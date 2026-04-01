@@ -1,0 +1,42 @@
+# Vercel ignore file
+# Files and directories to exclude from deployment
+
+# Development files
+node_modules/
+.git/
+.env.local
+.env.development
+.env.test
+
+# Build artifacts (Vercel will build these)
+# dist/ is included because Vercel needs the built files
+
+# Documentation
+docs/
+*.md
+!README.md
+
+# Test files
+tests/
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+
+# Scripts (not needed in deployment)
+scripts/
+
+# Database files (not needed in frontend deployment)
+database/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+

@@ -1,0 +1,121 @@
+/* Family Privacy Guide — no inline styles */
+
+.family-guide-container {
+  max-width: 56rem;
+  margin: 0 auto;
+}
+
+.family-guide-section {
+  margin-bottom: clamp(3rem, 6vw, 4rem);
+}
+
+.family-guide-h2 {
+  font-size: clamp(1.875rem, 3vw, 2.25rem);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #1B5E20;
+}
+
+.family-guide-p {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  color: #64748b;
+}
+
+.family-guide-callout {
+  background-color: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 16px;
+  padding: 1.5rem;
+}
+
+.family-guide-callout h3 {
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #1B5E20;
+}
+
+.family-guide-card {
+  background-color: var(--card-color, #fff);
+}
+
+.family-guide-primary {
+  color: var(--primary, #1B5E20);
+}
+
+.family-guide-muted {
+  color: var(--gray-600, #64748b);
+}
+
+.family-guide-cta {
+  background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 100%);
+  border-radius: 16px;
+  padding: 2rem;
+  color: white;
+  text-align: center;
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+
+.family-guide-cta h2 {
+  font-size: clamp(1.5rem, 3vw, 1.875rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.family-guide-cta > .family-guide-cta-p {
+  font-size: 1.125rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+.family-guide-cta-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.family-guide-cta-btn-primary {
+  background: white;
+  color: #1B5E20;
+  padding: 0.875rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.family-guide-cta-btn-primary:hover {
+  background-color: #f3f4f6;
+  transform: translateY(-2px);
+}
+
+.family-guide-cta-btn-outline {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 0.875rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 2px solid white;
+  transition: all 0.3s ease;
+}
+
+.family-guide-cta-btn-outline:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.family-guide-cta-footer {
+  margin-top: 1.25rem;
+  font-size: 0.9375rem;
+  opacity: 0.95;
+}
+
+.family-guide-cta-footer a {
+  color: white;
+  text-decoration: underline;
+}

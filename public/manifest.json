@@ -1,0 +1,75 @@
+{
+  "name": "Privacy Panda - Digital Privacy Education",
+  "short_name": "Privacy Panda",
+  "description": "Interactive digital privacy education platform for children and families",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#16a34a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/LogoPandagarde.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/LogoPandagarde.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "kids", "privacy", "family"],
+  "lang": "en",
+  "scope": "/",
+  "prefer_related_applications": false,
+  "shortcuts": [
+    {
+      "name": "Interactive Story",
+      "short_name": "Story",
+      "description": "Read the Privacy Panda interactive story",
+      "url": "/interactive-story",
+      "icons": [
+        {
+          "src": "/LogoPandagarde.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Privacy Tools",
+      "short_name": "Tools",
+      "description": "Access privacy learning tools",
+      "url": "/privacy-tools",
+      "icons": [
+        {
+          "src": "/LogoPandagarde.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Mission Hub",
+      "short_name": "Missions",
+      "description": "Complete privacy missions",
+      "url": "/mission-hub",
+      "icons": [
+        {
+          "src": "/LogoPandagarde.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/LogoPandagarde.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Privacy Panda Homepage"
+    }
+  ]
+}

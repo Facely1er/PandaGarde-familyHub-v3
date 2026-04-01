@@ -1,0 +1,66 @@
+# Copy and Paste This for Signing Setup
+
+## Quick Setup - Config File Method
+
+1. Create a file named: keystore-config.txt
+2. Paste this content (replace the values):
+
+KEYSTORE_PASSWORD=YourSecurePassword123!
+KEY_PASSWORD=YourSecurePassword123!
+KEYSTORE_NAME=PandaGarde
+KEYSTORE_ORG=PandaGarde
+KEYSTORE_ORG_UNIT=
+KEYSTORE_CITY=Your City
+KEYSTORE_STATE=Your State
+KEYSTORE_COUNTRY=US
+
+3. Replace these values:
+   - YourSecurePassword123! → Your actual password
+   - Your City → Your actual city
+   - Your State → Your actual state/province
+   - US → Your country code (US, CA, GB, etc.)
+
+4. Save the file in the project root (same folder as package.json)
+
+5. Run this command:
+   .\scripts\setup-signing-from-env.ps1
+
+---
+
+## Alternative: Environment Variables (PowerShell)
+
+Copy and paste this entire block into PowerShell:
+
+$env:KEYSTORE_PASSWORD = 'YourSecurePassword123!'
+$env:KEY_PASSWORD = 'YourSecurePassword123!'
+$env:KEYSTORE_NAME = 'PandaGarde'
+$env:KEYSTORE_ORG = 'PandaGarde'
+$env:KEYSTORE_ORG_UNIT = ''
+$env:KEYSTORE_CITY = 'Your City'
+$env:KEYSTORE_STATE = 'Your State'
+$env:KEYSTORE_COUNTRY = 'US'
+.\scripts\setup-signing-from-env.ps1
+
+(Replace the values with your actual information)
+
+---
+
+## What You Need to Provide:
+
+1. Keystore Password - A strong password (save it securely!)
+2. Key Password - Can be same as keystore password
+3. Your Name/Organization - e.g., "PandaGarde"
+4. City - Your city
+5. State/Province - Your state or province
+6. Country Code - Two letters (US, CA, GB, etc.)
+
+---
+
+## After Setup:
+
+Verify it worked:
+.\scripts\complete-signing-setup.ps1
+
+Build release AAB:
+.\scripts\build-android.ps1 release
+

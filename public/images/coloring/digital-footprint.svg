@@ -1,0 +1,52 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="400" height="300" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+  
+  <!-- Title -->
+  <text x="200" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1f2937">Digital Footprint Map</text>
+  
+  <!-- Footprint Path -->
+  <path d="M 80 200 Q 120 180 160 190 Q 200 200 240 180 Q 280 160 320 170" fill="none" stroke="#1f2937" stroke-width="3"/>
+  
+  <!-- Footprint Steps -->
+  <ellipse cx="100" cy="200" rx="15" ry="8" fill="none" stroke="#1f2937" stroke-width="2"/>
+  <ellipse cx="140" cy="190" rx="15" ry="8" fill="none" stroke="#1f2937" stroke-width="2"/>
+  <ellipse cx="180" cy="200" rx="15" ry="8" fill="none" stroke="#1f2937" stroke-width="2"/>
+  <ellipse cx="220" cy="180" rx="15" ry="8" fill="none" stroke="#1f2937" stroke-width="2"/>
+  <ellipse cx="260" cy="170" rx="15" ry="8" fill="none" stroke="#1f2937" stroke-width="2"/>
+  <ellipse cx="300" cy="180" rx="15" ry="8" fill="none" stroke="#1f2937" stroke-width="2"/>
+  
+  <!-- Digital Elements -->
+  <!-- Computer -->
+  <rect x="60" y="120" width="40" height="30" rx="3" fill="none" stroke="#1f2937" stroke-width="2"/>
+  <rect x="65" y="125" width="30" height="20" fill="none" stroke="#1f2937" stroke-width="1"/>
+  <rect x="70" y="155" width="20" height="5" fill="none" stroke="#1f2937" stroke-width="1"/>
+  
+  <!-- Phone -->
+  <rect x="320" y="120" width="20" height="35" rx="3" fill="none" stroke="#1f2937" stroke-width="2"/>
+  <rect x="325" y="125" width="10" height="25" fill="none" stroke="#1f2937" stroke-width="1"/>
+  
+  <!-- Tablet -->
+  <rect x="180" y="100" width="40" height="25" rx="3" fill="none" stroke="#1f2937" stroke-width="2"/>
+  <rect x="185" y="105" width="30" height="15" fill="none" stroke="#1f2937" stroke-width="1"/>
+  
+  <!-- Cloud -->
+  <path d="M 200 80 Q 190 70 200 60 Q 210 50 220 60 Q 230 50 240 60 Q 250 70 240 80 Q 230 90 220 80 Q 210 90 200 80" fill="none" stroke="#1f2937" stroke-width="2"/>
+  
+  <!-- Data Lines -->
+  <path d="M 100 200 L 60 130" fill="none" stroke="#1f2937" stroke-width="1" stroke-dasharray="3,3"/>
+  <path d="M 140 190 L 200 110" fill="none" stroke="#1f2937" stroke-width="1" stroke-dasharray="3,3"/>
+  <path d="M 180 200 L 200 125" fill="none" stroke="#1f2937" stroke-width="1" stroke-dasharray="3,3"/>
+  <path d="M 220 180 L 200 125" fill="none" stroke="#1f2937" stroke-width="1" stroke-dasharray="3,3"/>
+  <path d="M 260 170 L 240 125" fill="none" stroke="#1f2937" stroke-width="1" stroke-dasharray="3,3"/>
+  <path d="M 300 180 L 340 130" fill="none" stroke="#1f2937" stroke-width="1" stroke-dasharray="3,3"/>
+  
+  <!-- Decorative Elements -->
+  <circle cx="50" cy="50" r="3" fill="none" stroke="#1f2937" stroke-width="1"/>
+  <circle cx="350" cy="50" r="3" fill="none" stroke="#1f2937" stroke-width="1"/>
+  <circle cx="50" cy="250" r="3" fill="none" stroke="#1f2937" stroke-width="1"/>
+  <circle cx="350" cy="250" r="3" fill="none" stroke="#1f2937" stroke-width="1"/>
+  
+  <!-- Instructions -->
+  <text x="200" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#6b7280">Trace your digital journey and learn about online privacy!</text>
+</svg>

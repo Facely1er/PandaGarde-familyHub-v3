@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Download Functionality</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-button {
+            background: #10b981;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 16px;
+        }
+        .test-button:hover {
+            background: #059669;
+        }
+        .status {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+        .error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Download Functionality Test</h1>
+    <p>This page tests the download functionality for the Privacy Panda application.</p>
+
+    <div class="test-section">
+        <h2>📄 HTML Download Tests</h2>
+        <p>Test downloading the HTML files directly:</p>
+        <button class="test-button" onclick="testDownload('/downloads/coloring-sheets.html', 'coloring-sheets.html')">
+            Test Coloring Sheets Download
+        </button>
+        <button class="test-button" onclick="testDownload('/downloads/safety-posters.html', 'safety-posters.html')">
+            Test Safety Posters Download
+        </button>
+        <button class="test-button" onclick="testDownload('/downloads/certificates.html', 'certificates.html')">
+            Test Certificates Download
+        </button>
+        <button class="test-button" onclick="testDownload('/downloads/family-agreement.html', 'family-agreement.html')">
+            Test Family Agreement Download
+        </button>
+        <div id="html-status"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>🔗 Route Tests</h2>
+        <p>Test the application routes:</p>
+        <button class="test-button" onclick="testRoute('/downloads/coloring-sheets')">
+            Test Coloring Sheets Page
+        </button>
+        <button class="test-button" onclick="testRoute('/downloads/safety-posters')">
+            Test Safety Posters Page
+        </button>
+        <button class="test-button" onclick="testRoute('/downloads/certificates')">
+            Test Certificates Page
+        </button>
+        <button class="test-button" onclick="testRoute('/downloads/family-agreement')">
+            Test Family Agreement Page
+        </button>
+        <div id="route-status"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>📊 Test Results</h2>
+        <div id="test-results">
+            <p>Click the buttons above to test the download functionality.</p>
+        </div>
+    </div>
+
+    <script>
+        function testDownload(url, filename) {
+            const statusDiv = document.getElementById('html-status');
+            statusDiv.innerHTML = '<div class="status">Testing download...</div>';
+            
+            fetch(url)
+                .then(response => {
+                    if (response.ok) {
+                        statusDiv.innerHTML = '<div class="status success">✅ HTML file accessible: ' + filename + '</div>';
+                        addTestResult('HTML Download: ' + filename, 'PASS', 'File is accessible');
+                    } else {
+                        statusDiv.innerHTML = '<div class="status error">❌ HTML file not accessible: ' + filename + ' (Status: ' + response.status + ')</div>';
+                        addTestResult('HTML Download: ' + filename, 'FAIL', 'File not accessible (Status: ' + response.status + ')');
+                    }
+                })
+                .catch(error => {
+                    statusDiv.innerHTML = '<div class="status error">❌ Error testing download: ' + error.message + '</div>';
+                    addTestResult('HTML Download: ' + filename, 'ERROR', error.message);
+                });
+        }
+
+        function testRoute(route) {
+            const statusDiv = document.getElementById('route-status');
+            statusDiv.innerHTML = '<div class="status">Testing route...</div>';
+            
+            fetch(route)
+                .then(response => {
+                    if (response.ok) {
+                        statusDiv.innerHTML = '<div class="status success">✅ Route accessible: ' + route + '</div>';
+                        addTestResult('Route: ' + route, 'PASS', 'Route is accessible');
+                    } else {
+                        statusDiv.innerHTML = '<div class="status error">❌ Route not accessible: ' + route + ' (Status: ' + response.status + ')</div>';
+                        addTestResult('Route: ' + route, 'FAIL', 'Route not accessible (Status: ' + response.status + ')');
+                    }
+                })
+                .catch(error => {
+                    statusDiv.innerHTML = '<div class="status error">❌ Error testing route: ' + error.message + '</div>';
+                    addTestResult('Route: ' + route, 'ERROR', error.message);
+                });
+        }
+
+        function addTestResult(test, status, message) {
+            const resultsDiv = document.getElementById('test-results');
+            const timestamp = new Date().toLocaleTimeString();
+            const statusIcon = status === 'PASS' ? '✅' : status === 'FAIL' ? '❌' : '⚠️';
+            const statusClass = status === 'PASS' ? 'success' : status === 'FAIL' ? 'error' : 'warning';
+            
+            const resultDiv = document.createElement('div');
+            resultDiv.className = 'status ' + statusClass;
+            resultDiv.innerHTML = `${statusIcon} [${timestamp}] ${test}: ${status} - ${message}`;
+            resultsDiv.appendChild(resultDiv);
+        }
+
+        // Auto-run basic tests on page load
+        window.onload = function() {
+            addTestResult('Page Load', 'PASS', 'Test page loaded successfully');
+        };
+    </script>
+</body>
+</html>
