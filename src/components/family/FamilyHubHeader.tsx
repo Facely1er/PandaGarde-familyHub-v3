@@ -93,7 +93,7 @@ const FamilyHubHeader: React.FC = () => {
             </Link>
           ) : showBack ? (
             <Link
-              to="/family-hub"
+              to="/family-hub" target="_blank" rel="noopener noreferrer"
               className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-xl text-violet-700 touch-manipulation dark:text-violet-300"
               aria-label="Back to Family Hub home"
             >
@@ -101,7 +101,7 @@ const FamilyHubHeader: React.FC = () => {
             </Link>
           ) : (
             <Link
-              to="/family-hub"
+              to="/family-hub" target="_blank" rel="noopener noreferrer"
               className="flex min-h-[44px] min-w-[44px] items-center justify-center touch-manipulation"
               aria-label="Family Hub home"
             >

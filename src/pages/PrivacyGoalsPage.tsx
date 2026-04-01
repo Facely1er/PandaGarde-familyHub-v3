@@ -43,7 +43,7 @@ const PrivacyGoalsPage: React.FC = () => {
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
             <Link
-              to="/family-hub"
+              to="/family-hub" target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 font-medium transition-colors"
             >
               <ArrowLeft size={16} />

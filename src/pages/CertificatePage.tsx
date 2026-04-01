@@ -10,7 +10,7 @@ const CertificatePage: React.FC = () => {
       <header className="bg-white dark:bg-gray-800 shadow-sm border-b">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <Link to="/family-hub"
+            <Link to="/family-hub" target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 font-medium transition-colors"
             >
               <ArrowLeft size={16} />

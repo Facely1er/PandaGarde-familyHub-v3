@@ -491,7 +491,7 @@ const QuickStartPage: React.FC = () => {
                 <Play size={20} />
                 Start with Privacy Panda
               </Link>
-              <Link to="/family-hub" className="button secondary" style={{ background: 'rgba(255,255,255,0.2)', color: 'white', border: '2px solid white' }}>
+              <Link to="/family-hub" target="_blank" rel="noopener noreferrer" className="button secondary" style={{ background: 'rgba(255,255,255,0.2)', color: 'white', border: '2px solid white' }}>
                 <Users size={20} />
                 Join Family Hub
               </Link>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Shield, Lock, Eye, CheckCircle, BookOpen, Users, Smartphone, Globe, Clock, LucideIcon } from 'lucide-react';
+import { Shield, Lock, Eye, CheckCircle, BookOpen, Users, Smartphone, Globe, Clock, Video as LucideIcon } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 
 interface Guide {
@@ -451,7 +451,7 @@ const PrivacyHandbookPage: React.FC = () => {
               Try Privacy Explorers
             </Link>
             <Link 
-              to="/family-hub"
+              to="/family-hub" target="_blank" rel="noopener noreferrer"
               style={{
                 background: 'rgba(255, 255, 255, 0.2)',
                 color: 'white',

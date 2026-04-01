@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Users, BookOpen, Book, Settings, Award, TrendingUp, Clock, CheckCircle, ArrowLeft, ArrowRight, User, Shield as Child, UserCheck, Star, Play, Download, Plus, UserPlus, LogOut, Globe, Shield, Target, UserCircle } from 'lucide-react';
+import { Users, BookOpen, Book, Settings, Award, TrendingUp, Clock, CheckCircle, ArrowLeft, ArrowRight, User, Shield as Child, UserCheck, Star, Play, Download, Plus, UserPlus, LogOut, Globe, Shield, Target, CircleUser as UserCircle } from 'lucide-react';
 import Logo from '../components/Logo';
 import { useAuth } from './family-hub/AuthWrapper';
 import { useFamily } from '../contexts/FamilyContext';
@@ -965,7 +965,7 @@ const FamilyHubPage: React.FC = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <Link 
-                to="/family-hub"
+                to="/family-hub" target="_blank" rel="noopener noreferrer"
                 className="bg-white rounded-xl p-6 hover:shadow-lg transition-all block"
                 style={{ backgroundColor: 'var(--card-color)' }}
               >

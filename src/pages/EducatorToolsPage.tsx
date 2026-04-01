@@ -464,7 +464,7 @@ const EducatorToolsPage: React.FC = () => {
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link
-              to="/family-hub"
+              to="/family-hub" target="_blank" rel="noopener noreferrer"
               className="bg-white text-green-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center gap-2"
             >
               <Users size={20} />

@@ -363,7 +363,7 @@ const PilotPage: React.FC = () => {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link
-                to="/family-hub"
+                to="/family-hub" target="_blank" rel="noopener noreferrer"
                 onClick={() => handleCTAClick('cta_section')}
                 className="inline-flex items-center gap-2 bg-white text-green-800 px-6 py-3 sm:px-8 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:bg-gray-100 transition-colors shadow-lg"
               >

@@ -10,7 +10,7 @@ const AssessmentHistoryPage: React.FC = () => {
         {/* Header */}
         <div className="mb-8">
           <Link
-            to="/family-hub"
+            to="/family-hub" target="_blank" rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 font-medium transition-colors mb-4"
           >
             <ArrowLeft size={16} />

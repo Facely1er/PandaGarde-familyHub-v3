@@ -499,7 +499,7 @@ const TeenHandbookPage: React.FC = () => {
               Privacy Tools
             </Link>
             <Link 
-              to="/family-hub"
+              to="/family-hub" target="_blank" rel="noopener noreferrer"
               style={{
                 background: 'rgba(255, 255, 255, 0.2)',
                 color: 'white',

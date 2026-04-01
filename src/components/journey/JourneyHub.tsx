@@ -183,6 +183,8 @@ const JourneyHub: React.FC = () => {
         </p>
         <Link
           to="/family-hub"
+          target="_blank"
+          rel="noopener noreferrer"
           className="mt-2 inline-block text-sm font-medium underline hover:no-underline"
         >
           Go to dashboard

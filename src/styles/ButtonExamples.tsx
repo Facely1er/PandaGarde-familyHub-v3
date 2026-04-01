@@ -49,7 +49,7 @@ export const ButtonWithIconExample = () => {
 export const LinkButtonExample = () => {
   return (
     <Link 
-      to="/family-hub" 
+      to="/family-hub" target="_blank" rel="noopener noreferrer" 
       style={buttonStyles.primary}
     >
       <ArrowRight size={20} />

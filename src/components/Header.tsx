@@ -171,6 +171,8 @@ function Header() {
             <div className="nav-actions" aria-label="Utility actions">
               <Link
                 to="/family-hub"
+                target="_blank"
+                rel="noopener noreferrer"
                 className={`nav-cta nav-cta-primary ${isActive('/family-hub') ? 'active' : ''}`}
                 aria-current={isActive('/family-hub') ? 'page' : undefined}
               >

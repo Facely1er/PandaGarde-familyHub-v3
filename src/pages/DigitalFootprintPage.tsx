@@ -113,7 +113,7 @@ const DigitalFootprintPage: React.FC = () => {
               <Link to="/service-catalog" className="inline-flex items-center gap-2 font-medium text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200">
                 <ArrowLeft size={16} /> Service Catalog
               </Link>
-              <Link to="/family-hub" className="inline-flex items-center gap-2 font-medium text-green-600 transition-colors hover:text-green-700 dark:text-green-400 dark:hover:text-green-300">
+              <Link to="/family-hub" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-medium text-green-600 transition-colors hover:text-green-700 dark:text-green-400 dark:hover:text-green-300">
                 <LayoutDashboard size={16} /> Family Hub
               </Link>
             </div>
@@ -175,7 +175,7 @@ const DigitalFootprintPage: React.FC = () => {
             </div>
             <div className="flex flex-wrap gap-3">
               <Link to="/privacy-assessment" className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-5 py-3 font-semibold text-white hover:bg-emerald-700">Continue to assessment <ArrowRight size={16} /></Link>
-              <Link to="/family-hub" className="inline-flex items-center gap-2 rounded-xl border border-slate-300 px-5 py-3 font-semibold text-slate-700 hover:bg-slate-50">Open Family Hub</Link>
+              <Link to="/family-hub" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-slate-300 px-5 py-3 font-semibold text-slate-700 hover:bg-slate-50">Open Family Hub</Link>
             </div>
           </div>
         </div>

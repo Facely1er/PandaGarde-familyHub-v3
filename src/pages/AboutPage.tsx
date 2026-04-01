@@ -199,7 +199,7 @@ const AboutPage: React.FC = () => {
                 PandaGarde can make it easier and more fun.
               </p>
               <Link
-                to="/family-hub"
+                to="/family-hub" target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 bg-white text-green-600 px-8 py-4 rounded-xl font-bold text-lg hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg"
               >
                 <Rocket size={24} />

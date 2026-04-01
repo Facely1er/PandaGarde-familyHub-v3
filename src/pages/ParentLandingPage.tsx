@@ -52,7 +52,7 @@ const ParentLandingPage: React.FC = () => {
             </p>
             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
               <Link 
-                to="/family-hub"
+                to="/family-hub" target="_blank" rel="noopener noreferrer"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -268,7 +268,7 @@ const ParentLandingPage: React.FC = () => {
             
             <div style={{ textAlign: 'center' }}>
               <Link 
-                to="/family-hub"
+                to="/family-hub" target="_blank" rel="noopener noreferrer"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -365,7 +365,7 @@ const ParentLandingPage: React.FC = () => {
             Keep your family safe online with simple, easy-to-use tools designed for parents who want to protect their children's privacy.
           </p>
           <Link 
-            to="/family-hub"
+            to="/family-hub" target="_blank" rel="noopener noreferrer"
             style={{
               display: 'inline-flex',
               alignItems: 'center',

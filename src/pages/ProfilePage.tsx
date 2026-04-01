@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { ArrowLeft, User, Mail, Calendar, Shield, Save, Edit3, X, Download } from 'lucide-react';
+import { ArrowLeft, User, Mail, Calendar, Shield, Save, CreditCard as Edit3, X, Download } from 'lucide-react';
 import { useAuth } from './family-hub/AuthWrapper';
 import { useToast } from '../contexts/ToastContext';
 import ProgressExport from '../components/ProgressExport';
@@ -101,7 +101,7 @@ const ProfilePage: React.FC = () => {
           {/* Header */}
           <div className="flex items-center justify-between mb-8">
             <Link
-              to="/family-hub"
+              to="/family-hub" target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 font-medium transition-colors"
             >
               <ArrowLeft size={16} />

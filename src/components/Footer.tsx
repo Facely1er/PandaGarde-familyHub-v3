@@ -91,7 +91,7 @@ const Footer: React.FC = () => {
           <div className="footer-links" aria-label="Footer utility links">
             <Link to="/about">About</Link>
             <Link to="/support">Support</Link>
-            <Link to="/family-hub">Family Hub</Link>
+            <Link to="/family-hub" target="_blank" rel="noopener noreferrer">Family Hub</Link>
           </div>
         </div>
       </div>

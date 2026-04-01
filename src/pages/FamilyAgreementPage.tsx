@@ -237,7 +237,7 @@ const FamilyAgreementPage: React.FC = () => {
               </p>
             </Link>
 
-            <Link to="/family-hub"
+            <Link to="/family-hub" target="_blank" rel="noopener noreferrer"
               className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow text-center"
               style={{ backgroundColor: 'var(--card-color)' }}
             >

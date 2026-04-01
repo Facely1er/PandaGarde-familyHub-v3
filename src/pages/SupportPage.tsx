@@ -332,7 +332,7 @@ const SupportPage: React.FC = () => {
               <BookOpen size={20} />
               Try Activities
             </Link>
-            <Link to="/family-hub"
+            <Link to="/family-hub" target="_blank" rel="noopener noreferrer"
               className="bg-indigo-700 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-800 transition-colors inline-flex items-center gap-2"
             >
               <Users size={20} />
