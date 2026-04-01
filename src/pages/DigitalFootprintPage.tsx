@@ -59,7 +59,7 @@ const DigitalFootprintPage: React.FC = () => {
     return (
       <EmptyStateWithServicePrompt
         feature="Your family's digital footprint"
-        description="See how your family's data is used across school, home, and everyday apps. Add at least 3 services first so the DFA has something real to analyze."
+        description="See how your family's data is used across school, home, and everyday apps. Add at least 3 services first so the Digital Footprint Analysis has something real to analyze."
         minimumServices={3}
         icon={<BarChart3 size={24} className="text-white" />}
       />
@@ -102,7 +102,7 @@ const DigitalFootprintPage: React.FC = () => {
 
         <div className="mb-8">
           <p className="mb-3 text-sm text-gray-500 dark:text-gray-400">
-            <span className="font-medium text-gray-700 dark:text-gray-300">Current phase:</span> DFA results
+            <span className="font-medium text-gray-700 dark:text-gray-300">Current phase:</span> Digital Footprint Analysis results
             {' · '}
             <Link to="/get-started" className="inline-flex items-center gap-1 font-medium text-blue-600 hover:underline dark:text-blue-400">
               <ShoppingBag size={14} /> Review overall journey
@@ -125,7 +125,7 @@ const DigitalFootprintPage: React.FC = () => {
           </div>
           <div>
             <h1 className="mb-2 text-3xl font-bold text-gray-900 dark:text-white">Your family's digital footprint</h1>
-            <p className="text-gray-600 dark:text-gray-400">Review where exposure is building across apps and services, compare the Basic and Advanced DFA scores, then continue straight into privacy assessment while the context is still fresh.</p>
+            <p className="text-gray-600 dark:text-gray-400">Review where exposure is building across apps and services, compare the Basic and Advanced Digital Footprint Analysis scores, then continue straight into privacy assessment while the context is still fresh.</p>
           </div>
         </div>
 
@@ -142,7 +142,7 @@ const DigitalFootprintPage: React.FC = () => {
                   <h3 className="text-lg font-bold text-blue-900 dark:text-blue-100">Improve your analysis</h3>
                   <span className="rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-700 dark:bg-blue-800 dark:text-blue-200">{totalServicesCount} of 5+ services</span>
                 </div>
-                <p className="mb-3 text-sm text-blue-800 dark:text-blue-200">You already have a usable DFA. Add more services later if you want a broader household view, but you do not need to wait to continue into assessment.</p>
+                <p className="mb-3 text-sm text-blue-800 dark:text-blue-200">You already have a usable Digital Footprint Analysis. Add more services later if you want a broader household view, but you do not need to wait to continue into assessment.</p>
                 <div className="flex flex-wrap gap-3">
                   <Link to="/privacy-assessment" className="inline-flex items-center gap-2 rounded-lg bg-blue-700 px-4 py-2 font-semibold text-white hover:bg-blue-800">Continue to assessment <ArrowRight size={16} /></Link>
                   <Link to="/service-catalog" className="inline-flex items-center gap-2 rounded-lg border border-blue-300 px-4 py-2 font-semibold text-blue-700 hover:bg-blue-100/60 dark:border-blue-700 dark:text-blue-200">Add more services</Link>

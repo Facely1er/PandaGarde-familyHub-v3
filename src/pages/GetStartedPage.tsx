@@ -16,7 +16,7 @@ const GetStartedPage: React.FC = () => {
 
   return (
     <PageLayout
-      title="Start Your DFA Journey"
+      title="Start Your Digital Footprint Analysis Journey"
       subtitle="PandaGarde starts with Digital Footprint Analysis. Move through four phases, save progress locally, and resume without losing your place."
       icon={ShieldCheck}
       badge="GET STARTED"
@@ -31,7 +31,7 @@ const GetStartedPage: React.FC = () => {
               <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-sm font-semibold text-emerald-700">
                 <Sparkles size={16} /> Low-friction family onboarding
               </div>
-              <h2 className="mt-4 text-3xl font-bold text-slate-900">The journey revolves around DFA</h2>
+              <h2 className="mt-4 text-3xl font-bold text-slate-900">The journey revolves around Digital Footprint Analysis</h2>
               <p className="mt-3 max-w-3xl text-base leading-7 text-slate-600">
                 Instead of dropping families into a pile of tools, PandaGarde uses one sequence: choose the services you want analyzed, run Digital Footprint Analysis, turn findings into an action plan, then continue inside Family Hub.
               </p>
@@ -68,7 +68,7 @@ const GetStartedPage: React.FC = () => {
               <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
                 <div className="text-sm font-semibold uppercase tracking-wide text-slate-500">Current status</div>
                 <div className="mt-2 text-3xl font-bold text-slate-900">{journey.progressPercent}% complete</div>
-                <p className="mt-2 text-sm leading-6 text-slate-600">{journey.progressPercent === 0 ? 'Start with your service catalog so the DFA has something real to analyze.' : 'Keep following the DFA-led path instead of jumping between disconnected pages.'}</p>
+                <p className="mt-2 text-sm leading-6 text-slate-600">{journey.progressPercent === 0 ? 'Start with your service catalog so the Digital Footprint Analysis has something real to analyze.' : 'Keep following the Digital Footprint Analysis-led path instead of jumping between disconnected pages.'}</p>
                 <div className="mt-5 space-y-3">
                   <Link to={nextPhase.path} className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-4 py-3 font-semibold text-white transition-colors hover:bg-emerald-700">
                     Continue to {nextPhase.title} <ArrowRight size={16} />

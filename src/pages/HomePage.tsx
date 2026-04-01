@@ -315,7 +315,7 @@ const HomePage: React.FC = () => {
               <div className="premium-hero__workspace-grid">
                 <div className="premium-hero__metric-card premium-hero__metric-card--primary">
                   <span className="premium-hero__metric-label">Current path</span>
-                  <strong>DFA → Action Plan → Hub</strong>
+                  <strong>Digital Footprint Analysis → Action Plan → Hub</strong>
                   <p>One coherent route instead of disconnected pages and tools.</p>
                 </div>
 
