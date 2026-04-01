@@ -1,5 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import fs from 'fs';
+import path from 'path';
 
 const optionalDependenciesPlugin = () => ({
   name: 'optional-dependencies',
@@ -11,8 +13,29 @@ const optionalDependenciesPlugin = () => ({
   },
 });
 
+const cleanPublicDirPlugin = () => ({
+  name: 'clean-public-dir',
+  buildStart() {
+    const storyDir = path.resolve(__dirname, 'public/images/story');
+    if (fs.existsSync(storyDir)) {
+      const files = fs.readdirSync(storyDir);
+      files.forEach(file => {
+        if (file.includes("'") || file.includes(' ')) {
+          const filePath = path.join(storyDir, file);
+          try {
+            fs.unlinkSync(filePath);
+            console.log(`Removed problematic file: ${file}`);
+          } catch (err) {
+            // File might be locked, skip it
+          }
+        }
+      });
+    }
+  }
+});
+
 export default defineConfig({
-  plugins: [react(), optionalDependenciesPlugin()],
+  plugins: [react(), optionalDependenciesPlugin(), cleanPublicDirPlugin()],
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
