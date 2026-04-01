@@ -350,13 +350,18 @@ const HomePage: React.FC = () => {
 
 
       <section className="homepage-stats reveal-on-scroll">
-        <div className="container homepage-stats__container">
-          {quickStats.map((item) => (
-            <article key={item.label} className="homepage-stats__card">
-              <span>{item.label}</span>
-              <strong>{item.value}</strong>
-            </article>
-          ))}
+        <div className="container">
+          <div className="homepage-stats__grid">
+            {quickStats.map((item, index) => (
+              <article key={item.label} className="homepage-stats__card">
+                <div className="homepage-stats__index">0{index + 1}</div>
+                <div className="homepage-stats__content">
+                  <span className="homepage-stats__label">{item.label}</span>
+                  <strong className="homepage-stats__value">{item.value}</strong>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
