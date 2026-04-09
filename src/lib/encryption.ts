@@ -116,17 +116,60 @@ export async function decryptData<T>(encryptedData: string, password: string): P
   }
 }
 
+// localStorage key for the per-device random secret.
+// Intentionally NOT prefixed with `pandagarde_` so it is never cleared by the
+// consent-revocation routine in coppaCompliance.ts (which wipes all
+// `pandagarde_*` keys).  Clearing this key would make all previously encrypted
+// data permanently unreadable.
+const DEVICE_SECRET_KEY = 'pg_device_secret';
+
+/** Convert a Uint8Array to a lowercase hex string. */
+function bytesToHex(bytes: Uint8Array): string {
+  return Array.from(bytes, b => b.toString(16).padStart(2, '0')).join('');
+}
+
 /**
- * Generate a secure password from user-specific data
- * This creates a deterministic password based on user ID and a site secret
- * 
- * Note: In production, this should use a server-provided secret or user-entered password
+ * Return the per-device random secret, creating and persisting one on the
+ * first call.  Because this secret is generated locally and never transmitted,
+ * knowledge of the source code alone is insufficient to decrypt data stored on
+ * any given device.
+ *
+ * The secret is stored as a cleartext hex string in localStorage.  This is
+ * intentional and unavoidable for a purely client-side key: a key must reside
+ * unencrypted somewhere so it can be read; encrypting it would only push the
+ * problem one level further.  The security benefit is per-device isolation —
+ * the secret is different on every device/browser profile, so compromising the
+ * source code gives an attacker nothing without physical access to localStorage.
+ */
+function getOrCreateDeviceSecret(): string {
+  try {
+    let secret = localStorage.getItem(DEVICE_SECRET_KEY);
+    if (!secret) {
+      const bytes = new Uint8Array(32);
+      crypto.getRandomValues(bytes);
+      secret = bytesToHex(bytes);
+      localStorage.setItem(DEVICE_SECRET_KEY, secret);
+    }
+    return secret;
+  } catch {
+    // localStorage unavailable (e.g., private-browsing restrictions).
+    // Fall back to a one-time session secret so encryption still works,
+    // even though it won't survive a page reload in this edge case.
+    const bytes = new Uint8Array(32);
+    crypto.getRandomValues(bytes);
+    return bytesToHex(bytes);
+  }
+}
+
+/**
+ * Generate a secure password from user-specific data.
+ * Combines the user ID with a randomly-generated per-device secret so that
+ * neither the source code nor the user ID alone is sufficient to decrypt
+ * any user's stored data.
  */
 export function generateUserPassword(userId: string): string {
-  // Use a combination of userId and a site-specific secret
-  // In production, this should be more secure (e.g., user-entered password or server secret)
-  const siteSecret = 'pandagarde-encryption-secret-v1'; // Should be environment variable in production
-  return `${userId}-${siteSecret}`;
+  const deviceSecret = getOrCreateDeviceSecret();
+  return `${userId}-${deviceSecret}`;
 }
 
 /**

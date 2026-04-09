@@ -3,6 +3,8 @@
  * Provides additional security measures beyond the main PandaGarde site
  */
 
+import { encryptData, decryptData } from './encryption';
+
 // Input sanitization for family data
 export const sanitizeInput = (input: string | number | null | undefined): string => {
   if (input === null || input === undefined) {return '';}
@@ -90,25 +92,45 @@ export const validateGoal = (goal: {
   };
 };
 
-// Rate limiting check (client-side, server should also implement)
-let requestTimestamps: number[] = [];
+// Rate limiting check (client-side; server should also implement this)
 const MAX_REQUESTS = 10;
 const TIME_WINDOW = 60000; // 1 minute
+const RATE_LIMIT_STORAGE_KEY = 'fh_rate_limit_ts';
+
+// Helpers to persist rate-limit timestamps across page refreshes so that
+// reloading the page cannot trivially reset the counter.
+const getRateLimitTimestamps = (): number[] => {
+  try {
+    const stored = localStorage.getItem(RATE_LIMIT_STORAGE_KEY);
+    return stored ? (JSON.parse(stored) as number[]) : [];
+  } catch {
+    return [];
+  }
+};
+
+const setRateLimitTimestamps = (timestamps: number[]): void => {
+  try {
+    localStorage.setItem(RATE_LIMIT_STORAGE_KEY, JSON.stringify(timestamps));
+  } catch {
+    // Ignore write failures; rate limiting degrades gracefully.
+  }
+};
 
 export const checkRateLimit = (): boolean => {
   const now = Date.now();
-  
-  // Remove old timestamps
-  requestTimestamps = requestTimestamps.filter(timestamp => now - timestamp < TIME_WINDOW);
-  
-  // Check if limit exceeded
-  if (requestTimestamps.length >= MAX_REQUESTS) {
+
+  // Load persisted timestamps and prune entries older than the time window.
+  const timestamps = getRateLimitTimestamps().filter(ts => now - ts < TIME_WINDOW);
+
+  if (timestamps.length >= MAX_REQUESTS) {
     console.warn('Rate limit exceeded');
+    setRateLimitTimestamps(timestamps);
     return false;
   }
-  
-  // Add current timestamp
-  requestTimestamps.push(now);
+
+  // Record this request and persist immediately.
+  timestamps.push(now);
+  setRateLimitTimestamps(timestamps);
   return true;
 };
 
@@ -225,15 +247,11 @@ export const generateNonce = (): string => {
   return nonceCache;
 };
 
-// Secure data encryption helper (for sensitive data)
+// Secure data encryption helper – wraps the AES-256-GCM implementation in
+// encryption.ts so callers throughout the codebase use a consistent API.
 export const encryptSensitiveData = async (data: string, key: string): Promise<string> => {
-  // Note: This is a placeholder. In production, use proper encryption
-  // For client-side, consider using Web Crypto API or a library like crypto-js
-  // For sensitive data, encryption should be handled server-side
   try {
-    // Simple obfuscation (NOT real encryption - for demonstration only)
-    // In production, use proper encryption libraries
-    return btoa(encodeURIComponent(data + key));
+    return await encryptData(data, key);
   } catch (error) {
     console.error('Encryption failed:', error);
     throw new Error('Failed to encrypt data');
@@ -242,9 +260,7 @@ export const encryptSensitiveData = async (data: string, key: string): Promise<s
 
 export const decryptSensitiveData = async (encrypted: string, key: string): Promise<string> => {
   try {
-    // Simple deobfuscation (NOT real decryption - for demonstration only)
-    const decoded = decodeURIComponent(atob(encrypted));
-    return decoded.replace(key, '');
+    return await decryptData<string>(encrypted, key);
   } catch (error) {
     console.error('Decryption failed:', error);
     throw new Error('Failed to decrypt data');

@@ -40,50 +40,6 @@ export class COPPAComplianceManager {
   }
 
   /**
-   * Get user's IP address (for audit trail)
-   * Note: This is a client-side approximation
-   */
-  private async getUserIP(): Promise<string> {
-    // Try multiple IP services with fallbacks
-    const ipServices = [
-      'https://api.ipify.org?format=json',
-      'https://api64.ipify.org?format=json',
-      'https://ipapi.co/json/'
-    ];
-
-    for (const serviceUrl of ipServices) {
-      try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 3000); // 3 second timeout
-        
-        const response = await fetch(serviceUrl, {
-          signal: controller.signal,
-          headers: {
-            'Accept': 'application/json'
-          }
-        });
-        
-        clearTimeout(timeoutId);
-        
-        if (response.ok) {
-          const data = await response.json();
-          // Handle different response formats
-          const ip = data.ip || data.query || data.origin;
-          if (ip && typeof ip === 'string') {
-            return ip;
-          }
-        }
-      } catch (error) {
-        // Silently continue to next service
-        continue;
-      }
-    }
-    
-    // If all services fail, return unknown
-    return 'unknown';
-  }
-
-  /**
    * Store consent record (encrypted)
    */
   private async storeConsentRecord(token: string, record: ParentalConsentRecord): Promise<void> {
@@ -144,16 +100,12 @@ export class COPPAComplianceManager {
       // Generate consent token
       const consentToken = this.generateConsentToken();
       
-      // Get IP address for audit trail
-      const ipAddress = await this.getUserIP();
-      
       // Create consent record
       const consentRecord: ParentalConsentRecord = {
         childAge,
         parentEmail,
         consentToken,
         consentDate: new Date().toISOString(),
-        ipAddress,
         consentMethod: 'email',
         verified: false
       };
@@ -254,8 +206,6 @@ export class COPPAComplianceManager {
       // In development, return true to allow testing
       // In production, you may want to return false and require email service
       return import.meta.env.MODE === 'development';
-
-      return true;
     } catch (error) {
       console.error('Error sending consent email:', error);
       // Return true in development to allow testing
@@ -302,8 +252,9 @@ export class COPPAComplianceManager {
       record.revokedDate = new Date().toISOString();
       await this.storeConsentRecord(token, record);
 
-      // Clear all data for this child
-      await this.clearChildData(token);
+      // Clear all data for this child (consent record is already marked
+      // revoked above and intentionally kept for the audit trail)
+      await this.clearChildData();
 
       return true;
     } catch (error) {
@@ -355,29 +306,28 @@ export class COPPAComplianceManager {
   }
 
   /**
-   * Clear all data for a child (when consent is revoked)
+   * Clear user activity data when consent is revoked.
+   *
+   * The consent-record store (CONSENT_STORAGE_KEY) is intentionally preserved
+   * as an audit trail.  This allows subsequent calls to verifyConsentToken to
+   * correctly return "This consent has been revoked" rather than the misleading
+   * "Invalid consent token" that would be returned if the record were deleted.
    */
-  private async clearChildData(consentToken: string): Promise<void> {
+  private clearChildData(): void {
     try {
-      // Clear localStorage data
+      // Remove all user activity/progress data but leave the consent store intact.
       const keys = Object.keys(localStorage);
       keys.forEach(key => {
-        if (key.startsWith('pandagarde_')) {
+        // CONSENT_STORAGE_KEY is intentionally excluded: the revoked record
+        // must remain in the store so that verifyConsentToken can return
+        // "This consent has been revoked" rather than "Invalid consent token".
+        if (key.startsWith('pandagarde_') && key !== COPPAComplianceManager.CONSENT_STORAGE_KEY) {
           localStorage.removeItem(key);
         }
       });
 
-      // Clear sessionStorage
+      // Clear sessionStorage (zero-data flag, session consent token, etc.).
       sessionStorage.clear();
-
-      // Clear consent record
-      const allConsents = await this.getAllConsentRecords();
-      delete allConsents[consentToken];
-      
-      const userId = this.getCurrentUserId();
-      const password = generateUserPassword(userId);
-      const encrypted = await encryptData(allConsents, password);
-      localStorage.setItem(COPPAComplianceManager.CONSENT_STORAGE_KEY, encrypted);
     } catch (error) {
       console.error('Error clearing child data:', error);
     }
