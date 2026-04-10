@@ -1,8 +1,21 @@
 import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 
+// Mirror the plugin from vite.config.ts so that optional peer dependencies
+// (e.g. @emailjs/browser) are treated as external during tests, preventing
+// Vite's import-analysis from throwing on modules that are intentionally absent.
+const optionalDependenciesPlugin = () => ({
+  name: 'optional-dependencies',
+  resolveId(id: string) {
+    if (id === '@emailjs/browser') {
+      return { id, external: true };
+    }
+    return null;
+  },
+});
+
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), optionalDependenciesPlugin()],
   test: {
     environment: 'jsdom',
     globals: true,
