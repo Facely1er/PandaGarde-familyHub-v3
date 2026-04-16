@@ -258,3 +258,21 @@
   color: var(--white);
   text-decoration: underline;
 }
+
+/* ===== DARK THEME OVERRIDES ===== */
+[data-theme="dark"] .get-started-steps-intro,
+[data-theme="dark"] .get-started-step-desc,
+[data-theme="dark"] .get-started-quick-intro,
+[data-theme="dark"] .get-started-quick-card-desc {
+  color: var(--gray-600);
+}
+
+[data-theme="dark"] .get-started-step-card,
+[data-theme="dark"] .get-started-quick-card {
+  background-color: var(--white);
+  border-color: var(--gray-300);
+}
+
+[data-theme="dark"] .get-started-quick-section {
+  background-color: var(--light);
+}

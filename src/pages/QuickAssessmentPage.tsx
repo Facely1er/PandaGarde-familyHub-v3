@@ -91,16 +91,29 @@ const QuickAssessmentPage: React.FC = () => {
               purple: 'bg-purple-50 dark:bg-purple-900/20 border-purple-200 dark:border-purple-800',
               orange: 'bg-orange-50 dark:bg-orange-900/20 border-orange-200 dark:border-orange-800'
             };
+            const iconBgClasses = {
+              blue: 'bg-blue-100 dark:bg-blue-900/30',
+              green: 'bg-green-100 dark:bg-green-900/30',
+              purple: 'bg-purple-100 dark:bg-purple-900/30',
+              orange: 'bg-orange-100 dark:bg-orange-900/30'
+            };
+            const iconColorClasses = {
+              blue: 'h-6 w-6 text-blue-600 dark:text-blue-400',
+              green: 'h-6 w-6 text-green-600 dark:text-green-400',
+              purple: 'h-6 w-6 text-purple-600 dark:text-purple-400',
+              orange: 'h-6 w-6 text-orange-600 dark:text-orange-400'
+            };
+            const color = assessment.color as keyof typeof colorClasses;
 
             return (
               <div
                 key={assessment.id}
-                className={`p-6 rounded-lg border-2 ${colorClasses[assessment.color as keyof typeof colorClasses]} hover:shadow-lg transition-shadow cursor-pointer`}
+                className={`p-6 rounded-lg border-2 ${colorClasses[color]} hover:shadow-lg transition-shadow cursor-pointer`}
                 onClick={() => handleStartAssessment(assessment.id)}
               >
                 <div className="flex items-start space-x-4">
-                  <div className={`p-3 rounded-lg bg-${assessment.color}-100 dark:bg-${assessment.color}-900/30`}>
-                    <Icon className={`h-6 w-6 text-${assessment.color}-600 dark:text-${assessment.color}-400`} />
+                  <div className={`p-3 rounded-lg ${iconBgClasses[color]}`}>
+                    <Icon className={iconColorClasses[color]} />
                   </div>
                   <div className="flex-1">
                     <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
