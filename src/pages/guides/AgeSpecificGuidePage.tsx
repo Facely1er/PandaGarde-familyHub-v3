@@ -165,9 +165,7 @@ const AgeSpecificGuidePage: React.FC = () => {
           </div>
         </section>
       {/* Age Group Selector */}
-      <div style={{
-        backgroundColor: '#ffffff',
-        borderBottom: '1px solid #e5e7eb',
+      <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700" style={{
         padding: '1.5rem 0',
         marginBottom: 'clamp(2rem, 4vw, 3rem)'
       }}>
@@ -176,14 +174,27 @@ const AgeSpecificGuidePage: React.FC = () => {
             {ageGroups.map((group) => {
               const IconComponent = group.icon;
               const isSelected = selectedAgeGroup === group.id;
+              const buttonMap: Record<string, { selected: string; unselected: string }> = {
+                green: {
+                  selected: 'bg-green-600 text-white',
+                  unselected: 'bg-green-100 text-green-700 hover:bg-green-200 dark:bg-green-900/30 dark:text-green-300 dark:hover:bg-green-900/50',
+                },
+                blue: {
+                  selected: 'bg-blue-600 text-white',
+                  unselected: 'bg-blue-100 text-blue-700 hover:bg-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:hover:bg-blue-900/50',
+                },
+                purple: {
+                  selected: 'bg-purple-600 text-white',
+                  unselected: 'bg-purple-100 text-purple-700 hover:bg-purple-200 dark:bg-purple-900/30 dark:text-purple-300 dark:hover:bg-purple-900/50',
+                },
+              };
+              const colorKey = group.color as keyof typeof buttonMap;
               return (
                 <button
                   key={group.id}
                   onClick={() => setSelectedAgeGroup(group.id)}
                   className={`flex items-center gap-3 px-6 py-3 rounded-lg font-semibold transition-colors ${
-                    isSelected
-                      ? `bg-${group.color}-600 text-white`
-                      : `bg-${group.color}-100 text-${group.color}-700 hover:bg-${group.color}-200`
+                    isSelected ? buttonMap[colorKey].selected : buttonMap[colorKey].unselected
                   }`}
                 >
                   <IconComponent size={20} />

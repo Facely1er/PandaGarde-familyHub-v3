@@ -119,3 +119,29 @@
   color: white;
   text-decoration: underline;
 }
+
+/* ===== DARK THEME OVERRIDES ===== */
+[data-theme="dark"] .family-guide-h2 {
+  color: var(--primary);
+}
+
+[data-theme="dark"] .family-guide-p {
+  color: var(--gray-600);
+}
+
+[data-theme="dark"] .family-guide-callout {
+  background-color: var(--gray-100);
+  border-color: var(--gray-300);
+}
+
+[data-theme="dark"] .family-guide-callout h3 {
+  color: var(--primary);
+}
+
+[data-theme="dark"] .family-guide-cta-btn-primary {
+  color: var(--primary);
+}
+
+[data-theme="dark"] .family-guide-cta-btn-primary:hover {
+  background-color: var(--gray-200);
+}
