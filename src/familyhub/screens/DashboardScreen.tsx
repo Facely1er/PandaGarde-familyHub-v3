@@ -11,25 +11,25 @@ interface FamilyGoal {
 
 const quickActions = [
   {
-    title: 'Manage family',
+    title: 'Manage Family',
     description: 'Add or review kids and guardians',
     to: '/family-hub/kids',
     icon: Users,
   },
   {
-    title: 'Start activities',
+    title: 'Start Activities',
     description: 'Launch games and learning sessions',
     to: '/family-hub/activities',
     icon: Gamepad2,
   },
   {
-    title: 'Track progress',
+    title: 'Track Progress',
     description: 'View achievements and certificates',
     to: '/family-hub/progress',
     icon: Award,
   },
   {
-    title: 'Open settings',
+    title: 'Open Settings',
     description: 'Adjust preferences and support links',
     to: '/family-hub/settings',
     icon: Settings,
@@ -95,7 +95,7 @@ const DashboardScreen: React.FC = () => {
                     className="group flex items-center gap-3 rounded-xl border border-gray-200 bg-white p-4 text-left shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-teal-300 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 dark:border-gray-700 dark:bg-gray-800 dark:hover:border-teal-500"
                   >
                     <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-teal-100 text-teal-700 transition-colors group-hover:bg-teal-600 group-hover:text-white dark:bg-teal-900/40 dark:text-teal-200">
-                      <Icon size={20} aria-hidden />
+                      <Icon size={20} aria-hidden="true" />
                     </span>
                     <span className="min-w-0">
                       <span className="block text-sm font-semibold text-gray-900 dark:text-white">{title}</span>

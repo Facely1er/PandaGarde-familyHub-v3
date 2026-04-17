@@ -71,7 +71,7 @@ const AppShell: React.FC = () => {
                 PandaGarde Family Hub
               </h1>
               <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-                {currentTab?.label ?? 'Dashboard'}
+                {currentTab?.label ?? tabs[0].label}
               </p>
             </div>
             <div className="rounded-full bg-teal-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-teal-700 dark:bg-teal-900/40 dark:text-teal-200">
@@ -115,15 +115,15 @@ const AppShell: React.FC = () => {
                   ].join(' ')}
                   aria-current={active ? 'page' : undefined}
                 >
-                  <span
-                    className={[
-                      'flex h-8 w-8 items-center justify-center rounded-lg transition-colors',
-                      active
-                        ? 'bg-teal-100 text-teal-700 dark:bg-teal-800/60 dark:text-teal-200'
-                        : 'text-gray-500 dark:text-gray-400 group-hover:text-teal-700 dark:group-hover:text-teal-300',
-                    ].join(' ')}
-                  >
-                    <Icon size={20} strokeWidth={active ? 2.5 : 2} />
+                    <span
+                      className={[
+                        'flex h-8 w-8 items-center justify-center rounded-lg transition-colors',
+                        active
+                          ? 'bg-teal-100 text-teal-700 dark:bg-teal-800/60 dark:text-teal-200'
+                          : 'text-gray-500 dark:text-gray-400 group-hover:text-teal-700 dark:group-hover:text-teal-300',
+                      ].join(' ')}
+                    >
+                    <Icon size={20} strokeWidth={active ? 2.5 : 2} aria-hidden="true" />
                   </span>
                   <span
                     className={[
