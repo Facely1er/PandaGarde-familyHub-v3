@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
 import { ArrowLeft, CheckCircle2, Users, Gamepad2, Award, Settings } from "lucide-react";
+import { Link } from "react-router-dom";
 import FamilyDashboard from "../../components/FamilyDashboard";
 import { updateDfaJourneyPhase } from "../../lib/dfaJourney";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
+import HubTour from "../components/HubTour";
 
 interface FamilyGoal {
   completed?: boolean;
@@ -47,15 +48,16 @@ const DashboardScreen: React.FC = () => {
 
   return (
     <div className="min-h-full">
+      <HubTour />
       <div className="border-b border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-900">
         <div className="mx-auto flex max-w-5xl flex-col gap-2 md:flex-row md:items-center md:justify-between">
           <div className="flex items-start gap-2">
             <CheckCircle2 size={18} className="mt-0.5 text-emerald-700" />
             <p className="leading-6">You are in <strong>Phase 4</strong> of the DFA journey. Family Hub keeps the plan visible so the work does not disappear after the assessment.</p>
           </div>
-          <Link to="/privacy-assessment" className="inline-flex items-center gap-2 font-semibold text-emerald-800 hover:text-emerald-900">
+          <a href="/privacy-assessment" className="inline-flex items-center gap-2 font-semibold text-emerald-800 hover:text-emerald-900">
             <ArrowLeft size={16} /> Review assessment
-          </Link>
+          </a>
         </div>
       </div>
       <section className="border-b border-gray-200 bg-white/95 px-4 py-5 shadow-sm dark:border-gray-700 dark:bg-gray-900/80">

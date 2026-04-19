@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { BookOpen, ShieldCheck, Users, Mail, HelpCircle, Scale, Accessibility, PlayCircle, HeartHandshake } from 'lucide-react';
+import { BookOpen, ShieldCheck, LayoutDashboard, Mail, HelpCircle, Scale, Accessibility, PlayCircle, HeartHandshake } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const exploreLinks = [
     { icon: ShieldCheck, href: '/how-it-works', label: 'How It Works' },
     { icon: BookOpen, href: '/resources', label: 'Resources' },
-    { icon: Users, href: '/family-hub', label: 'Family Hub' },
+    { icon: LayoutDashboard, href: '/family-hub', label: 'Family Hub', target: '_blank', rel: 'noopener noreferrer' },
     { icon: PlayCircle, href: '/get-started', label: 'Get Started' },
   ];
 
@@ -45,9 +45,9 @@ const Footer: React.FC = () => {
             <div className="footer-column">
               <h4>Explore</h4>
               <ul>
-                {exploreLinks.map(({ icon: Icon, href, label }) => (
+                {exploreLinks.map(({ icon: Icon, href, label, target, rel }) => (
                   <li key={href}>
-                    <Link to={href} className="footer-link">
+                    <Link to={href} className="footer-link" target={target} rel={rel}>
                       <Icon size={16} aria-hidden="true" />
                       <span>{label}</span>
                     </Link>
