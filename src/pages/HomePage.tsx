@@ -15,7 +15,6 @@ import {
   GraduationCap,
   ClipboardCheck,
   Home,
-  Shield,
 } from 'lucide-react';
 import { loadDfaJourneyState } from '../lib/dfaJourney';
 
@@ -253,6 +252,9 @@ const HomePage: React.FC = () => {
       <section className="homepage-hero premium-hero">
         <div className="container premium-hero__container">
           <div className="premium-hero__content slide-in-left">
+            <div className="premium-hero__logo-badge">
+              <img src="/LogoPandagarde.png" alt="PandaGarde" />
+            </div>
             <div className="premium-hero__eyebrow">
               <span className="premium-hero__eyebrow-pill">
                 <ShieldCheck size={14} />
@@ -295,14 +297,20 @@ const HomePage: React.FC = () => {
           <div className="premium-hero__visual slide-in-right" aria-hidden="true">
             <div className="premium-hero__glow premium-hero__glow--one" />
             <div className="premium-hero__glow premium-hero__glow--two" />
-            <div className="premium-hero__floating-chip premium-hero__floating-chip--top">Local-first by design</div>
-            <div className="premium-hero__floating-chip premium-hero__floating-chip--bottom">Website → Family Hub</div>
+            <div className="premium-hero__floating-chip premium-hero__floating-chip--top premium-hero__floating-chip--accent">
+              <ShieldCheck size={14} />
+              Local-first by design
+            </div>
+            <div className="premium-hero__floating-chip premium-hero__floating-chip--bottom premium-hero__floating-chip--info">
+              <Users size={14} />
+              Website → Family Hub
+            </div>
 
             <div className="premium-hero__workspace-card">
               <div className="premium-hero__workspace-topbar">
                 <div className="premium-hero__workspace-brand">
-                  <div className="premium-hero__workspace-icon">
-                    <Shield size={18} />
+                  <div className="premium-hero__workspace-icon premium-hero__workspace-icon--logo">
+                    <img src="/LogoPandagarde.png" alt="PandaGarde" />
                   </div>
                   <div>
                     <strong>PandaGarde Family Hub</strong>
