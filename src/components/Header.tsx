@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Menu, X, Info, Moon, Sun, Search, BookOpen, ShieldCheck, Users, LifeBuoy, Scale, Wrench } from 'lucide-react';
+import { Menu, X, Info, Moon, Sun, Search, BookOpen, ShieldCheck, Users, LifeBuoy, Scale, Wrench, LayoutDashboard } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import SearchModal from './SearchModal';
 
@@ -69,14 +69,14 @@ function Header() {
 
   const mobileCtaItems = useMemo(
     () => [
-      { id: 'mobile-nav-family-hub', icon: Users, label: 'Open Family Hub', href: '/family-hub', variant: 'primary' },
+      { id: 'mobile-nav-family-hub', icon: LayoutDashboard, label: 'Open Family Hub', href: '/family-hub', variant: 'primary', target: '_blank', rel: 'noopener noreferrer' },
       { id: 'mobile-nav-get-started', icon: Users, label: 'Get Started', href: '/get-started', variant: 'secondary' },
     ],
     []
   );
 
   const isActive = (href: string) => {
-    if (href === '/') return location.pathname === '/';
+    if (href === '/') {return location.pathname === '/';}
     return location.pathname.startsWith(href);
   };
 
@@ -102,7 +102,7 @@ function Header() {
   };
 
   const handleMobileMenuKeyDown = (e: React.KeyboardEvent) => {
-    if (!isMobileMenuOpen) return;
+    if (!isMobileMenuOpen) {return;}
     const menuItems = Array.from(
       document.querySelectorAll('.mobile-nav .nav-link, .mobile-nav .mobile-nav-section-link')
     ) as HTMLElement[];
@@ -174,9 +174,10 @@ function Header() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`nav-cta nav-cta-primary ${isActive('/family-hub') ? 'active' : ''}`}
+                aria-label="Open Family Hub workspace (opens in new tab)"
                 aria-current={isActive('/family-hub') ? 'page' : undefined}
               >
-                <Users size={16} aria-hidden="true" />
+                <LayoutDashboard size={16} aria-hidden="true" />
                 <span>Family Hub</span>
               </Link>
 
@@ -291,6 +292,8 @@ function Header() {
                     <li key={item.id}>
                       <Link
                         to={item.href}
+                        target={'target' in item ? item.target : undefined}
+                        rel={'rel' in item ? item.rel : undefined}
                         className={`mobile-nav-section-link mobile-nav-cta mobile-nav-cta-${item.variant}`}
                         onClick={() => setIsMobileMenuOpen(false)}
                       >

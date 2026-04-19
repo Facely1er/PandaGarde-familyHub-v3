@@ -6,11 +6,13 @@ import KidsScreen from '../../familyhub/screens/KidsScreen';
 import ActivitiesScreen from '../../familyhub/screens/ActivitiesScreen';
 import ProgressScreen from '../../familyhub/screens/ProgressScreen';
 import SettingsScreen from '../../familyhub/screens/SettingsScreen';
+import WelcomeScreen, { HUB_WELCOMED_KEY } from '../../familyhub/screens/WelcomeScreen';
 import AuthWrapper, { useAuth } from './AuthWrapper';
 import LoginPage from './LoginPage';
 
 const FamilyHubRoutes: React.FC = () => {
   const { isAuthenticated } = useAuth();
+  const hubWelcomed = localStorage.getItem(HUB_WELCOMED_KEY) === 'true';
 
   if (!isAuthenticated) {
     return (
@@ -22,7 +24,15 @@ const FamilyHubRoutes: React.FC = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="dashboard" replace />} />
+      {/* First-time welcome screen — shown before the shell */}
+      <Route path="welcome" element={<WelcomeScreen />} />
+
+      {/* Redirect root: send newcomers to welcome, returners to dashboard */}
+      <Route
+        path="/"
+        element={<Navigate to={hubWelcomed ? 'dashboard' : 'welcome'} replace />}
+      />
+
       <Route element={<AppShell />}>
         <Route path="dashboard" element={<DashboardScreen />} />
         <Route path="kids" element={<KidsScreen />} />
