@@ -6826,9 +6826,18 @@ body {
   overflow: clip;
   padding: clamp(2rem, 4vw, 3.5rem) 0 clamp(3.6rem, 6vw, 5.25rem);
   background:
-    radial-gradient(circle at top left, rgba(16, 185, 129, 0.12), transparent 28%),
-    radial-gradient(circle at 85% 12%, rgba(59, 130, 246, 0.1), transparent 24%),
-    linear-gradient(180deg, rgba(248, 250, 252, 0.98) 0%, rgba(255, 255, 255, 1) 62%, rgba(248, 250, 252, 0.82) 100%);
+    radial-gradient(ellipse 60% 50% at top left, rgba(16, 185, 129, 0.18), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 88% 8%, rgba(59, 130, 246, 0.14), transparent 48%),
+    radial-gradient(ellipse 40% 30% at 20% 90%, rgba(245, 158, 11, 0.08), transparent 50%),
+    linear-gradient(180deg, rgba(240, 253, 244, 0.95) 0%, rgba(255, 255, 255, 1) 55%, rgba(240, 253, 244, 0.7) 100%);
+}
+
+[data-theme="dark"] .homepage-hero {
+  background:
+    radial-gradient(ellipse 60% 50% at top left, rgba(74, 222, 128, 0.12), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 88% 8%, rgba(56, 189, 248, 0.1), transparent 48%),
+    radial-gradient(ellipse 40% 30% at 20% 90%, rgba(251, 191, 36, 0.07), transparent 50%),
+    linear-gradient(180deg, rgba(7, 23, 18, 0.98) 0%, rgba(4, 13, 10, 1) 55%, rgba(7, 23, 18, 0.9) 100%);
 }
 
 .premium-hero__container {
@@ -6841,6 +6850,33 @@ body {
 .premium-hero__content {
   position: relative;
   z-index: 2;
+}
+
+/* Panda logo mark above the headline */
+.premium-hero__logo-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(14, 165, 233, 0.08));
+  border: 1px solid rgba(16, 185, 129, 0.18);
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.14), 0 2px 8px rgba(15, 23, 42, 0.06);
+  margin-bottom: 1.25rem;
+  animation: floatY 6s ease-in-out infinite;
+}
+
+.premium-hero__logo-badge img {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+}
+
+[data-theme="dark"] .premium-hero__logo-badge {
+  background: linear-gradient(135deg, rgba(74, 222, 128, 0.12), rgba(56, 189, 248, 0.1));
+  border-color: rgba(74, 222, 128, 0.22);
+  box-shadow: 0 8px 24px rgba(74, 222, 128, 0.16), 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .premium-hero__eyebrow {
@@ -7040,6 +7076,20 @@ body {
   justify-content: center;
   background: linear-gradient(135deg, rgba(16, 185, 129, 0.16), rgba(14, 165, 233, 0.16));
   color: var(--primary);
+}
+
+/* Logo variant: show the actual panda image instead of an icon */
+.premium-hero__workspace-icon--logo {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(16, 185, 129, 0.18);
+  padding: 4px;
+  overflow: hidden;
+}
+
+.premium-hero__workspace-icon--logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .premium-hero__workspace-brand div {
@@ -7837,6 +7887,27 @@ body {
   animation: floatY 8s ease-in-out infinite reverse;
 }
 
+/* Coloured chip variants */
+.premium-hero__floating-chip--accent {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.14), rgba(5, 150, 105, 0.12));
+  border-color: rgba(16, 185, 129, 0.28);
+  color: #065f46;
+}
+
+.premium-hero__floating-chip--accent svg {
+  color: #059669;
+}
+
+.premium-hero__floating-chip--info {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(14, 165, 233, 0.1));
+  border-color: rgba(59, 130, 246, 0.24);
+  color: #1e3a8a;
+}
+
+.premium-hero__floating-chip--info svg {
+  color: #3b82f6;
+}
+
 @keyframes floatY {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
@@ -8012,6 +8083,27 @@ body {
   background: rgba(15, 23, 42, 0.72);
   border-color: rgba(148, 163, 184, 0.18);
   box-shadow: 0 24px 64px rgba(2, 6, 23, 0.34);
+}
+
+/* Dark mode overrides for coloured chip variants */
+[data-theme="dark"] .premium-hero__floating-chip--accent {
+  background: linear-gradient(135deg, rgba(74, 222, 128, 0.14), rgba(16, 185, 129, 0.1));
+  border-color: rgba(74, 222, 128, 0.26);
+  color: #86efac;
+}
+
+[data-theme="dark"] .premium-hero__floating-chip--accent svg {
+  color: #4ade80;
+}
+
+[data-theme="dark"] .premium-hero__floating-chip--info {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(14, 165, 233, 0.1));
+  border-color: rgba(56, 189, 248, 0.24);
+  color: #bae6fd;
+}
+
+[data-theme="dark"] .premium-hero__floating-chip--info svg {
+  color: #38bdf8;
 }
 
 [data-theme="dark"] .homepage-architecture__intro h2,

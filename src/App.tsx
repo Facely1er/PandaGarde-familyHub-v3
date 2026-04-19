@@ -141,6 +141,19 @@ const ConditionalFooter: React.FC = () => {
   return <Footer />;
 };
 
+// Component to apply the content wrapper only on non-Family-Hub routes.
+// Family Hub uses AppShell with h-screen; the 60px padding-top from
+// main-content-wrapper would shift the shell down and clip the bottom nav.
+const ConditionalMain: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const location = useLocation();
+  const isFamilyHub = location.pathname.startsWith('/family-hub');
+  return (
+    <main id="main-content" className={isFamilyHub ? '' : 'main-content-wrapper'}>
+      {children}
+    </main>
+  );
+};
+
 function App() {
   return (
     <ThemeProvider>
@@ -156,7 +169,7 @@ function App() {
                       <PageTracker />
                       <HashHandler />
                       <ConditionalHeader />
-                      <main className="main-content-wrapper">
+                      <ConditionalMain>
                         <Suspense fallback={<div className="page-loading">Loading…</div>}>
                         <Routes>
             <Route path="/" element={<HomePage />} />
@@ -271,7 +284,7 @@ function App() {
             <Route path="*" element={<NotFoundPage />} />
                         </Routes>
                         </Suspense>
-                      </main>
+                      </ConditionalMain>
                       <ConditionalFooter />
                       <BackToTop />
                     </div>
