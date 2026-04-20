@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Users, Plus, Eye, Trash2 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { useFamilyProgress } from '../../contexts/FamilyProgressContext';
 import ChildProgressDetail from '../../components/ChildProgressDetail';
@@ -96,14 +97,18 @@ const KidsScreen: React.FC = () => {
         </div>
       ) : (
         <div className="space-y-4">
-          {familyMembers.map(member => (
-            <div
+          {familyMembers.map((member, index) => (
+            <motion.div
               key={member.id}
-              className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700 shadow-sm"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ duration: 0.3, delay: index * 0.05, ease: 'easeOut' }}
+              className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow"
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4 flex-1">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-teal-500 to-cyan-600 flex items-center justify-center text-white text-lg font-bold">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-r from-teal-500 to-cyan-600 flex items-center justify-center text-white text-lg font-bold shadow-md">
                     {member.name.charAt(0).toUpperCase()}
                   </div>
                   <div>
@@ -121,45 +126,56 @@ const KidsScreen: React.FC = () => {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => setSelectedChildId(member.id)}
-                    className="p-2 text-blue-600 hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+                    className="p-2 text-blue-600 hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-all hover:scale-105 min-w-[44px] min-h-[44px] flex items-center justify-center"
                     title="View detailed progress"
+                    aria-label={`View detailed progress for ${member.name}`}
                   >
-                    <Eye size={18} />
+                    <Eye size={18} aria-hidden="true" />
                   </button>
                   <button
                     onClick={() => removeFamilyMember(member.id)}
-                    className="p-2 text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+                    className="p-2 text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all hover:scale-105 min-w-[44px] min-h-[44px] flex items-center justify-center"
                     title="Remove family member"
+                    aria-label={`Remove ${member.name} from family`}
                   >
-                    <Trash2 size={18} />
+                    <Trash2 size={18} aria-hidden="true" />
                   </button>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       )}
 
       {/* Add Member Modal */}
-      {showAddMember && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-xl max-w-md w-full p-6 shadow-xl">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white">Add Family Member</h3>
-              <button
-                onClick={() => setShowAddMember(false)}
-                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-              >
-                ×
-              </button>
-            </div>
-            
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Name</label>
-                <input
-                  type="text"
-                  value={newMember.name}
+      <AnimatePresence>
+        {showAddMember && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ duration: 0.2, ease: 'easeOut' }}
+              className="bg-white dark:bg-gray-800 rounded-xl max-w-md w-full p-6 shadow-xl"
+            >
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white">Add Family Member</h3>
+                <button
+                  onClick={() => setShowAddMember(false)}
+                  className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 min-w-[44px] min-h-[44px] flex items-center justify-center text-3xl leading-none transition-colors"
+                  aria-label="Close dialog"
+                >
+                  ×
+                </button>
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <label htmlFor="member-name" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Name</label>
+                  <input
+                    id="member-name"
+                    type="text"
+                    value={newMember.name}
                   onChange={(e) => setNewMember({...newMember, name: e.target.value})}
                   className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-600 dark:bg-gray-700 dark:text-white"
                   placeholder="Enter family member's name"
@@ -193,12 +209,13 @@ const KidsScreen: React.FC = () => {
                   <option value="Guardian">Guardian</option>
                 </select>
               </div>
-              
+
               <div className="flex gap-3 pt-4">
                 <button
                   type="button"
                   onClick={() => setShowAddMember(false)}
                   className="flex-1 bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-200 py-3 rounded-lg hover:bg-gray-400 dark:hover:bg-gray-500 transition-colors min-h-[44px] font-medium"
+                  aria-label="Cancel and close dialog"
                 >
                   Cancel
                 </button>
@@ -206,14 +223,16 @@ const KidsScreen: React.FC = () => {
                   type="button"
                   onClick={addFamilyMember}
                   className="flex-1 bg-teal-600 text-white py-3 rounded-lg hover:bg-teal-700 transition-colors min-h-[44px] font-medium"
+                  aria-label="Add family member"
                 >
                   Add Member
                 </button>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
-      )}
+        )}
+      </AnimatePresence>
     </div>
   );
 };
