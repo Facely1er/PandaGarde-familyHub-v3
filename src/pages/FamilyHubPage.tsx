@@ -290,9 +290,10 @@ const FamilyHubPage: React.FC = () => {
               
               <Link
                 to="/family-hub/profile"
-                className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 font-medium transition-colors text-sm sm:text-base"
+                className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 font-medium transition-colors text-sm sm:text-base min-h-[44px] min-w-[44px] justify-center"
+                aria-label="View profile"
               >
-                <User size={16} />
+                <User size={16} aria-hidden="true" />
                 <span className="hidden sm:inline">Profile</span>
               </Link>
             </div>
@@ -309,17 +310,19 @@ const FamilyHubPage: React.FC = () => {
                 <button
                   key={key}
                   onClick={() => setActiveTab(key as 'dashboard' | 'activities' | 'progress' | 'family' | 'resources')}
-                  className={`flex items-center gap-1.5 lg:gap-2 px-3 lg:px-4 py-2 rounded-lg font-medium transition-all text-sm lg:text-base ${
-                    activeTab === key 
-                      ? 'bg-green-100 text-green-700' 
+                  className={`flex items-center gap-1.5 lg:gap-2 px-3 lg:px-4 py-2 rounded-lg font-medium transition-all text-sm lg:text-base min-h-[44px] ${
+                    activeTab === key
+                      ? 'bg-green-100 text-green-700'
                       : 'text-gray-600 hover:text-green-600 hover:bg-gray-50'
                   }`}
                   style={{
                     backgroundColor: activeTab === key ? 'var(--secondary)' : undefined,
                     color: activeTab === key ? 'var(--primary)' : undefined
                   }}
+                  aria-label={`${label} tab`}
+                  aria-current={activeTab === key ? 'page' : undefined}
                 >
-                  <Icon size={16} />
+                  <Icon size={16} aria-hidden="true" />
                   <span>{label}</span>
                 </button>
               ))}
@@ -1034,35 +1037,47 @@ const FamilyHubPage: React.FC = () => {
 
       {/* Create Family Modal */}
       {showCreateFamily && (
-        <div className="fixed inset-0 z-50 overflow-y-auto">
+        <div className="fixed inset-0 z-50 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="create-family-title">
           <div className="flex min-h-screen items-center justify-center p-4">
-            <div className="fixed inset-0 bg-black bg-opacity-50" onClick={() => setShowCreateFamily(false)} />
-            <div className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full p-6">
-              <h3 className="text-xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+            <div
+              className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
+              onClick={() => setShowCreateFamily(false)}
+              aria-hidden="true"
+            />
+            <div className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full p-6 sm:p-6 mx-auto">
+              <h3 id="create-family-title" className="text-xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
                 Create New Family
               </h3>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2">Family Name</label>
+                  <label htmlFor="family-name" className="block text-sm font-medium mb-2">
+                    Family Name <span className="text-red-500" aria-label="required">*</span>
+                  </label>
                   <input
+                    id="family-name"
                     type="text"
                     value={newFamilyName}
                     onChange={(e) => setNewFamilyName(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                     placeholder="Enter family name"
+                    autoFocus
+                    required
+                    aria-required="true"
                   />
                 </div>
                 <div className="flex gap-3">
                   <button
                     onClick={handleCreateFamily}
                     disabled={!newFamilyName.trim() || loading}
-                    className="flex-1 bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white px-4 py-2 rounded-md font-medium transition-colors"
+                    className="flex-1 bg-green-600 hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white px-4 py-3 rounded-md font-medium transition-colors min-h-[44px]"
+                    aria-label="Create family"
                   >
                     {loading ? 'Creating...' : 'Create Family'}
                   </button>
                   <button
                     onClick={() => setShowCreateFamily(false)}
-                    className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 px-4 py-2 rounded-md font-medium transition-colors"
+                    className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 px-4 py-3 rounded-md font-medium transition-colors min-h-[44px]"
+                    aria-label="Cancel and close dialog"
                   >
                     Cancel
                   </button>
@@ -1075,35 +1090,47 @@ const FamilyHubPage: React.FC = () => {
 
       {/* Join Family Modal */}
       {showJoinFamily && (
-        <div className="fixed inset-0 z-50 overflow-y-auto">
+        <div className="fixed inset-0 z-50 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="join-family-title">
           <div className="flex min-h-screen items-center justify-center p-4">
-            <div className="fixed inset-0 bg-black bg-opacity-50" onClick={() => setShowJoinFamily(false)} />
+            <div
+              className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
+              onClick={() => setShowJoinFamily(false)}
+              aria-hidden="true"
+            />
             <div className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full p-6">
-              <h3 className="text-xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+              <h3 id="join-family-title" className="text-xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
                 Join Existing Family
               </h3>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2">Family ID</label>
+                  <label htmlFor="family-id" className="block text-sm font-medium mb-2">
+                    Family ID <span className="text-red-500" aria-label="required">*</span>
+                  </label>
                   <input
+                    id="family-id"
                     type="text"
                     value={joinFamilyId}
                     onChange={(e) => setJoinFamilyId(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                     placeholder="Enter family ID"
+                    autoFocus
+                    required
+                    aria-required="true"
                   />
                 </div>
                 <div className="flex gap-3">
                   <button
                     onClick={handleJoinFamily}
                     disabled={!joinFamilyId.trim() || loading}
-                    className="flex-1 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white px-4 py-2 rounded-md font-medium transition-colors"
+                    className="flex-1 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white px-4 py-3 rounded-md font-medium transition-colors min-h-[44px]"
+                    aria-label="Join family"
                   >
                     {loading ? 'Joining...' : 'Join Family'}
                   </button>
                   <button
                     onClick={() => setShowJoinFamily(false)}
-                    className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 px-4 py-2 rounded-md font-medium transition-colors"
+                    className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 px-4 py-3 rounded-md font-medium transition-colors min-h-[44px]"
+                    aria-label="Cancel and close dialog"
                   >
                     Cancel
                   </button>
@@ -1116,52 +1143,73 @@ const FamilyHubPage: React.FC = () => {
 
       {/* Add Member Modal */}
       {showAddMember && (
-        <div className="fixed inset-0 z-50 overflow-y-auto">
+        <div className="fixed inset-0 z-50 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="add-member-title">
           <div className="flex min-h-screen items-center justify-center p-4">
-            <div className="fixed inset-0 bg-black bg-opacity-50" onClick={() => setShowAddMember(false)} />
+            <div
+              className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
+              onClick={() => setShowAddMember(false)}
+              aria-hidden="true"
+            />
             <div className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full p-6">
-              <h3 className="text-xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+              <h3 id="add-member-title" className="text-xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
                 Add Family Member
               </h3>
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-sm font-medium mb-2">First Name</label>
+                    <label htmlFor="member-first-name" className="block text-sm font-medium mb-2">
+                      First Name <span className="text-red-500" aria-label="required">*</span>
+                    </label>
                     <input
+                      id="member-first-name"
                       type="text"
                       value={newMemberFirstName}
                       onChange={(e) => setNewMemberFirstName(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                       placeholder="First name"
+                      required
+                      aria-required="true"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-2">Last Name</label>
+                    <label htmlFor="member-last-name" className="block text-sm font-medium mb-2">
+                      Last Name <span className="text-red-500" aria-label="required">*</span>
+                    </label>
                     <input
+                      id="member-last-name"
                       type="text"
                       value={newMemberLastName}
                       onChange={(e) => setNewMemberLastName(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                       placeholder="Last name"
+                      required
+                      aria-required="true"
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-2">Email</label>
+                  <label htmlFor="member-email" className="block text-sm font-medium mb-2">
+                    Email <span className="text-red-500" aria-label="required">*</span>
+                  </label>
                   <input
+                    id="member-email"
                     type="email"
                     value={newMemberEmail}
                     onChange={(e) => setNewMemberEmail(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                     placeholder="Email address"
+                    required
+                    aria-required="true"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-2">Role</label>
+                  <label htmlFor="member-role" className="block text-sm font-medium mb-2">Role</label>
                   <select
+                    id="member-role"
                     value={newMemberRole}
                     onChange={(e) => setNewMemberRole(e.target.value as 'parent' | 'child')}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                    aria-label="Select member role"
                   >
                     <option value="child">Child</option>
                     <option value="parent">Parent</option>
@@ -1171,13 +1219,15 @@ const FamilyHubPage: React.FC = () => {
                   <button
                     onClick={handleAddMember}
                     disabled={!newMemberEmail.trim() || !newMemberFirstName.trim() || !newMemberLastName.trim() || loading}
-                    className="flex-1 bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white px-4 py-2 rounded-md font-medium transition-colors"
+                    className="flex-1 bg-green-600 hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white px-4 py-3 rounded-md font-medium transition-colors min-h-[44px]"
+                    aria-label="Add family member"
                   >
                     {loading ? 'Adding...' : 'Add Member'}
                   </button>
                   <button
                     onClick={() => setShowAddMember(false)}
-                    className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 px-4 py-2 rounded-md font-medium transition-colors"
+                    className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 px-4 py-3 rounded-md font-medium transition-colors min-h-[44px]"
+                    aria-label="Cancel and close dialog"
                   >
                     Cancel
                   </button>
