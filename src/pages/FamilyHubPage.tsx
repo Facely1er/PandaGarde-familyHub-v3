@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Users, BookOpen, Book, Settings, Award, TrendingUp, Clock, CheckCircle, ArrowLeft, ArrowRight, User, Shield as Child, UserCheck, Star, Play, Download, Plus, UserPlus, LogOut, Globe, Shield, Target, CircleUser as UserCircle } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Logo from '../components/Logo';
 import { useAuth } from './family-hub/AuthWrapper';
 import { useFamily } from '../contexts/FamilyContext';
@@ -1036,24 +1037,35 @@ const FamilyHubPage: React.FC = () => {
       </main>
 
       {/* Create Family Modal */}
-      {showCreateFamily && (
-        <div className="fixed inset-0 z-50 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="create-family-title">
-          <div className="flex min-h-screen items-center justify-center p-4">
-            <div
-              className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
-              onClick={() => setShowCreateFamily(false)}
-              aria-hidden="true"
-            />
-            <div className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full p-6 sm:p-6 mx-auto">
-              <h3 id="create-family-title" className="text-xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
-                Create New Family
-              </h3>
-              <div className="space-y-4">
-                <div>
-                  <label htmlFor="family-name" className="block text-sm font-medium mb-2">
-                    Family Name <span className="text-red-500" aria-label="required">*</span>
-                  </label>
-                  <input
+      <AnimatePresence>
+        {showCreateFamily && (
+          <div className="fixed inset-0 z-50 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="create-family-title">
+            <div className="flex min-h-screen items-center justify-center p-4">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="fixed inset-0 bg-black bg-opacity-50"
+                onClick={() => setShowCreateFamily(false)}
+                aria-hidden="true"
+              />
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                transition={{ duration: 0.2, ease: 'easeOut' }}
+                className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full p-6 sm:p-6 mx-auto"
+              >
+                <h3 id="create-family-title" className="text-xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+                  Create New Family
+                </h3>
+                <div className="space-y-4">
+                  <div>
+                    <label htmlFor="family-name" className="block text-sm font-medium mb-2">
+                      Family Name <span className="text-red-500" aria-label="required">*</span>
+                    </label>
+                    <input
                     id="family-name"
                     type="text"
                     value={newFamilyName}
@@ -1083,21 +1095,33 @@ const FamilyHubPage: React.FC = () => {
                   </button>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
-      )}
+        )}
+      </AnimatePresence>
 
       {/* Join Family Modal */}
-      {showJoinFamily && (
-        <div className="fixed inset-0 z-50 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="join-family-title">
-          <div className="flex min-h-screen items-center justify-center p-4">
-            <div
-              className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
-              onClick={() => setShowJoinFamily(false)}
-              aria-hidden="true"
-            />
-            <div className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full p-6">
+      <AnimatePresence>
+        {showJoinFamily && (
+          <div className="fixed inset-0 z-50 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="join-family-title">
+            <div className="flex min-h-screen items-center justify-center p-4">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="fixed inset-0 bg-black bg-opacity-50"
+                onClick={() => setShowJoinFamily(false)}
+                aria-hidden="true"
+              />
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                transition={{ duration: 0.2, ease: 'easeOut' }}
+                className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full p-6"
+              >
               <h3 id="join-family-title" className="text-xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
                 Join Existing Family
               </h3>
@@ -1136,21 +1160,33 @@ const FamilyHubPage: React.FC = () => {
                   </button>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
-      )}
+        )}
+      </AnimatePresence>
 
       {/* Add Member Modal */}
-      {showAddMember && (
+      <AnimatePresence>
+        {showAddMember && (
         <div className="fixed inset-0 z-50 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="add-member-title">
           <div className="flex min-h-screen items-center justify-center p-4">
-            <div
-              className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 bg-black bg-opacity-50"
               onClick={() => setShowAddMember(false)}
               aria-hidden="true"
             />
-            <div className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full p-6">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ duration: 0.2, ease: 'easeOut' }}
+              className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full p-6"
+            >
               <h3 id="add-member-title" className="text-xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
                 Add Family Member
               </h3>
@@ -1233,10 +1269,11 @@ const FamilyHubPage: React.FC = () => {
                   </button>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
-      )}
+        )}
+      </AnimatePresence>
     </div>
   );
 };
