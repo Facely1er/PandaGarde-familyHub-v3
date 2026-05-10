@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { Play, RotateCcw } from 'lucide-react';
 import { useProgress } from '../../contexts/ProgressContext';
+import { useFamilyProgress } from '../../contexts/FamilyProgressContext';
 import { useToast } from '../../contexts/ToastContext';
 // import { useAuth } from '../../contexts/AuthContext';
 
@@ -24,7 +25,18 @@ const ActivityManager: React.FC<ActivityManagerProps> = ({ activityId, onClose, 
   const [showInstructions, setShowInstructions] = useState(true);
   const [startTime, setStartTime] = useState<Date | null>(null);
   const { markActivityCompleted } = useProgress();
+  const { recordActivityCompletion } = useFamilyProgress();
   const { showSuccess, showError } = useToast();
+
+  // Get current family member from localStorage (used by Family Hub)
+  const getCurrentMemberId = (): number | null => {
+    try {
+      const stored = localStorage.getItem('pandagarde_currentMember');
+      return stored ? JSON.parse(stored) : null;
+    } catch {
+      return null;
+    }
+  };
 
   const activityInstructions = {
     coloring: {
@@ -134,13 +146,37 @@ const ActivityManager: React.FC<ActivityManagerProps> = ({ activityId, onClose, 
 
   const handleComplete = async (score?: number) => {
     const timeSpent = startTime ? Math.round((Date.now() - startTime.getTime()) / 1000) : 0;
-    
+
     try {
-      await markActivityCompleted(activityId, score, timeSpent);
-      const scoreMessage = score !== undefined ? ` You scored ${score}%!` : '';
+      // Ensure score is a valid number or undefined
+      const validScore = score !== undefined && !isNaN(score) ? Math.round(score) : undefined;
+
+      // Save to ProgressContext (for general app usage)
+      await markActivityCompleted(activityId, validScore, timeSpent);
+
+      // Also save to FamilyProgressContext if a family member is selected (for Family Hub)
+      const currentMemberId = getCurrentMemberId();
+      if (currentMemberId !== null) {
+        const activityName = currentActivity?.title || activityId;
+        recordActivityCompletion(
+          currentMemberId,
+          activityId,
+          activityName,
+          'game', // Activity type for Family Hub tracking
+          validScore || 0, // Score (0 if undefined)
+          100, // Max score is always 100%
+          {
+            timeSpent,
+            completedAt: new Date().toISOString()
+          }
+        );
+      }
+
+      const scoreMessage = validScore !== undefined ? ` You scored ${validScore}%!` : '';
       showSuccess('Activity Completed!', `Great job! Your progress has been saved.${scoreMessage}`);
-      onComplete(activityId, score);
-    } catch {
+      onComplete(activityId, validScore);
+    } catch (error) {
+      console.error('Error saving activity progress:', error);
       showError('Error', 'Failed to save progress. Please try again.');
     }
   };
@@ -155,7 +191,11 @@ const ActivityManager: React.FC<ActivityManagerProps> = ({ activityId, onClose, 
   };
 
   const renderActivity = () => {
-    const activityProps = { onComplete: handleComplete, onClose: onClose };
+    // Create activity props with proper typing for onComplete callback
+    const activityProps = {
+      onComplete: (score?: number) => handleComplete(score),
+      onClose: onClose
+    };
 
     switch (activityId) {
       case 'coloring':

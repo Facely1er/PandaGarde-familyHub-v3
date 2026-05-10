@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { RotateCcw, CheckCircle, ArrowUp, ArrowDown, ArrowLeft, ArrowRight, Download } from 'lucide-react';
 
 interface MazeActivityProps {
-  onComplete: () => void;
+  onComplete: (score?: number) => void;
   onClose: () => void;
 }
 

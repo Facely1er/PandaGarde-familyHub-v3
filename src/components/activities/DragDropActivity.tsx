@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react'
 import { Shuffle, CheckCircle, Download } from 'lucide-react';
 
 interface DragDropActivityProps {
-  onComplete: () => void;
+  onComplete: (score?: number) => void;
   onClose: () => void;
 }
 

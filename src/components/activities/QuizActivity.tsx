@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { RotateCcw, CheckCircle, ArrowRight, ArrowLeft, Star, Clock, Pause, Play, TimerOff } from 'lucide-react';
 
 interface QuizActivityProps {
-  onComplete: () => void;
+  onComplete: (score?: number) => void;
   onClose: () => void;
 }
 
@@ -170,7 +170,9 @@ const QuizActivity: React.FC<QuizActivityProps> = ({ onComplete, onClose }) => {
       setTimeLeft(30);
     } else {
       setIsCompleted(true);
-      onComplete();
+      // Calculate final score as percentage when completing
+      const finalScore = Math.round((score / questions.length) * 100);
+      onComplete(finalScore);
     }
   };
 

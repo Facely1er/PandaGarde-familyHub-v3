@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { RotateCcw, Download, CheckCircle } from 'lucide-react';
 
 interface ColoringActivityProps {
-  onComplete: () => void;
+  onComplete: (score?: number) => void;
   onClose: () => void;
 }
 
