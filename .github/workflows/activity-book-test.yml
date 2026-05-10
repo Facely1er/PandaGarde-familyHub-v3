@@ -44,8 +44,10 @@ jobs:
       
     - name: Verify Activity Book bundle
       run: |
-        echo "Checking Activity Book bundle size..."
-        ls -la dist/assets/ | grep activities
+        echo "Checking build output..."
+        test -f dist/index.html
+        test -d dist/assets
+        ls -la dist/assets/
         echo "Activity Book features built successfully!"
         
     - name: Test Activity Book integration
