@@ -121,71 +121,78 @@ const AppStoreReviewPage: React.FC = () => {
   ];
 
   return (
-    <PageLayout>
-      <div className="min-h-screen bg-gradient-to-br from-teal-50 via-white to-green-50">
-        {/* Header */}
-        <div className="bg-gradient-to-r from-teal-600 to-green-600 text-white py-12">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <Link
-              to="/app-features"
-              className="inline-flex items-center text-teal-100 hover:text-white mb-4"
-            >
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to App Features
-            </Link>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              App Store Reviewer Guide
-            </h1>
-            <p className="text-xl text-teal-100">
-              Step-by-step guide for verifying PandaGarde Family Hub app features
-            </p>
-          </div>
+    <PageLayout
+      title="App Store Reviewer Guide"
+      subtitle="Step-by-step guide for verifying PandaGarde Family Hub app features"
+      icon={Smartphone}
+      badge="REVIEWER GUIDE"
+      breadcrumbs={true}
+    >
+      <div className="min-h-screen" style={{ backgroundColor: 'var(--white)' }}>
+        {/* Back link */}
+        <div className="mb-6">
+          <Link
+            to="/app-features"
+            className="inline-flex items-center font-semibold"
+            style={{ color: 'var(--primary)' }}
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back to App Features
+          </Link>
         </div>
 
         {/* Quick Info */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Quick Information</h2>
+        <div className="py-4">
+          <div className="rounded-xl shadow-lg p-6 mb-8" style={{
+            backgroundColor: 'var(--card-color)',
+            boxShadow: 'var(--shadow-lg)'
+          }}>
+            <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--primary)' }}>Quick Information</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
-                <h3 className="font-semibold text-gray-700 mb-2">App Name</h3>
-                <p className="text-gray-900">Privacy Panda Family Hub</p>
+                <h3 className="font-semibold mb-2" style={{ color: 'var(--gray-700)' }}>App Name</h3>
+                <p style={{ color: 'var(--gray-900)' }}>Privacy Panda Family Hub</p>
               </div>
               <div>
-                <h3 className="font-semibold text-gray-700 mb-2">Category</h3>
-                <p className="text-gray-900">Education / Family</p>
+                <h3 className="font-semibold mb-2" style={{ color: 'var(--gray-700)' }}>Category</h3>
+                <p style={{ color: 'var(--gray-900)' }}>Education / Family</p>
               </div>
               <div>
-                <h3 className="font-semibold text-gray-700 mb-2">Age Rating</h3>
-                <p className="text-gray-900">Ages 4+ (Family Friendly)</p>
+                <h3 className="font-semibold mb-2" style={{ color: 'var(--gray-700)' }}>Age Rating</h3>
+                <p style={{ color: 'var(--gray-900)' }}>Ages 4+ (Family Friendly)</p>
               </div>
             </div>
           </div>
         </div>
 
         {/* Review Steps */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="py-8">
           <div className="space-y-8">
             {reviewSteps.map((step) => (
-              <div key={step.step} className="bg-white rounded-xl shadow-lg p-8">
+              <div key={step.step} className="rounded-xl shadow-lg p-8" style={{
+                backgroundColor: 'var(--card-color)',
+                boxShadow: 'var(--shadow-lg)'
+              }}>
                 <div className="flex items-start mb-6">
-                  <div className="flex-shrink-0 w-12 h-12 bg-teal-600 text-white rounded-full flex items-center justify-center font-bold text-xl mr-4">
+                  <div className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl mr-4 text-white" style={{
+                    backgroundColor: 'var(--primary-light)'
+                  }}>
                     {step.step}
                   </div>
                   <div className="flex-1">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                    <h2 className="text-2xl font-bold mb-2" style={{ color: 'var(--primary)' }}>
                       {step.title}
                     </h2>
-                    <p className="text-gray-600 mb-4">{step.description}</p>
-                    <div className="bg-gray-50 rounded-lg p-4">
-                      <h3 className="font-semibold text-gray-900 mb-3">
+                    <p className="mb-4" style={{ color: 'var(--gray-600)' }}>{step.description}</p>
+                    <div className="rounded-lg p-4" style={{ backgroundColor: 'var(--light)' }}>
+                      <h3 className="font-semibold mb-3" style={{ color: 'var(--gray-900)' }}>
                         Verification Checklist:
                       </h3>
                       <ul className="space-y-2">
                         {step.checks.map((check, index) => (
                           <li key={index} className="flex items-start">
-                            <CheckCircle2 className="w-5 h-5 text-teal-600 mr-2 mt-0.5 flex-shrink-0" />
-                            <span className="text-gray-700">{check}</span>
+                            <CheckCircle2 className="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" style={{ color: 'var(--primary-light)' }} />
+                            <span style={{ color: 'var(--gray-700)' }}>{check}</span>
                           </li>
                         ))}
                       </ul>
