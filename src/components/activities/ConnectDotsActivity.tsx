@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { RotateCcw, CheckCircle, Download } from 'lucide-react';
 
 interface ConnectDotsActivityProps {
-  onComplete: () => void;
+  onComplete: (score?: number) => void;
   onClose: () => void;
 }
 

@@ -134,12 +134,15 @@ const ActivityManager: React.FC<ActivityManagerProps> = ({ activityId, onClose, 
 
   const handleComplete = async (score?: number) => {
     const timeSpent = startTime ? Math.round((Date.now() - startTime.getTime()) / 1000) : 0;
-    
+
     try {
-      await markActivityCompleted(activityId, score, timeSpent);
-      const scoreMessage = score !== undefined ? ` You scored ${score}%!` : '';
+      // Ensure score is a valid number or undefined
+      const validScore = score !== undefined && !isNaN(score) ? Math.round(score) : undefined;
+
+      await markActivityCompleted(activityId, validScore, timeSpent);
+      const scoreMessage = validScore !== undefined ? ` You scored ${validScore}%!` : '';
       showSuccess('Activity Completed!', `Great job! Your progress has been saved.${scoreMessage}`);
-      onComplete(activityId, score);
+      onComplete(activityId, validScore);
     } catch {
       showError('Error', 'Failed to save progress. Please try again.');
     }
@@ -155,7 +158,11 @@ const ActivityManager: React.FC<ActivityManagerProps> = ({ activityId, onClose, 
   };
 
   const renderActivity = () => {
-    const activityProps = { onComplete: handleComplete, onClose: onClose };
+    // Create activity props with proper typing for onComplete callback
+    const activityProps = {
+      onComplete: (score?: number) => handleComplete(score),
+      onClose: onClose
+    };
 
     switch (activityId) {
       case 'coloring':

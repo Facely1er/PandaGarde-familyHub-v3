@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { RotateCcw, CheckCircle, Brain, Clock } from 'lucide-react';
 
 interface MemoryGameActivityProps {
-  onComplete: () => void;
+  onComplete: (score?: number) => void;
   onClose: () => void;
 }
 
