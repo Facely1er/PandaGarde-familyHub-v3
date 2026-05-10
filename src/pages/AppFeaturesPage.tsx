@@ -128,51 +128,47 @@ const AppFeaturesPage: React.FC = () => {
   ];
 
   return (
-    <PageLayout>
-      <div className="min-h-screen bg-gradient-to-br from-teal-50 via-white to-green-50">
-        {/* Hero Section */}
-        <div className="bg-gradient-to-r from-teal-600 to-green-600 text-white py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                PandaGarde Family Hub App
-              </h1>
-              <p className="text-xl md:text-2xl text-teal-100 mb-8">
-                Mobile app features for app store reviewers
-              </p>
-              <div className="flex flex-wrap justify-center gap-4">
-                <a
-                  href="https://play.google.com/store/apps"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center px-6 py-3 bg-white text-teal-600 rounded-lg font-semibold hover:bg-teal-50 transition-colors"
-                >
-                  <Download className="w-5 h-5 mr-2" />
-                  Google Play Store
-                  <ExternalLink className="w-4 h-4 ml-2" />
-                </a>
-                <a
-                  href="https://apps.apple.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center px-6 py-3 bg-white text-teal-600 rounded-lg font-semibold hover:bg-teal-50 transition-colors"
-                >
-                  <Download className="w-5 h-5 mr-2" />
-                  Apple App Store
-                  <ExternalLink className="w-4 h-4 ml-2" />
-                </a>
-              </div>
-            </div>
+    <PageLayout
+      title="PandaGarde Family Hub App"
+      subtitle="Mobile app features for app store reviewers"
+      icon={Smartphone}
+      badge="APP FEATURES"
+      breadcrumbs={true}
+    >
+      <div className="min-h-screen" style={{ backgroundColor: 'var(--white)' }}>
+        {/* App Store Links Section */}
+        <div className="mb-8 text-center">
+          <div className="flex flex-wrap justify-center gap-4">
+            <a
+              href="https://play.google.com/store/apps"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-teal-600 to-green-600 text-white rounded-lg font-semibold hover:opacity-90 transition-opacity"
+            >
+              <Download className="w-5 h-5 mr-2" />
+              Google Play Store
+              <ExternalLink className="w-4 h-4 ml-2" />
+            </a>
+            <a
+              href="https://apps.apple.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-teal-600 to-green-600 text-white rounded-lg font-semibold hover:opacity-90 transition-opacity"
+            >
+              <Download className="w-5 h-5 mr-2" />
+              Apple App Store
+              <ExternalLink className="w-4 h-4 ml-2" />
+            </a>
           </div>
         </div>
 
         {/* Features Grid */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="py-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
               App Features
             </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            <p className="text-lg max-w-3xl mx-auto" style={{ color: 'var(--gray-600)' }}>
               The Family Hub app provides a comprehensive mobile experience for families
               to learn about digital privacy together.
             </p>
@@ -183,16 +179,20 @@ const AppFeaturesPage: React.FC = () => {
               <div
                 key={index}
                 className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow"
+                style={{
+                  backgroundColor: 'var(--card-color)',
+                  boxShadow: 'var(--shadow-lg)'
+                }}
               >
-                <div className="text-teal-600 mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
+                <div className="mb-4" style={{ color: 'var(--primary-light)' }}>{feature.icon}</div>
+                <h3 className="text-xl font-bold mb-3" style={{ color: 'var(--primary)' }}>
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 mb-4">{feature.description}</p>
+                <p className="mb-4" style={{ color: 'var(--gray-600)' }}>{feature.description}</p>
                 <ul className="space-y-2">
                   {feature.highlights.map((highlight, i) => (
-                    <li key={i} className="flex items-start text-sm text-gray-700">
-                      <CheckCircle2 className="w-4 h-4 text-teal-600 mr-2 mt-0.5 flex-shrink-0" />
+                    <li key={i} className="flex items-start text-sm" style={{ color: 'var(--gray-700)' }}>
+                      <CheckCircle2 className="w-4 h-4 mr-2 mt-0.5 flex-shrink-0" style={{ color: 'var(--primary-light)' }} />
                       {highlight}
                     </li>
                   ))}
@@ -203,98 +203,106 @@ const AppFeaturesPage: React.FC = () => {
         </div>
 
         {/* Activities Section */}
-        <div className="bg-gray-50 py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Interactive Activities
-              </h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Eight engaging activities designed to teach digital privacy concepts
-                through interactive gameplay.
-              </p>
-            </div>
+        <div className="py-8" style={{ backgroundColor: 'var(--light)' }}>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+              Interactive Activities
+            </h2>
+            <p className="text-lg max-w-3xl mx-auto" style={{ color: 'var(--gray-600)' }}>
+              Eight engaging activities designed to teach digital privacy concepts
+              through interactive gameplay.
+            </p>
+          </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {activities.map((activity, index) => (
-                <div
-                  key={index}
-                  className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow"
-                >
-                  <div className="flex items-center justify-between mb-3">
-                    <Star className="w-5 h-5 text-yellow-400" />
-                    <span className="text-xs font-semibold text-teal-600 bg-teal-50 px-2 py-1 rounded">
-                      {activity.ageRange}
-                    </span>
-                  </div>
-                  <h3 className="font-bold text-gray-900 mb-2">
-                    {activity.name}
-                  </h3>
-                  <p className="text-sm text-gray-600">
-                    {activity.description}
-                  </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {activities.map((activity, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow"
+                style={{
+                  backgroundColor: 'var(--card-color)',
+                  boxShadow: 'var(--shadow-md)'
+                }}
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <Star className="w-5 h-5 text-yellow-400" />
+                  <span className="text-xs font-semibold px-2 py-1 rounded" style={{
+                    color: 'var(--primary-light)',
+                    backgroundColor: 'var(--light)'
+                  }}>
+                    {activity.ageRange}
+                  </span>
                 </div>
-              ))}
-            </div>
+                <h3 className="font-bold mb-2" style={{ color: 'var(--primary)' }}>
+                  {activity.name}
+                </h3>
+                <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+                  {activity.description}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
 
         {/* App Store Information */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="bg-white rounded-xl shadow-lg p-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">
+        <div className="py-8">
+          <div className="rounded-xl shadow-lg p-8" style={{
+            backgroundColor: 'var(--card-color)',
+            boxShadow: 'var(--shadow-lg)'
+          }}>
+            <h2 className="text-3xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
               App Store Information
             </h2>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                <h3 className="text-xl font-semibold mb-4" style={{ color: 'var(--primary)' }}>
                   App Details
                 </h3>
                 <dl className="space-y-3">
                   <div>
-                    <dt className="font-semibold text-gray-700">App Name</dt>
-                    <dd className="text-gray-600">Privacy Panda Family Hub</dd>
+                    <dt className="font-semibold" style={{ color: 'var(--gray-700)' }}>App Name</dt>
+                    <dd style={{ color: 'var(--gray-600)' }}>Privacy Panda Family Hub</dd>
                   </div>
                   <div>
-                    <dt className="font-semibold text-gray-700">Category</dt>
-                    <dd className="text-gray-600">Education / Family</dd>
+                    <dt className="font-semibold" style={{ color: 'var(--gray-700)' }}>Category</dt>
+                    <dd style={{ color: 'var(--gray-600)' }}>Education / Family</dd>
                   </div>
                   <div>
-                    <dt className="font-semibold text-gray-700">Age Rating</dt>
-                    <dd className="text-gray-600">Ages 4+ (Family Friendly)</dd>
+                    <dt className="font-semibold" style={{ color: 'var(--gray-700)' }}>Age Rating</dt>
+                    <dd style={{ color: 'var(--gray-600)' }}>Ages 4+ (Family Friendly)</dd>
                   </div>
                   <div>
-                    <dt className="font-semibold text-gray-700">Platform</dt>
-                    <dd className="text-gray-600">iOS, Android, or add to home screen in a browser</dd>
+                    <dt className="font-semibold" style={{ color: 'var(--gray-700)' }}>Platform</dt>
+                    <dd style={{ color: 'var(--gray-600)' }}>iOS, Android, or add to home screen in a browser</dd>
                   </div>
                 </dl>
               </div>
 
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                <h3 className="text-xl font-semibold mb-4" style={{ color: 'var(--primary)' }}>
                   Key Highlights
                 </h3>
                 <ul className="space-y-2">
                   <li className="flex items-start">
-                    <CheckCircle2 className="w-5 h-5 text-teal-600 mr-2 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-700">COPPA compliant - safe for children</span>
+                    <CheckCircle2 className="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" style={{ color: 'var(--primary-light)' }} />
+                    <span style={{ color: 'var(--gray-700)' }}>COPPA compliant - safe for children</span>
                   </li>
                   <li className="flex items-start">
-                    <CheckCircle2 className="w-5 h-5 text-teal-600 mr-2 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-700">No in-app purchases or ads</span>
+                    <CheckCircle2 className="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" style={{ color: 'var(--primary-light)' }} />
+                    <span style={{ color: 'var(--gray-700)' }}>No in-app purchases or ads</span>
                   </li>
                   <li className="flex items-start">
-                    <CheckCircle2 className="w-5 h-5 text-teal-600 mr-2 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-700">Works offline - no internet required</span>
+                    <CheckCircle2 className="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" style={{ color: 'var(--primary-light)' }} />
+                    <span style={{ color: 'var(--gray-700)' }}>Works offline - no internet required</span>
                   </li>
                   <li className="flex items-start">
-                    <CheckCircle2 className="w-5 h-5 text-teal-600 mr-2 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-700">Privacy-first - all data stored locally</span>
+                    <CheckCircle2 className="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" style={{ color: 'var(--primary-light)' }} />
+                    <span style={{ color: 'var(--gray-700)' }}>Privacy-first - all data stored locally</span>
                   </li>
                   <li className="flex items-start">
-                    <CheckCircle2 className="w-5 h-5 text-teal-600 mr-2 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-700">Content supports what schools teach about being safe online</span>
+                    <CheckCircle2 className="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" style={{ color: 'var(--primary-light)' }} />
+                    <span style={{ color: 'var(--gray-700)' }}>Content supports what schools teach about being safe online</span>
                   </li>
                 </ul>
               </div>
@@ -303,56 +311,65 @@ const AppFeaturesPage: React.FC = () => {
         </div>
 
         {/* Reviewer Guide Section */}
-        <div className="bg-teal-600 text-white py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-8">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                For App Store Reviewers
-              </h2>
-              <p className="text-xl text-teal-100">
-                Quick guide to verify app features and functionality
-              </p>
+        <div className="py-8 rounded-xl" style={{
+          background: 'linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%)',
+          color: 'white'
+        }}>
+          <div className="text-center mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              For App Store Reviewers
+            </h2>
+            <p className="text-xl opacity-90">
+              Quick guide to verify app features and functionality
+            </p>
+          </div>
+
+          <div className="rounded-xl p-8 max-w-4xl mx-auto" style={{
+            background: 'rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(10px)'
+          }}>
+            <h3 className="text-2xl font-bold mb-6">Feature Verification Checklist</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {[
+                'Family member management (add/remove members)',
+                'Activity selection and completion',
+                'Progress tracking and statistics',
+                'Certificate generation',
+                'Offline functionality',
+                'Touch controls and mobile optimization',
+                'Data privacy (local storage only)',
+                'Age-appropriate content filtering'
+              ].map((item, index) => (
+                <div key={index} className="flex items-start">
+                  <CheckCircle2 className="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" />
+                  <span>{item}</span>
+                </div>
+              ))}
             </div>
 
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 max-w-4xl mx-auto">
-              <h3 className="text-2xl font-bold mb-6">Feature Verification Checklist</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {[
-                  'Family member management (add/remove members)',
-                  'Activity selection and completion',
-                  'Progress tracking and statistics',
-                  'Certificate generation',
-                  'Offline functionality',
-                  'Touch controls and mobile optimization',
-                  'Data privacy (local storage only)',
-                  'Age-appropriate content filtering'
-                ].map((item, index) => (
-                  <div key={index} className="flex items-start">
-                    <CheckCircle2 className="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" />
-                    <span>{item}</span>
-                  </div>
-                ))}
-              </div>
-              
-              <div className="mt-8 pt-8 border-t border-teal-500">
-                <Link
-                  to="/app-store-review"
-                  className="inline-flex items-center px-6 py-3 bg-white text-teal-600 rounded-lg font-semibold hover:bg-teal-50 transition-colors"
-                >
-                  View Detailed Reviewer Guide
-                  <ExternalLink className="w-4 h-4 ml-2" />
-                </Link>
-              </div>
+            <div className="mt-8 pt-8" style={{ borderTop: '1px solid rgba(255, 255, 255, 0.3)' }}>
+              <Link
+                to="/app-store-review"
+                className="inline-flex items-center px-6 py-3 rounded-lg font-semibold transition-colors"
+                style={{
+                  backgroundColor: 'white',
+                  color: 'var(--primary)'
+                }}
+              >
+                View Detailed Reviewer Guide
+                <ExternalLink className="w-4 h-4 ml-2" />
+              </Link>
             </div>
           </div>
         </div>
 
         {/* Back to Website */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="py-8">
           <div className="text-center">
             <Link
               to="/"
-              className="inline-flex items-center text-teal-600 hover:text-teal-700 font-semibold"
+              className="inline-flex items-center font-semibold"
+              style={{ color: 'var(--primary)' }}
             >
               ← Back to PandaGarde Website
             </Link>
