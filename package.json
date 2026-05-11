@@ -1,7 +1,10 @@
 {
-  "name": "vite-react-typescript-starter",
+  "name": "pandagarde-family-hub",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "PandaGarde Family Hub - Proprietary family management and activity tracking application",
+  "license": "UNLICENSED",
+  "author": "PandaGarde Family Hub",
   "type": "module",
   "engines": {
     "node": ">=20.19.0 <21",
