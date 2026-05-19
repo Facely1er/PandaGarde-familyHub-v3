@@ -1,5 +1,6 @@
 // Frontend-only mode - no database dependencies
 import { trackEvent, AnalyticsEvents } from './analytics';
+import { logger } from './logger';
 
 export interface SearchContentItem {
   id: string;
@@ -81,7 +82,7 @@ class SearchService {
   }
 
   private async loadSearchContent(): Promise<void> {
-    console.log('Frontend-only mode: Using static search content');
+    logger.debug('Frontend-only mode: Using static search content', undefined, 'SEARCH');
     // Static search content for frontend-only mode
     this.searchIndex = [
       {
@@ -130,7 +131,7 @@ class SearchService {
   }
 
   private async loadCategories(): Promise<void> {
-    console.log('Frontend-only mode: Using static categories');
+    logger.debug('Frontend-only mode: Using static categories', undefined, 'SEARCH');
     this.categories = [
       {
         id: 'privacy',
@@ -166,7 +167,7 @@ class SearchService {
   }
 
   private async loadSuggestions(): Promise<void> {
-    console.log('Frontend-only mode: Using static suggestions');
+    logger.debug('Frontend-only mode: Using static suggestions', undefined, 'SEARCH');
     this.suggestions = [
       {
         id: 'privacy-settings',
@@ -299,22 +300,22 @@ class SearchService {
   }
 
   async addSearchContent(content: Omit<SearchContentItem, 'id' | 'created_at' | 'updated_at'>): Promise<SearchContentItem | null> {
-    console.log('Frontend-only mode: Cannot add search content to database');
+    logger.debug('Frontend-only mode: Cannot add search content to database', undefined, 'SEARCH');
     return null;
   }
 
   async updateSearchContent(id: string, updates: Partial<SearchContentItem>): Promise<SearchContentItem | null> {
-    console.log('Frontend-only mode: Cannot update search content in database');
+    logger.debug('Frontend-only mode: Cannot update search content in database', undefined, 'SEARCH');
     return null;
   }
 
   async deleteSearchContent(id: string): Promise<boolean> {
-    console.log('Frontend-only mode: Cannot delete search content from database');
+    logger.debug('Frontend-only mode: Cannot delete search content from database', undefined, 'SEARCH');
     return false;
   }
 
   private async trackSearchAnalytics(query: string, resultsCount: number, filters?: SearchFilters): Promise<void> {
-    console.log('Frontend-only mode: Tracking search analytics locally');
+    logger.debug('Frontend-only mode: Tracking search analytics locally', undefined, 'SEARCH');
     
     try {
       // Track in analytics

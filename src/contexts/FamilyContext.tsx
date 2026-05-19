@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 // Frontend-only mode - no authentication or database dependencies
 import { localStorageManager, UserProgress } from '../utils/localStorageManager';
+import { logger } from '../lib/logger';
 
 export interface ServiceUsage {
   serviceId: string;
@@ -138,7 +139,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
   };
 
   const loadFamilyMembers = useCallback(async (familyId: string) => {
-    console.log('Frontend-only mode: loadFamilyMembers() - using localStorage', familyId);
+    logger.debug('Frontend-only mode: loadFamilyMembers() - using localStorage', familyId, 'FAMILY');
     try {
       const familyData = await localStorageManager.getFamilyData();
       if (familyData && familyData.id === familyId) {
@@ -165,7 +166,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
   }, []);
 
   const checkExistingFamily = useCallback(async () => {
-    console.log('Frontend-only mode: checkExistingFamily() - using localStorage');
+    logger.debug('Frontend-only mode: checkExistingFamily() - using localStorage', undefined, 'FAMILY');
     try {
       const currentUserId = getCurrentUserId();
       const familyData = await localStorageManager.getFamilyData();
@@ -184,12 +185,12 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
 
   // Load family data when component mounts - Frontend-only mode
   useEffect(() => {
-    console.log('Frontend-only mode: Loading family data from localStorage');
+    logger.debug('Frontend-only mode: Loading family data from localStorage', undefined, 'FAMILY');
     checkExistingFamily();
   }, [checkExistingFamily]);
 
   const createFamily = async (name: string) => {
-    console.log('Frontend-only mode: createFamily() - using localStorage', name);
+    logger.debug('Frontend-only mode: createFamily() - using localStorage', undefined, 'FAMILY');
     setLoading(true);
     try {
       const currentUserId = getCurrentUserId();
@@ -243,7 +244,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
   };
 
   const joinFamily = async (familyId: string) => {
-    console.log('Frontend-only mode: joinFamily() - using localStorage', familyId);
+    logger.debug('Frontend-only mode: joinFamily() - using localStorage', undefined, 'FAMILY');
     setLoading(true);
     try {
       const currentUserId = getCurrentUserId();
@@ -297,7 +298,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
   };
 
   const leaveFamily = async () => {
-    console.log('Frontend-only mode: leaveFamily() - using localStorage');
+    logger.debug('Frontend-only mode: leaveFamily() - using localStorage', undefined, 'FAMILY');
     if (!currentFamily) {
       return { success: false, error: 'No family to leave' };
     }
@@ -337,7 +338,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
   };
 
   const addFamilyMember = async (email: string, role: 'parent' | 'child', firstName: string, lastName: string) => {
-    console.log('Frontend-only mode: addFamilyMember() - using localStorage', { email, role, firstName, lastName });
+    logger.debug('Frontend-only mode: addFamilyMember() - using localStorage', undefined, 'FAMILY');
     if (!currentFamily) {
       return { success: false, error: 'No family selected' };
     }
@@ -390,7 +391,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
   };
 
   const removeFamilyMember = async (memberId: string) => {
-    console.log('Frontend-only mode: removeFamilyMember() - using localStorage', memberId);
+    logger.debug('Frontend-only mode: removeFamilyMember() - using localStorage', undefined, 'FAMILY');
     if (!currentFamily) {
       return { success: false, error: 'No family selected' };
     }
@@ -430,7 +431,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
   };
 
   const updateFamilyMember = async (memberId: string, updates: Partial<FamilyMember>) => {
-    console.log('Frontend-only mode: updateFamilyMember() - using localStorage', { memberId, updates });
+    logger.debug('Frontend-only mode: updateFamilyMember() - using localStorage', undefined, 'FAMILY');
     if (!currentFamily) {
       return { success: false, error: 'No family selected' };
     }
@@ -471,7 +472,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
   };
 
   const getFamilyProgress = async () => {
-    console.log('Frontend-only mode: getFamilyProgress() - using localStorage');
+    logger.debug('Frontend-only mode: getFamilyProgress() - using localStorage', undefined, 'FAMILY');
     if (!currentFamily) {
       return null;
     }
@@ -545,7 +546,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
 
   // Request service for a family member
   const requestService = async (memberId: string, serviceId: string): Promise<{ success: boolean; error: string | null }> => {
-    console.log('Frontend-only mode: requestService() - using localStorage', { memberId, serviceId });
+    logger.debug('Frontend-only mode: requestService() - using localStorage', undefined, 'FAMILY');
     if (!currentFamily) {
       return { success: false, error: 'No family selected' };
     }
@@ -602,7 +603,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
 
   // Add service to family (for Digital Footprint Analysis)
   const addServiceToFamily = async (serviceId: string): Promise<{ success: boolean; error: string | null }> => {
-    console.log('Frontend-only mode: addServiceToFamily() - using localStorage', { serviceId });
+    logger.debug('Frontend-only mode: addServiceToFamily() - using localStorage', undefined, 'FAMILY');
     
     try {
       // Get or create family services list
@@ -659,7 +660,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
 
   // Remove service from family
   const removeServiceFromFamily = async (serviceId: string): Promise<{ success: boolean; error: string | null }> => {
-    console.log('Frontend-only mode: removeServiceFromFamily() - using localStorage', { serviceId });
+    logger.debug('Frontend-only mode: removeServiceFromFamily() - using localStorage', undefined, 'FAMILY');
     
     try {
       // Get family services list

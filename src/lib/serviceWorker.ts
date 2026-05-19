@@ -1,4 +1,6 @@
-// Service Worker Manager
+
+import { logger } from "./logger";
+
 interface ServiceWorkerConfig {
   enabled: boolean;
   updateInterval: number;
@@ -17,7 +19,7 @@ class ServiceWorkerManager {
   // Register service worker
   async register(): Promise<ServiceWorkerRegistration | null> {
     if (!this.config.enabled || !('serviceWorker' in navigator)) {
-      console.log('Service Worker not supported or disabled');
+      logger.debug('Service Worker not supported or disabled', undefined, 'SW');
       return null;
     }
 
@@ -26,7 +28,7 @@ class ServiceWorkerManager {
         scope: '/',
       });
 
-      console.log('Service Worker registered:', this.registration);
+      logger.debug('Service Worker registered', undefined, 'SW');
 
       // Handle updates
       this.registration.addEventListener('updatefound', () => {
@@ -120,7 +122,7 @@ class ServiceWorkerManager {
         this.updateCheckInterval = null;
       }
 
-      console.log('Service Worker unregistered:', result);
+      logger.debug('Service Worker unregistered', undefined, 'SW');
       return result;
     } catch (error) {
       console.error('Service Worker unregistration failed:', error);
@@ -135,7 +137,7 @@ class ServiceWorkerManager {
       await Promise.all(
         cacheNames.map(cacheName => caches.delete(cacheName))
       );
-      console.log('All caches cleared');
+      logger.debug('All caches cleared', undefined, 'SW');
     } catch (error) {
       console.error('Cache clearing failed:', error);
     }
@@ -170,7 +172,7 @@ class ServiceWorkerManager {
 
     try {
       await this.registration.sync.register(tag);
-      console.log('Background sync registered:', tag);
+      logger.debug('Background sync registered', tag, 'SW');
     } catch (error) {
       console.error('Background sync registration failed:', error);
     }
@@ -183,7 +185,7 @@ class ServiceWorkerManager {
         type: 'CACHE_TOOL_ASSETS',
         toolId
       });
-      console.log(`Tool assets cached for: ${toolId}`);
+      logger.debug(`Tool assets cached for: ${toolId}`, undefined, 'SW');
     } catch (error) {
       console.error('Tool asset caching failed:', error);
     }
@@ -196,7 +198,7 @@ class ServiceWorkerManager {
         type: 'CACHE_MISSION_CONTENT',
         missionId
       });
-      console.log(`Mission content cached for: ${missionId}`);
+      logger.debug(`Mission content cached for: ${missionId}`, undefined, 'SW');
     } catch (error) {
       console.error('Mission content caching failed:', error);
     }

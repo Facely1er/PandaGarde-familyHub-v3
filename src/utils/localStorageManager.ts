@@ -9,6 +9,8 @@ export interface UserProgress {
   completedMissions: string[];
   unlockedAchievements: string[];
   currentStreak: number;
+  longestStreak: number;
+  toolsUsed: string[];
   lastActive: string;
   createdAt: string;
 }
@@ -374,6 +376,8 @@ export class LocalStorageManager {
       completedMissions: [],
       unlockedAchievements: [],
       currentStreak: 0,
+      longestStreak: 0,
+      toolsUsed: [],
       lastActive: now,
       createdAt: now
     };
@@ -446,7 +450,7 @@ export class LocalStorageManager {
   }
 
   /**
-   * Update user's streak
+   * Update user's streak, also tracking longestStreak
    */
   updateStreak(userId: string, streak: number): void {
     const progress = this.getUserProgress(userId);
@@ -455,7 +459,31 @@ export class LocalStorageManager {
     }
 
     progress.currentStreak = streak;
+    // Ensure longestStreak is initialised for progress created before this field existed
+    if (!progress.longestStreak) {
+      progress.longestStreak = 0;
+    }
+    if (streak > progress.longestStreak) {
+      progress.longestStreak = streak;
+    }
     this.saveUserProgress(userId, progress);
+  }
+
+  /**
+   * Record that a user has used a particular tool (identified by toolId).
+   * Idempotent – safe to call multiple times for the same tool.
+   */
+  recordToolUsed(userId: string, toolId: string): void {
+    const progress = this.getUserProgress(userId);
+    if (!progress) {return;}
+
+    if (!progress.toolsUsed) {
+      progress.toolsUsed = [];
+    }
+    if (!progress.toolsUsed.includes(toolId)) {
+      progress.toolsUsed.push(toolId);
+      this.saveUserProgress(userId, progress);
+    }
   }
 }
 

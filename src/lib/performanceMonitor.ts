@@ -152,7 +152,7 @@ class PerformanceMonitor {
 
     // Log in development
     if (import.meta.env.MODE === 'development') {
-      console.log(`[Performance] ${name}: ${value.toFixed(2)}ms`);
+      // Performance metrics are debug-only
     }
   }
 

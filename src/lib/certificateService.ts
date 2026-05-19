@@ -1,4 +1,3 @@
-import jsPDF from 'jspdf';
 
 export interface CertificateData {
   recipientName: string;
@@ -67,6 +66,7 @@ export const ACHIEVEMENTS: Achievement[] = [
 
 export class CertificateService {
   static async generateCertificate(certificateData: CertificateData): Promise<Blob> {
+    const { default: jsPDF } = await import('jspdf');
     const pdf = new jsPDF('landscape', 'mm', 'a4');
     const pageWidth = pdf.internal.pageSize.getWidth();
     const pageHeight = pdf.internal.pageSize.getHeight();
@@ -203,6 +203,7 @@ export class CertificateService {
   }
 
   static async generateAchievementBadge(achievement: Achievement, recipientName: string): Promise<Blob> {
+    const { default: jsPDF } = await import('jspdf');
     const pdf = new jsPDF('portrait', 'mm', [100, 100]);
     const pageWidth = pdf.internal.pageSize.getWidth();
     const pageHeight = pdf.internal.pageSize.getHeight();

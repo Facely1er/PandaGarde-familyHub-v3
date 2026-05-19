@@ -259,7 +259,7 @@ const ParentResourcesPage: React.FC = () => {
                 </div>
                 <p>20 hands-on activities including games, crafts, role-playing scenarios, and interactive exercises to teach privacy concepts through play.</p>
                 <div className="flex items-center gap-4 mt-4">
-                  <Link to="/activities/privacy-learning-kit" className="button">
+                  <Link to="/classroom-activities" className="button">
                     <Download size={16} />
                     View Activities
                   </Link>
@@ -319,7 +319,7 @@ const ParentResourcesPage: React.FC = () => {
                 </div>
                 <p>Educational worksheets and activity sheets for reinforcing privacy concepts through writing, drawing, and reflection exercises.</p>
                 <div className="flex items-center gap-4 mt-4">
-                  <Link to="/downloads/worksheets" className="button">
+                  <Link to="/resources" className="button">
                     <Download size={16} />
                     View Worksheets
                   </Link>

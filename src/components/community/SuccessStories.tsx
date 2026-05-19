@@ -340,6 +340,15 @@ const StorySubmissionForm: React.FC<StorySubmissionFormProps> = ({ onSubmit, onC
   const [tags, setTags] = useState('');
   const [errors, setErrors] = useState<Record<string, string>>({});
 
+  // Close on Escape key
+  React.useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {onCancel();}
+    };
+    document.addEventListener('keydown', handleKey);
+    return () => document.removeEventListener('keydown', handleKey);
+  }, [onCancel]);
+
   const validate = () => {
     const newErrors: Record<string, string> = {};
     if (!title.trim()) {newErrors['title'] = 'Title is required';}
@@ -372,9 +381,22 @@ const StorySubmissionForm: React.FC<StorySubmissionFormProps> = ({ onSubmit, onC
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto">
       <div className="flex min-h-screen items-center justify-center p-4">
-        <div className="fixed inset-0 bg-black bg-opacity-50" onClick={onCancel} />
-        <div className="relative bg-white rounded-lg shadow-xl max-w-2xl w-full p-6" style={{ backgroundColor: 'var(--card-color)' }}>
-          <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+        <div className="fixed inset-0 bg-black bg-opacity-50" onClick={onCancel} aria-hidden="true" />
+        <div
+          className="relative bg-white rounded-lg shadow-xl max-w-2xl w-full p-6"
+          style={{ backgroundColor: 'var(--card-color)' }}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="story-submit-title"
+        >
+          <button
+            onClick={onCancel}
+            className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+            aria-label="Close modal"
+          >
+            ✕
+          </button>
+          <h2 id="story-submit-title" className="text-2xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
             Share Your Success Story
           </h2>
 
