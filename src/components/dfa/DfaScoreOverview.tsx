@@ -57,7 +57,7 @@ const DfaScoreOverview: React.FC<Props> = ({ analysis }) => {
           </div>
           <button
             type="button"
-            onClick={() => downloadDfaExecutiveSummary(analysis, score)}
+            onClick={() => { downloadDfaExecutiveSummary(analysis, score).catch(err => console.error('PDF error', err)); }}
             className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-800"
           >
             <Download size={16} /> Export executive summary

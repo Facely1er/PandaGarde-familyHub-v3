@@ -582,13 +582,23 @@ export class GamificationSystem {
         return userProgress.currentStreak >= requirement.value;
       
       case 'tools_used':
-        // This would need to be tracked separately in user progress
-        // For now, we'll use a simple check
-        return false; // TODO: Implement tool usage tracking
+        if (requirement.toolId) {
+          // Specific tool achievement – check if that exact tool has been used
+          return (userProgress.toolsUsed ?? []).includes(requirement.toolId);
+        }
+        // Generic "used N different tools" achievement
+        return (userProgress.toolsUsed ?? []).length >= requirement.value;
       
-      case 'privacy_score':
-        // This would need to be calculated from user's privacy activities
-        return false; // TODO: Implement privacy score calculation
+      case 'privacy_score': {
+        // Privacy score based on learning activity:
+        // base 100, +2 per completed mission (max +40), +1 per used tool (max +20),
+        // +10 for streak >= 7, +5 for streak >= 3 – floor at 0, cap at 100.
+        const missionBonus = Math.min(userProgress.completedMissions.length * 2, 40);
+        const toolBonus = Math.min((userProgress.toolsUsed ?? []).length, 20);
+        const streakBonus = userProgress.currentStreak >= 7 ? 10 : userProgress.currentStreak >= 3 ? 5 : 0;
+        const privacyScore = Math.min(100, missionBonus + toolBonus + streakBonus);
+        return privacyScore >= requirement.value;
+      }
       
       default:
         return false;
@@ -679,11 +689,29 @@ export class GamificationSystem {
       achievementsUnlocked: userProgress.unlockedAchievements.length,
       missionsCompleted: userProgress.completedMissions.length,
       currentStreak: userProgress.currentStreak,
-      longestStreak: userProgress.currentStreak, // TODO: Track longest streak separately
-      toolsUsed: [], // TODO: Implement tool usage tracking
-      privacyScore: 0, // TODO: Calculate privacy score
+      longestStreak: userProgress.longestStreak ?? userProgress.currentStreak,
+      toolsUsed: userProgress.toolsUsed ?? [],
+      privacyScore: this.calculatePrivacyScore(userProgress),
       lastActive: userProgress.lastActive
     };
+  }
+
+  /**
+   * Calculate a privacy score (0–100) for a user based on their activity.
+   * The score reflects completed missions, tools used, and streak activity.
+   */
+  calculatePrivacyScore(userProgress: UserProgress): number {
+    const missionBonus = Math.min(userProgress.completedMissions.length * 2, 40);
+    const toolBonus = Math.min((userProgress.toolsUsed ?? []).length, 20);
+    const streakBonus = userProgress.currentStreak >= 7 ? 10 : userProgress.currentStreak >= 3 ? 5 : 0;
+    return Math.min(100, missionBonus + toolBonus + streakBonus);
+  }
+
+  /**
+   * Record that a user has used a specific tool.
+   */
+  recordToolUsed(userId: string, toolId: string): void {
+    localStorageManager.recordToolUsed(userId, toolId);
   }
 
   /**

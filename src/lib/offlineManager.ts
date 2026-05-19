@@ -1,5 +1,6 @@
 // Advanced Offline Manager for Privacy Panda
 import React from 'react';
+import { logger } from './logger';
 
 interface OfflineData {
   stories: unknown[];
@@ -44,16 +45,16 @@ class OfflineManager {
   private initializeOfflineSupport() {
     // Check if service worker is supported
     if ('serviceWorker' in navigator) {
-      console.log('Service Worker supported - offline features enabled');
+      logger.debug('Service Worker supported - offline features enabled', undefined, 'OFFLINE');
     } else {
-      console.log('Service Worker not supported - limited offline features');
+      logger.debug('Service Worker not supported - limited offline features', undefined, 'OFFLINE');
     }
 
     // Check if IndexedDB is supported
     if ('indexedDB' in window) {
-      console.log('IndexedDB supported - data persistence enabled');
+      logger.debug('IndexedDB supported - data persistence enabled', undefined, 'OFFLINE');
     } else {
-      console.log('IndexedDB not supported - using localStorage fallback');
+      logger.debug('IndexedDB not supported - using localStorage fallback', undefined, 'OFFLINE');
     }
   }
 
@@ -114,7 +115,7 @@ class OfflineManager {
     this.data[type] = content;
     await this.saveOfflineData();
     
-    console.log(`Cached ${content.length} ${type} for offline use`);
+    logger.debug(`Cached ${content.length} ${type} for offline use`, undefined, 'OFFLINE');
   }
 
   // Get cached content
@@ -153,7 +154,7 @@ class OfflineManager {
     this.syncStatus.pendingActions.push(queuedAction);
     await this.saveOfflineData();
     
-    console.log(`Queued action: ${action.type}`);
+    logger.debug(`Queued action: ${action.type}`, undefined, 'OFFLINE');
     
     // Try to sync immediately if online
     if (this.syncStatus.isOnline) {
@@ -190,7 +191,7 @@ class OfflineManager {
       this.syncStatus.lastSync = Date.now();
       await this.saveOfflineData();
       
-      console.log(`Synced ${actionsToSync.length} actions`);
+      logger.debug(`Synced ${actionsToSync.length} actions`, undefined, 'OFFLINE');
     } catch (error) {
       console.error('Sync failed:', error);
     } finally {
@@ -206,25 +207,25 @@ class OfflineManager {
     
     switch (action.type) {
       case 'save_progress':
-        console.log('Syncing progress:', action.data);
+        logger.debug('Syncing progress', action.data, 'OFFLINE');
         // Simulate API call
         await new Promise(resolve => setTimeout(resolve, 1000));
         break;
         
       case 'update_profile':
-        console.log('Syncing profile:', action.data);
+        logger.debug('Syncing profile', action.data, 'OFFLINE');
         // Simulate API call
         await new Promise(resolve => setTimeout(resolve, 1000));
         break;
         
       case 'complete_activity':
-        console.log('Syncing activity completion:', action.data);
+        logger.debug('Syncing activity completion', action.data, 'OFFLINE');
         // Simulate API call
         await new Promise(resolve => setTimeout(resolve, 1000));
         break;
         
       default:
-        console.log('Unknown action type:', action.type);
+        logger.debug('Unknown action type', action.type, 'OFFLINE');
     }
   }
 
@@ -289,7 +290,7 @@ class OfflineManager {
     
     await this.saveOfflineData();
     
-    console.log('Offline data cleared');
+    logger.debug('Offline data cleared', undefined, 'OFFLINE');
   }
 
   // Force sync

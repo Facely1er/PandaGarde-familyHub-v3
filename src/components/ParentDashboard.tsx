@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Users, Clock, Award, TrendingUp, Download, Share2, BookOpen, Target } from 'lucide-react';
 import ProgressDisplay from './ProgressDisplay';
+import { logger } from '../lib/logger';
 
 interface ParentDashboardProps {
   progress: {
@@ -57,7 +58,7 @@ const ParentDashboard: React.FC<ParentDashboardProps> = ({ progress, onClose }) 
           url: window.location.href
         });
       } catch (error) {
-        console.log('Error sharing:', error);
+        logger.warn('Error sharing', error, 'SHARE');
       }
     } else {
       // Fallback: copy to clipboard

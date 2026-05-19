@@ -70,7 +70,7 @@ class ChildRSSAlertService {
       }
       
       if (isDevMode) {
-        console.log('[Child RSS Alert Service] Initializing...');
+        // RSS Alert Service initialized (debug mode)
       }
       
       // Process feeds immediately on initialization (only in dev)

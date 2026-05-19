@@ -10,13 +10,11 @@ const FamilyPrivacyPlanPage: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const handleSave = (plan: FamilyPrivacyPlan) => {
-    console.log('Privacy plan saved:', plan);
-    // Could integrate with backend or analytics here
+  const handleSave = (_plan: FamilyPrivacyPlan) => {
+    // Plan saved - could integrate with analytics here
   };
 
-  const handleExport = (plan: FamilyPrivacyPlan) => {
-    console.log('Privacy plan exported:', plan);
+  const handleExport = (_plan: FamilyPrivacyPlan) => {
     // Analytics tracking could go here
   };
 

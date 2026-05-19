@@ -816,6 +816,16 @@ const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({ onSubmit, o
     { id: 'usercircle', icon: UserCircle, label: 'User Circle' }
   ];
 
+  // Close on Escape key
+  React.useEffect(() => {
+    if (!required) {return;}
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {onCancel();}
+    };
+    document.addEventListener('keydown', handleKey);
+    return () => document.removeEventListener('keydown', handleKey);
+  }, [required, onCancel]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!username.trim()) {
@@ -839,8 +849,20 @@ const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({ onSubmit, o
   return (
     <div className={`${required ? 'fixed inset-0 z-50 overflow-y-auto' : ''}`}>
       <div className={`${required ? 'flex min-h-screen items-center justify-center p-4' : ''}`}>
-        {required && <div className="fixed inset-0 bg-black bg-opacity-50" onClick={onCancel} />}
-        <div className={`relative bg-white rounded-lg shadow-xl ${required ? 'max-w-md w-full' : 'w-full'} p-6`} style={{ backgroundColor: 'var(--card-color)' }}>
+        {required && (
+          <div
+            className="fixed inset-0 bg-black bg-opacity-50"
+            onClick={onCancel}
+            aria-hidden="true"
+          />
+        )}
+        <div
+          className={`relative bg-white rounded-lg shadow-xl ${required ? 'max-w-md w-full' : 'w-full'} p-6`}
+          style={{ backgroundColor: 'var(--card-color)' }}
+          role={required ? 'dialog' : undefined}
+          aria-modal={required ? 'true' : undefined}
+          aria-labelledby="user-reg-title"
+        >
           {required && (
             <button
               onClick={onCancel}
@@ -850,7 +872,7 @@ const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({ onSubmit, o
               <X size={24} />
             </button>
           )}
-          <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+          <h2 id="user-reg-title" className="text-2xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
             Join Privacy Tips Forum
           </h2>
           <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
@@ -945,6 +967,15 @@ const TopicCreationForm: React.FC<TopicCreationFormProps> = ({ onSubmit, onCance
   const [category, setCategory] = useState<ForumTopic['category']>('general-questions');
   const [description, setDescription] = useState('');
 
+  // Close on Escape key
+  React.useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {onCancel();}
+    };
+    document.addEventListener('keydown', handleKey);
+    return () => document.removeEventListener('keydown', handleKey);
+  }, [onCancel]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (title.trim()) {
@@ -961,9 +992,22 @@ const TopicCreationForm: React.FC<TopicCreationFormProps> = ({ onSubmit, onCance
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto">
       <div className="flex min-h-screen items-center justify-center p-4">
-        <div className="fixed inset-0 bg-black bg-opacity-50" onClick={onCancel} />
-        <div className="relative bg-white rounded-lg shadow-xl max-w-2xl w-full p-6" style={{ backgroundColor: 'var(--card-color)' }}>
-          <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+        <div className="fixed inset-0 bg-black bg-opacity-50" onClick={onCancel} aria-hidden="true" />
+        <div
+          className="relative bg-white rounded-lg shadow-xl max-w-2xl w-full p-6"
+          style={{ backgroundColor: 'var(--card-color)' }}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="topic-create-title"
+        >
+          <button
+            onClick={onCancel}
+            className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+            aria-label="Close modal"
+          >
+            <X size={24} />
+          </button>
+          <h2 id="topic-create-title" className="text-2xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
             Create New Topic
           </h2>
           <form onSubmit={handleSubmit} className="space-y-4">

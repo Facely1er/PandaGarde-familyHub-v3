@@ -1,8 +1,6 @@
 // PDF Generation Service for Downloadable Resources
 // This service handles generating PDFs for various downloadable resources
-
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+// jsPDF and html2canvas are dynamically imported to reduce initial bundle size.
 
 export interface PDFResource {
   type: 'coloring-sheets' | 'safety-posters' | 'certificates' | 'family-agreement';
@@ -30,6 +28,11 @@ export class PDFService {
    */
   async generatePDF(htmlContent: string, filename: string = 'document.pdf'): Promise<void> {
     try {
+      const [{ default: jsPDF }, { default: html2canvas }] = await Promise.all([
+        import('jspdf'),
+        import('html2canvas'),
+      ]);
+
       // Create a temporary container
       const tempContainer = document.createElement('div');
       tempContainer.innerHTML = htmlContent;

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { CheckCircle, Circle, Award, Download, Share2 } from 'lucide-react';
 import { useFamily } from '../../contexts/FamilyContext';
+import { logger } from '../../lib/logger';
 
 interface ChecklistItem {
   id: string;
@@ -128,7 +129,7 @@ const PrivacyChecklists: React.FC = () => {
       try {
         await navigator.share({ text, title: currentChecklist.title });
       } catch (error) {
-        console.log('Error sharing:', error);
+        logger.warn('Error sharing', error, 'SHARE');
       }
     } else {
       navigator.clipboard.writeText(text);

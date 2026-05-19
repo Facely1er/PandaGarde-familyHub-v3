@@ -163,14 +163,35 @@ function App() {
             <ProgressProvider>
               <FamilyProgressProvider>
                 <Router>
-                <SentryErrorBoundary fallback={<div>Something went wrong. Please refresh the page.</div>}>
+                <SentryErrorBoundary fallback={
+                  <div role="alert" className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4">
+                    <div className="text-center max-w-md">
+                      <div className="text-5xl mb-4">🐼</div>
+                      <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-2">Something went wrong</h1>
+                      <p className="text-gray-600 dark:text-gray-400 mb-6">An unexpected error occurred. Please refresh the page to continue.</p>
+                      <button
+                        onClick={() => window.location.reload()}
+                        className="px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition-colors"
+                      >
+                        Refresh Page
+                      </button>
+                    </div>
+                  </div>
+                }>
                   <NavigationErrorBoundary>
                     <div className="App">
                       <PageTracker />
                       <HashHandler />
                       <ConditionalHeader />
                       <ConditionalMain>
-                        <Suspense fallback={<div className="page-loading">Loading…</div>}>
+                        <Suspense fallback={
+                          <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900" aria-label="Loading page" aria-live="polite">
+                            <div className="text-center">
+                              <div className="text-5xl mb-4 animate-bounce">🐼</div>
+                              <p className="text-gray-600 dark:text-gray-400 font-medium">Loading…</p>
+                            </div>
+                          </div>
+                        }>
                         <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/story" element={<InteractiveStoryPage />} />
@@ -273,12 +294,12 @@ function App() {
             <Route path="/family-privacy-plan" element={<FamilyPrivacyPlanPage />} />
             <Route path="/guides/family-privacy-plan" element={<FamilyPrivacyPlanPage />} />
 
-            {/* Activity Pages */}
-            <Route path="/activities" element={<PlaceholderPage title="Activities" description="Interactive activities and games to reinforce privacy concepts" />} />
-            <Route path="/activities/privacy-learning-kit" element={<PlaceholderPage title="Privacy Learning Kit" description="Interactive activities and games to reinforce privacy concepts" />} />
+            {/* Activity Pages - redirect to classroom activities */}
+            <Route path="/activities" element={<ClassroomActivitiesPage />} />
+            <Route path="/activities/privacy-learning-kit" element={<ClassroomActivitiesPage />} />
             
             {/* Additional Download Pages */}
-            <Route path="/downloads/worksheets" element={<PlaceholderPage title="Privacy Worksheets" description="Printable worksheets and activities for hands-on learning" />} />
+            <Route path="/downloads/worksheets" element={<ResourcesPage />} />
             
             {/* 404 Fallback */}
             <Route path="*" element={<NotFoundPage />} />
