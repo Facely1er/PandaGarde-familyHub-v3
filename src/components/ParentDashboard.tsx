@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Users, Clock, Award, TrendingUp, Download, Share2, BookOpen, Target } from 'lucide-react';
 import ProgressDisplay from './ProgressDisplay';
 import { logger } from '../lib/logger';
@@ -16,6 +16,15 @@ interface ParentDashboardProps {
 
 const ParentDashboard: React.FC<ParentDashboardProps> = ({ progress, onClose }) => {
   const [activeTab, setActiveTab] = useState<'overview' | 'activities' | 'achievements'>('overview');
+
+  // Close on Escape key
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') { onClose(); }
+    };
+    document.addEventListener('keydown', handleKey);
+    return () => document.removeEventListener('keydown', handleKey);
+  }, [onClose]);
 
   const getOverallProgress = () => {
     const totalCount = 8;
@@ -98,7 +107,6 @@ const ParentDashboard: React.FC<ParentDashboardProps> = ({ progress, onClose }) 
       role="dialog"
       aria-modal="true"
       aria-labelledby="parent-dashboard-title"
-      onKeyDown={(e) => { if (e.key === 'Escape') { onClose(); } }}
     >
       {/* Header */}
       <div className="flex items-center justify-between px-5 py-4 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
