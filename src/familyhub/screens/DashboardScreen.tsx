@@ -19,7 +19,7 @@ const quickActions = [
   },
   {
     title: 'Start Activities',
-    description: 'Launch games and learning sessions',
+    description: 'Launch age-appropriate learning activities',
     to: '/family-hub/activities',
     icon: Gamepad2,
   },
@@ -53,10 +53,10 @@ const DashboardScreen: React.FC = () => {
         <div className="mx-auto flex max-w-5xl flex-col gap-2 md:flex-row md:items-center md:justify-between">
           <div className="flex items-start gap-2">
             <CheckCircle2 size={18} className="mt-0.5 text-emerald-700" />
-            <p className="leading-6">You are in <strong>Phase 4</strong> of the DFA journey. Family Hub keeps the plan visible so the work does not disappear after the assessment.</p>
+            <p className="leading-6">Your family's privacy journey is underway — keep the momentum going with <strong>activities and goals</strong> tailored to every age group.</p>
           </div>
           <a href="/privacy-assessment" className="inline-flex items-center gap-2 font-semibold text-emerald-800 hover:text-emerald-900">
-            <ArrowLeft size={16} /> Review assessment
+            <ArrowLeft size={16} /> Privacy check-up
           </a>
         </div>
       </div>
@@ -64,10 +64,10 @@ const DashboardScreen: React.FC = () => {
         <div className="mx-auto flex max-w-5xl flex-col gap-5">
           <div className="space-y-2">
             <h1 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-3xl">
-              Family Hub dashboard
+              Family Hub
             </h1>
             <p className="text-sm text-gray-600 dark:text-gray-300 sm:text-base">
-              Keep your family’s privacy plan visible with clear next actions and progress signals.
+              Your family's privacy plan — clear next steps and progress signals, all in one place.
             </p>
           </div>
 
