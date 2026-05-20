@@ -39,7 +39,7 @@ function mergeClassName(existing, added) {
   }
   const quote = existing.includes('className="') ? '"' : existing.includes("className='") ? "'" : '`';
   const current = m[1] ?? m[2] ?? m[3] ?? '';
-  const merged = `${current} ${added.replace('className="', '').replace('"', '')}`.trim();
+  const merged = `${current} ${added.replace('className="', '').replace(/"/g, '')}`.trim();
   if (quote === '`') {
     return `className={\`${merged}\`}`;
   }
