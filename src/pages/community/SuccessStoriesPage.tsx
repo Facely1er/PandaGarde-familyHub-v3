@@ -12,8 +12,6 @@ const SuccessStoriesPage: React.FC = () => {
       <PageLayout
         title="Success Stories"
         subtitle="Read and share anonymous success stories about teaching privacy to children. Learn from other families' experiences and celebrate privacy education wins."
-        icon={Heart}
-        badge="COMMUNITY"
         breadcrumbs={true}
       >
         {/* MODPA awareness callout for Maryland families */}

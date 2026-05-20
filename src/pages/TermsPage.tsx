@@ -8,8 +8,6 @@ const TermsPage: React.FC = () => {
     <PageLayout
       title="Terms of Service"
       subtitle="Please read these terms carefully before using our digital privacy education platform. Last updated: December 2024"
-      icon={FileText}
-      badge="LEGAL"
     >
       <div className="max-w-4xl mx-auto">
           <div className="prose prose-lg max-w-none">

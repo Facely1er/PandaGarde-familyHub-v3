@@ -7,8 +7,6 @@ const EmergencySafetyGuidePage: React.FC = () => {
     <PageLayout
       title="Digital Safety Emergency Guide"
       subtitle="Step-by-step instructions for handling privacy breaches, cyberbullying, and other digital safety emergencies. Includes legal considerations and recovery strategies."
-      icon={AlertTriangle}
-      badge="EMERGENCY GUIDE"
       breadcrumbs={true}
     >
       <div style={{ maxWidth: '56rem', margin: '0 auto' }}>

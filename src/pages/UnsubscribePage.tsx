@@ -64,8 +64,6 @@ const UnsubscribePage: React.FC = () => {
     <PageLayout
       title="Unsubscribe from Newsletter"
       subtitle="We're sorry to see you go. You can unsubscribe from our privacy education newsletter at any time."
-      icon={Mail}
-      badge="NEWSLETTER"
       breadcrumbs={true}
     >
       <div className="container mx-auto px-6 py-16">

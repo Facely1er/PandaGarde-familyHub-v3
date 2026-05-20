@@ -12,8 +12,6 @@ const PrivacyPolicyPage: React.FC = () => {
     <PageLayout
       title="Privacy Policy"
       subtitle={`How we protect your privacy and data while providing educational content about digital safety. Last updated: ${new Date().toLocaleDateString()}`}
-      icon={Shield}
-      badge="PRIVACY POLICY"
     >
       <div className="max-w-4xl mx-auto">
           <div className="prose prose-lg max-w-none">

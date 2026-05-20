@@ -14,8 +14,6 @@ const ParentResourcesPage: React.FC = () => {
     <PageLayout
       title="Parent & Educator Resources"
       subtitle="Comprehensive tools, guides, and materials to help adults facilitate privacy education for children."
-      icon={BookOpen}
-      badge="RESOURCES"
       breadcrumbs={true}
     >
       <section className="resources-section">

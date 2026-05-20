@@ -112,8 +112,6 @@ const DownloadGuidePage: React.FC<DownloadGuidePageProps> = ({
     <PageLayout
       title={title}
       subtitle={description}
-      icon={IconComponent}
-      badge={type.toUpperCase()}
       breadcrumbs={true}
     >
       <div className="min-h-screen bg-white">

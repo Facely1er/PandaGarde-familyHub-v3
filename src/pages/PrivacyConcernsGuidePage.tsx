@@ -207,8 +207,6 @@ const PrivacyConcernsGuidePage: React.FC = () => {
     <PageLayout
       title="Responding to Privacy Concerns"
       subtitle="When privacy issues arise, quick and appropriate action is crucial. This guide helps you recognize, respond to, and recover from various privacy concerns."
-      icon={AlertTriangle}
-      badge="EMERGENCY GUIDE"
       breadcrumbs={true}
     >
       <div style={{ maxWidth: '56rem', margin: '0 auto' }}>

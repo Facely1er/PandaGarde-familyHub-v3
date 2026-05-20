@@ -115,8 +115,6 @@ const FAQPage: React.FC = () => {
     <PageLayout
       title="FAQ"
       subtitle="Quick answers to questions about PandaGarde and how to use it with your family."
-      icon={HelpCircle}
-      badge="FAQ"
     >
       <div className="max-w-4xl mx-auto">
           {/* Category Filter */}

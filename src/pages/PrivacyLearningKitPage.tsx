@@ -40,8 +40,6 @@ const PrivacyLearningKitPage: React.FC = () => {
     <PageLayout
       title="Privacy Learning Kit"
       subtitle="Story, missions, printables, and parent guides in one place."
-      icon={Shield}
-      badge="FAMILY LEARNING KIT"
       breadcrumbs
     >
       <main className="container mx-auto px-4 sm:px-6 py-12 max-w-5xl">

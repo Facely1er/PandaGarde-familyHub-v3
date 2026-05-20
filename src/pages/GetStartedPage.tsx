@@ -18,8 +18,6 @@ const GetStartedPage: React.FC = () => {
     <PageLayout
       title="Start Your Digital Footprint Analysis Journey"
       subtitle="PandaGarde starts with Digital Footprint Analysis. Move through four phases, save progress locally, and resume without losing your place."
-      icon={ShieldCheck}
-      badge="GET STARTED"
       breadcrumbs={true}
     >
       <section style={{ padding: '1rem 0 2rem' }}>

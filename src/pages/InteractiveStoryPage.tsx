@@ -433,8 +433,6 @@ const InteractiveStoryPage: React.FC = () => {
     <PageLayout
       title="Privacy Panda"
       subtitle="Join Po the Panda on an interactive adventure through the Digital Bamboo Forest as he learns about privacy, sharing, and staying safe online. Make choices, unlock achievements, and become a privacy expert!"
-      icon={Book}
-      badge="INTERACTIVE STORY"
       breadcrumbs={true}
     >
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem', position: 'relative' }}>

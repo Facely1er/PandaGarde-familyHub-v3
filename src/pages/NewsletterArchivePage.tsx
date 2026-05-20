@@ -21,8 +21,6 @@ const NewsletterArchivePage: React.FC = () => {
     <PageLayout
       title="Newsletter Archive"
       subtitle="Browse past issues of our privacy education newsletter. Find tips, resources, and updates from previous months."
-      icon={Mail}
-      badge="ARCHIVE"
       breadcrumbs={true}
     >
       <div className="container mx-auto px-6 py-16">

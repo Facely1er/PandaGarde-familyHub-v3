@@ -249,8 +249,6 @@ const ParentToolkitPage: React.FC = () => {
     <PageLayout
       title="Parent Toolkit"
       subtitle="Comprehensive tools and resources to help parents guide their children's digital journey. Templates, guides, checklists, and expert advice all in one place."
-      icon={Wrench}
-      badge="TOOLKIT"
       breadcrumbs={true}
     >
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>

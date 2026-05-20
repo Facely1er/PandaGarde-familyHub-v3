@@ -1,12 +1,9 @@
 import React from 'react';
-import { LucideIcon } from 'lucide-react';
 import Breadcrumbs from '../navigation/Breadcrumbs';
 
 interface PageHeaderProps {
   title: string;
   subtitle?: string;
-  icon?: LucideIcon;
-  badge?: string;
   breadcrumbs?: boolean;
   className?: string;
 }
@@ -14,8 +11,6 @@ interface PageHeaderProps {
 const PageHeader: React.FC<PageHeaderProps> = ({
   title,
   subtitle,
-  icon: Icon,
-  badge,
   breadcrumbs: showBreadcrumbs = true,
   className = ''
 }) => {
@@ -29,13 +24,6 @@ const PageHeader: React.FC<PageHeaderProps> = ({
         )}
 
         <div className="text-center">
-          {badge && (
-            <div className="page-header__badge">
-              {Icon && <Icon size={16} />}
-              {badge}
-            </div>
-          )}
-
           <h1 className="page-header__title">{title}</h1>
 
           {subtitle && <p className="page-header__subtitle">{subtitle}</p>}

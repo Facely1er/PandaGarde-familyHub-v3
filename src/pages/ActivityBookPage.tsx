@@ -217,8 +217,6 @@ const ActivityBookPage: React.FC = () => {
     <PageLayout
       title="Privacy Panda's Activity Adventures"
       subtitle="Continue Po the Panda's journey with interactive activities that reinforce the privacy lessons from the Digital Bamboo Forest story. Learn through fun games, coloring, and puzzles!"
-      icon={Book}
-      badge="INTERACTIVE ACTIVITY BOOK"
       breadcrumbs={true}
     >
       <main id="main-content" className="min-h-screen" style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}>

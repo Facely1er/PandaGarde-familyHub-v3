@@ -148,8 +148,6 @@ const ModelingBehaviorGuidePage: React.FC = () => {
     <PageLayout
       title="Modeling Good Digital Citizenship"
       subtitle="Children learn digital behavior by watching adults. This guide shows you how to model healthy online habits and create a positive digital environment for your family."
-      icon={Users}
-      badge="PARENT GUIDE"
       breadcrumbs={true}
     >
       <div style={{ maxWidth: '56rem', margin: '0 auto' }}>

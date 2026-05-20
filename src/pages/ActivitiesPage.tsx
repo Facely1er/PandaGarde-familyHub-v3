@@ -36,8 +36,6 @@ const ActivitiesPage: React.FC = () => {
       <PageLayout
         title={selected.name}
         subtitle={selected.educationalObjective}
-        icon={Gamepad2}
-        badge={selected.category.toUpperCase()}
         breadcrumbs
       >
         <div className="max-w-5xl mx-auto px-4 pb-12">
@@ -65,8 +63,6 @@ const ActivitiesPage: React.FC = () => {
     <PageLayout
       title="Family Privacy Activities"
       subtitle="Interactive missions that teach password safety, safe sharing, and digital wellbeing."
-      icon={Gamepad2}
-      badge="INTERACTIVE MISSIONS"
       breadcrumbs
     >
       <main className="container mx-auto px-4 sm:px-6 py-12 max-w-5xl">

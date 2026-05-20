@@ -122,8 +122,6 @@ const SafetyPostersPage: React.FC = () => {
     <PageLayout
       title="Digital Safety Posters"
       subtitle="Professional classroom posters designed to reinforce privacy education concepts. Perfect for schools, libraries, and educational environments."
-      icon={Shield}
-      badge="CLASSROOM RESOURCES"
       breadcrumbs={true}
     >
       <div className="min-h-screen" style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}>

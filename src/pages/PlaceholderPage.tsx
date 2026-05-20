@@ -18,8 +18,6 @@ const PlaceholderPage: React.FC<PlaceholderPageProps> = ({
     <PageLayout
       title={title}
       subtitle={description}
-      icon={Construction}
-      badge="COMING SOON"
       breadcrumbs={true}
     >
 

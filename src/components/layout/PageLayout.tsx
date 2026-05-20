@@ -1,12 +1,9 @@
 import React from 'react';
-import { LucideIcon } from 'lucide-react';
 import PageHeader from './PageHeader';
 
 interface PageLayoutProps {
   title: string;
   subtitle?: string;
-  icon?: LucideIcon;
-  badge?: string;
   breadcrumbs?: boolean;
   children: React.ReactNode;
   className?: string;
@@ -15,8 +12,6 @@ interface PageLayoutProps {
 const PageLayout: React.FC<PageLayoutProps> = ({
   title,
   subtitle,
-  icon,
-  badge,
   breadcrumbs = true,
   children,
   className = ''
@@ -26,8 +21,6 @@ const PageLayout: React.FC<PageLayoutProps> = ({
       <PageHeader
         title={title}
         subtitle={subtitle}
-        icon={icon}
-        badge={badge}
         breadcrumbs={breadcrumbs}
       />
 

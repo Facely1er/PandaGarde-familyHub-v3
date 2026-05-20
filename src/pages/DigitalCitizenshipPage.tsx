@@ -213,8 +213,6 @@ const DigitalCitizenshipPage: React.FC = () => {
     <PageLayout
       title="Digital Citizenship Academy"
       subtitle="Interactive modules about responsible online behavior, critical thinking, and evaluating digital information. Become a responsible digital citizen!"
-      icon={Globe}
-      badge="DIGITAL CITIZENSHIP ACADEMY - AGES 9-12"
       breadcrumbs={true}
     >
       <div style={{ maxWidth: '75rem', margin: '0 auto' }}>

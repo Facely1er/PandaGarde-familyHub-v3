@@ -13,8 +13,6 @@ const StoryPage: React.FC = () => {
     <PageLayout
       title="Privacy Panda and the Digital Bamboo Forest"
       subtitle="Join Po the Panda on an adventure through the Digital Bamboo Forest as he learns about privacy, sharing, and staying safe online."
-      icon={Book}
-      badge="DIGITAL PRIVACY STORY"
       breadcrumbs={true}
     >
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>

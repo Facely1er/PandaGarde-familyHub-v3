@@ -355,8 +355,6 @@ const ImplementationGuidePage: React.FC = () => {
     <PageLayout
       title="Implementation Guide - Step-by-Step Success"
       subtitle="A comprehensive, step-by-step guide to successfully implementing privacy education in your school or organization. From planning to evaluation, we'll guide you through every step."
-      icon={Calendar}
-      badge="IMPLEMENTATION GUIDE"
       breadcrumbs={true}
     >
       <div className="min-h-screen" style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}>

@@ -95,8 +95,6 @@ const DeviceSetupGuidePage: React.FC = () => {
     <PageLayout
       title="Child-Friendly Device Setup"
       subtitle="Step-by-step guide for configuring devices with appropriate controls to keep children safe while they learn and play online."
-      icon={Settings}
-      badge="PARENT GUIDE"
       breadcrumbs={true}
     >
       <div style={{ maxWidth: '56rem', margin: '0 auto' }}>

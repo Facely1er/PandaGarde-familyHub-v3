@@ -29,8 +29,6 @@ const FeaturesPage: React.FC = () => {
     <PageLayout
       title="How PandaGarde Works"
       subtitle="PandaGarde is the website. Family Hub is the dedicated workspace inside the PandaGarde experience."
-      icon={ShieldCheck}
-      badge="HOW IT WORKS"
       breadcrumbs={true}
     >
       <section style={{ padding: '1rem 0 2rem' }}>

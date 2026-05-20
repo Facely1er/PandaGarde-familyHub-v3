@@ -145,8 +145,6 @@ const ImplementationPage: React.FC = () => {
     <PageLayout
       title="Implementation Timeline"
       subtitle="Flexible guides to implementing Privacy Panda education in various settings. Choose the implementation model that best fits your needs and schedule."
-      icon={Calendar}
-      badge="IMPLEMENTATION"
       breadcrumbs={true}
     >
 

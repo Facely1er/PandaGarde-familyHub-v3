@@ -309,8 +309,6 @@ const DigitalRightsPage: React.FC = () => {
     <PageLayout
       title="Digital Rights & Law"
       subtitle="Understanding privacy legislation and digital rights—including Maryland’s MODPA for residents—and how to exercise your rights as a digital citizen."
-      icon={Scale}
-      badge="DIGITAL RIGHTS & LAW - AGES 13-17"
       breadcrumbs={true}
     >
       <div style={{ maxWidth: '75rem', margin: '0 auto' }}>

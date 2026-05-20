@@ -9,8 +9,6 @@ const ContactPage: React.FC = () => {
     <PageLayout
       title="Contact Us"
       subtitle="Questions about PandaGarde or need help? We're here to help you and your family learn about online privacy."
-      icon={MessageCircle}
-      badge="CONTACT US"
     >
       {/* Contact Form Section */}
       <section style={{ marginBottom: '2rem' }}>

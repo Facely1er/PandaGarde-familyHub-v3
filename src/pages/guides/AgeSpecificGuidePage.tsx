@@ -128,8 +128,6 @@ const AgeSpecificGuidePage: React.FC = () => {
     <PageLayout
       title="Age-Specific Privacy Education Guide"
       subtitle="Tailored privacy education strategies for different age groups. Learn age-appropriate concepts, activities, and conversation starters for children ages 5-17."
-      icon={Users}
-      badge="AGE-SPECIFIC GUIDE"
       breadcrumbs={true}
     >
       <div style={{ maxWidth: '56rem', margin: '0 auto' }}>

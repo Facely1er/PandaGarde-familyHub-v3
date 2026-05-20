@@ -47,8 +47,6 @@ const AboutPage: React.FC = () => {
     <PageLayout
       title="About"
       subtitle="We help families and kids learn about online privacy through fun, age-appropriate activities—so everyone can stay safer online."
-      icon={Shield}
-      badge="ABOUT US"
     >
       <div className="max-w-6xl mx-auto">
 

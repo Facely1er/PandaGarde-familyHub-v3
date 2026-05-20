@@ -8818,19 +8818,6 @@ body {
   border-bottom: 1px solid rgba(102, 187, 106, 0.3);
 }
 
-.page-header__badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  margin-bottom: 0.5rem;
-  padding: 0.35rem 0.75rem;
-  border-radius: 9999px;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-}
-
 .page-header__title {
   margin: 0 0 0.375rem;
   font-size: clamp(1.75rem, 4vw, 2.25rem);

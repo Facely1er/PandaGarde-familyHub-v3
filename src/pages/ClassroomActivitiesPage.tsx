@@ -37,8 +37,6 @@ const ClassroomActivitiesPage: React.FC = () => {
     <PageLayout
       title="Privacy Panda Classroom Activities"
       subtitle="Chapter-by-chapter activities aligned with 'Privacy Panda and the Digital Bamboo Forest' story. Perfect for educators teaching digital privacy to children ages 5-8."
-      icon={BookOpen}
-      badge="EDUCATOR RESOURCES"
       breadcrumbs={true}
     >
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>

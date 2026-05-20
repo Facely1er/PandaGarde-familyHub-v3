@@ -7,8 +7,6 @@ const AccessibilityPage: React.FC = () => {
     <PageLayout
       title="Accessibility Statement"
       subtitle="We are committed to making digital privacy education accessible to all learners, regardless of ability or circumstance."
-      icon={Accessibility}
-      badge="ACCESSIBILITY"
     >
       <div className="max-w-4xl mx-auto">
           <div className="prose prose-lg max-w-none">

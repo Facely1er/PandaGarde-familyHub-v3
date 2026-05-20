@@ -8,8 +8,6 @@ const CookiesPage: React.FC = () => {
     <PageLayout
       title="Cookie Policy"
       subtitle="Learn about how we use cookies and similar technologies to enhance your experience while protecting your privacy."
-      icon={Cookie}
-      badge="PRIVACY"
     >
       <div className="max-w-4xl mx-auto">
           <div className="prose prose-lg max-w-none">

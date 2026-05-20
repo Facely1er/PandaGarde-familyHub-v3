@@ -259,8 +259,6 @@ const EducatorToolsPage: React.FC = () => {
     <PageLayout
       title="Educator Tools"
       subtitle="What works today on PandaGarde: classroom activities, interactive content, assessments, printables, and guides. Packaged PDF curricula and slide ZIP files are not on the server yet — cards link to live pages or the pilot program."
-      icon={GraduationCap}
-      badge="EDUCATOR TOOLS"
       breadcrumbs={true}
     >
 

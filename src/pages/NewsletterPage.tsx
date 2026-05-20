@@ -92,8 +92,6 @@ const NewsletterPage: React.FC = () => {
     <PageLayout
       title="Newsletter"
       subtitle="Stay updated with the latest privacy education news, new activities, and expert tips to help your family navigate the digital world safely."
-      icon={Mail}
-      badge="NEWSLETTER"
       breadcrumbs={true}
     >
 

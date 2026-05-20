@@ -115,8 +115,6 @@ const ColoringSheetsPage: React.FC = () => {
     <PageLayout
       title="Privacy Panda Coloring Sheets"
       subtitle="Download and print these fun coloring pages featuring Privacy Panda and privacy concepts. Perfect for offline learning and creative expression!"
-      icon={Palette}
-      badge="DOWNLOADABLE RESOURCES"
       breadcrumbs={true}
     >
       <div className="min-h-screen" style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}>
