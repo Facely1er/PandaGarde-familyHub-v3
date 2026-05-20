@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Mail, CheckCircle, AlertCircle } from 'lucide-react';
 import { useToast } from '../hooks/useToast';
+import { logger } from '../lib/logger';
 
 interface EmailCaptureInlineProps {
   title?: string;
@@ -40,7 +41,7 @@ const EmailCaptureInline: React.FC<EmailCaptureInlineProps> = ({
         const parsed = JSON.parse(subscriptionsStr);
         subscriptions = Array.isArray(parsed) ? parsed : [];
       } catch (error) {
-        console.error('Error parsing email subscriptions:', error);
+        logger.error('Error parsing email subscriptions:', error);
         subscriptions = [];
       }
       
@@ -70,7 +71,7 @@ const EmailCaptureInline: React.FC<EmailCaptureInlineProps> = ({
         setIsSubmitted(false);
       }, 3000);
     } catch (error) {
-      console.error('Error subscribing email:', error);
+      logger.error('Error subscribing email:', error);
       showError('Failed to subscribe. Please try again.');
     } finally {
       setIsSubmitting(false);

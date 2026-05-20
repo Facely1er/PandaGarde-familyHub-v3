@@ -16,6 +16,7 @@ import {
   logSecurityEvent
 } from '../lib/familyHubSecurity';
 import { useActiveMember } from '../utils/familyProgressIntegration';
+import { logger } from '../lib/logger';
 
 interface FamilyMember {
   id: number;
@@ -401,7 +402,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
         const realScore = calculateMemberScore(member.id);
         return sum + (realScore || 0);
       } catch (error) {
-        console.error('Error calculating member score:', error);
+        logger.error('Error calculating member score:', error);
         return sum;
       }
     }, 0);

@@ -3,7 +3,6 @@
  * Creates comprehensive PDF reports from assessment results
  */
 
-import jsPDF from 'jspdf';
 import type { AssessmentResult, Recommendation } from './familyPrivacyAssessment';
 import type { PersonaDetectionResult } from './familyPersonaDetection';
 import { FamilyPersonaProfiles } from '../data/familyPersonaProfiles';
@@ -25,6 +24,8 @@ export class FamilyPrivacyReportGenerator {
     personaResult?: PersonaDetectionResult,
     options: ReportOptions = {}
   ): Promise<Blob> {
+    const { default: jsPDF } = await import('jspdf');
+
     const {
       includePersona = true,
       includeRecommendations = true,

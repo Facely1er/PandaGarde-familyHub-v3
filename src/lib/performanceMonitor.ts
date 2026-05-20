@@ -1,3 +1,4 @@
+import { logger } from './logger';
 /**
  * Performance Monitoring and Metrics
  * Tracks Core Web Vitals and custom performance metrics
@@ -35,7 +36,7 @@ class PerformanceMonitor {
       lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
       this.observers.push(lcpObserver);
     } catch (e) {
-      console.warn('LCP observer not supported:', e);
+      logger.warn('LCP observer not supported:', e);
     }
 
     // Observe FID
@@ -53,7 +54,7 @@ class PerformanceMonitor {
       fidObserver.observe({ entryTypes: ['first-input'] });
       this.observers.push(fidObserver);
     } catch (e) {
-      console.warn('FID observer not supported:', e);
+      logger.warn('FID observer not supported:', e);
     }
 
     // Observe CLS
@@ -72,7 +73,7 @@ class PerformanceMonitor {
       clsObserver.observe({ entryTypes: ['layout-shift'] });
       this.observers.push(clsObserver);
     } catch (e) {
-      console.warn('CLS observer not supported:', e);
+      logger.warn('CLS observer not supported:', e);
     }
 
     // Track page load time
@@ -115,7 +116,7 @@ class PerformanceMonitor {
     
     // Warn if render time is too high
     if (renderTime > 100) {
-      console.warn(`Component ${componentName} took ${renderTime}ms to render`);
+      logger.warn(`Component ${componentName} took ${renderTime}ms to render`);
     }
   }
 
@@ -152,7 +153,7 @@ class PerformanceMonitor {
 
     // Log in development
     if (import.meta.env.MODE === 'development') {
-      console.log(`[Performance] ${name}: ${value.toFixed(2)}ms`);
+      // Performance metrics are debug-only
     }
   }
 

@@ -1,0 +1,85 @@
+%% PandaGarde — Domain Model v1
+
+erDiagram
+    Family ||--o{ Guardian : has
+    Family ||--o{ ChildProfile : has
+    Family ||--o{ ConsentRecord : governs
+    ChildProfile ||--o{ LearningActivity : performs
+    ChildProfile ||--o{ PrivacyMilestone : earns
+    ChildProfile ||--o{ ScreenTimeSession : tracks
+    ChildProfile ||--o{ ModerationEvent : subject_of
+    School ||--o{ Vendor : evaluates
+    School }o--o{ Family : optional_link
+    AIInteraction ||--o| ModerationEvent : may_trigger
+    ChildProfile ||--o{ AIInteraction : generates
+
+    Family {
+        uuid id PK
+        string display_name
+        timestamp created_at
+    }
+
+    Guardian {
+        uuid id PK
+        uuid family_id FK
+        string email
+        string role
+    }
+
+    ChildProfile {
+        uuid id PK
+        uuid family_id FK
+        string age_band
+        string display_name
+    }
+
+    ConsentRecord {
+        uuid id PK
+        uuid family_id FK
+        string consent_type
+        boolean granted
+        timestamp recorded_at
+    }
+
+    LearningActivity {
+        uuid id PK
+        uuid child_profile_id FK
+        string module_id
+        string status
+    }
+
+    PrivacyMilestone {
+        uuid id PK
+        uuid child_profile_id FK
+        string milestone_key
+    }
+
+    ScreenTimeSession {
+        uuid id PK
+        uuid child_profile_id FK
+        int duration_minutes
+    }
+
+    School {
+        uuid id PK
+        string name
+    }
+
+    Vendor {
+        uuid id PK
+        uuid school_id FK
+        string name
+        string privacy_rating
+    }
+
+    ModerationEvent {
+        uuid id PK
+        string severity
+        timestamp created_at
+    }
+
+    AIInteraction {
+        uuid id PK
+        uuid child_profile_id FK
+        string interaction_type
+    }

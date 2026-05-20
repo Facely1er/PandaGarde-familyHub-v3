@@ -1,0 +1,41 @@
+%% PandaGarde — UX Journey Review Order v1
+%% Mandatory review sequence (do not reorder)
+
+flowchart TD
+    subgraph ReviewOrder["UX Journey Review — Mandatory Order"]
+        J1["1 Entry\nFirst impression"]
+        J2["2 Orientation\nCognitive friction"]
+        J3["3 Mission\nFull activity flow"]
+        J4["4 Progression\nXP without manipulation"]
+        J5["5 Parent\nCollaboration not surveillance"]
+        J6["6 Emotional\nTrust & memorability"]
+        J7["7 Visual rhythm\nCalm breathing UI"]
+        J8["8 Mobile\nTablet-first"]
+        J9["9 Accessibility\nInclusive UX"]
+        J10["10 Return\nCome back tomorrow"]
+    end
+
+    J1 --> J2 --> J3 --> J4 --> J5 --> J6 --> J7 --> J8 --> J9 --> J10
+
+    subgraph Strategic["Strategic thread"]
+        EC["Emotional continuity\nbetween activities"]
+    end
+
+    J3 -.-> EC
+    J10 -.-> EC
+
+    subgraph CodeSurfaces["FamilyHub v3 surfaces"]
+        Home["/ HomePage"]
+        Hub["/family-hub AppShell"]
+        DFA["dfaJourney + assessment"]
+        Act["ActivitiesScreen"]
+    end
+
+    J1 --> Home
+    J2 --> Hub
+    J3 --> Act
+    J10 --> Hub
+
+    style EC fill:#fef3c7,stroke:#d97706
+    style J3 fill:#d1fae5,stroke:#059669
+    style J10 fill:#d1fae5,stroke:#059669

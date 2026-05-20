@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Download, Upload, FileText, AlertCircle, CheckCircle, Copy } from 'lucide-react';
 import { useProgress } from '../contexts/ProgressContext';
 import { useToast } from '../contexts/ToastContext';
+import { logger } from '../lib/logger';
 
 interface ProgressExportProps {
   onClose?: () => void;
@@ -30,7 +31,7 @@ const ProgressExport: React.FC<ProgressExportProps> = ({ onClose }) => {
       URL.revokeObjectURL(url);
       showSuccess('Progress exported successfully!', 'Your learning progress has been saved to a file.');
     } catch (error) {
-      console.error('Export error:', error);
+      logger.error('Export error:', error);
       showError('Export failed', 'There was an error exporting your progress. Please try again.');
     } finally {
       setIsExporting(false);
@@ -54,7 +55,7 @@ const ProgressExport: React.FC<ProgressExportProps> = ({ onClose }) => {
         showError('Import failed', 'The data format is invalid. Please check your progress file.');
       }
     } catch (error) {
-      console.error('Import error:', error);
+      logger.error('Import error:', error);
       showError('Import failed', 'There was an error importing your progress. Please check the data format.');
     } finally {
       setIsImporting(false);
@@ -67,7 +68,7 @@ const ProgressExport: React.FC<ProgressExportProps> = ({ onClose }) => {
       await navigator.clipboard.writeText(data);
       showSuccess('Copied to clipboard!', 'Your progress data has been copied to the clipboard.');
     } catch (error) {
-      console.error('Copy error:', error);
+      logger.error('Copy error:', error);
       showError('Copy failed', 'Could not copy to clipboard. Please try downloading instead.');
     }
   };

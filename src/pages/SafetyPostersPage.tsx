@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Download, Shield, AlertTriangle, Users, Lock, Smartphone, LifeBuoy } from 'lucide-react';
 import { pdfService } from '../lib/pdfService';
 import { downloadService } from '../lib/database';
+import { logger } from '../lib/logger';
 import PageLayout from '../components/layout/PageLayout';
 
 const SafetyPostersPage: React.FC = () => {
@@ -88,7 +89,7 @@ const SafetyPostersPage: React.FC = () => {
       try {
         await pdfService.generateSafetyPostersPDF();
       } catch (error) {
-        console.error('Error downloading safety posters:', error);
+        logger.error('Error downloading safety posters:', error);
         alert('Error downloading safety posters. Please try again.');
       } finally {
         setIsDownloading(false);
@@ -105,7 +106,7 @@ const SafetyPostersPage: React.FC = () => {
             resource_name: posterTitle || poster.title
           });
         } catch (error) {
-          console.log('Download tracking failed (demo mode):', error);
+          logger.debug('Download tracking failed (demo mode)', error, 'DOWNLOAD');
         }
         
         // Open the download URL

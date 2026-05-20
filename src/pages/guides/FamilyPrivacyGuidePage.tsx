@@ -348,7 +348,7 @@ const FamilyPrivacyGuidePage: React.FC = () => {
               </Link>
 
               <Link
-                to="/activities/privacy-learning-kit"
+                to="/classroom-activities"
                 className="family-guide-card bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow text-center"
               >
                 <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 mx-auto">

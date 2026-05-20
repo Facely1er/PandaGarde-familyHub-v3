@@ -1,0 +1,41 @@
+%% PandaGarde / FamilyHub — Deployment v1
+
+flowchart LR
+    subgraph Dev["Development"]
+        DevNode["Node 20 + Vite dev server"]
+        DevLS["Browser localStorage"]
+    end
+
+    subgraph CI["CI Pipeline"]
+        Lint["ESLint"]
+        Test["Vitest"]
+        Build["vite build → dist/"]
+        Audit["npm audit"]
+    end
+
+    subgraph Staging["Staging"]
+        StagingCDN["Netlify / Vercel Preview"]
+        StagingEnv["Staging env vars"]
+    end
+
+    subgraph Prod["Production"]
+        ProdCDN["Netlify / Vercel Production"]
+        ProdTLS["TLS 1.2+ / HTTPS"]
+        ProdMon["Uptime monitoring"]
+    end
+
+    subgraph OptionalBackend["Optional Backend"]
+        SB["Supabase"]
+        PG[("PostgreSQL + RLS")]
+    end
+
+    DevNode --> DevLS
+    DevNode --> CI
+    Lint --> Test --> Build --> Audit
+    Build --> StagingCDN
+    StagingCDN --> StagingEnv
+    Build --> ProdCDN
+    ProdCDN --> ProdTLS
+    ProdCDN --> ProdMon
+    ProdCDN -.->|if configured| SB
+    SB --> PG

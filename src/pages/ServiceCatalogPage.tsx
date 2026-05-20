@@ -17,6 +17,9 @@ const AI_SERVICE_IDS = ['chatgpt', 'google-gemini', 'microsoft-copilot', 'charac
 const TELECOM_SERVICE_IDS = ['verizon', 'att', 'tmobile', 'cricket-wireless', 'boost-mobile', 'mint-mobile'] as const;
 const HIGH_LE_CONCERN_IDS = ['att', 'verizon', 'tmobile', 'tiktok', 'google-classroom', 'chatgpt', 'discord', 'snapchat', 'instagram', 'youtube', 'microsoft-teams-edu'] as const;
 
+const headerActionLinkClass =
+  'inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-lg bg-green-800 px-4 py-2 text-white transition-colors hover:bg-green-900';
+
 const ServiceCatalogPage: React.FC = () => {
   const { getFamilyServices, addServiceToFamily, removeServiceFromFamily } = useFamily();
   const [servicesCount, setServicesCount] = useState(0);
@@ -132,13 +135,13 @@ const ServiceCatalogPage: React.FC = () => {
                 Add the apps your family actually uses so PandaGarde can analyze something real. This phase should feel fast, not like a questionnaire marathon.
               </p>
             </div>
-            <div className="flex items-center space-x-2">
-              <Link to="/safety-alerts" className="flex items-center space-x-2 rounded-lg bg-green-600 px-4 py-2 text-white transition-colors hover:bg-green-700">
-                <Bell className="h-5 w-5" />
+            <div className="flex shrink-0 items-center gap-2">
+              <Link to="/safety-alerts" className={headerActionLinkClass}>
+                <Bell className="h-5 w-5 shrink-0" aria-hidden />
                 <span>Safety Alerts</span>
               </Link>
-              <Link to="/digital-footprint" className="flex items-center space-x-2 rounded-lg bg-green-800 px-4 py-2 text-white transition-colors hover:bg-green-900">
-                <BarChart3 className="h-5 w-5" />
+              <Link to="/digital-footprint" className={headerActionLinkClass}>
+                <BarChart3 className="h-5 w-5 shrink-0" aria-hidden />
                 <span>Footprint</span>
               </Link>
             </div>

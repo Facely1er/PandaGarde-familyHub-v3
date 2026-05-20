@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import { searchService, SearchResult, SearchFilters } from '../lib/searchService';
+import { logger } from '../lib/logger';
 
 // SearchResult interface is now imported from searchService
 
@@ -42,7 +43,7 @@ export const SearchProvider: React.FC<SearchProviderProps> = ({ children }) => {
     try {
       searchService.initialize();
     } catch (error) {
-      console.error('Failed to initialize search service:', error);
+      logger.error('Failed to initialize search service:', error);
     }
   }, []);
 
@@ -75,7 +76,7 @@ export const SearchProvider: React.FC<SearchProviderProps> = ({ children }) => {
       // Add to recent searches
       addToRecentSearches(query);
     } catch (error) {
-      console.error('Search failed:', error);
+      logger.error('Search failed:', error);
       setSearchResults([]);
     } finally {
       setIsSearching(false);
@@ -94,7 +95,7 @@ export const SearchProvider: React.FC<SearchProviderProps> = ({ children }) => {
       }
       return await searchService.getSuggestions(query);
     } catch (error) {
-      console.error('Error getting suggestions:', error);
+      logger.error('Error getting suggestions:', error);
       return [];
     }
   }, []);
@@ -103,7 +104,7 @@ export const SearchProvider: React.FC<SearchProviderProps> = ({ children }) => {
     try {
       return await searchService.getPopularSearches();
     } catch (error) {
-      console.error('Error getting popular searches:', error);
+      logger.error('Error getting popular searches:', error);
       return [];
     }
   }, []);

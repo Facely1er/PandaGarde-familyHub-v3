@@ -1,0 +1,49 @@
+%% PandaGarde / FamilyHub — Architecture v1
+%% Render with Mermaid (GitHub, VS Code, or mermaid.live)
+
+flowchart TB
+    subgraph Clients["Client Tier"]
+        Browser["Web Browser\n(React SPA)"]
+        PWA["Offline Cache\n(Service Worker / Vite assets)"]
+    end
+
+    subgraph Presentation["Presentation Layer"]
+        ParentUI["Parent Dashboard"]
+        ChildUI["Child-Safe Learning UI"]
+        SchoolUI["School Privacy Portal"]
+        Guides["Privacy Guides & DFA Journey"]
+    end
+
+    subgraph Application["Application Layer"]
+        Auth["AuthWrapper\n(Guardian session)"]
+        FamilyCtx["FamilyContext"]
+        ProgressCtx["ProgressContext"]
+        DFA["DFA Journey & Score Engine"]
+        Moderation["AI Safety & Moderation"]
+        Alerts["RSS / Safety Alerts"]
+    end
+
+    subgraph Data["Data Layer"]
+        LocalStore["Encrypted localStorage\n(LocalStorageManager)"]
+        SecureFH["Secure Storage fh_*\n(TTL wrappers)"]
+        Supabase[("Supabase PostgreSQL\n(optional)")]
+        RLS["Row-Level Security"]
+    end
+
+    subgraph Hosting["Hosting Tier"]
+        CDN["Netlify / Vercel CDN"]
+        HTTPS["HTTPS / TLS"]
+    end
+
+    Browser --> CDN
+    CDN --> Presentation
+    Presentation --> Application
+    Auth --> LocalStore
+    FamilyCtx --> LocalStore
+    FamilyCtx --> SecureFH
+    ProgressCtx --> LocalStore
+    DFA --> LocalStore
+    Application --> Supabase
+    Supabase --> RLS
+    Browser --> PWA
+    CDN --> HTTPS

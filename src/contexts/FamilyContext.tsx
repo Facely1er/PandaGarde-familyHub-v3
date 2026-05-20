@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 // Frontend-only mode - no authentication or database dependencies
 import { localStorageManager, UserProgress } from '../utils/localStorageManager';
+import { logger } from '../lib/logger';
 
 export interface ServiceUsage {
   serviceId: string;
@@ -138,7 +139,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
   };
 
   const loadFamilyMembers = useCallback(async (familyId: string) => {
-    console.log('Frontend-only mode: loadFamilyMembers() - using localStorage', familyId);
+    logger.debug('Frontend-only mode: loadFamilyMembers() - using localStorage', familyId, 'FAMILY');
     try {
       const familyData = await localStorageManager.getFamilyData();
       if (familyData && familyData.id === familyId) {
@@ -159,13 +160,13 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
         setFamilyMembers([]);
       }
     } catch (error) {
-      console.error('Error loading family members:', error);
+      logger.error('Error loading family members:', error);
       setFamilyMembers([]);
     }
   }, []);
 
   const checkExistingFamily = useCallback(async () => {
-    console.log('Frontend-only mode: checkExistingFamily() - using localStorage');
+    logger.debug('Frontend-only mode: checkExistingFamily() - using localStorage', undefined, 'FAMILY');
     try {
       const currentUserId = getCurrentUserId();
       const familyData = await localStorageManager.getFamilyData();
@@ -178,18 +179,18 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
         }
       }
     } catch (error) {
-      console.error('Error checking existing family:', error);
+      logger.error('Error checking existing family:', error);
     }
   }, [loadFamilyMembers]);
 
   // Load family data when component mounts - Frontend-only mode
   useEffect(() => {
-    console.log('Frontend-only mode: Loading family data from localStorage');
+    logger.debug('Frontend-only mode: Loading family data from localStorage', undefined, 'FAMILY');
     checkExistingFamily();
   }, [checkExistingFamily]);
 
   const createFamily = async (name: string) => {
-    console.log('Frontend-only mode: createFamily() - using localStorage', name);
+    logger.debug('Frontend-only mode: createFamily() - using localStorage', undefined, 'FAMILY');
     setLoading(true);
     try {
       const currentUserId = getCurrentUserId();
@@ -235,7 +236,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
 
       return { family: familyData, error: null };
     } catch (error) {
-      console.error('Error creating family:', error);
+      logger.error('Error creating family:', error);
       return { family: null, error: 'Failed to create family' };
     } finally {
       setLoading(false);
@@ -243,7 +244,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
   };
 
   const joinFamily = async (familyId: string) => {
-    console.log('Frontend-only mode: joinFamily() - using localStorage', familyId);
+    logger.debug('Frontend-only mode: joinFamily() - using localStorage', undefined, 'FAMILY');
     setLoading(true);
     try {
       const currentUserId = getCurrentUserId();
@@ -289,7 +290,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
 
       return { success: true, error: null };
     } catch (error) {
-      console.error('Error joining family:', error);
+      logger.error('Error joining family:', error);
       return { success: false, error: 'Failed to join family' };
     } finally {
       setLoading(false);
@@ -297,7 +298,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
   };
 
   const leaveFamily = async () => {
-    console.log('Frontend-only mode: leaveFamily() - using localStorage');
+    logger.debug('Frontend-only mode: leaveFamily() - using localStorage', undefined, 'FAMILY');
     if (!currentFamily) {
       return { success: false, error: 'No family to leave' };
     }
@@ -329,7 +330,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
 
       return { success: true, error: null };
     } catch (error) {
-      console.error('Error leaving family:', error);
+      logger.error('Error leaving family:', error);
       return { success: false, error: 'Failed to leave family' };
     } finally {
       setLoading(false);
@@ -337,7 +338,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
   };
 
   const addFamilyMember = async (email: string, role: 'parent' | 'child', firstName: string, lastName: string) => {
-    console.log('Frontend-only mode: addFamilyMember() - using localStorage', { email, role, firstName, lastName });
+    logger.debug('Frontend-only mode: addFamilyMember() - using localStorage', undefined, 'FAMILY');
     if (!currentFamily) {
       return { success: false, error: 'No family selected' };
     }
@@ -382,7 +383,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
       await loadFamilyMembers(currentFamily.id);
       return { success: true, error: null };
     } catch (error) {
-      console.error('Error adding family member:', error);
+      logger.error('Error adding family member:', error);
       return { success: false, error: 'Failed to add family member' };
     } finally {
       setLoading(false);
@@ -390,7 +391,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
   };
 
   const removeFamilyMember = async (memberId: string) => {
-    console.log('Frontend-only mode: removeFamilyMember() - using localStorage', memberId);
+    logger.debug('Frontend-only mode: removeFamilyMember() - using localStorage', undefined, 'FAMILY');
     if (!currentFamily) {
       return { success: false, error: 'No family selected' };
     }
@@ -422,7 +423,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
       await loadFamilyMembers(currentFamily.id);
       return { success: true, error: null };
     } catch (error) {
-      console.error('Error removing family member:', error);
+      logger.error('Error removing family member:', error);
       return { success: false, error: 'Failed to remove family member' };
     } finally {
       setLoading(false);
@@ -430,7 +431,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
   };
 
   const updateFamilyMember = async (memberId: string, updates: Partial<FamilyMember>) => {
-    console.log('Frontend-only mode: updateFamilyMember() - using localStorage', { memberId, updates });
+    logger.debug('Frontend-only mode: updateFamilyMember() - using localStorage', undefined, 'FAMILY');
     if (!currentFamily) {
       return { success: false, error: 'No family selected' };
     }
@@ -463,7 +464,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
       await loadFamilyMembers(currentFamily.id);
       return { success: true, error: null };
     } catch (error) {
-      console.error('Error updating family member:', error);
+      logger.error('Error updating family member:', error);
       return { success: false, error: 'Failed to update family member' };
     } finally {
       setLoading(false);
@@ -471,7 +472,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
   };
 
   const getFamilyProgress = async () => {
-    console.log('Frontend-only mode: getFamilyProgress() - using localStorage');
+    logger.debug('Frontend-only mode: getFamilyProgress() - using localStorage', undefined, 'FAMILY');
     if (!currentFamily) {
       return null;
     }
@@ -495,7 +496,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
         progressPercentage
       };
     } catch (error) {
-      console.error('Error loading family progress:', error);
+      logger.error('Error loading family progress:', error);
       return null;
     }
   };
@@ -545,7 +546,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
 
   // Request service for a family member
   const requestService = async (memberId: string, serviceId: string): Promise<{ success: boolean; error: string | null }> => {
-    console.log('Frontend-only mode: requestService() - using localStorage', { memberId, serviceId });
+    logger.debug('Frontend-only mode: requestService() - using localStorage', undefined, 'FAMILY');
     if (!currentFamily) {
       return { success: false, error: 'No family selected' };
     }
@@ -593,7 +594,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
       await loadFamilyMembers(currentFamily.id);
       return { success: true, error: null };
     } catch (error) {
-      console.error('Error requesting service:', error);
+      logger.error('Error requesting service:', error);
       return { success: false, error: 'Failed to request service' };
     } finally {
       setLoading(false);
@@ -602,7 +603,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
 
   // Add service to family (for Digital Footprint Analysis)
   const addServiceToFamily = async (serviceId: string): Promise<{ success: boolean; error: string | null }> => {
-    console.log('Frontend-only mode: addServiceToFamily() - using localStorage', { serviceId });
+    logger.debug('Frontend-only mode: addServiceToFamily() - using localStorage', undefined, 'FAMILY');
     
     try {
       // Get or create family services list
@@ -613,7 +614,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
         const parsed = JSON.parse(servicesStr);
         existingServices = Array.isArray(parsed) ? parsed : [];
       } catch (error) {
-        console.error('Error parsing family services:', error);
+        logger.error('Error parsing family services:', error);
         existingServices = [];
       }
       
@@ -652,14 +653,14 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
       
       return { success: true, error: null };
     } catch (error) {
-      console.error('Error adding service to family:', error);
+      logger.error('Error adding service to family:', error);
       return { success: false, error: 'Failed to add service' };
     }
   };
 
   // Remove service from family
   const removeServiceFromFamily = async (serviceId: string): Promise<{ success: boolean; error: string | null }> => {
-    console.log('Frontend-only mode: removeServiceFromFamily() - using localStorage', { serviceId });
+    logger.debug('Frontend-only mode: removeServiceFromFamily() - using localStorage', undefined, 'FAMILY');
     
     try {
       // Get family services list
@@ -670,7 +671,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
         const parsed = JSON.parse(servicesStr);
         existingServices = Array.isArray(parsed) ? parsed : [];
       } catch (error) {
-        console.error('Error parsing family services:', error);
+        logger.error('Error parsing family services:', error);
         existingServices = [];
       }
       
@@ -695,7 +696,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
       
       return { success: true, error: null };
     } catch (error) {
-      console.error('Error removing service from family:', error);
+      logger.error('Error removing service from family:', error);
       return { success: false, error: 'Failed to remove service' };
     }
   };
@@ -708,7 +709,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
       const parsed = JSON.parse(servicesStr);
       return Array.isArray(parsed) ? parsed : [];
     } catch (error) {
-      console.error('Error parsing family services:', error);
+      logger.error('Error parsing family services:', error);
       return [];
     }
   };

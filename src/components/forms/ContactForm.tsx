@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Send, User, Mail, MessageSquare, Phone, CheckCircle, AlertCircle } from 'lucide-react';
 import { contactService, newsletterService } from '../../lib/database';
 import { useToast } from '../../hooks/useToast';
+import { logger } from '../../lib/logger';
 
 interface FormData {
   name: string;
@@ -49,7 +50,7 @@ const ContactForm: React.FC = () => {
         const parsedData = JSON.parse(savedData);
         setFormData(parsedData);
       } catch (error) {
-        console.error('Error loading saved form data:', error);
+        logger.error('Error loading saved form data:', error);
       }
     }
   }, []);
@@ -140,7 +141,7 @@ const ContactForm: React.FC = () => {
           try {
             await newsletterService.subscribe(formData.email);
           } catch (newsletterError) {
-            console.warn('Newsletter subscription failed:', newsletterError);
+            logger.warn('Newsletter subscription failed:', newsletterError);
             // Don't fail the form submission for newsletter errors
           }
         }
@@ -166,7 +167,7 @@ const ContactForm: React.FC = () => {
         throw new Error('Failed to submit form');
       }
     } catch (error) {
-      console.error('Contact form submission error:', error);
+      logger.error('Contact form submission error:', error);
       setSubmitError('Failed to send message. Please try again.');
       showError('Submission Failed', 'There was an error sending your message. Please try again.');
     } finally {

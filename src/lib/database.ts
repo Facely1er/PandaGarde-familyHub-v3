@@ -2,12 +2,14 @@
 // Mock types for compatibility
 type Database = any
 
+import { logger } from './logger'
+
 // Frontend-only mode - all database operations are disabled
-console.log('Running in frontend-only mode - database operations disabled')
+logger.debug('Running in frontend-only mode - database operations disabled', undefined, 'DB')
 
 // Mock error handling for compatibility
 const handleDatabaseError = (operation: string, error: unknown) => {
-  console.log(`Frontend-only mode: ${operation} would have failed:`, error)
+  logger.debug(`Frontend-only mode: ${operation} would have failed`, error, 'DB')
   return null
 }
 
@@ -16,7 +18,7 @@ const safeDbOperation = async <T>(
   operation: () => Promise<T>,
   operationName: string
 ): Promise<T | null> => {
-  console.log(`Frontend-only mode: ${operationName} operation skipped`)
+  logger.debug(`Frontend-only mode: ${operationName} operation skipped`, undefined, 'DB')
   return null
 }
 
@@ -34,19 +36,19 @@ type UserSession = Tables['pandagarde_user_sessions']['Row']
 export const userService = {
   // Get current user - always returns null in frontend-only mode
   async getCurrentUser(): Promise<User | null> {
-    console.log('Frontend-only mode: getCurrentUser() - returning null')
+    logger.debug('Frontend-only mode: getCurrentUser() - returning null', undefined, 'DB')
     return null
   },
 
   // Create or update user profile - disabled in frontend-only mode
   async upsertUser(userData: Partial<User>): Promise<User | null> {
-    console.log('Frontend-only mode: upsertUser() - operation skipped', userData)
+    logger.debug('Frontend-only mode: upsertUser() - operation skipped', userData, 'DB')
     return null
   },
 
   // Update user profile - disabled in frontend-only mode
   async updateUser(id: string, updates: Partial<User>): Promise<User | null> {
-    console.log('Frontend-only mode: updateUser() - operation skipped', { id, updates })
+    logger.debug('Frontend-only mode: updateUser() - operation skipped', { id, updates }, 'DB')
     return null
   }
 }
@@ -55,25 +57,25 @@ export const userService = {
 export const activityService = {
   // Get user activities - returns empty array in frontend-only mode
   async getUserActivities(userId: string): Promise<Activity[]> {
-    console.log('Frontend-only mode: getUserActivities() - returning empty array', userId)
+    logger.debug('Frontend-only mode: getUserActivities() - returning empty array', userId, 'DB')
     return []
   },
 
   // Create new activity - disabled in frontend-only mode
   async createActivity(activityData: Omit<Activity, 'id' | 'created_at'>): Promise<Activity | null> {
-    console.log('Frontend-only mode: createActivity() - operation skipped', activityData)
+    logger.debug('Frontend-only mode: createActivity() - operation skipped', activityData, 'DB')
     return null
   },
 
   // Update activity - disabled in frontend-only mode
   async updateActivity(id: string, updates: Partial<Activity>): Promise<Activity | null> {
-    console.log('Frontend-only mode: updateActivity() - operation skipped', { id, updates })
+    logger.debug('Frontend-only mode: updateActivity() - operation skipped', { id, updates }, 'DB')
     return null
   },
 
   // Mark activity as completed - disabled in frontend-only mode
   async completeActivity(id: string): Promise<Activity | null> {
-    console.log('Frontend-only mode: completeActivity() - operation skipped', id)
+    logger.debug('Frontend-only mode: completeActivity() - operation skipped', id, 'DB')
     return null
   }
 }
@@ -82,13 +84,13 @@ export const activityService = {
 export const progressService = {
   // Get user progress - returns empty array in frontend-only mode
   async getUserProgress(userId: string): Promise<Progress[]> {
-    console.log('Frontend-only mode: getUserProgress() - returning empty array', userId)
+    logger.debug('Frontend-only mode: getUserProgress() - returning empty array', userId, 'DB')
     return []
   },
 
   // Save progress - disabled in frontend-only mode
   async saveProgress(progressData: Omit<Progress, 'id' | 'created_at' | 'updated_at'>): Promise<Progress | null> {
-    console.log('Frontend-only mode: saveProgress() - operation skipped', progressData)
+    logger.debug('Frontend-only mode: saveProgress() - operation skipped', undefined, 'DB')
     return null
   }
 }
@@ -96,16 +98,15 @@ export const progressService = {
 // Contact form functions - Frontend-only mode
 export const contactService = {
   // Submit contact form - logs submission in frontend-only mode
-  async submitContactForm(submission: Omit<ContactSubmission, 'id' | 'created_at' | 'status'>): Promise<ContactSubmission | null> {
-    console.log('Frontend-only mode: Contact form submission logged:', submission)
+  async submitContactForm(_submission: Omit<ContactSubmission, 'id' | 'created_at' | 'status'>): Promise<ContactSubmission | null> {
+    logger.debug('Frontend-only mode: contact form submission received', undefined, 'DB')
     // In a real frontend-only setup, you might want to send this to an external service
-    // For now, we just log it
     return null
   },
 
   // Get contact submissions - returns empty array in frontend-only mode
   async getContactSubmissions(): Promise<ContactSubmission[]> {
-    console.log('Frontend-only mode: getContactSubmissions() - returning empty array')
+    logger.debug('Frontend-only mode: getContactSubmissions() - returning empty array', undefined, 'DB')
     return []
   }
 }
@@ -169,7 +170,7 @@ export const newsletterService = {
         return data
       }
     } catch (error) {
-      console.error('Supabase newsletter subscription error:', error)
+      logger.error('Supabase newsletter subscription error:', error)
       // Fall through to localStorage fallback
     }
 
@@ -209,10 +210,10 @@ export const newsletterService = {
         JSON.stringify(subscriptions)
       )
       
-      console.log('Frontend-only mode: Newsletter subscription saved:', subscriptionData)
+      logger.debug('Frontend-only mode: Newsletter subscription saved', undefined, 'DB')
       return subscriptionData
     } catch (error) {
-      console.error('LocalStorage newsletter subscription error:', error)
+      logger.error('LocalStorage newsletter subscription error:', error)
       throw new Error('Failed to save newsletter subscription')
     }
   },
@@ -242,7 +243,7 @@ export const newsletterService = {
         return true
       }
     } catch (error) {
-      console.error('Supabase unsubscribe error:', error)
+      logger.error('Supabase unsubscribe error:', error)
       // Fall through to localStorage fallback
     }
 
@@ -265,10 +266,10 @@ export const newsletterService = {
         )
       }
       
-      console.log('Frontend-only mode: Newsletter unsubscription saved:', normalizedEmail)
+      logger.debug('Frontend-only mode: Newsletter unsubscription saved', undefined, 'DB')
       return true
     } catch (error) {
-      console.error('LocalStorage unsubscribe error:', error)
+      logger.error('LocalStorage unsubscribe error:', error)
       return false
     }
   },
@@ -295,7 +296,7 @@ export const newsletterService = {
         return data?.subscribed ?? false
       }
     } catch (error) {
-      console.error('Supabase check subscription error:', error)
+      logger.error('Supabase check subscription error:', error)
       // Fall through to localStorage fallback
     }
 
@@ -311,7 +312,7 @@ export const newsletterService = {
       
       return subscription?.subscribed ?? false
     } catch (error) {
-      console.error('LocalStorage check subscription error:', error)
+      logger.error('LocalStorage check subscription error:', error)
       return false
     }
   }
@@ -332,10 +333,10 @@ export const downloadService = {
       const existingDownloads = JSON.parse(localStorage.getItem('pandagarde_downloads') || '[]');
       existingDownloads.push(downloadRecord);
       localStorage.setItem('pandagarde_downloads', JSON.stringify(existingDownloads));
-      console.log('Frontend-only mode: Download tracked (localStorage):', downloadRecord);
+      logger.debug('Frontend-only mode: Download tracked (localStorage)', undefined, 'DB');
       return downloadRecord;
     } catch (error) {
-      console.error('Error storing download in localStorage:', error);
+      logger.error('Error storing download in localStorage:', error);
       return null;
     }
   },
@@ -348,7 +349,7 @@ export const downloadService = {
         new Date(b.downloaded_at).getTime() - new Date(a.downloaded_at).getTime()
       );
     } catch (error) {
-      console.error('Error fetching local download stats:', error);
+      logger.error('Error fetching local download stats:', error);
       return [];
     }
   }
@@ -357,20 +358,20 @@ export const downloadService = {
 // Session management functions - Frontend-only mode
 export const sessionService = {
   // Create user session - disabled in frontend-only mode
-  async createSession(userId: string, sessionData: Record<string, unknown>, expiresAt: Date): Promise<UserSession | null> {
-    console.log('Frontend-only mode: createSession() - operation skipped', { userId, sessionData, expiresAt })
+  async createSession(_userId: string, _sessionData: Record<string, unknown>, _expiresAt: Date): Promise<UserSession | null> {
+    logger.debug('Frontend-only mode: createSession() - operation skipped', undefined, 'DB')
     return null
   },
 
   // Get user sessions - returns empty array in frontend-only mode
-  async getUserSessions(userId: string): Promise<UserSession[]> {
-    console.log('Frontend-only mode: getUserSessions() - returning empty array', userId)
+  async getUserSessions(_userId: string): Promise<UserSession[]> {
+    logger.debug('Frontend-only mode: getUserSessions() - returning empty array', undefined, 'DB')
     return []
   },
 
   // Clean up expired sessions - always returns true in frontend-only mode
   async cleanupExpiredSessions(): Promise<boolean> {
-    console.log('Frontend-only mode: cleanupExpiredSessions() - operation skipped')
+    logger.debug('Frontend-only mode: cleanupExpiredSessions() - operation skipped', undefined, 'DB')
     return true
   }
 }
@@ -378,26 +379,26 @@ export const sessionService = {
 // Auth helper functions - Frontend-only mode
 export const authService = {
   // Sign up with email and password - disabled in frontend-only mode
-  async signUp(email: string, password: string) {
-    console.log('Frontend-only mode: Sign up attempt logged:', email)
+  async signUp(_email: string, _password: string) {
+    logger.debug('Frontend-only mode: sign-up attempt (auth disabled)', undefined, 'DB')
     return { data: null, error: { message: 'Authentication disabled - redirect to family hub project' } }
   },
 
   // Sign in with email and password - disabled in frontend-only mode
-  async signIn(email: string, password: string) {
-    console.log('Frontend-only mode: Sign in attempt logged:', email)
+  async signIn(_email: string, _password: string) {
+    logger.debug('Frontend-only mode: sign-in attempt (auth disabled)', undefined, 'DB')
     return { data: null, error: { message: 'Authentication disabled - redirect to family hub project' } }
   },
 
   // Sign out - always succeeds in frontend-only mode
   async signOut() {
-    console.log('Frontend-only mode: Sign out logged')
+    logger.debug('Frontend-only mode: sign-out', undefined, 'DB')
     return { error: null }
   },
 
   // Get current session - always returns null in frontend-only mode
   async getCurrentSession() {
-    console.log('Frontend-only mode: getCurrentSession() - returning null')
+    logger.debug('Frontend-only mode: getCurrentSession() - returning null', undefined, 'DB')
     return { data: { session: null }, error: null }
   }
 }

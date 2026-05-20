@@ -5,6 +5,7 @@ import PageLayout from '../components/layout/PageLayout';
 import { useToast } from '../contexts/ToastContext';
 import { newsletterArchive } from '../data/newsletters';
 import { newsletterService } from '../lib/database';
+import { logger } from '../lib/logger';
 
 const NewsletterPage: React.FC = () => {
   const { showSuccess, showError } = useToast();
@@ -38,7 +39,7 @@ const NewsletterPage: React.FC = () => {
         showError('Subscription Failed', 'There was an error subscribing. Please try again.');
       }
     } catch (error) {
-      console.error('Newsletter subscription error:', error);
+      logger.error('Newsletter subscription error:', error);
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
       if (errorMessage.includes('Invalid email')) {
         showError('Invalid Email', 'Please enter a valid email address.');

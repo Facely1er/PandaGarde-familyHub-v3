@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Download, Award, Star, Trophy, Medal } from 'lucide-react';
 import { pdfService } from '../lib/pdfService';
 import PageLayout from '../components/layout/PageLayout';
+import { logger } from '../lib/logger';
 
 const CertificatesPage: React.FC = () => {
   const [isDownloading, setIsDownloading] = useState(false);
@@ -68,7 +69,7 @@ const CertificatesPage: React.FC = () => {
       try {
         await pdfService.generateCertificatesPDF();
       } catch (error) {
-        console.error('Error downloading certificates:', error);
+        logger.error('Error downloading certificates:', error);
         alert('Error downloading certificates. Please try again.');
       } finally {
         setIsDownloading(false);

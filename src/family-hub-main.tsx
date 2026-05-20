@@ -5,6 +5,7 @@ import './index.css';
 import { initSentry, reportError } from './lib/sentry.ts';
 import { initAnalytics, trackError } from './lib/analytics.ts';
 import { initServiceWorker } from './lib/serviceWorker.ts';
+import { logger } from './lib/logger';
 
 // Initialize monitoring, analytics, and service worker before rendering the app
 // Wrap in try-catch to prevent initialization errors from blocking the app
@@ -15,19 +16,19 @@ try {
   initSentry();
   sentryInitialized = true;
 } catch (error) {
-  console.warn('Failed to initialize Sentry:', error);
+  logger.warn('Failed to initialize Sentry:', error);
 }
 
 try {
   initAnalytics();
   analyticsInitialized = true;
 } catch (error) {
-  console.warn('Failed to initialize Analytics:', error);
+  logger.warn('Failed to initialize Analytics:', error);
 }
 
 // Initialize service worker asynchronously (don't block app rendering)
 initServiceWorker().catch((error) => {
-  console.warn('Failed to initialize Service Worker:', error);
+  logger.warn('Failed to initialize Service Worker:', error);
 });
 
 // Global error handlers - capture unhandled errors
@@ -45,7 +46,7 @@ window.onerror = (message, source, lineno, colno, error) => {
         colno,
       });
     } catch (err) {
-      console.warn('Error reporting failed:', err);
+      logger.warn('Error reporting failed:', err);
     }
   }
   
@@ -58,7 +59,7 @@ window.onerror = (message, source, lineno, colno, error) => {
         colno,
       });
     } catch (err) {
-      console.warn('Error tracking failed:', err);
+      logger.warn('Error tracking failed:', err);
     }
   }
   
@@ -78,7 +79,7 @@ window.onunhandledrejection = (event) => {
         type: 'unhandled_rejection',
       });
     } catch (err) {
-      console.warn('Error reporting failed:', err);
+      logger.warn('Error reporting failed:', err);
     }
   }
   
@@ -88,7 +89,7 @@ window.onunhandledrejection = (event) => {
         type: 'unhandled_rejection',
       });
     } catch (err) {
-      console.warn('Error tracking failed:', err);
+      logger.warn('Error tracking failed:', err);
     }
   }
 };

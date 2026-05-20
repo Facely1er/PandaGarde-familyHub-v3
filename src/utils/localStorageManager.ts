@@ -1,4 +1,5 @@
 import { encryptData, decryptData, generateUserPassword, isEncryptionAvailable } from '../lib/encryption';
+import { logger } from '../lib/logger';
 
 export interface UserProgress {
   id: string;
@@ -9,6 +10,8 @@ export interface UserProgress {
   completedMissions: string[];
   unlockedAchievements: string[];
   currentStreak: number;
+  longestStreak: number;
+  toolsUsed: string[];
   lastActive: string;
   createdAt: string;
 }
@@ -30,7 +33,7 @@ export class LocalStorageManager {
       allProgress[userId] = progress;
       localStorage.setItem(LocalStorageManager.STORAGE_KEY, JSON.stringify(allProgress));
     } catch (error) {
-      console.error('Error saving user progress:', error);
+      logger.error('Error saving user progress:', error);
       throw new Error('Failed to save user progress');
     }
   }
@@ -43,7 +46,7 @@ export class LocalStorageManager {
       const allProgress = this.getAllUsers();
       return allProgress[userId] || null;
     } catch (error) {
-      console.error('Error getting user progress:', error);
+      logger.error('Error getting user progress:', error);
       return null;
     }
   }
@@ -56,7 +59,7 @@ export class LocalStorageManager {
       const data = localStorage.getItem(LocalStorageManager.STORAGE_KEY);
       return data ? JSON.parse(data) : {};
     } catch (error) {
-      console.error('Error getting all users:', error);
+      logger.error('Error getting all users:', error);
       return {};
     }
   }
@@ -70,7 +73,7 @@ export class LocalStorageManager {
       delete allProgress[userId];
       localStorage.setItem(LocalStorageManager.STORAGE_KEY, JSON.stringify(allProgress));
     } catch (error) {
-      console.error('Error deleting user:', error);
+      logger.error('Error deleting user:', error);
       throw new Error('Failed to delete user');
     }
   }
@@ -90,7 +93,7 @@ export class LocalStorageManager {
       };
       return JSON.stringify(exportData, null, 2);
     } catch (error) {
-      console.error('Error exporting data:', error);
+      logger.error('Error exporting data:', error);
       throw new Error('Failed to export data');
     }
   }
@@ -117,7 +120,7 @@ export class LocalStorageManager {
 
       return true;
     } catch (error) {
-      console.error('Error importing data:', error);
+      logger.error('Error importing data:', error);
       return false;
     }
   }
@@ -143,7 +146,7 @@ export class LocalStorageManager {
 
       return totalSize;
     } catch (error) {
-      console.error('Error calculating storage usage:', error);
+      logger.error('Error calculating storage usage:', error);
       return 0;
     }
   }
@@ -156,7 +159,7 @@ export class LocalStorageManager {
       localStorage.removeItem(LocalStorageManager.STORAGE_KEY);
       localStorage.removeItem(LocalStorageManager.FAMILY_KEY);
     } catch (error) {
-      console.error('Error clearing data:', error);
+      logger.error('Error clearing data:', error);
       throw new Error('Failed to clear data');
     }
   }
@@ -172,7 +175,7 @@ export class LocalStorageManager {
       // Check if data is encrypted
       if (data.startsWith(LocalStorageManager.ENCRYPTED_FLAG)) {
         if (!isEncryptionAvailable()) {
-          console.warn('Encryption not available, cannot decrypt family data');
+          logger.warn('Encryption not available, cannot decrypt family data');
           return null;
         }
         
@@ -184,7 +187,7 @@ export class LocalStorageManager {
         try {
           return await decryptData<any>(encryptedData, password);
         } catch (decryptError) {
-          console.error('Error decrypting family data:', decryptError);
+          logger.error('Error decrypting family data:', decryptError);
           // Try to parse as plain JSON as fallback (for migration)
           try {
             return JSON.parse(encryptedData);
@@ -196,7 +199,7 @@ export class LocalStorageManager {
       
       return JSON.parse(data);
     } catch (error) {
-      console.error('Error getting family data:', error);
+      logger.error('Error getting family data:', error);
       return null;
     }
   }
@@ -208,7 +211,7 @@ export class LocalStorageManager {
     try {
       if (!isEncryptionAvailable()) {
         // Fallback to unencrypted storage if encryption not available
-        console.warn('Encryption not available, saving family data unencrypted');
+        logger.warn('Encryption not available, saving family data unencrypted');
         localStorage.setItem(LocalStorageManager.FAMILY_KEY, JSON.stringify(familyData));
         return;
       }
@@ -229,7 +232,7 @@ export class LocalStorageManager {
         LocalStorageManager.ENCRYPTED_FLAG + encryptedData
       );
     } catch (error) {
-      console.error('Error saving family data:', error);
+      logger.error('Error saving family data:', error);
       throw new Error('Failed to save family data');
     }
   }
@@ -255,7 +258,7 @@ export class LocalStorageManager {
             result[key] = await encryptData(value, password);
             result[`${key}_encrypted`] = true;
           } catch (error) {
-            console.error(`Error encrypting field ${key}:`, error);
+            logger.error(`Error encrypting field ${key}:`, error);
             result[key] = value; // Fallback to unencrypted
           }
         } else if (typeof value === 'object') {
@@ -296,7 +299,7 @@ export class LocalStorageManager {
           try {
             result[key] = await decryptData<string>(value, password);
           } catch (error) {
-            console.error(`Error decrypting field ${key}:`, error);
+            logger.error(`Error decrypting field ${key}:`, error);
             result[key] = value; // Fallback to encrypted value
           }
         } else if (typeof value === 'object') {
@@ -355,7 +358,7 @@ export class LocalStorageManager {
         percentage: Math.min(percentage, 100)
       };
     } catch (error) {
-      console.error('Error getting storage info:', error);
+      logger.error('Error getting storage info:', error);
       return { used: 0, available: 0, percentage: 0 };
     }
   }
@@ -374,6 +377,8 @@ export class LocalStorageManager {
       completedMissions: [],
       unlockedAchievements: [],
       currentStreak: 0,
+      longestStreak: 0,
+      toolsUsed: [],
       lastActive: now,
       createdAt: now
     };
@@ -446,7 +451,7 @@ export class LocalStorageManager {
   }
 
   /**
-   * Update user's streak
+   * Update user's streak, also tracking longestStreak
    */
   updateStreak(userId: string, streak: number): void {
     const progress = this.getUserProgress(userId);
@@ -455,7 +460,31 @@ export class LocalStorageManager {
     }
 
     progress.currentStreak = streak;
+    // Ensure longestStreak is initialised for progress created before this field existed
+    if (!progress.longestStreak) {
+      progress.longestStreak = 0;
+    }
+    if (streak > progress.longestStreak) {
+      progress.longestStreak = streak;
+    }
     this.saveUserProgress(userId, progress);
+  }
+
+  /**
+   * Record that a user has used a particular tool (identified by toolId).
+   * Idempotent – safe to call multiple times for the same tool.
+   */
+  recordToolUsed(userId: string, toolId: string): void {
+    const progress = this.getUserProgress(userId);
+    if (!progress) {return;}
+
+    if (!progress.toolsUsed) {
+      progress.toolsUsed = [];
+    }
+    if (!progress.toolsUsed.includes(toolId)) {
+      progress.toolsUsed.push(toolId);
+      this.saveUserProgress(userId, progress);
+    }
   }
 }
 

@@ -5,6 +5,7 @@
 
 import { childRssFeeds, severityKeywords, type ChildRSSFeed } from '../data/childRssFeeds';
 import { childServiceCatalog } from '../data/childServiceCatalog';
+import { logger } from './logger';
 
 export interface ChildSafetyAlert {
   id: string;
@@ -70,7 +71,7 @@ class ChildRSSAlertService {
       }
       
       if (isDevMode) {
-        console.log('[Child RSS Alert Service] Initializing...');
+        // RSS Alert Service initialized (debug mode)
       }
       
       // Process feeds immediately on initialization (only in dev)
@@ -86,7 +87,7 @@ class ChildRSSAlertService {
       }, intervalMs);
     } catch (error) {
       // Silently fail initialization to prevent breaking the app
-      console.warn('[Child RSS Alert Service] Initialization failed:', error);
+      logger.warn('[Child RSS Alert Service] Initialization failed:', error);
     }
   }
 
@@ -132,7 +133,7 @@ class ChildRSSAlertService {
       return allAlerts;
     } catch (error) {
       // This should rarely happen, but log if it does
-      console.warn('[RSS Alert Service] Unexpected error processing feeds:', error);
+      logger.warn('[RSS Alert Service] Unexpected error processing feeds:', error);
       return allAlerts; // Return whatever we've collected so far
     } finally {
       this.isProcessing = false;
@@ -324,22 +325,22 @@ class ChildRSSAlertService {
       } else if (isExpectedError) {
         // Network/CORS/timeout errors are expected - only log in dev mode
         if (isDevMode) {
-          console.warn(`[RSS Alert Service] Unable to fetch feed "${feed.name}" (${feed.id}). This is expected if the CORS proxy is unavailable or the request timed out.`);
+          logger.warn(`[RSS Alert Service] Unable to fetch feed "${feed.name}" (${feed.id}). This is expected if the CORS proxy is unavailable or the request timed out.`);
         }
       } else if (isHttpError) {
         // HTTP errors (4xx, 5xx) - log in dev, minimal log in production
         if (isDevMode) {
           const errorMessage = error instanceof Error ? error.message : String(error);
-          console.warn(`[RSS Alert Service] HTTP error for feed "${feed.name}" (${feed.id}): ${errorMessage}`);
+          logger.warn(`[RSS Alert Service] HTTP error for feed "${feed.name}" (${feed.id}): ${errorMessage}`);
         }
       } else {
         // Other errors (like parsing errors) should be logged with more context
         const errorMessage = error instanceof Error ? error.message : String(error);
         if (isDevMode) {
-          console.warn(`[RSS Alert Service] Error processing feed "${feed.name}" (${feed.id}): ${errorMessage}`);
+          logger.warn(`[RSS Alert Service] Error processing feed "${feed.name}" (${feed.id}): ${errorMessage}`);
         } else if (!isProduction) {
           // In non-production, only log unexpected errors briefly
-          console.warn(`[RSS Alert Service] Unable to process feed "${feed.name}" - using cached data if available`);
+          logger.warn(`[RSS Alert Service] Unable to process feed "${feed.name}" - using cached data if available`);
         }
       }
       

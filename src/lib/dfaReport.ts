@@ -1,8 +1,8 @@
-import jsPDF from 'jspdf';
 import type { FootprintAnalysis } from './footprintAnalyzer';
 import type { DfaScoreResult } from './dfaScoreEngine';
 
-export const downloadDfaExecutiveSummary = (analysis: FootprintAnalysis, score: DfaScoreResult): void => {
+export const downloadDfaExecutiveSummary = async (analysis: FootprintAnalysis, score: DfaScoreResult): Promise<void> => {
+  const { default: jsPDF } = await import('jspdf');
   const doc = new jsPDF();
   let y = 20;
   const line = (text: string, size = 11, bold = false): void => {

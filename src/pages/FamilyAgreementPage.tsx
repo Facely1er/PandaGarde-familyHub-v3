@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Download, FileText, Users, Shield, CheckCircle } from 'lucide-react';
 import { pdfService } from '../lib/pdfService';
 import PageLayout from '../components/layout/PageLayout';
+import { logger } from '../lib/logger';
 
 const FamilyAgreementPage: React.FC = () => {
   const [isDownloading, setIsDownloading] = useState(false);
@@ -16,7 +17,7 @@ const FamilyAgreementPage: React.FC = () => {
     try {
       await pdfService.generateFamilyAgreementPDF();
     } catch (error) {
-      console.error('Error downloading family agreement:', error);
+      logger.error('Error downloading family agreement:', error);
       alert('Error downloading family agreement. Please try again.');
     } finally {
       setIsDownloading(false);

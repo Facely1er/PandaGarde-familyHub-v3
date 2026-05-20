@@ -5,6 +5,7 @@
 
 import { useFamilyProgress } from '../contexts/FamilyProgressContext';
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import { logger } from '../lib/logger';
 
 /**
  * Hook to record game completion
@@ -22,7 +23,7 @@ export const useGameCompletion = () => {
     additionalData?: Record<string, unknown>
   ) => {
     if (!currentMemberId) {
-      console.warn('No active family member selected. Progress not recorded.');
+      logger.warn('No active family member selected. Progress not recorded.');
       return;
     }
 
@@ -56,7 +57,7 @@ export const useJourneyCompletion = () => {
     additionalData?: Record<string, unknown>
   ) => {
     if (!currentMemberId) {
-      console.warn('No active family member selected. Progress not recorded.');
+      logger.warn('No active family member selected. Progress not recorded.');
       return;
     }
 

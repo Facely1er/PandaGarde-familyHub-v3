@@ -12,6 +12,7 @@ import PrivacyGoals from '../components/PrivacyGoals';
 import AdaptiveResources from '../components/AdaptiveResources';
 import EmailCaptureInline from '../components/EmailCaptureInline';
 import { FamilyPersonaProfiles } from '../data/familyPersonaProfiles';
+import { logger } from '../lib/logger';
 
 
 interface Activity {
@@ -58,7 +59,7 @@ const FamilyHubPage: React.FC = () => {
         const personaData = JSON.parse(storedPersona);
         setFamilyPersona(personaData.primary || null);
       } catch (e) {
-        console.error('Error parsing persona data:', e);
+        logger.error('Error parsing persona data:', e);
       }
     }
   }, []);
@@ -618,7 +619,7 @@ const FamilyHubPage: React.FC = () => {
                   Continue Learning
                 </h2>
                 <Link 
-                  to="/activities" 
+                  to="/classroom-activities" 
                   className="text-sm text-green-600 hover:text-green-700 font-medium hidden sm:inline-flex items-center gap-1"
                 >
                   View all <ArrowRight size={14} />
@@ -681,7 +682,7 @@ const FamilyHubPage: React.FC = () => {
               {/* Mobile View All Link */}
               <div className="mt-4 sm:hidden text-center">
                 <Link 
-                  to="/activities" 
+                  to="/classroom-activities" 
                   className="inline-flex items-center gap-2 text-green-600 hover:text-green-700 font-medium text-sm"
                 >
                   View all activities <ArrowRight size={14} />

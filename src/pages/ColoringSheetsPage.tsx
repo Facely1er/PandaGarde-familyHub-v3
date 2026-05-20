@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Download, Palette, Printer, Share2, Star } from 'lucide-react';
 import { pdfService } from '../lib/pdfService';
 import PageLayout from '../components/layout/PageLayout';
+import { logger } from '../lib/logger';
 
 const ColoringSheetsPage: React.FC = () => {
   const [isDownloading, setIsDownloading] = useState(false);
@@ -85,7 +86,7 @@ const ColoringSheetsPage: React.FC = () => {
           await new Promise(resolve => setTimeout(resolve, 500));
         }
       } catch (error) {
-        console.error('Error downloading coloring sheets:', error);
+        logger.error('Error downloading coloring sheets:', error);
         alert('Error downloading coloring sheets. Please try again.');
       } finally {
         setIsDownloading(false);
@@ -103,7 +104,7 @@ const ColoringSheetsPage: React.FC = () => {
           link.click();
           document.body.removeChild(link);
         } catch (error) {
-          console.error('Error downloading SVG:', error);
+          logger.error('Error downloading SVG:', error);
           alert('Error downloading coloring sheet. Please try again.');
         }
       }

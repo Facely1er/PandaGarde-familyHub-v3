@@ -1,4 +1,5 @@
-// Service Worker Manager
+import { logger } from './logger';
+
 interface ServiceWorkerConfig {
   enabled: boolean;
   updateInterval: number;
@@ -17,7 +18,7 @@ class ServiceWorkerManager {
   // Register service worker
   async register(): Promise<ServiceWorkerRegistration | null> {
     if (!this.config.enabled || !('serviceWorker' in navigator)) {
-      console.log('Service Worker not supported or disabled');
+      logger.debug('Service Worker not supported or disabled', undefined, 'SW');
       return null;
     }
 
@@ -26,7 +27,7 @@ class ServiceWorkerManager {
         scope: '/',
       });
 
-      console.log('Service Worker registered:', this.registration);
+      logger.debug('Service Worker registered', undefined, 'SW');
 
       // Handle updates
       this.registration.addEventListener('updatefound', () => {
@@ -38,7 +39,7 @@ class ServiceWorkerManager {
 
       return this.registration;
     } catch (error) {
-      console.error('Service Worker registration failed:', error);
+      logger.error('Service Worker registration failed:', error);
       return null;
     }
   }
@@ -82,7 +83,7 @@ class ServiceWorkerManager {
         window.location.reload();
       }
     } catch (error) {
-      console.error('Service Worker update failed:', error);
+      logger.error('Service Worker update failed:', error);
     }
   }
 
@@ -104,7 +105,7 @@ class ServiceWorkerManager {
     try {
       await this.registration.update();
     } catch (error) {
-      console.error('Update check failed:', error);
+      logger.error('Update check failed:', error);
     }
   }
 
@@ -120,10 +121,10 @@ class ServiceWorkerManager {
         this.updateCheckInterval = null;
       }
 
-      console.log('Service Worker unregistered:', result);
+      logger.debug('Service Worker unregistered', undefined, 'SW');
       return result;
     } catch (error) {
-      console.error('Service Worker unregistration failed:', error);
+      logger.error('Service Worker unregistration failed:', error);
       return false;
     }
   }
@@ -135,9 +136,9 @@ class ServiceWorkerManager {
       await Promise.all(
         cacheNames.map(cacheName => caches.delete(cacheName))
       );
-      console.log('All caches cleared');
+      logger.debug('All caches cleared', undefined, 'SW');
     } catch (error) {
-      console.error('Cache clearing failed:', error);
+      logger.error('Cache clearing failed:', error);
     }
   }
 
@@ -159,7 +160,7 @@ class ServiceWorkerManager {
       
       return cacheInfo;
     } catch (error) {
-      console.error('Cache info retrieval failed:', error);
+      logger.error('Cache info retrieval failed:', error);
       return [];
     }
   }
@@ -170,9 +171,9 @@ class ServiceWorkerManager {
 
     try {
       await this.registration.sync.register(tag);
-      console.log('Background sync registered:', tag);
+      logger.debug('Background sync registered', tag, 'SW');
     } catch (error) {
-      console.error('Background sync registration failed:', error);
+      logger.error('Background sync registration failed:', error);
     }
   }
 
@@ -183,9 +184,9 @@ class ServiceWorkerManager {
         type: 'CACHE_TOOL_ASSETS',
         toolId
       });
-      console.log(`Tool assets cached for: ${toolId}`);
+      logger.debug(`Tool assets cached for: ${toolId}`, undefined, 'SW');
     } catch (error) {
-      console.error('Tool asset caching failed:', error);
+      logger.error('Tool asset caching failed:', error);
     }
   }
 
@@ -196,9 +197,9 @@ class ServiceWorkerManager {
         type: 'CACHE_MISSION_CONTENT',
         missionId
       });
-      console.log(`Mission content cached for: ${missionId}`);
+      logger.debug(`Mission content cached for: ${missionId}`, undefined, 'SW');
     } catch (error) {
-      console.error('Mission content caching failed:', error);
+      logger.error('Mission content caching failed:', error);
     }
   }
 
@@ -210,7 +211,7 @@ class ServiceWorkerManager {
         message
       });
     } catch (error) {
-      console.error('Update notification failed:', error);
+      logger.error('Update notification failed:', error);
     }
   }
 
@@ -277,7 +278,7 @@ export const initServiceWorker = async (): Promise<void> => {
   try {
     await serviceWorkerManager.register();
   } catch (error) {
-    console.error('Service Worker initialization failed:', error);
+    logger.error('Service Worker initialization failed:', error);
   }
 };
 

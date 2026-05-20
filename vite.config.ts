@@ -24,8 +24,9 @@ const cleanPublicDirPlugin = () => ({
           const filePath = path.join(storyDir, file);
           try {
             fs.unlinkSync(filePath);
-            console.log(`Removed problematic file: ${file}`);
-          } catch (err) {
+             
+            console.warn(`Removed problematic file: ${file}`);
+          } catch (_err) {
             // File might be locked, skip it
           }
         }

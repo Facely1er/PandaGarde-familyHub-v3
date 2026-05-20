@@ -104,7 +104,7 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
   // Persist current score for next visit's delta
   useEffect(() => {
     if (analysis?.privacyScore !== undefined) {
-      try { localStorage.setItem(LS_PREV_SCORE, String(analysis.privacyScore)); } catch (_e) { /* storage unavailable */ }
+      try { localStorage.setItem(LS_PREV_SCORE, String(analysis.privacyScore)); } catch { /* quota/private mode */ }
     }
   }, [analysis?.privacyScore]);
 
@@ -113,7 +113,7 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
     setDoneRecs(prev => {
       const next = new Set(prev);
       if (next.has(recId)) { next.delete(recId); } else { next.add(recId); }
-      try { localStorage.setItem(LS_DONE_RECS, JSON.stringify([...next])); } catch (_e) { /* storage unavailable */ }
+      try { localStorage.setItem(LS_DONE_RECS, JSON.stringify([...next])); } catch { /* quota/private mode */ }
       return next;
     });
   };
