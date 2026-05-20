@@ -620,7 +620,7 @@ const FamilyHubPage: React.FC = () => {
                   <h2 className="text-2xl font-bold text-primary sm:text-3xl">
                     Continue Learning
                   </h2>
-                  <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-600 sm:text-base">
+                  <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-600 dark:text-gray-300 sm:text-base">
                     Keep momentum going with featured family missions that include clear goals, conversation starters, and next steps you can use together.
                   </p>
                 </div>

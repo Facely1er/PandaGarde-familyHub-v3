@@ -41,7 +41,7 @@ const FOCUS_ORDER: ActivityFocus[] = [
 type AgeTabId = (typeof AGE_TABS)[number]['id'];
 type FocusTabId = 'all' | ActivityFocus;
 
-const parseDurationMinutes = (duration: string) => Number.parseInt(duration, 10) || 0;
+const extractDurationNumber = (duration: string) => Number.parseInt(duration, 10) || 0;
 const getCompletionId = (activity: FlattenedAgeBasedActivity) => activity.activityManagerId ?? activity.id;
 
 const LearningCard: React.FC<{
@@ -332,7 +332,7 @@ const ActivitiesScreen: React.FC = () => {
     [completedIds, filteredActivities]
   );
   const totalMinutes = useMemo(
-    () => filteredActivities.reduce((sum, activity) => sum + parseDurationMinutes(activity.duration), 0),
+    () => filteredActivities.reduce((sum, activity) => sum + extractDurationNumber(activity.duration), 0),
     [filteredActivities]
   );
   const showGroupedGrid = activeAge === 'all' && activeFocus === 'all';
@@ -402,7 +402,7 @@ const ActivitiesScreen: React.FC = () => {
 
         <div className="flex-1 overflow-auto">
           <ActivityManager
-            activityId={selectedActivity.activityManagerId}
+            activityId={selectedActivity.activityManagerId!}
             onClose={handleClose}
             onComplete={handleClose}
           />
@@ -585,11 +585,12 @@ const ActivitiesScreen: React.FC = () => {
                 </div>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
                   {group.activities.map((activity) => {
-                    const fullActivity = allActivities.find((candidate) => candidate.id === activity.id);
-
-                    if (!fullActivity) {
-                      return null;
-                    }
+                    const fullActivity: FlattenedAgeBasedActivity = {
+                      ...activity,
+                      groupAgeRange: group.ageRange,
+                      groupLabel: group.label,
+                      groupEmoji: group.emoji,
+                    };
 
                     const progressDetails = getActivityProgress(getCompletionId(fullActivity));
                     return (
