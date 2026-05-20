@@ -23,7 +23,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({
     <div className={`page-header ${className}`}>
       <div className="container page-header-content">
         {showBreadcrumbs && (
-          <div className="mb-3">
+          <div className="page-header__breadcrumbs">
             <Breadcrumbs />
           </div>
         )}
