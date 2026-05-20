@@ -14,18 +14,20 @@ const PageLayout: React.FC<PageLayoutProps> = ({
   subtitle,
   breadcrumbs = true,
   children,
-  className = ''
+  className = '',
 }) => {
   return (
-    <div className={`page-layout ${className}`}>
+    <div className={`page-layout min-h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 ${className}`}>
       <PageHeader
         title={title}
         subtitle={subtitle}
         breadcrumbs={breadcrumbs}
       />
 
-      <main className="page-layout__main">
-        <div className="container relative z-[2]">{children}</div>
+      <main className="page-layout__main relative z-10 py-8 min-h-96 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100">
+        <div className="container relative z-20">
+          {children}
+        </div>
       </main>
     </div>
   );
