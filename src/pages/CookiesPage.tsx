@@ -46,7 +46,7 @@ const CookiesPage: React.FC = () => {
 
               <div className="space-y-6">
                 {/* Essential Cookies */}
-                <div className="bg-green-50 p-6 rounded-lg" style={{ backgroundColor: '#f0fdf4' }}>
+                <div className="callout-green">
                   <div className="flex items-start gap-3">
                     <CheckCircle size={24} className="text-green-600 mt-1" />
                     <div>
@@ -68,7 +68,7 @@ const CookiesPage: React.FC = () => {
                 </div>
 
                 {/* Functional Cookies */}
-                <div className="bg-blue-50 p-6 rounded-lg" style={{ backgroundColor: '#eff6ff' }}>
+                <div className="callout-blue">
                   <div className="flex items-start gap-3">
                     <Settings size={24} className="text-blue-600 mt-1" />
                     <div>
@@ -90,7 +90,7 @@ const CookiesPage: React.FC = () => {
                 </div>
 
                 {/* Analytics Cookies */}
-                <div className="bg-yellow-50 p-6 rounded-lg" style={{ backgroundColor: '#fffbeb' }}>
+                <div className="callout-yellow">
                   <div className="flex items-start gap-3">
                     <AlertTriangle size={24} className="text-yellow-600 mt-1" />
                     <div>
@@ -146,7 +146,7 @@ const CookiesPage: React.FC = () => {
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="bg-white p-6 rounded-lg shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
+                <div className="theme-card p-6">
                   <h3 className="font-semibold mb-3 text-primary">
                     Browser Settings
                   </h3>
@@ -161,7 +161,7 @@ const CookiesPage: React.FC = () => {
                   </ul>
                 </div>
 
-                <div className="bg-white p-6 rounded-lg shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
+                <div className="theme-card p-6">
                   <h3 className="font-semibold mb-3 text-primary">
                     Our Cookie Banner
                   </h3>
@@ -183,7 +183,7 @@ const CookiesPage: React.FC = () => {
               <h2 className="text-3xl font-bold mb-6 text-primary">
                 Special Considerations for Children
               </h2>
-              <div className="bg-pink-50 p-6 rounded-lg mb-6" style={{ backgroundColor: '#fdf2f8' }}>
+              <div className="callout-pink mb-6">
                 <div className="flex items-start gap-3">
                   <Shield size={24} className="text-pink-600 mt-1" />
                   <div>

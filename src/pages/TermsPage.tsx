@@ -17,12 +17,12 @@ const TermsPage: React.FC = () => {
               <h2 className="text-3xl font-bold mb-6 text-primary">
                 Introduction
               </h2>
-              <p className="text-lg mb-4 text-gray-600">
+              <p className="text-lg mb-4 text-gray-600 dark:text-gray-300">
                 Welcome to PandaGarde, a digital privacy education platform designed to help families learn about
                 online safety and digital citizenship together. These Terms of Service ("Terms") govern your use
                 of our website, applications, and services (collectively, the "Service").
               </p>
-              <p className="text-lg mb-4 text-gray-600">
+              <p className="text-lg mb-4 text-gray-600 dark:text-gray-300">
                 By accessing or using our Service, you agree to be bound by these Terms. If you disagree with any
                 part of these terms, you may not access the Service.
               </p>
@@ -40,7 +40,7 @@ const TermsPage: React.FC = () => {
                     <h3 className="font-semibold mb-2 text-primary">
                       Agreement to Terms
                     </h3>
-                    <p className="text-gray-600">
+                    <p className="text-gray-600 dark:text-gray-300">
                       By using PandaGarde, you confirm that you have read, understood, and agree to be bound by
                       these Terms and our Privacy Policy.
                     </p>
@@ -54,11 +54,11 @@ const TermsPage: React.FC = () => {
               <h2 className="text-3xl font-bold mb-6 text-primary">
                 Description of Service
               </h2>
-              <p className="text-lg mb-4 text-gray-600">
+              <p className="text-lg mb-4 text-gray-600 dark:text-gray-300">
                 PandaGarde provides educational content, interactive activities, and resources focused on digital
                 privacy and online safety for children and families. Our Service includes:
               </p>
-              <ul className="list-disc pl-6 mb-6 text-gray-600">
+              <ul className="list-disc pl-6 mb-6 text-gray-600 dark:text-gray-300">
                 <li>Interactive educational activities and games</li>
                 <li>Age-appropriate privacy education content</li>
                 <li>Family progress tracking and management tools</li>
@@ -102,14 +102,14 @@ const TermsPage: React.FC = () => {
               <h2 className="text-3xl font-bold mb-6 text-primary">
                 Acceptable Use
               </h2>
-              <div className="bg-red-50 p-6 rounded-lg mb-6" style={{ backgroundColor: '#fef2f2' }}>
+              <div className="callout-red mb-6">
                 <div className="flex items-start gap-3">
-                  <AlertTriangle size={24} className="text-red-600 mt-1" />
+                  <AlertTriangle size={24} className="text-red-600 dark:text-red-400 mt-1" />
                   <div>
-                    <h3 className="font-semibold mb-2 text-red-800">
+                    <h3 className="font-semibold mb-2 text-red-800 dark:text-red-200">
                       Prohibited Activities
                     </h3>
-                    <p className="text-red-700">
+                    <p className="text-red-700 dark:text-red-300">
                       You agree not to use the Service for any unlawful purpose or in any way that could damage,
                       disable, overburden, or impair the Service.
                     </p>
@@ -117,10 +117,10 @@ const TermsPage: React.FC = () => {
                 </div>
               </div>
 
-              <p className="text-lg mb-4 text-gray-600">
+              <p className="text-lg mb-4 text-gray-600 dark:text-gray-300">
                 You agree not to:
               </p>
-              <ul className="list-disc pl-6 mb-6 text-gray-600">
+              <ul className="list-disc pl-6 mb-6 text-gray-600 dark:text-gray-300">
                 <li>Violate any applicable laws or regulations</li>
                 <li>Infringe on the rights of others</li>
                 <li>Transmit harmful or malicious code</li>
@@ -136,14 +136,14 @@ const TermsPage: React.FC = () => {
               <h2 className="text-3xl font-bold mb-6 text-primary">
                 Privacy and Data Protection
               </h2>
-              <div className="bg-green-50 p-6 rounded-lg mb-6" style={{ backgroundColor: '#f0fdf4' }}>
+              <div className="callout-green mb-6">
                 <div className="flex items-start gap-3">
-                  <Shield size={24} className="text-green-600 mt-1" />
+                  <Shield size={24} className="text-green-600 dark:text-green-400 mt-1" />
                   <div>
-                    <h3 className="font-semibold mb-2 text-green-800">
+                    <h3 className="font-semibold mb-2 text-green-800 dark:text-green-200">
                       Privacy First Approach
                     </h3>
-                    <p className="text-green-700">
+                    <p className="text-green-700 dark:text-green-300">
                       We are committed to protecting your privacy and the privacy of children using our Service.
                       Our data practices are designed to minimize data collection and maximize privacy protection.
                     </p>
@@ -151,7 +151,7 @@ const TermsPage: React.FC = () => {
                 </div>
               </div>
 
-              <p className="text-lg mb-4 text-gray-600">
+              <p className="text-lg mb-4 text-gray-600 dark:text-gray-300">
                 Please review our Privacy Policy for detailed information about how we collect, use, and protect
                 your information. We comply with applicable privacy laws including COPPA (Children's Online
                 Privacy Protection Act).
@@ -163,12 +163,12 @@ const TermsPage: React.FC = () => {
               <h2 className="text-3xl font-bold mb-6 text-primary">
                 Intellectual Property
               </h2>
-              <p className="text-lg mb-4 text-gray-600">
+              <p className="text-lg mb-4 text-gray-600 dark:text-gray-300">
                 The Service and its original content, features, and functionality are owned by PandaGarde and are
                 protected by international copyright, trademark, patent, trade secret, and other intellectual
                 property laws.
               </p>
-              <p className="text-lg mb-4 text-gray-600">
+              <p className="text-lg mb-4 text-gray-600 dark:text-gray-300">
                 You may not copy, modify, distribute, sell, or lease any part of our Service or included software,
                 nor may you reverse engineer or attempt to extract the source code of that software.
               </p>
@@ -179,14 +179,14 @@ const TermsPage: React.FC = () => {
               <h2 className="text-3xl font-bold mb-6 text-primary">
                 Disclaimers
               </h2>
-              <div className="bg-yellow-50 p-6 rounded-lg mb-6" style={{ backgroundColor: '#fffbeb' }}>
+              <div className="callout-yellow mb-6">
                 <div className="flex items-start gap-3">
-                  <AlertTriangle size={24} className="text-yellow-600 mt-1" />
+                  <AlertTriangle size={24} className="text-yellow-600 dark:text-yellow-400 mt-1" />
                   <div>
-                    <h3 className="font-semibold mb-2 text-yellow-800">
+                    <h3 className="font-semibold mb-2 text-yellow-800 dark:text-yellow-200">
                       Educational Content Disclaimer
                     </h3>
-                    <p className="text-yellow-700">
+                    <p className="text-yellow-700 dark:text-yellow-300">
                       The educational content provided through our Service is for informational purposes only.
                       While we strive for accuracy, we make no guarantees about the completeness or accuracy of
                       the information provided.
@@ -195,7 +195,7 @@ const TermsPage: React.FC = () => {
                 </div>
               </div>
 
-              <p className="text-lg mb-4 text-gray-600">
+              <p className="text-lg mb-4 text-gray-600 dark:text-gray-300">
                 The Service is provided "as is" without warranties of any kind, either express or implied.
                 We do not warrant that the Service will be uninterrupted, secure, or error-free.
               </p>
@@ -206,7 +206,7 @@ const TermsPage: React.FC = () => {
               <h2 className="text-3xl font-bold mb-6 text-primary">
                 Limitation of Liability
               </h2>
-              <p className="text-lg mb-4 text-gray-600">
+              <p className="text-lg mb-4 text-gray-600 dark:text-gray-300">
                 In no event shall PandaGarde, its directors, employees, partners, agents, suppliers, or affiliates
                 be liable for any indirect, incidental, special, consequential, or punitive damages, including
                 without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting
@@ -219,11 +219,11 @@ const TermsPage: React.FC = () => {
               <h2 className="text-3xl font-bold mb-6 text-primary">
                 Termination
               </h2>
-              <p className="text-lg mb-4 text-gray-600">
+              <p className="text-lg mb-4 text-gray-600 dark:text-gray-300">
                 We may terminate or suspend your account and access to the Service immediately, without prior
                 notice or liability, for any reason whatsoever, including without limitation if you breach the Terms.
               </p>
-              <p className="text-lg mb-4 text-gray-600">
+              <p className="text-lg mb-4 text-gray-600 dark:text-gray-300">
                 Upon termination, your right to use the Service will cease immediately. All provisions of the Terms
                 which by their nature should survive termination shall survive termination.
               </p>
@@ -234,12 +234,12 @@ const TermsPage: React.FC = () => {
               <h2 className="text-3xl font-bold mb-6 text-primary">
                 Changes to Terms
               </h2>
-              <p className="text-lg mb-4 text-gray-600">
+              <p className="text-lg mb-4 text-gray-600 dark:text-gray-300">
                 We reserve the right, at our sole discretion, to modify or replace these Terms at any time.
                 If a revision is material, we will try to provide at least 30 days notice prior to any new terms
                 taking effect.
               </p>
-              <p className="text-lg mb-4 text-gray-600">
+              <p className="text-lg mb-4 text-gray-600 dark:text-gray-300">
                 By continuing to access or use our Service after those revisions become effective, you agree to
                 be bound by the revised terms.
               </p>
@@ -250,7 +250,7 @@ const TermsPage: React.FC = () => {
               <h2 className="text-3xl font-bold mb-6 text-primary">
                 Contact Information
               </h2>
-              <p className="text-lg mb-4 text-gray-600">
+              <p className="text-lg mb-4 text-gray-600 dark:text-gray-300">
                 If you have any questions about these Terms of Service, please contact us:
               </p>
               <div className="bg-gray-50 p-6 rounded-lg bg-light">

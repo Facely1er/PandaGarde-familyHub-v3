@@ -21,7 +21,7 @@ const AccessibilityPage: React.FC = () => {
                 We are committed to ensuring that our platform, content, and activities are usable by people
                 of all abilities, including those with visual, auditory, motor, and cognitive disabilities.
               </p>
-              <div className="bg-green-50 p-6 rounded-lg mb-6" style={{ backgroundColor: '#f0fdf4' }}>
+              <div className="callout-green mb-6">
                 <div className="flex items-start gap-3">
                   <CheckCircle size={24} className="text-green-600 mt-1" />
                   <div>
@@ -45,7 +45,7 @@ const AccessibilityPage: React.FC = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Visual Accessibility */}
-                <div className="bg-white p-6 rounded-lg shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
+                <div className="theme-card p-6">
                   <div className="flex items-center gap-3 mb-4">
                     <Eye size={24} className="text-blue-600 text-primary" />
                     <h3 className="font-semibold text-lg text-primary">
@@ -63,7 +63,7 @@ const AccessibilityPage: React.FC = () => {
                 </div>
 
                 {/* Audio Accessibility */}
-                <div className="bg-white p-6 rounded-lg shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
+                <div className="theme-card p-6">
                   <div className="flex items-center gap-3 mb-4">
                     <Ear size={24} className="text-green-600 text-primary" />
                     <h3 className="font-semibold text-lg text-primary">
@@ -81,7 +81,7 @@ const AccessibilityPage: React.FC = () => {
                 </div>
 
                 {/* Motor Accessibility */}
-                <div className="bg-white p-6 rounded-lg shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
+                <div className="theme-card p-6">
                   <div className="flex items-center gap-3 mb-4">
                     <Hand size={24} className="text-purple-600 text-primary" />
                     <h3 className="font-semibold text-lg text-primary">
@@ -99,7 +99,7 @@ const AccessibilityPage: React.FC = () => {
                 </div>
 
                 {/* Cognitive Accessibility */}
-                <div className="bg-white p-6 rounded-lg shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
+                <div className="theme-card p-6">
                   <div className="flex items-center gap-3 mb-4">
                     <Brain size={24} className="text-orange-600 text-primary" />
                     <h3 className="font-semibold text-lg text-primary">
@@ -128,7 +128,7 @@ const AccessibilityPage: React.FC = () => {
               </p>
 
               <div className="space-y-6">
-                <div className="bg-blue-50 p-6 rounded-lg" style={{ backgroundColor: '#eff6ff' }}>
+                <div className="callout-blue">
                   <h3 className="font-semibold mb-3 text-blue-800">
                     Interactive Activities
                   </h3>
@@ -141,7 +141,7 @@ const AccessibilityPage: React.FC = () => {
                   </ul>
                 </div>
 
-                <div className="bg-green-50 p-6 rounded-lg" style={{ backgroundColor: '#f0fdf4' }}>
+                <div className="callout-green">
                   <h3 className="font-semibold mb-3 text-green-800">
                     Learning Materials
                   </h3>
@@ -154,7 +154,7 @@ const AccessibilityPage: React.FC = () => {
                   </ul>
                 </div>
 
-                <div className="bg-purple-50 p-6 rounded-lg" style={{ backgroundColor: '#faf5ff' }}>
+                <div className="callout-purple">
                   <h3 className="font-semibold mb-3 text-purple-800">
                     Assessment and Progress Tracking
                   </h3>
@@ -179,7 +179,7 @@ const AccessibilityPage: React.FC = () => {
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-white p-6 rounded-lg shadow-md text-center" style={{ backgroundColor: 'var(--card-color)' }}>
+                <div className="theme-card p-6 text-center">
                   <h3 className="font-semibold mb-3 text-primary">
                     Screen Readers
                   </h3>
@@ -188,7 +188,7 @@ const AccessibilityPage: React.FC = () => {
                   </p>
                 </div>
 
-                <div className="bg-white p-6 rounded-lg shadow-md text-center" style={{ backgroundColor: 'var(--card-color)' }}>
+                <div className="theme-card p-6 text-center">
                   <h3 className="font-semibold mb-3 text-primary">
                     Voice Control
                   </h3>
@@ -197,7 +197,7 @@ const AccessibilityPage: React.FC = () => {
                   </p>
                 </div>
 
-                <div className="bg-white p-6 rounded-lg shadow-md text-center" style={{ backgroundColor: 'var(--card-color)' }}>
+                <div className="theme-card p-6 text-center">
                   <h3 className="font-semibold mb-3 text-primary">
                     Switch Control
                   </h3>
@@ -213,7 +213,7 @@ const AccessibilityPage: React.FC = () => {
               <h2 className="text-3xl font-bold mb-6 text-primary">
                 Known Issues and Limitations
               </h2>
-              <div className="bg-yellow-50 p-6 rounded-lg mb-6" style={{ backgroundColor: '#fffbeb' }}>
+              <div className="callout-yellow mb-6">
                 <div className="flex items-start gap-3">
                   <AlertTriangle size={24} className="text-yellow-600 mt-1" />
                   <div>
@@ -269,7 +269,7 @@ const AccessibilityPage: React.FC = () => {
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="bg-white p-6 rounded-lg shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
+                <div className="theme-card p-6">
                   <h3 className="font-semibold mb-3 text-primary">
                     Available Formats
                   </h3>
@@ -283,7 +283,7 @@ const AccessibilityPage: React.FC = () => {
                   </ul>
                 </div>
 
-                <div className="bg-white p-6 rounded-lg shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
+                <div className="theme-card p-6">
                   <h3 className="font-semibold mb-3 text-primary">
                     Request Process
                   </h3>
@@ -302,7 +302,7 @@ const AccessibilityPage: React.FC = () => {
               <h2 className="text-3xl font-bold mb-6 text-primary">
                 Accessibility Contact Information
               </h2>
-              <div className="bg-blue-50 p-6 rounded-lg" style={{ backgroundColor: '#eff6ff' }}>
+              <div className="callout-blue">
                 <div className="flex items-start gap-3">
                   <Info size={24} className="text-blue-600 mt-1" />
                   <div>
@@ -324,7 +324,7 @@ const AccessibilityPage: React.FC = () => {
 
             {/* Effective Date */}
             <section className="mb-12">
-              <div className="bg-green-50 p-6 rounded-lg text-center" style={{ backgroundColor: '#f0fdf4' }}>
+              <div className="callout-green text-center">
                 <p className="text-lg font-semibold text-green-800">
                   This Accessibility Statement is effective as of December 2024
                 </p>

@@ -8,6 +8,7 @@ import { ProgressProvider } from './contexts/ProgressContext';
 import { FamilyProgressProvider } from './contexts/FamilyProgressContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import BrandSplash from './components/BrandSplash';
 import BackToTop from './components/BackToTop';
 import { usePageTracking } from './hooks/useAnalytics';
 import NavigationErrorBoundary from './components/NavigationErrorBoundary';
@@ -166,9 +167,11 @@ function App() {
               <FamilyProgressProvider>
                 <Router>
                 <SentryErrorBoundary fallback={
-                  <div role="alert" className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4">
+                  <div role="alert" className="min-h-screen flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-900 px-4">
                     <div className="text-center max-w-md">
-                      <div className="text-5xl mb-4">🐼</div>
+                      <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border-2 border-green-200 bg-white shadow-md dark:border-green-800/60 dark:bg-gray-800">
+                        <img src="/LogoPandagarde.png" alt="PandaGarde" className="h-full w-full object-contain p-1" width={64} height={64} />
+                      </div>
                       <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-2">Something went wrong</h1>
                       <p className="text-gray-600 dark:text-gray-400 mb-6">An unexpected error occurred. Please refresh the page to continue.</p>
                       <button
@@ -186,14 +189,7 @@ function App() {
                       <HashHandler />
                       <ConditionalHeader />
                       <ConditionalMain>
-                        <Suspense fallback={
-                          <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900" aria-label="Loading page" aria-live="polite">
-                            <div className="text-center">
-                              <div className="text-5xl mb-4 animate-bounce">🐼</div>
-                              <p className="text-gray-600 dark:text-gray-400 font-medium">Loading…</p>
-                            </div>
-                          </div>
-                        }>
+                        <Suspense fallback={<BrandSplash message="Loading…" pulsing />}>
                         <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/story" element={<InteractiveStoryPage />} />

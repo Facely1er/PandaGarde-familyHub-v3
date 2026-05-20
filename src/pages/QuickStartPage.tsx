@@ -185,7 +185,7 @@ const QuickStartPage: React.FC = () => {
       </section>
 
       {/* Age Group Paths */}
-      <section className="age-paths" style={{ padding: 'clamp(4rem, 8vw, 6rem) 0', background: '#f8fafc' }}>
+      <section className="age-paths section-ambient py-16 sm:py-24">
         <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
           <div className="section-header fade-in" style={{ marginBottom: '3rem', textAlign: 'center' }}>
             <h2 style={{
@@ -237,7 +237,7 @@ const QuickStartPage: React.FC = () => {
       </section>
 
       {/* Parent Quick Steps */}
-      <section className="parent-steps" style={{ padding: 'clamp(4rem, 8vw, 6rem) 0', background: '#ffffff' }}>
+      <section className="parent-steps section-elevated py-16 sm:py-24">
         <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
           <div className="section-header fade-in" style={{ marginBottom: '3rem', textAlign: 'center' }}>
             <h2 style={{
@@ -413,7 +413,7 @@ const QuickStartPage: React.FC = () => {
       </section>
 
       {/* Success Tips */}
-      <section className="success-tips" style={{ padding: 'clamp(4rem, 8vw, 6rem) 0', background: '#f8fafc' }}>
+      <section className="success-tips py-16 sm:py-24 bg-slate-50 dark:bg-gray-900/60">
         <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
           <div className="section-header fade-in" style={{ marginBottom: '3rem', textAlign: 'center' }}>
             <h2 style={{
@@ -468,7 +468,7 @@ const QuickStartPage: React.FC = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="cta-section" style={{ padding: 'clamp(4rem, 8vw, 6rem) 0', background: 'linear-gradient(135deg, #1B5E20 0%, #2E7D32 100%)', color: 'white' }}>
+      <section className="cta-section cta-banner py-16 sm:py-24">
         <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
           <div className="fade-in text-center">
             <h2 style={{
