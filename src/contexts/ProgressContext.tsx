@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { logger } from '../lib/logger';
 // Frontend-only mode - no authentication or database dependencies
 
 interface ActivityProgress {
@@ -107,7 +108,7 @@ export const ProgressProvider: React.FC<ProgressProviderProps> = ({ children }) 
         setProgress(processedProgress);
       }
     } catch (error) {
-      console.error('Error loading progress from localStorage:', error);
+      logger.error('Error loading progress from localStorage:', error);
     }
   }, []);
 
@@ -214,7 +215,7 @@ export const ProgressProvider: React.FC<ProgressProviderProps> = ({ children }) 
       setProgress(processedProgress);
       return true;
     } catch (error) {
-      console.error('Error importing progress:', error);
+      logger.error('Error importing progress:', error);
       return false;
     }
   }, []);

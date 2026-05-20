@@ -1,3 +1,4 @@
+import { logger } from './logger';
 /**
  * Encryption utility for protecting PII (Personally Identifiable Information)
  * Uses Web Crypto API for secure encryption/decryption
@@ -75,7 +76,7 @@ export async function encryptData(data: unknown, password: string): Promise<stri
     // Convert to base64 for storage
     return btoa(String.fromCharCode(...combined));
   } catch (error) {
-    console.error('Encryption error:', error);
+    logger.error('Encryption error:', error);
     throw new Error('Failed to encrypt data');
   }
 }
@@ -111,7 +112,7 @@ export async function decryptData<T>(encryptedData: string, password: string): P
     const decryptedString = decoder.decode(decryptedData);
     return JSON.parse(decryptedString) as T;
   } catch (error) {
-    console.error('Decryption error:', error);
+    logger.error('Decryption error:', error);
     throw new Error('Failed to decrypt data. Invalid password or corrupted data.');
   }
 }

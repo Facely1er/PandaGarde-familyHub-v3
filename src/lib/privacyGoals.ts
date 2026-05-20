@@ -1,3 +1,4 @@
+import { logger } from './logger';
 /**
  * Privacy Goal Setting System
  * Allows families to set and track privacy improvement goals
@@ -38,7 +39,7 @@ export class PrivacyGoalManager {
       if (!stored) {return [];}
       return JSON.parse(stored);
     } catch (error) {
-      console.error('Error loading goals:', error);
+      logger.error('Error loading goals:', error);
       return [];
     }
   }
@@ -175,7 +176,7 @@ export class PrivacyGoalManager {
     try {
       localStorage.setItem(this.STORAGE_KEY, JSON.stringify(goals));
     } catch (error) {
-      console.error('Error saving goals:', error);
+      logger.error('Error saving goals:', error);
     }
   }
 

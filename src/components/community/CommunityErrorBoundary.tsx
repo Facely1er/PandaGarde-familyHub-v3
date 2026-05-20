@@ -1,5 +1,6 @@
 import React, { Component, ErrorInfo, ReactNode } from 'react';
 import { AlertTriangle, RefreshCw } from 'lucide-react';
+import { logger } from '../../lib/logger';
 
 interface Props {
   children: ReactNode;
@@ -28,7 +29,7 @@ class CommunityErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
-    console.error('Community feature error:', error, errorInfo);
+    logger.error('Community feature error:', error, errorInfo);
     // In production, you might want to log this to an error reporting service
     // but only if user opts in (privacy-first)
   }
@@ -77,7 +78,7 @@ class CommunityErrorBoundary extends Component<Props, State> {
                     localStorage.removeItem('pandagarde_shared_resources');
                     localStorage.removeItem('pandagarde_community_prefs');
                   } catch (e) {
-                    console.error('Error clearing localStorage:', e);
+                    logger.error('Error clearing localStorage:', e);
                   }
                   this.handleReset();
                 }}

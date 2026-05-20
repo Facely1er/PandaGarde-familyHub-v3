@@ -3,6 +3,7 @@ import Card from './Card';
 import { gamificationSystem, Achievement, Mission, GamificationStats } from '../utils/gamificationSystem';
 import { localStorageManager, UserProgress } from '../utils/localStorageManager';
 import { BarChart3, Target, Trophy, Star, Calendar, Wrench, BookOpen, Award, TrendingUp, Clock, Users as UsersIcon } from 'lucide-react';
+import { logger } from '../lib/logger';
 
 interface GamificationDashboardProps {
   userId: string;
@@ -63,7 +64,7 @@ const GamificationDashboard: React.FC<GamificationDashboardProps> = ({ userId, a
       // Reload data
       loadUserData();
     } catch (error) {
-      console.error('Error completing mission:', error);
+      logger.error('Error completing mission:', error);
     }
   };
 
@@ -80,7 +81,7 @@ const GamificationDashboard: React.FC<GamificationDashboardProps> = ({ userId, a
       // Reload data
       loadUserData();
     } catch (error) {
-      console.error('Error adding XP:', error);
+      logger.error('Error adding XP:', error);
     }
   };
 

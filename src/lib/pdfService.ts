@@ -1,3 +1,4 @@
+import { logger } from './logger';
 // PDF Generation Service for Downloadable Resources
 // This service handles generating PDFs for various downloadable resources
 // jsPDF and html2canvas are dynamically imported to reduce initial bundle size.
@@ -80,7 +81,7 @@ export class PDFService {
       // Download the PDF
       pdf.save(filename);
     } catch (error) {
-      console.error('Error generating PDF:', error);
+      logger.error('Error generating PDF:', error);
       // Fallback to print dialog
       await this.generatePDFFallback(htmlContent, filename);
     }
@@ -113,7 +114,7 @@ export class PDFService {
         }, 1000);
       };
     } catch (error) {
-      console.error('Error generating PDF fallback:', error);
+      logger.error('Error generating PDF fallback:', error);
       throw new Error('Failed to generate PDF. Please try again.');
     }
   }
@@ -136,7 +137,7 @@ export class PDFService {
       // Clean up the URL object
       URL.revokeObjectURL(url);
     } catch (error) {
-      console.error('Error downloading file:', error);
+      logger.error('Error downloading file:', error);
       throw new Error('Failed to download file. Please try again.');
     }
   }
@@ -210,7 +211,7 @@ export class PDFService {
       
       return await response.text();
     } catch (error) {
-      console.warn('Error fetching coloring sheets HTML, using fallback:', error);
+      logger.warn('Error fetching coloring sheets HTML, using fallback:', error);
       return this.getDefaultColoringSheetsHTML();
     }
   }
@@ -235,7 +236,7 @@ export class PDFService {
       
       return await response.text();
     } catch (error) {
-      console.warn('Error fetching safety posters HTML, using fallback:', error);
+      logger.warn('Error fetching safety posters HTML, using fallback:', error);
       return this.getDefaultSafetyPostersHTML();
     }
   }
@@ -260,7 +261,7 @@ export class PDFService {
       
       return await response.text();
     } catch (error) {
-      console.warn('Error fetching certificates HTML, using fallback:', error);
+      logger.warn('Error fetching certificates HTML, using fallback:', error);
       return this.getDefaultCertificatesHTML();
     }
   }
@@ -285,7 +286,7 @@ export class PDFService {
       
       return await response.text();
     } catch (error) {
-      console.warn('Error fetching family agreement HTML, using fallback:', error);
+      logger.warn('Error fetching family agreement HTML, using fallback:', error);
       return this.getDefaultFamilyAgreementHTML();
     }
   }

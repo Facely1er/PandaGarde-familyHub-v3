@@ -58,7 +58,7 @@ export const getDefaultDfaJourneyState = (): DfaJourneyState => ({
 
 const normalizeState = (raw: Partial<DfaJourneyState> | null | undefined): DfaJourneyState => {
   const fallback = getDefaultDfaJourneyState();
-  if (!raw) return fallback;
+  if (!raw) {return fallback;}
 
   const rawPhases = Array.isArray(raw.phases) ? raw.phases : [];
   const phases = phaseBlueprint.map((phase) => {
@@ -83,10 +83,10 @@ const normalizeState = (raw: Partial<DfaJourneyState> | null | undefined): DfaJo
 };
 
 export const loadDfaJourneyState = (): DfaJourneyState => {
-  if (typeof window === 'undefined') return getDefaultDfaJourneyState();
+  if (typeof window === 'undefined') {return getDefaultDfaJourneyState();}
   try {
     const raw = window.localStorage.getItem(DFA_JOURNEY_STORAGE_KEY);
-    if (!raw) return getDefaultDfaJourneyState();
+    if (!raw) {return getDefaultDfaJourneyState();}
     return normalizeState(JSON.parse(raw) as Partial<DfaJourneyState>);
   } catch {
     return getDefaultDfaJourneyState();
@@ -94,7 +94,7 @@ export const loadDfaJourneyState = (): DfaJourneyState => {
 };
 
 export const saveDfaJourneyState = (state: DfaJourneyState): void => {
-  if (typeof window === 'undefined') return;
+  if (typeof window === 'undefined') {return;}
   window.localStorage.setItem(DFA_JOURNEY_STORAGE_KEY, JSON.stringify(state));
 };
 

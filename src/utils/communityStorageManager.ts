@@ -1,3 +1,4 @@
+import { logger } from '../lib/logger';
 /**
  * Community Storage Manager
  * Privacy-first localStorage-based storage for community features
@@ -591,7 +592,7 @@ export class CommunityStorageManager {
       if (imported.resources) {this.setResources(imported.resources);}
       if (imported.preferences) {this.setUserPreferences(imported.preferences);}
     } catch (error) {
-      console.error('Error importing data:', error);
+      logger.error('Error importing data:', error);
       throw new Error('Failed to import data');
     }
   }

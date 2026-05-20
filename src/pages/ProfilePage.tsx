@@ -4,6 +4,7 @@ import { ArrowLeft, User, Mail, Calendar, Shield, Save, CreditCard as Edit3, X, 
 import { useAuth } from './family-hub/AuthWrapper';
 import { useToast } from '../contexts/ToastContext';
 import ProgressExport from '../components/ProgressExport';
+import { logger } from '../lib/logger';
 
 const ProfilePage: React.FC = () => {
   const navigate = useNavigate();
@@ -58,7 +59,7 @@ const ProfilePage: React.FC = () => {
         setIsEditing(false);
       }
     } catch (error) {
-      console.error('Error updating profile:', error);
+      logger.error('Error updating profile:', error);
       showError('An error occurred while updating your profile');
     }
   };

@@ -12,6 +12,7 @@ import PrivacyGoals from '../components/PrivacyGoals';
 import AdaptiveResources from '../components/AdaptiveResources';
 import EmailCaptureInline from '../components/EmailCaptureInline';
 import { FamilyPersonaProfiles } from '../data/familyPersonaProfiles';
+import { logger } from '../lib/logger';
 
 
 interface Activity {
@@ -58,7 +59,7 @@ const FamilyHubPage: React.FC = () => {
         const personaData = JSON.parse(storedPersona);
         setFamilyPersona(personaData.primary || null);
       } catch (e) {
-        console.error('Error parsing persona data:', e);
+        logger.error('Error parsing persona data:', e);
       }
     }
   }, []);

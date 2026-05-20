@@ -3,6 +3,7 @@ import { Play, RotateCcw } from 'lucide-react';
 import { useProgress } from '../../contexts/ProgressContext';
 import { useFamilyProgress } from '../../contexts/FamilyProgressContext';
 import { useToast } from '../../contexts/ToastContext';
+import { logger } from '../../lib/logger';
 // import { useAuth } from '../../contexts/AuthContext';
 
 // Lazy load activity components
@@ -176,7 +177,7 @@ const ActivityManager: React.FC<ActivityManagerProps> = ({ activityId, onClose, 
       showSuccess('Activity Completed!', `Great job! Your progress has been saved.${scoreMessage}`);
       onComplete(activityId, validScore);
     } catch (error) {
-      console.error('Error saving activity progress:', error);
+      logger.error('Error saving activity progress:', error);
       showError('Error', 'Failed to save progress. Please try again.');
     }
   };

@@ -7,6 +7,7 @@
  */
 
 import { encryptData, decryptData, generateUserPassword } from './encryption';
+import { logger } from './logger';
 
 export interface ParentalConsentRecord {
   childAge: number;
@@ -54,7 +55,7 @@ export class COPPAComplianceManager {
       
       localStorage.setItem(COPPAComplianceManager.CONSENT_STORAGE_KEY, encrypted);
     } catch (error) {
-      console.error('Error storing consent record:', error);
+      logger.error('Error storing consent record:', error);
       throw new Error('Failed to store consent record');
     }
   }
@@ -71,7 +72,7 @@ export class COPPAComplianceManager {
       const password = generateUserPassword(userId);
       return await decryptData<Record<string, ParentalConsentRecord>>(stored, password);
     } catch (error) {
-      console.error('Error getting consent records:', error);
+      logger.error('Error getting consent records:', error);
       return {};
     }
   }
@@ -126,7 +127,7 @@ export class COPPAComplianceManager {
       
       return { success: true, consentToken };
     } catch (error) {
-      console.error('Error requesting parental consent:', error);
+      logger.error('Error requesting parental consent:', error);
       return { 
         success: false, 
         consentToken: '', 
@@ -148,9 +149,9 @@ export class COPPAComplianceManager {
 
       if (!emailjsServiceId || !emailjsTemplateId || !emailjsPublicKey) {
         // Fallback: Use mailto link or log for manual processing
-        console.warn('EmailJS not configured. Consent token:', consentToken);
-        console.warn('Parent email:', parentEmail);
-        console.warn('Consent URL:', `${window.location.origin}/parental-consent?token=${consentToken}`);
+        logger.warn('EmailJS not configured. Consent token:', consentToken);
+        logger.warn('Parent email:', parentEmail);
+        logger.warn('Consent URL:', `${window.location.origin}/parental-consent?token=${consentToken}`);
         
         // In development, we'll simulate success
         // In production, you should configure EmailJS or another email service
@@ -192,22 +193,22 @@ export class COPPAComplianceManager {
         }
       } catch (emailError) {
         // Silently fail - fallback to manual processing
-        console.warn('EmailJS error (falling back to manual processing):', emailError);
+        logger.warn('EmailJS error (falling back to manual processing):', emailError);
         // Fall through to manual processing
       }
       
       // Fallback: Log consent details for manual email sending
       // In production, you should configure EmailJS or another email service
-      console.warn('EmailJS not configured. Manual consent email required:');
-      console.warn('Parent Email:', parentEmail);
-      console.warn('Consent Token:', consentToken);
-      console.warn('Consent URL:', consentUrl);
+      logger.warn('EmailJS not configured. Manual consent email required:');
+      logger.warn('Parent Email:', parentEmail);
+      logger.warn('Consent Token:', consentToken);
+      logger.warn('Consent URL:', consentUrl);
       
       // In development, return true to allow testing
       // In production, you may want to return false and require email service
       return import.meta.env.MODE === 'development';
     } catch (error) {
-      console.error('Error sending consent email:', error);
+      logger.error('Error sending consent email:', error);
       // Return true in development to allow testing
       // In production, you may want to return false
       return import.meta.env.MODE === 'development';
@@ -235,7 +236,7 @@ export class COPPAComplianceManager {
 
       return { valid: true, record };
     } catch (error) {
-      console.error('Error verifying consent token:', error);
+      logger.error('Error verifying consent token:', error);
       return { valid: false, error: 'Failed to verify consent token' };
     }
   }
@@ -258,7 +259,7 @@ export class COPPAComplianceManager {
 
       return true;
     } catch (error) {
-      console.error('Error revoking consent:', error);
+      logger.error('Error revoking consent:', error);
       return false;
     }
   }
@@ -329,7 +330,7 @@ export class COPPAComplianceManager {
       // Clear sessionStorage (zero-data flag, session consent token, etc.).
       sessionStorage.clear();
     } catch (error) {
-      console.error('Error clearing child data:', error);
+      logger.error('Error clearing child data:', error);
     }
   }
 

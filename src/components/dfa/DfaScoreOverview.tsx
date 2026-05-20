@@ -6,6 +6,7 @@ import ScoreGauge from './ScoreGauge';
 import BreakdownBars from './BreakdownBars';
 import RiskCategoryCards from './RiskCategoryCards';
 import { downloadDfaExecutiveSummary } from '../../lib/dfaReport';
+import { logger } from '../../lib/logger';
 
 interface Props {
   analysis: FootprintAnalysis;
@@ -15,7 +16,7 @@ const STORAGE_KEY = 'pandagarde_dfa_score_tier';
 
 const DfaScoreOverview: React.FC<Props> = ({ analysis }) => {
   const [tier, setTier] = useState<DfaScoreTier>(() => {
-    if (typeof window === 'undefined') return 'basic';
+    if (typeof window === 'undefined') {return 'basic';}
     const stored = window.localStorage.getItem(STORAGE_KEY);
     return stored === 'advanced' ? 'advanced' : 'basic';
   });
@@ -57,7 +58,7 @@ const DfaScoreOverview: React.FC<Props> = ({ analysis }) => {
           </div>
           <button
             type="button"
-            onClick={() => { Promise.resolve(downloadDfaExecutiveSummary(analysis, score)).catch(err => console.error('PDF error', err)); }}
+            onClick={() => { Promise.resolve(downloadDfaExecutiveSummary(analysis, score)).catch(err => logger.error('PDF error', err)); }}
             className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-800"
           >
             <Download size={16} /> Export executive summary

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Shield, CheckCircle, AlertTriangle, Mail, X } from 'lucide-react';
 import { coppaComplianceManager, type ConsentVerificationResult } from '../lib/coppaCompliance';
+import { logger } from '../lib/logger';
 
 const ParentalConsentPage: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -50,7 +51,7 @@ const ParentalConsentPage: React.FC = () => {
     } catch (error) {
       setStatus('error');
       setMessage('An error occurred while verifying consent. Please try again or contact support.');
-      console.error('Error verifying consent:', error);
+      logger.error('Error verifying consent:', error);
     }
   };
 
@@ -66,7 +67,7 @@ const ParentalConsentPage: React.FC = () => {
         setMessage('Failed to revoke consent. Please contact support.');
       }
     } catch (error) {
-      console.error('Error revoking consent:', error);
+      logger.error('Error revoking consent:', error);
       setMessage('An error occurred while revoking consent.');
     }
   };

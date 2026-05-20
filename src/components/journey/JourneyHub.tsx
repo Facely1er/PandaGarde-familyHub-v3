@@ -142,7 +142,7 @@ const journeyPaths: JourneyPath[] = [
 function useCompletedGameIds(memberId: number | null): Set<string> {
   const { getMemberActivities } = useFamilyProgress();
   return useMemo(() => {
-    if (memberId == null) return new Set();
+    if (memberId === null) {return new Set();}
     const acts = getMemberActivities(memberId);
     const ids = new Set<string>();
     for (const a of acts) {
@@ -167,7 +167,7 @@ const JourneyHub: React.FC = () => {
 
   const openStepGame = (stepId: string) => {
     const gameId = gameIdForJourneyStep(stepId);
-    if (!gameId) return;
+    if (!gameId) {return;}
     navigate(`/family-hub/learning?play=${encodeURIComponent(gameId)}`);
   };
 
@@ -197,7 +197,7 @@ const JourneyHub: React.FC = () => {
     return (
       <div className="min-h-screen bg-gradient-to-b from-slate-50 via-emerald-50/30 to-cyan-50/20 px-4 py-6 dark:from-gray-950 dark:via-gray-900 dark:to-gray-900 sm:p-6">
         <div className="mx-auto max-w-4xl">
-          {currentMemberId == null && noPlayerBanner}
+          {currentMemberId === null && noPlayerBanner}
 
           <button
             type="button"
@@ -318,7 +318,7 @@ const JourneyHub: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 via-emerald-50/30 to-cyan-50/20 px-4 py-6 dark:from-gray-950 dark:via-gray-900 dark:to-gray-900 sm:p-6">
       <div className="mx-auto max-w-6xl">
-        {currentMemberId == null && noPlayerBanner}
+        {currentMemberId === null && noPlayerBanner}
 
         <button
           type="button"

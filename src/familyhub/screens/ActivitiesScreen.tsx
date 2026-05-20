@@ -1,26 +1,13 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Gamepad2, Play, ArrowLeft } from 'lucide-react';
+import { Play, ArrowLeft } from 'lucide-react';
 import ActivityManager from '../../components/activities/ActivityManager';
+import { PRIVACY_ACTIVITIES } from '../../data/privacyActivitiesCatalog';
 
 const ActivitiesScreen: React.FC = () => {
-  const navigate = useNavigate();
   const [selectedActivity, setSelectedActivity] = useState<string | null>(null);
 
-  const activities = [
-    { id: 'maze', name: 'Safe Online Journey Maze', icon: '🎮', description: 'Navigate safely through the digital world' },
-    { id: 'memory', name: 'Privacy Symbol Matching', icon: '🧩', description: 'Match privacy symbols with their meanings' },
-    { id: 'quiz', name: 'Privacy Quiz', icon: '❓', description: 'Test your privacy knowledge' },
-    { id: 'coloring', name: 'Privacy Panda Coloring', icon: '🎨', description: 'Color and learn about privacy protection' },
-    { id: 'sorting', name: 'Information Sorting', icon: '📦', description: 'Learn what information is safe to share' },
-    { id: 'wordsearch', name: 'Privacy Word Search', icon: '🔍', description: 'Find important privacy words' },
-    { id: 'connectdots', name: 'Privacy Shield Connect-the-Dots', icon: '🔗', description: 'Connect dots to reveal the shield' },
-    { id: 'matching', name: 'Privacy Symbol Matching', icon: '🎯', description: 'Match symbols with meanings' },
-  ];
-
-  const handleActivityComplete = (activityId: string, score?: number) => {
+  const handleActivityComplete = () => {
     setSelectedActivity(null);
-    // Activity completion is handled by ActivityManager
   };
 
   if (selectedActivity) {
@@ -56,7 +43,7 @@ const ActivitiesScreen: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {activities.map((activity) => (
+        {PRIVACY_ACTIVITIES.map((activity) => (
           <button
             key={activity.id}
             onClick={() => setSelectedActivity(activity.id)}
@@ -66,6 +53,7 @@ const ActivitiesScreen: React.FC = () => {
               <div className="flex items-center gap-3 mb-2">
                 <span className="text-3xl">{activity.icon}</span>
                 <h3 className="font-semibold text-gray-900 dark:text-white">{activity.name}</h3>
+                <p className="text-xs text-teal-600 dark:text-teal-400 font-medium">{activity.category}</p>
               </div>
               <p className="text-sm text-gray-600 dark:text-gray-400">{activity.description}</p>
             </div>

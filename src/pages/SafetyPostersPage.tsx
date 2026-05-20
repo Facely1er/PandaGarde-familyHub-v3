@@ -89,7 +89,7 @@ const SafetyPostersPage: React.FC = () => {
       try {
         await pdfService.generateSafetyPostersPDF();
       } catch (error) {
-        console.error('Error downloading safety posters:', error);
+        logger.error('Error downloading safety posters:', error);
         alert('Error downloading safety posters. Please try again.');
       } finally {
         setIsDownloading(false);

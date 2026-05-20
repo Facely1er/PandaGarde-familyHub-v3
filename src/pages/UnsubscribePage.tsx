@@ -4,6 +4,7 @@ import { Mail, CheckCircle, AlertCircle, ArrowLeft } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 import { useToast } from '../contexts/ToastContext';
 import { newsletterService } from '../lib/database';
+import { logger } from '../lib/logger';
 
 const UnsubscribePage: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -47,7 +48,7 @@ const UnsubscribePage: React.FC = () => {
         showError('Unsubscribe Failed', 'There was an error unsubscribing. Please try again or contact support.');
       }
     } catch (error) {
-      console.error('Newsletter unsubscribe error:', error);
+      logger.error('Newsletter unsubscribe error:', error);
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
       if (errorMessage.includes('Invalid email')) {
         showError('Invalid Email', 'Please enter a valid email address.');

@@ -77,7 +77,7 @@ class SearchService {
       await this.loadCategories();
       await this.loadSuggestions();
     } catch (error) {
-      console.error('Failed to initialize search service:', error);
+      logger.error('Failed to initialize search service:', error);
     }
   }
 
@@ -325,7 +325,7 @@ class SearchService {
         filters_applied: filters ? Object.keys(filters).length : 0,
       });
     } catch (error) {
-      console.error('Error tracking search analytics:', error);
+      logger.error('Error tracking search analytics:', error);
     }
   }
 

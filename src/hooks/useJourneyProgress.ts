@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useFamily } from '../contexts/FamilyContext';
+import { logger } from '../lib/logger';
 
 export interface JourneyStepStatus {
   step: number;
@@ -48,7 +49,7 @@ const loadProgress = (): JourneyProgress => {
       return parsed;
     }
   } catch (error) {
-    console.error('Error loading journey progress:', error);
+    logger.error('Error loading journey progress:', error);
   }
   return getDefaultProgress();
 };
@@ -57,7 +58,7 @@ const saveProgress = (progress: JourneyProgress): void => {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
   } catch (error) {
-    console.error('Error saving journey progress:', error);
+    logger.error('Error saving journey progress:', error);
   }
 };
 

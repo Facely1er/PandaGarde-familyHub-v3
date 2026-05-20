@@ -4,6 +4,7 @@ import { ArrowLeft, Target, Lightbulb } from 'lucide-react';
 import PrivacyGoals from '../components/PrivacyGoals';
 import { privacyGoalManager, type PrivacyGoal } from '../lib/privacyGoals';
 import { type AssessmentResult } from '../lib/familyPrivacyAssessment';
+import { logger } from '../lib/logger';
 
 const PrivacyGoalsPage: React.FC = () => {
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -25,7 +26,7 @@ const PrivacyGoalsPage: React.FC = () => {
         }
       }
     } catch (error) {
-      console.error('Error loading suggested goals:', error);
+      logger.error('Error loading suggested goals:', error);
     }
   };
 

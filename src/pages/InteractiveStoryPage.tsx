@@ -6,6 +6,7 @@ import StoryProgress from '../components/story/StoryProgress';
 import PageLayout from '../components/layout/PageLayout';
 import { storyScenes } from '../data/storyScenes';
 import { useTheme } from '../contexts/ThemeContext';
+import { logger } from '../lib/logger';
 
 interface Achievement {
   id: string;
@@ -73,7 +74,7 @@ const InteractiveStoryPage: React.FC = () => {
           savedChoices = [];
         }
       } catch (error) {
-        console.error('Error parsing saved choices:', error);
+        logger.error('Error parsing saved choices:', error);
         savedChoices = [];
       }
       
@@ -87,13 +88,13 @@ const InteractiveStoryPage: React.FC = () => {
       try {
         localStorage.setItem('story-choices', JSON.stringify(savedChoices));
       } catch (error) {
-        console.error('Error saving choices to localStorage:', error);
+        logger.error('Error saving choices to localStorage:', error);
       }
       
       // Check for achievements
       checkChoiceAchievements();
     } catch (error) {
-      console.error('Error handling choice:', error);
+      logger.error('Error handling choice:', error);
     }
   };
 
@@ -107,7 +108,7 @@ const InteractiveStoryPage: React.FC = () => {
           savedChoices = [];
         }
       } catch (error) {
-        console.error('Error parsing saved choices:', error);
+        logger.error('Error parsing saved choices:', error);
         savedChoices = [];
       }
       
@@ -137,7 +138,7 @@ const InteractiveStoryPage: React.FC = () => {
         }
       }
     } catch (error) {
-      console.error('Error checking choice achievements:', error);
+      logger.error('Error checking choice achievements:', error);
     }
   };
 
@@ -344,7 +345,7 @@ const InteractiveStoryPage: React.FC = () => {
         const bookmarkArray = JSON.parse(savedBookmarks);
         setBookmarks(new Set(bookmarkArray));
       } catch (error) {
-        console.error('Error loading bookmarks:', error);
+        logger.error('Error loading bookmarks:', error);
       }
     }
   }, []);
@@ -365,7 +366,7 @@ const InteractiveStoryPage: React.FC = () => {
         setPoints(progress.points || 0);
         setAchievements(progress.achievements || achievements);
       } catch (error) {
-        console.error('Error loading progress:', error);
+        logger.error('Error loading progress:', error);
       }
     }
   }, []);

@@ -88,7 +88,7 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
   }, [familyMembers, catalogServices]);
 
   const membersForAnalysis = useMemo(() => {
-    if (familyMembers.length > 0) return familyMembers;
+    if (familyMembers.length > 0) {return familyMembers;}
     if (catalogServices.length > 0) {
       return [{ id: 'family', services: catalogServices.map(id => ({ serviceId: id, status: 'approved' })) }];
     }
@@ -97,14 +97,14 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
 
   const analysis = useMemo<FootprintAnalysis | null>(() => {
     const hasServices = Object.values(memberServices).some(arr => arr.length > 0);
-    if (!hasServices) return null;
+    if (!hasServices) {return null;}
     return footprintAnalyzer.analyzeFamilyFootprint(membersForAnalysis, memberServices);
   }, [membersForAnalysis, memberServices]);
 
   // Persist current score for next visit's delta
   useEffect(() => {
     if (analysis?.privacyScore !== undefined) {
-      try { localStorage.setItem(LS_PREV_SCORE, String(analysis.privacyScore)); } catch {}
+      try { localStorage.setItem(LS_PREV_SCORE, String(analysis.privacyScore)); } catch { /* quota/private mode */ }
     }
   }, [analysis?.privacyScore]);
 
@@ -113,7 +113,7 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
     setDoneRecs(prev => {
       const next = new Set(prev);
       if (next.has(recId)) { next.delete(recId); } else { next.add(recId); }
-      try { localStorage.setItem(LS_DONE_RECS, JSON.stringify([...next])); } catch {}
+      try { localStorage.setItem(LS_DONE_RECS, JSON.stringify([...next])); } catch { /* quota/private mode */ }
       return next;
     });
   };
@@ -135,8 +135,8 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
   };
 
   const getContextIcon = (context: string) => {
-    if (context === 'school') return School;
-    if (context === 'home')   return Home;
+    if (context === 'school') {return School;}
+    if (context === 'home')   {return Home;}
     return Smartphone;
   };
 

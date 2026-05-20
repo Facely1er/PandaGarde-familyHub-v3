@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Save, Download, CheckCircle, Plus, X, Calendar, Users, Shield, Settings, AlertCircle } from 'lucide-react';
 import { useFamily } from '../../contexts/FamilyContext';
+import { logger } from '../../lib/logger';
 
 export interface FamilyPrivacyPlan {
   id?: string;
@@ -98,7 +99,7 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
           }
         };
       } catch (e) {
-        console.error('Error loading saved plan:', e);
+        logger.error('Error loading saved plan:', e);
       }
     }
     
