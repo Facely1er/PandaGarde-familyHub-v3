@@ -10,8 +10,6 @@ const PrivacyTipsForumPage: React.FC = () => {
       <PageLayout
         title="Privacy Tips Forum"
         subtitle="Share tips, ask questions, and learn from other parents in our privacy-first community forum."
-        icon={MessageCircle}
-        badge="COMMUNITY"
         breadcrumbs={true}
       >
         <PrivacyTipsForum />

@@ -17,6 +17,7 @@ import { childServiceNotificationManager, type ServiceNotification } from '../li
 import { getServiceLogoUrlWithBrandColor, hasServiceLogo } from '../utils/serviceLogos';
 import { childServiceCatalog, getServiceById } from '../data/childServiceCatalog';
 import { calculatePrivacyExposureIndex, getExposureLevel } from '../lib/privacyExposureIndex';
+import { logger } from '../lib/logger';
 
 interface ServiceNotificationCenterProps {
   compact?: boolean;
@@ -62,7 +63,7 @@ const ServiceNotificationCenter: React.FC<ServiceNotificationCenterProps> = ({
       );
       setDismissedIds(new Set(dismissed));
     } catch (error) {
-      console.warn('Error loading dismissed notifications:', error);
+      logger.warn('Error loading dismissed notifications:', error);
     }
   }, []);
 
@@ -81,7 +82,7 @@ const ServiceNotificationCenter: React.FC<ServiceNotificationCenterProps> = ({
       );
       setNotifications(fetchedNotifications);
     } catch (error) {
-      console.error('Error loading notifications:', error);
+      logger.error('Error loading notifications:', error);
     } finally {
       setLoading(false);
     }
@@ -120,7 +121,7 @@ const ServiceNotificationCenter: React.FC<ServiceNotificationCenterProps> = ({
       dismissed.push(notificationId);
       localStorage.setItem('pandagarde_dismissed_notifications', JSON.stringify(dismissed));
     } catch (error) {
-      console.warn('Error saving dismissed notification:', error);
+      logger.warn('Error saving dismissed notification:', error);
     }
   };
 

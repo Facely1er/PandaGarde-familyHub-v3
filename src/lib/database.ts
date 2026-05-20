@@ -170,7 +170,7 @@ export const newsletterService = {
         return data
       }
     } catch (error) {
-      console.error('Supabase newsletter subscription error:', error)
+      logger.error('Supabase newsletter subscription error:', error)
       // Fall through to localStorage fallback
     }
 
@@ -213,7 +213,7 @@ export const newsletterService = {
       logger.debug('Frontend-only mode: Newsletter subscription saved', undefined, 'DB')
       return subscriptionData
     } catch (error) {
-      console.error('LocalStorage newsletter subscription error:', error)
+      logger.error('LocalStorage newsletter subscription error:', error)
       throw new Error('Failed to save newsletter subscription')
     }
   },
@@ -243,7 +243,7 @@ export const newsletterService = {
         return true
       }
     } catch (error) {
-      console.error('Supabase unsubscribe error:', error)
+      logger.error('Supabase unsubscribe error:', error)
       // Fall through to localStorage fallback
     }
 
@@ -269,7 +269,7 @@ export const newsletterService = {
       logger.debug('Frontend-only mode: Newsletter unsubscription saved', undefined, 'DB')
       return true
     } catch (error) {
-      console.error('LocalStorage unsubscribe error:', error)
+      logger.error('LocalStorage unsubscribe error:', error)
       return false
     }
   },
@@ -296,7 +296,7 @@ export const newsletterService = {
         return data?.subscribed ?? false
       }
     } catch (error) {
-      console.error('Supabase check subscription error:', error)
+      logger.error('Supabase check subscription error:', error)
       // Fall through to localStorage fallback
     }
 
@@ -312,7 +312,7 @@ export const newsletterService = {
       
       return subscription?.subscribed ?? false
     } catch (error) {
-      console.error('LocalStorage check subscription error:', error)
+      logger.error('LocalStorage check subscription error:', error)
       return false
     }
   }
@@ -336,7 +336,7 @@ export const downloadService = {
       logger.debug('Frontend-only mode: Download tracked (localStorage)', undefined, 'DB');
       return downloadRecord;
     } catch (error) {
-      console.error('Error storing download in localStorage:', error);
+      logger.error('Error storing download in localStorage:', error);
       return null;
     }
   },
@@ -349,7 +349,7 @@ export const downloadService = {
         new Date(b.downloaded_at).getTime() - new Date(a.downloaded_at).getTime()
       );
     } catch (error) {
-      console.error('Error fetching local download stats:', error);
+      logger.error('Error fetching local download stats:', error);
       return [];
     }
   }

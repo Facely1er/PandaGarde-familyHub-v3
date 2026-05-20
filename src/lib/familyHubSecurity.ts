@@ -4,6 +4,7 @@
  */
 
 import { encryptData, decryptData } from './encryption';
+import { logger } from './logger';
 
 // Input sanitization for family data
 export const sanitizeInput = (input: string | number | null | undefined): string => {
@@ -123,7 +124,7 @@ export const checkRateLimit = (): boolean => {
   const timestamps = getRateLimitTimestamps().filter(ts => now - ts < TIME_WINDOW);
 
   if (timestamps.length >= MAX_REQUESTS) {
-    console.warn('Rate limit exceeded');
+    logger.warn('Rate limit exceeded');
     setRateLimitTimestamps(timestamps);
     return false;
   }
@@ -147,7 +148,7 @@ export const secureStorage = {
       };
       localStorage.setItem(`fh_${key}`, JSON.stringify(data));
     } catch (error) {
-      console.error('Failed to save to secure storage:', error);
+      logger.error('Failed to save to secure storage:', error);
     }
   },
   
@@ -166,7 +167,7 @@ export const secureStorage = {
       
       return JSON.parse(data.value) as T;
     } catch (error) {
-      console.error('Failed to read from secure storage:', error);
+      logger.error('Failed to read from secure storage:', error);
       return null;
     }
   },
@@ -175,7 +176,7 @@ export const secureStorage = {
     try {
       localStorage.removeItem(`fh_${key}`);
     } catch (error) {
-      console.error('Failed to remove from secure storage:', error);
+      logger.error('Failed to remove from secure storage:', error);
     }
   },
   
@@ -188,7 +189,7 @@ export const secureStorage = {
         }
       });
     } catch (error) {
-      console.error('Failed to clear secure storage:', error);
+      logger.error('Failed to clear secure storage:', error);
     }
   }
 };
@@ -206,7 +207,7 @@ export const logSecurityEvent = (event: string, details?: unknown): void => {
     
     // Log to console in development
     if (import.meta.env.DEV) {
-      console.warn('[Security Event]', logEntry);
+      logger.warn('[Security Event]', logEntry);
     }
     
     // In production, send to monitoring service
@@ -216,7 +217,7 @@ export const logSecurityEvent = (event: string, details?: unknown): void => {
       // trackSecurityEvent(logEntry);
     }
   } catch (error) {
-    console.error('Failed to log security event:', error);
+    logger.error('Failed to log security event:', error);
   }
 };
 
@@ -253,7 +254,7 @@ export const encryptSensitiveData = async (data: string, key: string): Promise<s
   try {
     return await encryptData(data, key);
   } catch (error) {
-    console.error('Encryption failed:', error);
+    logger.error('Encryption failed:', error);
     throw new Error('Failed to encrypt data');
   }
 };
@@ -262,7 +263,7 @@ export const decryptSensitiveData = async (encrypted: string, key: string): Prom
   try {
     return await decryptData<string>(encrypted, key);
   } catch (error) {
-    console.error('Decryption failed:', error);
+    logger.error('Decryption failed:', error);
     throw new Error('Failed to decrypt data');
   }
 };

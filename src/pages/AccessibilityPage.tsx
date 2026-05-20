@@ -7,18 +7,16 @@ const AccessibilityPage: React.FC = () => {
     <PageLayout
       title="Accessibility Statement"
       subtitle="We are committed to making digital privacy education accessible to all learners, regardless of ability or circumstance."
-      icon={Accessibility}
-      badge="ACCESSIBILITY"
     >
       <div className="max-w-4xl mx-auto">
           <div className="prose prose-lg max-w-none">
 
             {/* Introduction */}
             <section className="mb-12">
-              <h2 className="text-3xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+              <h2 className="text-3xl font-bold mb-6 text-primary">
                 Our Commitment to Accessibility
               </h2>
-              <p className="text-lg mb-4" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-lg mb-4 text-gray-600">
                 At PandaGarde, we believe that digital privacy education should be accessible to everyone.
                 We are committed to ensuring that our platform, content, and activities are usable by people
                 of all abilities, including those with visual, auditory, motor, and cognitive disabilities.
@@ -41,7 +39,7 @@ const AccessibilityPage: React.FC = () => {
 
             {/* Accessibility Features */}
             <section className="mb-12">
-              <h2 className="text-3xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+              <h2 className="text-3xl font-bold mb-6 text-primary">
                 Accessibility Features
               </h2>
 
@@ -49,12 +47,12 @@ const AccessibilityPage: React.FC = () => {
                 {/* Visual Accessibility */}
                 <div className="bg-white p-6 rounded-lg shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
                   <div className="flex items-center gap-3 mb-4">
-                    <Eye size={24} className="text-blue-600" style={{ color: 'var(--primary)' }} />
-                    <h3 className="font-semibold text-lg" style={{ color: 'var(--primary)' }}>
+                    <Eye size={24} className="text-blue-600 text-primary" />
+                    <h3 className="font-semibold text-lg text-primary">
                       Visual Accessibility
                     </h3>
                   </div>
-                  <ul className="list-disc pl-6 space-y-2" style={{ color: 'var(--gray-600)' }}>
+                  <ul className="list-disc pl-6 space-y-2 text-gray-600">
                     <li>High contrast color schemes</li>
                     <li>Scalable text and interface elements</li>
                     <li>Alternative text for all images</li>
@@ -67,12 +65,12 @@ const AccessibilityPage: React.FC = () => {
                 {/* Audio Accessibility */}
                 <div className="bg-white p-6 rounded-lg shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
                   <div className="flex items-center gap-3 mb-4">
-                    <Ear size={24} className="text-green-600" style={{ color: 'var(--primary)' }} />
-                    <h3 className="font-semibold text-lg" style={{ color: 'var(--primary)' }}>
+                    <Ear size={24} className="text-green-600 text-primary" />
+                    <h3 className="font-semibold text-lg text-primary">
                       Audio Accessibility
                     </h3>
                   </div>
-                  <ul className="list-disc pl-6 space-y-2" style={{ color: 'var(--gray-600)' }}>
+                  <ul className="list-disc pl-6 space-y-2 text-gray-600">
                     <li>Audio descriptions for visual content</li>
                     <li>Text alternatives for audio content</li>
                     <li>Volume controls and audio settings</li>
@@ -85,12 +83,12 @@ const AccessibilityPage: React.FC = () => {
                 {/* Motor Accessibility */}
                 <div className="bg-white p-6 rounded-lg shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
                   <div className="flex items-center gap-3 mb-4">
-                    <Hand size={24} className="text-purple-600" style={{ color: 'var(--primary)' }} />
-                    <h3 className="font-semibold text-lg" style={{ color: 'var(--primary)' }}>
+                    <Hand size={24} className="text-purple-600 text-primary" />
+                    <h3 className="font-semibold text-lg text-primary">
                       Motor Accessibility
                     </h3>
                   </div>
-                  <ul className="list-disc pl-6 space-y-2" style={{ color: 'var(--gray-600)' }}>
+                  <ul className="list-disc pl-6 space-y-2 text-gray-600">
                     <li>Large clickable areas for touch targets</li>
                     <li>Keyboard-only navigation support</li>
                     <li>Voice control compatibility</li>
@@ -103,12 +101,12 @@ const AccessibilityPage: React.FC = () => {
                 {/* Cognitive Accessibility */}
                 <div className="bg-white p-6 rounded-lg shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
                   <div className="flex items-center gap-3 mb-4">
-                    <Brain size={24} className="text-orange-600" style={{ color: 'var(--primary)' }} />
-                    <h3 className="font-semibold text-lg" style={{ color: 'var(--primary)' }}>
+                    <Brain size={24} className="text-orange-600 text-primary" />
+                    <h3 className="font-semibold text-lg text-primary">
                       Cognitive Accessibility
                     </h3>
                   </div>
-                  <ul className="list-disc pl-6 space-y-2" style={{ color: 'var(--gray-600)' }}>
+                  <ul className="list-disc pl-6 space-y-2 text-gray-600">
                     <li>Clear, simple language and instructions</li>
                     <li>Consistent navigation and layout</li>
                     <li>Progress indicators and feedback</li>
@@ -122,10 +120,10 @@ const AccessibilityPage: React.FC = () => {
 
             {/* Educational Content Accessibility */}
             <section className="mb-12">
-              <h2 className="text-3xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+              <h2 className="text-3xl font-bold mb-6 text-primary">
                 Educational Content Accessibility
               </h2>
-              <p className="text-lg mb-4" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-lg mb-4 text-gray-600">
                 Our educational activities and content are designed with accessibility in mind:
               </p>
 
@@ -173,37 +171,37 @@ const AccessibilityPage: React.FC = () => {
 
             {/* Assistive Technology Support */}
             <section className="mb-12">
-              <h2 className="text-3xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+              <h2 className="text-3xl font-bold mb-6 text-primary">
                 Assistive Technology Support
               </h2>
-              <p className="text-lg mb-4" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-lg mb-4 text-gray-600">
                 Our platform is designed to work with a wide range of assistive technologies:
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="bg-white p-6 rounded-lg shadow-md text-center" style={{ backgroundColor: 'var(--card-color)' }}>
-                  <h3 className="font-semibold mb-3" style={{ color: 'var(--primary)' }}>
+                  <h3 className="font-semibold mb-3 text-primary">
                     Screen Readers
                   </h3>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+                  <p className="text-sm text-gray-600">
                     Compatible with JAWS, NVDA, VoiceOver, and other screen reading software
                   </p>
                 </div>
 
                 <div className="bg-white p-6 rounded-lg shadow-md text-center" style={{ backgroundColor: 'var(--card-color)' }}>
-                  <h3 className="font-semibold mb-3" style={{ color: 'var(--primary)' }}>
+                  <h3 className="font-semibold mb-3 text-primary">
                     Voice Control
                   </h3>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+                  <p className="text-sm text-gray-600">
                     Works with Dragon NaturallySpeaking, Voice Control, and other voice recognition software
                   </p>
                 </div>
 
                 <div className="bg-white p-6 rounded-lg shadow-md text-center" style={{ backgroundColor: 'var(--card-color)' }}>
-                  <h3 className="font-semibold mb-3" style={{ color: 'var(--primary)' }}>
+                  <h3 className="font-semibold mb-3 text-primary">
                     Switch Control
                   </h3>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+                  <p className="text-sm text-gray-600">
                     Supports switch navigation and single-switch scanning for motor accessibility
                   </p>
                 </div>
@@ -212,7 +210,7 @@ const AccessibilityPage: React.FC = () => {
 
             {/* Known Issues and Limitations */}
             <section className="mb-12">
-              <h2 className="text-3xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+              <h2 className="text-3xl font-bold mb-6 text-primary">
                 Known Issues and Limitations
               </h2>
               <div className="bg-yellow-50 p-6 rounded-lg mb-6" style={{ backgroundColor: '#fffbeb' }}>
@@ -230,7 +228,7 @@ const AccessibilityPage: React.FC = () => {
                 </div>
               </div>
 
-              <ul className="list-disc pl-6 mb-6" style={{ color: 'var(--gray-600)' }}>
+              <ul className="list-disc pl-6 mb-6 text-gray-600">
                 <li>Some interactive activities may require additional keyboard navigation improvements</li>
                 <li>Video content is being updated to include more comprehensive captions</li>
                 <li>Color contrast in some older activities is being enhanced</li>
@@ -240,19 +238,19 @@ const AccessibilityPage: React.FC = () => {
 
             {/* Feedback and Reporting */}
             <section className="mb-12">
-              <h2 className="text-3xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+              <h2 className="text-3xl font-bold mb-6 text-primary">
                 Feedback and Reporting Issues
               </h2>
-              <p className="text-lg mb-4" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-lg mb-4 text-gray-600">
                 We welcome feedback about accessibility issues and suggestions for improvement. If you
                 encounter any barriers to accessing our content, please let us know:
               </p>
 
-              <div className="bg-gray-50 p-6 rounded-lg" style={{ backgroundColor: 'var(--light)' }}>
-                <h3 className="font-semibold mb-3" style={{ color: 'var(--primary)' }}>
+              <div className="bg-gray-50 p-6 rounded-lg bg-light">
+                <h3 className="font-semibold mb-3 text-primary">
                   How to Report Accessibility Issues:
                 </h3>
-                <ul className="list-disc pl-6 space-y-2" style={{ color: 'var(--gray-600)' }}>
+                <ul className="list-disc pl-6 space-y-2 text-gray-600">
                   <li><strong>Email:</strong> accessibility@pandagarde.com</li>
                   <li><strong>Phone:</strong> 1-800-PANDA-HELP (1-800-726-3243)</li>
                   <li><strong>Contact Form:</strong> Use our contact form and select "Accessibility" as the topic</li>
@@ -263,19 +261,19 @@ const AccessibilityPage: React.FC = () => {
 
             {/* Alternative Formats */}
             <section className="mb-12">
-              <h2 className="text-3xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+              <h2 className="text-3xl font-bold mb-6 text-primary">
                 Alternative Formats
               </h2>
-              <p className="text-lg mb-4" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-lg mb-4 text-gray-600">
                 We provide alternative formats for our educational content to ensure accessibility:
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="bg-white p-6 rounded-lg shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
-                  <h3 className="font-semibold mb-3" style={{ color: 'var(--primary)' }}>
+                  <h3 className="font-semibold mb-3 text-primary">
                     Available Formats
                   </h3>
-                  <ul className="list-disc pl-6 space-y-2" style={{ color: 'var(--gray-600)' }}>
+                  <ul className="list-disc pl-6 space-y-2 text-gray-600">
                     <li>Large print versions</li>
                     <li>Audio descriptions</li>
                     <li>Simplified text versions</li>
@@ -286,10 +284,10 @@ const AccessibilityPage: React.FC = () => {
                 </div>
 
                 <div className="bg-white p-6 rounded-lg shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
-                  <h3 className="font-semibold mb-3" style={{ color: 'var(--primary)' }}>
+                  <h3 className="font-semibold mb-3 text-primary">
                     Request Process
                   </h3>
-                  <ol className="list-decimal pl-6 space-y-2" style={{ color: 'var(--gray-600)' }}>
+                  <ol className="list-decimal pl-6 space-y-2 text-gray-600">
                     <li>Contact us with your specific needs</li>
                     <li>Specify the content and preferred format</li>
                     <li>We'll provide the alternative format within 5 business days</li>
@@ -301,7 +299,7 @@ const AccessibilityPage: React.FC = () => {
 
             {/* Contact Information */}
             <section className="mb-12">
-              <h2 className="text-3xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+              <h2 className="text-3xl font-bold mb-6 text-primary">
                 Accessibility Contact Information
               </h2>
               <div className="bg-blue-50 p-6 rounded-lg" style={{ backgroundColor: '#eff6ff' }}>

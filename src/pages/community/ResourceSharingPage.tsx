@@ -10,8 +10,6 @@ const ResourceSharingPage: React.FC = () => {
       <PageLayout
         title="Community Resources"
         subtitle="Discover privacy tools and resources shared and voted on by the community. Find trusted recommendations from other families navigating digital privacy education."
-        icon={Globe}
-        badge="COMMUNITY"
         breadcrumbs={true}
       >
         <ResourceSharing />

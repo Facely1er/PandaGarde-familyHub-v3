@@ -22,7 +22,8 @@ import {
   School,
   Bot,
   Signal,
-  Scale
+  Scale,
+  LayoutGrid
 } from 'lucide-react';
 import { 
   childServiceCatalog, 
@@ -34,6 +35,7 @@ import { useFamily, type ServiceUsage } from '../contexts/FamilyContext';
 import { calculatePrivacyExposureIndex, getExposureLevel } from '../lib/privacyExposureIndex';
 import { getServiceLogoUrlWithBrandColor, hasServiceLogo } from '../utils/serviceLogos';
 import ServiceRelationshipMap from './ServiceRelationshipMap';
+import { logger } from '../lib/logger';
 import './ServiceCatalog.css';
 
 const CATEGORY_LABELS: Record<ServiceCategory | 'all', string> = {
@@ -156,9 +158,11 @@ const ServiceCatalog: React.FC<ServiceCatalogProps> = ({
     return services;
   }, [searchQuery, selectedCategory, selectedRisk, selectedExposureLevel, filterLawEnforcement, sortBy, sortOrder]);
 
-  // Get category icon
-  const getCategoryIcon = (category: ServiceCategory) => {
+  // Get category icon (shared by service cards and filter pills)
+  const getCategoryIcon = (category: ServiceCategory | 'all') => {
     switch (category) {
+      case 'all':
+        return LayoutGrid;
       case 'social-media':
         return Users;
       case 'messaging':
@@ -216,7 +220,7 @@ const ServiceCatalog: React.FC<ServiceCatalogProps> = ({
         alert(`Error: ${result.error}`);
       }
     } catch (error) {
-      console.error('Error requesting service:', error);
+      logger.error('Error requesting service:', error);
       alert('Failed to request service');
     } finally {
       setIsRequesting(false);
@@ -243,7 +247,7 @@ const ServiceCatalog: React.FC<ServiceCatalogProps> = ({
         }
       }
     } catch (error) {
-      console.error('Error toggling family service:', error);
+      logger.error('Error toggling family service:', error);
       alert('Failed to update service');
     } finally {
       setIsRequesting(false);
@@ -305,12 +309,14 @@ const ServiceCatalog: React.FC<ServiceCatalogProps> = ({
         {/* Category pills in guided mode for friendlier browsing */}
         {guidedMode && (
           <div className="flex flex-wrap gap-2 mb-3" role="group" aria-label="Filter by category">
-            {(['all', 'edtech', 'ai', 'telecom', 'social-media', 'messaging', 'gaming', 'streaming', 'education', 'creative'] as const).map((cat) => (
+            {(['all', 'edtech', 'ai', 'telecom', 'social-media', 'messaging', 'gaming', 'streaming', 'education', 'creative'] as const).map((cat) => {
+              const CategoryIcon = getCategoryIcon(cat);
+              return (
               <button
                 key={cat}
                 type="button"
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                   selectedCategory === cat
                     ? cat === 'edtech'
                       ? 'bg-amber-600 text-white shadow-md'
@@ -322,9 +328,11 @@ const ServiceCatalog: React.FC<ServiceCatalogProps> = ({
                     : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
                 }`}
               >
-                {cat === 'edtech' ? '🏫 ' : cat === 'ai' ? '🤖 ' : cat === 'telecom' ? '📡 ' : ''}{CATEGORY_LABELS[cat]}
+                <CategoryIcon className="h-4 w-4 shrink-0" aria-hidden />
+                {CATEGORY_LABELS[cat]}
               </button>
-            ))}
+            );
+            })}
           </div>
         )}
 

@@ -38,8 +38,6 @@ const PrivacyToolsPage: React.FC = () => {
     <PageLayout
       title="Privacy Tools"
       subtitle="The DFA journey is the main flow. These tools support the journey before, during, and after Digital Footprint Analysis."
-      icon={Wrench}
-      badge="TOOLS"
       breadcrumbs={true}
     >
       <section style={{ padding: '1rem 0 2rem' }}>

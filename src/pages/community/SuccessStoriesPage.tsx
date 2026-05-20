@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Scale, ExternalLink } from 'lucide-react';
+import { Scale, ExternalLink, Heart } from 'lucide-react';
 import SuccessStories from '../../components/community/SuccessStories';
 import CommunityErrorBoundary from '../../components/community/CommunityErrorBoundary';
 import PageLayout from '../../components/layout/PageLayout';
-import { Heart } from 'lucide-react';
 import { PRIVACY_PORTAL_URL } from '../../config/portal';
 
 const SuccessStoriesPage: React.FC = () => {
@@ -13,8 +12,6 @@ const SuccessStoriesPage: React.FC = () => {
       <PageLayout
         title="Success Stories"
         subtitle="Read and share anonymous success stories about teaching privacy to children. Learn from other families' experiences and celebrate privacy education wins."
-        icon={Heart}
-        badge="COMMUNITY"
         breadcrumbs={true}
       >
         {/* MODPA awareness callout for Maryland families */}

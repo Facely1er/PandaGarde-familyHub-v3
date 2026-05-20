@@ -21,8 +21,6 @@ const NewsletterArchivePage: React.FC = () => {
     <PageLayout
       title="Newsletter Archive"
       subtitle="Browse past issues of our privacy education newsletter. Find tips, resources, and updates from previous months."
-      icon={Mail}
-      badge="ARCHIVE"
       breadcrumbs={true}
     >
       <div className="container mx-auto px-6 py-16">
@@ -49,7 +47,7 @@ const NewsletterArchivePage: React.FC = () => {
             <div className="space-y-12">
               {years.map((year) => (
                 <div key={year}>
-                  <h2 className="text-2xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+                  <h2 className="text-2xl font-bold mb-6 text-primary">
                     {year}
                   </h2>
                   <div className="space-y-4">
@@ -74,7 +72,7 @@ const NewsletterArchivePage: React.FC = () => {
                                 </span>
                               )}
                             </div>
-                            <h3 className="text-xl font-bold mb-2" style={{ color: 'var(--primary)' }}>
+                            <h3 className="text-xl font-bold mb-2 text-primary">
                               {newsletter.title}
                             </h3>
                             <p className="text-gray-600 mb-3">{newsletter.featuredTopic.description}</p>

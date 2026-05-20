@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useCallback, useState, ReactNode } from 'react';
+import { logger } from '../lib/logger';
 
 // Simple localStorage hook for Family Hub
 const useFamilyLocalStorage = <T,>(key: string, initialValue: T): [T, (value: T | ((prev: T) => T)) => void] => {
@@ -19,7 +20,7 @@ const useFamilyLocalStorage = <T,>(key: string, initialValue: T): [T, (value: T 
         return newValue;
       });
     } catch (error) {
-      console.error('Error saving to localStorage:', error);
+      logger.error('Error saving to localStorage:', error);
     }
   };
 
@@ -182,7 +183,7 @@ export const FamilyProgressProvider: React.FC<FamilyProgressProviderProps> = ({ 
         });
       return limit ? sorted.slice(0, limit) : sorted;
     } catch (error) {
-      console.error('Error getting activity history:', error);
+      logger.error('Error getting activity history:', error);
       return [];
     }
   }, [getMemberActivities]);

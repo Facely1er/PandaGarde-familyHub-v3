@@ -179,8 +179,6 @@ const PrivacyHandbookPage: React.FC = () => {
     <PageLayout
       title="Ages 9-12"
       subtitle="Hands-on projects and practical guides that teach tweens how to protect personal information and navigate online spaces safely. Become a digital privacy expert!"
-      icon={Shield}
-      badge="PRIVACY PROTECTOR'S GUIDE - AGES 9-12"
       breadcrumbs={true}
     >
       <div style={{ maxWidth: '75rem', margin: '0 auto' }}>
@@ -342,7 +340,7 @@ const PrivacyHandbookPage: React.FC = () => {
           <div className="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-2xl font-bold" style={{ color: 'var(--primary)' }}>
+                <h3 className="text-2xl font-bold text-primary">
                   {selectedGuide.title}
                 </h3>
                 <button
@@ -354,15 +352,15 @@ const PrivacyHandbookPage: React.FC = () => {
               </div>
 
               <div className="mb-6">
-                <p className="text-lg mb-6" style={{ color: 'var(--gray-600)' }}>
+                <p className="text-lg mb-6 text-gray-600">
                   {selectedGuide.description}
                 </p>
 
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
-                  <h4 className="font-semibold mb-4" style={{ color: 'var(--primary)' }}>
+                  <h4 className="font-semibold mb-4 text-primary">
                     What You'll Learn:
                   </h4>
-                  <ul className="list-disc pl-6 space-y-2" style={{ color: 'var(--gray-600)' }}>
+                  <ul className="list-disc pl-6 space-y-2 text-gray-600">
                     {selectedGuide.content.map((item, index) => (
                       <li key={index}>{item}</li>
                     ))}

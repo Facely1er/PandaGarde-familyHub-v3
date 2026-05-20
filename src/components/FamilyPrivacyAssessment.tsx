@@ -24,6 +24,7 @@ import {
 import { familyPersonaDetectionEngine, type PersonaDetectionResult } from '../lib/familyPersonaDetection';
 import { familyPrivacyReportGenerator } from '../lib/familyPrivacyReportGenerator';
 import { useFamily } from '../contexts/FamilyContext';
+import { logger } from '../lib/logger';
 
 interface FamilyPrivacyAssessmentProps {
   onComplete?: (result: AssessmentResult) => void;
@@ -105,7 +106,7 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
         }
       );
     } catch (error) {
-      console.error('Error generating report:', error);
+      logger.error('Error generating report:', error);
     } finally {
       setIsGeneratingReport(false);
     }

@@ -7,8 +7,6 @@ const EmergencySafetyGuidePage: React.FC = () => {
     <PageLayout
       title="Digital Safety Emergency Guide"
       subtitle="Step-by-step instructions for handling privacy breaches, cyberbullying, and other digital safety emergencies. Includes legal considerations and recovery strategies."
-      icon={AlertTriangle}
-      badge="EMERGENCY GUIDE"
       breadcrumbs={true}
     >
       <div style={{ maxWidth: '56rem', margin: '0 auto' }}>
@@ -53,7 +51,7 @@ const EmergencySafetyGuidePage: React.FC = () => {
 
           {/* Immediate Response Steps */}
           <section className="mb-16">
-            <h2 className="text-3xl font-bold mb-8" style={{ color: 'var(--primary)' }}>
+            <h2 className="text-3xl font-bold mb-8 text-primary">
               Immediate Response Steps
             </h2>
             
@@ -64,8 +62,8 @@ const EmergencySafetyGuidePage: React.FC = () => {
                     <span className="text-red-600 font-bold">1</span>
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold mb-3" style={{ color: 'var(--primary)' }}>Stay Calm and Assess the Situation</h3>
-                    <ul className="space-y-2 text-sm" style={{ color: 'var(--gray-600)' }}>
+                    <h3 className="text-xl font-bold mb-3 text-primary">Stay Calm and Assess the Situation</h3>
+                    <ul className="space-y-2 text-sm text-gray-600">
                       <li>• Take a deep breath and remain calm</li>
                       <li>• Assess the immediate danger level</li>
                       <li>• If there's immediate physical danger, call 911</li>
@@ -81,8 +79,8 @@ const EmergencySafetyGuidePage: React.FC = () => {
                     <span className="text-red-600 font-bold">2</span>
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold mb-3" style={{ color: 'var(--primary)' }}>Document Everything</h3>
-                    <ul className="space-y-2 text-sm" style={{ color: 'var(--gray-600)' }}>
+                    <h3 className="text-xl font-bold mb-3 text-primary">Document Everything</h3>
+                    <ul className="space-y-2 text-sm text-gray-600">
                       <li>• Take screenshots of all relevant content</li>
                       <li>• Save URLs and timestamps</li>
                       <li>• Document who was involved</li>
@@ -98,8 +96,8 @@ const EmergencySafetyGuidePage: React.FC = () => {
                     <span className="text-red-600 font-bold">3</span>
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold mb-3" style={{ color: 'var(--primary)' }}>Secure Accounts and Devices</h3>
-                    <ul className="space-y-2 text-sm" style={{ color: 'var(--gray-600)' }}>
+                    <h3 className="text-xl font-bold mb-3 text-primary">Secure Accounts and Devices</h3>
+                    <ul className="space-y-2 text-sm text-gray-600">
                       <li>• Change all passwords immediately</li>
                       <li>• Enable two-factor authentication</li>
                       <li>• Log out of all devices and sessions</li>
@@ -115,8 +113,8 @@ const EmergencySafetyGuidePage: React.FC = () => {
                     <span className="text-red-600 font-bold">4</span>
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold mb-3" style={{ color: 'var(--primary)' }}>Report to Appropriate Authorities</h3>
-                    <ul className="space-y-2 text-sm" style={{ color: 'var(--gray-600)' }}>
+                    <h3 className="text-xl font-bold mb-3 text-primary">Report to Appropriate Authorities</h3>
+                    <ul className="space-y-2 text-sm text-gray-600">
                       <li>• Report to the platform where the incident occurred</li>
                       <li>• Contact local law enforcement if necessary</li>
                       <li>• Report to the CyberTipline for child exploitation</li>
@@ -130,7 +128,7 @@ const EmergencySafetyGuidePage: React.FC = () => {
 
           {/* Specific Emergency Types */}
           <section className="mb-16">
-            <h2 className="text-3xl font-bold mb-8" style={{ color: 'var(--primary)' }}>
+            <h2 className="text-3xl font-bold mb-8 text-primary">
               Specific Emergency Response Plans
             </h2>
             
@@ -141,12 +139,12 @@ const EmergencySafetyGuidePage: React.FC = () => {
                   <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
                     <Users size={24} className="text-orange-600" />
                   </div>
-                  <h3 className="text-xl font-bold" style={{ color: 'var(--primary)' }}>Cyberbullying</h3>
+                  <h3 className="text-xl font-bold text-primary">Cyberbullying</h3>
                 </div>
                 <div className="space-y-4">
                   <div>
-                    <h4 className="font-semibold mb-2" style={{ color: 'var(--primary)' }}>Immediate Actions:</h4>
-                    <ul className="space-y-1 text-sm" style={{ color: 'var(--gray-600)' }}>
+                    <h4 className="font-semibold mb-2 text-primary">Immediate Actions:</h4>
+                    <ul className="space-y-1 text-sm text-gray-600">
                       <li>• Block the bully on all platforms</li>
                       <li>• Save evidence (screenshots, messages)</li>
                       <li>• Report to the platform</li>
@@ -154,8 +152,8 @@ const EmergencySafetyGuidePage: React.FC = () => {
                     </ul>
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-2" style={{ color: 'var(--primary)' }}>Support Your Child:</h4>
-                    <ul className="space-y-1 text-sm" style={{ color: 'var(--gray-600)' }}>
+                    <h4 className="font-semibold mb-2 text-primary">Support Your Child:</h4>
+                    <ul className="space-y-1 text-sm text-gray-600">
                       <li>• Listen without judgment</li>
                       <li>• Reassure them it's not their fault</li>
                       <li>• Consider professional counseling if needed</li>
@@ -171,12 +169,12 @@ const EmergencySafetyGuidePage: React.FC = () => {
                   <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
                     <Shield size={24} className="text-red-600" />
                   </div>
-                  <h3 className="text-xl font-bold" style={{ color: 'var(--primary)' }}>Privacy Breach</h3>
+                  <h3 className="text-xl font-bold text-primary">Privacy Breach</h3>
                 </div>
                 <div className="space-y-4">
                   <div>
-                    <h4 className="font-semibold mb-2" style={{ color: 'var(--primary)' }}>Immediate Actions:</h4>
-                    <ul className="space-y-1 text-sm" style={{ color: 'var(--gray-600)' }}>
+                    <h4 className="font-semibold mb-2 text-primary">Immediate Actions:</h4>
+                    <ul className="space-y-1 text-sm text-gray-600">
                       <li>• Change all passwords immediately</li>
                       <li>• Enable two-factor authentication</li>
                       <li>• Check for unauthorized account activity</li>
@@ -184,8 +182,8 @@ const EmergencySafetyGuidePage: React.FC = () => {
                     </ul>
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-2" style={{ color: 'var(--primary)' }}>Damage Control:</h4>
-                    <ul className="space-y-1 text-sm" style={{ color: 'var(--gray-600)' }}>
+                    <h4 className="font-semibold mb-2 text-primary">Damage Control:</h4>
+                    <ul className="space-y-1 text-sm text-gray-600">
                       <li>• Contact platforms to request content removal</li>
                       <li>• Monitor for identity theft signs</li>
                       <li>• Consider credit monitoring services</li>
@@ -201,12 +199,12 @@ const EmergencySafetyGuidePage: React.FC = () => {
                   <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
                     <AlertTriangle size={24} className="text-purple-600" />
                   </div>
-                  <h3 className="text-xl font-bold" style={{ color: 'var(--primary)' }}>Online Exploitation</h3>
+                  <h3 className="text-xl font-bold text-primary">Online Exploitation</h3>
                 </div>
                 <div className="space-y-4">
                   <div>
-                    <h4 className="font-semibold mb-2" style={{ color: 'var(--primary)' }}>Immediate Actions:</h4>
-                    <ul className="space-y-1 text-sm" style={{ color: 'var(--gray-600)' }}>
+                    <h4 className="font-semibold mb-2 text-primary">Immediate Actions:</h4>
+                    <ul className="space-y-1 text-sm text-gray-600">
                       <li>• Call 911 if there's immediate danger</li>
                       <li>• Contact the CyberTipline: 1-800-843-5678</li>
                       <li>• Preserve all evidence (DO NOT delete anything)</li>
@@ -214,8 +212,8 @@ const EmergencySafetyGuidePage: React.FC = () => {
                     </ul>
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-2" style={{ color: 'var(--primary)' }}>Support Your Child:</h4>
-                    <ul className="space-y-1 text-sm" style={{ color: 'var(--gray-600)' }}>
+                    <h4 className="font-semibold mb-2 text-primary">Support Your Child:</h4>
+                    <ul className="space-y-1 text-sm text-gray-600">
                       <li>• Seek immediate professional counseling</li>
                       <li>• Work with law enforcement and child advocacy centers</li>
                       <li>• Create a safe, supportive environment</li>
@@ -229,11 +227,11 @@ const EmergencySafetyGuidePage: React.FC = () => {
 
           {/* Legal Considerations */}
           <section className="mb-16">
-            <h2 className="text-3xl font-bold mb-8" style={{ color: 'var(--primary)' }}>
+            <h2 className="text-3xl font-bold mb-8 text-primary">
               Legal Considerations
             </h2>
             
-            <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-6 mb-8" style={{ backgroundColor: 'var(--light)' }}>
+            <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-6 mb-8 bg-light">
               <h3 className="text-xl font-semibold mb-4 text-yellow-800">
                 ⚖️ Important Legal Notes
               </h3>
@@ -247,8 +245,8 @@ const EmergencySafetyGuidePage: React.FC = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="bg-white rounded-xl p-6 shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
-                <h3 className="text-xl font-bold mb-4" style={{ color: 'var(--primary)' }}>When to Contact Law Enforcement</h3>
-                <ul className="space-y-2 text-sm" style={{ color: 'var(--gray-600)' }}>
+                <h3 className="text-xl font-bold mb-4 text-primary">When to Contact Law Enforcement</h3>
+                <ul className="space-y-2 text-sm text-gray-600">
                   <li>• Threats of violence or harm</li>
                   <li>• Sexual exploitation or grooming</li>
                   <li>• Identity theft or financial fraud</li>
@@ -258,8 +256,8 @@ const EmergencySafetyGuidePage: React.FC = () => {
               </div>
 
               <div className="bg-white rounded-xl p-6 shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
-                <h3 className="text-xl font-bold mb-4" style={{ color: 'var(--primary)' }}>Evidence Preservation</h3>
-                <ul className="space-y-2 text-sm" style={{ color: 'var(--gray-600)' }}>
+                <h3 className="text-xl font-bold mb-4 text-primary">Evidence Preservation</h3>
+                <ul className="space-y-2 text-sm text-gray-600">
                   <li>• Take screenshots of all relevant content</li>
                   <li>• Save URLs and timestamps</li>
                   <li>• Keep original devices if possible</li>
@@ -272,17 +270,17 @@ const EmergencySafetyGuidePage: React.FC = () => {
 
           {/* Recovery and Prevention */}
           <section className="mb-16">
-            <h2 className="text-3xl font-bold mb-8" style={{ color: 'var(--primary)' }}>
+            <h2 className="text-3xl font-bold mb-8 text-primary">
               Recovery and Prevention
             </h2>
             
             <div className="space-y-8">
               <div className="bg-white rounded-xl p-6 shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
-                <h3 className="text-xl font-bold mb-4" style={{ color: 'var(--primary)' }}>Immediate Recovery Steps</h3>
+                <h3 className="text-xl font-bold mb-4 text-primary">Immediate Recovery Steps</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <h4 className="font-semibold mb-3" style={{ color: 'var(--primary)' }}>For Your Child:</h4>
-                    <ul className="space-y-2 text-sm" style={{ color: 'var(--gray-600)' }}>
+                    <h4 className="font-semibold mb-3 text-primary">For Your Child:</h4>
+                    <ul className="space-y-2 text-sm text-gray-600">
                       <li>• Provide emotional support and reassurance</li>
                       <li>• Seek professional counseling if needed</li>
                       <li>• Gradually reintroduce safe online activities</li>
@@ -290,8 +288,8 @@ const EmergencySafetyGuidePage: React.FC = () => {
                     </ul>
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-3" style={{ color: 'var(--primary)' }}>For Your Family:</h4>
-                    <ul className="space-y-2 text-sm" style={{ color: 'var(--gray-600)' }}>
+                    <h4 className="font-semibold mb-3 text-primary">For Your Family:</h4>
+                    <ul className="space-y-2 text-sm text-gray-600">
                       <li>• Review and update family internet rules</li>
                       <li>• Implement stronger monitoring systems</li>
                       <li>• Consider family counseling</li>
@@ -302,11 +300,11 @@ const EmergencySafetyGuidePage: React.FC = () => {
               </div>
 
               <div className="bg-white rounded-xl p-6 shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
-                <h3 className="text-xl font-bold mb-4" style={{ color: 'var(--primary)' }}>Long-term Prevention</h3>
+                <h3 className="text-xl font-bold mb-4 text-primary">Long-term Prevention</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <h4 className="font-semibold mb-3" style={{ color: 'var(--primary)' }}>Technical Measures:</h4>
-                    <ul className="space-y-2 text-sm" style={{ color: 'var(--gray-600)' }}>
+                    <h4 className="font-semibold mb-3 text-primary">Technical Measures:</h4>
+                    <ul className="space-y-2 text-sm text-gray-600">
                       <li>• Use comprehensive parental controls</li>
                       <li>• Enable two-factor authentication everywhere</li>
                       <li>• Regularly review privacy settings</li>
@@ -314,8 +312,8 @@ const EmergencySafetyGuidePage: React.FC = () => {
                     </ul>
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-3" style={{ color: 'var(--primary)' }}>Educational Measures:</h4>
-                    <ul className="space-y-2 text-sm" style={{ color: 'var(--gray-600)' }}>
+                    <h4 className="font-semibold mb-3 text-primary">Educational Measures:</h4>
+                    <ul className="space-y-2 text-sm text-gray-600">
                       <li>• Continue privacy education conversations</li>
                       <li>• Teach critical thinking about online content</li>
                       <li>• Encourage open communication</li>
@@ -329,14 +327,14 @@ const EmergencySafetyGuidePage: React.FC = () => {
 
           {/* Resources */}
           <section className="mb-16">
-            <h2 className="text-3xl font-bold mb-8" style={{ color: 'var(--primary)' }}>
+            <h2 className="text-3xl font-bold mb-8 text-primary">
               Additional Resources
             </h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="bg-white rounded-xl p-6 shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
-                <h3 className="text-xl font-bold mb-4" style={{ color: 'var(--primary)' }}>Professional Help</h3>
-                <ul className="space-y-2 text-sm" style={{ color: 'var(--gray-600)' }}>
+                <h3 className="text-xl font-bold mb-4 text-primary">Professional Help</h3>
+                <ul className="space-y-2 text-sm text-gray-600">
                   <li>• Child psychologists specializing in trauma</li>
                   <li>• Family therapists</li>
                   <li>• Internet safety specialists</li>
@@ -345,8 +343,8 @@ const EmergencySafetyGuidePage: React.FC = () => {
               </div>
 
               <div className="bg-white rounded-xl p-6 shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
-                <h3 className="text-xl font-bold mb-4" style={{ color: 'var(--primary)' }}>Support Organizations</h3>
-                <ul className="space-y-2 text-sm" style={{ color: 'var(--gray-600)' }}>
+                <h3 className="text-xl font-bold mb-4 text-primary">Support Organizations</h3>
+                <ul className="space-y-2 text-sm text-gray-600">
                   <li>• National Center for Missing & Exploited Children</li>
                   <li>• Cyberbullying Research Center</li>
                   <li>• Family Online Safety Institute</li>

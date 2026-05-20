@@ -12,6 +12,7 @@ import {
   Award
 } from 'lucide-react';
 import { type AssessmentResult } from '../lib/familyPrivacyAssessment';
+import { logger } from '../lib/logger';
 
 interface AssessmentHistoryEntry {
   result: AssessmentResult;
@@ -41,7 +42,7 @@ const AssessmentHistory: React.FC = () => {
         }
       }
     } catch (error) {
-      console.error('Error loading assessment history:', error);
+      logger.error('Error loading assessment history:', error);
     }
   };
 

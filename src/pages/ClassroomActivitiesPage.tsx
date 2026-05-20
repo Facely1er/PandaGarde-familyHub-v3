@@ -37,8 +37,6 @@ const ClassroomActivitiesPage: React.FC = () => {
     <PageLayout
       title="Privacy Panda Classroom Activities"
       subtitle="Chapter-by-chapter activities aligned with 'Privacy Panda and the Digital Bamboo Forest' story. Perfect for educators teaching digital privacy to children ages 5-8."
-      icon={BookOpen}
-      badge="EDUCATOR RESOURCES"
       breadcrumbs={true}
     >
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
@@ -48,13 +46,13 @@ const ClassroomActivitiesPage: React.FC = () => {
                backgroundColor: 'var(--light)',
                borderLeftColor: 'var(--primary-light)'
              }}>
-          <h2 className="text-2xl font-bold text-green-800 mb-3" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-2xl font-bold text-green-800 mb-3 text-primary">
             Introduction for Educators
           </h2>
-          <p className="text-gray-700 leading-relaxed mb-4" style={{ color: 'var(--gray-600)' }}>
+          <p className="text-gray-700 leading-relaxed mb-4 text-gray-600">
             "Privacy Panda and the Digital Bamboo Forest" provides an excellent framework for introducing essential digital privacy concepts to children ages 5-8. This guide offers classroom activities designed to reinforce the lessons from each chapter of the story, helping you extend the learning experience in an engaging, interactive way.
           </p>
-          <p className="text-gray-700 leading-relaxed mb-4" style={{ color: 'var(--gray-600)' }}>
+          <p className="text-gray-700 leading-relaxed mb-4 text-gray-600">
             Each set of activities includes learning objectives aligned with the story's themes, materials needed, detailed instructions, discussion prompts, assessment opportunities, and adaptations for different learning needs.
           </p>
           <div className="flex flex-wrap gap-4 mt-4">
@@ -76,12 +74,12 @@ const ClassroomActivitiesPage: React.FC = () => {
         </div>
 
         {/* General Tips */}
-        <div className="bg-blue-50 rounded-lg p-6 mb-8" style={{ backgroundColor: 'var(--light)' }}>
-          <h3 className="text-xl font-bold mb-4 flex items-center gap-2" style={{ color: 'var(--primary)' }}>
+        <div className="bg-blue-50 rounded-lg p-6 mb-8 bg-light">
+          <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-primary">
             <Lightbulb size={24} />
             General Tips for Teaching Digital Privacy
           </h3>
-          <ul className="space-y-2" style={{ color: 'var(--gray-700)' }}>
+          <ul className="space-y-2 text-gray-700">
             <li className="flex items-start gap-2">
               <CheckCircle size={18} className="text-green-600 mt-1 flex-shrink-0" />
               <span>Use concrete examples that children can relate to in their daily lives</span>
@@ -136,11 +134,11 @@ const ClassroomActivitiesPage: React.FC = () => {
                     {chapter.number}
                   </div>
                   <div>
-                    <h2 className="text-2xl font-bold" style={{ color: 'var(--primary)' }}>
+                    <h2 className="text-2xl font-bold text-primary">
                       Chapter {chapter.number}: {chapter.title}
                     </h2>
                     {chapter.storyQuote && (
-                      <p className="text-sm mt-1 italic flex items-center gap-2" style={{ color: 'var(--gray-600)' }}>
+                      <p className="text-sm mt-1 italic flex items-center gap-2 text-gray-600">
                         <Quote size={14} />
                         {chapter.storyQuote}
                       </p>
@@ -154,12 +152,12 @@ const ClassroomActivitiesPage: React.FC = () => {
               {isExpanded && (
                 <div className="px-6 pb-6">
                   {/* Story Connection */}
-                  <div className="bg-blue-50 rounded-lg p-4 mb-6" style={{ backgroundColor: 'var(--light)' }}>
-                    <h3 className="font-semibold mb-2 flex items-center gap-2" style={{ color: 'var(--primary)' }}>
+                  <div className="bg-blue-50 rounded-lg p-4 mb-6 bg-light">
+                    <h3 className="font-semibold mb-2 flex items-center gap-2 text-primary">
                       <BookOpen size={18} />
                       Story Connection
                     </h3>
-                    <p style={{ color: 'var(--gray-700)' }}>{chapter.storyConnection}</p>
+                    <p className="text-gray-700">{chapter.storyConnection}</p>
                   </div>
 
                   {/* Activities */}
@@ -177,30 +175,30 @@ const ClassroomActivitiesPage: React.FC = () => {
                             className="w-full p-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
                             style={{ backgroundColor: isActivityExpanded ? 'var(--light)' : undefined }}
                           >
-                            <h3 className="text-lg font-semibold" style={{ color: 'var(--primary)' }}>
+                            <h3 className="text-lg font-semibold text-primary">
                               {activity.title}
                             </h3>
                             {isActivityExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
                           </button>
 
                           {isActivityExpanded && (
-                            <div className="p-4 space-y-4" style={{ backgroundColor: 'var(--light)' }}>
+                            <div className="p-4 space-y-4 bg-light">
                               {/* Learning Objective */}
                               <div>
-                                <h4 className="font-semibold mb-2 flex items-center gap-2" style={{ color: 'var(--primary)' }}>
+                                <h4 className="font-semibold mb-2 flex items-center gap-2 text-primary">
                                   <GraduationCap size={18} />
                                   Learning Objective
                                 </h4>
-                                <p style={{ color: 'var(--gray-700)' }}>{activity.learningObjective}</p>
+                                <p className="text-gray-700">{activity.learningObjective}</p>
                               </div>
 
                               {/* Story Connection */}
                               {activity.storyConnection && (
                                 <div className="bg-green-50 rounded p-3">
-                                  <h4 className="font-semibold mb-1 text-sm" style={{ color: 'var(--primary)' }}>
+                                  <h4 className="font-semibold mb-1 text-sm text-primary">
                                     Story Connection
                                   </h4>
-                                  <p className="text-sm" style={{ color: 'var(--gray-700)' }}>
+                                  <p className="text-sm text-gray-700">
                                     {activity.storyConnection}
                                   </p>
                                 </div>
@@ -208,11 +206,11 @@ const ClassroomActivitiesPage: React.FC = () => {
 
                               {/* Materials */}
                               <div>
-                                <h4 className="font-semibold mb-2 flex items-center gap-2" style={{ color: 'var(--primary)' }}>
+                                <h4 className="font-semibold mb-2 flex items-center gap-2 text-primary">
                                   <ClipboardList size={18} />
                                   Materials
                                 </h4>
-                                <ul className="list-disc list-inside space-y-1" style={{ color: 'var(--gray-700)' }}>
+                                <ul className="list-disc list-inside space-y-1 text-gray-700">
                                   {activity.materials.map((material, idx) => (
                                     <li key={idx}>{material}</li>
                                   ))}
@@ -221,10 +219,10 @@ const ClassroomActivitiesPage: React.FC = () => {
 
                               {/* Instructions */}
                               <div>
-                                <h4 className="font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+                                <h4 className="font-semibold mb-2 text-primary">
                                   Instructions
                                 </h4>
-                                <ol className="list-decimal list-inside space-y-2" style={{ color: 'var(--gray-700)' }}>
+                                <ol className="list-decimal list-inside space-y-2 text-gray-700">
                                   {activity.instructions.map((instruction, idx) => (
                                     <li key={idx}>{instruction}</li>
                                   ))}
@@ -234,10 +232,10 @@ const ClassroomActivitiesPage: React.FC = () => {
                               {/* Scenario Examples */}
                               {activity.scenarioExamples && activity.scenarioExamples.length > 0 && (
                                 <div>
-                                  <h4 className="font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+                                  <h4 className="font-semibold mb-2 text-primary">
                                     Scenario Examples
                                   </h4>
-                                  <ul className="list-disc list-inside space-y-1" style={{ color: 'var(--gray-700)' }}>
+                                  <ul className="list-disc list-inside space-y-1 text-gray-700">
                                     {activity.scenarioExamples.map((scenario, idx) => (
                                       <li key={idx} className="italic">"{scenario}"</li>
                                     ))}
@@ -247,10 +245,10 @@ const ClassroomActivitiesPage: React.FC = () => {
 
                               {/* Discussion Prompts */}
                               <div>
-                                <h4 className="font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+                                <h4 className="font-semibold mb-2 text-primary">
                                   Discussion Prompts
                                 </h4>
-                                <ul className="list-disc list-inside space-y-1" style={{ color: 'var(--gray-700)' }}>
+                                <ul className="list-disc list-inside space-y-1 text-gray-700">
                                   {activity.discussionPrompts.map((prompt, idx) => (
                                     <li key={idx}>"{prompt}"</li>
                                   ))}
@@ -259,27 +257,27 @@ const ClassroomActivitiesPage: React.FC = () => {
 
                               {/* Assessment */}
                               <div>
-                                <h4 className="font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+                                <h4 className="font-semibold mb-2 text-primary">
                                   Assessment
                                 </h4>
-                                <p style={{ color: 'var(--gray-700)' }}>{activity.assessment}</p>
+                                <p className="text-gray-700">{activity.assessment}</p>
                               </div>
 
                               {/* Adaptations */}
                               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="bg-yellow-50 rounded p-3">
-                                  <h4 className="font-semibold mb-1 text-sm" style={{ color: 'var(--primary)' }}>
+                                  <h4 className="font-semibold mb-1 text-sm text-primary">
                                     For Younger Students
                                   </h4>
-                                  <p className="text-sm" style={{ color: 'var(--gray-700)' }}>
+                                  <p className="text-sm text-gray-700">
                                     {activity.adaptations.younger}
                                   </p>
                                 </div>
                                 <div className="bg-purple-50 rounded p-3">
-                                  <h4 className="font-semibold mb-1 text-sm" style={{ color: 'var(--primary)' }}>
+                                  <h4 className="font-semibold mb-1 text-sm text-primary">
                                     For Advanced Students
                                   </h4>
-                                  <p className="text-sm" style={{ color: 'var(--gray-700)' }}>
+                                  <p className="text-sm text-gray-700">
                                     {activity.adaptations.advanced}
                                   </p>
                                 </div>
@@ -298,16 +296,16 @@ const ClassroomActivitiesPage: React.FC = () => {
 
         {/* Cross-Curricular Connections */}
         <div className="bg-white rounded-xl shadow-md p-6 mb-6" style={{ backgroundColor: 'var(--card-color)' }}>
-          <h2 className="text-2xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-2xl font-bold mb-6 text-primary">
             Cross-Curricular Connections
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div>
-              <h3 className="font-semibold mb-3 flex items-center gap-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="font-semibold mb-3 flex items-center gap-2 text-primary">
                 <BookOpen size={20} />
                 Language Arts
               </h3>
-              <ul className="space-y-2" style={{ color: 'var(--gray-700)' }}>
+              <ul className="space-y-2 text-gray-700">
                 {crossCurricularConnections.languageArts.map((item, idx) => (
                   <li key={idx} className="flex items-start gap-2">
                     <span className="text-green-600 mt-1">•</span>
@@ -317,11 +315,11 @@ const ClassroomActivitiesPage: React.FC = () => {
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold mb-3 flex items-center gap-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="font-semibold mb-3 flex items-center gap-2 text-primary">
                 <Palette size={20} />
                 Art
               </h3>
-              <ul className="space-y-2" style={{ color: 'var(--gray-700)' }}>
+              <ul className="space-y-2 text-gray-700">
                 {crossCurricularConnections.art.map((item, idx) => (
                   <li key={idx} className="flex items-start gap-2">
                     <span className="text-green-600 mt-1">•</span>
@@ -331,11 +329,11 @@ const ClassroomActivitiesPage: React.FC = () => {
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold mb-3 flex items-center gap-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="font-semibold mb-3 flex items-center gap-2 text-primary">
                 <Calculator size={20} />
                 Math
               </h3>
-              <ul className="space-y-2" style={{ color: 'var(--gray-700)' }}>
+              <ul className="space-y-2 text-gray-700">
                 {crossCurricularConnections.math.map((item, idx) => (
                   <li key={idx} className="flex items-start gap-2">
                     <span className="text-green-600 mt-1">•</span>
@@ -345,11 +343,11 @@ const ClassroomActivitiesPage: React.FC = () => {
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold mb-3 flex items-center gap-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="font-semibold mb-3 flex items-center gap-2 text-primary">
                 <Globe size={20} />
                 Social Studies
               </h3>
-              <ul className="space-y-2" style={{ color: 'var(--gray-700)' }}>
+              <ul className="space-y-2 text-gray-700">
                 {crossCurricularConnections.socialStudies.map((item, idx) => (
                   <li key={idx} className="flex items-start gap-2">
                     <span className="text-green-600 mt-1">•</span>
@@ -359,11 +357,11 @@ const ClassroomActivitiesPage: React.FC = () => {
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold mb-3 flex items-center gap-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="font-semibold mb-3 flex items-center gap-2 text-primary">
                 <FlaskConical size={20} />
                 Science
               </h3>
-              <ul className="space-y-2" style={{ color: 'var(--gray-700)' }}>
+              <ul className="space-y-2 text-gray-700">
                 {crossCurricularConnections.science.map((item, idx) => (
                   <li key={idx} className="flex items-start gap-2">
                     <span className="text-green-600 mt-1">•</span>
@@ -377,16 +375,16 @@ const ClassroomActivitiesPage: React.FC = () => {
 
         {/* Assessment Tools */}
         <div className="bg-white rounded-xl shadow-md p-6 mb-6" style={{ backgroundColor: 'var(--card-color)' }}>
-          <h2 className="text-2xl font-bold mb-6 flex items-center gap-2" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 text-primary">
             <FileText size={28} />
             Assessment Tools
           </h2>
           <div className="space-y-6">
             <div>
-              <h3 className="font-semibold mb-3" style={{ color: 'var(--primary)' }}>
+              <h3 className="font-semibold mb-3 text-primary">
                 Observation Checklist
               </h3>
-              <ul className="space-y-2" style={{ color: 'var(--gray-700)' }}>
+              <ul className="space-y-2 text-gray-700">
                 {assessmentTools.observationChecklist.map((item, idx) => (
                   <li key={idx} className="flex items-start gap-2">
                     <CheckCircle size={18} className="text-green-600 mt-1 flex-shrink-0" />
@@ -396,41 +394,41 @@ const ClassroomActivitiesPage: React.FC = () => {
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="font-semibold mb-2 text-primary">
                 Digital Privacy Scenario Cards
               </h3>
-              <p style={{ color: 'var(--gray-700)' }}>{assessmentTools.digitalPrivacyScenarioCards}</p>
+              <p className="text-gray-700">{assessmentTools.digitalPrivacyScenarioCards}</p>
             </div>
             <div>
-              <h3 className="font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="font-semibold mb-2 text-primary">
                 Privacy Concept Map
               </h3>
-              <p style={{ color: 'var(--gray-700)' }}>{assessmentTools.privacyConceptMap}</p>
+              <p className="text-gray-700">{assessmentTools.privacyConceptMap}</p>
             </div>
             <div>
-              <h3 className="font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="font-semibold mb-2 text-primary">
                 Exit Tickets
               </h3>
-              <p style={{ color: 'var(--gray-700)' }}>{assessmentTools.exitTickets}</p>
+              <p className="text-gray-700">{assessmentTools.exitTickets}</p>
             </div>
             <div>
-              <h3 className="font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="font-semibold mb-2 text-primary">
                 Culminating Project
               </h3>
-              <p style={{ color: 'var(--gray-700)' }}>{assessmentTools.culminatingProject}</p>
+              <p className="text-gray-700">{assessmentTools.culminatingProject}</p>
             </div>
           </div>
         </div>
 
         {/* Family Connection */}
-        <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-lg p-6 mb-8" style={{ backgroundColor: 'var(--light)' }}>
-          <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+        <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-lg p-6 mb-8 bg-light">
+          <h2 className="text-2xl font-bold mb-4 text-primary">
             Family Connection
           </h2>
-          <p className="mb-4" style={{ color: 'var(--gray-700)' }}>
+          <p className="mb-4 text-gray-700">
             Maintaining consistency between school and home is crucial for reinforcing privacy concepts. Consider:
           </p>
-          <ul className="space-y-2" style={{ color: 'var(--gray-700)' }}>
+          <ul className="space-y-2 text-gray-700">
             <li className="flex items-start gap-2">
               <CheckCircle size={18} className="text-green-600 mt-1 flex-shrink-0" />
               <span>Sending home a summary of privacy concepts covered in class</span>

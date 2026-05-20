@@ -39,15 +39,15 @@ const defaultProfile: AuthProfile = {
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
 const readBoolean = (key: string, fallback: boolean) => {
-  if (typeof window === 'undefined') return fallback;
+  if (typeof window === 'undefined') {return fallback;}
   const raw = window.localStorage.getItem(key);
   return raw === null ? fallback : raw === 'true';
 };
 
 const readProfile = (): AuthProfile => {
-  if (typeof window === 'undefined') return defaultProfile;
+  if (typeof window === 'undefined') {return defaultProfile;}
   const raw = window.localStorage.getItem(PROFILE_STORAGE_KEY);
-  if (!raw) return defaultProfile;
+  if (!raw) {return defaultProfile;}
   try {
     const parsed = JSON.parse(raw) as Partial<AuthProfile>;
     return {
@@ -67,12 +67,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [profile, setProfile] = useState<AuthProfile>(() => readProfile());
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined') {return;}
     window.localStorage.setItem(AUTH_STORAGE_KEY, String(isAuthenticated));
   }, [isAuthenticated]);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined') {return;}
     window.localStorage.setItem(PROFILE_STORAGE_KEY, JSON.stringify(profile));
   }, [profile]);
 

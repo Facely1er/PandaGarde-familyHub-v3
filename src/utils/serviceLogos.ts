@@ -11,27 +11,43 @@ const serviceLogoMap: Record<string, string> = {
   'tiktok': 'tiktok',
   'snapchat': 'snapchat',
   'facebook': 'facebook',
+  'pinterest': 'pinterest',
   
   // Messaging
   'whatsapp': 'whatsapp',
   'discord': 'discord',
+  'telegram': 'telegram',
   
   // Gaming
   'roblox': 'roblox',
   'minecraft': 'minecraft',
   'fortnite': 'epicgames', // Fortnite is by Epic Games
+  'among-us': 'amongus',
+  'steam': 'steam',
   
   // Streaming
   'youtube': 'youtube',
   'youtube-kids': 'youtube', // Use YouTube logo
   'netflix': 'netflix',
+  'disney-plus': 'disneyplus',
+  'amazon-prime-video': 'primevideo',
+  'hulu': 'hulu',
+  'max': 'max',
+  'apple-tv': 'appletv',
+  'paramount-plus': 'paramountplus',
+  'peacock': 'peacock',
+  'spotify': 'spotify',
+  'twitch': 'twitch',
+  'crunchyroll': 'crunchyroll',
+  'pbs-kids': 'pbs',
   
   // Education
   'khan-academy': 'khanacademy',
   'duolingo': 'duolingo',
   
   // Creative
-  'scratch': 'scratch'
+  'scratch': 'scratch',
+  'canva': 'canva'
 };
 
 /**
@@ -77,6 +93,22 @@ export const getServiceLogoUrlWithBrandColor = (serviceId: string): string | nul
     'epicgames': '313131',
     'youtube': 'FF0000',
     'netflix': 'E50914',
+    'disneyplus': '113CCF',
+    'primevideo': '00A8E1',
+    'hulu': '1CE783',
+    'max': '002BE7',
+    'appletv': '000000',
+    'paramountplus': '0064FF',
+    'peacock': '000000',
+    'spotify': '1DB954',
+    'twitch': '9146FF',
+    'crunchyroll': 'F47521',
+    'pbs': '2638C8',
+    'amongus': 'FF4655',
+    'steam': '000000',
+    'pinterest': 'BD081C',
+    'telegram': '26A5E4',
+    'canva': '00C4CC',
     'khanacademy': '14BF96',
     'duolingo': '58CC02',
     'scratch': '4C97FF'

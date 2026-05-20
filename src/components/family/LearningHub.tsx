@@ -177,7 +177,7 @@ const LearningHub: React.FC = () => {
 
   useEffect(() => {
     const play = searchParams.get('play');
-    if (!play || !games.some((g) => g.id === play)) return;
+    if (!play || !games.some((g) => g.id === play)) {return;}
     setSelectedGame(play);
     const next = new URLSearchParams(searchParams);
     next.delete('play');
@@ -227,7 +227,7 @@ const LearningHub: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 via-teal-50/40 to-cyan-50/30 dark:from-gray-950 dark:via-gray-900 dark:to-gray-900 px-4 py-6 sm:p-6">
       <div className="mx-auto max-w-7xl">
-        {currentMemberId == null && (
+        {currentMemberId === null && (
           <div className="mb-6 flex items-start gap-3 rounded-2xl border border-amber-200/80 bg-gradient-to-r from-amber-50 to-orange-50/80 p-4 shadow-sm dark:border-amber-800/60 dark:from-amber-950/40 dark:to-orange-950/20 dark:text-amber-50">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-100 dark:bg-amber-900/50">
               <UserCircle className="text-amber-700 dark:text-amber-200" size={22} />

@@ -588,7 +588,7 @@ export class FootprintAnalyzer {
           const s = childServiceCatalog.find(svc => svc.id === id);
           return s?.name || id;
         }),
-        note: `Receives data from ${b.seenIn.length} of your family\'s apps — this broker can build a combined profile of your child across multiple platforms.`
+        note: `Receives data from ${b.seenIn.length} of your family's apps — this broker can build a combined profile of your child across multiple platforms.`
       }));
 
     return {

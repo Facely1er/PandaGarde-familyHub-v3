@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { logger } from '../lib/logger';
 
 // Check if localStorage is available
 const isLocalStorageAvailable = (): boolean => {
@@ -29,7 +30,7 @@ export const useLocalStorage = <T,>(key: string, initialValue: T, expectedType?:
       const parsed = JSON.parse(item);
       return parsed;
     } catch (error) {
-      console.error('Error reading from localStorage:', error);
+      logger.error('Error reading from localStorage:', error);
       return initialValue;
     }
   });
@@ -42,7 +43,7 @@ export const useLocalStorage = <T,>(key: string, initialValue: T, expectedType?:
         window.localStorage.setItem(key, JSON.stringify(value));
       }
     } catch (error) {
-      console.error('Error saving to localStorage:', error);
+      logger.error('Error saving to localStorage:', error);
       // If quota exceeded, try to clear old data and retry
       if (error instanceof DOMException && error.code === 22) {
         try {
@@ -54,7 +55,7 @@ export const useLocalStorage = <T,>(key: string, initialValue: T, expectedType?:
             window.localStorage.setItem(key, JSON.stringify(value));
           }
         } catch (retryError) {
-          console.warn('Could not save to localStorage even after cleanup:', retryError);
+          logger.warn('Could not save to localStorage even after cleanup:', retryError);
         }
       }
     }

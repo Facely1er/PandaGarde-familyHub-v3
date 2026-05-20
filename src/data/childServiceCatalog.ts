@@ -119,6 +119,27 @@ export const childServiceCatalog: ChildService[] = [
     ],
     website: 'https://www.snapchat.com'
   },
+  {
+    id: 'pinterest',
+    name: 'Pinterest',
+    category: 'social-media',
+    description: 'Image discovery and idea boards',
+    minAge: 13,
+    riskLevel: 'medium',
+    privacyConcerns: [
+      'Public boards can reveal interests and location',
+      'Comments and messages from other users',
+      'Algorithm may surface mature content',
+      'Shopping links track browsing behavior'
+    ],
+    parentTips: [
+      'Set account to private',
+      'Review boards and followers regularly',
+      'Disable personalized ads where possible',
+      'Discuss what not to pin publicly'
+    ],
+    website: 'https://www.pinterest.com'
+  },
   
   // Messaging Apps
   {
@@ -161,6 +182,27 @@ export const childServiceCatalog: ChildService[] = [
       'Use Safe Direct Messaging setting'
     ],
     website: 'https://discord.com'
+  },
+  {
+    id: 'telegram',
+    name: 'Telegram',
+    category: 'messaging',
+    description: 'Cloud-based messaging with groups and channels',
+    minAge: 16,
+    riskLevel: 'high',
+    privacyConcerns: [
+      'Public channels and large groups with strangers',
+      'Secret chats are not visible to parents',
+      'Bots and links can expose scams or mature content',
+      'Phone number discovery settings'
+    ],
+    parentTips: [
+      'Restrict who can add your teen to groups',
+      'Disable nearby people and username search if needed',
+      'Discuss never joining unknown channels',
+      'Review active sessions and linked devices'
+    ],
+    website: 'https://telegram.org'
   },
   
   // Gaming
@@ -226,6 +268,47 @@ export const childServiceCatalog: ChildService[] = [
     ],
     website: 'https://www.epicgames.com/fortnite'
   },
+  {
+    id: 'among-us',
+    name: 'Among Us',
+    category: 'gaming',
+    description: 'Multiplayer social deduction game',
+    minAge: 10,
+    riskLevel: 'medium',
+    privacyConcerns: [
+      'Public lobbies with voice/text from strangers',
+      'Usernames and chat can expose personal info',
+      'In-app purchases for cosmetics'
+    ],
+    parentTips: [
+      'Play private games with friends only',
+      'Turn off free chat or use quick chat',
+      'Review username choices',
+      'Set spending limits on the platform store'
+    ],
+    website: 'https://www.innersloth.com/games/among-us/'
+  },
+  {
+    id: 'steam',
+    name: 'Steam',
+    category: 'gaming',
+    description: 'PC game store, library, and community platform',
+    minAge: 13,
+    riskLevel: 'medium',
+    privacyConcerns: [
+      'Community forums and friend lists',
+      'Mature games available in the store',
+      'Voice chat in some multiplayer titles',
+      'Trading and marketplace interactions'
+    ],
+    parentTips: [
+      'Use Family View parental controls',
+      'Approve purchases and friend requests',
+      'Review game age ratings before installing',
+      'Limit community features for younger teens'
+    ],
+    website: 'https://store.steampowered.com'
+  },
   
   // Streaming
   {
@@ -288,6 +371,244 @@ export const childServiceCatalog: ChildService[] = [
     ],
     website: 'https://www.netflix.com'
   },
+  {
+    id: 'disney-plus',
+    name: 'Disney+',
+    category: 'streaming',
+    description: 'Family movies, shows, and Disney-owned streaming content',
+    minAge: 4,
+    riskLevel: 'low',
+    privacyConcerns: [
+      'Viewing history and profiles tracked',
+      'Targeted recommendations and ads on some plans',
+      'Child profiles still linked to a household account'
+    ],
+    parentTips: [
+      'Use a Kids profile with content filters',
+      'Set a PIN for switching profiles',
+      'Review watch history together',
+      'Turn off autoplay if it encourages binge-watching'
+    ],
+    website: 'https://www.disneyplus.com',
+    vendor: 'Disney'
+  },
+  {
+    id: 'amazon-prime-video',
+    name: 'Prime Video',
+    category: 'streaming',
+    description: 'Movies and TV streaming tied to Amazon accounts',
+    minAge: 7,
+    riskLevel: 'medium',
+    privacyConcerns: [
+      'Viewing tied to Amazon purchase and ad profiles',
+      'Rentals and channels can expose mature content',
+      'Household sharing blurs who watched what'
+    ],
+    parentTips: [
+      'Enable PIN for purchases and mature titles',
+      'Use Amazon Kids or restricted profiles where available',
+      'Review channel subscriptions',
+      'Separate child viewing on a family profile when possible'
+    ],
+    website: 'https://www.primevideo.com',
+    vendor: 'Amazon',
+    lawEnforcementConcerns: [
+      'Amazon receives large volumes of law enforcement requests and publishes compliance rates in its transparency reports',
+      'Prime Video activity can be correlated with broader Amazon account, device, and purchase data'
+    ]
+  },
+  {
+    id: 'hulu',
+    name: 'Hulu',
+    category: 'streaming',
+    description: 'TV, movies, and live TV streaming',
+    minAge: 13,
+    riskLevel: 'medium',
+    privacyConcerns: [
+      'Mature content available on the same account',
+      'Viewing and ad profiles tracked',
+      'Live TV may include unfiltered channels'
+    ],
+    parentTips: [
+      'Create a teen-appropriate profile with restrictions',
+      'Block mature titles with profile PINs',
+      'Review Hulu Kids content only for younger children',
+      'Discuss ad-supported plan data use'
+    ],
+    website: 'https://www.hulu.com',
+    vendor: 'Disney (Hulu)'
+  },
+  {
+    id: 'max',
+    name: 'Max',
+    category: 'streaming',
+    description: 'HBO, Warner, and Discovery streaming shows and films',
+    minAge: 13,
+    riskLevel: 'medium',
+    privacyConcerns: [
+      'Includes mature HBO content on shared accounts',
+      'Viewing history used for recommendations',
+      'Ad-supported tier collects viewing for advertising'
+    ],
+    parentTips: [
+      'Use Kids & Family profile for younger viewers',
+      'Set profile PINs to limit profile switching',
+      'Review content ratings before allowing solo viewing',
+      'Monitor watch history on shared family accounts'
+    ],
+    website: 'https://www.max.com',
+    vendor: 'Warner Bros. Discovery'
+  },
+  {
+    id: 'apple-tv',
+    name: 'Apple TV',
+    category: 'streaming',
+    description: 'Apple shows, movies, and channels in the TV app',
+    minAge: 7,
+    riskLevel: 'low',
+    privacyConcerns: [
+      'Viewing tied to Apple ID and Family Sharing',
+      'Third-party channels may have separate privacy policies',
+      'Purchase history visible on shared devices'
+    ],
+    parentTips: [
+      'Use Screen Time and content restrictions',
+      'Require Ask to Buy for purchases',
+      'Review Family Sharing settings',
+      'Check channel-specific parental controls'
+    ],
+    website: 'https://www.apple.com/apple-tv-app/',
+    vendor: 'Apple'
+  },
+  {
+    id: 'paramount-plus',
+    name: 'Paramount+',
+    category: 'streaming',
+    description: 'CBS, Nickelodeon, and Paramount movies and shows',
+    minAge: 7,
+    riskLevel: 'low',
+    privacyConcerns: [
+      'Kids and adult content on one subscription',
+      'Viewing data used for recommendations',
+      'Live sports and news may not be age-appropriate'
+    ],
+    parentTips: [
+      'Use kid profiles where available',
+      'Restrict live TV for younger children',
+      'Review Nickelodeon vs. general catalog access',
+      'Set PINs for profile changes'
+    ],
+    website: 'https://www.paramountplus.com',
+    vendor: 'Paramount'
+  },
+  {
+    id: 'peacock',
+    name: 'Peacock',
+    category: 'streaming',
+    description: 'NBCUniversal streaming with shows, sports, and movies',
+    minAge: 10,
+    riskLevel: 'medium',
+    privacyConcerns: [
+      'Live TV and news may include mature content',
+      'Ad-supported tiers track viewing for ads',
+      'Sports and late-night content on shared accounts'
+    ],
+    parentTips: [
+      'Use parental controls and PINs',
+      'Choose ad-free family plans if available',
+      'Block live channels for younger kids',
+      'Review profile settings regularly'
+    ],
+    website: 'https://www.peacocktv.com',
+    vendor: 'NBCUniversal'
+  },
+  {
+    id: 'spotify',
+    name: 'Spotify',
+    category: 'streaming',
+    description: 'Music and podcast streaming',
+    minAge: 13,
+    riskLevel: 'medium',
+    privacyConcerns: [
+      'Listening history builds detailed interest profiles',
+      'Podcasts may include explicit content',
+      'Social features can expose activity to others',
+      'Wrapped and recommendations reveal habits'
+    ],
+    parentTips: [
+      'Use Spotify Kids for children under 13',
+      'Disable public listening activity',
+      'Review explicit content filters',
+      'Discuss podcast sources before subscribing'
+    ],
+    website: 'https://www.spotify.com'
+  },
+  {
+    id: 'twitch',
+    name: 'Twitch',
+    category: 'streaming',
+    description: 'Live game streaming and creator broadcasts',
+    minAge: 13,
+    riskLevel: 'high',
+    privacyConcerns: [
+      'Unfiltered live chat with strangers',
+      'Mature language and content on many streams',
+      'Donations and DMs from viewers',
+      'Recommendations can surface inappropriate streams'
+    ],
+    parentTips: [
+      'Disable whispers and restrict chat',
+      'Follow only approved channels',
+      'Use supervised viewing for younger teens',
+      'Turn off notifications from unknown creators'
+    ],
+    website: 'https://www.twitch.tv',
+    vendor: 'Amazon',
+    lawEnforcementConcerns: [
+      'Twitch is owned by Amazon; stream metadata, chat logs, and account data can be disclosed to law enforcement under Amazon\'s policies'
+    ]
+  },
+  {
+    id: 'crunchyroll',
+    name: 'Crunchyroll',
+    category: 'streaming',
+    description: 'Anime and Asian media streaming',
+    minAge: 13,
+    riskLevel: 'medium',
+    privacyConcerns: [
+      'Anime ratings vary; some series are mature',
+      'Community forums and comments',
+      'Watch history used for recommendations'
+    ],
+    parentTips: [
+      'Review series ratings before approving',
+      'Disable forums for younger teens',
+      'Use mature content filters',
+      'Co-watch unfamiliar series first'
+    ],
+    website: 'https://www.crunchyroll.com',
+    vendor: 'Sony'
+  },
+  {
+    id: 'pbs-kids',
+    name: 'PBS Kids Video',
+    category: 'streaming',
+    description: 'Educational shows and games from PBS Kids',
+    minAge: 3,
+    riskLevel: 'low',
+    privacyConcerns: [
+      'Limited ads but usage may still be tracked',
+      'Links can open external sites',
+      'Local station branding varies by region'
+    ],
+    parentTips: [
+      'Download for offline viewing when traveling',
+      'Review games vs. video time balance',
+      'Use together to discuss shows',
+      'Check PBS Kids privacy policy for your region'
+    ],
+    website: 'https://pbskids.org/video'
+  },
   
   // Education
   {
@@ -347,6 +668,27 @@ export const childServiceCatalog: ChildService[] = [
       'Set privacy to "Unlisted" if needed'
     ],
     website: 'https://scratch.mit.edu'
+  },
+  {
+    id: 'canva',
+    name: 'Canva',
+    category: 'creative',
+    description: 'Design tool for presentations, posters, and social graphics',
+    minAge: 13,
+    riskLevel: 'medium',
+    privacyConcerns: [
+      'Projects can be shared publicly via link',
+      'Templates may include brand and stock content tracking',
+      'Education vs. personal accounts collect different data',
+      'AI image tools may store prompts'
+    ],
+    parentTips: [
+      'Use Canva for Education when offered by school',
+      'Keep projects private by default',
+      'Review AI feature settings',
+      'Discuss copyright when using templates'
+    ],
+    website: 'https://www.canva.com'
   },
 
   // â”€â”€ EdTech / School-Assigned â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€

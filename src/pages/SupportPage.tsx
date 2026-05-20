@@ -134,18 +134,16 @@ const SupportPage: React.FC = () => {
     <PageLayout
       title="Support"
       subtitle="Get help and support for using PandaGarde resources. Find answers to common questions, troubleshoot issues, and connect with our support team."
-      icon={Headphones}
-      badge="SUPPORT"
       breadcrumbs={true}
     >
 
       {/* Support Options */}
       <section className="container mx-auto px-6 py-16">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-3xl font-bold mb-4 text-primary">
             How Can We Help You?
           </h2>
-          <p className="text-lg" style={{ color: 'var(--gray-600)' }}>
+          <p className="text-lg text-gray-600">
             Choose the support option that works best for you.
           </p>
         </div>
@@ -171,10 +169,10 @@ const SupportPage: React.FC = () => {
                 <div className="w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center text-white mb-4">
                   <Icon size={24} />
                 </div>
-                <h3 className="text-lg font-bold mb-2" style={{ color: 'var(--primary)' }}>
+                <h3 className="text-lg font-bold mb-2 text-primary">
                   {option.title}
                 </h3>
-                <p className="text-sm mb-4" style={{ color: 'var(--gray-600)' }}>
+                <p className="text-sm mb-4 text-gray-600">
                   {option.description}
                 </p>
                 <div className="flex items-center justify-between text-xs text-gray-500">
@@ -194,10 +192,10 @@ const SupportPage: React.FC = () => {
       <section className="container mx-auto px-6 mb-12">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-8">
-            <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+            <h2 className="text-2xl font-bold mb-4 text-primary">
               Frequently Asked Questions
             </h2>
-            <p className="text-lg" style={{ color: 'var(--gray-600)' }}>
+            <p className="text-lg text-gray-600">
               Find quick answers to common questions about PandaGarde.
             </p>
           </div>
@@ -252,7 +250,7 @@ const SupportPage: React.FC = () => {
                   className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
                   style={{ backgroundColor: 'var(--gray-100)' }}
                 >
-                  <h3 className="text-lg font-semibold pr-4" style={{ color: 'var(--primary)' }}>
+                  <h3 className="text-lg font-semibold pr-4 text-primary">
                     {item.question}
                   </h3>
                   {expandedFAQ === item.id ? (
@@ -264,7 +262,7 @@ const SupportPage: React.FC = () => {
 
                 {expandedFAQ === item.id && (
                   <div className="px-6 pb-4">
-                    <p className="text-gray-700 leading-relaxed" style={{ color: 'var(--gray-600)' }}>
+                    <p className="text-gray-700 leading-relaxed text-gray-600">
                       {item.answer}
                     </p>
                   </div>
@@ -276,10 +274,10 @@ const SupportPage: React.FC = () => {
           {filteredFAQs.length === 0 && (
             <div className="text-center py-12">
               <HelpCircle className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="text-lg font-semibold mb-2 text-primary">
                 No FAQs Found
               </h3>
-              <p style={{ color: 'var(--gray-600)' }}>
+              <p className="text-gray-600">
                 Try adjusting your search terms or category filter.
               </p>
             </div>
@@ -288,12 +286,12 @@ const SupportPage: React.FC = () => {
       </section>
 
       {/* Contact CTA */}
-      <section className="bg-gray-50 py-16" style={{ backgroundColor: 'var(--light)' }}>
+      <section className="bg-gray-50 py-16 bg-light">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-3xl font-bold mb-4 text-primary">
             Still Need Help?
           </h2>
-          <p className="text-lg mb-8" style={{ color: 'var(--gray-600)' }}>
+          <p className="text-lg mb-8 text-gray-600">
             Can't find what you're looking for? Our support team is here to help.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">

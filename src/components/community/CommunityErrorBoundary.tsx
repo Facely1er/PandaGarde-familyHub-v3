@@ -1,5 +1,6 @@
 import React, { Component, ErrorInfo, ReactNode } from 'react';
 import { AlertTriangle, RefreshCw } from 'lucide-react';
+import { logger } from '../../lib/logger';
 
 interface Props {
   children: ReactNode;
@@ -28,7 +29,7 @@ class CommunityErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
-    console.error('Community feature error:', error, errorInfo);
+    logger.error('Community feature error:', error, errorInfo);
     // In production, you might want to log this to an error reporting service
     // but only if user opts in (privacy-first)
   }
@@ -47,12 +48,12 @@ class CommunityErrorBoundary extends Component<Props, State> {
       }
 
       return (
-        <div className="min-h-screen flex items-center justify-center p-4" style={{ backgroundColor: 'var(--white)' }}>
+        <div className="min-h-screen flex items-center justify-center p-4 bg-surface">
           <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-6 text-center" style={{ backgroundColor: 'var(--card-color)' }}>
             <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <AlertTriangle size={32} className="text-red-600" />
             </div>
-            <h2 className="text-2xl font-bold mb-2" style={{ color: 'var(--primary)' }}>
+            <h2 className="text-2xl font-bold mb-2 text-primary">
               Something Went Wrong
             </h2>
             <p className="text-gray-600 mb-6">
@@ -77,7 +78,7 @@ class CommunityErrorBoundary extends Component<Props, State> {
                     localStorage.removeItem('pandagarde_shared_resources');
                     localStorage.removeItem('pandagarde_community_prefs');
                   } catch (e) {
-                    console.error('Error clearing localStorage:', e);
+                    logger.error('Error clearing localStorage:', e);
                   }
                   this.handleReset();
                 }}

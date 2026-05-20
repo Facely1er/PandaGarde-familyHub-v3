@@ -4,6 +4,7 @@ import { CertificateService, CertificateData, Achievement, ACHIEVEMENTS } from '
 import { useProgress } from '../contexts/ProgressContext';
 import { useAuth } from '../pages/family-hub/AuthWrapper';
 import { useFamily } from '../contexts/FamilyContext';
+import { logger } from '../lib/logger';
 
 interface CertificateGeneratorProps {
   onClose?: () => void;
@@ -47,7 +48,7 @@ const CertificateGenerator: React.FC<CertificateGeneratorProps> = ({ onClose }) 
 
       await CertificateService.downloadCertificate(certificateData);
     } catch (error) {
-      console.error('Error generating certificate:', error);
+      logger.error('Error generating certificate:', error);
       alert('Error generating certificate. Please try again.');
     } finally {
       setIsGenerating(false);
@@ -62,7 +63,7 @@ const CertificateGenerator: React.FC<CertificateGeneratorProps> = ({ onClose }) 
       
       await CertificateService.downloadAchievementBadge(achievement, recipientName);
     } catch (error) {
-      console.error('Error generating achievement badge:', error);
+      logger.error('Error generating achievement badge:', error);
       alert('Error generating achievement badge. Please try again.');
     }
   };

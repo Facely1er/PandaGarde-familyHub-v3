@@ -8,30 +8,28 @@ const CookiesPage: React.FC = () => {
     <PageLayout
       title="Cookie Policy"
       subtitle="Learn about how we use cookies and similar technologies to enhance your experience while protecting your privacy."
-      icon={Cookie}
-      badge="PRIVACY"
     >
       <div className="max-w-4xl mx-auto">
           <div className="prose prose-lg max-w-none">
 
             {/* Introduction */}
             <section className="mb-12">
-              <h2 className="text-3xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+              <h2 className="text-3xl font-bold mb-6 text-primary">
                 What Are Cookies?
               </h2>
-              <p className="text-lg mb-4" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-lg mb-4 text-gray-600">
                 Cookies are small text files that are stored on your device when you visit a website. They help
                 websites remember information about your visit, such as your preferences and settings, to make
                 your next visit easier and more personalized.
               </p>
-              <div className="bg-blue-50 p-6 rounded-lg mb-6" style={{ backgroundColor: 'var(--light)' }}>
+              <div className="bg-blue-50 p-6 rounded-lg mb-6 bg-light">
                 <div className="flex items-start gap-3">
-                  <Info size={24} className="text-blue-600 mt-1" style={{ color: 'var(--primary)' }} />
+                  <Info size={24} className="text-blue-600 mt-1 text-primary" />
                   <div>
-                    <h3 className="font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+                    <h3 className="font-semibold mb-2 text-primary">
                       Our Privacy-First Approach
                     </h3>
-                    <p style={{ color: 'var(--gray-600)' }}>
+                    <p className="text-gray-600">
                       At PandaGarde, we believe in minimal data collection and maximum privacy protection.
                       We only use cookies that are essential for the functioning of our educational platform.
                     </p>
@@ -42,7 +40,7 @@ const CookiesPage: React.FC = () => {
 
             {/* Types of Cookies */}
             <section className="mb-12">
-              <h2 className="text-3xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+              <h2 className="text-3xl font-bold mb-6 text-primary">
                 Types of Cookies We Use
               </h2>
 
@@ -117,19 +115,19 @@ const CookiesPage: React.FC = () => {
 
             {/* Third-Party Cookies */}
             <section className="mb-12">
-              <h2 className="text-3xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+              <h2 className="text-3xl font-bold mb-6 text-primary">
                 Third-Party Services
               </h2>
-              <p className="text-lg mb-4" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-lg mb-4 text-gray-600">
                 We may use third-party services that set their own cookies. These services are carefully
                 selected for their privacy-focused approach and educational value.
               </p>
 
-              <div className="bg-gray-50 p-6 rounded-lg" style={{ backgroundColor: 'var(--light)' }}>
-                <h3 className="font-semibold mb-3" style={{ color: 'var(--primary)' }}>
+              <div className="bg-gray-50 p-6 rounded-lg bg-light">
+                <h3 className="font-semibold mb-3 text-primary">
                   Services We May Use:
                 </h3>
-                <ul className="list-disc pl-6" style={{ color: 'var(--gray-600)' }}>
+                <ul className="list-disc pl-6 text-gray-600">
                   <li><strong>Educational Content Delivery:</strong> Secure content delivery networks for educational materials</li>
                   <li><strong>Privacy-Focused Analytics:</strong> Anonymous usage analytics that don't track individuals</li>
                   <li><strong>Security Services:</strong> Protection against malicious attacks and spam</li>
@@ -140,22 +138,22 @@ const CookiesPage: React.FC = () => {
 
             {/* Cookie Management */}
             <section className="mb-12">
-              <h2 className="text-3xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+              <h2 className="text-3xl font-bold mb-6 text-primary">
                 Managing Your Cookie Preferences
               </h2>
-              <p className="text-lg mb-4" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-lg mb-4 text-gray-600">
                 You have control over which cookies you accept. Here's how you can manage your preferences:
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="bg-white p-6 rounded-lg shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
-                  <h3 className="font-semibold mb-3" style={{ color: 'var(--primary)' }}>
+                  <h3 className="font-semibold mb-3 text-primary">
                     Browser Settings
                   </h3>
-                  <p className="mb-3" style={{ color: 'var(--gray-600)' }}>
+                  <p className="mb-3 text-gray-600">
                     Most browsers allow you to control cookies through their settings. You can:
                   </p>
-                  <ul className="list-disc pl-6 text-sm" style={{ color: 'var(--gray-600)' }}>
+                  <ul className="list-disc pl-6 text-sm text-gray-600">
                     <li>Block all cookies</li>
                     <li>Block third-party cookies only</li>
                     <li>Delete existing cookies</li>
@@ -164,13 +162,13 @@ const CookiesPage: React.FC = () => {
                 </div>
 
                 <div className="bg-white p-6 rounded-lg shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
-                  <h3 className="font-semibold mb-3" style={{ color: 'var(--primary)' }}>
+                  <h3 className="font-semibold mb-3 text-primary">
                     Our Cookie Banner
                   </h3>
-                  <p className="mb-3" style={{ color: 'var(--gray-600)' }}>
+                  <p className="mb-3 text-gray-600">
                     When you first visit our site, you'll see a cookie banner where you can:
                   </p>
-                  <ul className="list-disc pl-6 text-sm" style={{ color: 'var(--gray-600)' }}>
+                  <ul className="list-disc pl-6 text-sm text-gray-600">
                     <li>Accept all cookies</li>
                     <li>Accept only essential cookies</li>
                     <li>Customize your preferences</li>
@@ -182,7 +180,7 @@ const CookiesPage: React.FC = () => {
 
             {/* Children's Privacy */}
             <section className="mb-12">
-              <h2 className="text-3xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+              <h2 className="text-3xl font-bold mb-6 text-primary">
                 Special Considerations for Children
               </h2>
               <div className="bg-pink-50 p-6 rounded-lg mb-6" style={{ backgroundColor: '#fdf2f8' }}>
@@ -201,10 +199,10 @@ const CookiesPage: React.FC = () => {
                 </div>
               </div>
 
-              <p className="text-lg mb-4" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-lg mb-4 text-gray-600">
                 For children using our platform:
               </p>
-              <ul className="list-disc pl-6 mb-6" style={{ color: 'var(--gray-600)' }}>
+              <ul className="list-disc pl-6 mb-6 text-gray-600">
                 <li>We only use essential cookies necessary for educational activities</li>
                 <li>No tracking or advertising cookies are used for children's accounts</li>
                 <li>Parents can review and control their child's cookie settings</li>
@@ -214,13 +212,13 @@ const CookiesPage: React.FC = () => {
 
             {/* Data Retention */}
             <section className="mb-12">
-              <h2 className="text-3xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+              <h2 className="text-3xl font-bold mb-6 text-primary">
                 Data Retention
               </h2>
-              <p className="text-lg mb-4" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-lg mb-4 text-gray-600">
                 We retain cookie data only as long as necessary for the purposes outlined in this policy:
               </p>
-              <ul className="list-disc pl-6 mb-6" style={{ color: 'var(--gray-600)' }}>
+              <ul className="list-disc pl-6 mb-6 text-gray-600">
                 <li><strong>Session Cookies:</strong> Deleted when you close your browser</li>
                 <li><strong>Persistent Cookies:</strong> Deleted after 12 months maximum</li>
                 <li><strong>Essential Cookies:</strong> Retained only for security and functionality purposes</li>
@@ -230,38 +228,38 @@ const CookiesPage: React.FC = () => {
 
             {/* Updates to Policy */}
             <section className="mb-12">
-              <h2 className="text-3xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+              <h2 className="text-3xl font-bold mb-6 text-primary">
                 Updates to This Policy
               </h2>
-              <p className="text-lg mb-4" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-lg mb-4 text-gray-600">
                 We may update this Cookie Policy from time to time to reflect changes in our practices or
                 for other operational, legal, or regulatory reasons. We will notify you of any material
                 changes by posting the updated policy on our website.
               </p>
-              <p className="text-lg mb-4" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-lg mb-4 text-gray-600">
                 We encourage you to review this policy periodically to stay informed about how we use cookies.
               </p>
             </section>
 
             {/* Contact Information */}
             <section className="mb-12">
-              <h2 className="text-3xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+              <h2 className="text-3xl font-bold mb-6 text-primary">
                 Questions About Cookies?
               </h2>
-              <p className="text-lg mb-4" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-lg mb-4 text-gray-600">
                 If you have any questions about our use of cookies or this Cookie Policy, please contact us:
               </p>
-              <div className="bg-gray-50 p-6 rounded-lg" style={{ backgroundColor: 'var(--light)' }}>
-                <p className="mb-2" style={{ color: 'var(--gray-600)' }}>
+              <div className="bg-gray-50 p-6 rounded-lg bg-light">
+                <p className="mb-2 text-gray-600">
                   <strong>Email:</strong> privacy@pandagarde.com
                 </p>
-                <p className="mb-2" style={{ color: 'var(--gray-600)' }}>
+                <p className="mb-2 text-gray-600">
                   <strong>Website:</strong>{' '}
                   <Link to="/contact" className="text-blue-600 hover:underline">
                     pandagarde.com/contact
                   </Link>
                 </p>
-                <p style={{ color: 'var(--gray-600)' }}>
+                <p className="text-gray-600">
                   <strong>Subject Line:</strong> Cookie Policy Inquiry
                 </p>
               </div>
@@ -269,11 +267,11 @@ const CookiesPage: React.FC = () => {
 
             {/* Effective Date */}
             <section className="mb-12">
-              <div className="bg-blue-50 p-6 rounded-lg text-center" style={{ backgroundColor: 'var(--light)' }}>
-                <p className="text-lg font-semibold" style={{ color: 'var(--primary)' }}>
+              <div className="bg-blue-50 p-6 rounded-lg text-center bg-light">
+                <p className="text-lg font-semibold text-primary">
                   This Cookie Policy is effective as of December 2024
                 </p>
-                <p className="text-sm mt-2" style={{ color: 'var(--gray-600)' }}>
+                <p className="text-sm mt-2 text-gray-600">
                   Last updated: December 2024
                 </p>
               </div>

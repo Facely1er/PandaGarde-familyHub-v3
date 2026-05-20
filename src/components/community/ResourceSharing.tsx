@@ -118,7 +118,7 @@ const ResourceSharing: React.FC<ResourceSharingProps> = ({ compact = false }) =>
     return (
       <div className="bg-white rounded-lg p-4 shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold flex items-center gap-2" style={{ color: 'var(--primary)' }}>
+          <h3 className="text-lg font-semibold flex items-center gap-2 text-primary">
             <BookOpen size={20} />
             Community Resources
           </h3>
@@ -135,11 +135,11 @@ const ResourceSharing: React.FC<ResourceSharingProps> = ({ compact = false }) =>
             <div key={resource.id} className="border-b border-gray-200 pb-3 last:border-0">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
-                  <h4 className="font-medium mb-1 flex items-center gap-2" style={{ color: 'var(--primary)' }}>
+                  <h4 className="font-medium mb-1 flex items-center gap-2 text-primary">
                     {resource.title}
                     {resource.verified && <CheckCircle size={14} className="text-green-600" />}
                   </h4>
-                  <p className="text-sm line-clamp-2 mb-2" style={{ color: 'var(--gray-600)' }}>
+                  <p className="text-sm line-clamp-2 mb-2 text-gray-600">
                     {resource.description}
                   </p>
                   <div className="flex items-center gap-3 text-xs text-gray-500">
@@ -179,10 +179,10 @@ const ResourceSharing: React.FC<ResourceSharingProps> = ({ compact = false }) =>
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h2 className="text-3xl font-bold mb-2" style={{ color: 'var(--primary)' }}>
+              <h2 className="text-3xl font-bold mb-2 text-primary">
                 Community Resources
               </h2>
-              <p className="text-lg" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-lg text-gray-600">
                 Privacy tools, guides, and educational resources shared by the community
               </p>
             </div>
@@ -304,7 +304,7 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ resource, isSaved, onVote, 
       <div className="flex items-start justify-between mb-3">
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-2">
-            <h3 className="text-xl font-bold" style={{ color: 'var(--primary)' }}>
+            <h3 className="text-xl font-bold text-primary">
               {resource.title}
             </h3>
             {resource.verified && (
@@ -328,7 +328,7 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ resource, isSaved, onVote, 
         </div>
       </div>
       
-      <p className="mb-4 line-clamp-3" style={{ color: 'var(--gray-600)' }}>
+      <p className="mb-4 line-clamp-3 text-gray-600">
         {resource.description}
       </p>
 
@@ -454,7 +454,7 @@ const ResourceSubmissionForm: React.FC<ResourceSubmissionFormProps> = ({ onSubmi
           >
             ✕
           </button>
-          <h2 id="resource-submit-title" className="text-2xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+          <h2 id="resource-submit-title" className="text-2xl font-bold mb-4 text-primary">
             Share a Resource
           </h2>
 
@@ -466,7 +466,7 @@ const ResourceSubmissionForm: React.FC<ResourceSubmissionFormProps> = ({ onSubmi
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: 'var(--gray-700)' }}>
+              <label className="block text-sm font-medium mb-2 text-gray-700">
                 Resource Title *
               </label>
               <input
@@ -482,7 +482,7 @@ const ResourceSubmissionForm: React.FC<ResourceSubmissionFormProps> = ({ onSubmi
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: 'var(--gray-700)' }}>
+              <label className="block text-sm font-medium mb-2 text-gray-700">
                 URL *
               </label>
               <input
@@ -497,7 +497,7 @@ const ResourceSubmissionForm: React.FC<ResourceSubmissionFormProps> = ({ onSubmi
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: 'var(--gray-700)' }}>
+              <label className="block text-sm font-medium mb-2 text-gray-700">
                 Category *
               </label>
               <select
@@ -518,7 +518,7 @@ const ResourceSubmissionForm: React.FC<ResourceSubmissionFormProps> = ({ onSubmi
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: 'var(--gray-700)' }}>
+              <label className="block text-sm font-medium mb-2 text-gray-700">
                 Description *
               </label>
               <textarea
@@ -535,7 +535,7 @@ const ResourceSubmissionForm: React.FC<ResourceSubmissionFormProps> = ({ onSubmi
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: 'var(--gray-700)' }}>
+              <label className="block text-sm font-medium mb-2 text-gray-700">
                 Tags (optional, comma-separated)
               </label>
               <input

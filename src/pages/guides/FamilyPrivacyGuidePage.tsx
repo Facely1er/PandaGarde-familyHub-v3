@@ -10,8 +10,6 @@ const FamilyPrivacyGuidePage: React.FC = () => {
     <PageLayout
       title="Complete Family Privacy Guide"
       subtitle="Everything parents need to know about teaching digital privacy to children of all ages. Includes age-specific strategies, conversation starters, and practical implementation tips."
-      icon={Heart}
-      badge="FAMILY GUIDE"
       breadcrumbs={true}
     >
       <div className="family-guide-container">

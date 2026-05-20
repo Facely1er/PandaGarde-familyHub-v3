@@ -62,7 +62,9 @@ const FeaturesPage = lazy(() => import('./pages/FeaturesPage'));
 const ResourcesPage = lazy(() => import('./pages/ResourcesPage'));
 const QuickStartPage = lazy(() => import('./pages/QuickStartPage'));
 const ParentToolkitPage = lazy(() => import('./pages/ParentToolkitPage'));
-const PlaceholderPage = lazy(() => import('./pages/PlaceholderPage'));
+const ActivitiesPage = lazy(() => import('./pages/ActivitiesPage'));
+const PrivacyLearningKitPage = lazy(() => import('./pages/PrivacyLearningKitPage'));
+const WorksheetsPage = lazy(() => import('./pages/WorksheetsPage'));
 const PilotPage = lazy(() => import('./pages/PilotPage'));
 const ChildSafetyAlertsPage = lazy(() => import('./pages/ChildSafetyAlertsPage'));
 const ServiceCatalogPage = lazy(() => import('./pages/ServiceCatalogPage'));
@@ -294,12 +296,13 @@ function App() {
             <Route path="/family-privacy-plan" element={<FamilyPrivacyPlanPage />} />
             <Route path="/guides/family-privacy-plan" element={<FamilyPrivacyPlanPage />} />
 
-            {/* Activity Pages - redirect to classroom activities */}
-            <Route path="/activities" element={<ClassroomActivitiesPage />} />
-            <Route path="/activities/privacy-learning-kit" element={<ClassroomActivitiesPage />} />
+            {/* Activity Pages */}
+            <Route path="/activities/privacy-learning-kit" element={<PrivacyLearningKitPage />} />
+            <Route path="/activities/:activityId" element={<ActivitiesPage />} />
+            <Route path="/activities" element={<ActivitiesPage />} />
             
             {/* Additional Download Pages */}
-            <Route path="/downloads/worksheets" element={<ResourcesPage />} />
+            <Route path="/downloads/worksheets" element={<WorksheetsPage />} />
             
             {/* 404 Fallback */}
             <Route path="*" element={<NotFoundPage />} />

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Download, Palette, Printer, Share2, Star } from 'lucide-react';
 import { pdfService } from '../lib/pdfService';
 import PageLayout from '../components/layout/PageLayout';
+import { logger } from '../lib/logger';
 
 const ColoringSheetsPage: React.FC = () => {
   const [isDownloading, setIsDownloading] = useState(false);
@@ -85,7 +86,7 @@ const ColoringSheetsPage: React.FC = () => {
           await new Promise(resolve => setTimeout(resolve, 500));
         }
       } catch (error) {
-        console.error('Error downloading coloring sheets:', error);
+        logger.error('Error downloading coloring sheets:', error);
         alert('Error downloading coloring sheets. Please try again.');
       } finally {
         setIsDownloading(false);
@@ -103,7 +104,7 @@ const ColoringSheetsPage: React.FC = () => {
           link.click();
           document.body.removeChild(link);
         } catch (error) {
-          console.error('Error downloading SVG:', error);
+          logger.error('Error downloading SVG:', error);
           alert('Error downloading coloring sheet. Please try again.');
         }
       }
@@ -114,8 +115,6 @@ const ColoringSheetsPage: React.FC = () => {
     <PageLayout
       title="Privacy Panda Coloring Sheets"
       subtitle="Download and print these fun coloring pages featuring Privacy Panda and privacy concepts. Perfect for offline learning and creative expression!"
-      icon={Palette}
-      badge="DOWNLOADABLE RESOURCES"
       breadcrumbs={true}
     >
       <div className="min-h-screen" style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}>
@@ -127,41 +126,41 @@ const ColoringSheetsPage: React.FC = () => {
           <h2 className="font-bold mb-6" style={{ fontSize: 'clamp(1.875rem, 3vw, 2.25rem)', color: 'var(--primary)' }}>
             Creative Learning Through Coloring
           </h2>
-          <p className="text-lg leading-relaxed mb-8" style={{ color: 'var(--gray-600)' }}>
+          <p className="text-lg leading-relaxed mb-8 text-gray-600">
             These coloring sheets combine creativity with privacy education. Each page teaches important concepts while providing a fun, relaxing activity for children of all ages.
           </p>
           
-          <div className="bg-green-50 border border-green-200 rounded-xl p-6 mb-8" style={{ backgroundColor: 'var(--light)' }}>
-            <h3 className="text-xl font-semibold mb-4" style={{ color: 'var(--primary)' }}>
+          <div className="bg-green-50 border border-green-200 rounded-xl p-6 mb-8 bg-light">
+            <h3 className="text-xl font-semibold mb-4 text-primary">
               💡 Coloring Tips for Parents & Educators
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
               <div className="flex items-start gap-3">
                 <Star size={20} className="text-green-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1" style={{ color: 'var(--primary)' }}>Discuss While Coloring</h4>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>Talk about the privacy concepts shown in each picture</p>
+                  <h4 className="font-semibold mb-1 text-primary">Discuss While Coloring</h4>
+                  <p className="text-sm text-gray-600">Talk about the privacy concepts shown in each picture</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Star size={20} className="text-green-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1" style={{ color: 'var(--primary)' }}>Display Finished Art</h4>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>Hang completed coloring sheets as privacy reminders</p>
+                  <h4 className="font-semibold mb-1 text-primary">Display Finished Art</h4>
+                  <p className="text-sm text-gray-600">Hang completed coloring sheets as privacy reminders</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Star size={20} className="text-green-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1" style={{ color: 'var(--primary)' }}>Use Quality Materials</h4>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>Print on good paper for better coloring experience</p>
+                  <h4 className="font-semibold mb-1 text-primary">Use Quality Materials</h4>
+                  <p className="text-sm text-gray-600">Print on good paper for better coloring experience</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Star size={20} className="text-green-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1" style={{ color: 'var(--primary)' }}>Make It Social</h4>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>Color together as a family activity</p>
+                  <h4 className="font-semibold mb-1 text-primary">Make It Social</h4>
+                  <p className="text-sm text-gray-600">Color together as a family activity</p>
                 </div>
               </div>
             </div>
@@ -202,7 +201,7 @@ const ColoringSheetsPage: React.FC = () => {
               
               <div className="p-6">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-lg font-bold" style={{ color: 'var(--primary)' }}>
+                  <h3 className="text-lg font-bold text-primary">
                     {sheet.title}
                   </h3>
                   <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
@@ -214,7 +213,7 @@ const ColoringSheetsPage: React.FC = () => {
                   </span>
                 </div>
                 
-                <p className="text-sm mb-4" style={{ color: 'var(--gray-600)' }}>
+                <p className="text-sm mb-4 text-gray-600">
                   {sheet.description}
                 </p>
                 
@@ -278,10 +277,10 @@ const ColoringSheetsPage: React.FC = () => {
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Palette size={24} className="text-blue-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="text-lg font-semibold mb-2 text-primary">
                 Interactive Coloring
               </h3>
-              <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-sm text-gray-600">
                 Try our digital coloring activity in the Activity Book
               </p>
             </Link>
@@ -294,10 +293,10 @@ const ColoringSheetsPage: React.FC = () => {
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Star size={24} className="text-purple-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="text-lg font-semibold mb-2 text-primary">
                 Privacy Panda Story
               </h3>
-              <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-sm text-gray-600">
                 Read the full story that inspired these coloring sheets
               </p>
             </Link>
@@ -310,10 +309,10 @@ const ColoringSheetsPage: React.FC = () => {
               <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Share2 size={24} className="text-yellow-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="text-lg font-semibold mb-2 text-primary">
                 Safety Posters
               </h3>
-              <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-sm text-gray-600">
                 Download classroom-ready privacy education posters
               </p>
             </Link>

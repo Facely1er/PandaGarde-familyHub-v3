@@ -96,7 +96,7 @@ class OfflineManager {
         this.syncStatus.lastSync = this.data.lastSync;
       }
     } catch (error) {
-      console.error('Failed to load offline data:', error);
+      logger.error('Failed to load offline data:', error);
     }
   }
 
@@ -106,7 +106,7 @@ class OfflineManager {
       this.data.lastSync = Date.now();
       localStorage.setItem('pandagarde_offline_data', JSON.stringify(this.data));
     } catch (error) {
-      console.error('Failed to save offline data:', error);
+      logger.error('Failed to save offline data:', error);
     }
   }
 
@@ -183,7 +183,7 @@ class OfflineManager {
             a => a.id !== action.id
           );
         } catch (error) {
-          console.error(`Failed to sync action ${action.type}:`, error);
+          logger.error(`Failed to sync action ${action.type}:`, error);
           // Keep failed actions for retry
         }
       }
@@ -193,7 +193,7 @@ class OfflineManager {
       
       logger.debug(`Synced ${actionsToSync.length} actions`, undefined, 'OFFLINE');
     } catch (error) {
-      console.error('Sync failed:', error);
+      logger.error('Sync failed:', error);
     } finally {
       this.syncStatus.syncInProgress = false;
       this.notifyListeners();
@@ -249,7 +249,7 @@ class OfflineManager {
       try {
         listener(this.syncStatus);
       } catch (error) {
-        console.error('Error in sync status listener:', error);
+        logger.error('Error in sync status listener:', error);
       }
     });
   }

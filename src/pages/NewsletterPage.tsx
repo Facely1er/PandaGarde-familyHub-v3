@@ -5,6 +5,7 @@ import PageLayout from '../components/layout/PageLayout';
 import { useToast } from '../contexts/ToastContext';
 import { newsletterArchive } from '../data/newsletters';
 import { newsletterService } from '../lib/database';
+import { logger } from '../lib/logger';
 
 const NewsletterPage: React.FC = () => {
   const { showSuccess, showError } = useToast();
@@ -38,7 +39,7 @@ const NewsletterPage: React.FC = () => {
         showError('Subscription Failed', 'There was an error subscribing. Please try again.');
       }
     } catch (error) {
-      console.error('Newsletter subscription error:', error);
+      logger.error('Newsletter subscription error:', error);
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
       if (errorMessage.includes('Invalid email')) {
         showError('Invalid Email', 'Please enter a valid email address.');
@@ -91,18 +92,16 @@ const NewsletterPage: React.FC = () => {
     <PageLayout
       title="Newsletter"
       subtitle="Stay updated with the latest privacy education news, new activities, and expert tips to help your family navigate the digital world safely."
-      icon={Mail}
-      badge="NEWSLETTER"
       breadcrumbs={true}
     >
 
       {/* Subscription Section */}
       <section className="py-12">
         <div className="max-w-2xl mx-auto text-center mb-12">
-          <h2 className="text-3xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-3xl font-bold mb-6 text-primary">
             Join Our Privacy Education Community
           </h2>
-          <p className="text-lg mb-8" style={{ color: 'var(--gray-600)' }}>
+          <p className="text-lg mb-8 text-gray-600">
             Get monthly updates with the latest privacy education resources, activities, and expert tips
             delivered directly to your inbox. No spam, just valuable content for your family.
           </p>
@@ -154,10 +153,10 @@ const NewsletterPage: React.FC = () => {
                 <div className="w-16 h-16 rounded-full flex items-center justify-center text-white mx-auto mb-4" style={{ background: 'var(--gradient-primary)' }}>
                   <Icon size={32} />
                 </div>
-                <h3 className="text-lg font-bold mb-2" style={{ color: 'var(--primary)' }}>
+                <h3 className="text-lg font-bold mb-2 text-primary">
                   {feature.title}
                 </h3>
-                <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+                <p className="text-sm text-gray-600">
                   {feature.description}
                 </p>
               </div>
@@ -167,13 +166,13 @@ const NewsletterPage: React.FC = () => {
       </section>
 
       {/* Recent Newsletters */}
-      <section className="py-12 rounded-xl" style={{ backgroundColor: 'var(--light)' }}>
+      <section className="py-12 rounded-xl bg-light">
         <div>
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+            <h2 className="text-3xl font-bold mb-4 text-primary">
               Recent Newsletters
             </h2>
-            <p className="text-lg mb-4" style={{ color: 'var(--gray-600)' }}>
+            <p className="text-lg mb-4 text-gray-600">
               See what our community has been learning about digital privacy.
             </p>
             <Link
@@ -197,7 +196,7 @@ const NewsletterPage: React.FC = () => {
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-2">
-                        <h3 className="text-xl font-bold" style={{ color: 'var(--primary)' }}>
+                        <h3 className="text-xl font-bold text-primary">
                           {newsletter.title}
                         </h3>
                         {newsletter.featured && (
@@ -226,7 +225,7 @@ const NewsletterPage: React.FC = () => {
       {/* Privacy Promise */}
       <section className="py-12">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-8" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-3xl font-bold mb-8 text-primary">
             Our Privacy Promise
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -234,10 +233,10 @@ const NewsletterPage: React.FC = () => {
               <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Shield size={24} className="text-green-600" />
               </div>
-              <h3 className="font-bold mb-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="font-bold mb-2 text-primary">
                 No Spam
               </h3>
-              <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-sm text-gray-600">
                 We only send valuable content about privacy education. No promotional spam.
               </p>
             </div>
@@ -245,10 +244,10 @@ const NewsletterPage: React.FC = () => {
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Mail size={24} className="text-blue-600" />
               </div>
-              <h3 className="font-bold mb-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="font-bold mb-2 text-primary">
                 Easy Unsubscribe
               </h3>
-              <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-sm text-gray-600">
                 <Link to="/newsletter/unsubscribe" className="text-green-700 hover:text-green-800 underline">
                   Unsubscribe anytime
                 </Link> with one click. We respect your inbox.
@@ -258,10 +257,10 @@ const NewsletterPage: React.FC = () => {
               <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Users size={24} className="text-purple-600" />
               </div>
-              <h3 className="font-bold mb-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="font-bold mb-2 text-primary">
                 Data Protection
               </h3>
-              <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-sm text-gray-600">
                 We never share your email with third parties. Your privacy is protected.
               </p>
             </div>
@@ -281,7 +280,7 @@ const NewsletterPage: React.FC = () => {
           <div className="flex flex-wrap gap-4 justify-center">
             <Link
               to="/activity-book"
-              className="bg-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center gap-2" style={{ color: 'var(--primary)' }}
+              className="bg-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center gap-2 text-primary"
             >
               <BookOpen size={20} />
               Try Activities

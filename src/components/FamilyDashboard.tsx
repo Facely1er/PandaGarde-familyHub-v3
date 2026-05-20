@@ -16,6 +16,7 @@ import {
   logSecurityEvent
 } from '../lib/familyHubSecurity';
 import { useActiveMember } from '../utils/familyProgressIntegration';
+import { logger } from '../lib/logger';
 
 interface FamilyMember {
   id: number;
@@ -344,7 +345,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
       return;
     }
     const stillValid =
-      currentMemberId != null && familyMembers.some((m) => m.id === currentMemberId);
+      currentMemberId !== null && familyMembers.some((m) => m.id === currentMemberId);
     if (!stillValid) {
       setActiveMember(familyMembers[0].id);
     }
@@ -401,7 +402,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
         const realScore = calculateMemberScore(member.id);
         return sum + (realScore || 0);
       } catch (error) {
-        console.error('Error calculating member score:', error);
+        logger.error('Error calculating member score:', error);
         return sum;
       }
     }, 0);
@@ -695,7 +696,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
               </span>
             </div>
             <h3 className="font-semibold text-xs sm:text-sm mb-0.5 sm:mb-1 text-teal-700">Family Members</h3>
-            <p className="text-xs" style={{ color: 'var(--gray-600)' }}>Active participants</p>
+            <p className="text-xs text-gray-600">Active participants</p>
           </div>
 
           <div 
@@ -714,7 +715,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
               </span>
             </div>
             <h3 className="font-semibold text-xs sm:text-sm mb-0.5 sm:mb-1 text-teal-700">Privacy Score</h3>
-            <p className="text-xs" style={{ color: 'var(--gray-600)' }}>Family average</p>
+            <p className="text-xs text-gray-600">Family average</p>
           </div>
 
           <div 
@@ -733,7 +734,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
               </span>
             </div>
             <h3 className="font-semibold text-xs sm:text-sm mb-0.5 sm:mb-1 text-teal-700">Activities Done</h3>
-            <p className="text-xs" style={{ color: 'var(--gray-600)' }}>Total completed</p>
+            <p className="text-xs text-gray-600">Total completed</p>
           </div>
 
           <div 
@@ -752,7 +753,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
               </span>
             </div>
             <h3 className="font-semibold text-xs sm:text-sm mb-0.5 sm:mb-1 text-teal-700">Goals Achieved</h3>
-            <p className="text-xs" style={{ color: 'var(--gray-600)' }}>Privacy goals</p>
+            <p className="text-xs text-gray-600">Privacy goals</p>
           </div>
         </div>
 
@@ -821,7 +822,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
             }}
           >
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0 mb-4 sm:mb-6">
-              <h2 className="text-xl sm:text-2xl font-bold" style={{ color: 'var(--primary)' }}>Family Members</h2>
+              <h2 className="text-xl sm:text-2xl font-bold text-primary">Family Members</h2>
               <button 
                 onClick={() => setShowAddMember(true)}
                 className="bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-teal-700 active:bg-teal-800 transition-colors flex items-center justify-center gap-2 touch-manipulation min-h-[44px] w-full sm:w-auto font-medium"
@@ -836,10 +837,10 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
                 <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-5">
                   <Users className="text-gray-400" size={28} />
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3" style={{ color: 'var(--primary)' }}>
+                <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-primary">
                   No Family Members Yet
                 </h3>
-                <p className="mb-4 sm:mb-6 text-sm sm:text-base" style={{ color: 'var(--gray-600)' }}>Add your first family member to start tracking progress together.</p>
+                <p className="mb-4 sm:mb-6 text-sm sm:text-base text-gray-600">Add your first family member to start tracking progress together.</p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <button 
                     onClick={() => setShowAddMember(true)}
@@ -873,18 +874,18 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
                           {member.name.charAt(0).toUpperCase()}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h3 className="font-bold text-base sm:text-lg sm:truncate break-words" style={{ color: 'var(--primary)' }}>
+                          <h3 className="font-bold text-base sm:text-lg sm:truncate break-words text-primary">
                             {member.name}
                           </h3>
-                          <p className="text-sm" style={{ color: 'var(--gray-600)' }}>{member.role} • Age {member.age}</p>
+                          <p className="text-sm text-gray-600">{member.role} • Age {member.age}</p>
                         </div>
                       </div>
                       <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-4">
                         <div className="text-right">
-                          <div className="text-lg sm:text-xl font-bold" style={{ color: 'var(--primary)' }}>
+                          <div className="text-lg sm:text-xl font-bold text-primary">
                             {calculateMemberScore(member.id)}
                           </div>
-                          <div className="text-xs" style={{ color: 'var(--gray-600)' }}>Privacy Score</div>
+                          <div className="text-xs text-gray-600">Privacy Score</div>
                         </div>
                         <div className="flex items-center gap-2">
                           <button
@@ -911,8 +912,8 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
                     {/* Privacy Score Display */}
                     <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t" style={{ borderColor: 'var(--gray-200)' }}>
                       <div className="flex items-center justify-between mb-1.5 sm:mb-2">
-                        <span className="text-xs sm:text-sm" style={{ color: 'var(--gray-600)' }}>Privacy Score</span>
-                        <span className="text-xs sm:text-sm font-medium" style={{ color: 'var(--gray-700)' }}>
+                        <span className="text-xs sm:text-sm text-gray-600">Privacy Score</span>
+                        <span className="text-xs sm:text-sm font-medium text-gray-700">
                           {calculateMemberScore(member.id)}/100
                         </span>
                       </div>
@@ -949,7 +950,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
             }}
           >
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0 mb-4 sm:mb-6">
-              <h2 className="text-xl sm:text-2xl font-bold" style={{ color: 'var(--primary)' }}>Privacy Goals</h2>
+              <h2 className="text-xl sm:text-2xl font-bold text-primary">Privacy Goals</h2>
               <button 
                 onClick={() => setShowAddGoal(true)}
                 className="bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-teal-700 active:bg-teal-800 transition-colors flex items-center justify-center gap-2 touch-manipulation min-h-[44px] w-full sm:w-auto font-medium"
@@ -964,10 +965,10 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
                 <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-5">
                   <Award className="text-gray-400" size={28} />
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3" style={{ color: 'var(--primary)' }}>
+                <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-primary">
                   No Privacy Goals Yet
                 </h3>
-                <p className="mb-4 sm:mb-6 text-sm sm:text-base" style={{ color: 'var(--gray-600)' }}>Set your first privacy goal to track your family's progress.</p>
+                <p className="mb-4 sm:mb-6 text-sm sm:text-base text-gray-600">Set your first privacy goal to track your family's progress.</p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <button 
                     onClick={() => setShowAddGoal(true)}
@@ -1013,7 +1014,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
                             {goal.priority}
                           </span>
                         </div>
-                        <p className="text-sm mb-2" style={{ color: 'var(--gray-600)' }}>{goal.description}</p>
+                        <p className="text-sm mb-2 text-gray-600">{goal.description}</p>
                         {goal.targetDate && (
                           <p className="text-xs" style={{ color: 'var(--gray-500)' }}>
                             Target: {new Date(goal.targetDate).toLocaleDateString()}
@@ -1048,7 +1049,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
             style={{ backgroundColor: 'var(--card-color)' }}
           >
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-xl font-bold" style={{ color: 'var(--primary)' }}>Add Family Member</h3>
+              <h3 className="text-xl font-bold text-primary">Add Family Member</h3>
               <button 
                 onClick={() => setShowAddMember(false)}
                 className="text-gray-400 hover:text-gray-600 transition-colors"
@@ -1069,7 +1070,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
               )}
               
               <div>
-                <label className="block text-sm font-medium mb-2" style={{ color: 'var(--gray-700)' }}>Name</label>
+                <label className="block text-sm font-medium mb-2 text-gray-700">Name</label>
                 <input
                   type="text"
                   value={newMember.name}
@@ -1083,7 +1084,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
               </div>
               
               <div>
-                <label className="block text-sm font-medium mb-2" style={{ color: 'var(--gray-700)' }}>Age</label>
+                <label className="block text-sm font-medium mb-2 text-gray-700">Age</label>
                 <input
                   type="number"
                   value={newMember.age || ''}
@@ -1098,7 +1099,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
               </div>
               
               <div>
-                <label className="block text-sm font-medium mb-2" style={{ color: 'var(--gray-700)' }}>Role</label>
+                <label className="block text-sm font-medium mb-2 text-gray-700">Role</label>
                 <select
                   value={newMember.role}
                   onChange={(e) => setNewMember({...newMember, role: e.target.value})}
@@ -1141,7 +1142,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
             style={{ backgroundColor: 'var(--card-color)' }}
           >
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-xl font-bold" style={{ color: 'var(--primary)' }}>Add Privacy Goal</h3>
+              <h3 className="text-xl font-bold text-primary">Add Privacy Goal</h3>
               <button 
                 onClick={() => setShowAddGoal(false)}
                 className="text-gray-400 hover:text-gray-600 transition-colors"
@@ -1152,7 +1153,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
             
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium mb-2" style={{ color: 'var(--gray-700)' }}>Goal Title</label>
+                <label className="block text-sm font-medium mb-2 text-gray-700">Goal Title</label>
                 <input
                   type="text"
                   value={newGoal.title}
@@ -1165,7 +1166,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
               </div>
               
               <div>
-                <label className="block text-sm font-medium mb-2" style={{ color: 'var(--gray-700)' }}>Description</label>
+                <label className="block text-sm font-medium mb-2 text-gray-700">Description</label>
                 <textarea
                   value={newGoal.description}
                   onChange={(e) => setNewGoal({...newGoal, description: e.target.value})}
@@ -1177,7 +1178,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
               </div>
               
               <div>
-                <label className="block text-sm font-medium mb-2" style={{ color: 'var(--gray-700)' }}>Target Date (Optional)</label>
+                <label className="block text-sm font-medium mb-2 text-gray-700">Target Date (Optional)</label>
                 <input
                   type="date"
                   value={newGoal.targetDate}
@@ -1188,7 +1189,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
               </div>
               
               <div>
-                <label className="block text-sm font-medium mb-2" style={{ color: 'var(--gray-700)' }}>Priority</label>
+                <label className="block text-sm font-medium mb-2 text-gray-700">Priority</label>
                 <select
                   value={newGoal.priority}
                   onChange={(e) => setNewGoal({...newGoal, priority: e.target.value})}

@@ -2,6 +2,7 @@ import React from 'react';
 import { useFamilyProgress } from '../contexts/FamilyProgressContext';
 import { Award, Clock, TrendingUp, Calendar, Gamepad2, BookOpen, GraduationCap, ArrowLeft } from 'lucide-react';
 import { ProgressBar } from './ui/ProgressBar';
+import { logger } from '../lib/logger';
 
 interface ChildProgressDetailProps {
   memberId: number;
@@ -59,7 +60,7 @@ const ChildProgressDetail: React.FC<ChildProgressDetailProps> = ({
         minute: '2-digit'
       });
     } catch (error) {
-      console.error('Error formatting date:', error);
+      logger.error('Error formatting date:', error);
       return 'N/A';
     }
   };

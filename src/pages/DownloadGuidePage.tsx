@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Download, FileText, Printer, Eye, CheckCircle } from 'lucide-react';
 import { pdfService } from '../lib/pdfService';
 import PageLayout from '../components/layout/PageLayout';
+import { logger } from '../lib/logger';
 
 interface DownloadGuidePageProps {
   title: string;
@@ -51,7 +52,7 @@ const DownloadGuidePage: React.FC<DownloadGuidePageProps> = ({
         }
       }
     } catch (error) {
-      console.error('Error downloading resource:', error);
+      logger.error('Error downloading resource:', error);
       // Fallback to HTML view if PDF generation fails
       const url = `/downloads/${resourceType}.html`;
       window.open(url, '_blank');
@@ -111,8 +112,6 @@ const DownloadGuidePage: React.FC<DownloadGuidePageProps> = ({
     <PageLayout
       title={title}
       subtitle={description}
-      icon={IconComponent}
-      badge={type.toUpperCase()}
       breadcrumbs={true}
     >
       <div className="min-h-screen bg-white">

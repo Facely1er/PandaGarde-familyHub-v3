@@ -11,8 +11,7 @@ export const GuideContentRenderer: React.FC<GuideContentRendererProps> = ({ cont
     case 'paragraph':
       return (
         <p 
-          className="mb-4 leading-relaxed" 
-          style={{ color: 'var(--gray-700)' }}
+          className="mb-4 leading-relaxed text-gray-700"
         >
           {typeof content.content === 'string' ? content.content : ''}
         </p>
@@ -21,7 +20,7 @@ export const GuideContentRenderer: React.FC<GuideContentRendererProps> = ({ cont
     case 'list':
       if (Array.isArray(content.content)) {
         return (
-          <ul className="mb-4 space-y-2 list-disc list-inside" style={{ color: 'var(--gray-700)' }}>
+          <ul className="mb-4 space-y-2 list-disc list-inside text-gray-700">
             {content.content.map((item, idx) => (
               <li key={idx} className="leading-relaxed">
                 {item}
@@ -54,12 +53,12 @@ export const GuideContentRenderer: React.FC<GuideContentRendererProps> = ({ cont
             borderColor: 'var(--gray-200)' 
           }}
         >
-          <h4 className="text-lg font-semibold mb-3" style={{ color: 'var(--primary)' }}>
+          <h4 className="text-lg font-semibold mb-3 text-primary">
             {card.title}
           </h4>
           <ul className="space-y-2">
             {card.items.map((item, idx) => (
-              <li key={idx} className="flex items-start gap-2" style={{ color: 'var(--gray-700)' }}>
+              <li key={idx} className="flex items-start gap-2 text-gray-700">
                 <span className="text-green-600 mt-1">•</span>
                 <span>{item}</span>
               </li>
@@ -81,7 +80,7 @@ export const GuideContentRenderer: React.FC<GuideContentRendererProps> = ({ cont
       return (
         <HeadingTag 
           className={headingClasses[heading.level]}
-          style={{ color: 'var(--primary)' }}
+          className="text-primary"
         >
           {heading.text}
         </HeadingTag>

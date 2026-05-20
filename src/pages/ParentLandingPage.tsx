@@ -1,91 +1,100 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Shield, Eye, MessageCircle, TrendingUp, ArrowRight, CheckCircle, HelpCircle } from 'lucide-react';
+import { Shield, Eye, TrendingUp, ArrowRight, CheckCircle, HelpCircle } from 'lucide-react';
+
+const featureCards = [
+  {
+    icon: Eye,
+    iconBg: 'bg-red-100',
+    iconColor: 'text-red-600',
+    title: 'See Risks',
+    description:
+      "Get a clear view of your family's privacy status. See which apps and websites your children use, and understand the privacy risks for each one - all explained in simple terms.",
+    bullets: [
+      'View all apps and websites your children use',
+      'See privacy risk scores for each service',
+      'Get alerts when new risks appear',
+    ],
+  },
+  {
+    icon: Shield,
+    iconBg: 'bg-blue-100',
+    iconColor: 'text-blue-600',
+    title: 'Take Action',
+    description:
+      "Don't just see the problems - get clear, actionable steps to fix them. Approve or deny app requests, get privacy setting guides, and take control of your family's online safety.",
+    bullets: [
+      'Approve or deny app requests from your children',
+      'Get step-by-step privacy setting guides',
+      'See what needs your attention right away',
+    ],
+  },
+  {
+    icon: TrendingUp,
+    iconBg: 'bg-amber-100',
+    iconColor: 'text-amber-600',
+    title: 'Stay Informed',
+    description:
+      "Get conversation starters, track your family's privacy progress, and stay up-to-date with tips and resources designed specifically for parents.",
+    bullets: [
+      'Get ready-to-use conversation starters',
+      "Track your family's privacy improvements",
+      'Access parent guides and resources',
+    ],
+  },
+] as const;
 
 const ParentLandingPage: React.FC = () => {
   const faqs = [
     {
       question: 'How do I see what my children do online?',
-      answer: 'Once you create a Family Hub account and add your children, you can see all the apps and websites they use, along with privacy risk scores for each one.'
+      answer:
+        'Once you create a Family Hub account and add your children, you can see all the apps and websites they use, along with privacy risk scores for each one.',
     },
     {
       question: 'What is a privacy risk score?',
-      answer: 'A simple number that shows how safe your child\'s privacy is with each app or website. Lower is safer, higher means more risk. We explain what each score means in plain language.'
+      answer:
+        "A simple number that shows how safe your child's privacy is with each app or website. Lower is safer, higher means more risk. We explain what each score means in plain language.",
     },
     {
       question: 'Do I need to be tech-savvy to use this?',
-      answer: 'Not at all! Everything is designed for parents who aren\'t tech experts. We use simple language and clear explanations, not technical jargon.'
+      answer:
+        "Not at all! Everything is designed for parents who aren't tech experts. We use simple language and clear explanations, not technical jargon.",
     },
     {
       question: 'How do conversation starters help?',
-      answer: 'We provide ready-to-use questions and topics based on what your children are actually using online, so you know exactly what to talk about and how to start the conversation.'
+      answer:
+        'We provide ready-to-use questions and topics based on what your children are actually using online, so you know exactly what to talk about and how to start the conversation.',
     },
     {
-      question: 'Is my family\'s information safe?',
-      answer: 'Yes. We take privacy seriously - we\'re helping you protect your family\'s privacy, so we protect yours too. All information is encrypted and stored securely.'
-    }
+      question: "Is my family's information safe?",
+      answer:
+        "Yes. We take privacy seriously - we're helping you protect your family's privacy, so we protect yours too. All information is encrypted and stored securely.",
+    },
   ];
 
   return (
-    <main id="main-content" style={{ minHeight: '100vh' }}>
-      {/* Page Header */}
-      <section style={{ padding: 'clamp(3rem, 6vw, 4rem) 0', background: 'linear-gradient(135deg, #f8fafc 0%, #ffffff 100%)' }}>
+    <main id="main-content">
+      <section className="marketing-hero">
         <div className="container">
-          <div className="text-center fade-in" style={{ textAlign: 'center' }}>
-            <h1 style={{
-              fontSize: 'clamp(2rem, 4vw, 2.5rem)',
-              fontWeight: '800',
-              lineHeight: '1.1',
-              marginBottom: '1rem',
-              color: '#0f172a'
-            }}>
-              For Parents: Keep Your Family Safe Online
-            </h1>
-            <p style={{
-              fontSize: '1.125rem',
-              color: '#64748b',
-              maxWidth: '48rem',
-              margin: '0 auto 2rem',
-              lineHeight: '1.6'
-            }}>
-              Simple tools to see what your children do online, understand their privacy risks, and get help talking to them about staying safe.
+          <div className="fade-in text-center">
+            <h1 className="marketing-heading">For Parents: Keep Your Family Safe Online</h1>
+            <p className="marketing-lead">
+              Simple tools to see what your children do online, understand their privacy risks, and get help
+              talking to them about staying safe.
             </p>
-            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Link 
-                to="/family-hub" target="_blank" rel="noopener noreferrer"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.5rem',
-                  padding: '1rem 2rem',
-                  backgroundColor: '#667eea',
-                  color: 'white',
-                  borderRadius: '8px',
-                  textDecoration: 'none',
-                  fontWeight: 'bold',
-                  fontSize: '1.1rem'
-                }}
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link
+                to="/family-hub"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-marketing-primary"
               >
                 <Shield size={20} />
                 Start Protecting Your Family
                 <ArrowRight size={16} />
               </Link>
-              <Link 
-                to="/overview"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.5rem',
-                  padding: '1rem 2rem',
-                  backgroundColor: 'transparent',
-                  color: '#667eea',
-                  border: '2px solid #667eea',
-                  borderRadius: '8px',
-                  textDecoration: 'none',
-                  fontWeight: 'bold',
-                  fontSize: '1.1rem'
-                }}
-              >
+              <Link to="/overview" className="btn-marketing-outline">
                 Learn More
               </Link>
             </div>
@@ -93,194 +102,59 @@ const ParentLandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Three Column Layout */}
-      <section style={{ padding: '4rem 0', backgroundColor: '#f8f9fa' }}>
+      <section className="marketing-section">
         <div className="container">
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
-            gap: '2rem',
-            marginTop: '2rem'
-          }}>
-            {/* See Risks */}
-            <div style={{ 
-              backgroundColor: 'white', 
-              padding: '2.5rem', 
-              borderRadius: '12px',
-              boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
-            }}>
-              <div style={{ 
-                width: '64px', 
-                height: '64px', 
-                backgroundColor: '#fee2e2', 
-                borderRadius: '50%', 
-                display: 'flex', 
-                alignItems: 'center', 
-                justifyContent: 'center',
-                marginBottom: '1.5rem'
-              }}>
-                <Eye size={32} style={{ color: '#dc2626' }} />
-              </div>
-              <h2 style={{ fontSize: '1.75rem', marginBottom: '1rem', color: '#2C3E50' }}>
-                See Risks
-              </h2>
-              <p style={{ color: '#666', lineHeight: '1.8', marginBottom: '1.5rem' }}>
-                Get a clear view of your family's privacy status. See which apps and websites your children use, and understand the privacy risks for each one - all explained in simple terms.
-              </p>
-              <ul style={{ listStyle: 'none', padding: 0, color: '#666' }}>
-                <li style={{ marginBottom: '0.75rem', display: 'flex', alignItems: 'start', gap: '0.5rem' }}>
-                  <CheckCircle size={20} style={{ color: '#4CAF50', flexShrink: 0, marginTop: '2px' }} />
-                  <span>View all apps and websites your children use</span>
-                </li>
-                <li style={{ marginBottom: '0.75rem', display: 'flex', alignItems: 'start', gap: '0.5rem' }}>
-                  <CheckCircle size={20} style={{ color: '#4CAF50', flexShrink: 0, marginTop: '2px' }} />
-                  <span>See privacy risk scores for each service</span>
-                </li>
-                <li style={{ marginBottom: '0.75rem', display: 'flex', alignItems: 'start', gap: '0.5rem' }}>
-                  <CheckCircle size={20} style={{ color: '#4CAF50', flexShrink: 0, marginTop: '2px' }} />
-                  <span>Get alerts when new risks appear</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Take Action */}
-            <div style={{ 
-              backgroundColor: 'white', 
-              padding: '2.5rem', 
-              borderRadius: '12px',
-              boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
-            }}>
-              <div style={{ 
-                width: '64px', 
-                height: '64px', 
-                backgroundColor: '#dbeafe', 
-                borderRadius: '50%', 
-                display: 'flex', 
-                alignItems: 'center', 
-                justifyContent: 'center',
-                marginBottom: '1.5rem'
-              }}>
-                <Shield size={32} style={{ color: '#2563eb' }} />
-              </div>
-              <h2 style={{ fontSize: '1.75rem', marginBottom: '1rem', color: '#2C3E50' }}>
-                Take Action
-              </h2>
-              <p style={{ color: '#666', lineHeight: '1.8', marginBottom: '1.5rem' }}>
-                Don't just see the problems - get clear, actionable steps to fix them. Approve or deny app requests, get privacy setting guides, and take control of your family's online safety.
-              </p>
-              <ul style={{ listStyle: 'none', padding: 0, color: '#666' }}>
-                <li style={{ marginBottom: '0.75rem', display: 'flex', alignItems: 'start', gap: '0.5rem' }}>
-                  <CheckCircle size={20} style={{ color: '#4CAF50', flexShrink: 0, marginTop: '2px' }} />
-                  <span>Approve or deny app requests from your children</span>
-                </li>
-                <li style={{ marginBottom: '0.75rem', display: 'flex', alignItems: 'start', gap: '0.5rem' }}>
-                  <CheckCircle size={20} style={{ color: '#4CAF50', flexShrink: 0, marginTop: '2px' }} />
-                  <span>Get step-by-step privacy setting guides</span>
-                </li>
-                <li style={{ marginBottom: '0.75rem', display: 'flex', alignItems: 'start', gap: '0.5rem' }}>
-                  <CheckCircle size={20} style={{ color: '#4CAF50', flexShrink: 0, marginTop: '2px' }} />
-                  <span>See what needs your attention right away</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Stay Informed */}
-            <div style={{ 
-              backgroundColor: 'white', 
-              padding: '2.5rem', 
-              borderRadius: '12px',
-              boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
-            }}>
-              <div style={{ 
-                width: '64px', 
-                height: '64px', 
-                backgroundColor: '#fef3c7', 
-                borderRadius: '50%', 
-                display: 'flex', 
-                alignItems: 'center', 
-                justifyContent: 'center',
-                marginBottom: '1.5rem'
-              }}>
-                <TrendingUp size={32} style={{ color: '#d97706' }} />
-              </div>
-              <h2 style={{ fontSize: '1.75rem', marginBottom: '1rem', color: '#2C3E50' }}>
-                Stay Informed
-              </h2>
-              <p style={{ color: '#666', lineHeight: '1.8', marginBottom: '1.5rem' }}>
-                Get conversation starters, track your family's privacy progress, and stay up-to-date with tips and resources designed specifically for parents.
-              </p>
-              <ul style={{ listStyle: 'none', padding: 0, color: '#666' }}>
-                <li style={{ marginBottom: '0.75rem', display: 'flex', alignItems: 'start', gap: '0.5rem' }}>
-                  <CheckCircle size={20} style={{ color: '#4CAF50', flexShrink: 0, marginTop: '2px' }} />
-                  <span>Get ready-to-use conversation starters</span>
-                </li>
-                <li style={{ marginBottom: '0.75rem', display: 'flex', alignItems: 'start', gap: '0.5rem' }}>
-                  <CheckCircle size={20} style={{ color: '#4CAF50', flexShrink: 0, marginTop: '2px' }} />
-                  <span>Track your family's privacy improvements</span>
-                </li>
-                <li style={{ marginBottom: '0.75rem', display: 'flex', alignItems: 'start', gap: '0.5rem' }}>
-                  <CheckCircle size={20} style={{ color: '#4CAF50', flexShrink: 0, marginTop: '2px' }} />
-                  <span>Access parent guides and resources</span>
-                </li>
-              </ul>
-            </div>
+          <div className="marketing-grid">
+            {featureCards.map(({ icon: Icon, iconBg, iconColor, title, description, bullets }) => (
+              <article key={title} className="marketing-card">
+                <div className={`icon-circle ${iconBg}`}>
+                  <Icon size={32} className={iconColor} />
+                </div>
+                <h2 className="mb-4 text-3xl text-gray-800">{title}</h2>
+                <p className="mb-6 leading-relaxed text-gray-600">{description}</p>
+                <ul className="list-none space-y-3 p-0 text-gray-600">
+                  {bullets.map((item) => (
+                    <li key={item} className="flex items-start gap-2">
+                      <CheckCircle size={20} className="mt-0.5 shrink-0 text-success" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Risk Dashboard Preview */}
-      <section style={{ padding: '4rem 0', backgroundColor: 'white' }}>
+      <section className="bg-surface py-16">
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-            <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: '#2C3E50' }}>
-              Your Privacy Dashboard
-            </h2>
-            <p style={{ fontSize: '1.25rem', color: '#666', maxWidth: '700px', margin: '0 auto' }}>
-              See everything you need to know about your family's online privacy in one simple dashboard.
+          <div className="mb-12 text-center">
+            <h2 className="mb-4 text-4xl text-gray-800">Your Privacy Dashboard</h2>
+            <p className="mx-auto max-w-2xl text-xl text-gray-600">
+              See everything you need to know about your family&apos;s online privacy in one simple dashboard.
             </p>
           </div>
-          
-          <div style={{ 
-            backgroundColor: '#f8f9fa', 
-            borderRadius: '12px', 
-            padding: '2rem',
-            border: '2px dashed #ddd'
-          }}>
-            <div style={{ 
-              display: 'grid', 
-              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
-              gap: '1.5rem',
-              marginBottom: '2rem'
-            }}>
-              <div style={{ textAlign: 'center', padding: '1.5rem', backgroundColor: 'white', borderRadius: '8px' }}>
-                <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#4CAF50', marginBottom: '0.5rem' }}>85</div>
-                <div style={{ color: '#666' }}>Family Privacy Score</div>
-              </div>
-              <div style={{ textAlign: 'center', padding: '1.5rem', backgroundColor: 'white', borderRadius: '8px' }}>
-                <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#f59e0b', marginBottom: '0.5rem' }}>3</div>
-                <div style={{ color: '#666' }}>Action Items</div>
-              </div>
-              <div style={{ textAlign: 'center', padding: '1.5rem', backgroundColor: 'white', borderRadius: '8px' }}>
-                <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#2563eb', marginBottom: '0.5rem' }}>2</div>
-                <div style={{ color: '#666' }}>Children</div>
-              </div>
+
+          <div className="rounded-card border-2 border-dashed border-gray-300 bg-light p-8">
+            <div className="mb-8 grid gap-6 sm:grid-cols-3">
+              {[
+                { value: '85', label: 'Family Privacy Score', color: 'text-success' },
+                { value: '3', label: 'Action Items', color: 'text-amber-500' },
+                { value: '2', label: 'Children', color: 'text-blue-600' },
+              ].map(({ value, label, color }) => (
+                <div key={label} className="rounded-lg bg-surface p-6 text-center">
+                  <div className={`mb-2 text-4xl font-bold ${color}`}>{value}</div>
+                  <div className="text-gray-600">{label}</div>
+                </div>
+              ))}
             </div>
-            
-            <div style={{ textAlign: 'center' }}>
-              <Link 
-                to="/family-hub" target="_blank" rel="noopener noreferrer"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.5rem',
-                  padding: '1rem 2rem',
-                  backgroundColor: '#4CAF50',
-                  color: 'white',
-                  borderRadius: '8px',
-                  textDecoration: 'none',
-                  fontWeight: 'bold',
-                  fontSize: '1.1rem'
-                }}
+
+            <div className="text-center">
+              <Link
+                to="/family-hub"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg bg-success px-8 py-4 text-lg font-bold text-white no-underline"
               >
                 <Shield size={20} />
                 Access Your Dashboard
@@ -291,57 +165,31 @@ const ParentLandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section style={{ padding: '4rem 0', backgroundColor: '#f8f9fa' }}>
+      <section className="marketing-section">
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-            <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: '#2C3E50' }}>
-              Common Questions from Parents
-            </h2>
-            <p style={{ fontSize: '1.25rem', color: '#666' }}>
-              Everything you need to know to get started
-            </p>
+          <div className="mb-12 text-center">
+            <h2 className="mb-4 text-4xl text-gray-800">Common Questions from Parents</h2>
+            <p className="text-xl text-gray-600">Everything you need to know to get started</p>
           </div>
-          
-          <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-            {faqs.map((faq, index) => (
-              <div 
-                key={index}
-                style={{ 
-                  backgroundColor: 'white', 
-                  padding: '1.5rem', 
-                  borderRadius: '8px',
-                  marginBottom: '1rem',
-                  boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'start', gap: '1rem' }}>
-                  <HelpCircle size={24} style={{ color: '#4CAF50', flexShrink: 0, marginTop: '2px' }} />
+
+          <div className="mx-auto max-w-3xl">
+            {faqs.map((faq) => (
+              <article key={faq.question} className="mb-4 rounded-lg bg-surface p-6 shadow-card">
+                <div className="flex items-start gap-4">
+                  <HelpCircle size={24} className="mt-0.5 shrink-0 text-success" />
                   <div>
-                    <h3 style={{ fontSize: '1.25rem', marginBottom: '0.75rem', color: '#2C3E50' }}>
-                      {faq.question}
-                    </h3>
-                    <p style={{ color: '#666', lineHeight: '1.8' }}>
-                      {faq.answer}
-                    </p>
+                    <h3 className="mb-3 text-xl text-gray-800">{faq.question}</h3>
+                    <p className="leading-relaxed text-gray-600">{faq.answer}</p>
                   </div>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
-          
-          <div style={{ textAlign: 'center', marginTop: '3rem' }}>
-            <Link 
+
+          <div className="mt-12 text-center">
+            <Link
               to="/faq"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                color: '#4CAF50',
-                textDecoration: 'none',
-                fontWeight: 'bold',
-                fontSize: '1.1rem'
-              }}
+              className="inline-flex items-center gap-2 text-lg font-bold text-success no-underline"
             >
               See All Questions
               <ArrowRight size={16} />
@@ -350,34 +198,18 @@ const ParentLandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section style={{ 
-        padding: '4rem 0', 
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        color: 'white',
-        textAlign: 'center'
-      }}>
+      <section className="bg-gradient-to-br from-indigo-500 to-purple-600 py-16 text-center text-white">
         <div className="container">
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>
-            Ready to Protect Your Family?
-          </h2>
-          <p style={{ fontSize: '1.25rem', marginBottom: '2rem', maxWidth: '600px', margin: '0 auto 2rem' }}>
-            Keep your family safe online with simple, easy-to-use tools designed for parents who want to protect their children's privacy.
+          <h2 className="mb-4 text-4xl font-bold">Ready to Protect Your Family?</h2>
+          <p className="mx-auto mb-8 max-w-xl text-xl">
+            Keep your family safe online with simple, easy-to-use tools designed for parents who want to protect
+            their children&apos;s privacy.
           </p>
-          <Link 
-            to="/family-hub" target="_blank" rel="noopener noreferrer"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              padding: '1.25rem 2.5rem',
-              backgroundColor: 'white',
-              color: '#667eea',
-              borderRadius: '8px',
-              textDecoration: 'none',
-              fontWeight: 'bold',
-              fontSize: '1.2rem'
-            }}
+          <Link
+            to="/family-hub"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-lg bg-white px-10 py-5 text-xl font-bold text-indigo-500 no-underline"
           >
             <Shield size={24} />
             Start Protecting Your Family Now
@@ -390,4 +222,3 @@ const ParentLandingPage: React.FC = () => {
 };
 
 export default ParentLandingPage;
-

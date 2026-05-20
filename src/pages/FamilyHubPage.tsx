@@ -12,6 +12,7 @@ import PrivacyGoals from '../components/PrivacyGoals';
 import AdaptiveResources from '../components/AdaptiveResources';
 import EmailCaptureInline from '../components/EmailCaptureInline';
 import { FamilyPersonaProfiles } from '../data/familyPersonaProfiles';
+import { logger } from '../lib/logger';
 
 
 interface Activity {
@@ -58,7 +59,7 @@ const FamilyHubPage: React.FC = () => {
         const personaData = JSON.parse(storedPersona);
         setFamilyPersona(personaData.primary || null);
       } catch (e) {
-        console.error('Error parsing persona data:', e);
+        logger.error('Error parsing persona data:', e);
       }
     }
   }, []);
@@ -435,7 +436,7 @@ const FamilyHubPage: React.FC = () => {
                             {member.first_name.charAt(0).toUpperCase()}
                           </div>
                           <div className="flex-1 min-w-0">
-                            <h3 className="font-bold text-base sm:text-lg sm:truncate break-words" style={{ color: 'var(--primary)' }}>
+                            <h3 className="font-bold text-base sm:text-lg sm:truncate break-words text-primary">
                               {member.first_name} {member.last_name}
                             </h3>
                             <div className="flex items-center gap-1.5 text-xs sm:text-sm" style={{ color: 'var(--gray-500)' }}>
@@ -448,12 +449,12 @@ const FamilyHubPage: React.FC = () => {
                         <div className="space-y-2 text-xs sm:text-sm pt-4 border-t border-gray-100" style={{ borderColor: 'var(--light)' }}>
                           <div className="flex items-center justify-between">
                             <span className="text-gray-500">Email</span>
-                            <span className="font-medium sm:truncate break-words ml-2" style={{ color: 'var(--gray-700)' }}>{member.email}</span>
+                            <span className="font-medium sm:truncate break-words ml-2 text-gray-700">{member.email}</span>
                           </div>
                           {member.profile_data?.age && (
                             <div className="flex items-center justify-between">
                               <span className="text-gray-500">Age</span>
-                              <span className="font-medium" style={{ color: 'var(--gray-700)' }}>{member.profile_data.age} years</span>
+                              <span className="font-medium text-gray-700">{member.profile_data.age} years</span>
                             </div>
                           )}
                         </div>
@@ -470,7 +471,7 @@ const FamilyHubPage: React.FC = () => {
                     <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mb-3 group-hover:bg-green-200 transition-colors">
                       <Plus size={24} className="text-green-600" />
                     </div>
-                    <span className="font-semibold text-sm" style={{ color: 'var(--primary)' }}>Add Family Member</span>
+                    <span className="font-semibold text-sm text-primary">Add Family Member</span>
                   </button>
                 </div>
               )}
@@ -501,7 +502,7 @@ const FamilyHubPage: React.FC = () => {
             {familyPersona && (
               <section>
                 <div className="bg-white rounded-xl p-6 border-2 border-green-200 dark:border-green-800" style={{ backgroundColor: 'var(--card-color)' }}>
-                  <h3 className="text-xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+                  <h3 className="text-xl font-bold mb-4 text-primary">
                     Recommended for You
                   </h3>
                   <AdaptiveResources 
@@ -545,10 +546,10 @@ const FamilyHubPage: React.FC = () => {
                           <div className={`w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r ${action.color} rounded-xl flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform`}>
                             <IconComponent size={24} className="sm:w-7 sm:h-7" />
                           </div>
-                          <h3 className="font-bold mb-2 text-base sm:text-lg leading-tight" style={{ color: 'var(--primary)' }}>
+                          <h3 className="font-bold mb-2 text-base sm:text-lg leading-tight text-primary">
                             {action.title}
                           </h3>
-                          <p className="text-xs sm:text-sm leading-relaxed mb-3" style={{ color: 'var(--gray-600)' }}>
+                          <p className="text-xs sm:text-sm leading-relaxed mb-3 text-gray-600">
                             {action.description}
                           </p>
                           <div className="flex items-center text-green-600 text-xs sm:text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
@@ -573,10 +574,10 @@ const FamilyHubPage: React.FC = () => {
                         <div className={`w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r ${action.color} rounded-xl flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform`}>
                           <IconComponent size={24} className="sm:w-7 sm:h-7" />
                         </div>
-                        <h3 className="font-bold mb-2 text-base sm:text-lg leading-tight" style={{ color: 'var(--primary)' }}>
+                        <h3 className="font-bold mb-2 text-base sm:text-lg leading-tight text-primary">
                           {action.title}
                         </h3>
-                        <p className="text-xs sm:text-sm leading-relaxed mb-3" style={{ color: 'var(--gray-600)' }}>
+                        <p className="text-xs sm:text-sm leading-relaxed mb-3 text-gray-600">
                           {action.description}
                         </p>
                         <div className="flex items-center text-green-600 text-xs sm:text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
@@ -599,10 +600,10 @@ const FamilyHubPage: React.FC = () => {
                       <div className={`w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r ${action.color} rounded-xl flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform`}>
                         <IconComponent size={24} className="sm:w-7 sm:h-7" />
                       </div>
-                      <h3 className="font-bold mb-2 text-base sm:text-lg leading-tight" style={{ color: 'var(--primary)' }}>
+                      <h3 className="font-bold mb-2 text-base sm:text-lg leading-tight text-primary">
                         {action.title}
                       </h3>
-                      <p className="text-xs sm:text-sm leading-relaxed" style={{ color: 'var(--gray-600)' }}>
+                      <p className="text-xs sm:text-sm leading-relaxed text-gray-600">
                         {action.description}
                       </p>
                     </button>
@@ -642,7 +643,7 @@ const FamilyHubPage: React.FC = () => {
                           <IconComponent size={24} />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h3 className="font-bold mb-2 leading-tight" style={{ color: 'var(--primary)' }}>
+                          <h3 className="font-bold mb-2 leading-tight text-primary">
                             {activity.title}
                           </h3>
                           <div className="flex items-center gap-2 text-sm mb-2" style={{ color: 'var(--gray-500)' }}>
@@ -698,7 +699,7 @@ const FamilyHubPage: React.FC = () => {
               <h2 className="font-bold mb-4" style={{ fontSize: 'clamp(1.875rem, 3vw, 2.25rem)', color: 'var(--primary)' }}>
                 Learning Activities
               </h2>
-              <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-lg max-w-2xl mx-auto text-gray-600">
                 Explore our comprehensive library of age-appropriate privacy education activities.
               </p>
             </div>
@@ -710,10 +711,10 @@ const FamilyHubPage: React.FC = () => {
                   <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center text-white mx-auto mb-6">
                     <BookOpen size={32} />
                   </div>
-                  <h3 className="text-xl font-bold mb-3" style={{ color: 'var(--primary)' }}>
+                  <h3 className="text-xl font-bold mb-3 text-primary">
                     Interactive Activity Book
                   </h3>
-                  <p className="mb-4" style={{ color: 'var(--gray-600)' }}>
+                  <p className="mb-4 text-gray-600">
                     6 interactive activities teaching privacy fundamentals
                   </p>
                   <div className="text-green-600 font-semibold">
@@ -728,10 +729,10 @@ const FamilyHubPage: React.FC = () => {
                   <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white mx-auto mb-6">
                     <Book size={32} />
                   </div>
-                  <h3 className="text-xl font-bold mb-3" style={{ color: 'var(--primary)' }}>
+                  <h3 className="text-xl font-bold mb-3 text-primary">
                     Digital Bamboo Forest Story
                   </h3>
-                  <p className="mb-4" style={{ color: 'var(--gray-600)' }}>
+                  <p className="mb-4 text-gray-600">
                     Follow Privacy Panda's adventure learning about digital safety
                   </p>
                   <div className="text-blue-600 font-semibold">
@@ -746,10 +747,10 @@ const FamilyHubPage: React.FC = () => {
                   <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center text-white mx-auto mb-6">
                     <Award size={32} />
                   </div>
-                  <h3 className="text-xl font-bold mb-3" style={{ color: 'var(--primary)' }}>
+                  <h3 className="text-xl font-bold mb-3 text-primary">
                     Privacy Tools & Challenges
                   </h3>
-                  <p className="mb-4" style={{ color: 'var(--gray-600)' }}>
+                  <p className="mb-4 text-gray-600">
                     Advanced privacy tools and challenges for older children
                   </p>
                   <div className="text-purple-600 font-semibold">
@@ -768,7 +769,7 @@ const FamilyHubPage: React.FC = () => {
               <h2 className="font-bold mb-4" style={{ fontSize: 'clamp(1.875rem, 3vw, 2.25rem)', color: 'var(--primary)' }}>
                 Family Progress Tracking
               </h2>
-              <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-lg max-w-2xl mx-auto text-gray-600">
                 Monitor learning progress and achievements across all family members.
               </p>
             </div>
@@ -784,7 +785,7 @@ const FamilyHubPage: React.FC = () => {
                       <div className="font-bold" style={{ fontSize: 'clamp(1.875rem, 3vw, 2.25rem)', color: 'var(--primary)' }}>
                         {getOverallProgressPercentage()}%
                       </div>
-                      <div className="text-sm" style={{ color: 'var(--gray-600)' }}>
+                      <div className="text-sm text-gray-600">
                         Complete
                       </div>
                     </div>
@@ -808,7 +809,7 @@ const FamilyHubPage: React.FC = () => {
                           <UserCircle size={32} className="text-white" />
                         )}
                       </div>
-                      <h4 className="font-bold mb-2" style={{ color: 'var(--primary)' }}>
+                      <h4 className="font-bold mb-2 text-primary">
                         {memberName || 'Family Member'}
                       </h4>
                       <div className="w-full bg-gray-200 rounded-full h-3 mb-2">
@@ -817,7 +818,7 @@ const FamilyHubPage: React.FC = () => {
                           style={{ width: `${progress}%` }}
                         />
                       </div>
-                      <div className="text-sm font-medium" style={{ color: 'var(--gray-600)' }}>
+                      <div className="text-sm font-medium text-gray-600">
                         {completedActivities}/{totalActivities} activities
                       </div>
                     </div>
@@ -835,7 +836,7 @@ const FamilyHubPage: React.FC = () => {
               <h2 className="font-bold mb-4" style={{ fontSize: 'clamp(1.875rem, 3vw, 2.25rem)', color: 'var(--primary)' }}>
                 Family Management
               </h2>
-              <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-lg max-w-2xl mx-auto text-gray-600">
                 Manage your family members and settings.
               </p>
             </div>
@@ -845,7 +846,7 @@ const FamilyHubPage: React.FC = () => {
                 <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
                   <Users size={32} className="text-gray-400" />
                 </div>
-                <h3 className="text-xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+                <h3 className="text-xl font-bold mb-4 text-primary">
                   No Family Yet
                 </h3>
                 <p className="text-gray-600 mb-8 max-w-md mx-auto">
@@ -871,7 +872,7 @@ const FamilyHubPage: React.FC = () => {
                 {/* Family Info */}
                 <div className="bg-white rounded-xl p-6" style={{ backgroundColor: 'var(--card-color)' }}>
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-xl font-bold" style={{ color: 'var(--primary)' }}>
+                    <h3 className="text-xl font-bold text-primary">
                       {currentFamily.name}
                     </h3>
                     <button
@@ -893,7 +894,7 @@ const FamilyHubPage: React.FC = () => {
                 {/* Family Members */}
                 <div className="bg-white rounded-xl p-6" style={{ backgroundColor: 'var(--card-color)' }}>
                   <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-xl font-bold" style={{ color: 'var(--primary)' }}>
+                    <h3 className="text-xl font-bold text-primary">
                       Family Members ({familyMembers.length})
                     </h3>
                     <button
@@ -913,7 +914,7 @@ const FamilyHubPage: React.FC = () => {
                             {member.first_name.charAt(0)}
                           </div>
                           <div>
-                            <h4 className="font-medium" style={{ color: 'var(--primary)' }}>
+                            <h4 className="font-medium text-primary">
                               {member.first_name} {member.last_name}
                             </h4>
                             <p className="text-sm text-gray-600">{member.email}</p>
@@ -941,10 +942,10 @@ const FamilyHubPage: React.FC = () => {
         {activeTab === 'resources' && (
           <div className="space-y-8">
             <div className="text-center">
-              <h2 className="text-3xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+              <h2 className="text-3xl font-bold mb-4 text-primary">
                 Personalized Resources
               </h2>
-              <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-lg max-w-2xl mx-auto text-gray-600">
                 {familyPersona 
                   ? `Resources tailored for ${FamilyPersonaProfiles[familyPersona]?.name || 'your family'}`
                   : 'Resources tailored to your family\'s privacy needs'}
@@ -976,10 +977,10 @@ const FamilyHubPage: React.FC = () => {
                 <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
                   <Star size={24} className="text-orange-600" />
                 </div>
-                <h3 className="text-xl font-bold mb-3" style={{ color: 'var(--primary)' }}>
+                <h3 className="text-xl font-bold mb-3 text-primary">
                   PrivacyPanda Mobile App
                 </h3>
-                <p className="mb-4" style={{ color: 'var(--gray-600)' }}>
+                <p className="mb-4 text-gray-600">
                   Access the full PrivacyPanda mobile application with advanced features and offline capabilities.
                 </p>
                 <div className="text-orange-600 font-semibold hover:text-orange-700 transition-colors">
@@ -991,10 +992,10 @@ const FamilyHubPage: React.FC = () => {
                 <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
                   <Download size={24} className="text-blue-600" />
                 </div>
-                <h3 className="text-xl font-bold mb-3" style={{ color: 'var(--primary)' }}>
+                <h3 className="text-xl font-bold mb-3 text-primary">
                   Printable Activities
                 </h3>
-                <p className="mb-4" style={{ color: 'var(--gray-600)' }}>
+                <p className="mb-4 text-gray-600">
                   Coloring sheets, certificates, and offline activities for screen-free learning.
                 </p>
                 <button className="text-blue-600 font-semibold hover:text-blue-700 transition-colors">
@@ -1006,10 +1007,10 @@ const FamilyHubPage: React.FC = () => {
                 <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
                   <Users size={24} className="text-purple-600" />
                 </div>
-                <h3 className="text-xl font-bold mb-3" style={{ color: 'var(--primary)' }}>
+                <h3 className="text-xl font-bold mb-3 text-primary">
                   Discussion Guides
                 </h3>
-                <p className="mb-4" style={{ color: 'var(--gray-600)' }}>
+                <p className="mb-4 text-gray-600">
                   Conversation starters and questions for family privacy discussions.
                 </p>
                 <Link to="/#parent-resources" className="text-purple-600 font-semibold hover:text-purple-700 transition-colors">
@@ -1021,10 +1022,10 @@ const FamilyHubPage: React.FC = () => {
                 <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
                   <Settings size={24} className="text-green-600" />
                 </div>
-                <h3 className="text-xl font-bold mb-3" style={{ color: 'var(--primary)' }}>
+                <h3 className="text-xl font-bold mb-3 text-primary">
                   Privacy Tools
                 </h3>
-                <p className="mb-4" style={{ color: 'var(--gray-600)' }}>
+                <p className="mb-4 text-gray-600">
                   Practical tools and settings guides for family devices and apps.
                 </p>
                 <button className="text-green-600 font-semibold hover:text-green-700 transition-colors">
@@ -1057,7 +1058,7 @@ const FamilyHubPage: React.FC = () => {
                 transition={{ duration: 0.2, ease: 'easeOut' }}
                 className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full p-6 sm:p-6 mx-auto"
               >
-                <h3 id="create-family-title" className="text-xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+                <h3 id="create-family-title" className="text-xl font-bold mb-4 text-primary">
                   Create New Family
                 </h3>
                 <div className="space-y-4">
@@ -1122,7 +1123,7 @@ const FamilyHubPage: React.FC = () => {
                 transition={{ duration: 0.2, ease: 'easeOut' }}
                 className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full p-6"
               >
-              <h3 id="join-family-title" className="text-xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+              <h3 id="join-family-title" className="text-xl font-bold mb-4 text-primary">
                 Join Existing Family
               </h3>
               <div className="space-y-4">
@@ -1187,7 +1188,7 @@ const FamilyHubPage: React.FC = () => {
               transition={{ duration: 0.2, ease: 'easeOut' }}
               className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full p-6"
             >
-              <h3 id="add-member-title" className="text-xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+              <h3 id="add-member-title" className="text-xl font-bold mb-4 text-primary">
                 Add Family Member
               </h3>
               <div className="space-y-4">

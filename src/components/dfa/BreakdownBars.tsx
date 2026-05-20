@@ -6,9 +6,9 @@ interface Props {
 }
 
 const tone = (value: number): string => {
-  if (value >= 75) return 'bg-red-500';
-  if (value >= 55) return 'bg-orange-500';
-  if (value >= 30) return 'bg-amber-500';
+  if (value >= 75) {return 'bg-red-500';}
+  if (value >= 55) {return 'bg-orange-500';}
+  if (value >= 30) {return 'bg-amber-500';}
   return 'bg-emerald-500';
 };
 

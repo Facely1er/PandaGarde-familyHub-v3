@@ -207,51 +207,49 @@ const PrivacyConcernsGuidePage: React.FC = () => {
     <PageLayout
       title="Responding to Privacy Concerns"
       subtitle="When privacy issues arise, quick and appropriate action is crucial. This guide helps you recognize, respond to, and recover from various privacy concerns."
-      icon={AlertTriangle}
-      badge="EMERGENCY GUIDE"
       breadcrumbs={true}
     >
       <div style={{ maxWidth: '56rem', margin: '0 auto' }}>
         {/* Introduction */}
         <div className="max-w-4xl mx-auto text-center mb-16">
-          <h2 className="text-3xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-3xl font-bold mb-6 text-primary">
             Quick Response is Key
           </h2>
-          <p className="text-lg leading-relaxed mb-8" style={{ color: 'var(--gray-600)' }}>
+          <p className="text-lg leading-relaxed mb-8 text-gray-600">
             Privacy concerns can range from minor inconveniences to serious threats. The key is to recognize the signs early and take appropriate action quickly. This guide covers the most common privacy issues and how to respond effectively.
           </p>
           
-          <div className="bg-red-50 border border-red-200 rounded-xl p-6 mb-8" style={{ backgroundColor: 'var(--light)' }}>
-            <h3 className="text-xl font-semibold mb-4" style={{ color: 'var(--primary)' }}>
+          <div className="bg-red-50 border border-red-200 rounded-xl p-6 mb-8 bg-light">
+            <h3 className="text-xl font-semibold mb-4 text-primary">
               🚨 Emergency Contacts
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
               <div className="flex items-start gap-3">
                 <Phone size={20} className="text-red-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1" style={{ color: 'var(--primary)' }}>Law Enforcement</h4>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>Contact local police for serious privacy violations</p>
+                  <h4 className="font-semibold mb-1 text-primary">Law Enforcement</h4>
+                  <p className="text-sm text-gray-600">Contact local police for serious privacy violations</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Phone size={20} className="text-red-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1" style={{ color: 'var(--primary)' }}>FBI Internet Crime</h4>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>Report online crimes at ic3.gov</p>
+                  <h4 className="font-semibold mb-1 text-primary">FBI Internet Crime</h4>
+                  <p className="text-sm text-gray-600">Report online crimes at ic3.gov</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Phone size={20} className="text-red-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1" style={{ color: 'var(--primary)' }}>National Center for Missing & Exploited Children</h4>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>1-800-THE-LOST for child safety concerns</p>
+                  <h4 className="font-semibold mb-1 text-primary">National Center for Missing & Exploited Children</h4>
+                  <p className="text-sm text-gray-600">1-800-THE-LOST for child safety concerns</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Phone size={20} className="text-red-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1" style={{ color: 'var(--primary)' }}>Crisis Text Line</h4>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>Text HOME to 741741 for immediate support</p>
+                  <h4 className="font-semibold mb-1 text-primary">Crisis Text Line</h4>
+                  <p className="text-sm text-gray-600">Text HOME to 741741 for immediate support</p>
                 </div>
               </div>
             </div>
@@ -260,7 +258,7 @@ const PrivacyConcernsGuidePage: React.FC = () => {
 
         {/* Common Concerns */}
         <div className="max-w-6xl mx-auto mb-16">
-          <h2 className="text-2xl font-bold mb-8 text-center" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-2xl font-bold mb-8 text-center text-primary">
             Common Privacy Concerns
           </h2>
           
@@ -288,7 +286,7 @@ const PrivacyConcernsGuidePage: React.FC = () => {
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center justify-between">
-                          <h3 className="text-lg font-bold" style={{ color: 'var(--primary)' }}>
+                          <h3 className="text-lg font-bold text-primary">
                             {concern.title}
                           </h3>
                           <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
@@ -299,17 +297,17 @@ const PrivacyConcernsGuidePage: React.FC = () => {
                             {concern.severity}
                           </span>
                         </div>
-                        <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+                        <p className="text-sm text-gray-600">
                           {concern.description}
                         </p>
                       </div>
                     </div>
                     
                     <div className="mb-4">
-                      <h4 className="text-sm font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+                      <h4 className="text-sm font-semibold mb-2 text-primary">
                         Warning Signs:
                       </h4>
-                      <ul className="text-sm space-y-1" style={{ color: 'var(--gray-600)' }}>
+                      <ul className="text-sm space-y-1 text-gray-600">
                         {concern.signs.map((sign, index) => (
                           <li key={index} className="flex items-start gap-2">
                             <AlertTriangle size={14} className="text-orange-600 mt-1 flex-shrink-0" />
@@ -320,10 +318,10 @@ const PrivacyConcernsGuidePage: React.FC = () => {
                     </div>
                     
                     <div className="mb-4">
-                      <h4 className="text-sm font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+                      <h4 className="text-sm font-semibold mb-2 text-primary">
                         Immediate Actions:
                       </h4>
-                      <ul className="text-sm space-y-1" style={{ color: 'var(--gray-600)' }}>
+                      <ul className="text-sm space-y-1 text-gray-600">
                         {concern.actions.map((action, index) => (
                           <li key={index} className="flex items-start gap-2">
                             <CheckCircle size={14} className="text-green-600 mt-1 flex-shrink-0" />
@@ -341,7 +339,7 @@ const PrivacyConcernsGuidePage: React.FC = () => {
 
         {/* Response Steps */}
         <div className="max-w-6xl mx-auto mb-16">
-          <h2 className="text-2xl font-bold mb-8 text-center" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-2xl font-bold mb-8 text-center text-primary">
             General Response Steps
           </h2>
           
@@ -363,10 +361,10 @@ const PrivacyConcernsGuidePage: React.FC = () => {
                     </div>
                   </div>
                   
-                  <h3 className="text-lg font-bold mb-2" style={{ color: 'var(--primary)' }}>
+                  <h3 className="text-lg font-bold mb-2 text-primary">
                     {step.title}
                   </h3>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+                  <p className="text-sm text-gray-600">
                     {step.description}
                   </p>
                 </div>
@@ -377,7 +375,7 @@ const PrivacyConcernsGuidePage: React.FC = () => {
 
         {/* Prevention Tips */}
         <div className="max-w-6xl mx-auto mb-16">
-          <h2 className="text-2xl font-bold mb-8 text-center" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-2xl font-bold mb-8 text-center text-primary">
             Prevention Strategies
           </h2>
           
@@ -388,12 +386,12 @@ const PrivacyConcernsGuidePage: React.FC = () => {
                 className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow"
                 style={{ backgroundColor: 'var(--card-color)' }}
               >
-                <h3 className="text-lg font-bold mb-4" style={{ color: 'var(--primary)' }}>
+                <h3 className="text-lg font-bold mb-4 text-primary">
                   {category.category}
                 </h3>
                 <ul className="space-y-2">
                   {category.tips.map((tip, tipIndex) => (
-                    <li key={tipIndex} className="flex items-start gap-2 text-sm" style={{ color: 'var(--gray-600)' }}>
+                    <li key={tipIndex} className="flex items-start gap-2 text-sm text-gray-600">
                       <CheckCircle size={14} className="text-green-600 mt-1 flex-shrink-0" />
                       {tip}
                     </li>
@@ -459,7 +457,7 @@ const PrivacyConcernsGuidePage: React.FC = () => {
 
         {/* Additional Resources */}
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold mb-8 text-center" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-2xl font-bold mb-8 text-center text-primary">
             Related Resources
           </h2>
           
@@ -472,10 +470,10 @@ const PrivacyConcernsGuidePage: React.FC = () => {
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Shield size={24} className="text-green-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="text-lg font-semibold mb-2 text-primary">
                 Device Setup Guide
               </h3>
-              <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-sm text-gray-600">
                 Prevent issues with proper device configuration
               </p>
             </Link>
@@ -488,10 +486,10 @@ const PrivacyConcernsGuidePage: React.FC = () => {
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Users size={24} className="text-blue-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="text-lg font-semibold mb-2 text-primary">
                 Modeling Behavior
               </h3>
-              <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-sm text-gray-600">
                 Teach children to recognize and avoid risks
               </p>
             </Link>
@@ -504,10 +502,10 @@ const PrivacyConcernsGuidePage: React.FC = () => {
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Phone size={24} className="text-purple-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="text-lg font-semibold mb-2 text-primary">
                 Support Center
               </h3>
-              <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-sm text-gray-600">
                 Get help and support for privacy concerns
               </p>
             </Link>

@@ -8,8 +8,6 @@ const AgeSpecificPrivacyPage: React.FC = () => {
     <PageLayout
       title="Age-Specific Privacy Guidance"
       subtitle="Ready-to-use conversation starters and privacy guidance tailored to your child's age group. Learn what to say and how to say it."
-      icon={Users}
-      badge="AGE-SPECIFIC GUIDE"
       breadcrumbs={true}
     >
       <div style={{ maxWidth: '56rem', margin: '0 auto' }}>

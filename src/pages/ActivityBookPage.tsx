@@ -217,8 +217,6 @@ const ActivityBookPage: React.FC = () => {
     <PageLayout
       title="Privacy Panda's Activity Adventures"
       subtitle="Continue Po the Panda's journey with interactive activities that reinforce the privacy lessons from the Digital Bamboo Forest story. Learn through fun games, coloring, and puzzles!"
-      icon={Book}
-      badge="INTERACTIVE ACTIVITY BOOK"
       breadcrumbs={true}
     >
       <main id="main-content" className="min-h-screen" style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}>
@@ -244,14 +242,14 @@ const ActivityBookPage: React.FC = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6">
               <div className="bg-white rounded-lg p-4 md:p-6 shadow-sm">
-                <h3 className="font-semibold mb-2 text-base md:text-lg" style={{ color: 'var(--primary)' }}>📖 Story Connection</h3>
-                <p className="text-sm md:text-base" style={{ color: 'var(--gray-600)' }}>
+                <h3 className="font-semibold mb-2 text-base md:text-lg text-primary">📖 Story Connection</h3>
+                <p className="text-sm md:text-base text-gray-600">
                   Each activity relates to a part of Po's adventure, reinforcing the privacy lessons he learned.
                 </p>
               </div>
               <div className="bg-white rounded-lg p-4 md:p-6 shadow-sm">
-                <h3 className="font-semibold mb-2 text-base md:text-lg" style={{ color: 'var(--primary)' }}>🎯 Learning Goals</h3>
-                <p className="text-sm md:text-base" style={{ color: 'var(--gray-600)' }}>
+                <h3 className="font-semibold mb-2 text-base md:text-lg text-primary">🎯 Learning Goals</h3>
+                <p className="text-sm md:text-base text-gray-600">
                   Develop practical skills for protecting personal information and staying safe online.
                 </p>
               </div>
@@ -283,10 +281,10 @@ const ActivityBookPage: React.FC = () => {
               borderColor: 'var(--warning)'
             }}>
               <Award className="w-16 h-16 mx-auto mb-4" style={{ color: 'var(--warning)' }} />
-              <h3 className="text-xl font-bold mb-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="text-xl font-bold mb-2 text-primary">
                 Congratulations! 🎉
               </h3>
-              <p style={{ color: 'var(--gray-700)' }}>
+              <p className="text-gray-700">
                 You've completed all activities and earned your Privacy Champion certificate!
               </p>
               <button 
@@ -308,7 +306,7 @@ const ActivityBookPage: React.FC = () => {
             <h2 className="font-bold mb-3 md:mb-4" style={{ fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', color: 'var(--primary)' }}>
               Choose Your Activity
             </h2>
-            <p className="text-base md:text-lg lg:text-xl max-w-2xl mx-auto mb-6 md:mb-8 px-4" style={{ color: 'var(--gray-600)' }}>
+            <p className="text-base md:text-lg lg:text-xl max-w-2xl mx-auto mb-6 md:mb-8 px-4 text-gray-600">
               Click on any activity to start learning about digital privacy through interactive games and exercises.
             </p>
 
@@ -324,8 +322,7 @@ const ActivityBookPage: React.FC = () => {
                       placeholder="Search activities..."
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm md:text-base"
-                      style={{ backgroundColor: 'var(--white)' }}
+                      className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm md:text-base bg-surface"
                     />
                   </div>
                 </div>
@@ -343,8 +340,7 @@ const ActivityBookPage: React.FC = () => {
                   <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value as 'name' | 'difficulty' | 'duration')}
-                    className="px-3 md:px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm md:text-base"
-                    style={{ backgroundColor: 'var(--white)' }}
+                    className="px-3 md:px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm md:text-base bg-surface"
                   >
                     <option value="name">Sort by Name</option>
                     <option value="difficulty">Sort by Difficulty</option>
@@ -399,10 +395,10 @@ const ActivityBookPage: React.FC = () => {
           {filteredActivities.length === 0 ? (
             <div className="col-span-full text-center py-12">
               <div className="text-6xl mb-4">🔍</div>
-              <h3 className="text-xl font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="text-xl font-semibold mb-2 text-primary">
                 No activities found
               </h3>
-              <p style={{ color: 'var(--gray-600)' }}>
+              <p className="text-gray-600">
                 Try adjusting your search or filter criteria
               </p>
             </div>
@@ -433,11 +429,11 @@ const ActivityBookPage: React.FC = () => {
                     )}
                   </div>
 
-                  <h3 className="text-lg md:text-xl font-bold mb-3" style={{ color: 'var(--primary)' }}>
+                  <h3 className="text-lg md:text-xl font-bold mb-3 text-primary">
                     {activity.title}
                   </h3>
 
-                  <p className="mb-4 leading-relaxed text-sm md:text-base" style={{ color: 'var(--gray-600)' }}>
+                  <p className="mb-4 leading-relaxed text-sm md:text-base text-gray-600">
                     {activity.description}
                   </p>
 
@@ -500,7 +496,7 @@ const ActivityBookPage: React.FC = () => {
             <h2 className="font-bold mb-3 md:mb-4" style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', color: 'var(--primary)' }}>
               For Parents & Educators
             </h2>
-            <p className="text-base md:text-lg max-w-2xl mx-auto px-4" style={{ color: 'var(--gray-600)' }}>
+            <p className="text-base md:text-lg max-w-2xl mx-auto px-4 text-gray-600">
               Additional resources to support privacy education and continue the learning at home.
             </p>
           </div>
@@ -510,10 +506,10 @@ const ActivityBookPage: React.FC = () => {
               <div className="w-12 h-12 md:w-14 md:h-14 bg-blue-100 rounded-full flex items-center justify-center mb-4 mx-auto">
                 <Download size={20} className="text-blue-600 md:w-6 md:h-6" />
               </div>
-              <h3 className="text-lg md:text-xl font-bold mb-3" style={{ color: 'var(--primary)' }}>
+              <h3 className="text-lg md:text-xl font-bold mb-3 text-primary">
                 Printable Activities
               </h3>
-              <p className="mb-4 text-sm md:text-base" style={{ color: 'var(--gray-600)' }}>
+              <p className="mb-4 text-sm md:text-base text-gray-600">
                 Download coloring sheets, certificates, and offline activities to continue learning away from screens.
               </p>
               <button
@@ -528,10 +524,10 @@ const ActivityBookPage: React.FC = () => {
               <div className="w-12 h-12 md:w-14 md:h-14 bg-purple-100 rounded-full flex items-center justify-center mb-4 mx-auto">
                 <Users size={20} className="text-purple-600 md:w-6 md:h-6" />
               </div>
-              <h3 className="text-lg md:text-xl font-bold mb-3" style={{ color: 'var(--primary)' }}>
+              <h3 className="text-lg md:text-xl font-bold mb-3 text-primary">
                 Discussion Guides
               </h3>
-              <p className="mb-4 text-sm md:text-base" style={{ color: 'var(--gray-600)' }}>
+              <p className="mb-4 text-sm md:text-base text-gray-600">
                 Conversation starters and questions to discuss privacy concepts with your children after activities.
               </p>
               <Link to="/#parent-resources" className="text-green-600 font-semibold hover:text-green-700 transition-colors text-sm md:text-base">
@@ -543,10 +539,10 @@ const ActivityBookPage: React.FC = () => {
               <div className="w-12 h-12 md:w-14 md:h-14 bg-yellow-100 rounded-full flex items-center justify-center mb-4 mx-auto">
                 <Book size={20} className="text-yellow-600 md:w-6 md:h-6" />
               </div>
-              <h3 className="text-lg md:text-xl font-bold mb-3" style={{ color: 'var(--primary)' }}>
+              <h3 className="text-lg md:text-xl font-bold mb-3 text-primary">
                 Privacy Panda Story
               </h3>
-              <p className="mb-4 text-sm md:text-base" style={{ color: 'var(--gray-600)' }}>
+              <p className="mb-4 text-sm md:text-base text-gray-600">
                 Read the full Digital Bamboo Forest story that teaches privacy concepts through storytelling.
               </p>
               <Link to="/story" className="text-green-600 font-semibold hover:text-green-700 transition-colors text-sm md:text-base">

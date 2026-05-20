@@ -70,7 +70,7 @@ const DigitalFootprintPage: React.FC = () => {
   const analysis = footprintAnalyzer.analyzeFamilyFootprint(membersForAnalysis, memberServices);
 
   const handleExport = () => {
-    if (!analysis) return;
+    if (!analysis) {return;}
     const exportData = {
       analysisDate: new Date().toISOString(),
       familyScore: analysis.familyScore,

@@ -160,7 +160,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
         setFamilyMembers([]);
       }
     } catch (error) {
-      console.error('Error loading family members:', error);
+      logger.error('Error loading family members:', error);
       setFamilyMembers([]);
     }
   }, []);
@@ -179,7 +179,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
         }
       }
     } catch (error) {
-      console.error('Error checking existing family:', error);
+      logger.error('Error checking existing family:', error);
     }
   }, [loadFamilyMembers]);
 
@@ -236,7 +236,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
 
       return { family: familyData, error: null };
     } catch (error) {
-      console.error('Error creating family:', error);
+      logger.error('Error creating family:', error);
       return { family: null, error: 'Failed to create family' };
     } finally {
       setLoading(false);
@@ -290,7 +290,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
 
       return { success: true, error: null };
     } catch (error) {
-      console.error('Error joining family:', error);
+      logger.error('Error joining family:', error);
       return { success: false, error: 'Failed to join family' };
     } finally {
       setLoading(false);
@@ -330,7 +330,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
 
       return { success: true, error: null };
     } catch (error) {
-      console.error('Error leaving family:', error);
+      logger.error('Error leaving family:', error);
       return { success: false, error: 'Failed to leave family' };
     } finally {
       setLoading(false);
@@ -383,7 +383,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
       await loadFamilyMembers(currentFamily.id);
       return { success: true, error: null };
     } catch (error) {
-      console.error('Error adding family member:', error);
+      logger.error('Error adding family member:', error);
       return { success: false, error: 'Failed to add family member' };
     } finally {
       setLoading(false);
@@ -423,7 +423,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
       await loadFamilyMembers(currentFamily.id);
       return { success: true, error: null };
     } catch (error) {
-      console.error('Error removing family member:', error);
+      logger.error('Error removing family member:', error);
       return { success: false, error: 'Failed to remove family member' };
     } finally {
       setLoading(false);
@@ -464,7 +464,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
       await loadFamilyMembers(currentFamily.id);
       return { success: true, error: null };
     } catch (error) {
-      console.error('Error updating family member:', error);
+      logger.error('Error updating family member:', error);
       return { success: false, error: 'Failed to update family member' };
     } finally {
       setLoading(false);
@@ -496,7 +496,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
         progressPercentage
       };
     } catch (error) {
-      console.error('Error loading family progress:', error);
+      logger.error('Error loading family progress:', error);
       return null;
     }
   };
@@ -594,7 +594,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
       await loadFamilyMembers(currentFamily.id);
       return { success: true, error: null };
     } catch (error) {
-      console.error('Error requesting service:', error);
+      logger.error('Error requesting service:', error);
       return { success: false, error: 'Failed to request service' };
     } finally {
       setLoading(false);
@@ -614,7 +614,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
         const parsed = JSON.parse(servicesStr);
         existingServices = Array.isArray(parsed) ? parsed : [];
       } catch (error) {
-        console.error('Error parsing family services:', error);
+        logger.error('Error parsing family services:', error);
         existingServices = [];
       }
       
@@ -653,7 +653,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
       
       return { success: true, error: null };
     } catch (error) {
-      console.error('Error adding service to family:', error);
+      logger.error('Error adding service to family:', error);
       return { success: false, error: 'Failed to add service' };
     }
   };
@@ -671,7 +671,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
         const parsed = JSON.parse(servicesStr);
         existingServices = Array.isArray(parsed) ? parsed : [];
       } catch (error) {
-        console.error('Error parsing family services:', error);
+        logger.error('Error parsing family services:', error);
         existingServices = [];
       }
       
@@ -696,7 +696,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
       
       return { success: true, error: null };
     } catch (error) {
-      console.error('Error removing service from family:', error);
+      logger.error('Error removing service from family:', error);
       return { success: false, error: 'Failed to remove service' };
     }
   };
@@ -709,7 +709,7 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
       const parsed = JSON.parse(servicesStr);
       return Array.isArray(parsed) ? parsed : [];
     } catch (error) {
-      console.error('Error parsing family services:', error);
+      logger.error('Error parsing family services:', error);
       return [];
     }
   };

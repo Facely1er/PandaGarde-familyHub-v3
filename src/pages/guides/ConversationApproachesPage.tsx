@@ -8,8 +8,6 @@ const ConversationApproachesPage: React.FC = () => {
     <PageLayout
       title="8 Ways to Talk About Privacy With Your Children"
       subtitle="Effective approaches to help your children understand online privacy and stay safe. Learn how to have meaningful conversations that build trust and understanding."
-      icon={MessageCircle}
-      badge="CONVERSATION GUIDE"
       breadcrumbs={true}
     >
       <div style={{ maxWidth: '56rem', margin: '0 auto' }}>

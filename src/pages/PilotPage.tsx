@@ -114,8 +114,6 @@ const PilotPage: React.FC = () => {
     <PageLayout
       title="PandaGarde Pilot 2026"
       subtitle="Help shape the future of family privacy education. Join our 2026 pilot—families and educators testing the PandaGarde Family Hub and building momentum for the year ahead."
-      icon={Sparkles}
-      badge="PILOT 2026"
       breadcrumbs={true}
     >
       <div className="max-w-6xl mx-auto py-12">

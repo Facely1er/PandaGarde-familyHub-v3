@@ -137,8 +137,6 @@ const PrivacyExplorersPage: React.FC = () => {
     <PageLayout
       title="Ages 5-8"
       subtitle="Interactive privacy challenges and games designed specifically for young learners. Learn digital safety through exciting quests and fun activities!"
-      icon={Shield}
-      badge="PRIVACY EXPLORERS - AGES 9-12"
       breadcrumbs={true}
     >
       {/* Progress Section */}
@@ -186,10 +184,10 @@ const PrivacyExplorersPage: React.FC = () => {
                    borderColor: 'var(--warning)'
                  }}>
               <Trophy className="w-16 h-16 mx-auto mb-4 text-yellow-600" />
-              <h3 className="text-xl font-bold mb-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="text-xl font-bold mb-2 text-primary">
                 Congratulations! 🎉
               </h3>
-              <p style={{ color: 'var(--gray-700)' }}>
+              <p className="text-gray-700">
                 You've completed all Privacy Explorer challenges and earned your Digital Privacy Champion badge!
               </p>
             </div>
@@ -376,7 +374,7 @@ const PrivacyExplorersPage: React.FC = () => {
         padding: 'clamp(3rem, 6vw, 4rem) 0',
         marginTop: 'clamp(2rem, 4vw, 3rem)'
       }}>
-        <div style={{ textAlign: 'center' }}>
+        <div className="text-center">
           <h2 style={{ 
             fontSize: 'clamp(1.875rem, 3vw, 2.25rem)', 
             fontWeight: 700, 

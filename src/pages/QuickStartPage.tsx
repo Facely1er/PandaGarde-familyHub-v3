@@ -133,8 +133,6 @@ const QuickStartPage: React.FC = () => {
     <PageLayout
       title="Quick Start Guide"
       subtitle="Get started with PandaGarde in minutes. Choose your path and begin your family's privacy education journey today."
-      icon={Rocket}
-      badge="QUICK START"
       breadcrumbs={true}
     >
       {/* Quick Actions */}

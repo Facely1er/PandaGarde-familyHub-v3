@@ -12,8 +12,6 @@ const PrivacyPolicyPage: React.FC = () => {
     <PageLayout
       title="Privacy Policy"
       subtitle={`How we protect your privacy and data while providing educational content about digital safety. Last updated: ${new Date().toLocaleDateString()}`}
-      icon={Shield}
-      badge="PRIVACY POLICY"
     >
       <div className="max-w-4xl mx-auto">
           <div className="prose prose-lg max-w-none">
@@ -24,10 +22,10 @@ const PrivacyPolicyPage: React.FC = () => {
                    backgroundColor: 'var(--light)',
                    borderLeftColor: 'var(--primary-light)'
                  }}>
-              <h2 className="text-2xl font-bold text-green-800 mb-3" style={{ color: 'var(--primary)' }}>
+              <h2 className="text-2xl font-bold text-green-800 mb-3 text-primary">
                 Our Commitment to Privacy
               </h2>
-              <p className="text-gray-700 leading-relaxed" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-gray-700 leading-relaxed text-gray-600">
                 At PandaGarde, we believe that privacy education should be taught through example.
                 We are committed to protecting your privacy and the privacy of your children while
                 providing valuable educational content about digital safety.
@@ -36,19 +34,19 @@ const PrivacyPolicyPage: React.FC = () => {
 
             {/* Information We Collect */}
             <section className="mb-8">
-              <h2 className="text-3xl font-bold mb-6 flex items-center gap-3" style={{ color: 'var(--primary)' }}>
+              <h2 className="text-3xl font-bold mb-6 flex items-center gap-3 text-primary">
                 <Database size={32} />
                 Information We Collect
               </h2>
 
               <div className="bg-white rounded-lg p-6 shadow-md mb-6" style={{ backgroundColor: 'var(--card-color)' }}>
-                <h3 className="text-xl font-semibold mb-4" style={{ color: 'var(--primary)' }}>
+                <h3 className="text-xl font-semibold mb-4 text-primary">
                   Minimal Data Collection
                 </h3>
-                <p className="mb-4" style={{ color: 'var(--gray-600)' }}>
+                <p className="mb-4 text-gray-600">
                   We collect the absolute minimum information necessary to provide our educational services:
                 </p>
-                <ul className="list-disc pl-6 space-y-2" style={{ color: 'var(--gray-600)' }}>
+                <ul className="list-disc pl-6 space-y-2 text-gray-600">
                   <li><strong>Progress Data:</strong> Activity completion status and scores (stored locally on your device)</li>
                   <li><strong>Contact Information:</strong> Only when you voluntarily contact us through our contact form</li>
                   <li><strong>Usage Analytics:</strong> Anonymous, aggregated data to improve our services</li>
@@ -77,17 +75,17 @@ const PrivacyPolicyPage: React.FC = () => {
 
             {/* How We Use Information */}
             <section className="mb-8">
-              <h2 className="text-3xl font-bold mb-6 flex items-center gap-3" style={{ color: 'var(--primary)' }}>
+              <h2 className="text-3xl font-bold mb-6 flex items-center gap-3 text-primary">
                 <Eye size={32} />
                 How We Use Your Information
               </h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="bg-white rounded-lg p-6 shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
-                  <h3 className="text-xl font-semibold mb-4" style={{ color: 'var(--primary)' }}>
+                  <h3 className="text-xl font-semibold mb-4 text-primary">
                     Educational Purposes
                   </h3>
-                  <ul className="list-disc pl-6 space-y-2" style={{ color: 'var(--gray-600)' }}>
+                  <ul className="list-disc pl-6 space-y-2 text-gray-600">
                     <li>Track learning progress and achievements</li>
                     <li>Provide personalized educational content</li>
                     <li>Generate completion certificates</li>
@@ -96,10 +94,10 @@ const PrivacyPolicyPage: React.FC = () => {
                 </div>
 
                 <div className="bg-white rounded-lg p-6 shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
-                  <h3 className="text-xl font-semibold mb-4" style={{ color: 'var(--primary)' }}>
+                  <h3 className="text-xl font-semibold mb-4 text-primary">
                     Service Improvement
                   </h3>
-                  <ul className="list-disc pl-6 space-y-2" style={{ color: 'var(--gray-600)' }}>
+                  <ul className="list-disc pl-6 space-y-2 text-gray-600">
                     <li>Analyze usage patterns (anonymized)</li>
                     <li>Fix bugs and technical issues</li>
                     <li>Develop new features and activities</li>
@@ -111,7 +109,7 @@ const PrivacyPolicyPage: React.FC = () => {
 
             {/* Data Protection */}
             <section className="mb-8">
-              <h2 className="text-3xl font-bold mb-6 flex items-center gap-3" style={{ color: 'var(--primary)' }}>
+              <h2 className="text-3xl font-bold mb-6 flex items-center gap-3 text-primary">
                 <Lock size={32} />
                 How We Protect Your Data
               </h2>
@@ -121,10 +119,10 @@ const PrivacyPolicyPage: React.FC = () => {
                      backgroundColor: 'var(--tertiary)',
                      borderColor: 'var(--secondary)'
                    }}>
-                <h3 className="text-xl font-semibold mb-4 text-green-800" style={{ color: 'var(--primary)' }}>
+                <h3 className="text-xl font-semibold mb-4 text-green-800 text-primary">
                   Local Storage First
                 </h3>
-                <p className="text-green-800 mb-4" style={{ color: 'var(--primary)' }}>
+                <p className="text-green-800 mb-4 text-primary">
                   All progress data is stored locally on your device using secure browser storage.
                   This means your child's learning progress never leaves your device unless you choose to export it.
                 </p>
@@ -135,8 +133,8 @@ const PrivacyPolicyPage: React.FC = () => {
                   <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Lock size={32} className="text-blue-600" />
                   </div>
-                  <h3 className="font-semibold mb-2" style={{ color: 'var(--primary)' }}>Encryption</h3>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+                  <h3 className="font-semibold mb-2 text-primary">Encryption</h3>
+                  <p className="text-sm text-gray-600">
                     All data transmission uses HTTPS encryption
                   </p>
                 </div>
@@ -145,8 +143,8 @@ const PrivacyPolicyPage: React.FC = () => {
                   <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Shield size={32} className="text-green-600" />
                   </div>
-                  <h3 className="font-semibold mb-2" style={{ color: 'var(--primary)' }}>No Tracking</h3>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+                  <h3 className="font-semibold mb-2 text-primary">No Tracking</h3>
+                  <p className="text-sm text-gray-600">
                     We don't use tracking cookies or analytics
                   </p>
                 </div>
@@ -155,8 +153,8 @@ const PrivacyPolicyPage: React.FC = () => {
                   <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Users size={32} className="text-purple-600" />
                   </div>
-                  <h3 className="font-semibold mb-2" style={{ color: 'var(--primary)' }}>No Sharing</h3>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+                  <h3 className="font-semibold mb-2 text-primary">No Sharing</h3>
+                  <p className="text-sm text-gray-600">
                     We never share data with third parties
                   </p>
                 </div>
@@ -165,7 +163,7 @@ const PrivacyPolicyPage: React.FC = () => {
 
             {/* Children's Privacy */}
             <section className="mb-8">
-              <h2 className="text-3xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+              <h2 className="text-3xl font-bold mb-6 text-primary">
                 Children's Privacy (COPPA Compliance)
               </h2>
 
@@ -193,13 +191,13 @@ const PrivacyPolicyPage: React.FC = () => {
               </div>
 
               <div className="bg-white rounded-lg p-6 shadow-md mb-6" style={{ backgroundColor: 'var(--card-color)' }}>
-                <h3 className="text-xl font-semibold mb-4" style={{ color: 'var(--primary)' }}>
+                <h3 className="text-xl font-semibold mb-4 text-primary">
                   Parental Consent Process
                 </h3>
-                <p className="mb-4" style={{ color: 'var(--gray-600)' }}>
+                <p className="mb-4 text-gray-600">
                   For children under 13, we require verifiable parental consent before collecting any personal information:
                 </p>
-                <ol className="list-decimal pl-6 space-y-3" style={{ color: 'var(--gray-600)' }}>
+                <ol className="list-decimal pl-6 space-y-3 text-gray-600">
                   <li>
                     <strong>Age Verification:</strong> When a child indicates they are under 13, we immediately enable "zero-data mode" which prevents all data collection, including analytics tracking.
                   </li>
@@ -241,13 +239,13 @@ const PrivacyPolicyPage: React.FC = () => {
               </div>
 
               <div className="bg-white rounded-lg p-6 shadow-md mb-6" style={{ backgroundColor: 'var(--card-color)' }}>
-                <h3 className="text-xl font-semibold mb-4" style={{ color: 'var(--primary)' }}>
+                <h3 className="text-xl font-semibold mb-4 text-primary">
                   Parental Rights
                 </h3>
-                <p className="mb-4" style={{ color: 'var(--gray-600)' }}>
+                <p className="mb-4 text-gray-600">
                   Parents have the following rights regarding their child's information:
                 </p>
-                <ul className="list-disc pl-6 space-y-2" style={{ color: 'var(--gray-600)' }}>
+                <ul className="list-disc pl-6 space-y-2 text-gray-600">
                   <li><strong>Review:</strong> Parents can request to review all personal information collected from their child</li>
                   <li><strong>Delete:</strong> Parents can request deletion of their child's personal information at any time</li>
                   <li><strong>Revoke Consent:</strong> Parents can revoke consent at any time, which will immediately delete all collected data and re-enable zero-data mode</li>
@@ -285,16 +283,16 @@ const PrivacyPolicyPage: React.FC = () => {
 
             {/* Your Rights */}
             <section className="mb-8">
-              <h2 className="text-3xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+              <h2 className="text-3xl font-bold mb-6 text-primary">
                 Your Rights and Choices
               </h2>
 
               <div className="space-y-4">
                 <div className="bg-white rounded-lg p-6 shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
-                  <h3 className="text-xl font-semibold mb-3" style={{ color: 'var(--primary)' }}>
+                  <h3 className="text-xl font-semibold mb-3 text-primary">
                     Access and Control
                   </h3>
-                  <ul className="list-disc pl-6 space-y-2" style={{ color: 'var(--gray-600)' }}>
+                  <ul className="list-disc pl-6 space-y-2 text-gray-600">
                     <li>View all data we have about you or your child</li>
                     <li>Export your progress data for backup or transfer</li>
                     <li>Delete all data associated with your account</li>
@@ -323,7 +321,7 @@ const PrivacyPolicyPage: React.FC = () => {
 
             {/* Contact Information */}
             <section className="mb-8">
-              <h2 className="text-3xl font-bold mb-6 flex items-center gap-3" style={{ color: 'var(--primary)' }}>
+              <h2 className="text-3xl font-bold mb-6 flex items-center gap-3 text-primary">
                 <Mail size={32} />
                 Questions About Privacy?
               </h2>
@@ -346,13 +344,13 @@ const PrivacyPolicyPage: React.FC = () => {
 
             {/* Updates */}
             <section className="mb-8">
-              <h2 className="text-3xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+              <h2 className="text-3xl font-bold mb-6 text-primary">
                 Policy Updates
               </h2>
-              <p className="mb-4" style={{ color: 'var(--gray-600)' }}>
+              <p className="mb-4 text-gray-600">
                 We may update this Privacy Policy from time to time. When we do, we will:
               </p>
-              <ul className="list-disc pl-6 space-y-2" style={{ color: 'var(--gray-600)' }}>
+              <ul className="list-disc pl-6 space-y-2 text-gray-600">
                 <li>Post the updated policy on this page</li>
                 <li>Update the "Last updated" date at the top</li>
                 <li>Notify users of significant changes via email (if we have your contact information)</li>

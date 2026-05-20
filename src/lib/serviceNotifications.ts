@@ -6,6 +6,7 @@
 import { childServiceCatalog, type ChildService } from '../data/childServiceCatalog';
 import { childRSSAlertService } from './rssAlertService';
 import { calculatePrivacyExposureIndex } from './privacyExposureIndex';
+import { logger } from './logger';
 
 export interface ServiceNotification {
   id: string;
@@ -189,7 +190,7 @@ export class ChildServiceNotificationManager {
         .map((tip, index) => `${serviceId}-tip-${index}`)
         .filter(actionId => !serviceCompleted.includes(actionId));
     } catch (error) {
-      console.warn('Error reading completed actions:', error);
+      logger.warn('Error reading completed actions:', error);
       return [];
     }
   }
@@ -212,7 +213,7 @@ export class ChildServiceNotificationManager {
         localStorage.setItem('pandagarde_completed_actions', JSON.stringify(completedActions));
       }
     } catch (error) {
-      console.warn('Error saving completed action:', error);
+      logger.warn('Error saving completed action:', error);
     }
   }
 
@@ -277,7 +278,7 @@ export class ChildServiceNotificationManager {
                            window.location.hostname.includes('vercel.app') ||
                            window.location.hostname.includes('netlify.app'));
       if (!isProduction) {
-        console.warn('Error fetching RSS notifications:', error);
+        logger.warn('Error fetching RSS notifications:', error);
       }
       return [];
     }

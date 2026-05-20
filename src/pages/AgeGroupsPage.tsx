@@ -94,8 +94,6 @@ const AgeGroupsPage: React.FC = () => {
     <PageLayout
       title="Age-Appropriate Learning Paths"
       subtitle="Tailored content and interactions designed specifically for different developmental stages. Each age group has unique learning needs and capabilities when it comes to understanding digital privacy."
-      icon={Users}
-      badge="LEARNING PATHS"
       breadcrumbs={true}
     >
 

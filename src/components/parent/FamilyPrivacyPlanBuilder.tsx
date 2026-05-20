@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Save, Download, CheckCircle, Plus, X, Calendar, Users, Shield, Settings, AlertCircle } from 'lucide-react';
 import { useFamily } from '../../contexts/FamilyContext';
+import { logger } from '../../lib/logger';
 
 export interface FamilyPrivacyPlan {
   id?: string;
@@ -98,7 +99,7 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
           }
         };
       } catch (e) {
-        console.error('Error loading saved plan:', e);
+        logger.error('Error loading saved plan:', e);
       }
     }
     
@@ -276,10 +277,10 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
           <Shield size={24} />
         </div>
         <div>
-          <h2 className="text-2xl font-bold" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-2xl font-bold text-primary">
             Create Your Family Privacy Plan
           </h2>
-          <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+          <p className="text-sm text-gray-600">
             A family privacy plan works best when everyone helps create it
           </p>
         </div>
@@ -288,7 +289,7 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
       {/* Step 1: Sharing Rules */}
       <section className="mb-8">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-xl font-semibold flex items-center gap-2" style={{ color: 'var(--primary)' }}>
+          <h3 className="text-xl font-semibold flex items-center gap-2 text-primary">
             <Users size={20} />
             Set Clear Sharing Rules
           </h3>
@@ -302,7 +303,7 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
         </div>
 
         {showAddRule && (
-          <div className="mb-4 p-4 border border-gray-300 rounded-lg" style={{ backgroundColor: 'var(--light)' }}>
+          <div className="mb-4 p-4 border border-gray-300 rounded-lg bg-light">
             <textarea
               value={newRule}
               onChange={(e) => setNewRule(e.target.value)}
@@ -312,7 +313,7 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
               rows={2}
             />
             <div className="flex items-center gap-4 mb-3">
-              <label className="text-sm font-medium" style={{ color: 'var(--gray-700)' }}>
+              <label className="text-sm font-medium text-gray-700">
                 Applies to:
               </label>
               {['5-8', '9-12', '13-17', 'all'].map(age => (
@@ -359,14 +360,13 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
           {plan.sharingRules.map((rule) => (
             <div
               key={rule.id}
-              className="flex items-start justify-between p-4 border border-gray-200 rounded-lg"
-              style={{ backgroundColor: 'var(--light)' }}
+              className="flex items-start justify-between p-4 border border-gray-200 rounded-lg bg-light"
             >
               <div className="flex-1">
-                <p className="font-medium mb-2" style={{ color: 'var(--gray-800)' }}>
+                <p className="font-medium mb-2 text-gray-800">
                   {rule.rule}
                 </p>
-                <div className="flex items-center gap-4 text-sm" style={{ color: 'var(--gray-600)' }}>
+                <div className="flex items-center gap-4 text-sm text-gray-600">
                   <span>Applies to: {rule.appliesTo.join(', ')}</span>
                   {rule.requiresApproval && (
                     <span className="px-2 py-1 bg-yellow-100 rounded text-yellow-800 text-xs">
@@ -389,7 +389,7 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
 
       {/* Step 2: Safety Tools */}
       <section className="mb-8">
-        <h3 className="text-xl font-semibold flex items-center gap-2 mb-4" style={{ color: 'var(--primary)' }}>
+        <h3 className="text-xl font-semibold flex items-center gap-2 mb-4 text-primary">
           <Settings size={20} />
           Set Up Safety Tools
         </h3>
@@ -397,14 +397,13 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
           {plan.safetyTools.map((tool) => (
             <div
               key={tool.id}
-              className="flex items-center justify-between p-4 border border-gray-200 rounded-lg"
-              style={{ backgroundColor: 'var(--light)' }}
+              className="flex items-center justify-between p-4 border border-gray-200 rounded-lg bg-light"
             >
               <div className="flex-1">
-                <h4 className="font-medium mb-1" style={{ color: 'var(--gray-800)' }}>
+                <h4 className="font-medium mb-1 text-gray-800">
                   {tool.name}
                 </h4>
-                <p className="text-sm capitalize" style={{ color: 'var(--gray-600)' }}>
+                <p className="text-sm capitalize text-gray-600">
                   {tool.category.replace('-', ' ')}
                 </p>
               </div>
@@ -416,7 +415,7 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
                     onChange={() => toggleSafetyTool(tool.id, 'installed')}
                     className="rounded"
                   />
-                  <span style={{ color: 'var(--gray-700)' }}>Installed</span>
+                  <span className="text-gray-700">Installed</span>
                 </label>
                 <label className="flex items-center gap-2 text-sm">
                   <input
@@ -426,7 +425,7 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
                     className="rounded"
                     disabled={!tool.installed}
                   />
-                  <span style={{ color: 'var(--gray-700)' }}>Configured</span>
+                  <span className="text-gray-700">Configured</span>
                 </label>
               </div>
             </div>
@@ -436,13 +435,13 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
 
       {/* Step 3: Privacy Day Schedule */}
       <section className="mb-8">
-        <h3 className="text-xl font-semibold flex items-center gap-2 mb-4" style={{ color: 'var(--primary)' }}>
+        <h3 className="text-xl font-semibold flex items-center gap-2 mb-4 text-primary">
           <Calendar size={20} />
           Plan Regular Check-Ups
         </h3>
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: 'var(--gray-700)' }}>
+            <label className="block text-sm font-medium mb-2 text-gray-700">
               Frequency
             </label>
             <select
@@ -459,7 +458,7 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
 
           {plan.privacyDaySchedule.frequency !== 'custom' && plan.privacyDaySchedule.nextDate && (
             <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: 'var(--gray-700)' }}>
+              <label className="block text-sm font-medium mb-2 text-gray-700">
                 Next Privacy Day
               </label>
               <input
@@ -496,13 +495,13 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
                 }}
                 className="rounded"
               />
-              <span className="text-sm" style={{ color: 'var(--gray-700)' }}>
+              <span className="text-sm text-gray-700">
                 Enable reminders
               </span>
             </label>
             {plan.privacyDaySchedule.reminders && (
               <div className="flex items-center gap-2">
-                <label className="text-sm" style={{ color: 'var(--gray-700)' }}>
+                <label className="text-sm text-gray-700">
                   Remind me
                 </label>
                 <input
@@ -522,7 +521,7 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
                   className="w-16 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                   style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}
                 />
-                <span className="text-sm" style={{ color: 'var(--gray-700)' }}>
+                <span className="text-sm text-gray-700">
                   days before
                 </span>
               </div>

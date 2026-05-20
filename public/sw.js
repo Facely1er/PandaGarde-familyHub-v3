@@ -19,7 +19,8 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(STATIC_CACHE)
       .then((cache) => {
-        console.log('[SW] Caching static assets');
+        // Service worker cannot import app logger; warn is allowed by eslint in app code
+        console.warn('[SW] Caching static assets');
         return cache.addAll(STATIC_ASSETS);
       })
       .then(() => self.skipWaiting())
@@ -39,7 +40,7 @@ self.addEventListener('activate', (event) => {
                      cacheName !== CACHE_NAME;
             })
             .map((cacheName) => {
-              console.log('[SW] Deleting old cache:', cacheName);
+              console.warn('[SW] Deleting old cache:', cacheName);
               return caches.delete(cacheName);
             })
         );

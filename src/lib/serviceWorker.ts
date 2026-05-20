@@ -1,5 +1,4 @@
-
-import { logger } from "./logger";
+import { logger } from './logger';
 
 interface ServiceWorkerConfig {
   enabled: boolean;
@@ -40,7 +39,7 @@ class ServiceWorkerManager {
 
       return this.registration;
     } catch (error) {
-      console.error('Service Worker registration failed:', error);
+      logger.error('Service Worker registration failed:', error);
       return null;
     }
   }
@@ -84,7 +83,7 @@ class ServiceWorkerManager {
         window.location.reload();
       }
     } catch (error) {
-      console.error('Service Worker update failed:', error);
+      logger.error('Service Worker update failed:', error);
     }
   }
 
@@ -106,7 +105,7 @@ class ServiceWorkerManager {
     try {
       await this.registration.update();
     } catch (error) {
-      console.error('Update check failed:', error);
+      logger.error('Update check failed:', error);
     }
   }
 
@@ -125,7 +124,7 @@ class ServiceWorkerManager {
       logger.debug('Service Worker unregistered', undefined, 'SW');
       return result;
     } catch (error) {
-      console.error('Service Worker unregistration failed:', error);
+      logger.error('Service Worker unregistration failed:', error);
       return false;
     }
   }
@@ -139,7 +138,7 @@ class ServiceWorkerManager {
       );
       logger.debug('All caches cleared', undefined, 'SW');
     } catch (error) {
-      console.error('Cache clearing failed:', error);
+      logger.error('Cache clearing failed:', error);
     }
   }
 
@@ -161,7 +160,7 @@ class ServiceWorkerManager {
       
       return cacheInfo;
     } catch (error) {
-      console.error('Cache info retrieval failed:', error);
+      logger.error('Cache info retrieval failed:', error);
       return [];
     }
   }
@@ -174,7 +173,7 @@ class ServiceWorkerManager {
       await this.registration.sync.register(tag);
       logger.debug('Background sync registered', tag, 'SW');
     } catch (error) {
-      console.error('Background sync registration failed:', error);
+      logger.error('Background sync registration failed:', error);
     }
   }
 
@@ -187,7 +186,7 @@ class ServiceWorkerManager {
       });
       logger.debug(`Tool assets cached for: ${toolId}`, undefined, 'SW');
     } catch (error) {
-      console.error('Tool asset caching failed:', error);
+      logger.error('Tool asset caching failed:', error);
     }
   }
 
@@ -200,7 +199,7 @@ class ServiceWorkerManager {
       });
       logger.debug(`Mission content cached for: ${missionId}`, undefined, 'SW');
     } catch (error) {
-      console.error('Mission content caching failed:', error);
+      logger.error('Mission content caching failed:', error);
     }
   }
 
@@ -212,7 +211,7 @@ class ServiceWorkerManager {
         message
       });
     } catch (error) {
-      console.error('Update notification failed:', error);
+      logger.error('Update notification failed:', error);
     }
   }
 
@@ -279,7 +278,7 @@ export const initServiceWorker = async (): Promise<void> => {
   try {
     await serviceWorkerManager.register();
   } catch (error) {
-    console.error('Service Worker initialization failed:', error);
+    logger.error('Service Worker initialization failed:', error);
   }
 };
 

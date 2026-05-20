@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { AlertTriangle, Shield, RefreshCw, ExternalLink } from 'lucide-react';
 import { childRSSAlertService, type ChildSafetyAlert } from '../../lib/rssAlertService';
 import { childServiceCatalog } from '../../data/childServiceCatalog';
+import { logger } from '../../lib/logger';
 
 const ChildSafetyAlerts: React.FC = () => {
   const [alerts, setAlerts] = useState<ChildSafetyAlert[]>([]);
@@ -32,7 +33,7 @@ const ChildSafetyAlerts: React.FC = () => {
                            window.location.hostname.includes('vercel.app') ||
                            window.location.hostname.includes('netlify.app'));
       if (!isProduction) {
-        console.error('Error loading alerts:', error);
+        logger.error('Error loading alerts:', error);
       }
       // Silently fail - alerts will be empty array
     } finally {

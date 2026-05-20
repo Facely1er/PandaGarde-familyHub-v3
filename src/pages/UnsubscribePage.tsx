@@ -4,6 +4,7 @@ import { Mail, CheckCircle, AlertCircle, ArrowLeft } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 import { useToast } from '../contexts/ToastContext';
 import { newsletterService } from '../lib/database';
+import { logger } from '../lib/logger';
 
 const UnsubscribePage: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -47,7 +48,7 @@ const UnsubscribePage: React.FC = () => {
         showError('Unsubscribe Failed', 'There was an error unsubscribing. Please try again or contact support.');
       }
     } catch (error) {
-      console.error('Newsletter unsubscribe error:', error);
+      logger.error('Newsletter unsubscribe error:', error);
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
       if (errorMessage.includes('Invalid email')) {
         showError('Invalid Email', 'Please enter a valid email address.');
@@ -63,8 +64,6 @@ const UnsubscribePage: React.FC = () => {
     <PageLayout
       title="Unsubscribe from Newsletter"
       subtitle="We're sorry to see you go. You can unsubscribe from our privacy education newsletter at any time."
-      icon={Mail}
-      badge="NEWSLETTER"
       breadcrumbs={true}
     >
       <div className="container mx-auto px-6 py-16">
@@ -97,7 +96,7 @@ const UnsubscribePage: React.FC = () => {
           ) : (
             <div className="bg-white rounded-xl p-8 shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
               <div className="mb-6">
-                <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+                <h2 className="text-2xl font-bold mb-4 text-primary">
                   Unsubscribe from Newsletter
                 </h2>
                 <p className="text-gray-600 mb-2">
@@ -117,7 +116,7 @@ const UnsubscribePage: React.FC = () => {
 
               <form onSubmit={handleUnsubscribe} className="space-y-6">
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ color: 'var(--gray-700)' }}>
+                  <label htmlFor="email" className="block text-sm font-medium mb-2 text-gray-700">
                     Email Address
                   </label>
                   <input

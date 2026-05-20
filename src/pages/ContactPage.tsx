@@ -9,8 +9,6 @@ const ContactPage: React.FC = () => {
     <PageLayout
       title="Contact Us"
       subtitle="Questions about PandaGarde or need help? We're here to help you and your family learn about online privacy."
-      icon={MessageCircle}
-      badge="CONTACT US"
     >
       {/* Contact Form Section */}
       <section style={{ marginBottom: '2rem' }}>
@@ -18,13 +16,13 @@ const ContactPage: React.FC = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-12 rounded-xl" style={{ backgroundColor: 'var(--light)' }}>
+      <section className="py-12 rounded-xl bg-light">
         <div>
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+            <h2 className="text-3xl font-bold mb-4 text-primary">
               Frequently Asked Questions
             </h2>
-            <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--gray-600)' }}>
+            <p className="text-lg max-w-2xl mx-auto text-gray-600">
               Quick answers to common questions about PandaGarde and privacy education.
             </p>
           </div>
@@ -37,10 +35,10 @@ const ContactPage: React.FC = () => {
                     <HelpCircle size={20} className="text-green-600" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+                    <h3 className="text-lg font-semibold mb-2 text-primary">
                       Is PandaGarde free to use?
                     </h3>
-                    <p style={{ color: 'var(--gray-600)' }}>
+                    <p className="text-gray-600">
                       Yes! PandaGarde is completely free for families and educators. We believe privacy education should be accessible to everyone.
                     </p>
                   </div>
@@ -53,10 +51,10 @@ const ContactPage: React.FC = () => {
                     <HelpCircle size={20} className="text-green-600" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+                    <h3 className="text-lg font-semibold mb-2 text-primary">
                       What age groups is this for?
                     </h3>
-                    <p style={{ color: 'var(--gray-600)' }}>
+                    <p className="text-gray-600">
                       Our resources are for kids ages 5–17, with different activities for each age group.
                     </p>
                   </div>
@@ -69,10 +67,10 @@ const ContactPage: React.FC = () => {
                     <HelpCircle size={20} className="text-green-600" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+                    <h3 className="text-lg font-semibold mb-2 text-primary">
                       How do I get started?
                     </h3>
-                    <p style={{ color: 'var(--gray-600)' }}>
+                    <p className="text-gray-600">
                       Browse our resources, try the activities, and use our simple Get Started guide—no account needed to explore.
                     </p>
                   </div>
@@ -85,10 +83,10 @@ const ContactPage: React.FC = () => {
                     <HelpCircle size={20} className="text-green-600" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+                    <h3 className="text-lg font-semibold mb-2 text-primary">
                       Can educators use this in schools?
                     </h3>
-                    <p style={{ color: 'var(--gray-600)' }}>
+                    <p className="text-gray-600">
                       Absolutely! We provide educator-specific resources and curriculum guides for classroom use.
                     </p>
                   </div>

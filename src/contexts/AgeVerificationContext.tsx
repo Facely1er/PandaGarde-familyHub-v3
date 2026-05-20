@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { coppaComplianceManager } from '../lib/coppaCompliance';
+import { logger } from '../lib/logger';
 
 interface AgeVerificationContextType {
   isVerified: boolean;
@@ -74,7 +75,7 @@ export const AgeVerificationProvider: React.FC<AgeVerificationProviderProps> = (
             autoRouteToAppropriateContent(age);
           }
         } catch (error) {
-          console.error('Error parsing age verification data:', error);
+          logger.error('Error parsing age verification data:', error);
           // Clear invalid data
           sessionStorage.removeItem('pandagarde-age-verification');
           setShowAgeModal(true);

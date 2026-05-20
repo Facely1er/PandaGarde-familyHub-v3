@@ -89,7 +89,7 @@ const SafetyPostersPage: React.FC = () => {
       try {
         await pdfService.generateSafetyPostersPDF();
       } catch (error) {
-        console.error('Error downloading safety posters:', error);
+        logger.error('Error downloading safety posters:', error);
         alert('Error downloading safety posters. Please try again.');
       } finally {
         setIsDownloading(false);
@@ -122,8 +122,6 @@ const SafetyPostersPage: React.FC = () => {
     <PageLayout
       title="Digital Safety Posters"
       subtitle="Professional classroom posters designed to reinforce privacy education concepts. Perfect for schools, libraries, and educational environments."
-      icon={Shield}
-      badge="CLASSROOM RESOURCES"
       breadcrumbs={true}
     >
       <div className="min-h-screen" style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}>
@@ -131,44 +129,44 @@ const SafetyPostersPage: React.FC = () => {
       <main className="container mx-auto px-6 py-20">
         {/* Introduction */}
         <div className="max-w-4xl mx-auto text-center mb-16">
-          <h2 className="text-3xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-3xl font-bold mb-6 text-primary">
             Visual Learning Tools for Privacy Education
           </h2>
-          <p className="text-lg leading-relaxed mb-8" style={{ color: 'var(--gray-600)' }}>
+          <p className="text-lg leading-relaxed mb-8 text-gray-600">
             These professionally designed posters serve as constant visual reminders of important privacy concepts. They're perfect for classrooms, computer labs, libraries, and home learning spaces.
           </p>
           
-          <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-8" style={{ backgroundColor: 'var(--light)' }}>
-            <h3 className="text-xl font-semibold mb-4" style={{ color: 'var(--primary)' }}>
+          <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-8 bg-light">
+            <h3 className="text-xl font-semibold mb-4 text-primary">
               📋 Printing & Display Guidelines
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
               <div className="flex items-start gap-3">
                 <Shield size={20} className="text-blue-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1" style={{ color: 'var(--primary)' }}>Print Quality</h4>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>Use high-quality paper and color printing for best results</p>
+                  <h4 className="font-semibold mb-1 text-primary">Print Quality</h4>
+                  <p className="text-sm text-gray-600">Use high-quality paper and color printing for best results</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Shield size={20} className="text-blue-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1" style={{ color: 'var(--primary)' }}>Placement</h4>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>Display at eye level for children in learning areas</p>
+                  <h4 className="font-semibold mb-1 text-primary">Placement</h4>
+                  <p className="text-sm text-gray-600">Display at eye level for children in learning areas</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Shield size={20} className="text-blue-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1" style={{ color: 'var(--primary)' }}>Lamination</h4>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>Consider laminating for durability and easy cleaning</p>
+                  <h4 className="font-semibold mb-1 text-primary">Lamination</h4>
+                  <p className="text-sm text-gray-600">Consider laminating for durability and easy cleaning</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Shield size={20} className="text-blue-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1" style={{ color: 'var(--primary)' }}>Discussion</h4>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>Use posters as conversation starters about privacy</p>
+                  <h4 className="font-semibold mb-1 text-primary">Discussion</h4>
+                  <p className="text-sm text-gray-600">Use posters as conversation starters about privacy</p>
                 </div>
               </div>
             </div>
@@ -196,7 +194,7 @@ const SafetyPostersPage: React.FC = () => {
                 
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-lg font-bold" style={{ color: 'var(--primary)' }}>
+                    <h3 className="text-lg font-bold text-primary">
                       {poster.title}
                     </h3>
                     <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-semibold">
@@ -204,7 +202,7 @@ const SafetyPostersPage: React.FC = () => {
                     </span>
                   </div>
                   
-                  <p className="text-sm mb-4" style={{ color: 'var(--gray-600)' }}>
+                  <p className="text-sm mb-4 text-gray-600">
                     {poster.description}
                   </p>
                   
@@ -247,7 +245,7 @@ const SafetyPostersPage: React.FC = () => {
 
         {/* Additional Resources */}
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold mb-8 text-center" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-2xl font-bold mb-8 text-center text-primary">
             Related Resources
           </h2>
           
@@ -260,10 +258,10 @@ const SafetyPostersPage: React.FC = () => {
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Shield size={24} className="text-green-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="text-lg font-semibold mb-2 text-primary">
                 Coloring Sheets
               </h3>
-              <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-sm text-gray-600">
                 Download fun coloring pages featuring Privacy Panda
               </p>
             </Link>
@@ -276,10 +274,10 @@ const SafetyPostersPage: React.FC = () => {
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Users size={24} className="text-purple-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="text-lg font-semibold mb-2 text-primary">
                 Family Agreement
               </h3>
-              <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-sm text-gray-600">
                 Customizable family guidelines for internet use
               </p>
             </Link>
@@ -292,10 +290,10 @@ const SafetyPostersPage: React.FC = () => {
               <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <AlertTriangle size={24} className="text-yellow-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="text-lg font-semibold mb-2 text-primary">
                 Educator Tools
               </h3>
-              <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-sm text-gray-600">
                 Additional resources for teachers and educators
               </p>
             </Link>
