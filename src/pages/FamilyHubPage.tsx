@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Users, BookOpen, Book, Settings, Award, TrendingUp, Clock, CheckCircle, ArrowLeft, ArrowRight, User, Shield as Child, UserCheck, Star, Play, Download, Plus, UserPlus, LogOut, Globe, Shield, Target, CircleUser as UserCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -11,18 +11,23 @@ import FamilyPrivacyAssessment from '../components/FamilyPrivacyAssessment';
 import PrivacyGoals from '../components/PrivacyGoals';
 import AdaptiveResources from '../components/AdaptiveResources';
 import EmailCaptureInline from '../components/EmailCaptureInline';
+import { classroomActivities } from '../data/classroomActivities';
+import { flattenAgeBasedActivities, getFeaturedAgeBasedActivities, type ActivityFocus } from '../data/ageBasedActivities';
 import { FamilyPersonaProfiles } from '../data/familyPersonaProfiles';
 import { logger } from '../lib/logger';
 
 
-interface Activity {
+interface ActivityHighlight {
   id: string;
   title: string;
-  type: 'story' | 'activity' | 'game' | 'assessment';
+  emoji: string;
   ageGroups: string[];
   duration: string;
   completed: boolean;
-  icon: React.ComponentType<any>;
+  learningObjective: string;
+  familyPrompt: string;
+  difficulty: string;
+  focus: ActivityFocus;
 }
 
 const FamilyHubPage: React.FC = () => {
@@ -48,7 +53,7 @@ const FamilyHubPage: React.FC = () => {
     leaveFamily, 
     addFamilyMember 
   } = useFamily();
-  const { getOverallProgress } = useProgress();
+  const { getOverallProgress, progress } = useProgress();
   const [familyPersona, setFamilyPersona] = useState<string | null>(null);
 
   // Load family persona from localStorage
@@ -71,35 +76,31 @@ const FamilyHubPage: React.FC = () => {
     }
   }, [isAuthenticated, navigate]);
 
-  const recentActivities: Activity[] = [
-    {
-      id: '1',
-      title: 'Privacy Panda Story',
-      type: 'story',
-      ageGroups: ['5-8', '9-12'],
-      duration: '10 min',
-      completed: true,
-      icon: Book
-    },
-    {
-      id: '2',
-      title: 'Password Safety Game',
-      type: 'activity',
-      ageGroups: ['5-8'],
-      duration: '15 min',
-      completed: false,
-      icon: Play
-    },
-    {
-      id: '3',
-      title: 'Social Media Privacy',
-      type: 'activity',
-      ageGroups: ['13-17'],
-      duration: '20 min',
-      completed: false,
-      icon: Users
-    }
-  ];
+  const activityCatalogue = useMemo(() => flattenAgeBasedActivities(), []);
+  const featuredActivities = useMemo(
+    () => getFeaturedAgeBasedActivities(activityCatalogue),
+    [activityCatalogue]
+  );
+  const recentActivities: ActivityHighlight[] = useMemo(
+    () =>
+      featuredActivities.slice(0, 3).map((activity) => ({
+        id: activity.id,
+        title: activity.name,
+        emoji: activity.icon,
+        ageGroups: [activity.groupAgeRange],
+        duration: activity.duration,
+        completed: Boolean(activity.activityManagerId && progress.completedActivities.includes(activity.activityManagerId)),
+        learningObjective: activity.learningObjective,
+        familyPrompt: activity.familyPrompt,
+        difficulty: activity.difficulty,
+        focus: activity.focus,
+      })),
+    [featuredActivities, progress.completedActivities]
+  );
+  const classroomActivityCount = useMemo(
+    () => classroomActivities.reduce((count, chapter) => count + chapter.activities.length, 0),
+    []
+  );
 
   const quickActions = [
     {
@@ -614,67 +615,117 @@ const FamilyHubPage: React.FC = () => {
 
             {/* Recent Activities */}
             <section>
-              <div className="flex items-center justify-between mb-6 sm:mb-8">
-                <h2 className="font-bold" style={{ fontSize: 'clamp(1.5rem, 4vw, 1.875rem)', color: 'var(--primary)' }}>
-                  Continue Learning
-                </h2>
+              <div className="mb-6 flex flex-col gap-4 sm:mb-8 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                  <h2 className="text-2xl font-bold text-primary sm:text-3xl">
+                    Continue Learning
+                  </h2>
+                  <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-600 sm:text-base">
+                    Keep momentum going with featured family missions that include clear goals, conversation starters, and next steps you can use together.
+                  </p>
+                </div>
                 <Link 
-                  to="/classroom-activities" 
-                  className="text-sm text-green-600 hover:text-green-700 font-medium hidden sm:inline-flex items-center gap-1"
+                  to="/family-hub/activities" 
+                  className="inline-flex items-center gap-2 self-start rounded-full border border-green-200 bg-green-50 px-4 py-2 text-sm font-semibold text-green-700 transition-colors hover:border-green-300 hover:bg-green-100"
                 >
-                  View all <ArrowRight size={14} />
+                  Open activity catalogue <ArrowRight size={14} />
                 </Link>
               </div>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+
+              <div className="mb-6 grid gap-4 lg:grid-cols-[1.35fr,0.65fr]">
+                <div className="rounded-2xl border border-green-200 bg-white p-5 shadow-sm dark:border-green-700 dark:bg-gray-900 sm:p-6">
+                  <div className="grid gap-3 sm:grid-cols-3">
+                    <div className="rounded-2xl bg-green-50 p-4 dark:bg-green-900/20">
+                      <p className="text-xs font-semibold uppercase tracking-wide text-green-700 dark:text-green-300">Family missions</p>
+                      <p className="mt-2 text-2xl font-bold text-green-950 dark:text-green-100">{activityCatalogue.length}</p>
+                    </div>
+                    <div className="rounded-2xl bg-blue-50 p-4 dark:bg-blue-900/20">
+                      <p className="text-xs font-semibold uppercase tracking-wide text-blue-700 dark:text-blue-300">Featured picks</p>
+                      <p className="mt-2 text-2xl font-bold text-blue-950 dark:text-blue-100">{featuredActivities.length}</p>
+                    </div>
+                    <div className="rounded-2xl bg-amber-50 p-4 dark:bg-amber-900/20">
+                      <p className="text-xs font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-300">Progress</p>
+                      <p className="mt-2 text-2xl font-bold text-amber-950 dark:text-amber-100">{getOverallProgressPercentage()}%</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="rounded-2xl border border-indigo-200 bg-indigo-50 p-5 shadow-sm dark:border-indigo-700 dark:bg-indigo-900/20 sm:p-6">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-indigo-700 dark:text-indigo-300">Family reflection cue</p>
+                  <p className="mt-3 text-sm leading-6 text-indigo-950 dark:text-indigo-100">
+                    {recentActivities[0]?.familyPrompt ?? 'Use the featured activities to spark a family privacy conversation this week.'}
+                  </p>
+                  <Link
+                    to="/family-hub/activities"
+                    className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-indigo-700 hover:text-indigo-800 dark:text-indigo-200 dark:hover:text-indigo-100"
+                  >
+                    Start with a featured mission <ArrowRight size={14} />
+                  </Link>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-6">
                 {recentActivities.map((activity) => {
-                  const IconComponent = activity.icon;
                   return (
-                    <div 
+                    <Link
                       key={activity.id}
-                      className="group bg-white rounded-xl p-6 hover:shadow-xl transition-all cursor-pointer border-2 border-transparent hover:border-green-200 active:scale-[0.98]"
-                      style={{ 
-                        backgroundColor: 'var(--card-color)',
-                        boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)'
-                      }}
+                      to="/family-hub/activities"
+                      className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-green-300 hover:shadow-lg dark:border-gray-700 dark:bg-gray-900"
                     >
-                      <div className="flex items-start gap-4 mb-4">
-                        <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-xl flex items-center justify-center text-white flex-shrink-0 group-hover:scale-110 transition-transform">
-                          <IconComponent size={24} />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <h3 className="font-bold mb-2 leading-tight text-primary">
-                            {activity.title}
-                          </h3>
-                          <div className="flex items-center gap-2 text-sm mb-2" style={{ color: 'var(--gray-500)' }}>
-                            <Clock size={14} />
-                            <span>{activity.duration}</span>
-                            {activity.completed && (
-                              <span className="flex items-center gap-1 text-green-600">
-                                <CheckCircle size={14} />
-                                <span className="text-xs font-medium">Completed</span>
-                              </span>
-                            )}
+                      <div className="mb-4 flex items-start justify-between gap-4">
+                        <div className="flex items-center gap-4">
+                          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-green-50 text-2xl shadow-sm transition-transform group-hover:scale-110 dark:bg-green-900/20">
+                            <span role="img" aria-label={activity.title}>{activity.emoji}</span>
+                          </div>
+                          <div className="min-w-0">
+                            <h3 className="font-bold leading-tight text-primary">
+                              {activity.title}
+                            </h3>
+                            <p className="mt-2 flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                              <Clock size={14} />
+                              <span>{activity.duration}</span>
+                            </p>
                           </div>
                         </div>
+                        {activity.completed && (
+                          <span className="inline-flex items-center gap-1 rounded-full bg-green-50 px-3 py-1 text-xs font-semibold text-green-700 dark:bg-green-900/20 dark:text-green-200">
+                            <CheckCircle size={14} />
+                            Completed
+                          </span>
+                        )}
                       </div>
-                      
-                      <div className="flex items-center gap-2 mb-4 flex-wrap">
+
+                      <div className="mb-4 flex flex-wrap items-center gap-2">
+                        <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 dark:bg-blue-900/20 dark:text-blue-200">
+                          {activity.focus}
+                        </span>
+                        <span className="rounded-full bg-amber-50 px-3 py-1 text-xs font-medium text-amber-700 dark:bg-amber-900/20 dark:text-amber-200">
+                          {activity.difficulty}
+                        </span>
                         {activity.ageGroups.map((group) => (
                           <span 
                             key={group}
-                            className="px-2.5 py-1 bg-gray-100 rounded-md text-xs font-medium"
-                            style={{ backgroundColor: 'var(--light)', color: 'var(--gray-600)' }}
+                            className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-300"
                           >
                             Ages {group}
                           </span>
                         ))}
                       </div>
-                      
-                      <button className="w-full py-3 px-4 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg font-semibold hover:from-green-600 hover:to-green-700 transition-all shadow-sm hover:shadow-md active:scale-[0.98]">
-                        {activity.completed ? 'Review Activity' : 'Start Activity'}
-                      </button>
-                    </div>
+
+                      <div className="rounded-2xl bg-gray-50 p-4 dark:bg-gray-800">
+                        <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">Learning goal</p>
+                        <p className="mt-2 text-sm text-gray-700 dark:text-gray-200">{activity.learningObjective}</p>
+                      </div>
+
+                      <div className="mt-4 rounded-2xl bg-indigo-50 p-4 dark:bg-indigo-900/20">
+                        <p className="text-xs font-semibold uppercase tracking-wide text-indigo-700 dark:text-indigo-300">Family prompt</p>
+                        <p className="mt-2 text-sm text-indigo-950 dark:text-indigo-100">{activity.familyPrompt}</p>
+                      </div>
+
+                      <div className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-green-600 transition-transform group-hover:translate-x-0.5 dark:text-green-300">
+                        {activity.completed ? 'Review mission' : 'Start mission'} <ArrowRight size={14} />
+                      </div>
+                    </Link>
                   );
                 })}
               </div>
@@ -682,7 +733,7 @@ const FamilyHubPage: React.FC = () => {
               {/* Mobile View All Link */}
               <div className="mt-4 sm:hidden text-center">
                 <Link 
-                  to="/classroom-activities" 
+                  to="/family-hub/activities" 
                   className="inline-flex items-center gap-2 text-green-600 hover:text-green-700 font-medium text-sm"
                 >
                   View all activities <ArrowRight size={14} />
@@ -695,68 +746,105 @@ const FamilyHubPage: React.FC = () => {
         {/* Activities Tab */}
         {activeTab === 'activities' && (
           <div className="space-y-8">
-            <div className="text-center">
-              <h2 className="font-bold mb-4" style={{ fontSize: 'clamp(1.875rem, 3vw, 2.25rem)', color: 'var(--primary)' }}>
-                Learning Activities
-              </h2>
-              <p className="text-lg max-w-2xl mx-auto text-gray-600">
-                Explore our comprehensive library of age-appropriate privacy education activities.
-              </p>
+            <div className="grid gap-6 lg:grid-cols-[1.3fr,0.7fr]">
+              <div className="rounded-3xl border border-green-200 bg-white p-6 shadow-sm dark:border-green-700 dark:bg-gray-900 sm:p-8">
+                <span className="inline-flex items-center rounded-full bg-green-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-green-700 dark:bg-green-900/20 dark:text-green-200">
+                  Family-first learning
+                </span>
+                <h2 className="mt-4 text-3xl font-bold text-primary sm:text-4xl">
+                  Learning Activities
+                </h2>
+                <p className="mt-3 max-w-2xl text-base leading-7 text-gray-600 dark:text-gray-300">
+                  Explore a richer Family Hub activity journey with guided missions, real-world scenarios, parent prompts, and classroom extensions for every age group.
+                </p>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  <span className="rounded-full bg-green-50 px-3 py-1 text-sm font-medium text-green-700 dark:bg-green-900/20 dark:text-green-200">
+                    {activityCatalogue.length} family missions
+                  </span>
+                  <span className="rounded-full bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700 dark:bg-blue-900/20 dark:text-blue-200">
+                    {featuredActivities.length} featured picks
+                  </span>
+                  <span className="rounded-full bg-purple-50 px-3 py-1 text-sm font-medium text-purple-700 dark:bg-purple-900/20 dark:text-purple-200">
+                    {classroomActivityCount} classroom activities
+                  </span>
+                </div>
+              </div>
+
+              <div className="rounded-3xl border border-indigo-200 bg-indigo-50 p-6 shadow-sm dark:border-indigo-700 dark:bg-indigo-900/20">
+                <p className="text-xs font-semibold uppercase tracking-wide text-indigo-700 dark:text-indigo-300">This week in Family Hub</p>
+                <ul className="mt-4 space-y-3">
+                  {recentActivities.map((activity) => (
+                    <li key={activity.id} className="rounded-2xl bg-white/80 px-4 py-3 text-sm text-indigo-950 shadow-sm dark:bg-gray-900/50 dark:text-indigo-100">
+                      <span className="font-semibold">{activity.title}</span>
+                      <span className="mt-1 block text-indigo-900/80 dark:text-indigo-100/80">{activity.learningObjective}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  to="/family-hub/activities"
+                  className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-indigo-700 hover:text-indigo-800 dark:text-indigo-200 dark:hover:text-indigo-100"
+                >
+                  Launch family missions <ArrowRight size={14} />
+                </Link>
+              </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <Link to="/activity-book" className="block">
-                <div className="bg-white rounded-xl p-8 text-center hover:shadow-lg transition-all"
-                     style={{ backgroundColor: 'var(--card-color)' }}>
-                  <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center text-white mx-auto mb-6">
-                    <BookOpen size={32} />
-                  </div>
-                  <h3 className="text-xl font-bold mb-3 text-primary">
-                    Interactive Activity Book
-                  </h3>
-                  <p className="mb-4 text-gray-600">
-                    6 interactive activities teaching privacy fundamentals
-                  </p>
-                  <div className="text-green-600 font-semibold">
-                    Start Activities →
-                  </div>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+              <Link to="/family-hub/activities" className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-green-300 hover:shadow-lg dark:border-gray-700 dark:bg-gray-900">
+                <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-r from-green-500 to-green-600 text-white">
+                  <BookOpen size={28} />
                 </div>
+                <h3 className="text-xl font-bold text-primary">Family Activity Missions</h3>
+                <p className="mt-3 text-sm leading-6 text-gray-600 dark:text-gray-300">
+                  Launch the full Family Hub activities catalogue with richer mission cards, learning goals, reflection prompts, and age + focus filters.
+                </p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  <span className="rounded-full bg-green-50 px-3 py-1 text-xs font-medium text-green-700 dark:bg-green-900/20 dark:text-green-200">
+                    Family-friendly prompts
+                  </span>
+                  <span className="rounded-full bg-teal-50 px-3 py-1 text-xs font-medium text-teal-700 dark:bg-teal-900/20 dark:text-teal-200">
+                    Better discovery
+                  </span>
+                </div>
+                <div className="mt-5 text-sm font-semibold text-green-600 dark:text-green-300">Open Family Hub activities →</div>
               </Link>
 
-              <Link to="/story" className="block">
-                <div className="bg-white rounded-xl p-8 text-center hover:shadow-lg transition-all"
-                     style={{ backgroundColor: 'var(--card-color)' }}>
-                  <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white mx-auto mb-6">
-                    <Book size={32} />
-                  </div>
-                  <h3 className="text-xl font-bold mb-3 text-primary">
-                    Digital Bamboo Forest Story
-                  </h3>
-                  <p className="mb-4 text-gray-600">
-                    Follow Privacy Panda's adventure learning about digital safety
-                  </p>
-                  <div className="text-blue-600 font-semibold">
-                    Read Story →
-                  </div>
+              <Link to="/story" className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-lg dark:border-gray-700 dark:bg-gray-900">
+                <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-r from-blue-500 to-blue-600 text-white">
+                  <Book size={28} />
                 </div>
+                <h3 className="text-xl font-bold text-primary">Story + Reflection</h3>
+                <p className="mt-3 text-sm leading-6 text-gray-600 dark:text-gray-300">
+                  Follow Privacy Panda’s story, then bring the lesson back to Family Hub conversations using the mission prompts and scenarios.
+                </p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 dark:bg-blue-900/20 dark:text-blue-200">
+                    Story connection
+                  </span>
+                  <span className="rounded-full bg-indigo-50 px-3 py-1 text-xs font-medium text-indigo-700 dark:bg-indigo-900/20 dark:text-indigo-200">
+                    Family discussion
+                  </span>
+                </div>
+                <div className="mt-5 text-sm font-semibold text-blue-600 dark:text-blue-300">Read the story →</div>
               </Link>
 
-              <Link to="/privacy-tools" className="block">
-                <div className="bg-white rounded-xl p-8 text-center hover:shadow-lg transition-all"
-                     style={{ backgroundColor: 'var(--card-color)' }}>
-                  <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center text-white mx-auto mb-6">
-                    <Award size={32} />
-                  </div>
-                  <h3 className="text-xl font-bold mb-3 text-primary">
-                    Privacy Tools & Challenges
-                  </h3>
-                  <p className="mb-4 text-gray-600">
-                    Advanced privacy tools and challenges for older children
-                  </p>
-                  <div className="text-purple-600 font-semibold">
-                    Explore Tools →
-                  </div>
+              <Link to="/classroom-activities" className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-purple-300 hover:shadow-lg dark:border-gray-700 dark:bg-gray-900">
+                <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-r from-purple-500 to-purple-600 text-white">
+                  <Award size={28} />
                 </div>
+                <h3 className="text-xl font-bold text-primary">Classroom Extensions</h3>
+                <p className="mt-3 text-sm leading-6 text-gray-600 dark:text-gray-300">
+                  Bring the learning offline with printable, educator-friendly activities inspired by the same privacy themes used in Family Hub.
+                </p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  <span className="rounded-full bg-purple-50 px-3 py-1 text-xs font-medium text-purple-700 dark:bg-purple-900/20 dark:text-purple-200">
+                    {classroomActivityCount} guided extensions
+                  </span>
+                  <span className="rounded-full bg-amber-50 px-3 py-1 text-xs font-medium text-amber-700 dark:bg-amber-900/20 dark:text-amber-200">
+                    Home + school bridge
+                  </span>
+                </div>
+                <div className="mt-5 text-sm font-semibold text-purple-600 dark:text-purple-300">Explore classroom activities →</div>
               </Link>
             </div>
           </div>
