@@ -266,8 +266,7 @@ const EducatorToolsPage: React.FC = () => {
 
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
         <div
-          className="rounded-xl border border-amber-200 bg-amber-50 dark:bg-amber-950/30 dark:border-amber-800 px-4 py-3 mb-6 text-sm"
-          style={{ color: 'var(--gray-800)' }}
+          className="rounded-xl border border-amber-200 bg-amber-50 dark:bg-amber-950/30 dark:border-amber-800 px-4 py-3 mb-6 text-sm text-gray-800"
           role="status"
         >
           <strong className="text-amber-900 dark:text-amber-100">Note for educators:</strong>{' '}
@@ -284,23 +283,23 @@ const EducatorToolsPage: React.FC = () => {
             boxShadow: 'var(--shadow-lg)'
           }}>
             <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+              <h2 className="text-2xl font-bold mb-4 text-primary">
                 Your Resource Library
               </h2>
               <div className="flex items-center justify-center gap-8 mb-6">
                 <div className="text-center">
-                  <div className="text-3xl font-bold" style={{ color: 'var(--primary)' }}>{completedResources.length}</div>
-                  <div className="text-sm" style={{ color: 'var(--gray-600)' }}>Resources Used</div>
+                  <div className="text-3xl font-bold text-primary">{completedResources.length}</div>
+                  <div className="text-sm text-gray-600">Resources Used</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold" style={{ color: 'var(--primary-light)' }}>{resources.length}</div>
-                  <div className="text-sm" style={{ color: 'var(--gray-600)' }}>Total Resources</div>
+                  <div className="text-sm text-gray-600">Total Resources</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold" style={{ color: 'var(--primary)' }}>
+                  <div className="text-3xl font-bold text-primary">
                     {Math.round((completedResources.length / resources.length) * 100)}%
                   </div>
-                  <div className="text-sm" style={{ color: 'var(--gray-600)' }}>Library Usage</div>
+                  <div className="text-sm text-gray-600">Library Usage</div>
                 </div>
               </div>
             </div>
@@ -310,7 +309,7 @@ const EducatorToolsPage: React.FC = () => {
         {/* Category Filter */}
         <div className="mb-8">
           <div className="text-center mb-8">
-            <h2 className="text-2xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+            <h2 className="text-2xl font-bold mb-6 text-primary">
               Browse by Category
             </h2>
             <div className="flex flex-wrap gap-3 justify-center">
@@ -374,11 +373,11 @@ const EducatorToolsPage: React.FC = () => {
                     <span className="text-sm text-gray-500 capitalize">{resource.category}</span>
                   </div>
 
-                  <h3 className="text-xl font-bold mb-3" style={{ color: 'var(--primary)' }}>
+                  <h3 className="text-xl font-bold mb-3 text-primary">
                     {resource.title}
                   </h3>
 
-                  <p className="mb-4 leading-relaxed" style={{ color: 'var(--gray-600)' }}>
+                  <p className="mb-4 leading-relaxed text-gray-600">
                     {resource.description}
                   </p>
 

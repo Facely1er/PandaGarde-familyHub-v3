@@ -85,44 +85,44 @@ const FamilyAgreementPage: React.FC = () => {
       <main className="container mx-auto px-6 py-20">
         {/* Introduction */}
         <div className="max-w-4xl mx-auto text-center mb-16">
-          <h2 className="text-3xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-3xl font-bold mb-6 text-primary">
             Create Your Family's Digital Safety Foundation
           </h2>
-          <p className="text-lg leading-relaxed mb-8" style={{ color: 'var(--gray-600)' }}>
+          <p className="text-lg leading-relaxed mb-8 text-gray-600">
             This comprehensive family internet agreement helps you establish clear, age-appropriate rules for safe and responsible internet use. It's designed to grow with your family and adapt to changing technology.
           </p>
           
-          <div className="bg-purple-50 border border-purple-200 rounded-xl p-6 mb-8" style={{ backgroundColor: 'var(--light)' }}>
-            <h3 className="text-xl font-semibold mb-4" style={{ color: 'var(--primary)' }}>
+          <div className="bg-purple-50 border border-purple-200 rounded-xl p-6 mb-8 bg-light">
+            <h3 className="text-xl font-semibold mb-4 text-primary">
               💡 How to Use This Agreement
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
               <div className="flex items-start gap-3">
                 <CheckCircle size={20} className="text-purple-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1" style={{ color: 'var(--primary)' }}>Print & Discuss</h4>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>Print the agreement and fill it out together as a family</p>
+                  <h4 className="font-semibold mb-1 text-primary">Print & Discuss</h4>
+                  <p className="text-sm text-gray-600">Print the agreement and fill it out together as a family</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <CheckCircle size={20} className="text-purple-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1" style={{ color: 'var(--primary)' }}>Customize Rules</h4>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>Adapt the rules to fit your family's specific needs and values</p>
+                  <h4 className="font-semibold mb-1 text-primary">Customize Rules</h4>
+                  <p className="text-sm text-gray-600">Adapt the rules to fit your family's specific needs and values</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <CheckCircle size={20} className="text-purple-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1" style={{ color: 'var(--primary)' }}>Sign Together</h4>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>Have everyone sign to show commitment to the agreement</p>
+                  <h4 className="font-semibold mb-1 text-primary">Sign Together</h4>
+                  <p className="text-sm text-gray-600">Have everyone sign to show commitment to the agreement</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <CheckCircle size={20} className="text-purple-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1" style={{ color: 'var(--primary)' }}>Review Regularly</h4>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>Update the agreement as your children grow and technology changes</p>
+                  <h4 className="font-semibold mb-1 text-primary">Review Regularly</h4>
+                  <p className="text-sm text-gray-600">Update the agreement as your children grow and technology changes</p>
                 </div>
               </div>
             </div>
@@ -131,7 +131,7 @@ const FamilyAgreementPage: React.FC = () => {
 
         {/* Agreement Sections Preview */}
         <div className="max-w-6xl mx-auto mb-16">
-          <h2 className="text-2xl font-bold mb-8 text-center" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-2xl font-bold mb-8 text-center text-primary">
             What's Included in Your Family Agreement
           </h2>
           
@@ -143,15 +143,15 @@ const FamilyAgreementPage: React.FC = () => {
                 style={{ backgroundColor: 'var(--card-color)' }}
               >
                 <div className="text-4xl mb-4">{section.icon}</div>
-                <h3 className="text-lg font-semibold mb-3" style={{ color: 'var(--primary)' }}>
+                <h3 className="text-lg font-semibold mb-3 text-primary">
                   {section.title}
                 </h3>
-                <p className="text-sm mb-4" style={{ color: 'var(--gray-600)' }}>
+                <p className="text-sm mb-4 text-gray-600">
                   {section.description}
                 </p>
                 <ul className="space-y-1">
                   {section.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="text-xs flex items-center gap-2" style={{ color: 'var(--gray-600)' }}>
+                    <li key={featureIndex} className="text-xs flex items-center gap-2 text-gray-600">
                       <CheckCircle size={12} className="text-green-600 flex-shrink-0" />
                       {feature}
                     </li>
@@ -164,10 +164,10 @@ const FamilyAgreementPage: React.FC = () => {
 
         {/* Action Buttons */}
         <div className="max-w-4xl mx-auto text-center mb-16">
-          <h2 className="text-2xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-2xl font-bold mb-6 text-primary">
             Get Your Family Internet Agreement
           </h2>
-          <p className="text-lg mb-8" style={{ color: 'var(--gray-600)' }}>
+          <p className="text-lg mb-8 text-gray-600">
             Download, print, and customize this comprehensive agreement for your family.
           </p>
           
@@ -201,7 +201,7 @@ const FamilyAgreementPage: React.FC = () => {
 
         {/* Additional Resources */}
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold mb-8 text-center" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-2xl font-bold mb-8 text-center text-primary">
             Related Resources
           </h2>
           
@@ -214,10 +214,10 @@ const FamilyAgreementPage: React.FC = () => {
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Shield size={24} className="text-blue-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="text-lg font-semibold mb-2 text-primary">
                 Safety Posters
               </h3>
-              <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-sm text-gray-600">
                 Visual reminders of important digital safety rules
               </p>
             </Link>
@@ -230,10 +230,10 @@ const FamilyAgreementPage: React.FC = () => {
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Users size={24} className="text-purple-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="text-lg font-semibold mb-2 text-primary">
                 Parent Resources
               </h3>
-              <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-sm text-gray-600">
                 Additional tools and guides for parents
               </p>
             </Link>
@@ -245,10 +245,10 @@ const FamilyAgreementPage: React.FC = () => {
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <CheckCircle size={24} className="text-green-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="text-lg font-semibold mb-2 text-primary">
                 Family Hub
               </h3>
-              <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-sm text-gray-600">
                 Track your family's privacy learning progress
               </p>
             </Link>

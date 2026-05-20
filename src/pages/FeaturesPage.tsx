@@ -67,7 +67,7 @@ const FeaturesPage: React.FC = () => {
               ].map((item) => (
                 <div key={item} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', background: 'var(--white)', borderRadius: '16px', padding: '1rem', border: '1px solid var(--gray-200)' }}>
                   <CheckCircle2 size={18} color="#047857" />
-                  <span style={{ color: 'var(--gray-700)' }}>{item}</span>
+                  <span className="text-gray-700">{item}</span>
                 </div>
               ))}
             </div>

@@ -212,19 +212,19 @@ const AgeSpecificGuidePage: React.FC = () => {
           
           {/* Selected Age Group Content */}
           <section className="mb-16">
-            <h2 className="text-3xl font-bold mb-8" style={{ color: 'var(--primary)' }}>
+            <h2 className="text-3xl font-bold mb-8 text-primary">
               {content.title}
             </h2>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Key Concepts */}
               <div className="bg-white rounded-xl p-6 shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
-                <h3 className="text-xl font-bold mb-4" style={{ color: 'var(--primary)' }}>Key Concepts to Teach</h3>
+                <h3 className="text-xl font-bold mb-4 text-primary">Key Concepts to Teach</h3>
                 <ul className="space-y-3">
                   {content.concepts.map((concept, index) => (
                     <li key={index} className="flex items-start gap-3">
                       <CheckCircle size={20} className="text-green-600 mt-1 flex-shrink-0" />
-                      <span className="text-sm" style={{ color: 'var(--gray-600)' }}>{concept}</span>
+                      <span className="text-sm text-gray-600">{concept}</span>
                     </li>
                   ))}
                 </ul>
@@ -232,12 +232,12 @@ const AgeSpecificGuidePage: React.FC = () => {
 
               {/* Activities */}
               <div className="bg-white rounded-xl p-6 shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
-                <h3 className="text-xl font-bold mb-4" style={{ color: 'var(--primary)' }}>Recommended Activities</h3>
+                <h3 className="text-xl font-bold mb-4 text-primary">Recommended Activities</h3>
                 <ul className="space-y-3">
                   {content.activities.map((activity, index) => (
                     <li key={index} className="flex items-start gap-3">
                       <BookOpen size={20} className="text-blue-600 mt-1 flex-shrink-0" />
-                      <span className="text-sm" style={{ color: 'var(--gray-600)' }}>{activity}</span>
+                      <span className="text-sm text-gray-600">{activity}</span>
                     </li>
                   ))}
                 </ul>
@@ -247,18 +247,18 @@ const AgeSpecificGuidePage: React.FC = () => {
 
           {/* Conversation Starters */}
           <section className="mb-16">
-            <h2 className="text-3xl font-bold mb-8" style={{ color: 'var(--primary)' }}>
+            <h2 className="text-3xl font-bold mb-8 text-primary">
               Conversation Starters
             </h2>
             
             <div className="bg-white rounded-xl p-6 shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
-              <p className="text-sm mb-4" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-sm mb-4 text-gray-600">
                 Use these questions to start meaningful conversations about digital privacy with your child:
               </p>
               <div className="space-y-4">
                 {content.conversationStarters.map((starter, index) => (
-                  <div key={index} className="bg-gray-50 rounded-lg p-4" style={{ backgroundColor: 'var(--light)' }}>
-                    <p className="text-sm font-medium" style={{ color: 'var(--gray-700)' }}>
+                  <div key={index} className="bg-gray-50 rounded-lg p-4 bg-light">
+                    <p className="text-sm font-medium text-gray-700">
                       "{starter}"
                     </p>
                   </div>
@@ -269,7 +269,7 @@ const AgeSpecificGuidePage: React.FC = () => {
 
           {/* Parental Guidance */}
           <section className="mb-16">
-            <h2 className="text-3xl font-bold mb-8" style={{ color: 'var(--primary)' }}>
+            <h2 className="text-3xl font-bold mb-8 text-primary">
               Parental Guidance Tips
             </h2>
             
@@ -280,7 +280,7 @@ const AgeSpecificGuidePage: React.FC = () => {
                     <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                       <span className="text-green-600 font-bold text-sm">{index + 1}</span>
                     </div>
-                    <span className="text-sm" style={{ color: 'var(--gray-600)' }}>{tip}</span>
+                    <span className="text-sm text-gray-600">{tip}</span>
                   </li>
                 ))}
               </ul>
@@ -289,7 +289,7 @@ const AgeSpecificGuidePage: React.FC = () => {
 
           {/* Age-Specific Resources */}
           <section className="mb-16">
-            <h2 className="text-3xl font-bold mb-8" style={{ color: 'var(--primary)' }}>
+            <h2 className="text-3xl font-bold mb-8 text-primary">
               Age-Specific Resources
             </h2>
             
@@ -304,10 +304,10 @@ const AgeSpecificGuidePage: React.FC = () => {
                     <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                       <Heart size={24} className="text-green-600" />
                     </div>
-                    <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+                    <h3 className="text-lg font-semibold mb-2 text-primary">
                       Coloring Sheets
                     </h3>
-                    <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+                    <p className="text-sm text-gray-600">
                       Fun activities for young learners
                     </p>
                   </Link>
@@ -320,10 +320,10 @@ const AgeSpecificGuidePage: React.FC = () => {
                     <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                       <BookOpen size={24} className="text-blue-600" />
                     </div>
-                    <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+                    <h3 className="text-lg font-semibold mb-2 text-primary">
                       Privacy Panda Story
                     </h3>
-                    <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+                    <p className="text-sm text-gray-600">
                       Interactive story for young children
                     </p>
                   </Link>
@@ -336,10 +336,10 @@ const AgeSpecificGuidePage: React.FC = () => {
                     <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                       <Shield size={24} className="text-purple-600" />
                     </div>
-                    <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+                    <h3 className="text-lg font-semibold mb-2 text-primary">
                       Activity Book
                     </h3>
-                    <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+                    <p className="text-sm text-gray-600">
                       Hands-on learning activities
                     </p>
                   </Link>
@@ -356,10 +356,10 @@ const AgeSpecificGuidePage: React.FC = () => {
                     <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                       <BookOpen size={24} className="text-blue-600" />
                     </div>
-                    <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+                    <h3 className="text-lg font-semibold mb-2 text-primary">
                       Privacy Handbook
                     </h3>
-                    <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+                    <p className="text-sm text-gray-600">
                       Comprehensive guide for elementary students
                     </p>
                   </Link>
@@ -372,10 +372,10 @@ const AgeSpecificGuidePage: React.FC = () => {
                     <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                       <Shield size={24} className="text-green-600" />
                     </div>
-                    <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+                    <h3 className="text-lg font-semibold mb-2 text-primary">
                       Safety Posters
                     </h3>
-                    <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+                    <p className="text-sm text-gray-600">
                       Visual reminders for classrooms
                     </p>
                   </Link>
@@ -388,10 +388,10 @@ const AgeSpecificGuidePage: React.FC = () => {
                     <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                       <Brain size={24} className="text-purple-600" />
                     </div>
-                    <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+                    <h3 className="text-lg font-semibold mb-2 text-primary">
                       Privacy Tools
                     </h3>
-                    <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+                    <p className="text-sm text-gray-600">
                       Interactive tools and games
                     </p>
                   </Link>
@@ -408,10 +408,10 @@ const AgeSpecificGuidePage: React.FC = () => {
                     <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                       <Brain size={24} className="text-purple-600" />
                     </div>
-                    <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+                    <h3 className="text-lg font-semibold mb-2 text-primary">
                       Teen Handbook
                     </h3>
-                    <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+                    <p className="text-sm text-gray-600">
                       Advanced privacy concepts for teens
                     </p>
                   </Link>
@@ -424,10 +424,10 @@ const AgeSpecificGuidePage: React.FC = () => {
                     <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                       <Users size={24} className="text-blue-600" />
                     </div>
-                    <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+                    <h3 className="text-lg font-semibold mb-2 text-primary">
                       Digital Citizenship
                     </h3>
-                    <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+                    <p className="text-sm text-gray-600">
                       Responsible online behavior
                     </p>
                   </Link>
@@ -440,10 +440,10 @@ const AgeSpecificGuidePage: React.FC = () => {
                     <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                       <Shield size={24} className="text-green-600" />
                     </div>
-                    <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+                    <h3 className="text-lg font-semibold mb-2 text-primary">
                       Digital Rights
                     </h3>
-                    <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+                    <p className="text-sm text-gray-600">
                       Understanding your digital rights
                     </p>
                   </Link>

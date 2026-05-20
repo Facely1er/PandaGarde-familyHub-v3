@@ -482,8 +482,8 @@ const InteractiveStoryPage: React.FC = () => {
                   <Star size={20} className={isDark ? 'text-yellow-100' : 'text-yellow-900'} fill="currentColor" />
                 </div>
                 <div>
-                  <div className="font-bold text-sm" style={{ color: 'var(--gray-800)' }}>Ages 5-12</div>
-                  <div className="text-xs" style={{ color: 'var(--gray-600)' }}>Perfect Age</div>
+                  <div className="font-bold text-sm text-gray-800">Ages 5-12</div>
+                  <div className="text-xs text-gray-600">Perfect Age</div>
                 </div>
               </div>
               <div className={`flex items-center gap-3 px-4 py-3 rounded-xl border-2 shadow-md hover:shadow-lg transition-all transform hover:scale-105 ${isDark ? 'bg-gradient-to-br from-blue-900/40 to-blue-800/40 border-blue-600' : 'bg-gradient-to-br from-blue-50 to-blue-100 border-blue-300'}`}>
@@ -491,8 +491,8 @@ const InteractiveStoryPage: React.FC = () => {
                   <Book size={20} className={isDark ? 'text-blue-100' : 'text-blue-900'} />
                 </div>
                 <div>
-                  <div className="font-bold text-sm" style={{ color: 'var(--gray-800)' }}>Interactive</div>
-                  <div className="text-xs" style={{ color: 'var(--gray-600)' }}>Engaging</div>
+                  <div className="font-bold text-sm text-gray-800">Interactive</div>
+                  <div className="text-xs text-gray-600">Engaging</div>
                 </div>
               </div>
               <div className={`flex items-center gap-3 px-4 py-3 rounded-xl border-2 shadow-md hover:shadow-lg transition-all transform hover:scale-105 ${isDark ? 'bg-gradient-to-br from-red-900/40 to-red-800/40 border-red-600' : 'bg-gradient-to-br from-red-50 to-red-100 border-red-300'}`}>
@@ -500,8 +500,8 @@ const InteractiveStoryPage: React.FC = () => {
                   <Heart size={20} className={isDark ? 'text-red-100' : 'text-red-900'} fill="currentColor" />
                 </div>
                 <div>
-                  <div className="font-bold text-sm" style={{ color: 'var(--gray-800)' }}>Educational</div>
-                  <div className="text-xs" style={{ color: 'var(--gray-600)' }}>Learning</div>
+                  <div className="font-bold text-sm text-gray-800">Educational</div>
+                  <div className="text-xs text-gray-600">Learning</div>
                 </div>
               </div>
               <div className={`flex items-center gap-3 px-4 py-3 rounded-xl border-2 shadow-md hover:shadow-lg transition-all transform hover:scale-105 ${isDark ? 'bg-gradient-to-br from-purple-900/40 to-purple-800/40 border-purple-600' : 'bg-gradient-to-br from-purple-50 to-purple-100 border-purple-300'}`}>
@@ -509,8 +509,8 @@ const InteractiveStoryPage: React.FC = () => {
                   <span className="text-2xl">🎮</span>
                 </div>
                 <div>
-                  <div className="font-bold text-sm" style={{ color: 'var(--gray-800)' }}>Make Choices</div>
-                  <div className="text-xs" style={{ color: 'var(--gray-600)' }}>Decisions</div>
+                  <div className="font-bold text-sm text-gray-800">Make Choices</div>
+                  <div className="text-xs text-gray-600">Decisions</div>
                 </div>
               </div>
             </div>
@@ -586,10 +586,10 @@ const InteractiveStoryPage: React.FC = () => {
                     </div>
                   </div>
                   
-                  <p className="text-base font-semibold mb-2" style={{ color: 'var(--gray-800)' }}>Ready to protect your digital privacy?</p>
+                  <p className="text-base font-semibold mb-2 text-gray-800">Ready to protect your digital privacy?</p>
                   <div className="flex justify-center gap-1 mt-2">
                     <Sparkles size={16} className="text-yellow-500" />
-                    <span className="text-xs" style={{ color: 'var(--gray-600)' }}>Interactive Learning Adventure</span>
+                    <span className="text-xs text-gray-600">Interactive Learning Adventure</span>
                     <Sparkles size={16} className="text-yellow-500" />
                   </div>
                 </div>
@@ -637,7 +637,7 @@ const InteractiveStoryPage: React.FC = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" role="dialog" aria-labelledby="keyboard-help-title">
           <div className={`rounded-lg p-6 max-w-md mx-4 ${isDark ? 'bg-gray-800' : 'bg-white'}`} style={{ backgroundColor: 'var(--card-color)' }}>
             <div className="flex justify-between items-center mb-4">
-              <h2 id="keyboard-help-title" className="text-xl font-bold" style={{ color: 'var(--gray-800)' }}>Keyboard Shortcuts</h2>
+              <h2 id="keyboard-help-title" className="text-xl font-bold text-gray-800">Keyboard Shortcuts</h2>
               <button
                 onClick={() => setShowKeyboardHelp(false)}
                 className="text-2xl"
@@ -647,38 +647,38 @@ const InteractiveStoryPage: React.FC = () => {
                 ×
               </button>
             </div>
-            <div className="space-y-3" style={{ color: 'var(--gray-700)' }}>
+            <div className="space-y-3 text-gray-700">
               <div className="flex justify-between">
                 <span>Next scene:</span>
-                <kbd className={`px-2 py-1 rounded text-sm ${isDark ? 'bg-gray-700' : 'bg-gray-200'}`} style={{ color: 'var(--gray-700)' }}>→</kbd>
+                <kbd className="px-2 py-1 rounded text-sm ${isDark ? 'bg-gray-700' : 'bg-gray-200'} text-gray-700">→</kbd>
               </div>
               <div className="flex justify-between">
                 <span>Previous scene:</span>
-                <kbd className={`px-2 py-1 rounded text-sm ${isDark ? 'bg-gray-700' : 'bg-gray-200'}`} style={{ color: 'var(--gray-700)' }}>←</kbd>
+                <kbd className="px-2 py-1 rounded text-sm ${isDark ? 'bg-gray-700' : 'bg-gray-200'} text-gray-700">←</kbd>
               </div>
               <div className="flex justify-between">
                 <span>Play/Pause:</span>
-                <kbd className={`px-2 py-1 rounded text-sm ${isDark ? 'bg-gray-700' : 'bg-gray-200'}`} style={{ color: 'var(--gray-700)' }}>P</kbd>
+                <kbd className="px-2 py-1 rounded text-sm ${isDark ? 'bg-gray-700' : 'bg-gray-200'} text-gray-700">P</kbd>
               </div>
               <div className="flex justify-between">
                 <span>Mute/Unmute:</span>
-                <kbd className={`px-2 py-1 rounded text-sm ${isDark ? 'bg-gray-700' : 'bg-gray-200'}`} style={{ color: 'var(--gray-700)' }}>M</kbd>
+                <kbd className="px-2 py-1 rounded text-sm ${isDark ? 'bg-gray-700' : 'bg-gray-200'} text-gray-700">M</kbd>
               </div>
               <div className="flex justify-between">
                 <span>Reset story:</span>
-                <kbd className={`px-2 py-1 rounded text-sm ${isDark ? 'bg-gray-700' : 'bg-gray-200'}`} style={{ color: 'var(--gray-700)' }}>R</kbd>
+                <kbd className="px-2 py-1 rounded text-sm ${isDark ? 'bg-gray-700' : 'bg-gray-200'} text-gray-700">R</kbd>
               </div>
               <div className="flex justify-between">
                 <span>Select choice:</span>
-                <kbd className={`px-2 py-1 rounded text-sm ${isDark ? 'bg-gray-700' : 'bg-gray-200'}`} style={{ color: 'var(--gray-700)' }}>Enter</kbd>
+                <kbd className="px-2 py-1 rounded text-sm ${isDark ? 'bg-gray-700' : 'bg-gray-200'} text-gray-700">Enter</kbd>
               </div>
               <div className="flex justify-between">
                 <span>Show this help:</span>
-                <kbd className={`px-2 py-1 rounded text-sm ${isDark ? 'bg-gray-700' : 'bg-gray-200'}`} style={{ color: 'var(--gray-700)' }}>H</kbd>
+                <kbd className="px-2 py-1 rounded text-sm ${isDark ? 'bg-gray-700' : 'bg-gray-200'} text-gray-700">H</kbd>
               </div>
               <div className="flex justify-between">
                 <span>Show bookmarks:</span>
-                <kbd className={`px-2 py-1 rounded text-sm ${isDark ? 'bg-gray-700' : 'bg-gray-200'}`} style={{ color: 'var(--gray-700)' }}>B</kbd>
+                <kbd className="px-2 py-1 rounded text-sm ${isDark ? 'bg-gray-700' : 'bg-gray-200'} text-gray-700">B</kbd>
               </div>
             </div>
           </div>
@@ -690,7 +690,7 @@ const InteractiveStoryPage: React.FC = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" role="dialog" aria-labelledby="bookmarks-title">
           <div className={`rounded-lg p-6 max-w-2xl mx-4 max-h-96 overflow-y-auto ${isDark ? 'bg-gray-800' : 'bg-white'}`} style={{ backgroundColor: 'var(--card-color)' }}>
             <div className="flex justify-between items-center mb-4">
-              <h2 id="bookmarks-title" className="text-xl font-bold" style={{ color: 'var(--gray-800)' }}>Story Bookmarks</h2>
+              <h2 id="bookmarks-title" className="text-xl font-bold text-gray-800">Story Bookmarks</h2>
               <button
                 onClick={() => setShowBookmarks(false)}
                 className="text-2xl"
@@ -709,8 +709,8 @@ const InteractiveStoryPage: React.FC = () => {
                   return scene ? (
                     <div key={sceneId} className={`flex items-center justify-between p-3 rounded-lg ${isDark ? 'bg-gray-700' : 'bg-gray-50'}`}>
                       <div className="flex-1">
-                        <h3 className="font-semibold" style={{ color: 'var(--gray-800)' }}>{scene.title}</h3>
-                        <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+                        <h3 className="font-semibold text-gray-800">{scene.title}</h3>
+                        <p className="text-sm text-gray-600">
                           {scene.content.substring(0, 100)}...
                         </p>
                       </div>
@@ -740,7 +740,7 @@ const InteractiveStoryPage: React.FC = () => {
         {/* Visual Achievement Showcase */}
         <div className="mb-6 relative z-10">
           <div className={`rounded-2xl p-6 border-2 shadow-lg ${isDark ? 'bg-gradient-to-r from-purple-900/40 via-pink-900/40 to-orange-900/40 border-purple-700' : 'bg-gradient-to-r from-purple-50 via-pink-50 to-orange-50 border-purple-200'}`}>
-            <h3 className="text-xl font-bold mb-4 flex items-center gap-2" style={{ color: 'var(--gray-800)' }}>
+            <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-gray-800">
               <Trophy className="text-yellow-500" size={24} />
               Your Achievements
             </h3>

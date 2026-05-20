@@ -155,44 +155,44 @@ const AppSelectionGuidePage: React.FC = () => {
       <div style={{ maxWidth: '56rem', margin: '0 auto' }}>
         {/* Introduction */}
         <div className="max-w-4xl mx-auto text-center mb-16">
-          <h2 className="text-3xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-3xl font-bold mb-6 text-primary">
             Making Smart App Choices
           </h2>
-          <p className="text-lg leading-relaxed mb-8" style={{ color: 'var(--gray-600)' }}>
+          <p className="text-lg leading-relaxed mb-8 text-gray-600">
             With millions of apps available, choosing the right ones for your children can be overwhelming. This guide provides clear criteria and recommendations to help you make informed decisions.
           </p>
           
-          <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-8" style={{ backgroundColor: 'var(--light)' }}>
-            <h3 className="text-xl font-semibold mb-4" style={{ color: 'var(--primary)' }}>
+          <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-8 bg-light">
+            <h3 className="text-xl font-semibold mb-4 text-primary">
               📱 App Selection Principles
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
               <div className="flex items-start gap-3">
                 <CheckCircle size={20} className="text-blue-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1" style={{ color: 'var(--primary)' }}>Age Appropriateness</h4>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>Content and complexity match your child's developmental stage</p>
+                  <h4 className="font-semibold mb-1 text-primary">Age Appropriateness</h4>
+                  <p className="text-sm text-gray-600">Content and complexity match your child's developmental stage</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <CheckCircle size={20} className="text-blue-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1" style={{ color: 'var(--primary)' }}>Educational Value</h4>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>Apps should teach, inspire, or develop skills</p>
+                  <h4 className="font-semibold mb-1 text-primary">Educational Value</h4>
+                  <p className="text-sm text-gray-600">Apps should teach, inspire, or develop skills</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <CheckCircle size={20} className="text-blue-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1" style={{ color: 'var(--primary)' }}>Privacy Protection</h4>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>Strong privacy policies and minimal data collection</p>
+                  <h4 className="font-semibold mb-1 text-primary">Privacy Protection</h4>
+                  <p className="text-sm text-gray-600">Strong privacy policies and minimal data collection</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <CheckCircle size={20} className="text-blue-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1" style={{ color: 'var(--primary)' }}>Parental Controls</h4>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>Options for monitoring and restricting usage</p>
+                  <h4 className="font-semibold mb-1 text-primary">Parental Controls</h4>
+                  <p className="text-sm text-gray-600">Options for monitoring and restricting usage</p>
                 </div>
               </div>
             </div>
@@ -201,7 +201,7 @@ const AppSelectionGuidePage: React.FC = () => {
 
         {/* App Categories */}
         <div className="max-w-6xl mx-auto mb-16">
-          <h2 className="text-2xl font-bold mb-8 text-center" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-2xl font-bold mb-8 text-center text-primary">
             App Categories & Recommendations
           </h2>
           
@@ -220,29 +220,29 @@ const AppSelectionGuidePage: React.FC = () => {
                         <IconComponent size={24} className="text-blue-600" />
                       </div>
                       <div>
-                        <h3 className="text-lg font-bold" style={{ color: 'var(--primary)' }}>
+                        <h3 className="text-lg font-bold text-primary">
                           {category.title}
                         </h3>
-                        <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+                        <p className="text-sm text-gray-600">
                           {category.description}
                         </p>
                       </div>
                     </div>
                     
                     <div className="mb-4">
-                      <h4 className="text-sm font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+                      <h4 className="text-sm font-semibold mb-2 text-primary">
                         Examples:
                       </h4>
-                      <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+                      <p className="text-sm text-gray-600">
                         {category.examples.join(', ')}
                       </p>
                     </div>
                     
                     <div className="mb-4">
-                      <h4 className="text-sm font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+                      <h4 className="text-sm font-semibold mb-2 text-primary">
                         Selection Criteria:
                       </h4>
-                      <ul className="text-sm space-y-1" style={{ color: 'var(--gray-600)' }}>
+                      <ul className="text-sm space-y-1 text-gray-600">
                         {category.criteria.map((criterion, index) => (
                           <li key={index} className="flex items-start gap-2">
                             <CheckCircle size={14} className="text-green-600 mt-1 flex-shrink-0" />
@@ -266,7 +266,7 @@ const AppSelectionGuidePage: React.FC = () => {
 
         {/* Red Flags */}
         <div className="max-w-6xl mx-auto mb-16">
-          <h2 className="text-2xl font-bold mb-8 text-center" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-2xl font-bold mb-8 text-center text-primary">
             Red Flags to Avoid
           </h2>
           
@@ -293,7 +293,7 @@ const AppSelectionGuidePage: React.FC = () => {
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-2">
-                        <h3 className="font-semibold" style={{ color: 'var(--primary)' }}>
+                        <h3 className="font-semibold text-primary">
                           {flag.title}
                         </h3>
                         <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
@@ -304,7 +304,7 @@ const AppSelectionGuidePage: React.FC = () => {
                           {flag.severity}
                         </span>
                       </div>
-                      <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+                      <p className="text-sm text-gray-600">
                         {flag.description}
                       </p>
                     </div>
@@ -317,7 +317,7 @@ const AppSelectionGuidePage: React.FC = () => {
 
         {/* Age Recommendations */}
         <div className="max-w-6xl mx-auto mb-16">
-          <h2 className="text-2xl font-bold mb-8 text-center" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-2xl font-bold mb-8 text-center text-primary">
             Age-Specific Recommendations
           </h2>
           
@@ -328,12 +328,12 @@ const AppSelectionGuidePage: React.FC = () => {
                 className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow"
                 style={{ backgroundColor: 'var(--card-color)' }}
               >
-                <h3 className="text-lg font-bold mb-4 text-center" style={{ color: 'var(--primary)' }}>
+                <h3 className="text-lg font-bold mb-4 text-center text-primary">
                   {rec.age}
                 </h3>
                 <ul className="space-y-2">
                   {rec.recommendations.map((item, itemIndex) => (
-                    <li key={itemIndex} className="flex items-start gap-2 text-sm" style={{ color: 'var(--gray-600)' }}>
+                    <li key={itemIndex} className="flex items-start gap-2 text-sm text-gray-600">
                       <CheckCircle size={14} className="text-green-600 mt-1 flex-shrink-0" />
                       {item}
                     </li>
@@ -399,7 +399,7 @@ const AppSelectionGuidePage: React.FC = () => {
 
         {/* Additional Resources */}
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold mb-8 text-center" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-2xl font-bold mb-8 text-center text-primary">
             Related Resources
           </h2>
           
@@ -412,10 +412,10 @@ const AppSelectionGuidePage: React.FC = () => {
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Shield size={24} className="text-green-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="text-lg font-semibold mb-2 text-primary">
                 Device Setup Guide
               </h3>
-              <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-sm text-gray-600">
                 Learn how to configure devices with appropriate controls
               </p>
             </Link>
@@ -428,10 +428,10 @@ const AppSelectionGuidePage: React.FC = () => {
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Star size={24} className="text-blue-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="text-lg font-semibold mb-2 text-primary">
                 Modeling Behavior
               </h3>
-              <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-sm text-gray-600">
                 Tips for demonstrating healthy online behavior
               </p>
             </Link>
@@ -444,10 +444,10 @@ const AppSelectionGuidePage: React.FC = () => {
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Smartphone size={24} className="text-purple-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="text-lg font-semibold mb-2 text-primary">
                 Parent Resources
               </h3>
-              <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-sm text-gray-600">
                 Additional tools and resources for parents
               </p>
             </Link>

@@ -98,41 +98,41 @@ const CertificatesPage: React.FC = () => {
           <h2 className="font-bold mb-6" style={{ fontSize: 'clamp(1.875rem, 3vw, 2.25rem)', color: 'var(--primary)' }}>
             Celebrate Learning Achievements
           </h2>
-          <p className="text-lg leading-relaxed mb-8" style={{ color: 'var(--gray-600)' }}>
+          <p className="text-lg leading-relaxed mb-8 text-gray-600">
             These certificates recognize and celebrate children's privacy education achievements. They serve as positive reinforcement and create lasting memories of their learning journey.
           </p>
           
-          <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-6 mb-8" style={{ backgroundColor: 'var(--light)' }}>
-            <h3 className="text-xl font-semibold mb-4" style={{ color: 'var(--primary)' }}>
+          <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-6 mb-8 bg-light">
+            <h3 className="text-xl font-semibold mb-4 text-primary">
               🏆 Certificate Usage Tips
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
               <div className="flex items-start gap-3">
                 <Star size={20} className="text-yellow-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1" style={{ color: 'var(--primary)' }}>Personalize</h4>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>Add the child's name and achievement date</p>
+                  <h4 className="font-semibold mb-1 text-primary">Personalize</h4>
+                  <p className="text-sm text-gray-600">Add the child's name and achievement date</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Star size={20} className="text-yellow-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1" style={{ color: 'var(--primary)' }}>Display Proudly</h4>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>Frame and display certificates in learning areas</p>
+                  <h4 className="font-semibold mb-1 text-primary">Display Proudly</h4>
+                  <p className="text-sm text-gray-600">Frame and display certificates in learning areas</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Star size={20} className="text-yellow-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1" style={{ color: 'var(--primary)' }}>Celebrate Together</h4>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>Present certificates during family celebrations</p>
+                  <h4 className="font-semibold mb-1 text-primary">Celebrate Together</h4>
+                  <p className="text-sm text-gray-600">Present certificates during family celebrations</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Star size={20} className="text-yellow-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1" style={{ color: 'var(--primary)' }}>Create Portfolio</h4>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>Keep certificates as part of learning portfolio</p>
+                  <h4 className="font-semibold mb-1 text-primary">Create Portfolio</h4>
+                  <p className="text-sm text-gray-600">Keep certificates as part of learning portfolio</p>
                 </div>
               </div>
             </div>
@@ -157,7 +157,7 @@ const CertificatesPage: React.FC = () => {
                 
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-lg font-bold" style={{ color: 'var(--primary)' }}>
+                    <h3 className="text-lg font-bold text-primary">
                       {cert.title}
                     </h3>
                     <span className="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-semibold">
@@ -165,15 +165,15 @@ const CertificatesPage: React.FC = () => {
                     </span>
                   </div>
                   
-                  <p className="text-sm mb-4" style={{ color: 'var(--gray-600)' }}>
+                  <p className="text-sm mb-4 text-gray-600">
                     {cert.description}
                   </p>
                   
-                  <div className="bg-gray-50 rounded-lg p-3 mb-4" style={{ backgroundColor: 'var(--light)' }}>
-                    <h4 className="text-sm font-semibold mb-1" style={{ color: 'var(--primary)' }}>
+                  <div className="bg-gray-50 rounded-lg p-3 mb-4 bg-light">
+                    <h4 className="text-sm font-semibold mb-1 text-primary">
                       Requirements:
                     </h4>
-                    <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+                    <p className="text-sm text-gray-600">
                       {cert.requirements}
                     </p>
                   </div>
@@ -241,10 +241,10 @@ const CertificatesPage: React.FC = () => {
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Award size={24} className="text-green-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="text-lg font-semibold mb-2 text-primary">
                 Activity Book
               </h3>
-              <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-sm text-gray-600">
                 Complete activities to earn these certificates
               </p>
             </Link>
@@ -257,10 +257,10 @@ const CertificatesPage: React.FC = () => {
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Star size={24} className="text-blue-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="text-lg font-semibold mb-2 text-primary">
                 Coloring Sheets
               </h3>
-              <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-sm text-gray-600">
                 Download fun coloring pages featuring Privacy Panda
               </p>
             </Link>
@@ -272,10 +272,10 @@ const CertificatesPage: React.FC = () => {
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Trophy size={24} className="text-purple-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="text-lg font-semibold mb-2 text-primary">
                 Family Hub
               </h3>
-              <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-sm text-gray-600">
                 Track family achievements and progress together
               </p>
             </Link>

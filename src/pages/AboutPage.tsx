@@ -56,10 +56,10 @@ const AboutPage: React.FC = () => {
           <section className="mb-20">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <div>
-                <h2 className="text-3xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+                <h2 className="text-3xl font-bold mb-6 text-primary">
                   Our Mission
                 </h2>
-                <div className="space-y-6 text-lg leading-relaxed" style={{ color: 'var(--gray-600)' }}>
+                <div className="space-y-6 text-lg leading-relaxed text-gray-600">
                   <p>
                     We believe kids should learn about online privacy early—and that it should be easy and fun for every family.
                     Our goal is to give children and parents the knowledge and skills to stay safe and confident online.
@@ -75,15 +75,14 @@ const AboutPage: React.FC = () => {
                 </div>
               </div>
 
-              <div className="bg-gray-50 rounded-2xl p-12 text-center"
-                   style={{ backgroundColor: 'var(--light)' }}>
+              <div className="bg-gray-50 rounded-2xl p-12 text-center bg-light">
                 <div className="w-32 h-32 bg-gradient-to-r from-green-600 to-green-500 rounded-full flex items-center justify-center text-white text-5xl mx-auto mb-6">
                   <Shield size={64} />
                 </div>
-                <h3 className="text-2xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+                <h3 className="text-2xl font-bold mb-4 text-primary">
                   Privacy First
                 </h3>
-                <p style={{ color: 'var(--gray-600)' }}>
+                <p className="text-gray-600">
                   Building a safer digital future for families everywhere
                 </p>
               </div>
@@ -93,10 +92,10 @@ const AboutPage: React.FC = () => {
           {/* Values Section */}
           <section className="mb-20">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+              <h2 className="text-4xl font-bold mb-6 text-primary">
                 Our Core Values
               </h2>
-              <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-xl max-w-3xl mx-auto leading-relaxed text-gray-600">
                 These principles guide everything we do at PandaGarde, from product development to community engagement.
               </p>
             </div>
@@ -116,10 +115,10 @@ const AboutPage: React.FC = () => {
                     <div className="w-20 h-20 bg-gradient-to-r from-green-600 to-green-500 rounded-xl flex items-center justify-center text-white mx-auto mb-6">
                       <IconComponent size={32} />
                     </div>
-                    <h3 className="text-xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+                    <h3 className="text-xl font-bold mb-4 text-primary">
                       {value.title}
                     </h3>
-                    <p className="leading-relaxed" style={{ color: 'var(--gray-600)' }}>
+                    <p className="leading-relaxed text-gray-600">
                       {value.description}
                     </p>
                   </div>
@@ -131,24 +130,23 @@ const AboutPage: React.FC = () => {
           {/* Educational Approach Section */}
           <section className="mb-20">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              <div className="bg-gray-50 rounded-2xl p-12 text-center order-2 lg:order-1"
-                   style={{ backgroundColor: 'var(--light)' }}>
+              <div className="bg-gray-50 rounded-2xl p-12 text-center order-2 lg:order-1 bg-light">
                 <div className="w-32 h-32 bg-gradient-to-r from-green-600 to-green-500 rounded-full flex items-center justify-center text-white text-5xl mx-auto mb-6">
                   <School size={64} />
                 </div>
-                <h3 className="text-2xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+                <h3 className="text-2xl font-bold mb-4 text-primary">
                   K-12 Standards
                 </h3>
-                <p style={{ color: 'var(--gray-600)' }}>
+                <p className="text-gray-600">
                   Curriculum aligned with educational standards nationwide
                 </p>
               </div>
 
               <div className="order-1 lg:order-2">
-                <h2 className="text-3xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+                <h2 className="text-3xl font-bold mb-6 text-primary">
                   Comprehensive K-12 Integration
                 </h2>
-                <div className="space-y-6 text-lg leading-relaxed" style={{ color: 'var(--gray-600)' }}>
+                <div className="space-y-6 text-lg leading-relaxed text-gray-600">
                   <p>
                     PandaGarde works for both families at home and schools in the classroom. Our content fits with what
                     many schools already teach about digital citizenship and staying safe online.
@@ -169,17 +167,16 @@ const AboutPage: React.FC = () => {
           {/* Team Approach Section */}
           <section className="mb-20">
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+              <h2 className="text-4xl font-bold mb-6 text-primary">
                 Our Approach
               </h2>
             </div>
 
-            <div className="bg-gray-50 rounded-2xl p-12 text-center max-w-4xl mx-auto"
-                 style={{ backgroundColor: 'var(--light)' }}>
-              <h3 className="text-3xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+            <div className="bg-gray-50 rounded-2xl p-12 text-center max-w-4xl mx-auto bg-light">
+              <h3 className="text-3xl font-bold mb-6 text-primary">
                 Expert-Designed, Family-Tested
               </h3>
-              <p className="text-lg leading-relaxed" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-lg leading-relaxed text-gray-600">
                 PandaGarde is developed by a team of privacy experts, educators, and child development specialists
                 who understand both the technical aspects of digital privacy and the unique challenges of teaching
                 these concepts to children. Every resource is tested with real families to ensure it's both
