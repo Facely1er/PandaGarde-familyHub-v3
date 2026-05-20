@@ -54,7 +54,7 @@ const ResourceModal: React.FC<ResourceModalProps> = ({
       >
         <div className="p-6">
           <div className="flex items-center justify-between mb-6">
-            <h3 className="text-2xl font-bold" style={{ color: 'var(--primary)' }}>
+            <h3 className="text-2xl font-bold text-primary">
               {title}
             </h3>
             <button
@@ -67,16 +67,16 @@ const ResourceModal: React.FC<ResourceModalProps> = ({
           </div>
 
           <div className="mb-6">
-            <p className="text-lg mb-6" style={{ color: 'var(--gray-600)' }}>
+            <p className="text-lg mb-6 text-gray-600">
               {description}
             </p>
 
             {preview && preview.length > 0 && (
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
-                <h4 className="font-semibold mb-4" style={{ color: 'var(--primary)' }}>
+                <h4 className="font-semibold mb-4 text-primary">
                   What's Included:
                 </h4>
-                <ul className="list-disc pl-6 space-y-2" style={{ color: 'var(--gray-600)' }}>
+                <ul className="list-disc pl-6 space-y-2 text-gray-600">
                   {preview.map((item, index) => (
                     <li key={index}>{item}</li>
                   ))}
@@ -85,7 +85,7 @@ const ResourceModal: React.FC<ResourceModalProps> = ({
             )}
 
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4 text-sm" style={{ color: 'var(--gray-600)' }}>
+              <div className="flex items-center gap-4 text-sm text-gray-600">
                 {duration && (
                   <span className="flex items-center gap-1">
                     <Clock size={16} />

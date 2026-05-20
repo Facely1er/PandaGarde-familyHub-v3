@@ -379,7 +379,7 @@ const DigitalRightsPage: React.FC = () => {
       {/* Category Filter */}
       <section className="container mx-auto px-6 mb-8">
         <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-2xl font-bold mb-6 text-primary">
             Browse by Category
           </h2>
           <div className="flex flex-wrap gap-3 justify-center">
@@ -443,11 +443,11 @@ const DigitalRightsPage: React.FC = () => {
                     <span className="text-sm text-gray-500 capitalize">{module.category.replace('-', ' ')}</span>
                   </div>
 
-                  <h3 className="text-xl font-bold mb-3" style={{ color: 'var(--primary)' }}>
+                  <h3 className="text-xl font-bold mb-3 text-primary">
                     {module.title}
                   </h3>
 
-                  <p className="mb-4 leading-relaxed" style={{ color: 'var(--gray-600)' }}>
+                  <p className="mb-4 leading-relaxed text-gray-600">
                     {module.description}
                   </p>
 
@@ -482,7 +482,7 @@ const DigitalRightsPage: React.FC = () => {
           <div className="bg-white rounded-xl max-w-5xl w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-2xl font-bold" style={{ color: 'var(--primary)' }}>
+                <h3 className="text-2xl font-bold text-primary">
                   {selectedModule.title}
                 </h3>
                 <button
@@ -494,16 +494,16 @@ const DigitalRightsPage: React.FC = () => {
               </div>
 
               <div className="mb-6">
-                <p className="text-lg mb-6" style={{ color: 'var(--gray-600)' }}>
+                <p className="text-lg mb-6 text-gray-600">
                   {selectedModule.description}
                 </p>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
                   <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-                    <h4 className="font-semibold mb-4" style={{ color: 'var(--primary)' }}>
+                    <h4 className="font-semibold mb-4 text-primary">
                       Key Points:
                     </h4>
-                    <ul className="list-disc pl-6 space-y-2" style={{ color: 'var(--gray-600)' }}>
+                    <ul className="list-disc pl-6 space-y-2 text-gray-600">
                       {selectedModule.keyPoints.map((point, index) => (
                         <li key={index}>{point}</li>
                       ))}
@@ -511,10 +511,10 @@ const DigitalRightsPage: React.FC = () => {
                   </div>
 
                   <div className="bg-green-50 border border-green-200 rounded-lg p-6">
-                    <h4 className="font-semibold mb-4" style={{ color: 'var(--primary)' }}>
+                    <h4 className="font-semibold mb-4 text-primary">
                       Real-World Examples:
                     </h4>
-                    <ul className="list-disc pl-6 space-y-2" style={{ color: 'var(--gray-600)' }}>
+                    <ul className="list-disc pl-6 space-y-2 text-gray-600">
                       {selectedModule.realWorldExamples.map((example, index) => (
                         <li key={index}>{example}</li>
                       ))}
@@ -522,10 +522,10 @@ const DigitalRightsPage: React.FC = () => {
                   </div>
 
                   <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
-                    <h4 className="font-semibold mb-4" style={{ color: 'var(--primary)' }}>
+                    <h4 className="font-semibold mb-4 text-primary">
                       Your Rights:
                     </h4>
-                    <ul className="list-disc pl-6 space-y-2" style={{ color: 'var(--gray-600)' }}>
+                    <ul className="list-disc pl-6 space-y-2 text-gray-600">
                       {selectedModule.yourRights.map((right, index) => (
                         <li key={index}>{right}</li>
                       ))}

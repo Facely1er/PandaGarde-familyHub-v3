@@ -155,44 +155,44 @@ const ModelingBehaviorGuidePage: React.FC = () => {
       <div style={{ maxWidth: '56rem', margin: '0 auto' }}>
         {/* Introduction */}
         <div className="max-w-4xl mx-auto text-center mb-16">
-          <h2 className="text-3xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-3xl font-bold mb-6 text-primary">
             Leading by Example
           </h2>
-          <p className="text-lg leading-relaxed mb-8" style={{ color: 'var(--gray-600)' }}>
+          <p className="text-lg leading-relaxed mb-8 text-gray-600">
             Children are always watching and learning from adult behavior. When it comes to digital citizenship, your actions speak louder than your words. This guide helps you become a positive digital role model.
           </p>
           
-          <div className="bg-purple-50 border border-purple-200 rounded-xl p-6 mb-8" style={{ backgroundColor: 'var(--light)' }}>
-            <h3 className="text-xl font-semibold mb-4" style={{ color: 'var(--primary)' }}>
+          <div className="bg-purple-50 border border-purple-200 rounded-xl p-6 mb-8 bg-light">
+            <h3 className="text-xl font-semibold mb-4 text-primary">
               👨‍👩‍👧‍👦 Why Modeling Matters
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
               <div className="flex items-start gap-3">
                 <Eye size={20} className="text-purple-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1" style={{ color: 'var(--primary)' }}>Children Learn by Watching</h4>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>They observe and imitate adult behavior patterns</p>
+                  <h4 className="font-semibold mb-1 text-primary">Children Learn by Watching</h4>
+                  <p className="text-sm text-gray-600">They observe and imitate adult behavior patterns</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Eye size={20} className="text-purple-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1" style={{ color: 'var(--primary)' }}>Consistency Builds Trust</h4>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>When your actions match your words, children trust your guidance</p>
+                  <h4 className="font-semibold mb-1 text-primary">Consistency Builds Trust</h4>
+                  <p className="text-sm text-gray-600">When your actions match your words, children trust your guidance</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Eye size={20} className="text-purple-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1" style={{ color: 'var(--primary)' }}>Creates Family Culture</h4>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>Establishes shared values and expectations</p>
+                  <h4 className="font-semibold mb-1 text-primary">Creates Family Culture</h4>
+                  <p className="text-sm text-gray-600">Establishes shared values and expectations</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Eye size={20} className="text-purple-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1" style={{ color: 'var(--primary)' }}>Prevents Hypocrisy</h4>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>Avoids "do as I say, not as I do" situations</p>
+                  <h4 className="font-semibold mb-1 text-primary">Prevents Hypocrisy</h4>
+                  <p className="text-sm text-gray-600">Avoids "do as I say, not as I do" situations</p>
                 </div>
               </div>
             </div>
@@ -201,7 +201,7 @@ const ModelingBehaviorGuidePage: React.FC = () => {
 
         {/* Modeling Areas */}
         <div className="max-w-6xl mx-auto mb-16">
-          <h2 className="text-2xl font-bold mb-8 text-center" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-2xl font-bold mb-8 text-center text-primary">
             Key Areas to Model
           </h2>
           
@@ -220,20 +220,20 @@ const ModelingBehaviorGuidePage: React.FC = () => {
                         <IconComponent size={24} className="text-purple-600" />
                       </div>
                       <div>
-                        <h3 className="text-lg font-bold" style={{ color: 'var(--primary)' }}>
+                        <h3 className="text-lg font-bold text-primary">
                           {area.title}
                         </h3>
-                        <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+                        <p className="text-sm text-gray-600">
                           {area.description}
                         </p>
                       </div>
                     </div>
                     
                     <div className="mb-4">
-                      <h4 className="text-sm font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+                      <h4 className="text-sm font-semibold mb-2 text-primary">
                         Examples to Demonstrate:
                       </h4>
-                      <ul className="text-sm space-y-1" style={{ color: 'var(--gray-600)' }}>
+                      <ul className="text-sm space-y-1 text-gray-600">
                         {area.examples.map((example, index) => (
                           <li key={index} className="flex items-start gap-2">
                             <CheckCircle size={14} className="text-green-600 mt-1 flex-shrink-0" />
@@ -244,10 +244,10 @@ const ModelingBehaviorGuidePage: React.FC = () => {
                     </div>
                     
                     <div className="mb-4">
-                      <h4 className="text-sm font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+                      <h4 className="text-sm font-semibold mb-2 text-primary">
                         Teaching Tips:
                       </h4>
-                      <ul className="text-sm space-y-1" style={{ color: 'var(--gray-600)' }}>
+                      <ul className="text-sm space-y-1 text-gray-600">
                         {area.tips.map((tip, index) => (
                           <li key={index} className="flex items-start gap-2">
                             <AlertTriangle size={14} className="text-blue-600 mt-1 flex-shrink-0" />
@@ -265,7 +265,7 @@ const ModelingBehaviorGuidePage: React.FC = () => {
 
         {/* Daily Practices */}
         <div className="max-w-6xl mx-auto mb-16">
-          <h2 className="text-2xl font-bold mb-8 text-center" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-2xl font-bold mb-8 text-center text-primary">
             Daily Modeling Practices
           </h2>
           
@@ -276,12 +276,12 @@ const ModelingBehaviorGuidePage: React.FC = () => {
                 className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow"
                 style={{ backgroundColor: 'var(--card-color)' }}
               >
-                <h3 className="text-lg font-bold mb-4 text-center" style={{ color: 'var(--primary)' }}>
+                <h3 className="text-lg font-bold mb-4 text-center text-primary">
                   {practice.time}
                 </h3>
                 <ul className="space-y-2">
                   {practice.practices.map((item, itemIndex) => (
-                    <li key={itemIndex} className="flex items-start gap-2 text-sm" style={{ color: 'var(--gray-600)' }}>
+                    <li key={itemIndex} className="flex items-start gap-2 text-sm text-gray-600">
                       <CheckCircle size={14} className="text-green-600 mt-1 flex-shrink-0" />
                       {item}
                     </li>
@@ -294,7 +294,7 @@ const ModelingBehaviorGuidePage: React.FC = () => {
 
         {/* Conversation Starters */}
         <div className="max-w-6xl mx-auto mb-16">
-          <h2 className="text-2xl font-bold mb-8 text-center" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-2xl font-bold mb-8 text-center text-primary">
             Conversation Starters
           </h2>
           
@@ -305,22 +305,22 @@ const ModelingBehaviorGuidePage: React.FC = () => {
                 className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow"
                 style={{ backgroundColor: 'var(--card-color)' }}
               >
-                <h3 className="text-lg font-bold mb-3" style={{ color: 'var(--primary)' }}>
+                <h3 className="text-lg font-bold mb-3 text-primary">
                   {starter.topic}
                 </h3>
                 <div className="mb-4">
-                  <h4 className="text-sm font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+                  <h4 className="text-sm font-semibold mb-2 text-primary">
                     Ask:
                   </h4>
-                  <p className="text-sm italic" style={{ color: 'var(--gray-600)' }}>
+                  <p className="text-sm italic text-gray-600">
                     "{starter.question}"
                   </p>
                 </div>
                 <div>
-                  <h4 className="text-sm font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+                  <h4 className="text-sm font-semibold mb-2 text-primary">
                     Discuss:
                   </h4>
-                  <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+                  <p className="text-sm text-gray-600">
                     {starter.discussion}
                   </p>
                 </div>
@@ -384,7 +384,7 @@ const ModelingBehaviorGuidePage: React.FC = () => {
 
         {/* Additional Resources */}
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold mb-8 text-center" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-2xl font-bold mb-8 text-center text-primary">
             Related Resources
           </h2>
           
@@ -397,10 +397,10 @@ const ModelingBehaviorGuidePage: React.FC = () => {
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Shield size={24} className="text-green-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="text-lg font-semibold mb-2 text-primary">
                 Privacy Concerns Guide
               </h3>
-              <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-sm text-gray-600">
                 Learn how to respond when privacy issues arise
               </p>
             </Link>
@@ -413,10 +413,10 @@ const ModelingBehaviorGuidePage: React.FC = () => {
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Users size={24} className="text-blue-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="text-lg font-semibold mb-2 text-primary">
                 Device Setup Guide
               </h3>
-              <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-sm text-gray-600">
                 Configure devices with appropriate controls
               </p>
             </Link>
@@ -428,10 +428,10 @@ const ModelingBehaviorGuidePage: React.FC = () => {
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Heart size={24} className="text-purple-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="text-lg font-semibold mb-2 text-primary">
                 Family Hub
               </h3>
-              <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-sm text-gray-600">
                 Track family progress and digital activities
               </p>
             </Link>

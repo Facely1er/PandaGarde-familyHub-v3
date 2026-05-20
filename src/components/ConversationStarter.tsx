@@ -223,7 +223,7 @@ export const ConversationStarter: React.FC<ConversationStarterProps> = ({
     return (
       <div className="conversation-starter-compact bg-white rounded-lg p-4 shadow-md">
         <div className="flex items-center justify-between mb-3">
-          <h3 className="text-lg font-semibold flex items-center gap-2" style={{ color: 'var(--primary)' }}>
+          <h3 className="text-lg font-semibold flex items-center gap-2 text-primary">
             <MessageCircle size={20} />
             Conversation Starter
           </h3>
@@ -239,14 +239,14 @@ export const ConversationStarter: React.FC<ConversationStarterProps> = ({
         {currentPrompt ? (
           <div className="space-y-2">
             <div className="flex items-center gap-2 text-sm">
-              <span className="px-2 py-1 bg-gray-100 rounded text-xs" style={{ backgroundColor: 'var(--light)' }}>
+              <span className="px-2 py-1 bg-gray-100 rounded text-xs bg-light">
                 Ages {currentPrompt.ageGroups.join(', ')}
               </span>
               <span className="px-2 py-1 bg-blue-100 rounded text-xs text-blue-700">
                 {currentPrompt.topic}
               </span>
             </div>
-            <p className="text-sm" style={{ color: 'var(--gray-700)' }}>
+            <p className="text-sm text-gray-700">
               {currentPrompt.prompt}
             </p>
             {currentPrompt.tips && currentPrompt.tips.length > 0 && (
@@ -254,7 +254,7 @@ export const ConversationStarter: React.FC<ConversationStarterProps> = ({
                 <summary className="cursor-pointer text-green-600 hover:text-green-700">
                   Show Tips
                 </summary>
-                <ul className="mt-2 space-y-1 list-disc list-inside" style={{ color: 'var(--gray-600)' }}>
+                <ul className="mt-2 space-y-1 list-disc list-inside text-gray-600">
                   {currentPrompt.tips.map((tip, idx) => (
                     <li key={idx}>{tip}</li>
                   ))}
@@ -278,10 +278,10 @@ export const ConversationStarter: React.FC<ConversationStarterProps> = ({
           <MessageCircle size={24} />
         </div>
         <div>
-          <h2 className="text-2xl font-bold" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-2xl font-bold text-primary">
             Privacy Conversation Starters
           </h2>
-          <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+          <p className="text-sm text-gray-600">
             Get age-appropriate prompts to start meaningful privacy conversations
           </p>
         </div>
@@ -290,7 +290,7 @@ export const ConversationStarter: React.FC<ConversationStarterProps> = ({
       {/* Filters */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
         <div>
-          <label className="block text-sm font-medium mb-2" style={{ color: 'var(--gray-700)' }}>
+          <label className="block text-sm font-medium mb-2 text-gray-700">
             Age Group
           </label>
           <select
@@ -318,7 +318,7 @@ export const ConversationStarter: React.FC<ConversationStarterProps> = ({
         </div>
         
         <div>
-          <label className="block text-sm font-medium mb-2" style={{ color: 'var(--gray-700)' }}>
+          <label className="block text-sm font-medium mb-2 text-gray-700">
             Topic
           </label>
           <select
@@ -372,11 +372,11 @@ export const ConversationStarter: React.FC<ConversationStarterProps> = ({
                 return <Icon size={24} className="text-green-600" />;
               })()}
               <div>
-                <h3 className="text-lg font-bold" style={{ color: 'var(--primary)' }}>
+                <h3 className="text-lg font-bold text-primary">
                   {currentPrompt.topic}
                 </h3>
                 <div className="flex items-center gap-2 mt-1">
-                  <span className="px-2 py-1 bg-white rounded text-xs font-medium" style={{ backgroundColor: 'var(--white)' }}>
+                  <span className="px-2 py-1 bg-white rounded text-xs font-medium bg-surface">
                     Ages {currentPrompt.ageGroups.join(', ')}
                   </span>
                 </div>
@@ -395,8 +395,8 @@ export const ConversationStarter: React.FC<ConversationStarterProps> = ({
             </button>
           </div>
           
-          <div className="bg-white rounded-lg p-4 mb-4" style={{ backgroundColor: 'var(--white)' }}>
-            <p className="text-base leading-relaxed" style={{ color: 'var(--gray-800)' }}>
+          <div className="bg-white rounded-lg p-4 mb-4 bg-surface">
+            <p className="text-base leading-relaxed text-gray-800">
               {currentPrompt.prompt}
             </p>
           </div>
@@ -410,14 +410,14 @@ export const ConversationStarter: React.FC<ConversationStarterProps> = ({
           )}
 
           {currentPrompt.tips && currentPrompt.tips.length > 0 && (
-            <div className="bg-white rounded-lg p-4" style={{ backgroundColor: 'var(--white)' }}>
-              <h4 className="font-semibold mb-3 flex items-center gap-2" style={{ color: 'var(--primary)' }}>
+            <div className="bg-white rounded-lg p-4 bg-surface">
+              <h4 className="font-semibold mb-3 flex items-center gap-2 text-primary">
                 <Info size={18} />
                 Tips for This Conversation
               </h4>
               <ul className="space-y-2">
                 {currentPrompt.tips.map((tip, idx) => (
-                  <li key={idx} className="flex items-start gap-2 text-sm" style={{ color: 'var(--gray-700)' }}>
+                  <li key={idx} className="flex items-start gap-2 text-sm text-gray-700">
                     <span className="text-green-600 mt-1">•</span>
                     <span>{tip}</span>
                   </li>

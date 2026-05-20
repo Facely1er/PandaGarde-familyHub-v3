@@ -87,7 +87,7 @@ const AgeVerificationModal: React.FC = () => {
         setLoading(false);
       }
       // If successful, modal will close automatically
-    } catch (err) {
+    } catch (_err) {
       setError('An error occurred. Please try again.');
       setLoading(false);
     }

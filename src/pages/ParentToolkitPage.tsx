@@ -256,10 +256,10 @@ const ParentToolkitPage: React.FC = () => {
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
         {/* Introduction Section */}
         <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-8 mb-8 border border-green-200">
-          <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-2xl font-bold mb-4 text-primary">
             Everything You Need to Protect Your Family's Digital Privacy
           </h2>
-          <p className="text-lg mb-4" style={{ color: 'var(--gray-700)' }}>
+          <p className="text-lg mb-4 text-gray-700">
             Our Parent Toolkit provides you with practical, ready-to-use resources to help your children navigate the digital world safely. 
             From privacy policy templates to conversation starters, we've got you covered.
           </p>
@@ -269,8 +269,8 @@ const ParentToolkitPage: React.FC = () => {
                 <FileText size={20} className="text-green-600" />
               </div>
               <div>
-                <h3 className="font-semibold mb-1" style={{ color: 'var(--gray-800)' }}>Ready-to-Use Templates</h3>
-                <p className="text-sm" style={{ color: 'var(--gray-600)' }}>Customizable templates for policies, agreements, and plans</p>
+                <h3 className="font-semibold mb-1 text-gray-800">Ready-to-Use Templates</h3>
+                <p className="text-sm text-gray-600">Customizable templates for policies, agreements, and plans</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
@@ -278,8 +278,8 @@ const ParentToolkitPage: React.FC = () => {
                 <BookOpen size={20} className="text-blue-600" />
               </div>
               <div>
-                <h3 className="font-semibold mb-1" style={{ color: 'var(--gray-800)' }}>Step-by-Step Guides</h3>
-                <p className="text-sm" style={{ color: 'var(--gray-600)' }}>Detailed guides for setting up devices and configuring privacy</p>
+                <h3 className="font-semibold mb-1 text-gray-800">Step-by-Step Guides</h3>
+                <p className="text-sm text-gray-600">Detailed guides for setting up devices and configuring privacy</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
@@ -287,8 +287,8 @@ const ParentToolkitPage: React.FC = () => {
                 <MessageCircle size={20} className="text-purple-600" />
               </div>
               <div>
-                <h3 className="font-semibold mb-1" style={{ color: 'var(--gray-800)' }}>Conversation Starters</h3>
-                <p className="text-sm" style={{ color: 'var(--gray-600)' }}>Age-appropriate prompts to start meaningful discussions</p>
+                <h3 className="font-semibold mb-1 text-gray-800">Conversation Starters</h3>
+                <p className="text-sm text-gray-600">Age-appropriate prompts to start meaningful discussions</p>
               </div>
             </div>
           </div>
@@ -311,7 +311,7 @@ const ParentToolkitPage: React.FC = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Filter size={18} className="text-gray-400" />
-                <span className="text-sm font-medium" style={{ color: 'var(--gray-700)' }}>Filter by category:</span>
+                <span className="text-sm font-medium text-gray-700">Filter by category:</span>
               </div>
             </div>
             <div className="flex flex-wrap gap-2">
@@ -372,10 +372,10 @@ const ParentToolkitPage: React.FC = () => {
                           {resource.category}
                         </span>
                       </div>
-                      <h3 className="text-xl font-bold mb-2" style={{ color: 'var(--primary)' }}>
+                      <h3 className="text-xl font-bold mb-2 text-primary">
                         {resource.title}
                       </h3>
-                      <p className="mb-4 leading-relaxed" style={{ color: 'var(--gray-600)' }}>
+                      <p className="mb-4 leading-relaxed text-gray-600">
                         {resource.description}
                       </p>
                       {resource.duration && (

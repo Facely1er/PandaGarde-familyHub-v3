@@ -8784,3 +8784,173 @@ body {
     left: 0.75rem;
   }
 }
+
+/* ===== LAYOUT & MARKETING (theme-aware; plain CSS — no @apply on custom tokens) ===== */
+.page-layout {
+  min-height: 100vh;
+  background-color: var(--white);
+  color: var(--gray-800);
+}
+
+.page-layout__main {
+  position: relative;
+  z-index: 1;
+  min-height: 400px;
+  padding: 2rem 0;
+  background-color: var(--white);
+  color: var(--gray-800);
+}
+
+.page-header {
+  position: relative;
+  overflow: hidden;
+  padding: 1rem 0 0.875rem;
+  color: #fff;
+  background: var(--gradient-primary);
+}
+
+.page-header__breadcrumbs {
+  margin-bottom: 0.5rem;
+}
+
+[data-theme='dark'] .page-header {
+  background: linear-gradient(135deg, #1a2e1a 0%, #243524 50%, #2d4a2d 100%);
+  border-bottom: 1px solid rgba(102, 187, 106, 0.3);
+}
+
+.page-header__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-bottom: 0.5rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.page-header__title {
+  margin: 0 0 0.375rem;
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 800;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.page-header__subtitle {
+  max-width: 42rem;
+  margin: 0 auto;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.marketing-hero {
+  padding: clamp(3rem, 6vw, 4rem) 0;
+  background: linear-gradient(135deg, var(--gray-100) 0%, var(--white) 100%);
+}
+
+[data-theme='dark'] .marketing-hero {
+  background: linear-gradient(135deg, var(--gray-200) 0%, var(--gray-100) 100%);
+}
+
+.marketing-section {
+  padding: 4rem 0;
+  background-color: var(--light);
+}
+
+[data-theme='dark'] .marketing-section {
+  background-color: var(--gray-200);
+}
+
+.marketing-card {
+  padding: 2.5rem;
+  border-radius: var(--border-radius);
+  background-color: var(--white);
+  box-shadow: var(--shadow-md);
+}
+
+.marketing-grid {
+  display: grid;
+  gap: 2rem;
+  margin-top: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.marketing-heading {
+  margin-bottom: 1rem;
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--gray-900);
+}
+
+.marketing-lead {
+  max-width: 48rem;
+  margin: 0 auto 2rem;
+  font-size: 1.125rem;
+  line-height: 1.625;
+  color: var(--gray-600);
+}
+
+.btn-marketing-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  background-color: #667eea;
+}
+
+.btn-marketing-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  border: 2px solid #667eea;
+  border-radius: 8px;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #667eea;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.icon-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: 1.5rem;
+  border-radius: 9999px;
+}
+
+/* Tailwind utility aliases for semantic tokens (use in JSX) */
+@layer utilities {
+  .bg-surface {
+    background-color: var(--white);
+  }
+
+  .bg-light {
+    background-color: var(--light);
+  }
+
+  .text-primary {
+    color: var(--primary);
+  }
+
+  .rounded-card {
+    border-radius: var(--border-radius);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-md);
+  }
+}

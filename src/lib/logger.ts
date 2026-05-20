@@ -48,9 +48,11 @@ class Logger {
     
     switch (level) {
       case 'debug':
+        // eslint-disable-next-line no-console -- centralized logger sink
         console.log(formattedMessage, data || '');
         break;
       case 'info':
+        // eslint-disable-next-line no-console -- centralized logger sink
         console.log(formattedMessage, data || '');
         break;
       case 'warn':

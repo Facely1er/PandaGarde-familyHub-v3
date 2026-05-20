@@ -98,7 +98,7 @@ const UnsubscribePage: React.FC = () => {
           ) : (
             <div className="bg-white rounded-xl p-8 shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
               <div className="mb-6">
-                <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+                <h2 className="text-2xl font-bold mb-4 text-primary">
                   Unsubscribe from Newsletter
                 </h2>
                 <p className="text-gray-600 mb-2">
@@ -118,7 +118,7 @@ const UnsubscribePage: React.FC = () => {
 
               <form onSubmit={handleUnsubscribe} className="space-y-6">
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ color: 'var(--gray-700)' }}>
+                  <label htmlFor="email" className="block text-sm font-medium mb-2 text-gray-700">
                     Email Address
                   </label>
                   <input

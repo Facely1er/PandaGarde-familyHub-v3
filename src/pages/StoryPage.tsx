@@ -24,10 +24,10 @@ const StoryPage: React.FC = () => {
                backgroundColor: 'var(--light)',
                borderLeftColor: 'var(--primary-light)'
              }}>
-          <h2 className="text-2xl font-bold text-green-800 mb-3" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-2xl font-bold text-green-800 mb-3 text-primary">
             About This Story
           </h2>
-          <p className="text-gray-700 leading-relaxed" style={{ color: 'var(--gray-600)' }}>
+          <p className="text-gray-700 leading-relaxed text-gray-600">
             This story teaches children about digital privacy through the adventures of Po the Panda.
             It covers important concepts like protecting personal information, understanding privacy settings,
             and being careful about what we share online. Perfect for reading together with children ages 5-12.
@@ -44,36 +44,36 @@ const StoryPage: React.FC = () => {
         </div>
 
           {/* Discussion Questions */}
-          <div className="mt-16 bg-gray-50 rounded-lg p-8" style={{ backgroundColor: 'var(--light)' }}>
-            <h2 className="text-3xl font-bold mb-6 text-green-800" style={{ color: 'var(--primary)' }}>
+          <div className="mt-16 bg-gray-50 rounded-lg p-8 bg-light">
+            <h2 className="text-3xl font-bold mb-6 text-green-800 text-primary">
               Discussion Questions
             </h2>
             <div className="space-y-4">
               <div className="flex items-start gap-3">
                 <span className="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0 mt-1"
                       style={{ backgroundColor: 'var(--primary-light)' }}>1</span>
-                <p className="text-gray-700" style={{ color: 'var(--gray-700)' }}>
+                <p className="text-gray-700 text-gray-700">
                   What happened when Po accidentally shared all his information? How do you think he felt?
                 </p>
               </div>
               <div className="flex items-start gap-3">
                 <span className="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0 mt-1"
                       style={{ backgroundColor: 'var(--primary-light)' }}>2</span>
-                <p className="text-gray-700" style={{ color: 'var(--gray-700)' }}>
+                <p className="text-gray-700 text-gray-700">
                   What are some examples of personal information that should be kept private?
                 </p>
               </div>
               <div className="flex items-start gap-3">
                 <span className="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0 mt-1"
                       style={{ backgroundColor: 'var(--primary-light)' }}>3</span>
-                <p className="text-gray-700" style={{ color: 'var(--gray-700)' }}>
+                <p className="text-gray-700 text-gray-700">
                   How did Privacy Panda help other animals in the forest? What made him a good teacher?
                 </p>
               </div>
               <div className="flex items-start gap-3">
                 <span className="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0 mt-1"
                       style={{ backgroundColor: 'var(--primary-light)' }}>4</span>
-                <p className="text-gray-700" style={{ color: 'var(--gray-700)' }}>
+                <p className="text-gray-700 text-gray-700">
                   What can you do to create your own "Privacy Shield" when using devices or apps?
                 </p>
               </div>

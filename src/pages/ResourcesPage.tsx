@@ -41,8 +41,6 @@ const ResourcesPage: React.FC = () => {
     <PageLayout
       title="Resources"
       subtitle="Use the right materials for the right audience: parents, kids, and educators."
-      icon={BookOpen}
-      badge="RESOURCES"
       breadcrumbs={true}
     >
       <section style={{ padding: '1rem 0 2rem' }}>

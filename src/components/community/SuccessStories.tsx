@@ -96,7 +96,7 @@ const SuccessStories: React.FC<SuccessStoriesProps> = ({ compact = false }) => {
     return (
       <div className="bg-white rounded-lg p-4 shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold flex items-center gap-2" style={{ color: 'var(--primary)' }}>
+          <h3 className="text-lg font-semibold flex items-center gap-2 text-primary">
             <Heart size={20} />
             Success Stories
           </h3>
@@ -111,8 +111,8 @@ const SuccessStories: React.FC<SuccessStoriesProps> = ({ compact = false }) => {
         <div className="space-y-3">
           {featuredStories.map(story => (
             <div key={story.id} className="border-b border-gray-200 pb-3 last:border-0">
-              <h4 className="font-medium mb-1" style={{ color: 'var(--primary)' }}>{story.title}</h4>
-              <p className="text-sm line-clamp-2" style={{ color: 'var(--gray-600)' }}>
+              <h4 className="font-medium mb-1 text-primary">{story.title}</h4>
+              <p className="text-sm line-clamp-2 text-gray-600">
                 {story.story.substring(0, 150)}...
               </p>
               <div className="flex items-center gap-3 mt-2 text-xs text-gray-500">
@@ -150,7 +150,7 @@ const SuccessStories: React.FC<SuccessStoriesProps> = ({ compact = false }) => {
         <div className="container">
           <div className="text-center fade-in">
             <span className="badge">COMMUNITY</span>
-            <p className="text-2xl font-bold" style={{ color: 'var(--primary)' }}>Success Stories</p>
+            <p className="text-2xl font-bold text-primary">Success Stories</p>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Real-world examples of families teaching privacy to their children. Share your anonymous success story and inspire others.
             </p>
@@ -164,10 +164,10 @@ const SuccessStories: React.FC<SuccessStoriesProps> = ({ compact = false }) => {
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h2 className="text-3xl font-bold mb-2" style={{ color: 'var(--primary)' }}>
+              <h2 className="text-3xl font-bold mb-2 text-primary">
                 Success Stories
               </h2>
-              <p className="text-lg" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-lg text-gray-600">
                 Real-world examples of families teaching privacy to their children
               </p>
             </div>
@@ -279,7 +279,7 @@ const StoryCard: React.FC<StoryCardProps> = ({ story, onVote }) => {
     <div className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all" style={{ backgroundColor: 'var(--card-color)' }}>
       <div className="flex items-start justify-between mb-3">
         <div className="flex-1">
-          <h3 className="text-xl font-bold mb-2" style={{ color: 'var(--primary)' }}>
+          <h3 className="text-xl font-bold mb-2 text-primary">
             {story.title}
           </h3>
           <div className="flex items-center gap-2 mb-3">
@@ -296,7 +296,7 @@ const StoryCard: React.FC<StoryCardProps> = ({ story, onVote }) => {
         </div>
       </div>
       
-      <p className="mb-4 line-clamp-4" style={{ color: 'var(--gray-600)' }}>
+      <p className="mb-4 line-clamp-4 text-gray-600">
         {story.story}
       </p>
 
@@ -396,7 +396,7 @@ const StorySubmissionForm: React.FC<StorySubmissionFormProps> = ({ onSubmit, onC
           >
             ✕
           </button>
-          <h2 id="story-submit-title" className="text-2xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+          <h2 id="story-submit-title" className="text-2xl font-bold mb-4 text-primary">
             Share Your Success Story
           </h2>
 
@@ -408,7 +408,7 @@ const StorySubmissionForm: React.FC<StorySubmissionFormProps> = ({ onSubmit, onC
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: 'var(--gray-700)' }}>
+              <label className="block text-sm font-medium mb-2 text-gray-700">
                 Title *
               </label>
               <input
@@ -425,7 +425,7 @@ const StorySubmissionForm: React.FC<StorySubmissionFormProps> = ({ onSubmit, onC
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: 'var(--gray-700)' }}>
+              <label className="block text-sm font-medium mb-2 text-gray-700">
                 Category *
               </label>
               <select
@@ -446,7 +446,7 @@ const StorySubmissionForm: React.FC<StorySubmissionFormProps> = ({ onSubmit, onC
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: 'var(--gray-700)' }}>
+              <label className="block text-sm font-medium mb-2 text-gray-700">
                 Your Story *
               </label>
               <textarea
@@ -463,7 +463,7 @@ const StorySubmissionForm: React.FC<StorySubmissionFormProps> = ({ onSubmit, onC
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: 'var(--gray-700)' }}>
+              <label className="block text-sm font-medium mb-2 text-gray-700">
                 Tags (optional, comma-separated)
               </label>
               <input

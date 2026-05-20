@@ -153,7 +153,7 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
     return (
       <div className="bg-white rounded-lg p-4 shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold flex items-center gap-2" style={{ color: 'var(--primary)' }}>
+          <h3 className="text-lg font-semibold flex items-center gap-2 text-primary">
             <MessageCircle size={20} />
             Privacy Tips Forum
           </h3>
@@ -180,8 +180,8 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
                 onClick={() => setSelectedTopic(topic)}
                 className="border-b border-gray-200 pb-3 last:border-0 cursor-pointer hover:bg-gray-50 p-2 rounded transition-colors"
               >
-                <h4 className="font-medium mb-1" style={{ color: 'var(--primary)' }}>{topic.title}</h4>
-                <p className="text-sm line-clamp-2 mb-2" style={{ color: 'var(--gray-600)' }}>
+                <h4 className="font-medium mb-1 text-primary">{topic.title}</h4>
+                <p className="text-sm line-clamp-2 mb-2 text-gray-600">
                   {topic.description || 'No description'}
                 </p>
                 <div className="flex items-center gap-3 text-xs text-gray-500">
@@ -543,13 +543,13 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-xl font-bold" style={{ color: 'var(--primary)' }}>
+                        <h3 className="text-xl font-bold text-primary">
                           {topic.title}
                         </h3>
                         {topic.pinned && <span className="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded">Pinned</span>}
                       </div>
                       {topic.description && (
-                        <p className="mb-3" style={{ color: 'var(--gray-600)' }}>
+                        <p className="mb-3 text-gray-600">
                           {topic.description}
                         </p>
                       )}
@@ -628,7 +628,7 @@ const TopicDetailView: React.FC<TopicDetailViewProps> = ({
   const author = communityStorage.getForumUser(topic.authorId);
 
   return (
-    <main id="main-content" style={{ minHeight: '100vh' }}>
+    <main id="main-content" >
       {/* Back Navigation */}
       <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '1.5rem 1.5rem' }}>
         <button
@@ -672,11 +672,11 @@ const TopicDetailView: React.FC<TopicDetailViewProps> = ({
         <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
         {/* Topic Header */}
         <div className="bg-white rounded-lg p-6 shadow-md mb-6" style={{ backgroundColor: 'var(--card-color)' }}>
-          <h2 className="text-3xl font-bold mb-3" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-3xl font-bold mb-3 text-primary">
             {topic.title}
           </h2>
           {topic.description && (
-            <p className="mb-4" style={{ color: 'var(--gray-600)' }}>
+            <p className="mb-4 text-gray-600">
               {topic.description}
             </p>
           )}
@@ -709,7 +709,7 @@ const TopicDetailView: React.FC<TopicDetailViewProps> = ({
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="font-semibold" style={{ color: 'var(--primary)' }}>
+                      <span className="font-semibold text-primary">
                         {postAuthor?.displayName || postAuthor?.username || 'Anonymous'}
                       </span>
                       {post.isSolution && (
@@ -722,7 +722,7 @@ const TopicDetailView: React.FC<TopicDetailViewProps> = ({
                         <span className="text-xs text-gray-500">(edited)</span>
                       )}
                     </div>
-                    <p className="mb-3 whitespace-pre-wrap" style={{ color: 'var(--gray-700)' }}>
+                    <p className="mb-3 whitespace-pre-wrap text-gray-700">
                       {post.content}
                     </p>
                     <div className="flex items-center gap-4 text-sm text-gray-500">
@@ -872,7 +872,7 @@ const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({ onSubmit, o
               <X size={24} />
             </button>
           )}
-          <h2 id="user-reg-title" className="text-2xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+          <h2 id="user-reg-title" className="text-2xl font-bold mb-4 text-primary">
             Join Privacy Tips Forum
           </h2>
           <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
@@ -882,7 +882,7 @@ const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({ onSubmit, o
           </div>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: 'var(--gray-700)' }}>
+              <label className="block text-sm font-medium mb-2 text-gray-700">
                 Username (Pseudonym) *
               </label>
               <input
@@ -899,7 +899,7 @@ const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({ onSubmit, o
               {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: 'var(--gray-700)' }}>
+              <label className="block text-sm font-medium mb-2 text-gray-700">
                 Display Name (Optional)
               </label>
               <input
@@ -912,7 +912,7 @@ const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({ onSubmit, o
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: 'var(--gray-700)' }}>
+              <label className="block text-sm font-medium mb-2 text-gray-700">
                 Avatar
               </label>
               <div className="flex gap-2 flex-wrap">
@@ -1007,12 +1007,12 @@ const TopicCreationForm: React.FC<TopicCreationFormProps> = ({ onSubmit, onCance
           >
             <X size={24} />
           </button>
-          <h2 id="topic-create-title" className="text-2xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+          <h2 id="topic-create-title" className="text-2xl font-bold mb-4 text-primary">
             Create New Topic
           </h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: 'var(--gray-700)' }}>
+              <label className="block text-sm font-medium mb-2 text-gray-700">
                 Topic Title *
               </label>
               <input
@@ -1025,7 +1025,7 @@ const TopicCreationForm: React.FC<TopicCreationFormProps> = ({ onSubmit, onCance
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: 'var(--gray-700)' }}>
+              <label className="block text-sm font-medium mb-2 text-gray-700">
                 Category *
               </label>
               <select
@@ -1045,7 +1045,7 @@ const TopicCreationForm: React.FC<TopicCreationFormProps> = ({ onSubmit, onCance
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: 'var(--gray-700)' }}>
+              <label className="block text-sm font-medium mb-2 text-gray-700">
                 Description (Optional)
               </label>
               <textarea

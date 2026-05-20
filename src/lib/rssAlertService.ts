@@ -423,7 +423,7 @@ if (typeof window !== 'undefined') {
         childRSSAlertService.initialize(3600000);
       }, 1000);
     }
-  } catch (error) {
+  } catch (_error) {
     // Silently fail auto-initialization to prevent breaking the app
     // Components can still initialize the service on-demand
   }

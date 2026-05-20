@@ -363,10 +363,10 @@ const ImplementationGuidePage: React.FC = () => {
       {/* Phase Navigation */}
       <section className="container mx-auto px-6 py-12">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+          <h2 className="text-3xl font-bold mb-4 text-primary">
             Implementation Phases
           </h2>
-          <p className="text-lg" style={{ color: 'var(--gray-600)' }}>
+          <p className="text-lg text-gray-600">
             Choose a phase to see detailed implementation steps and resources.
           </p>
         </div>
@@ -386,10 +386,10 @@ const ImplementationGuidePage: React.FC = () => {
               <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${getPhaseColor(phase.color)} flex items-center justify-center text-white mb-4`}>
                 <Calendar size={24} />
               </div>
-              <h3 className="text-lg font-bold mb-2" style={{ color: 'var(--primary)' }}>
+              <h3 className="text-lg font-bold mb-2 text-primary">
                 {phase.title}
               </h3>
-              <p className="text-sm mb-3" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-sm mb-3 text-gray-600">
                 {phase.description}
               </p>
               <div className="flex items-center gap-2 text-xs text-gray-500">
@@ -406,10 +406,10 @@ const ImplementationGuidePage: React.FC = () => {
         <section className="container mx-auto px-6 pb-16">
           <div className="bg-white rounded-xl shadow-lg p-8" style={{ backgroundColor: 'var(--card-color)' }}>
             <div className="text-center mb-8">
-              <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+              <h2 className="text-2xl font-bold mb-4 text-primary">
                 {activePhaseData.title}
               </h2>
-              <p className="text-lg mb-4" style={{ color: 'var(--gray-600)' }}>
+              <p className="text-lg mb-4 text-gray-600">
                 {activePhaseData.description}
               </p>
               <div className="inline-flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-full text-sm font-medium">
@@ -442,10 +442,10 @@ const ImplementationGuidePage: React.FC = () => {
                           {isCompleted ? <CheckCircle size={20} /> : <Icon size={20} />}
                         </div>
                         <div>
-                          <h3 className="text-lg font-bold mb-2" style={{ color: 'var(--primary)' }}>
+                          <h3 className="text-lg font-bold mb-2 text-primary">
                             {index + 1}. {step.title}
                           </h3>
-                          <p className="text-sm mb-2" style={{ color: 'var(--gray-600)' }}>
+                          <p className="text-sm mb-2 text-gray-600">
                             {step.description}
                           </p>
                           <div className="flex items-center gap-4 text-xs text-gray-500">
@@ -470,27 +470,27 @@ const ImplementationGuidePage: React.FC = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
-                        <h4 className="font-semibold mb-3" style={{ color: 'var(--primary)' }}>
+                        <h4 className="font-semibold mb-3 text-primary">
                           Tasks to Complete:
                         </h4>
                         <ul className="space-y-2">
                           {step.tasks.map((task, taskIndex) => (
                             <li key={taskIndex} className="flex items-start gap-2 text-sm">
                               <span className="text-gray-400 mt-1">•</span>
-                              <span style={{ color: 'var(--gray-600)' }}>{task}</span>
+                              <span className="text-gray-600">{task}</span>
                             </li>
                           ))}
                         </ul>
                       </div>
                       <div>
-                        <h4 className="font-semibold mb-3" style={{ color: 'var(--primary)' }}>
+                        <h4 className="font-semibold mb-3 text-primary">
                           Resources Available:
                         </h4>
                         <ul className="space-y-2">
                           {step.resources.map((resource, resourceIndex) => (
                             <li key={resourceIndex} className="flex items-center gap-2 text-sm">
                               <Download size={12} className="text-gray-400" />
-                              <span style={{ color: 'var(--gray-600)' }}>{resource}</span>
+                              <span className="text-gray-600">{resource}</span>
                             </li>
                           ))}
                         </ul>
@@ -505,13 +505,13 @@ const ImplementationGuidePage: React.FC = () => {
       )}
 
       {/* Progress Summary */}
-      <section className="bg-gray-50 py-16" style={{ backgroundColor: 'var(--light)' }}>
+      <section className="bg-gray-50 py-16 bg-light">
         <div className="container mx-auto px-6">
           <div className="text-center mb-8">
-            <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
+            <h2 className="text-2xl font-bold mb-4 text-primary">
               Your Implementation Progress
             </h2>
-            <p className="text-lg" style={{ color: 'var(--gray-600)' }}>
+            <p className="text-lg text-gray-600">
               Track your progress through the implementation phases.
             </p>
           </div>
@@ -530,15 +530,15 @@ const ImplementationGuidePage: React.FC = () => {
                     <div key={phase.id} className="text-center">
                       <div className="w-16 h-16 mx-auto mb-4 relative">
                         <div className="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center">
-                          <span className="text-lg font-bold" style={{ color: 'var(--primary)' }}>
+                          <span className="text-lg font-bold text-primary">
                             {progressPercentage}%
                           </span>
                         </div>
                       </div>
-                      <h3 className="font-semibold mb-2" style={{ color: 'var(--primary)' }}>
+                      <h3 className="font-semibold mb-2 text-primary">
                         {phase.title}
                       </h3>
-                      <p className="text-sm" style={{ color: 'var(--gray-600)' }}>
+                      <p className="text-sm text-gray-600">
                         {completedPhaseSteps} of {phaseSteps} steps completed
                       </p>
                     </div>

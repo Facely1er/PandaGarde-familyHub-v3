@@ -48,12 +48,12 @@ class CommunityErrorBoundary extends Component<Props, State> {
       }
 
       return (
-        <div className="min-h-screen flex items-center justify-center p-4" style={{ backgroundColor: 'var(--white)' }}>
+        <div className="min-h-screen flex items-center justify-center p-4 bg-surface">
           <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-6 text-center" style={{ backgroundColor: 'var(--card-color)' }}>
             <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <AlertTriangle size={32} className="text-red-600" />
             </div>
-            <h2 className="text-2xl font-bold mb-2" style={{ color: 'var(--primary)' }}>
+            <h2 className="text-2xl font-bold mb-2 text-primary">
               Something Went Wrong
             </h2>
             <p className="text-gray-600 mb-6">

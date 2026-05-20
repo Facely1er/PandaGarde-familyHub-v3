@@ -121,7 +121,7 @@ const FAQPage: React.FC = () => {
       <div className="max-w-4xl mx-auto">
           {/* Category Filter */}
           <div className="mb-12">
-            <h2 className="text-2xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
+            <h2 className="text-2xl font-bold mb-6 text-primary">
               Browse by Category
             </h2>
             <div className="flex flex-wrap gap-3">
@@ -162,7 +162,7 @@ const FAQPage: React.FC = () => {
                   className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
                   style={{ backgroundColor: 'var(--gray-100)' }}
                 >
-                  <h3 className="text-lg font-semibold pr-4" style={{ color: 'var(--primary)' }}>
+                  <h3 className="text-lg font-semibold pr-4 text-primary">
                     {item.question}
                   </h3>
                   {openItems.includes(item.id) ? (
@@ -174,7 +174,7 @@ const FAQPage: React.FC = () => {
 
                 {openItems.includes(item.id) && (
                   <div className="px-6 pb-4">
-                    <p className="text-gray-700 leading-relaxed" style={{ color: 'var(--gray-600)' }}>
+                    <p className="text-gray-700 leading-relaxed text-gray-600">
                       {item.answer}
                     </p>
                   </div>
