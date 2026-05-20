@@ -50,14 +50,14 @@ const FamilyHubHeader: React.FC = () => {
   useEffect(() => setMenuOpen(false), [pathname]);
 
   useEffect(() => {
-    if (!menuOpen) return;
+    if (!menuOpen) {return;}
     const onDoc = (e: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
         setMenuOpen(false);
       }
     };
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setMenuOpen(false);
+      if (e.key === 'Escape') {setMenuOpen(false);}
     };
     document.addEventListener('mousedown', onDoc);
     document.addEventListener('keydown', onKey);

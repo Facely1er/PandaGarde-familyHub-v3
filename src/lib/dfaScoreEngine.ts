@@ -28,16 +28,16 @@ export interface DfaScoreResult {
 const clamp = (value: number, min = 0, max = 100): number => Math.min(max, Math.max(min, Math.round(value)));
 
 const levelFromScore = (score: number): DfaRiskLevel => {
-  if (score >= 75) return 'Critical';
-  if (score >= 55) return 'High';
-  if (score >= 30) return 'Moderate';
+  if (score >= 75) {return 'Critical';}
+  if (score >= 55) {return 'High';}
+  if (score >= 30) {return 'Moderate';}
   return 'Low';
 };
 
 const severityFromValue = (value: number): DfaRiskFlag['severity'] => {
-  if (value >= 75) return 'critical';
-  if (value >= 55) return 'high';
-  if (value >= 30) return 'medium';
+  if (value >= 75) {return 'critical';}
+  if (value >= 55) {return 'high';}
+  if (value >= 30) {return 'medium';}
   return 'info';
 };
 

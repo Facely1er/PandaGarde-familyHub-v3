@@ -19,17 +19,10 @@ const PageLayout: React.FC<PageLayoutProps> = ({
   badge,
   breadcrumbs = true,
   children,
-  className = ''
+  className = '',
 }) => {
   return (
-    <div 
-      className={`page-layout ${className}`}
-      style={{
-        minHeight: '100vh',
-        backgroundColor: 'var(--white)',
-        color: 'var(--gray-800)'
-      }}
-    >
+    <div className={`page-layout min-h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 ${className}`}>
       <PageHeader
         title={title}
         subtitle={subtitle}
@@ -38,26 +31,8 @@ const PageLayout: React.FC<PageLayoutProps> = ({
         breadcrumbs={breadcrumbs}
       />
 
-      <main 
-        style={{
-          padding: '2rem 0',
-          backgroundColor: 'var(--white)',
-          color: 'var(--gray-800)',
-          minHeight: '400px',
-          position: 'relative',
-          zIndex: 1
-        }}
-      >
-        <div 
-          className="container"
-          style={{
-            maxWidth: '1200px',
-            margin: '0 auto',
-            padding: '0 1.5rem',
-            position: 'relative',
-            zIndex: 2
-          }}
-        >
+      <main className="relative z-10 py-8 min-h-96 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100">
+        <div className="container relative z-20">
           {children}
         </div>
       </main>
@@ -66,4 +41,3 @@ const PageLayout: React.FC<PageLayoutProps> = ({
 };
 
 export default PageLayout;
-

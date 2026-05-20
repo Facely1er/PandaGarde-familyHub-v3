@@ -47,7 +47,7 @@ const ServiceCatalogPage: React.FC = () => {
   const leConcernServices = getServicesWithLawEnforcementConcerns().filter(s => HIGH_LE_CONCERN_IDS.includes(s.id as typeof HIGH_LE_CONCERN_IDS[number]));
 
   const handleSuggestedAddRemove = async (serviceId: string) => {
-    if (addingId) return;
+    if (addingId) {return;}
     setAddingId(serviceId);
     try {
       if (familyServiceIds.includes(serviceId)) {

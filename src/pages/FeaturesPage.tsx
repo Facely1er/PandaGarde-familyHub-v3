@@ -6,22 +6,29 @@ import PageLayout from '../components/layout/PageLayout';
 const flow = [
   {
     title: 'Discover your privacy exposure',
-    description: 'Start with the website to understand your family\'s digital footprint, privacy priorities, and immediate risks.',
+    description: "Start with the website to understand your family's digital footprint, privacy priorities, and immediate risks.",
     icon: ShieldCheck,
-    href: '/digital-footprint'
+    href: '/digital-footprint',
   },
   {
     title: 'Learn what matters',
     description: 'Use age-based resources, guided content, and practical materials for parents, children, and educators.',
     icon: BookOpen,
-    href: '/resources'
+    href: '/resources',
   },
   {
     title: 'Take action in Family Hub',
     description: 'Move into the Family Hub workspace to track activities, progress, and privacy goals in one place.',
     icon: LayoutDashboard,
-    href: '/family-hub'
+    href: '/family-hub',
   },
+];
+
+const benefits = [
+  'A clear start instead of scattered pages',
+  'Website guidance before workspace use',
+  'Family Hub access without backend dependency',
+  'Practical privacy steps instead of generic advice',
 ];
 
 const FeaturesPage: React.FC = () => {
@@ -33,44 +40,48 @@ const FeaturesPage: React.FC = () => {
       badge="HOW IT WORKS"
       breadcrumbs={true}
     >
-      <section style={{ padding: '1rem 0 2rem' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <div style={{ display: 'grid', gap: '1.25rem', marginBottom: '2rem' }}>
-            {flow.map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <div key={item.title} style={{ display: 'grid', gridTemplateColumns: '64px 1fr auto', gap: '1rem', alignItems: 'center', padding: '1.25rem', borderRadius: '22px', border: '1px solid var(--gray-200)', background: 'var(--white)' }}>
-                  <div style={{ width: 64, height: 64, borderRadius: '18px', background: '#f0fdf4', color: '#047857', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}>
-                    <span style={{ fontSize: '0.75rem' }}>{index + 1}</span>
-                    <Icon size={22} />
-                  </div>
-                  <div>
-                    <h2 style={{ margin: 0, fontSize: '1.2rem', color: 'var(--gray-900)' }}>{item.title}</h2>
-                    <p style={{ margin: '0.5rem 0 0', color: 'var(--gray-600)', lineHeight: 1.7 }}>{item.description}</p>
-                  </div>
-                  <Link to={item.href} className="button button-secondary" style={{ whiteSpace: 'nowrap' }}>
-                    Open <ArrowRight size={16} />
-                  </Link>
+      <section className="py-4 pb-8">
+        <div className="flex flex-col gap-5 mb-8">
+          {flow.map((item, index) => {
+            const Icon = item.icon;
+            return (
+              <div
+                key={item.title}
+                className="flex flex-col sm:flex-row sm:items-center gap-4 p-5 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800"
+              >
+                <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-green-50 dark:bg-green-950 text-green-700 dark:text-green-400 flex flex-col items-center justify-center font-bold">
+                  <span className="text-xs">{index + 1}</span>
+                  <Icon size={22} />
                 </div>
-              );
-            })}
-          </div>
 
-          <div style={{ background: 'var(--gray-100)', borderRadius: '24px', padding: '1.5rem', border: '1px solid var(--gray-200)' }}>
-            <h2 style={{ marginTop: 0 }}>What you get</h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem' }}>
-              {[
-                'A clear start instead of scattered pages',
-                'Website guidance before workspace use',
-                'Family Hub access without backend dependency',
-                'Practical privacy steps instead of generic advice',
-              ].map((item) => (
-                <div key={item} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', background: 'var(--white)', borderRadius: '16px', padding: '1rem', border: '1px solid var(--gray-200)' }}>
-                  <CheckCircle2 size={18} color="#047857" />
-                  <span style={{ color: 'var(--gray-700)' }}>{item}</span>
+                <div className="flex-1 min-w-0">
+                  <h2 className="m-0 text-lg font-semibold text-gray-900 dark:text-gray-100">{item.title}</h2>
+                  <p className="mt-1 mb-0 text-gray-600 dark:text-gray-300 leading-relaxed">{item.description}</p>
                 </div>
-              ))}
-            </div>
+
+                <Link
+                  to={item.href}
+                  className="button button-secondary inline-flex items-center gap-2 whitespace-nowrap self-start sm:self-auto"
+                >
+                  Open <ArrowRight size={16} />
+                </Link>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="rounded-3xl bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-6">
+          <h2 className="mt-0 mb-4 text-gray-900 dark:text-gray-100">What you get</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {benefits.map((item) => (
+              <div
+                key={item}
+                className="flex items-center gap-3 bg-white dark:bg-gray-700 rounded-2xl p-4 border border-gray-200 dark:border-gray-600"
+              >
+                <CheckCircle2 size={18} className="text-green-700 dark:text-green-400 flex-shrink-0" />
+                <span className="text-gray-700 dark:text-gray-200 text-sm">{item}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>

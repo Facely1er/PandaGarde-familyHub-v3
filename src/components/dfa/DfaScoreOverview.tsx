@@ -15,7 +15,7 @@ const STORAGE_KEY = 'pandagarde_dfa_score_tier';
 
 const DfaScoreOverview: React.FC<Props> = ({ analysis }) => {
   const [tier, setTier] = useState<DfaScoreTier>(() => {
-    if (typeof window === 'undefined') return 'basic';
+    if (typeof window === 'undefined') {return 'basic';}
     const stored = window.localStorage.getItem(STORAGE_KEY);
     return stored === 'advanced' ? 'advanced' : 'basic';
   });

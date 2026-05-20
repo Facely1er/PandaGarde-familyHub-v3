@@ -344,7 +344,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
       return;
     }
     const stillValid =
-      currentMemberId != null && familyMembers.some((m) => m.id === currentMemberId);
+      currentMemberId !== null && familyMembers.some((m) => m.id === currentMemberId);
     if (!stillValid) {
       setActiveMember(familyMembers[0].id);
     }
