@@ -1,21 +1,60 @@
-MIT License
+ PandaGarde Proprietary License v1.0
 
-Copyright (c) 2021 Supabase, Inc. and contributors
+Copyright (c) 2026 ERMITS Advisory and PandaGarde contributors
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+All rights reserved.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+This software, including all source code, designs, workflows, educational content,
+graphics, documentation, branding, and associated materials (the "Software"),
+is the exclusive intellectual property of ERMITS Advisory and PandaGarde.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+Permission is granted to authorized users to use the Software solely for
+personal, educational, evaluation, or internal organizational purposes,
+subject to the following conditions:
+
+1. Restrictions
+   You may NOT, without prior written permission from ERMITS Advisory:
+
+   - Copy, reproduce, modify, distribute, sublicense, publish, or resell the Software
+     or any substantial portion of it;
+   - Create derivative works for commercial purposes;
+   - Remove or alter branding, copyright notices, trademarks, or attribution;
+   - Use the Software to develop competing products or services;
+   - Reverse engineer, decompile, or attempt to extract proprietary logic,
+     except where explicitly permitted by applicable law;
+   - Host, deploy, or provide the Software as a public SaaS or commercial service.
+
+2. Educational and Pilot Usage
+   Approved educational institutions, nonprofit organizations, and pilot partners
+   may use the Software internally for evaluation and training purposes only,
+   unless otherwise authorized in writing.
+
+3. Commercial Licensing
+   Commercial use, white-labeling, redistribution, enterprise deployment,
+   and integration into paid services require a separate commercial agreement
+   with ERMITS Advisory.
+
+4. Ownership
+   The Software is licensed, not sold. ERMITS Advisory retains all rights,
+   title, and interest in and to the Software and all related intellectual property.
+
+5. Trademarks
+   "PandaGarde", "Privacy Panda", "ERMITS", and associated names, logos,
+   graphics, and branding elements are trademarks or proprietary assets
+   of ERMITS Advisory and may not be used without written permission.
+
+6. Disclaimer
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+   EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+   MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT,
+   SECURITY, OR REGULATORY COMPLIANCE.
+
+7. Limitation of Liability
+   IN NO EVENT SHALL ERMITS ADVISORY, PANDAGARDE CONTRIBUTORS,
+   OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES,
+   OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT,
+   OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH
+   THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+For commercial licensing inquiries, partnership requests, or permissions:
+https://www.ermits-advisory.com
