@@ -1,0 +1,55 @@
+%% FamilyHub — Data Flow v1
+
+flowchart TD
+    Guardian(["Guardian"])
+    Child(["Child"])
+    SchoolAdmin(["School Admin"])
+
+    subgraph UI["FamilyHub UI"]
+        Onboard["Onboarding & Consent"]
+        Hub["Family Hub Dashboard"]
+        Learn["Learning Modules"]
+        DFAFlow["DFA Journey"]
+        Export["Privacy Report Export"]
+    end
+
+    subgraph ClientLogic["Client Logic"]
+        AuthW["AuthWrapper"]
+        FamCtx["FamilyContext"]
+        LSM["LocalStorageManager\n(encrypt PII)"]
+        SecStore["secureStorage fh_*"]
+        Score["dfaScoreEngine"]
+    end
+
+    subgraph Storage["Persistence"]
+        LS[("localStorage")]
+        Cloud[("Supabase\noptional")]
+    end
+
+    Guardian --> Onboard
+    Guardian --> Hub
+    Guardian --> DFAFlow
+    Guardian --> Export
+    Child --> Learn
+
+    Onboard --> AuthW
+    Hub --> FamCtx
+    Learn --> FamCtx
+    DFAFlow --> Score
+
+    AuthW --> LS
+    FamCtx --> LSM
+    FamCtx --> SecStore
+    LSM --> LS
+    SecStore --> LS
+    Score --> LS
+
+    FamCtx -.->|consent + backend| Cloud
+    Onboard -.->|consent records| Cloud
+
+    SchoolAdmin --> Cloud
+
+    Export -->|PDF/JSON client-side| Guardian
+
+    style LS fill:#e8f4e8
+    style Cloud fill:#e8eef4
