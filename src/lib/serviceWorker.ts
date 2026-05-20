@@ -1,5 +1,3 @@
-
-import { logger } from "./logger";
 import { logger } from './logger';
 
 interface ServiceWorkerConfig {
