@@ -49,7 +49,7 @@ export const storyScenes: StorySceneData[] = [
     id: 'the-accident',
     title: 'The Accident',
     imageUrl: '/images/story/3-TheAccident.png',
-    content: 'One sunny morning, Po was so excited about a new game on his tablet that he accidentally pressed the wrong button. Suddenly, a message appeared: "All your information has been shared with the entire forest!" Po gasped! His secret diary, his collection of embarrassing bamboo dance videos, and even his personal information like where he slept and what times he ate â€“ everything was now visible to every animal in the forest! "Oh no!" cried Po, hiding his face behind his paws. Notifications, messages, and alerts flooded his screen, overwhelming him with the realization that his private world was no longer private.',
+    content: 'One sunny morning, Po was so excited about a new game on his tablet that he accidentally pressed the wrong button. Suddenly, a message appeared: "All your information has been shared with the entire forest!" Po gasped! His secret diary, his collection of embarrassing bamboo dance videos, and even his personal information like where he slept and what times he ate — everything was now visible to every animal in the forest! "Oh no!" cried Po, hiding his face behind his paws. Notifications, messages, and alerts flooded his screen, overwhelming him with the realization that his private world was no longer private.',
     character: 'panda',
     animation: 'shake',
     background: 'digital',
@@ -74,7 +74,7 @@ export const storyScenes: StorySceneData[] = [
   {
     id: 'pos-den',
     title: 'Po\'s Den',
-    imageUrl: '/images/story/05-Po\'s Den.png',
+    imageUrl: '/images/story/05-Po-Den.png',
     content: 'Po turned off his tablet and hid in his den for days, too embarrassed to come out. He wrapped himself in a blanket, trying to hide from the world. The digital tablet that had once brought him joy now brought only fear and sadness. Po felt lost and didn\'t know how to fix what had happened. He stayed hidden, hoping that if he couldn\'t see the messages, maybe they would go away. But deep down, Po knew that wasn\'t how the Digital Forest worked.',
     character: 'panda',
     animation: 'hide',
@@ -87,7 +87,7 @@ export const storyScenes: StorySceneData[] = [
   {
     id: 'turtle-appears',
     title: 'A Wise Friend Appears',
-    imageUrl: '/images/story/06-Turtle Appears.png',
+    imageUrl: '/images/story/06-Turtle-Appears.png',
     content: 'After a week, there was a gentle knock at his door. It was wise old Turtle, the eldest animal in the forest. "Po," said Turtle softly, "may I come in?" Po reluctantly let Turtle inside. "I know what happened," Turtle said. "And I\'m here to help you understand something important about our Digital Forest." Turtle showed Po a special shield he carried. "This is a Privacy Shield. It helps protect what we share in the Digital Forest. Let me teach you how to use it."',
     character: 'turtle',
     animation: 'wave',
@@ -113,8 +113,8 @@ export const storyScenes: StorySceneData[] = [
   {
     id: 'new-po',
     title: 'A New Po',
-    imageUrl: '/images/story/08-New Po.png',
-    content: 'As Po practiced with his Privacy Shield, he began to feel confident again. He learned to balance enjoying his digital tablet with protecting his privacy. Po started wearing his Privacy Shield proudly and carried his digital bamboo tablet everywhere he went. He was no longer afraid â€“ he was empowered with knowledge. The shy panda who once hid in the shadows was transforming into someone who understood how to navigate the Digital Forest safely.',
+    imageUrl: '/images/story/08-New-Po.png',
+    content: 'As Po practiced with his Privacy Shield, he began to feel confident again. He learned to balance enjoying his digital tablet with protecting his privacy. Po started wearing his Privacy Shield proudly and carried his digital bamboo tablet everywhere he went. He was no longer afraid — he was empowered with knowledge. The shy panda who once hid in the shadows was transforming into someone who understood how to navigate the Digital Forest safely.',
     character: 'panda',
     animation: 'dance',
     background: 'forest',
@@ -126,8 +126,8 @@ export const storyScenes: StorySceneData[] = [
   {
     id: 'po-teaches',
     title: 'Po Teaches Others',
-    imageUrl: '/images/story/09-Po teaches.png',
-    content: 'As Po became more confident, something unexpected happened. Forest animals began coming to him with questions: "Po, how do I stop strangers from seeing my photos?" asked Owen the Owl. "Po, someone is pretending to be me online! What should I do?" worried Fiona the Fox. With each question, Po realized he could use what he had learned to help others. Soon, Po wasn\'t shy anymore. He became known as "Privacy Panda" â€“ the forest\'s expert on staying safe in the digital world. He created fun games to teach young animals about online safety and held special classes under the tallest bamboo tree, sharing his knowledge with all who wanted to learn.',
+    imageUrl: '/images/story/09-Po-teaches.png',
+    content: 'As Po became more confident, something unexpected happened. Forest animals began coming to him with questions: "Po, how do I stop strangers from seeing my photos?" asked Owen the Owl. "Po, someone is pretending to be me online! What should I do?" worried Fiona the Fox. With each question, Po realized he could use what he had learned to help others. Soon, Po wasn\'t shy anymore. He became known as "Privacy Panda" — the forest\'s expert on staying safe in the digital world. He created fun games to teach young animals about online safety and held special classes under the tallest bamboo tree, sharing his knowledge with all who wanted to learn.',
     character: 'panda',
     animation: 'wave',
     background: 'village',

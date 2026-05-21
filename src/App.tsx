@@ -17,7 +17,6 @@ import NavigationErrorBoundary from './components/NavigationErrorBoundary';
 import { SentryErrorBoundary } from './lib/sentry';
 
 const HomePage = lazy(() => import('./pages/HomePage'));
-const InteractiveStoryPage = lazy(() => import('./pages/InteractiveStoryPage'));
 const ActivityBookPage = lazy(() => import('./pages/ActivityBookPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
 const AgeGroupsPage = lazy(() => import('./pages/AgeGroupsPage'));
@@ -195,7 +194,10 @@ function App() {
               path="/story-classic"
               element={<Navigate to={`/stories/${ORIGIN_STORY_SLUG}`} replace />}
             />
-            <Route path="/interactive-story" element={<InteractiveStoryPage />} />
+            <Route
+              path="/interactive-story"
+              element={<Navigate to={`/stories/${ORIGIN_STORY_SLUG}`} replace />}
+            />
             <Route path="/activity-book" element={<ActivityBookPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/age-groups" element={<AgeGroupsPage />} />

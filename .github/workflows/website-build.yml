@@ -16,6 +16,7 @@ on:
       - 'package-lock.json'
       - 'netlify.toml'
       - 'scripts/check-content-truth.mjs'
+      - 'scripts/verify-story-scene-assets.mjs'
       - 'docs/CONTENT_TRUTH.md'
 
 concurrency:
@@ -33,6 +34,8 @@ jobs:
           cache: npm
       - run: npm ci --ignore-scripts
       - run: npm run check:content-truth
+      - run: npm run check:story-assets
+      - run: npm run test:run -- src/data/stories.test.ts
       - run: npm run test:launch-smoke
       - name: Verify PWA assets in dist
         run: |

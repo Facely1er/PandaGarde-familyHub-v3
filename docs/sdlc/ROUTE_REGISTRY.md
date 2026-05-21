@@ -32,8 +32,10 @@ Update this registry when adding, removing, or changing routes. Placeholder rout
 | Path | Component | Purpose | Status |
 |------|-----------|---------|--------|
 | `/` | `HomePage` | Primary entry, DFA CTAs | Active |
-| `/story`, `/privacy-panda` | `InteractiveStoryPage` | Privacy Panda narrative | Active |
-| `/story-classic` | `StoryPage` | Classic story mode | Active |
+| `/stories` | `StoryListPage` | Privacy Panda story catalog | Active |
+| `/stories/:slug` | `StoryReaderPage` | Chapter reader; foundation slug adds interactive mode | Active |
+| `/story`, `/privacy-panda`, `/story-classic`, `/interactive-story` | → `/stories/privacy-panda-and-the-digital-bamboo-forest` | Legacy story URLs | Redirect |
+| `/activities/story` | → `/stories/privacy-panda-and-the-digital-bamboo-forest` | Legacy activity link | Redirect |
 | `/activity-book` | `ActivityBookPage` | Activity book experience | Active |
 | `/get-started` | `GetStartedPage` | Onboarding entry | Active |
 | `/family-hub/*` | `FamilyHubWrapper` | Local guardian gate + mission hub | Active |

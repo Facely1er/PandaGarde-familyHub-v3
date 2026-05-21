@@ -4,9 +4,11 @@ import { getStoryCoverUrl } from '../../data/storyCoverAssets';
 export function ComingSoonBanner() {
   const next = getNextScheduledStory();
   const coverUrl = next ? getStoryCoverUrl(next) : undefined;
-  if (!next) return null;
+  if (!next?.scheduledAt) {
+    return null;
+  }
 
-  const releaseDate = new Date(next.scheduledAt!);
+  const releaseDate = new Date(next.scheduledAt);
   const formatted = releaseDate.toLocaleDateString('en-US', {
     month: 'long',
     day: 'numeric',

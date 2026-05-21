@@ -276,6 +276,7 @@ const episode3: Story = {
   privacyTopic: 'Pause before "Allow All"',
   ageGroups: ['middle', 'older'],
   publishedAt: '2024-03-01',
+  scheduledAt: '2026-09-01',
   coverEmoji: '🦉',
   coverColor: 'bg-violet-100 dark:bg-violet-950',
   coverImagePosition: 'left top',
@@ -376,12 +377,11 @@ export const getFoundationStory = (): Story | undefined =>
   STORIES.find((s) => s.slug === ORIGIN_STORY_SLUG);
 
 // Helpers
-export const getPublishedStories = (): Story[] => {
-  const now = new Date();
-  return STORIES.filter((s) => !s.scheduledAt || new Date(s.scheduledAt) <= now).sort(
-    (a, b) => a.episodeNumber - b.episodeNumber
-  );
-};
+export const isStoryPublished = (story: Story, at: Date = new Date()): boolean =>
+  !story.scheduledAt || new Date(story.scheduledAt) <= at;
+
+export const getPublishedStories = (): Story[] =>
+  STORIES.filter((s) => isStoryPublished(s)).sort((a, b) => a.episodeNumber - b.episodeNumber);
 
 export const getStoryBySlug = (slug: string): Story | undefined =>
   STORIES.find((s) => s.slug === slug);
@@ -394,7 +394,10 @@ export const getLatestStory = (): Story | undefined => {
   return published[published.length - 1];
 };
 
-export const getNextScheduledStory = (): Story | undefined =>
-  STORIES.filter((s) => s.scheduledAt && new Date(s.scheduledAt) > new Date()).sort(
-    (a, b) => new Date(a.scheduledAt!).getTime() - new Date(b.scheduledAt!).getTime()
+export const getNextScheduledStory = (): Story | undefined => {
+  const now = new Date();
+  return STORIES.filter((s) => s.scheduledAt && new Date(s.scheduledAt) > now).sort(
+    (a, b) =>
+      new Date(a.scheduledAt as string).getTime() - new Date(b.scheduledAt as string).getTime()
   )[0];
+};

@@ -13,30 +13,42 @@ const optionalDependenciesPlugin = () => ({
   },
 });
 
-const cleanPublicDirPlugin = () => ({
-  name: 'clean-public-dir',
+/** Legacy scene files used spaces/apostrophes; rename to hyphenated URLs in storyScenes.ts. */
+const STORY_SCENE_RENAMES: Record<string, string> = {
+  "05-Po's Den.png": '05-Po-Den.png',
+  '06-Turtle Appears.png': '06-Turtle-Appears.png',
+  '08-New Po.png': '08-New-Po.png',
+  '09-Po teaches.png': '09-Po-teaches.png',
+};
+
+const normalizeStorySceneAssetsPlugin = () => ({
+  name: 'normalize-story-scene-assets',
   buildStart() {
     const storyDir = path.resolve(__dirname, 'public/images/story');
-    if (fs.existsSync(storyDir)) {
-      const files = fs.readdirSync(storyDir);
-      files.forEach(file => {
-        if (file.includes("'") || file.includes(' ')) {
-          const filePath = path.join(storyDir, file);
-          try {
-            fs.unlinkSync(filePath);
-             
-            console.warn(`Removed problematic file: ${file}`);
-          } catch (_err) {
-            // File might be locked, skip it
-          }
-        }
-      });
+    if (!fs.existsSync(storyDir)) {
+      return;
     }
-  }
+    for (const [legacyName, safeName] of Object.entries(STORY_SCENE_RENAMES)) {
+      const legacyPath = path.join(storyDir, legacyName);
+      const safePath = path.join(storyDir, safeName);
+      if (!fs.existsSync(legacyPath)) {
+        continue;
+      }
+      try {
+        if (!fs.existsSync(safePath) || fs.statSync(safePath).size === 0) {
+          fs.copyFileSync(legacyPath, safePath);
+        }
+        fs.unlinkSync(legacyPath);
+        console.warn(`Renamed story scene asset: ${legacyName} → ${safeName}`);
+      } catch (_err) {
+        // File might be locked; skip
+      }
+    }
+  },
 });
 
 export default defineConfig({
-  plugins: [react(), optionalDependenciesPlugin(), cleanPublicDirPlugin()],
+  plugins: [react(), optionalDependenciesPlugin(), normalizeStorySceneAssetsPlugin()],
   server: {
     port: 5173,
   },

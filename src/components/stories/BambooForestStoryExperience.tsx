@@ -69,7 +69,9 @@ export function BambooForestStoryExperience({ story }: BambooForestStoryExperien
     try {
       const savedChoicesStr = localStorage.getItem('story-choices') || '[]';
       const savedChoices = JSON.parse(savedChoicesStr);
-      if (!Array.isArray(savedChoices)) return;
+      if (!Array.isArray(savedChoices)) {
+        return;
+      }
 
       if (savedChoices.length >= 3) {
         setAchievements((prev) =>
@@ -107,7 +109,9 @@ export function BambooForestStoryExperience({ story }: BambooForestStoryExperien
 
   useEffect(() => {
     const savedProgress = localStorage.getItem('story-progress');
-    if (!savedProgress) return;
+    if (!savedProgress) {
+      return;
+    }
     try {
       const progress = JSON.parse(savedProgress);
       setCurrentSceneIndex(progress.sceneIndex ?? 0);
