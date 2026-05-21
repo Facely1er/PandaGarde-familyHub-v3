@@ -17,9 +17,11 @@ import {
   Home,
 } from 'lucide-react';
 import { loadDfaJourneyState } from '../lib/dfaJourney';
+import { getLatestStory } from '../data/stories';
 
 const HomePage: React.FC = () => {
   const journey = useMemo(() => loadDfaJourneyState(), []);
+  const latestStory = useMemo(() => getLatestStory(), []);
 
 
   useEffect(() => {
@@ -395,7 +397,35 @@ const HomePage: React.FC = () => {
                 </span>
               </Link>
             ))}
+            {latestStory && (
+              <Link
+                to={`/stories/${latestStory.slug}`}
+                className="homepage-spotlight__card homepage-spotlight__card--story"
+              >
+                <span className="homepage-spotlight__tag">Latest Story</span>
+                <div className="flex items-start gap-3">
+                  <span className="text-3xl" aria-hidden="true">
+                    {latestStory.coverEmoji}
+                  </span>
+                  <div>
+                    <h3>{latestStory.title}</h3>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{latestStory.privacyTopic}</p>
+                  </div>
+                </div>
+                <span className="homepage-spotlight__cta">
+                  Read episode {latestStory.episodeNumber}
+                  <ChevronRight size={16} />
+                </span>
+              </Link>
+            )}
           </div>
+          {latestStory && (
+            <p className="homepage-spotlight__see-all mt-4">
+              <Link to="/stories" className="text-green-700 dark:text-green-400 font-medium hover:underline">
+                See all stories →
+              </Link>
+            </p>
+          )}
         </div>
       </section>
 

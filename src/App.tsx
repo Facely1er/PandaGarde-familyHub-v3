@@ -1,5 +1,5 @@
 import React, { Suspense, lazy, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { ToastProvider } from './contexts/ToastContext';
 import { FamilyProvider } from './contexts/FamilyContext';
@@ -83,6 +83,12 @@ const PrivacyTipsForumPage = lazy(() => import('./pages/community/PrivacyTipsFor
 const AppFeaturesPage = lazy(() => import('./pages/AppFeaturesPage'));
 const AppStoreReviewPage = lazy(() => import('./pages/AppStoreReviewPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
+const StoryListPage = lazy(() =>
+  import('./pages/StoryListPage').then((m) => ({ default: m.StoryListPage }))
+);
+const StoryReaderPage = lazy(() =>
+  import('./pages/StoryReaderPage').then((m) => ({ default: m.StoryReaderPage }))
+);
 
 // Component to handle hash navigation
 const HashHandler: React.FC = () => {
@@ -277,8 +283,16 @@ function App() {
             <Route path="/family-privacy-plan" element={<FamilyPrivacyPlanPage />} />
             <Route path="/guides/family-privacy-plan" element={<FamilyPrivacyPlanPage />} />
 
+            {/* Privacy Panda Stories */}
+            <Route path="/stories" element={<StoryListPage />} />
+            <Route path="/stories/:slug" element={<StoryReaderPage />} />
+
             {/* Activity Pages */}
             <Route path="/activities/privacy-learning-kit" element={<PrivacyLearningKitPage />} />
+            <Route
+              path="/activities/story"
+              element={<Navigate to="/stories/privacy-panda-and-the-digital-bamboo-forest" replace />}
+            />
             <Route path="/activities/:activityId" element={<ActivitiesPage />} />
             <Route path="/activities" element={<ActivitiesPage />} />
             
