@@ -7,6 +7,7 @@ import { ProgressProvider } from './contexts/ProgressContext';
 import { FamilyProgressProvider } from './contexts/FamilyProgressContext';
 import LoginPage from './pages/family-hub/LoginPage';
 import NavigationErrorBoundary from './components/NavigationErrorBoundary';
+import ErrorFallback from './components/ui/ErrorFallback';
 import { SentryErrorBoundary } from './lib/sentry';
 import { usePageTracking } from './hooks/useAnalytics';
 import AppShell from './familyhub/components/AppShell';
@@ -58,7 +59,7 @@ function FamilyHubApp() {
           <ProgressProvider>
             <FamilyProgressProvider>
               <Router>
-                <SentryErrorBoundary fallback={<div>Something went wrong. Please refresh the page.</div>}>
+                <SentryErrorBoundary fallback={<ErrorFallback />}>
                   <NavigationErrorBoundary>
                     <div className="App">
                       <PageTracker />

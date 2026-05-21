@@ -175,7 +175,7 @@ const ParentDashboard: React.FC<ParentDashboardProps> = ({ progress, onClose }) 
 
               <div className="mt-8 pt-5 border-t border-gray-200 dark:border-gray-700">
                 <h3 className="mb-5 text-lg font-semibold text-gray-800 dark:text-gray-100">Learning Insights</h3>
-                <div className="grid gap-4" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))' }}>
+                <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                   <div className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                     <BookOpen size={24} className="text-blue-600 dark:text-blue-400 shrink-0" />
                     <div>
