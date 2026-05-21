@@ -66,6 +66,7 @@ const KidsScreen: React.FC = () => {
     if (!newMember.name.trim() || newMember.age <= 0) {
       return;
     }
+
     const member: FamilyMember = {
       id: Date.now(),
       name: newMember.name,
@@ -76,6 +77,7 @@ const KidsScreen: React.FC = () => {
       badges: [],
       lastActive: new Date().toISOString(),
     };
+
     setFamilyMembers([...familyMembers, member]);
     setNewMember({ name: '', age: 0, role: 'Child' });
     setShowAddMember(false);
@@ -149,11 +151,12 @@ const KidsScreen: React.FC = () => {
                     <div className="min-w-0">
                       <h3 className="font-bold text-lg text-gray-900 dark:text-white">{member.name}</h3>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
-                        {member.role} · Age {member.age}
+                        {member.role} &middot; Age {member.age}
                       </p>
                       <p className="text-xs text-gray-500 dark:text-gray-500 mt-0.5">
                         Privacy Score: {calculateMemberScore(member.id)}/100
                       </p>
+                      {/* Age-group activity badge — only for children and teens */}
                       {ageGroup && (
                         <Link
                           to="/family-hub/activities"
@@ -162,7 +165,7 @@ const KidsScreen: React.FC = () => {
                           aria-label={`View ${ageGroup.label} activities for ${member.name}`}
                         >
                           <span aria-hidden="true">{ageGroup.emoji}</span>
-                          {ageGroup.label} activities →
+                          {ageGroup.label} activities &rarr;
                         </Link>
                       )}
                     </div>
@@ -192,6 +195,7 @@ const KidsScreen: React.FC = () => {
         </div>
       )}
 
+      {/* Add Member Modal */}
       <AnimatePresence>
         {showAddMember && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
@@ -209,12 +213,15 @@ const KidsScreen: React.FC = () => {
                   className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 min-w-[44px] min-h-[44px] flex items-center justify-center text-3xl leading-none transition-colors"
                   aria-label="Close dialog"
                 >
-                  ×
+                  &times;
                 </button>
               </div>
+
               <div className="space-y-4">
                 <div>
-                  <label htmlFor="member-name" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Name</label>
+                  <label htmlFor="member-name" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+                    Name
+                  </label>
                   <input
                     id="member-name"
                     type="text"
@@ -227,8 +234,11 @@ const KidsScreen: React.FC = () => {
                     aria-required="true"
                   />
                 </div>
+
                 <div>
-                  <label htmlFor="member-age" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Age</label>
+                  <label htmlFor="member-age" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+                    Age
+                  </label>
                   <input
                     id="member-age"
                     type="number"
@@ -240,6 +250,7 @@ const KidsScreen: React.FC = () => {
                     max="100"
                     aria-required="true"
                   />
+                  {/* Preview age-group badge as user types */}
                   {newMember.age >= 5 && newMember.age <= 17 && (() => {
                     const g = getAgeGroup(newMember.age);
                     return g ? (
@@ -249,8 +260,11 @@ const KidsScreen: React.FC = () => {
                     ) : null;
                   })()}
                 </div>
+
                 <div>
-                  <label htmlFor="member-role" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Role</label>
+                  <label htmlFor="member-role" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+                    Role
+                  </label>
                   <select
                     id="member-role"
                     value={newMember.role}
@@ -263,6 +277,7 @@ const KidsScreen: React.FC = () => {
                     <option value="Guardian">Guardian</option>
                   </select>
                 </div>
+
                 <div className="flex gap-3 pt-4">
                   <button
                     type="button"

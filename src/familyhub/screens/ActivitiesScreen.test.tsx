@@ -1,14 +1,17 @@
 import { describe, expect, it, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { MemoryRouter } from 'react-router-dom';
 import { ProgressProvider } from '../../contexts/ProgressContext';
 import ActivitiesScreen from './ActivitiesScreen';
 
 const renderScreen = () =>
   render(
-    <ProgressProvider>
-      <ActivitiesScreen />
-    </ProgressProvider>
+    <MemoryRouter>
+      <ProgressProvider>
+        <ActivitiesScreen />
+      </ProgressProvider>
+    </MemoryRouter>
   );
 
 describe('ActivitiesScreen', () => {
