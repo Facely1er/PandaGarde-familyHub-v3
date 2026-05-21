@@ -16,6 +16,10 @@ const familyhubIndexHtmlPlugin = () => ({
     if (fs.existsSync(src)) {
       fs.copyFileSync(src, dest);
     }
+    const redirectsSrc = path.resolve(rootDir, 'public/familyhub-_redirects');
+    if (fs.existsSync(redirectsSrc)) {
+      fs.copyFileSync(redirectsSrc, path.join(outDir, '_redirects'));
+    }
   },
 });
 
