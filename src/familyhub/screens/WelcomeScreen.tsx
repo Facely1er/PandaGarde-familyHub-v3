@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Shield, Users, Gamepad2, Award } from 'lucide-react';
 import { updateDfaJourneyPhase } from '../../lib/dfaJourney';
+import { setHubOrigin } from '../../lib/hubMission';
 import { HUB_WELCOMED_KEY } from '../constants';
 
 export { HUB_WELCOMED_KEY };
@@ -41,7 +42,13 @@ const WelcomeScreen: React.FC = () => {
     updateDfaJourneyPhase('hub', { visited: true, resumePath: '/family-hub/welcome' });
   }, []);
 
-  const handleGetStarted = () => {
+  const handleGetStarted = (origin: 'standalone' | 'web') => {
+    setHubOrigin(origin);
+    if (origin === 'web') {
+      updateDfaJourneyPhase('profile', { visited: true, completed: true });
+      updateDfaJourneyPhase('dfa', { visited: true, completed: true });
+      updateDfaJourneyPhase('plan', { visited: true, completed: true });
+    }
     localStorage.setItem(HUB_WELCOMED_KEY, 'true');
     navigate('/family-hub/dashboard', { replace: true });
   };
@@ -66,7 +73,7 @@ const WelcomeScreen: React.FC = () => {
                 <span className="text-teal-600 dark:text-teal-400">Family Hub</span>
               </h1>
               <p className="mt-3 text-base sm:text-lg text-gray-600 dark:text-gray-300">
-                Your family's home base for privacy learning — age-matched activities, shared goals, and progress you can track together.
+                Your family&apos;s daily privacy missions — age-matched activities, streaks, and progress that stays on this device. Works on its own or after the website assessment.
               </p>
             </div>
           </div>
@@ -160,14 +167,21 @@ const WelcomeScreen: React.FC = () => {
 
       {/* Sticky CTA */}
       <div className="sticky bottom-0 bg-white/90 dark:bg-gray-900/90 backdrop-blur border-t border-gray-200 dark:border-gray-700 px-4 py-4 safe-area-bottom">
-        <div className="max-w-xl mx-auto">
+        <div className="max-w-xl mx-auto flex flex-col gap-2">
           <button
             type="button"
-            onClick={handleGetStarted}
+            onClick={() => handleGetStarted('standalone')}
             className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-teal-600 px-6 py-4 text-base font-semibold text-white shadow-sm hover:bg-teal-700 active:scale-[0.98] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
           >
-            Set up my Family Hub
+            Start fresh in Family Hub
             <ArrowRight size={20} aria-hidden="true" />
+          </button>
+          <button
+            type="button"
+            onClick={() => handleGetStarted('web')}
+            className="w-full inline-flex items-center justify-center rounded-xl border border-gray-200 bg-white px-6 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
+          >
+            I completed the website assessment
           </button>
         </div>
       </div>

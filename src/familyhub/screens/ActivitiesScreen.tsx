@@ -1,21 +1,9 @@
-import React, { lazy, Suspense, useMemo, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import {
-  ArrowLeft,
-  BookOpen,
-  CheckCircle2,
-  Clock,
-  Info,
-  MessageCircleHeart,
-  Play,
-  Sparkles,
-  Target,
-  Users,
-} from 'lucide-react';
-import { HubScreenFallback } from '../lazyScreen';
-
-const ActivityManager = lazy(() => import('../../components/activities/ActivityManager'));
+import React, { useEffect, useMemo, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { CheckCircle2, Clock, Info, Play, Sparkles, Users } from 'lucide-react';
+import MissionShell from '../components/MissionShell';
 import { useProgress } from '../../contexts/ProgressContext';
+import { findActivityById, getCompletionId } from '../../lib/hubMission';
 import {
   ageBasedActivities,
   flattenAgeBasedActivities,
@@ -45,174 +33,6 @@ type AgeTabId = (typeof AGE_TABS)[number]['id'];
 type FocusTabId = 'all' | ActivityFocus;
 
 const extractDurationNumber = (duration: string) => Number.parseInt(duration, 10) || 0;
-const getCompletionId = (activity: FlattenedAgeBasedActivity) => activity.activityManagerId ?? activity.id;
-
-const LearningCard: React.FC<{
-  activity: FlattenedAgeBasedActivity;
-  isCompleted: boolean;
-  score?: number;
-  onClose: () => void;
-}> = ({ activity, isCompleted, score, onClose }) => (
-  <div className="flex h-full flex-col bg-gray-50 dark:bg-gray-900">
-    <div className="border-b border-gray-200 bg-white px-4 py-3 dark:border-gray-700 dark:bg-gray-800">
-      <div className="mx-auto flex max-w-4xl items-center gap-4">
-        <button
-          onClick={onClose}
-          className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg p-2 transition-colors hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 dark:hover:bg-gray-700"
-          aria-label="Back to activities"
-        >
-          <ArrowLeft size={20} />
-        </button>
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{activity.name}</h2>
-      </div>
-    </div>
-
-    <div className="flex-1 overflow-auto px-4 py-5 sm:px-6">
-      <div className="mx-auto flex max-w-4xl flex-col gap-6">
-        <section className="rounded-3xl border border-teal-100 bg-white p-6 shadow-sm dark:border-teal-700/40 dark:bg-gray-800">
-          <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
-            <div>
-              <div className="inline-flex items-center gap-2 rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-teal-700 dark:bg-teal-900/30 dark:text-teal-200">
-                <Sparkles size={14} aria-hidden="true" />
-                Family activity mission
-              </div>
-              <div className="mt-4 flex items-center gap-4">
-                <span className="text-5xl" role="img" aria-label={activity.name}>
-                  {activity.icon}
-                </span>
-                <div>
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{activity.name}</h3>
-                  <div className="mt-2 flex flex-wrap items-center gap-2 text-xs font-medium">
-                    <span className="rounded-full bg-teal-50 px-3 py-1 text-teal-700 dark:bg-teal-900/30 dark:text-teal-200">
-                      Ages {activity.groupAgeRange}
-                    </span>
-                    <span className="rounded-full bg-gray-100 px-3 py-1 text-gray-700 dark:bg-gray-700 dark:text-gray-200">
-                      {activity.focus}
-                    </span>
-                    <span className="rounded-full bg-amber-50 px-3 py-1 text-amber-700 dark:bg-amber-900/30 dark:text-amber-200">
-                      {activity.difficulty}
-                    </span>
-                    <span className="rounded-full bg-indigo-50 px-3 py-1 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-200">
-                      {activity.familyMode}
-                    </span>
-                    {isCompleted && (
-                      <span className="rounded-full bg-emerald-50 px-3 py-1 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-200">
-                        Completed{score !== undefined ? ` · ${score}%` : ''}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid gap-3 sm:grid-cols-2 lg:max-w-xs lg:grid-cols-1">
-              <div className="rounded-2xl bg-gray-50 p-4 dark:bg-gray-900/70">
-                <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                  Time together
-                </p>
-                <p className="mt-2 flex items-center gap-2 text-sm font-medium text-gray-900 dark:text-white">
-                  <Clock size={15} aria-hidden="true" />
-                  {activity.duration}
-                </p>
-              </div>
-              <div className="rounded-2xl bg-gray-50 p-4 dark:bg-gray-900/70">
-                <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                  Learning goal
-                </p>
-                <p className="mt-2 text-sm text-gray-700 dark:text-gray-200">{activity.learningObjective}</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <div className="grid gap-4 lg:grid-cols-[1.2fr,0.8fr]">
-          <section className="rounded-2xl border border-amber-200 bg-amber-50 p-5 dark:border-amber-700/40 dark:bg-amber-900/20">
-            <p className="text-xs font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-300">
-              Real-life scenario
-            </p>
-            <p className="mt-2 text-sm leading-relaxed text-amber-950 dark:text-amber-100">
-              {activity.realLifeScenario}
-            </p>
-          </section>
-
-          <section className="rounded-2xl border border-indigo-200 bg-indigo-50 p-5 dark:border-indigo-700/40 dark:bg-indigo-900/20">
-            <p className="text-xs font-semibold uppercase tracking-wide text-indigo-700 dark:text-indigo-300">
-              Family prompt
-            </p>
-            <p className="mt-2 text-sm leading-relaxed text-indigo-950 dark:text-indigo-100">
-              {activity.familyPrompt}
-            </p>
-          </section>
-        </div>
-
-        <div className="grid gap-4 lg:grid-cols-2">
-          <section className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-800">
-            <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-teal-700 dark:text-teal-300">
-              <BookOpen size={14} aria-hidden="true" />
-              Key privacy learnings
-            </p>
-            <ul className="mt-4 space-y-3">
-              {activity.keyLearnings.map((tip) => (
-                <li key={tip} className="flex items-start gap-3 text-sm text-gray-700 dark:text-gray-200">
-                  <span className="mt-0.5 text-teal-500" aria-hidden="true">
-                    ✓
-                  </span>
-                  <span>{tip}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
-
-          <section className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-800">
-            <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-rose-700 dark:text-rose-300">
-              <MessageCircleHeart size={14} aria-hidden="true" />
-              Family reflection prompts
-            </p>
-            <ul className="mt-4 space-y-3">
-              {activity.discussionPrompts.map((prompt) => (
-                <li key={prompt} className="rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-900 dark:bg-rose-900/20 dark:text-rose-100">
-                  {prompt}
-                </li>
-              ))}
-            </ul>
-          </section>
-        </div>
-
-        <section className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5 dark:border-emerald-700/40 dark:bg-emerald-900/20">
-          <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-emerald-700 dark:text-emerald-300">
-            <Target size={14} aria-hidden="true" />
-            Next family step
-          </p>
-          <p className="mt-2 text-sm leading-relaxed text-emerald-950 dark:text-emerald-100">{activity.nextStep}</p>
-        </section>
-
-        {activity.sitePath && (
-          <section className="rounded-2xl border border-sky-200 bg-sky-50 p-5 dark:border-sky-700/40 dark:bg-sky-900/20">
-            <p className="text-xs font-semibold uppercase tracking-wide text-sky-700 dark:text-sky-300">
-              Family tool on PandaGarde
-            </p>
-            <p className="mt-2 text-sm text-sky-950 dark:text-sky-100">
-              Continue with the full in-app analysis and checklist on the main site, then return here to mark progress.
-            </p>
-            <Link
-              to={activity.sitePath}
-              className="mt-4 inline-flex min-h-[44px] items-center justify-center rounded-lg bg-sky-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-sky-700"
-            >
-              Open {activity.sitePath === '/digital-footprint' ? 'Digital Footprint Analysis' : 'tool'}
-            </Link>
-          </section>
-        )}
-
-        <p className="pb-4 text-center text-xs text-gray-500 dark:text-gray-400">
-          {activity.activityManagerId
-            ? 'Use the prompts above, then launch the interactive game from the activity list when you are ready.'
-            : 'Use the discussion prompts above for a short family conversation today.'}
-        </p>
-      </div>
-    </div>
-  </div>
-);
-
 const ActivityCard: React.FC<{
   activity: FlattenedAgeBasedActivity;
   isCompleted: boolean;
@@ -291,7 +111,7 @@ const ActivityCard: React.FC<{
       </div>
       <div className="flex items-center gap-1 text-sm font-semibold text-teal-600 transition-transform group-hover:translate-x-0.5 dark:text-teal-300">
         <Play size={15} aria-hidden="true" />
-        {activity.activityManagerId ? 'Start game' : activity.sitePath ? 'Open guide' : 'Start mission'}
+        {activity.activityManagerId ? 'Start mission' : 'Start conversation'}
       </div>
     </div>
   </button>
@@ -313,16 +133,24 @@ const GroupHeading: React.FC<{ group: AgeGroup }> = ({ group }) => (
 );
 
 const ActivitiesScreen: React.FC = () => {
-  // Read initial age filter passed via React Router state (e.g. from KidsScreen badges)
   const location = useLocation();
-  const locationState = location.state as { initialAgeFilter?: AgeTabId } | null;
+  const locationState = location.state as { initialAgeFilter?: AgeTabId; startMissionId?: string } | null;
   const initialAge: AgeTabId = locationState?.initialAgeFilter ?? 'all';
 
-  const [selectedActivityId, setSelectedActivityId] = useState<string | null>(null);
+  const [activeMission, setActiveMission] = useState<FlattenedAgeBasedActivity | null>(null);
   const [activeAge, setActiveAge] = useState<AgeTabId>(initialAge);
   const [activeFocus, setActiveFocus] = useState<FocusTabId>('all');
-  const [showLearningCard, setShowLearningCard] = useState(false);
   const { progress, getActivityProgress } = useProgress();
+
+  useEffect(() => {
+    const missionId = locationState?.startMissionId;
+    if (missionId) {
+      const found = findActivityById(missionId);
+      if (found) {
+        setActiveMission(found);
+      }
+    }
+  }, [locationState?.startMissionId]);
 
   const allActivities = useMemo(() => flattenAgeBasedActivities(), []);
   const focusTabs = useMemo(
@@ -346,8 +174,6 @@ const ActivitiesScreen: React.FC = () => {
     [activeAge, activeFocus, allActivities]
   );
 
-  const selectedActivity = allActivities.find((activity) => activity.id === selectedActivityId) ?? null;
-  const selectedActivityProgress = selectedActivity ? getActivityProgress(getCompletionId(selectedActivity)) : undefined;
   const completedIds = useMemo(() => new Set(progress.completedActivities), [progress.completedActivities]);
   const featuredActivities = useMemo(() => {
     const featuredMatches = getFeaturedAgeBasedActivities(filteredActivities);
@@ -365,89 +191,16 @@ const ActivitiesScreen: React.FC = () => {
   const showGroupedGrid = activeAge === 'all' && activeFocus === 'all';
 
   const handleStart = (activity: FlattenedAgeBasedActivity) => {
-    setSelectedActivityId(activity.id);
-    setShowLearningCard(!activity.activityManagerId);
+    setActiveMission(activity);
   };
 
-  const handleClose = () => {
-    setSelectedActivityId(null);
-    setShowLearningCard(false);
-  };
-
-  if (selectedActivityId && selectedActivity?.activityManagerId && !showLearningCard) {
-    const activityManagerId = selectedActivity.activityManagerId;
+  if (activeMission) {
     return (
-      <div className="flex h-full flex-col bg-gray-50 dark:bg-gray-900">
-        <div className="border-b border-gray-200 bg-white px-4 py-3 dark:border-gray-700 dark:bg-gray-800">
-          <div className="mx-auto flex max-w-5xl items-center gap-4">
-            <button
-              onClick={handleClose}
-              className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg p-2 transition-colors hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 dark:hover:bg-gray-700"
-              aria-label="Back to activities"
-            >
-              <ArrowLeft size={20} />
-            </button>
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{selectedActivity.name}</h2>
-          </div>
-        </div>
-
-        <div className="border-b border-gray-200 bg-white/90 px-4 py-4 dark:border-gray-700 dark:bg-gray-800/80">
-          <div className="mx-auto grid max-w-5xl gap-3 md:grid-cols-2 xl:grid-cols-4">
-            <div className="rounded-2xl bg-teal-50 p-4 dark:bg-teal-900/20">
-              <p className="text-xs font-semibold uppercase tracking-wide text-teal-700 dark:text-teal-300">
-                Learning goal
-              </p>
-              <p className="mt-2 text-sm text-teal-950 dark:text-teal-100">{selectedActivity.learningObjective}</p>
-            </div>
-            <div className="rounded-2xl bg-indigo-50 p-4 dark:bg-indigo-900/20">
-              <p className="text-xs font-semibold uppercase tracking-wide text-indigo-700 dark:text-indigo-300">
-                Family cue
-              </p>
-              <p className="mt-2 text-sm text-indigo-950 dark:text-indigo-100">{selectedActivity.familyPrompt}</p>
-            </div>
-            <div className="rounded-2xl bg-amber-50 p-4 dark:bg-amber-900/20">
-              <p className="text-xs font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-300">
-                Focus
-              </p>
-              <p className="mt-2 text-sm text-amber-950 dark:text-amber-100">
-                {selectedActivity.focus} · {selectedActivity.duration}
-              </p>
-              <p className="mt-1 text-xs text-amber-800/80 dark:text-amber-100/80">{selectedActivity.familyMode}</p>
-            </div>
-            <div className="rounded-2xl bg-emerald-50 p-4 dark:bg-emerald-900/20">
-              <p className="text-xs font-semibold uppercase tracking-wide text-emerald-700 dark:text-emerald-300">
-                Progress
-              </p>
-              <p className="mt-2 text-sm text-emerald-950 dark:text-emerald-100">
-                {selectedActivityProgress?.completed
-                  ? `Completed${selectedActivityProgress.score !== undefined ? ` · ${selectedActivityProgress.score}%` : ''}`
-                  : 'Ready to start'}
-              </p>
-              <p className="mt-1 text-xs text-emerald-800/80 dark:text-emerald-100/80">{selectedActivity.nextStep}</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex-1 overflow-auto">
-          <Suspense fallback={<HubScreenFallback />}>
-            <ActivityManager
-              activityId={activityManagerId}
-              onClose={handleClose}
-              onComplete={handleClose}
-            />
-          </Suspense>
-        </div>
-      </div>
-    );
-  }
-
-  if (selectedActivityId && selectedActivity && showLearningCard) {
-    return (
-      <LearningCard
-        activity={selectedActivity}
-        isCompleted={Boolean(selectedActivityProgress?.completed)}
-        score={selectedActivityProgress?.score}
-        onClose={handleClose}
+      <MissionShell
+        activity={activeMission}
+        completedIds={completedIds}
+        onExit={() => setActiveMission(null)}
+        onStartNext={(next) => setActiveMission(next)}
       />
     );
   }

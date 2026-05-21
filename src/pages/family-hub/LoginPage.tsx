@@ -38,7 +38,7 @@ const LoginPage: React.FC = () => {
         </div>
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">PandaGarde Family Hub</h1>
         <p className="text-gray-600 dark:text-gray-400 mb-3">
-          Your family privacy workspace — the final phase of the PandaGarde DFA journey where you act on your privacy plan together.
+          Your family privacy app — daily missions, activities, and progress together. Works on its own or after the website assessment.
         </p>
         <div className="text-sm text-gray-500 dark:text-gray-400 mb-6 space-y-2 text-left bg-gray-50 dark:bg-slate-700/50 border border-gray-200 dark:border-slate-600 rounded-xl p-4">
           <div className="flex items-center gap-2"><CheckCircle2 size={16} className="text-teal-600 dark:text-teal-400 shrink-0" /> <span className="text-gray-700 dark:text-gray-300">Works offline — no account required</span></div>

@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { LayoutDashboard, Users, Gamepad2, Award, Settings, Moon, Sun, ArrowLeft, type LucideIcon } from 'lucide-react';
 import { useTheme } from '../../contexts/ThemeContext';
+import { getHubOrigin } from '../../lib/hubMission';
 
 interface TabItem {
   id: string;
@@ -31,6 +32,7 @@ const AppShell: React.FC = () => {
   };
 
   const currentTab = tabs.find((tab) => isActive(tab.path));
+  const hubOrigin = getHubOrigin();
 
   const onNavKeyDown: React.KeyboardEventHandler<HTMLElement> = (event) => {
     if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) {
@@ -72,8 +74,8 @@ const AppShell: React.FC = () => {
               <a
                 href="/"
                 className="flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-gray-200 bg-white hover:opacity-80 dark:border-gray-600 dark:bg-gray-900 transition-opacity"
-                aria-label="Back to PandaGarde website"
-                title="Back to PandaGarde"
+                aria-label={hubOrigin === 'standalone' ? 'Open PandaGarde website (optional)' : 'Back to PandaGarde website'}
+                title={hubOrigin === 'standalone' ? 'Website' : 'Back to PandaGarde'}
               >
                 <img
                   src="/LogoPandagarde.png"

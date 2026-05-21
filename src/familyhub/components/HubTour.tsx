@@ -14,7 +14,7 @@ interface TourStep {
 const steps: TourStep[] = [
   {
     title: 'Dashboard — your overview',
-    body: "The Dashboard shows your family's progress at a glance: members, completed goals, and open items. It's your home base.",
+    body: "Start with Today's mission on the Dashboard, then track members, goals, and your learning streak — your daily home base.",
     icon: LayoutDashboard,
     navTarget: '/family-hub/dashboard',
   },

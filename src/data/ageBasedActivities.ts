@@ -251,7 +251,7 @@ export const ageBasedActivities: AgeGroup[] = [
         focus: 'Digital footprint',
         familyMode: 'Talk together',
         featured: true,
-        sitePath: '/digital-footprint',
+        activityManagerId: 'digital-footprint',
       },
       {
         id: 'phishing-patrol',
@@ -478,7 +478,7 @@ export const ageBasedActivities: AgeGroup[] = [
         difficulty: 'Advanced',
         focus: 'Digital footprint',
         familyMode: 'Talk together',
-        sitePath: '/digital-footprint',
+        activityManagerId: 'digital-footprint',
       },
       {
         id: 'privacy-rights-challenge',

@@ -1,5 +1,5 @@
 import React, { lazy, Suspense, useEffect } from "react";
-import { ArrowLeft, CheckCircle2, Users, Gamepad2, Award, Settings } from "lucide-react";
+import { CheckCircle2, Users, Gamepad2, Award, Settings } from "lucide-react";
 import { Link } from "react-router-dom";
 import { HubScreenFallback } from "../lazyScreen";
 
@@ -7,6 +7,8 @@ const FamilyDashboard = lazy(() => import("../../components/FamilyDashboard"));
 import { updateDfaJourneyPhase } from "../../lib/dfaJourney";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import HubTour from "../components/HubTour";
+import TodayMissionCard from "../components/TodayMissionCard";
+import { getHubOrigin, touchHubStreak } from "../../lib/hubMission";
 
 interface FamilyGoal {
   completed?: boolean;
@@ -44,26 +46,29 @@ const DashboardScreen: React.FC = () => {
   const [familyGoals] = useLocalStorage<FamilyGoal[]>('pandagarde_family_goals', []);
   const completedGoals = familyGoals.filter((goal) => goal?.completed).length;
 
+  const hubOrigin = getHubOrigin();
+
   useEffect(() => {
     updateDfaJourneyPhase('hub', { visited: true, completed: true, resumePath: '/family-hub/dashboard' });
+    touchHubStreak();
   }, []);
 
   return (
     <div className="min-h-full">
       <HubTour />
-      <div className="border-b border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-900">
-        <div className="mx-auto flex max-w-5xl flex-col gap-2 md:flex-row md:items-center md:justify-between">
-          <div className="flex items-start gap-2">
-            <CheckCircle2 size={18} className="mt-0.5 text-emerald-700" />
-            <p className="leading-6">Your family's privacy journey is underway — keep the momentum going with <strong>activities and goals</strong> tailored to every age group.</p>
-          </div>
-          <a href="/privacy-assessment" className="inline-flex items-center gap-2 font-semibold text-emerald-800 hover:text-emerald-900">
-            <ArrowLeft size={16} /> Privacy check-up
-          </a>
+      <div className="border-b border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-900 dark:border-emerald-800/50 dark:bg-emerald-900/20 dark:text-emerald-100">
+        <div className="mx-auto flex max-w-5xl items-start gap-2">
+          <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-emerald-700 dark:text-emerald-300" />
+          <p className="leading-6">
+            {hubOrigin === 'web'
+              ? <>Your assessment progress is saved locally. Continue with <strong>today&apos;s mission</strong> below.</>
+              : <>Welcome to your family privacy home base — start with <strong>today&apos;s mission</strong>, then add kids and track progress together.</>}
+          </p>
         </div>
       </div>
       <section className="border-b border-gray-200 bg-white/95 px-4 py-5 shadow-sm dark:border-gray-700 dark:bg-gray-900/80">
         <div className="mx-auto flex max-w-5xl flex-col gap-5">
+          <TodayMissionCard />
           <div className="space-y-2">
             <h1 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-3xl">
               Family Hub
