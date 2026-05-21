@@ -886,7 +886,7 @@ const FamilyHubPage: React.FC = () => {
                   const memberName = `${member.first_name} ${member.last_name}`.trim();
                   const progress = member.privacyScore ?? 0;
                   const completedActivities = member.progress?.completedMissions.length ?? 0;
-                  const totalActivities = member.progress?.completedMissions.length ?? 0;
+                  const totalActivities = 5;
                   
                   return (
                     <div key={member.id} className="text-center">

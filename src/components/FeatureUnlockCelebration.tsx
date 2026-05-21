@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { X, CheckCircle, Sparkles, Unlock, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -20,24 +20,24 @@ const FeatureUnlockCelebration: React.FC<FeatureUnlockCelebrationProps> = ({
   const [isVisible, setIsVisible] = useState(true);
   const [isAnimating, setIsAnimating] = useState(true);
 
+  const handleClose = useCallback(() => {
+    setIsVisible(false);
+    if (onClose) {
+      setTimeout(onClose, 300); // Wait for animation
+    }
+  }, [onClose]);
+
   useEffect(() => {
     // Trigger animation
     setTimeout(() => setIsAnimating(false), 100);
-    
+
     // Auto-hide after 8 seconds
     const timer = setTimeout(() => {
       handleClose();
     }, 8000);
 
     return () => clearTimeout(timer);
-  }, []);
-
-  const handleClose = () => {
-    setIsVisible(false);
-    if (onClose) {
-      setTimeout(onClose, 300); // Wait for animation
-    }
-  };
+  }, [handleClose]);
 
   if (!isVisible) {
     return null;

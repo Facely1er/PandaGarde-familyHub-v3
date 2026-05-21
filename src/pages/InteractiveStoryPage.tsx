@@ -371,7 +371,7 @@ const InteractiveStoryPage: React.FC = () => {
         const progress = JSON.parse(savedProgress);
         setCurrentSceneIndex(progress.sceneIndex || 0);
         setPoints(progress.points || 0);
-        setAchievements(progress.achievements || achievements);
+        setAchievements(Array.isArray(progress.achievements) ? progress.achievements : []);
       } catch (error) {
         logger.error('Error loading progress:', error);
       }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Shield, CheckCircle, AlertTriangle, Mail, X } from 'lucide-react';
 import { coppaComplianceManager, type ConsentVerificationResult } from '../lib/coppaCompliance';
@@ -13,17 +13,7 @@ const ParentalConsentPage: React.FC = () => {
   const [message, setMessage] = useState('');
   const [consentRecord, setConsentRecord] = useState<ConsentVerificationResult | null>(null);
 
-  useEffect(() => {
-    if (!token) {
-      setStatus('error');
-      setMessage('No consent token provided. Please use the link from the consent email.');
-      return;
-    }
-
-    verifyConsent();
-  }, [token]);
-
-  const verifyConsent = async () => {
+  const verifyConsent = useCallback(async () => {
     if (!token) {return;}
 
     try {
@@ -53,7 +43,17 @@ const ParentalConsentPage: React.FC = () => {
       setMessage('An error occurred while verifying consent. Please try again or contact support.');
       logger.error('Error verifying consent:', error);
     }
-  };
+  }, [token, navigate]);
+
+  useEffect(() => {
+    if (!token) {
+      setStatus('error');
+      setMessage('No consent token provided. Please use the link from the consent email.');
+      return;
+    }
+
+    verifyConsent();
+  }, [token, verifyConsent]);
 
   const handleRevokeConsent = async () => {
     if (!token) {return;}

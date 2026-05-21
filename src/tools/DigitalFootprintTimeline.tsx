@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Card from '../components/Card';
 
 interface FootprintEvent {
@@ -107,11 +107,7 @@ const DigitalFootprintTimeline: React.FC = () => {
   const [filterPlatform, setFilterPlatform] = useState<string>('all');
   const [dailySummary, setDailySummary] = useState<DailySummary | null>(null);
 
-  useEffect(() => {
-    calculateDailySummary();
-  }, [events, selectedDate]);
-
-  const calculateDailySummary = (): void => {
+  const calculateDailySummary = useCallback((): void => {
     const selectedDateEvents = events.filter(event => {
       const eventDate = new Date(event.timestamp).toISOString().split('T')[0];
       return eventDate === selectedDate;
@@ -138,7 +134,11 @@ const DigitalFootprintTimeline: React.FC = () => {
       dataTypesShared: dataTypes,
       privacyScore
     });
-  };
+  }, [events, selectedDate]);
+
+  useEffect(() => {
+    calculateDailySummary();
+  }, [calculateDailySummary]);
 
   const getRiskColor = (risk: string): string => {
     switch (risk) {
@@ -332,7 +332,7 @@ const DigitalFootprintTimeline: React.FC = () => {
                 <label className="block text-sm font-medium text-gray-700 mb-1">Risk Level</label>
                 <select
                   value={filterRisk}
-                  onChange={(e) => setFilterRisk(e.target.value as any)}
+                  onChange={(e) => setFilterRisk(e.target.value as typeof filterRisk)}
                   className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
                   <option value="all">All Risk Levels</option>

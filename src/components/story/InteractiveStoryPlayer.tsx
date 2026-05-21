@@ -426,7 +426,7 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
 
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [isLoading, currentScene, nextScene, prevScene, togglePlay, toggleMute, resetStory, showSettings]);
+  }, [isLoading, currentScene, nextScene, prevScene, togglePlay, toggleMute, resetStory, showSettings, handleChoice]);
 
   const progress = hasValidScenes ? ((currentSceneIndex + 1) / scenes.length) * 100 : 0;
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import ServiceCatalog from '../components/ServiceCatalog';
 import EmailCaptureInline from '../components/EmailCaptureInline';
@@ -23,13 +23,15 @@ const ServiceCatalogPage: React.FC = () => {
   const { getFamilyServices, addServiceToFamily, removeServiceFromFamily } = useFamily();
   const [servicesCount, setServicesCount] = useState(0);
   const [addingId, setAddingId] = useState<string | null>(null);
-  const updateCount = () => setServicesCount(getFamilyServices().length);
+  const updateCount = useCallback(() => {
+    setServicesCount(getFamilyServices().length);
+  }, [getFamilyServices]);
 
   useEffect(() => {
     updateCount();
     const interval = setInterval(updateCount, 1000);
     return () => clearInterval(interval);
-  }, [getFamilyServices]);
+  }, [updateCount]);
 
   useEffect(() => {
     updateDfaJourneyPhase('profile', {

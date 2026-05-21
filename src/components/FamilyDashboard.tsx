@@ -390,7 +390,9 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
       });
       setFamilyMembers(updatedMembers);
     }
-  }, [calculateMemberScore, getMemberProgress]); // Removed setFamilyMembers from deps to avoid infinite loop
+    // familyMembers intentionally omitted — effect syncs scores from progress hooks only
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [calculateMemberScore, getMemberProgress]);
 
   // Calculate family privacy score
   const calculateFamilyScore = () => {

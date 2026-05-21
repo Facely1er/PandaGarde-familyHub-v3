@@ -472,7 +472,16 @@ export class GamificationSystem {
     const currentLevel = userProgress.currentLevel;
     const levelInfo = this.getLevelInfo(currentLevel);
     if (!levelInfo) {
-      return LEVELS[0]!; // Fallback to level 1
+      return (
+        LEVELS[0] ?? {
+          level: 1,
+          title: 'Privacy Explorer',
+          xpRequired: 0,
+          xpToNext: 100,
+          description: 'Starting level',
+          rewards: [],
+        }
+      );
     }
 
     // Calculate XP to next level

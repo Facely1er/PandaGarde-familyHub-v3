@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { ArrowLeft, Scale, CheckCircle, XCircle } from 'lucide-react';
 import { useGameCompletion } from '../../utils/familyProgressIntegration';
 
@@ -6,14 +6,7 @@ interface DigitalRightsQuizProps {
   onBack: () => void;
 }
 
-const DigitalRightsQuiz: React.FC<DigitalRightsQuizProps> = ({ onBack }) => {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [answers, setAnswers] = useState<number[]>([]);
-  const [showResults, setShowResults] = useState(false);
-  const [progressRecorded, setProgressRecorded] = useState(false);
-  const { recordGameCompletion } = useGameCompletion();
-
-  const questions = [
+const QUIZ_QUESTIONS = [
     {
       question: "What is the right to be forgotten?",
       options: [
@@ -80,40 +73,47 @@ const DigitalRightsQuiz: React.FC<DigitalRightsQuizProps> = ({ onBack }) => {
       correct: 1,
       explanation: "You have the right not to be subject to automated decision-making and can request human review of decisions that significantly affect you."
     }
-  ];
+];
+
+const DigitalRightsQuiz: React.FC<DigitalRightsQuizProps> = ({ onBack }) => {
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [answers, setAnswers] = useState<number[]>([]);
+  const [showResults, setShowResults] = useState(false);
+  const [progressRecorded, setProgressRecorded] = useState(false);
+  const { recordGameCompletion } = useGameCompletion();
 
   const handleAnswer = (answerIndex: number) => {
     const newAnswers = [...answers, answerIndex];
     setAnswers(newAnswers);
 
-    if (currentQuestion < questions.length - 1) {
+    if (currentQuestion < QUIZ_QUESTIONS.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
       setShowResults(true);
     }
   };
 
-  const calculateScore = () => {
+  const calculateScore = useCallback(() => {
     return answers.reduce((score, answer, index) => {
-      return score + (answer === questions[index].correct ? 1 : 0);
+      return score + (answer === QUIZ_QUESTIONS[index].correct ? 1 : 0);
     }, 0);
-  };
+  }, [answers]);
 
   // Record progress when quiz completes
   useEffect(() => {
-    if (showResults && !progressRecorded && answers.length === questions.length) {
+    if (showResults && !progressRecorded && answers.length === QUIZ_QUESTIONS.length) {
       const score = calculateScore();
-      const percentage = Math.round((score / questions.length) * 100);
+      const percentage = Math.round((score / QUIZ_QUESTIONS.length) * 100);
       recordGameCompletion(
         'digital-rights',
         'Digital Rights Quiz',
         percentage,
         100,
-        { correctAnswers: score, totalQuestions: questions.length }
+        { correctAnswers: score, totalQuestions: QUIZ_QUESTIONS.length }
       );
       setProgressRecorded(true);
     }
-  }, [showResults, progressRecorded, answers.length, questions.length, recordGameCompletion]);
+  }, [showResults, progressRecorded, answers.length, recordGameCompletion, calculateScore]);
 
   const resetQuiz = () => {
     setCurrentQuestion(0);
@@ -124,7 +124,7 @@ const DigitalRightsQuiz: React.FC<DigitalRightsQuizProps> = ({ onBack }) => {
 
   if (showResults) {
     const score = calculateScore();
-    const percentage = Math.round((score / questions.length) * 100);
+    const percentage = Math.round((score / QUIZ_QUESTIONS.length) * 100);
 
     return (
       <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 p-6">
@@ -154,7 +154,7 @@ const DigitalRightsQuiz: React.FC<DigitalRightsQuizProps> = ({ onBack }) => {
                 {percentage}%
               </div>
               <p className="text-xl text-gray-700 dark:text-gray-300 mb-2">
-                You got {score} out of {questions.length} questions correct
+                You got {score} out of {QUIZ_QUESTIONS.length} QUIZ_QUESTIONS correct
               </p>
               <p className="text-gray-600 dark:text-gray-400">
                 {percentage >= 80 ? 'Excellent knowledge of digital rights!' : 
@@ -164,7 +164,7 @@ const DigitalRightsQuiz: React.FC<DigitalRightsQuizProps> = ({ onBack }) => {
 
             <div className="space-y-6 mb-8">
               <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100">Review Your Answers</h2>
-              {questions.map((question, index) => (
+              {QUIZ_QUESTIONS.map((question, index) => (
                 <div key={index} className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
                   <div className="flex items-start space-x-4">
                     <div className="flex-shrink-0">
@@ -215,7 +215,7 @@ const DigitalRightsQuiz: React.FC<DigitalRightsQuizProps> = ({ onBack }) => {
     );
   }
 
-  const question = questions[currentQuestion];
+  const question = QUIZ_QUESTIONS[currentQuestion];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 p-6">
@@ -241,16 +241,16 @@ const DigitalRightsQuiz: React.FC<DigitalRightsQuizProps> = ({ onBack }) => {
           <div className="mb-8">
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                Question {currentQuestion + 1} of {questions.length}
+                Question {currentQuestion + 1} of {QUIZ_QUESTIONS.length}
               </span>
               <span className="text-sm text-gray-500 dark:text-gray-400">
-                {Math.round(((currentQuestion + 1) / questions.length) * 100)}% Complete
+                {Math.round(((currentQuestion + 1) / QUIZ_QUESTIONS.length) * 100)}% Complete
               </span>
             </div>
             <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2">
               <div
                 className="bg-purple-500 h-2 rounded-full transition-all duration-300"
-                style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
+                style={{ width: `${((currentQuestion + 1) / QUIZ_QUESTIONS.length) * 100}%` }}
               />
             </div>
           </div>

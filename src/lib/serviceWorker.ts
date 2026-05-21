@@ -228,7 +228,12 @@ class ServiceWorkerManager {
         resolve(event.data);
       };
 
-      this.registration!.active!.postMessage(message, [messageChannel.port2]);
+      const activeWorker = this.registration?.active;
+      if (!activeWorker) {
+        reject(new Error('Service worker is not active'));
+        return;
+      }
+      activeWorker.postMessage(message, [messageChannel.port2]);
       
       // Timeout after 5 seconds
       setTimeout(() => {

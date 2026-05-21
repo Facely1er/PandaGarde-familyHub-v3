@@ -31,6 +31,14 @@ const Toast: React.FC<ToastProps> = ({
   const [isVisible, setIsVisible] = useState(false);
   const [isLeaving, setIsLeaving] = useState(false);
 
+  const handleClose = useCallback(() => {
+    setIsLeaving(true);
+    // Instant close if user prefers reduced motion
+    setTimeout(() => {
+      onClose(id);
+    }, prefersReducedMotion ? 0 : 300);
+  }, [onClose, id]);
+
   useEffect(() => {
     // Trigger entrance animation (instant if user prefers reduced motion)
     const timer = setTimeout(() => setIsVisible(true), prefersReducedMotion ? 0 : 10);
@@ -45,14 +53,6 @@ const Toast: React.FC<ToastProps> = ({
       return () => clearTimeout(timer);
     }
   }, [duration, handleClose]);
-
-  const handleClose = useCallback(() => {
-    setIsLeaving(true);
-    // Instant close if user prefers reduced motion
-    setTimeout(() => {
-      onClose(id);
-    }, prefersReducedMotion ? 0 : 300);
-  }, [onClose, id]);
 
   const getIcon = () => {
     switch (type) {

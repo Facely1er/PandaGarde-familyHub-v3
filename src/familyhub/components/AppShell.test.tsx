@@ -1,21 +1,24 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { ThemeProvider } from '../../contexts/ThemeContext';
 import AppShell from './AppShell';
 
 const renderShell = (initialEntry = '/family-hub/dashboard') =>
   render(
-    <MemoryRouter initialEntries={[initialEntry]}>
-      <Routes>
-        <Route path="/family-hub" element={<AppShell />}>
-          <Route path="dashboard" element={<div>Dashboard Page</div>} />
-          <Route path="kids" element={<div>Kids Page</div>} />
-          <Route path="activities" element={<div>Activities Page</div>} />
-          <Route path="progress" element={<div>Progress Page</div>} />
-          <Route path="settings" element={<div>Settings Page</div>} />
-        </Route>
-      </Routes>
-    </MemoryRouter>
+    <ThemeProvider>
+      <MemoryRouter initialEntries={[initialEntry]}>
+        <Routes>
+          <Route path="/family-hub" element={<AppShell />}>
+            <Route path="dashboard" element={<div>Dashboard Page</div>} />
+            <Route path="kids" element={<div>Kids Page</div>} />
+            <Route path="activities" element={<div>Activities Page</div>} />
+            <Route path="progress" element={<div>Progress Page</div>} />
+            <Route path="settings" element={<div>Settings Page</div>} />
+          </Route>
+        </Routes>
+      </MemoryRouter>
+    </ThemeProvider>
   );
 
 describe('AppShell navigation', () => {

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { coppaComplianceManager } from '../lib/coppaCompliance';
 import { logger } from '../lib/logger';
@@ -34,6 +34,18 @@ export const AgeVerificationProvider: React.FC<AgeVerificationProviderProps> = (
   const [userAge, setUserAge] = useState<number | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
+
+  const autoRouteToAppropriateContent = useCallback((age: number) => {
+    if (age >= 5 && age <= 8) {
+      navigate('/ages-5-8');
+    } else if (age >= 9 && age <= 12) {
+      navigate('/ages-9-12');
+    } else if (age >= 13 && age <= 17) {
+      navigate('/ages-13-17');
+    } else {
+      navigate('/get-started');
+    }
+  }, [navigate]);
 
   // Check for existing verification on mount
   useEffect(() => {
@@ -87,7 +99,7 @@ export const AgeVerificationProvider: React.FC<AgeVerificationProviderProps> = (
     };
     
     checkVerification();
-  }, [location.pathname]);
+  }, [location.pathname, autoRouteToAppropriateContent]);
 
   const verifyAge = async (age: number, parentEmail?: string): Promise<{ success: boolean; error?: string; consentToken?: string }> => {
     const under13 = age < 13;
@@ -172,19 +184,6 @@ export const AgeVerificationProvider: React.FC<AgeVerificationProviderProps> = (
   
   const isZeroDataMode = (): boolean => {
     return coppaComplianceManager.isZeroDataMode();
-  };
-
-  // Auto-route to age-appropriate content
-  const autoRouteToAppropriateContent = (age: number) => {
-    if (age >= 5 && age <= 8) {
-      navigate('/ages-5-8');
-    } else if (age >= 9 && age <= 12) {
-      navigate('/ages-9-12');
-    } else if (age >= 13 && age <= 17) {
-      navigate('/ages-13-17');
-    } else {
-      navigate('/get-started');
-    }
   };
 
   // Get age group category

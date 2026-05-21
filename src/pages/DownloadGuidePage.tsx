@@ -138,7 +138,7 @@ const DownloadGuidePage: React.FC<DownloadGuidePageProps> = ({
               {/* Action Buttons */}
               <div className="flex flex-wrap gap-4 justify-center mb-12">
                 <button
-                  onClick={() => handleDownload(resourceType!)}
+                  onClick={() => resourceType && handleDownload(resourceType)}
                   disabled={isDownloading}
                   className="bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white px-8 py-4 rounded-lg font-semibold transition-colors inline-flex items-center gap-2"
                 >
@@ -147,7 +147,7 @@ const DownloadGuidePage: React.FC<DownloadGuidePageProps> = ({
                 </button>
                 
                 <button
-                  onClick={() => handlePreview(resourceType!)}
+                  onClick={() => resourceType && handlePreview(resourceType)}
                   className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition-colors inline-flex items-center gap-2"
                 >
                   <Eye size={20} />
@@ -155,7 +155,7 @@ const DownloadGuidePage: React.FC<DownloadGuidePageProps> = ({
                 </button>
                 
                 <button
-                  onClick={() => handlePrint(resourceType!)}
+                  onClick={() => resourceType && handlePrint(resourceType)}
                   className="bg-gray-600 hover:bg-gray-700 text-white px-8 py-4 rounded-lg font-semibold transition-colors inline-flex items-center gap-2"
                 >
                   <Printer size={20} />

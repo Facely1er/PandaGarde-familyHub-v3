@@ -353,7 +353,8 @@ const ActivitiesScreen: React.FC = () => {
     setShowLearningCard(false);
   };
 
-  if (selectedActivityId && selectedActivity && !showLearningCard) {
+  if (selectedActivityId && selectedActivity?.activityManagerId && !showLearningCard) {
+    const activityManagerId = selectedActivity.activityManagerId;
     return (
       <div className="flex h-full flex-col bg-gray-50 dark:bg-gray-900">
         <div className="border-b border-gray-200 bg-white px-4 py-3 dark:border-gray-700 dark:bg-gray-800">
@@ -408,7 +409,7 @@ const ActivitiesScreen: React.FC = () => {
 
         <div className="flex-1 overflow-auto">
           <ActivityManager
-            activityId={selectedActivity.activityManagerId!}
+            activityId={activityManagerId}
             onClose={handleClose}
             onComplete={handleClose}
           />
