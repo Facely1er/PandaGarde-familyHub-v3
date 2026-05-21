@@ -82,20 +82,38 @@ npm run cap:ios
 
 ## Deploy hub.pandagarde.com (Netlify)
 
-Use a **second Netlify site** on the same repo (do not replace the main marketing site).
+**Production:** https://hub.pandagarde.com  
+**Netlify site:** `pandagarde-family-hub` (`09a33b67-21f2-4f27-bc38-1b732b9cf29e`)  
+**Admin:** https://app.netlify.com/projects/pandagarde-family-hub
 
-1. Netlify → **Add new site** → Import from Git → same repository.
-2. **Site configuration → Build & deploy → Build settings:**
-   - **Configuration file:** `netlify-familyhub.toml`
-   - Or manually: Build command `npm run build:familyhub`, Publish directory `dist-familyhub`
-3. **Environment variables:**
-   - `VITE_HUB_STANDALONE=true`
-   - `VITE_WEBSITE_URL=https://www.pandagarde.com`
-   - `NODE_VERSION=20` (or match `engines` in package.json)
-4. **Domain management:** Add custom domain `hub.pandagarde.com` (CNAME to Netlify).
-5. Deploy; verify `/`, `/dashboard`, `/activities` load and refresh correctly.
+### Manual deploy (CLI)
+
+```bash
+npm run deploy:netlify:familyhub
+```
+
+Uploads `dist-familyhub/` with `--no-build` (avoids running the full-site `netlify.toml` build).
+
+### Git-connected builds
+
+The site is configured to run:
+
+- **Build command:** `npm ci --ignore-scripts && npm run build:familyhub`
+- **Publish directory:** `dist-familyhub`
+- **Repo:** `Facely1er/PandaGarde-familyHub-v3` (branch `main`)
+
+Optional env in Netlify UI:
+
+- `VITE_HUB_STANDALONE=true`
+- `VITE_WEBSITE_URL=https://www.pandagarde.com`
 
 Config reference: [netlify-familyhub.toml](../netlify-familyhub.toml)
+
+### Attach domain (one-time script)
+
+```bash
+node scripts/netlify-add-hub-domain.mjs
+```
 
 ---
 

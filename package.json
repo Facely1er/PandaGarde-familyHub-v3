@@ -18,7 +18,7 @@
     "cap:ios": "npm run cap:sync && npx cap open ios",
     "assets:generate": "capacitor-assets generate --android",
     "assets:generate:all": "capacitor-assets generate",
-    "deploy:netlify:familyhub": "npm run build:familyhub && netlify deploy --prod --dir=dist-familyhub",
+    "deploy:netlify:familyhub": "npm run build:familyhub && netlify deploy --prod --dir=dist-familyhub --site 09a33b67-21f2-4f27-bc38-1b732b9cf29e --no-build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
