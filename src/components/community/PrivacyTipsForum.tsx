@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { createFocusTrap } from '../../utils/accessibility';
 import { Link } from 'react-router-dom';
 import { MessageCircle, Plus, Search, ArrowRight, Heart, CheckCircle, User, Users, Shield, Lock, GraduationCap, Briefcase, UserCircle, X, ArrowLeft } from 'lucide-react';
 import { communityStorage, ForumTopic, ForumPost, ForumUser } from '../../utils/communityStorageManager';
@@ -405,19 +406,21 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
               <input
-                type="text"
+                type="search"
+                id="forum-topic-search"
                 placeholder="Search topics..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100"
+                aria-label="Search forum topics"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
               />
             </div>
             <select
+              id="forum-topic-category-filter"
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-              style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}
+              aria-label="Filter topics by category"
+              className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
             >
               {categories.map(cat => (
                 <option key={cat.value} value={cat.value}>{cat.label}</option>
@@ -455,8 +458,7 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
                 <div
                   key={topic.id}
                   onClick={() => setSelectedTopic(topic)}
-                  className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all cursor-pointer"
-                  className="bg-white dark:bg-gray-800"
+                  className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md hover:shadow-lg transition-all cursor-pointer"
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
@@ -618,8 +620,7 @@ const TopicDetailView: React.FC<TopicDetailViewProps> = ({
             return (
               <div
                 key={post.id}
-                className="bg-white rounded-lg p-6 shadow-md"
-                className="bg-white dark:bg-gray-800"
+                className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md"
               >
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center text-white flex-shrink-0">
@@ -664,12 +665,15 @@ const TopicDetailView: React.FC<TopicDetailViewProps> = ({
         {showPostForm ? (
           <div className="bg-white rounded-lg p-6 shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
             <form onSubmit={handleSubmitPost}>
+              <label htmlFor="forum-post-reply" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+                Your reply
+              </label>
               <textarea
+                id="forum-post-reply"
                 value={postContent}
                 onChange={(e) => setPostContent(e.target.value)}
                 rows={6}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 mb-4"
-                className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 mb-4"
                 placeholder="Write your reply..."
               />
               <div className="flex gap-3">
@@ -734,14 +738,11 @@ const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({ onSubmit, o
     { id: 'usercircle', icon: UserCircle, label: 'User Circle' }
   ];
 
-  // Close on Escape key
+  const modalRef = useRef<HTMLDivElement>(null);
+
   React.useEffect(() => {
-    if (!required) {return;}
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {onCancel();}
-    };
-    document.addEventListener('keydown', handleKey);
-    return () => document.removeEventListener('keydown', handleKey);
+    if (!required || !modalRef.current) {return;}
+    return createFocusTrap(modalRef.current, { onEscape: onCancel });
   }, [required, onCancel]);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -775,8 +776,8 @@ const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({ onSubmit, o
           />
         )}
         <div
-          className={`relative bg-white rounded-lg shadow-xl ${required ? 'max-w-md w-full' : 'w-full'} p-6`}
-          className="bg-white dark:bg-gray-800"
+          ref={required ? modalRef : undefined}
+          className={`relative bg-white dark:bg-gray-800 rounded-lg shadow-xl ${required ? 'max-w-md w-full' : 'w-full'} p-6`}
           role={required ? 'dialog' : undefined}
           aria-modal={required ? 'true' : undefined}
           aria-labelledby="user-reg-title"
@@ -800,39 +801,39 @@ const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({ onSubmit, o
           </div>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-700">
+              <label htmlFor="forum-username" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                 Username (Pseudonym) *
               </label>
               <input
+                id="forum-username"
                 type="text"
                 value={username}
                 onChange={(e) => {
                   setUsername(e.target.value);
                   setError('');
                 }}
-                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 ${error ? 'border-red-500' : 'border-gray-300'}`}
-                className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100"
+                className={`w-full px-3 py-2 border rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 ${error ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'}`}
                 placeholder="Choose a pseudonym"
               />
               {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-700">
+              <label htmlFor="forum-display-name" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                 Display Name (Optional)
               </label>
               <input
+                id="forum-display-name"
                 type="text"
                 value={displayName}
                 onChange={(e) => setDisplayName(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
                 placeholder="Optional display name"
               />
             </div>
-            <div>
-              <label className="block text-sm font-medium mb-2 text-gray-700">
+            <fieldset>
+              <legend className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                 Avatar
-              </label>
+              </legend>
               <div className="flex gap-2 flex-wrap">
                 {avatars.map(av => {
                   const IconComponent = av.icon;
@@ -841,15 +842,16 @@ const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({ onSubmit, o
                     key={av.id}
                     type="button"
                     onClick={() => setAvatar(av.id)}
-                    className={`w-12 h-12 rounded-full border-2 flex items-center justify-center transition-all ${avatar === av.id ? 'border-green-600 bg-green-50' : 'border-gray-300 hover:border-gray-400'}`}
-                    title={av.label}
+                    className={`w-12 h-12 rounded-full border-2 flex items-center justify-center transition-all ${avatar === av.id ? 'border-green-600 bg-green-50 dark:bg-green-950' : 'border-gray-300 dark:border-gray-600 hover:border-gray-400'}`}
+                    aria-label={`Select ${av.label} avatar`}
+                    aria-pressed={avatar === av.id}
                   >
                     <IconComponent size={24} className={avatar === av.id ? 'text-green-600' : 'text-gray-600'} />
                   </button>
                 );
                 })}
               </div>
-            </div>
+            </fieldset>
             <div className="flex gap-3 pt-4">
               <button
                 type="submit"
@@ -885,13 +887,11 @@ const TopicCreationForm: React.FC<TopicCreationFormProps> = ({ onSubmit, onCance
   const [category, setCategory] = useState<ForumTopic['category']>('general-questions');
   const [description, setDescription] = useState('');
 
-  // Close on Escape key
+  const modalRef = useRef<HTMLDivElement>(null);
+
   React.useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {onCancel();}
-    };
-    document.addEventListener('keydown', handleKey);
-    return () => document.removeEventListener('keydown', handleKey);
+    if (!modalRef.current) {return;}
+    return createFocusTrap(modalRef.current, { onEscape: onCancel });
   }, [onCancel]);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -912,8 +912,8 @@ const TopicCreationForm: React.FC<TopicCreationFormProps> = ({ onSubmit, onCance
       <div className="flex min-h-screen items-center justify-center p-4">
         <div className="fixed inset-0 bg-black bg-opacity-50" onClick={onCancel} aria-hidden="true" />
         <div
-          className="relative bg-white rounded-lg shadow-xl max-w-2xl w-full p-6"
-          className="bg-white dark:bg-gray-800"
+          ref={modalRef}
+          className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full p-6"
           role="dialog"
           aria-modal="true"
           aria-labelledby="topic-create-title"
@@ -930,27 +930,27 @@ const TopicCreationForm: React.FC<TopicCreationFormProps> = ({ onSubmit, onCance
           </h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-700">
+              <label htmlFor="forum-topic-title" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                 Topic Title *
               </label>
               <input
+                id="forum-topic-title"
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
                 placeholder="What's your topic about?"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-700">
+              <label htmlFor="forum-topic-category" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                 Category *
               </label>
               <select
+                id="forum-topic-category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value as ForumTopic['category'])}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
               >
                 <option value="privacy-tips">Privacy Tips</option>
                 <option value="conversation-starters">Conversation Starters</option>
@@ -963,15 +963,15 @@ const TopicCreationForm: React.FC<TopicCreationFormProps> = ({ onSubmit, onCance
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-700">
+              <label htmlFor="forum-topic-description" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                 Description (Optional)
               </label>
               <textarea
+                id="forum-topic-description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 rows={4}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
                 placeholder="Add more details about your topic..."
               />
             </div>

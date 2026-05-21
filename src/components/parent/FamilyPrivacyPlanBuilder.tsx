@@ -303,13 +303,16 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
         </div>
 
         {showAddRule && (
-          <div className="mb-4 p-4 border border-gray-300 rounded-lg bg-light">
+          <div className="mb-4 p-4 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-900/50">
+            <label htmlFor="new-sharing-rule" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+              New sharing rule
+            </label>
             <textarea
+              id="new-sharing-rule"
               value={newRule}
               onChange={(e) => setNewRule(e.target.value)}
               placeholder="Enter a new sharing rule..."
-              className="w-full px-3 py-2 border border-gray-300 rounded-md mb-3 focus:outline-none focus:ring-2 focus:ring-green-500"
-              style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md mb-3 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
               rows={2}
             />
             <div className="flex items-center gap-4 mb-3">
@@ -441,14 +444,14 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
         </h3>
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-2 text-gray-700">
+            <label htmlFor="privacy-day-frequency" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
               Frequency
             </label>
             <select
+              id="privacy-day-frequency"
               value={plan.privacyDaySchedule.frequency}
               onChange={(e) => handleFrequencyChange(e.target.value as 'quarterly' | 'monthly' | 'custom')}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-              style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
             >
               <option value="quarterly">Every 3 months (Quarterly)</option>
               <option value="monthly">Every month</option>
@@ -458,10 +461,11 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
 
           {plan.privacyDaySchedule.frequency !== 'custom' && plan.privacyDaySchedule.nextDate && (
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-700">
+              <label htmlFor="privacy-day-next-date" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                 Next Privacy Day
               </label>
               <input
+                id="privacy-day-next-date"
                 type="date"
                 value={plan.privacyDaySchedule.nextDate.toISOString().split('T')[0]}
                 onChange={(e) => {
@@ -473,15 +477,15 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
                     }
                   });
                 }}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
               />
             </div>
           )}
 
           <div className="flex items-center gap-4">
-            <label className="flex items-center gap-2">
+            <label htmlFor="privacy-day-reminders" className="flex items-center gap-2">
               <input
+                id="privacy-day-reminders"
                 type="checkbox"
                 checked={plan.privacyDaySchedule.reminders}
                 onChange={(e) => {
@@ -501,14 +505,16 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
             </label>
             {plan.privacyDaySchedule.reminders && (
               <div className="flex items-center gap-2">
-                <label className="text-sm text-gray-700">
+                <label htmlFor="privacy-day-reminder-days" className="text-sm text-gray-700 dark:text-gray-300">
                   Remind me
                 </label>
                 <input
+                  id="privacy-day-reminder-days"
                   type="number"
                   min="1"
                   max="30"
                   value={plan.privacyDaySchedule.reminderDaysBefore}
+                  aria-label="Days before privacy day to send reminder"
                   onChange={(e) => {
                     setPlan({
                       ...plan,
@@ -518,8 +524,7 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
                       }
                     });
                   }}
-                  className="w-16 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                  style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}
+                  className="w-16 px-2 py-1 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
                 />
                 <span className="text-sm text-gray-700">
                   days before

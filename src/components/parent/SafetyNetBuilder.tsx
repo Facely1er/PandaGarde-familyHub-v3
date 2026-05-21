@@ -52,8 +52,8 @@ function guideCardClass(guide: TechGuide): string {
 }
 
 function guideIconClass(guide: TechGuide): string {
-  if (guide.isPrimary) return 'text-green-600 dark:text-green-400';
-  if (guide.isBackup) return 'text-amber-600 dark:text-amber-400';
+  if (guide.isPrimary) {return 'text-green-600 dark:text-green-400';}
+  if (guide.isBackup) {return 'text-amber-600 dark:text-amber-400';}
   return 'text-gray-500 dark:text-gray-400';
 }
 
@@ -91,7 +91,7 @@ const SafetyNetBuilder: React.FC = () => {
   });
 
   const addTechGuide = () => {
-    if (!newTechGuide.name || (!newTechGuide.phone && !newTechGuide.email)) return;
+    if (!newTechGuide.name || (!newTechGuide.phone && !newTechGuide.email)) {return;}
 
     const guide: TechGuide = {
       id: `guide-${Date.now()}`,
@@ -111,7 +111,7 @@ const SafetyNetBuilder: React.FC = () => {
   };
 
   const addPointOfContact = () => {
-    if (!newContact.issueType || !newContact.contactName) return;
+    if (!newContact.issueType || !newContact.contactName) {return;}
 
     const contact: PointOfContact = {
       id: `contact-${Date.now()}`,

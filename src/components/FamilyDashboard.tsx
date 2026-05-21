@@ -1034,8 +1034,9 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
               )}
               
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-700">Name</label>
+                <label htmlFor="add-member-name" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Name</label>
                 <input
+                  id="add-member-name"
                   type="text"
                   value={newMember.name}
                   onChange={(e) => setNewMember({...newMember, name: e.target.value})}
@@ -1047,8 +1048,9 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
               </div>
               
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-700">Age</label>
+                <label htmlFor="add-member-age" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Age</label>
                 <input
+                  id="add-member-age"
                   type="number"
                   value={newMember.age || ''}
                   onChange={(e) => setNewMember({...newMember, age: parseInt(e.target.value, 10) || 0})}
@@ -1061,8 +1063,9 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
               </div>
               
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-700">Role</label>
+                <label htmlFor="add-member-role" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Role</label>
                 <select
+                  id="add-member-role"
                   value={newMember.role}
                   onChange={(e) => setNewMember({...newMember, role: e.target.value})}
                   className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-teal-600 focus:border-transparent"
@@ -1113,8 +1116,9 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
             
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-700">Goal Title</label>
+                <label htmlFor="add-goal-title" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Goal Title</label>
                 <input
+                  id="add-goal-title"
                   type="text"
                   value={newGoal.title}
                   onChange={(e) => setNewGoal({...newGoal, title: e.target.value})}
@@ -1125,8 +1129,9 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
               </div>
               
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-700">Description</label>
+                <label htmlFor="add-goal-description" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Description</label>
                 <textarea
+                  id="add-goal-description"
                   value={newGoal.description}
                   onChange={(e) => setNewGoal({...newGoal, description: e.target.value})}
                   className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-teal-600 focus:border-transparent"
@@ -1136,8 +1141,9 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
               </div>
               
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-700">Target Date (Optional)</label>
+                <label htmlFor="add-goal-target-date" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Target Date (Optional)</label>
                 <input
+                  id="add-goal-target-date"
                   type="date"
                   value={newGoal.targetDate}
                   onChange={(e) => setNewGoal({...newGoal, targetDate: e.target.value})}
@@ -1146,8 +1152,9 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
               </div>
               
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-700">Priority</label>
+                <label htmlFor="add-goal-priority" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Priority</label>
                 <select
+                  id="add-goal-priority"
                   value={newGoal.priority}
                   onChange={(e) => setNewGoal({...newGoal, priority: e.target.value})}
                   className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-teal-600 focus:border-transparent"

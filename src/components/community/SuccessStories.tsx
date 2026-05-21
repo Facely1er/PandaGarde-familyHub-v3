@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Heart, MessageCircle, Plus, Search, Clock, Tag } from 'lucide-react';
 import { communityStorage, SuccessStory } from '../../utils/communityStorageManager';
+import { createFocusTrap } from '../../utils/accessibility';
 
 interface SuccessStoriesProps {
   compact?: boolean;
@@ -194,29 +195,32 @@ const SuccessStories: React.FC<SuccessStoriesProps> = ({ compact = false }) => {
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
               <input
-                type="text"
+                type="search"
+                id="stories-search"
                 placeholder="Search stories..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}
+                aria-label="Search success stories"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
               />
             </div>
             <select
+              id="stories-category-filter"
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-              style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}
+              aria-label="Filter stories by category"
+              className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
             >
               {categories.map(cat => (
                 <option key={cat.value} value={cat.value}>{cat.label}</option>
               ))}
             </select>
             <select
+              id="stories-sort"
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as 'recent' | 'popular')}
-              className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-              style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}
+              aria-label="Sort success stories"
+              className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
             >
               <option value="recent">Most Recent</option>
               <option value="popular">Most Popular</option>
@@ -340,13 +344,11 @@ const StorySubmissionForm: React.FC<StorySubmissionFormProps> = ({ onSubmit, onC
   const [tags, setTags] = useState('');
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  // Close on Escape key
+  const modalRef = useRef<HTMLDivElement>(null);
+
   React.useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {onCancel();}
-    };
-    document.addEventListener('keydown', handleKey);
-    return () => document.removeEventListener('keydown', handleKey);
+    if (!modalRef.current) {return;}
+    return createFocusTrap(modalRef.current, { onEscape: onCancel });
   }, [onCancel]);
 
   const validate = () => {
@@ -383,8 +385,8 @@ const StorySubmissionForm: React.FC<StorySubmissionFormProps> = ({ onSubmit, onC
       <div className="flex min-h-screen items-center justify-center p-4">
         <div className="fixed inset-0 bg-black bg-opacity-50" onClick={onCancel} aria-hidden="true" />
         <div
-          className="relative bg-white rounded-lg shadow-xl max-w-2xl w-full p-6"
-          style={{ backgroundColor: 'var(--card-color)' }}
+          ref={modalRef}
+          className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full p-6"
           role="dialog"
           aria-modal="true"
           aria-labelledby="story-submit-title"
@@ -408,10 +410,11 @@ const StorySubmissionForm: React.FC<StorySubmissionFormProps> = ({ onSubmit, onC
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-700">
+              <label htmlFor="story-title" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                 Title *
               </label>
               <input
+                id="story-title"
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
@@ -425,10 +428,11 @@ const StorySubmissionForm: React.FC<StorySubmissionFormProps> = ({ onSubmit, onC
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-700">
+              <label htmlFor="story-category" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                 Category *
               </label>
               <select
+                id="story-category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value as SuccessStory['category'])}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -446,10 +450,11 @@ const StorySubmissionForm: React.FC<StorySubmissionFormProps> = ({ onSubmit, onC
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-700">
+              <label htmlFor="story-body" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                 Your Story *
               </label>
               <textarea
+                id="story-body"
                 value={story}
                 onChange={(e) => setStory(e.target.value)}
                 maxLength={2000}
@@ -463,10 +468,11 @@ const StorySubmissionForm: React.FC<StorySubmissionFormProps> = ({ onSubmit, onC
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-700">
+              <label htmlFor="story-tags" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                 Tags (optional, comma-separated)
               </label>
               <input
+                id="story-tags"
                 type="text"
                 value={tags}
                 onChange={(e) => setTags(e.target.value)}

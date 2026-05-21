@@ -564,20 +564,23 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
             </div>
           </div>
           <div className="setting-group">
-            <label>Reading Speed</label>
+            <label htmlFor="story-reading-speed">Reading Speed</label>
             <input
+              id="story-reading-speed"
               type="range"
               min="0.5"
               max="2"
               step="0.1"
               value={readingSpeed}
               onChange={(e) => setReadingSpeed(parseFloat(e.target.value))}
+              aria-valuetext={`${readingSpeed}x`}
             />
             <span>{readingSpeed}x</span>
           </div>
           <div className="setting-group">
-            <label>
+            <label htmlFor="story-auto-advance" className="flex items-center gap-2">
               <input
+                id="story-auto-advance"
                 type="checkbox"
                 checked={autoAdvance}
                 onChange={(e) => setAutoAdvance(e.target.checked)}
@@ -586,32 +589,37 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
             </label>
           </div>
           <div className="setting-group">
-            <label>Speech Rate</label>
+            <label htmlFor="story-speech-rate">Speech Rate</label>
             <input
+              id="story-speech-rate"
               type="range"
               min="0.5"
               max="2"
               step="0.1"
               value={speechRate}
               onChange={(e) => setSpeechRate(parseFloat(e.target.value))}
+              aria-valuetext={`${speechRate}x`}
             />
             <span>{speechRate}x</span>
           </div>
           <div className="setting-group">
-            <label>Speech Pitch</label>
+            <label htmlFor="story-speech-pitch">Speech Pitch</label>
             <input
+              id="story-speech-pitch"
               type="range"
               min="0.5"
               max="2"
               step="0.1"
               value={speechPitch}
               onChange={(e) => setSpeechPitch(parseFloat(e.target.value))}
+              aria-valuetext={`${speechPitch}x`}
             />
             <span>{speechPitch}x</span>
           </div>
           <div className="setting-group">
-            <label>Voice Selection</label>
+            <label htmlFor="story-voice-select">Voice Selection</label>
             <select
+              id="story-voice-select"
               value={speechVoice?.name || ''}
               onChange={(e) => {
                 const selectedVoice = availableVoices.find(v => v.name === e.target.value);

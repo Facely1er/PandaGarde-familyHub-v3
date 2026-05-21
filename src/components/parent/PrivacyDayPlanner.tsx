@@ -35,7 +35,7 @@ const PrivacyDayPlanner: React.FC = () => {
   const [showAddEvent, setShowAddEvent] = useState(false);
 
   const addPrivacyDay = () => {
-    if (!selectedDate) return;
+    if (!selectedDate) {return;}
 
     const newEvent: PrivacyDayEvent = {
       id: `event-${Date.now()}`,
@@ -78,8 +78,8 @@ const PrivacyDayPlanner: React.FC = () => {
   const isUpcoming = (dateString: string): boolean => new Date(dateString) >= new Date();
 
   const eventBorderClass = (event: PrivacyDayEvent) => {
-    if (event.completed) return 'border-green-500 dark:border-green-600';
-    if (isUpcoming(event.date)) return 'border-blue-500 dark:border-blue-500';
+    if (event.completed) {return 'border-green-500 dark:border-green-600';}
+    if (isUpcoming(event.date)) {return 'border-blue-500 dark:border-blue-500';}
     return 'border-gray-400 dark:border-gray-600';
   };
 

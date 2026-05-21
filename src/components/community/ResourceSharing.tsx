@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { BookOpen, ExternalLink, Plus, Search, Star, TrendingUp, Save, CheckCircle, Tag, Eye } from 'lucide-react';
 import { communityStorage, SharedResource } from '../../utils/communityStorageManager';
+import { createFocusTrap } from '../../utils/accessibility';
 
 interface ResourceSharingProps {
   compact?: boolean;
@@ -209,29 +210,32 @@ const ResourceSharing: React.FC<ResourceSharingProps> = ({ compact = false }) =>
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
               <input
-                type="text"
+                type="search"
+                id="resource-search"
                 placeholder="Search resources..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}
+                aria-label="Search shared resources"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
               />
             </div>
             <select
+              id="resource-category-filter"
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-              style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}
+              aria-label="Filter resources by category"
+              className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
             >
               {categories.map(cat => (
                 <option key={cat.value} value={cat.value}>{cat.label}</option>
               ))}
             </select>
             <select
+              id="resource-sort"
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as 'recent' | 'popular' | 'verified')}
-              className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-              style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}
+              aria-label="Sort resources"
+              className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
             >
               <option value="popular">Most Popular</option>
               <option value="verified">Verified First</option>
@@ -392,13 +396,11 @@ const ResourceSubmissionForm: React.FC<ResourceSubmissionFormProps> = ({ onSubmi
   const [tags, setTags] = useState('');
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  // Close on Escape key
+  const modalRef = useRef<HTMLDivElement>(null);
+
   React.useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {onCancel();}
-    };
-    document.addEventListener('keydown', handleKey);
-    return () => document.removeEventListener('keydown', handleKey);
+    if (!modalRef.current) {return;}
+    return createFocusTrap(modalRef.current, { onEscape: onCancel });
   }, [onCancel]);
 
   const validate = () => {
@@ -441,8 +443,8 @@ const ResourceSubmissionForm: React.FC<ResourceSubmissionFormProps> = ({ onSubmi
       <div className="flex min-h-screen items-center justify-center p-4">
         <div className="fixed inset-0 bg-black bg-opacity-50" onClick={onCancel} aria-hidden="true" />
         <div
-          className="relative bg-white rounded-lg shadow-xl max-w-2xl w-full p-6"
-          style={{ backgroundColor: 'var(--card-color)' }}
+          ref={modalRef}
+          className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full p-6"
           role="dialog"
           aria-modal="true"
           aria-labelledby="resource-submit-title"
@@ -466,10 +468,11 @@ const ResourceSubmissionForm: React.FC<ResourceSubmissionFormProps> = ({ onSubmi
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-700">
+              <label htmlFor="resource-title" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                 Resource Title *
               </label>
               <input
+                id="resource-title"
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
@@ -482,10 +485,11 @@ const ResourceSubmissionForm: React.FC<ResourceSubmissionFormProps> = ({ onSubmi
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-700">
+              <label htmlFor="resource-url" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                 URL *
               </label>
               <input
+                id="resource-url"
                 type="url"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
@@ -497,10 +501,11 @@ const ResourceSubmissionForm: React.FC<ResourceSubmissionFormProps> = ({ onSubmi
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-700">
+              <label htmlFor="resource-category" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                 Category *
               </label>
               <select
+                id="resource-category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value as SharedResource['category'])}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -518,10 +523,11 @@ const ResourceSubmissionForm: React.FC<ResourceSubmissionFormProps> = ({ onSubmi
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-700">
+              <label htmlFor="resource-description" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                 Description *
               </label>
               <textarea
+                id="resource-description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 maxLength={500}
@@ -535,10 +541,11 @@ const ResourceSubmissionForm: React.FC<ResourceSubmissionFormProps> = ({ onSubmi
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-700">
+              <label htmlFor="resource-tags" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                 Tags (optional, comma-separated)
               </label>
               <input
+                id="resource-tags"
                 type="text"
                 value={tags}
                 onChange={(e) => setTags(e.target.value)}
