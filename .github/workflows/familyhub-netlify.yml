@@ -1,0 +1,36 @@
+# Optional CI: build hub-only bundle (attach dist-familyhub as artifact or wire to Netlify deploy hook)
+name: Family Hub build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+    paths:
+      - 'src/familyhub/**'
+      - 'src/pages/family-hub/**'
+      - 'src/FamilyHubStandaloneApp.tsx'
+      - 'src/familyhub-main.tsx'
+      - 'familyhub.html'
+      - 'vite.familyhub.config.ts'
+      - 'netlify-familyhub.toml'
+      - 'public/familyhub-manifest.json'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm run build:familyhub
+        env:
+          VITE_HUB_STANDALONE: 'true'
+          VITE_WEBSITE_URL: 'https://www.pandagarde.com'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist-familyhub
+          path: dist-familyhub/
+          retention-days: 7

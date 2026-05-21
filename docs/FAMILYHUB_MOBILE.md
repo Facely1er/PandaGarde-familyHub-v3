@@ -78,9 +78,31 @@ VITE_WEBSITE_URL=https://www.pandagarde.com
 
 The header “Site” link opens this URL in the system browser when running standalone.
 
-## Deploy hub-only web (optional)
+## Icons & splash (native)
 
-Host `dist-familyhub/` on e.g. `hub.pandagarde.com` with SPA fallback to `index.html` (same as Netlify `/* → /index.html`).
+Source files live in `assets/` (see [assets/README.md](../assets/README.md)).
+
+```bash
+npm run assets:generate   # writes Android res/; add --ios after cap add ios
+npm run cap:sync
+```
+
+## Deploy hub.pandagarde.com
+
+**Netlify (recommended):** second site using [netlify-familyhub.toml](../netlify-familyhub.toml) — full steps in [FAMILYHUB_STORE_RELEASE.md](./FAMILYHUB_STORE_RELEASE.md).
+
+```bash
+npm run deploy:netlify:familyhub   # requires netlify CLI + linked site
+```
+
+**Vercel:** new project with [vercel-familyhub.json](../vercel-familyhub.json), output `dist-familyhub`.
+
+Env for both hosts:
+
+```env
+VITE_HUB_STANDALONE=true
+VITE_WEBSITE_URL=https://www.pandagarde.com
+```
 
 ## Architecture
 
@@ -89,3 +111,7 @@ Host `dist-familyhub/` on e.g. `hub.pandagarde.com` with SPA fallback to `index.
 - **Paths:** `src/familyhub/hubPaths.ts` switches `/family-hub/*` vs `/` based on `VITE_HUB_STANDALONE`
 
 The main site build is unchanged; marketing + DFA remain on `npm run build`.
+
+## Store release
+
+See [FAMILYHUB_STORE_RELEASE.md](./FAMILYHUB_STORE_RELEASE.md) for bundle IDs, Play/App Store checklist, and reviewer notes.
