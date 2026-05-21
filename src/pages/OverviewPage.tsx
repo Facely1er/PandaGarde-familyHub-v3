@@ -76,7 +76,7 @@ const OverviewPage: React.FC = () => {
         'Device and app management',
         'Monitoring and guidance strategies',
         'Privacy education resources',
-        'Community support and networking'
+        'Guided missions and household routines'
       ]
     }
   ];
@@ -84,8 +84,8 @@ const OverviewPage: React.FC = () => {
   const customerJourney = [
     {
       step: 1,
-      title: 'Join PandaGarde Platform',
-      description: 'Create your family profile and access the complete privacy education ecosystem',
+      title: 'Open Family Hub',
+      description: 'Set up family members on your device and open the local-first mission workspace—no server account required',
       icon: Users,
       link: '/family-hub',
       platform: 'PandaGarde'
@@ -125,15 +125,15 @@ const OverviewPage: React.FC = () => {
       title: 'Family Hub',
       icon: Users,
       gradient: 'from-purple-500 to-pink-500',
-      description: 'Connect with other families and access exclusive resources for digital safety education.',
+      description: 'A local-first workspace for age-matched privacy missions, family progress, and follow-through after your digital footprint review.',
       features: [
-        'Community support and networking',
-        'Exclusive educational resources',
-        'Parent guidance and tips',
-        'Progress tracking and achievements',
-        'Family challenges and activities'
+        '18 age-matched privacy missions (ages 5–17)',
+        'Real-life scenarios and family conversation prompts',
+        'Progress, streaks, and certificates on your device',
+        'Parent-guided practice—no child social network',
+        'Works standalone or after the website assessment'
       ],
-      ctaText: 'Join Family Hub',
+      ctaText: 'Open Family Hub',
       ctaLink: '/family-hub'
     },
     {
@@ -173,7 +173,7 @@ const OverviewPage: React.FC = () => {
   return (
     <PageLayout
       title="Overview"
-      subtitle="Everything your family needs for digital privacy. Our comprehensive platform provides age-appropriate education, interactive tools, and community support to help families navigate the digital world safely and confidently."
+      subtitle="Everything your family needs for digital privacy. Our platform provides age-appropriate education, interactive tools, and a local-first Family Hub workspace so families can practice and follow through together."
     >
 
       {/* Customer Journey */}
@@ -366,7 +366,7 @@ const OverviewPage: React.FC = () => {
             <div className="cta-buttons">
               <Link to="/family-hub" className="button primary">
                 <Users size={20} />
-                Join Family Hub
+                Open Family Hub
               </Link>
               <Link to="/privacy-panda" className="button secondary" style={{ background: 'rgba(255,255,255,0.2)', color: 'white', border: '2px solid white' }}>
                 <Shield size={20} />

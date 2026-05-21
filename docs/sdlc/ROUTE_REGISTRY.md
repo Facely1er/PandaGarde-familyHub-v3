@@ -36,7 +36,7 @@ Update this registry when adding, removing, or changing routes. Placeholder rout
 | `/story-classic` | `StoryPage` | Classic story mode | Active |
 | `/activity-book` | `ActivityBookPage` | Activity book experience | Active |
 | `/get-started` | `GetStartedPage` | Onboarding entry | Active |
-| `/family-hub/*` | `FamilyHubWrapper` | Authenticated hub | Active |
+| `/family-hub/*` | `FamilyHubWrapper` | Local guardian gate + mission hub | Active |
 
 ### Digital footprint & assessment
 

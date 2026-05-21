@@ -257,8 +257,8 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
           What is the Privacy Tips Forum?
         </h2>
         <p className="text-base text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-          A community-driven space where parents, educators, and families come together to share knowledge,
-          ask questions, and support each other in teaching children about digital privacy and online safety.
+          A device-local demo forum: pseudonymous posts are stored in your browser only. Use it to practice
+          discussion prompts—not as a live social network or part of Family Hub.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">

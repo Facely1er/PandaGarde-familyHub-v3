@@ -102,9 +102,9 @@ const SupportPage: React.FC = () => {
       availability: '24/7'
     },
     {
-      id: 'community',
-      title: 'Family Hub Community',
-      description: 'Connect with other families and share experiences through our Family Hub.',
+      id: 'family-hub',
+      title: 'Family Hub workspace',
+      description: 'Open the on-device mission workspace for family members, missions, and progress.',
       icon: Users,
       responseTime: 'Variable',
       availability: '24/7'
@@ -161,7 +161,7 @@ const SupportPage: React.FC = () => {
                     navigate('/contact');
                   } else if (option.id === 'email') {
                     window.open('mailto:support@pandagarde.com', '_blank');
-                  } else if (option.id === 'community') {
+                  } else if (option.id === 'family-hub') {
                     navigate('/family-hub');
                   }
                 }}

@@ -7,7 +7,7 @@ const PrivacyTipsForumPage: React.FC = () => {
     <CommunityErrorBoundary>
       <PageLayout
         title="Privacy Tips Forum"
-        subtitle="Share tips, ask questions, and learn from other parents in our privacy-first community forum."
+        subtitle="Device-local demo forum: pseudonymous posts stay on your browser. Not connected to Family Hub or a live social network."
         breadcrumbs={true}
       >
         <PrivacyTipsForum />

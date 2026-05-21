@@ -29,10 +29,10 @@ const AppFeaturesPage: React.FC = () => {
     },
     {
       icon: <Gamepad2 className="w-8 h-8" />,
-      title: 'Interactive Activities',
-      description: 'Engage children with 8 different privacy education activities including coloring, mazes, word searches, quizzes, and memory games.',
+      title: 'Privacy missions',
+      description: '18 age-matched family missions with real-life scenarios, guided conversation, and one practical action per mission.',
       highlights: [
-        '8 unique activity types',
+        '18 missions for ages 5–17',
         'Age-appropriate content',
         'Touch-optimized controls',
         'Offline play support'
@@ -210,8 +210,7 @@ const AppFeaturesPage: React.FC = () => {
                 Interactive Activities
               </h2>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Eight engaging activities designed to teach digital privacy concepts
-                through interactive gameplay.
+                Missions use interactive formats—games, sorting, mazes, quizzes, and family talk steps—inside each real-world scenario.
               </p>
             </div>
 

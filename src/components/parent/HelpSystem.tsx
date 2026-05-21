@@ -15,20 +15,20 @@ const helpItems: HelpItem[] = [
   {
     id: '1',
     question: 'How do I add my children?',
-    answer: 'Go to the Family Hub and click "Add Family Member". Enter their name and email, then select "Child" as their role.',
+    answer: 'Open Family Hub → Family tab → Add Family Member. Enter their name and age (no email required). Missions and progress are saved on this device.',
     category: 'getting-started',
     link: '/family-hub'
   },
   {
     id: '2',
     question: 'What is a privacy risk score?',
-    answer: 'The privacy risk score (0-100) shows how safe your child\'s online activity is. Lower scores are better. It\'s calculated based on the apps and websites they use.',
+    answer: 'The privacy risk score (0-100) reflects services you add to your family catalog—not live device monitoring. Lower scores are better. Scores come from Digital Footprint Analysis and the service catalog.',
     category: 'dashboard'
   },
   {
     id: '3',
     question: 'How do I approve or deny service requests?',
-    answer: 'When your child requests a new app or website, you\'ll see it in the "Pending Requests" section of your dashboard. Click "Approve" or "Deny" to make your decision.',
+    answer: 'On the website service catalog, you can mark services as requested, approved, or denied for planning and footprint analysis. Family Hub missions do not include a child app-approval workflow.',
     category: 'services'
   },
   {
@@ -41,7 +41,7 @@ const helpItems: HelpItem[] = [
   {
     id: '5',
     question: 'How do I view my family\'s privacy status?',
-    answer: 'The Overview tab in your dashboard shows your family\'s overall privacy score, action items, and quick stats. This is your main hub for privacy monitoring.',
+    answer: 'Use Digital Footprint Analysis on the website for household exposure, then Family Hub dashboard for today\'s mission, goals, and per-member progress—all stored locally.',
     category: 'dashboard'
   },
   {
@@ -59,7 +59,7 @@ const helpItems: HelpItem[] = [
   {
     id: '8',
     question: 'Can I track multiple children?',
-    answer: 'Yes! You can add multiple children to your family account. Each child has their own privacy score and service list. You can view them all from the Children tab.',
+    answer: 'Yes. Add each child in Family Hub with name and age. Mission progress and rewards are tracked per member on this device.',
     category: 'getting-started'
   }
 ];

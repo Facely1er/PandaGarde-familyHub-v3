@@ -18,8 +18,8 @@ const QuickStartPage: React.FC = () => {
       difficulty: 'Easy'
     },
     {
-      title: 'Join Family Hub',
-      description: 'Connect with other families and access exclusive resources',
+      title: 'Open Family Hub',
+      description: 'Start age-matched privacy missions and track progress on your device',
       icon: Users,
       color: 'text-purple-600',
       bgColor: 'bg-purple-50',
@@ -426,7 +426,7 @@ const QuickStartPage: React.FC = () => {
               </Link>
               <Link to="/family-hub" className="button secondary bg-white/20 text-white border-2 border-white">
                 <Users size={20} />
-                Join Family Hub
+                Open Family Hub
               </Link>
             </div>
           </div>

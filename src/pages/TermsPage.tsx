@@ -63,7 +63,7 @@ const TermsPage: React.FC = () => {
                 <li>Age-appropriate privacy education content</li>
                 <li>Family progress tracking and management tools</li>
                 <li>Educational resources and guides for parents and educators</li>
-                <li>Community features and support resources</li>
+                <li>Optional device-local community demos (forum, stories, shared resources) and support resources</li>
               </ul>
             </section>
 
@@ -77,10 +77,10 @@ const TermsPage: React.FC = () => {
                   <h3 className="font-semibold mb-2 text-primary">
                     Account Creation
                   </h3>
-                  <p className="text-gray-600">
-                    You may be required to create an account to access certain features. You are responsible for
-                    maintaining the confidentiality of your account information and for all activities that occur
-                    under your account.
+                  <p className="text-gray-600 dark:text-gray-300">
+                    Family Hub uses an optional local guardian profile on your device (no server account required for
+                    core features). If you subscribe to newsletters or enable future cloud features, you are
+                    responsible for keeping that information confidential.
                   </p>
                 </div>
 

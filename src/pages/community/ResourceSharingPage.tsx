@@ -8,7 +8,7 @@ const ResourceSharingPage: React.FC = () => {
     <CommunityErrorBoundary>
       <PageLayout
         title="Community Resources"
-        subtitle="Discover privacy tools and resources shared and voted on by the community. Find trusted recommendations from other families navigating digital privacy education."
+        subtitle="Device-local resource list demo—saved in your browser only. Not a live marketplace or part of Family Hub sync."
         breadcrumbs={true}
       >
         <ResourceSharing />

@@ -425,7 +425,7 @@ const ParentToolkitPage: React.FC = () => {
             Need More Help?
           </h2>
           <p className="text-lg mb-6 opacity-90 max-w-2xl mx-auto">
-            Explore our guides, join the community forum, or access additional resources to support your family's digital privacy journey.
+            Explore our guides, try the device-local community forum demo, or open Family Hub for privacy missions.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link

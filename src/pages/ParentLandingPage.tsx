@@ -49,7 +49,7 @@ const ParentLandingPage: React.FC = () => {
     {
       question: 'How do I see what my children do online?',
       answer:
-        'Once you create a Family Hub account and add your children, you can see all the apps and websites they use, along with privacy risk scores for each one.',
+        'Family Hub does not monitor children’s devices. You add the apps and services your family uses (or complete Digital Footprint Analysis on the website), then review privacy risk scores and guided next steps for those services.',
     },
     {
       question: 'What is a privacy risk score?',
@@ -69,7 +69,7 @@ const ParentLandingPage: React.FC = () => {
     {
       question: "Is my family's information safe?",
       answer:
-        "Yes. We take privacy seriously - we're helping you protect your family's privacy, so we protect yours too. All information is encrypted and stored securely.",
+        "Yes. Family Hub is local-first: family profiles and mission progress stay on your device. Sensitive fields can be encrypted in the browser when supported. We do not require a server account for the core journey.",
     },
   ];
 

@@ -56,8 +56,8 @@ const PilotPage: React.FC = () => {
     },
     {
       icon: Users,
-      title: 'Join a Community',
-      description: 'Connect with other privacy-conscious families and educators sharing the pilot journey'
+      title: 'Pilot partner feedback',
+      description: 'Share structured feedback with the PandaGarde team and other pilot families through the program—not an in-app social network'
     }
   ];
 

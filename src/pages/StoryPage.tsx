@@ -88,23 +88,23 @@ const StoryPage: React.FC = () => {
                 <Users size={32} className="text-blue-600" />
               </div>
               <h3 className="text-2xl font-bold mb-3" style={{ color: theme === 'dark' ? '#93C5FD' : '#1E40AF' }}>
-                Join Our Family Hub Community
+                Continue in Family Hub
               </h3>
               <p className="text-lg max-w-2xl mx-auto" style={{ color: theme === 'dark' ? '#93C5FD' : '#1E40AF' }}>
-                Connect with other families learning about digital privacy together. Share experiences, track progress, and access exclusive resources.
+                Turn what you learned into short privacy missions at home—real situations, family talks, and progress that stays on your device.
               </p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
               <div className="text-center p-4 bg-white rounded-lg shadow-sm">
                 <Heart size={24} className="text-red-500 mx-auto mb-2" />
-                <h4 className="font-semibold mb-2">Community Support</h4>
-                <p className="text-sm text-gray-600">Connect with other families on the same journey</p>
+                <h4 className="font-semibold mb-2">Family missions</h4>
+                <p className="text-sm text-gray-600">Age-matched scenarios you practice together</p>
               </div>
               <div className="text-center p-4 bg-white rounded-lg shadow-sm">
                 <Sparkles size={24} className="text-purple-500 mx-auto mb-2" />
-                <h4 className="font-semibold mb-2">Exclusive Resources</h4>
-                <p className="text-sm text-gray-600">Access special content and activities</p>
+                <h4 className="font-semibold mb-2">On-device progress</h4>
+                <p className="text-sm text-gray-600">Streaks, badges, and certificates saved locally</p>
               </div>
               <div className="text-center p-4 bg-white rounded-lg shadow-sm">
                 <Star size={24} className="text-yellow-500 mx-auto mb-2" />
@@ -118,7 +118,7 @@ const StoryPage: React.FC = () => {
                 className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors inline-flex items-center gap-2"
               >
                 <Users size={20} />
-                Join Family Hub
+                Open Family Hub
               </Link>
             </div>
           </div>

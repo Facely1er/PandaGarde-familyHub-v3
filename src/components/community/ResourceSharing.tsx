@@ -187,8 +187,8 @@ const ResourceSharing: React.FC<ResourceSharingProps> = ({ compact = false }) =>
               <h2 className="text-3xl font-bold mb-2 text-primary">
                 Community Resources
               </h2>
-              <p className="text-lg text-gray-600">
-                Privacy tools, guides, and educational resources shared by the community
+              <p className="text-lg text-gray-600 dark:text-gray-300">
+                Device-local demo list—resources you save stay in this browser only (not synced or verified by PandaGarde).
               </p>
             </div>
             <button
