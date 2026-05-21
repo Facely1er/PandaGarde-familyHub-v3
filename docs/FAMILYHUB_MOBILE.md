@@ -46,20 +46,19 @@ npx cap add ios   # macOS only
 ### Day-to-day workflow
 
 ```bash
-npm run build:familyhub
-npx cap sync
-npx cap open android
-# or
-npx cap open ios
+npm run mobile:prepare    # build:familyhub + cap sync (both platforms)
+npm run cap:android       # open Android Studio
+npm run cap:ios           # open Xcode (macOS)
 ```
 
-Or use convenience scripts:
+Platform-only sync:
 
 ```bash
-npm run cap:sync
-npm run cap:android
-npm run cap:ios
+npm run cap:sync:android
+npm run cap:sync:ios
 ```
+
+**Release sync (web + stores):** see [FAMILYHUB_RELEASE_SYNC.md](./FAMILYHUB_RELEASE_SYNC.md).
 
 ### Store identifiers
 

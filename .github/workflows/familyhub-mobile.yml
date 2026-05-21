@@ -1,0 +1,170 @@
+# Family Hub mobile: build hub bundle, sync Capacitor, smoke-build Android + iOS.
+# Signed Play AAB: workflow_dispatch only, requires ANDROID_* secrets (see docs/FAMILYHUB_RELEASE_SYNC.md).
+name: Family Hub mobile
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+    paths:
+      - '.github/workflows/familyhub-mobile.yml'
+      - 'src/**'
+      - 'familyhub.html'
+      - 'vite.familyhub.config.ts'
+      - 'capacitor.config.ts'
+      - 'android/**'
+      - 'ios/**'
+      - 'package.json'
+      - 'package-lock.json'
+
+concurrency:
+  group: familyhub-mobile-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  VITE_HUB_STANDALONE: 'true'
+  VITE_WEBSITE_URL: 'https://www.pandagarde.com'
+
+jobs:
+  build-web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.19.0'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm run build:familyhub
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist-familyhub
+          path: dist-familyhub/
+          retention-days: 14
+
+  android-debug:
+    needs: build-web
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.19.0'
+          cache: npm
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: platforms;android-35 build-tools;35.0.0
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist-familyhub
+          path: dist-familyhub/
+      - name: Configure Android SDK path
+        run: echo "sdk.dir=${ANDROID_SDK_ROOT}" >> android/local.properties
+      - run: npm ci --ignore-scripts
+      - run: npx cap sync android
+      - name: Assemble debug APK
+        working-directory: android
+        run: chmod +x gradlew && ./gradlew assembleDebug --no-daemon --stacktrace
+      - uses: actions/upload-artifact@v4
+        with:
+          name: familyhub-android-debug
+          path: android/app/build/outputs/apk/debug/
+          retention-days: 7
+          if-no-files-found: error
+
+  ios-sync:
+    needs: build-web
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.19.0'
+          cache: npm
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist-familyhub
+          path: dist-familyhub/
+      - run: npm ci --ignore-scripts
+      - run: npx cap sync ios
+      - name: Pod install
+        working-directory: ios/App
+        run: pod install --repo-update
+      - name: Build for simulator (smoke)
+        working-directory: ios/App
+        run: |
+          xcodebuild -workspace App.xcworkspace -scheme App -configuration Debug \
+            -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+
+  android-release:
+    if: github.event_name == 'workflow_dispatch'
+    needs: build-web
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.19.0'
+          cache: npm
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: platforms;android-35 build-tools;35.0.0
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist-familyhub
+          path: dist-familyhub/
+      - name: Configure Android SDK path
+        run: echo "sdk.dir=${ANDROID_SDK_ROOT}" >> android/local.properties
+      - run: npm ci --ignore-scripts
+      - run: npx cap sync android
+      - name: Prepare release signing
+        id: signing
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          if [ -z "$ANDROID_KEYSTORE_BASE64" ]; then
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::ANDROID_KEYSTORE_BASE64 not set — skipping signed bundleRelease."
+            exit 0
+          fi
+          for var in ANDROID_KEYSTORE_PASSWORD ANDROID_KEY_ALIAS ANDROID_KEY_PASSWORD; do
+            if [ -z "${!var}" ]; then
+              echo "::error::Missing GitHub secret: $var"
+              exit 1
+            fi
+          done
+          echo "$ANDROID_KEYSTORE_BASE64" | base64 -d > android/pandagarde-familyhub-upload.jks
+          {
+            echo "storeFile=pandagarde-familyhub-upload.jks"
+            echo "storePassword=${ANDROID_KEYSTORE_PASSWORD}"
+            echo "keyAlias=${ANDROID_KEY_ALIAS}"
+            echo "keyPassword=${ANDROID_KEY_PASSWORD}"
+          } > android/keystore.properties
+          echo "configured=true" >> "$GITHUB_OUTPUT"
+      - name: Bundle release AAB
+        if: steps.signing.outputs.configured == 'true'
+        working-directory: android
+        run: chmod +x gradlew && ./gradlew bundleRelease --no-daemon --stacktrace
+      - uses: actions/upload-artifact@v4
+        if: steps.signing.outputs.configured == 'true'
+        with:
+          name: familyhub-android-release-aab
+          path: android/app/build/outputs/bundle/release/
+          retention-days: 30
+          if-no-files-found: error

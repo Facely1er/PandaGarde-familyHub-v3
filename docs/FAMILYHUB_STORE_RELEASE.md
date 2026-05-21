@@ -145,7 +145,22 @@ npm run cap:sync && npm run cap:android
 
 ---
 
+## Version bump (all platforms)
+
+```bash
+node scripts/bump-familyhub-version.mjs 1.0.1
+npm run mobile:prepare
+```
+
+Build-number only (same marketing version, new Play/App Store upload):
+
+```bash
+npm run mobile:bump:build
+npm run mobile:prepare
+```
+
 ## Related docs
 
+- [FAMILYHUB_RELEASE_SYNC.md](./FAMILYHUB_RELEASE_SYNC.md) — web + Android + iOS on one commit
 - [FAMILYHUB_MOBILE.md](./FAMILYHUB_MOBILE.md) — dev workflow
 - [PRE_DEPLOYMENT_UI_UX_QA_AUDIT.md](./sdlc/PRE_DEPLOYMENT_UI_UX_QA_AUDIT.md) — store UX gates
