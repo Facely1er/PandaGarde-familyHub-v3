@@ -29,6 +29,13 @@ jobs:
         env:
           VITE_HUB_STANDALONE: 'true'
           VITE_WEBSITE_URL: 'https://www.pandagarde.com'
+      - name: Verify hub PWA assets in dist-familyhub
+        run: |
+          test -f dist-familyhub/index.html
+          test -f dist-familyhub/sw.js
+          test -f dist-familyhub/familyhub-manifest.json
+          test -f dist-familyhub/offline.html
+          test -f dist-familyhub/_redirects
       - uses: actions/upload-artifact@v4
         with:
           name: dist-familyhub

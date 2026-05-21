@@ -1,0 +1,44 @@
+# Main PandaGarde website (dist/) — build + smoke tests on every main push.
+# Netlify production deploy uses netlify.toml; this workflow verifies the bundle before merge.
+name: Website build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+    paths:
+      - '.github/workflows/website-build.yml'
+      - 'src/**'
+      - 'index.html'
+      - 'vite.config.ts'
+      - 'public/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'netlify.toml'
+
+concurrency:
+  group: website-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.19.0'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm run test:launch-smoke
+      - name: Verify PWA assets in dist
+        run: |
+          test -f dist/sw.js
+          test -f dist/manifest.json
+          test -f dist/offline.html
+          test -f dist/index.html
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist-website
+          path: dist/
+          retention-days: 7

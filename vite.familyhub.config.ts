@@ -20,6 +20,10 @@ const familyhubIndexHtmlPlugin = () => ({
     if (fs.existsSync(redirectsSrc)) {
       fs.copyFileSync(redirectsSrc, path.join(outDir, '_redirects'));
     }
+    const headersSrc = path.resolve(rootDir, 'public/_headers');
+    if (fs.existsSync(headersSrc)) {
+      fs.copyFileSync(headersSrc, path.join(outDir, '_headers'));
+    }
   },
 });
 

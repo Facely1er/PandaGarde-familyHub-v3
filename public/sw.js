@@ -1,6 +1,6 @@
 // PandaGarde Service Worker
 // Updated cache version to force invalidation
-const CACHE_VERSION = 'v3';
+const CACHE_VERSION = 'v4';
 const CACHE_NAME = `pandagarde-${CACHE_VERSION}`;
 const STATIC_CACHE = `pandagarde-static-${CACHE_VERSION}`;
 const DYNAMIC_CACHE = `pandagarde-dynamic-${CACHE_VERSION}`;
@@ -11,6 +11,7 @@ const STATIC_ASSETS = [
   '/index.html',
   '/offline.html',
   '/manifest.json',
+  '/familyhub-manifest.json',
   '/LogoPandagarde.png'
 ];
 

@@ -86,6 +86,40 @@ npm run assets:generate   # writes Android res/; add --ios after cap add ios
 npm run cap:sync
 ```
 
+## PWA (website + hub web)
+
+Both production bundles register `/sw.js` in production (`src/main.tsx` for www, `src/familyhub-main.tsx` for hub).
+
+| Host | Build | Manifest |
+|------|-------|----------|
+| www.pandagarde.com | `npm run build` → `dist/` | `/manifest.json` |
+| hub.pandagarde.com | `npm run build:familyhub` → `dist-familyhub/` | `/familyhub-manifest.json` |
+
+Pre-deploy (one command — tests, both builds, PWA asset checks):
+
+```bash
+npm run deploy:check
+```
+
+Ship both Netlify sites after `deploy:check` passes (requires Netlify CLI login + linked sites):
+
+```bash
+npm run deploy:netlify:all
+```
+
+Individual deploys (run `deploy:check` first; deploys use `--no-build`):
+
+```bash
+npm run deploy:netlify              # www.pandagarde.com — dist/
+npm run deploy:netlify:familyhub    # hub.pandagarde.com — dist-familyhub/
+```
+
+Netlify site IDs (ERMITS team): main `2e41bc3f-2d27-469f-a104-c8ddcee69883`, hub `09a33b67-21f2-4f27-bc38-1b732b9cf29e`.
+
+CI: `.github/workflows/website-build.yml` (main site), `familyhub-netlify.yml` (hub).
+
+---
+
 ## Deploy hub.pandagarde.com
 
 **Netlify (recommended):** second site using [netlify-familyhub.toml](../netlify-familyhub.toml) — full steps in [FAMILYHUB_STORE_RELEASE.md](./FAMILYHUB_STORE_RELEASE.md).

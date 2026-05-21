@@ -69,7 +69,7 @@ function Header() {
 
   const mobileCtaItems = useMemo(
     () => [
-      { id: 'mobile-nav-family-hub', icon: LayoutDashboard, label: 'Open Family Hub', href: '/family-hub', variant: 'primary', target: '_blank', rel: 'noopener noreferrer' },
+      { id: 'mobile-nav-family-hub', icon: LayoutDashboard, label: 'Open Family Hub', href: '/family-hub', variant: 'primary' },
       { id: 'mobile-nav-get-started', icon: Users, label: 'Get Started', href: '/get-started', variant: 'secondary' },
     ],
     []
@@ -171,10 +171,8 @@ function Header() {
             <div className="nav-actions" aria-label="Utility actions">
               <Link
                 to="/family-hub"
-                target="_blank"
-                rel="noopener noreferrer"
                 className={`nav-cta nav-cta-primary ${isActive('/family-hub') ? 'active' : ''}`}
-                aria-label="Open Family Hub workspace (opens in new tab)"
+                aria-label="Open Family Hub workspace"
                 aria-current={isActive('/family-hub') ? 'page' : undefined}
               >
                 <LayoutDashboard size={16} aria-hidden="true" />

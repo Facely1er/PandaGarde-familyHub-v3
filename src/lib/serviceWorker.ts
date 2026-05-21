@@ -62,7 +62,7 @@ class ServiceWorkerManager {
   // Show update notification to user
   private showUpdateConfirmation() {
     const shouldUpdate = confirm(
-      'A new version of Privacy Panda is available. Would you like to update now?'
+      'A new version of PandaGarde is available. Would you like to update now?'
     );
 
     if (shouldUpdate) {
