@@ -18,6 +18,7 @@ function StoryCoverImage({
   showLogoOverlay?: boolean;
 }) {
   const position = story.coverImagePosition ?? 'center';
+  const isVectorCover = story.coverImage?.endsWith('.svg');
 
   if (!story.coverImage) {
     return (
@@ -41,7 +42,11 @@ function StoryCoverImage({
         decoding="async"
       />
       <div
-        className="absolute inset-0 bg-gradient-to-t from-gray-900/75 via-gray-900/25 to-emerald-900/10 dark:from-gray-950/85 dark:via-gray-900/40"
+        className={
+          isVectorCover
+            ? 'absolute inset-0 bg-gradient-to-t from-gray-900/50 via-transparent to-transparent dark:from-gray-950/60'
+            : 'absolute inset-0 bg-gradient-to-t from-gray-900/75 via-gray-900/25 to-emerald-900/10 dark:from-gray-950/85 dark:via-gray-900/40'
+        }
         aria-hidden
       />
       {showLogoOverlay && (
