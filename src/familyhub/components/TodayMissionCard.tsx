@@ -45,7 +45,7 @@ const TodayMissionCard: React.FC = () => {
 
   return (
     <section
-      className="rounded-2xl border border-teal-200 bg-gradient-to-br from-teal-50 via-white to-cyan-50 p-5 shadow-sm dark:border-teal-700/50 dark:from-teal-900/20 dark:via-gray-800 dark:to-gray-800"
+      className="hub-card-lift overflow-hidden rounded-2xl border-2 border-teal-300 bg-gradient-to-br from-teal-50 via-white to-amber-50/60 p-5 shadow-md dark:border-teal-600/60 dark:from-teal-900/30 dark:via-gray-800 dark:to-amber-900/10"
       aria-labelledby="today-mission-heading"
     >
       <div className="flex flex-wrap items-start justify-between gap-3">
@@ -53,7 +53,12 @@ const TodayMissionCard: React.FC = () => {
           <p className="text-xs font-semibold uppercase tracking-wide text-teal-700 dark:text-teal-300">
             {missionDone ? 'Great progress today' : 'Today\u2019s mission'}
           </p>
-          <h2 id="today-mission-heading" className="mt-1 text-lg font-bold text-gray-900 dark:text-white">
+          <h2 id="today-mission-heading" className="mt-1 flex items-center gap-2 text-lg font-bold text-gray-900 dark:text-white">
+            {!missionDone && (
+              <span className="text-2xl" role="img" aria-hidden="true">
+                {todaysMission.icon}
+              </span>
+            )}
             {missionDone ? 'Pick another mission or revisit a favourite' : todaysMission.name}
           </h2>
           {!missionDone && (

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Shield, Users, Gamepad2, Award } from 'lucide-react';
 import { updateDfaJourneyPhase } from '../../lib/dfaJourney';
 import { setHubOrigin } from '../../lib/hubMission';
+import AgeBandStrip from '../components/AgeBandStrip';
 import { HUB_WELCOMED_KEY } from '../constants';
 import { hubPaths } from '../hubPaths';
 
@@ -55,29 +56,31 @@ const WelcomeScreen: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-50 via-white to-cyan-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 flex flex-col">
+    <div className="family-hub-theme flex min-h-screen flex-col bg-gradient-to-br from-teal-50 via-white to-amber-50/30 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
       <div className="flex-1 overflow-y-auto px-4 py-8 sm:py-12">
         <div className="max-w-xl mx-auto space-y-8">
 
           {/* Hero */}
           <div className="text-center space-y-4">
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl overflow-hidden shadow-lg border-2 border-teal-200 dark:border-teal-700 bg-white mx-auto">
-              <img
-                src="/LogoPandagarde.png"
-                alt="PandaGarde"
-                className="w-full h-full object-contain"
-              />
-            </div>
+            <span
+              className="hub-mascot-float mx-auto flex h-20 w-20 items-center justify-center rounded-2xl border-2 border-teal-200 bg-white text-5xl shadow-lg dark:border-teal-700 dark:bg-gray-800"
+              role="img"
+              aria-label="Privacy Panda"
+            >
+              🐼
+            </span>
             <div>
               <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight">
                 Welcome to your<br />
                 <span className="text-teal-600 dark:text-teal-400">Family Hub</span>
               </h1>
               <p className="mt-3 text-base sm:text-lg text-gray-600 dark:text-gray-300">
-                Your family&apos;s daily privacy missions — age-matched activities, streaks, and progress that stays on this device. Works on its own or after the website assessment.
+                Play short privacy missions together — real situations, family talks, and fun practice for ages 5–17. Everything stays on this device.
               </p>
             </div>
           </div>
+
+          <AgeBandStrip title="Three adventure paths" />
 
           {/* What's inside */}
           <div className="space-y-3">

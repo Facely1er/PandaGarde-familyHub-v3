@@ -1,13 +1,15 @@
 import React, { lazy, Suspense, useEffect } from "react";
-import { CheckCircle2, Users, Gamepad2, Award, Settings } from "lucide-react";
+import { Users, Gamepad2, Award, Settings } from 'lucide-react';
 import { Link } from "react-router-dom";
 import { HubScreenFallback } from "../lazyScreen";
 
 const FamilyDashboard = lazy(() => import("../../components/FamilyDashboard"));
 import { updateDfaJourneyPhase } from "../../lib/dfaJourney";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
-import HubTour from "../components/HubTour";
-import TodayMissionCard from "../components/TodayMissionCard";
+import AgeBandStrip from '../components/AgeBandStrip';
+import HubScreenHero from '../components/HubScreenHero';
+import HubTour from '../components/HubTour';
+import TodayMissionCard from '../components/TodayMissionCard';
 import { getHubOrigin, touchHubStreak } from "../../lib/hubMission";
 import { hubPaths } from "../hubPaths";
 
@@ -57,27 +59,20 @@ const DashboardScreen: React.FC = () => {
   return (
     <div className="min-h-full">
       <HubTour />
-      <div className="border-b border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-900 dark:border-emerald-800/50 dark:bg-emerald-900/20 dark:text-emerald-100">
-        <div className="mx-auto flex max-w-5xl items-start gap-2">
-          <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-emerald-700 dark:text-emerald-300" />
-          <p className="leading-6">
-            {hubOrigin === 'web'
-              ? <>Your assessment progress is saved locally. Continue with <strong>today&apos;s mission</strong> below.</>
-              : <>Welcome to your family privacy home base — start with <strong>today&apos;s mission</strong>, then add kids and track progress together.</>}
-          </p>
-        </div>
-      </div>
-      <section className="border-b border-gray-200 bg-white/95 px-4 py-5 shadow-sm dark:border-gray-700 dark:bg-gray-900/80">
+      <section className="px-4 py-5">
         <div className="mx-auto flex max-w-5xl flex-col gap-5">
+          <HubScreenHero
+            badge={hubOrigin === 'web' ? 'Assessment complete' : 'Your family HQ'}
+            title="Ready for today's mission?"
+            subtitle={
+              hubOrigin === 'web'
+                ? "Your plan is saved on this device. Start with today's mission, then explore missions by age."
+                : 'Add family members, pick an age path, and complete one real-world privacy mission together.'
+            }
+            compact
+          />
           <TodayMissionCard />
-          <div className="space-y-2">
-            <h1 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-3xl">
-              Family Hub
-            </h1>
-            <p className="text-sm text-gray-600 dark:text-gray-300 sm:text-base">
-              Your family's privacy plan — clear next steps and progress signals, all in one place.
-            </p>
-          </div>
+          <AgeBandStrip title="Explore by age" />
 
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
             <div className="rounded-xl border border-teal-100 bg-teal-50/70 p-3 dark:border-teal-700/50 dark:bg-teal-900/20">

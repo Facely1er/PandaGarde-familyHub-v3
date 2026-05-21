@@ -1,11 +1,13 @@
 import React, { lazy, Suspense, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Users, Plus, Eye, Trash2 } from 'lucide-react';
+import { Plus, Eye, Trash2 } from 'lucide-react';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { useFamilyProgress } from '../../contexts/FamilyProgressContext';
 import { useDialogFocusTrap } from '../../hooks/useDialogFocusTrap';
 import { HubScreenFallback } from '../lazyScreen';
 import { hubPaths } from '../hubPaths';
+import HubScreenHero from '../components/HubScreenHero';
+import { hubAgeBandForAge, HUB_AGE_BANDS } from '../hubAgeBands';
 
 const ChildProgressDetail = lazy(() => import('../../components/ChildProgressDetail'));
 
@@ -28,34 +30,16 @@ type AgeGroupMeta = {
 };
 
 function getAgeGroup(age: number): AgeGroupMeta | null {
-  if (age >= 5 && age <= 8) {
-    return {
-      range: '5-8',
-      label: 'Ages 5–8',
-      emoji: '🐼',
-      badgeClass:
-        'bg-green-50 text-green-700 border-green-200 hover:bg-green-100 dark:bg-green-900/30 dark:text-green-300 dark:border-green-700 dark:hover:bg-green-900/50',
-    };
+  const band = hubAgeBandForAge(age);
+  if (!band) {
+    return null;
   }
-  if (age >= 9 && age <= 12) {
-    return {
-      range: '9-12',
-      label: 'Ages 9–12',
-      emoji: '🕵️',
-      badgeClass:
-        'bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-700 dark:hover:bg-blue-900/50',
-    };
-  }
-  if (age >= 13 && age <= 17) {
-    return {
-      range: '13-17',
-      label: 'Ages 13–17',
-      emoji: '🌐',
-      badgeClass:
-        'bg-purple-50 text-purple-700 border-purple-200 hover:bg-purple-100 dark:bg-purple-900/30 dark:text-purple-300 dark:border-purple-700 dark:hover:bg-purple-900/50',
-    };
-  }
-  return null;
+  return {
+    range: band.range,
+    label: band.shortLabel,
+    emoji: band.emoji,
+    badgeClass: `${band.chipClass} border`,
+  };
 }
 
 const KidsScreen: React.FC = () => {
@@ -126,9 +110,19 @@ const KidsScreen: React.FC = () => {
   }
 
   return (
-    <div className="p-4 sm:p-6 max-w-4xl mx-auto">
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Family Members</h1>
+    <div className="mx-auto max-w-4xl space-y-6 p-4 sm:p-6">
+      <HubScreenHero
+        badge="Your crew"
+        title="Family members"
+        subtitle="Add each child’s age so missions and rewards match their world — games, group chats, or first social accounts."
+        compact
+      />
+      <div className="flex items-center justify-between">
+        <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+          {familyMembers.length === 0
+            ? 'No one added yet — start with one child or teen.'
+            : `${familyMembers.length} member${familyMembers.length === 1 ? '' : 's'} on this device`}
+        </p>
         <button
           ref={addMemberTriggerRef}
           type="button"
@@ -141,13 +135,15 @@ const KidsScreen: React.FC = () => {
       </div>
 
       {familyMembers.length === 0 ? (
-        <div className="text-center py-12">
-          <div className="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Users className="text-gray-400" size={32} aria-hidden="true" />
+        <div className="rounded-3xl border border-dashed border-teal-200 bg-teal-50/50 py-12 text-center dark:border-teal-700 dark:bg-teal-900/10">
+          <div className="mx-auto mb-4 flex justify-center gap-2 text-3xl" aria-hidden="true">
+            {HUB_AGE_BANDS.map((b) => (
+              <span key={b.range}>{b.emoji}</span>
+            ))}
           </div>
-          <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">No Family Members Yet</h3>
-          <p className="mb-6 text-gray-600 dark:text-gray-400">
-            Add your first family member to start tracking progress together.
+          <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-white">Who is learning with you?</h3>
+          <p className="mx-auto mb-6 max-w-sm text-gray-600 dark:text-gray-400">
+            Add a name and age — we&apos;ll suggest the right privacy missions automatically.
           </p>
           <button
             type="button"
@@ -161,15 +157,23 @@ const KidsScreen: React.FC = () => {
         <div className="space-y-4">
           {familyMembers.map((member) => {
             const ageGroup = getAgeGroup(member.age);
+            const band = hubAgeBandForAge(member.age);
             return (
               <div
                 key={member.id}
-                className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow"
+                className="hub-card-lift rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-shadow dark:border-gray-700 dark:bg-gray-800"
               >
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4 flex-1 min-w-0">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-teal-500 to-cyan-600 flex items-center justify-center text-white text-lg font-bold shadow-md flex-shrink-0">
-                      {member.name.charAt(0).toUpperCase()}
+                  <div className="flex min-w-0 flex-1 items-center gap-4">
+                    <div
+                      className={[
+                        'flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br text-xl shadow-md',
+                        band ? band.avatarClass : 'from-teal-500 to-cyan-600',
+                      ].join(' ')}
+                      role="img"
+                      aria-label={band ? `${band.label} avatar` : `${member.name} avatar`}
+                    >
+                      {band?.emoji ?? member.name.charAt(0).toUpperCase()}
                     </div>
                     <div className="min-w-0">
                       <h3 className="font-bold text-lg text-gray-900 dark:text-white">{member.name}</h3>

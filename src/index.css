@@ -105,6 +105,37 @@
   --tertiary: #5CC9D0;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .family-hub-theme .hub-mascot-float {
+    animation: hub-mascot-float 4s ease-in-out infinite;
+  }
+
+  .family-hub-theme .hub-card-lift:active {
+    transform: scale(0.98);
+  }
+}
+
+@keyframes hub-mascot-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.family-hub-theme .hub-card-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .family-hub-theme .hub-card-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--fh-shadow-md);
+  }
+}
+
 /* Family Hub page wrapper styles */
 .family-hub-wrapper {
   min-height: 100vh;

@@ -6,6 +6,7 @@ const CertificateGenerator = lazy(() => import('../../components/CertificateGene
 const ProgressExport = lazy(() => import('../../components/ProgressExport'));
 import { useProgress } from '../../contexts/ProgressContext';
 import { flattenAgeBasedActivities } from '../../data/ageBasedActivities';
+import HubScreenHero from '../components/HubScreenHero';
 
 const ACHIEVEMENT_META: Record<string, { label: string; emoji: string; description: string }> = {
   first_activity: { label: 'First Step', emoji: '🌱', description: 'Completed your first activity' },
@@ -46,11 +47,17 @@ const ProgressScreen: React.FC = () => {
   }, [allActivities, getActivityProgress]);
 
   return (
-    <div className="p-4 sm:p-6 max-w-4xl mx-auto space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">Progress &amp; Achievements</h1>
-        <p className="text-gray-600 dark:text-gray-400">Your family's privacy learning journey so far.</p>
-      </div>
+    <div className="mx-auto max-w-4xl space-y-6 p-4 sm:p-6">
+      <HubScreenHero
+        badge="Family rewards"
+        title="Your privacy journey"
+        subtitle={
+          completedCount === 0
+            ? 'Complete your first mission to unlock badges and certificates — every step counts!'
+            : `You've finished ${completedCount} of ${totalCount} missions. Keep your streak going!`
+        }
+        compact
+      />
 
       {/* Summary stats */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">

@@ -25,16 +25,16 @@ describe('AppShell navigation', () => {
   it('marks the current route with aria-current', () => {
     renderShell('/family-hub/dashboard');
 
-    expect(screen.getByRole('link', { name: 'Dashboard' })).toHaveAttribute('aria-current', 'page');
-    expect(screen.getByRole('link', { name: 'Kids' })).not.toHaveAttribute('aria-current');
+    expect(screen.getByRole('link', { name: 'Dashboard home' })).toHaveAttribute('aria-current', 'page');
+    expect(screen.getByRole('link', { name: 'Family members' })).not.toHaveAttribute('aria-current');
   });
 
   it('supports keyboard arrow navigation between tabs', () => {
     renderShell('/family-hub/dashboard');
 
     const nav = screen.getByRole('navigation', { name: /primary family hub navigation/i });
-    const dashboardLink = screen.getByRole('link', { name: 'Dashboard' });
-    const kidsLink = screen.getByRole('link', { name: 'Kids' });
+    const dashboardLink = screen.getByRole('link', { name: 'Dashboard home' });
+    const kidsLink = screen.getByRole('link', { name: 'Family members' });
 
     dashboardLink.focus();
     fireEvent.keyDown(nav, { key: 'ArrowRight' });
@@ -46,10 +46,10 @@ describe('AppShell navigation', () => {
     const user = userEvent.setup();
     renderShell('/family-hub/dashboard');
 
-    await user.click(screen.getByRole('link', { name: 'Activities' }));
+    await user.click(screen.getByRole('link', { name: 'Privacy missions' }));
 
     expect(screen.getByText('Activities Page')).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Activities' })).toHaveAttribute('aria-current', 'page');
+    expect(screen.getByRole('link', { name: 'Privacy missions' })).toHaveAttribute('aria-current', 'page');
   });
 });
 

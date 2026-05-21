@@ -14,20 +14,20 @@ interface TourStep {
 
 const steps: TourStep[] = [
   {
-    title: 'Dashboard — your overview',
-    body: "Start with Today's mission on the Dashboard, then track members, goals, and your learning streak — your daily home base.",
+    title: 'Home — start here',
+    body: "Today's mission is your daily adventure. Finish it with a family talk, then check your streak on the Home tab.",
     icon: LayoutDashboard,
     navTarget: hubPaths.dashboard,
   },
   {
-    title: 'Family Members',
-    body: 'Add parents, children, and teens here. Each member gets their own privacy score and activity tracking.',
+    title: 'Family — add your crew',
+    body: 'Add each child with their age. We match missions to Little Explorers (5–8), Detectives (9–12), or Digital Citizens (13–17).',
     icon: Users,
     navTarget: hubPaths.kids,
   },
   {
-    title: 'Activities — learn together',
-    body: "Pick age-appropriate privacy games and exercises. Completing activities earns badges and raises each member's score.",
+    title: 'Missions — play & learn',
+    body: '18 real-world privacy missions: scenarios, games, and a “try at home” step. Earn rewards as you go!',
     icon: Gamepad2,
     navTarget: hubPaths.activities,
   },

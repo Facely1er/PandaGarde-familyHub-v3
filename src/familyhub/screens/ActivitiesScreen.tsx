@@ -1,7 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { CheckCircle2, Clock, Info, Play, Sparkles, Users } from 'lucide-react';
+import AgeBandStrip from '../components/AgeBandStrip';
+import HubScreenHero from '../components/HubScreenHero';
 import MissionShell from '../components/MissionShell';
+import type { HubAgeRange } from '../hubAgeBands';
 import { useProgress } from '../../contexts/ProgressContext';
 import { findActivityById, getCompletionId } from '../../lib/hubMission';
 import {
@@ -214,31 +217,36 @@ const ActivitiesScreen: React.FC = () => {
     );
   }
 
+  const activeBandRange: HubAgeRange | 'all' =
+    activeAge === 'all' ? 'all' : (activeAge as HubAgeRange);
+
   return (
-    <div className="mx-auto max-w-6xl p-4 sm:p-6">
+    <div className="mx-auto max-w-6xl space-y-6 p-4 sm:p-6">
+      <HubScreenHero
+        badge="18 privacy missions"
+        title="Choose your mission"
+        subtitle="Each mission starts with a real situation from games, school, or social life — then you talk and practice together."
+        compact
+      >
+        <div className="flex flex-wrap gap-2 text-xs font-semibold">
+          <span className="rounded-full bg-white/25 px-3 py-1 text-white">{allActivities.length} total</span>
+          <span className="rounded-full bg-white/25 px-3 py-1 text-white">
+            {getFeaturedAgeBasedActivities(allActivities).length} featured
+          </span>
+        </div>
+      </HubScreenHero>
+
+      <AgeBandStrip activeRange={activeBandRange} title="Jump in by age" />
+
       <div className="grid gap-4 lg:grid-cols-[1.7fr,1fr]">
         <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-8">
           <div className="inline-flex items-center gap-2 rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-teal-700 dark:bg-teal-900/30 dark:text-teal-200">
             <Sparkles size={14} aria-hidden="true" />
-            Family activity catalogue
+            Filter &amp; browse
           </div>
-          <h1 className="mt-4 text-2xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-3xl">
-            Discover activities your family can play, discuss, and revisit together
-          </h1>
-          <p className="mt-3 max-w-2xl text-sm leading-6 text-gray-600 dark:text-gray-300 sm:text-base">
-            Browse age-matched privacy missions with clear learning goals, real-life scenarios, and conversation starters so every activity feels useful beyond the screen.
+          <p className="mt-4 text-sm leading-6 text-gray-600 dark:text-gray-300 sm:text-base">
+            Use age tabs and learning goals below. Every card shows a real-life situation before you start.
           </p>
-          <div className="mt-6 flex flex-wrap gap-2 text-xs font-medium">
-            <span className="rounded-full bg-teal-50 px-3 py-1 text-teal-700 dark:bg-teal-900/30 dark:text-teal-200">
-              {allActivities.length} activities
-            </span>
-            <span className="rounded-full bg-indigo-50 px-3 py-1 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-200">
-              {getFeaturedAgeBasedActivities(allActivities).length} featured picks
-            </span>
-            <span className="rounded-full bg-amber-50 px-3 py-1 text-amber-700 dark:bg-amber-900/30 dark:text-amber-200">
-              Guided by age, goal, and family mode
-            </span>
-          </div>
         </section>
 
         <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">

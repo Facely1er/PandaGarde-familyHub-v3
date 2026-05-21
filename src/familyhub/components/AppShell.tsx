@@ -8,16 +8,18 @@ import { hubPaths, pandagardeWebsiteUrl, isHubStandalone } from '../hubPaths';
 interface TabItem {
   id: string;
   label: string;
+  /** Visible on bottom nav (short, kid-friendly) */
+  shortLabel: string;
   icon: LucideIcon;
   path: string;
 }
 
 const tabs: TabItem[] = [
-  { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, path: hubPaths.dashboard },
-  { id: 'kids', label: 'Kids', icon: Users, path: hubPaths.kids },
-  { id: 'activities', label: 'Activities', icon: Gamepad2, path: hubPaths.activities },
-  { id: 'progress', label: 'Progress', icon: Award, path: hubPaths.progress },
-  { id: 'settings', label: 'Settings', icon: Settings, path: hubPaths.settings },
+  { id: 'dashboard', label: 'Dashboard home', shortLabel: 'Home', icon: LayoutDashboard, path: hubPaths.dashboard },
+  { id: 'kids', label: 'Family members', shortLabel: 'Family', icon: Users, path: hubPaths.kids },
+  { id: 'activities', label: 'Privacy missions', shortLabel: 'Missions', icon: Gamepad2, path: hubPaths.activities },
+  { id: 'progress', label: 'Progress and rewards', shortLabel: 'Rewards', icon: Award, path: hubPaths.progress },
+  { id: 'settings', label: 'Settings', shortLabel: 'Settings', icon: Settings, path: hubPaths.settings },
 ];
 
 const AppShell: React.FC = () => {
@@ -60,7 +62,7 @@ const AppShell: React.FC = () => {
   };
 
   return (
-    <div className="family-hub-theme flex flex-col h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="family-hub-theme flex h-screen flex-col bg-gradient-to-b from-teal-50/80 via-gray-50 to-white dark:from-gray-900 dark:via-gray-900 dark:to-gray-950">
       <a
         href="#family-hub-main"
         className="sr-only focus:not-sr-only focus:absolute focus:left-3 focus:top-3 focus:z-[90] focus:rounded-lg focus:bg-teal-700 focus:px-3 focus:py-2 focus:text-sm focus:font-semibold focus:text-white focus:outline-none focus:ring-2 focus:ring-white"
@@ -89,7 +91,7 @@ const AppShell: React.FC = () => {
               </a>
               <div className="flex min-w-0 items-center gap-1.5">
                 <h1 className="truncate text-sm font-bold text-teal-700 dark:text-teal-400">
-                  Family Hub
+                  PandaGarde
                 </h1>
                 <span className="shrink-0 text-gray-300 dark:text-gray-600" aria-hidden="true">
                   ·
@@ -145,6 +147,7 @@ const AppShell: React.FC = () => {
                     tabRefs.current[index] = el;
                   }}
                   to={tab.path}
+                  aria-label={tab.label}
                   className={[
                     'group flex flex-col items-center justify-center gap-0.5',
                     'min-h-[64px] min-w-[64px] touch-manipulation rounded-none',
@@ -172,7 +175,7 @@ const AppShell: React.FC = () => {
                       active ? 'font-semibold' : 'font-medium',
                     ].join(' ')}
                   >
-                    {tab.label}
+                    {tab.shortLabel}
                   </span>
                 </NavLink>
               </li>
