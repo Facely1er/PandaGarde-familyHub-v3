@@ -1,5 +1,6 @@
 // Frontend-only mode - no database dependencies
 // Mock types for compatibility
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Supabase client stub; no DB in frontend-only mode
 type Database = any
 
 import { logger } from './logger'
@@ -181,7 +182,7 @@ export const newsletterService = {
       )
       
       const existingIndex = subscriptions.findIndex(
-        (s: any) => s.email.toLowerCase() === normalizedEmail
+        (s: NewsletterSubscriber) => s.email.toLowerCase() === normalizedEmail
       )
 
       const subscriptionData: NewsletterSubscriber = {
@@ -254,7 +255,7 @@ export const newsletterService = {
       )
       
       const index = subscriptions.findIndex(
-        (s: any) => s.email.toLowerCase() === normalizedEmail
+        (s: NewsletterSubscriber) => s.email.toLowerCase() === normalizedEmail
       )
 
       if (index >= 0) {
@@ -307,7 +308,7 @@ export const newsletterService = {
       )
       
       const subscription = subscriptions.find(
-        (s: any) => s.email.toLowerCase() === normalizedEmail
+        (s: NewsletterSubscriber) => s.email.toLowerCase() === normalizedEmail
       )
       
       return subscription?.subscribed ?? false

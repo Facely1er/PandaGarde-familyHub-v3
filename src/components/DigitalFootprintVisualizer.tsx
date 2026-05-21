@@ -76,7 +76,7 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
     const services: Record<string, string[]> = {};
     let totalMemberServices = 0;
     familyMembers.forEach(member => {
-      const ids = (member as any).services?.map((s: any) => s.serviceId) || [];
+      const ids = member.services?.map((s) => s.serviceId) ?? [];
       services[member.id] = ids;
       totalMemberServices += ids.length;
     });

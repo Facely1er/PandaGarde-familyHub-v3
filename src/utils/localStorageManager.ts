@@ -167,7 +167,7 @@ export class LocalStorageManager {
   /**
    * Get family data from localStorage (with decryption if encrypted)
    */
-  async getFamilyData(): Promise<any> {
+  async getFamilyData(): Promise<unknown> {
     try {
       const data = localStorage.getItem(LocalStorageManager.FAMILY_KEY);
       if (!data) {return null;}
@@ -185,7 +185,7 @@ export class LocalStorageManager {
         const password = generateUserPassword(userId);
         
         try {
-          return await decryptData<any>(encryptedData, password);
+          return await decryptData<unknown>(encryptedData, password);
         } catch (decryptError) {
           logger.error('Error decrypting family data:', decryptError);
           // Try to parse as plain JSON as fallback (for migration)
@@ -207,7 +207,7 @@ export class LocalStorageManager {
   /**
    * Save family data to localStorage (with encryption for PII)
    */
-  async saveFamilyData(familyData: any): Promise<void> {
+  async saveFamilyData(familyData: unknown): Promise<void> {
     try {
       if (!isEncryptionAvailable()) {
         // Fallback to unencrypted storage if encryption not available
@@ -240,16 +240,16 @@ export class LocalStorageManager {
   /**
    * Encrypt PII fields in an object recursively
    */
-  private async encryptPIIFields(obj: any): Promise<any> {
+  private async encryptPIIFields(obj: unknown): Promise<unknown> {
     if (obj === null || obj === undefined) {return obj;}
     
     if (Array.isArray(obj)) {
       return Promise.all(obj.map(item => this.encryptPIIFields(item)));
     }
     
-    if (typeof obj === 'object') {
-      const result: any = {};
-      for (const [key, value] of Object.entries(obj)) {
+    if (typeof obj === 'object' && obj !== null) {
+      const result: Record<string, unknown> = {};
+      for (const [key, value] of Object.entries(obj as Record<string, unknown>)) {
         if (LocalStorageManager.PII_FIELDS.includes(key) && typeof value === 'string' && value) {
           // Encrypt PII field
           const userId = this.getCurrentUserId();
@@ -276,16 +276,16 @@ export class LocalStorageManager {
   /**
    * Decrypt PII fields in an object recursively
    */
-  private async decryptPIIFields(obj: any): Promise<any> {
+  private async decryptPIIFields(obj: unknown): Promise<unknown> {
     if (obj === null || obj === undefined) {return obj;}
     
     if (Array.isArray(obj)) {
       return Promise.all(obj.map(item => this.decryptPIIFields(item)));
     }
     
-    if (typeof obj === 'object') {
-      const result: any = {};
-      for (const [key, value] of Object.entries(obj)) {
+    if (typeof obj === 'object' && obj !== null) {
+      const result: Record<string, unknown> = {};
+      for (const [key, value] of Object.entries(obj as Record<string, unknown>)) {
         if (key.endsWith('_encrypted') && obj[key.replace('_encrypted', '')]) {
           // Skip the encrypted flag
           continue;

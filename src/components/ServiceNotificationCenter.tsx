@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
   Bell, 
@@ -12,7 +12,7 @@ import {
   ExternalLink,
   Settings
 } from 'lucide-react';
-import { useFamily } from '../contexts/FamilyContext';
+import { useFamily, type FamilyMember } from '../contexts/FamilyContext';
 import { childServiceNotificationManager, type ServiceNotification } from '../lib/serviceNotifications';
 import { getServiceLogoUrlWithBrandColor, hasServiceLogo } from '../utils/serviceLogos';
 import { getServiceById } from '../data/childServiceCatalog';
@@ -42,12 +42,9 @@ const ServiceNotificationCenter: React.FC<ServiceNotificationCenterProps> = ({
   // Get all service IDs from family members
   const familyServiceIds = useMemo(() => {
     const serviceIds = new Set<string>();
-    familyMembers.forEach(member => {
-      // Services may be stored on member object or accessed via localStorage
-      // Check both possible locations
-      const memberServices = (member as any).services || [];
-      memberServices.forEach((service: any) => {
-        if (service?.serviceId) {
+    familyMembers.forEach((member: FamilyMember) => {
+      member.services?.forEach((service) => {
+        if (service.serviceId) {
           serviceIds.add(service.serviceId);
         }
       });
@@ -67,8 +64,18 @@ const ServiceNotificationCenter: React.FC<ServiceNotificationCenterProps> = ({
     }
   }, []);
 
+  const getNotificationPreferences = useCallback((): Record<string, boolean> => {
+    try {
+      return JSON.parse(
+        localStorage.getItem('pandagarde_notification_prefs') || '{}'
+      ) as Record<string, boolean>;
+    } catch {
+      return {};
+    }
+  }, []);
+
   // Load notifications
-  const loadNotifications = async () => {
+  const loadNotifications = useCallback(async () => {
     if (familyServiceIds.length === 0) {
       setNotifications([]);
       setLoading(false);
@@ -86,22 +93,11 @@ const ServiceNotificationCenter: React.FC<ServiceNotificationCenterProps> = ({
     } finally {
       setLoading(false);
     }
-  };
+  }, [familyServiceIds, getNotificationPreferences]);
 
   useEffect(() => {
     loadNotifications();
-  }, [familyServiceIds]);
-
-  // Get notification preferences from localStorage
-  const getNotificationPreferences = (): Record<string, boolean> => {
-    try {
-      return JSON.parse(
-        localStorage.getItem('pandagarde_notification_prefs') || '{}'
-      );
-    } catch {
-      return {};
-    }
-  };
+  }, [loadNotifications]);
 
   // Handle refresh
   const handleRefresh = async () => {
@@ -265,7 +261,7 @@ const ServiceNotificationCenter: React.FC<ServiceNotificationCenterProps> = ({
           <Filter className="h-4 w-4 text-gray-500" />
           <select
             value={filter}
-            onChange={(e) => setFilter(e.target.value as any)}
+            onChange={(e) => setFilter(e.target.value as typeof filter)}
             className="px-3 py-1.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-sm"
           >
             <option value="all">All Priorities</option>

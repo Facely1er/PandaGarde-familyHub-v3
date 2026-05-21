@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Heart, MessageCircle, Plus, Search, Clock, Tag } from 'lucide-react';
 import { communityStorage, SuccessStory } from '../../utils/communityStorageManager';
@@ -32,10 +32,6 @@ const SuccessStories: React.FC<SuccessStoriesProps> = ({ compact = false }) => {
     loadStories();
   }, []);
 
-  useEffect(() => {
-    filterAndSortStories();
-  }, [stories, selectedCategory, searchQuery, sortBy]);
-
   const loadStories = () => {
     const allStories = communityStorage.getAllStories();
     const publishedStories = Object.values(allStories)
@@ -48,7 +44,7 @@ const SuccessStories: React.FC<SuccessStoriesProps> = ({ compact = false }) => {
     setStories(publishedStories);
   };
 
-  const filterAndSortStories = () => {
+  const filterAndSortStories = useCallback(() => {
     let filtered = [...stories];
 
     // Filter by category
@@ -74,7 +70,11 @@ const SuccessStories: React.FC<SuccessStoriesProps> = ({ compact = false }) => {
     }
 
     setFilteredStories(filtered);
-  };
+  }, [stories, selectedCategory, searchQuery, sortBy]);
+
+  useEffect(() => {
+    filterAndSortStories();
+  }, [filterAndSortStories]);
 
   const handleVote = (storyId: string) => {
     communityStorage.voteStory(storyId, 'up');

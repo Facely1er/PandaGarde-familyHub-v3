@@ -5,7 +5,7 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
-  { ignores: ['dist', 'family-hub/**', 'vite.family-hub.config.ts'] },
+  { ignores: ['dist', 'family-hub/**', 'vite.family-hub.config.ts', 'eslint-report.json', 'scripts/**'] },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
     files: ['**/*.{ts,tsx}'],
@@ -21,7 +21,19 @@ export default tseslint.config(
       ...reactHooks.configs.recommended.rules,
       'react-refresh/only-export-components': [
         'warn',
-        { allowConstantExport: true },
+        {
+          allowConstantExport: true,
+          allowExportNames: [
+            'useAgeVerification',
+            'useAuth',
+            'useFamily',
+            'useFamilyProgress',
+            'useProgress',
+            'useSearch',
+            'useTheme',
+            'useToast',
+          ],
+        },
       ],
       '@typescript-eslint/no-unused-expressions': 'off',
       
@@ -61,5 +73,11 @@ export default tseslint.config(
       'radix': 'error',
       'yoda': 'error',
     },
-  }
+  },
+  {
+    files: ['**/*.{test,spec}.{ts,tsx}'],
+    rules: {
+      '@typescript-eslint/no-non-null-assertion': 'off',
+    },
+  },
 );

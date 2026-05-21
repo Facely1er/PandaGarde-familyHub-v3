@@ -7,13 +7,13 @@ export const supabase = null;
 export const isSupabaseAvailable = () => false;
 
 export const safeSupabaseQuery = async <T>(
-  _queryFn: (client: any) => Promise<{ data: T | null; error: any }>
+  _queryFn: (client: never) => Promise<{ data: T | null; error: unknown }>
 ): Promise<{ data: T | null; error: string | null }> => {
   return { data: null, error: 'Supabase is not configured (no-backend mode)' };
 };
 
 export const safeSupabaseMutation = async <T>(
-  _mutationFn: (client: any) => Promise<{ data: T | null; error: any }>
+  _mutationFn: (client: never) => Promise<{ data: T | null; error: unknown }>
 ): Promise<{ data: T | null; error: string | null }> => {
   return { data: null, error: 'Supabase is not configured (no-backend mode)' };
 };

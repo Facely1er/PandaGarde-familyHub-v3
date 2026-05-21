@@ -23,7 +23,8 @@ import {
   Settings,
   Book,
   Users,
-  Palette
+  Palette,
+  type LucideIcon,
 } from 'lucide-react';
 import { 
   familyResources, 
@@ -38,7 +39,7 @@ interface AdaptiveResourcesProps {
   compact?: boolean;
 }
 
-const iconMap: Record<string, React.ComponentType<any>> = {
+const iconMap: Record<string, LucideIcon> = {
   Shield,
   FileText,
   Bell,

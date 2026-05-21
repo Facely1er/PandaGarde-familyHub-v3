@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Clock,
@@ -23,11 +23,7 @@ const AssessmentHistory: React.FC = () => {
   const [history, setHistory] = useState<AssessmentHistoryEntry[]>([]);
   const [selectedEntry, setSelectedEntry] = useState<AssessmentHistoryEntry | null>(null);
 
-  useEffect(() => {
-    loadHistory();
-  }, []);
-
-  const loadHistory = () => {
+  const loadHistory = useCallback(() => {
     try {
       const stored = localStorage.getItem('pandagarde_assessment_history');
       if (stored) {
@@ -44,7 +40,11 @@ const AssessmentHistory: React.FC = () => {
     } catch (error) {
       logger.error('Error loading assessment history:', error);
     }
-  };
+  }, [selectedEntry]);
+
+  useEffect(() => {
+    loadHistory();
+  }, [loadHistory]);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);

@@ -1,0 +1,192 @@
+﻿
+> vite-react-typescript-starter@0.0.0 lint
+> eslint .
+
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\components\AdaptiveResources.tsx
+  41:51  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\components\AssessmentHistory.tsx
+  28:6  warning  React Hook useEffect has a missing dependency: 'loadHistory'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\components\ConversationStarter.tsx
+  173:21  warning  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
+  173:21  warning  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\components\DigitalFootprintVisualizer.tsx
+  79:30  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  79:53  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\components\EmailCaptureInline.tsx
+  38:26  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  48:35  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\components\EmailCaptureModal.tsx
+  44:26  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  55:52  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\components\FamilyDashboard.tsx
+  393:6  warning  React Hook useEffect has missing dependencies: 'familyMembers' and 'setFamilyMembers'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\components\FeatureUnlockCelebration.tsx
+  33:6  warning  React Hook useEffect has a missing dependency: 'handleClose'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\components\GamificationDashboard.tsx
+   23:6   warning  React Hook useEffect has a missing dependency: 'loadUserData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  185:57  warning  Unexpected any. Specify a different type                                                                         @typescript-eslint/no-explicit-any
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\components\OnboardingFlow.tsx
+  9:29  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\components\ServiceNotificationCenter.tsx
+   48:41  warning  Unexpected any. Specify a different type                                                                              @typescript-eslint/no-explicit-any
+   49:40  warning  Unexpected any. Specify a different type                                                                              @typescript-eslint/no-explicit-any
+   93:6   warning  React Hook useEffect has a missing dependency: 'loadNotifications'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  268:58  warning  Unexpected any. Specify a different type                                                                              @typescript-eslint/no-explicit-any
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\components\community\SuccessStories.tsx
+  37:6  warning  React Hook useEffect has a missing dependency: 'filterAndSortStories'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\components\games\DigitalRightsQuiz.tsx
+  116:6  warning  React Hook useEffect has a missing dependency: 'calculateScore'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\components\parent\FamilyPrivacyPlanBuilder.tsx
+  85:26  warning  'familyMembers' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\components\story\InteractiveStoryPlayer.tsx
+  429:6  warning  React Hook useEffect has a missing dependency: 'handleChoice'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\contexts\AgeVerificationContext.tsx
+   90:6   warning  React Hook useEffect has a missing dependency: 'autoRouteToAppropriateContent'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  278:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components    react-refresh/only-export-components
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\contexts\FamilyContext.tsx
+  72:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\contexts\FamilyProgressContext.tsx
+  67:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\contexts\ProgressContext.tsx
+  40:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\contexts\SearchContext.tsx
+  22:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\contexts\ThemeContext.tsx
+  10:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\contexts\ToastContext.tsx
+  16:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\familyhub\screens\ActivitiesScreen.tsx
+  411:25  warning  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\familyhub\screens\KidsScreen.tsx
+  69:0  error  Parsing error: Merge conflict marker encountered
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\hooks\useJourneyProgress.ts
+  142:43  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\lib\coppaCompliance.test.ts
+  122:68  warning  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
+  138:9   warning  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
+  162:55  warning  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
+  165:50  warning  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
+  169:9   warning  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
+  185:55  warning  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
+  188:66  warning  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
+  191:68  warning  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
+  225:55  warning  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
+  238:55  warning  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
+  239:50  warning  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
+  283:55  warning  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\lib\coppaCompliance.ts
+  290:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  291:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\lib\database.ts
+    3:17  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  184:13  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  257:13  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  310:13  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\lib\footprintAnalyzer.ts
+  156:20  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  156:43  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  163:9   warning  Forbidden non-null assertion              @typescript-eslint/no-non-null-assertion
+  233:7   warning  Forbidden non-null assertion              @typescript-eslint/no-non-null-assertion
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\lib\performanceMonitor.ts
+   65:33  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  142:53  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  143:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  147:53  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  148:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\lib\serviceWorker.ts
+  231:7  warning  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
+  231:7  warning  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\lib\supabase.ts
+  10:22  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  10:63  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  16:25  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  16:66  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\pages\DigitalFootprintPage.tsx
+  40:41  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  40:64  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\pages\DownloadGuidePage.tsx
+  141:49  warning  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
+  150:48  warning  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
+  158:46  warning  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\pages\FamilyHubPage.tsx
+  887:47  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  888:58  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  889:54  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\pages\InteractiveStoryPage.tsx
+   70:25  warning  Unexpected any. Specify a different type                                                                                                                                                                                                        @typescript-eslint/no-explicit-any
+  104:25  warning  Unexpected any. Specify a different type                                                                                                                                                                                                        @typescript-eslint/no-explicit-any
+  115:59  warning  Unexpected any. Specify a different type                                                                                                                                                                                                        @typescript-eslint/no-explicit-any
+  325:30  warning  Unexpected any. Specify a different type                                                                                                                                                                                                        @typescript-eslint/no-explicit-any
+  325:53  warning  Unexpected any. Specify a different type                                                                                                                                                                                                        @typescript-eslint/no-explicit-any
+  334:30  warning  Unexpected any. Specify a different type                                                                                                                                                                                                        @typescript-eslint/no-explicit-any
+  334:53  warning  Unexpected any. Specify a different type                                                                                                                                                                                                        @typescript-eslint/no-explicit-any
+  372:6   warning  React Hook useEffect has a missing dependency: 'achievements'. Either include it or remove the dependency array. You can also do a functional update 'setAchievements(a => ...)' if you only need 'achievements' in the 'setAchievements' call  react-hooks/exhaustive-deps
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\pages\ParentalConsentPage.tsx
+  24:6  warning  React Hook useEffect has a missing dependency: 'verifyConsent'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\pages\QuickAssessmentPage.tsx
+  13:29  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\pages\ServiceCatalogPage.tsx
+  32:6  warning  React Hook useEffect has a missing dependency: 'updateCount'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\pages\family-hub\AuthWrapper.tsx
+  117:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\tools\DigitalFootprintTimeline.tsx
+  112:6   warning  React Hook useEffect has a missing dependency: 'calculateDailySummary'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  335:68  warning  Unexpected any. Specify a different type                                                                                  @typescript-eslint/no-explicit-any
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\utils\gamificationSystem.ts
+  475:14  warning  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
+
+C:\Users\facel\Downloads\GitHub\ERMITS_MONOREPOS\PandaGarde-familyHub-v3-main\src\utils\localStorageManager.ts
+  170:34  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  188:36  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  210:36  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  243:39  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  243:53  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  251:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  279:39  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  279:53  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  287:21  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+Γ£û 99 problems (1 error, 98 warnings)
+

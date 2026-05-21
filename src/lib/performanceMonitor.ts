@@ -62,9 +62,10 @@ class PerformanceMonitor {
       let clsValue = 0;
       const clsObserver = new PerformanceObserver((list) => {
         const entries = list.getEntries();
-        entries.forEach((entry: any) => {
-          if (!entry.hadRecentInput) {
-            clsValue += entry.value;
+        entries.forEach((entry) => {
+          const layoutShift = entry as LayoutShiftEntry;
+          if (!layoutShift.hadRecentInput) {
+            clsValue += layoutShift.value;
             this.metrics.cls = clsValue;
             this.reportMetric('cls', clsValue);
           }
@@ -139,13 +140,13 @@ class PerformanceMonitor {
    */
   private reportMetric(name: string, value: number): void {
     // Report to Sentry if available
-    if (typeof window !== 'undefined' && (window as any).Sentry) {
-      (window as any).Sentry.metrics.distribution(name, value);
+    if (typeof window !== 'undefined' && window.Sentry) {
+      window.Sentry.metrics.distribution(name, value);
     }
 
     // Report to analytics if available
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'performance_metric', {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'performance_metric', {
         metric_name: name,
         metric_value: value,
       });

@@ -170,7 +170,10 @@ export const ConversationStarter: React.FC<ConversationStarterProps> = ({
     const ages = familyMembers
       .filter(m => m.role === 'child' && m.profile_data?.age)
       .map(m => {
-        const age = m.profile_data!.age!;
+        const age = m.profile_data?.age;
+        if (age === undefined) {
+          return null;
+        }
         if (age >= 5 && age <= 8) {return '5-8' as ConversationAgeGroup;}
         if (age >= 9 && age <= 12) {return '9-12' as ConversationAgeGroup;}
         if (age >= 13 && age <= 17) {return '13-17' as ConversationAgeGroup;}

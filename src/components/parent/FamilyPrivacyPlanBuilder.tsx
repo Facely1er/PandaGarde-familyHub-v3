@@ -82,7 +82,7 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
   onSave,
   onExport
 }) => {
-  const { currentFamily, familyMembers } = useFamily();
+  const { currentFamily } = useFamily();
   const [plan, setPlan] = useState<FamilyPrivacyPlan>(() => {
     if (initialPlan) {return initialPlan;}
     

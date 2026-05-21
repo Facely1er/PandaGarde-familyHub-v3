@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Card from './Card';
 import { gamificationSystem, Achievement, Mission, GamificationStats } from '../utils/gamificationSystem';
 import { localStorageManager, UserProgress } from '../utils/localStorageManager';
@@ -18,11 +18,7 @@ const GamificationDashboard: React.FC<GamificationDashboardProps> = ({ userId, a
   const [selectedTab, setSelectedTab] = useState<'overview' | 'missions' | 'achievements' | 'levels'>('overview');
   const [showAchievementNotification, setShowAchievementNotification] = useState<Achievement | null>(null);
 
-  useEffect(() => {
-    loadUserData();
-  }, [userId]);
-
-  const loadUserData = (): void => {
+  const loadUserData = useCallback((): void => {
     const progress = localStorageManager.getUserProgress(userId);
     if (!progress) {
       // Create new user progress if doesn't exist
@@ -49,7 +45,11 @@ const GamificationDashboard: React.FC<GamificationDashboardProps> = ({ userId, a
       ).filter(Boolean) as Achievement[];
       setAchievements(unlockedAchievements);
     }
-  };
+  }, [userId, ageGroup]);
+
+  useEffect(() => {
+    loadUserData();
+  }, [loadUserData]);
 
   const completeMission = (missionId: string): void => {
     try {
@@ -182,7 +182,7 @@ const GamificationDashboard: React.FC<GamificationDashboardProps> = ({ userId, a
             return (
               <button
                 key={tab.id}
-                onClick={() => setSelectedTab(tab.id as any)}
+                onClick={() => setSelectedTab(tab.id as typeof selectedTab)}
                 className={`flex-1 flex items-center justify-center space-x-2 py-3 px-4 rounded-md transition-colors ${
                   selectedTab === tab.id
                     ? 'bg-white text-blue-600 shadow-sm'

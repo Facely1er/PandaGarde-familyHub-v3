@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { X, Mail, CheckCircle } from 'lucide-react';
 import { useToast } from '../hooks/useToast';
 import { logger } from '../lib/logger';
+import type { EmailSubscription } from '../types/emailSubscription';
 
 interface EmailCaptureModalProps {
   isOpen: boolean;
@@ -41,7 +42,7 @@ const EmailCaptureModal: React.FC<EmailCaptureModalProps> = ({
 
     try {
       // Save to localStorage
-      let subscriptions: any[] = [];
+      let subscriptions: EmailSubscription[] = [];
       try {
         const subscriptionsStr = localStorage.getItem('pandagarde_email_subscriptions') || '[]';
         const parsed = JSON.parse(subscriptionsStr);
@@ -52,7 +53,7 @@ const EmailCaptureModal: React.FC<EmailCaptureModalProps> = ({
       }
       
       // Check if email already exists
-      const emailExists = subscriptions.some((sub: any) => sub && sub.email === email);
+      const emailExists = subscriptions.some((sub) => sub?.email === email);
       if (!emailExists) {
         subscriptions.push({
           email,

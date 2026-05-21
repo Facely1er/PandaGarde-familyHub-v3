@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Mail, CheckCircle } from 'lucide-react';
 import { useToast } from '../hooks/useToast';
 import { logger } from '../lib/logger';
+import type { EmailSubscription } from '../types/emailSubscription';
 
 interface EmailCaptureInlineProps {
   title?: string;
@@ -35,7 +36,7 @@ const EmailCaptureInline: React.FC<EmailCaptureInlineProps> = ({
     setIsSubmitting(true);
 
     try {
-      let subscriptions: any[] = [];
+      let subscriptions: EmailSubscription[] = [];
       try {
         const subscriptionsStr = localStorage.getItem('pandagarde_email_subscriptions') || '[]';
         const parsed = JSON.parse(subscriptionsStr);
@@ -45,7 +46,7 @@ const EmailCaptureInline: React.FC<EmailCaptureInlineProps> = ({
         subscriptions = [];
       }
       
-      if (!subscriptions.find((s: any) => s && s.email === email)) {
+      if (!subscriptions.find((s) => s?.email === email)) {
         subscriptions.push({
           email,
           purpose,

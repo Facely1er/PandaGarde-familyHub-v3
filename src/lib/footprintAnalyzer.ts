@@ -152,15 +152,15 @@ export class FootprintAnalyzer {
     const serviceMemberMap = new Map<string, Set<string>>(); // serviceId -> memberIds
 
     familyMembers.forEach(member => {
-      const memberServiceIds = memberServices[member.id] || 
-        (member as any).services?.map((s: any) => s.serviceId) || [];
+      const memberServiceIds =
+        memberServices[member.id] ?? member.services?.map((s) => s.serviceId) ?? [];
       
       memberServiceIds.forEach(serviceId => {
         allServiceIds.add(serviceId);
         if (!serviceMemberMap.has(serviceId)) {
           serviceMemberMap.set(serviceId, new Set());
         }
-        serviceMemberMap.get(serviceId)!.add(member.id);
+        serviceMemberMap.get(serviceId)?.add(member.id);
       });
     });
 
@@ -230,7 +230,7 @@ export class FootprintAnalyzer {
       if (!contextMap.has(ctx)) {
         contextMap.set(ctx, []);
       }
-      contextMap.get(ctx)!.push(risk);
+      contextMap.get(ctx)?.push(risk);
     });
     const contextBreakdown: ContextBreakdown[] = (['school', 'home', 'in-between'] as UsageContext[]).map(ctx => {
       const risks = contextMap.get(ctx) || [];

@@ -10,7 +10,7 @@ export interface ServiceUsage {
   notes?: string;
 }
 
-interface FamilyMember {
+export interface FamilyMember {
   id: string;
   user_id: string;
   family_id: string;
