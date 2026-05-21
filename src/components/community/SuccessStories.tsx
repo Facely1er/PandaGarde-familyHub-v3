@@ -95,7 +95,7 @@ const SuccessStories: React.FC<SuccessStoriesProps> = ({ compact = false }) => {
   if (compact) {
     const featuredStories = filteredStories.slice(0, 3);
     return (
-      <div className="bg-white rounded-lg p-4 shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
+      <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold flex items-center gap-2 text-primary">
             <Heart size={20} />
@@ -190,7 +190,7 @@ const SuccessStories: React.FC<SuccessStoriesProps> = ({ compact = false }) => {
         </div>
 
         {/* Filters and Search */}
-        <div className="bg-white rounded-lg p-4 shadow-md mb-6" style={{ backgroundColor: 'var(--card-color)' }}>
+        <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md mb-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
@@ -280,7 +280,7 @@ const StoryCard: React.FC<StoryCardProps> = ({ story, onVote }) => {
   };
 
   return (
-    <div className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all" style={{ backgroundColor: 'var(--card-color)' }}>
+    <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-lg transition-all">
       <div className="flex items-start justify-between mb-3">
         <div className="flex-1">
           <h3 className="text-xl font-bold mb-2 text-primary">
@@ -402,8 +402,8 @@ const StorySubmissionForm: React.FC<StorySubmissionFormProps> = ({ onSubmit, onC
             Share Your Success Story
           </h2>
 
-          <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
-            <p className="text-sm text-green-800">
+          <div className="bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-700 rounded-lg p-4 mb-6">
+            <p className="text-sm text-green-800 dark:text-green-200">
               <strong>Privacy Notice:</strong> Your story will be completely anonymous. No personal information will be collected or displayed. All data is stored locally on your device.
             </p>
           </div>
@@ -419,8 +419,7 @@ const StorySubmissionForm: React.FC<StorySubmissionFormProps> = ({ onSubmit, onC
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 maxLength={100}
-                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 ${errors['title'] ? 'border-red-500' : 'border-gray-300'}`}
-                style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}
+                className={`w-full px-3 py-2 border rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 ${errors['title'] ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'}`}
                 placeholder="A brief title for your story"
               />
               {errors['title'] && <p className="text-red-500 text-sm mt-1">{errors['title']}</p>}
@@ -435,8 +434,7 @@ const StorySubmissionForm: React.FC<StorySubmissionFormProps> = ({ onSubmit, onC
                 id="story-category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value as SuccessStory['category'])}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
               >
                 <option value="conversation-starter">Conversation Starter</option>
                 <option value="activity-success">Activity Success</option>
@@ -459,8 +457,7 @@ const StorySubmissionForm: React.FC<StorySubmissionFormProps> = ({ onSubmit, onC
                 onChange={(e) => setStory(e.target.value)}
                 maxLength={2000}
                 rows={8}
-                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 ${errors['story'] ? 'border-red-500' : 'border-gray-300'}`}
-                style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}
+                className={`w-full px-3 py-2 border rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 ${errors['story'] ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'}`}
                 placeholder="Share your success story about teaching privacy to your children. Remember: no personal information, names, or identifying details."
               />
               {errors['story'] && <p className="text-red-500 text-sm mt-1">{errors['story']}</p>}
@@ -476,8 +473,7 @@ const StorySubmissionForm: React.FC<StorySubmissionFormProps> = ({ onSubmit, onC
                 type="text"
                 value={tags}
                 onChange={(e) => setTags(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
                 placeholder="e.g., password, conversation, family"
               />
             </div>

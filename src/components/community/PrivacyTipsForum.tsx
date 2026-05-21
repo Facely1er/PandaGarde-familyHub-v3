@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createFocusTrap } from '../../utils/accessibility';
-import { Link } from 'react-router-dom';
 import { MessageCircle, Plus, Search, ArrowRight, Heart, CheckCircle, User, Users, Shield, Lock, GraduationCap, Briefcase, UserCircle, X, ArrowLeft } from 'lucide-react';
 import { communityStorage, ForumTopic, ForumPost, ForumUser } from '../../utils/communityStorageManager';
 
@@ -176,10 +175,11 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
           {recentTopics.map(topic => {
             const author = communityStorage.getForumUser(topic.authorId);
             return (
-              <div
+              <button
+                type="button"
                 key={topic.id}
                 onClick={() => setSelectedTopic(topic)}
-                className="border-b border-gray-200 pb-3 last:border-0 cursor-pointer hover:bg-gray-50 p-2 rounded transition-colors"
+                className="w-full text-left border-b border-gray-200 dark:border-gray-700 pb-3 last:border-0 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/50 p-2 rounded transition-colors"
               >
                 <h4 className="font-medium mb-1 text-primary">{topic.title}</h4>
                 <p className="text-sm line-clamp-2 mb-2 text-gray-600">
@@ -192,7 +192,7 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
                   </span>
                   <span>{topic.postCount} posts</span>
                 </div>
-              </div>
+              </button>
             );
           })}
         </div>
@@ -225,6 +225,7 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
         onVotePost={handleVotePost}
         showPostForm={showPostForm}
         setShowPostForm={setShowPostForm}
+        onJoinRequired={() => setShowUserForm(true)}
       />
     );
   }
@@ -311,37 +312,11 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
         <div className="container max-w-6xl mx-auto py-8 sm:py-12 px-4 sm:px-6">
           {/* Join Banner - Closable */}
           {showBanner && currentUser && (
-            <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6" style={{
-              position: 'relative',
-              background: 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)',
-              border: '2px solid #86efac'
-            }}>
+            <div className="relative mb-6 rounded-lg border-2 border-green-300 bg-gradient-to-br from-green-50 to-green-100 p-4 dark:border-green-700 dark:from-green-950/40 dark:to-green-900/30">
               <button
+                type="button"
                 onClick={handleDismissBanner}
-                style={{
-                  position: 'absolute',
-                  top: '0.75rem',
-                  right: '0.75rem',
-                  background: 'transparent',
-                  border: 'none',
-                  color: '#16a34a',
-                  padding: '0.25rem',
-                  borderRadius: '4px',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  transition: 'background 0.2s',
-                  opacity: 0.7
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'rgba(22, 163, 74, 0.1)';
-                  e.currentTarget.style.opacity = '1';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'transparent';
-                  e.currentTarget.style.opacity = '0.7';
-                }}
+                className="absolute top-3 right-3 flex items-center justify-center rounded p-1 text-green-700 opacity-70 transition hover:bg-green-600/10 hover:opacity-100 dark:text-green-400"
                 aria-label="Dismiss banner"
               >
                 <X size={18} />
@@ -350,11 +325,11 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
                 <div className="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center text-white flex-shrink-0">
                   {React.createElement(getAvatarIcon(currentUser?.avatar), { size: 20 })}
                 </div>
-                <div style={{ flex: 1 }}>
-                  <p className="font-semibold mb-1" style={{ color: 'var(--primary)', fontSize: '1rem' }}>
+                <div className="flex-1 min-w-0">
+                  <p className="font-semibold mb-1 text-base text-green-800 dark:text-green-300">
                     Welcome, {currentUser?.displayName || currentUser?.username || 'User'}!
                   </p>
-                  <p className="text-sm" style={{ color: '#166534', lineHeight: '1.5' }}>
+                  <p className="text-sm leading-relaxed text-green-800 dark:text-green-200">
                     <strong>Privacy First:</strong> Your username is pseudonymous. All data is stored locally on your device. No backend required, completely anonymous.
                   </p>
                 </div>
@@ -366,32 +341,27 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
           <div className="mb-8">
             <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
               <div>
-                <h2 style={{
-                  fontSize: 'clamp(1.5rem, 3vw, 2rem)',
-                  fontWeight: '700',
-                  color: 'var(--gray-800)',
-                  marginBottom: '0.5rem'
-                }}>
+                <h2 className="text-2xl sm:text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100">
                   Community Discussions
                 </h2>
-                <p style={{ color: 'var(--gray-600)', fontSize: '1rem' }}>
+                <p className="text-base text-gray-600 dark:text-gray-300">
                   Join conversations and share your privacy tips
                 </p>
               </div>
               {currentUser ? (
                 <button
+                  type="button"
                   onClick={() => setShowTopicForm(true)}
-                  className="px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg font-semibold hover:from-green-600 hover:to-green-700 transition-all flex items-center gap-2"
-                  style={{ whiteSpace: 'nowrap' }}
+                  className="whitespace-nowrap px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg font-semibold hover:from-green-600 hover:to-green-700 transition-all flex items-center gap-2"
                 >
                   <Plus size={20} />
                   New Topic
                 </button>
               ) : (
                 <button
+                  type="button"
                   onClick={() => setShowUserForm(true)}
-                  className="px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg font-semibold hover:from-green-600 hover:to-green-700 transition-all flex items-center gap-2"
-                  style={{ whiteSpace: 'nowrap' }}
+                  className="whitespace-nowrap px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg font-semibold hover:from-green-600 hover:to-green-700 transition-all flex items-center gap-2"
                 >
                   <Users size={20} />
                   Join Forum
@@ -401,7 +371,7 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
           </div>
 
         {/* Filters */}
-        <div className="bg-white rounded-lg p-4 shadow-md mb-6" style={{ backgroundColor: 'var(--card-color)' }}>
+        <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md mb-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
@@ -455,10 +425,11 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
             {filteredTopics.map(topic => {
               const author = communityStorage.getForumUser(topic.authorId);
               return (
-                <div
+                <button
+                  type="button"
                   key={topic.id}
                   onClick={() => setSelectedTopic(topic)}
-                  className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md hover:shadow-lg transition-all cursor-pointer"
+                  className="w-full text-left bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md hover:shadow-lg transition-all cursor-pointer"
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
@@ -485,9 +456,9 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
                         <span>{new Date(topic.lastActivity).toLocaleDateString()}</span>
                       </div>
                     </div>
-                    <ArrowRight size={20} className="text-gray-400" />
+                    <ArrowRight size={20} className="text-gray-400 shrink-0" aria-hidden />
                   </div>
-                </div>
+                </button>
               );
             })}
           </div>
@@ -517,23 +488,25 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
 interface TopicDetailViewProps {
   topic: ForumTopic;
   posts: ForumPost[];
-  currentUser: ForumUser;
+  currentUser: ForumUser | null;
   onBack: () => void;
   onCreatePost: (content: string) => void;
   onVotePost: (postId: string) => void;
   showPostForm: boolean;
   setShowPostForm: (show: boolean) => void;
+  onJoinRequired: () => void;
 }
 
 const TopicDetailView: React.FC<TopicDetailViewProps> = ({
   topic,
   posts,
-  currentUser: _currentUser,
+  currentUser,
   onBack,
   onCreatePost,
   onVotePost,
   showPostForm,
-  setShowPostForm
+  setShowPostForm,
+  onJoinRequired
 }) => {
   const [postContent, setPostContent] = useState('');
 
@@ -548,50 +521,34 @@ const TopicDetailView: React.FC<TopicDetailViewProps> = ({
   const author = communityStorage.getForumUser(topic.authorId);
 
   return (
-    <main id="main-content" >
-      {/* Back Navigation */}
-      <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '1.5rem 1.5rem' }}>
+    <main id="main-content" className="bg-white dark:bg-gray-900">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6">
         <button
+          type="button"
           onClick={onBack}
-          className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
-          style={{ textDecoration: 'none', background: 'none', border: 'none', cursor: 'pointer', padding: 0, font: 'inherit' }}
+          className="inline-flex items-center gap-2 p-0 font-inherit text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 transition-colors bg-transparent border-0 cursor-pointer"
         >
-          <ArrowLeft size={16} />
+          <ArrowLeft size={16} aria-hidden />
           Back to Forum
         </button>
       </div>
 
-      {/* Page Header */}
-      <section style={{ padding: 'clamp(3rem, 6vw, 4rem) 0', background: 'var(--gray-100)' }}>
-        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
-          <h1 style={{
-            fontSize: 'clamp(2rem, 4vw, 2.5rem)',
-            fontWeight: '800',
-            lineHeight: '1.1',
-            marginBottom: '1rem',
-            color: 'var(--gray-800)'
-          }}>
+      <section className="py-12 sm:py-16 bg-gray-100 dark:bg-gray-800/50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <h1 className="text-3xl sm:text-4xl font-extrabold leading-tight mb-4 text-gray-900 dark:text-gray-100">
             {topic.title}
           </h1>
           {topic.description && (
-            <p style={{
-              fontSize: '1.125rem',
-              color: 'var(--gray-600)',
-              maxWidth: '48rem',
-              margin: '0 auto',
-              lineHeight: '1.6'
-            }}>
+            <p className="text-lg max-w-3xl leading-relaxed text-gray-600 dark:text-gray-300">
               {topic.description}
             </p>
           )}
         </div>
       </section>
 
-      {/* Topic Content */}
-      <section style={{ padding: 'clamp(4rem, 8vw, 6rem) 0', background: '#ffffff' }}>
-        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
-        {/* Topic Header */}
-        <div className="bg-white rounded-lg p-6 shadow-md mb-6" style={{ backgroundColor: 'var(--card-color)' }}>
+      <section className="py-12 sm:py-16 md:py-24">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md mb-6">
           <h2 className="text-3xl font-bold mb-3 text-primary">
             {topic.title}
           </h2>
@@ -601,7 +558,7 @@ const TopicDetailView: React.FC<TopicDetailViewProps> = ({
             </p>
           )}
           <div className="flex items-center gap-4 text-sm text-gray-500">
-            <span className="px-2 py-1 bg-green-100 text-green-800 rounded">
+            <span className="px-2 py-1 bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300 rounded">
               {topic.category.replace('-', ' ')}
             </span>
             <span className="flex items-center gap-1">
@@ -641,7 +598,7 @@ const TopicDetailView: React.FC<TopicDetailViewProps> = ({
                         <span className="text-xs text-gray-500">(edited)</span>
                       )}
                     </div>
-                    <p className="mb-3 whitespace-pre-wrap text-gray-700">
+                    <p className="mb-3 whitespace-pre-wrap text-gray-700 dark:text-gray-300">
                       {post.content}
                     </p>
                     <div className="flex items-center gap-4 text-sm text-gray-500">
@@ -663,7 +620,7 @@ const TopicDetailView: React.FC<TopicDetailViewProps> = ({
 
         {/* Reply Form */}
         {showPostForm ? (
-          <div className="bg-white rounded-lg p-6 shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
+          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md">
             <form onSubmit={handleSubmitPost}>
               <label htmlFor="forum-post-reply" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                 Your reply
@@ -698,11 +655,12 @@ const TopicDetailView: React.FC<TopicDetailViewProps> = ({
           </div>
         ) : (
           <button
+            type="button"
             onClick={() => {
               if (currentUser) {
                 setShowPostForm(true);
               } else {
-                setShowUserForm(true);
+                onJoinRequired();
               }
             }}
             className="w-full px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition-colors"
