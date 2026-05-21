@@ -177,8 +177,8 @@ const OverviewPage: React.FC = () => {
     >
 
       {/* Customer Journey */}
-      <section className="parent-steps">
-        <div className="container">
+      <section className="parent-steps py-8 md:py-12">
+        <div className="container px-4 sm:px-6 lg:px-8">
           <div className="section-header fade-in">
             <h2>Your PandaGarde Journey</h2>
             <p>Follow these simple steps to protect your family in the digital age.</p>
@@ -193,7 +193,7 @@ const OverviewPage: React.FC = () => {
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="step-number">
-                  {step.isFoundation && <Unlock size={12} style={{ position: 'absolute', top: '-5px', right: '-5px' }} />}
+                  {step.isFoundation && <Unlock size={12} className="absolute -top-1 -right-1" aria-hidden />}
                   <span>{step.step}</span>
                 </div>
                 <div className="step-content">
@@ -245,8 +245,8 @@ const OverviewPage: React.FC = () => {
       </section>
 
       {/* Age-Appropriate Curriculum */}
-      <section className="curriculum-section" id="curriculum">
-        <div className="container">
+      <section className="curriculum-section py-8 md:py-12" id="curriculum">
+        <div className="container px-4 sm:px-6 lg:px-8">
           <div className="section-header fade-in">
             <span className="badge">AGE-APPROPRIATE CURRICULUM</span>
             <h2>Learning Paths for Every Family Member</h2>
@@ -282,8 +282,8 @@ const OverviewPage: React.FC = () => {
       </section>
 
       {/* Complete Ecosystem */}
-      <section className="products-section" id="products">
-        <div className="container">
+      <section className="products-section py-8 md:py-12" id="products">
+        <div className="container px-4 sm:px-6 lg:px-8">
           <div className="section-header fade-in">
             <span className="badge">OUR COMPLETE ECOSYSTEM</span>
             <h2>Three Powerful Tools Working Together</h2>

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Users, Phone, Mail, AlertTriangle, Shield, CheckCircle, Plus, X, Edit2 } from 'lucide-react';
-import { useFamily } from '../../contexts/FamilyContext';
+import { Users, Phone, Mail, AlertTriangle, Shield, CheckCircle, Plus, X } from 'lucide-react';
 
 interface TechGuide {
   id: string;
@@ -27,19 +26,49 @@ interface WarningSign {
   checked: boolean;
 }
 
+const fieldClass =
+  'w-full px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500';
+
+const sectionCardClass =
+  'rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-6 mb-8';
+
+const btnPrimaryClass =
+  'inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-green-600 hover:bg-green-700 dark:bg-green-600 dark:hover:bg-green-500 rounded-md transition-colors';
+
+const btnSecondaryClass =
+  'inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-semibold text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-md transition-colors';
+
+const btnBlueClass =
+  'inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 rounded-md transition-colors';
+
+function guideCardClass(guide: TechGuide): string {
+  if (guide.isPrimary) {
+    return 'relative rounded-lg p-4 border-2 bg-green-50 dark:bg-green-950/40 border-green-500';
+  }
+  if (guide.isBackup) {
+    return 'relative rounded-lg p-4 border-2 bg-amber-50 dark:bg-amber-950/40 border-amber-500';
+  }
+  return 'relative rounded-lg p-4 border-2 bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700';
+}
+
+function guideIconClass(guide: TechGuide): string {
+  if (guide.isPrimary) return 'text-green-600 dark:text-green-400';
+  if (guide.isBackup) return 'text-amber-600 dark:text-amber-400';
+  return 'text-gray-500 dark:text-gray-400';
+}
+
 const SafetyNetBuilder: React.FC = () => {
-  const { familyMembers } = useFamily();
   const [techGuides, setTechGuides] = useState<TechGuide[]>([]);
   const [pointsOfContact, setPointsOfContact] = useState<PointOfContact[]>([]);
   const [warningSigns, setWarningSigns] = useState<WarningSign[]>([
     { id: '1', description: 'Unexpected charges on credit cards or bank statements', checked: false },
     { id: '2', description: 'Receiving emails or calls from unknown companies asking for personal information', checked: false },
-    { id: '3', description: 'Noticing new accounts or apps you didn\'t create', checked: false },
+    { id: '3', description: "Noticing new accounts or apps you didn't create", checked: false },
     { id: '4', description: 'Friends or family receiving strange messages from your accounts', checked: false },
     { id: '5', description: 'Unable to log into your accounts (password changed)', checked: false },
-    { id: '6', description: 'Seeing posts or activity on your social media you didn\'t create', checked: false },
+    { id: '6', description: "Seeing posts or activity on your social media you didn't create", checked: false },
     { id: '7', description: 'Receiving notifications about login attempts from unfamiliar locations', checked: false },
-    { id: '8', description: 'Noticing your device is slower or behaving strangely', checked: false }
+    { id: '8', description: 'Noticing your device is slower or behaving strangely', checked: false },
   ]);
   const [showAddTechGuide, setShowAddTechGuide] = useState(false);
   const [showAddContact, setShowAddContact] = useState(false);
@@ -50,7 +79,7 @@ const SafetyNetBuilder: React.FC = () => {
     phone: '',
     email: '',
     isPrimary: false,
-    isBackup: false
+    isBackup: false,
   });
 
   const [newContact, setNewContact] = useState({
@@ -58,15 +87,15 @@ const SafetyNetBuilder: React.FC = () => {
     contactName: '',
     contactMethod: 'phone',
     phone: '',
-    email: ''
+    email: '',
   });
 
   const addTechGuide = () => {
-    if (!newTechGuide.name || (!newTechGuide.phone && !newTechGuide.email)) {return;}
+    if (!newTechGuide.name || (!newTechGuide.phone && !newTechGuide.email)) return;
 
     const guide: TechGuide = {
       id: `guide-${Date.now()}`,
-      ...newTechGuide
+      ...newTechGuide,
     };
 
     setTechGuides([...techGuides, guide]);
@@ -76,17 +105,17 @@ const SafetyNetBuilder: React.FC = () => {
       phone: '',
       email: '',
       isPrimary: false,
-      isBackup: false
+      isBackup: false,
     });
     setShowAddTechGuide(false);
   };
 
   const addPointOfContact = () => {
-    if (!newContact.issueType || !newContact.contactName) {return;}
+    if (!newContact.issueType || !newContact.contactName) return;
 
     const contact: PointOfContact = {
       id: `contact-${Date.now()}`,
-      ...newContact
+      ...newContact,
     };
 
     setPointsOfContact([...pointsOfContact, contact]);
@@ -95,169 +124,146 @@ const SafetyNetBuilder: React.FC = () => {
       contactName: '',
       contactMethod: 'phone',
       phone: '',
-      email: ''
+      email: '',
     });
     setShowAddContact(false);
   };
 
   const toggleWarningSign = (id: string) => {
-    setWarningSigns(warningSigns.map(sign =>
-      sign.id === id ? { ...sign, checked: !sign.checked } : sign
-    ));
+    setWarningSigns(
+      warningSigns.map((sign) => (sign.id === id ? { ...sign, checked: !sign.checked } : sign))
+    );
   };
 
   const removeTechGuide = (id: string) => {
-    setTechGuides(techGuides.filter(guide => guide.id !== id));
+    setTechGuides(techGuides.filter((guide) => guide.id !== id));
   };
 
   const removeContact = (id: string) => {
-    setPointsOfContact(pointsOfContact.filter(contact => contact.id !== id));
+    setPointsOfContact(pointsOfContact.filter((contact) => contact.id !== id));
   };
 
   return (
-    <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
-      <div style={{ marginBottom: '2rem' }}>
-        <h2 style={{ fontSize: '2rem', fontWeight: 'bold', color: '#2C3E50', marginBottom: '0.5rem' }}>
+    <div className="p-4 sm:p-8 max-w-6xl mx-auto">
+      <div className="mb-8">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-gray-100 mb-2">
           Build Your Digital Safety Net
         </h2>
-        <p style={{ color: '#666', fontSize: '1.125rem' }}>
-          Set up your family's support network for handling online privacy issues and emergencies
+        <p className="text-gray-600 dark:text-gray-300 text-base sm:text-lg">
+          Set up your family&apos;s support network for handling online privacy issues and emergencies
         </p>
       </div>
 
       {/* Tech Guides Section */}
-      <div style={{
-        backgroundColor: 'white',
-        borderRadius: '12px',
-        border: '1px solid #e5e7eb',
-        padding: '1.5rem',
-        marginBottom: '2rem'
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
+      <div className={sectionCardClass}>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
           <div>
-            <h3 style={{ fontSize: '1.5rem', fontWeight: 600, color: '#2C3E50', marginBottom: '0.25rem' }}>
+            <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-1">
               Designate Tech Guides
             </h3>
-            <p style={{ color: '#666', fontSize: '0.875rem' }}>
+            <p className="text-gray-600 dark:text-gray-400 text-sm">
               Choose trusted family members or friends who can help with technology questions and privacy issues
             </p>
           </div>
-          <button
-            onClick={() => setShowAddTechGuide(!showAddTechGuide)}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              padding: '0.75rem 1rem',
-              backgroundColor: '#4CAF50',
-              color: 'white',
-              border: 'none',
-              borderRadius: '6px',
-              cursor: 'pointer',
-              fontSize: '0.875rem',
-              fontWeight: 600
-            }}
-          >
-            <Plus size={16} />
+          <button type="button" onClick={() => setShowAddTechGuide(!showAddTechGuide)} className={btnPrimaryClass}>
+            <Plus size={16} aria-hidden />
             Add Tech Guide
           </button>
         </div>
 
         {showAddTechGuide && (
-          <div style={{
-            backgroundColor: '#f8f9fa',
-            borderRadius: '8px',
-            padding: '1.5rem',
-            marginBottom: '1rem'
-          }}>
-            <h4 style={{ fontSize: '1rem', fontWeight: 600, color: '#2C3E50', marginBottom: '1rem' }}>
-              Add New Tech Guide
-            </h4>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '1rem' }}>
-              <input
-                type="text"
-                placeholder="Name"
-                value={newTechGuide.name}
-                onChange={(e) => setNewTechGuide({ ...newTechGuide, name: e.target.value })}
-                style={{
-                  padding: '0.75rem',
-                  border: '1px solid #e5e7eb',
-                  borderRadius: '6px',
-                  fontSize: '0.875rem'
-                }}
-              />
-              <input
-                type="text"
-                placeholder="Relationship (e.g., Uncle, Friend)"
-                value={newTechGuide.relationship}
-                onChange={(e) => setNewTechGuide({ ...newTechGuide, relationship: e.target.value })}
-                style={{
-                  padding: '0.75rem',
-                  border: '1px solid #e5e7eb',
-                  borderRadius: '6px',
-                  fontSize: '0.875rem'
-                }}
-              />
-              <input
-                type="tel"
-                placeholder="Phone Number"
-                value={newTechGuide.phone}
-                onChange={(e) => setNewTechGuide({ ...newTechGuide, phone: e.target.value })}
-                style={{
-                  padding: '0.75rem',
-                  border: '1px solid #e5e7eb',
-                  borderRadius: '6px',
-                  fontSize: '0.875rem'
-                }}
-              />
-              <input
-                type="email"
-                placeholder="Email"
-                value={newTechGuide.email}
-                onChange={(e) => setNewTechGuide({ ...newTechGuide, email: e.target.value })}
-                style={{
-                  padding: '0.75rem',
-                  border: '1px solid #e5e7eb',
-                  borderRadius: '6px',
-                  fontSize: '0.875rem'
-                }}
-              />
+          <div className="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-4 sm:p-6 mb-4">
+            <h4 className="text-base font-semibold text-gray-800 dark:text-gray-100 mb-4">Add New Tech Guide</h4>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label htmlFor="tech-guide-name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Name
+                </label>
+                <input
+                  id="tech-guide-name"
+                  type="text"
+                  placeholder="Name"
+                  value={newTechGuide.name}
+                  onChange={(e) => setNewTechGuide({ ...newTechGuide, name: e.target.value })}
+                  className={fieldClass}
+                />
+              </div>
+              <div>
+                <label htmlFor="tech-guide-relationship" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Relationship
+                </label>
+                <input
+                  id="tech-guide-relationship"
+                  type="text"
+                  placeholder="e.g., Uncle, Friend"
+                  value={newTechGuide.relationship}
+                  onChange={(e) => setNewTechGuide({ ...newTechGuide, relationship: e.target.value })}
+                  className={fieldClass}
+                />
+              </div>
+              <div>
+                <label htmlFor="tech-guide-phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Phone
+                </label>
+                <input
+                  id="tech-guide-phone"
+                  type="tel"
+                  placeholder="Phone number"
+                  value={newTechGuide.phone}
+                  onChange={(e) => setNewTechGuide({ ...newTechGuide, phone: e.target.value })}
+                  className={fieldClass}
+                />
+              </div>
+              <div>
+                <label htmlFor="tech-guide-email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Email
+                </label>
+                <input
+                  id="tech-guide-email"
+                  type="email"
+                  placeholder="Email"
+                  value={newTechGuide.email}
+                  onChange={(e) => setNewTechGuide({ ...newTechGuide, email: e.target.value })}
+                  className={fieldClass}
+                />
+              </div>
             </div>
-            <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
-              <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+            <div className="flex flex-wrap gap-4 mb-4">
+              <label className="flex items-center gap-2 cursor-pointer text-sm text-gray-600 dark:text-gray-400">
                 <input
                   type="checkbox"
                   checked={newTechGuide.isPrimary}
-                  onChange={(e) => setNewTechGuide({ ...newTechGuide, isPrimary: e.target.checked, isBackup: e.target.checked ? false : newTechGuide.isBackup })}
+                  onChange={(e) =>
+                    setNewTechGuide({
+                      ...newTechGuide,
+                      isPrimary: e.target.checked,
+                      isBackup: e.target.checked ? false : newTechGuide.isBackup,
+                    })
+                  }
                 />
-                <span style={{ fontSize: '0.875rem', color: '#666' }}>Primary Contact</span>
+                Primary Contact
               </label>
-              <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+              <label className="flex items-center gap-2 cursor-pointer text-sm text-gray-600 dark:text-gray-400">
                 <input
                   type="checkbox"
                   checked={newTechGuide.isBackup}
-                  onChange={(e) => setNewTechGuide({ ...newTechGuide, isBackup: e.target.checked, isPrimary: e.target.checked ? false : newTechGuide.isPrimary })}
+                  onChange={(e) =>
+                    setNewTechGuide({
+                      ...newTechGuide,
+                      isBackup: e.target.checked,
+                      isPrimary: e.target.checked ? false : newTechGuide.isPrimary,
+                    })
+                  }
                 />
-                <span style={{ fontSize: '0.875rem', color: '#666' }}>Backup Contact</span>
+                Backup Contact
               </label>
             </div>
-            <div style={{ display: 'flex', gap: '0.5rem' }}>
-              <button
-                onClick={addTechGuide}
-                style={{
-                  padding: '0.75rem 1.5rem',
-                  backgroundColor: '#4CAF50',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '6px',
-                  cursor: 'pointer',
-                  fontSize: '0.875rem',
-                  fontWeight: 600
-                }}
-              >
+            <div className="flex flex-wrap gap-2">
+              <button type="button" onClick={addTechGuide} className={btnPrimaryClass}>
                 Add Guide
               </button>
               <button
+                type="button"
                 onClick={() => {
                   setShowAddTechGuide(false);
                   setNewTechGuide({
@@ -266,19 +272,10 @@ const SafetyNetBuilder: React.FC = () => {
                     phone: '',
                     email: '',
                     isPrimary: false,
-                    isBackup: false
+                    isBackup: false,
                   });
                 }}
-                style={{
-                  padding: '0.75rem 1.5rem',
-                  backgroundColor: '#f3f4f6',
-                  color: '#666',
-                  border: 'none',
-                  borderRadius: '6px',
-                  cursor: 'pointer',
-                  fontSize: '0.875rem',
-                  fontWeight: 600
-                }}
+                className={btnSecondaryClass}
               >
                 Cancel
               </button>
@@ -287,85 +284,48 @@ const SafetyNetBuilder: React.FC = () => {
         )}
 
         {techGuides.length === 0 ? (
-          <p style={{ color: '#666', fontStyle: 'italic', textAlign: 'center', padding: '2rem' }}>
+          <p className="text-gray-500 dark:text-gray-400 italic text-center py-8">
             No tech guides added yet. Add someone who can help with technology questions.
           </p>
         ) : (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1rem' }}>
-            {techGuides.map(guide => (
-              <div
-                key={guide.id}
-                style={{
-                  backgroundColor: guide.isPrimary ? '#f0fdf4' : guide.isBackup ? '#fef3c7' : '#f8f9fa',
-                  border: `2px solid ${guide.isPrimary ? '#10b981' : guide.isBackup ? '#f59e0b' : '#e5e7eb'}`,
-                  borderRadius: '8px',
-                  padding: '1rem',
-                  position: 'relative'
-                }}
-              >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {techGuides.map((guide) => (
+              <div key={guide.id} className={guideCardClass(guide)}>
                 <button
+                  type="button"
                   onClick={() => removeTechGuide(guide.id)}
-                  style={{
-                    position: 'absolute',
-                    top: '0.5rem',
-                    right: '0.5rem',
-                    padding: '0.25rem',
-                    backgroundColor: 'transparent',
-                    border: 'none',
-                    cursor: 'pointer'
-                  }}
+                  className="absolute top-2 right-2 p-1 text-red-600 dark:text-red-400 hover:opacity-80"
+                  aria-label={`Remove ${guide.name}`}
                 >
-                  <X size={16} style={{ color: '#dc2626' }} />
+                  <X size={16} aria-hidden />
                 </button>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
-                  <Users size={24} style={{ color: guide.isPrimary ? '#10b981' : guide.isBackup ? '#f59e0b' : '#666' }} />
+                <div className="flex items-center gap-3 mb-3">
+                  <Users size={24} className={guideIconClass(guide)} aria-hidden />
                   <div>
-                    <div style={{ fontSize: '1rem', fontWeight: 600, color: '#2C3E50' }}>
-                      {guide.name}
-                    </div>
-                    <div style={{ fontSize: '0.875rem', color: '#666' }}>
-                      {guide.relationship}
-                    </div>
+                    <div className="font-semibold text-gray-800 dark:text-gray-100">{guide.name}</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">{guide.relationship}</div>
                   </div>
                 </div>
                 {guide.isPrimary && (
-                  <span style={{
-                    display: 'inline-block',
-                    padding: '0.25rem 0.75rem',
-                    backgroundColor: '#10b981',
-                    color: 'white',
-                    borderRadius: '12px',
-                    fontSize: '0.75rem',
-                    fontWeight: 600,
-                    marginBottom: '0.5rem'
-                  }}>
+                  <span className="inline-block px-3 py-0.5 mb-2 text-xs font-semibold text-white bg-green-600 rounded-full">
                     Primary Contact
                   </span>
                 )}
                 {guide.isBackup && (
-                  <span style={{
-                    display: 'inline-block',
-                    padding: '0.25rem 0.75rem',
-                    backgroundColor: '#f59e0b',
-                    color: 'white',
-                    borderRadius: '12px',
-                    fontSize: '0.75rem',
-                    fontWeight: 600,
-                    marginBottom: '0.5rem'
-                  }}>
+                  <span className="inline-block px-3 py-0.5 mb-2 text-xs font-semibold text-white bg-amber-500 rounded-full">
                     Backup Contact
                   </span>
                 )}
-                <div style={{ fontSize: '0.875rem', color: '#666' }}>
+                <div className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
                   {guide.phone && (
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
-                      <Phone size={14} />
+                    <div className="flex items-center gap-2">
+                      <Phone size={14} aria-hidden />
                       {guide.phone}
                     </div>
                   )}
                   {guide.email && (
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                      <Mail size={14} />
+                    <div className="flex items-center gap-2">
+                      <Mail size={14} aria-hidden />
                       {guide.email}
                     </div>
                   )}
@@ -377,138 +337,102 @@ const SafetyNetBuilder: React.FC = () => {
       </div>
 
       {/* Points of Contact Section */}
-      <div style={{
-        backgroundColor: 'white',
-        borderRadius: '12px',
-        border: '1px solid #e5e7eb',
-        padding: '1.5rem',
-        marginBottom: '2rem'
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
+      <div className={sectionCardClass}>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
           <div>
-            <h3 style={{ fontSize: '1.5rem', fontWeight: 600, color: '#2C3E50', marginBottom: '0.25rem' }}>
-              Points of Contact
-            </h3>
-            <p style={{ color: '#666', fontSize: '0.875rem' }}>
+            <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-1">Points of Contact</h3>
+            <p className="text-gray-600 dark:text-gray-400 text-sm">
               Who to contact for different types of privacy issues or emergencies
             </p>
           </div>
-          <button
-            onClick={() => setShowAddContact(!showAddContact)}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              padding: '0.75rem 1rem',
-              backgroundColor: '#3b82f6',
-              color: 'white',
-              border: 'none',
-              borderRadius: '6px',
-              cursor: 'pointer',
-              fontSize: '0.875rem',
-              fontWeight: 600
-            }}
-          >
-            <Plus size={16} />
+          <button type="button" onClick={() => setShowAddContact(!showAddContact)} className={btnBlueClass}>
+            <Plus size={16} aria-hidden />
             Add Contact
           </button>
         </div>
 
         {showAddContact && (
-          <div style={{
-            backgroundColor: '#f8f9fa',
-            borderRadius: '8px',
-            padding: '1.5rem',
-            marginBottom: '1rem'
-          }}>
-            <h4 style={{ fontSize: '1rem', fontWeight: 600, color: '#2C3E50', marginBottom: '1rem' }}>
-              Add Point of Contact
-            </h4>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '1rem' }}>
-              <input
-                type="text"
-                placeholder="Issue Type (e.g., Account Hacked, Scam)"
-                value={newContact.issueType}
-                onChange={(e) => setNewContact({ ...newContact, issueType: e.target.value })}
-                style={{
-                  padding: '0.75rem',
-                  border: '1px solid #e5e7eb',
-                  borderRadius: '6px',
-                  fontSize: '0.875rem'
-                }}
-              />
-              <input
-                type="text"
-                placeholder="Contact Name or Organization"
-                value={newContact.contactName}
-                onChange={(e) => setNewContact({ ...newContact, contactName: e.target.value })}
-                style={{
-                  padding: '0.75rem',
-                  border: '1px solid #e5e7eb',
-                  borderRadius: '6px',
-                  fontSize: '0.875rem'
-                }}
-              />
-              <select
-                value={newContact.contactMethod}
-                onChange={(e) => setNewContact({ ...newContact, contactMethod: e.target.value })}
-                style={{
-                  padding: '0.75rem',
-                  border: '1px solid #e5e7eb',
-                  borderRadius: '6px',
-                  fontSize: '0.875rem'
-                }}
-              >
-                <option value="phone">Phone</option>
-                <option value="email">Email</option>
-                <option value="both">Both</option>
-              </select>
-              {newContact.contactMethod !== 'email' && (
+          <div className="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-4 sm:p-6 mb-4">
+            <h4 className="text-base font-semibold text-gray-800 dark:text-gray-100 mb-4">Add Point of Contact</h4>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label htmlFor="contact-issue-type" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Issue type
+                </label>
                 <input
-                  type="tel"
-                  placeholder="Phone Number"
-                  value={newContact.phone}
-                  onChange={(e) => setNewContact({ ...newContact, phone: e.target.value })}
-                  style={{
-                    padding: '0.75rem',
-                    border: '1px solid #e5e7eb',
-                    borderRadius: '6px',
-                    fontSize: '0.875rem'
-                  }}
+                  id="contact-issue-type"
+                  type="text"
+                  placeholder="e.g., Account Hacked, Scam"
+                  value={newContact.issueType}
+                  onChange={(e) => setNewContact({ ...newContact, issueType: e.target.value })}
+                  className={fieldClass}
                 />
+              </div>
+              <div>
+                <label htmlFor="contact-name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Contact name or organization
+                </label>
+                <input
+                  id="contact-name"
+                  type="text"
+                  placeholder="Contact name"
+                  value={newContact.contactName}
+                  onChange={(e) => setNewContact({ ...newContact, contactName: e.target.value })}
+                  className={fieldClass}
+                />
+              </div>
+              <div>
+                <label htmlFor="contact-method" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  Contact method
+                </label>
+                <select
+                  id="contact-method"
+                  value={newContact.contactMethod}
+                  onChange={(e) => setNewContact({ ...newContact, contactMethod: e.target.value })}
+                  className={fieldClass}
+                >
+                  <option value="phone">Phone</option>
+                  <option value="email">Email</option>
+                  <option value="both">Both</option>
+                </select>
+              </div>
+              {newContact.contactMethod !== 'email' && (
+                <div>
+                  <label htmlFor="contact-phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Phone number
+                  </label>
+                  <input
+                    id="contact-phone"
+                    type="tel"
+                    placeholder="Phone number"
+                    value={newContact.phone}
+                    onChange={(e) => setNewContact({ ...newContact, phone: e.target.value })}
+                    className={fieldClass}
+                  />
+                </div>
               )}
               {newContact.contactMethod !== 'phone' && (
-                <input
-                  type="email"
-                  placeholder="Email"
-                  value={newContact.email}
-                  onChange={(e) => setNewContact({ ...newContact, email: e.target.value })}
-                  style={{
-                    padding: '0.75rem',
-                    border: '1px solid #e5e7eb',
-                    borderRadius: '6px',
-                    fontSize: '0.875rem'
-                  }}
-                />
+                <div>
+                  <label htmlFor="contact-email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Email
+                  </label>
+                  <input
+                    id="contact-email"
+                    type="email"
+                    placeholder="Email"
+                    value={newContact.email}
+                    onChange={(e) => setNewContact({ ...newContact, email: e.target.value })}
+                    className={fieldClass}
+                  />
+                </div>
               )}
             </div>
-            <div style={{ display: 'flex', gap: '0.5rem' }}>
-              <button
-                onClick={addPointOfContact}
-                style={{
-                  padding: '0.75rem 1.5rem',
-                  backgroundColor: '#3b82f6',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '6px',
-                  cursor: 'pointer',
-                  fontSize: '0.875rem',
-                  fontWeight: 600
-                }}
-              >
+            <div className="flex flex-wrap gap-2">
+              <button type="button" onClick={addPointOfContact} className={btnBlueClass}>
                 Add Contact
               </button>
               <button
+                type="button"
                 onClick={() => {
                   setShowAddContact(false);
                   setNewContact({
@@ -516,19 +440,10 @@ const SafetyNetBuilder: React.FC = () => {
                     contactName: '',
                     contactMethod: 'phone',
                     phone: '',
-                    email: ''
+                    email: '',
                   });
                 }}
-                style={{
-                  padding: '0.75rem 1.5rem',
-                  backgroundColor: '#f3f4f6',
-                  color: '#666',
-                  border: 'none',
-                  borderRadius: '6px',
-                  cursor: 'pointer',
-                  fontSize: '0.875rem',
-                  fontWeight: 600
-                }}
+                className={btnSecondaryClass}
               >
                 Cancel
               </button>
@@ -537,43 +452,31 @@ const SafetyNetBuilder: React.FC = () => {
         )}
 
         {pointsOfContact.length === 0 ? (
-          <p style={{ color: '#666', fontStyle: 'italic', textAlign: 'center', padding: '2rem' }}>
+          <p className="text-gray-500 dark:text-gray-400 italic text-center py-8">
             No points of contact added yet. Add contacts for different types of privacy issues.
           </p>
         ) : (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-            {pointsOfContact.map(contact => (
+          <div className="flex flex-col gap-3">
+            {pointsOfContact.map((contact) => (
               <div
                 key={contact.id}
-                style={{
-                  backgroundColor: '#f8f9fa',
-                  borderRadius: '8px',
-                  padding: '1rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between'
-                }}
+                className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 rounded-lg bg-gray-50 dark:bg-gray-900/50 p-4"
               >
-                <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: '1rem', fontWeight: 600, color: '#2C3E50', marginBottom: '0.25rem' }}>
-                    {contact.issueType}
-                  </div>
-                  <div style={{ fontSize: '0.875rem', color: '#666' }}>
+                <div className="flex-1 min-w-0">
+                  <div className="font-semibold text-gray-800 dark:text-gray-100 mb-1">{contact.issueType}</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">
                     Contact: {contact.contactName}
                     {contact.phone && ` • ${contact.phone}`}
                     {contact.email && ` • ${contact.email}`}
                   </div>
                 </div>
                 <button
+                  type="button"
                   onClick={() => removeContact(contact.id)}
-                  style={{
-                    padding: '0.5rem',
-                    backgroundColor: 'transparent',
-                    border: 'none',
-                    cursor: 'pointer'
-                  }}
+                  className="self-end sm:self-center p-2 text-red-600 dark:text-red-400 hover:opacity-80"
+                  aria-label={`Remove contact for ${contact.issueType}`}
                 >
-                  <X size={16} style={{ color: '#dc2626' }} />
+                  <X size={16} aria-hidden />
                 </button>
               </div>
             ))}
@@ -582,70 +485,52 @@ const SafetyNetBuilder: React.FC = () => {
       </div>
 
       {/* Warning Signs Section */}
-      <div style={{
-        backgroundColor: 'white',
-        borderRadius: '12px',
-        border: '1px solid #e5e7eb',
-        padding: '1.5rem'
-      }}>
-        <div style={{ marginBottom: '1rem' }}>
-          <h3 style={{ fontSize: '1.5rem', fontWeight: 600, color: '#2C3E50', marginBottom: '0.25rem' }}>
-            Recognize Warning Signs
-          </h3>
-          <p style={{ color: '#666', fontSize: '0.875rem' }}>
-            Know what to look for - these are red flags that something might be wrong with your online privacy
+      <div className={`${sectionCardClass} mb-0`}>
+        <div className="mb-4">
+          <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-1">Recognize Warning Signs</h3>
+          <p className="text-gray-600 dark:text-gray-400 text-sm">
+            Know what to look for — red flags that something might be wrong with your online privacy
           </p>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-          {warningSigns.map(sign => (
-            <div
+        <div className="flex flex-col gap-3">
+          {warningSigns.map((sign) => (
+            <button
               key={sign.id}
+              type="button"
               onClick={() => toggleWarningSign(sign.id)}
-              style={{
-                display: 'flex',
-                alignItems: 'start',
-                gap: '1rem',
-                padding: '1rem',
-                backgroundColor: sign.checked ? '#fef2f2' : '#f8f9fa',
-                borderRadius: '8px',
-                cursor: 'pointer',
-                border: sign.checked ? '2px solid #dc2626' : '1px solid #e5e7eb',
-                transition: 'all 0.2s'
-              }}
+              className={`flex items-start gap-4 p-4 rounded-lg text-left transition-all ${
+                sign.checked
+                  ? 'bg-red-50 dark:bg-red-950/30 border-2 border-red-600 dark:border-red-500'
+                  : 'bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
+              }`}
             >
               {sign.checked ? (
-                <CheckCircle size={24} style={{ color: '#dc2626', flexShrink: 0, marginTop: '2px' }} />
+                <CheckCircle size={24} className="text-red-600 dark:text-red-400 shrink-0 mt-0.5" aria-hidden />
               ) : (
-                <AlertTriangle size={24} style={{ color: '#f59e0b', flexShrink: 0, marginTop: '2px' }} />
+                <AlertTriangle size={24} className="text-amber-500 dark:text-amber-400 shrink-0 mt-0.5" aria-hidden />
               )}
-              <span style={{
-                fontSize: '0.9375rem',
-                color: sign.checked ? '#991b1b' : '#2C3E50',
-                lineHeight: 1.6
-              }}>
+              <span
+                className={`text-[0.9375rem] leading-relaxed ${
+                  sign.checked ? 'text-red-900 dark:text-red-200' : 'text-gray-800 dark:text-gray-200'
+                }`}
+              >
                 {sign.description}
               </span>
-            </div>
+            </button>
           ))}
         </div>
 
-        <div style={{
-          marginTop: '1.5rem',
-          padding: '1rem',
-          backgroundColor: '#fef3c7',
-          borderRadius: '8px',
-          border: '1px solid #f59e0b'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'start', gap: '0.75rem' }}>
-            <Shield size={20} style={{ color: '#f59e0b', flexShrink: 0, marginTop: '2px' }} />
+        <div className="mt-6 p-4 bg-amber-50 dark:bg-amber-950/30 rounded-lg border border-amber-400 dark:border-amber-600">
+          <div className="flex items-start gap-3">
+            <Shield size={20} className="text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" aria-hidden />
             <div>
-              <strong style={{ color: '#92400e', display: 'block', marginBottom: '0.25rem' }}>
+              <strong className="block text-amber-900 dark:text-amber-200 mb-1">
                 What to Do If You See Warning Signs
               </strong>
-              <p style={{ color: '#92400e', margin: 0, fontSize: '0.875rem', lineHeight: 1.6 }}>
-                If you notice any of these warning signs, don't panic. Take screenshots of anything suspicious, 
-                contact your tech guide or point of contact, and follow the safety protocols you've established. 
+              <p className="text-amber-900 dark:text-amber-200/90 text-sm leading-relaxed m-0">
+                If you notice any of these warning signs, don&apos;t panic. Take screenshots of anything suspicious,
+                contact your tech guide or point of contact, and follow the safety protocols you&apos;ve established.
                 Most issues can be resolved quickly if caught early.
               </p>
             </div>
@@ -657,4 +542,3 @@ const SafetyNetBuilder: React.FC = () => {
 };
 
 export default SafetyNetBuilder;
-

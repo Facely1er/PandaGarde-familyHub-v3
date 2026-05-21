@@ -40,8 +40,8 @@ const PrivacyToolsPage: React.FC = () => {
       subtitle="The DFA journey is the main flow. These tools support the journey before, during, and after Digital Footprint Analysis."
       breadcrumbs={true}
     >
-      <section className="py-4 pb-8">
-        <div className="mx-auto grid max-w-[1100px] gap-6">
+      <section className="py-4 pb-8 px-4 sm:px-6">
+        <div className="mx-auto grid max-w-[1100px] gap-6 lg:gap-8">
           {groups.map((group) => {
             const Icon = group.icon;
             return (

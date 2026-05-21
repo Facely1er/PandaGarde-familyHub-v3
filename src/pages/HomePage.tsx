@@ -249,8 +249,8 @@ const HomePage: React.FC = () => {
 
   return (
     <>
-      <section className="homepage-hero premium-hero">
-        <div className="container premium-hero__container">
+      <section className="homepage-hero premium-hero py-6 md:py-10">
+        <div className="container premium-hero__container px-4 sm:px-6 lg:px-8">
           <div className="premium-hero__content slide-in-left">
             <div className="premium-hero__logo-badge">
               <img src="/LogoPandagarde.png" alt="PandaGarde" />
@@ -357,8 +357,8 @@ const HomePage: React.FC = () => {
       </section>
 
 
-      <section className="homepage-stats reveal-on-scroll">
-        <div className="container">
+      <section className="homepage-stats reveal-on-scroll py-8 md:py-12">
+        <div className="container px-4 sm:px-6 lg:px-8">
           <div className="homepage-stats__grid">
             {quickStats.map((item, index) => (
               <article key={item.label} className="homepage-stats__card">
@@ -399,8 +399,8 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-      <section className="homepage-proofband reveal-on-scroll">
-        <div className="container homepage-proofband__container">
+      <section className="homepage-proofband reveal-on-scroll py-8 md:py-12">
+        <div className="container homepage-proofband__container px-4 sm:px-6 lg:px-8">
           <div className="homepage-proofband__intro">
             <span>What PandaGarde is built to do</span>
             <h2>Make family privacy feel navigable, not overwhelming.</h2>
@@ -422,8 +422,8 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-      <section className="homepage-architecture reveal-on-scroll">
-        <div className="container homepage-architecture__container">
+      <section className="homepage-architecture reveal-on-scroll py-8 md:py-12">
+        <div className="container homepage-architecture__container px-4 sm:px-6 lg:px-8">
           <div className="homepage-architecture__intro">
             <span className="badge">Why the product feels cleaner</span>
             <h2>A homepage that leads somewhere. A workspace that keeps the progress.</h2>
@@ -482,8 +482,8 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-      <section className="homepage-actions-section reveal-on-scroll">
-        <div className="container">
+      <section className="homepage-actions-section reveal-on-scroll py-8 md:py-12">
+        <div className="container px-4 sm:px-6 lg:px-8">
           <div className="section-header homepage-section-header">
             <span className="badge">Start with the right entry point</span>
             <h2>Use the site for guidance. Use Family Hub for follow-through.</h2>

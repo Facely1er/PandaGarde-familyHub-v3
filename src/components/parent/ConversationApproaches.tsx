@@ -206,158 +206,115 @@ const ConversationApproaches: React.FC = () => {
   ];
 
   return (
-    <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
-      <div style={{ marginBottom: '2rem' }}>
-        <h2 style={{ fontSize: '2rem', fontWeight: 'bold', color: '#2C3E50', marginBottom: '0.5rem' }}>
+    <div className="p-4 sm:p-8 max-w-6xl mx-auto">
+      <div className="mb-8">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-gray-100 mb-2">
           8 Ways to Talk About Privacy With Your Children
         </h2>
-        <p style={{ color: '#666', fontSize: '1.125rem' }}>
+        <p className="text-gray-600 dark:text-gray-300 text-base sm:text-lg">
           Effective approaches to help your children understand online privacy and stay safe
         </p>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-        {approaches.map(approach => {
+      <div className="flex flex-col gap-6">
+        {approaches.map((approach) => {
           const Icon = approach.icon;
           const isExpanded = expandedApproach === approach.id;
+          const panelId = `approach-panel-${approach.id}`;
 
           return (
             <div
               key={approach.id}
-              style={{
-                backgroundColor: 'white',
-                borderRadius: '12px',
-                border: '1px solid #e5e7eb',
-                overflow: 'hidden'
-              }}
+              className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-hidden"
             >
-              <div
-                style={{
-                  padding: '1.5rem',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  backgroundColor: isExpanded ? '#f0fdf4' : '#f8f9fa',
-                  transition: 'background-color 0.2s'
-                }}
+              <button
+                type="button"
+                className={`w-full p-4 sm:p-6 flex items-center justify-between gap-4 text-left transition-colors ${
+                  isExpanded
+                    ? 'bg-green-50 dark:bg-green-950/30'
+                    : 'bg-gray-50 dark:bg-gray-900/50 hover:bg-gray-100 dark:hover:bg-gray-900'
+                }`}
                 onClick={() => setExpandedApproach(isExpanded ? null : approach.id)}
+                aria-expanded={isExpanded}
+                aria-controls={panelId}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                  <div style={{
-                    width: '48px',
-                    height: '48px',
-                    borderRadius: '8px',
-                    backgroundColor: '#d1fae5',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}>
-                    <Icon size={24} style={{ color: '#4CAF50' }} />
+                <div className="flex items-center gap-4 min-w-0">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-green-100 dark:bg-green-900/40">
+                    <Icon size={24} className="text-green-600 dark:text-green-400" aria-hidden />
                   </div>
-                  <div>
-                    <h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: '#2C3E50', margin: 0, marginBottom: '0.25rem' }}>
+                  <div className="min-w-0">
+                    <h3 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-gray-100 mb-1">
                       {approach.title}
                     </h3>
-                    <p style={{ fontSize: '0.875rem', color: '#666', margin: 0 }}>
-                      {approach.description}
-                    </p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 m-0">{approach.description}</p>
                   </div>
                 </div>
                 {isExpanded ? (
-                  <ChevronUp size={20} style={{ color: '#666' }} />
+                  <ChevronUp size={20} className="text-gray-500 dark:text-gray-400 shrink-0" aria-hidden />
                 ) : (
-                  <ChevronDown size={20} style={{ color: '#666' }} />
+                  <ChevronDown size={20} className="text-gray-500 dark:text-gray-400 shrink-0" aria-hidden />
                 )}
-              </div>
+              </button>
 
               {isExpanded && (
-                <div style={{ padding: '1.5rem' }}>
-                  {/* Do's and Don'ts */}
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
-                    <div style={{
-                      backgroundColor: '#f0fdf4',
-                      padding: '1rem',
-                      borderRadius: '8px',
-                      border: '1px solid #10b981'
-                    }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-                        <CheckCircle size={20} style={{ color: '#10b981' }} />
-                        <h4 style={{ fontSize: '1rem', fontWeight: 600, color: '#065f46', margin: 0 }}>
-                          Do:
-                        </h4>
+                <div id={panelId} className="p-4 sm:p-6 border-t border-gray-200 dark:border-gray-700">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                    <div className="p-4 rounded-lg bg-green-50 dark:bg-green-950/30 border border-green-500 dark:border-green-600">
+                      <div className="flex items-center gap-2 mb-3">
+                        <CheckCircle size={20} className="text-green-600 dark:text-green-400" aria-hidden />
+                        <h4 className="text-base font-semibold text-green-900 dark:text-green-200 m-0">Do:</h4>
                       </div>
-                      <ul style={{ margin: 0, paddingLeft: '1.25rem', color: '#065f46', lineHeight: 1.8 }}>
+                      <ul className="m-0 pl-5 text-green-900 dark:text-green-200 leading-relaxed space-y-2">
                         {approach.doExamples.map((example, idx) => (
-                          <li key={idx} style={{ marginBottom: '0.5rem' }}>{example}</li>
+                          <li key={idx}>{example}</li>
                         ))}
                       </ul>
                     </div>
 
-                    <div style={{
-                      backgroundColor: '#fef2f2',
-                      padding: '1rem',
-                      borderRadius: '8px',
-                      border: '1px solid #dc2626'
-                    }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-                        <X size={20} style={{ color: '#dc2626' }} />
-                        <h4 style={{ fontSize: '1rem', fontWeight: 600, color: '#991b1b', margin: 0 }}>
-                          Don't:
-                        </h4>
+                    <div className="p-4 rounded-lg bg-red-50 dark:bg-red-950/30 border border-red-500 dark:border-red-600">
+                      <div className="flex items-center gap-2 mb-3">
+                        <X size={20} className="text-red-600 dark:text-red-400" aria-hidden />
+                        <h4 className="text-base font-semibold text-red-900 dark:text-red-200 m-0">Don&apos;t:</h4>
                       </div>
-                      <ul style={{ margin: 0, paddingLeft: '1.25rem', color: '#991b1b', lineHeight: 1.8 }}>
+                      <ul className="m-0 pl-5 text-red-900 dark:text-red-200 leading-relaxed space-y-2">
                         {approach.dontExamples.map((example, idx) => (
-                          <li key={idx} style={{ marginBottom: '0.5rem' }}>{example}</li>
+                          <li key={idx}>{example}</li>
                         ))}
                       </ul>
                     </div>
                   </div>
 
-                  {/* Scenarios */}
                   {approach.scenarios.length > 0 && (
                     <div>
-                      <h4 style={{ fontSize: '1rem', fontWeight: 600, color: '#2C3E50', marginBottom: '1rem' }}>
+                      <h4 className="text-base font-semibold text-gray-800 dark:text-gray-100 mb-4">
                         Example Scenario:
                       </h4>
                       {approach.scenarios.map((scenario, idx) => (
-                        <div key={idx} style={{
-                          backgroundColor: '#f8f9fa',
-                          padding: '1.5rem',
-                          borderRadius: '8px',
-                          marginBottom: '1rem'
-                        }}>
-                          <div style={{ marginBottom: '1rem' }}>
-                            <strong style={{ color: '#2C3E50' }}>Situation: </strong>
-                            <span style={{ color: '#666' }}>{scenario.situation}</span>
-                          </div>
-                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1rem' }}>
-                            <div style={{
-                              backgroundColor: '#f0fdf4',
-                              padding: '1rem',
-                              borderRadius: '8px',
-                              borderLeft: '3px solid #10b981'
-                            }}>
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                                <CheckCircle size={16} style={{ color: '#10b981' }} />
-                                <strong style={{ color: '#065f46' }}>Good Approach:</strong>
+                        <div
+                          key={idx}
+                          className="bg-gray-50 dark:bg-gray-900/50 p-4 sm:p-6 rounded-lg mb-4 last:mb-0"
+                        >
+                          <p className="mb-4 text-gray-700 dark:text-gray-300">
+                            <strong className="text-gray-800 dark:text-gray-100">Situation: </strong>
+                            {scenario.situation}
+                          </p>
+                          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                            <div className="p-4 rounded-lg bg-green-50 dark:bg-green-950/30 border-l-4 border-green-500">
+                              <div className="flex items-center gap-2 mb-2">
+                                <CheckCircle size={16} className="text-green-600 dark:text-green-400" aria-hidden />
+                                <strong className="text-green-900 dark:text-green-200">Good Approach:</strong>
                               </div>
-                              <p style={{ color: '#065f46', margin: 0, fontStyle: 'italic', lineHeight: 1.6 }}>
-                                "{scenario.goodApproach}"
+                              <p className="text-green-900 dark:text-green-200 m-0 italic leading-relaxed">
+                                &ldquo;{scenario.goodApproach}&rdquo;
                               </p>
                             </div>
-                            <div style={{
-                              backgroundColor: '#fef2f2',
-                              padding: '1rem',
-                              borderRadius: '8px',
-                              borderLeft: '3px solid #dc2626'
-                            }}>
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                                <X size={16} style={{ color: '#dc2626' }} />
-                                <strong style={{ color: '#991b1b' }}>Poor Approach:</strong>
+                            <div className="p-4 rounded-lg bg-red-50 dark:bg-red-950/30 border-l-4 border-red-500">
+                              <div className="flex items-center gap-2 mb-2">
+                                <X size={16} className="text-red-600 dark:text-red-400" aria-hidden />
+                                <strong className="text-red-900 dark:text-red-200">Poor Approach:</strong>
                               </div>
-                              <p style={{ color: '#991b1b', margin: 0, fontStyle: 'italic', lineHeight: 1.6 }}>
-                                "{scenario.poorApproach}"
+                              <p className="text-red-900 dark:text-red-200 m-0 italic leading-relaxed">
+                                &ldquo;{scenario.poorApproach}&rdquo;
                               </p>
                             </div>
                           </div>
