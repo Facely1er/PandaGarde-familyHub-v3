@@ -74,7 +74,7 @@ const OverviewPage: React.FC = () => {
       features: [
         'Family privacy policy creation',
         'Device and app management',
-        'Monitoring and guidance strategies',
+        'Guided missions and household routines',
         'Privacy education resources',
         'Guided missions and household routines'
       ]

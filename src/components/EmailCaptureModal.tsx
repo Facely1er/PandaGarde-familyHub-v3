@@ -74,7 +74,7 @@ const EmailCaptureModal: React.FC<EmailCaptureModalProps> = ({
       }
 
       setIsSubmitted(true);
-      showSuccess('Successfully subscribed!', 'You\'ll receive important safety alerts and updates.');
+      showSuccess('Successfully subscribed!', 'You\'ll receive optional email updates about privacy news and resources.');
       
       // Close modal after 2 seconds
       setTimeout(() => {

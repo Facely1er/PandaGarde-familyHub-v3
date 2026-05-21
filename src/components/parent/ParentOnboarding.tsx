@@ -35,41 +35,41 @@ const ParentOnboarding: React.FC<ParentOnboardingProps> = ({ onComplete, onSkip 
     {
       id: 1,
       title: 'Welcome to PandaGarde',
-      subtitle: 'Your Family Privacy Protection Hub',
+      subtitle: 'Local-first privacy education for your household',
       icon: Shield,
       content: (
         <div>
           <InfoBox type="info" title="What You'll Get">
             <ul className={listClass}>
-              <li>See what apps and websites your children use</li>
-              <li>Know their privacy risks at a glance</li>
-              <li>Get conversation starters to talk about privacy</li>
-              <li>Track their safety progress over time</li>
+              <li>List apps and services your family uses in the catalog</li>
+              <li>See privacy risk scores from Digital Footprint Analysis</li>
+              <li>Get conversation starters and Family Hub missions</li>
+              <li>Track mission and assessment progress on your device</li>
             </ul>
           </InfoBox>
           <p className="text-base leading-relaxed text-gray-800 dark:text-gray-200 mt-4">
-            PandaGarde helps you protect your family&apos;s privacy online. We&apos;ll guide you through setting up
-            your family account and show you how to use the dashboard.
+            PandaGarde helps you protect your family&apos;s privacy online. We&apos;ll guide you through your local
+            family profile and the website + Family Hub workflow.
           </p>
         </div>
       ),
     },
     {
       id: 2,
-      title: 'Create Your Family Account',
-      subtitle: 'Set up your family profile',
+      title: 'Set Up Your Family Profile',
+      subtitle: 'On this device—no server account required',
       icon: Users,
       content: (
         <div>
-          <InfoBox type="tip" title="Your Account is Ready!">
-            <p>You&apos;re already logged in. Your family account is set up and ready to use.</p>
+          <InfoBox type="tip" title="Your profile is ready">
+            <p>You&apos;re signed in locally. Add family members and services when you&apos;re ready.</p>
           </InfoBox>
           <div className="mt-6">
             <h4 className="text-base font-semibold mb-3 text-gray-800 dark:text-gray-100">What&apos;s Next:</h4>
             <ul className={`m-0 ${listClass}`}>
-              <li>Add your children to track their privacy</li>
-              <li>Review their online services</li>
-              <li>Set up privacy education</li>
+              <li>Add children in Family Hub (name and age)</li>
+              <li>List services in the catalog for footprint analysis</li>
+              <li>Start privacy missions or website learning paths</li>
             </ul>
           </div>
         </div>
@@ -78,7 +78,7 @@ const ParentOnboarding: React.FC<ParentOnboardingProps> = ({ onComplete, onSkip 
     {
       id: 3,
       title: 'Add Your Children',
-      subtitle: 'Start tracking their privacy',
+      subtitle: 'Profiles for missions and progress',
       icon: Users,
       content: (
         <div>
@@ -86,16 +86,16 @@ const ParentOnboarding: React.FC<ParentOnboardingProps> = ({ onComplete, onSkip 
             <p>
               {childCount > 0
                 ? `You have ${childCount} child(ren) added. You can add more from the Family Hub.`
-                : 'Add your children to start tracking their online privacy. You can add them from the Family Hub after completing this tour.'}
+                : 'Add your children in Family Hub (name and age) to match missions and save progress on this device.'}
             </p>
           </InfoBox>
           <div className={subBoxClass}>
             <h4 className="text-base font-semibold mb-3 text-gray-800 dark:text-gray-100">For each child, you can:</h4>
             <ul className={`m-0 ${listClass}`}>
-              <li>See their privacy risk score</li>
-              <li>Review apps and websites they use</li>
-              <li>Approve or deny service requests</li>
-              <li>Get conversation starters</li>
+              <li>See catalog-based privacy risk scores</li>
+              <li>Review services you listed for each child</li>
+              <li>Plan with requested / approved / denied catalog status</li>
+              <li>Use mission prompts and conversation starters</li>
             </ul>
           </div>
         </div>
@@ -112,7 +112,7 @@ const ParentOnboarding: React.FC<ParentOnboardingProps> = ({ onComplete, onSkip 
             <p>Your privacy dashboard shows you at a glance:</p>
             <ul className={`mt-2 mb-0 ${listClass}`}>
               <li>Family privacy score (average of all children)</li>
-              <li>Action items (pending approvals, high-risk alerts)</li>
+              <li>Action items (catalog reminders, high-risk services)</li>
               <li>Individual child risk cards</li>
               <li>Conversation starters for high-risk services</li>
             </ul>
@@ -173,7 +173,7 @@ const ParentOnboarding: React.FC<ParentOnboardingProps> = ({ onComplete, onSkip 
                 Services
               </h4>
               <p className="m-0 text-gray-600 dark:text-gray-400 text-[0.9375rem]">
-                Browse the service catalog and approve/deny requests
+                Browse the catalog and set requested / approved / denied status
               </p>
             </div>
             <div className={tabCardClass}>
@@ -188,7 +188,7 @@ const ParentOnboarding: React.FC<ParentOnboardingProps> = ({ onComplete, onSkip 
             <div className={tabCardClass}>
               <h4 className="text-base font-semibold mb-2 text-gray-800 dark:text-gray-100">Quick Actions</h4>
               <p className="m-0 text-gray-600 dark:text-gray-400 text-[0.9375rem]">
-                Common tasks like adding children, reviewing requests, and accessing guides
+                Common tasks like adding children, updating the catalog, and opening Family Hub
               </p>
             </div>
           </div>

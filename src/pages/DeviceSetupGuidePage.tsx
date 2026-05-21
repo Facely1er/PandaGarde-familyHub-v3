@@ -271,7 +271,7 @@ const DeviceSetupGuidePage: React.FC = () => {
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle size={16} />
-                    Set up family accounts
+                    Set up device profiles and parental controls
                   </li>
                 </ul>
               </div>

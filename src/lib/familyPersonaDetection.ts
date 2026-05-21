@@ -220,7 +220,7 @@ export class FamilyPersonaDetectionEngine {
         'Set up parental controls on all devices',
         'Review child safety alerts regularly',
         'Create a family internet agreement',
-        'Monitor children\'s online activity'
+        'Review catalog and RSS safety headlines regularly'
       ],
       'privacy-focused-family': [
         'Review privacy settings on all services',
@@ -236,7 +236,7 @@ export class FamilyPersonaDetectionEngine {
       ],
       'tech-savvy-family': [
         'Configure advanced security settings',
-        'Set up automated privacy monitoring',
+        'Review service catalog and privacy settings on key apps',
         'Review service relationships and data sharing',
         'Implement technical privacy solutions'
       ],
@@ -249,7 +249,7 @@ export class FamilyPersonaDetectionEngine {
       'concerned-family': [
         'Complete privacy assessment immediately',
         'Review high-priority recommendations',
-        'Set up safety alerts',
+        'Add services to the catalog and open Safety Alerts',
         'Start with urgent privacy fixes'
       ]
     };

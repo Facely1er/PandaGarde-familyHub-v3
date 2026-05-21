@@ -137,7 +137,11 @@ const ServiceCatalogPage: React.FC = () => {
               </p>
             </div>
             <div className="flex shrink-0 items-center gap-2">
-              <Link to="/safety-alerts" className={headerActionLinkClass}>
+              <Link
+                to="/safety-alerts"
+                className={headerActionLinkClass}
+                title="Catalog notifications and RSS safety headlines for services you list"
+              >
                 <Bell className="h-5 w-5 shrink-0" aria-hidden />
                 <span>Safety Alerts</span>
               </Link>

@@ -312,7 +312,7 @@ const AppStoreReviewPage: React.FC = () => {
                 <BarChart3 className="w-8 h-8 mb-4" />
                 <h3 className="font-bold text-lg mb-2">Progress Tracking</h3>
                 <p className="text-teal-100 text-sm">
-                  Detailed analytics and progress monitoring
+                  Mission completion, streaks, and certificates on device
                 </p>
               </div>
             </div>

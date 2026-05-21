@@ -9,11 +9,11 @@ const featureCards = [
     iconColor: 'text-red-600',
     title: 'See Risks',
     description:
-      "Get a clear view of your family's privacy status. See which apps and websites your children use, and understand the privacy risks for each one - all explained in simple terms.",
+      "Get a clear view of your family's privacy status from the apps and services you list in your catalog—not from monitoring their devices.",
     bullets: [
-      'View all apps and websites your children use',
-      'See privacy risk scores for each service',
-      'Get alerts when new risks appear',
+      'List apps and sites your family uses (self-reported)',
+      'See privacy risk scores per service from Digital Footprint Analysis',
+      'Catalog notifications and RSS headlines when feeds load',
     ],
   },
   {
@@ -22,11 +22,11 @@ const featureCards = [
     iconColor: 'text-blue-600',
     title: 'Take Action',
     description:
-      "Don't just see the problems - get clear, actionable steps to fix them. Approve or deny app requests, get privacy setting guides, and take control of your family's online safety.",
+      "Don't just see the problems—get clear next steps: privacy setting guides, Family Hub missions, and catalog reminders for services you listed.",
     bullets: [
-      'Approve or deny app requests from your children',
+      'Mark services requested, approved, or denied in your catalog (planning)',
       'Get step-by-step privacy setting guides',
-      'See what needs your attention right away',
+      'Open Family Hub for age-matched missions and family talks',
     ],
   },
   {
