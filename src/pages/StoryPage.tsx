@@ -1,160 +1,161 @@
 import React from 'react';
 import { Book, Play, Heart, Star, Users, Sparkles, GraduationCap } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useTheme } from '../contexts/ThemeContext';
 import InteractiveStoryPlayer from '../components/story/InteractiveStoryPlayer';
 import { storyScenes } from '../data/storyScenes';
 import PageLayout from '../components/layout/PageLayout';
 
-const StoryPage: React.FC = () => {
-  const { theme } = useTheme();
+const discussionQuestions = [
+  'What happened when Po accidentally shared all his information? How do you think he felt?',
+  'What are some examples of personal information that should be kept private?',
+  'How did Privacy Panda help other animals in the forest? What made him a good teacher?',
+  'What can you do to create your own "Privacy Shield" when using devices or apps?',
+] as const;
 
+const StoryPage: React.FC = () => {
   return (
     <PageLayout
       title="Privacy Panda and the Digital Bamboo Forest"
       subtitle="Join Po the Panda on an adventure through the Digital Bamboo Forest as he learns about privacy, sharing, and staying safe online."
-      breadcrumbs={true}
+      breadcrumbs
     >
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
-        {/* Story Introduction */}
-        <div className="bg-green-50 border-l-4 border-green-500 p-6 mb-8 rounded-r-lg"
-             style={{
-               backgroundColor: 'var(--light)',
-               borderLeftColor: 'var(--primary-light)'
-             }}>
-          <h2 className="text-2xl font-bold text-green-800 mb-3 text-primary">
+      <div className="mx-auto max-w-5xl space-y-12 pb-8">
+        <section
+          className="rounded-r-2xl border-l-4 border-green-600 bg-green-50 p-6 dark:border-green-500 dark:bg-green-950/40"
+          aria-labelledby="about-story-heading"
+        >
+          <h2
+            id="about-story-heading"
+            className="mb-3 text-2xl font-bold text-green-800 dark:text-green-300"
+          >
             About This Story
           </h2>
-          <p className="text-gray-700 leading-relaxed text-gray-600">
+          <p className="leading-relaxed text-gray-600 dark:text-gray-300">
             This story teaches children about digital privacy through the adventures of Po the Panda.
             It covers important concepts like protecting personal information, understanding privacy settings,
-            and being careful about what we share online. Perfect for reading together with children ages 5-12.
+            and being careful about what we share online. Perfect for reading together with children ages 5–12.
           </p>
-        </div>
+        </section>
 
-        {/* Interactive Story Player with Full Text View */}
-        <div className="mb-8">
-          <InteractiveStoryPlayer
-            scenes={storyScenes}
-            initialViewMode="fulltext"
-            hideControls={false}
-          />
-        </div>
+        <section aria-label="Interactive story">
+          <InteractiveStoryPlayer scenes={storyScenes} initialViewMode="fulltext" hideControls={false} />
+        </section>
 
-          {/* Discussion Questions */}
-          <div className="mt-16 bg-gray-50 rounded-lg p-8 bg-light">
-            <h2 className="text-3xl font-bold mb-6 text-green-800 text-primary">
-              Discussion Questions
+        <section
+          className="rounded-2xl border border-gray-200 bg-gray-50 p-6 sm:p-8 dark:border-gray-700 dark:bg-gray-800/80"
+          aria-labelledby="discussion-heading"
+        >
+          <h2
+            id="discussion-heading"
+            className="mb-6 text-2xl font-bold text-gray-900 dark:text-gray-100 sm:text-3xl"
+          >
+            Discussion Questions
+          </h2>
+          <ol className="space-y-4">
+            {discussionQuestions.map((question, index) => (
+              <li key={question} className="flex items-start gap-3">
+                <span
+                  className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-green-600 text-sm font-bold text-white dark:bg-green-500"
+                  aria-hidden
+                >
+                  {index + 1}
+                </span>
+                <p className="text-gray-700 dark:text-gray-300">{question}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section
+          className="rounded-2xl border border-blue-200 bg-gradient-to-br from-blue-50 to-green-50 p-6 sm:p-8 dark:border-blue-800/60 dark:from-blue-950/30 dark:to-green-950/20"
+          aria-labelledby="family-hub-cta-heading"
+        >
+          <div className="mb-6 text-center">
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/50">
+              <Users size={32} className="text-blue-600 dark:text-blue-400" aria-hidden />
+            </div>
+            <h2
+              id="family-hub-cta-heading"
+              className="mb-3 text-2xl font-bold text-blue-900 dark:text-blue-200"
+            >
+              Continue in Family Hub
             </h2>
-            <div className="space-y-4">
-              <div className="flex items-start gap-3">
-                <span className="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0 mt-1"
-                      style={{ backgroundColor: 'var(--primary-light)' }}>1</span>
-                <p className="text-gray-700 text-gray-700">
-                  What happened when Po accidentally shared all his information? How do you think he felt?
-                </p>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0 mt-1"
-                      style={{ backgroundColor: 'var(--primary-light)' }}>2</span>
-                <p className="text-gray-700 text-gray-700">
-                  What are some examples of personal information that should be kept private?
-                </p>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0 mt-1"
-                      style={{ backgroundColor: 'var(--primary-light)' }}>3</span>
-                <p className="text-gray-700 text-gray-700">
-                  How did Privacy Panda help other animals in the forest? What made him a good teacher?
-                </p>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0 mt-1"
-                      style={{ backgroundColor: 'var(--primary-light)' }}>4</span>
-                <p className="text-gray-700 text-gray-700">
-                  What can you do to create your own "Privacy Shield" when using devices or apps?
-                </p>
-              </div>
-            </div>
+            <p className="mx-auto max-w-2xl text-base leading-relaxed text-blue-800 dark:text-blue-300 sm:text-lg">
+              Turn what you learned into short privacy missions at home—real situations, family talks, and
+              progress that stays on your device.
+            </p>
           </div>
 
-          {/* Family Hub Integration */}
-          <div className="mt-16 bg-gradient-to-r from-blue-50 to-green-50 border border-blue-200 rounded-lg p-8" style={{
-            backgroundColor: theme === 'dark' ? 'rgba(59, 130, 246, 0.1)' : '#F0F9FF',
-            borderColor: theme === 'dark' ? 'rgba(59, 130, 246, 0.3)' : '#BFDBFE'
-          }}>
-            <div className="text-center mb-6">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users size={32} className="text-blue-600" />
-              </div>
-              <h3 className="text-2xl font-bold mb-3" style={{ color: theme === 'dark' ? '#93C5FD' : '#1E40AF' }}>
-                Continue in Family Hub
-              </h3>
-              <p className="text-lg max-w-2xl mx-auto" style={{ color: theme === 'dark' ? '#93C5FD' : '#1E40AF' }}>
-                Turn what you learned into short privacy missions at home—real situations, family talks, and progress that stays on your device.
+          <ul className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-3">
+            <li className="rounded-xl border border-gray-200 bg-white p-4 text-center shadow-sm dark:border-gray-700 dark:bg-gray-800">
+              <Heart size={24} className="mx-auto mb-2 text-red-500" aria-hidden />
+              <h3 className="mb-2 font-semibold text-gray-900 dark:text-gray-100">Family missions</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Age-matched scenarios you practice together
               </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-              <div className="text-center p-4 bg-white rounded-lg shadow-sm">
-                <Heart size={24} className="text-red-500 mx-auto mb-2" />
-                <h4 className="font-semibold mb-2">Family missions</h4>
-                <p className="text-sm text-gray-600">Age-matched scenarios you practice together</p>
-              </div>
-              <div className="text-center p-4 bg-white rounded-lg shadow-sm">
-                <Sparkles size={24} className="text-purple-500 mx-auto mb-2" />
-                <h4 className="font-semibold mb-2">On-device progress</h4>
-                <p className="text-sm text-gray-600">Streaks, badges, and certificates saved locally</p>
-              </div>
-              <div className="text-center p-4 bg-white rounded-lg shadow-sm">
-                <Star size={24} className="text-yellow-500 mx-auto mb-2" />
-                <h4 className="font-semibold mb-2">Progress Tracking</h4>
-                <p className="text-sm text-gray-600">Monitor your family's learning journey</p>
-              </div>
-            </div>
-            
-            <div className="text-center">
-              <Link to="/family-hub"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors inline-flex items-center gap-2"
-              >
-                <Users size={20} />
-                Open Family Hub
-              </Link>
-            </div>
-          </div>
+            </li>
+            <li className="rounded-xl border border-gray-200 bg-white p-4 text-center shadow-sm dark:border-gray-700 dark:bg-gray-800">
+              <Sparkles size={24} className="mx-auto mb-2 text-purple-500" aria-hidden />
+              <h3 className="mb-2 font-semibold text-gray-900 dark:text-gray-100">On-device progress</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Streaks, badges, and certificates saved locally
+              </p>
+            </li>
+            <li className="rounded-xl border border-gray-200 bg-white p-4 text-center shadow-sm dark:border-gray-700 dark:bg-gray-800">
+              <Star size={24} className="mx-auto mb-2 text-amber-500" aria-hidden />
+              <h3 className="mb-2 font-semibold text-gray-900 dark:text-gray-100">Parent-guided</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                No child social network—practice together at home
+              </p>
+            </li>
+          </ul>
 
-          {/* Call to Action */}
-          <div className="mt-16 text-center">
-            <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-8 rounded-lg">
-              <h2 className="text-2xl font-bold mb-4">Continue Learning with Privacy Panda!</h2>
-              <p className="text-lg mb-6 opacity-90">
-                Explore more activities, games, and resources to help children learn about digital privacy and online safety.
-              </p>
-              <div className="flex flex-wrap gap-4 justify-center">
-                <Link
-                  to="/activity-book"
-                  className="bg-white text-green-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center gap-2"
-                >
-                  <Book size={20} />
-                  Activity Book
-                </Link>
-                <Link
-                  to="/privacy-panda"
-                  className="bg-green-700 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-800 transition-colors inline-flex items-center gap-2"
-                >
-                  <Play size={20} />
-                  Interactive Story
-                </Link>
-                <Link
-                  to="/classroom-activities"
-                  className="bg-white text-green-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center gap-2"
-                >
-                  <GraduationCap size={20} />
-                  Classroom Activities
-                </Link>
-              </div>
-            </div>
+          <div className="text-center">
+            <Link
+              to="/family-hub"
+              className="button button-primary inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500"
+            >
+              <Users size={20} aria-hidden />
+              Open Family Hub
+            </Link>
           </div>
+        </section>
+
+        <section
+          className="rounded-2xl bg-gradient-to-r from-green-600 to-green-700 p-6 text-center text-white sm:p-8"
+          aria-labelledby="continue-learning-heading"
+        >
+          <h2 id="continue-learning-heading" className="mb-4 text-2xl font-bold">
+            Continue Learning with Privacy Panda
+          </h2>
+          <p className="mx-auto mb-6 max-w-2xl text-lg opacity-90">
+            Explore more activities, games, and resources to help children learn about digital privacy and
+            online safety.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link
+              to="/activity-book"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-white px-6 py-3 font-semibold text-green-700 transition-colors hover:bg-gray-100"
+            >
+              <Book size={20} aria-hidden />
+              Activity Book
+            </Link>
+            <Link
+              to="/stories"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-green-800 px-6 py-3 font-semibold text-white transition-colors hover:bg-green-900"
+            >
+              <Play size={20} aria-hidden />
+              All Stories
+            </Link>
+            <Link
+              to="/classroom-activities"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-white px-6 py-3 font-semibold text-green-700 transition-colors hover:bg-gray-100"
+            >
+              <GraduationCap size={20} aria-hidden />
+              Classroom Activities
+            </Link>
+          </div>
+        </section>
       </div>
     </PageLayout>
   );
