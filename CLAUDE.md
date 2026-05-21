@@ -36,6 +36,7 @@ npm run lint:fix      # ESLint auto-fix
 npm run format        # Prettier
 npm run type-check    # npx tsc --noEmit
 npm run test:run      # Vitest single run
+npm run check:content-truth  # Banned misleading marketing phrases
 npm run test:coverage # Coverage report
 ```
 

@@ -140,7 +140,19 @@ Enter their name and email.*Child
 
 ---
 
-## 9. Related docs
+## 9. Automated check
+
+```bash
+npm run check:content-truth
+```
+
+Scans `src/pages`, `src/components`, `src/familyhub`, and `src/data/familyResources.ts` for §7 banned phrases. Survey copy (`familyPrivacyAssessment.ts`) and service catalog vendor text are excluded.
+
+Add new patterns to `scripts/check-content-truth.mjs` when product behavior changes.
+
+---
+
+## 10. Related docs
 
 - [FAMILYHUB_APP_STORE_COPY.md](./FAMILYHUB_APP_STORE_COPY.md) — store listings (aligned with §2)
 - [FAMILYHUB_MISSIONS_PARENT_GUIDE.md](./FAMILYHUB_MISSIONS_PARENT_GUIDE.md) — parent one-pager

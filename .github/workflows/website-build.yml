@@ -15,6 +15,8 @@ on:
       - 'package.json'
       - 'package-lock.json'
       - 'netlify.toml'
+      - 'scripts/check-content-truth.mjs'
+      - 'docs/CONTENT_TRUTH.md'
 
 concurrency:
   group: website-build-${{ github.ref }}
@@ -30,6 +32,7 @@ jobs:
           node-version: '20.19.0'
           cache: npm
       - run: npm ci --ignore-scripts
+      - run: npm run check:content-truth
       - run: npm run test:launch-smoke
       - name: Verify PWA assets in dist
         run: |
