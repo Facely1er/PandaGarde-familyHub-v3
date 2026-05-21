@@ -361,7 +361,7 @@ export const STORIES: Story[] = [episode1, episode2, episode3];
 /** Canonical URL slug for the interactive Digital Bamboo Forest origin story. */
 export const ORIGIN_STORY_SLUG = 'privacy-panda-and-the-digital-bamboo-forest';
 
-/** Origin episode uses InteractiveStoryPlayer + storyScenes (illustrations, narration). */
+/** Origin episode: InteractiveStoryPlayer + storyScenes, plus chapter reader on the same URL. */
 export const isFoundationStory = (story: Story): boolean =>
   story.isOrigin === true || story.slug === ORIGIN_STORY_SLUG;
 

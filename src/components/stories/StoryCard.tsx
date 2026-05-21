@@ -36,7 +36,7 @@ export function StoryCard({ story }: { story: Story }) {
           {isFoundation && (
             <span className="inline-flex items-center gap-1 text-xs font-medium text-emerald-800 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-950 px-2 py-0.5 rounded-full">
               <Play size={12} aria-hidden />
-              Interactive · Narration
+              Interactive + chapters
             </span>
           )}
         </div>

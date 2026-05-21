@@ -30,7 +30,7 @@ export function StoryListPage() {
   return (
     <PageLayout
       title="Privacy Panda Stories"
-      subtitle="Start with the Digital Bamboo Forest, then continue with age-matched episodes and family activities."
+      subtitle="Start with the Digital Bamboo Forest (interactive or chapters), then continue with age-matched episodes."
       breadcrumbs
     >
       <section className="py-4 pb-8">
@@ -58,12 +58,12 @@ export function StoryListPage() {
                         Interactive scenes
                       </li>
                       <li className="inline-flex items-center gap-1">
-                        <Volume2 size={14} aria-hidden />
-                        Narration
+                        <BookOpen size={14} aria-hidden />
+                        Chapter reader
                       </li>
                       <li className="inline-flex items-center gap-1">
-                        <BookOpen size={14} aria-hidden />
-                        Follow-up activities
+                        <Volume2 size={14} aria-hidden />
+                        Narration
                       </li>
                     </ul>
                   </div>

@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, BookOpen, Volume2 } from 'lucide-react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
 import InteractiveStoryPlayer from '../story/InteractiveStoryPlayer';
 import StoryProgress from '../story/StoryProgress';
 import { storyScenes } from '../../data/storyScenes';
 import { Story } from '../../data/stories';
 import { StoryEpilogue } from './StoryEpilogue';
+import { StoryModeSwitcher, StoryViewMode } from './StoryModeSwitcher';
+import { StoryReader } from './StoryReader';
 import { logger } from '../../lib/logger';
 
 const DEFAULT_ACHIEVEMENTS = [
@@ -15,15 +17,46 @@ const DEFAULT_ACHIEVEMENTS = [
   { id: 'story-complete', name: 'Story Master', description: 'Complete the entire story', icon: '🏆', unlocked: false },
 ];
 
+const MODE_PARAM = 'mode';
+
+function parseMode(searchParams: URLSearchParams): StoryViewMode {
+  return searchParams.get(MODE_PARAM) === 'chapters' ? 'chapters' : 'interactive';
+}
+
 interface BambooForestStoryExperienceProps {
   story: Story;
 }
 
 export function BambooForestStoryExperience({ story }: BambooForestStoryExperienceProps) {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [mode, setMode] = useState<StoryViewMode>(() => parseMode(searchParams));
   const [currentSceneIndex, setCurrentSceneIndex] = useState(0);
   const [points, setPoints] = useState(0);
-  const [showEpilogue, setShowEpilogue] = useState(false);
+  const [showInteractiveEpilogue, setShowInteractiveEpilogue] = useState(false);
   const [achievements, setAchievements] = useState(DEFAULT_ACHIEVEMENTS);
+
+  const setViewMode = useCallback(
+    (next: StoryViewMode) => {
+      setMode(next);
+      setSearchParams(
+        (prev) => {
+          const params = new URLSearchParams(prev);
+          if (next === 'chapters') {
+            params.set(MODE_PARAM, 'chapters');
+          } else {
+            params.delete(MODE_PARAM);
+          }
+          return params;
+        },
+        { replace: true }
+      );
+    },
+    [setSearchParams]
+  );
+
+  useEffect(() => {
+    setMode(parseMode(searchParams));
+  }, [searchParams]);
 
   const handleSceneChange = useCallback((sceneId: string) => {
     const sceneIndex = storyScenes.findIndex((scene) => scene.id === sceneId);
@@ -53,7 +86,7 @@ export function BambooForestStoryExperience({ story }: BambooForestStoryExperien
       prev.map((a) => (a.id === 'story-complete' ? { ...a, unlocked: true } : a))
     );
     setPoints((prev) => prev + 50);
-    setShowEpilogue(true);
+    setShowInteractiveEpilogue(true);
   }, []);
 
   useEffect(() => {
@@ -83,7 +116,7 @@ export function BambooForestStoryExperience({ story }: BambooForestStoryExperien
         setAchievements(progress.achievements);
       }
       if (progress.sceneIndex >= storyScenes.length - 1) {
-        setShowEpilogue(true);
+        setShowInteractiveEpilogue(true);
       }
     } catch (error) {
       logger.error('Error loading story progress:', error);
@@ -101,10 +134,10 @@ export function BambooForestStoryExperience({ story }: BambooForestStoryExperien
   }, [currentSceneIndex, points, achievements]);
 
   useEffect(() => {
-    if (showEpilogue) {
+    if (showInteractiveEpilogue && mode === 'interactive') {
       document.getElementById('story-epilogue')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-  }, [showEpilogue]);
+  }, [showInteractiveEpilogue, mode]);
 
   return (
     <div className="mx-auto max-w-5xl px-4 sm:px-6 pb-12">
@@ -116,61 +149,73 @@ export function BambooForestStoryExperience({ story }: BambooForestStoryExperien
         All stories
       </Link>
 
-      <div className="mb-6 rounded-2xl border border-emerald-200 bg-emerald-50 p-5 dark:border-emerald-800 dark:bg-emerald-950/40 sm:p-6">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-4">
-          <span className="text-4xl" aria-hidden>
-            {story.coverEmoji}
-          </span>
-          <div className="flex-1">
-            <p className="text-xs font-semibold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 mb-1">
-              Episode {story.episodeNumber} · Foundation story
-            </p>
-            <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-              The Digital Bamboo Forest is the core Privacy Panda journey: illustrated scenes, play/pause
-              narration, and progress saved on your device. Finish the story to unlock discussion activities below.
-            </p>
-            <ul className="mt-3 flex flex-wrap gap-3 text-xs text-gray-600 dark:text-gray-400">
-              <li className="inline-flex items-center gap-1">
-                <BookOpen size={14} aria-hidden />
-                {storyScenes.length} scenes
-              </li>
-              <li className="inline-flex items-center gap-1">
-                <Volume2 size={14} aria-hidden />
-                Narration (listen or read)
-              </li>
-            </ul>
-          </div>
+      <div className="mb-6 space-y-4">
+        <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5 dark:border-emerald-800 dark:bg-emerald-950/40 sm:p-6">
+          <p className="text-xs font-semibold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 mb-2">
+            Episode {story.episodeNumber} · Foundation story
+          </p>
+          <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+            Two ways through the same Digital Bamboo Forest: follow illustrated scenes with narration, or read
+            chapter-by-chapter at your own pace. Switch anytime—activities unlock when you finish either path.
+          </p>
         </div>
-      </div>
 
-      <div id="story-player" className="mb-6 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-hidden">
-        <InteractiveStoryPlayer
-          scenes={storyScenes}
-          currentSceneIndex={currentSceneIndex}
-          onSceneIndexChange={setCurrentSceneIndex}
-          onSceneChange={handleSceneChange}
-          onStoryComplete={handleStoryComplete}
-          onChoiceMade={handleChoiceMade}
-          hideControls={false}
+        <StoryModeSwitcher
+          mode={mode}
+          onModeChange={setViewMode}
+          sceneCount={storyScenes.length}
+          chapterCount={story.chapters.length}
         />
       </div>
 
-      <div className="mb-8">
-        <StoryProgress
-          currentScene={currentSceneIndex + 1}
-          totalScenes={storyScenes.length}
-          points={points}
-          achievements={achievements}
-          showDetailedProgress
-        />
-      </div>
+      {mode === 'interactive' ? (
+        <>
+          <div
+            id="story-player"
+            className="mb-6 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-hidden"
+            role="tabpanel"
+            aria-label="Interactive story"
+          >
+            <InteractiveStoryPlayer
+              scenes={storyScenes}
+              currentSceneIndex={currentSceneIndex}
+              onSceneIndexChange={setCurrentSceneIndex}
+              onSceneChange={handleSceneChange}
+              onStoryComplete={handleStoryComplete}
+              onChoiceMade={handleChoiceMade}
+              hideControls={false}
+            />
+          </div>
 
-      {showEpilogue ? (
-        <StoryEpilogue story={story} id="story-epilogue" />
+          <div className="mb-8">
+            <StoryProgress
+              currentScene={currentSceneIndex + 1}
+              totalScenes={storyScenes.length}
+              points={points}
+              achievements={achievements}
+              showDetailedProgress
+            />
+          </div>
+
+          {showInteractiveEpilogue ? (
+            <StoryEpilogue story={story} id="story-epilogue" />
+          ) : (
+            <p className="text-center text-sm text-gray-500 dark:text-gray-400">
+              Complete the final scene to see Privacy Panda&apos;s lesson and family activities. Prefer reading?
+              <button
+                type="button"
+                onClick={() => setViewMode('chapters')}
+                className="ml-1 font-medium text-green-700 underline dark:text-green-400"
+              >
+                Open chapter reader
+              </button>
+            </p>
+          )}
+        </>
       ) : (
-        <p className="text-center text-sm text-gray-500 dark:text-gray-400">
-          Complete the final scene to see Privacy Panda&apos;s lesson and family activities.
-        </p>
+        <div role="tabpanel" aria-label="Chapter reader">
+          <StoryReader story={story} embedded showBackLink={false} />
+        </div>
       )}
     </div>
   );

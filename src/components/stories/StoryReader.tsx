@@ -8,23 +8,27 @@ interface StoryReaderProps {
   story: Story;
   /** When true, title comes from PageLayout; omit duplicate page heading. */
   embedded?: boolean;
+  /** When false, parent supplies navigation (e.g. mixed-mode foundation story). */
+  showBackLink?: boolean;
 }
 
-export function StoryReader({ story, embedded = false }: StoryReaderProps) {
+export function StoryReader({ story, embedded = false, showBackLink = true }: StoryReaderProps) {
   const [currentChapter, setCurrentChapter] = useState(0);
   const chapter = story.chapters[currentChapter];
   const isFirst = currentChapter === 0;
   const isLast = currentChapter === story.chapters.length - 1;
 
   return (
-    <div className={`mx-auto ${embedded ? 'max-w-3xl px-4 sm:px-6 pb-12' : 'max-w-2xl px-4 py-8'}`}>
-      <Link
-        to="/stories"
-        className="mb-6 inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-green-700 hover:bg-green-50 dark:text-green-400 dark:hover:bg-green-950/50 min-h-[44px]"
-      >
-        <ArrowLeft size={18} aria-hidden />
-        All stories
-      </Link>
+    <div className={`mx-auto ${embedded ? 'max-w-3xl pb-8' : 'max-w-2xl px-4 py-8'}`}>
+      {showBackLink && (
+        <Link
+          to="/stories"
+          className="mb-6 inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-green-700 hover:bg-green-50 dark:text-green-400 dark:hover:bg-green-950/50 min-h-[44px]"
+        >
+          <ArrowLeft size={18} aria-hidden />
+          All stories
+        </Link>
+      )}
 
       {!embedded && (
         <div className="mb-6">

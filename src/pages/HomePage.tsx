@@ -411,7 +411,7 @@ const HomePage: React.FC = () => {
                   <div>
                     <h3>{foundationStory.title}</h3>
                     <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                      Interactive story with narration and illustrations
+                      Interactive scenes or chapter reader—your choice
                     </p>
                   </div>
                 </div>

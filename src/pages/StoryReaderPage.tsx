@@ -37,7 +37,7 @@ export function StoryReaderPage() {
     return (
       <PageLayout
         title={story.title}
-        subtitle="Interactive origin story with illustrations and narration through the Digital Bamboo Forest."
+        subtitle="Interactive scenes with narration, or a calm chapter reader—two paths through the Digital Bamboo Forest."
         breadcrumbs
       >
         <BambooForestStoryExperience story={story} />
