@@ -1,6 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useFamily } from '../../contexts/FamilyContext';
-import { CheckCircle, ArrowRight, ArrowLeft, Shield, Users, Eye, BookOpen, X, UsersRound, Smartphone, Lightbulb } from 'lucide-react';
+import {
+  CheckCircle,
+  ArrowRight,
+  ArrowLeft,
+  Shield,
+  Users,
+  Eye,
+  BookOpen,
+  X,
+  UsersRound,
+  Smartphone,
+  Lightbulb,
+} from 'lucide-react';
 import InfoBox from './InfoBox';
 
 interface ParentOnboardingProps {
@@ -8,12 +20,16 @@ interface ParentOnboardingProps {
   onSkip?: () => void;
 }
 
+const listClass = 'my-4 pl-6 leading-relaxed text-gray-800 dark:text-gray-200 space-y-1';
+const subBoxClass = 'mt-6 p-4 rounded-lg bg-gray-50 dark:bg-gray-900/50';
+const tabCardClass = 'mb-4 p-4 rounded-lg bg-gray-50 dark:bg-gray-900/50 last:mb-0';
+
 const ParentOnboarding: React.FC<ParentOnboardingProps> = ({ onComplete, onSkip }) => {
   const { familyMembers } = useFamily();
   const [currentStep, setCurrentStep] = useState(1);
-  const [completedSteps, setCompletedSteps] = useState<number[]>([]);
 
   const totalSteps = 5;
+  const childCount = familyMembers.filter((m) => m.role === 'child').length;
 
   const steps = [
     {
@@ -24,18 +40,19 @@ const ParentOnboarding: React.FC<ParentOnboardingProps> = ({ onComplete, onSkip 
       content: (
         <div>
           <InfoBox type="info" title="What You'll Get">
-            <ul style={{ margin: '1rem 0', paddingLeft: '1.5rem', lineHeight: '1.8' }}>
+            <ul className={listClass}>
               <li>See what apps and websites your children use</li>
               <li>Know their privacy risks at a glance</li>
               <li>Get conversation starters to talk about privacy</li>
               <li>Track their safety progress over time</li>
             </ul>
           </InfoBox>
-          <p style={{ fontSize: '1rem', lineHeight: '1.6', color: '#2C3E50', marginTop: '1rem' }}>
-            PandaGarde helps you protect your family's privacy online. We'll guide you through setting up your family account and show you how to use the dashboard.
+          <p className="text-base leading-relaxed text-gray-800 dark:text-gray-200 mt-4">
+            PandaGarde helps you protect your family&apos;s privacy online. We&apos;ll guide you through setting up
+            your family account and show you how to use the dashboard.
           </p>
         </div>
-      )
+      ),
     },
     {
       id: 2,
@@ -45,20 +62,18 @@ const ParentOnboarding: React.FC<ParentOnboardingProps> = ({ onComplete, onSkip 
       content: (
         <div>
           <InfoBox type="tip" title="Your Account is Ready!">
-            <p>You're already logged in. Your family account is set up and ready to use.</p>
+            <p>You&apos;re already logged in. Your family account is set up and ready to use.</p>
           </InfoBox>
-          <div style={{ marginTop: '1.5rem' }}>
-            <h4 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.75rem', color: '#2C3E50' }}>
-              What's Next:
-            </h4>
-            <ul style={{ margin: 0, paddingLeft: '1.5rem', lineHeight: '1.8', color: '#2C3E50' }}>
+          <div className="mt-6">
+            <h4 className="text-base font-semibold mb-3 text-gray-800 dark:text-gray-100">What&apos;s Next:</h4>
+            <ul className={`m-0 ${listClass}`}>
               <li>Add your children to track their privacy</li>
               <li>Review their online services</li>
               <li>Set up privacy education</li>
             </ul>
           </div>
         </div>
-      )
+      ),
     },
     {
       id: 3,
@@ -69,16 +84,14 @@ const ParentOnboarding: React.FC<ParentOnboardingProps> = ({ onComplete, onSkip 
         <div>
           <InfoBox type="info" title="Add Family Members">
             <p>
-              {familyMembers.filter(m => m.role === 'child').length > 0
-                ? `You have ${familyMembers.filter(m => m.role === 'child').length} child(ren) added. You can add more from the Family Hub.`
+              {childCount > 0
+                ? `You have ${childCount} child(ren) added. You can add more from the Family Hub.`
                 : 'Add your children to start tracking their online privacy. You can add them from the Family Hub after completing this tour.'}
             </p>
           </InfoBox>
-          <div style={{ marginTop: '1.5rem', padding: '1rem', backgroundColor: '#f8f9fa', borderRadius: '8px' }}>
-            <h4 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.75rem', color: '#2C3E50' }}>
-              For each child, you can:
-            </h4>
-            <ul style={{ margin: 0, paddingLeft: '1.5rem', lineHeight: '1.8', color: '#2C3E50' }}>
+          <div className={subBoxClass}>
+            <h4 className="text-base font-semibold mb-3 text-gray-800 dark:text-gray-100">For each child, you can:</h4>
+            <ul className={`m-0 ${listClass}`}>
               <li>See their privacy risk score</li>
               <li>Review apps and websites they use</li>
               <li>Approve or deny service requests</li>
@@ -86,7 +99,7 @@ const ParentOnboarding: React.FC<ParentOnboardingProps> = ({ onComplete, onSkip 
             </ul>
           </div>
         </div>
-      )
+      ),
     },
     {
       id: 4,
@@ -96,29 +109,37 @@ const ParentOnboarding: React.FC<ParentOnboardingProps> = ({ onComplete, onSkip 
       content: (
         <div>
           <InfoBox type="success" title="Privacy Dashboard">
-            <p>
-              Your privacy dashboard shows you at a glance:
-            </p>
-            <ul style={{ margin: '0.5rem 0 0 0', paddingLeft: '1.5rem', lineHeight: '1.8' }}>
+            <p>Your privacy dashboard shows you at a glance:</p>
+            <ul className={`mt-2 mb-0 ${listClass}`}>
               <li>Family privacy score (average of all children)</li>
               <li>Action items (pending approvals, high-risk alerts)</li>
               <li>Individual child risk cards</li>
               <li>Conversation starters for high-risk services</li>
             </ul>
           </InfoBox>
-          <div style={{ marginTop: '1.5rem', padding: '1rem', backgroundColor: '#f0f9ff', borderRadius: '8px', border: '2px solid #3b82f6' }}>
-            <h4 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.75rem', color: '#1e40af' }}>
-              Risk Levels Explained:
-            </h4>
-            <ul style={{ margin: 0, paddingLeft: '1.5rem', lineHeight: '1.8', color: '#1e40af' }}>
-              <li><strong style={{ color: '#10b981' }}>Low (Green):</strong> Generally safe, minimal privacy concerns</li>
-              <li><strong style={{ color: '#f59e0b' }}>Medium (Yellow):</strong> Some privacy concerns, review settings</li>
-              <li><strong style={{ color: '#f97316' }}>High (Orange):</strong> Significant risks, needs attention</li>
-              <li><strong style={{ color: '#dc2626' }}>Very High (Red):</strong> Major privacy risks, immediate action needed</li>
+          <div className={`${subBoxClass} border-2 border-blue-500 dark:border-blue-600 bg-blue-50 dark:bg-blue-950/30`}>
+            <h4 className="text-base font-semibold mb-3 text-blue-900 dark:text-blue-200">Risk Levels Explained:</h4>
+            <ul className="m-0 pl-6 leading-relaxed text-blue-900 dark:text-blue-200 space-y-1">
+              <li>
+                <strong className="text-green-600 dark:text-green-400">Low (Green):</strong> Generally safe, minimal
+                privacy concerns
+              </li>
+              <li>
+                <strong className="text-amber-600 dark:text-amber-400">Medium (Yellow):</strong> Some privacy concerns,
+                review settings
+              </li>
+              <li>
+                <strong className="text-orange-600 dark:text-orange-400">High (Orange):</strong> Significant risks,
+                needs attention
+              </li>
+              <li>
+                <strong className="text-red-600 dark:text-red-400">Very High (Red):</strong> Major privacy risks,
+                immediate action needed
+              </li>
             </ul>
           </div>
         </div>
-      )
+      ),
     },
     {
       id: 5,
@@ -130,63 +151,73 @@ const ParentOnboarding: React.FC<ParentOnboardingProps> = ({ onComplete, onSkip 
           <InfoBox type="tip" title="Dashboard Overview">
             <p>Your dashboard has 5 main tabs:</p>
           </InfoBox>
-          <div style={{ marginTop: '1.5rem' }}>
-            <div style={{ marginBottom: '1rem', padding: '1rem', backgroundColor: '#f8f9fa', borderRadius: '8px' }}>
-              <h4 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.5rem', color: '#2C3E50' }}>
-                📊 Overview
-              </h4>
-              <p style={{ margin: 0, color: '#666', fontSize: '0.9375rem' }}>
-                See your family's privacy score, action items, and quick stats
+          <div className="mt-6">
+            <div className={tabCardClass}>
+              <h4 className="text-base font-semibold mb-2 text-gray-800 dark:text-gray-100">Overview</h4>
+              <p className="m-0 text-gray-600 dark:text-gray-400 text-[0.9375rem]">
+                See your family&apos;s privacy score, action items, and quick stats
               </p>
             </div>
-            <div style={{ marginBottom: '1rem', padding: '1rem', backgroundColor: '#f8f9fa', borderRadius: '8px' }}>
-              <h4 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.5rem', color: '#2C3E50', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <UsersRound size={18} />
+            <div className={tabCardClass}>
+              <h4 className="text-base font-semibold mb-2 text-gray-800 dark:text-gray-100 flex items-center gap-2">
+                <UsersRound size={18} aria-hidden />
                 Children
               </h4>
-              <p style={{ margin: 0, color: '#666', fontSize: '0.9375rem' }}>
-                View each child's privacy status and manage their services
+              <p className="m-0 text-gray-600 dark:text-gray-400 text-[0.9375rem]">
+                View each child&apos;s privacy status and manage their services
               </p>
             </div>
-            <div style={{ marginBottom: '1rem', padding: '1rem', backgroundColor: '#f8f9fa', borderRadius: '8px' }}>
-              <h4 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.5rem', color: '#2C3E50', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <Smartphone size={18} />
+            <div className={tabCardClass}>
+              <h4 className="text-base font-semibold mb-2 text-gray-800 dark:text-gray-100 flex items-center gap-2">
+                <Smartphone size={18} aria-hidden />
                 Services
               </h4>
-              <p style={{ margin: 0, color: '#666', fontSize: '0.9375rem' }}>
+              <p className="m-0 text-gray-600 dark:text-gray-400 text-[0.9375rem]">
                 Browse the service catalog and approve/deny requests
               </p>
             </div>
-            <div style={{ marginBottom: '1rem', padding: '1rem', backgroundColor: '#f8f9fa', borderRadius: '8px' }}>
-              <h4 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.5rem', color: '#2C3E50', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <Lightbulb size={18} />
+            <div className={tabCardClass}>
+              <h4 className="text-base font-semibold mb-2 text-gray-800 dark:text-gray-100 flex items-center gap-2">
+                <Lightbulb size={18} aria-hidden />
                 Insights
               </h4>
-              <p style={{ margin: 0, color: '#666', fontSize: '0.9375rem' }}>
+              <p className="m-0 text-gray-600 dark:text-gray-400 text-[0.9375rem]">
                 View privacy trends and get recommendations
               </p>
             </div>
-            <div style={{ padding: '1rem', backgroundColor: '#f8f9fa', borderRadius: '8px' }}>
-              <h4 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.5rem', color: '#2C3E50' }}>
-                ⚡ Quick Actions
-              </h4>
-              <p style={{ margin: 0, color: '#666', fontSize: '0.9375rem' }}>
+            <div className={tabCardClass}>
+              <h4 className="text-base font-semibold mb-2 text-gray-800 dark:text-gray-100">Quick Actions</h4>
+              <p className="m-0 text-gray-600 dark:text-gray-400 text-[0.9375rem]">
                 Common tasks like adding children, reviewing requests, and accessing guides
               </p>
             </div>
           </div>
         </div>
-      )
-    }
+      ),
+    },
   ];
 
-  const currentStepData = steps.find(s => s.id === currentStep);
+  const currentStepData = steps.find((s) => s.id === currentStep);
   const Icon = currentStepData?.icon || Shield;
+  const progressPct = (currentStep / totalSteps) * 100;
+
+  const handleComplete = useCallback(() => {
+    onComplete?.();
+  }, [onComplete]);
+
+  const handleSkip = useCallback(() => {
+    onSkip?.();
+  }, [onSkip]);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {handleSkip();}
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [handleSkip]);
 
   const handleNext = () => {
-    if (!completedSteps.includes(currentStep)) {
-      setCompletedSteps([...completedSteps, currentStep]);
-    }
     if (currentStep < totalSteps) {
       setCurrentStep(currentStep + 1);
     } else {
@@ -195,241 +226,94 @@ const ParentOnboarding: React.FC<ParentOnboardingProps> = ({ onComplete, onSkip 
   };
 
   const handlePrevious = () => {
-    if (currentStep > 1) {
-      setCurrentStep(currentStep - 1);
-    }
+    if (currentStep > 1) {setCurrentStep(currentStep - 1);}
   };
 
-  const handleComplete = () => {
-    if (!completedSteps.includes(currentStep)) {
-      setCompletedSteps([...completedSteps, currentStep]);
-    }
-    if (onComplete) {
-      onComplete();
-    }
-  };
+  const btnOutline =
+    'inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium border-2 border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors';
 
-  const handleSkip = () => {
-    if (onSkip) {
-      onSkip();
-    }
-  };
+  const btnPrimary =
+    'inline-flex items-center justify-center gap-2 flex-1 px-6 py-3 rounded-lg font-medium bg-green-600 hover:bg-green-700 dark:bg-green-600 dark:hover:bg-green-500 text-white transition-colors';
 
   return (
     <div
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        backgroundColor: 'rgba(0, 0, 0, 0.7)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 2000,
-        padding: '20px'
-      }}
+      className="fixed inset-0 z-[2000] flex items-center justify-center bg-black/70 p-4 sm:p-5"
+      role="presentation"
+      onClick={handleSkip}
     >
       <div
-        style={{
-          backgroundColor: 'white',
-          borderRadius: '16px',
-          maxWidth: '600px',
-          width: '100%',
-          maxHeight: '90vh',
-          overflowY: 'auto',
-          boxShadow: '0 20px 60px rgba(0,0,0,0.3)',
-          display: 'flex',
-          flexDirection: 'column'
-        }}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="onboarding-title"
+        className="bg-white dark:bg-gray-800 rounded-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header */}
-        <div
-          style={{
-            padding: '1.5rem',
-            borderBottom: '1px solid #e5e7eb',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center'
-          }}
-        >
+        <div className="p-4 sm:p-6 border-b border-gray-200 dark:border-gray-700 flex justify-between items-start gap-4">
           <div>
-            <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#2C3E50', margin: 0 }}>
+            <h2 id="onboarding-title" className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-gray-100 m-0">
               {currentStepData?.title}
             </h2>
-            <p style={{ fontSize: '0.875rem', color: '#666', margin: '0.25rem 0 0 0' }}>
-              {currentStepData?.subtitle}
-            </p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 mb-0">{currentStepData?.subtitle}</p>
           </div>
           <button
+            type="button"
             onClick={handleSkip}
-            style={{
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              color: '#666',
-              padding: '0.5rem'
-            }}
+            className="p-2 text-gray-500 hover:text-gray-800 dark:hover:text-gray-200"
             aria-label="Skip tour"
           >
             <X size={24} />
           </button>
         </div>
 
-        {/* Progress Bar */}
-        <div style={{ padding: '1rem 1.5rem', backgroundColor: '#f8f9fa', borderBottom: '1px solid #e5e7eb' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-            <span style={{ fontSize: '0.875rem', color: '#666' }}>
+        <div className="px-4 sm:px-6 py-4 bg-gray-50 dark:bg-gray-900/50 border-b border-gray-200 dark:border-gray-700">
+          <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mb-2">
+            <span>
               Step {currentStep} of {totalSteps}
             </span>
-            <span style={{ fontSize: '0.875rem', color: '#666' }}>
-              {Math.round((currentStep / totalSteps) * 100)}% Complete
-            </span>
+            <span>{Math.round(progressPct)}% Complete</span>
           </div>
-          <div
-            style={{
-              width: '100%',
-              height: '8px',
-              backgroundColor: '#e5e7eb',
-              borderRadius: '4px',
-              overflow: 'hidden'
-            }}
-          >
+          <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded overflow-hidden">
             <div
-              style={{
-                width: `${(currentStep / totalSteps) * 100}%`,
-                height: '100%',
-                backgroundColor: '#4CAF50',
-                transition: 'width 0.3s ease'
-              }}
+              className="h-full bg-green-600 dark:bg-green-500 transition-all duration-300"
+              style={{ width: `${progressPct}%` }}
             />
           </div>
         </div>
 
-        {/* Step Indicators */}
-        <div style={{ padding: '1rem 1.5rem', display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
+        <div className="px-4 sm:px-6 py-4 flex gap-2 justify-center" aria-hidden>
           {steps.map((step) => (
             <div
               key={step.id}
-              style={{
-                width: '12px',
-                height: '12px',
-                borderRadius: '50%',
-                backgroundColor:
-                  step.id < currentStep
-                    ? '#4CAF50'
-                    : step.id === currentStep
-                    ? '#4CAF50'
-                    : '#e5e7eb',
-                border: step.id === currentStep ? '2px solid #4CAF50' : 'none',
-                boxShadow: step.id === currentStep ? '0 0 0 3px rgba(76, 175, 80, 0.2)' : 'none'
-              }}
+              className={`w-3 h-3 rounded-full ${
+                step.id <= currentStep ? 'bg-green-600 dark:bg-green-500' : 'bg-gray-200 dark:bg-gray-600'
+              } ${step.id === currentStep ? 'ring-2 ring-green-600/30 dark:ring-green-400/30' : ''}`}
               title={step.title}
             />
           ))}
         </div>
 
-        {/* Content */}
-        <div style={{ padding: '1.5rem', flex: 1 }}>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: '1.5rem'
-            }}
-          >
-            <div
-              style={{
-                width: '64px',
-                height: '64px',
-                borderRadius: '50%',
-                backgroundColor: '#e0f2fe',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
-            >
-              <Icon size={32} style={{ color: '#0ea5e9' }} />
+        <div className="p-4 sm:p-6 flex-1">
+          <div className="flex justify-center mb-6">
+            <div className="w-16 h-16 rounded-full bg-sky-100 dark:bg-sky-900/40 flex items-center justify-center">
+              <Icon size={32} className="text-sky-600 dark:text-sky-400" aria-hidden />
             </div>
           </div>
-
           {currentStepData?.content}
         </div>
 
-        {/* Footer */}
-        <div
-          style={{
-            padding: '1.5rem',
-            borderTop: '1px solid #e5e7eb',
-            display: 'flex',
-            justifyContent: 'space-between',
-            gap: '1rem'
-          }}
-        >
-          <button
-            onClick={handlePrevious}
-            disabled={currentStep === 1}
-            style={{
-              padding: '0.75rem 1.5rem',
-              backgroundColor: currentStep === 1 ? '#f3f4f6' : 'white',
-              color: currentStep === 1 ? '#9ca3af' : '#2C3E50',
-              border: '2px solid #e5e7eb',
-              borderRadius: '8px',
-              cursor: currentStep === 1 ? 'not-allowed' : 'pointer',
-              fontWeight: 500,
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              opacity: currentStep === 1 ? 0.5 : 1
-            }}
-          >
-            <ArrowLeft size={18} />
+        <div className="p-4 sm:p-6 border-t border-gray-200 dark:border-gray-700 flex flex-col sm:flex-row justify-between gap-3">
+          <button type="button" onClick={handlePrevious} disabled={currentStep === 1} className={btnOutline}>
+            <ArrowLeft size={18} aria-hidden />
             Previous
           </button>
-
           {currentStep < totalSteps ? (
-            <button
-              onClick={handleNext}
-              style={{
-                padding: '0.75rem 1.5rem',
-                backgroundColor: '#4CAF50',
-                color: 'white',
-                border: 'none',
-                borderRadius: '8px',
-                cursor: 'pointer',
-                fontWeight: 500,
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                flex: 1,
-                justifyContent: 'center'
-              }}
-            >
+            <button type="button" onClick={handleNext} className={btnPrimary}>
               Next
-              <ArrowRight size={18} />
+              <ArrowRight size={18} aria-hidden />
             </button>
           ) : (
-            <button
-              onClick={handleComplete}
-              style={{
-                padding: '0.75rem 1.5rem',
-                backgroundColor: '#4CAF50',
-                color: 'white',
-                border: 'none',
-                borderRadius: '8px',
-                cursor: 'pointer',
-                fontWeight: 500,
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                flex: 1,
-                justifyContent: 'center'
-              }}
-            >
-              <CheckCircle size={18} />
+            <button type="button" onClick={handleComplete} className={btnPrimary}>
+              <CheckCircle size={18} aria-hidden />
               Get Started
             </button>
           )}
@@ -440,4 +324,3 @@ const ParentOnboarding: React.FC<ParentOnboardingProps> = ({ onComplete, onSkip 
 };
 
 export default ParentOnboarding;
-

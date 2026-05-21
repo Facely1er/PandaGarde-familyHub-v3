@@ -78,8 +78,10 @@ const ParentLandingPage: React.FC = () => {
       <section className="marketing-hero">
         <div className="container">
           <div className="fade-in text-center">
-            <h1 className="marketing-heading">For Parents: Keep Your Family Safe Online</h1>
-            <p className="marketing-lead">
+            <h1 className="marketing-heading text-3xl sm:text-4xl lg:text-5xl text-gray-900 dark:text-gray-100">
+              For Parents: Keep Your Family Safe Online
+            </h1>
+            <p className="marketing-lead text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
               Simple tools to see what your children do online, understand their privacy risks, and get help
               talking to them about staying safe.
             </p>
@@ -110,9 +112,9 @@ const ParentLandingPage: React.FC = () => {
                 <div className={`icon-circle ${iconBg}`}>
                   <Icon size={32} className={iconColor} />
                 </div>
-                <h2 className="mb-4 text-3xl text-gray-800">{title}</h2>
-                <p className="mb-6 leading-relaxed text-gray-600">{description}</p>
-                <ul className="list-none space-y-3 p-0 text-gray-600">
+                <h2 className="mb-4 text-2xl sm:text-3xl text-gray-800 dark:text-gray-100">{title}</h2>
+                <p className="mb-6 leading-relaxed text-gray-600 dark:text-gray-300">{description}</p>
+                <ul className="list-none space-y-3 p-0 text-gray-600 dark:text-gray-400">
                   {bullets.map((item) => (
                     <li key={item} className="flex items-start gap-2">
                       <CheckCircle size={20} className="mt-0.5 shrink-0 text-success" />
@@ -129,14 +131,14 @@ const ParentLandingPage: React.FC = () => {
       <section className="bg-surface py-16">
         <div className="container">
           <div className="mb-12 text-center">
-            <h2 className="mb-4 text-4xl text-gray-800">Your Privacy Dashboard</h2>
-            <p className="mx-auto max-w-2xl text-xl text-gray-600">
+            <h2 className="mb-4 text-3xl sm:text-4xl text-gray-800 dark:text-gray-100">Your Privacy Dashboard</h2>
+            <p className="mx-auto max-w-2xl text-lg sm:text-xl text-gray-600 dark:text-gray-300">
               See everything you need to know about your family&apos;s online privacy in one simple dashboard.
             </p>
           </div>
 
-          <div className="rounded-card border-2 border-dashed border-gray-300 bg-light p-8">
-            <div className="mb-8 grid gap-6 sm:grid-cols-3">
+          <div className="rounded-card border-2 border-dashed border-gray-300 dark:border-gray-600 bg-light dark:bg-gray-800/50 p-6 sm:p-8">
+            <div className="mb-8 grid grid-cols-1 gap-6 sm:grid-cols-3">
               {[
                 { value: '85', label: 'Family Privacy Score', color: 'text-success' },
                 { value: '3', label: 'Action Items', color: 'text-amber-500' },
@@ -144,7 +146,7 @@ const ParentLandingPage: React.FC = () => {
               ].map(({ value, label, color }) => (
                 <div key={label} className="rounded-lg bg-surface p-6 text-center">
                   <div className={`mb-2 text-4xl font-bold ${color}`}>{value}</div>
-                  <div className="text-gray-600">{label}</div>
+                  <div className="text-gray-600 dark:text-gray-400">{label}</div>
                 </div>
               ))}
             </div>
@@ -168,18 +170,18 @@ const ParentLandingPage: React.FC = () => {
       <section className="marketing-section">
         <div className="container">
           <div className="mb-12 text-center">
-            <h2 className="mb-4 text-4xl text-gray-800">Common Questions from Parents</h2>
-            <p className="text-xl text-gray-600">Everything you need to know to get started</p>
+            <h2 className="mb-4 text-3xl sm:text-4xl text-gray-800 dark:text-gray-100">Common Questions from Parents</h2>
+            <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300">Everything you need to know to get started</p>
           </div>
 
           <div className="mx-auto max-w-3xl">
             {faqs.map((faq) => (
-              <article key={faq.question} className="mb-4 rounded-lg bg-surface p-6 shadow-card">
-                <div className="flex items-start gap-4">
-                  <HelpCircle size={24} className="mt-0.5 shrink-0 text-success" />
+              <article key={faq.question} className="mb-4 rounded-lg bg-surface dark:bg-gray-800 p-6 shadow-card">
+                <div className="flex flex-col sm:flex-row items-start gap-4">
+                  <HelpCircle size={24} className="mt-0.5 shrink-0 text-success" aria-hidden />
                   <div>
-                    <h3 className="mb-3 text-xl text-gray-800">{faq.question}</h3>
-                    <p className="leading-relaxed text-gray-600">{faq.answer}</p>
+                    <h3 className="mb-3 text-lg sm:text-xl text-gray-800 dark:text-gray-100">{faq.question}</h3>
+                    <p className="leading-relaxed text-gray-600 dark:text-gray-300">{faq.answer}</p>
                   </div>
                 </div>
               </article>
@@ -200,8 +202,8 @@ const ParentLandingPage: React.FC = () => {
 
       <section className="bg-gradient-to-br from-indigo-500 to-purple-600 py-16 text-center text-white">
         <div className="container">
-          <h2 className="mb-4 text-4xl font-bold">Ready to Protect Your Family?</h2>
-          <p className="mx-auto mb-8 max-w-xl text-xl">
+          <h2 className="mb-4 text-3xl sm:text-4xl font-bold">Ready to Protect Your Family?</h2>
+          <p className="mx-auto mb-8 max-w-xl text-lg sm:text-xl px-4">
             Keep your family safe online with simple, easy-to-use tools designed for parents who want to protect
             their children&apos;s privacy.
           </p>

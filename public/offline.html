@@ -22,15 +22,21 @@
             padding: 2rem;
         }
         .logo {
-            width: 120px;
-            height: 120px;
+            width: 96px;
+            height: 96px;
             margin: 0 auto 2rem;
             background: white;
-            border-radius: 50%;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
+            padding: 8px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
         h1 {
             font-size: 2.5rem;
@@ -74,7 +80,9 @@
 </head>
 <body>
     <div class="container">
-        <div class="logo">🐼</div>
+        <div class="logo">
+            <img src="/LogoPandagarde.png" alt="PandaGarde" width="80" height="80" />
+        </div>
         <h1>You're Offline</h1>
         <p>Don't worry! Privacy Panda has cached some content for offline use. Check your internet connection and try again.</p>
         

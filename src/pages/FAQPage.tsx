@@ -116,7 +116,7 @@ const FAQPage: React.FC = () => {
       title="FAQ"
       subtitle="Quick answers to questions about PandaGarde and how to use it with your family."
     >
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 pb-8">
           {/* Category Filter */}
           <div className="mb-12">
             <h2 className="text-2xl font-bold mb-6 text-primary">
@@ -131,13 +131,9 @@ const FAQPage: React.FC = () => {
                     onClick={() => setSelectedCategory(category.id)}
                     className={`flex items-center gap-2 px-4 py-2 rounded-full font-medium transition-all ${
                       selectedCategory === category.id
-                        ? 'bg-green-500 text-white'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        ? 'bg-green-600 text-white shadow-md shadow-green-900/30 ring-2 ring-green-400/40'
+                        : 'bg-gray-100 dark:bg-gray-200/80 text-gray-700 dark:text-gray-200 hover:bg-green-100/80 dark:hover:bg-green-900/30 dark:hover:text-green-200 dark:border dark:border-green-500/20'
                     }`}
-                    style={{
-                      backgroundColor: selectedCategory === category.id ? 'var(--primary-light)' : undefined,
-                      color: selectedCategory === category.id ? 'white' : undefined
-                    }}
                   >
                     <Icon size={16} />
                     {category.label}
@@ -152,27 +148,25 @@ const FAQPage: React.FC = () => {
             {filteredItems.map((item) => (
               <div
                 key={item.id}
-                className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden"
-                style={{ backgroundColor: 'var(--card-color)', boxShadow: 'var(--shadow-md)' }}
+                className="theme-card overflow-hidden"
               >
                 <button
                   onClick={() => toggleItem(item.id)}
-                  className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
-                  style={{ backgroundColor: 'var(--gray-100)' }}
+                  className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors bg-gray-50/50 dark:bg-gray-800"
                 >
                   <h3 className="text-lg font-semibold pr-4 text-primary">
                     {item.question}
                   </h3>
                   {openItems.includes(item.id) ? (
-                    <ChevronUp size={20} className="text-gray-500 flex-shrink-0" />
+                    <ChevronUp size={20} className="text-gray-500 dark:text-gray-400 flex-shrink-0" />
                   ) : (
-                    <ChevronDown size={20} className="text-gray-500 flex-shrink-0" />
+                    <ChevronDown size={20} className="text-gray-500 dark:text-gray-400 flex-shrink-0" />
                   )}
                 </button>
 
                 {openItems.includes(item.id) && (
                   <div className="px-6 pb-4">
-                    <p className="text-gray-700 leading-relaxed text-gray-600">
+                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                       {item.answer}
                     </p>
                   </div>
@@ -182,7 +176,7 @@ const FAQPage: React.FC = () => {
           </div>
 
           {/* Contact Section */}
-          <div className="mt-16 bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-8 text-white text-center">
+          <div className="mt-16 cta-banner">
             <h2 className="text-2xl font-bold mb-4">
               Still Have Questions?
             </h2>
@@ -192,7 +186,7 @@ const FAQPage: React.FC = () => {
             <div className="flex flex-wrap gap-4 justify-center">
               <Link
                 to="/contact"
-                className="bg-white text-green-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+                className="bg-white/95 text-green-700 px-6 py-3 rounded-lg font-semibold shadow-md hover:bg-white hover:shadow-lg transition-all dark:bg-emerald-950/60 dark:text-green-300 dark:border dark:border-green-400/30 dark:hover:bg-emerald-900/50"
               >
                 Contact Us
               </Link>

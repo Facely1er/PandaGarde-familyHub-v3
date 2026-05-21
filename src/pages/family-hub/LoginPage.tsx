@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, CheckCircle2 } from 'lucide-react';
 import { updateDfaJourneyPhase } from '../../lib/dfaJourney';
 import { useAuth } from './AuthWrapper';
 import { HUB_WELCOMED_KEY } from '../../familyhub/screens/WelcomeScreen';
@@ -27,8 +27,14 @@ const LoginPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex items-center justify-center px-4">
       <div className="max-w-lg w-full bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-200 dark:border-slate-700 p-8 text-center">
-        <div className="inline-flex items-center justify-center h-14 w-14 rounded-full bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-400 mb-4">
-          <LayoutDashboard size={24} />
+        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border-2 border-teal-200 bg-white shadow-md dark:border-teal-800/60 dark:bg-slate-900">
+          <img
+            src="/LogoPandagarde.png"
+            alt="PandaGarde"
+            className="h-full w-full object-contain p-1"
+            width={64}
+            height={64}
+          />
         </div>
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">PandaGarde Family Hub</h1>
         <p className="text-gray-600 dark:text-gray-400 mb-3">

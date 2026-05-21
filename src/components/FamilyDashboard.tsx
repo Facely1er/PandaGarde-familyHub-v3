@@ -579,7 +579,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
   }
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: 'var(--fh-bg-light, #F0FDFA)', color: 'var(--gray-800)' }}>
+    <div className="min-h-screen bg-teal-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100">
       {/* Hero Section - Teal Theme - Hidden in app mode */}
       {!appMode && (
       <section className="bg-gradient-to-r from-teal-600 via-teal-500 to-cyan-500 text-white py-6 sm:py-10 relative overflow-hidden">
@@ -619,10 +619,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
       )}
 
       {/* Quick Actions Bar */}
-      <div
-        className="border-b border-teal-100/80 bg-white/90 backdrop-blur-sm dark:border-teal-900/40 dark:bg-gray-900/80"
-        style={{ backgroundColor: 'var(--card-color)' }}
-      >
+      <div className="border-b border-teal-100/80 bg-white/90 backdrop-blur-sm dark:border-teal-900/40 dark:bg-gray-900/80">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-end py-2.5 sm:py-3">
             <button
@@ -681,11 +678,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
         {/* Family Overview Cards - Teal Theme */}
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
           <div 
-            className="family-hub-card bg-white p-4 sm:p-5 rounded-xl shadow-md hover:shadow-xl transition-all border-2 border-transparent hover:border-teal-200"
-            style={{ 
-              backgroundColor: 'var(--card-color)',
-              boxShadow: '0 1px 3px 0 rgba(13, 115, 119, 0.08), 0 1px 2px 0 rgba(13, 115, 119, 0.04)'
-            }}
+            className="family-hub-card bg-white dark:bg-gray-800 p-4 sm:p-5 rounded-xl shadow-md shadow-teal-900/5 hover:shadow-xl transition-all border-2 border-transparent hover:border-teal-200 dark:hover:border-teal-700"
           >
             <div className="flex items-center justify-between mb-2 sm:mb-3">
               <div className="w-9 h-9 sm:w-11 sm:h-11 bg-teal-100 rounded-xl flex items-center justify-center">
@@ -700,11 +693,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
           </div>
 
           <div 
-            className="family-hub-card bg-white p-4 sm:p-5 rounded-xl shadow-md hover:shadow-xl transition-all border-2 border-transparent hover:border-teal-200"
-            style={{ 
-              backgroundColor: 'var(--card-color)',
-              boxShadow: '0 1px 3px 0 rgba(13, 115, 119, 0.08), 0 1px 2px 0 rgba(13, 115, 119, 0.04)'
-            }}
+            className="family-hub-card bg-white dark:bg-gray-800 p-4 sm:p-5 rounded-xl shadow-md shadow-teal-900/5 hover:shadow-xl transition-all border-2 border-transparent hover:border-teal-200 dark:hover:border-teal-700"
           >
             <div className="flex items-center justify-between mb-2 sm:mb-3">
               <div className="w-9 h-9 sm:w-11 sm:h-11 bg-cyan-100 rounded-xl flex items-center justify-center">
@@ -719,11 +708,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
           </div>
 
           <div 
-            className="family-hub-card bg-white p-4 sm:p-5 rounded-xl shadow-md hover:shadow-xl transition-all border-2 border-transparent hover:border-teal-200"
-            style={{ 
-              backgroundColor: 'var(--card-color)',
-              boxShadow: '0 1px 3px 0 rgba(13, 115, 119, 0.08), 0 1px 2px 0 rgba(13, 115, 119, 0.04)'
-            }}
+            className="family-hub-card bg-white dark:bg-gray-800 p-4 sm:p-5 rounded-xl shadow-md shadow-teal-900/5 hover:shadow-xl transition-all border-2 border-transparent hover:border-teal-200 dark:hover:border-teal-700"
           >
             <div className="flex items-center justify-between mb-2 sm:mb-3">
               <div className="w-9 h-9 sm:w-11 sm:h-11 bg-amber-100 rounded-xl flex items-center justify-center">
@@ -738,11 +723,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
           </div>
 
           <div 
-            className="family-hub-card bg-white p-4 sm:p-5 rounded-xl shadow-md hover:shadow-xl transition-all border-2 border-transparent hover:border-teal-200"
-            style={{ 
-              backgroundColor: 'var(--card-color)',
-              boxShadow: '0 1px 3px 0 rgba(13, 115, 119, 0.08), 0 1px 2px 0 rgba(13, 115, 119, 0.04)'
-            }}
+            className="family-hub-card bg-white dark:bg-gray-800 p-4 sm:p-5 rounded-xl shadow-md shadow-teal-900/5 hover:shadow-xl transition-all border-2 border-transparent hover:border-teal-200 dark:hover:border-teal-700"
           >
             <div className="flex items-center justify-between mb-2 sm:mb-3">
               <div className="w-9 h-9 sm:w-11 sm:h-11 bg-orange-100 rounded-xl flex items-center justify-center">
@@ -815,11 +796,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
           {/* Family Members Management */}
           <div 
-            className="bg-white rounded-xl shadow-md p-5 sm:p-6"
-            style={{ 
-              backgroundColor: 'var(--card-color)',
-              boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)'
-            }}
+            className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 sm:p-6"
           >
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0 mb-4 sm:mb-6">
               <h2 className="text-xl sm:text-2xl font-bold text-primary">Family Members</h2>
@@ -862,11 +839,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
                 {familyMembers.map(member => (
                   <div 
                     key={member.id} 
-                    className="border-2 border-gray-200 rounded-lg p-4 hover:border-green-300 transition-all"
-                    style={{ 
-                      backgroundColor: 'var(--light)',
-                      borderColor: 'var(--gray-200)'
-                    }}
+                    className="border-2 border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50 rounded-lg p-4 hover:border-green-300 dark:hover:border-green-600 transition-all"
                   >
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                       <div className="flex items-center gap-4 flex-1">
@@ -910,7 +883,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
                     </div>
                     
                     {/* Privacy Score Display */}
-                    <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t" style={{ borderColor: 'var(--gray-200)' }}>
+                    <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-gray-200 dark:border-gray-700">
                       <div className="flex items-center justify-between mb-1.5 sm:mb-2">
                         <span className="text-xs sm:text-sm text-gray-600">Privacy Score</span>
                         <span className="text-xs sm:text-sm font-medium text-gray-700">
@@ -926,12 +899,12 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
                           style={{ width: `${Math.max(0, Math.min(100, calculateMemberScore(member.id)))}%` }}
                         />
                       </div>
-                      <div className="flex justify-between text-xs mt-1 sm:mt-1.5" style={{ color: 'var(--gray-500)' }}>
+                      <div className="flex justify-between text-xs mt-1 sm:mt-1.5 text-gray-500 dark:text-gray-400">
                         <span>Needs Work</span>
                         <span>Good</span>
                         <span>Excellent</span>
                       </div>
-                      <p className="text-xs mt-1.5 sm:mt-2" style={{ color: 'var(--gray-500)' }}>
+                      <p className="text-xs mt-1.5 sm:mt-2 text-gray-500 dark:text-gray-400">
                         Score calculated from completed activities
                       </p>
                     </div>
@@ -943,11 +916,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
 
           {/* Family Goals */}
           <div 
-            className="bg-white rounded-xl shadow-md p-5 sm:p-6"
-            style={{ 
-              backgroundColor: 'var(--card-color)',
-              boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)'
-            }}
+            className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 sm:p-6"
           >
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0 mb-4 sm:mb-6">
               <h2 className="text-xl sm:text-2xl font-bold text-primary">Privacy Goals</h2>
@@ -992,18 +961,14 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
                 {familyGoals.map(goal => (
                   <div 
                     key={goal.id} 
-                    className="border-2 border-gray-200 rounded-lg p-4 hover:border-green-300 transition-all"
-                    style={{ 
-                      backgroundColor: 'var(--light)',
-                      borderColor: goal.completed ? 'var(--green-200)' : 'var(--gray-200)'
-                    }}
+                    className={`border-2 rounded-lg p-4 hover:border-green-300 dark:hover:border-green-600 transition-all bg-gray-50 dark:bg-gray-900/50 ${
+                      goal.completed ? 'border-green-200 dark:border-green-800' : 'border-gray-200 dark:border-gray-700'
+                    }`}
                   >
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-2 flex-wrap">
-                          <h3 className={`font-semibold text-base sm:text-lg ${goal.completed ? 'line-through' : ''}`} style={{ 
-                            color: goal.completed ? 'var(--gray-500)' : 'var(--primary)' 
-                          }}>
+                          <h3 className={`font-semibold text-base sm:text-lg ${goal.completed ? 'line-through text-gray-500 dark:text-gray-400' : 'text-green-800 dark:text-green-300'}`}>
                             {goal.title}
                           </h3>
                           <span className={`px-2.5 py-1 text-xs rounded-full font-medium ${
@@ -1016,7 +981,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
                         </div>
                         <p className="text-sm mb-2 text-gray-600">{goal.description}</p>
                         {goal.targetDate && (
-                          <p className="text-xs" style={{ color: 'var(--gray-500)' }}>
+                          <p className="text-xs text-gray-500 dark:text-gray-400">
                             Target: {new Date(goal.targetDate).toLocaleDateString()}
                           </p>
                         )}
@@ -1045,8 +1010,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
       {showAddMember && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 overflow-y-auto">
           <div 
-            className="rounded-xl max-w-md w-full p-4 sm:p-6 my-auto max-h-[90vh] overflow-y-auto shadow-xl"
-            style={{ backgroundColor: 'var(--card-color)' }}
+            className="rounded-xl max-w-md w-full p-4 sm:p-6 my-auto max-h-[90vh] overflow-y-auto shadow-xl bg-white dark:bg-gray-800"
           >
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-xl font-bold text-primary">Add Family Member</h3>
@@ -1070,13 +1034,13 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
               )}
               
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-700">Name</label>
+                <label htmlFor="add-member-name" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Name</label>
                 <input
+                  id="add-member-name"
                   type="text"
                   value={newMember.name}
                   onChange={(e) => setNewMember({...newMember, name: e.target.value})}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-600 focus:border-transparent"
-                  style={{ backgroundColor: 'var(--card-color)', color: 'var(--gray-900)' }}
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-teal-600 focus:border-transparent"
                   placeholder="Enter family member's name"
                   maxLength={50}
                   required
@@ -1084,13 +1048,13 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
               </div>
               
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-700">Age</label>
+                <label htmlFor="add-member-age" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Age</label>
                 <input
+                  id="add-member-age"
                   type="number"
                   value={newMember.age || ''}
                   onChange={(e) => setNewMember({...newMember, age: parseInt(e.target.value, 10) || 0})}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-600 focus:border-transparent"
-                  style={{ backgroundColor: 'var(--card-color)', color: 'var(--gray-900)' }}
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-teal-600 focus:border-transparent"
                   placeholder="Enter age"
                   min="1"
                   max="100"
@@ -1099,12 +1063,12 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
               </div>
               
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-700">Role</label>
+                <label htmlFor="add-member-role" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Role</label>
                 <select
+                  id="add-member-role"
                   value={newMember.role}
                   onChange={(e) => setNewMember({...newMember, role: e.target.value})}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-600 focus:border-transparent"
-                  style={{ backgroundColor: 'var(--card-color)', color: 'var(--gray-900)' }}
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-teal-600 focus:border-transparent"
                 >
                   <option value="Parent">Parent</option>
                   <option value="Child">Child</option>
@@ -1138,8 +1102,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
       {showAddGoal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 overflow-y-auto">
           <div 
-            className="rounded-xl max-w-md w-full p-4 sm:p-6 my-auto max-h-[90vh] overflow-y-auto shadow-xl"
-            style={{ backgroundColor: 'var(--card-color)' }}
+            className="rounded-xl max-w-md w-full p-4 sm:p-6 my-auto max-h-[90vh] overflow-y-auto shadow-xl bg-white dark:bg-gray-800"
           >
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-xl font-bold text-primary">Add Privacy Goal</h3>
@@ -1153,48 +1116,48 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
             
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-700">Goal Title</label>
+                <label htmlFor="add-goal-title" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Goal Title</label>
                 <input
+                  id="add-goal-title"
                   type="text"
                   value={newGoal.title}
                   onChange={(e) => setNewGoal({...newGoal, title: e.target.value})}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-600 focus:border-transparent"
-                  style={{ backgroundColor: 'var(--card-color)', color: 'var(--gray-900)' }}
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-teal-600 focus:border-transparent"
                   placeholder="e.g., Set up 2FA for all accounts"
                   required
                 />
               </div>
               
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-700">Description</label>
+                <label htmlFor="add-goal-description" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Description</label>
                 <textarea
+                  id="add-goal-description"
                   value={newGoal.description}
                   onChange={(e) => setNewGoal({...newGoal, description: e.target.value})}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-600 focus:border-transparent"
-                  style={{ backgroundColor: 'var(--card-color)', color: 'var(--gray-900)' }}
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-teal-600 focus:border-transparent"
                   placeholder="Describe what needs to be done..."
                   rows={3}
                 />
               </div>
               
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-700">Target Date (Optional)</label>
+                <label htmlFor="add-goal-target-date" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Target Date (Optional)</label>
                 <input
+                  id="add-goal-target-date"
                   type="date"
                   value={newGoal.targetDate}
                   onChange={(e) => setNewGoal({...newGoal, targetDate: e.target.value})}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-600 focus:border-transparent"
-                  style={{ backgroundColor: 'var(--card-color)', color: 'var(--gray-900)' }}
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-teal-600 focus:border-transparent"
                 />
               </div>
               
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-700">Priority</label>
+                <label htmlFor="add-goal-priority" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">Priority</label>
                 <select
+                  id="add-goal-priority"
                   value={newGoal.priority}
                   onChange={(e) => setNewGoal({...newGoal, priority: e.target.value})}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-600 focus:border-transparent"
-                  style={{ backgroundColor: 'var(--card-color)', color: 'var(--gray-900)' }}
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-teal-600 focus:border-transparent"
                 >
                   <option value="Low">Low Priority</option>
                   <option value="Medium">Medium Priority</option>

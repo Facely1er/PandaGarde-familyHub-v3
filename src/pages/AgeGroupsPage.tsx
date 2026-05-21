@@ -97,8 +97,8 @@ const AgeGroupsPage: React.FC = () => {
       breadcrumbs={true}
     >
 
-      <section className="age-group-section">
-        <div className="container">
+      <section className="age-group-section py-8 md:py-12">
+        <div className="container px-4 sm:px-6 lg:px-8">
           <div className="age-group-tabs">
             {ageGroups.map((group) => (
               <button
@@ -162,8 +162,8 @@ const AgeGroupsPage: React.FC = () => {
         </div>
       </section>
 
-      <section className="cta-section">
-        <div className="container">
+      <section className="cta-section py-8 md:py-12">
+        <div className="container px-4 sm:px-6 lg:px-8">
           <div className="cta-content">
             <h2>Ready to Start Learning?</h2>
             <p>Choose your age group above to begin your privacy education journey with Privacy Panda.</p>

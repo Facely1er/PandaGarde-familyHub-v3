@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { BookOpen, ExternalLink, Plus, Search, Star, TrendingUp, Save, CheckCircle, Tag, Eye } from 'lucide-react';
 import { communityStorage, SharedResource } from '../../utils/communityStorageManager';
+import { createFocusTrap } from '../../utils/accessibility';
 
 interface ResourceSharingProps {
   compact?: boolean;
@@ -116,7 +117,7 @@ const ResourceSharing: React.FC<ResourceSharingProps> = ({ compact = false }) =>
       .slice(0, 5);
     
     return (
-      <div className="bg-white rounded-lg p-4 shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
+      <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold flex items-center gap-2 text-primary">
             <BookOpen size={20} />
@@ -173,7 +174,7 @@ const ResourceSharing: React.FC<ResourceSharingProps> = ({ compact = false }) =>
   }
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}>
+    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100">
       <div className="container mx-auto px-6 py-8">
         {/* Header */}
         <div className="mb-8">
@@ -196,42 +197,45 @@ const ResourceSharing: React.FC<ResourceSharingProps> = ({ compact = false }) =>
           </div>
 
           {/* Privacy Notice */}
-          <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
-            <p className="text-sm text-green-800">
+          <div className="bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-700 rounded-lg p-4 mb-6">
+            <p className="text-sm text-green-800 dark:text-green-200">
               <strong>Privacy First:</strong> All resource submissions are anonymous. No personal information is collected. All data is stored locally on your device.
             </p>
           </div>
         </div>
 
         {/* Filters and Search */}
-        <div className="bg-white rounded-lg p-4 shadow-md mb-6" style={{ backgroundColor: 'var(--card-color)' }}>
+        <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md mb-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
               <input
-                type="text"
+                type="search"
+                id="resource-search"
                 placeholder="Search resources..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}
+                aria-label="Search shared resources"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
               />
             </div>
             <select
+              id="resource-category-filter"
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-              style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}
+              aria-label="Filter resources by category"
+              className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
             >
               {categories.map(cat => (
                 <option key={cat.value} value={cat.value}>{cat.label}</option>
               ))}
             </select>
             <select
+              id="resource-sort"
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as 'recent' | 'popular' | 'verified')}
-              className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-              style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}
+              aria-label="Sort resources"
+              className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
             >
               <option value="popular">Most Popular</option>
               <option value="verified">Verified First</option>
@@ -300,7 +304,7 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ resource, isSaved, onVote, 
   };
 
   return (
-    <div className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all" style={{ backgroundColor: 'var(--card-color)' }}>
+    <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-lg transition-all">
       <div className="flex items-start justify-between mb-3">
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-2">
@@ -392,13 +396,11 @@ const ResourceSubmissionForm: React.FC<ResourceSubmissionFormProps> = ({ onSubmi
   const [tags, setTags] = useState('');
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  // Close on Escape key
+  const modalRef = useRef<HTMLDivElement>(null);
+
   React.useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {onCancel();}
-    };
-    document.addEventListener('keydown', handleKey);
-    return () => document.removeEventListener('keydown', handleKey);
+    if (!modalRef.current) {return;}
+    return createFocusTrap(modalRef.current, { onEscape: onCancel });
   }, [onCancel]);
 
   const validate = () => {
@@ -441,8 +443,8 @@ const ResourceSubmissionForm: React.FC<ResourceSubmissionFormProps> = ({ onSubmi
       <div className="flex min-h-screen items-center justify-center p-4">
         <div className="fixed inset-0 bg-black bg-opacity-50" onClick={onCancel} aria-hidden="true" />
         <div
-          className="relative bg-white rounded-lg shadow-xl max-w-2xl w-full p-6"
-          style={{ backgroundColor: 'var(--card-color)' }}
+          ref={modalRef}
+          className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full p-6"
           role="dialog"
           aria-modal="true"
           aria-labelledby="resource-submit-title"
@@ -458,53 +460,53 @@ const ResourceSubmissionForm: React.FC<ResourceSubmissionFormProps> = ({ onSubmi
             Share a Resource
           </h2>
 
-          <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
-            <p className="text-sm text-green-800">
+          <div className="bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-700 rounded-lg p-4 mb-6">
+            <p className="text-sm text-green-800 dark:text-green-200">
               <strong>Privacy Notice:</strong> Your submission is completely anonymous. No personal information is collected. All data is stored locally on your device.
             </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-700">
+              <label htmlFor="resource-title" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                 Resource Title *
               </label>
               <input
+                id="resource-title"
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 maxLength={200}
-                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 ${errors.title ? 'border-red-500' : 'border-gray-300'}`}
-                style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}
+                className={`w-full px-3 py-2 border rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 ${errors.title ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'}`}
                 placeholder="Name of the resource"
               />
               {errors.title && <p className="text-red-500 text-sm mt-1">{errors.title}</p>}
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-700">
+              <label htmlFor="resource-url" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                 URL *
               </label>
               <input
+                id="resource-url"
                 type="url"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
-                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 ${errors.url ? 'border-red-500' : 'border-gray-300'}`}
-                style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}
+                className={`w-full px-3 py-2 border rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 ${errors.url ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'}`}
                 placeholder="https://example.com"
               />
               {errors.url && <p className="text-red-500 text-sm mt-1">{errors.url}</p>}
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-700">
+              <label htmlFor="resource-category" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                 Category *
               </label>
               <select
+                id="resource-category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value as SharedResource['category'])}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
               >
                 <option value="privacy-tools">Privacy Tools</option>
                 <option value="educational-content">Educational Content</option>
@@ -518,16 +520,16 @@ const ResourceSubmissionForm: React.FC<ResourceSubmissionFormProps> = ({ onSubmi
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-700">
+              <label htmlFor="resource-description" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                 Description *
               </label>
               <textarea
+                id="resource-description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 maxLength={500}
                 rows={4}
-                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 ${errors.description ? 'border-red-500' : 'border-gray-300'}`}
-                style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}
+                className={`w-full px-3 py-2 border rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 ${errors.description ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'}`}
                 placeholder="Brief description of the resource and why it's useful for privacy education"
               />
               {errors.description && <p className="text-red-500 text-sm mt-1">{errors.description}</p>}
@@ -535,15 +537,15 @@ const ResourceSubmissionForm: React.FC<ResourceSubmissionFormProps> = ({ onSubmi
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-700">
+              <label htmlFor="resource-tags" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                 Tags (optional, comma-separated)
               </label>
               <input
+                id="resource-tags"
                 type="text"
                 value={tags}
                 onChange={(e) => setTags(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
                 placeholder="e.g., password, privacy, tools"
               />
             </div>

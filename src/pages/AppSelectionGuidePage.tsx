@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Smartphone, Star, Shield, AlertTriangle, CheckCircle, Search, Download } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 
