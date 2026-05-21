@@ -15,7 +15,7 @@ export function ComingSoonBanner() {
   return (
     <div className="rounded-xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950 px-4 py-3 flex items-center gap-3 overflow-hidden">
       {coverUrl ? (
-        <div className="story-cover-art story-cover-art--thumb h-14 w-14">
+        <div className="story-cover-art h-14 w-14 shrink-0 rounded-lg border border-amber-200/60 dark:border-amber-800/60">
           <img
             src={coverUrl}
             alt=""
