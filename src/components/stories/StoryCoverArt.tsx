@@ -29,11 +29,9 @@ function CoverFallback({
 function StoryCoverImage({
   story,
   heightClass,
-  showLogoOverlay,
 }: {
   story: Story;
   heightClass: string;
-  showLogoOverlay?: boolean;
 }) {
   const [coverFailed, setCoverFailed] = useState(false);
   const coverUrl = getStoryCoverUrl(story);
@@ -61,16 +59,6 @@ function StoryCoverImage({
         className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-gray-900/40 via-transparent to-transparent dark:from-gray-950/50"
         aria-hidden
       />
-      {showLogoOverlay && (
-        <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center p-4">
-          <img
-            src={PANDAGARDE_LOGO}
-            alt=""
-            className="h-20 w-20 object-contain drop-shadow-lg sm:h-24 sm:w-24"
-            aria-hidden
-          />
-        </div>
-      )}
     </div>
   );
 }
@@ -131,16 +119,7 @@ export function StoryCoverArt({ story, variant }: StoryCoverArtProps) {
             loading="lazy"
             onError={() => setHeroFailed(true)}
           />
-          <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-r from-emerald-900/40 to-transparent" aria-hidden />
-          {isFoundation && (
-            <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center">
-              <img
-                src={PANDAGARDE_LOGO}
-                alt="PandaGarde"
-                className="h-16 w-16 object-contain drop-shadow-md sm:h-20 sm:w-20"
-              />
-            </div>
-          )}
+          <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-r from-emerald-900/30 to-transparent" aria-hidden />
         </div>
       );
     }
@@ -152,10 +131,6 @@ export function StoryCoverArt({ story, variant }: StoryCoverArtProps) {
   }
 
   return (
-    <StoryCoverImage
-      story={story}
-      heightClass="h-36 sm:h-40"
-      showLogoOverlay={isFoundation}
-    />
+    <StoryCoverImage story={story} heightClass="h-36 sm:h-40" />
   );
 }

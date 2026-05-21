@@ -1,7 +1,7 @@
 import type { Story } from './stories';
-import coverEp1 from '../assets/story-covers/episode-1-bamboo-forest.svg?url';
-import coverEp2 from '../assets/story-covers/episode-2-photo-consent.svg?url';
-import coverEp3 from '../assets/story-covers/episode-3-sneaky-settings.svg?url';
+import coverEp1 from '../assets/story-covers/episode-1-cover.webp?url';
+import coverEp2 from '../assets/story-covers/episode-2-cover.webp?url';
+import coverEp3 from '../assets/story-covers/episode-3-cover.webp?url';
 
 /** Bundled cover URLs (Vite resolves at build time). */
 export const STORY_COVER_BY_SLUG: Record<string, string> = {
