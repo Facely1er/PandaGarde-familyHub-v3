@@ -10,55 +10,53 @@ interface StoryCoverArtProps {
   variant: 'hero' | 'card' | 'inline';
 }
 
-function CoverFallback({
-  story,
-  heightClass,
+function coverPosition(story: Story, variant: StoryCoverArtProps['variant']): string {
+  if (variant === 'hero' && story.coverHeroImagePosition) {
+    return story.coverHeroImagePosition;
+  }
+  return story.coverImagePosition ?? 'center';
+}
+
+function CoverImage({
+  coverUrl,
+  position,
+  onError,
+  hoverZoom = false,
 }: {
-  story: Story;
-  heightClass: string;
+  coverUrl: string;
+  position: string;
+  onError: () => void;
+  hoverZoom?: boolean;
 }) {
   return (
-    <div
-      className={`${story.coverColor} ${heightClass} flex items-center justify-center text-5xl border-b border-gray-100 dark:border-gray-700`}
-    >
-      <span aria-hidden>{story.coverEmoji}</span>
-    </div>
+    <img
+      src={coverUrl}
+      alt=""
+      width={640}
+      height={360}
+      className={`story-cover-art__img${hoverZoom ? ' transition-transform duration-300 group-hover:scale-105' : ''}`}
+      style={{ objectPosition: position }}
+      aria-hidden
+      loading="lazy"
+      decoding="async"
+      onError={onError}
+    />
   );
 }
 
-function StoryCoverImage({
+function CoverFallback({
   story,
-  heightClass,
+  sizeClass,
 }: {
   story: Story;
-  heightClass: string;
+  sizeClass: string;
 }) {
-  const [coverFailed, setCoverFailed] = useState(false);
-  const coverUrl = getStoryCoverUrl(story);
-  const position = story.coverImagePosition ?? 'center';
-
-  if (!coverUrl || coverFailed) {
-    return <CoverFallback story={story} heightClass={heightClass} />;
-  }
-
   return (
-    <div className={`relative ${heightClass} overflow-hidden border-b border-gray-100 dark:border-gray-700 ${story.coverColor}`}>
-      <img
-        src={coverUrl}
-        alt=""
-        width={640}
-        height={360}
-        className="absolute inset-0 z-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-        style={{ objectPosition: position }}
-        aria-hidden
-        loading="lazy"
-        decoding="async"
-        onError={() => setCoverFailed(true)}
-      />
-      <div
-        className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-gray-900/40 via-transparent to-transparent dark:from-gray-950/50"
-        aria-hidden
-      />
+    <div
+      className={`story-cover-art ${story.coverColor} ${sizeClass} flex items-center justify-center text-5xl`}
+      aria-hidden
+    >
+      <span>{story.coverEmoji}</span>
     </div>
   );
 }
@@ -66,7 +64,8 @@ function StoryCoverImage({
 export function StoryCoverArt({ story, variant }: StoryCoverArtProps) {
   const isFoundation = isFoundationStory(story);
   const coverUrl = getStoryCoverUrl(story);
-  const [heroFailed, setHeroFailed] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const position = coverPosition(story, variant);
 
   if (variant === 'inline') {
     if (isFoundation) {
@@ -79,22 +78,10 @@ export function StoryCoverArt({ story, variant }: StoryCoverArtProps) {
         />
       );
     }
-    if (coverUrl) {
+    if (coverUrl && !failed) {
       return (
-        <div className={`relative h-12 w-12 shrink-0 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-600 ${story.coverColor}`}>
-          <img
-            src={coverUrl}
-            alt=""
-            width={48}
-            height={48}
-            className="h-full w-full object-cover"
-            style={{ objectPosition: story.coverImagePosition ?? 'center' }}
-            aria-hidden
-            loading="lazy"
-            onError={(e) => {
-              (e.target as HTMLImageElement).style.display = 'none';
-            }}
-          />
+        <div className="story-cover-art story-cover-art--thumb">
+          <CoverImage coverUrl={coverUrl} position={position} onError={() => setFailed(true)} />
         </div>
       );
     }
@@ -106,34 +93,36 @@ export function StoryCoverArt({ story, variant }: StoryCoverArtProps) {
   }
 
   if (variant === 'hero') {
-    if (coverUrl && !heroFailed) {
+    if (coverUrl && !failed) {
       return (
-        <div className={`relative h-28 w-full shrink-0 overflow-hidden rounded-2xl border border-emerald-200/80 shadow-sm dark:border-emerald-800/60 sm:h-32 sm:w-44 ${story.coverColor}`}>
-          <img
-            src={coverUrl}
-            alt=""
-            width={640}
-            height={360}
-            className="absolute inset-0 z-0 h-full w-full object-cover"
-            style={{
-              objectPosition:
-                story.coverHeroImagePosition ?? story.coverImagePosition ?? 'center',
-            }}
-            loading="lazy"
-            onError={() => setHeroFailed(true)}
+        <div className="story-cover-art story-cover-art--hero">
+          <CoverImage coverUrl={coverUrl} position={position} onError={() => setFailed(true)} />
+          <div
+            className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-r from-emerald-900/25 to-transparent"
+            aria-hidden
           />
-          <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-r from-emerald-900/30 to-transparent" aria-hidden />
         </div>
       );
     }
+    return <CoverFallback story={story} sizeClass="story-cover-art--hero" />;
+  }
+
+  if (coverUrl && !failed) {
     return (
-      <span className="shrink-0 text-5xl" aria-hidden>
-        {story.coverEmoji}
-      </span>
+      <div className="story-cover-art story-cover-art--card">
+        <CoverImage
+          coverUrl={coverUrl}
+          position={position}
+          onError={() => setFailed(true)}
+          hoverZoom
+        />
+        <div
+          className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-gray-900/35 via-transparent to-transparent dark:from-gray-950/45"
+          aria-hidden
+        />
+      </div>
     );
   }
 
-  return (
-    <StoryCoverImage story={story} heightClass="h-36 sm:h-40" />
-  );
+  return <CoverFallback story={story} sizeClass="story-cover-art--card" />;
 }

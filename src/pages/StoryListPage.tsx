@@ -37,11 +37,11 @@ export function StoryListPage() {
       <section className="py-4 pb-8">
         <div className="mx-auto max-w-[1100px] space-y-8">
           {foundationStory && (
-            <div className="rounded-3xl border border-emerald-200 dark:border-emerald-800 bg-gradient-to-br from-emerald-50 to-white dark:from-emerald-950/50 dark:to-gray-800 p-6 sm:p-8">
+            <div className="story-feature-panel rounded-3xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-white p-6 dark:border-emerald-800 dark:from-emerald-950/50 dark:to-gray-800 sm:p-8">
               <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                <div className="flex gap-4">
+                <div className="flex min-w-0 gap-4">
                   <StoryCoverArt story={foundationStory} variant="hero" />
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <p className="text-xs font-semibold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 mb-1">
                       Start here · Foundation story
                     </p>

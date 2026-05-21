@@ -15,11 +15,11 @@ export function ComingSoonBanner() {
   return (
     <div className="rounded-xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950 px-4 py-3 flex items-center gap-3 overflow-hidden">
       {coverUrl ? (
-        <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg">
+        <div className="story-cover-art story-cover-art--thumb h-14 w-14">
           <img
             src={coverUrl}
             alt=""
-            className="h-full w-full object-cover"
+            className="story-cover-art__img"
             style={{ objectPosition: next.coverImagePosition ?? 'center' }}
             aria-hidden
             loading="lazy"

@@ -58,7 +58,7 @@ const episode1: Story = {
   ageGroups: ['early', 'middle'],
   publishedAt: '2024-01-01',
   coverEmoji: '🐼',
-  coverColor: 'bg-emerald-100',
+  coverColor: 'bg-emerald-100 dark:bg-emerald-950',
   coverImagePosition: 'left center',
   coverHeroImagePosition: '32% center',
   summary:
@@ -183,7 +183,7 @@ const episode2: Story = {
   ageGroups: ['early', 'middle'],
   publishedAt: '2024-02-01',
   coverEmoji: '📸',
-  coverColor: 'bg-yellow-100',
+  coverColor: 'bg-yellow-100 dark:bg-yellow-950',
   coverImagePosition: 'left top',
   summary:
     "Miki is so proud of Ruby's bamboo sculpture that he shares a photo of it everywhere — without asking. When Ruby is upset, Privacy Panda helps Miki understand that sharing something about someone else always needs their permission first.",
@@ -277,7 +277,7 @@ const episode3: Story = {
   ageGroups: ['middle', 'older'],
   publishedAt: '2024-03-01',
   coverEmoji: '🦉',
-  coverColor: 'bg-violet-100',
+  coverColor: 'bg-violet-100 dark:bg-violet-950',
   coverImagePosition: 'left top',
   summary:
     'Owen downloads a new game and taps "Allow All" without reading. Strange things start happening — the Smoke Foxes seem to know too much. Privacy Panda helps Owen audit his settings and understand what each permission really means.',
