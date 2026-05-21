@@ -41,7 +41,7 @@ function Header() {
   const navItems = useMemo(
     () => [
       { id: 'nav-how-it-works', icon: ShieldCheck, label: 'How It Works', href: '/how-it-works' },
-      { id: 'nav-stories', icon: Library, label: '📚 Stories', href: '/stories' },
+      { id: 'nav-stories', icon: Library, label: 'Stories', href: '/stories' },
       { id: 'nav-resources', icon: BookOpen, label: 'Resources', href: '/resources' },
       { id: 'nav-about', icon: Info, label: 'About', href: '/about' },
       { id: 'nav-support', icon: LifeBuoy, label: 'Support', href: '/support' },
@@ -53,7 +53,7 @@ function Header() {
     () => [
       { id: 'mobile-nav-home', icon: ShieldCheck, label: 'Home', href: '/' },
       { id: 'mobile-nav-how-it-works', icon: ShieldCheck, label: 'How It Works', href: '/how-it-works' },
-      { id: 'mobile-nav-stories', icon: Library, label: '📚 Stories', href: '/stories' },
+      { id: 'mobile-nav-stories', icon: Library, label: 'Stories', href: '/stories' },
       { id: 'mobile-nav-resources', icon: BookOpen, label: 'Resources', href: '/resources' },
       { id: 'mobile-nav-about', icon: Info, label: 'About', href: '/about' },
       { id: 'mobile-nav-support', icon: LifeBuoy, label: 'Support', href: '/support' },

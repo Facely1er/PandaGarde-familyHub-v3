@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { Story, isFoundationStory } from '../../data/stories';
+import { getStoryCoverUrl } from '../../data/storyCoverAssets';
 
 const PANDAGARDE_LOGO = '/LogoPandagarde.png';
 
@@ -6,6 +8,22 @@ interface StoryCoverArtProps {
   story: Story;
   /** hero = list featured block; card = grid tile; inline = compact row (e.g. homepage) */
   variant: 'hero' | 'card' | 'inline';
+}
+
+function CoverFallback({
+  story,
+  heightClass,
+}: {
+  story: Story;
+  heightClass: string;
+}) {
+  return (
+    <div
+      className={`${story.coverColor} ${heightClass} flex items-center justify-center text-5xl border-b border-gray-100 dark:border-gray-700`}
+    >
+      <span aria-hidden>{story.coverEmoji}</span>
+    </div>
+  );
 }
 
 function StoryCoverImage({
@@ -17,40 +35,34 @@ function StoryCoverImage({
   heightClass: string;
   showLogoOverlay?: boolean;
 }) {
+  const [coverFailed, setCoverFailed] = useState(false);
+  const coverUrl = getStoryCoverUrl(story);
   const position = story.coverImagePosition ?? 'center';
-  const isVectorCover = story.coverImage?.endsWith('.svg');
 
-  if (!story.coverImage) {
-    return (
-      <div
-        className={`${story.coverColor} ${heightClass} flex items-center justify-center text-5xl border-b border-gray-100 dark:border-gray-700`}
-      >
-        <span aria-hidden>{story.coverEmoji}</span>
-      </div>
-    );
+  if (!coverUrl || coverFailed) {
+    return <CoverFallback story={story} heightClass={heightClass} />;
   }
 
   return (
-    <div className={`relative ${heightClass} overflow-hidden border-b border-gray-100 dark:border-gray-700`}>
+    <div className={`relative ${heightClass} overflow-hidden border-b border-gray-100 dark:border-gray-700 ${story.coverColor}`}>
       <img
-        src={story.coverImage}
+        src={coverUrl}
         alt=""
-        className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+        width={640}
+        height={360}
+        className="absolute inset-0 z-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         style={{ objectPosition: position }}
         aria-hidden
         loading="lazy"
         decoding="async"
+        onError={() => setCoverFailed(true)}
       />
       <div
-        className={
-          isVectorCover
-            ? 'absolute inset-0 bg-gradient-to-t from-gray-900/50 via-transparent to-transparent dark:from-gray-950/60'
-            : 'absolute inset-0 bg-gradient-to-t from-gray-900/75 via-gray-900/25 to-emerald-900/10 dark:from-gray-950/85 dark:via-gray-900/40'
-        }
+        className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-gray-900/40 via-transparent to-transparent dark:from-gray-950/50"
         aria-hidden
       />
       {showLogoOverlay && (
-        <div className="absolute inset-0 flex items-center justify-center p-4">
+        <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center p-4">
           <img
             src={PANDAGARDE_LOGO}
             alt=""
@@ -65,6 +77,8 @@ function StoryCoverImage({
 
 export function StoryCoverArt({ story, variant }: StoryCoverArtProps) {
   const isFoundation = isFoundationStory(story);
+  const coverUrl = getStoryCoverUrl(story);
+  const [heroFailed, setHeroFailed] = useState(false);
 
   if (variant === 'inline') {
     if (isFoundation) {
@@ -77,16 +91,21 @@ export function StoryCoverArt({ story, variant }: StoryCoverArtProps) {
         />
       );
     }
-    if (story.coverImage) {
+    if (coverUrl) {
       return (
-        <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-600">
+        <div className={`relative h-12 w-12 shrink-0 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-600 ${story.coverColor}`}>
           <img
-            src={story.coverImage}
+            src={coverUrl}
             alt=""
+            width={48}
+            height={48}
             className="h-full w-full object-cover"
             style={{ objectPosition: story.coverImagePosition ?? 'center' }}
             aria-hidden
             loading="lazy"
+            onError={(e) => {
+              (e.target as HTMLImageElement).style.display = 'none';
+            }}
           />
         </div>
       );
@@ -99,19 +118,22 @@ export function StoryCoverArt({ story, variant }: StoryCoverArtProps) {
   }
 
   if (variant === 'hero') {
-    if (story.coverImage) {
+    if (coverUrl && !heroFailed) {
       return (
-        <div className="relative h-28 w-full shrink-0 overflow-hidden rounded-2xl border border-emerald-200/80 shadow-sm dark:border-emerald-800/60 sm:h-32 sm:w-44">
+        <div className={`relative h-28 w-full shrink-0 overflow-hidden rounded-2xl border border-emerald-200/80 shadow-sm dark:border-emerald-800/60 sm:h-32 sm:w-44 ${story.coverColor}`}>
           <img
-            src={story.coverImage}
+            src={coverUrl}
             alt=""
-            className="h-full w-full object-cover"
+            width={640}
+            height={360}
+            className="absolute inset-0 z-0 h-full w-full object-cover"
             style={{ objectPosition: story.coverImagePosition ?? 'center' }}
             loading="lazy"
+            onError={() => setHeroFailed(true)}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-emerald-900/50 to-transparent" aria-hidden />
+          <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-r from-emerald-900/40 to-transparent" aria-hidden />
           {isFoundation && (
-            <div className="absolute inset-0 flex items-center justify-center">
+            <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center">
               <img
                 src={PANDAGARDE_LOGO}
                 alt="PandaGarde"

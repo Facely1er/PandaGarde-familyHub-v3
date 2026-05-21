@@ -1,7 +1,9 @@
 import { getNextScheduledStory } from '../../data/stories';
+import { getStoryCoverUrl } from '../../data/storyCoverAssets';
 
 export function ComingSoonBanner() {
   const next = getNextScheduledStory();
+  const coverUrl = next ? getStoryCoverUrl(next) : undefined;
   if (!next) return null;
 
   const releaseDate = new Date(next.scheduledAt!);
@@ -12,10 +14,10 @@ export function ComingSoonBanner() {
 
   return (
     <div className="rounded-xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950 px-4 py-3 flex items-center gap-3 overflow-hidden">
-      {next.coverImage ? (
+      {coverUrl ? (
         <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg">
           <img
-            src={next.coverImage}
+            src={coverUrl}
             alt=""
             className="h-full w-full object-cover"
             style={{ objectPosition: next.coverImagePosition ?? 'center' }}

@@ -1,46 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-label="Check app permissions before Allow All">
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" role="img" aria-label="Check app permissions">
   <defs>
     <linearGradient id="ep3-bg" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#312e81"/>
-      <stop offset="55%" stop-color="#5b21b6"/>
       <stop offset="100%" stop-color="#7c3aed"/>
     </linearGradient>
   </defs>
   <rect width="640" height="360" fill="url(#ep3-bg)"/>
-  <!-- Sneaky smoke wisps -->
-  <g fill="#1e1b4b" opacity="0.35">
-    <ellipse cx="120" cy="80" rx="70" ry="40"/>
-    <ellipse cx="520" cy="100" rx="90" ry="45"/>
-  </g>
-  <g fill="#c4b5fd" opacity="0.25">
-    <circle cx="100" cy="70" r="8"/>
-    <circle cx="115" cy="68" r="5"/>
-    <circle cx="500" cy="90" r="9"/>
-    <circle cx="518" cy="88" r="6"/>
-  </g>
-  <!-- Owl (Owen) -->
-  <g transform="translate(70 130)">
-    <ellipse cx="55" cy="70" rx="50" ry="58" fill="#4c1d95"/>
-    <circle cx="38" cy="55" r="16" fill="#f5f3ff"/>
-    <circle cx="72" cy="55" r="16" fill="#f5f3ff"/>
-    <circle cx="38" cy="55" r="7" fill="#1e1b4b"/>
-    <circle cx="72" cy="55" r="7" fill="#1e1b4b"/>
-    <path d="M55 68 L48 78 L62 78 Z" fill="#fbbf24"/>
-  </g>
-  <!-- Phone permissions dialog -->
-  <g transform="translate(260 55)">
-    <rect x="0" y="0" width="300" height="250" rx="20" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="4"/>
-    <text x="150" y="36" text-anchor="middle" font-family="system-ui,sans-serif" font-size="16" font-weight="700" fill="#312e81">Bamboo Runner</text>
-    <text x="150" y="58" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#6b7280">wants access to&</text>
-    <g font-family="system-ui,sans-serif" font-size="13" fill="#374151">
-      <text x="28" y="92">=Í Location</text>
-      <text x="28" y="122">=Ç Contacts</text>
-      <text x="28" y="152">=÷ Camera</text>
-      <text x="28" y="182">=Á Files</text>
-    </g>
-    <rect x="24" y="200" width="252" height="36" rx="10" fill="#dc2626"/>
-    <text x="150" y="224" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="800" fill="#fff">Allow All</text>
-    <rect x="24" y="244" width="120" height="0" fill="none"/>
-  </g>
-  <text x="320" y="330" text-anchor="middle" font-family="system-ui,sans-serif" font-size="20" font-weight="700" fill="#ede9fe">Pause before Allow All</text>
+  <text x="320" y="330" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#ede9fe">Pause before Allow All</text>
 </svg>
