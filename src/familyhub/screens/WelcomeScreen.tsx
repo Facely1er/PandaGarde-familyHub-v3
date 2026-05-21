@@ -16,7 +16,7 @@ const sections = [
   {
     icon: Users,
     title: 'Family Members',
-    description: "Add your kids and guardians to track everyone's progress together.",
+    description: 'Add your kids and guardians to track everyone\'s progress together.',
     color: 'text-teal-600 dark:text-teal-400 bg-teal-50 dark:bg-teal-900/30',
   },
   {
@@ -53,7 +53,11 @@ const WelcomeScreen: React.FC = () => {
           {/* Hero */}
           <div className="text-center space-y-4">
             <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl overflow-hidden shadow-lg border-2 border-teal-200 dark:border-teal-700 bg-white mx-auto">
-              <img src="/LogoPandagarde.png" alt="PandaGarde" className="w-full h-full object-contain" />
+              <img
+                src="/LogoPandagarde.png"
+                alt="PandaGarde"
+                className="w-full h-full object-contain"
+              />
             </div>
             <div>
               <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight">
@@ -68,7 +72,9 @@ const WelcomeScreen: React.FC = () => {
 
           {/* What's inside */}
           <div className="space-y-3">
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">What's inside</h2>
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+              What's inside
+            </h2>
             <ul className="grid gap-3">
               {sections.map(({ icon: Icon, title, description, color }) => (
                 <li
@@ -87,7 +93,7 @@ const WelcomeScreen: React.FC = () => {
             </ul>
           </div>
 
-          {/* Journey tracker — collapsed by default for users not coming from the assessment */}
+          {/* Journey progress — for users coming from the full assessment */}
           <details className="group rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm">
             <summary className="flex cursor-pointer items-center justify-between px-5 py-4 text-sm font-semibold text-gray-700 dark:text-gray-200 list-none">
               <span>Coming from the Privacy Assessment?</span>
@@ -118,7 +124,14 @@ const WelcomeScreen: React.FC = () => {
                       )}
                     </span>
                     <div className="min-w-0">
-                      <p className={['text-sm font-semibold', phase.active ? 'text-teal-700 dark:text-teal-300' : 'text-gray-700 dark:text-gray-200'].join(' ')}>
+                      <p
+                        className={[
+                          'text-sm font-semibold',
+                          phase.active
+                            ? 'text-teal-700 dark:text-teal-300'
+                            : 'text-gray-700 dark:text-gray-200',
+                        ].join(' ')}
+                      >
                         {phase.label} — {phase.name}
                         {phase.active && (
                           <span className="ml-2 inline-block rounded-full bg-teal-100 dark:bg-teal-900/50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-teal-700 dark:text-teal-300">

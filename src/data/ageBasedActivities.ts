@@ -86,7 +86,7 @@ export const ageBasedActivities: AgeGroup[] = [
         description:
           'Use a red, yellow, and green light to decide if sharing something online is safe, risky, or definitely not okay.',
         realLifeScenario:
-          'A fun game says: "You won a prize! Tell us your address to receive it." Red, yellow, or green?',
+          'A fun game says: “You won a prize! Tell us your address to receive it.” Red, yellow, or green?',
         learningObjective: 'Build a simple family language for stop, slow down, and ask for help online.',
         keyLearnings: [
           'Green = safe to share (favourite colour, pet name)',
@@ -145,7 +145,7 @@ export const ageBasedActivities: AgeGroup[] = [
         learningObjective: 'Help children recognise when online contacts are trusted helpers and when they are strangers.',
         keyLearnings: [
           'Online friends are still strangers until a trusted adult has checked',
-          'It is always okay to say "I need to ask my parent" and log off',
+          'It is always okay to say “I need to ask my parent” and log off',
           'Tell a trusted adult straight away if a message makes you uncomfortable',
         ],
         discussionPrompts: [
@@ -166,7 +166,7 @@ export const ageBasedActivities: AgeGroup[] = [
         name: 'My Public & Private Collage',
         icon: '🎨',
         description:
-          'Create a collage that separates "okay to share" information from "keep private" information using Privacy Panda characters.',
+          'Create a collage that separates “okay to share” information from “keep private” information using Privacy Panda characters.',
         realLifeScenario:
           'Your class is making a school website. Which things about yourself can you put on it for everyone to see?',
         learningObjective: 'Show that every post or profile shares pieces of a child’s digital footprint.',
@@ -198,8 +198,8 @@ export const ageBasedActivities: AgeGroup[] = [
           'Your mum takes a lovely photo of you and your friend at the park. She wants to post it. Should she ask your friend first?',
         learningObjective: 'Teach children that privacy includes asking before posting pictures, videos, or messages.',
         keyLearnings: [
-          'Always ask before sharing someone else\'s photo',
-          'It is okay to say "no" and that choice must be respected',
+          "Always ask before sharing someone else's photo",
+          'It is okay to say “no” and that choice must be respected',
           'Once posted online, photos are very hard to remove completely',
         ],
         discussionPrompts: [
@@ -257,7 +257,7 @@ export const ageBasedActivities: AgeGroup[] = [
         description:
           'Spot fake messages pretending to be from games, schools, or prize competitions. Real-style examples in a safe practice space.',
         realLifeScenario:
-          '"You won 10,000 Robux! Click here and log in to claim your reward." Is this message real or a trick?',
+          '“You won 10,000 Robux! Click here and log in to claim your reward.” Is this message real or a trick?',
         learningObjective: 'Teach families to slow down, check the sender, and avoid urgent scam messages.',
         keyLearnings: [
           'Phishing messages create urgency and promise rewards',
@@ -315,7 +315,7 @@ export const ageBasedActivities: AgeGroup[] = [
         learningObjective: 'Build confidence changing privacy settings before a child starts a new social or gaming account.',
         keyLearnings: [
           'Set your account to Private so only approved followers see your posts',
-          'Turn off "Show activity status" to avoid telling strangers when you are online',
+          'Turn off “Show activity status” to avoid telling strangers when you are online',
           'Never share your phone number on a public profile',
         ],
         discussionPrompts: [
@@ -341,8 +341,8 @@ export const ageBasedActivities: AgeGroup[] = [
         learningObjective: 'Show how screenshots can turn private moments into lasting digital footprints.',
         keyLearnings: [
           'Screenshots can spread far beyond the original audience',
-          'Sharing someone else\'s image without permission can be a form of cyberbullying',
-          'Ask: "Would I be okay if this were a screenshot of me?"',
+          "Sharing someone else's image without permission can be a form of cyberbullying",
+          'Ask: “Would I be okay if this were a screenshot of me?”',
         ],
         discussionPrompts: [
           'What changes when a private message becomes a screenshot?',
@@ -363,7 +363,7 @@ export const ageBasedActivities: AgeGroup[] = [
         description:
           'Test real-looking passwords and learn what makes them strong or weak. Build a memorable passphrase you will actually use.',
         realLifeScenario:
-          'Your school account password is "123abc". Your IT teacher says it was found in a data breach. Create a better one now.',
+          'Your school account password is “123abc”. Your IT teacher says it was found in a data breach. Create a better one now.',
         learningObjective: 'Teach families how to build strong, memorable passwords without reusing them everywhere.',
         keyLearnings: [
           'Longer passphrases (3–4 random words) beat short complex passwords',
@@ -475,9 +475,9 @@ export const ageBasedActivities: AgeGroup[] = [
         name: 'Privacy Rights Challenge',
         icon: '⚖️',
         description:
-          'Test your knowledge of COPPA, GDPR, and the "right to be forgotten". Understand what schools and companies can and cannot do with your data.',
+          'Test your knowledge of COPPA, GDPR, and the “right to be forgotten”. Understand what schools and companies can and cannot do with your data.',
         realLifeScenario:
-          'Your school wants to share student assessment data with a third-party tutoring app. Do they need your parents\' permission first?',
+          'Your school wants to share student assessment data with a third-party tutoring app. Do they need your parents’ permission first?',
         learningObjective: 'Help teens connect privacy laws to their real rights at school, online, and in everyday apps.',
         keyLearnings: [
           'COPPA (USA) and GDPR (Europe) give you rights over how your data is used',
@@ -508,7 +508,7 @@ export const ageBasedActivities: AgeGroup[] = [
         keyLearnings: [
           'Location tags on photos reveal exactly where you were and when',
           'Even deleted posts can be screenshotted and saved by others',
-          'Think before posting: "Am I happy for my grandparent, teacher, and future boss to see this?"',
+          'Think before posting: “Am I happy for my grandparent, teacher, and future boss to see this?”',
         ],
         discussionPrompts: [
           'Which part of a post feels most risky: the caption, the photo, the location, or the audience?',

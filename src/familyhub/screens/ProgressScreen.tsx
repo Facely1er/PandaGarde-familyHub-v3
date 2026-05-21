@@ -82,14 +82,7 @@ const ProgressScreen: React.FC = () => {
           <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">Overall journey progress</p>
           <p className="text-sm font-bold text-teal-700 dark:text-teal-300">{completedCount} / {totalCount}</p>
         </div>
-        <div
-          className="h-3 w-full rounded-full bg-gray-100 dark:bg-gray-700 overflow-hidden"
-          role="progressbar"
-          aria-valuenow={pct}
-          aria-valuemin={0}
-          aria-valuemax={100}
-          aria-label={`${pct}% of activities completed`}
-        >
+        <div className="h-3 w-full rounded-full bg-gray-100 dark:bg-gray-700 overflow-hidden" role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100} aria-label={`${pct}% of activities completed`}>
           <div
             className="h-full rounded-full bg-gradient-to-r from-teal-400 to-teal-600 transition-all duration-500"
             style={{ width: `${pct}%` }}
@@ -109,7 +102,9 @@ const ProgressScreen: React.FC = () => {
           <ul className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {progress.achievements.map((id) => {
               const meta = ACHIEVEMENT_META[id];
-              if (!meta) return null;
+              if (!meta) {
+                return null;
+              }
               return (
                 <li key={id} className="flex flex-col items-center gap-1 rounded-xl border border-amber-100 bg-amber-50 p-3 text-center dark:border-amber-700/40 dark:bg-amber-900/20">
                   <span className="text-2xl" role="img" aria-label={meta.label}>{meta.emoji}</span>
@@ -133,8 +128,8 @@ const ProgressScreen: React.FC = () => {
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-gray-900 dark:text-white truncate">{activity.name}</p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    Ages {activity.groupAgeRange} · {activity.focus}
-                    {detail.score !== undefined ? ` · ${detail.score}%` : ''}
+                    Ages {activity.groupAgeRange} &middot; {activity.focus}
+                    {detail.score !== undefined ? ` &middot; ${detail.score}%` : ''}
                   </p>
                 </div>
                 <span className="flex-shrink-0 text-xs text-gray-400 dark:text-gray-500">
@@ -158,6 +153,7 @@ const ProgressScreen: React.FC = () => {
           </div>
           <p className="text-sm text-gray-600 dark:text-gray-400">Generate and download certificates for completed activities.</p>
         </button>
+
         <button
           onClick={() => setShowProgressExport(true)}
           className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:border-teal-500 dark:hover:border-teal-500 transition-all shadow-sm hover:shadow-md text-left"
@@ -170,6 +166,7 @@ const ProgressScreen: React.FC = () => {
         </button>
       </div>
 
+      {/* Certificates Modal */}
       {showCertificates && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white dark:bg-gray-800 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-xl relative">
@@ -188,6 +185,7 @@ const ProgressScreen: React.FC = () => {
         </div>
       )}
 
+      {/* Progress Export Modal */}
       {showProgressExport && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white dark:bg-gray-800 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-xl relative">
