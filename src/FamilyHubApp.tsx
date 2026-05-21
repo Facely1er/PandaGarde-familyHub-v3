@@ -1,3 +1,6 @@
+/**
+ * @deprecated Use `FamilyHubStandaloneApp` + `familyhub-main.tsx` (see `npm run build:familyhub`).
+ */
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { ThemeProvider } from './contexts/ThemeContext';

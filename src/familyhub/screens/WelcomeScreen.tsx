@@ -4,6 +4,7 @@ import { ArrowRight, Shield, Users, Gamepad2, Award } from 'lucide-react';
 import { updateDfaJourneyPhase } from '../../lib/dfaJourney';
 import { setHubOrigin } from '../../lib/hubMission';
 import { HUB_WELCOMED_KEY } from '../constants';
+import { hubPaths } from '../hubPaths';
 
 export { HUB_WELCOMED_KEY };
 
@@ -50,7 +51,7 @@ const WelcomeScreen: React.FC = () => {
       updateDfaJourneyPhase('plan', { visited: true, completed: true });
     }
     localStorage.setItem(HUB_WELCOMED_KEY, 'true');
-    navigate('/family-hub/dashboard', { replace: true });
+    navigate(hubPaths.dashboard, { replace: true });
   };
 
   return (

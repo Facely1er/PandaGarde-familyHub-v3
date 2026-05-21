@@ -5,6 +5,7 @@ import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { useFamilyProgress } from '../../contexts/FamilyProgressContext';
 import { useDialogFocusTrap } from '../../hooks/useDialogFocusTrap';
 import { HubScreenFallback } from '../lazyScreen';
+import { hubPaths } from '../hubPaths';
 
 const ChildProgressDetail = lazy(() => import('../../components/ChildProgressDetail'));
 
@@ -180,7 +181,7 @@ const KidsScreen: React.FC = () => {
                       </p>
                       {ageGroup && (
                         <Link
-                          to="/family-hub/activities"
+                          to={hubPaths.activities}
                           state={{ initialAgeFilter: ageGroup.range }}
                           className={`inline-flex items-center gap-1 mt-2 px-2.5 py-0.5 rounded-full border text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 ${ageGroup.badgeClass}`}
                           aria-label={`View ${ageGroup.label} activities for ${member.name}`}

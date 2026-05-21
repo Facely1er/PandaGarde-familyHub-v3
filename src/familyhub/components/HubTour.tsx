@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { X, ArrowRight, LayoutDashboard, Users, Gamepad2 } from 'lucide-react';
 import { useDialogFocusTrap } from '../../hooks/useDialogFocusTrap';
+import { hubPaths } from '../hubPaths';
 
 export const HUB_TOUR_KEY = 'pandagarde_hub_tour_done';
 
@@ -16,19 +17,19 @@ const steps: TourStep[] = [
     title: 'Dashboard — your overview',
     body: "Start with Today's mission on the Dashboard, then track members, goals, and your learning streak — your daily home base.",
     icon: LayoutDashboard,
-    navTarget: '/family-hub/dashboard',
+    navTarget: hubPaths.dashboard,
   },
   {
     title: 'Family Members',
     body: 'Add parents, children, and teens here. Each member gets their own privacy score and activity tracking.',
     icon: Users,
-    navTarget: '/family-hub/kids',
+    navTarget: hubPaths.kids,
   },
   {
     title: 'Activities — learn together',
     body: "Pick age-appropriate privacy games and exercises. Completing activities earns badges and raises each member's score.",
     icon: Gamepad2,
-    navTarget: '/family-hub/activities',
+    navTarget: hubPaths.activities,
   },
 ];
 

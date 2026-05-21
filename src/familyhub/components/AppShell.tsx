@@ -3,6 +3,7 @@ import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { LayoutDashboard, Users, Gamepad2, Award, Settings, Moon, Sun, ArrowLeft, type LucideIcon } from 'lucide-react';
 import { useTheme } from '../../contexts/ThemeContext';
 import { getHubOrigin } from '../../lib/hubMission';
+import { hubPaths, pandagardeWebsiteUrl, isHubStandalone } from '../hubPaths';
 
 interface TabItem {
   id: string;
@@ -12,11 +13,11 @@ interface TabItem {
 }
 
 const tabs: TabItem[] = [
-  { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, path: '/family-hub/dashboard' },
-  { id: 'kids', label: 'Kids', icon: Users, path: '/family-hub/kids' },
-  { id: 'activities', label: 'Activities', icon: Gamepad2, path: '/family-hub/activities' },
-  { id: 'progress', label: 'Progress', icon: Award, path: '/family-hub/progress' },
-  { id: 'settings', label: 'Settings', icon: Settings, path: '/family-hub/settings' },
+  { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, path: hubPaths.dashboard },
+  { id: 'kids', label: 'Kids', icon: Users, path: hubPaths.kids },
+  { id: 'activities', label: 'Activities', icon: Gamepad2, path: hubPaths.activities },
+  { id: 'progress', label: 'Progress', icon: Award, path: hubPaths.progress },
+  { id: 'settings', label: 'Settings', icon: Settings, path: hubPaths.settings },
 ];
 
 const AppShell: React.FC = () => {
@@ -25,8 +26,8 @@ const AppShell: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
 
   const isActive = (path: string): boolean => {
-    if (path === '/family-hub/dashboard') {
-      return location.pathname === '/family-hub/dashboard' || location.pathname === '/family-hub';
+    if (path === hubPaths.dashboard) {
+      return location.pathname === hubPaths.dashboard || location.pathname === hubPaths.root;
     }
     return location.pathname.startsWith(path);
   };
@@ -72,10 +73,11 @@ const AppShell: React.FC = () => {
           <div className="flex h-11 max-w-full items-center justify-between gap-2 pl-[max(0.75rem,env(safe-area-inset-left,0px))] pr-[max(0.75rem,env(safe-area-inset-right,0px))]">
             <div className="flex min-w-0 flex-1 items-center gap-2">
               <a
-                href="/"
+                href={isHubStandalone ? pandagardeWebsiteUrl : '/'}
+                {...(isHubStandalone ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                 className="flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-gray-200 bg-white hover:opacity-80 dark:border-gray-600 dark:bg-gray-900 transition-opacity"
-                aria-label={hubOrigin === 'standalone' ? 'Open PandaGarde website (optional)' : 'Back to PandaGarde website'}
-                title={hubOrigin === 'standalone' ? 'Website' : 'Back to PandaGarde'}
+                aria-label={hubOrigin === 'standalone' || isHubStandalone ? 'Open PandaGarde website (optional)' : 'Back to PandaGarde website'}
+                title={hubOrigin === 'standalone' || isHubStandalone ? 'Website' : 'Back to PandaGarde'}
               >
                 <img
                   src="/LogoPandagarde.png"
@@ -107,9 +109,10 @@ const AppShell: React.FC = () => {
                 {theme === 'light' ? <Moon size={16} aria-hidden="true" /> : <Sun size={16} aria-hidden="true" />}
               </button>
               <a
-                href="/"
+                href={isHubStandalone ? pandagardeWebsiteUrl : '/'}
+                {...(isHubStandalone ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                 className="hidden sm:inline-flex h-8 items-center gap-1 rounded-full bg-teal-50 px-2.5 text-[10px] font-semibold uppercase tracking-wide text-teal-700 hover:bg-teal-100 dark:bg-teal-900/40 dark:text-teal-200 dark:hover:bg-teal-900/60 transition-colors"
-                aria-label="Back to PandaGarde website"
+                aria-label="Open PandaGarde website"
               >
                 <ArrowLeft size={11} aria-hidden="true" />
                 Site

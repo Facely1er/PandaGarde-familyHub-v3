@@ -4,6 +4,7 @@ import { ShieldCheck, CheckCircle2 } from 'lucide-react';
 import { updateDfaJourneyPhase } from '../../lib/dfaJourney';
 import { useAuth } from './AuthWrapper';
 import { HUB_WELCOMED_KEY } from '../../familyhub/constants';
+import { hubPaths, isHubStandalone, pandagardeWebsiteUrl } from '../../familyhub/hubPaths';
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -12,15 +13,15 @@ const LoginPage: React.FC = () => {
 
   const handleContinue = () => {
     signInLocally();
-    updateDfaJourneyPhase('hub', { visited: true, completed: true, resumePath: '/family-hub/dashboard' });
+    updateDfaJourneyPhase('hub', { visited: true, completed: true, resumePath: hubPaths.dashboard });
     const hubWelcomed = localStorage.getItem(HUB_WELCOMED_KEY) === 'true';
-    const nextPath = location.pathname.startsWith('/family-hub') ? location.pathname : '/family-hub';
-    const resolvedPath =
-      nextPath === '/family-hub' || nextPath === '/family-hub/'
-        ? hubWelcomed
-          ? '/family-hub/dashboard'
-          : '/family-hub/welcome'
-        : nextPath;
+    const atHubRoot =
+      location.pathname === hubPaths.root || location.pathname === `${hubPaths.root}/`;
+    const resolvedPath = atHubRoot
+      ? hubWelcomed
+        ? hubPaths.dashboard
+        : hubPaths.welcome
+      : location.pathname;
     navigate(resolvedPath, { replace: true });
   };
 
@@ -52,9 +53,25 @@ const LoginPage: React.FC = () => {
         >
           Open Family Hub
         </button>
-        <p className="mt-4 text-xs text-gray-400 dark:text-gray-500">
-          <a href="/" className="underline hover:text-gray-600 dark:hover:text-gray-300">← Back to PandaGarde website</a>
-        </p>
+        {!isHubStandalone && (
+          <p className="mt-4 text-xs text-gray-400 dark:text-gray-500">
+            <a href="/" className="underline hover:text-gray-600 dark:hover:text-gray-300">
+              ← Back to PandaGarde website
+            </a>
+          </p>
+        )}
+        {isHubStandalone && (
+          <p className="mt-4 text-xs text-gray-400 dark:text-gray-500">
+            <a
+              href={pandagardeWebsiteUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-gray-600 dark:hover:text-gray-300"
+            >
+              Visit PandaGarde website
+            </a>
+          </p>
+        )}
       </div>
     </div>
   );

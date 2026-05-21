@@ -9,6 +9,7 @@ import { useLocalStorage } from "../../hooks/useLocalStorage";
 import HubTour from "../components/HubTour";
 import TodayMissionCard from "../components/TodayMissionCard";
 import { getHubOrigin, touchHubStreak } from "../../lib/hubMission";
+import { hubPaths } from "../hubPaths";
 
 interface FamilyGoal {
   completed?: boolean;
@@ -18,25 +19,25 @@ const quickActions = [
   {
     title: 'Manage Family',
     description: 'Add or review kids and guardians',
-    to: '/family-hub/kids',
+    to: hubPaths.kids,
     icon: Users,
   },
   {
     title: 'Start Activities',
     description: 'Launch age-appropriate learning activities',
-    to: '/family-hub/activities',
+    to: hubPaths.activities,
     icon: Gamepad2,
   },
   {
     title: 'Track Progress',
     description: 'View achievements and certificates',
-    to: '/family-hub/progress',
+    to: hubPaths.progress,
     icon: Award,
   },
   {
     title: 'Open Settings',
     description: 'Adjust preferences and support links',
-    to: '/family-hub/settings',
+    to: hubPaths.settings,
     icon: Settings,
   },
 ];

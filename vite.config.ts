@@ -37,6 +37,9 @@ const cleanPublicDirPlugin = () => ({
 
 export default defineConfig({
   plugins: [react(), optionalDependenciesPlugin(), cleanPublicDirPlugin()],
+  server: {
+    port: 5173,
+  },
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
