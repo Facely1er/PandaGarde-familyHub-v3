@@ -151,7 +151,7 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
   if (compact) {
     const recentTopics = filteredTopics.slice(0, 5);
     return (
-      <div className="bg-white rounded-lg p-4 shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
+      <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold flex items-center gap-2 text-primary">
             <MessageCircle size={20} />
@@ -228,125 +228,60 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
     );
   }
 
+  const featureIconClass =
+    'w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center mb-4';
+
   return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-      {/* Forum Description Section */}
-      <div style={{
-        maxWidth: '900px',
-        margin: '0 auto',
-        textAlign: 'left',
-        background: 'white',
-        borderRadius: '12px',
-        padding: '2rem',
-        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-        marginTop: '2rem'
-      }}>
-        <h2 style={{
-          fontSize: '1.5rem',
-          fontWeight: '700',
-          color: 'var(--primary)',
-          marginBottom: '1rem'
-        }}>
+    <div className="max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="max-w-3xl mx-auto text-left bg-white dark:bg-gray-800 rounded-xl p-6 sm:p-8 shadow-md mt-8">
+        <h2 className="text-2xl font-bold text-green-800 dark:text-green-300 mb-4">
           What is the Privacy Tips Forum?
         </h2>
-        <p style={{
-          fontSize: '1rem',
-          color: 'var(--gray-600)',
-          lineHeight: '1.7',
-          marginBottom: '1.5rem'
-        }}>
-          A community-driven space where parents, educators, and families come together to share knowledge, 
+        <p className="text-base text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
+          A community-driven space where parents, educators, and families come together to share knowledge,
           ask questions, and support each other in teaching children about digital privacy and online safety.
         </p>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', marginTop: '2rem' }}>
-          <div style={{ padding: '1rem' }}>
-            <div style={{
-              width: '48px',
-              height: '48px',
-              borderRadius: '50%',
-              background: 'linear-gradient(135deg, var(--secondary) 0%, var(--primary-light) 100%)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: '1rem'
-            }}>
-              <MessageCircle size={24} style={{ color: 'white' }} />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+          <div className="p-4">
+            <div className={featureIconClass}>
+              <MessageCircle size={24} className="text-white" aria-hidden />
             </div>
-            <h3 style={{ fontSize: '1.125rem', fontWeight: '600', color: 'var(--gray-800)', marginBottom: '0.5rem' }}>
-              Share Tips & Strategies
-            </h3>
-            <p style={{ fontSize: '0.875rem', color: 'var(--gray-600)', lineHeight: '1.6' }}>
-              Exchange practical advice on teaching privacy concepts, managing screen time, and protecting your family's digital footprint.
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">Share Tips & Strategies</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+              Exchange practical advice on teaching privacy concepts, managing screen time, and protecting your
+              family&apos;s digital footprint.
             </p>
           </div>
-
-          <div style={{ padding: '1rem' }}>
-            <div style={{
-              width: '48px',
-              height: '48px',
-              borderRadius: '50%',
-              background: 'linear-gradient(135deg, var(--secondary) 0%, var(--primary-light) 100%)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: '1rem'
-            }}>
-              <Users size={24} style={{ color: 'white' }} />
+          <div className="p-4">
+            <div className={featureIconClass}>
+              <Users size={24} className="text-white" aria-hidden />
             </div>
-            <h3 style={{ fontSize: '1.125rem', fontWeight: '600', color: 'var(--gray-800)', marginBottom: '0.5rem' }}>
-              Ask Questions
-            </h3>
-            <p style={{ fontSize: '0.875rem', color: 'var(--gray-600)', lineHeight: '1.6' }}>
-              Get answers from experienced parents and educators about age-appropriate privacy education, app safety, and digital citizenship.
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">Ask Questions</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+              Get answers from experienced parents and educators about age-appropriate privacy education, app
+              safety, and digital citizenship.
             </p>
           </div>
-
-          <div style={{ padding: '1rem' }}>
-            <div style={{
-              width: '48px',
-              height: '48px',
-              borderRadius: '50%',
-              background: 'linear-gradient(135deg, var(--secondary) 0%, var(--primary-light) 100%)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: '1rem'
-            }}>
-              <Shield size={24} style={{ color: 'white' }} />
+          <div className="p-4">
+            <div className={featureIconClass}>
+              <Shield size={24} className="text-white" aria-hidden />
             </div>
-            <h3 style={{ fontSize: '1.125rem', fontWeight: '600', color: 'var(--gray-800)', marginBottom: '0.5rem' }}>
-              Privacy First
-            </h3>
-            <p style={{ fontSize: '0.875rem', color: 'var(--gray-600)', lineHeight: '1.6' }}>
-              All data is stored locally on your device. No backend required. Use pseudonymous usernames. Completely anonymous and secure.
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">Privacy First</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+              All data is stored locally on your device. No backend required. Use pseudonymous usernames.
+              Completely anonymous and secure.
             </p>
           </div>
         </div>
 
-        <div style={{
-          marginTop: '2rem',
-          padding: '1.5rem',
-          background: 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)',
-          borderRadius: '8px',
-          border: '1px solid #86efac'
-        }}>
-          <h3 style={{ fontSize: '1.125rem', fontWeight: '600', color: 'var(--primary)', marginBottom: '0.75rem' }}>
-            Topics You Can Explore:
-          </h3>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-            {categories.filter(c => c.value !== 'all').map((category) => (
+        <div className="mt-8 p-6 rounded-lg bg-green-50 dark:bg-green-950/30 border border-green-300 dark:border-green-700">
+          <h3 className="text-lg font-semibold text-green-800 dark:text-green-300 mb-3">Topics You Can Explore:</h3>
+          <div className="flex flex-wrap gap-2">
+            {categories.filter((c) => c.value !== 'all').map((category) => (
               <span
                 key={category.value}
-                style={{
-                  display: 'inline-block',
-                  padding: '0.5rem 1rem',
-                  background: 'white',
-                  borderRadius: '20px',
-                  fontSize: '0.875rem',
-                  color: '#166534',
-                  border: '1px solid #86efac'
-                }}
+                className="inline-block px-4 py-2 bg-white dark:bg-gray-800 rounded-full text-sm text-green-800 dark:text-green-300 border border-green-300 dark:border-green-600"
               >
                 {category.label}
               </span>
@@ -355,32 +290,15 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
         </div>
 
         {!currentUser && (
-          <div style={{
-            marginTop: '2rem',
-            padding: '1.5rem',
-          background: 'var(--gradient-primary)',
-            borderRadius: '8px',
-            color: 'white',
-            textAlign: 'center'
-          }}>
-            <p style={{ fontSize: '1rem', marginBottom: '1rem', opacity: 0.95 }}>
-              <strong>Ready to join the conversation?</strong> Browse topics below or sign up to start sharing your own tips and questions.
+          <div className="mt-8 p-6 rounded-lg bg-gradient-to-r from-green-700 to-green-600 text-white text-center">
+            <p className="text-base mb-4 opacity-95">
+              <strong>Ready to join the conversation?</strong> Browse topics below or sign up to start sharing
+              your own tips and questions.
             </p>
             <button
+              type="button"
               onClick={() => setShowUserForm(true)}
-              style={{
-                padding: '0.75rem 2rem',
-                background: 'white',
-                color: 'var(--primary)',
-                border: 'none',
-                borderRadius: '8px',
-                fontSize: '1rem',
-                fontWeight: '600',
-                cursor: 'pointer',
-                transition: 'opacity 0.2s'
-              }}
-              onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
-              onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+              className="px-8 py-3 bg-white text-green-800 rounded-lg text-base font-semibold hover:opacity-90 transition-opacity"
             >
               Join Forum
             </button>
@@ -388,8 +306,8 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
         )}
       </div>
 
-      <div style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)', marginTop: '2rem' }}>
-        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: 'clamp(2rem, 4vw, 3rem) 1.5rem' }}>
+      <div className="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 mt-8">
+        <div className="container max-w-6xl mx-auto py-8 sm:py-12 px-4 sm:px-6">
           {/* Join Banner - Closable */}
           {showBanner && currentUser && (
             <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6" style={{
@@ -492,7 +410,7 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}
+                className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100"
               />
             </div>
             <select
@@ -538,7 +456,7 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
                   key={topic.id}
                   onClick={() => setSelectedTopic(topic)}
                   className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all cursor-pointer"
-                  style={{ backgroundColor: 'var(--card-color)' }}
+                  className="bg-white dark:bg-gray-800"
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
@@ -701,7 +619,7 @@ const TopicDetailView: React.FC<TopicDetailViewProps> = ({
               <div
                 key={post.id}
                 className="bg-white rounded-lg p-6 shadow-md"
-                style={{ backgroundColor: 'var(--card-color)' }}
+                className="bg-white dark:bg-gray-800"
               >
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center text-white flex-shrink-0">
@@ -751,7 +669,7 @@ const TopicDetailView: React.FC<TopicDetailViewProps> = ({
                 onChange={(e) => setPostContent(e.target.value)}
                 rows={6}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 mb-4"
-                style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}
+                className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100"
                 placeholder="Write your reply..."
               />
               <div className="flex gap-3">
@@ -858,7 +776,7 @@ const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({ onSubmit, o
         )}
         <div
           className={`relative bg-white rounded-lg shadow-xl ${required ? 'max-w-md w-full' : 'w-full'} p-6`}
-          style={{ backgroundColor: 'var(--card-color)' }}
+          className="bg-white dark:bg-gray-800"
           role={required ? 'dialog' : undefined}
           aria-modal={required ? 'true' : undefined}
           aria-labelledby="user-reg-title"
@@ -893,7 +811,7 @@ const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({ onSubmit, o
                   setError('');
                 }}
                 className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 ${error ? 'border-red-500' : 'border-gray-300'}`}
-                style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}
+                className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100"
                 placeholder="Choose a pseudonym"
               />
               {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
@@ -907,7 +825,7 @@ const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({ onSubmit, o
                 value={displayName}
                 onChange={(e) => setDisplayName(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}
+                className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100"
                 placeholder="Optional display name"
               />
             </div>
@@ -995,7 +913,7 @@ const TopicCreationForm: React.FC<TopicCreationFormProps> = ({ onSubmit, onCance
         <div className="fixed inset-0 bg-black bg-opacity-50" onClick={onCancel} aria-hidden="true" />
         <div
           className="relative bg-white rounded-lg shadow-xl max-w-2xl w-full p-6"
-          style={{ backgroundColor: 'var(--card-color)' }}
+          className="bg-white dark:bg-gray-800"
           role="dialog"
           aria-modal="true"
           aria-labelledby="topic-create-title"
@@ -1020,7 +938,7 @@ const TopicCreationForm: React.FC<TopicCreationFormProps> = ({ onSubmit, onCance
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}
+                className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100"
                 placeholder="What's your topic about?"
               />
             </div>
@@ -1032,7 +950,7 @@ const TopicCreationForm: React.FC<TopicCreationFormProps> = ({ onSubmit, onCance
                 value={category}
                 onChange={(e) => setCategory(e.target.value as ForumTopic['category'])}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}
+                className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100"
               >
                 <option value="privacy-tips">Privacy Tips</option>
                 <option value="conversation-starters">Conversation Starters</option>
@@ -1053,7 +971,7 @@ const TopicCreationForm: React.FC<TopicCreationFormProps> = ({ onSubmit, onCance
                 onChange={(e) => setDescription(e.target.value)}
                 rows={4}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}
+                className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100"
                 placeholder="Add more details about your topic..."
               />
             </div>

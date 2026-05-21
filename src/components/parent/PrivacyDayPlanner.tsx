@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Calendar, Clock, CheckCircle, Bell, Users, Shield, RefreshCw, Trash2, MessageCircle } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Calendar, CheckCircle, Bell, Trash2 } from 'lucide-react';
 
 interface PrivacyDayEvent {
   id: string;
@@ -9,31 +9,40 @@ interface PrivacyDayEvent {
   participants: string[];
 }
 
+const defaultActivities = [
+  'Review all family member account lists',
+  'Update passwords and recovery options',
+  'Remove unused apps and services',
+  'Discuss new platforms or apps family members want to use',
+  'Review privacy settings on active accounts',
+  'Check location sharing settings',
+  'Review friend/follower lists on social media',
+  'Update family privacy plan if needed',
+];
+
+const fieldClass =
+  'px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500';
+
+const btnPrimary =
+  'inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-green-600 hover:bg-green-700 dark:bg-green-600 dark:hover:bg-green-500 rounded-lg transition-colors';
+
+const btnSecondary =
+  'inline-flex items-center justify-center gap-2 px-6 py-2 text-sm font-semibold text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-md transition-colors';
+
 const PrivacyDayPlanner: React.FC = () => {
   const [events, setEvents] = useState<PrivacyDayEvent[]>([]);
-  const [selectedDate, setSelectedDate] = useState<string>('');
+  const [selectedDate, setSelectedDate] = useState('');
   const [showAddEvent, setShowAddEvent] = useState(false);
 
-  const defaultActivities = [
-    'Review all family member account lists',
-    'Update passwords and recovery options',
-    'Remove unused apps and services',
-    'Discuss new platforms or apps family members want to use',
-    'Review privacy settings on active accounts',
-    'Check location sharing settings',
-    'Review friend/follower lists on social media',
-    'Update family privacy plan if needed'
-  ];
-
   const addPrivacyDay = () => {
-    if (!selectedDate) {return;}
+    if (!selectedDate) return;
 
     const newEvent: PrivacyDayEvent = {
       id: `event-${Date.now()}`,
       date: selectedDate,
       completed: false,
       activities: [...defaultActivities],
-      participants: []
+      participants: [],
     };
 
     setEvents([...events, newEvent].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()));
@@ -41,26 +50,12 @@ const PrivacyDayPlanner: React.FC = () => {
     setShowAddEvent(false);
   };
 
-  const toggleActivity = (eventId: string, activityIndex: number) => {
-    setEvents(events.map(event => {
-      if (event.id === eventId) {
-        const newActivities = [...event.activities];
-        // For simplicity, we'll just mark activities as done by removing them
-        // In a real app, you'd track completion separately
-        return event;
-      }
-      return event;
-    }));
-  };
-
   const markEventComplete = (eventId: string) => {
-    setEvents(events.map(event =>
-      event.id === eventId ? { ...event, completed: !event.completed } : event
-    ));
+    setEvents(events.map((event) => (event.id === eventId ? { ...event, completed: !event.completed } : event)));
   };
 
   const deleteEvent = (eventId: string) => {
-    setEvents(events.filter(event => event.id !== eventId));
+    setEvents(events.filter((event) => event.id !== eventId));
   };
 
   const getNextQuarterDate = (): string => {
@@ -72,130 +67,82 @@ const PrivacyDayPlanner: React.FC = () => {
 
   const formatDate = (dateString: string): string => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-      weekday: 'long', 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
+    return date.toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
     });
   };
 
-  const isUpcoming = (dateString: string): boolean => {
-    return new Date(dateString) >= new Date();
+  const isUpcoming = (dateString: string): boolean => new Date(dateString) >= new Date();
+
+  const eventBorderClass = (event: PrivacyDayEvent) => {
+    if (event.completed) return 'border-green-500 dark:border-green-600';
+    if (isUpcoming(event.date)) return 'border-blue-500 dark:border-blue-500';
+    return 'border-gray-400 dark:border-gray-600';
   };
 
   return (
-    <div style={{ padding: '2rem', maxWidth: '1000px', margin: '0 auto' }}>
-      <div style={{ marginBottom: '2rem' }}>
-        <h2 style={{ fontSize: '2rem', fontWeight: 'bold', color: '#2C3E50', marginBottom: '0.5rem' }}>
+    <div className="p-4 sm:p-8 max-w-4xl mx-auto">
+      <div className="mb-8">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-gray-100 mb-2">
           Family Privacy Day Planner
         </h2>
-        <p style={{ color: '#666', fontSize: '1.125rem' }}>
-          Schedule quarterly "Privacy Days" to review and update your family's online privacy together
+        <p className="text-gray-600 dark:text-gray-300 text-base sm:text-lg">
+          Schedule quarterly &ldquo;Privacy Days&rdquo; to review and update your family&apos;s online privacy together
         </p>
       </div>
 
-      {/* Info Box */}
-      <div style={{
-        backgroundColor: '#f0f9ff',
-        border: '2px solid #3b82f6',
-        borderRadius: '12px',
-        padding: '1.5rem',
-        marginBottom: '2rem'
-      }}>
-        <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#1e40af', marginBottom: '0.75rem' }}>
-          What is a Privacy Day?
-        </h3>
-        <p style={{ color: '#1e40af', lineHeight: 1.8, margin: 0 }}>
-          A Privacy Day is a scheduled time (every 3 months) when your family comes together to review online accounts, 
-          update privacy settings, remove unused apps, and discuss new platforms. It's a great way to make privacy 
+      <div className="rounded-xl border-2 border-blue-500 dark:border-blue-600 bg-blue-50 dark:bg-blue-950/30 p-6 mb-8">
+        <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-200 mb-3">What is a Privacy Day?</h3>
+        <p className="text-blue-900 dark:text-blue-200/90 leading-relaxed m-0">
+          A Privacy Day is a scheduled time (every 3 months) when your family comes together to review online accounts,
+          update privacy settings, remove unused apps, and discuss new platforms. It&apos;s a great way to make privacy
           maintenance a regular family activity.
         </p>
       </div>
 
-      {/* Add Privacy Day Button */}
-      <div style={{ marginBottom: '2rem' }}>
+      <div className="mb-8">
         {!showAddEvent ? (
           <button
+            type="button"
             onClick={() => {
               setSelectedDate(getNextQuarterDate());
               setShowAddEvent(true);
             }}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              padding: '1rem 1.5rem',
-              backgroundColor: '#4CAF50',
-              color: 'white',
-              border: 'none',
-              borderRadius: '8px',
-              cursor: 'pointer',
-              fontSize: '1rem',
-              fontWeight: 600
-            }}
+            className={btnPrimary}
           >
-            <Calendar size={20} />
+            <Calendar size={20} aria-hidden />
             Schedule Next Privacy Day
           </button>
         ) : (
-          <div style={{
-            backgroundColor: 'white',
-            border: '2px solid #4CAF50',
-            borderRadius: '12px',
-            padding: '1.5rem'
-          }}>
-            <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#2C3E50', marginBottom: '1rem' }}>
-              Schedule Privacy Day
-            </h3>
-            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1rem' }}>
-              <label style={{ fontSize: '0.875rem', color: '#666', fontWeight: 500 }}>
-                Date:
+          <div className="rounded-xl border-2 border-green-500 dark:border-green-600 bg-white dark:bg-gray-800 p-6">
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4">Schedule Privacy Day</h3>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-4">
+              <label htmlFor="privacy-day-date" className="text-sm font-medium text-gray-700 dark:text-gray-300 shrink-0">
+                Date
               </label>
               <input
+                id="privacy-day-date"
                 type="date"
                 value={selectedDate}
                 onChange={(e) => setSelectedDate(e.target.value)}
                 min={new Date().toISOString().split('T')[0]}
-                style={{
-                  padding: '0.5rem',
-                  border: '1px solid #e5e7eb',
-                  borderRadius: '6px',
-                  fontSize: '0.875rem'
-                }}
+                className={fieldClass}
               />
             </div>
-            <div style={{ display: 'flex', gap: '0.5rem' }}>
-              <button
-                onClick={addPrivacyDay}
-                style={{
-                  padding: '0.75rem 1.5rem',
-                  backgroundColor: '#4CAF50',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '6px',
-                  cursor: 'pointer',
-                  fontSize: '0.875rem',
-                  fontWeight: 600
-                }}
-              >
+            <div className="flex flex-wrap gap-2">
+              <button type="button" onClick={addPrivacyDay} className={btnPrimary}>
                 Add Privacy Day
               </button>
               <button
+                type="button"
                 onClick={() => {
                   setShowAddEvent(false);
                   setSelectedDate('');
                 }}
-                style={{
-                  padding: '0.75rem 1.5rem',
-                  backgroundColor: '#f3f4f6',
-                  color: '#666',
-                  border: 'none',
-                  borderRadius: '6px',
-                  cursor: 'pointer',
-                  fontSize: '0.875rem',
-                  fontWeight: 600
-                }}
+                className={btnSecondary}
               >
                 Cancel
               </button>
@@ -204,155 +151,84 @@ const PrivacyDayPlanner: React.FC = () => {
         )}
       </div>
 
-      {/* Privacy Day Events */}
       {events.length === 0 ? (
-        <div style={{
-          backgroundColor: '#f8f9fa',
-          borderRadius: '12px',
-          padding: '3rem',
-          textAlign: 'center'
-        }}>
-          <Calendar size={48} style={{ color: '#9ca3af', marginBottom: '1rem' }} />
-          <p style={{ color: '#666', fontSize: '1rem' }}>
-            No Privacy Days scheduled yet. Schedule your first one above!
-          </p>
+        <div className="rounded-xl bg-gray-50 dark:bg-gray-900/50 p-12 text-center">
+          <Calendar size={48} className="text-gray-400 dark:text-gray-500 mx-auto mb-4" aria-hidden />
+          <p className="text-gray-600 dark:text-gray-400">No Privacy Days scheduled yet. Schedule your first one above!</p>
         </div>
       ) : (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-          {events.map(event => (
+        <div className="flex flex-col gap-6">
+          {events.map((event) => (
             <div
               key={event.id}
-              style={{
-                backgroundColor: 'white',
-                border: `2px solid ${event.completed ? '#10b981' : isUpcoming(event.date) ? '#3b82f6' : '#9ca3af'}`,
-                borderRadius: '12px',
-                padding: '1.5rem',
-                opacity: event.completed ? 0.7 : 1
-              }}
+              className={`rounded-xl border-2 bg-white dark:bg-gray-800 p-6 ${eventBorderClass(event)} ${
+                event.completed ? 'opacity-70' : ''
+              }`}
             >
-              <div style={{ display: 'flex', alignItems: 'start', justifyContent: 'space-between', marginBottom: '1rem' }}>
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
                 <div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                    <Calendar size={20} style={{ color: isUpcoming(event.date) ? '#3b82f6' : '#9ca3af' }} />
-                    <h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: '#2C3E50', margin: 0 }}>
+                  <div className="flex flex-wrap items-center gap-2 mb-2">
+                    <Calendar
+                      size={20}
+                      className={isUpcoming(event.date) ? 'text-blue-600 dark:text-blue-400' : 'text-gray-400'}
+                      aria-hidden
+                    />
+                    <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100 m-0">
                       {formatDate(event.date)}
                     </h3>
                     {event.completed && (
-                      <span style={{
-                        padding: '0.25rem 0.75rem',
-                        backgroundColor: '#d1fae5',
-                        color: '#065f46',
-                        borderRadius: '12px',
-                        fontSize: '0.75rem',
-                        fontWeight: 600
-                      }}>
+                      <span className="px-3 py-0.5 text-xs font-semibold text-green-800 dark:text-green-200 bg-green-100 dark:bg-green-900/40 rounded-full">
                         Completed
                       </span>
                     )}
                   </div>
                   {!isUpcoming(event.date) && !event.completed && (
-                    <p style={{ color: '#dc2626', fontSize: '0.875rem', margin: 0 }}>
-                      This Privacy Day has passed
-                    </p>
+                    <p className="text-red-600 dark:text-red-400 text-sm m-0">This Privacy Day has passed</p>
                   )}
                 </div>
-                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                <div className="flex gap-2 self-end sm:self-auto">
                   {!event.completed && (
                     <button
+                      type="button"
                       onClick={() => markEventComplete(event.id)}
-                      style={{
-                        padding: '0.5rem',
-                        backgroundColor: '#f0fdf4',
-                        border: '1px solid #10b981',
-                        borderRadius: '6px',
-                        cursor: 'pointer',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                      }}
-                      title="Mark as complete"
+                      className="p-2 rounded-md bg-green-50 dark:bg-green-950/30 border border-green-500 hover:opacity-90"
+                      aria-label="Mark as complete"
                     >
-                      <CheckCircle size={20} style={{ color: '#10b981' }} />
+                      <CheckCircle size={20} className="text-green-600 dark:text-green-400" />
                     </button>
                   )}
                   <button
+                    type="button"
                     onClick={() => deleteEvent(event.id)}
-                    style={{
-                      padding: '0.5rem',
-                      backgroundColor: '#fef2f2',
-                      border: '1px solid #dc2626',
-                      borderRadius: '6px',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}
-                    title="Delete"
+                    className="p-2 rounded-md bg-red-50 dark:bg-red-950/30 border border-red-500 hover:opacity-90"
+                    aria-label="Delete privacy day"
                   >
-                    <Trash2 size={20} style={{ color: '#dc2626' }} />
+                    <Trash2 size={20} className="text-red-600 dark:text-red-400" />
                   </button>
                 </div>
               </div>
 
-              {/* Agenda */}
-              <div>
-                <h4 style={{ fontSize: '1rem', fontWeight: 600, color: '#2C3E50', marginBottom: '1rem' }}>
-                  Privacy Day Agenda:
-                </h4>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                  {defaultActivities.map((activity, index) => (
-                    <div
-                      key={index}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'start',
-                        gap: '0.75rem',
-                        padding: '0.75rem',
-                        backgroundColor: '#f8f9fa',
-                        borderRadius: '6px'
-                      }}
-                    >
-                      <div style={{
-                        width: '24px',
-                        height: '24px',
-                        borderRadius: '50%',
-                        backgroundColor: '#e5e7eb',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        flexShrink: 0,
-                        marginTop: '2px'
-                      }}>
-                        <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#666' }}>
-                          {index + 1}
-                        </span>
-                      </div>
-                      <span style={{ color: '#2C3E50', lineHeight: 1.6 }}>
-                        {activity}
-                      </span>
+              <h4 className="text-base font-semibold text-gray-800 dark:text-gray-100 mb-3">Privacy Day Agenda:</h4>
+              <div className="flex flex-col gap-2">
+                {defaultActivities.map((activity, index) => (
+                  <div
+                    key={index}
+                    className="flex items-start gap-3 p-3 rounded-md bg-gray-50 dark:bg-gray-900/50"
+                  >
+                    <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gray-200 dark:bg-gray-700 text-xs font-semibold text-gray-600 dark:text-gray-300 mt-0.5">
+                      {index + 1}
                     </div>
-                  ))}
-                </div>
+                    <span className="text-gray-800 dark:text-gray-200 leading-relaxed">{activity}</span>
+                  </div>
+                ))}
               </div>
 
-              {/* Reminder */}
               {isUpcoming(event.date) && !event.completed && (
-                <div style={{
-                  marginTop: '1rem',
-                  padding: '1rem',
-                  backgroundColor: '#fef3c7',
-                  borderRadius: '8px',
-                  border: '1px solid #f59e0b',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.75rem'
-                }}>
-                  <Bell size={20} style={{ color: '#f59e0b' }} />
+                <div className="mt-4 p-4 rounded-lg bg-amber-50 dark:bg-amber-950/30 border border-amber-400 dark:border-amber-600 flex items-start gap-3">
+                  <Bell size={20} className="text-amber-600 dark:text-amber-400 shrink-0" aria-hidden />
                   <div>
-                    <strong style={{ color: '#92400e', display: 'block', marginBottom: '0.25rem' }}>
-                      Reminder
-                    </strong>
-                    <p style={{ color: '#92400e', margin: 0, fontSize: '0.875rem' }}>
+                    <strong className="block text-amber-900 dark:text-amber-200 mb-1">Reminder</strong>
+                    <p className="text-amber-900 dark:text-amber-200/90 text-sm m-0">
                       Set a reminder for this Privacy Day in your calendar app
                     </p>
                   </div>
@@ -363,19 +239,12 @@ const PrivacyDayPlanner: React.FC = () => {
         </div>
       )}
 
-      {/* Tips */}
-      <div style={{
-        marginTop: '2rem',
-        backgroundColor: '#f0fdf4',
-        border: '1px solid #10b981',
-        borderRadius: '12px',
-        padding: '1.5rem'
-      }}>
-        <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#065f46', marginBottom: '1rem' }}>
+      <div className="mt-8 rounded-xl border border-green-500 dark:border-green-600 bg-green-50 dark:bg-green-950/30 p-6">
+        <h3 className="text-lg font-semibold text-green-900 dark:text-green-200 mb-4">
           Tips for a Successful Privacy Day
         </h3>
-        <ul style={{ margin: 0, paddingLeft: '1.25rem', color: '#065f46', lineHeight: 1.8 }}>
-          <li>Make it a family activity - involve everyone in the process</li>
+        <ul className="m-0 pl-5 text-green-900 dark:text-green-200 leading-relaxed space-y-2">
+          <li>Make it a family activity — involve everyone in the process</li>
           <li>Keep it positive and educational, not scary or punitive</li>
           <li>Order pizza or have a special treat to make it fun</li>
           <li>Take breaks if it gets overwhelming</li>
@@ -388,4 +257,3 @@ const PrivacyDayPlanner: React.FC = () => {
 };
 
 export default PrivacyDayPlanner;
-

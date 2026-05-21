@@ -116,7 +116,7 @@ const FAQPage: React.FC = () => {
       title="FAQ"
       subtitle="Quick answers to questions about PandaGarde and how to use it with your family."
     >
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 pb-8">
           {/* Category Filter */}
           <div className="mb-12">
             <h2 className="text-2xl font-bold mb-6 text-primary">
