@@ -19,7 +19,7 @@ const resourceGroups = [
     icon: BookOpen,
     description: 'Stories, activities, and age-based materials that make privacy easier to understand.',
     links: [
-      { label: 'Privacy Panda Story', href: '/privacy-panda' },
+      { label: 'Privacy Panda Story', href: '/stories/privacy-panda-and-the-digital-bamboo-forest' },
       { label: 'Activity Book', href: '/activity-book' },
       { label: 'Privacy Explorers', href: '/privacy-explorers' },
     ],

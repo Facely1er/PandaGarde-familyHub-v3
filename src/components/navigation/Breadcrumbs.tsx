@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronRight, Home } from 'lucide-react';
+import { getStoryBySlug } from '../../data/stories';
 
 interface BreadcrumbItem {
   label: string;
@@ -39,6 +40,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className = '' }) => {
     '/profile': 'Profile',
     
     // Privacy Panda & Story
+    '/stories': 'Privacy Panda Stories',
     '/story': 'Privacy Panda Story',
     '/privacy-panda': 'Privacy Panda',
     '/activity-book': 'Activity Book',
@@ -131,12 +133,21 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className = '' }) => {
     ];
 
     let currentPath = '';
-    pathSegments.forEach((segment, _index) => {
+    pathSegments.forEach((segment, index) => {
       currentPath += `/${segment}`;
-      const title = pageTitles[currentPath] || segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ');
+      let title = pageTitles[currentPath];
+
+      if (!title && currentPath.startsWith('/stories/') && index === pathSegments.length - 1) {
+        title = getStoryBySlug(segment)?.title ?? segment.replace(/-/g, ' ');
+      }
+
+      if (!title) {
+        title = segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ');
+      }
+
       breadcrumbs.push({
         label: title,
-        path: currentPath
+        path: currentPath,
       });
     });
 

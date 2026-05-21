@@ -72,7 +72,7 @@ const ActivitiesPage: React.FC = () => {
           </p>
           <div className="flex flex-wrap gap-3">
             <Link
-              to="/privacy-panda"
+              to="/stories/privacy-panda-and-the-digital-bamboo-forest"
               className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-emerald-700 min-h-[44px]"
             >
               <BookOpen size={18} aria-hidden />

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Story } from '../../data/stories';
+import { ChevronRight, Play } from 'lucide-react';
+import { Story, isFoundationStory } from '../../data/stories';
 
 const AGE_LABELS: Record<string, string> = {
   early: 'Ages 5–7',
@@ -8,10 +9,12 @@ const AGE_LABELS: Record<string, string> = {
 };
 
 export function StoryCard({ story }: { story: Story }) {
+  const isFoundation = isFoundationStory(story);
+
   return (
     <Link
       to={`/stories/${story.slug}`}
-      className="block rounded-2xl border border-gray-200 dark:border-gray-700 hover:border-green-400 dark:hover:border-green-500 hover:shadow-md transition-all duration-200 overflow-hidden bg-white dark:bg-gray-800"
+      className="group block rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-hidden no-underline text-inherit transition-all hover:border-green-600 dark:hover:border-green-500 hover:shadow-card-hover"
     >
       <div className={`${story.coverColor} flex items-center justify-center h-32 text-5xl`}>
         {story.coverEmoji}
@@ -30,9 +33,10 @@ export function StoryCard({ story }: { story: Story }) {
               {AGE_LABELS[ag]}
             </span>
           ))}
-          {story.isOrigin && (
-            <span className="text-xs font-medium text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950 px-2 py-0.5 rounded-full">
-              Origin Story
+          {isFoundation && (
+            <span className="inline-flex items-center gap-1 text-xs font-medium text-emerald-800 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-950 px-2 py-0.5 rounded-full">
+              <Play size={12} aria-hidden />
+              Interactive · Narration
             </span>
           )}
         </div>
@@ -48,7 +52,10 @@ export function StoryCard({ story }: { story: Story }) {
         <span className="text-xs text-gray-400 dark:text-gray-500">
           {story.chapters.length} chapters · {story.activities.length} activities
         </span>
-        <span className="text-xs font-medium text-green-600 dark:text-green-400">Read →</span>
+        <span className="inline-flex items-center gap-1 text-xs font-semibold text-green-700 dark:text-green-400 group-hover:gap-2 transition-all">
+          {isFoundation ? 'Begin' : 'Read'}
+          <ChevronRight size={14} aria-hidden />
+        </span>
       </div>
     </Link>
   );

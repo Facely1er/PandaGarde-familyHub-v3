@@ -17,10 +17,11 @@ import {
   Home,
 } from 'lucide-react';
 import { loadDfaJourneyState } from '../lib/dfaJourney';
-import { getLatestStory } from '../data/stories';
+import { getFoundationStory, getLatestStory, ORIGIN_STORY_SLUG } from '../data/stories';
 
 const HomePage: React.FC = () => {
   const journey = useMemo(() => loadDfaJourneyState(), []);
+  const foundationStory = useMemo(() => getFoundationStory(), []);
   const latestStory = useMemo(() => getLatestStory(), []);
 
 
@@ -397,7 +398,30 @@ const HomePage: React.FC = () => {
                 </span>
               </Link>
             ))}
-            {latestStory && (
+            {foundationStory && (
+              <Link
+                to={`/stories/${ORIGIN_STORY_SLUG}`}
+                className="homepage-spotlight__card homepage-spotlight__card--story"
+              >
+                <span className="homepage-spotlight__tag">Start here · Digital Bamboo Forest</span>
+                <div className="flex items-start gap-3">
+                  <span className="text-3xl" aria-hidden="true">
+                    {foundationStory.coverEmoji}
+                  </span>
+                  <div>
+                    <h3>{foundationStory.title}</h3>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                      Interactive story with narration and illustrations
+                    </p>
+                  </div>
+                </div>
+                <span className="homepage-spotlight__cta">
+                  Begin the journey
+                  <ChevronRight size={16} />
+                </span>
+              </Link>
+            )}
+            {latestStory && latestStory.slug !== ORIGIN_STORY_SLUG && (
               <Link
                 to={`/stories/${latestStory.slug}`}
                 className="homepage-spotlight__card homepage-spotlight__card--story"
@@ -419,7 +443,7 @@ const HomePage: React.FC = () => {
               </Link>
             )}
           </div>
-          {latestStory && (
+          {(foundationStory || latestStory) && (
             <p className="homepage-spotlight__see-all mt-4">
               <Link to="/stories" className="text-green-700 dark:text-green-400 font-medium hover:underline">
                 See all stories →

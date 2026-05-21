@@ -1,5 +1,6 @@
 import React, { Suspense, lazy, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { ORIGIN_STORY_SLUG } from './data/stories';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { ToastProvider } from './contexts/ToastContext';
 import { FamilyProvider } from './contexts/FamilyContext';
@@ -16,7 +17,6 @@ import NavigationErrorBoundary from './components/NavigationErrorBoundary';
 import { SentryErrorBoundary } from './lib/sentry';
 
 const HomePage = lazy(() => import('./pages/HomePage'));
-const StoryPage = lazy(() => import('./pages/StoryPage'));
 const InteractiveStoryPage = lazy(() => import('./pages/InteractiveStoryPage'));
 const ActivityBookPage = lazy(() => import('./pages/ActivityBookPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
@@ -183,9 +183,19 @@ function App() {
                         <Suspense fallback={<PageLoader />}>
                         <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/story" element={<InteractiveStoryPage />} />
-            <Route path="/privacy-panda" element={<InteractiveStoryPage />} />
-            <Route path="/story-classic" element={<StoryPage />} />
+            <Route
+              path="/story"
+              element={<Navigate to={`/stories/${ORIGIN_STORY_SLUG}`} replace />}
+            />
+            <Route
+              path="/privacy-panda"
+              element={<Navigate to={`/stories/${ORIGIN_STORY_SLUG}`} replace />}
+            />
+            <Route
+              path="/story-classic"
+              element={<Navigate to={`/stories/${ORIGIN_STORY_SLUG}`} replace />}
+            />
+            <Route path="/interactive-story" element={<InteractiveStoryPage />} />
             <Route path="/activity-book" element={<ActivityBookPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/age-groups" element={<AgeGroupsPage />} />
