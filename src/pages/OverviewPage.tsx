@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Users, Shield, Wrench, Check, BookOpen, Heart, Brain, Play, Baby, ArrowRight, ArrowLeft, ShoppingBag, BarChart3, Unlock, User, GraduationCap, UsersRound, Info } from 'lucide-react';
+import { Users, Shield, Wrench, Check, BookOpen, Heart, Brain, Play, Baby, ArrowRight, ArrowLeft, ShoppingBag, BarChart3, Unlock, User, GraduationCap, UsersRound } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 
 const OverviewPage: React.FC = () => {

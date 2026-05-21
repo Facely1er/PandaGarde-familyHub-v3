@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Shield } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 
 type KitItem = { title: string; href: string; badge: string };

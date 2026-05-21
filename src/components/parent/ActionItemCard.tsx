@@ -12,8 +12,8 @@ interface ActionItemCardProps {
 }
 
 const ActionItemCard: React.FC<ActionItemCardProps> = ({
-  id,
-  type,
+  id: _id,
+  type: _type,
   priority,
   title,
   description,

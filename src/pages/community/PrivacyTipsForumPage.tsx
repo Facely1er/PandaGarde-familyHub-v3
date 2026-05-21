@@ -2,8 +2,6 @@ import React from 'react';
 import PrivacyTipsForum from '../../components/community/PrivacyTipsForum';
 import CommunityErrorBoundary from '../../components/community/CommunityErrorBoundary';
 import PageLayout from '../../components/layout/PageLayout';
-import { MessageCircle } from 'lucide-react';
-
 const PrivacyTipsForumPage: React.FC = () => {
   return (
     <CommunityErrorBoundary>

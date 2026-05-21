@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Smartphone, Shield, Lock, CheckCircle, Star, Trophy, Clock, BookOpen, Users, Globe, Settings } from 'lucide-react';
+import { Shield, Lock, CheckCircle, Star, Clock, BookOpen, Users, Globe, Settings } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 
 interface Chapter {

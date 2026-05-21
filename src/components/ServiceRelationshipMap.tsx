@@ -1,8 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Building2, Network, Info, ExternalLink } from 'lucide-react';
 import { getServiceRelationship, getSiblingServices, getParentCompany } from '../data/serviceRelationships';
-import { childServiceCatalog, getServiceById } from '../data/childServiceCatalog';
+import { getServiceById, type ChildService } from '../data/childServiceCatalog';
 import { getServiceLogoUrlWithBrandColor, hasServiceLogo } from '../utils/serviceLogos';
 
 interface ServiceRelationshipMapProps {
@@ -17,15 +16,13 @@ const ServiceRelationshipMap: React.FC<ServiceRelationshipMapProps> = ({
   const relationship = getServiceRelationship(serviceId);
   const parentCompany = getParentCompany(serviceId);
   const siblings = getSiblingServices(serviceId);
-  const currentService = getServiceById(serviceId);
-
   if (!relationship || (!parentCompany && (!siblings || siblings.length === 0))) {
     return null;
   }
 
   const siblingServices = siblings
     .map(id => getServiceById(id))
-    .filter(service => service !== undefined) as typeof currentService[];
+    .filter((service): service is ChildService => service !== undefined);
 
   return (
     <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">

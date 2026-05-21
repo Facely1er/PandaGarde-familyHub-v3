@@ -4,10 +4,10 @@
  * Provides actionable insights and recommendations
  */
 
-import { childServiceCatalog, type ChildService } from '../data/childServiceCatalog';
+import { childServiceCatalog } from '../data/childServiceCatalog';
 import { calculatePrivacyExposureIndex, getExposureLevel } from './privacyExposureIndex';
 import { getServiceRelationship, getSiblingServices } from '../data/serviceRelationships';
-import { getDataChainsForServices, getUniqueBrokersForServices, type ServiceDataChain } from '../data/dataBrokerNetwork';
+import { getDataChainsForServices, getUniqueBrokersForServices } from '../data/dataBrokerNetwork';
 
 /** Map app category to where the app is typically used: school (EdTech), home, or in-between (both / everywhere). */
 function getUsageContext(category: string): UsageContext {
@@ -208,7 +208,7 @@ export class FootprintAnalyzer {
 
     const categoryBreakdown: CategoryBreakdown[] = Array.from(categoryMap.entries()).map(([category, data]) => {
       const averageExposure = Math.round(data.totalExposure / data.count);
-      const exposureLevel = getExposureLevel(averageExposure);
+      const _exposureLevel = getExposureLevel(averageExposure);
       
       let riskLevel: 'low' | 'medium' | 'high' | 'very-high' = 'low';
       if (averageExposure >= 70) {riskLevel = 'very-high';}
@@ -349,7 +349,7 @@ export class FootprintAnalyzer {
     serviceRisks: ServiceRisk[],
     averageExposure: number,
     totalServices: number,
-    totalMembers: number
+    _totalMembers: number
   ): number {
     // Base score from average exposure (0-40 points)
     let score = averageExposure * 0.4;

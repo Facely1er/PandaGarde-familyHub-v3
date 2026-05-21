@@ -6,19 +6,16 @@ import {
   CheckCircle,
   Clock,
   AlertTriangle,
-  TrendingUp,
   Calendar,
   X,
   Edit,
   Trash2,
-  Award,
-  ArrowRight
+  Award
 } from 'lucide-react';
 import {
   privacyGoalManager,
   type PrivacyGoal
 } from '../lib/privacyGoals';
-import { type AssessmentResult } from '../lib/familyPrivacyAssessment';
 
 interface PrivacyGoalsProps {
   compact?: boolean;
@@ -452,9 +449,11 @@ const PrivacyGoals: React.FC<PrivacyGoalsProps> = ({ compact = false, onGoalCrea
                     value={editingGoal?.targetDate.split('T')[0] || newGoal.targetDate}
                     onChange={(e) => {
                       const dateValue = e.target.value ? new Date(e.target.value).toISOString() : '';
-                      editingGoal
-                        ? setEditingGoal({ ...editingGoal, targetDate: dateValue })
-                        : setNewGoal({ ...newGoal, targetDate: dateValue });
+                      if (editingGoal) {
+                        setEditingGoal({ ...editingGoal, targetDate: dateValue });
+                      } else {
+                        setNewGoal({ ...newGoal, targetDate: dateValue });
+                      }
                     }}
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white"
                   />

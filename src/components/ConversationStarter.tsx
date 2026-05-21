@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { MessageCircle, RefreshCw, Heart, BookOpen, Shield, Users, Info, Copy, Check } from 'lucide-react';
+import { MessageCircle, RefreshCw, BookOpen, Shield, Users, Info, Copy, Check } from 'lucide-react';
 import { useFamily } from '../contexts/FamilyContext';
 
 export type ConversationTopic = 

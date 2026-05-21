@@ -69,7 +69,7 @@ describe('buildDfaScore', () => {
 
   it('includes advanced-only categories and does not score lower than the same basic snapshot here', () => {
     const analysis = makeAnalysis();
-    const basic = buildDfaScore(analysis, 'basic');
+    const _basic = buildDfaScore(analysis, 'basic');
     const advanced = buildDfaScore(analysis, 'advanced');
 
     expect(advanced.breakdown.map((item) => item.key)).toEqual([

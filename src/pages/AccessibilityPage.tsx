@@ -1,5 +1,5 @@
 import React from 'react';
-import { Accessibility, Eye, Ear, Hand, Brain, CheckCircle, AlertTriangle, Info } from 'lucide-react';
+import { Eye, Ear, Hand, Brain, CheckCircle, AlertTriangle, Info } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 
 const AccessibilityPage: React.FC = () => {

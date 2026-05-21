@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Mail, CheckCircle, Star, Users, Calendar, BookOpen, Shield } from 'lucide-react';
+import { Mail, CheckCircle, Users, Calendar, BookOpen, Shield } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 import { useToast } from '../contexts/ToastContext';
 import { newsletterArchive } from '../data/newsletters';

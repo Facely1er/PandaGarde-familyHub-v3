@@ -15,7 +15,7 @@ import {
 import { useFamily } from '../contexts/FamilyContext';
 import { childServiceNotificationManager, type ServiceNotification } from '../lib/serviceNotifications';
 import { getServiceLogoUrlWithBrandColor, hasServiceLogo } from '../utils/serviceLogos';
-import { childServiceCatalog, getServiceById } from '../data/childServiceCatalog';
+import { getServiceById } from '../data/childServiceCatalog';
 import { calculatePrivacyExposureIndex, getExposureLevel } from '../lib/privacyExposureIndex';
 import { logger } from '../lib/logger';
 

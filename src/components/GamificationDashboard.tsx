@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Card from './Card';
 import { gamificationSystem, Achievement, Mission, GamificationStats } from '../utils/gamificationSystem';
 import { localStorageManager, UserProgress } from '../utils/localStorageManager';
-import { BarChart3, Target, Trophy, Star, Calendar, Wrench, BookOpen, Award, TrendingUp, Clock, Users as UsersIcon } from 'lucide-react';
+import { BarChart3, Target, Trophy, Star, Calendar, Wrench, BookOpen, Award, Clock, Users as UsersIcon } from 'lucide-react';
 import { logger } from '../lib/logger';
 
 interface GamificationDashboardProps {

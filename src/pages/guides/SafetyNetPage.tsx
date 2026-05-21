@@ -1,5 +1,4 @@
 import React from 'react';
-import { Shield } from 'lucide-react';
 import SafetyNetBuilder from '../../components/parent/SafetyNetBuilder';
 import PageLayout from '../../components/layout/PageLayout';
 

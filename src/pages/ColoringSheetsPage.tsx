@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Download, Palette, Printer, Share2, Star } from 'lucide-react';
-import { pdfService } from '../lib/pdfService';
 import PageLayout from '../components/layout/PageLayout';
 import { logger } from '../lib/logger';
 

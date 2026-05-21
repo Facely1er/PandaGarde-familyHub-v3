@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { BookOpen, ExternalLink, Plus, Search, Star, TrendingUp, Save, CheckCircle, Tag, Eye } from 'lucide-react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { BookOpen, ExternalLink, Plus, Search, Star, Save, CheckCircle, Tag, Eye } from 'lucide-react';
 import { communityStorage, SharedResource } from '../../utils/communityStorageManager';
 import { createFocusTrap } from '../../utils/accessibility';
 
@@ -33,10 +33,6 @@ const ResourceSharing: React.FC<ResourceSharingProps> = ({ compact = false }) =>
     loadSavedResources();
   }, []);
 
-  useEffect(() => {
-    filterAndSortResources();
-  }, [resources, selectedCategory, searchQuery, sortBy]);
-
   const loadResources = () => {
     const allResources = communityStorage.getAllResources();
     const publishedResources = Object.values(allResources)
@@ -54,7 +50,7 @@ const ResourceSharing: React.FC<ResourceSharingProps> = ({ compact = false }) =>
     setSavedResources(saved.map(r => r.id));
   };
 
-  const filterAndSortResources = () => {
+  const filterAndSortResources = useCallback(() => {
     let filtered = [...resources];
 
     // Filter by category
@@ -77,8 +73,12 @@ const ResourceSharing: React.FC<ResourceSharingProps> = ({ compact = false }) =>
       filtered.sort((a, b) => b.upvotes - a.upvotes);
     } else if (sortBy === 'verified') {
       filtered.sort((a, b) => {
-        if (a.verified && !b.verified) {return -1;}
-        if (!a.verified && b.verified) {return 1;}
+        if (a.verified && !b.verified) {
+          return -1;
+        }
+        if (!a.verified && b.verified) {
+          return 1;
+        }
         return b.upvotes - a.upvotes;
       });
     } else {
@@ -86,7 +86,11 @@ const ResourceSharing: React.FC<ResourceSharingProps> = ({ compact = false }) =>
     }
 
     setFilteredResources(filtered);
-  };
+  }, [resources, selectedCategory, searchQuery, sortBy]);
+
+  useEffect(() => {
+    filterAndSortResources();
+  }, [filterAndSortResources]);
 
   const handleVote = (resourceId: string) => {
     communityStorage.voteResource(resourceId, 'up');

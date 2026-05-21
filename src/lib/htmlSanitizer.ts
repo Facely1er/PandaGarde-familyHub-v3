@@ -4,7 +4,7 @@
  */
 
 // Simple HTML sanitizer that only allows safe tags and attributes
-const ALLOWED_TAGS = ['strong', 'em', 'b', 'i', 'mark', 'span'];
+const _ALLOWED_TAGS = ['strong', 'em', 'b', 'i', 'mark', 'span'];
 const ALLOWED_ATTRIBUTES = ['class', 'style'];
 
 /**

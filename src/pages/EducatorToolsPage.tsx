@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { type LucideIcon, GraduationCap, BookOpen, Users, ArrowRight, CheckCircle, Clock, FileText, Presentation, Award, Scale } from 'lucide-react';
+import { type LucideIcon, GraduationCap, BookOpen, Users, ArrowRight, CheckCircle, FileText, Presentation, Award, Scale } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 import ResourceModal from '../components/ResourceModal';
 import { PRIVACY_PORTAL_URL } from '../config/portal';

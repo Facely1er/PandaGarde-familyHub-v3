@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Headphones, Mail, MessageCircle, HelpCircle, Search, Clock, Star, Users, BookOpen, Shield } from 'lucide-react';
+import { Mail, MessageCircle, HelpCircle, Search, Clock, Users, BookOpen, Shield } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 
 interface FAQItem {

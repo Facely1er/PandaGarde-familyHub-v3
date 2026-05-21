@@ -8,13 +8,13 @@ import { logger } from './logger'
 logger.debug('Running in frontend-only mode - database operations disabled', undefined, 'DB')
 
 // Mock error handling for compatibility
-const handleDatabaseError = (operation: string, error: unknown) => {
+const _handleDatabaseError = (operation: string, error: unknown) => {
   logger.debug(`Frontend-only mode: ${operation} would have failed`, error, 'DB')
   return null
 }
 
 // Mock database operation wrapper for compatibility
-const safeDbOperation = async <T>(
+const _safeDbOperation = async <T>(
   operation: () => Promise<T>,
   operationName: string
 ): Promise<T | null> => {
@@ -89,7 +89,7 @@ export const progressService = {
   },
 
   // Save progress - disabled in frontend-only mode
-  async saveProgress(progressData: Omit<Progress, 'id' | 'created_at' | 'updated_at'>): Promise<Progress | null> {
+  async saveProgress(_progressData: Omit<Progress, 'id' | 'created_at' | 'updated_at'>): Promise<Progress | null> {
     logger.debug('Frontend-only mode: saveProgress() - operation skipped', undefined, 'DB')
     return null
   }

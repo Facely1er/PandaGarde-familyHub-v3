@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   Book,
@@ -10,10 +10,8 @@ import {
   Link as LinkIcon,
   Award,
   Users,
-  Play,
   Download,
   CheckCircle,
-  Star,
   Filter,
 } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';

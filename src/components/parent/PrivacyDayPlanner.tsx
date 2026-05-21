@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Calendar, CheckCircle, Bell, Trash2 } from 'lucide-react';
 
 interface PrivacyDayEvent {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Play, Users, BookOpen, Download, CheckCircle, ArrowRight, Clock, Star, Shield, ShoppingBag, BarChart3, Unlock, Baby, User, GraduationCap, Rocket } from 'lucide-react';
+import { Play, Users, BookOpen, Download, CheckCircle, ArrowRight, Clock, Star, Shield, ShoppingBag, BarChart3, Unlock, Baby, User, GraduationCap } from 'lucide-react';
 import { useJourneyProgress } from '../hooks/useJourneyProgress';
 import PageLayout from '../components/layout/PageLayout';
 

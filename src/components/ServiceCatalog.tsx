@@ -18,7 +18,6 @@ import {
   ChevronRight,
   Clock,
   Bell,
-  BookOpen,
   School,
   Bot,
   Signal,

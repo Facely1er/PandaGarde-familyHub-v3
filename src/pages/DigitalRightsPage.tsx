@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Scale, Globe, Shield, BookOpen, CheckCircle, Star, Trophy, Clock, Users, AlertTriangle, FileText, ExternalLink } from 'lucide-react';
+import { Scale, Globe, Shield, BookOpen, CheckCircle, Clock, Users, AlertTriangle, FileText, ExternalLink } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 import { PRIVACY_PORTAL_URL, PRIVACY_PORTAL_OPT_OUT_URL } from '../config/portal';
 

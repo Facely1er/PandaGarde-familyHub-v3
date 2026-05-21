@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { coppaComplianceManager, COPPAComplianceManager } from './coppaCompliance';
+import { coppaComplianceManager } from './coppaCompliance';
 
 // Mock localStorage and sessionStorage
 const localStorageMock = (() => {
@@ -288,7 +288,7 @@ describe('COPPA Compliance Manager', () => {
 
   describe('Data Protection', () => {
     it('should encrypt consent records', async () => {
-      const result = await coppaComplianceManager.requestParentalConsent(
+      await coppaComplianceManager.requestParentalConsent(
         10,
         'parent@example.com'
       );

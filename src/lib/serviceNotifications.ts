@@ -3,7 +3,7 @@
  * Provides parent-focused notifications about privacy and safety updates
  */
 
-import { childServiceCatalog, type ChildService } from '../data/childServiceCatalog';
+import { childServiceCatalog } from '../data/childServiceCatalog';
 import { childRSSAlertService } from './rssAlertService';
 import { calculatePrivacyExposureIndex } from './privacyExposureIndex';
 import { logger } from './logger';

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Calendar, ArrowLeft, Star } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
-import { newsletterArchive, getNewslettersByYear } from '../data/newsletters';
+import { newsletterArchive } from '../data/newsletters';
 
 const NewsletterArchivePage: React.FC = () => {
   // Group newsletters by year

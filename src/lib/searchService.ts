@@ -299,17 +299,17 @@ class SearchService {
     return this.categories;
   }
 
-  async addSearchContent(content: Omit<SearchContentItem, 'id' | 'created_at' | 'updated_at'>): Promise<SearchContentItem | null> {
+  async addSearchContent(_content: Omit<SearchContentItem, 'id' | 'created_at' | 'updated_at'>): Promise<SearchContentItem | null> {
     logger.debug('Frontend-only mode: Cannot add search content to database', undefined, 'SEARCH');
     return null;
   }
 
-  async updateSearchContent(id: string, updates: Partial<SearchContentItem>): Promise<SearchContentItem | null> {
+  async updateSearchContent(_id: string, _updates: Partial<SearchContentItem>): Promise<SearchContentItem | null> {
     logger.debug('Frontend-only mode: Cannot update search content in database', undefined, 'SEARCH');
     return null;
   }
 
-  async deleteSearchContent(id: string): Promise<boolean> {
+  async deleteSearchContent(_id: string): Promise<boolean> {
     logger.debug('Frontend-only mode: Cannot delete search content from database', undefined, 'SEARCH');
     return false;
   }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Shield as Child, User, UserCheck, BookOpen, Palette, Puzzle, Shield, Globe, Smartphone, Wrench, Scale, ArrowRight, Users } from 'lucide-react';
+import { Shield as Child, User, UserCheck, BookOpen, Palette, Puzzle, Shield, Globe, Smartphone, Wrench, Scale, ArrowRight } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 
 const ageGroups = [

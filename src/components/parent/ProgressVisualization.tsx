@@ -54,7 +54,7 @@ const ProgressVisualization: React.FC<ProgressVisualizationProps> = ({
 
   // Simple bar chart visualization
   const maxBarHeight = 120;
-  const barWidth = Math.max(40, Math.min(80, 400 / data.length));
+  const _barWidth = Math.max(40, Math.min(80, 400 / data.length));
 
   return (
     <div style={{ padding: '1.5rem', backgroundColor: 'white', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>

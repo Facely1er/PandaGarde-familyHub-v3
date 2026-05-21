@@ -1,6 +1,5 @@
 import {
   DFA_JOURNEY_STORAGE_KEY,
-  getDefaultDfaJourneyState,
   loadDfaJourneyState,
   updateDfaJourneyPhase,
 } from './dfaJourney';

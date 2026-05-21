@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Cookie, Shield, Settings, Info, CheckCircle, AlertTriangle } from 'lucide-react';
+import { Shield, Settings, Info, CheckCircle, AlertTriangle } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 
 const CookiesPage: React.FC = () => {

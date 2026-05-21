@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Save, Download, CheckCircle, Plus, X, Calendar, Users, Shield, Settings, AlertCircle } from 'lucide-react';
+import { Save, Download, CheckCircle, Plus, X, Calendar, Users, Shield, Settings } from 'lucide-react';
 import { useFamily } from '../../contexts/FamilyContext';
 import { logger } from '../../lib/logger';
 
@@ -127,9 +127,6 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
   const [selectedAgeGroups, setSelectedAgeGroups] = useState<string[]>([]);
   const [showAddRule, setShowAddRule] = useState(false);
   const [saved, setSaved] = useState(false);
-
-  // Get parent members for approval selection
-  const parentMembers = familyMembers.filter(m => m.role === 'parent');
 
   useEffect(() => {
     // Auto-save to localStorage

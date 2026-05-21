@@ -72,7 +72,7 @@ const FIREBASE_ANALYTICS: ThirdPartyTracker = {
   documented: true
 };
 
-const FACEBOOK_SDK: ThirdPartyTracker = {
+const _FACEBOOK_SDK: ThirdPartyTracker = {
   name: 'Meta SDK / Facebook Pixel',
   role: 'advertising',
   notes: 'Reports user actions to Meta for ad targeting and cross-app measurement',
@@ -112,7 +112,7 @@ const SALESFORCE_MKT: ThirdPartyTracker = {
   documented: true
 };
 
-const OPENAI_API: ThirdPartyTracker = {
+const _OPENAI_API: ThirdPartyTracker = {
   name: 'OpenAI API',
   role: 'ai-training',
   notes: 'Content sent via API may be stored and used to improve OpenAI models (unless opted out via enterprise agreement)',

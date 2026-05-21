@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { ArrowLeft, BookOpen, Gamepad2, Play, Shield } from 'lucide-react';
+import { ArrowLeft, BookOpen, Play, Shield } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 import ActivityManager from '../components/activities/ActivityManager';
 import {

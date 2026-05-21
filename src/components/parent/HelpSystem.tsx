@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { HelpCircle, X, Search, BookOpen, MessageCircle, Video, FileText, ExternalLink, ChevronRight } from 'lucide-react';
+import { HelpCircle, X, Search, BookOpen, MessageCircle, FileText, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import HelpTooltip from './HelpTooltip';
 

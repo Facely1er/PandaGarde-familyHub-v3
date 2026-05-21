@@ -51,7 +51,7 @@ const SocialMediaAudit: React.FC<SocialMediaAuditProps> = ({ onBack }) => {
   ];
 
   const handleAction = (action: 'hide' | 'review' | 'keep' | 'fix') => {
-    const item = auditItems[currentItem];
+    const _item = auditItems[currentItem];
     const correctActions = ['hide', 'fix', 'review'];
     if (correctActions.includes(action) && action !== 'keep') {
       setScore(score + 20);

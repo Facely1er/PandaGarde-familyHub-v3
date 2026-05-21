@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Globe, Users, Shield, Heart, Brain, CheckCircle, Star, Trophy, Clock, BookOpen } from 'lucide-react';
+import { Globe, Users, Shield, Heart, Brain, CheckCircle, Clock, BookOpen } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 
 interface Module {

@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ShieldCheck, Sparkles, ArrowRight, CheckCircle2, LayoutDashboard, ListChecks } from 'lucide-react';
+import { Sparkles, ArrowRight, CheckCircle2, LayoutDashboard, ListChecks } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 import DfaJourneyStepper from '../components/journey/DfaJourneyStepper';
 import { loadDfaJourneyState, updateDfaJourneyPhase, type DfaJourneyState } from '../lib/dfaJourney';

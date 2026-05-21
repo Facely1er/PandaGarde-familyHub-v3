@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Download, ShoppingBag, ArrowRight, BarChart3, CheckCircle, TrendingUp, LayoutDashboard, BookOpen, ChevronDown, ChevronUp } from 'lucide-react';
+import { ArrowLeft, Download, ShoppingBag, ArrowRight, BarChart3, TrendingUp, LayoutDashboard, BookOpen, ChevronDown, ChevronUp } from 'lucide-react';
 import DigitalFootprintVisualizer from '../components/DigitalFootprintVisualizer';
 import EmptyStateWithServicePrompt from '../components/EmptyStateWithServicePrompt';
 import DfaJourneyStepper from '../components/journey/DfaJourneyStepper';

@@ -1,6 +1,23 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { createFocusTrap } from '../../utils/accessibility';
-import { MessageCircle, Plus, Search, ArrowRight, Heart, CheckCircle, User, Users, Shield, Lock, GraduationCap, Briefcase, UserCircle, X, ArrowLeft } from 'lucide-react';
+import {
+  MessageCircle,
+  Plus,
+  Search,
+  ArrowRight,
+  Heart,
+  CheckCircle,
+  User,
+  Users,
+  Shield,
+  Lock,
+  GraduationCap,
+  Briefcase,
+  UserCircle,
+  X,
+  ArrowLeft,
+  type LucideIcon,
+} from 'lucide-react';
 import { communityStorage, ForumTopic, ForumPost, ForumUser } from '../../utils/communityStorageManager';
 
 interface PrivacyTipsForumProps {
@@ -9,7 +26,7 @@ interface PrivacyTipsForumProps {
 
 // Avatar mapping helper
 const getAvatarIcon = (avatarId: string | undefined) => {
-  const avatarMap: Record<string, React.ComponentType<any>> = {
+  const avatarMap: Record<string, LucideIcon> = {
     'user': User,
     'shield': Shield,
     'lock': Lock,
@@ -62,10 +79,6 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
     }
   }, [selectedTopic]);
 
-  useEffect(() => {
-    filterTopics();
-  }, [topics, selectedCategory, searchQuery]);
-
   const loadCurrentUser = () => {
     const user = communityStorage.getCurrentForumUser();
     setCurrentUser(user);
@@ -84,7 +97,7 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
     setPosts(topicPosts);
   };
 
-  const filterTopics = () => {
+  const filterTopics = useCallback(() => {
     let filtered = [...topics];
 
     if (selectedCategory !== 'all') {
@@ -100,7 +113,11 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
     }
 
     setFilteredTopics(filtered);
-  };
+  }, [topics, selectedCategory, searchQuery]);
+
+  useEffect(() => {
+    filterTopics();
+  }, [filterTopics]);
 
   const handleCreateUser = (username: string, displayName?: string, avatar?: string) => {
     const user = communityStorage.createForumUser(username, displayName, avatar);

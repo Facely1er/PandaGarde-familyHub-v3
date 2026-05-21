@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Shield, FileText, Calendar, AlertTriangle, CheckCircle } from 'lucide-react';
+import { Shield, AlertTriangle, CheckCircle } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 
 const TermsPage: React.FC = () => {

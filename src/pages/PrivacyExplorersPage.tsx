@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Shield, Lock, Eye, AlertTriangle, CheckCircle, Star, Trophy, Users, BookOpen, Gamepad2 } from 'lucide-react';
+import { Shield, Lock, Eye, AlertTriangle, CheckCircle, Users, BookOpen } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 
 interface Challenge {

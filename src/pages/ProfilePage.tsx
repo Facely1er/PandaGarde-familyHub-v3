@@ -2,14 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, User, Mail, Calendar, Shield, Save, CreditCard as Edit3, X, Download } from 'lucide-react';
 import { useAuth } from './family-hub/AuthWrapper';
-import { useToast } from '../contexts/ToastContext';
 import ProgressExport from '../components/ProgressExport';
 import { logger } from '../lib/logger';
 
 const ProfilePage: React.FC = () => {
   const navigate = useNavigate();
   const { user, profile, updateProfile } = useAuth();
-  const { showToast } = useToast();
   const [isEditing, setIsEditing] = useState(false);
   const [showProgressExport, setShowProgressExport] = useState(false);
   const [formData, setFormData] = useState({

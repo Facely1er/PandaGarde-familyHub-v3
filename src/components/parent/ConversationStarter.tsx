@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MessageCircle, ExternalLink, Heart, Lightbulb, ArrowRight } from 'lucide-react';
+import { MessageCircle, Heart, Lightbulb, ArrowRight } from 'lucide-react';
 
 interface ConversationStarterProps {
   childName: string;

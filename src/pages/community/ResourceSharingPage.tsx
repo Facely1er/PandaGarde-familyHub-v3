@@ -2,7 +2,6 @@ import React from 'react';
 import ResourceSharing from '../../components/community/ResourceSharing';
 import CommunityErrorBoundary from '../../components/community/CommunityErrorBoundary';
 import PageLayout from '../../components/layout/PageLayout';
-import { Globe } from 'lucide-react';
 
 const ResourceSharingPage: React.FC = () => {
   return (

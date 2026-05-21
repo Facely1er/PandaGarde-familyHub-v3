@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Shield,
@@ -6,18 +6,15 @@ import {
   AlertTriangle,
   ArrowRight,
   ArrowLeft,
-  TrendingUp,
   Target,
   Info,
   BarChart3,
   Lightbulb,
-  Download,
-  FileText
+  Download
 } from 'lucide-react';
 import {
   assessmentQuestions,
   familyPrivacyAssessment,
-  type AssessmentQuestion,
   type AssessmentAnswer,
   type AssessmentResult
 } from '../lib/familyPrivacyAssessment';

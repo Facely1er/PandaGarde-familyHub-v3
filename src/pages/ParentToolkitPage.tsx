@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Wrench, ArrowLeft, Download, FileText, Shield, MessageCircle, CheckCircle, Users, BookOpen, Settings, Lock, Eye, AlertTriangle, Search, Filter, Star, Clock } from 'lucide-react';
+import { Wrench, Download, FileText, Shield, MessageCircle, CheckCircle, Users, BookOpen, Settings, Lock, Eye, AlertTriangle, Search, Filter, Star, Clock } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 import ResourceModal from '../components/ResourceModal';
 

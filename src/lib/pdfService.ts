@@ -90,7 +90,7 @@ export class PDFService {
   /**
    * Fallback PDF generation using print dialog
    */
-  async generatePDFFallback(htmlContent: string, filename: string): Promise<void> {
+  async generatePDFFallback(htmlContent: string, _filename: string): Promise<void> {
     try {
       // Create a new window with the HTML content
       const printWindow = window.open('', '_blank');

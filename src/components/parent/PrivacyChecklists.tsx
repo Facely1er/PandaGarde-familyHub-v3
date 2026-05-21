@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { CheckCircle, Circle, Award, Download, Share2 } from 'lucide-react';
-import { useFamily } from '../../contexts/FamilyContext';
 import { logger } from '../../lib/logger';
 
 interface ChecklistItem {
@@ -17,7 +16,6 @@ interface Checklist {
 }
 
 const PrivacyChecklists: React.FC = () => {
-  const { familyMembers } = useFamily();
   const [checklists, setChecklists] = useState<Record<string, Checklist>>({
     '5-12': {
       id: '5-12',

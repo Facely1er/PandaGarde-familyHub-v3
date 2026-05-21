@@ -1,5 +1,4 @@
 import React from 'react';
-import { MessageCircle } from 'lucide-react';
 import ConversationApproaches from '../../components/parent/ConversationApproaches';
 import PageLayout from '../../components/layout/PageLayout';
 

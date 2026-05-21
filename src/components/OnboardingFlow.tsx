@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, ArrowRight, CheckCircle, Sparkles, Shield, ShoppingBag, Play, BarChart3 } from 'lucide-react';
+import { X, ArrowRight, CheckCircle, Sparkles, ShoppingBag, Play, BarChart3 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface OnboardingStep {

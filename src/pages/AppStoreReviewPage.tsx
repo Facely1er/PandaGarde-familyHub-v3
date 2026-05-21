@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
   CheckCircle2, 
-  Smartphone, 
   Shield, 
   Users, 
   Gamepad2,

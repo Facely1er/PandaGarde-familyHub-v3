@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Search, X, Clock, ArrowRight, FileText, BookOpen, Download, Settings, Filter } from 'lucide-react';
 import { useSearch, SearchResult } from '../contexts/SearchContext';
-import { renderSearchHighlights, safeTextContent } from '../lib/htmlSanitizer';
+import { renderSearchHighlights } from '../lib/htmlSanitizer';
 
 interface SearchModalProps {
   isOpen: boolean;

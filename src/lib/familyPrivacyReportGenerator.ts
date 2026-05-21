@@ -29,7 +29,7 @@ export class FamilyPrivacyReportGenerator {
     const {
       includePersona = true,
       includeRecommendations = true,
-      includeCharts = true,
+      includeCharts: _includeCharts = true,
       familyName = 'Your Family',
       assessmentDate = new Date().toLocaleDateString()
     } = options;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Clock, Target, Shield, Users, AlertTriangle } from 'lucide-react';
 
@@ -55,8 +55,6 @@ const quickAssessments: QuickAssessment[] = [
 
 const QuickAssessmentPage: React.FC = () => {
   const navigate = useNavigate();
-  const [selectedAssessment, setSelectedAssessment] = useState<AssessmentType | null>(null);
-
   const handleStartAssessment = (assessmentId: AssessmentType) => {
     navigate(`/privacy-assessment?type=${assessmentId}&quick=true`);
   };

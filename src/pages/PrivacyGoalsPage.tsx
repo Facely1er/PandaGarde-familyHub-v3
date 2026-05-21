@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, Target, Lightbulb } from 'lucide-react';
 import PrivacyGoals from '../components/PrivacyGoals';
 import { privacyGoalManager, type PrivacyGoal } from '../lib/privacyGoals';
-import { type AssessmentResult } from '../lib/familyPrivacyAssessment';
 import { logger } from '../lib/logger';
 
 const PrivacyGoalsPage: React.FC = () => {
@@ -31,7 +30,7 @@ const PrivacyGoalsPage: React.FC = () => {
   };
 
   const handleCreateFromSuggestion = (suggestion: Omit<PrivacyGoal, 'id' | 'createdAt' | 'status' | 'progress'>) => {
-    const goal = privacyGoalManager.createGoal(suggestion);
+    privacyGoalManager.createGoal(suggestion);
     setShowSuggestions(false);
     // Refresh the component by reloading
     window.location.reload();

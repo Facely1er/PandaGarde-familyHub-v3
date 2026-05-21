@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Mail, CheckCircle, AlertCircle } from 'lucide-react';
+import { X, Mail, CheckCircle } from 'lucide-react';
 import { useToast } from '../hooks/useToast';
 import { logger } from '../lib/logger';
 

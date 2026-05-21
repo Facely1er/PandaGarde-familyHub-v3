@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertTriangle, Phone, Users, FileText, CheckCircle } from 'lucide-react';
+import { AlertTriangle, Users } from 'lucide-react';
 import PageLayout from '../../components/layout/PageLayout';
 
 const EmergencySafetyGuidePage: React.FC = () => {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Users, Plus, Eye, Trash2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
@@ -25,7 +25,7 @@ type AgeGroupMeta = {
 };
 
 function getAgeGroup(age: number): AgeGroupMeta | null {
-  if (age >= 5 && age <= 8)
+  if (age >= 5 && age <= 8) {
     return {
       range: '5-8',
       label: 'Ages 5–8',
@@ -33,7 +33,8 @@ function getAgeGroup(age: number): AgeGroupMeta | null {
       badgeClass:
         'bg-green-50 text-green-700 border-green-200 hover:bg-green-100 dark:bg-green-900/30 dark:text-green-300 dark:border-green-700 dark:hover:bg-green-900/50',
     };
-  if (age >= 9 && age <= 12)
+  }
+  if (age >= 9 && age <= 12) {
     return {
       range: '9-12',
       label: 'Ages 9–12',
@@ -41,7 +42,8 @@ function getAgeGroup(age: number): AgeGroupMeta | null {
       badgeClass:
         'bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-700 dark:hover:bg-blue-900/50',
     };
-  if (age >= 13 && age <= 17)
+  }
+  if (age >= 13 && age <= 17) {
     return {
       range: '13-17',
       label: 'Ages 13–17',
@@ -49,11 +51,11 @@ function getAgeGroup(age: number): AgeGroupMeta | null {
       badgeClass:
         'bg-purple-50 text-purple-700 border-purple-200 hover:bg-purple-100 dark:bg-purple-900/30 dark:text-purple-300 dark:border-purple-700 dark:hover:bg-purple-900/50',
     };
+  }
   return null;
 }
 
 const KidsScreen: React.FC = () => {
-  const navigate = useNavigate();
   const [familyMembers, setFamilyMembers] = useLocalStorage<FamilyMember[]>('pandagarde_family', []);
   const { calculateMemberScore } = useFamilyProgress();
   const [showAddMember, setShowAddMember] = useState(false);
@@ -61,7 +63,9 @@ const KidsScreen: React.FC = () => {
   const [newMember, setNewMember] = useState({ name: '', age: 0, role: 'Child' });
 
   const addFamilyMember = () => {
-    if (!newMember.name.trim() || newMember.age <= 0) return;
+    if (!newMember.name.trim() || newMember.age <= 0) {
+      return;
+    }
     const member: FamilyMember = {
       id: Date.now(),
       name: newMember.name,

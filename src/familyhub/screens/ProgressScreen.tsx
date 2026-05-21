@@ -109,7 +109,9 @@ const ProgressScreen: React.FC = () => {
           <ul className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {progress.achievements.map((id) => {
               const meta = ACHIEVEMENT_META[id];
-              if (!meta) return null;
+              if (!meta) {
+                return null;
+              }
               return (
                 <li key={id} className="flex flex-col items-center gap-1 rounded-xl border border-amber-100 bg-amber-50 p-3 text-center dark:border-amber-700/40 dark:bg-amber-900/20">
                   <span className="text-2xl" role="img" aria-label={meta.label}>{meta.emoji}</span>

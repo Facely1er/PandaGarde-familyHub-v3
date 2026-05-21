@@ -17,7 +17,7 @@ const isLocalStorageAvailable = (): boolean => {
   }
 };
 
-export const useLocalStorage = <T,>(key: string, initialValue: T, expectedType?: string): [T, (value: T) => void] => {
+export const useLocalStorage = <T,>(key: string, initialValue: T, _expectedType?: string): [T, (value: T) => void] => {
   const [storedValue, setStoredValue] = useState<T>(() => {
     if (!isLocalStorageAvailable()) {
       return initialValue;

@@ -6,7 +6,7 @@ interface GuideContentRendererProps {
   index?: number;
 }
 
-export const GuideContentRenderer: React.FC<GuideContentRendererProps> = ({ content, index }) => {
+export const GuideContentRenderer: React.FC<GuideContentRendererProps> = ({ content }) => {
   switch (content.type) {
     case 'paragraph':
       return (
