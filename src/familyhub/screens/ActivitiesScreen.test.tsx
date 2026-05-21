@@ -42,6 +42,7 @@ describe('ActivitiesScreen', () => {
 
     expect(screen.getByRole('heading', { name: /Featured family picks/i })).toBeInTheDocument();
     expect(screen.getAllByText(/Family cue/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Real-life situation/i).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/Completed · 88%/i).length).toBeGreaterThan(0);
     expect(
       screen.getAllByText(/Help younger children tell the difference between friendly facts and private details\./i)
@@ -74,6 +75,7 @@ describe('ActivitiesScreen', () => {
 
     expect(screen.getByText(/Step 2 · Talk together/i)).toBeInTheDocument();
     expect(screen.getByText(/Family prompt/i)).toBeInTheDocument();
+    expect(screen.getByText(/Discussion starters/i)).toBeInTheDocument();
     expect(
       screen.getByText(/Pick one favourite app together and list what it probably knows/i)
     ).toBeInTheDocument();

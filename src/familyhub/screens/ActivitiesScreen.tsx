@@ -87,6 +87,15 @@ const ActivityCard: React.FC<{
 
     <p className="mt-4 text-sm leading-relaxed text-gray-600 dark:text-gray-300">{activity.description}</p>
 
+    <div className="mt-4 rounded-2xl border border-amber-100 bg-amber-50/80 p-4 dark:border-amber-800/40 dark:bg-amber-900/15">
+      <p className="text-[11px] font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-300">
+        Real-life situation
+      </p>
+      <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-amber-950 dark:text-amber-100">
+        {activity.realLifeScenario}
+      </p>
+    </div>
+
     <div className="mt-4 rounded-2xl bg-gray-50 p-4 dark:bg-gray-900/60">
       <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
         Learning goal

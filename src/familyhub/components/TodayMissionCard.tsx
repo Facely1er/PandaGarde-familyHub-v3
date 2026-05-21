@@ -70,11 +70,26 @@ const TodayMissionCard: React.FC = () => {
         )}
       </div>
 
-      <p className="mt-3 text-sm text-gray-700 dark:text-gray-200">
-        {missionDone
-          ? 'You\u2019ve already completed this pick. Start another activity to keep your streak going.'
-          : todaysMission.familyPrompt}
-      </p>
+      {missionDone ? (
+        <p className="mt-3 text-sm text-gray-700 dark:text-gray-200">
+          You&apos;ve already completed this pick. Start another activity to keep your streak going.
+        </p>
+      ) : (
+        <div className="mt-3 space-y-3">
+          <div className="rounded-xl border border-amber-200 bg-amber-50/90 p-3 dark:border-amber-700/40 dark:bg-amber-900/20">
+            <p className="text-[11px] font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-300">
+              Real-life situation
+            </p>
+            <p className="mt-1.5 text-sm leading-relaxed text-amber-950 dark:text-amber-100">
+              {todaysMission.realLifeScenario}
+            </p>
+          </div>
+          <p className="text-sm text-gray-700 dark:text-gray-200">
+            <span className="font-semibold text-indigo-800 dark:text-indigo-200">Family cue: </span>
+            {todaysMission.familyPrompt}
+          </p>
+        </div>
+      )}
 
       <div className="mt-4 flex flex-wrap gap-2">
         <Link

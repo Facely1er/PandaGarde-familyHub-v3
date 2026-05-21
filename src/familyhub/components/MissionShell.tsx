@@ -1,5 +1,5 @@
 import React, { lazy, Suspense, useState } from 'react';
-import { ArrowLeft, BookOpen, MessageCircleHeart, Play, Sparkles, Target } from 'lucide-react';
+import { ArrowLeft, BookOpen, MessageCircle, MessageCircleHeart, Play, Sparkles, Target } from 'lucide-react';
 import { HubScreenFallback } from '../lazyScreen';
 
 const ActivityManager = lazy(() => import('../../components/activities/ActivityManager'));
@@ -20,6 +20,50 @@ interface MissionShellProps {
   onExit: () => void;
   onStartNext?: (activity: FlattenedAgeBasedActivity) => void;
 }
+
+const MissionStepProgress: React.FC<{ phase: MissionPhase; hasGame: boolean }> = ({ phase, hasGame }) => {
+  const steps = hasGame
+    ? (['Intro', 'Talk', 'Practice', 'Done'] as const)
+    : (['Intro', 'Talk', 'Done'] as const);
+  const phaseIndex: Record<MissionPhase, number> = hasGame
+    ? { intro: 0, learn: 1, play: 2, complete: 3 }
+    : { intro: 0, learn: 1, play: 1, complete: 2 };
+  const current = phaseIndex[phase];
+
+  return (
+    <nav aria-label="Mission progress" className="mx-auto w-full max-w-lg">
+      <ol className="flex items-center justify-between gap-1">
+        {steps.map((label, index) => {
+          const done = index < current;
+          const active = index === current;
+          return (
+            <li key={label} className="flex flex-1 flex-col items-center gap-1">
+              <span
+                className={`flex h-7 w-7 items-center justify-center rounded-full text-[11px] font-bold ${
+                  done
+                    ? 'bg-teal-600 text-white'
+                    : active
+                      ? 'bg-teal-100 text-teal-800 ring-2 ring-teal-500 dark:bg-teal-900/50 dark:text-teal-100'
+                      : 'bg-gray-100 text-gray-400 dark:bg-gray-700 dark:text-gray-500'
+                }`}
+                aria-current={active ? 'step' : undefined}
+              >
+                {done ? '✓' : index + 1}
+              </span>
+              <span
+                className={`text-[10px] font-medium uppercase tracking-wide ${
+                  active ? 'text-teal-700 dark:text-teal-300' : 'text-gray-400 dark:text-gray-500'
+                }`}
+              >
+                {label}
+              </span>
+            </li>
+          );
+        })}
+      </ol>
+    </nav>
+  );
+};
 
 const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onExit, onStartNext }) => {
   const hasGame = Boolean(activity.activityManagerId);
@@ -93,6 +137,13 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
               </span>
             </div>
             <p className="text-sm leading-relaxed text-gray-700 dark:text-gray-200">{activity.learningObjective}</p>
+            <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-left dark:border-amber-700/40 dark:bg-amber-900/20">
+              <p className="text-[11px] font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-300">
+                Real-life situation
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-amber-950 dark:text-amber-100">{activity.realLifeScenario}</p>
+            </div>
+            <MissionStepProgress phase={phase} hasGame={hasGame} />
             <button
               type="button"
               onClick={() => setPhase('learn')}
@@ -132,6 +183,25 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
               <p className="mt-2 text-sm leading-relaxed text-indigo-950 dark:text-indigo-100">{activity.familyPrompt}</p>
             </section>
 
+            {activity.discussionPrompts.length > 0 && (
+              <section className="rounded-2xl border border-violet-200 bg-violet-50 p-5 dark:border-violet-700/40 dark:bg-violet-900/20">
+                <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-violet-700 dark:text-violet-300">
+                  <MessageCircle size={14} aria-hidden="true" />
+                  Discussion starters
+                </p>
+                <ul className="mt-3 space-y-2">
+                  {activity.discussionPrompts.map((prompt) => (
+                    <li key={prompt} className="flex items-start gap-2 text-sm text-violet-950 dark:text-violet-100">
+                      <span className="mt-0.5 text-violet-500" aria-hidden="true">
+                        ?
+                      </span>
+                      {prompt}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
             <section className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-800">
               <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-teal-700 dark:text-teal-300">
                 <BookOpen size={14} aria-hidden="true" />
@@ -156,6 +226,8 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
               </p>
               <p className="mt-2 text-sm text-emerald-950 dark:text-emerald-100">{activity.nextStep}</p>
             </section>
+
+            <MissionStepProgress phase={phase} hasGame={hasGame} />
 
             <div className="flex flex-col gap-2 pb-4 sm:flex-row">
               {hasGame ? (

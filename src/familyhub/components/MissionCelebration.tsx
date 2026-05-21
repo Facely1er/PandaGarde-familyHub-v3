@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Award, ArrowRight, Sparkles } from 'lucide-react';
+import { Award, ArrowRight, Sparkles, Target } from 'lucide-react';
 import { useDialogFocusTrap } from '../../hooks/useDialogFocusTrap';
 import type { FlattenedAgeBasedActivity } from '../../data/ageBasedActivities';
 
@@ -60,6 +60,14 @@ const MissionCelebration: React.FC<MissionCelebrationProps> = ({
               {streak}-day family learning streak
             </p>
           )}
+        </div>
+
+        <div className="mt-5 rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-left dark:border-emerald-700/40 dark:bg-emerald-900/20">
+          <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-emerald-700 dark:text-emerald-300">
+            <Target size={14} aria-hidden="true" />
+            Try this at home
+          </p>
+          <p className="mt-2 text-sm leading-relaxed text-emerald-950 dark:text-emerald-100">{activity.nextStep}</p>
         </div>
 
         {nextMission && (
