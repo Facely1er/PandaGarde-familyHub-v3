@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Play, ArrowLeft, Info, Clock, BookOpen } from 'lucide-react';
 import ActivityManager from '../../components/activities/ActivityManager';
 import { ageBasedActivities, type AgeBasedActivity, type AgeGroup } from '../../data/ageBasedActivities';
@@ -43,32 +44,28 @@ const LearningCard: React.FC<{ activity: ActivityWithMeta; onClose: () => void }
     </div>
 
     <div className="flex-1 overflow-auto p-4 sm:p-6 max-w-2xl mx-auto w-full space-y-6">
-      {/* Hero */}
       <div className="text-center py-6">
         <span className="text-6xl" role="img" aria-label={activity.name}>{activity.icon}</span>
         <h3 className="mt-4 text-xl font-bold text-gray-900 dark:text-white">{activity.name}</h3>
         <div className="flex items-center justify-center gap-3 mt-2 text-sm text-gray-500 dark:text-gray-400">
           <span className="flex items-center gap-1"><Clock size={14} />{activity.duration}</span>
-          <span>•</span>
+          <span>&bull;</span>
           <span className="px-2 py-0.5 rounded-full bg-teal-50 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 text-xs font-medium">
             Ages {activity.groupAgeRange}
           </span>
         </div>
       </div>
 
-      {/* Real-life scenario */}
       <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl p-4">
         <p className="text-xs font-semibold text-amber-700 dark:text-amber-300 uppercase tracking-wide mb-1">Real-life scenario</p>
         <p className="text-sm text-amber-900 dark:text-amber-100 leading-relaxed">{activity.realLifeScenario}</p>
       </div>
 
-      {/* About */}
       <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4">
         <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">About this activity</p>
         <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{activity.description}</p>
       </div>
 
-      {/* Key learnings */}
       <div className="bg-teal-50 dark:bg-teal-900/20 border border-teal-200 dark:border-teal-700 rounded-xl p-4">
         <p className="text-xs font-semibold text-teal-700 dark:text-teal-300 uppercase tracking-wide mb-3 flex items-center gap-1.5">
           <BookOpen size={14} />Key privacy learnings
@@ -76,7 +73,7 @@ const LearningCard: React.FC<{ activity: ActivityWithMeta; onClose: () => void }
         <ul className="space-y-2">
           {activity.keyLearnings.map((tip, i) => (
             <li key={i} className="flex items-start gap-2 text-sm text-teal-900 dark:text-teal-100">
-              <span className="text-teal-500 mt-0.5 flex-shrink-0">✓</span>
+              <span className="text-teal-500 mt-0.5 flex-shrink-0">&check;</span>
               <span>{tip}</span>
             </li>
           ))}
@@ -84,7 +81,7 @@ const LearningCard: React.FC<{ activity: ActivityWithMeta; onClose: () => void }
       </div>
 
       <p className="text-center text-xs text-gray-400 dark:text-gray-500 pb-4">
-        Interactive game coming soon — discuss this scenario together as a family!
+        Interactive game coming soon &mdash; discuss this scenario together as a family!
       </p>
     </div>
   </div>
@@ -137,8 +134,12 @@ const GroupHeading: React.FC<{ group: AgeGroup }> = ({ group }) => (
 
 // --- Main Screen ---
 const ActivitiesScreen: React.FC = () => {
+  const location = useLocation();
+  const locationState = location.state as { initialAgeFilter?: AgeTabId } | null;
+  const initialAge: AgeTabId = locationState?.initialAgeFilter ?? 'all';
+
   const [selectedActivityId, setSelectedActivityId] = useState<string | null>(null);
-  const [activeAge, setActiveAge] = useState<AgeTabId>('all');
+  const [activeAge, setActiveAge] = useState<AgeTabId>(initialAge);
   const [showLearningCard, setShowLearningCard] = useState(false);
 
   const allActivities = flattenActivities();
@@ -158,7 +159,6 @@ const ActivitiesScreen: React.FC = () => {
     setShowLearningCard(false);
   };
 
-  // Render ActivityManager for activities that have a mapped game
   if (selectedActivityId && selectedActivity && !showLearningCard) {
     return (
       <div className="h-full flex flex-col">
@@ -183,22 +183,19 @@ const ActivitiesScreen: React.FC = () => {
     );
   }
 
-  // Render inline learning card for new activities without a game yet
   if (selectedActivityId && selectedActivity && showLearningCard) {
     return <LearningCard activity={selectedActivity} onClose={handleClose} />;
   }
 
   return (
     <div className="p-4 sm:p-6 max-w-4xl mx-auto">
-      {/* Page header */}
       <div className="mb-5">
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">Activities</h1>
         <p className="text-sm text-gray-600 dark:text-gray-400">
-          Age-matched privacy activities for every family member — pick a tab or explore them all.
+          Age-matched privacy activities for every family member &mdash; pick a tab or explore them all.
         </p>
       </div>
 
-      {/* Age-group tabs */}
       <div className="flex gap-2 flex-wrap mb-6" role="tablist" aria-label="Filter by age group">
         {AGE_TABS.map((tab) => (
           <button
@@ -217,7 +214,6 @@ const ActivitiesScreen: React.FC = () => {
         ))}
       </div>
 
-      {/* Info banner for individual age tabs */}
       {activeAge !== 'all' && (() => {
         const group = ageBasedActivities.find((g) => g.ageRange === activeAge);
         return group ? (
@@ -228,7 +224,6 @@ const ActivitiesScreen: React.FC = () => {
         ) : null;
       })()}
 
-      {/* Activity grid — grouped when showing all, flat when filtered */}
       {activeAge === 'all' ? (
         <div className="space-y-10">
           {ageBasedActivities.map((group) => (
