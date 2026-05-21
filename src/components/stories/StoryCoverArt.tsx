@@ -8,11 +8,61 @@ interface StoryCoverArtProps {
   variant: 'hero' | 'card' | 'inline';
 }
 
-export function StoryCoverArt({ story, variant }: StoryCoverArtProps) {
-  const useLogo = isFoundationStory(story);
+function StoryCoverImage({
+  story,
+  heightClass,
+  showLogoOverlay,
+}: {
+  story: Story;
+  heightClass: string;
+  showLogoOverlay?: boolean;
+}) {
+  const position = story.coverImagePosition ?? 'center';
 
-  if (useLogo) {
-    if (variant === 'inline') {
+  if (!story.coverImage) {
+    return (
+      <div
+        className={`${story.coverColor} ${heightClass} flex items-center justify-center text-5xl border-b border-gray-100 dark:border-gray-700`}
+      >
+        <span aria-hidden>{story.coverEmoji}</span>
+      </div>
+    );
+  }
+
+  return (
+    <div className={`relative ${heightClass} overflow-hidden border-b border-gray-100 dark:border-gray-700`}>
+      <img
+        src={story.coverImage}
+        alt=""
+        className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+        style={{ objectPosition: position }}
+        aria-hidden
+        loading="lazy"
+        decoding="async"
+      />
+      <div
+        className="absolute inset-0 bg-gradient-to-t from-gray-900/75 via-gray-900/25 to-emerald-900/10 dark:from-gray-950/85 dark:via-gray-900/40"
+        aria-hidden
+      />
+      {showLogoOverlay && (
+        <div className="absolute inset-0 flex items-center justify-center p-4">
+          <img
+            src={PANDAGARDE_LOGO}
+            alt=""
+            className="h-20 w-20 object-contain drop-shadow-lg sm:h-24 sm:w-24"
+            aria-hidden
+          />
+        </div>
+      )}
+    </div>
+  );
+}
+
+export function StoryCoverArt({ story, variant }: StoryCoverArtProps) {
+  const isFoundation = isFoundationStory(story);
+
+  if (variant === 'inline') {
+    if (isFoundation) {
       return (
         <img
           src={PANDAGARDE_LOGO}
@@ -22,34 +72,51 @@ export function StoryCoverArt({ story, variant }: StoryCoverArtProps) {
         />
       );
     }
-
-    if (variant === 'hero') {
+    if (story.coverImage) {
       return (
-        <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl border border-emerald-200/80 bg-white p-2 shadow-sm dark:border-emerald-800/60 dark:bg-gray-900 sm:h-24 sm:w-24">
+        <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-600">
           <img
-            src={PANDAGARDE_LOGO}
-            alt="PandaGarde"
-            className="h-full w-full object-contain"
+            src={story.coverImage}
+            alt=""
+            className="h-full w-full object-cover"
+            style={{ objectPosition: story.coverImagePosition ?? 'center' }}
+            aria-hidden
+            loading="lazy"
           />
         </div>
       );
     }
-
     return (
-      <div
-        className={`${story.coverColor} flex h-32 items-center justify-center border-b border-gray-100 dark:border-gray-700`}
-      >
-        <img
-          src={PANDAGARDE_LOGO}
-          alt=""
-          className="h-24 w-24 object-contain"
-          aria-hidden
-        />
-      </div>
+      <span className="shrink-0 text-3xl" aria-hidden>
+        {story.coverEmoji}
+      </span>
     );
   }
 
   if (variant === 'hero') {
+    if (story.coverImage) {
+      return (
+        <div className="relative h-28 w-full shrink-0 overflow-hidden rounded-2xl border border-emerald-200/80 shadow-sm dark:border-emerald-800/60 sm:h-32 sm:w-44">
+          <img
+            src={story.coverImage}
+            alt=""
+            className="h-full w-full object-cover"
+            style={{ objectPosition: story.coverImagePosition ?? 'center' }}
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-emerald-900/50 to-transparent" aria-hidden />
+          {isFoundation && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <img
+                src={PANDAGARDE_LOGO}
+                alt="PandaGarde"
+                className="h-16 w-16 object-contain drop-shadow-md sm:h-20 sm:w-20"
+              />
+            </div>
+          )}
+        </div>
+      );
+    }
     return (
       <span className="shrink-0 text-5xl" aria-hidden>
         {story.coverEmoji}
@@ -58,8 +125,10 @@ export function StoryCoverArt({ story, variant }: StoryCoverArtProps) {
   }
 
   return (
-    <div className={`${story.coverColor} flex h-32 items-center justify-center text-5xl`}>
-      <span aria-hidden>{story.coverEmoji}</span>
-    </div>
+    <StoryCoverImage
+      story={story}
+      heightClass="h-36 sm:h-40"
+      showLogoOverlay={isFoundation}
+    />
   );
 }

@@ -31,8 +31,10 @@ export interface Story {
   ageGroups: AgeGroup[];
   publishedAt: string;       // ISO date string
   scheduledAt?: string;      // If future, component hides until date passes
-  coverEmoji: string;        // Fallback when no illustration
-  coverColor: string;        // Tailwind bg class for card
+  coverEmoji: string;        // Fallback when cover image unavailable
+  coverColor: string;        // Tailwind bg class behind image / fallback
+  coverImage?: string;       // Card & hero artwork (under /public)
+  coverImagePosition?: string; // CSS object-position for cover crop
   summary: string;
   chapters: StoryChapter[];
   keyLesson: string;
@@ -56,6 +58,8 @@ const episode1: Story = {
   publishedAt: '2024-01-01',
   coverEmoji: '🐼',
   coverColor: 'bg-emerald-100',
+  coverImage: '/images/story/2-ForestNetwork.png',
+  coverImagePosition: 'center 40%',
   summary:
     'Po the panda accidentally shares everything with the entire forest — and learns from wise Elder Turtle how to protect his information and help others do the same.',
   characters: ['Po (Privacy Panda)', 'Elder Turtle', 'Miki the Monkey', 'Billy the Beaver', 'Ruby the Rabbit'],
@@ -179,6 +183,8 @@ const episode2: Story = {
   publishedAt: '2024-02-01',
   coverEmoji: '📸',
   coverColor: 'bg-yellow-100',
+  coverImage: '/images/story/04-PublicReaction.png',
+  coverImagePosition: 'center 35%',
   summary:
     "Miki is so proud of Ruby's bamboo sculpture that he shares a photo of it everywhere — without asking. When Ruby is upset, Privacy Panda helps Miki understand that sharing something about someone else always needs their permission first.",
   characters: ['Po (Privacy Panda)', 'Miki the Monkey', 'Ruby the Rabbit'],
@@ -272,6 +278,8 @@ const episode3: Story = {
   publishedAt: '2024-03-01',
   coverEmoji: '🦉',
   coverColor: 'bg-violet-100',
+  coverImage: '/images/story/07-LearningMoments.png',
+  coverImagePosition: 'center 30%',
   summary:
     'Owen downloads a new game and taps "Allow All" without reading. Strange things start happening — the Smoke Foxes seem to know too much. Privacy Panda helps Owen audit his settings and understand what each permission really means.',
   characters: ['Po (Privacy Panda)', 'Owen the Owl', 'The Smoke Foxes'],
