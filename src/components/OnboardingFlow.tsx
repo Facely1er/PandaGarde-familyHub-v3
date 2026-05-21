@@ -65,7 +65,7 @@ const onboardingSteps: OnboardingStep[] = [
   {
     id: 4,
     title: 'Explore Advanced Features',
-    description: 'Once you\'ve set up your Service Catalog, you can access Digital Footprint Analysis, Risk Assessments, and Safety Alerts.',
+    description: 'After your Service Catalog is set up, you can run Digital Footprint Analysis, privacy assessments, and open catalog-based notifications plus RSS safety headlines.',
     icon: BarChart3,
     action: {
       label: 'View Features',
@@ -74,7 +74,7 @@ const onboardingSteps: OnboardingStep[] = [
     tips: [
       'Digital Footprint shows your family\'s online presence',
       'Risk Assessments help identify privacy concerns',
-      'Safety Alerts notify you about service updates'
+      'Alerts page: catalog notifications and RSS headlines for services you listed (not device monitoring)'
     ]
   }
 ];

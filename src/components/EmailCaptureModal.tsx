@@ -17,7 +17,7 @@ const EmailCaptureModal: React.FC<EmailCaptureModalProps> = ({
   isOpen,
   onClose,
   title = 'Stay Updated on Child Safety',
-  description = 'Get notified about important child safety alerts, privacy updates, and new educational resources.',
+  description = 'Optional email updates about privacy news, safety headlines, and new educational resources (not device monitoring).',
   onSubmit,
   purpose = 'safety-alerts'
 }) => {
@@ -93,8 +93,8 @@ const EmailCaptureModal: React.FC<EmailCaptureModalProps> = ({
   const purposeMessages = {
     'safety-alerts': {
       title: 'Stay Updated on Child Safety',
-      description: 'Get notified about important child safety alerts, privacy updates, and new educational resources.',
-      placeholder: 'Enter your email for safety alerts'
+      description: 'Optional email list for privacy news and safety headlines—not live monitoring of your child\'s device.',
+      placeholder: 'Enter your email for updates'
     },
     'updates': {
       title: 'Get Privacy Updates',

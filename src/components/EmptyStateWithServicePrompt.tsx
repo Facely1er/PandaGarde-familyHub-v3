@@ -81,7 +81,7 @@ const EmptyStateWithServicePrompt: React.FC<EmptyStateWithServicePromptProps> = 
                   </div>
                   <div>
                     <p className="font-medium text-green-900 dark:text-green-100 text-sm">Safety Alerts</p>
-                    <p className="text-xs text-green-700 dark:text-green-300">Stay informed</p>
+                    <p className="text-xs text-green-700 dark:text-green-300">Catalog + RSS headlines</p>
                   </div>
                 </div>
               </div>

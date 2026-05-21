@@ -93,11 +93,11 @@ const OverviewPage: React.FC = () => {
     {
       step: 2,
       title: 'Add Services for Digital Footprint Analysis',
-      description: 'Tell us which apps and services your family uses. This enables Digital Footprint Analysis, privacy recommendations, and safety alerts',
+      description: 'List apps and services your family uses (self-reported). This unlocks Digital Footprint Analysis, privacy recommendations, catalog-based notifications, and RSS safety headlines when feeds load.',
       icon: ShoppingBag,
       link: '/service-catalog',
       platform: 'PandaGarde',
-      enables: ['Digital Footprint Analysis', 'Privacy Recommendations', 'Safety Alerts'],
+      enables: ['Digital Footprint Analysis', 'Privacy recommendations', 'Catalog notifications', 'RSS safety headlines'],
       isFoundation: true
     },
     {

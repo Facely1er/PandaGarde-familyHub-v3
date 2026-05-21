@@ -45,7 +45,7 @@ export const familyResources: FamilyResource[] = [
   {
     id: 'child-safety-alerts',
     title: 'Child Safety Alerts',
-    description: 'Real-time alerts about child safety issues and privacy concerns',
+    description: 'Catalog-based notifications and RSS safety headlines for services you list (not device monitoring)',
     type: 'tool',
     category: ['child-safety', 'alerts'],
     personaTags: ['cautious-parent', 'concerned-family'],

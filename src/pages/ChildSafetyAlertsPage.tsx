@@ -19,7 +19,7 @@ const ChildSafetyAlertsPage: React.FC = () => {
                 Safety Alerts & Notifications
               </h1>
               <p className="text-gray-600 dark:text-gray-400">
-                Real-time alerts about privacy and safety updates for services your children use
+                Catalog-based notifications and RSS safety headlines for apps you add—not live monitoring of your child&apos;s device
               </p>
             </div>
             <div className="flex items-center space-x-2">
@@ -49,7 +49,7 @@ const ChildSafetyAlertsPage: React.FC = () => {
                   Add Services to Enable Alerts
                 </h3>
                 <p className="text-sm text-yellow-800 dark:text-yellow-200 mb-3">
-                  Safety alerts are generated for services you add. Add your family's apps and services to receive personalized safety alerts and privacy updates.
+                  Notifications and RSS headlines are tied to services in your catalog. Add the apps and sites your family uses to see catalog-based reminders and matched safety headlines (refresh RSS on this page when online).
                 </p>
                 <Link
                   to="/service-catalog"
@@ -71,8 +71,7 @@ const ChildSafetyAlertsPage: React.FC = () => {
                   Stay Informed About Your Services
                 </h3>
                 <p className="text-sm text-amber-800 dark:text-amber-200">
-                  Notifications are automatically generated for services your family members use. 
-                  High-priority alerts appear first. Click any notification to view service details in the catalog.
+                  Service notifications are generated from your catalog and privacy checklist—not from watching your child&apos;s device. High-priority items appear first. Open a notification to jump to that service in the catalog.
                 </p>
               </div>
             </div>
@@ -172,7 +171,7 @@ const ChildSafetyAlertsPage: React.FC = () => {
         <div className="mt-8">
           <EmailCaptureInline
             title="Stay Updated on Child Safety Alerts"
-            description="Get notified immediately when new child safety alerts are published. We'll send you important updates about privacy concerns, data breaches, and safety recommendations."
+            description="Optional email list for PandaGarde privacy and safety updates (when EmailJS is configured). This is not live monitoring of your child's apps or device."
             purpose="safety-alerts"
             compact={false}
           />
@@ -192,7 +191,7 @@ const ChildSafetyAlertsPage: React.FC = () => {
               Add Services for Analysis
             </h3>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              Add or update your family's apps and services to enable personalized safety alerts and Digital Footprint Analysis
+              Add or update catalog entries to enable footprint analysis and catalog-based notifications
             </p>
           </Link>
 

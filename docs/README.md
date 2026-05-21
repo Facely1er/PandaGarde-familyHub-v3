@@ -1,5 +1,9 @@
 # PandaGarde / FamilyHub Documentation
 
+## Content & marketing accuracy
+
+**[CONTENT_TRUTH.md](./CONTENT_TRUTH.md)** — What Family Hub and the website actually do (local-first, missions, catalog/RSS alerts). Grep §7 before release to catch stale copy.
+
 ## Authoritative Governance
 
 **[pandagarde_authoritative_sdlc_governance_suite_v_1.md](./pandagarde_authoritative_sdlc_governance_suite_v_1.md)** — v1.0, STATUS: AUTHORITATIVE. Supersedes conflicting implementation decisions.

@@ -14,7 +14,7 @@ interface EmailCaptureInlineProps {
 
 const EmailCaptureInline: React.FC<EmailCaptureInlineProps> = ({
   title = 'Stay Updated on Child Safety',
-  description = 'Get notified about important child safety alerts and privacy updates.',
+  description = 'Optional email updates about privacy news and safety headlines (not live monitoring of your child\'s device).',
   onSubmit,
   purpose = 'safety-alerts',
   compact = false

@@ -88,7 +88,7 @@ const ChildSafetyAlerts: React.FC = () => {
         <div className="p-8 text-center bg-gray-50 dark:bg-gray-800 rounded-lg">
           <Shield className="h-12 w-12 mx-auto text-gray-400 mb-4" />
           <p className="text-gray-600 dark:text-gray-400">
-            No recent safety alerts. Your child's services appear to be safe.
+            No recent RSS headlines matched your catalog. Add services in the catalog or refresh when online.
           </p>
         </div>
       ) : (

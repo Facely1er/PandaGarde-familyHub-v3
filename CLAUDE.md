@@ -4,6 +4,8 @@
 
 PandaGarde is a family privacy-education SPA built with React 18, TypeScript, Tailwind CSS, and Vite. The website guides families through a Digital Footprint Analysis and routes them into the Family Hub workspace. It is deployed on Netlify as a frontend-only PWA (no backend in production today).
 
+**User-facing copy:** Follow [docs/CONTENT_TRUTH.md](docs/CONTENT_TRUTH.md) so marketing/help text matches shipped behavior (local-first Hub, self-reported catalog, catalog/RSS alerts—not child monitoring or a social network).
+
 ## Architecture
 
 ```

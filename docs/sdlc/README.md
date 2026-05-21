@@ -1,5 +1,7 @@
 # PandaGarde / FamilyHub SDLC Master Package
 
+**Marketing & UI copy accuracy:** [../CONTENT_TRUTH.md](../CONTENT_TRUTH.md)
+
 Version: 1.0
 Date: May 2026
 
