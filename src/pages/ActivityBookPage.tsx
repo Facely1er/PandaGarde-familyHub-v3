@@ -568,7 +568,7 @@ const ActivityBookPage: React.FC = () => {
               <Book size={18} className="md:w-5 md:h-5" />
               Read Privacy Panda's Story
             </Link>
-            <Link to="/family-hub" target="_blank" rel="noopener noreferrer"
+            <Link to="/family-hub"
               className="bg-blue-600 text-white px-4 md:px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors inline-flex items-center justify-center gap-2 text-sm md:text-base"
             >
               <Users size={18} className="md:w-5 md:h-5" />

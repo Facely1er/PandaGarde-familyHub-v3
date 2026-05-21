@@ -279,7 +279,7 @@ const HomePage: React.FC = () => {
                 Continue your journey
                 <ArrowRight size={18} />
               </Link>
-              <Link to="/family-hub" target="_blank" rel="noopener noreferrer" className="button button-secondary premium-hero__secondary-action">
+              <Link to="/family-hub" className="button button-secondary premium-hero__secondary-action">
                 Explore Family Hub
               </Link>
             </div>
@@ -621,7 +621,7 @@ const HomePage: React.FC = () => {
             <Link to="/digital-footprint" className="button button-primary">
               Run Digital Footprint Analysis
             </Link>
-            <Link to="/family-hub" target="_blank" rel="noopener noreferrer" className="button button-secondary">
+            <Link to="/family-hub" className="button button-secondary">
               Open Family Hub
             </Link>
           </div>

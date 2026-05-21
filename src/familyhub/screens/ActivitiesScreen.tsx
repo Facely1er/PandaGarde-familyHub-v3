@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { lazy, Suspense, useMemo, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import {
   ArrowLeft,
   BookOpen,
@@ -12,7 +12,9 @@ import {
   Target,
   Users,
 } from 'lucide-react';
-import ActivityManager from '../../components/activities/ActivityManager';
+import { HubScreenFallback } from '../lazyScreen';
+
+const ActivityManager = lazy(() => import('../../components/activities/ActivityManager'));
 import { useProgress } from '../../contexts/ProgressContext';
 import {
   ageBasedActivities,
@@ -184,8 +186,27 @@ const LearningCard: React.FC<{
           <p className="mt-2 text-sm leading-relaxed text-emerald-950 dark:text-emerald-100">{activity.nextStep}</p>
         </section>
 
+        {activity.sitePath && (
+          <section className="rounded-2xl border border-sky-200 bg-sky-50 p-5 dark:border-sky-700/40 dark:bg-sky-900/20">
+            <p className="text-xs font-semibold uppercase tracking-wide text-sky-700 dark:text-sky-300">
+              Family tool on PandaGarde
+            </p>
+            <p className="mt-2 text-sm text-sky-950 dark:text-sky-100">
+              Continue with the full in-app analysis and checklist on the main site, then return here to mark progress.
+            </p>
+            <Link
+              to={activity.sitePath}
+              className="mt-4 inline-flex min-h-[44px] items-center justify-center rounded-lg bg-sky-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-sky-700"
+            >
+              Open {activity.sitePath === '/digital-footprint' ? 'Digital Footprint Analysis' : 'tool'}
+            </Link>
+          </section>
+        )}
+
         <p className="pb-4 text-center text-xs text-gray-500 dark:text-gray-400">
-          Interactive game coming soon — use these prompts to turn the activity into a quick family conversation today.
+          {activity.activityManagerId
+            ? 'Use the prompts above, then launch the interactive game from the activity list when you are ready.'
+            : 'Use the discussion prompts above for a short family conversation today.'}
         </p>
       </div>
     </div>
@@ -270,7 +291,7 @@ const ActivityCard: React.FC<{
       </div>
       <div className="flex items-center gap-1 text-sm font-semibold text-teal-600 transition-transform group-hover:translate-x-0.5 dark:text-teal-300">
         <Play size={15} aria-hidden="true" />
-        {activity.activityManagerId ? 'Start game' : 'Explore'}
+        {activity.activityManagerId ? 'Start game' : activity.sitePath ? 'Open guide' : 'Start mission'}
       </div>
     </div>
   </button>
@@ -408,11 +429,13 @@ const ActivitiesScreen: React.FC = () => {
         </div>
 
         <div className="flex-1 overflow-auto">
-          <ActivityManager
-            activityId={activityManagerId}
-            onClose={handleClose}
-            onComplete={handleClose}
-          />
+          <Suspense fallback={<HubScreenFallback />}>
+            <ActivityManager
+              activityId={activityManagerId}
+              onClose={handleClose}
+              onComplete={handleClose}
+            />
+          </Suspense>
         </div>
       </div>
     );

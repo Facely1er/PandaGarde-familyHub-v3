@@ -1,14 +1,17 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import AppShell from '../../familyhub/components/AppShell';
-import DashboardScreen from '../../familyhub/screens/DashboardScreen';
-import KidsScreen from '../../familyhub/screens/KidsScreen';
-import ActivitiesScreen from '../../familyhub/screens/ActivitiesScreen';
-import ProgressScreen from '../../familyhub/screens/ProgressScreen';
-import SettingsScreen from '../../familyhub/screens/SettingsScreen';
-import WelcomeScreen, { HUB_WELCOMED_KEY } from '../../familyhub/screens/WelcomeScreen';
+import { HUB_WELCOMED_KEY } from '../../familyhub/constants';
+import { lazyScreen } from '../../familyhub/lazyScreen';
 import AuthWrapper, { useAuth } from './AuthWrapper';
 import LoginPage from './LoginPage';
+
+const WelcomeScreen = lazyScreen(() => import('../../familyhub/screens/WelcomeScreen'));
+const DashboardScreen = lazyScreen(() => import('../../familyhub/screens/DashboardScreen'));
+const KidsScreen = lazyScreen(() => import('../../familyhub/screens/KidsScreen'));
+const ActivitiesScreen = lazyScreen(() => import('../../familyhub/screens/ActivitiesScreen'));
+const ProgressScreen = lazyScreen(() => import('../../familyhub/screens/ProgressScreen'));
+const SettingsScreen = lazyScreen(() => import('../../familyhub/screens/SettingsScreen'));
 
 const FamilyHubRoutes: React.FC = () => {
   const { isAuthenticated } = useAuth();
@@ -24,15 +27,11 @@ const FamilyHubRoutes: React.FC = () => {
 
   return (
     <Routes>
-      {/* First-time welcome screen — shown before the shell */}
       <Route path="welcome" element={<WelcomeScreen />} />
-
-      {/* Redirect root: send newcomers to welcome, returners to dashboard */}
       <Route
         path="/"
         element={<Navigate to={hubWelcomed ? 'dashboard' : 'welcome'} replace />}
       />
-
       <Route element={<AppShell />}>
         <Route path="dashboard" element={<DashboardScreen />} />
         <Route path="kids" element={<KidsScreen />} />

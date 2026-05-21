@@ -32,7 +32,7 @@ const EducatorToolsPage: React.FC = () => {
       id: 'k-5-curriculum',
       title: 'K-5 Privacy Curriculum',
       description:
-        'Roadmap for teaching digital privacy in elementary school. Full-year PDF lesson packs are not on the site yet — use the Resources hub and printable materials today.',
+        'Roadmap for teaching digital privacy in elementary school. Use the Resources hub, classroom activities, and printables on PandaGarde today.',
       category: 'curriculum',
       gradeLevel: 'K-5',
       duration: 'Full Year',
@@ -41,7 +41,7 @@ const EducatorToolsPage: React.FC = () => {
       navigateTo: '/resources',
       actionLabel: 'Open Resources',
       preview: [
-        'Printable year-long PDF curriculum: planned (pilot) — not a download yet',
+        'Year-long pacing outline via Resources and implementation guide',
         'Resources page: guides, discussion prompts, and printables you can use now',
         'Pair with Privacy Panda story, coloring sheets, and safety posters',
         'Assessment: try Quick Assessment with older students / families',
@@ -52,7 +52,7 @@ const EducatorToolsPage: React.FC = () => {
       id: 'middle-school-curriculum',
       title: '6-8 Privacy Curriculum',
       description:
-        'Middle school privacy themes and pacing. Packaged PDF curriculum is not published yet — browse guides and tools that are live on the site.',
+        'Middle school privacy themes and pacing using live guides, assessments, and Family Hub activities.',
       category: 'curriculum',
       gradeLevel: '6-8',
       duration: 'Full Year',
@@ -61,7 +61,7 @@ const EducatorToolsPage: React.FC = () => {
       navigateTo: '/resources',
       actionLabel: 'Open Resources',
       preview: [
-        'Printable middle-school PDF pack: coming later',
+        'Printable worksheets at /downloads/worksheets',
         'Use Resources + Privacy Explorers / Teen Handbook pages from the main site',
         'Classroom discussion guides under Resources → Comprehensive Guides',
         'Digital footprint topics: Digital Footprint tool for family/school context'
@@ -71,7 +71,7 @@ const EducatorToolsPage: React.FC = () => {
       id: 'high-school-curriculum',
       title: '9-12 Privacy Curriculum',
       description:
-        'Advanced privacy and digital rights themes. Standalone PDF curriculum files are not available yet — use live site content and pilot program for early access.',
+        'Advanced privacy and digital rights themes via Teen Handbook, Digital Rights page, and pilot extras.',
       category: 'curriculum',
       gradeLevel: '9-12',
       duration: 'Full Year',
@@ -80,7 +80,7 @@ const EducatorToolsPage: React.FC = () => {
       navigateTo: '/resources',
       actionLabel: 'Open Resources',
       preview: [
-        'Printable high-school PDF pack: coming later',
+        'Pilot program for extended slide decks and educator packs',
         'Teen Handbook, Digital Rights, and related pages are available now',
         'Join the pilot for educator-facing slide decks and fuller packs (see Presentation Slides card)'
       ]
@@ -127,7 +127,7 @@ const EducatorToolsPage: React.FC = () => {
     {
       id: 'assessment-tools',
       title: 'Assessment & Evaluation Tools',
-      description: 'Use the live privacy assessments on PandaGarde (printable rubric PDFs are not bundled as a file yet).',
+      description: 'Use the live privacy assessments on PandaGarde and mark resources complete as you teach.',
       category: 'assessments',
       gradeLevel: 'All',
       duration: 'Variable',
@@ -138,7 +138,7 @@ const EducatorToolsPage: React.FC = () => {
       preview: [
         'Quick Assessment and full Privacy Assessment flows are functional',
         'Great for pre/post checks with families or older students',
-        'Portfolio rubrics as PDF: not shipped — use “Mark as used” to track your own workflow'
+        'Use “Mark as used” to track your classroom workflow'
       ]
     },
     {
@@ -258,7 +258,7 @@ const EducatorToolsPage: React.FC = () => {
   return (
     <PageLayout
       title="Educator Tools"
-      subtitle="What works today on PandaGarde: classroom activities, interactive content, assessments, printables, and guides. Packaged PDF curricula and slide ZIP files are not on the server yet — cards link to live pages or the pilot program."
+      subtitle="Classroom activities, interactive missions, assessments, printables, and guides — each card opens a live page on PandaGarde or the pilot program for extended packs."
       breadcrumbs={true}
     >
 
@@ -268,7 +268,7 @@ const EducatorToolsPage: React.FC = () => {
           role="status"
         >
           <strong className="text-amber-900 dark:text-amber-100">Note for educators:</strong>{' '}
-          Older copy referenced PDF and ZIP downloads that are not in this build. Each card now opens a{' '}
+          Each card opens a{' '}
           <strong>real page</strong> on the site or the <Link to="/pilot" className="underline font-medium text-amber-900 dark:text-amber-100">pilot</Link>{' '}
           for upcoming packs. Questions?{' '}
           <Link to="/contact" className="underline font-medium text-amber-900 dark:text-amber-100">Contact us</Link>.
@@ -461,7 +461,7 @@ const EducatorToolsPage: React.FC = () => {
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link
-              to="/family-hub" target="_blank" rel="noopener noreferrer"
+              to="/family-hub"
               className="bg-white text-green-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center gap-2"
             >
               <Users size={20} />

@@ -28,6 +28,8 @@ export interface AgeBasedActivity {
   featured?: boolean;
   /** If set, this maps to an existing ActivityManager game ID */
   activityManagerId?: string;
+  /** In-app tool page when there is no bundled game (e.g. full DFA) */
+  sitePath?: string;
 }
 
 export interface AgeGroup {
@@ -249,6 +251,7 @@ export const ageBasedActivities: AgeGroup[] = [
         focus: 'Digital footprint',
         familyMode: 'Talk together',
         featured: true,
+        sitePath: '/digital-footprint',
       },
       {
         id: 'phishing-patrol',
@@ -276,7 +279,7 @@ export const ageBasedActivities: AgeGroup[] = [
         focus: 'Spotting scams',
         familyMode: 'Play together',
         featured: true,
-        activityManagerId: 'quiz',
+        activityManagerId: 'phishing-detective',
       },
       {
         id: 'app-permission-inspector',
@@ -303,6 +306,7 @@ export const ageBasedActivities: AgeGroup[] = [
         difficulty: 'Intermediate',
         focus: 'Privacy settings',
         familyMode: 'Talk together',
+        activityManagerId: 'privacy-settings',
       },
       {
         id: 'privacy-settings-pro',
@@ -329,6 +333,7 @@ export const ageBasedActivities: AgeGroup[] = [
         difficulty: 'Intermediate',
         focus: 'Privacy settings',
         familyMode: 'Talk together',
+        activityManagerId: 'privacy-settings',
       },
       {
         id: 'screenshot-safety',
@@ -355,6 +360,7 @@ export const ageBasedActivities: AgeGroup[] = [
         difficulty: 'Intermediate',
         focus: 'Digital footprint',
         familyMode: 'Talk together',
+        activityManagerId: 'safe-unsafe',
       },
       {
         id: 'password-strength-lab',
@@ -381,6 +387,7 @@ export const ageBasedActivities: AgeGroup[] = [
         difficulty: 'Intermediate',
         focus: 'Account security',
         familyMode: 'Play together',
+        activityManagerId: 'password-strength',
       },
     ],
   },
@@ -416,6 +423,7 @@ export const ageBasedActivities: AgeGroup[] = [
         focus: 'Account security',
         familyMode: 'Teen-led reflection',
         featured: true,
+        activityManagerId: 'password-fortress',
       },
       {
         id: 'online-reputation-audit',
@@ -443,6 +451,7 @@ export const ageBasedActivities: AgeGroup[] = [
         focus: 'Digital footprint',
         familyMode: 'Teen-led reflection',
         featured: true,
+        activityManagerId: 'social-media-audit',
       },
       {
         id: 'data-broker-discovery',
@@ -469,6 +478,7 @@ export const ageBasedActivities: AgeGroup[] = [
         difficulty: 'Advanced',
         focus: 'Digital footprint',
         familyMode: 'Talk together',
+        sitePath: '/digital-footprint',
       },
       {
         id: 'privacy-rights-challenge',
@@ -495,6 +505,7 @@ export const ageBasedActivities: AgeGroup[] = [
         difficulty: 'Advanced',
         focus: 'Digital rights',
         familyMode: 'Talk together',
+        activityManagerId: 'digital-rights',
       },
       {
         id: 'social-media-simulator',
@@ -521,6 +532,7 @@ export const ageBasedActivities: AgeGroup[] = [
         difficulty: 'Advanced',
         focus: 'Safe sharing',
         familyMode: 'Teen-led reflection',
+        activityManagerId: 'social-simulator',
       },
       {
         id: 'ai-and-your-privacy',
@@ -547,6 +559,7 @@ export const ageBasedActivities: AgeGroup[] = [
         difficulty: 'Advanced',
         focus: 'Digital footprint',
         familyMode: 'Talk together',
+        activityManagerId: 'privacy-decoder',
       },
     ],
   },

@@ -71,7 +71,7 @@ const GetStartedPage: React.FC = () => {
                   <Link to={nextPhase.path} className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-4 py-3 font-semibold text-white transition-colors hover:bg-emerald-700">
                     Continue to {nextPhase.title} <ArrowRight size={16} />
                   </Link>
-                  <Link to="/family-hub" target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-300 px-4 py-3 font-semibold text-slate-700 transition-colors hover:bg-slate-50">
+                  <Link to="/family-hub" className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-300 px-4 py-3 font-semibold text-slate-700 transition-colors hover:bg-slate-50">
                     <LayoutDashboard size={16} /> Open Family Hub
                   </Link>
                 </div>

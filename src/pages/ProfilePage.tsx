@@ -100,7 +100,7 @@ const ProfilePage: React.FC = () => {
           {/* Header */}
           <div className="flex items-center justify-between mb-8">
             <Link
-              to="/family-hub" target="_blank" rel="noopener noreferrer"
+              to="/family-hub"
               className="inline-flex items-center gap-2 text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 font-medium transition-colors"
             >
               <ArrowLeft size={16} />

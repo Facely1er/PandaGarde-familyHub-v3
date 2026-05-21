@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Shield, Users, Gamepad2, Award } from 'lucide-react';
 import { updateDfaJourneyPhase } from '../../lib/dfaJourney';
+import { HUB_WELCOMED_KEY } from '../constants';
 
-export const HUB_WELCOMED_KEY = 'pandagarde_hub_welcomed';
+export { HUB_WELCOMED_KEY };
 
 const phases = [
   { label: 'Step 1', name: 'Service Catalog', description: 'Map the apps & services your family uses', done: true },

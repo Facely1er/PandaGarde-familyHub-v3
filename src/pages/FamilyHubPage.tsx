@@ -1058,7 +1058,7 @@ const FamilyHubPage: React.FC = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <Link 
-                to="/family-hub" target="_blank" rel="noopener noreferrer"
+                to="/family-hub"
                 className="bg-white rounded-xl p-6 hover:shadow-lg transition-all block"
                 style={{ backgroundColor: 'var(--card-color)' }}
               >

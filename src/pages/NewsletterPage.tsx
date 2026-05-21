@@ -285,7 +285,7 @@ const NewsletterPage: React.FC = () => {
               <BookOpen size={20} />
               Try Activities
             </Link>
-            <Link to="/family-hub" target="_blank" rel="noopener noreferrer"
+            <Link to="/family-hub"
               className="bg-white/10 text-white border border-white px-6 py-3 rounded-lg font-semibold hover:bg-white/20 transition-colors inline-flex items-center gap-2"
             >
               <Users size={20} />

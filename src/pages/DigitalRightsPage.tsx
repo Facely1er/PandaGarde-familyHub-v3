@@ -613,7 +613,7 @@ const DigitalRightsPage: React.FC = () => {
               Teen Handbook
             </Link>
             <Link 
-              to="/family-hub" target="_blank" rel="noopener noreferrer"
+              to="/family-hub"
               style={{
                 background: 'rgba(255, 255, 255, 0.2)',
                 color: 'white',

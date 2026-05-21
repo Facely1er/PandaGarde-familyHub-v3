@@ -192,7 +192,7 @@ The Content Security Policy in `netlify.toml` must not be weakened without expli
 | Chunk | Current | Budget |
 |---|---|---|
 | `index.js` (main entry) | 262 KB | ≤ 300 KB |
-| `FamilyHubWrapper` | 225 KB | ≤ 250 KB |
+| `FamilyHubWrapper` | ~12 KB (shell; screens lazy) | ≤ 250 KB |
 | `jspdf` | 376 KB | Lazy-loaded only |
 | `html2canvas` | 201 KB | Lazy-loaded only |
 | Per-page chunks | avg 14 KB | ≤ 50 KB |

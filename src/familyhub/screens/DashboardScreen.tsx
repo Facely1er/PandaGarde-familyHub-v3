@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
+import React, { lazy, Suspense, useEffect } from "react";
 import { ArrowLeft, CheckCircle2, Users, Gamepad2, Award, Settings } from "lucide-react";
 import { Link } from "react-router-dom";
-import FamilyDashboard from "../../components/FamilyDashboard";
+import { HubScreenFallback } from "../lazyScreen";
+
+const FamilyDashboard = lazy(() => import("../../components/FamilyDashboard"));
 import { updateDfaJourneyPhase } from "../../lib/dfaJourney";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import HubTour from "../components/HubTour";
@@ -110,7 +112,9 @@ const DashboardScreen: React.FC = () => {
           </nav>
         </div>
       </section>
-      <FamilyDashboard appMode={true} />
+      <Suspense fallback={<HubScreenFallback />}>
+        <FamilyDashboard appMode={true} />
+      </Suspense>
     </div>
   );
 };

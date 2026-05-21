@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { X, ArrowRight, LayoutDashboard, Users, Gamepad2 } from 'lucide-react';
+import { useDialogFocusTrap } from '../../hooks/useDialogFocusTrap';
 
 export const HUB_TOUR_KEY = 'pandagarde_hub_tour_done';
 
@@ -53,6 +54,11 @@ const HubTour: React.FC<HubTourProps> = ({ onDone }) => {
     onDone?.();
   };
 
+  const dialogRef = useDialogFocusTrap({
+    isOpen: visible,
+    onClose: dismiss,
+  });
+
   const handleNext = () => {
     if (step < steps.length - 1) {
       setStep((s) => s + 1);
@@ -69,12 +75,20 @@ const HubTour: React.FC<HubTourProps> = ({ onDone }) => {
 
   return (
     <div
-      role="dialog"
-      aria-modal="true"
-      aria-label="Family Hub tour"
       className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4 bg-black/40 backdrop-blur-[2px]"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) {
+          dismiss();
+        }
+      }}
     >
-      <div className="relative w-full max-w-sm rounded-2xl bg-white dark:bg-gray-800 shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Family Hub tour"
+        className="relative w-full max-w-sm rounded-2xl bg-white dark:bg-gray-800 shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden"
+      >
         {/* Progress bar */}
         <div className="h-1 bg-gray-100 dark:bg-gray-700">
           <div

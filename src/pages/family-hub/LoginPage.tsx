@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { ShieldCheck, CheckCircle2 } from 'lucide-react';
 import { updateDfaJourneyPhase } from '../../lib/dfaJourney';
 import { useAuth } from './AuthWrapper';
-import { HUB_WELCOMED_KEY } from '../../familyhub/screens/WelcomeScreen';
+import { HUB_WELCOMED_KEY } from '../../familyhub/constants';
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();

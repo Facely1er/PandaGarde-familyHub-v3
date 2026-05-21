@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Wrench, Download, FileText, Shield, MessageCircle, CheckCircle, Users, BookOpen, Settings, Lock, Eye, AlertTriangle, Search, Filter, Star, Clock } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 import ResourceModal from '../components/ResourceModal';
+import { getToolkitRoute } from '../data/parentToolkitRoutes';
 
 interface ToolkitResource {
   id: string;
@@ -10,7 +11,6 @@ interface ToolkitResource {
   description: string;
   category: 'templates' | 'guides' | 'checklists' | 'conversations' | 'tools' | 'expert';
   icon: React.ComponentType<{ size?: number; className?: string }>;
-  downloadUrl?: string;
   preview?: string[];
   duration?: string;
 }
@@ -27,7 +27,6 @@ const ParentToolkitPage: React.FC = () => {
       description: 'A customizable template to create your own family privacy policy that establishes clear rules and expectations.',
       category: 'templates',
       icon: FileText,
-      downloadUrl: '/downloads/family-privacy-policy-template.pdf',
       preview: [
         'Device usage guidelines',
         'Social media rules',
@@ -43,7 +42,6 @@ const ParentToolkitPage: React.FC = () => {
       description: 'Step-by-step checklist for setting up new devices with privacy and safety in mind.',
       category: 'checklists',
       icon: CheckCircle,
-      downloadUrl: '/downloads/device-setup-checklist.pdf',
       preview: [
         'Initial security settings',
         'Privacy configuration steps',
@@ -59,7 +57,6 @@ const ParentToolkitPage: React.FC = () => {
       description: 'Age-appropriate questions and prompts to start meaningful conversations about digital privacy.',
       category: 'conversations',
       icon: MessageCircle,
-      downloadUrl: '/downloads/conversation-starters.pdf',
       preview: [
         'Questions for ages 5-8',
         'Discussion topics for ages 9-12',
@@ -75,7 +72,6 @@ const ParentToolkitPage: React.FC = () => {
       description: 'Learn how to evaluate apps for privacy, safety, and age-appropriateness before your child uses them.',
       category: 'guides',
       icon: Search,
-      downloadUrl: '/downloads/app-review-guide.pdf',
       preview: [
         'Privacy policy analysis',
         'Permission evaluation',
@@ -91,7 +87,6 @@ const ParentToolkitPage: React.FC = () => {
       description: 'Comprehensive checklist to regularly review your child\'s digital safety and privacy settings.',
       category: 'checklists',
       icon: Shield,
-      downloadUrl: '/downloads/digital-safety-checklist.pdf',
       preview: [
         'Account security review',
         'Privacy settings audit',
@@ -107,7 +102,6 @@ const ParentToolkitPage: React.FC = () => {
       description: 'Detailed guides for configuring privacy settings on popular platforms and devices.',
       category: 'guides',
       icon: Settings,
-      downloadUrl: '/downloads/privacy-settings-guide.pdf',
       preview: [
         'iOS privacy settings',
         'Android privacy settings',
@@ -123,7 +117,6 @@ const ParentToolkitPage: React.FC = () => {
       description: 'Overview of parental control and monitoring tools, their features, and best practices.',
       category: 'tools',
       icon: Eye,
-      downloadUrl: '/downloads/monitoring-tools-guide.pdf',
       preview: [
         'Tool comparison chart',
         'Feature explanations',
@@ -139,7 +132,6 @@ const ParentToolkitPage: React.FC = () => {
       description: 'A template to help you respond quickly and effectively if your child encounters online issues.',
       category: 'templates',
       icon: AlertTriangle,
-      downloadUrl: '/downloads/incident-response-plan.pdf',
       preview: [
         'Immediate response steps',
         'Documentation checklist',
@@ -155,7 +147,6 @@ const ParentToolkitPage: React.FC = () => {
       description: 'Teach your children about creating strong passwords and managing them securely.',
       category: 'guides',
       icon: Lock,
-      downloadUrl: '/downloads/password-security-guide.pdf',
       preview: [
         'Password creation rules',
         'Password manager basics',
@@ -171,7 +162,6 @@ const ParentToolkitPage: React.FC = () => {
       description: 'Curated articles and advice from privacy experts, child psychologists, and digital safety specialists.',
       category: 'expert',
       icon: BookOpen,
-      downloadUrl: '/downloads/expert-advice-library.pdf',
       preview: [
         'Age-appropriate privacy education',
         'Balancing safety and independence',
@@ -187,7 +177,6 @@ const ParentToolkitPage: React.FC = () => {
       description: 'A comprehensive agreement template that establishes rules and expectations for internet use.',
       category: 'templates',
       icon: FileText,
-      downloadUrl: '/downloads/family-agreement',
       preview: [
         'Device usage rules',
         'Time limits and schedules',
@@ -203,7 +192,6 @@ const ParentToolkitPage: React.FC = () => {
       description: 'Complete guide to helping your child navigate social media safely and responsibly.',
       category: 'guides',
       icon: Users,
-      downloadUrl: '/downloads/social-media-guide.pdf',
       preview: [
         'Platform-specific safety tips',
         'Privacy setting walkthroughs',
@@ -392,22 +380,19 @@ const ParentToolkitPage: React.FC = () => {
                         >
                           View Details
                         </button>
-                        {resource.downloadUrl && (
-                          <button
-                            className="bg-gray-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-gray-600 transition-all"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              // In a real app, this would trigger a download
-                              if (resource.downloadUrl === '/downloads/family-agreement') {
-                                window.location.href = '/downloads/family-agreement';
-                              } else {
-                                alert('Download would start here');
-                              }
-                            }}
+                        {(() => {
+                          const route = getToolkitRoute(resource.id);
+                          return route ? (
+                          <Link
+                            to={route.href}
+                            className="inline-flex items-center justify-center bg-gray-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-gray-600 transition-all min-h-[44px]"
+                            onClick={(e) => e.stopPropagation()}
+                            aria-label={route.label}
                           >
-                            <Download size={16} />
-                          </button>
-                        )}
+                            <Download size={16} aria-hidden />
+                          </Link>
+                          ) : null;
+                        })()}
                       </div>
                     </div>
                   </div>
@@ -425,14 +410,11 @@ const ParentToolkitPage: React.FC = () => {
           description={selectedResource?.description || ''}
           preview={selectedResource?.preview}
           duration={selectedResource?.duration}
-          downloadUrl={selectedResource?.downloadUrl}
+          downloadUrl={selectedResource ? getToolkitRoute(selectedResource.id)?.href : undefined}
           onDownload={() => {
-            if (selectedResource?.downloadUrl) {
-              if (selectedResource.downloadUrl === '/downloads/family-agreement') {
-                window.location.href = '/downloads/family-agreement';
-              } else {
-                alert('Download would start here');
-              }
+            const route = selectedResource ? getToolkitRoute(selectedResource.id) : undefined;
+            if (route) {
+              window.location.href = route.href;
             }
           }}
         />

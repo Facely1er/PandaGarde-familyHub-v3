@@ -6,7 +6,7 @@ const Footer: React.FC = () => {
   const exploreLinks = [
     { icon: ShieldCheck, href: '/how-it-works', label: 'How It Works' },
     { icon: BookOpen, href: '/resources', label: 'Resources' },
-    { icon: LayoutDashboard, href: '/family-hub', label: 'Family Hub', target: '_blank', rel: 'noopener noreferrer' },
+    { icon: LayoutDashboard, href: '/family-hub', label: 'Family Hub' },
     { icon: PlayCircle, href: '/get-started', label: 'Get Started' },
   ];
 
@@ -45,9 +45,9 @@ const Footer: React.FC = () => {
             <div className="footer-column">
               <h4>Explore</h4>
               <ul>
-                {exploreLinks.map(({ icon: Icon, href, label, target, rel }) => (
+                {exploreLinks.map(({ icon: Icon, href, label }) => (
                   <li key={href}>
-                    <Link to={href} className="footer-link" target={target} rel={rel}>
+                    <Link to={href} className="footer-link">
                       <Icon size={16} aria-hidden="true" />
                       <span>{label}</span>
                     </Link>
@@ -91,7 +91,7 @@ const Footer: React.FC = () => {
           <div className="footer-links" aria-label="Footer utility links">
             <Link to="/about">About</Link>
             <Link to="/support">Support</Link>
-            <Link to="/family-hub" target="_blank" rel="noopener noreferrer">Family Hub</Link>
+            <Link to="/family-hub">Family Hub</Link>
           </div>
         </div>
       </div>

@@ -1,7 +1,9 @@
-import React, { useMemo, useState } from 'react';
+import React, { lazy, Suspense, useMemo, useState } from 'react';
 import { Award, CheckCircle2, Clock, Download, Star, TrendingUp, X } from 'lucide-react';
-import CertificateGenerator from '../../components/CertificateGenerator';
-import ProgressExport from '../../components/ProgressExport';
+import { HubScreenFallback } from '../lazyScreen';
+
+const CertificateGenerator = lazy(() => import('../../components/CertificateGenerator'));
+const ProgressExport = lazy(() => import('../../components/ProgressExport'));
 import { useProgress } from '../../contexts/ProgressContext';
 import { flattenAgeBasedActivities } from '../../data/ageBasedActivities';
 
@@ -179,7 +181,9 @@ const ProgressScreen: React.FC = () => {
             </button>
             <div className="p-6">
               <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Certificate Generator</h2>
-              <CertificateGenerator />
+              <Suspense fallback={<HubScreenFallback />}>
+                <CertificateGenerator />
+              </Suspense>
             </div>
           </div>
         </div>
@@ -198,7 +202,9 @@ const ProgressScreen: React.FC = () => {
             </button>
             <div className="p-6">
               <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Export Progress</h2>
-              <ProgressExport onClose={() => setShowProgressExport(false)} />
+              <Suspense fallback={<HubScreenFallback />}>
+                <ProgressExport onClose={() => setShowProgressExport(false)} />
+              </Suspense>
             </div>
           </div>
         </div>

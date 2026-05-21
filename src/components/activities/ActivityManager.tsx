@@ -16,6 +16,32 @@ const MatchingActivity = lazy(() => import('./MatchingActivity'));
 const MemoryGameActivity = lazy(() => import('./MemoryGameActivity'));
 const QuizActivity = lazy(() => import('./QuizActivity'));
 
+const PasswordStrengthLab = lazy(() => import('../games/PasswordStrengthLab'));
+const PasswordFortressBuilder = lazy(() => import('../games/PasswordFortressBuilder'));
+const PhishingDetective = lazy(() => import('../games/PhishingDetective'));
+const PrivacySettingsTrainer = lazy(() => import('../games/PrivacySettingsTrainer'));
+const SocialMediaAudit = lazy(() => import('../games/SocialMediaAudit'));
+const SocialMediaSimulator = lazy(() => import('../games/SocialMediaSimulator'));
+const DigitalRightsQuiz = lazy(() => import('../games/DigitalRightsQuiz'));
+const DigitalFootprintVisualizer = lazy(() => import('../games/DigitalFootprintVisualizer'));
+const SafeUnsafeSorting = lazy(() => import('../games/SafeUnsafeSorting'));
+const PrivacyPolicyDecoder = lazy(() => import('../games/PrivacyPolicyDecoder'));
+
+type GameWithBack = React.ComponentType<{ onBack: () => void }>;
+
+const FamilyHubGame: React.FC<{
+  Game: GameWithBack;
+  onClose: () => void;
+  onComplete: (score?: number) => void;
+}> = ({ Game, onClose, onComplete }) => (
+  <Game
+    onBack={() => {
+      onComplete(100);
+      onClose();
+    }}
+  />
+);
+
 interface ActivityManagerProps {
   activityId: string;
   onClose: () => void;
@@ -135,7 +161,67 @@ const ActivityManager: React.FC<ActivityManagerProps> = ({ activityId, onClose, 
         "Try to get as many correct as possible!"
       ],
       tips: "This quiz helps you learn important privacy concepts. Don't worry if you get some wrong - you'll learn from the explanations and become safer online!"
-    }
+    },
+    'password-strength': {
+      title: 'Password Strength Lab',
+      description: 'Test passwords and learn what makes them strong or weak.',
+      instructions: ['Type sample passwords in the lab', 'Read the feedback for each one', 'Try building a passphrase your family could remember', 'Finish when you have one strong example'],
+      tips: 'Long passphrases beat short passwords with symbols. Never reuse passwords across accounts.',
+    },
+    'password-fortress': {
+      title: 'Password Fortress Builder',
+      description: 'Build a layered security plan with passphrases and two-factor authentication.',
+      instructions: ['Follow each fortress layer', 'Note which accounts need the strongest protection', 'Discuss 2FA with a parent or guardian', 'Complete all layers to finish'],
+      tips: 'Your email account is often the master key—protect it first.',
+    },
+    'phishing-detective': {
+      title: 'Phishing Detective',
+      description: 'Spot scam messages that pretend to be from games, schools, or prizes.',
+      instructions: ['Read each message carefully', 'Decide if it is phishing or legitimate', 'Review the clues after each answer', 'Aim for a high score'],
+      tips: 'Urgent rewards and odd links are common scam tricks. Go to official sites instead of clicking message links.',
+    },
+    'privacy-settings': {
+      title: 'Privacy Settings Trainer',
+      description: 'Practice changing privacy settings in a safe simulated app.',
+      instructions: ['Walk through each setting screen', 'Choose options that limit public visibility', 'Compare choices with your family', 'Finish the trainer to save progress'],
+      tips: 'Private accounts and limited location sharing are good defaults for teens.',
+    },
+    'social-media-audit': {
+      title: 'Social Media Audit',
+      description: 'Review a sample profile and improve privacy choices.',
+      instructions: ['Inspect each profile section', 'Fix risky settings', 'Discuss what should stay public vs. friends-only', 'Complete the audit checklist'],
+      tips: 'Assume screenshots and reposts can spread beyond your intended audience.',
+    },
+    'social-simulator': {
+      title: 'Social Media Simulator',
+      description: 'Make posting decisions and see how privacy choices play out.',
+      instructions: ['Read each scenario', 'Choose how to post, share, or respond', 'Notice consequences in the feedback', 'Discuss better choices as a family'],
+      tips: 'Pause before posting: who could see this, and for how long?',
+    },
+    'digital-rights': {
+      title: 'Digital Rights Quiz',
+      description: 'Learn about COPPA, GDPR, and your rights over personal data.',
+      instructions: ['Answer each rights question', 'Read explanations for tricky topics', 'Talk with a parent about school or app consent', 'Finish when you reach the results screen'],
+      tips: 'Laws give families rights to ask what data companies collect and to request deletion in many regions.',
+    },
+    'digital-footprint': {
+      title: 'Digital Footprint Visualizer',
+      description: 'See how online actions add up to a digital footprint over time.',
+      instructions: ['Explore the timeline examples', 'Add or remove sample actions', 'Discuss which footprints feel permanent', 'Complete the reflection step'],
+      tips: 'Even deleted posts can live on in screenshots—think before sharing.',
+    },
+    'safe-unsafe': {
+      title: 'Safe vs Unsafe Sorting',
+      description: 'Sort online behaviours into safe and unsafe categories.',
+      instructions: ['Drag each item to the correct zone', 'Check your answers', 'Talk about any yellow-zone choices', 'Retry until you feel confident'],
+      tips: 'When unsure, the family rule is: ask a trusted adult before sharing or clicking.',
+    },
+    'privacy-decoder': {
+      title: 'Privacy Policy Decoder',
+      description: 'Practice reading privacy policies in plain language.',
+      instructions: ['Pick a sample policy section', 'Match jargon to plain meanings', 'List one setting you would change', 'Finish the decoder activity'],
+      tips: 'Look for sections on data sharing, children, and deletion rights.',
+    },
   };
 
   const currentActivity = activityInstructions[activityId as keyof typeof activityInstructions];
@@ -245,6 +331,66 @@ const ActivityManager: React.FC<ActivityManagerProps> = ({ activityId, onClose, 
         return (
           <Suspense fallback={<div className="loading-spinner">Loading quiz...</div>}>
             <QuizActivity {...activityProps} />
+          </Suspense>
+        );
+      case 'password-strength':
+        return (
+          <Suspense fallback={<div className="loading-spinner">Loading password lab...</div>}>
+            <FamilyHubGame Game={PasswordStrengthLab} onClose={onClose} onComplete={activityProps.onComplete} />
+          </Suspense>
+        );
+      case 'password-fortress':
+        return (
+          <Suspense fallback={<div className="loading-spinner">Loading fortress builder...</div>}>
+            <FamilyHubGame Game={PasswordFortressBuilder} onClose={onClose} onComplete={activityProps.onComplete} />
+          </Suspense>
+        );
+      case 'phishing-detective':
+        return (
+          <Suspense fallback={<div className="loading-spinner">Loading phishing detective...</div>}>
+            <FamilyHubGame Game={PhishingDetective} onClose={onClose} onComplete={activityProps.onComplete} />
+          </Suspense>
+        );
+      case 'privacy-settings':
+        return (
+          <Suspense fallback={<div className="loading-spinner">Loading privacy settings trainer...</div>}>
+            <FamilyHubGame Game={PrivacySettingsTrainer} onClose={onClose} onComplete={activityProps.onComplete} />
+          </Suspense>
+        );
+      case 'social-media-audit':
+        return (
+          <Suspense fallback={<div className="loading-spinner">Loading social media audit...</div>}>
+            <FamilyHubGame Game={SocialMediaAudit} onClose={onClose} onComplete={activityProps.onComplete} />
+          </Suspense>
+        );
+      case 'social-simulator':
+        return (
+          <Suspense fallback={<div className="loading-spinner">Loading simulator...</div>}>
+            <FamilyHubGame Game={SocialMediaSimulator} onClose={onClose} onComplete={activityProps.onComplete} />
+          </Suspense>
+        );
+      case 'digital-rights':
+        return (
+          <Suspense fallback={<div className="loading-spinner">Loading digital rights quiz...</div>}>
+            <FamilyHubGame Game={DigitalRightsQuiz} onClose={onClose} onComplete={activityProps.onComplete} />
+          </Suspense>
+        );
+      case 'digital-footprint':
+        return (
+          <Suspense fallback={<div className="loading-spinner">Loading footprint visualizer...</div>}>
+            <FamilyHubGame Game={DigitalFootprintVisualizer} onClose={onClose} onComplete={activityProps.onComplete} />
+          </Suspense>
+        );
+      case 'safe-unsafe':
+        return (
+          <Suspense fallback={<div className="loading-spinner">Loading sorting game...</div>}>
+            <FamilyHubGame Game={SafeUnsafeSorting} onClose={onClose} onComplete={activityProps.onComplete} />
+          </Suspense>
+        );
+      case 'privacy-decoder':
+        return (
+          <Suspense fallback={<div className="loading-spinner">Loading policy decoder...</div>}>
+            <FamilyHubGame Game={PrivacyPolicyDecoder} onClose={onClose} onComplete={activityProps.onComplete} />
           </Suspense>
         );
       default:

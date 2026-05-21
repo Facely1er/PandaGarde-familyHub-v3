@@ -192,7 +192,7 @@ const ColoringSheetsPage: React.FC = () => {
                   <div className="absolute inset-0 flex items-center justify-center" style={{ display: 'none' }}>
                     <div className="text-center">
                       <Palette size={48} className="text-green-600 mx-auto mb-2" />
-                      <p className="text-sm text-gray-600">Preview not available</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">Download SVG to print</p>
                     </div>
                   </div>
                 </div>

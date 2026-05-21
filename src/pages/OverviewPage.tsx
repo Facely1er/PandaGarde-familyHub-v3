@@ -364,7 +364,7 @@ const OverviewPage: React.FC = () => {
             <h2>Ready to Get Started?</h2>
             <p>Choose the path that's right for your family and begin your digital privacy education journey today.</p>
             <div className="cta-buttons">
-              <Link to="/family-hub" target="_blank" rel="noopener noreferrer" className="button primary">
+              <Link to="/family-hub" className="button primary">
                 <Users size={20} />
                 Join Family Hub
               </Link>

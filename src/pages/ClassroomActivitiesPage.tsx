@@ -28,9 +28,8 @@ const ClassroomActivitiesPage: React.FC = () => {
     setExpandedActivities(newExpanded);
   };
 
-  const handleDownloadPDF = () => {
-    // In a real implementation, this would generate/download a PDF
-    alert('PDF download would be generated here. This feature will be available soon!');
+  const handlePrintGuide = () => {
+    window.print();
   };
 
   return (
@@ -39,47 +38,49 @@ const ClassroomActivitiesPage: React.FC = () => {
       subtitle="Chapter-by-chapter activities aligned with 'Privacy Panda and the Digital Bamboo Forest' story. Perfect for educators teaching digital privacy to children ages 5-8."
       breadcrumbs={true}
     >
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
-        {/* Introduction Section */}
-        <div className="bg-green-50 border-l-4 border-green-500 p-6 mb-8 rounded-r-lg"
-             style={{
-               backgroundColor: 'var(--light)',
-               borderLeftColor: 'var(--primary-light)'
-             }}>
-          <h2 className="text-2xl font-bold text-green-800 mb-3 text-primary">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <section className="mb-8 rounded-r-lg border-l-4 border-green-500 bg-green-50 p-6 dark:border-green-600 dark:bg-green-950/30">
+          <h2 className="mb-3 text-2xl font-bold text-green-800 dark:text-green-300">
             Introduction for Educators
           </h2>
-          <p className="text-gray-700 leading-relaxed mb-4 text-gray-600">
-            "Privacy Panda and the Digital Bamboo Forest" provides an excellent framework for introducing essential digital privacy concepts to children ages 5-8. This guide offers classroom activities designed to reinforce the lessons from each chapter of the story, helping you extend the learning experience in an engaging, interactive way.
+          <p className="mb-4 leading-relaxed text-gray-700 dark:text-gray-300">
+            &ldquo;Privacy Panda and the Digital Bamboo Forest&rdquo; provides an excellent framework for introducing essential digital privacy concepts to children ages 5-8. This guide offers classroom activities designed to reinforce the lessons from each chapter of the story, helping you extend the learning experience in an engaging, interactive way.
           </p>
-          <p className="text-gray-700 leading-relaxed mb-4 text-gray-600">
-            Each set of activities includes learning objectives aligned with the story's themes, materials needed, detailed instructions, discussion prompts, assessment opportunities, and adaptations for different learning needs.
+          <p className="mb-4 leading-relaxed text-gray-700 dark:text-gray-300">
+            Each set of activities includes learning objectives aligned with the story&apos;s themes, materials needed, detailed instructions, discussion prompts, assessment opportunities, and adaptations for different learning needs.
           </p>
-          <div className="flex flex-wrap gap-4 mt-4">
+          <div className="mt-4 flex flex-wrap gap-4">
             <Link
               to="/story"
-              className="bg-green-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-green-700 transition-colors inline-flex items-center gap-2"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-green-600 px-4 py-2 font-semibold text-white transition-colors hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-600"
             >
-              <BookOpen size={18} />
+              <BookOpen size={18} aria-hidden />
               Read the Story
             </Link>
-            <button
-              onClick={handleDownloadPDF}
-              className="bg-gray-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-gray-700 transition-colors inline-flex items-center gap-2"
+            <Link
+              to="/downloads/worksheets"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-gray-600 px-4 py-2 font-semibold text-white transition-colors hover:bg-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600"
             >
-              <Download size={18} />
-              Download PDF
+              <Download size={18} aria-hidden />
+              Printable worksheets
+            </Link>
+            <button
+              type="button"
+              onClick={handlePrintGuide}
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 font-semibold text-gray-800 transition-colors hover:bg-gray-50 print:hidden dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700"
+            >
+              <FileText size={18} aria-hidden />
+              Print this guide
             </button>
           </div>
-        </div>
+        </section>
 
-        {/* General Tips */}
-        <div className="bg-blue-50 rounded-lg p-6 mb-8 bg-light">
-          <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-primary">
+        <section className="mb-8 rounded-lg bg-blue-50 p-6 dark:bg-blue-950/30">
+          <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-gray-900 dark:text-white">
             <Lightbulb size={24} />
             General Tips for Teaching Digital Privacy
           </h3>
-          <ul className="space-y-2 text-gray-700">
+          <ul className="space-y-2 text-gray-700 dark:text-gray-300">
             <li className="flex items-start gap-2">
               <CheckCircle size={18} className="text-green-600 mt-1 flex-shrink-0" />
               <span>Use concrete examples that children can relate to in their daily lives</span>
@@ -109,7 +110,7 @@ const ClassroomActivitiesPage: React.FC = () => {
               <span>Keep it positive, focusing on empowerment rather than fear</span>
             </li>
           </ul>
-        </div>
+        </section>
 
         {/* Chapters */}
         {classroomActivities.map((chapter) => {
@@ -117,47 +118,45 @@ const ClassroomActivitiesPage: React.FC = () => {
           return (
             <div
               key={chapter.id}
-              className="bg-white rounded-xl shadow-md mb-6 overflow-hidden"
-              style={{
-                backgroundColor: 'var(--card-color)',
-                boxShadow: 'var(--shadow-md)'
-              }}
+              className="mb-6 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800"
             >
-              {/* Chapter Header */}
               <button
+                type="button"
                 onClick={() => toggleChapter(chapter.id)}
-                className="w-full p-6 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
-                style={{ backgroundColor: isExpanded ? 'var(--light)' : undefined }}
+                aria-expanded={isExpanded}
+                className={`flex w-full items-center justify-between p-6 text-left transition-colors hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 dark:hover:bg-gray-700/50 ${
+                  isExpanded ? 'bg-gray-50 dark:bg-gray-700/30' : ''
+                }`}
               >
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-full bg-gradient-to-r from-green-500 to-emerald-600 flex items-center justify-center text-white font-bold text-xl">
                     {chapter.number}
                   </div>
                   <div>
-                    <h2 className="text-2xl font-bold text-primary">
+                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
                       Chapter {chapter.number}: {chapter.title}
                     </h2>
                     {chapter.storyQuote && (
-                      <p className="text-sm mt-1 italic flex items-center gap-2 text-gray-600">
-                        <Quote size={14} />
+                      <p className="mt-1 flex items-center gap-2 text-sm italic text-gray-600 dark:text-gray-400">
+                        <Quote size={14} aria-hidden />
                         {chapter.storyQuote}
                       </p>
                     )}
                   </div>
                 </div>
-                {isExpanded ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
+                {isExpanded ? <ChevronUp size={24} aria-hidden /> : <ChevronDown size={24} aria-hidden />}
               </button>
 
               {/* Chapter Content */}
               {isExpanded && (
                 <div className="px-6 pb-6">
                   {/* Story Connection */}
-                  <div className="bg-blue-50 rounded-lg p-4 mb-6 bg-light">
-                    <h3 className="font-semibold mb-2 flex items-center gap-2 text-primary">
-                      <BookOpen size={18} />
+                  <div className="mb-6 rounded-lg bg-blue-50 p-4 dark:bg-blue-950/30">
+                    <h3 className="mb-2 flex items-center gap-2 font-semibold text-gray-900 dark:text-white">
+                      <BookOpen size={18} aria-hidden />
                       Story Connection
                     </h3>
-                    <p className="text-gray-700">{chapter.storyConnection}</p>
+                    <p className="text-gray-700 dark:text-gray-300">{chapter.storyConnection}</p>
                   </div>
 
                   {/* Activities */}
@@ -167,38 +166,40 @@ const ClassroomActivitiesPage: React.FC = () => {
                       return (
                         <div
                           key={activity.id}
-                          className="border-2 rounded-lg overflow-hidden"
-                          style={{ borderColor: 'var(--gray-300)' }}
+                          className="overflow-hidden rounded-lg border-2 border-gray-200 dark:border-gray-600"
                         >
                           <button
+                            type="button"
                             onClick={() => toggleActivity(activity.id)}
-                            className="w-full p-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
-                            style={{ backgroundColor: isActivityExpanded ? 'var(--light)' : undefined }}
+                            aria-expanded={isActivityExpanded}
+                            className={`flex w-full items-center justify-between p-4 text-left transition-colors hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 dark:hover:bg-gray-700/50 ${
+                              isActivityExpanded ? 'bg-gray-50 dark:bg-gray-700/30' : ''
+                            }`}
                           >
-                            <h3 className="text-lg font-semibold text-primary">
+                            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                               {activity.title}
                             </h3>
-                            {isActivityExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                            {isActivityExpanded ? <ChevronUp size={20} aria-hidden /> : <ChevronDown size={20} aria-hidden />}
                           </button>
 
                           {isActivityExpanded && (
-                            <div className="p-4 space-y-4 bg-light">
+                            <div className="space-y-4 bg-gray-50 p-4 dark:bg-gray-900/40">
                               {/* Learning Objective */}
                               <div>
-                                <h4 className="font-semibold mb-2 flex items-center gap-2 text-primary">
+                                <h4 className="mb-2 flex items-center gap-2 font-semibold text-gray-900 dark:text-white">
                                   <GraduationCap size={18} />
                                   Learning Objective
                                 </h4>
-                                <p className="text-gray-700">{activity.learningObjective}</p>
+                                <p className="text-gray-700 dark:text-gray-300">{activity.learningObjective}</p>
                               </div>
 
                               {/* Story Connection */}
                               {activity.storyConnection && (
-                                <div className="bg-green-50 rounded p-3">
-                                  <h4 className="font-semibold mb-1 text-sm text-primary">
+                                <div className="rounded bg-green-50 p-3 dark:bg-green-950/30">
+                                  <h4 className="mb-1 text-sm font-semibold text-gray-900 dark:text-white">
                                     Story Connection
                                   </h4>
-                                  <p className="text-sm text-gray-700">
+                                  <p className="text-sm text-gray-700 dark:text-gray-300">
                                     {activity.storyConnection}
                                   </p>
                                 </div>
@@ -206,11 +207,11 @@ const ClassroomActivitiesPage: React.FC = () => {
 
                               {/* Materials */}
                               <div>
-                                <h4 className="font-semibold mb-2 flex items-center gap-2 text-primary">
+                                <h4 className="mb-2 flex items-center gap-2 font-semibold text-gray-900 dark:text-white">
                                   <ClipboardList size={18} />
                                   Materials
                                 </h4>
-                                <ul className="list-disc list-inside space-y-1 text-gray-700">
+                                <ul className="list-inside list-disc space-y-1 text-gray-700 dark:text-gray-300">
                                   {activity.materials.map((material, idx) => (
                                     <li key={idx}>{material}</li>
                                   ))}
@@ -219,10 +220,10 @@ const ClassroomActivitiesPage: React.FC = () => {
 
                               {/* Instructions */}
                               <div>
-                                <h4 className="font-semibold mb-2 text-primary">
+                                <h4 className="mb-2 font-semibold text-gray-900 dark:text-white">
                                   Instructions
                                 </h4>
-                                <ol className="list-decimal list-inside space-y-2 text-gray-700">
+                                <ol className="list-inside list-decimal space-y-2 text-gray-700 dark:text-gray-300">
                                   {activity.instructions.map((instruction, idx) => (
                                     <li key={idx}>{instruction}</li>
                                   ))}
@@ -232,10 +233,10 @@ const ClassroomActivitiesPage: React.FC = () => {
                               {/* Scenario Examples */}
                               {activity.scenarioExamples && activity.scenarioExamples.length > 0 && (
                                 <div>
-                                  <h4 className="font-semibold mb-2 text-primary">
+                                  <h4 className="mb-2 font-semibold text-gray-900 dark:text-white">
                                     Scenario Examples
                                   </h4>
-                                  <ul className="list-disc list-inside space-y-1 text-gray-700">
+                                  <ul className="list-inside list-disc space-y-1 text-gray-700 dark:text-gray-300">
                                     {activity.scenarioExamples.map((scenario, idx) => (
                                       <li key={idx} className="italic">"{scenario}"</li>
                                     ))}
@@ -245,10 +246,10 @@ const ClassroomActivitiesPage: React.FC = () => {
 
                               {/* Discussion Prompts */}
                               <div>
-                                <h4 className="font-semibold mb-2 text-primary">
+                                <h4 className="mb-2 font-semibold text-gray-900 dark:text-white">
                                   Discussion Prompts
                                 </h4>
-                                <ul className="list-disc list-inside space-y-1 text-gray-700">
+                                <ul className="list-inside list-disc space-y-1 text-gray-700 dark:text-gray-300">
                                   {activity.discussionPrompts.map((prompt, idx) => (
                                     <li key={idx}>"{prompt}"</li>
                                   ))}
@@ -257,27 +258,27 @@ const ClassroomActivitiesPage: React.FC = () => {
 
                               {/* Assessment */}
                               <div>
-                                <h4 className="font-semibold mb-2 text-primary">
+                                <h4 className="mb-2 font-semibold text-gray-900 dark:text-white">
                                   Assessment
                                 </h4>
-                                <p className="text-gray-700">{activity.assessment}</p>
+                                <p className="text-gray-700 dark:text-gray-300">{activity.assessment}</p>
                               </div>
 
                               {/* Adaptations */}
                               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div className="bg-yellow-50 rounded p-3">
-                                  <h4 className="font-semibold mb-1 text-sm text-primary">
+                                <div className="rounded bg-yellow-50 p-3 dark:bg-yellow-950/30">
+                                  <h4 className="mb-1 text-sm font-semibold text-gray-900 dark:text-white">
                                     For Younger Students
                                   </h4>
-                                  <p className="text-sm text-gray-700">
+                                  <p className="text-sm text-gray-700 dark:text-gray-300">
                                     {activity.adaptations.younger}
                                   </p>
                                 </div>
-                                <div className="bg-purple-50 rounded p-3">
-                                  <h4 className="font-semibold mb-1 text-sm text-primary">
+                                <div className="rounded bg-purple-50 p-3 dark:bg-purple-950/30">
+                                  <h4 className="mb-1 text-sm font-semibold text-gray-900 dark:text-white">
                                     For Advanced Students
                                   </h4>
-                                  <p className="text-sm text-gray-700">
+                                  <p className="text-sm text-gray-700 dark:text-gray-300">
                                     {activity.adaptations.advanced}
                                   </p>
                                 </div>
@@ -294,18 +295,17 @@ const ClassroomActivitiesPage: React.FC = () => {
           );
         })}
 
-        {/* Cross-Curricular Connections */}
-        <div className="bg-white rounded-xl shadow-md p-6 mb-6" style={{ backgroundColor: 'var(--card-color)' }}>
-          <h2 className="text-2xl font-bold mb-6 text-primary">
+        <section className="mb-6 rounded-xl border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800">
+          <h2 className="mb-6 text-2xl font-bold text-gray-900 dark:text-white">
             Cross-Curricular Connections
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             <div>
-              <h3 className="font-semibold mb-3 flex items-center gap-2 text-primary">
-                <BookOpen size={20} />
+              <h3 className="mb-3 flex items-center gap-2 font-semibold text-gray-900 dark:text-white">
+                <BookOpen size={20} aria-hidden />
                 Language Arts
               </h3>
-              <ul className="space-y-2 text-gray-700">
+              <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                 {crossCurricularConnections.languageArts.map((item, idx) => (
                   <li key={idx} className="flex items-start gap-2">
                     <span className="text-green-600 mt-1">•</span>
@@ -315,11 +315,11 @@ const ClassroomActivitiesPage: React.FC = () => {
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold mb-3 flex items-center gap-2 text-primary">
-                <Palette size={20} />
+              <h3 className="mb-3 flex items-center gap-2 font-semibold text-gray-900 dark:text-white">
+                <Palette size={20} aria-hidden />
                 Art
               </h3>
-              <ul className="space-y-2 text-gray-700">
+              <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                 {crossCurricularConnections.art.map((item, idx) => (
                   <li key={idx} className="flex items-start gap-2">
                     <span className="text-green-600 mt-1">•</span>
@@ -329,11 +329,11 @@ const ClassroomActivitiesPage: React.FC = () => {
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold mb-3 flex items-center gap-2 text-primary">
-                <Calculator size={20} />
+              <h3 className="mb-3 flex items-center gap-2 font-semibold text-gray-900 dark:text-white">
+                <Calculator size={20} aria-hidden />
                 Math
               </h3>
-              <ul className="space-y-2 text-gray-700">
+              <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                 {crossCurricularConnections.math.map((item, idx) => (
                   <li key={idx} className="flex items-start gap-2">
                     <span className="text-green-600 mt-1">•</span>
@@ -343,11 +343,11 @@ const ClassroomActivitiesPage: React.FC = () => {
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold mb-3 flex items-center gap-2 text-primary">
-                <Globe size={20} />
+              <h3 className="mb-3 flex items-center gap-2 font-semibold text-gray-900 dark:text-white">
+                <Globe size={20} aria-hidden />
                 Social Studies
               </h3>
-              <ul className="space-y-2 text-gray-700">
+              <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                 {crossCurricularConnections.socialStudies.map((item, idx) => (
                   <li key={idx} className="flex items-start gap-2">
                     <span className="text-green-600 mt-1">•</span>
@@ -357,11 +357,11 @@ const ClassroomActivitiesPage: React.FC = () => {
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold mb-3 flex items-center gap-2 text-primary">
-                <FlaskConical size={20} />
+              <h3 className="mb-3 flex items-center gap-2 font-semibold text-gray-900 dark:text-white">
+                <FlaskConical size={20} aria-hidden />
                 Science
               </h3>
-              <ul className="space-y-2 text-gray-700">
+              <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                 {crossCurricularConnections.science.map((item, idx) => (
                   <li key={idx} className="flex items-start gap-2">
                     <span className="text-green-600 mt-1">•</span>
@@ -371,20 +371,19 @@ const ClassroomActivitiesPage: React.FC = () => {
               </ul>
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* Assessment Tools */}
-        <div className="bg-white rounded-xl shadow-md p-6 mb-6" style={{ backgroundColor: 'var(--card-color)' }}>
-          <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 text-primary">
-            <FileText size={28} />
+        <section className="mb-6 rounded-xl border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800">
+          <h2 className="mb-6 flex items-center gap-2 text-2xl font-bold text-gray-900 dark:text-white">
+            <FileText size={28} aria-hidden />
             Assessment Tools
           </h2>
           <div className="space-y-6">
             <div>
-              <h3 className="font-semibold mb-3 text-primary">
+              <h3 className="mb-3 font-semibold text-gray-900 dark:text-white">
                 Observation Checklist
               </h3>
-              <ul className="space-y-2 text-gray-700">
+              <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                 {assessmentTools.observationChecklist.map((item, idx) => (
                   <li key={idx} className="flex items-start gap-2">
                     <CheckCircle size={18} className="text-green-600 mt-1 flex-shrink-0" />
@@ -394,41 +393,40 @@ const ClassroomActivitiesPage: React.FC = () => {
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold mb-2 text-primary">
+              <h3 className="mb-2 font-semibold text-gray-900 dark:text-white">
                 Digital Privacy Scenario Cards
               </h3>
-              <p className="text-gray-700">{assessmentTools.digitalPrivacyScenarioCards}</p>
+              <p className="text-gray-700 dark:text-gray-300">{assessmentTools.digitalPrivacyScenarioCards}</p>
             </div>
             <div>
-              <h3 className="font-semibold mb-2 text-primary">
+              <h3 className="mb-2 font-semibold text-gray-900 dark:text-white">
                 Privacy Concept Map
               </h3>
-              <p className="text-gray-700">{assessmentTools.privacyConceptMap}</p>
+              <p className="text-gray-700 dark:text-gray-300">{assessmentTools.privacyConceptMap}</p>
             </div>
             <div>
-              <h3 className="font-semibold mb-2 text-primary">
+              <h3 className="mb-2 font-semibold text-gray-900 dark:text-white">
                 Exit Tickets
               </h3>
-              <p className="text-gray-700">{assessmentTools.exitTickets}</p>
+              <p className="text-gray-700 dark:text-gray-300">{assessmentTools.exitTickets}</p>
             </div>
             <div>
-              <h3 className="font-semibold mb-2 text-primary">
+              <h3 className="mb-2 font-semibold text-gray-900 dark:text-white">
                 Culminating Project
               </h3>
-              <p className="text-gray-700">{assessmentTools.culminatingProject}</p>
+              <p className="text-gray-700 dark:text-gray-300">{assessmentTools.culminatingProject}</p>
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* Family Connection */}
-        <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-lg p-6 mb-8 bg-light">
-          <h2 className="text-2xl font-bold mb-4 text-primary">
+        <section className="mb-8 rounded-lg bg-gradient-to-r from-blue-50 to-green-50 p-6 dark:from-blue-950/30 dark:to-green-950/30">
+          <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-white">
             Family Connection
           </h2>
-          <p className="mb-4 text-gray-700">
+          <p className="mb-4 text-gray-700 dark:text-gray-300">
             Maintaining consistency between school and home is crucial for reinforcing privacy concepts. Consider:
           </p>
-          <ul className="space-y-2 text-gray-700">
+          <ul className="space-y-2 text-gray-700 dark:text-gray-300">
             <li className="flex items-start gap-2">
               <CheckCircle size={18} className="text-green-600 mt-1 flex-shrink-0" />
               <span>Sending home a summary of privacy concepts covered in class</span>
@@ -443,40 +441,39 @@ const ClassroomActivitiesPage: React.FC = () => {
             </li>
             <li className="flex items-start gap-2">
               <CheckCircle size={18} className="text-green-600 mt-1 flex-shrink-0" />
-              <span>Hosting a "Privacy Panda Family Night" where students can teach their families what they've learned</span>
+              <span>Hosting a &ldquo;Privacy Panda Family Night&rdquo; where students can teach their families what they&apos;ve learned</span>
             </li>
             <li className="flex items-start gap-2">
               <CheckCircle size={18} className="text-green-600 mt-1 flex-shrink-0" />
               <span>Providing a list of recommended privacy-focused books and media for families</span>
             </li>
           </ul>
-        </div>
+        </section>
 
-        {/* Call to Action */}
-        <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl p-8 text-center mb-8">
+        <section className="mb-8 rounded-xl bg-gradient-to-r from-green-500 to-emerald-600 p-8 text-center text-white">
           <h2 className="text-2xl font-bold mb-4">
             Ready to Use These Activities?
           </h2>
           <p className="text-lg mb-6 opacity-90 max-w-2xl mx-auto">
-            These activities are designed to be flexible and can be adjusted to fit your classroom's specific needs, schedule, and available resources.
+            These activities are designed to be flexible and can be adjusted to fit your classroom&apos;s specific needs, schedule, and available resources.
           </p>
-          <div className="flex flex-wrap gap-4 justify-center">
+          <div className="flex flex-wrap justify-center gap-4">
             <Link
               to="/educator-tools"
-              className="bg-white text-green-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center gap-2"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-white px-6 py-3 font-semibold text-green-600 transition-colors hover:bg-gray-100"
             >
-              <Users size={20} />
+              <Users size={20} aria-hidden />
               More Educator Resources
             </Link>
             <Link
               to="/story"
-              className="bg-green-700 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-800 transition-colors inline-flex items-center gap-2"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-green-800 px-6 py-3 font-semibold text-white transition-colors hover:bg-green-900"
             >
-              <BookOpen size={20} />
+              <BookOpen size={20} aria-hidden />
               Read the Story
             </Link>
           </div>
-        </div>
+        </section>
       </div>
     </PageLayout>
   );
