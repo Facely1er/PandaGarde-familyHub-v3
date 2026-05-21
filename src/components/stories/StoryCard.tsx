@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ChevronRight, Play } from 'lucide-react';
 import { Story, isFoundationStory } from '../../data/stories';
+import { StoryCoverArt } from './StoryCoverArt';
 
 const AGE_LABELS: Record<string, string> = {
   early: 'Ages 5–7',
@@ -16,9 +17,7 @@ export function StoryCard({ story }: { story: Story }) {
       to={`/stories/${story.slug}`}
       className="group block rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-hidden no-underline text-inherit transition-all hover:border-green-600 dark:hover:border-green-500 hover:shadow-card-hover"
     >
-      <div className={`${story.coverColor} flex items-center justify-center h-32 text-5xl`}>
-        {story.coverEmoji}
-      </div>
+      <StoryCoverArt story={story} variant="card" />
 
       <div className="p-4">
         <div className="flex items-center gap-2 mb-2 flex-wrap">

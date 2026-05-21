@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { loadDfaJourneyState } from '../lib/dfaJourney';
 import { getFoundationStory, getLatestStory, ORIGIN_STORY_SLUG } from '../data/stories';
+import { StoryCoverArt } from '../components/stories/StoryCoverArt';
 
 const HomePage: React.FC = () => {
   const journey = useMemo(() => loadDfaJourneyState(), []);
@@ -405,9 +406,7 @@ const HomePage: React.FC = () => {
               >
                 <span className="homepage-spotlight__tag">Start here · Digital Bamboo Forest</span>
                 <div className="flex items-start gap-3">
-                  <span className="text-3xl" aria-hidden="true">
-                    {foundationStory.coverEmoji}
-                  </span>
+                  <StoryCoverArt story={foundationStory} variant="inline" />
                   <div>
                     <h3>{foundationStory.title}</h3>
                     <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
