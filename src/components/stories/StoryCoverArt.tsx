@@ -115,7 +115,10 @@ export function StoryCoverArt({ story, variant }: StoryCoverArtProps) {
             width={640}
             height={360}
             className="absolute inset-0 z-0 h-full w-full object-cover"
-            style={{ objectPosition: story.coverImagePosition ?? 'center' }}
+            style={{
+              objectPosition:
+                story.coverHeroImagePosition ?? story.coverImagePosition ?? 'center',
+            }}
             loading="lazy"
             onError={() => setHeroFailed(true)}
           />

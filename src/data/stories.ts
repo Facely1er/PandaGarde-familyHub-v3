@@ -34,7 +34,8 @@ export interface Story {
   coverEmoji: string;        // Fallback when cover image unavailable
   coverColor: string;        // Tailwind bg class behind image / fallback
   coverImage?: string;       // Episode-specific cover under /public (see images/stories/covers/)
-  coverImagePosition?: string; // CSS object-position for cover crop
+  coverImagePosition?: string; // CSS object-position for card/grid cover crop
+  coverHeroImagePosition?: string; // CSS object-position for StoryListPage hero thumbnail
   summary: string;
   chapters: StoryChapter[];
   keyLesson: string;
@@ -58,7 +59,8 @@ const episode1: Story = {
   publishedAt: '2024-01-01',
   coverEmoji: '🐼',
   coverColor: 'bg-emerald-100',
-  coverImagePosition: 'left top',
+  coverImagePosition: 'left center',
+  coverHeroImagePosition: '32% center',
   summary:
     'Po the panda accidentally shares everything with the entire forest — and learns from wise Elder Turtle how to protect his information and help others do the same.',
   characters: ['Po (Privacy Panda)', 'Elder Turtle', 'Miki the Monkey', 'Billy the Beaver', 'Ruby the Rabbit'],
