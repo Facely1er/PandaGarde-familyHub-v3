@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import {
   ArrowLeft,
   BookOpen,
@@ -151,9 +152,7 @@ const LearningCard: React.FC<{
             <ul className="mt-4 space-y-3">
               {activity.keyLearnings.map((tip) => (
                 <li key={tip} className="flex items-start gap-3 text-sm text-gray-700 dark:text-gray-200">
-                  <span className="mt-0.5 text-teal-500" aria-hidden="true">
-                    ✓
-                  </span>
+                  <span className="mt-0.5 text-teal-500" aria-hidden="true">✓</span>
                   <span>{tip}</span>
                 </li>
               ))}
@@ -291,8 +290,13 @@ const GroupHeading: React.FC<{ group: AgeGroup }> = ({ group }) => (
 );
 
 const ActivitiesScreen: React.FC = () => {
+  // Read initial age filter passed via React Router state (e.g. from KidsScreen age-group badges)
+  const location = useLocation();
+  const locationState = location.state as { initialAgeFilter?: AgeTabId } | null;
+  const initialAge: AgeTabId = locationState?.initialAgeFilter ?? 'all';
+
   const [selectedActivityId, setSelectedActivityId] = useState<string | null>(null);
-  const [activeAge, setActiveAge] = useState<AgeTabId>('all');
+  const [activeAge, setActiveAge] = useState<AgeTabId>(initialAge);
   const [activeFocus, setActiveFocus] = useState<FocusTabId>('all');
   const [showLearningCard, setShowLearningCard] = useState(false);
   const { progress, getActivityProgress } = useProgress();
@@ -366,30 +370,22 @@ const ActivitiesScreen: React.FC = () => {
         <div className="border-b border-gray-200 bg-white/90 px-4 py-4 dark:border-gray-700 dark:bg-gray-800/80">
           <div className="mx-auto grid max-w-5xl gap-3 md:grid-cols-2 xl:grid-cols-4">
             <div className="rounded-2xl bg-teal-50 p-4 dark:bg-teal-900/20">
-              <p className="text-xs font-semibold uppercase tracking-wide text-teal-700 dark:text-teal-300">
-                Learning goal
-              </p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-teal-700 dark:text-teal-300">Learning goal</p>
               <p className="mt-2 text-sm text-teal-950 dark:text-teal-100">{selectedActivity.learningObjective}</p>
             </div>
             <div className="rounded-2xl bg-indigo-50 p-4 dark:bg-indigo-900/20">
-              <p className="text-xs font-semibold uppercase tracking-wide text-indigo-700 dark:text-indigo-300">
-                Family cue
-              </p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-indigo-700 dark:text-indigo-300">Family cue</p>
               <p className="mt-2 text-sm text-indigo-950 dark:text-indigo-100">{selectedActivity.familyPrompt}</p>
             </div>
             <div className="rounded-2xl bg-amber-50 p-4 dark:bg-amber-900/20">
-              <p className="text-xs font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-300">
-                Focus
-              </p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-300">Focus</p>
               <p className="mt-2 text-sm text-amber-950 dark:text-amber-100">
                 {selectedActivity.focus} · {selectedActivity.duration}
               </p>
               <p className="mt-1 text-xs text-amber-800/80 dark:text-amber-100/80">{selectedActivity.familyMode}</p>
             </div>
             <div className="rounded-2xl bg-emerald-50 p-4 dark:bg-emerald-900/20">
-              <p className="text-xs font-semibold uppercase tracking-wide text-emerald-700 dark:text-emerald-300">
-                Progress
-              </p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-emerald-700 dark:text-emerald-300">Progress</p>
               <p className="mt-2 text-sm text-emerald-950 dark:text-emerald-100">
                 {selectedActivityProgress?.completed
                   ? `Completed${selectedActivityProgress.score !== undefined ? ` · ${selectedActivityProgress.score}%` : ''}`
@@ -591,7 +587,6 @@ const ActivitiesScreen: React.FC = () => {
                       groupLabel: group.label,
                       groupEmoji: group.emoji,
                     };
-
                     const progressDetails = getActivityProgress(getCompletionId(fullActivity));
                     return (
                       <ActivityCard

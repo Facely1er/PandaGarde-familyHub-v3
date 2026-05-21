@@ -1,34 +1,34 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Shield, Users, Gamepad2, Award, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Shield, Users, Gamepad2, Award } from 'lucide-react';
 import { updateDfaJourneyPhase } from '../../lib/dfaJourney';
 
 export const HUB_WELCOMED_KEY = 'pandagarde_hub_welcomed';
 
 const phases = [
-  { label: 'Phase 1', name: 'Service Catalog', description: 'Map the apps & services your family uses', done: true },
-  { label: 'Phase 2', name: 'Digital Footprint', description: 'Understand your online exposure', done: true },
-  { label: 'Phase 3', name: 'Privacy Assessment', description: 'Identify risks and priorities', done: true },
-  { label: 'Phase 4', name: 'Family Hub', description: 'Act on your plan — you are here!', done: false, active: true },
+  { label: 'Step 1', name: 'Service Catalog', description: 'Map the apps & services your family uses', done: true },
+  { label: 'Step 2', name: 'Digital Footprint', description: 'Understand your online exposure', done: true },
+  { label: 'Step 3', name: 'Privacy Assessment', description: 'Identify risks and priorities', done: true },
+  { label: 'Step 4', name: 'Family Hub', description: 'Act on your plan — you are here!', done: false, active: true },
 ];
 
 const sections = [
   {
     icon: Users,
     title: 'Family Members',
-    description: 'Add your kids and guardians to track everyone\'s progress together.',
+    description: "Add your kids and guardians to track everyone's progress together.",
     color: 'text-teal-600 dark:text-teal-400 bg-teal-50 dark:bg-teal-900/30',
   },
   {
     icon: Gamepad2,
     title: 'Activities',
-    description: 'Privacy games and learning exercises designed for every age.',
+    description: 'Age-matched privacy missions for ages 5–17 — grounded in real-life scenarios.',
     color: 'text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30',
   },
   {
     icon: Award,
     title: 'Progress',
-    description: 'Track achievements, certificates, and completed goals.',
+    description: 'Track completions, earn badges, and download certificates together.',
     color: 'text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/30',
   },
 ];
@@ -53,11 +53,7 @@ const WelcomeScreen: React.FC = () => {
           {/* Hero */}
           <div className="text-center space-y-4">
             <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl overflow-hidden shadow-lg border-2 border-teal-200 dark:border-teal-700 bg-white mx-auto">
-              <img
-                src="/LogoPandagarde.png"
-                alt="PandaGarde"
-                className="w-full h-full object-contain"
-              />
+              <img src="/LogoPandagarde.png" alt="PandaGarde" className="w-full h-full object-contain" />
             </div>
             <div>
               <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight">
@@ -65,59 +61,14 @@ const WelcomeScreen: React.FC = () => {
                 <span className="text-teal-600 dark:text-teal-400">Family Hub</span>
               </h1>
               <p className="mt-3 text-base sm:text-lg text-gray-600 dark:text-gray-300">
-                This is Phase&nbsp;4 of the PandaGarde DFA journey — your dedicated workspace to act on your privacy plan as a family.
+                Your family's home base for privacy learning — age-matched activities, shared goals, and progress you can track together.
               </p>
             </div>
           </div>
 
-          {/* Journey progress */}
-          <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-4">
-              Your DFA Journey
-            </h2>
-            <ol className="space-y-3">
-              {phases.map((phase, index) => (
-                <li key={phase.label} className="flex items-start gap-3">
-                  <span
-                    className={[
-                      'mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold',
-                      phase.active
-                        ? 'bg-teal-600 text-white ring-2 ring-teal-300 dark:ring-teal-700'
-                        : phase.done
-                        ? 'bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300'
-                        : 'bg-gray-100 dark:bg-gray-700 text-gray-500',
-                    ].join(' ')}
-                  >
-                    {phase.done ? <CheckCircle2 size={14} aria-hidden="true" /> : index + 1}
-                  </span>
-                  <div className="min-w-0">
-                    <p
-                      className={[
-                        'text-sm font-semibold',
-                        phase.active
-                          ? 'text-teal-700 dark:text-teal-300'
-                          : 'text-gray-700 dark:text-gray-200',
-                      ].join(' ')}
-                    >
-                      {phase.label} — {phase.name}
-                      {phase.active && (
-                        <span className="ml-2 inline-block rounded-full bg-teal-100 dark:bg-teal-900/50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-teal-700 dark:text-teal-300">
-                          You are here
-                        </span>
-                      )}
-                    </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">{phase.description}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
-
-          {/* Hub sections preview */}
+          {/* What's inside */}
           <div className="space-y-3">
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
-              What's inside
-            </h2>
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">What's inside</h2>
             <ul className="grid gap-3">
               {sections.map(({ icon: Icon, title, description, color }) => (
                 <li
@@ -135,6 +86,53 @@ const WelcomeScreen: React.FC = () => {
               ))}
             </ul>
           </div>
+
+          {/* Journey tracker — collapsed by default for users not coming from the assessment */}
+          <details className="group rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm">
+            <summary className="flex cursor-pointer items-center justify-between px-5 py-4 text-sm font-semibold text-gray-700 dark:text-gray-200 list-none">
+              <span>Coming from the Privacy Assessment?</span>
+              <span className="ml-2 text-xs font-normal text-gray-400 group-open:hidden">Show steps</span>
+              <span className="ml-2 text-xs font-normal text-gray-400 hidden group-open:inline">Hide</span>
+            </summary>
+            <div className="px-5 pb-5">
+              <p className="mb-4 text-xs text-gray-500 dark:text-gray-400">
+                Your Privacy Journey — four steps from mapping your family's digital life to acting on your plan.
+              </p>
+              <ol className="space-y-3">
+                {phases.map((phase, index) => (
+                  <li key={phase.label} className="flex items-start gap-3">
+                    <span
+                      className={[
+                        'mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold',
+                        phase.active
+                          ? 'bg-teal-600 text-white ring-2 ring-teal-300 dark:ring-teal-700'
+                          : phase.done
+                          ? 'bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300'
+                          : 'bg-gray-100 dark:bg-gray-700 text-gray-500',
+                      ].join(' ')}
+                    >
+                      {phase.done ? (
+                        <svg viewBox="0 0 14 14" width={14} height={14} fill="none" stroke="currentColor" strokeWidth={2} aria-hidden="true"><path d="M2 7l3.5 3.5L12 3.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                      ) : (
+                        index + 1
+                      )}
+                    </span>
+                    <div className="min-w-0">
+                      <p className={['text-sm font-semibold', phase.active ? 'text-teal-700 dark:text-teal-300' : 'text-gray-700 dark:text-gray-200'].join(' ')}>
+                        {phase.label} — {phase.name}
+                        {phase.active && (
+                          <span className="ml-2 inline-block rounded-full bg-teal-100 dark:bg-teal-900/50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-teal-700 dark:text-teal-300">
+                            You are here
+                          </span>
+                        )}
+                      </p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">{phase.description}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </details>
 
           {/* Privacy note */}
           <div className="flex items-start gap-3 rounded-xl bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 p-4 text-sm text-green-800 dark:text-green-200">
