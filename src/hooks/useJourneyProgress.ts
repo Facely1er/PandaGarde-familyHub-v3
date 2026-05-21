@@ -139,7 +139,7 @@ export const useJourneyProgress = () => {
 
       // Step 2: Service Catalog - completed if services added
       const totalServices = familyMembers.reduce((count, member) => {
-        const memberServices = (member as any).services || [];
+        const memberServices = member.services ?? [];
         return count + memberServices.length;
       }, 0);
       

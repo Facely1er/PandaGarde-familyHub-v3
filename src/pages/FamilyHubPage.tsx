@@ -884,9 +884,9 @@ const FamilyHubPage: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {familyMembers.map((member) => {
                   const memberName = `${member.first_name} ${member.last_name}`.trim();
-                  const progress = (member as any).progress || 0;
-                  const completedActivities = (member as any).completedActivities || 0;
-                  const totalActivities = (member as any).totalActivities || 0;
+                  const progress = member.privacyScore ?? 0;
+                  const completedActivities = member.progress?.completedMissions.length ?? 0;
+                  const totalActivities = member.progress?.completedMissions.length ?? 0;
                   
                   return (
                     <div key={member.id} className="text-center">

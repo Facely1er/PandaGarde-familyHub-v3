@@ -16,6 +16,13 @@ interface Achievement {
   icon: string;
 }
 
+interface StoryChoice {
+  text: string;
+  nextScene: string;
+  consequence?: string;
+  timestamp?: number;
+}
+
 const InteractiveStoryPage: React.FC = () => {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
@@ -67,7 +74,7 @@ const InteractiveStoryPage: React.FC = () => {
     try {
       // Save choice to localStorage
       const savedChoicesStr = localStorage.getItem('story-choices') || '[]';
-      let savedChoices: any[] = [];
+      let savedChoices: StoryChoice[] = [];
       try {
         savedChoices = JSON.parse(savedChoicesStr);
         if (!Array.isArray(savedChoices)) {
@@ -101,7 +108,7 @@ const InteractiveStoryPage: React.FC = () => {
   const checkChoiceAchievements = () => {
     try {
       const savedChoicesStr = localStorage.getItem('story-choices') || '[]';
-      let savedChoices: any[] = [];
+      let savedChoices: StoryChoice[] = [];
       try {
         savedChoices = JSON.parse(savedChoicesStr);
         if (!Array.isArray(savedChoices)) {
@@ -112,7 +119,7 @@ const InteractiveStoryPage: React.FC = () => {
         savedChoices = [];
       }
       
-      const privacyChoices = savedChoices.filter((choice: any) => 
+      const privacyChoices = savedChoices.filter((choice) =>
         choice && choice.consequence && typeof choice.consequence === 'string' && choice.consequence.includes('privacy')
       );
       
@@ -322,18 +329,18 @@ const InteractiveStoryPage: React.FC = () => {
   // Unlock first scene achievement
   useEffect(() => {
     if (currentSceneIndex === 0) {
-      setAchievements((prev: any[]) => prev.map((a: any) => 
-        a.id === 'first-scene' ? { ...a, unlocked: true } : a
-      ));
+      setAchievements((prev) =>
+        prev.map((a) => (a.id === 'first-scene' ? { ...a, unlocked: true } : a))
+      );
     }
   }, [currentSceneIndex]);
 
   // Unlock privacy learner achievement
   useEffect(() => {
     if (currentSceneIndex >= 5) {
-      setAchievements((prev: any[]) => prev.map((a: any) => 
-        a.id === 'privacy-learner' ? { ...a, unlocked: true } : a
-      ));
+      setAchievements((prev) =>
+        prev.map((a) => (a.id === 'privacy-learner' ? { ...a, unlocked: true } : a))
+      );
     }
   }, [currentSceneIndex]);
 

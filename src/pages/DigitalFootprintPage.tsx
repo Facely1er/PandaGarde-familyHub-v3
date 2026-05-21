@@ -37,7 +37,7 @@ const DigitalFootprintPage: React.FC = () => {
   let totalServicesCount = 0;
 
   familyMembers.forEach(member => {
-    const memberServiceIds = (member as any).services?.map((s: any) => s.serviceId) || [];
+    const memberServiceIds = member.services?.map((s) => s.serviceId) ?? [];
     memberServices[member.id] = memberServiceIds;
     totalServicesCount += memberServiceIds.length;
   });

@@ -287,8 +287,8 @@ export class COPPAComplianceManager {
     
     // Disable analytics
     if (typeof window !== 'undefined') {
-      (window as any).ga?.('set', 'anonymizeIp', true);
-      (window as any).ga?.('set', 'allowAdFeatures', false);
+      window.ga?.('set', 'anonymizeIp', true);
+      window.ga?.('set', 'allowAdFeatures', false);
     }
   }
 

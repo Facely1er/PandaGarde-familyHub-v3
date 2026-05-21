@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Clock, Target, Shield, Users, AlertTriangle } from 'lucide-react';
+import { ArrowLeft, Clock, Target, Shield, Users, AlertTriangle, type LucideIcon } from 'lucide-react';
 
 type AssessmentType = 'child-safety' | 'privacy-settings' | 'device-security' | 'data-sharing';
 
@@ -10,7 +10,7 @@ interface QuickAssessment {
   description: string;
   duration: string;
   questions: number;
-  icon: React.ComponentType<any>;
+  icon: LucideIcon;
   color: string;
 }
 
