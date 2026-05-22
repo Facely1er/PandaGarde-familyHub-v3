@@ -191,7 +191,7 @@ function Header() {
 
               <button
                 type="button"
-                className="search-button"
+                className="search-button header-icon-btn"
                 onClick={() => setIsSearchModalOpen(true)}
                 aria-label="Open search"
                 title="Search (Ctrl/Cmd + K)"
@@ -201,7 +201,7 @@ function Header() {
 
               <button
                 type="button"
-                className="theme-toggle"
+                className="theme-toggle header-icon-btn"
                 onClick={toggleTheme}
                 aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
               >
@@ -210,7 +210,7 @@ function Header() {
 
               <button
                 type="button"
-                className="mobile-menu-toggle"
+                className="mobile-menu-toggle header-icon-btn"
                 onClick={handleMobileMenuToggle}
                 aria-expanded={isMobileMenuOpen}
                 aria-controls="mobile-navigation"

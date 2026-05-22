@@ -1,10 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { BookOpen, ShieldCheck, LayoutDashboard, Mail, HelpCircle, Scale, Accessibility, PlayCircle, HeartHandshake } from 'lucide-react';
+import {
+  BookOpen,
+  Shield,
+  LayoutDashboard,
+  Mail,
+  HelpCircle,
+  Scale,
+  Accessibility,
+  PlayCircle,
+  HeartHandshake,
+  Compass,
+  FileText,
+  Cookie,
+} from 'lucide-react';
 
 const Footer: React.FC = () => {
   const exploreLinks = [
-    { icon: ShieldCheck, href: '/how-it-works', label: 'How It Works' },
+    { icon: Compass, href: '/how-it-works', label: 'How It Works' },
     { icon: BookOpen, href: '/resources', label: 'Resources' },
     { icon: LayoutDashboard, href: '/family-hub', label: 'Family Hub' },
     { icon: PlayCircle, href: '/get-started', label: 'Get Started' },
@@ -18,9 +31,9 @@ const Footer: React.FC = () => {
   ];
 
   const legalLinks = [
-    { icon: ShieldCheck, href: '/privacy', label: 'Privacy' },
-    { icon: ShieldCheck, href: '/terms', label: 'Terms' },
-    { icon: ShieldCheck, href: '/cookies', label: 'Cookies' },
+    { icon: Shield, href: '/privacy', label: 'Privacy' },
+    { icon: FileText, href: '/terms', label: 'Terms' },
+    { icon: Cookie, href: '/cookies', label: 'Cookies' },
     { icon: Accessibility, href: '/accessibility', label: 'Accessibility' },
   ];
 
@@ -44,7 +57,7 @@ const Footer: React.FC = () => {
           <div className="footer-grid">
             <div className="footer-column">
               <h4>Explore</h4>
-              <ul>
+              <ul className="footer-menu-list">
                 {exploreLinks.map(({ icon: Icon, href, label }) => (
                   <li key={href}>
                     <Link to={href} className="footer-link">
@@ -58,7 +71,7 @@ const Footer: React.FC = () => {
 
             <div className="footer-column">
               <h4>Support</h4>
-              <ul>
+              <ul className="footer-menu-list">
                 {supportLinks.map(({ icon: Icon, href, label }) => (
                   <li key={href}>
                     <Link to={href} className="footer-link">
@@ -72,7 +85,7 @@ const Footer: React.FC = () => {
 
             <div className="footer-column">
               <h4>Legal</h4>
-              <ul>
+              <ul className="footer-menu-list">
                 {legalLinks.map(({ icon: Icon, href, label }) => (
                   <li key={href}>
                     <Link to={href} className="footer-link">
