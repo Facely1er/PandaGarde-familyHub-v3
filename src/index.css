@@ -2937,7 +2937,7 @@ body {
   gap: 0;
 }
 
-.footer-brand p {
+.footer-brand p:not(.footer-description):not(.footer-trust-note) {
   color: rgba(255, 255, 255, 0.8);
   margin-bottom: 8px;
   line-height: 1.3;
@@ -2971,7 +2971,7 @@ body {
 .footer-column h4 {
   font-size: 15px;
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   color: white;
 }
 
@@ -2980,7 +2980,7 @@ body {
 }
 
 .footer-column ul li {
-  margin-bottom: 1px;
+  margin-bottom: 0;
 }
 
 .footer-column ul li a {
@@ -2991,7 +2991,8 @@ body {
   align-items: center;
   gap: 6px;
   font-size: 13px;
-  padding: 2px 0;
+  line-height: 1.15;
+  padding: 0;
 }
 
 .footer-column ul li a:hover {
@@ -7101,12 +7102,14 @@ body {
   margin-bottom: 0.75rem;
 }
 
+.footer-brand .footer-description,
+.footer-brand .footer-trust-note,
 .footer-description,
 .footer-trust-note {
   color: rgba(255, 255, 255, 0.82);
   font-size: 0.9375rem;
-  line-height: 1.6;
-  margin: 0 0 0.75rem;
+  line-height: 1.7;
+  margin: 0 0 0.875rem;
 }
 
 .footer-grid {
@@ -7119,6 +7122,14 @@ body {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.footer-column ul li {
+  margin: 0;
+  line-height: 1;
 }
 
 .footer-link {
@@ -7127,9 +7138,10 @@ body {
   transition: var(--transition);
   display: flex;
   align-items: center;
-  gap: 0.55rem;
+  gap: 0.5rem;
   font-size: 0.9375rem;
-  padding: 0.3rem 0;
+  line-height: 1.15;
+  padding: 0;
 }
 
 .footer-link:hover {

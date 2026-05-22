@@ -8,15 +8,15 @@ export const newsletterArchive: NewsletterContent[] = [
     year: 2026,
     title: 'Your New Rights: Maryland MODPA in Action',
     featuredTopic: {
-      title: 'Maryland MODPA Is Now in Effect â€” Here\'s What Your Family Can Do',
+      title: 'Maryland MODPA Is Now in Effect — Here\'s What Your Family Can Do',
       description:
-        'The Maryland Online Data Privacy Act (MODPA) is now fully in force. Maryland families can request access to personal data held by apps and websites, correct errors, delete records, receive a portable copy, and opt out of sale and targeted advertising â€” including for their children. This issue walks through each right in plain language and shows exactly how to submit a request.',
+        'The Maryland Online Data Privacy Act (MODPA) is now fully in force. Maryland families can request access to personal data held by apps and websites, correct errors, delete records, receive a portable copy, and opt out of sale and targeted advertising — including for their children. This issue walks through each right in plain language and shows exactly how to submit a request.',
       articleUrl: '/digital-rights'
     },
     monthlyTip: {
       title: 'Submit Your First MODPA Opt-Out',
       content:
-        'The fastest way to exercise a MODPA right is an opt-out of sale or targeted advertising â€” most apps must honor it within 15 days. If your school or EdTech provider uses the EduSoluce Privacy Portal, you can send a formal request there in minutes.',
+        'The fastest way to exercise a MODPA right is an opt-out of sale or targeted advertising — most apps must honor it within 15 days. If your school or EdTech provider uses the EduSoluce Privacy Portal, you can send a formal request there in minutes.',
       linkUrl: '/digital-rights'
     },
     newActivities: [
@@ -51,7 +51,7 @@ export const newsletterArchive: NewsletterContent[] = [
     featuredTopic: {
       title: 'Talking With Kids About AI-Generated Content',
       description:
-        'Help your family spot synthetic images, voices, and messages. Practice simple habits: pause before sharing, verify unusual requests, and agree on when to ask a trusted adultâ€”especially as chatbots and creative tools show up in homework, games, and social feeds.',
+        'Help your family spot synthetic images, voices, and messages. Practice simple habits: pause before sharing, verify unusual requests, and agree on when to ask a trusted adult—especially as chatbots and creative tools show up in homework, games, and social feeds.',
       articleUrl: '/guides/conversation-approaches'
     },
     monthlyTip: {
@@ -71,7 +71,7 @@ export const newsletterArchive: NewsletterContent[] = [
       {
         title: 'Maryland MODPA: Rights for families',
         summary:
-          'Marylandâ€™s Maryland Online Data Privacy Act (MODPA) gives residents powerful tools: know what data is collected, access and correct it, delete it, take a portable copy, and opt out of sale and targeted advertising. Our Digital Rights page explains MODPA in plain language and links to the EduSoluce Privacy Portal when your school or organization uses it.',
+          'Maryland\'s Maryland Online Data Privacy Act (MODPA) gives residents powerful tools: know what data is collected, access and correct it, delete it, take a portable copy, and opt out of sale and targeted advertising. Our Digital Rights page explains MODPA in plain language and links to the EduSoluce Privacy Portal when your school or organization uses it.',
         linkUrl: '/digital-rights'
       }
     ],
@@ -84,9 +84,9 @@ export const newsletterArchive: NewsletterContent[] = [
     year: 2026,
     title: 'Safer Internet Season at Home',
     featuredTopic: {
-      title: 'Turning â€œSafer Internetâ€ Into Weekly Habits',
+      title: 'Turning "Safer Internet" Into Weekly Habits',
       description:
-        'Safer Internet Day is a great prompt to refresh passwords, privacy settings, and your family agreementâ€”not as a one-day event, but as small, repeatable routines everyone can follow.',
+        'Safer Internet Day is a great prompt to refresh passwords, privacy settings, and your family agreement—not as a one-day event, but as small, repeatable routines everyone can follow.',
       articleUrl: '/guides/family-privacy-plan'
     },
     monthlyTip: {
@@ -106,7 +106,7 @@ export const newsletterArchive: NewsletterContent[] = [
       {
         title: 'Platform Teen and Default Privacy Settings',
         summary:
-          'Major apps still adjust defaults for minors and new accounts. Revisit settings after updatesâ€”what was private last year may not match todayâ€™s defaults.',
+          'Major apps still adjust defaults for minors and new accounts. Revisit settings after updates—what was private last year may not match today\'s defaults.',
         linkUrl: '/guides/age-specific'
       }
     ],
@@ -133,7 +133,7 @@ export const newsletterArchive: NewsletterContent[] = [
     newActivities: [
       {
         title: 'Privacy Assessment',
-        description: 'Take a quick check-in on your familyâ€™s digital privacy strengths and next steps.',
+        description: 'Take a quick check-in on your family\'s digital privacy strengths and next steps.',
         pageUrl: '/privacy-assessment'
       }
     ],
@@ -147,7 +147,7 @@ export const newsletterArchive: NewsletterContent[] = [
       {
         title: 'Maryland: MODPA and student data',
         summary:
-          'If you live in Maryland, MODPA adds state-level rights over personal data that can apply to many online servicesâ€”not only consumer apps. Pair district notices with an understanding of access, deletion, and opt-out so you can advocate clearly for your child.',
+          'If you live in Maryland, MODPA adds state-level rights over personal data that can apply to many online services—not only consumer apps. Pair district notices with an understanding of access, deletion, and opt-out so you can advocate clearly for your child.',
         linkUrl: '/digital-rights'
       }
     ],
