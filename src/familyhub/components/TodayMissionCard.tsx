@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Flame, Play, RotateCcw } from 'lucide-react';
 import { useProgress } from '../../contexts/ProgressContext';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { useHubFamilyMembers } from '../../contexts/HubFamilyContext';
 import {
   getCompletionId,
   getHubStreak,
@@ -12,15 +12,9 @@ import {
 } from '../../lib/hubMission';
 import { hubPaths } from '../hubPaths';
 
-interface FamilyMember {
-  name: string;
-  age: number;
-  role: string;
-}
-
 const TodayMissionCard: React.FC = () => {
   const { progress } = useProgress();
-  const [familyMembers] = useLocalStorage<FamilyMember[]>('pandagarde_family', []);
+  const { members: familyMembers } = useHubFamilyMembers();
 
   const completedIds = useMemo(() => new Set(progress.completedActivities), [progress.completedActivities]);
   const ageBand = preferredAgeFromFamily(familyMembers);

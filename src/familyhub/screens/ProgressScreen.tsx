@@ -6,6 +6,7 @@ const CertificateGenerator = lazy(() => import('../../components/CertificateGene
 const ProgressExport = lazy(() => import('../../components/ProgressExport'));
 import { useProgress } from '../../contexts/ProgressContext';
 import { flattenAgeBasedActivities } from '../../data/ageBasedActivities';
+import { getHubActivityCatalogCount } from '../../lib/hubProgress';
 import HubScreenHero from '../components/HubScreenHero';
 
 const ACHIEVEMENT_META: Record<string, { label: string; emoji: string; description: string }> = {
@@ -21,7 +22,7 @@ const ProgressScreen: React.FC = () => {
   const { progress, getActivityProgress } = useProgress();
 
   const allActivities = useMemo(() => flattenAgeBasedActivities(), []);
-  const totalCount = allActivities.length;
+  const totalCount = getHubActivityCatalogCount();
   const completedCount = progress.completedActivities.length;
   const pct = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
 

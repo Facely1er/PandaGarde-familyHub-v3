@@ -2,11 +2,13 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from '../../contexts/ThemeContext';
+import { FamilyProvider } from '../../contexts/FamilyContext';
 import AppShell from './AppShell';
 
 const renderShell = (initialEntry = '/family-hub/dashboard') =>
   render(
     <ThemeProvider>
+      <FamilyProvider>
       <MemoryRouter initialEntries={[initialEntry]}>
         <Routes>
           <Route path="/family-hub" element={<AppShell />}>
@@ -18,6 +20,7 @@ const renderShell = (initialEntry = '/family-hub/dashboard') =>
           </Route>
         </Routes>
       </MemoryRouter>
+      </FamilyProvider>
     </ThemeProvider>
   );
 

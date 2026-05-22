@@ -1,26 +1,17 @@
-import React, { lazy, Suspense, useRef, useState } from 'react';
+import React, { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Plus, Eye, Trash2 } from 'lucide-react';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { Plus, Eye, Trash2, Pencil } from 'lucide-react';
+import { useHubFamilyMembers } from '../../contexts/HubFamilyContext';
 import { useFamilyProgress } from '../../contexts/FamilyProgressContext';
+import { useActiveMember } from '../../utils/familyProgressIntegration';
 import { useDialogFocusTrap } from '../../hooks/useDialogFocusTrap';
+import { type HubFamilyMember, clearActiveMemberIfMatches } from '../hubFamilyMembers';
 import { HubScreenFallback } from '../lazyScreen';
 import { hubPaths } from '../hubPaths';
 import HubScreenHero from '../components/HubScreenHero';
 import { hubAgeBandForAge, HUB_AGE_BANDS } from '../hubAgeBands';
 
 const ChildProgressDetail = lazy(() => import('../../components/ChildProgressDetail'));
-
-interface FamilyMember {
-  id: number;
-  name: string;
-  age: number;
-  role: string;
-  privacyScore: number;
-  completedActivities: number;
-  badges: string[];
-  lastActive: string;
-}
 
 type AgeGroupMeta = {
   range: '5-8' | '9-12' | '13-17';
@@ -43,13 +34,17 @@ function getAgeGroup(age: number): AgeGroupMeta | null {
 }
 
 const KidsScreen: React.FC = () => {
-  const [familyMembers, setFamilyMembers] = useLocalStorage<FamilyMember[]>('pandagarde_family', []);
-  const { calculateMemberScore } = useFamilyProgress();
+  const { members: familyMembers, syncing, addMember, updateMember, removeMember } = useHubFamilyMembers();
+  const { calculateMemberScore, removeMemberProgress } = useFamilyProgress();
+  const { currentMemberId, setActiveMember } = useActiveMember();
   const [showAddMember, setShowAddMember] = useState(false);
-  const [memberToRemove, setMemberToRemove] = useState<FamilyMember | null>(null);
+  const [memberToEdit, setMemberToEdit] = useState<HubFamilyMember | null>(null);
+  const [memberToRemove, setMemberToRemove] = useState<HubFamilyMember | null>(null);
   const [selectedChildId, setSelectedChildId] = useState<number | null>(null);
   const [newMember, setNewMember] = useState({ name: '', age: 0, role: 'Child' });
+  const [editMember, setEditMember] = useState({ name: '', age: 0, role: 'Child' });
   const addMemberTriggerRef = useRef<HTMLButtonElement>(null);
+  const editMemberTriggerRef = useRef<HTMLButtonElement>(null);
 
   const closeAddMember = () => setShowAddMember(false);
   const addDialogRef = useDialogFocusTrap({
@@ -64,32 +59,68 @@ const KidsScreen: React.FC = () => {
     onClose: closeRemoveConfirm,
   });
 
-  const addFamilyMember = () => {
+  const openEditMember = (member: HubFamilyMember, trigger: HTMLButtonElement | null) => {
+    editMemberTriggerRef.current = trigger;
+    setEditMember({ name: member.name, age: member.age, role: member.role });
+    setMemberToEdit(member);
+  };
+
+  const closeEditMember = () => setMemberToEdit(null);
+  const editDialogRef = useDialogFocusTrap({
+    isOpen: memberToEdit !== null,
+    onClose: closeEditMember,
+    returnFocusRef: editMemberTriggerRef,
+  });
+
+  useEffect(() => {
+    if (familyMembers.length === 1 && currentMemberId === null) {
+      setActiveMember(familyMembers[0].id);
+    }
+  }, [familyMembers, currentMemberId, setActiveMember]);
+
+  const selectMember = (memberId: number) => {
+    setActiveMember(memberId);
+  };
+
+  const addFamilyMember = async () => {
     if (!newMember.name.trim() || newMember.age <= 0) {
       return;
     }
 
-    const member: FamilyMember = {
-      id: Date.now(),
-      name: newMember.name,
-      age: newMember.age,
-      role: newMember.role,
-      privacyScore: 0,
-      completedActivities: 0,
-      badges: [],
-      lastActive: new Date().toISOString(),
-    };
+    const linked = await addMember(newMember.name, newMember.age, newMember.role);
+    if (!linked) {
+      return;
+    }
 
-    setFamilyMembers([...familyMembers, member]);
+    if (familyMembers.length === 0) {
+      setActiveMember(linked.id);
+    }
     setNewMember({ name: '', age: 0, role: 'Child' });
     setShowAddMember(false);
   };
 
-  const confirmRemoveFamilyMember = () => {
+  const saveEditedMember = async () => {
+    if (!memberToEdit || !editMember.name.trim() || editMember.age <= 0) {
+      return;
+    }
+
+    const updated = await updateMember(memberToEdit, editMember);
+    if (updated && currentMemberId === memberToEdit.id) {
+      setActiveMember(updated.id);
+    }
+    setMemberToEdit(null);
+  };
+
+  const confirmRemoveFamilyMember = async () => {
     if (!memberToRemove) {
       return;
     }
-    setFamilyMembers(familyMembers.filter((member) => member.id !== memberToRemove.id));
+    removeMemberProgress(memberToRemove.id);
+    clearActiveMemberIfMatches(memberToRemove.id);
+    if (selectedChildId === memberToRemove.id) {
+      setSelectedChildId(null);
+    }
+    await removeMember(memberToRemove);
     setMemberToRemove(null);
   };
 
@@ -187,6 +218,7 @@ const KidsScreen: React.FC = () => {
                         <Link
                           to={hubPaths.activities}
                           state={{ initialAgeFilter: ageGroup.range }}
+                          onClick={() => selectMember(member.id)}
                           className={`inline-flex items-center gap-1 mt-2 px-2.5 py-0.5 rounded-full border text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 ${ageGroup.badgeClass}`}
                           aria-label={`View ${ageGroup.label} activities for ${member.name}`}
                         >
@@ -199,10 +231,27 @@ const KidsScreen: React.FC = () => {
                   <div className="flex items-center gap-2 flex-shrink-0">
                     <button
                       type="button"
-                      onClick={() => setSelectedChildId(member.id)}
-                      className="p-2 text-blue-600 hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-all hover:scale-105 min-w-[44px] min-h-[44px] flex items-center justify-center"
-                      title="View detailed progress"
+                      onClick={(e) => openEditMember(member, e.currentTarget)}
+                      className="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-gray-700/50 rounded-lg transition-all hover:scale-105 min-w-[44px] min-h-[44px] flex items-center justify-center"
+                      title="Edit family member"
+                      aria-label={`Edit ${member.name}`}
+                    >
+                      <Pencil size={18} aria-hidden="true" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        selectMember(member.id);
+                        setSelectedChildId(member.id);
+                      }}
+                      className={`p-2 rounded-lg transition-all hover:scale-105 min-w-[44px] min-h-[44px] flex items-center justify-center ${
+                        currentMemberId === member.id
+                          ? 'text-teal-700 bg-teal-50 dark:text-teal-300 dark:bg-teal-900/30'
+                          : 'text-blue-600 hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-900/20'
+                      }`}
+                      title={currentMemberId === member.id ? 'Active for missions — view progress' : 'Set as active and view progress'}
                       aria-label={`View detailed progress for ${member.name}`}
+                      aria-pressed={currentMemberId === member.id}
                     >
                       <Eye size={18} aria-hidden="true" />
                     </button>
@@ -324,10 +373,114 @@ const KidsScreen: React.FC = () => {
                 </button>
                 <button
                   type="button"
-                  onClick={addFamilyMember}
-                  className="flex-1 bg-teal-600 text-white py-3 rounded-lg hover:bg-teal-700 transition-colors min-h-[44px] font-medium"
+                  onClick={() => void addFamilyMember()}
+                  disabled={syncing}
+                  className="flex-1 bg-teal-600 text-white py-3 rounded-lg hover:bg-teal-700 transition-colors min-h-[44px] font-medium disabled:opacity-60"
                 >
-                  Add Member
+                  {syncing ? 'Saving…' : 'Add Member'}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {memberToEdit && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+          role="presentation"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              closeEditMember();
+            }
+          }}
+        >
+          <div
+            ref={editDialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="edit-member-title"
+            className="w-full max-w-md rounded-xl bg-white p-6 shadow-xl dark:bg-gray-800"
+          >
+            <div className="flex items-center justify-between mb-6">
+              <h3 id="edit-member-title" className="text-xl font-bold text-gray-900 dark:text-white">
+                Edit {memberToEdit.name}
+              </h3>
+              <button
+                type="button"
+                onClick={closeEditMember}
+                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 min-w-[44px] min-h-[44px] flex items-center justify-center text-3xl leading-none transition-colors"
+                aria-label="Close dialog"
+              >
+                &times;
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              <div>
+                <label htmlFor="edit-member-name" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+                  Name
+                </label>
+                <input
+                  id="edit-member-name"
+                  type="text"
+                  value={editMember.name}
+                  onChange={(e) => setEditMember({ ...editMember, name: e.target.value })}
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-600 dark:bg-gray-700 dark:text-white"
+                  maxLength={50}
+                  autoFocus
+                  aria-required="true"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="edit-member-age" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+                  Age
+                </label>
+                <input
+                  id="edit-member-age"
+                  type="number"
+                  value={editMember.age || ''}
+                  onChange={(e) => setEditMember({ ...editMember, age: parseInt(e.target.value, 10) || 0 })}
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-600 dark:bg-gray-700 dark:text-white"
+                  min="1"
+                  max="100"
+                  aria-required="true"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="edit-member-role" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+                  Role
+                </label>
+                <select
+                  id="edit-member-role"
+                  value={editMember.role}
+                  onChange={(e) => setEditMember({ ...editMember, role: e.target.value })}
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-600 dark:bg-gray-700 dark:text-white"
+                >
+                  <option value="Parent">Parent</option>
+                  <option value="Child">Child</option>
+                  <option value="Teen">Teen</option>
+                  <option value="Guardian">Guardian</option>
+                </select>
+              </div>
+
+              <div className="flex gap-3 pt-4">
+                <button
+                  type="button"
+                  onClick={closeEditMember}
+                  className="flex-1 bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-200 py-3 rounded-lg hover:bg-gray-400 dark:hover:bg-gray-500 transition-colors min-h-[44px] font-medium"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  onClick={() => void saveEditedMember()}
+                  disabled={syncing}
+                  className="flex-1 bg-teal-600 text-white py-3 rounded-lg hover:bg-teal-700 transition-colors min-h-[44px] font-medium disabled:opacity-60"
+                >
+                  {syncing ? 'Saving…' : 'Save changes'}
                 </button>
               </div>
             </div>
@@ -369,10 +522,11 @@ const KidsScreen: React.FC = () => {
               </button>
               <button
                 type="button"
-                onClick={confirmRemoveFamilyMember}
-                className="flex-1 bg-red-600 text-white py-3 rounded-lg hover:bg-red-700 transition-colors min-h-[44px] font-medium"
+                onClick={() => void confirmRemoveFamilyMember()}
+                disabled={syncing}
+                className="flex-1 bg-red-600 text-white py-3 rounded-lg hover:bg-red-700 transition-colors min-h-[44px] font-medium disabled:opacity-60"
               >
-                Remove
+                {syncing ? 'Removing…' : 'Remove'}
               </button>
             </div>
           </div>

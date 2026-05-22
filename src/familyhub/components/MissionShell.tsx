@@ -5,6 +5,8 @@ import { HubScreenFallback } from '../lazyScreen';
 const ActivityManager = lazy(() => import('../../components/activities/ActivityManager'));
 import MissionCelebration from './MissionCelebration';
 import { useProgress } from '../../contexts/ProgressContext';
+import { useFamilyProgress } from '../../contexts/FamilyProgressContext';
+import { useActiveMember } from '../../utils/familyProgressIntegration';
 import {
   getCompletionId,
   pickNextMission,
@@ -71,6 +73,8 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
   const [completionScore, setCompletionScore] = useState<number | undefined>();
   const [streak, setStreak] = useState(0);
   const { markActivityCompleted } = useProgress();
+  const { recordActivityCompletion } = useFamilyProgress();
+  const { currentMemberId } = useActiveMember();
 
   const nextMission = pickNextMission(activity, completedIds);
 
@@ -78,6 +82,22 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
     const completionId = getCompletionId(activity);
     const durationMins = Number.parseInt(activity.duration, 10) || 5;
     markActivityCompleted(completionId, score, durationMins);
+
+    if (currentMemberId !== null) {
+      recordActivityCompletion(
+        currentMemberId,
+        completionId,
+        activity.name,
+        'journey',
+        score ?? 0,
+        100,
+        {
+          timeSpent: durationMins,
+          completedAt: new Date().toISOString(),
+        }
+      );
+    }
+
     const newStreak = recordMissionComplete(activity);
     setCompletionScore(score);
     setStreak(newStreak);

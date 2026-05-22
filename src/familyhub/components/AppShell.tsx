@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { LayoutDashboard, Users, Gamepad2, Award, Settings, Moon, Sun, ArrowLeft, type LucideIcon } from 'lucide-react';
 import { useTheme } from '../../contexts/ThemeContext';
+import { HubFamilyProvider } from '../../contexts/HubFamilyContext';
 import { getHubOrigin } from '../../lib/hubMission';
 import { hubPaths, pandagardeWebsiteUrl, isHubStandalone } from '../hubPaths';
 
@@ -62,6 +63,7 @@ const AppShell: React.FC = () => {
   };
 
   return (
+    <HubFamilyProvider>
     <div className="family-hub-theme flex h-screen flex-col bg-gradient-to-b from-teal-50/80 via-gray-50 to-white dark:from-gray-900 dark:via-gray-900 dark:to-gray-950">
       <a
         href="#family-hub-main"
@@ -184,6 +186,7 @@ const AppShell: React.FC = () => {
         </ul>
       </nav>
     </div>
+    </HubFamilyProvider>
   );
 };
 

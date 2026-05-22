@@ -15,6 +15,7 @@ import { classroomActivities } from '../data/classroomActivities';
 import { flattenAgeBasedActivities, getFeaturedAgeBasedActivities, type ActivityFocus } from '../data/ageBasedActivities';
 import { FamilyPersonaProfiles } from '../data/familyPersonaProfiles';
 import { logger } from '../lib/logger';
+import { reconcileHubAndContext } from '../familyhub/hubFamilySync';
 
 
 interface ActivityHighlight {
@@ -51,7 +52,8 @@ const FamilyHubPage: React.FC = () => {
     createFamily, 
     joinFamily, 
     leaveFamily, 
-    addFamilyMember 
+    addFamilyMember,
+    refreshFamily,
   } = useFamily();
   const { getOverallProgress, progress } = useProgress();
   const [familyPersona, setFamilyPersona] = useState<string | null>(null);
@@ -179,6 +181,8 @@ const FamilyHubPage: React.FC = () => {
     if (error) {
       alert(`Error creating family: ${error}`);
     } else {
+      await refreshFamily();
+      await reconcileHubAndContext();
       setShowCreateFamily(false);
       setNewFamilyName('');
     }
@@ -191,6 +195,8 @@ const FamilyHubPage: React.FC = () => {
     if (error) {
       alert(`Error joining family: ${error}`);
     } else {
+      await refreshFamily();
+      await reconcileHubAndContext();
       setShowJoinFamily(false);
       setJoinFamilyId('');
     }
@@ -209,6 +215,8 @@ const FamilyHubPage: React.FC = () => {
     if (error) {
       alert(`Error adding family member: ${error}`);
     } else {
+      await refreshFamily();
+      await reconcileHubAndContext();
       setShowAddMember(false);
       setNewMemberEmail('');
       setNewMemberFirstName('');

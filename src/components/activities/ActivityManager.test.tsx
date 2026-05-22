@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import { ProgressProvider } from '../../contexts/ProgressContext';
 import { FamilyProgressProvider } from '../../contexts/FamilyProgressContext';
+import { HUB_CURRENT_MEMBER_KEY } from '../../familyhub/hubFamilyMembers';
 import { ToastProvider } from '../../contexts/ToastContext';
 import ActivityManager from './ActivityManager';
 
@@ -94,7 +95,7 @@ describe('ActivityManager', () => {
 
   it('should save to FamilyProgressContext when family member is selected', async () => {
     // Set a family member ID in localStorage
-    localStorage.setItem('pandagarde_currentMember', JSON.stringify(1));
+    localStorage.setItem(HUB_CURRENT_MEMBER_KEY, JSON.stringify(1));
 
     const { getByText } = render(
       <Wrapper>

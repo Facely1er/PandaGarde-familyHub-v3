@@ -65,6 +65,7 @@ interface FamilyContextType {
   importFamilyData: (jsonData: string) => boolean;
   getFamilyStorageUsage: () => number;
   clearFamilyData: () => void;
+  refreshFamily: () => Promise<void>;
 }
 
 const FamilyContext = createContext<FamilyContextType | undefined>(undefined);
@@ -735,7 +736,8 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
     exportFamilyData,
     importFamilyData,
     getFamilyStorageUsage,
-    clearFamilyData
+    clearFamilyData,
+    refreshFamily: checkExistingFamily,
   };
 
   return (

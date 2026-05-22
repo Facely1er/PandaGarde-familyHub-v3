@@ -2,6 +2,7 @@ import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { Play, RotateCcw } from 'lucide-react';
 import { useProgress } from '../../contexts/ProgressContext';
 import { useFamilyProgress } from '../../contexts/FamilyProgressContext';
+import { useActiveMember } from '../../utils/familyProgressIntegration';
 import { useToast } from '../../contexts/ToastContext';
 import { logger } from '../../lib/logger';
 // import { useAuth } from '../../contexts/AuthContext';
@@ -53,17 +54,8 @@ const ActivityManager: React.FC<ActivityManagerProps> = ({ activityId, onClose, 
   const [startTime, setStartTime] = useState<Date | null>(null);
   const { markActivityCompleted } = useProgress();
   const { recordActivityCompletion } = useFamilyProgress();
+  const { currentMemberId } = useActiveMember();
   const { showSuccess, showError } = useToast();
-
-  // Get current family member from localStorage (used by Family Hub)
-  const getCurrentMemberId = (): number | null => {
-    try {
-      const stored = localStorage.getItem('pandagarde_currentMember');
-      return stored ? JSON.parse(stored) : null;
-    } catch {
-      return null;
-    }
-  };
 
   const activityInstructions = {
     coloring: {
@@ -242,7 +234,6 @@ const ActivityManager: React.FC<ActivityManagerProps> = ({ activityId, onClose, 
       await markActivityCompleted(activityId, validScore, timeSpent);
 
       // Also save to FamilyProgressContext if a family member is selected (for Family Hub)
-      const currentMemberId = getCurrentMemberId();
       if (currentMemberId !== null) {
         const activityName = currentActivity?.title || activityId;
         recordActivityCompletion(

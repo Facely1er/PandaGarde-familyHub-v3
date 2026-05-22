@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useCallback, useState, ReactNode } from 'react';
+import { HUB_FAMILY_PROGRESS_KEY } from '../familyhub/hubFamilyMembers';
 import { logger } from '../lib/logger';
 
 // Simple localStorage hook for Family Hub
@@ -56,6 +57,7 @@ interface FamilyProgressContextType {
     maxScore: number,
     additionalData?: Record<string, unknown>
   ) => void;
+  removeMemberProgress: (memberId: number) => void;
   getMemberProgress: (memberId: number) => FamilyMemberProgress | null;
   getMemberActivities: (memberId: number) => ActivityResult[];
   calculateMemberScore: (memberId: number) => number;
@@ -78,7 +80,7 @@ interface FamilyProgressProviderProps {
 
 export const FamilyProgressProvider: React.FC<FamilyProgressProviderProps> = ({ children }) => {
   const [progressData, setProgressData] = useFamilyLocalStorage<Record<number, FamilyMemberProgress>>(
-    'pandagarde_family_progress',
+    HUB_FAMILY_PROGRESS_KEY,
     {}
   );
 
@@ -146,6 +148,17 @@ export const FamilyProgressProvider: React.FC<FamilyProgressProviderProps> = ({ 
     });
   }, [setProgressData]);
 
+  const removeMemberProgress = useCallback((memberId: number) => {
+    setProgressData((prev: Record<number, FamilyMemberProgress>) => {
+      if (!(memberId in prev)) {
+        return prev;
+      }
+      const next = { ...prev };
+      delete next[memberId];
+      return next;
+    });
+  }, [setProgressData]);
+
   const getMemberProgress = useCallback((memberId: number): FamilyMemberProgress | null => {
     return progressData[memberId] ?? null;
   }, [progressData]);
@@ -190,6 +203,7 @@ export const FamilyProgressProvider: React.FC<FamilyProgressProviderProps> = ({ 
 
   const value: FamilyProgressContextType = {
     recordActivityCompletion,
+    removeMemberProgress,
     getMemberProgress,
     getMemberActivities,
     calculateMemberScore,

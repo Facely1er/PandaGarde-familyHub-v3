@@ -6,6 +6,7 @@ import { HubScreenFallback } from "../lazyScreen";
 const FamilyDashboard = lazy(() => import("../../components/FamilyDashboard"));
 import { updateDfaJourneyPhase } from "../../lib/dfaJourney";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { useHubFamilyMembers } from "../../contexts/HubFamilyContext";
 import AgeBandStrip from '../components/AgeBandStrip';
 import HubScreenHero from '../components/HubScreenHero';
 import HubTour from '../components/HubTour';
@@ -45,7 +46,7 @@ const quickActions = [
 ];
 
 const DashboardScreen: React.FC = () => {
-  const [familyMembers] = useLocalStorage<{ id: number }[]>('pandagarde_family', []);
+  const { members: familyMembers } = useHubFamilyMembers();
   const [familyGoals] = useLocalStorage<FamilyGoal[]>('pandagarde_family_goals', []);
   const completedGoals = familyGoals.filter((goal) => goal?.completed).length;
 

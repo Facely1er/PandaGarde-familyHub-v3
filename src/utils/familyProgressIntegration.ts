@@ -4,6 +4,7 @@
  */
 
 import { useFamilyProgress } from '../contexts/FamilyProgressContext';
+import { HUB_CURRENT_MEMBER_KEY } from '../familyhub/hubFamilyMembers';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { logger } from '../lib/logger';
 
@@ -13,7 +14,7 @@ import { logger } from '../lib/logger';
  */
 export const useGameCompletion = () => {
   const { recordActivityCompletion } = useFamilyProgress();
-  const [currentMemberId] = useLocalStorage<number | null>('pandagarde_currentMember', null);
+  const [currentMemberId] = useLocalStorage<number | null>(HUB_CURRENT_MEMBER_KEY, null);
 
   const recordGameCompletion = (
     gameId: string,
@@ -47,7 +48,7 @@ export const useGameCompletion = () => {
  */
 export const useJourneyCompletion = () => {
   const { recordActivityCompletion } = useFamilyProgress();
-  const [currentMemberId] = useLocalStorage<number | null>('pandagarde_currentMember', null);
+  const [currentMemberId] = useLocalStorage<number | null>(HUB_CURRENT_MEMBER_KEY, null);
 
   const recordJourneyActivity = (
     activityId: string,
@@ -81,7 +82,7 @@ export const useJourneyCompletion = () => {
  */
 export const useActiveMember = () => {
   const [currentMemberId, setCurrentMemberId] = useLocalStorage<number | null>(
-    'pandagarde_currentMember',
+    HUB_CURRENT_MEMBER_KEY,
     null
   );
 

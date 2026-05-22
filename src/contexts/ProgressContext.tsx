@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { logger } from '../lib/logger';
+import { getHubActivityCatalogCount } from '../lib/hubProgress';
 // Frontend-only mode - no authentication or database dependencies
 
 interface ActivityProgress {
@@ -151,7 +152,8 @@ export const ProgressProvider: React.FC<ProgressProviderProps> = ({ children }) 
         achievements.push('getting_started');
       }
 
-      if (newProgress.completedActivities.length === 8) {
+      const catalogCount = getHubActivityCatalogCount();
+      if (catalogCount > 0 && newProgress.completedActivities.length >= catalogCount) {
         achievements.push('privacy_champion');
       }
 
@@ -170,7 +172,7 @@ export const ProgressProvider: React.FC<ProgressProviderProps> = ({ children }) 
   }, [progress.activityDetails]);
 
   const getOverallProgress = useCallback(() => {
-    const totalCount = 8;
+    const totalCount = getHubActivityCatalogCount();
     const completedCount = progress.completedActivities.length;
     const percentage = totalCount > 0 ? (completedCount / totalCount) * 100 : 0;
 
