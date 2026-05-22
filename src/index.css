@@ -7367,17 +7367,21 @@ header.header .nav-actions button.header-icon-btn {
   max-width: 12ch;
   margin: 0;
   font-size: clamp(3rem, 5.8vw, 5rem);
-  line-height: 0.94;
+  line-height: 1.08;
   letter-spacing: var(--heading-tight);
   color: var(--gray-900);
+  overflow: visible;
 }
 
 .premium-hero__copy h1 span {
   display: block;
+  line-height: 1.12;
+  padding-bottom: 0.06em;
   background: linear-gradient(135deg, var(--primary) 0%, #0ea5e9 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  overflow: visible;
 }
 
 .premium-hero__copy p {
@@ -8247,6 +8251,12 @@ header.header .nav-actions button.header-icon-btn {
 
   .premium-hero__copy h1 {
     max-width: 14ch;
+    line-height: 1.1;
+  }
+
+  .premium-hero__copy h1 span {
+    line-height: 1.14;
+    padding-bottom: 0.08em;
   }
 
   .premium-hero__visual {

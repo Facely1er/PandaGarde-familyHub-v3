@@ -13,6 +13,7 @@ import {
   Compass,
   FileText,
   Cookie,
+  Info,
 } from 'lucide-react';
 
 const Footer: React.FC = () => {
@@ -24,6 +25,7 @@ const Footer: React.FC = () => {
   ];
 
   const supportLinks = [
+    { icon: Info, href: '/about', label: 'About' },
     { icon: Mail, href: '/contact', label: 'Contact' },
     { icon: HelpCircle, href: '/faq', label: 'FAQ' },
     { icon: Scale, href: '/digital-rights', label: 'Digital Rights' },
@@ -101,11 +103,6 @@ const Footer: React.FC = () => {
 
         <div className="footer-bottom">
           <p>© {new Date().getFullYear()} PandaGarde. All rights reserved.</p>
-          <div className="footer-links" aria-label="Footer utility links">
-            <Link to="/about">About</Link>
-            <Link to="/support">Support</Link>
-            <Link to="/family-hub">Family Hub</Link>
-          </div>
         </div>
       </div>
     </footer>
