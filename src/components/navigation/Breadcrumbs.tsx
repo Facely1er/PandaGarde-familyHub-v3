@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronRight, Home } from 'lucide-react';
 import { getStoryBySlug } from '../../data/stories';
+import { getNewsletterById } from '../../data/newsletters';
 
 interface BreadcrumbItem {
   label: string;
@@ -139,6 +140,11 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className = '' }) => {
 
       if (!title && currentPath.startsWith('/stories/') && index === pathSegments.length - 1) {
         title = getStoryBySlug(segment)?.title ?? segment.replace(/-/g, ' ');
+      }
+
+      if (!title && currentPath.startsWith('/newsletter/') && index === pathSegments.length - 1) {
+        const issue = getNewsletterById(segment);
+        title = issue ? `${issue.month} ${issue.year}` : segment;
       }
 
       if (!title) {

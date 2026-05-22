@@ -85,7 +85,7 @@ const NewsletterPage: React.FC = () => {
     }),
     preview: `${newsletter.featuredTopic.description.substring(0, 80)  }...`,
     featured: newsletter.featured || false,
-    url: `/newsletter/archive`
+    url: `/newsletter/${newsletter.id}`
   }));
 
   return (

@@ -56,6 +56,7 @@ const ClassroomActivitiesPage = lazy(() => import('./pages/ClassroomActivitiesPa
 const NewsletterPage = lazy(() => import('./pages/NewsletterPage'));
 const UnsubscribePage = lazy(() => import('./pages/UnsubscribePage'));
 const NewsletterArchivePage = lazy(() => import('./pages/NewsletterArchivePage'));
+const NewsletterIssuePage = lazy(() => import('./pages/NewsletterIssuePage'));
 const SupportPage = lazy(() => import('./pages/SupportPage'));
 const ImplementationGuidePage = lazy(() => import('./pages/ImplementationGuidePage'));
 const OverviewPage = lazy(() => import('./pages/OverviewPage'));
@@ -229,6 +230,7 @@ function App() {
             <Route path="/newsletter" element={<NewsletterPage />} />
             <Route path="/newsletter/archive" element={<NewsletterArchivePage />} />
             <Route path="/newsletter/unsubscribe" element={<UnsubscribePage />} />
+            <Route path="/newsletter/:id" element={<NewsletterIssuePage />} />
             <Route path="/support" element={<SupportPage />} />
             <Route path="/pilot" element={<PilotPage />} />
             <Route path="/join-pilot" element={<PilotPage />} />
