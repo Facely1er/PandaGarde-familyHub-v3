@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Mail, CheckCircle, Users, Calendar, BookOpen, Shield } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 import { useToast } from '../contexts/ToastContext';
-import { newsletterArchive } from '../data/newsletters';
+import { newsletterArchive, newsletterIssuePath } from '../data/newsletters';
 import { newsletterService } from '../lib/database';
 import { logger } from '../lib/logger';
 
@@ -85,7 +85,7 @@ const NewsletterPage: React.FC = () => {
     }),
     preview: `${newsletter.featuredTopic.description.substring(0, 80)  }...`,
     featured: newsletter.featured || false,
-    url: `/newsletter/${newsletter.id}`
+    url: newsletterIssuePath(newsletter.id)
   }));
 
   return (
@@ -108,13 +108,19 @@ const NewsletterPage: React.FC = () => {
 
           {!isSubscribed ? (
             <form onSubmit={handleSubscribe} className="max-w-md mx-auto">
-              <div className="flex gap-4">
+              <label htmlFor="newsletter-email" className="sr-only">
+                Email address for newsletter subscription
+              </label>
+              <div className="flex flex-col gap-4 sm:flex-row">
                 <input
+                  id="newsletter-email"
                   type="email"
+                  name="email"
+                  autoComplete="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email address"
-                  className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                  className="flex-1 rounded-lg border border-gray-300 bg-white px-4 py-3 text-gray-900 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-green-600 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100"
                   disabled={isSubscribing}
                 />
                 <button
@@ -186,36 +192,42 @@ const NewsletterPage: React.FC = () => {
           <div className="max-w-4xl mx-auto">
             <div className="space-y-6">
               {recentNewsletters.map((newsletter) => (
-                <div
+                <article
                   key={newsletter.id}
-                  className={`bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all ${
-                    newsletter.featured ? 'border-2 border-green-600' : ''
+                  className={`rounded-xl border bg-white p-6 shadow-md transition-all hover:shadow-lg dark:bg-gray-800 ${
+                    newsletter.featured
+                      ? 'border-2 border-green-600 dark:border-green-500'
+                      : 'border-gray-200 dark:border-gray-700'
                   }`}
-                  style={{ backgroundColor: 'var(--card-color)' }}
                 >
-                  <div className="flex items-start justify-between">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                     <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-2">
-                        <h3 className="text-xl font-bold text-primary">
-                          {newsletter.title}
+                      <div className="mb-2 flex flex-wrap items-center gap-2">
+                        <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">
+                          <Link
+                            to={newsletter.url}
+                            className="hover:text-green-700 dark:hover:text-green-400"
+                          >
+                            {newsletter.title}
+                          </Link>
                         </h3>
                         {newsletter.featured && (
-                          <span className="bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 rounded-full">
+                          <span className="rounded-full bg-green-100 px-2 py-1 text-xs font-semibold text-green-800 dark:bg-green-900/40 dark:text-green-200">
                             Featured
                           </span>
                         )}
                       </div>
-                      <p className="text-sm text-gray-500 mb-2">{newsletter.date}</p>
-                      <p className="text-gray-600">{newsletter.preview}</p>
+                      <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">{newsletter.date}</p>
+                      <p className="text-gray-600 dark:text-gray-300">{newsletter.preview}</p>
                     </div>
                     <Link
-                      to={newsletter.url || '/newsletter'}
-                      className="ml-4 text-white px-4 py-2 rounded-lg font-semibold transition-all inline-block" style={{ background: 'var(--gradient-primary)' }}
+                      to={newsletter.url}
+                      className="inline-flex shrink-0 items-center justify-center rounded-lg bg-green-700 px-4 py-2 font-semibold text-white transition-colors hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500"
                     >
-                      Read More
+                      Read issue
                     </Link>
                   </div>
-                </div>
+                </article>
               ))}
             </div>
           </div>

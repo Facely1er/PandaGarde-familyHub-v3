@@ -1,5 +1,5 @@
 import { useEffect, type ReactNode } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import {
   ArrowLeft,
   BookOpen,
@@ -11,7 +11,7 @@ import {
   Users,
 } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
-import { getNewsletterById } from '../data/newsletters';
+import { getNewsletterById, isNewsletterReservedSegment } from '../data/newsletters';
 
 function InternalLink({ to, children }: { to: string; children: ReactNode }) {
   if (!to) return <>{children}</>;
@@ -27,11 +27,16 @@ function InternalLink({ to, children }: { to: string; children: ReactNode }) {
 
 export default function NewsletterIssuePage() {
   const { id } = useParams<{ id: string }>();
-  const newsletter = id ? getNewsletterById(id) : undefined;
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
+
+  if (id && isNewsletterReservedSegment(id)) {
+    return <Navigate to={`/newsletter/${id}`} replace />;
+  }
+
+  const newsletter = id ? getNewsletterById(id) : undefined;
 
   if (!newsletter) {
     return (

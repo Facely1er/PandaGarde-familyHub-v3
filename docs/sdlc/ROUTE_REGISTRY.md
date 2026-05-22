@@ -100,7 +100,11 @@ Update this registry when adding, removing, or changing routes. Placeholder rout
 | Path | Component | Purpose | Status |
 |------|-----------|---------|--------|
 | `/about`, `/overview`, `/features`, `/how-it-works` | Info pages | Product info | Active |
-| `/contact`, `/faq`, `/support`, `/pilot`, `/newsletter/*` | Support & comms | Active |
+| `/contact`, `/faq`, `/support`, `/pilot` | Support & comms | Active |
+| `/newsletter` | `NewsletterPage` | Subscribe & recent issues | Active |
+| `/newsletter/archive` | `NewsletterArchivePage` | Issue index | Active |
+| `/newsletter/unsubscribe` | `UnsubscribePage` | Unsubscribe flow | Active |
+| `/newsletter/:id` | `NewsletterIssuePage` | Issue detail (e.g. `2026-04`) | Active |
 | `*` | `NotFoundPage` | 404 | Active |
 
 ---

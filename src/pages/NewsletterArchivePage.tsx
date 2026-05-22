@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Calendar, ArrowLeft, Star } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
-import { newsletterArchive } from '../data/newsletters';
+import { newsletterArchive, newsletterIssuePath } from '../data/newsletters';
 
 const NewsletterArchivePage: React.FC = () => {
   // Group newsletters by year
@@ -28,12 +28,12 @@ const NewsletterArchivePage: React.FC = () => {
           <div className="mb-8">
             <Link
               to="/newsletter"
-              className="inline-flex items-center gap-2 text-pink-600 hover:text-pink-700 font-semibold mb-4"
+              className="mb-4 inline-flex items-center gap-2 font-semibold text-pink-600 hover:text-pink-700 dark:text-pink-400 dark:hover:text-pink-300"
             >
-              <ArrowLeft size={20} />
+              <ArrowLeft size={20} aria-hidden />
               Back to Newsletter
             </Link>
-            <p className="text-gray-600">
+            <p className="text-gray-600 dark:text-gray-300">
               Explore our collection of past newsletters covering privacy education topics, tips, and resources.
             </p>
           </div>
@@ -41,59 +41,59 @@ const NewsletterArchivePage: React.FC = () => {
           {years.length === 0 ? (
             <div className="text-center py-12">
               <Mail className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-600">No newsletters available yet.</p>
+              <p className="text-gray-600 dark:text-gray-300">No newsletters available yet.</p>
             </div>
           ) : (
             <div className="space-y-12">
               {years.map((year) => (
                 <div key={year}>
-                  <h2 className="text-2xl font-bold mb-6 text-primary">
+                  <h2 className="mb-6 text-2xl font-bold text-gray-900 dark:text-gray-100">
                     {year}
                   </h2>
                   <div className="space-y-4">
                     {newslettersByYear[year].map((newsletter) => (
                       <Link
                         key={newsletter.id}
-                        to={`/newsletter/${newsletter.id}`}
+                        to={newsletterIssuePath(newsletter.id)}
                         className="block bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-lg transition-all border border-gray-200 dark:border-gray-700"
                       >
                         <div className="flex items-start justify-between">
                           <div className="flex-1">
                             <div className="flex items-center gap-2 mb-2">
-                              <Calendar className="w-5 h-5 text-gray-400" />
-                              <span className="text-sm text-gray-500">
+                              <Calendar className="h-5 w-5 text-gray-400 dark:text-gray-500" aria-hidden />
+                              <span className="text-sm text-gray-500 dark:text-gray-400">
                                 {newsletter.month} {newsletter.year}
                               </span>
                               {newsletter.featured && (
-                                <span className="bg-pink-100 text-pink-800 text-xs font-semibold px-2 py-1 rounded-full flex items-center gap-1">
-                                  <Star size={12} />
+                                <span className="flex items-center gap-1 rounded-full bg-pink-100 px-2 py-1 text-xs font-semibold text-pink-800 dark:bg-pink-900/40 dark:text-pink-200">
+                                  <Star size={12} aria-hidden />
                                   Featured
                                 </span>
                               )}
                             </div>
-                            <h3 className="text-xl font-bold mb-2 text-primary">
+                            <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-gray-100">
                               {newsletter.title}
                             </h3>
-                            <p className="text-gray-600 mb-3">{newsletter.featuredTopic.description}</p>
+                            <p className="mb-3 text-gray-600 dark:text-gray-300">{newsletter.featuredTopic.description}</p>
                             <div className="flex flex-wrap gap-2">
                               {newsletter.monthlyTip && (
-                                <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
+                                <span className="rounded bg-blue-100 px-2 py-1 text-xs text-blue-800 dark:bg-blue-900/40 dark:text-blue-200">
                                   Monthly Tip
                                 </span>
                               )}
                               {newsletter.newActivities.length > 0 && (
-                                <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">
+                                <span className="rounded bg-green-100 px-2 py-1 text-xs text-green-800 dark:bg-green-900/40 dark:text-green-200">
                                   {newsletter.newActivities.length} New {newsletter.newActivities.length === 1 ? 'Activity' : 'Activities'}
                                 </span>
                               )}
                               {newsletter.privacyNews.length > 0 && (
-                                <span className="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded">
+                                <span className="rounded bg-purple-100 px-2 py-1 text-xs text-purple-800 dark:bg-purple-900/40 dark:text-purple-200">
                                   Privacy News
                                 </span>
                               )}
                             </div>
                           </div>
-                          <div className="ml-4 text-pink-600">
+                          <div className="ml-4 text-pink-600 dark:text-pink-400">
                             <ArrowLeft size={20} className="rotate-180" />
                           </div>
                         </div>

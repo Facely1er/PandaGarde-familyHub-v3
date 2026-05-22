@@ -156,8 +156,20 @@ export const newsletterArchive: NewsletterContent[] = [
   }
 ];
 
+/** URL segments served by static routes, not issue detail pages */
+export const NEWSLETTER_RESERVED_SEGMENT_IDS = ['archive', 'unsubscribe'] as const;
+
+export function isNewsletterReservedSegment(id: string): boolean {
+  return (NEWSLETTER_RESERVED_SEGMENT_IDS as readonly string[]).includes(id);
+}
+
+export function newsletterIssuePath(id: string): string {
+  return `/newsletter/${id}`;
+}
+
 export const getNewsletterById = (id: string): NewsletterContent | undefined => {
-  return newsletterArchive.find(newsletter => newsletter.id === id);
+  if (isNewsletterReservedSegment(id)) return undefined;
+  return newsletterArchive.find((newsletter) => newsletter.id === id);
 };
 
 export const getLatestNewsletter = (): NewsletterContent | undefined => {
