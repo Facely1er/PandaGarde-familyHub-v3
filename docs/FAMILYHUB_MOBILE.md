@@ -43,6 +43,37 @@ npx cap add android
 npx cap add ios   # macOS only
 ```
 
+### Android debug (no Play signing key)
+
+Use this until you create an upload keystore for release builds.
+
+**Prerequisites:** Android Studio (SDK 35), USB debugging or emulator.
+
+```bash
+npm install
+npm run android:debug     # SDK path + build hub + cap sync + debug APK
+```
+
+Output APK:
+
+`android/app/build/outputs/apk/debug/app-debug.apk`
+
+Install on a device:
+
+```bash
+adb install -r android/app/build/outputs/apk/debug/app-debug.apk
+```
+
+Or open the project in Android Studio and click **Run**:
+
+```bash
+npm run cap:android
+```
+
+`npm run android:local-props` writes `android/local.properties` (gitignored) from `ANDROID_HOME` or the default SDK path.
+
+**When you are ready for Play Store:** copy `android/keystore.properties.example` → `android/keystore.properties`, generate `pandagarde-familyhub-upload.jks`, then `npm run android:bundleRelease`. See [FAMILYHUB_RELEASE_SYNC.md](./FAMILYHUB_RELEASE_SYNC.md).
+
 ### Day-to-day workflow
 
 ```bash
