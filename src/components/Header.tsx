@@ -170,10 +170,13 @@ function Header() {
               })}
             </ul>
 
-            <div className="nav-actions" aria-label="Utility actions">
+            <div
+              className="nav-actions flex shrink-0 flex-nowrap items-center gap-1 lg:gap-2"
+              aria-label="Utility actions"
+            >
               <Link
                 to="/family-hub"
-                className={`nav-cta nav-cta-primary ${isActive('/family-hub') ? 'active' : ''}`}
+                className={`nav-cta nav-cta-primary hidden lg:inline-flex ${isActive('/family-hub') ? 'active' : ''}`}
                 aria-label="Open Family Hub workspace"
                 aria-current={isActive('/family-hub') ? 'page' : undefined}
               >
@@ -183,7 +186,7 @@ function Header() {
 
               <Link
                 to="/get-started"
-                className={`nav-cta nav-cta-secondary ${isActive('/get-started') ? 'active' : ''}`}
+                className={`nav-cta nav-cta-secondary hidden lg:inline-flex ${isActive('/get-started') ? 'active' : ''}`}
                 aria-current={isActive('/get-started') ? 'page' : undefined}
               >
                 <span>Get Started</span>
@@ -191,7 +194,7 @@ function Header() {
 
               <button
                 type="button"
-                className="search-button header-icon-btn"
+                className="search-button header-icon-btn inline-flex h-11 w-11 shrink-0 items-center justify-center p-0"
                 onClick={() => setIsSearchModalOpen(true)}
                 aria-label="Open search"
                 title="Search (Ctrl/Cmd + K)"
@@ -201,7 +204,7 @@ function Header() {
 
               <button
                 type="button"
-                className="theme-toggle header-icon-btn"
+                className="theme-toggle header-icon-btn inline-flex h-11 w-11 shrink-0 items-center justify-center p-0"
                 onClick={toggleTheme}
                 aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
               >
@@ -210,7 +213,7 @@ function Header() {
 
               <button
                 type="button"
-                className="mobile-menu-toggle header-icon-btn"
+                className="mobile-menu-toggle header-icon-btn inline-flex h-11 w-11 shrink-0 items-center justify-center p-0 max-lg:inline-flex lg:hidden"
                 onClick={handleMobileMenuToggle}
                 aria-expanded={isMobileMenuOpen}
                 aria-controls="mobile-navigation"

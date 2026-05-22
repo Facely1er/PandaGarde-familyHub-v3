@@ -6625,10 +6625,11 @@ body {
     padding: 1rem;
   }
   
-  /* Better mobile buttons (exclude compact header utility controls) */
-  .button,
-  button[type="button"]:not(.header-icon-btn):not(.search-button):not(.theme-toggle):not(.mobile-menu-toggle):not(.mobile-nav-close),
-  button[type="submit"] {
+  /* Better mobile buttons — scoped to page content, not header chrome */
+  main .button,
+  main button[type="button"]:not(.header-icon-btn),
+  main button[type="submit"],
+  form button[type="submit"] {
     min-height: 48px;
     padding: 0.75rem 1.5rem;
     font-size: 1rem;
@@ -6812,7 +6813,18 @@ body {
   box-sizing: border-box;
 }
 
-.header .nav-actions .header-icon-btn {
+header.header .nav-actions {
+  display: flex !important;
+  flex-flow: row nowrap !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  width: auto !important;
+  max-width: none !important;
+  overflow: visible !important;
+}
+
+header.header .nav-actions .header-icon-btn,
+header.header .nav-actions button.header-icon-btn {
   width: 44px !important;
   height: 44px !important;
   min-width: 44px !important;
@@ -6820,7 +6832,9 @@ body {
   min-height: 44px !important;
   max-height: 44px !important;
   padding: 0 !important;
-  flex: 0 0 auto !important;
+  margin: 0 !important;
+  flex: 0 0 44px !important;
+  box-sizing: border-box !important;
 }
 
 .search-button:hover,
@@ -7286,7 +7300,16 @@ body {
   z-index: 2;
 }
 
-/* Panda logo mark above the headline */
+.premium-hero__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  width: 100%;
+}
+
 .premium-hero__logo-badge {
   display: inline-flex;
   align-items: center;
@@ -7297,7 +7320,7 @@ body {
   background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(14, 165, 233, 0.08));
   border: 1px solid rgba(16, 185, 129, 0.18);
   box-shadow: 0 8px 24px rgba(16, 185, 129, 0.14), 0 2px 8px rgba(15, 23, 42, 0.06);
-  margin-bottom: 1.25rem;
+  margin-bottom: 0;
   animation: floatY 6s ease-in-out infinite;
 }
 
@@ -7311,14 +7334,6 @@ body {
   background: linear-gradient(135deg, rgba(74, 222, 128, 0.12), rgba(56, 189, 248, 0.1));
   border-color: rgba(74, 222, 128, 0.22);
   box-shadow: 0 8px 24px rgba(74, 222, 128, 0.16), 0 2px 8px rgba(0, 0, 0, 0.3);
-}
-
-.premium-hero__eyebrow {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.875rem;
-  margin-bottom: 1.25rem;
 }
 
 .premium-hero__eyebrow-pill {
@@ -7340,8 +7355,12 @@ body {
 }
 
 .premium-hero__eyebrow-text {
+  margin: 0;
+  max-width: 28rem;
   color: var(--gray-600);
   font-size: 0.95rem;
+  line-height: 1.45;
+  text-align: center;
 }
 
 .premium-hero__copy h1 {

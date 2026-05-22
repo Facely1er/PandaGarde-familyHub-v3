@@ -256,15 +256,15 @@ const HomePage: React.FC = () => {
       <section className="homepage-hero premium-hero py-6 md:py-10">
         <div className="container premium-hero__container px-4 sm:px-6 lg:px-8">
           <div className="premium-hero__content slide-in-left">
-            <div className="premium-hero__logo-badge">
-              <img src="/LogoPandagarde.png" alt="PandaGarde" />
-            </div>
-            <div className="premium-hero__eyebrow">
+            <div className="premium-hero__intro">
               <span className="premium-hero__eyebrow-pill">
-                <ShieldCheck size={14} />
+                <ShieldCheck size={14} aria-hidden />
                 Family Privacy Intelligence
               </span>
-              <span className="premium-hero__eyebrow-text">Website guidance + Family Hub continuity</span>
+              <div className="premium-hero__logo-badge">
+                <img src="/LogoPandagarde.png" alt="" aria-hidden />
+              </div>
+              <p className="premium-hero__eyebrow-text">Website guidance + Family Hub continuity</p>
             </div>
 
             <div className="premium-hero__copy">
