@@ -31,6 +31,7 @@
     "deploy:netlify:familyhub": "netlify deploy --prod --dir=dist-familyhub --site 09a33b67-21f2-4f27-bc38-1b732b9cf29e --no-build",
     "deploy:netlify:all": "npm run deploy:check && npm run deploy:netlify && npm run deploy:netlify:familyhub",
     "check:content-truth": "node scripts/check-content-truth.mjs",
+    "check:routes": "node scripts/verify-routes.mjs",
     "check:story-assets": "node scripts/verify-story-scene-assets.mjs",
     "assets:story-covers": "node scripts/crop-story-covers.mjs",
     "lint": "eslint .",

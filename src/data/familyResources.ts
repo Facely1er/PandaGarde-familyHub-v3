@@ -26,7 +26,7 @@ export const familyResources: FamilyResource[] = [
     category: ['parental-controls', 'child-safety'],
     personaTags: ['cautious-parent', 'concerned-family'],
     ageGroups: ['all'],
-    url: '/guides/parental-controls',
+    url: '/guides/device-setup',
     priority: 'high',
     icon: 'Shield'
   },
@@ -50,7 +50,7 @@ export const familyResources: FamilyResource[] = [
     category: ['child-safety', 'alerts'],
     personaTags: ['cautious-parent', 'concerned-family'],
     ageGroups: ['all'],
-    url: '/child-safety-alerts',
+    url: '/safety-alerts',
     priority: 'high',
     icon: 'Bell'
   },
@@ -100,7 +100,7 @@ export const familyResources: FamilyResource[] = [
     category: ['privacy-settings', 'configuration'],
     personaTags: ['privacy-focused-family', 'tech-savvy-family'],
     ageGroups: ['all'],
-    url: '/guides/privacy-settings',
+    url: '/privacy-tools',
     priority: 'high',
     icon: 'Settings'
   },
@@ -188,7 +188,7 @@ export const familyResources: FamilyResource[] = [
     category: ['security', 'technical'],
     personaTags: ['tech-savvy-family', 'privacy-focused-family'],
     ageGroups: ['all'],
-    url: '/guides/device-security',
+    url: '/guides/device-setup',
     priority: 'high',
     icon: 'Shield'
   },
@@ -264,7 +264,7 @@ export const familyResources: FamilyResource[] = [
     category: ['urgent', 'immediate-actions'],
     personaTags: ['concerned-family', 'cautious-parent'],
     ageGroups: ['all'],
-    url: '/guides/urgent-protection',
+    url: '/guides/emergency-safety',
     priority: 'high',
     icon: 'AlertTriangle'
   },
@@ -288,7 +288,7 @@ export const familyResources: FamilyResource[] = [
     category: ['alerts', 'breaches'],
     personaTags: ['concerned-family', 'privacy-focused-family'],
     ageGroups: ['all'],
-    url: '/child-safety-alerts',
+    url: '/safety-alerts',
     priority: 'high',
     icon: 'Bell'
   }

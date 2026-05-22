@@ -40,8 +40,8 @@ export const FamilyPersonaProfiles: Record<string, FamilyPersonaProfile> = {
     ],
     recommendedResources: [
       '/parent-resources',
-      '/guides/parental-controls',
-      '/child-safety-alerts',
+      '/guides/device-setup',
+      '/safety-alerts',
       '/downloads/family-agreement'
     ]
   },
@@ -67,7 +67,7 @@ export const FamilyPersonaProfiles: Record<string, FamilyPersonaProfile> = {
     recommendedResources: [
       '/privacy-tools',
       '/digital-footprint',
-      '/guides/privacy-settings',
+      '/privacy-tools',
       '/service-catalog'
     ]
   },
@@ -118,7 +118,7 @@ export const FamilyPersonaProfiles: Record<string, FamilyPersonaProfile> = {
     ],
     recommendedResources: [
       '/privacy-tools',
-      '/guides/device-security',
+      '/guides/device-setup',
       '/service-catalog',
       '/digital-footprint'
     ]
@@ -144,7 +144,7 @@ export const FamilyPersonaProfiles: Record<string, FamilyPersonaProfile> = {
     ],
     recommendedResources: [
       '/quick-start',
-      '/guides/practical-privacy',
+      '/guides/family-privacy',
       '/service-catalog',
       '/parent-resources'
     ]
@@ -170,9 +170,9 @@ export const FamilyPersonaProfiles: Record<string, FamilyPersonaProfile> = {
     ],
     recommendedResources: [
       '/privacy-assessment',
-      '/child-safety-alerts',
+      '/safety-alerts',
       '/quick-start',
-      '/guides/urgent-protection'
+      '/guides/emergency-safety'
     ]
   }
 };

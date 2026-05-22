@@ -32,6 +32,11 @@ const FamilyHubRoutes: React.FC = () => {
         path="/"
         element={<Navigate to={hubWelcomed ? 'dashboard' : 'welcome'} replace />}
       />
+      <Route path="profile" element={<Navigate to="settings" replace />} />
+      <Route path="certificates" element={<Navigate to="progress" replace />} />
+      <Route path="learning" element={<Navigate to="activities" replace />} />
+      <Route path="journeys" element={<Navigate to="activities" replace />} />
+      <Route path="games" element={<Navigate to="activities" replace />} />
       <Route element={<AppShell />}>
         <Route path="dashboard" element={<DashboardScreen />} />
         <Route path="kids" element={<KidsScreen />} />
@@ -39,6 +44,7 @@ const FamilyHubRoutes: React.FC = () => {
         <Route path="progress" element={<ProgressScreen />} />
         <Route path="settings" element={<SettingsScreen />} />
       </Route>
+      <Route path="*" element={<Navigate to="dashboard" replace />} />
     </Routes>
   );
 };

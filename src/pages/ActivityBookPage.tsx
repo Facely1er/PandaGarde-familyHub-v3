@@ -528,7 +528,7 @@ const ActivityBookPage: React.FC = () => {
               <p className="mb-4 text-sm md:text-base text-gray-600">
                 Conversation starters and questions to discuss privacy concepts with your children after activities.
               </p>
-              <Link to="/#parent-resources" className="text-green-600 font-semibold hover:text-green-700 transition-colors text-sm md:text-base">
+              <Link to="/resources" className="text-green-600 font-semibold hover:text-green-700 transition-colors text-sm md:text-base">
                 View Guides →
               </Link>
             </div>

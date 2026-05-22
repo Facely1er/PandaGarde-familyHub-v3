@@ -299,7 +299,7 @@ export class FamilyPrivacyAssessment {
           'Review app permissions on all devices'
         ],
         resources: [
-          { label: 'Privacy Settings Guide', url: '/guides/privacy-settings' },
+          { label: 'Privacy Settings Guide', url: '/privacy-tools' },
           { label: 'Service Catalog', url: '/service-catalog' }
         ]
       });
@@ -341,7 +341,7 @@ export class FamilyPrivacyAssessment {
           'Use a password manager for strong, unique passwords'
         ],
         resources: [
-          { label: 'Security Best Practices', url: '/guides/security' }
+          { label: 'Security Best Practices', url: '/guides/emergency-safety' }
         ]
       });
     }
@@ -382,7 +382,7 @@ export class FamilyPrivacyAssessment {
           'Use age-appropriate privacy settings'
         ],
         resources: [
-          { label: 'Parental Control Guide', url: '/guides/parental-controls' },
+          { label: 'Parental Control Guide', url: '/guides/device-setup' },
           { label: 'Family Hub', url: '/family-hub' }
         ]
       });

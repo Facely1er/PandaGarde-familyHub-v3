@@ -202,6 +202,10 @@ function App() {
             <Route path="/activity-book" element={<ActivityBookPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/age-groups" element={<AgeGroupsPage />} />
+            <Route path="/ages-5-8" element={<Navigate to="/activity-book" replace />} />
+            <Route path="/ages-9-12" element={<Navigate to="/privacy-explorers" replace />} />
+            <Route path="/ages-13-17" element={<Navigate to="/teen-handbook" replace />} />
+            <Route path="/mission-hub" element={<Navigate to="/family-hub" replace />} />
             <Route path="/implementation" element={<ImplementationPage />} />
             <Route path="/family-hub/*" element={<FamilyHubWrapper />} />
             
@@ -239,6 +243,7 @@ function App() {
             <Route path="/service-catalog" element={<ServiceCatalogPage />} />
             <Route path="/safety-alerts" element={<ChildSafetyAlertsPage />} />
             <Route path="/alerts" element={<ChildSafetyAlertsPage />} />
+            <Route path="/child-safety-alerts" element={<Navigate to="/safety-alerts" replace />} />
             <Route path="/digital-footprint" element={<DigitalFootprintPage />} />
             <Route path="/footprint" element={<DigitalFootprintPage />} />
             <Route path="/privacy-assessment" element={<PrivacyAssessmentPage />} />
@@ -285,6 +290,14 @@ function App() {
 
             {/* Guide Pages */}
             <Route path="/guides/device-setup" element={<DeviceSetupGuidePage />} />
+            <Route path="/guides/parental-controls" element={<Navigate to="/guides/device-setup" replace />} />
+            <Route path="/guides/device-security" element={<Navigate to="/guides/device-setup" replace />} />
+            <Route path="/guides/privacy-settings" element={<Navigate to="/privacy-tools" replace />} />
+            <Route path="/guides/privacy-basics" element={<Navigate to="/privacy-handbook" replace />} />
+            <Route path="/guides/social-media-privacy" element={<Navigate to="/teen-handbook" replace />} />
+            <Route path="/guides/security" element={<Navigate to="/guides/emergency-safety" replace />} />
+            <Route path="/guides/urgent-protection" element={<Navigate to="/guides/emergency-safety" replace />} />
+            <Route path="/guides/practical-privacy" element={<Navigate to="/guides/family-privacy" replace />} />
             <Route path="/guides/app-selection" element={<AppSelectionGuidePage />} />
             <Route path="/guides/modeling-behavior" element={<ModelingBehaviorGuidePage />} />
             <Route path="/guides/privacy-concerns" element={<PrivacyConcernsGuidePage />} />

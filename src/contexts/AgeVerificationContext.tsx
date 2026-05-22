@@ -37,11 +37,11 @@ export const AgeVerificationProvider: React.FC<AgeVerificationProviderProps> = (
 
   const autoRouteToAppropriateContent = useCallback((age: number) => {
     if (age >= 5 && age <= 8) {
-      navigate('/ages-5-8');
+      navigate('/activity-book');
     } else if (age >= 9 && age <= 12) {
-      navigate('/ages-9-12');
+      navigate('/privacy-explorers');
     } else if (age >= 13 && age <= 17) {
-      navigate('/ages-13-17');
+      navigate('/teen-handbook');
     } else {
       navigate('/get-started');
     }
@@ -202,25 +202,28 @@ export const AgeVerificationProvider: React.FC<AgeVerificationProviderProps> = (
 
     const contentMap = {
       'ages-5-8': [
-        '/ages-5-8',
-        '/interactive-story',
         '/activity-book',
+        '/stories',
+        '/privacy-panda',
+        '/interactive-story',
         '/coloring-sheets',
-        '/safety-posters'
+        '/safety-posters',
+        '/downloads/coloring-sheets'
       ],
       'ages-9-12': [
-        '/ages-9-12',
-        '/interactive-story',
+        '/privacy-explorers',
+        '/privacy-handbook',
+        '/digital-citizenship',
         '/activity-book',
-        '/privacy-tools',
-        '/mission-hub'
+        '/stories',
+        '/family-hub'
       ],
       'ages-13-17': [
-        '/ages-13-17',
-        '/privacy-tools',
-        '/mission-hub',
         '/teen-handbook',
-        '/digital-citizenship'
+        '/privacy-tools',
+        '/digital-citizenship',
+        '/digital-rights',
+        '/family-hub'
       ]
     };
 
