@@ -6,6 +6,7 @@ import { useAuth } from './AuthWrapper';
 import { HUB_WELCOMED_KEY } from '../../familyhub/constants';
 import { hubPaths, isHubStandalone, pandagardeWebsiteUrl } from '../../familyhub/hubPaths';
 import AgeBandStrip from '../../familyhub/components/AgeBandStrip';
+import HubBrandLogo from '../../familyhub/components/HubBrandLogo';
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -31,13 +32,7 @@ const LoginPage: React.FC = () => {
       <div className="flex flex-1 flex-col justify-center px-4 py-10">
         <div className="mx-auto w-full max-w-lg space-y-6">
           <div className="text-center">
-            <span
-              className="hub-mascot-float mx-auto flex h-20 w-20 items-center justify-center rounded-3xl border-2 border-teal-200 bg-white text-5xl shadow-lg dark:border-teal-700 dark:bg-gray-800"
-              role="img"
-              aria-label="Privacy Panda"
-            >
-              🐼
-            </span>
+            <HubBrandLogo size="hero" animated className="mx-auto" />
             <p className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-teal-100 px-3 py-1 text-xs font-bold uppercase tracking-wide text-teal-800 dark:bg-teal-900/50 dark:text-teal-200">
               <Sparkles size={12} aria-hidden="true" />
               Family privacy adventures

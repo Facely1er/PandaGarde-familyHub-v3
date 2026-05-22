@@ -4,6 +4,7 @@ import { ArrowRight, Shield, Users, Gamepad2, Award } from 'lucide-react';
 import { updateDfaJourneyPhase } from '../../lib/dfaJourney';
 import { setHubOrigin } from '../../lib/hubMission';
 import AgeBandStrip from '../components/AgeBandStrip';
+import HubBrandLogo from '../components/HubBrandLogo';
 import { HUB_WELCOMED_KEY } from '../constants';
 import { hubPaths } from '../hubPaths';
 
@@ -62,13 +63,7 @@ const WelcomeScreen: React.FC = () => {
 
           {/* Hero */}
           <div className="text-center space-y-4">
-            <span
-              className="hub-mascot-float mx-auto flex h-20 w-20 items-center justify-center rounded-2xl border-2 border-teal-200 bg-white text-5xl shadow-lg dark:border-teal-700 dark:bg-gray-800"
-              role="img"
-              aria-label="Privacy Panda"
-            >
-              🐼
-            </span>
+            <HubBrandLogo size="hero" animated className="mx-auto" />
             <div>
               <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight">
                 Welcome to your<br />

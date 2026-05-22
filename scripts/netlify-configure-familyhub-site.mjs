@@ -22,15 +22,16 @@ async function main() {
 
   const body = {
     build_settings: {
-      cmd: 'npm ci --ignore-scripts && npm run build:familyhub',
+      cmd: 'node scripts/netlify-build.mjs',
       dir: 'dist-familyhub',
       base: '',
+      configuration_file_path: 'netlify-familyhub.toml',
     },
     repo: {
       repo_path: 'Facely1er/PandaGarde-familyHub-v3',
       provider: 'github',
       repo_branch: 'main',
-      cmd: 'npm ci --ignore-scripts && npm run build:familyhub',
+      cmd: 'node scripts/netlify-build.mjs',
       dir: 'dist-familyhub',
     },
   };

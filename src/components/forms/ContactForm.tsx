@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Send, User, Mail, MessageSquare, Phone, CheckCircle, AlertCircle } from 'lucide-react';
-import { contactService, newsletterService } from '../../lib/database';
+import { newsletterService } from '../../lib/database';
+import { submitContactNetlifyForm } from '../../lib/netlifyForms';
 import { useToast } from '../../hooks/useToast';
 import { logger } from '../../lib/logger';
 
@@ -40,6 +41,7 @@ const ContactForm: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const [botField, setBotField] = useState('');
   const { showSuccess, showError } = useToast();
 
   // Load saved form data from localStorage
@@ -128,44 +130,41 @@ const ContactForm: React.FC = () => {
     setSubmitError('');
 
     try {
-      // Submit to database
-      const submission = await contactService.submitContactForm({
+      await submitContactNetlifyForm({
         name: formData.name,
         email: formData.email,
-        message: `${formData.subject}\n\nInquiry Type: ${formData.inquiryType}\nAge Group: ${formData.ageGroup || 'Not specified'}\nPhone: ${formData.phone || 'Not provided'}\n\nMessage:\n${formData.message}`
+        phone: formData.phone || undefined,
+        subject: formData.subject,
+        message: formData.message,
+        inquiryType: formData.inquiryType,
+        ageGroup: formData.ageGroup || undefined,
+        newsletter: formData.newsletter,
+        botField,
       });
 
-      if (submission) {
-        // Handle newsletter subscription if requested
-        if (formData.newsletter) {
-          try {
-            await newsletterService.subscribe(formData.email);
-          } catch (newsletterError) {
-            logger.warn('Newsletter subscription failed:', newsletterError);
-            // Don't fail the form submission for newsletter errors
-          }
+      if (formData.newsletter) {
+        try {
+          await newsletterService.subscribe(formData.email);
+        } catch (newsletterError) {
+          logger.warn('Newsletter subscription failed:', newsletterError);
         }
-
-        // Clear form data
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          subject: '',
-          message: '',
-          inquiryType: '',
-          ageGroup: '',
-          newsletter: false
-        });
-
-        // Clear localStorage
-        localStorage.removeItem('contactFormData');
-
-        showSuccess('Message Sent!', 'Thank you for contacting us. We\'ll get back to you within 24 hours.');
-        setIsSubmitted(true);
-      } else {
-        throw new Error('Failed to submit form');
       }
+
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: '',
+        inquiryType: '',
+        ageGroup: '',
+        newsletter: false,
+      });
+      setBotField('');
+      localStorage.removeItem('contactFormData');
+
+      showSuccess('Message Sent!', 'Thank you for contacting us. We\'ll get back to you within 24 hours.');
+      setIsSubmitted(true);
     } catch (error) {
       logger.error('Contact form submission error:', error);
       setSubmitError('Failed to send message. Please try again.');
@@ -211,7 +210,28 @@ const ContactForm: React.FC = () => {
 
   return (
     <div className="contact-form">
-      <form onSubmit={handleSubmit} className="form">
+      <form
+        name="contact"
+        onSubmit={handleSubmit}
+        className="form"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+      >
+        <input type="hidden" name="form-name" value="contact" />
+        <p className="hidden" aria-hidden="true">
+          <label htmlFor="contact-bot-field">
+            Don&apos;t fill this out if you&apos;re human:
+            <input
+              id="contact-bot-field"
+              name="bot-field"
+              type="text"
+              tabIndex={-1}
+              autoComplete="off"
+              value={botField}
+              onChange={(e) => setBotField(e.target.value)}
+            />
+          </label>
+        </p>
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="name" className="form-label">

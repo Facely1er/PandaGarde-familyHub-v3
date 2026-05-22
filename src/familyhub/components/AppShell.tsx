@@ -6,6 +6,7 @@ import { HubFamilyProvider } from '../../contexts/HubFamilyContext';
 import { getHubOrigin } from '../../lib/hubMission';
 import { openExternalUrl } from '../../lib/openExternalUrl';
 import { hubPaths, pandagardeWebsiteUrl, isHubStandalone } from '../hubPaths';
+import HubBrandLogo from './HubBrandLogo';
 
 interface TabItem {
   id: string;
@@ -88,17 +89,11 @@ const AppShell: React.FC = () => {
               <a
                 href={isHubStandalone ? pandagardeWebsiteUrl : '/'}
                 onClick={onOpenWebsite}
-                className="flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-gray-200 bg-white hover:opacity-80 dark:border-gray-600 dark:bg-gray-900 transition-opacity"
+                className="flex shrink-0 hover:opacity-80 transition-opacity"
                 aria-label={hubOrigin === 'standalone' || isHubStandalone ? 'Open PandaGarde website (optional)' : 'Back to PandaGarde website'}
                 title={hubOrigin === 'standalone' || isHubStandalone ? 'Website' : 'Back to PandaGarde'}
               >
-                <img
-                  src="/LogoPandagarde.png"
-                  alt=""
-                  className="h-full w-full object-contain p-0.5"
-                  width={28}
-                  height={28}
-                />
+                <HubBrandLogo size="xs" variant="card" alt="" />
               </a>
               <div className="flex min-w-0 items-center gap-1.5">
                 <h1 className="truncate text-sm font-bold text-teal-700 dark:text-teal-400">

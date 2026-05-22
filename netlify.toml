@@ -1,6 +1,7 @@
- [build]
+[build]
   publish = "dist"
-  command = "npm install --no-audit --ignore-scripts && npm run build"
+  # Routes hub Netlify site (09a33b67…) to build:familyhub even if this file is used by mistake
+  command = "node scripts/netlify-build.mjs"
 
 [build.environment]
   NODE_VERSION = "20.20.2"

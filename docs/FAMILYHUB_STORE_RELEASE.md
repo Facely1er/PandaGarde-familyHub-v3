@@ -98,8 +98,9 @@ Uploads `dist-familyhub/` with `--no-build` (avoids running the full-site `netli
 
 The site is configured to run:
 
-- **Build command:** `npm ci --ignore-scripts && npm run build:familyhub`
-- **Publish directory:** `dist-familyhub`
+- **Configuration file:** `netlify-familyhub.toml` (Site settings → Build & deploy)
+- **Build command:** `node scripts/netlify-build.mjs` (hub-only; safe even if `netlify.toml` is selected)
+- **Publish directory:** `dist-familyhub` (not `dist` — that folder is the full marketing website)
 - **Repo:** `Facely1er/PandaGarde-familyHub-v3` (branch `main`)
 
 Optional env in Netlify UI:

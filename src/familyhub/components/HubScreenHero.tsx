@@ -1,4 +1,5 @@
 import React from 'react';
+import HubBrandLogo from './HubBrandLogo';
 
 interface HubScreenHeroProps {
   badge?: string;
@@ -35,16 +36,11 @@ const HubScreenHero: React.FC<HubScreenHeroProps> = ({
     />
     <div className="relative flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-4">
       {mascot === 'panda' && (
-        <span
-          className={[
-            'hub-mascot-float flex shrink-0 items-center justify-center rounded-2xl bg-white/95 shadow-md dark:bg-gray-900/90',
-            compact ? 'h-14 w-14 text-3xl' : 'h-16 w-16 text-4xl sm:h-[4.5rem] sm:w-[4.5rem] sm:text-5xl',
-          ].join(' ')}
-          role="img"
-          aria-label="Privacy Panda"
-        >
-          🐼
-        </span>
+        <HubBrandLogo
+          size={compact ? 'md' : 'header'}
+          variant="header"
+          animated={!compact}
+        />
       )}
       <div className="min-w-0 flex-1">
         {badge && (

@@ -3,7 +3,7 @@
 
 [build]
   publish = "dist-familyhub"
-  command = "npm ci --ignore-scripts && npm run build:familyhub"
+  command = "node scripts/netlify-build.mjs"
 
 [build.environment]
   NODE_VERSION = "20.20.2"

@@ -13,7 +13,7 @@ const bundles = [
   {
     name: 'Main website (www)',
     dir: path.join(root, '..', 'dist'),
-    required: ['index.html', 'sw.js', 'manifest.json', 'offline.html', '_headers'],
+    required: ['index.html', 'sw.js', 'manifest.json', 'offline.html', '_headers', 'LogoPandagarde.png'],
   },
   {
     name: 'Family Hub (hub.pandagarde.com / Capacitor webDir)',
@@ -26,6 +26,7 @@ const bundles = [
       'offline.html',
       '_redirects',
       '_headers',
+      'LogoPandagarde.png',
     ],
   },
 ];

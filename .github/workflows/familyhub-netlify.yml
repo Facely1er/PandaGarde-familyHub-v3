@@ -36,6 +36,7 @@ jobs:
           test -f dist-familyhub/familyhub-manifest.json
           test -f dist-familyhub/offline.html
           test -f dist-familyhub/_redirects
+          test -f dist-familyhub/LogoPandagarde.png
       - uses: actions/upload-artifact@v4
         with:
           name: dist-familyhub

@@ -52,6 +52,34 @@
         } catch (e) {}
       })();
     </script>
+    <!-- Netlify Forms: static markup so Netlify detects fields at build (SPA submits via fetch) -->
+    <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <input type="text" name="subject" />
+      <select name="inquiryType">
+        <option value="general">General Question</option>
+        <option value="technical">Technical Support</option>
+        <option value="partnership">Partnership Inquiry</option>
+        <option value="media">Media Inquiry</option>
+        <option value="feedback">Feedback</option>
+        <option value="other">Other</option>
+      </select>
+      <select name="ageGroup">
+        <option value="5-8">Ages 5-8</option>
+        <option value="9-12">Ages 9-12</option>
+        <option value="13-17">Ages 13-17</option>
+        <option value="18+">Adult</option>
+        <option value="educator">Educator</option>
+        <option value="parent">Parent</option>
+      </select>
+      <textarea name="message"></textarea>
+      <input type="text" name="newsletter" />
+      <p class="hidden">
+        <label>Don’t fill this out: <input name="bot-field" /></label>
+      </p>
+    </form>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
