@@ -4,6 +4,14 @@
 
 **[CONTENT_TRUTH.md](./CONTENT_TRUTH.md)** — What Family Hub and the website actually do (local-first, missions, catalog/RSS alerts). Grep §7 before release to catch stale copy.
 
+## Product & story canon
+
+**[PRODUCT_VISION.md](./PRODUCT_VISION.md)** — Product definition (forest, cast, three layers). Product vs. Summer Camp boundary in §10.
+
+**[STORYLINE_BIBLE.md](./STORYLINE_BIBLE.md)** — Canonical world reference: characters, zones, quest pillars, story registry.
+
+**[STORY_VISUAL_ASSET_REGISTRY.md](./STORY_VISUAL_ASSET_REGISTRY.md)** — Art production checklist: covers, chapter panels, and shared assets wired to each `stories.ts` slug. Update when art ships or episodes change.
+
 ## Authoritative Governance
 
 **[pandagarde_authoritative_sdlc_governance_suite_v_1.md](./pandagarde_authoritative_sdlc_governance_suite_v_1.md)** — v1.0, STATUS: AUTHORITATIVE. Supersedes conflicting implementation decisions.
