@@ -34,6 +34,7 @@
     "check:routes": "node scripts/verify-routes.mjs",
     "check:story-assets": "node scripts/verify-story-scene-assets.mjs",
     "assets:story-covers": "node scripts/crop-story-covers.mjs",
+    "assets:story-covers:verify": "node scripts/verify-story-covers.mjs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",

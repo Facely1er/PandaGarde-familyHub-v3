@@ -10,7 +10,7 @@ npm run assets:story-covers
 
 | Save attached file as | Contents |
 |---|---|
-| **`season-1-covers-4x2.png`** | 4×2 grid of episode posters (PANDAGARDE Episodes 1–8). Crop order: row 1 → Ep 1–4, row 2 → Ep 5–8. |
+| **`sources/season-1-covers-4x2.png`** | 4×2 grid of episode posters (PANDAGARDE Episodes 1–8). Crop order: row 1 → Ep 1–4, row 2 → Ep 5–8. |
 
 The crop script trims ~11.5% top (title pill) and ~13.5% bottom (logo) per cell, plus **7.5% per side** on shared column borders and **4.5%** on the row split — so neighboring panels should not bleed into the card frame.
 

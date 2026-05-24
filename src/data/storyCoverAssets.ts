@@ -30,12 +30,12 @@ export const STORY_COVER_BY_SLUG: Record<string, string> = Object.fromEntries(
   }),
 );
 
-/** Per-episode object-position hints when poster title chrome was trimmed in crop. */
+/** Per-episode object-position hints (contain mode — usually centered). */
 const COVER_POSITION_BY_SLUG: Record<string, string> = {
-  'privacy-panda-and-the-digital-bamboo-forest': '32% center',
+  'privacy-panda-and-the-digital-bamboo-forest': 'center',
   'mika-and-the-photo-that-flew-away': 'center',
   'billys-invisible-collection': 'center',
-  'mika-and-the-sneaky-settings': 'center top',
+  'mika-and-the-sneaky-settings': 'center',
 };
 
 export function getStoryCoverUrl(story: Story): string | undefined {

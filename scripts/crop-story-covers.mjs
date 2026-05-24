@@ -1,10 +1,5 @@
 /**
- * Builds story card covers (640×360 WebP) from production source sheets.
- *
- * Primary source: season-1-covers-4x2.png — 4×2 grid, episodes 1–8 left→right, top→bottom.
- * Legacy: episode-1-hero-source.png, story-covers-master.png (ep 2–3 only).
- *
- * Cropping trims title/logo chrome and shaves shared gutters so adjacent panels never bleed in.
+ * Builds story card covers (512×640 WebP) from production source sheets.
  *
  * Usage: npm run assets:story-covers
  */
@@ -12,37 +7,28 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
+import {
+  LETTERBOX,
+  OUTPUT_HEIGHT,
+  OUTPUT_WIDTH,
+  getCellExtractRect,
+  detectGridGutters,
+} from './lib/storyCoverCropUtils.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, '..');
 const coversDir = path.join(root, 'src', 'assets', 'story-covers');
 const sourcesDir = path.join(coversDir, 'sources');
 
-const OUTPUT_WIDTH = 640;
-const OUTPUT_HEIGHT = 360;
-const MIN_INSET_PX = 6;
-
-/** Every panel has episode badge (top) and series logo (bottom). */
-const CHROME_TOP = 0.115;
-const CHROME_BOTTOM = 0.135;
-
-/** Outer sheet edge — small trim only. */
-const OUTER_EDGE = 0.02;
-
-/** Extra trim on each side of a column/row boundary (both cells share this gutter). */
-const INNER_COL_GUTTER = 0.075;
-const INNER_ROW_GUTTER = 0.045;
-
 const LEGACY_MASTER_BANDS = [
   { file: 'episode-2-cover.webp', top: 192, height: 192 },
   { file: 'episode-3-cover.webp', top: 384, height: 192 },
 ];
 const LEGACY_ARTWORK_WIDTH_RATIO = 0.62;
-const LEGACY_BAND_INSET_TOP = 0.1;
-const LEGACY_BAND_INSET_BOTTOM = 0.12;
+const LEGACY_BAND_INSET_TOP = 0.08;
+const LEGACY_BAND_INSET_BOTTOM = 0.08;
 const LEGACY_BAND_INSET_LEFT = 0.03;
 
-/** Episode number → output filename (wired in storyCoverAssets.ts by slug). */
 const SEASON1_GRID = {
   cols: 4,
   rows: 2,
@@ -58,77 +44,51 @@ const SEASON1_GRID = {
   ],
 };
 
-/**
- * @returns {{ left: number, top: number, width: number, height: number }}
- */
-function getCellExtractRect(width, height, col, row, cols, rows) {
-  const x0 = Math.round((col / cols) * width);
-  const x1 = Math.round(((col + 1) / cols) * width);
-  const y0 = Math.round((row / rows) * height);
-  const y1 = Math.round(((row + 1) / rows) * height);
-
-  const cellW = x1 - x0;
-  const cellH = y1 - y0;
-
-  let insetL = col === 0 ? OUTER_EDGE : INNER_COL_GUTTER / 2;
-  let insetR = col === cols - 1 ? OUTER_EDGE : INNER_COL_GUTTER / 2;
-  let insetT = CHROME_TOP;
-  let insetB = CHROME_BOTTOM;
-
-  if (row > 0) {
-    insetT += INNER_ROW_GUTTER / 2;
-  }
-  if (row < rows - 1) {
-    insetB += INNER_ROW_GUTTER / 2;
-  }
-
-  const padL = Math.max(MIN_INSET_PX, Math.floor(cellW * insetL));
-  const padR = Math.max(MIN_INSET_PX, Math.floor(cellW * insetR));
-  const padT = Math.max(MIN_INSET_PX, Math.floor(cellH * insetT));
-  const padB = Math.max(MIN_INSET_PX, Math.floor(cellH * insetB));
-
-  const extractLeft = x0 + padL;
-  const extractTop = y0 + padT;
-  const extractWidth = cellW - padL - padR;
-  const extractHeight = cellH - padT - padB;
-
-  if (extractWidth < 32 || extractHeight < 32) {
-    throw new Error(
-      `Extract rect too small for col=${col} row=${row}: ${extractWidth}×${extractHeight}`,
-    );
-  }
-
-  return {
-    left: extractLeft,
-    top: extractTop,
-    width: extractWidth,
-    height: extractHeight,
-  };
+async function buildCoverFromExtract(sourcePath, cellRect) {
+  return sharp(sourcePath)
+    .extract(cellRect)
+    .resize(OUTPUT_WIDTH, OUTPUT_HEIGHT, {
+      fit: 'contain',
+      background: LETTERBOX,
+    })
+    .webp({ quality: 90 });
 }
 
-async function cropGridCell(sourcePath, col, row, cols, rows) {
-  const { width, height } = await sharp(sourcePath).metadata();
-  if (!width || !height) {
-    throw new Error('Could not read source dimensions');
+async function validateOutput(filePath) {
+  const { width, height, format } = await sharp(filePath).metadata();
+  const size = fs.statSync(filePath).size;
+  if (format !== 'webp' || width !== OUTPUT_WIDTH || height !== OUTPUT_HEIGHT || size < 8000) {
+    throw new Error(`Invalid output ${path.basename(filePath)}: ${width}×${height} ${size}B`);
   }
+}
 
-  const rect = getCellExtractRect(width, height, col, row, cols, rows);
-
-  return sharp(sourcePath)
-    .extract(rect)
-    .resize(OUTPUT_WIDTH, OUTPUT_HEIGHT, { fit: 'cover', position: 'centre' })
-    .webp({ quality: 86 });
+function resolveSeason1SourcePath() {
+  const candidates = [
+    path.join(sourcesDir, 'season-1-covers-4x2.png'),
+    path.join(sourcesDir, 'pandastories-2.png'),
+  ];
+  for (const candidate of candidates) {
+    if (fs.existsSync(candidate)) {
+      return candidate;
+    }
+  }
+  return null;
 }
 
 async function writeSeason1Grid() {
-  const sourcePath = path.join(sourcesDir, 'season-1-covers-4x2.png');
-  if (!fs.existsSync(sourcePath)) {
-    console.warn(`Skip season-1 grid: missing ${path.relative(root, sourcePath)}`);
+  const sourcePath = resolveSeason1SourcePath();
+  if (!sourcePath) {
+    console.warn('Skip season-1 grid: add sources/season-1-covers-4x2.png');
     return false;
   }
 
   const { width, height } = await sharp(sourcePath).metadata();
-  console.log(`Season-1 grid source: ${width}×${height}`);
+  const { data } = await sharp(sourcePath).raw().toBuffer({ resolveWithObject: true });
+  const gutters = detectGridGutters(data, width, height, SEASON1_GRID.cols, SEASON1_GRID.rows);
+
+  console.log(`Season-1 grid source: ${path.relative(root, sourcePath)} (${width}×${height})`);
+  console.log(`Detected gutters: x=[${gutters.xGutters.join(', ')}] y=[${gutters.yGutters.join(', ')}]`);
+  console.log(`Output: ${OUTPUT_WIDTH}×${OUTPUT_HEIGHT} portrait (fit contain, no 16:9 chop)`);
 
   const { cols, rows, episodes } = SEASON1_GRID;
   let index = 0;
@@ -137,10 +97,11 @@ async function writeSeason1Grid() {
       const file = episodes[index];
       if (!file) break;
       const outPath = path.join(coversDir, file);
-      const rect = getCellExtractRect(width, height, col, row, cols, rows);
-      await (await cropGridCell(sourcePath, col, row, cols, rows)).toFile(outPath);
+      const cellRect = getCellExtractRect(width, height, col, row, cols, rows, gutters);
+      await (await buildCoverFromExtract(sourcePath, cellRect)).toFile(outPath);
+      await validateOutput(outPath);
       console.log(
-        `Wrote ${file} (col=${col} row=${row} extract ${rect.width}×${rect.height} @ ${rect.left},${rect.top})`,
+        `Wrote ${file} (col=${col} row=${row} art ${cellRect.width}×${cellRect.height} → ${OUTPUT_WIDTH}×${OUTPUT_HEIGHT})`,
       );
       index += 1;
     }
@@ -153,11 +114,13 @@ async function writeEpisode1HeroFallback() {
   if (!fs.existsSync(episode1SourcePath)) {
     return;
   }
+  const outPath = path.join(coversDir, 'episode-1-cover.webp');
   await sharp(episode1SourcePath)
-    .resize(OUTPUT_WIDTH, OUTPUT_HEIGHT, { fit: 'cover', position: 'left' })
-    .webp({ quality: 86 })
-    .toFile(path.join(coversDir, 'episode-1-cover.webp'));
-  console.log('Wrote episode-1-cover.webp (legacy hero source override)');
+    .resize(OUTPUT_WIDTH, OUTPUT_HEIGHT, { fit: 'contain', background: LETTERBOX })
+    .webp({ quality: 90 })
+    .toFile(outPath);
+  await validateOutput(outPath);
+  console.log('Wrote episode-1-cover.webp (legacy hero fallback)');
 }
 
 async function writeLegacyMasterBands() {
@@ -172,13 +135,14 @@ async function writeLegacyMasterBands() {
     if (top + bandHeight > height) continue;
 
     const cropWidth = Math.floor(width * LEGACY_ARTWORK_WIDTH_RATIO);
-    const padT = Math.max(MIN_INSET_PX, Math.floor(bandHeight * LEGACY_BAND_INSET_TOP));
-    const padB = Math.max(MIN_INSET_PX, Math.floor(bandHeight * LEGACY_BAND_INSET_BOTTOM));
-    const padL = Math.max(MIN_INSET_PX, Math.floor(cropWidth * LEGACY_BAND_INSET_LEFT));
+    const padT = Math.max(4, Math.floor(bandHeight * LEGACY_BAND_INSET_TOP));
+    const padB = Math.max(4, Math.floor(bandHeight * LEGACY_BAND_INSET_BOTTOM));
+    const padL = Math.max(4, Math.floor(cropWidth * LEGACY_BAND_INSET_LEFT));
     const extractHeight = bandHeight - padT - padB;
 
     if (extractHeight < 32) continue;
 
+    const outPath = path.join(coversDir, file);
     await sharp(masterPath)
       .extract({
         left: padL,
@@ -186,10 +150,11 @@ async function writeLegacyMasterBands() {
         width: cropWidth - padL,
         height: extractHeight,
       })
-      .resize(OUTPUT_WIDTH, OUTPUT_HEIGHT, { fit: 'cover', position: 'west' })
+      .resize(OUTPUT_WIDTH, OUTPUT_HEIGHT, { fit: 'contain', background: LETTERBOX })
       .webp({ quality: 82 })
-      .toFile(path.join(coversDir, file));
-    console.log(`Wrote ${file} (legacy master band, inset top/bottom/sides)`);
+      .toFile(outPath);
+    await validateOutput(outPath);
+    console.log(`Wrote ${file} (legacy master band)`);
   }
 }
 

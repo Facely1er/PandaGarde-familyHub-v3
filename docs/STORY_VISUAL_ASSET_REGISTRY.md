@@ -74,10 +74,14 @@ See [sources/README.md](../src/assets/story-covers/sources/README.md) for grid�
 
 | Status | Ep | Bundled path | Source panel |
 |---|---|---|---|
-| [x] | 1 | `src/assets/story-covers/episode-1-cover.webp` | Grid R0C0 or legacy hero |
-| [x] | 2 | `episode-2-cover.webp` | Grid R0C1 or legacy master band |
-| [~] | 3 | `episode-3-cover.webp` | Grid R0C2 — **legacy band is Owen-era; replace with grid** |
-| [ ] | 4–8 | `episode-4-cover.webp` … `episode-8-cover.webp` | Grid R0C3, R1C0–R1C3 — pending `season-1-covers-4x2.png` in repo |
+| [x] | 1 | `src/assets/story-covers/episode-1-cover.webp` | Grid R0C0 (`pandastories-2.png`) |
+| [x] | 2 | `episode-2-cover.webp` | Grid R0C1 |
+| [x] | 3 | `episode-3-cover.webp` | Grid R0C2 |
+| [x] | 4 | `episode-4-cover.webp` | Grid R0C3 |
+| [x] | 5 | `episode-5-cover.webp` | Grid R1C0 |
+| [x] | 6 | `episode-6-cover.webp` | Grid R1C1 |
+| [x] | 7 | `episode-7-cover.webp` | Grid R1C2 |
+| [x] | 8 | `episode-8-cover.webp` | Grid R1C3 |
 
 **Art vs. canon (Ep 5–8 panels):** attached posters use zone-themed titles (Bridge, Backup, Shadow Mist, Campfire). They are **interim card art** until story-specific covers ship at `public/stories/{slug}/cover.webp`.
 
@@ -209,7 +213,7 @@ See [sources/README.md](../src/assets/story-covers/sources/README.md) for grid�
 
 | Status | Asset | Chapter | Scene brief | Target path |
 |---|---|---|---|---|
-| [~] | Cover (card) | — | Billy + digital trail — **replace legacy Owen band** via grid R0C2 | `public/stories/billys-invisible-collection/cover.webp` |
+| [x] | Cover (card) | — | Billy + digital trail — bundled `episode-3-cover.webp` | `public/stories/billys-invisible-collection/cover.webp` |
 | [ ] | Ch1 | Billy's Big Idea | Billy building secret real-time map | `…/ch1.webp` |
 | [ ] | Ch2 | The Map Goes Live | Friends discover map; feel watched | `…/ch2.webp` |
 | [ ] | Ch3 | What the Archive Remembers | Mika at Archive with path scroll | `…/ch3.webp` |

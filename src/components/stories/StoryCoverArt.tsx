@@ -29,8 +29,8 @@ function CoverImage({
     <img
       src={coverUrl}
       alt=""
-      width={640}
-      height={360}
+      width={512}
+      height={640}
       className={`story-cover-art__img${hoverZoom ? ' transition-transform duration-300 group-hover:scale-105' : ''}`}
       style={{ objectPosition: position }}
       aria-hidden
