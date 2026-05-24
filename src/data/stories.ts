@@ -1016,6 +1016,7 @@ const episode9: Story = {
   characters: ['Po', 'Ruby the Bunny', 'Miki the Monkey'],
   ageGroups: ['middle', 'older'],
   publishedAt: '2026-01-01',
+  scheduledAt: '2026-06-01',
   coverEmoji: '🌊',
   coverColor: 'bg-blue-100',
   summary: 'A pile-on starts in the Crystal Stream about a forest animal\'s drawing. Several animals join in. A young bystander watches but says nothing — until Po helps them understand that silence at the Stream is not neutral, and one kind word can change a current.',
@@ -1151,6 +1152,7 @@ const episode10: Story = {
   characters: ['Po', 'Ruby the Bunny', 'Fiona the Fox', 'Vex the Chameleon'],
   ageGroups: ['middle', 'older'],
   publishedAt: '2026-02-01',
+  scheduledAt: '2026-06-08',
   coverEmoji: '🦎',
   coverColor: 'bg-orange-100',
   summary: 'Vex the Chameleon creates a false version of Fiona\'s identity in the Open Clearing and uses it to ask her friends for information. When Fiona discovers what happened, Po and Ruby help the group understand how to verify identities — and why Vex collects what is carelessly left unprotected.',
@@ -1268,6 +1270,7 @@ const episode11: Story = {
   characters: ['Po', 'Mika the Owl', 'Billy the Beaver'],
   ageGroups: ['middle', 'older'],
   publishedAt: '2026-03-01',
+  scheduledAt: '2026-06-15',
   coverEmoji: '📜',
   coverColor: 'bg-purple-100',
   summary: 'A false story about a well-liked forest animal spreads through the Great Archive. Mika realises she stored it without verifying it first. Po and Billy help her develop a truth-testing protocol — and understand that what the Archive remembers is only as accurate as what was put in.',
@@ -1388,6 +1391,7 @@ const episode12: Story = {
   characters: ['Po', 'Kai the Fox', 'Tao'],
   ageGroups: ['middle', 'older'],
   publishedAt: '2026-04-01',
+  scheduledAt: '2026-06-22',
   coverEmoji: '🦊',
   coverColor: 'bg-amber-100',
   summary: 'Kai builds a tool to help animals find bamboo faster. The tool learns from what it sees and starts steering animals away from certain parts of the forest based on patterns Kai never intended. Together with Po and Tao, the group has to fix it — and understand that building for others means being responsible for what your creation does in the world.',
@@ -1512,6 +1516,7 @@ const episode13: Story = {
   characters: ['Po', 'Tao', 'Ruby the Bunny'],
   ageGroups: ['middle', 'older'],
   publishedAt: '2026-05-01',
+  scheduledAt: '2026-06-29',
   coverEmoji: '⛈️',
   coverColor: 'bg-slate-100',
   summary: 'A storm hits the Digital Bamboo Forest and the Crystal Stream goes silent. Animals cannot reach each other. Tao leads the repair — rebuilding the bamboo relay stations, finding alternative paths — and teaches the forest that the backbone nobody sees needs constant care.',
@@ -2024,12 +2029,24 @@ export const STORIES: Story[] = [
 
 // ─── HELPERS ──────────────────────────────────────────────────────────────────
 
-export const getPublishedStories = (): Story[] => {
+export const ORIGIN_STORY_SLUG = 'privacy-panda-and-the-digital-bamboo-forest';
+
+export const isStoryPublished = (story: Story): boolean => {
   const now = new Date();
-  return STORIES
-    .filter((s) => !s.scheduledAt || new Date(s.scheduledAt) <= now)
-    .sort((a, b) => a.episodeNumber - b.episodeNumber);
+  if (story.publishedAt && new Date(story.publishedAt) > now) {
+    return false;
+  }
+  if (story.scheduledAt && new Date(story.scheduledAt) > now) {
+    return false;
+  }
+  return true;
 };
+
+export const isFoundationStory = (story: Story): boolean =>
+  story.isOrigin === true || story.slug === ORIGIN_STORY_SLUG;
+
+export const getPublishedStories = (): Story[] =>
+  STORIES.filter(isStoryPublished).sort((a, b) => a.episodeNumber - b.episodeNumber);
 
 export const getStoryBySlug = (slug: string): Story | undefined =>
   STORIES.find((s) => s.slug === slug);
@@ -2046,30 +2063,34 @@ export const getStoriesBySeason = (season: 1 | 2 | 3): Story[] =>
 export const getStoriesByZone = (zone: ForestZone): Story[] =>
   getPublishedStories().filter((s) => s.forestZone === zone);
 
+/** Latest shipped continuation episode (story list, analytics). */
 export const getLatestStory = (): Story | undefined => {
-  const published = getPublishedStories();
+  const published = getPublishedStories().filter((s) => !isFoundationStory(s));
   return published[published.length - 1];
+};
+
+/** Flip to true when the homepage spotlight should promote a new episode. */
+export const HOMEPAGE_LATEST_STORY_ENABLED = false;
+
+/** Homepage “Latest Story” card only — off until product enables promotion. */
+export const getHomepageLatestStory = (): Story | undefined => {
+  if (!HOMEPAGE_LATEST_STORY_ENABLED) {
+    return undefined;
+  }
+  const latest = getLatestStory();
+  if (!latest || isFoundationStory(latest)) {
+    return undefined;
+  }
+  return latest;
 };
 
 export const getNextScheduledStory = (): Story | undefined =>
   STORIES
-    .filter((s) => s.scheduledAt && new Date(s.scheduledAt) > new Date())
+    .filter((s) => !isStoryPublished(s) && s.scheduledAt)
     .sort((a, b) => new Date(a.scheduledAt!).getTime() - new Date(b.scheduledAt!).getTime())[0];
-
-export const ORIGIN_STORY_SLUG = 'privacy-panda-and-the-digital-bamboo-forest';
-
-export const isFoundationStory = (story: Story): boolean =>
-  story.isOrigin === true || story.slug === ORIGIN_STORY_SLUG;
 
 export const getFoundationStory = (): Story | undefined =>
   STORIES.find((s) => isFoundationStory(s));
 
 export const getContinuationStories = (): Story[] =>
   getPublishedStories().filter((s) => !isFoundationStory(s));
-
-export const isStoryPublished = (story: Story): boolean => {
-  if (story.scheduledAt && new Date(story.scheduledAt) > new Date()) {
-    return false;
-  }
-  return true;
-};

@@ -17,13 +17,13 @@ import {
   Home,
 } from 'lucide-react';
 import { loadDfaJourneyState } from '../lib/dfaJourney';
-import { getFoundationStory, getLatestStory, ORIGIN_STORY_SLUG } from '../data/stories';
+import { getFoundationStory, getHomepageLatestStory, ORIGIN_STORY_SLUG } from '../data/stories';
 import { StoryCoverArt } from '../components/stories/StoryCoverArt';
 
 const HomePage: React.FC = () => {
   const journey = useMemo(() => loadDfaJourneyState(), []);
   const foundationStory = useMemo(() => getFoundationStory(), []);
-  const latestStory = useMemo(() => getLatestStory(), []);
+  const latestStory = useMemo(() => getHomepageLatestStory(), []);
 
 
   useEffect(() => {

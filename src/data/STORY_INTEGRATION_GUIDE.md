@@ -19,7 +19,8 @@ This single file is the **entire content backend**. It exports:
 - `getPublishedStories()` — filters out future-scheduled stories
 - `getStoryBySlug(slug)` — for routing
 - `getStoriesByAgeGroup(age)` — for age-filtered views
-- `getLatestStory()` — for the homepage "New Story" banner
+- `getLatestStory()` — highest published continuation (internal / future banners)
+- `getHomepageLatestStory()` — homepage spotlight only when `HOMEPAGE_LATEST_STORY_ENABLED` is true
 - `getNextScheduledStory()` — for the "Coming Soon" countdown
 
 No database needed. No CMS. Stories live in TypeScript objects — readable, version-controlled, and directly linked to activities.
@@ -220,11 +221,13 @@ In your main nav (wherever your other menu items are):
 And on the homepage, add a "Latest Story" banner using:
 
 ```tsx
-import { getLatestStory, getNextScheduledStory } from '../data/stories';
+import { getHomepageLatestStory, getNextScheduledStory } from '../data/stories';
 
-const latest = getLatestStory();
+const latest = getHomepageLatestStory();
 const coming = getNextScheduledStory();
 ```
+
+Set `HOMEPAGE_LATEST_STORY_ENABLED = true` in `stories.ts` when ready to show the homepage spotlight card.
 
 ---
 

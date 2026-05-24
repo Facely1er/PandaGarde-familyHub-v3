@@ -4,6 +4,8 @@ import {
   STORIES,
   getContinuationStories,
   getFoundationStory,
+  getLatestStory,
+  getHomepageLatestStory,
   getNextScheduledStory,
   getPublishedStories,
   getStoryBySlug,
@@ -36,10 +38,11 @@ describe('stories registry', () => {
     ]);
   });
 
-  it('publishes episodes without a future scheduledAt', () => {
+  it('publishes Season 1 only until Season 2 scheduled dates', () => {
     const published = getPublishedStories();
-    expect(published.length).toBeGreaterThanOrEqual(13);
+    expect(published).toHaveLength(8);
     expect(published.every((s) => isStoryPublished(s))).toBe(true);
+    expect(published.every((s) => s.season === 1)).toBe(true);
     expect(published.some((s) => s.slug === 'billys-invisible-collection')).toBe(true);
   });
 
@@ -47,11 +50,23 @@ describe('stories registry', () => {
     const continuation = getContinuationStories();
     expect(continuation.every((s) => !isFoundationStory(s))).toBe(true);
     expect(continuation[0]?.episodeNumber).toBe(2);
+    expect(continuation).toHaveLength(7);
   });
 
-  it('returns the next scheduled story when future episodes exist', () => {
+  it('uses the latest published continuation for registry helpers', () => {
+    const latest = getLatestStory();
+    expect(latest?.slug).toBe('pos-toughest-question');
+    expect(latest?.episodeNumber).toBe(8);
+  });
+
+  it('hides homepage Latest Story spotlight until enabled', () => {
+    expect(getHomepageLatestStory()).toBeUndefined();
+  });
+
+  it('returns the next scheduled Season 2 story', () => {
     const next = getNextScheduledStory();
-    expect(next?.slug).toBe('lumis-light');
+    expect(next?.slug).toBe('the-echo-chamber');
+    expect(isStoryPublished(next!)).toBe(false);
   });
 
   it('resolves slugs for all registry entries', () => {

@@ -6844,7 +6844,7 @@ header.header .nav-actions button.header-icon-btn {
   background: rgba(255, 255, 255, 0.15);
 }
 
-/* Mobile Navigation Overlay */
+/* Mobile Navigation Overlay (portalled — see Header.tsx) */
 .mobile-nav-overlay {
   position: fixed;
   inset: 0;
@@ -6853,17 +6853,36 @@ header.header .nav-actions button.header-icon-btn {
   display: flex;
   align-items: flex-start;
   justify-content: flex-end;
-  padding: 1rem;
+  padding: max(1rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right))
+    max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
   animation: fadeIn 0.3s ease-out;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+/*
+ * Panel inside overlay — overrides legacy @media (max-width: 768px) rules that set
+ * `.mobile-nav { display: none }` (old slide-in drawer expected `.mobile-nav.active`).
+ */
+.mobile-nav-overlay .mobile-nav {
+  display: flex !important;
+  flex-direction: column;
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: min(92vw, 420px);
+  max-height: calc(100dvh - 2rem);
+  background: var(--white);
+  border-radius: 16px;
+  padding: 1.25rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  animation: slideInRight 0.3s ease-out;
 }
 
 .mobile-nav {
@@ -6879,6 +6898,15 @@ header.header .nav-actions button.header-icon-btn {
   animation: slideInRight 0.3s ease-out;
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @keyframes slideInRight {
   from {
     transform: translateX(100%);
@@ -6891,6 +6919,7 @@ header.header .nav-actions button.header-icon-btn {
 }
 
 /* Dark theme support */
+[data-theme="dark"] .mobile-nav-overlay .mobile-nav,
 [data-theme="dark"] .mobile-nav {
   background: var(--gray-800);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);

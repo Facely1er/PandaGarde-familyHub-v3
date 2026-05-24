@@ -38,6 +38,17 @@ function Header() {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [isMobileMenuOpen, isSearchModalOpen]);
 
+  useEffect(() => {
+    if (!isMobileMenuOpen) {
+      return undefined;
+    }
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isMobileMenuOpen]);
+
   const navItems = useMemo(
     () => [
       { id: 'nav-how-it-works', icon: ShieldCheck, label: 'How It Works', href: '/how-it-works' },
@@ -227,7 +238,11 @@ function Header() {
       </header>
 
       {isMobileMenuOpen && createPortal(
-        <div className="mobile-nav-overlay" onClick={() => setIsMobileMenuOpen(false)}>
+        <div
+          className="mobile-nav-overlay"
+          onClick={() => setIsMobileMenuOpen(false)}
+          aria-hidden="true"
+        >
           <div
             id="mobile-navigation"
             className="mobile-nav"
