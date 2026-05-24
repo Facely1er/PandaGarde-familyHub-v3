@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Story, isFoundationStory } from '../../data/stories';
-import { getStoryCoverUrl } from '../../data/storyCoverAssets';
+import { getStoryCoverPosition, getStoryCoverUrl } from '../../data/storyCoverAssets';
 
 const PANDAGARDE_LOGO = '/LogoPandagarde.png';
 
@@ -11,10 +11,7 @@ interface StoryCoverArtProps {
 }
 
 function coverPosition(story: Story, variant: StoryCoverArtProps['variant']): string {
-  if (variant === 'hero' && story.coverHeroImagePosition) {
-    return story.coverHeroImagePosition;
-  }
-  return story.coverImagePosition ?? 'center';
+  return getStoryCoverPosition(story, variant === 'hero' ? 'hero' : 'card');
 }
 
 function CoverImage({

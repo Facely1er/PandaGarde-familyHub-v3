@@ -89,6 +89,10 @@ export interface Story {
   scheduledAt?: string;
   coverEmoji: string;
   coverColor: string;
+  /** Optional bundled or public URL override (see storyCoverAssets.ts). */
+  coverImage?: string;
+  coverImagePosition?: string;
+  coverHeroImagePosition?: string;
   summary: string;
   chapters: StoryChapter[];
   keyLesson: string;
@@ -118,6 +122,7 @@ const episode1: Story = {
   publishedAt: '2024-01-01',
   coverEmoji: '🐼',
   coverColor: 'bg-emerald-100',
+  coverHeroImagePosition: '32% center',
   summary: 'Po accidentally shares everything with the entire forest and learns from wise Tao how to protect his information — and becomes its guide because of the mistake he made.',
   keyLesson: 'In the Digital Bamboo Forest, we must be as careful with our information as we are with our real bamboo treasures.',
   chapters: [
@@ -2050,3 +2055,21 @@ export const getNextScheduledStory = (): Story | undefined =>
   STORIES
     .filter((s) => s.scheduledAt && new Date(s.scheduledAt) > new Date())
     .sort((a, b) => new Date(a.scheduledAt!).getTime() - new Date(b.scheduledAt!).getTime())[0];
+
+export const ORIGIN_STORY_SLUG = 'privacy-panda-and-the-digital-bamboo-forest';
+
+export const isFoundationStory = (story: Story): boolean =>
+  story.isOrigin === true || story.slug === ORIGIN_STORY_SLUG;
+
+export const getFoundationStory = (): Story | undefined =>
+  STORIES.find((s) => isFoundationStory(s));
+
+export const getContinuationStories = (): Story[] =>
+  getPublishedStories().filter((s) => !isFoundationStory(s));
+
+export const isStoryPublished = (story: Story): boolean => {
+  if (story.scheduledAt && new Date(story.scheduledAt) > new Date()) {
+    return false;
+  }
+  return true;
+};

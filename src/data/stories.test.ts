@@ -19,25 +19,39 @@ describe('stories registry', () => {
     expect(isFoundationStory(foundation!)).toBe(true);
   });
 
-  it('publishes all three registry episodes', () => {
-    const published = getPublishedStories();
-    const slugs = published.map((s) => s.slug);
+  it('registers sixteen episodes across two seasons', () => {
+    expect(STORIES).toHaveLength(16);
+    expect(STORIES.map((s) => s.episodeNumber)).toEqual([
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+    ]);
+  });
+
+  it('uses canonical Season 1 slugs for episodes 1–4', () => {
+    const slugs = STORIES.slice(0, 4).map((s) => s.slug);
     expect(slugs).toEqual([
       'privacy-panda-and-the-digital-bamboo-forest',
       'miki-and-the-photo-that-flew-away',
-      'owen-and-the-sneaky-settings',
+      'billys-invisible-collection',
+      'mika-and-the-sneaky-settings',
     ]);
-    expect(STORIES.every((s) => isStoryPublished(s))).toBe(true);
+  });
+
+  it('publishes episodes without a future scheduledAt', () => {
+    const published = getPublishedStories();
+    expect(published.length).toBeGreaterThanOrEqual(13);
+    expect(published.every((s) => isStoryPublished(s))).toBe(true);
+    expect(published.some((s) => s.slug === 'billys-invisible-collection')).toBe(true);
   });
 
   it('lists continuation episodes without the foundation story', () => {
     const continuation = getContinuationStories();
-    expect(continuation.map((s) => s.episodeNumber)).toEqual([2, 3]);
     expect(continuation.every((s) => !isFoundationStory(s))).toBe(true);
+    expect(continuation[0]?.episodeNumber).toBe(2);
   });
 
-  it('returns no coming-soon story when all episodes are published', () => {
-    expect(getNextScheduledStory()).toBeUndefined();
+  it('returns the next scheduled story when future episodes exist', () => {
+    const next = getNextScheduledStory();
+    expect(next?.slug).toBe('lumis-light');
   });
 
   it('resolves slugs for all registry entries', () => {

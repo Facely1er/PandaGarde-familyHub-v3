@@ -60,6 +60,27 @@ Regenerate bundled card covers after updating sources:
 npm run assets:story-covers
 ```
 
+### Bundled card covers (`StoryCard`, `StoryCoverArt`)
+
+Story list cards use **640×360 WebP** crops in `src/assets/story-covers/episode-{n}-cover.webp`, wired by slug in [storyCoverAssets.ts](../src/data/storyCoverAssets.ts).
+
+| Save production sheet as | Delivers |
+|---|---|
+| `src/assets/story-covers/sources/season-1-covers-4x2.png` | Ep 1–8 card covers (4×2 grid, row-major) |
+| `src/assets/story-covers/sources/episodes-1-3-storyboard.png` | Ep 1–3 hero columns + 10 scene thumbs each + pillar/zone/character icons (future chapter crops) |
+| `src/assets/story-covers/sources/season-2-zones-4x4.png` | 16 zone posters — **do not** map 1:1 to Ep 9–16 slugs (different titles); use for forest map / zone unlock art |
+
+See [sources/README.md](../src/assets/story-covers/sources/README.md) for grid→slug mapping, gutter insets, and crop tunables.
+
+| Status | Ep | Bundled path | Source panel |
+|---|---|---|---|
+| [x] | 1 | `src/assets/story-covers/episode-1-cover.webp` | Grid R0C0 or legacy hero |
+| [x] | 2 | `episode-2-cover.webp` | Grid R0C1 or legacy master band |
+| [~] | 3 | `episode-3-cover.webp` | Grid R0C2 — **legacy band is Owen-era; replace with grid** |
+| [ ] | 4–8 | `episode-4-cover.webp` … `episode-8-cover.webp` | Grid R0C3, R1C0–R1C3 — pending `season-1-covers-4x2.png` in repo |
+
+**Art vs. canon (Ep 5–8 panels):** attached posters use zone-themed titles (Bridge, Backup, Shadow Mist, Campfire). They are **interim card art** until story-specific covers ship at `public/stories/{slug}/cover.webp`.
+
 ---
 
 ## Foundation library (shared across episodes)
@@ -140,7 +161,7 @@ npm run assets:story-covers
 
 | Status | Asset | Chapter | Scene brief | Target path | Legacy / notes |
 |---|---|---|---|---|---|
-| [~] | Cover | — | Po shy at Bamboo Gate with tablet; glowing paths behind | `public/stories/privacy-panda-and-the-digital-bamboo-forest/cover.webp` | `public/images/stories/covers/episode-1-bamboo-forest.svg` |
+| [x] | Cover (card) | — | Po at Bamboo Gate — bundled `episode-1-cover.webp` | `public/stories/privacy-panda-and-the-digital-bamboo-forest/cover.webp` | `public/images/stories/covers/episode-1-bamboo-forest.svg` |
 | [~] | Ch1 | The Shy Panda | Po hiding behind bamboo, tablet in paws, alone | `…/ch1.webp` | `public/images/story/01-PoInTheShadows.png` |
 | [~] | Ch2 | The Wrong Button | Alert + messages flooding; Po shocked | `…/ch2.webp` | `3-TheAccident.png`, `04-PublicReaction.png` |
 | [~] | Ch3 | Tao's Wisdom | Tao at den door with lantern; Privacy Shield intro | `…/ch3.webp` | `06-Turtle-Appears.png`, `07-LearningMoments.png` |
@@ -168,7 +189,7 @@ npm run assets:story-covers
 
 | Status | Asset | Chapter | Scene brief | Target path |
 |---|---|---|---|---|
-| [~] | Cover | — | Photo flying toward Bridge of Consent; Miki's tablet | `public/stories/miki-and-the-photo-that-flew-away/cover.webp` |
+| [x] | Cover (card) | — | Photo flying — bundled `episode-2-cover.webp` | `public/stories/miki-and-the-photo-that-flew-away/cover.webp` |
 | [ ] | Ch1 | Ruby's Secret Sculpture | Ruby with unfinished sculpture, not ready to show | `…/ch1.webp` |
 | [ ] | Ch2 | Miki Means Well | Miki snapping photo; Ruby reaching "Wait—" | `…/ch2.webp` |
 | [ ] | Ch3 | How Ruby Felt | Ruby hurt; praise messages she didn't choose | `…/ch3.webp` |
@@ -188,7 +209,7 @@ npm run assets:story-covers
 
 | Status | Asset | Chapter | Scene brief | Target path |
 |---|---|---|---|---|
-| [ ] | Cover | — | Billy unveiling location map; friends' dots visible | `public/stories/billys-invisible-collection/cover.webp` |
+| [~] | Cover (card) | — | Billy + digital trail — **replace legacy Owen band** via grid R0C2 | `public/stories/billys-invisible-collection/cover.webp` |
 | [ ] | Ch1 | Billy's Big Idea | Billy building secret real-time map | `…/ch1.webp` |
 | [ ] | Ch2 | The Map Goes Live | Friends discover map; feel watched | `…/ch2.webp` |
 | [ ] | Ch3 | What the Archive Remembers | Mika at Archive with path scroll | `…/ch3.webp` |
