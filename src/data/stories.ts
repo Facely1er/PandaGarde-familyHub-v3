@@ -265,7 +265,6 @@ Ruby smiled slowly. "Yes. And Miki — thank you for fixing it."`,
 
 // ─────────────────────────────────────────────
 // EPISODE 3 — Owen and the Sneaky Settings
-// (Scheduled — not yet published)
 // ─────────────────────────────────────────────
 const episode3: Story = {
   id: 'story-003',
@@ -276,7 +275,6 @@ const episode3: Story = {
   privacyTopic: 'Pause before "Allow All"',
   ageGroups: ['middle', 'older'],
   publishedAt: '2024-03-01',
-  scheduledAt: '2026-09-01',
   coverEmoji: '🦉',
   coverColor: 'bg-violet-100 dark:bg-violet-950',
   coverImagePosition: 'left top',
@@ -382,6 +380,10 @@ export const isStoryPublished = (story: Story, at: Date = new Date()): boolean =
 
 export const getPublishedStories = (): Story[] =>
   STORIES.filter((s) => isStoryPublished(s)).sort((a, b) => a.episodeNumber - b.episodeNumber);
+
+/** Published episodes after the foundation story (for the stories grid — avoids duplicating episode 1). */
+export const getContinuationStories = (): Story[] =>
+  getPublishedStories().filter((s) => !isFoundationStory(s));
 
 export const getStoryBySlug = (slug: string): Story | undefined =>
   STORIES.find((s) => s.slug === slug);

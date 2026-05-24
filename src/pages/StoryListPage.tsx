@@ -2,10 +2,11 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BookOpen, Play, Volume2 } from 'lucide-react';
 import {
-  getPublishedStories,
+  getContinuationStories,
   getStoriesByAgeGroup,
   getFoundationStory,
   ORIGIN_STORY_SLUG,
+  isFoundationStory,
   AgeGroup,
 } from '../data/stories';
 import { StoryCard } from '../components/stories/StoryCard';
@@ -26,7 +27,8 @@ export function StoryListPage() {
   const [filter, setFilter] = useState<Filter>('all');
   const foundationStory = getFoundationStory();
 
-  const stories = filter === 'all' ? getPublishedStories() : getStoriesByAgeGroup(filter);
+  const continuationStories =
+    filter === 'all' ? getContinuationStories() : getStoriesByAgeGroup(filter).filter((s) => !isFoundationStory(s));
 
   return (
     <PageLayout
@@ -97,16 +99,21 @@ export function StoryListPage() {
             ))}
           </div>
 
-          {stories.length === 0 ? (
+          {continuationStories.length === 0 ? (
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              No stories available for this age group yet.
+              {filter === 'all'
+                ? 'More episodes are on the way. Start with the foundation story above.'
+                : 'No continuation episodes for this age group yet. Try All Ages or begin with the foundation story.'}
             </p>
           ) : (
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {stories.map((story) => (
-                <StoryCard key={story.id} story={story} />
-              ))}
-            </div>
+            <>
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Continue the journey</h2>
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {continuationStories.map((story) => (
+                  <StoryCard key={story.id} story={story} />
+                ))}
+              </div>
+            </>
           )}
         </div>
       </section>

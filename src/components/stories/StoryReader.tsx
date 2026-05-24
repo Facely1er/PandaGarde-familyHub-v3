@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { Story } from '../../data/stories';
@@ -15,6 +15,10 @@ interface StoryReaderProps {
 export function StoryReader({ story, embedded = false, showBackLink = true }: StoryReaderProps) {
   const [currentChapter, setCurrentChapter] = useState(0);
   const chapter = story.chapters[currentChapter];
+
+  useEffect(() => {
+    setCurrentChapter(0);
+  }, [story.id]);
   const isFirst = currentChapter === 0;
   const isLast = currentChapter === story.chapters.length - 1;
 

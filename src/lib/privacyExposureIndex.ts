@@ -52,6 +52,7 @@ export function calculatePrivacyExposureIndex(serviceId: string): number | null 
     'education': 5,
     'ai': 14,     // conversation data, training use, no FERPA — second only to social-media
     'telecom': 15, // real-time location 24/7 + call metadata + device ID = maximum reach
+    'health': 14, // PHI-adjacent wellness, portals, pharmacy — high sensitivity
     'creative': 5,
     'other': 10
   };

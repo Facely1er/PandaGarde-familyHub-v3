@@ -3,8 +3,13 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import InteractiveStoryPlayer from '../story/InteractiveStoryPlayer';
 import StoryProgress from '../story/StoryProgress';
-import { storyScenes } from '../../data/storyScenes';
+import { foundationStoryScenes } from '../../data/storyScenes';
 import { Story } from '../../data/stories';
+import {
+  migrateLegacyStoryStorage,
+  storyChoicesKey,
+  storyProgressKey,
+} from '../../lib/storyStorageKeys';
 import { StoryEpilogue } from './StoryEpilogue';
 import { StoryModeSwitcher, StoryViewMode } from './StoryModeSwitcher';
 import { StoryReader } from './StoryReader';
@@ -28,6 +33,8 @@ interface BambooForestStoryExperienceProps {
 }
 
 export function BambooForestStoryExperience({ story }: BambooForestStoryExperienceProps) {
+  const progressKey = storyProgressKey(story.slug);
+  const choicesKey = storyChoicesKey(story.slug);
   const [searchParams, setSearchParams] = useSearchParams();
   const [mode, setMode] = useState<StoryViewMode>(() => parseMode(searchParams));
   const [currentSceneIndex, setCurrentSceneIndex] = useState(0);
@@ -59,7 +66,7 @@ export function BambooForestStoryExperience({ story }: BambooForestStoryExperien
   }, [searchParams]);
 
   const handleSceneChange = useCallback((sceneId: string) => {
-    const sceneIndex = storyScenes.findIndex((scene) => scene.id === sceneId);
+    const sceneIndex = foundationStoryScenes.findIndex((scene) => scene.id === sceneId);
     if (sceneIndex !== -1) {
       setCurrentSceneIndex(sceneIndex);
     }
@@ -67,7 +74,7 @@ export function BambooForestStoryExperience({ story }: BambooForestStoryExperien
 
   const handleChoiceMade = useCallback(() => {
     try {
-      const savedChoicesStr = localStorage.getItem('story-choices') || '[]';
+      const savedChoicesStr = localStorage.getItem(choicesKey) || '[]';
       const savedChoices = JSON.parse(savedChoicesStr);
       if (!Array.isArray(savedChoices)) {
         return;
@@ -81,7 +88,7 @@ export function BambooForestStoryExperience({ story }: BambooForestStoryExperien
     } catch (error) {
       logger.error('Error checking story choices:', error);
     }
-  }, []);
+  }, [choicesKey]);
 
   const handleStoryComplete = useCallback(() => {
     setAchievements((prev) =>
@@ -108,7 +115,8 @@ export function BambooForestStoryExperience({ story }: BambooForestStoryExperien
   }, [currentSceneIndex]);
 
   useEffect(() => {
-    const savedProgress = localStorage.getItem('story-progress');
+    migrateLegacyStoryStorage(story.slug);
+    const savedProgress = localStorage.getItem(progressKey);
     if (!savedProgress) {
       return;
     }
@@ -119,13 +127,13 @@ export function BambooForestStoryExperience({ story }: BambooForestStoryExperien
       if (Array.isArray(progress.achievements) && progress.achievements.length > 0) {
         setAchievements(progress.achievements);
       }
-      if (progress.sceneIndex >= storyScenes.length - 1) {
+      if (progress.sceneIndex >= foundationStoryScenes.length - 1) {
         setShowInteractiveEpilogue(true);
       }
     } catch (error) {
       logger.error('Error loading story progress:', error);
     }
-  }, []);
+  }, [progressKey, story.slug]);
 
   useEffect(() => {
     const progress = {
@@ -134,8 +142,8 @@ export function BambooForestStoryExperience({ story }: BambooForestStoryExperien
       achievements,
       timestamp: Date.now(),
     };
-    localStorage.setItem('story-progress', JSON.stringify(progress));
-  }, [currentSceneIndex, points, achievements]);
+    localStorage.setItem(progressKey, JSON.stringify(progress));
+  }, [currentSceneIndex, points, achievements, progressKey]);
 
   useEffect(() => {
     if (showInteractiveEpilogue && mode === 'interactive') {
@@ -167,7 +175,7 @@ export function BambooForestStoryExperience({ story }: BambooForestStoryExperien
         <StoryModeSwitcher
           mode={mode}
           onModeChange={setViewMode}
-          sceneCount={storyScenes.length}
+          sceneCount={foundationStoryScenes.length}
           chapterCount={story.chapters.length}
         />
       </div>
@@ -181,7 +189,7 @@ export function BambooForestStoryExperience({ story }: BambooForestStoryExperien
             aria-label="Interactive story"
           >
             <InteractiveStoryPlayer
-              scenes={storyScenes}
+              scenes={foundationStoryScenes}
               currentSceneIndex={currentSceneIndex}
               onSceneIndexChange={setCurrentSceneIndex}
               onSceneChange={handleSceneChange}
@@ -194,7 +202,7 @@ export function BambooForestStoryExperience({ story }: BambooForestStoryExperien
           <div className="mb-8">
             <StoryProgress
               currentScene={currentSceneIndex + 1}
-              totalScenes={storyScenes.length}
+              totalScenes={foundationStoryScenes.length}
               points={points}
               achievements={achievements}
               showDetailedProgress
@@ -218,7 +226,7 @@ export function BambooForestStoryExperience({ story }: BambooForestStoryExperien
         </>
       ) : (
         <div role="tabpanel" aria-label="Chapter reader">
-          <StoryReader story={story} embedded showBackLink={false} />
+          <StoryReader key={story.id} story={story} embedded showBackLink={false} />
         </div>
       )}
     </div>

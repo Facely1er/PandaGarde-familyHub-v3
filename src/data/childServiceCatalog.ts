@@ -13,8 +13,19 @@ export type ServiceCategory =
   | 'edtech'
   | 'ai'
   | 'telecom'
+  | 'health'
   | 'creative' 
   | 'other';
+
+/** Sub-type for health-category services (family-reported catalog only). */
+export type HealthSubcategory =
+  | 'wellness-fitness'
+  | 'mental-wellness'
+  | 'telehealth'
+  | 'patient-portal'
+  | 'school-health'
+  | 'pharmacy-retail'
+  | 'reproductive-health';
 
 export type RiskLevel = 'low' | 'medium' | 'high' | 'very-high';
 
@@ -42,6 +53,8 @@ export interface ChildService {
    * Presence of any items means the service has known LE data-sharing practices.
    */
   lawEnforcementConcerns?: string[];
+  /** Present when category is health — drives DFA context and parent guidance. */
+  healthSubcategory?: HealthSubcategory;
 }
 
 export const childServiceCatalog: ChildService[] = [
@@ -1595,7 +1608,198 @@ export const childServiceCatalog: ChildService[] = [
       'Mint operates on T-Mobile\'s network — all T-Mobile CALEA interception capabilities and law enforcement cooperation practices apply',
       'Real-time location, call records, and content interception are available to law enforcement via T-Mobile\'s infrastructure under a valid court order'
     ]
-  }
+  },
+
+  // Health & medical (family-reported — wellness, portals, school health, pharmacy)
+  {
+    id: 'apple-health',
+    name: 'Apple Health',
+    category: 'health',
+    healthSubcategory: 'wellness-fitness',
+    description: 'Health and activity data on iPhone or Apple Watch',
+    minAge: 5,
+    riskLevel: 'high',
+    vendor: 'Apple',
+    privacyConcerns: [
+      'Can store heart rate, sleep, cycle tracking, and connected provider records',
+      'Third-party apps may request HealthKit access on the device',
+      'May sync to iCloud — not the same as a school health record, but still very personal',
+    ],
+    parentTips: [
+      'Review Settings → Health → Data Access & Devices for apps your child allowed',
+      'Turn off Health data sharing for apps that do not need it',
+      'Use a strong device passcode; health data follows the phone',
+    ],
+    website: 'https://www.apple.com/health/',
+  },
+  {
+    id: 'google-fit',
+    name: 'Google Fit',
+    category: 'health',
+    healthSubcategory: 'wellness-fitness',
+    description: 'Activity and wellness tracking linked to a Google account',
+    minAge: 13,
+    riskLevel: 'high',
+    vendor: 'Google',
+    privacyConcerns: [
+      'Activity and wellness data may combine with other Google account signals',
+      'Third-party fitness apps can connect and share data into Fit',
+      'Not a HIPAA-covered medical record by default for consumer accounts',
+    ],
+    parentTips: [
+      'Review Google account privacy settings and Fit data sources',
+      'Disconnect unused apps from Google Fit',
+      'Remind teens not to log highly personal health notes in connected apps',
+    ],
+    website: 'https://www.google.com/fit',
+  },
+  {
+    id: 'fitbit',
+    name: 'Fitbit',
+    category: 'health',
+    healthSubcategory: 'wellness-fitness',
+    description: 'Wearable fitness and health tracking (Google)',
+    minAge: 13,
+    riskLevel: 'high',
+    vendor: 'Google (Fitbit)',
+    privacyConcerns: [
+      'Continuous activity, sleep, and heart-rate data stored on Fitbit servers',
+      'Social and challenge features can expose activity to others',
+      'Wellness data can reveal routines, location patterns, and health conditions',
+    ],
+    parentTips: [
+      'Set the account to private and limit social features for teens',
+      'Review which data types sync from the watch or phone',
+      'Use a strong password and enable two-factor authentication',
+    ],
+    website: 'https://www.fitbit.com',
+  },
+  {
+    id: 'calm',
+    name: 'Calm',
+    category: 'health',
+    healthSubcategory: 'mental-wellness',
+    description: 'Meditation, sleep stories, and relaxation content',
+    minAge: 4,
+    riskLevel: 'medium',
+    vendor: 'Calm.com',
+    privacyConcerns: [
+      'Account and usage data show meditation and sleep habits',
+      'Subscription and device identifiers linked to the account',
+      'Not a clinical therapy service — still personal wellbeing data',
+    ],
+    parentTips: [
+      'Use family sharing or a parent-managed account for younger children',
+      'Review privacy settings and marketing email opt-outs',
+      'Pair app use with offline coping strategies, not only screen-based calm',
+    ],
+    website: 'https://www.calm.com',
+  },
+  {
+    id: 'headspace',
+    name: 'Headspace',
+    category: 'health',
+    healthSubcategory: 'mental-wellness',
+    description: 'Mindfulness and meditation for kids and adults',
+    minAge: 5,
+    riskLevel: 'medium',
+    vendor: 'Headspace',
+    privacyConcerns: [
+      'Usage patterns reveal stress-management and sleep routines',
+      'Kids mode still collects account and progress data',
+      'Employer or school plans may add separate data controllers',
+    ],
+    parentTips: [
+      'Choose age-appropriate content and supervise younger kids',
+      'Review what profile data is stored for child accounts',
+      'Discuss when to talk to a trusted adult instead of only using an app',
+    ],
+    website: 'https://www.headspace.com',
+  },
+  {
+    id: 'teladoc',
+    name: 'Teladoc',
+    category: 'health',
+    healthSubcategory: 'telehealth',
+    description: 'Virtual urgent care and telehealth visits',
+    minAge: 0,
+    riskLevel: 'very-high',
+    vendor: 'Teladoc Health',
+    privacyConcerns: [
+      'Video visits and messages can include symptoms, medications, and identifiers',
+      'Health information handled under healthcare privacy rules when used as a covered service',
+      'Account data may include insurance, pharmacy, and family contact details',
+    ],
+    parentTips: [
+      'Use only for legitimate care — guardian should manage accounts for minors',
+      'Review the notice of privacy practices before a first visit',
+      'Do not share visit links or photos of records in group chats',
+    ],
+    website: 'https://www.teladoc.com',
+  },
+  {
+    id: 'epic-mychart',
+    name: 'MyChart (Epic patient portal)',
+    category: 'health',
+    healthSubcategory: 'patient-portal',
+    description: 'Hospital or clinic patient portal for records, messages, and results',
+    minAge: 0,
+    riskLevel: 'very-high',
+    vendor: 'Epic Systems',
+    privacyConcerns: [
+      'Can expose lab results, diagnoses, appointments, and provider messages',
+      'Proxy access for minors is controlled by the healthcare organization',
+      'Highly sensitive — treat portal login like banking credentials',
+    ],
+    parentTips: [
+      'Enable strong authentication; never share portal passwords with children casually',
+      'Review who has proxy access to a minor\'s chart at the clinic',
+      'Log out on shared family devices after viewing records',
+    ],
+    website: 'https://www.mychart.org',
+  },
+  {
+    id: 'school-student-health-portal',
+    name: 'School student health portal',
+    category: 'health',
+    healthSubcategory: 'school-health',
+    description: 'District nurse, immunization, or student health record system',
+    minAge: 5,
+    riskLevel: 'high',
+    schoolAssigned: true,
+    vendor: 'Varies by district',
+    privacyConcerns: [
+      'May store immunizations, medications, allergies, and nurse visit notes',
+      'Often required for enrollment — families may have limited opt-out',
+      'Governed by school policies and student privacy laws, not consumer app terms alone',
+    ],
+    parentTips: [
+      'Ask the school which vendor runs the health portal and request their privacy notice',
+      'Confirm who can see health entries (nurse, teachers, administrators)',
+      'Keep copies of forms you submit — do not paste portal passwords into email',
+    ],
+  },
+  {
+    id: 'cvs-pharmacy',
+    name: 'CVS Pharmacy',
+    category: 'health',
+    healthSubcategory: 'pharmacy-retail',
+    description: 'Pharmacy account and prescriptions (CVS / MinuteClinic)',
+    minAge: 0,
+    riskLevel: 'very-high',
+    vendor: 'CVS Health',
+    privacyConcerns: [
+      'Pharmacy profiles can include prescriptions, insurance, and contact information',
+      'Purchase and loyalty data may combine with retail shopping history',
+      'Highly sensitive — separate from general shopping apps in your family list',
+    ],
+    parentTips: [
+      'Guardian should manage pharmacy accounts for minors',
+      'Turn off marketing profiles where possible and use Rx privacy settings',
+      'Never photograph prescription labels for social sharing',
+    ],
+    website: 'https://www.cvs.com',
+  },
 ];
 
 /**
@@ -1612,6 +1816,13 @@ export const getServicesWithLawEnforcementConcerns = (): ChildService[] => {
  */
 export const getServicesByCategory = (category: ServiceCategory): ChildService[] => {
   return childServiceCatalog.filter(service => service.category === category);
+};
+
+/**
+ * All health-category services (wellness, portals, telehealth, pharmacy, school health).
+ */
+export const getHealthServices = (): ChildService[] => {
+  return getServicesByCategory('health');
 };
 
 /**

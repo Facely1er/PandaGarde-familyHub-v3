@@ -6,7 +6,7 @@ import { ProgressBar } from '../components/ui/ProgressBar';
 import DfaJourneyStepper from '../components/journey/DfaJourneyStepper';
 import { Bell, BarChart3, ArrowRight, Unlock, CheckCircle, Sparkles, Target, Plus, Heart, School, AlertTriangle, Bot, Signal } from 'lucide-react';
 import { useFamily } from '../contexts/FamilyContext';
-import { childServiceCatalog, getSchoolAssignedServices, getServicesWithLawEnforcementConcerns } from '../data/childServiceCatalog';
+import { childServiceCatalog, getHealthServices, getSchoolAssignedServices, getServicesWithLawEnforcementConcerns } from '../data/childServiceCatalog';
 import { getServiceLogoUrlWithBrandColor, hasServiceLogo } from '../utils/serviceLogos';
 import { updateDfaJourneyPhase } from '../lib/dfaJourney';
 
@@ -48,6 +48,7 @@ const ServiceCatalogPage: React.FC = () => {
   const schoolServices = getSchoolAssignedServices().filter(s => SCHOOL_SERVICE_IDS.includes(s.id as typeof SCHOOL_SERVICE_IDS[number]));
   const aiServices = childServiceCatalog.filter(s => AI_SERVICE_IDS.includes(s.id as typeof AI_SERVICE_IDS[number]));
   const telecomServices = childServiceCatalog.filter(s => TELECOM_SERVICE_IDS.includes(s.id as typeof TELECOM_SERVICE_IDS[number]));
+  const healthServices = getHealthServices();
   const leConcernServices = getServicesWithLawEnforcementConcerns().filter(s => HIGH_LE_CONCERN_IDS.includes(s.id as typeof HIGH_LE_CONCERN_IDS[number]));
 
   const handleSuggestedAddRemove = async (serviceId: string) => {
@@ -224,7 +225,7 @@ const ServiceCatalogPage: React.FC = () => {
         <div className="mt-10 grid gap-6 lg:grid-cols-2">
           <div className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-5 shadow-sm">
             <h3 className="text-lg font-bold text-slate-900 dark:text-white">Why this phase matters</h3>
-            <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">DFA is only useful if it reflects the real school, home, AI, and telecom services touching your family’s data. This step defines the scope without forcing a heavy signup flow.</p>
+            <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">DFA is only useful if it reflects the real school, home, health, AI, and telecom services touching your family’s data. This step defines the scope without forcing a heavy signup flow.</p>
           </div>
           <div className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-5 shadow-sm">
             <h3 className="text-lg font-bold text-slate-900 dark:text-white">Continue when ready</h3>
@@ -236,7 +237,7 @@ const ServiceCatalogPage: React.FC = () => {
         </div>
 
         <div className="mt-12 grid gap-8 lg:grid-cols-2">
-          {[{ title: 'School services frequently in scope', icon: School, items: schoolServices.slice(0, 6) }, { title: 'AI tools families are increasingly using', icon: Bot, items: aiServices.slice(0, 6) }, { title: 'Telecom services that shape the household data trail', icon: Signal, items: telecomServices.slice(0, 6) }, { title: 'Services with sharper law-enforcement concerns', icon: AlertTriangle, items: leConcernServices.slice(0, 6) }].map(({ title, icon: Icon, items }) => (
+          {[{ title: 'School services frequently in scope', icon: School, items: schoolServices.slice(0, 6) }, { title: 'Health & medical apps families report', icon: Heart, items: healthServices.slice(0, 6) }, { title: 'AI tools families are increasingly using', icon: Bot, items: aiServices.slice(0, 6) }, { title: 'Telecom services that shape the household data trail', icon: Signal, items: telecomServices.slice(0, 6) }, { title: 'Services with sharper law-enforcement concerns', icon: AlertTriangle, items: leConcernServices.slice(0, 6) }].map(({ title, icon: Icon, items }) => (
             <div key={title} className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-5 shadow-sm">
               <div className="mb-3 flex items-center gap-2 text-slate-900 dark:text-white"><Icon size={18} /><h3 className="text-lg font-bold">{title}</h3></div>
               <div className="flex flex-wrap gap-2">

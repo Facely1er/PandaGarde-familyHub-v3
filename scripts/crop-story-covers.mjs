@@ -20,10 +20,10 @@ const ARTWORK_WIDTH_RATIO = 0.65;
 const OUTPUT_WIDTH = 640;
 const OUTPUT_HEIGHT = 360;
 
-/** Gutter-aware bands in story-covers-master.png (1024×576). */
+/** Three equal bands in story-covers-master.png (1024×576). */
 const MASTER_BANDS = [
-  { file: 'episode-2-cover.webp', top: 212, height: 181 },
-  { file: 'episode-3-cover.webp', top: 398, height: 174 },
+  { file: 'episode-2-cover.webp', top: 192, height: 192 },
+  { file: 'episode-3-cover.webp', top: 384, height: 192 },
 ];
 
 async function writeEpisode1Cover() {

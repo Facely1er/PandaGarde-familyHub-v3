@@ -33,8 +33,11 @@ export function ComingSoonBanner() {
         </span>
       )}
       <div>
-        <p className="text-sm font-semibold text-amber-800 dark:text-amber-200">Coming {formatted}</p>
+        <p className="text-sm font-semibold text-amber-800 dark:text-amber-200">
+          Episode {next.episodeNumber} · Coming {formatted}
+        </p>
         <p className="text-xs text-amber-700 dark:text-amber-300">{next.title}</p>
+        <p className="text-xs text-amber-600/90 dark:text-amber-400/90 mt-0.5">{next.privacyTopic}</p>
       </div>
     </div>
   );

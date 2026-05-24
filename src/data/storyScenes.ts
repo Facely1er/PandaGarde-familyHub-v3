@@ -18,7 +18,8 @@ export interface StorySceneData {
   duration?: number;
 }
 
-export const storyScenes: StorySceneData[] = [
+/** Interactive scenes for Episode 1 (foundation story) only. */
+export const foundationStoryScenes: StorySceneData[] = [
   {
     id: 'po-in-shadows',
     title: 'Po in the Shadows',
@@ -150,4 +151,7 @@ export const storyScenes: StorySceneData[] = [
     duration: 18
   }
 ];
+
+/** @deprecated Use foundationStoryScenes — episode 1 interactive path only. */
+export const storyScenes = foundationStoryScenes;
 

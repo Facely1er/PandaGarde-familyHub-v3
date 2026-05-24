@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { getStoryBySlug, isFoundationStory, isStoryPublished } from '../data/stories';
 import { BambooForestStoryExperience } from '../components/stories/BambooForestStoryExperience';
-import { StoryReader } from '../components/stories/StoryReader';
+import { ChapterStoryExperience } from '../components/stories/ChapterStoryExperience';
 import PageLayout from '../components/layout/PageLayout';
 
 export function StoryReaderPage() {
@@ -78,7 +78,7 @@ export function StoryReaderPage() {
 
   return (
     <PageLayout title={story.title} subtitle={story.privacyTopic} breadcrumbs>
-      <StoryReader story={story} embedded />
+      <ChapterStoryExperience story={story} />
     </PageLayout>
   );
 }

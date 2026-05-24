@@ -50,6 +50,9 @@
 | “Encrypted and stored securely” (vague) | Prefer: data stays on device; optional client-side encryption for PII when Web Crypto is available |
 | “See all apps kids use” | **False** — parents **add** services to the catalog; no passive monitoring |
 | “Privacy risk score” | From **catalog + DFA**, not live activity monitoring |
+| “We analyze your medical records” | **False** — families **list** health/wellness apps they use; no access to EHR or prescription data |
+| “HIPAA-compliant” / “certifies HIPAA compliance” | **False** — educational exposure snapshot, not a compliance audit tool |
+| Health apps in service catalog | **True** — wellness, patient portals, telehealth, pharmacy, and school health portals can be **self-reported** like other services |
 | “Approve/deny child app requests” in Family Hub | **False** — catalog status exists on the **website** for planning/DFA, not a child request workflow in Hub |
 
 ---
@@ -134,8 +137,8 @@ Enter their name and email.*Child
 
 **Service catalog → alerts**
 
-- List apps and services your family uses (self-reported)
-- Digital Footprint Analysis and privacy recommendations from that list
+- List apps and services your family uses (self-reported), including optional **health & medical** entries (wellness, portals, telehealth, pharmacy)
+- Digital Footprint Analysis and privacy recommendations from that list — **not** from live medical record access
 - Catalog-based service notifications plus RSS safety headlines when feeds load
 
 ---

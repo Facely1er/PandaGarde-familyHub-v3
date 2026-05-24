@@ -4,17 +4,26 @@
  * Provides actionable insights and recommendations
  */
 
-import { childServiceCatalog } from '../data/childServiceCatalog';
+import { childServiceCatalog, type HealthSubcategory } from '../data/childServiceCatalog';
 import { calculatePrivacyExposureIndex, getExposureLevel } from './privacyExposureIndex';
 import { getServiceRelationship, getSiblingServices } from '../data/serviceRelationships';
 import { getDataChainsForServices, getUniqueBrokersForServices } from '../data/dataBrokerNetwork';
 
 /** Map app category to where the app is typically used: school (EdTech), home, or in-between (both / everywhere). */
-function getUsageContext(category: string): UsageContext {
+function getUsageContext(category: string, healthSubcategory?: HealthSubcategory): UsageContext {
   // edtech = school-assigned platforms (LMS, assessment, classroom tools)
   // education = family-chosen learning apps (Khan Academy, Duolingo, etc.)
   if (category === 'edtech' || category === 'education') {
     return 'school';
+  }
+  if (category === 'health') {
+    if (healthSubcategory === 'school-health') {
+      return 'school';
+    }
+    if (healthSubcategory === 'wellness-fitness') {
+      return 'in-between';
+    }
+    return 'home';
   }
   if (category === 'streaming' || category === 'creative') {
     return 'home';
@@ -226,7 +235,8 @@ export class FootprintAnalyzer {
     // Context breakdown: school (EdTech), home, in-between — how data exposure accumulates across life contexts
     const contextMap = new Map<UsageContext, ServiceRisk[]>();
     serviceRisks.forEach(risk => {
-      const ctx = getUsageContext(risk.category);
+      const catalogEntry = childServiceCatalog.find((s) => s.id === risk.serviceId);
+      const ctx = getUsageContext(risk.category, catalogEntry?.healthSubcategory);
       if (!contextMap.has(ctx)) {
         contextMap.set(ctx, []);
       }
@@ -517,6 +527,28 @@ export class FootprintAnalyzer {
           'Under CPNI rules, you can ask your carrier to restrict how they use your calling data'
         ],
         affectedServices: telecomServices.map(r => r.serviceId)
+      });
+    }
+
+    // Health & medical (family-reported catalog)
+    const healthServices = serviceRisks.filter(r => r.category === 'health');
+    if (healthServices.length > 0) {
+      const highRiskHealth = healthServices.filter(r => r.exposureIndex >= 70);
+      recommendations.push({
+        id: 'health-apps-sensitivity',
+        priority: 'high',
+        category: 'privacy',
+        title: 'Health-related apps — very sensitive data',
+        description: `Your family listed ${healthServices.length} health-related service${healthServices.length > 1 ? 's' : ''} (wellness, portals, telehealth, or pharmacy). PandaGarde does not read medical records — this snapshot is based on apps you chose.`,
+        actionItems: [
+          'Review privacy settings and data-sharing options in each health app',
+          'Use guardian-managed accounts for minors on telehealth and patient portals',
+          'Ask your school which vendor runs any student health portal and request their privacy notice',
+          highRiskHealth.length > 0
+            ? `Prioritize ${highRiskHealth.map(r => r.serviceName).join(', ')} — highest exposure in your health list`
+            : 'Limit optional health app connections you do not actively use',
+        ],
+        affectedServices: healthServices.map(r => r.serviceId),
       });
     }
 

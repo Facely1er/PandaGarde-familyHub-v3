@@ -22,7 +22,8 @@ import {
   Bot,
   Signal,
   Scale,
-  LayoutGrid
+  LayoutGrid,
+  HeartPulse
 } from 'lucide-react';
 import { 
   childServiceCatalog, 
@@ -47,6 +48,7 @@ const CATEGORY_LABELS: Record<ServiceCategory | 'all', string> = {
   edtech: 'School Tools (EdTech)',
   ai: 'AI Apps',
   telecom: 'Mobile Carriers',
+  health: 'Health & medical',
   creative: 'Creative',
   other: 'Other'
 };
@@ -178,6 +180,8 @@ const ServiceCatalog: React.FC<ServiceCatalogProps> = ({
         return Bot;
       case 'telecom':
         return Signal;
+      case 'health':
+        return HeartPulse;
       case 'creative':
         return Palette;
       default:
@@ -307,9 +311,15 @@ const ServiceCatalog: React.FC<ServiceCatalogProps> = ({
         </div>
 
         {/* Category pills in guided mode for friendlier browsing */}
+        {guidedMode && selectedCategory === 'health' && (
+          <p className="mb-3 rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-900 dark:border-rose-800 dark:bg-rose-950/40 dark:text-rose-100">
+            Health-related apps can hold very sensitive data. You are listing what your family uses — PandaGarde does not access medical records or prescriptions.
+          </p>
+        )}
+
         {guidedMode && (
           <div className="flex flex-wrap gap-2 mb-3" role="group" aria-label="Filter by category">
-            {(['all', 'edtech', 'ai', 'telecom', 'social-media', 'messaging', 'gaming', 'streaming', 'education', 'creative'] as const).map((cat) => {
+            {(['all', 'edtech', 'health', 'ai', 'telecom', 'social-media', 'messaging', 'gaming', 'streaming', 'education', 'creative'] as const).map((cat) => {
               const CategoryIcon = getCategoryIcon(cat);
               return (
               <button
@@ -324,7 +334,9 @@ const ServiceCatalog: React.FC<ServiceCatalogProps> = ({
                         ? 'bg-purple-600 text-white shadow-md'
                         : cat === 'telecom'
                           ? 'bg-blue-700 text-white shadow-md'
-                          : 'bg-green-600 text-white shadow-md'
+                          : cat === 'health'
+                            ? 'bg-rose-600 text-white shadow-md'
+                            : 'bg-green-600 text-white shadow-md'
                     : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
                 }`}
               >
@@ -349,6 +361,7 @@ const ServiceCatalog: React.FC<ServiceCatalogProps> = ({
             <option value="edtech">School Tools (EdTech)</option>
             <option value="ai">AI Apps</option>
             <option value="telecom">Mobile Carriers</option>
+            <option value="health">Health & medical</option>
             <option value="social-media">Social Media</option>
             <option value="messaging">Messaging</option>
             <option value="gaming">Gaming</option>
