@@ -136,19 +136,30 @@ input:focus-visible {
   object-position: center;
 }
 
-.brand-name {
+.brand-lockup {
+  display: block;
+  line-height: 1.12;
+}
+
+.brand-title {
+  display: block;
   font-weight: 950;
   color: var(--primary);
   letter-spacing: -0.03em;
+  font-size: clamp(0.9rem, 1.8vw, 1.05rem);
 }
 
-.brand-name .highlight {
-  color: var(--primary-light);
-}
-
-.brand small {
-  color: var(--muted);
+.brand-by {
+  display: block;
+  margin-top: 3px;
+  font-size: 12px;
   font-weight: 800;
+  color: var(--muted);
+}
+
+.brand-by .highlight {
+  color: var(--primary-light);
+  font-weight: 900;
 }
 
 .nav {
@@ -612,7 +623,11 @@ h3 {
 }
 
 @media (max-width: 900px) {
-  .brand small {
+  .brand-title {
+    font-size: 0.88rem;
+  }
+
+  .brand-by {
     font-size: 11px;
   }
 
