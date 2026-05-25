@@ -22,6 +22,35 @@ interface StoryScene {
   mood?: string;
 }
 
+/** Break long scene copy into readable paragraphs (~65ch-friendly chunks). */
+function splitStoryParagraphs(content: string): string[] {
+  const blocks = content
+    .split(/\n\n+/)
+    .map((p) => p.trim())
+    .filter(Boolean);
+  if (blocks.length > 1) return blocks;
+
+  const text = blocks[0] ?? content.trim();
+  if (text.length < 300) return [text];
+
+  const sentences =
+    text.match(/[^.!?]+[.!?]+(?:\s+|$)|[^.!?]+$/g)?.map((s) => s.trim()) ?? [text];
+  const paragraphs: string[] = [];
+  let batch = '';
+
+  for (const sentence of sentences) {
+    const candidate = batch ? `${batch} ${sentence}` : sentence;
+    if (batch && candidate.length > 280) {
+      paragraphs.push(batch);
+      batch = sentence;
+    } else {
+      batch = candidate;
+    }
+  }
+  if (batch) paragraphs.push(batch);
+  return paragraphs.length > 0 ? paragraphs : [text];
+}
+
 interface InteractiveStoryPlayerProps {
   scenes: StoryScene[];
   onSceneChange?: (sceneId: string) => void;
@@ -733,11 +762,11 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
           <div className="full-story-text">
             <div className="full-story-header">
               <h2 className="full-story-title">Privacy Panda and the Digital Bamboo Forest</h2>
-              <p className="full-story-intro" style={{ color: theme === 'dark' ? 'var(--gray-300)' : 'var(--gray-600)' }}>
+              <p className="full-story-intro" style={{ color: theme === 'dark' ? 'var(--gray-600)' : 'var(--gray-600)' }}>
                 Join Po the Panda on an adventure through the Digital Bamboo Forest as he learns about privacy, sharing, and staying safe online.
               </p>
             </div>
-            <div className="full-story-body" style={{ color: theme === 'dark' ? 'var(--gray-200)' : 'var(--gray-800)' }}>
+            <div className="full-story-body" style={{ color: theme === 'dark' ? 'var(--gray-800)' : 'var(--gray-800)' }}>
               {scenes.map((scene, index) => (
                 <div key={scene.id} className="full-story-scene">
                   {index > 0 && <div className="scene-divider"></div>}
@@ -755,78 +784,87 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
           currentScene && (
             <div className="story-scene">
               <h2 className="scene-title">{currentScene.title}</h2>
-              
-              {/* Story Image Display */}
-              {currentScene.imageUrl && (
-                <div className="story-image-container">
-                  <img 
-                    src={currentScene.imageUrl} 
-                    alt={currentScene.title}
-                    className="story-image"
-                  />
-                </div>
-              )}
-              
-              {/* Enhanced Character animation area */}
-              {currentScene.character && !currentScene.imageUrl && (
-                <div 
-                  ref={animationRef}
-                  className={`character-display ${isAnimating ? 'animating' : ''} ${isSpeaking ? 'speaking' : ''}`}
-                >
-                  <div className="character-icon">
-                    {currentScene.character === 'panda' && '🐼'}
-                    {currentScene.character === 'turtle' && '🐢'}
-                    {currentScene.character === 'monkey' && '🐵'}
-                    {currentScene.character === 'beaver' && '🦫'}
-                    {currentScene.character === 'rabbit' && '🐰'}
-                    {currentScene.character === 'owl' && '🦉'}
-                    {currentScene.character === 'fox' && '🦊'}
+
+              <div
+                className={`story-scene__layout${
+                  currentScene.imageUrl ? ' story-scene__layout--with-image' : ''
+                }`}
+              >
+                {currentScene.imageUrl && (
+                  <div className="story-image-container">
+                    <img
+                      src={currentScene.imageUrl}
+                      alt={currentScene.title}
+                      className="story-image"
+                      loading="lazy"
+                      decoding="async"
+                    />
                   </div>
-                  {isSpeaking && (
-                    <div className="speaking-indicator">
-                      <div className="speech-bubble">
-                        <div className="bubble-dot"></div>
-                        <div className="bubble-dot"></div>
-                        <div className="bubble-dot"></div>
+                )}
+
+                {currentScene.character && !currentScene.imageUrl && (
+                  <div
+                    ref={animationRef}
+                    className={`character-display ${isAnimating ? 'animating' : ''} ${isSpeaking ? 'speaking' : ''}`}
+                  >
+                    <div className="character-icon">
+                      {currentScene.character === 'panda' && '🐼'}
+                      {currentScene.character === 'turtle' && '🐢'}
+                      {currentScene.character === 'monkey' && '🐵'}
+                      {currentScene.character === 'beaver' && '🦫'}
+                      {currentScene.character === 'rabbit' && '🐰'}
+                      {currentScene.character === 'owl' && '🦉'}
+                      {currentScene.character === 'fox' && '🦊'}
+                    </div>
+                    {isSpeaking && (
+                      <div className="speaking-indicator">
+                        <div className="speech-bubble">
+                          <div className="bubble-dot"></div>
+                          <div className="bubble-dot"></div>
+                          <div className="bubble-dot"></div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                <div className="story-scene__copy">
+                  <div
+                    ref={textRef}
+                    className="story-text-panel"
+                    style={{ animationDuration: `${2 / readingSpeed}s` }}
+                  >
+                    <div className="story-text">
+                      {splitStoryParagraphs(currentScene.content).map((paragraph, index) => (
+                        <p key={index} className="story-text__paragraph">
+                          {paragraph.trim()}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+
+                  {currentScene.choices && currentScene.choices.length > 0 && (
+                    <div className="story-choices">
+                      <h3>What should happen next?</h3>
+                      <div className="choices-grid">
+                        {currentScene.choices.map((choice, index) => (
+                          <button
+                            key={index}
+                            onClick={() => handleChoice(choice)}
+                            className={`choice-btn ${selectedChoice === choice.text ? 'selected' : ''}`}
+                            disabled={selectedChoice !== null}
+                          >
+                            {choice.text}
+                            {choice.consequence && (
+                              <span className="choice-consequence">{choice.consequence}</span>
+                            )}
+                          </button>
+                        ))}
                       </div>
                     </div>
                   )}
                 </div>
-              )}
-
-              {/* Enhanced Story text */}
-              <div 
-                ref={textRef}
-                className="story-text"
-                style={{ 
-                  animationDuration: `${2 / readingSpeed}s`,
-                  color: theme === 'dark' ? 'var(--gray-200)' : 'var(--gray-800)'
-                }}
-              >
-                {currentScene.content}
               </div>
-
-              {/* Enhanced Interactive choices */}
-              {currentScene.choices && currentScene.choices.length > 0 && (
-                <div className="story-choices">
-                  <h3>What should happen next?</h3>
-                  <div className="choices-grid">
-                    {currentScene.choices.map((choice, index) => (
-                      <button
-                        key={index}
-                        onClick={() => handleChoice(choice)}
-                        className={`choice-btn ${selectedChoice === choice.text ? 'selected' : ''}`}
-                        disabled={selectedChoice !== null}
-                      >
-                        {choice.text}
-                        {choice.consequence && (
-                          <span className="choice-consequence">{choice.consequence}</span>
-                        )}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
           )
         )}
@@ -837,7 +875,7 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
           max-width: 900px;
           margin: 0 auto;
           background: ${theme === 'dark' 
-            ? 'linear-gradient(135deg, #0D1117 0%, #161B22 50%, #1C2128 100%)' 
+            ? 'linear-gradient(145deg, var(--gray-100) 0%, var(--gray-200) 55%, var(--gray-300) 100%)' 
             : 'white'};
           border-radius: 20px;
           box-shadow: ${theme === 'dark' 
@@ -1052,7 +1090,7 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
 
         .setting-group label {
           font-weight: 500;
-          color: ${theme === 'dark' ? 'var(--gray-300)' : 'var(--gray-700)'};
+          color: ${theme === 'dark' ? 'var(--gray-700)' : 'var(--gray-700)'};
         }
 
         .setting-group input[type="range"] {
@@ -1068,7 +1106,7 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
           background: ${theme === 'dark' 
             ? 'rgba(22, 27, 34, 0.8)' 
             : 'white'};
-          color: ${theme === 'dark' ? 'var(--gray-300)' : 'var(--gray-800)'};
+          color: ${theme === 'dark' ? 'var(--gray-800)' : 'var(--gray-800)'};
           font-size: 0.9rem;
           transition: all 0.2s ease;
         }
@@ -1121,7 +1159,7 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
         .story-content {
           padding: clamp(1rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem);
           background: ${theme === 'dark' 
-            ? 'linear-gradient(135deg, rgba(15, 23, 42, 0.7) 0%, rgba(30, 41, 59, 0.85) 50%, rgba(51, 65, 85, 0.7) 100%)' 
+            ? 'linear-gradient(135deg, rgba(13, 31, 26, 0.92) 0%, rgba(20, 43, 36, 0.95) 50%, rgba(30, 58, 49, 0.88) 100%)' 
             : 'linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(248, 250, 252, 0.9) 100%)'};
           backdrop-filter: blur(10px);
           position: relative;
@@ -1146,12 +1184,54 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
           text-align: center;
           position: relative;
           z-index: 1;
+          width: 100%;
+        }
+
+        .story-scene__layout {
+          width: 100%;
+          max-width: 52rem;
+          margin: 0 auto;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: clamp(1rem, 2.5vw, 1.5rem);
+        }
+
+        .story-scene__layout--with-image {
+          align-items: stretch;
+        }
+
+        @media (min-width: 768px) {
+          .story-scene__layout--with-image {
+            display: grid;
+            grid-template-columns: minmax(0, 20rem) minmax(0, 1fr);
+            gap: 1.5rem 2rem;
+            align-items: start;
+          }
+
+          .story-scene__layout--with-image .story-image-container {
+            margin: 0;
+            max-width: 100%;
+            width: 100%;
+            height: clamp(11rem, 28vw, 20rem);
+          }
+        }
+
+        .story-scene__copy {
+          width: 100%;
+          min-width: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: clamp(1rem, 2vw, 1.5rem);
         }
 
         .scene-title {
           font-size: clamp(1.5rem, 5vw, 2.5rem);
           font-weight: bold;
-          margin-bottom: clamp(1rem, 3vw, 2rem);
+          margin: 0 auto clamp(0.75rem, 2vw, 1.25rem);
+          max-width: 42rem;
+          width: 100%;
           color: var(--primary);
           text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
           background: linear-gradient(135deg, var(--primary), var(--primary-light));
@@ -1215,9 +1295,11 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
         }
 
         .story-image-container {
+          position: relative;
           width: 100%;
-          max-width: 800px;
-          margin: clamp(1rem, 3vw, 2rem) auto;
+          max-width: min(100%, 28rem);
+          height: clamp(11rem, 32vw, 22rem);
+          margin: clamp(0.75rem, 2vw, 1.25rem) auto;
           border-radius: 16px;
           overflow: hidden;
           box-shadow: ${theme === 'dark' 
@@ -1233,24 +1315,68 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
         }
 
         .story-image {
+          position: absolute;
+          inset: 0;
           width: 100%;
-          height: auto;
+          height: 100%;
           display: block;
+          margin: 0;
+          object-fit: cover;
+          object-position: center;
           transition: opacity 0.5s ease-in-out;
         }
 
-        .story-text {
-          font-size: clamp(1rem, 3vw, 1.2rem);
-          line-height: 1.8;
-          margin: clamp(1rem, 3vw, 2rem) 0;
+        .story-text-panel {
+          width: 100%;
+          max-width: 42rem;
+          margin: 0 auto;
+          padding: clamp(1rem, 2.5vw, 1.35rem) clamp(1.1rem, 3vw, 1.6rem);
+          border-radius: 14px;
           text-align: left;
           animation: fadeInUp 0.8s ease-out;
-          word-wrap: break-word;
-          overflow-wrap: break-word;
+          background: ${theme === 'dark'
+            ? 'linear-gradient(145deg, rgba(13, 31, 26, 0.65) 0%, rgba(20, 43, 36, 0.75) 100%)'
+            : 'rgba(255, 255, 255, 0.92)'};
+          border: 1px solid ${theme === 'dark'
+            ? 'rgba(74, 222, 128, 0.18)'
+            : 'rgba(22, 163, 74, 0.12)'};
+          box-shadow: ${theme === 'dark'
+            ? '0 8px 24px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(74, 222, 128, 0.08)'
+            : '0 4px 16px rgba(15, 23, 42, 0.06)'};
+        }
+
+        .story-text {
+          margin: 0;
+          font-size: clamp(1.02rem, 2.2vw, 1.125rem);
+          line-height: 1.75;
+          letter-spacing: 0.01em;
+          color: ${theme === 'dark' ? 'var(--gray-800)' : 'var(--gray-800)'};
+          text-wrap: pretty;
+        }
+
+        .story-text__paragraph {
+          margin: 0;
+          max-width: 65ch;
+        }
+
+        .story-text__paragraph + .story-text__paragraph {
+          margin-top: 1em;
+          text-indent: 1.25em;
+        }
+
+        .story-text__paragraph:first-child::first-letter {
+          float: left;
+          margin: 0.08em 0.14em 0 0;
+          font-size: 2.35em;
+          line-height: 0.85;
+          font-weight: 700;
+          color: var(--primary);
         }
 
         .story-choices {
-          margin-top: 2rem;
+          width: 100%;
+          max-width: 42rem;
+          margin: 0 auto;
           text-align: left;
         }
 
@@ -1334,7 +1460,7 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
           background: ${theme === 'dark' 
             ? 'linear-gradient(135deg, rgba(110, 231, 183, 0.35) 0%, rgba(134, 239, 172, 0.35) 100%)' 
             : 'var(--primary)'};
-          color: ${theme === 'dark' ? 'var(--white)' : 'white'};
+          color: ${theme === 'dark' ? '#f8fafc' : 'white'};
           border-color: ${theme === 'dark' 
             ? 'rgba(110, 231, 183, 0.8)' 
             : 'var(--primary)'};
@@ -1408,13 +1534,13 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
           border: ${theme === 'dark' 
             ? '1px solid rgba(102, 187, 106, 0.2)' 
             : 'none'};
-          color: ${theme === 'dark' ? 'var(--gray-300)' : 'inherit'};
+          color: ${theme === 'dark' ? 'var(--gray-700)' : 'inherit'};
         }
 
         .spinner {
           width: 40px;
           height: 40px;
-          border: 4px solid var(--gray-200);
+          border: 4px solid ${theme === 'dark' ? 'var(--gray-400)' : 'var(--gray-200)'};
           border-top: 4px solid var(--primary);
           border-radius: 50%;
           animation: spin 1s linear infinite;
@@ -1474,7 +1600,7 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
           background: ${theme === 'dark' 
             ? 'linear-gradient(135deg, rgba(22, 27, 34, 0.95) 0%, rgba(28, 33, 40, 0.95) 100%)' 
             : 'rgba(0, 0, 0, 0.85)'};
-          color: ${theme === 'dark' ? 'var(--gray-300)' : 'white'};
+          color: ${theme === 'dark' ? 'var(--gray-800)' : 'white'};
           padding: clamp(0.5rem, 2vw, 0.75rem) clamp(0.75rem, 3vw, 1rem);
           border-radius: 20px;
           display: flex;
@@ -1673,6 +1799,20 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
             text-align: center;
           }
 
+          .story-scene__layout--with-image {
+            display: flex;
+            flex-direction: column;
+          }
+
+          .story-text-panel {
+            padding: 1rem 1.1rem;
+          }
+
+          .story-text {
+            font-size: 1rem;
+            line-height: 1.7;
+          }
+
           .character-display {
             margin: 1.5rem 0;
           }
@@ -1682,7 +1822,9 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
           }
 
           .story-image-container {
-            margin: 1rem auto;
+            max-width: min(100%, 24rem);
+            height: min(38vh, 18rem);
+            margin: 0.75rem auto;
             border-radius: 12px;
           }
 
@@ -1890,7 +2032,9 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
           }
 
           .story-image-container {
-            margin: 0.75rem auto;
+            max-width: min(100%, 20rem);
+            height: min(32vh, 14rem);
+            margin: 0.5rem auto;
             border-radius: 8px;
           }
 

@@ -9977,6 +9977,125 @@ header.header .nav-actions button.header-icon-btn {
   color: rgba(226, 232, 240, 0.82);
 }
 
+/* Bamboo Forest / story experience */
+.story-intro-panel__eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--primary-dark);
+}
+
+.story-intro-panel__body {
+  margin: 0;
+  color: var(--gray-700);
+}
+
+[data-theme='dark'] .story-intro-panel {
+  border-color: rgba(74, 222, 128, 0.22);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.14), rgba(14, 165, 233, 0.1));
+}
+
+[data-theme='dark'] .story-intro-panel__eyebrow {
+  color: var(--secondary);
+}
+
+[data-theme='dark'] .story-intro-panel__body {
+  color: rgba(226, 232, 240, 0.88);
+}
+
+.story-mode-switcher {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.25rem;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: var(--radius-shell-lg);
+  background: linear-gradient(180deg, rgba(248, 250, 252, 0.96) 0%, rgba(241, 245, 249, 1) 100%);
+}
+
+@media (min-width: 640px) {
+  .story-mode-switcher {
+    flex-direction: row;
+    align-items: stretch;
+  }
+}
+
+.story-mode-switcher__tab {
+  flex: 1;
+  min-height: 44px;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 0.75rem;
+  background: transparent;
+  color: var(--gray-600);
+  text-align: left;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.story-mode-switcher__tab:hover {
+  background: rgba(255, 255, 255, 0.65);
+  color: var(--gray-800);
+}
+
+.story-mode-switcher__tab--active {
+  background: #fff;
+  color: var(--primary-dark);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+  outline: 1px solid rgba(22, 163, 74, 0.22);
+}
+
+.story-mode-switcher__title {
+  display: block;
+  font-weight: 600;
+}
+
+.story-mode-switcher__meta {
+  display: block;
+  margin-top: 0.125rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  opacity: 0.85;
+}
+
+[data-theme='dark'] .story-mode-switcher {
+  border-color: rgba(74, 222, 128, 0.18);
+  background: linear-gradient(145deg, var(--gray-100) 0%, var(--gray-200) 100%);
+  box-shadow: var(--shadow-md), 0 0 20px rgba(74, 222, 128, 0.05);
+}
+
+[data-theme='dark'] .story-mode-switcher__tab {
+  color: rgba(226, 232, 240, 0.72);
+}
+
+[data-theme='dark'] .story-mode-switcher__tab:hover {
+  background: rgba(74, 222, 128, 0.08);
+  color: rgba(248, 250, 252, 0.92);
+}
+
+[data-theme='dark'] .story-mode-switcher__tab--active {
+  background: linear-gradient(145deg, var(--gray-200) 0%, var(--gray-300) 100%);
+  color: var(--secondary);
+  outline-color: rgba(74, 222, 128, 0.35);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), 0 0 16px rgba(74, 222, 128, 0.12);
+}
+
+.story-player-shell {
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: var(--radius-shell-lg);
+  background: #fff;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+}
+
+[data-theme='dark'] .story-player-shell {
+  border-color: rgba(74, 222, 128, 0.2);
+  background: linear-gradient(145deg, var(--gray-100) 0%, var(--gray-200) 100%);
+  box-shadow: var(--shadow-md), 0 0 24px rgba(74, 222, 128, 0.08);
+}
+
 /* Legacy Tailwind dark grays inside PageLayout → homepage shell look */
 [data-theme='dark'] .page-layout__main [class*='dark:bg-gray-800'] {
   background: linear-gradient(145deg, var(--gray-100) 0%, var(--gray-200) 100%) !important;

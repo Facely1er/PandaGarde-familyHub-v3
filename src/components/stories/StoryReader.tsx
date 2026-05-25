@@ -67,7 +67,7 @@ export function StoryReader({ story, embedded = false, showBackLink = true }: St
       )}
 
       <div
-        className="mb-6 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-6"
+        className="story-chapter-panel shell-card shell-card--nested mb-6 p-6"
         role="tablist"
         aria-label="Chapter progress"
       >
