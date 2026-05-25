@@ -14,14 +14,18 @@ import {
   FileText,
   Cookie,
   Info,
+  Library,
+  Fingerprint,
 } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const exploreLinks = [
     { icon: Compass, href: '/how-it-works', label: 'How It Works' },
-    { icon: BookOpen, href: '/resources', label: 'Resources' },
-    { icon: LayoutDashboard, href: '/family-hub', label: 'Family Hub' },
     { icon: PlayCircle, href: '/get-started', label: 'Get Started' },
+    { icon: Fingerprint, href: '/digital-footprint', label: 'Digital Footprint Analysis' },
+    { icon: BookOpen, href: '/resources', label: 'Resources' },
+    { icon: Library, href: '/stories', label: 'Stories' },
+    { icon: LayoutDashboard, href: '/family-hub', label: 'Family Hub' },
   ];
 
   const resourcesLinks = [

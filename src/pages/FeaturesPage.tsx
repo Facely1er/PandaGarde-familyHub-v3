@@ -15,6 +15,11 @@ import {
   WifiOff,
 } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
+import {
+  PageLead,
+  PageSection,
+  ShellRowCard,
+} from '../components/layout/PageContent';
 
 const flow = [
   {
@@ -51,7 +56,6 @@ const transformationColumns = [
   {
     eyebrow: 'Without a shared plan',
     title: 'Privacy work scatters and restarts',
-    tone: 'before',
     points: [
       'Notes, tabs, and one-off conversations never become a household routine.',
       'It is hard to know which setting or app to fix first.',
@@ -61,7 +65,6 @@ const transformationColumns = [
   {
     eyebrow: 'With PandaGarde',
     title: 'Review, learn, and follow through together',
-    tone: 'after',
     points: [
       'Digital Footprint Analysis gives you a visible starting point before big changes.',
       'Resources and stories meet parents, kids, and educators where they are.',
@@ -130,17 +133,20 @@ const faqCards = [
 const trustPoints = [
   {
     title: 'Private by default',
-    description: 'Core progress stays on your device. PandaGarde is built for families who want guidance without unnecessary data collection.',
+    description:
+      'Core progress stays on your device. PandaGarde is built for families who want guidance without unnecessary data collection.',
     icon: WifiOff,
   },
   {
     title: 'One job per step',
-    description: 'The site helps you review and learn. Family Hub helps you practice and follow through—so each visit has a clear purpose.',
+    description:
+      'The site helps you review and learn. Family Hub helps you practice and follow through—so each visit has a clear purpose.',
     icon: ShieldCheck,
   },
   {
     title: 'Built for households',
-    description: 'Parents, kids, and educators each have an entry point, without splitting the family into separate products.',
+    description:
+      'Parents, kids, and educators each have an entry point, without splitting the family into separate products.',
     icon: Users,
   },
 ];
@@ -152,185 +158,168 @@ const FeaturesPage: React.FC = () => {
       subtitle="Review on the website, learn with resources and stories, then continue in Family Hub on your device."
       breadcrumbs={true}
     >
-      <section className="py-4 pb-8">
-        <p className="shell-card__body mb-8 max-w-3xl">
-          PandaGarde is two connected parts: this website for your first review and learning, and Family Hub for
-          missions and progress. You can move at your own pace—there is no requirement to use everything at once.
-        </p>
+      <PageLead>
+        PandaGarde is two connected parts: this website for your first review and learning, and Family Hub for
+        missions and progress. You can move at your own pace—there is no requirement to use everything at once.
+      </PageLead>
 
-        <div className="mb-10 flex flex-col gap-5">
+      <PageSection header={{ eyebrow: 'Your path', title: 'Three steps families follow' }}>
+        <div className="shell-stack">
           {flow.map((item, index) => {
             const Icon = item.icon;
             return (
-              <div
+              <ShellRowCard
                 key={item.title}
-                className="shell-card flex flex-col gap-4 p-5 sm:flex-row sm:items-center"
-              >
-                <div className="shell-icon h-16 w-16 flex-col font-bold">
-                  <span className="text-xs">{index + 1}</span>
-                  <Icon size={22} aria-hidden />
-                </div>
-
-                <div className="min-w-0 flex-1">
-                  <h2 className="shell-card__title text-lg">{item.title}</h2>
-                  <p className="shell-card__body mt-1">{item.description}</p>
-                </div>
-
-                <Link
-                  to={item.href}
-                  className="button button-secondary inline-flex items-center gap-2 self-start whitespace-nowrap sm:self-auto"
-                >
-                  Open <ArrowRight size={16} aria-hidden />
-                </Link>
-              </div>
+                iconLabel={`${index + 1}`}
+                icon={<Icon size={22} />}
+                title={item.title}
+                description={item.description}
+                action={
+                  <Link
+                    to={item.href}
+                    className="button button-secondary inline-flex items-center gap-2 whitespace-nowrap"
+                  >
+                    Open <ArrowRight size={16} aria-hidden />
+                  </Link>
+                }
+              />
             );
           })}
         </div>
+      </PageSection>
 
-        <div className="shell-card shell-card--panel mb-10 p-6">
-          <h2 className="shell-card__title mb-4 mt-0 text-xl">What you get</h2>
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+      <PageSection header={{ title: 'What you get' }}>
+        <div className="shell-card shell-card--panel shell-card--panel-inner">
+          <div className="shell-grid shell-grid--2">
             {benefits.map((item) => (
               <div key={item} className="shell-card shell-card--nested flex items-center gap-3 p-4">
-                <CheckCircle2 size={18} className="flex-shrink-0 text-green-700 dark:text-green-400" aria-hidden />
+                <CheckCircle2
+                  size={18}
+                  className="flex-shrink-0 text-green-700 dark:text-green-400"
+                  aria-hidden
+                />
                 <span className="shell-card__body text-sm">{item}</span>
               </div>
             ))}
           </div>
         </div>
+      </PageSection>
 
-        <div className="mb-10">
-          <span className="mb-2 inline-block text-sm font-semibold uppercase tracking-wide text-green-800 dark:text-green-300">
-            Before and after
-          </span>
-          <h2 className="shell-card__title mb-2 text-2xl">From scattered worry to a plan you can keep</h2>
-          <p className="shell-card__body mb-6 max-w-2xl">
-            Families often already care about privacy—the missing piece is a sequence that does not fall apart after
-            the first weekend of good intentions.
-          </p>
-          <div className="grid gap-4 md:grid-cols-2">
-            {transformationColumns.map((column) => (
-              <article
-                key={column.title}
-                className={`shell-card p-5 ${column.tone === 'before' ? '' : ''}`}
-              >
-                <span className="mb-2 inline-block rounded-full border border-gray-200 px-3 py-1 text-xs font-bold uppercase tracking-wide dark:border-gray-600">
-                  {column.eyebrow}
-                </span>
-                <h3 className="shell-card__title mb-3 text-lg">{column.title}</h3>
-                <ul className="shell-card__body list-none space-y-2 p-0">
-                  {column.points.map((point) => (
-                    <li key={point} className="relative pl-5 before:absolute before:left-0 before:top-2 before:h-2 before:w-2 before:rounded-full before:bg-green-600 dark:before:bg-green-400">
-                      {point}
-                    </li>
+      <PageSection
+        header={{
+          eyebrow: 'Before and after',
+          title: 'From scattered worry to a plan you can keep',
+          lead: 'Families often already care about privacy—the missing piece is a sequence that does not fall apart after the first weekend of good intentions.',
+        }}
+      >
+        <div className="shell-grid shell-grid--2">
+          {transformationColumns.map((column) => (
+            <article key={column.title} className="shell-card p-5">
+              <span className="shell-pill">{column.eyebrow}</span>
+              <h3 className="shell-card__title mt-3 text-lg">{column.title}</h3>
+              <ul className="shell-list mt-3">
+                {column.points.map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </PageSection>
+
+      <PageSection
+        header={{
+          eyebrow: 'How the journey is organized',
+          title: 'Three layers, one path',
+          lead: 'Each stage has a clear purpose so you are not asked to learn, plan, and operate in the same screen at once.',
+        }}
+      >
+        <div className="shell-grid shell-grid--3">
+          {journeyLayers.map((item) => {
+            const Icon = item.icon;
+            return (
+              <article key={item.title} className="shell-card p-5">
+                <div className="shell-icon shell-icon--md mb-4">
+                  <Icon size={20} aria-hidden />
+                </div>
+                <h3 className="shell-card__title text-base">{item.title}</h3>
+                <p className="shell-card__body mt-2 text-sm">{item.description}</p>
+                <ul className="shell-list mt-3">
+                  {item.points.map((point) => (
+                    <li key={point}>{point}</li>
                   ))}
                 </ul>
               </article>
-            ))}
-          </div>
+            );
+          })}
         </div>
+      </PageSection>
 
-        <div className="mb-10">
-          <span className="mb-2 inline-block text-sm font-semibold uppercase tracking-wide text-green-800 dark:text-green-300">
-            How the journey is organized
-          </span>
-          <h2 className="shell-card__title mb-2 text-2xl">Three layers, one path</h2>
-          <p className="shell-card__body mb-6 max-w-2xl">
-            Each stage has a clear purpose so you are not asked to learn, plan, and operate in the same screen at once.
-          </p>
-          <div className="grid gap-4 md:grid-cols-3">
-            {journeyLayers.map((item) => {
-              const Icon = item.icon;
-              return (
-                <article key={item.title} className="shell-card p-5">
-                  <div className="shell-icon mb-4 h-12 w-12">
-                    <Icon size={20} aria-hidden />
-                  </div>
-                  <h3 className="shell-card__title mb-2 text-base">{item.title}</h3>
-                  <p className="shell-card__body mb-3 text-sm">{item.description}</p>
-                  <ul className="shell-card__body list-none space-y-1 p-0 text-sm">
-                    {item.points.map((point) => (
-                      <li key={point}>· {point}</li>
-                    ))}
-                  </ul>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-
-        <div className="mb-10">
-          <span className="mb-2 inline-block text-sm font-semibold uppercase tracking-wide text-green-800 dark:text-green-300">
-            Who it is for
-          </span>
-          <h2 className="shell-card__title mb-6 text-2xl">One family, different entry points</h2>
-          <div className="grid gap-4 md:grid-cols-3">
-            {audienceCards.map((item) => {
-              const Icon = item.icon;
-              return (
-                <article key={item.title} className="shell-card p-5">
-                  <div className="shell-icon mb-4 h-12 w-12">
-                    <Icon size={20} aria-hidden />
-                  </div>
-                  <h3 className="shell-card__title mb-2 text-base">{item.title}</h3>
-                  <p className="shell-card__body text-sm">{item.description}</p>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-
-        <div className="mb-10">
-          <span className="mb-2 inline-block text-sm font-semibold uppercase tracking-wide text-green-800 dark:text-green-300">
-            Common questions
-          </span>
-          <h2 className="shell-card__title mb-6 text-2xl">Quick answers</h2>
-          <div className="grid gap-4 md:grid-cols-3">
-            {faqCards.map((item) => (
-              <article key={item.question} className="shell-card p-5">
-                <h3 className="shell-card__title mb-2 text-base">{item.question}</h3>
-                <p className="shell-card__body text-sm">{item.answer}</p>
+      <PageSection header={{ eyebrow: 'Who it is for', title: 'One family, different entry points' }}>
+        <div className="shell-grid shell-grid--3">
+          {audienceCards.map((item) => {
+            const Icon = item.icon;
+            return (
+              <article key={item.title} className="shell-card p-5">
+                <div className="shell-icon shell-icon--md mb-4">
+                  <Icon size={20} aria-hidden />
+                </div>
+                <h3 className="shell-card__title text-base">{item.title}</h3>
+                <p className="shell-card__body mt-2 text-sm">{item.description}</p>
               </article>
-            ))}
-          </div>
+            );
+          })}
         </div>
+      </PageSection>
 
-        <div className="mb-8">
-          <span className="mb-2 inline-block text-sm font-semibold uppercase tracking-wide text-green-800 dark:text-green-300">
-            Our approach
-          </span>
-          <h2 className="shell-card__title mb-6 text-2xl">Designed for real family use</h2>
-          <div className="grid gap-4 md:grid-cols-3">
-            {trustPoints.map((item) => {
-              const Icon = item.icon;
-              return (
-                <article key={item.title} className="shell-card p-5">
-                  <div className="shell-icon mb-4 h-12 w-12">
-                    <Icon size={20} aria-hidden />
-                  </div>
-                  <h3 className="shell-card__title mb-2 text-base">{item.title}</h3>
-                  <p className="shell-card__body text-sm">{item.description}</p>
-                </article>
-              );
-            })}
-          </div>
+      <PageSection
+        id="faq"
+        className="scroll-mt-24"
+        header={{ eyebrow: 'Common questions', title: 'Quick answers' }}
+      >
+        <div className="shell-grid shell-grid--3">
+          {faqCards.map((item) => (
+            <article key={item.question} className="shell-card p-5">
+              <h3 className="shell-card__title text-base">{item.question}</h3>
+              <p className="shell-card__body mt-2 text-sm">{item.answer}</p>
+            </article>
+          ))}
         </div>
+      </PageSection>
 
-        <div className="shell-card shell-card--panel flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <h2 className="shell-card__title m-0 text-xl">Ready to begin?</h2>
-            <p className="shell-card__body mt-2 mb-0">Start with Digital Footprint Analysis, or open Family Hub if you are already mid-journey.</p>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            <Link to="/digital-footprint" className="button button-primary inline-flex items-center gap-2">
-              Start review <ArrowRight size={16} aria-hidden />
-            </Link>
-            <Link to="/family-hub" className="button button-secondary inline-flex items-center gap-2">
-              Open Family Hub
-            </Link>
-          </div>
+      <PageSection header={{ eyebrow: 'Our approach', title: 'Designed for real family use' }}>
+        <div className="shell-grid shell-grid--3">
+          {trustPoints.map((item) => {
+            const Icon = item.icon;
+            return (
+              <article key={item.title} className="shell-card p-5">
+                <div className="shell-icon shell-icon--md mb-4">
+                  <Icon size={20} aria-hidden />
+                </div>
+                <h3 className="shell-card__title text-base">{item.title}</h3>
+                <p className="shell-card__body mt-2 text-sm">{item.description}</p>
+              </article>
+            );
+          })}
         </div>
-      </section>
+      </PageSection>
+
+      <div className="shell-card shell-card--panel shell-cta-panel">
+        <div>
+          <h2 className="shell-card__title text-xl">Ready to begin?</h2>
+          <p className="shell-card__body mt-2">
+            Start with Digital Footprint Analysis, or open Family Hub if you are already mid-journey.
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-3">
+          <Link to="/digital-footprint" className="button button-primary inline-flex items-center gap-2">
+            Start review <ArrowRight size={16} aria-hidden />
+          </Link>
+          <Link to="/family-hub" className="button button-secondary inline-flex items-center gap-2">
+            Open Family Hub
+          </Link>
+        </div>
+      </div>
     </PageLayout>
   );
 };

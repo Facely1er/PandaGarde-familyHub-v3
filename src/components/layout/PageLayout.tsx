@@ -24,9 +24,9 @@ const PageLayout: React.FC<PageLayoutProps> = ({
         breadcrumbs={breadcrumbs}
       />
 
-      <main className="page-layout__main relative z-10 py-8 min-h-96">
+      <main className="page-layout__main relative z-10 min-h-96">
         <div className="container relative z-20">
-          {children}
+          <div className="page-content">{children}</div>
         </div>
       </main>
     </div>

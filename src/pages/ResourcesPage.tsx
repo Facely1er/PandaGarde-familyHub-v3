@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { BookOpen, Users, GraduationCap, ArrowRight } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
+import { PageSection, ShellLinkCard } from '../components/layout/PageContent';
 
 const resourceGroups = [
   {
@@ -43,14 +44,20 @@ const ResourcesPage: React.FC = () => {
       subtitle="Use the right materials for the right audience: parents, kids, and educators."
       breadcrumbs={true}
     >
-      <section className="py-4 pb-8">
-        <div className="flex flex-col gap-5">
+      <PageSection
+        header={{
+          eyebrow: 'Browse by audience',
+          title: 'Guides, stories, and tools for your household',
+          lead: 'Each section links to materials matched to how your family wants to learn—not one generic checklist for everyone.',
+        }}
+      >
+        <div className="shell-stack">
           {resourceGroups.map((group) => {
             const Icon = group.icon;
             return (
-              <div key={group.title} className="shell-card p-5">
-                <div className="mb-4 flex flex-col gap-4 sm:flex-row sm:items-start">
-                  <div className="shell-icon h-16 w-16">
+              <article key={group.title} className="shell-card p-5">
+                <div className="mb-5 flex flex-col gap-4 sm:flex-row sm:items-start">
+                  <div className="shell-icon shell-icon--lg">
                     <Icon size={24} aria-hidden />
                   </div>
                   <div className="min-w-0 flex-1">
@@ -58,25 +65,21 @@ const ResourcesPage: React.FC = () => {
                     <p className="shell-card__body mt-2">{group.description}</p>
                   </div>
                 </div>
-
-                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="shell-grid shell-grid--3">
                   {group.links.map((link) => (
-                    <div key={link.href} className="shell-card shell-card--nested flex flex-col gap-3 p-4">
-                      <h3 className="shell-card__title text-base">{link.label}</h3>
-                      <Link
-                        to={link.href}
-                        className="button button-secondary mt-auto inline-flex items-center gap-2 self-start"
-                      >
-                        Open <ArrowRight size={16} aria-hidden />
-                      </Link>
-                    </div>
+                    <ShellLinkCard
+                      key={link.href}
+                      to={link.href}
+                      title={link.label}
+                      cta="Open"
+                    />
                   ))}
                 </div>
-              </div>
+              </article>
             );
           })}
         </div>
-      </section>
+      </PageSection>
     </PageLayout>
   );
 };

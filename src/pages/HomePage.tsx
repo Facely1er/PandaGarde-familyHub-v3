@@ -85,9 +85,9 @@ const HomePage: React.FC = () => {
   ];
 
   return (
-    <>
-      <section className="homepage-hero premium-hero py-6 md:py-10">
-        <div className="container premium-hero__container px-4 sm:px-6 lg:px-8">
+    <div className="site-page">
+      <section className="homepage-hero premium-hero site-section">
+        <div className="site-shell premium-hero__container">
           <div className="premium-hero__content slide-in-left">
             <div className="premium-hero__intro">
               <span className="premium-hero__eyebrow-pill">
@@ -193,8 +193,8 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-      <section className="homepage-stats reveal-on-scroll py-8 md:py-12">
-        <div className="container px-4 sm:px-6 lg:px-8">
+      <section className="homepage-stats site-section reveal-on-scroll">
+        <div className="site-shell">
           <div className="homepage-stats__grid">
             {quickStats.map((item, index) => (
               <article key={item.label} className="homepage-stats__card">
@@ -209,16 +209,16 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-      <section className="homepage-spotlight reveal-on-scroll">
-        <div className="container homepage-spotlight__container">
-          <div className="homepage-spotlight__copy">
-            <span className="badge">Start here</span>
-            <h2>Two places families use most</h2>
-            <p>
+      <section className="homepage-spotlight site-section reveal-on-scroll">
+        <div className="site-shell homepage-spotlight__container">
+          <header className="page-section__header homepage-spotlight__copy">
+            <span className="page-section__eyebrow">Start here</span>
+            <h2 className="page-section__title">Two places families use most</h2>
+            <p className="page-section__lead">
               Run your first review on the site, then open Family Hub when you are ready for missions and ongoing
               progress. Stories and guides are there when you want to learn together.
             </p>
-          </div>
+          </header>
           <div className="homepage-spotlight__grid">
             {spotlightCards.map((item) => (
               <Link key={item.title} to={item.href} className="homepage-spotlight__card">
@@ -293,12 +293,12 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-      <section className="homepage-closing-cta reveal-on-scroll">
-        <div className="container homepage-closing-cta__container">
+      <section className="homepage-closing-cta site-section reveal-on-scroll">
+        <div className="site-shell homepage-closing-cta__container">
           <div className="homepage-closing-cta__copy">
-            <span className="badge">Ready when you are</span>
-            <h2>Start with your family’s digital footprint review.</h2>
-            <p>
+            <span className="page-section__eyebrow">Ready when you are</span>
+            <h2 className="page-section__title">Start with your family’s digital footprint review.</h2>
+            <p className="page-section__lead">
               It takes a few minutes to list what your household uses online. Family Hub is there when you want
               missions and follow-through—no rush to open it on day one.
             </p>
@@ -311,9 +311,15 @@ const HomePage: React.FC = () => {
               Open Family Hub
             </Link>
           </div>
+          <p className="homepage-closing-cta__followup">
+            Still have questions?{' '}
+            <Link to="/how-it-works#faq" className="font-semibold text-green-700 hover:underline dark:text-green-400">
+              See how PandaGarde works and common answers
+            </Link>
+          </p>
         </div>
       </section>
-    </>
+    </div>
   );
 };
 
