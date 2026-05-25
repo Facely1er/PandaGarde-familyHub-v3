@@ -180,8 +180,8 @@ Over the next few days, Tao taught Po many important lessons about the Privacy G
 
 As Po became more confident, something unexpected happened. Forest animals began coming to him with questions:
 
-"Po, how do I stop strangers from seeing my photos?" asked Mika the Owl.
-"Po, someone is pretending to be me online! What should I do?" worried Fiona the Fox.
+"Po, how do I stop strangers from seeing my photos?" asked Miki the Monkey.
+"Po, someone is pretending to be me online! What should I do?" worried Ruby the Bunny.
 
 With each question, Po realized he could use what he had learned to help others. He started wearing his Privacy Shield proudly and carried his digital bamboo tablet everywhere he went.
 
@@ -235,54 +235,99 @@ const episode2: Story = {
   coverEmoji: '📸',
   coverColor: 'bg-yellow-100',
   summary: "Miki photographs Ruby's unfinished sculpture and shares it without asking. Po helps Miki understand that sharing something about someone else always needs their permission first.",
-  keyLesson: 'Even good intentions need consent. Always ask before sharing something about someone else.',
+  keyLesson:
+    'Even good intentions need consent. The Bridge of Consent exists for a reason.',
   chapters: [
     {
       id: 'c2-1',
       title: "Ruby's Secret Sculpture",
-      content: `Ruby the Bunny had been working on something special for weeks — the most beautiful bamboo sculpture anyone had ever seen. But she wasn't ready to show it to anyone yet.
+      content: `In a quiet corner of the Open Clearing, where the morning light fell through the bamboo in long golden stripes, Ruby the Bunny had been working on something special for weeks.
 
-"It's not finished," she told herself. "Maybe tomorrow."`,
+It was a sculpture — not finished, not perfect, but already the most beautiful thing she had ever made with her own paws. Curved bamboo stalks, tiny carved fireflies, a stream of blue glass that caught the light like the Crystal Stream at dusk.
+
+Ruby kept it hidden behind a screen of leaves. She would visit it every day after school, adding one small piece, smoothing one edge, thinking about when — if — she might be ready to show the forest.
+
+"It's not finished," she told herself each evening. "Maybe tomorrow."
+
+She had not told anyone about it yet. Not because she was ashamed. Because the story of the sculpture belonged to her, and she wanted to choose when that story left her burrow.`,
     },
     {
       id: 'c2-2',
       title: 'Miki Means Well',
-      content: `That afternoon, Miki the Monkey came swinging through the trees and stopped dead in his tracks.
+      content: `That afternoon, Miki the Monkey came swinging through the trees on his way to the Harmony Campfire. He was in a hurry — the Quick Click Wind had been blowing all day, making everything feel like it needed to happen right now.
 
-"Ruby! That is AMAZING!" Before Ruby could say hello, Miki pulled out his digital tablet — snap! — took a photo.
+He landed in the Open Clearing and stopped dead in his tracks.
 
-"I have to share this with everyone," Miki said, already typing.
+"Ruby! That is AMAZING!"
 
-"Wait—" Ruby started to say. But the photo was already gone, flying across the Digital Forest like a leaf in the wind.`,
+Ruby looked up, startled. Before she could say hello, Miki had already pulled out his digital bamboo tablet.
+
+Snap.
+
+"I have to share this with everyone," Miki said, his thumbs already flying across the screen. "They are going to love it."
+
+"Wait—" Ruby said, standing up so fast she knocked over her water jar. "Miki, I wasn't—"
+
+But the photo was already gone, flying across the Digital Bamboo Forest like a leaf caught in a strong wind — up through the paths, into message threads, into the Campfire circle where animals shared things before dinner.
+
+Ruby reached for the tablet, but Miki was still typing.
+
+"I didn't mean for it to go yet," she said. Her voice came out smaller than she wanted.
+
+Miki finally looked up. "What? It's incredible. Why wouldn't you want everyone to see?"`,
       lessonHighlight: 'Once you share something, you cannot un-share it.',
     },
     {
       id: 'c2-3',
       title: 'How Ruby Felt',
-      content: `Messages flooded in. Animals praised the sculpture from every corner of the forest. But Ruby didn't feel happy. She felt something tight in her chest — like someone had opened a surprise present that wasn't theirs to open.
+      content: `By evening, messages were arriving faster than Ruby could read them.
 
-"That was mine," she said quietly. "I wasn't ready."
+"Stunning work!" wrote animals from the East Grove.
+"Can you teach me how you did the stream?" asked someone Ruby had never met.
+"I saw it on the Campfire feed — wow!" wrote Billy the Beaver.
 
-When Miki saw Ruby's face, his excitement disappeared. "I thought you'd be happy."
+From the outside, it looked like a celebration. Ruby should have felt proud.
 
-Ruby shook her head. "You didn't ask me."`,
+Instead she felt something tight in her chest — like someone had opened a surprise present that was not theirs to open. The sculpture was still behind her leaf screen, but it did not feel private anymore. It felt like the forest had walked into her burrow without knocking.
+
+She sat on her step until Miki found her.
+
+"I thought you'd be happy," he said. His voice had lost its morning speed.
+
+Ruby looked at her paws. "That was mine. I wasn't ready."
+
+"But it was good," Miki said. "I was trying to help."
+
+"I know you were." Ruby took a breath. "You didn't ask me."
+
+Miki was very quiet. The Quick Click Wind, it turned out, did not feel so good when it stopped blowing.`,
+      lessonHighlight:
+        'Praise from the forest did not feel the same once the choice to share had already been made for her.',
     },
     {
       id: 'c2-4',
       title: "Po's Lesson",
-      content: `Po came to find them both.
+      content: `Po found them the next morning at the edge of the Bridge of Consent — a low bamboo crossing over a shallow stream, with a sign carved into the first post: Ask before you cross.
 
-"Miki," Po said gently, "you meant something kind. But kindness still needs permission."
+"Miki," Po said gently, sitting down beside them, "you meant something kind. But kindness still needs permission."
 
 "Even if it's something good?" Miki asked.
 
-"Especially then. When you share something about someone else, you are making a choice that belongs to them, not to you."
+"Especially then." Po pointed to the bridge. "When you share something about someone else — a photo, a story, a secret — you are crossing into their side of the forest. The Bridge of Consent exists because some doors should not be opened without asking the animal on the other side."
 
-Miki typed a message to everyone in the forest: "I shared Ruby's sculpture without asking. That was my mistake. The photo has been removed."
+Miki looked at the water. "I crossed without asking."
 
-He looked at Ruby. "I'm sorry. Will you tell me when you're ready to share it yourself?"
+"You did," Po said. "And you can cross back. Repair is a crossing too."
 
-Ruby smiled slowly. "Yes. And Miki — thank you for fixing it."`,
+Miki opened his tablet and typed a message to everyone who had seen the photo: "I shared Ruby's sculpture without asking. That was my mistake. The photo has been removed. I'm sorry."
+
+He looked at Ruby. "Will you tell me when you're ready to share it yourself?"
+
+Ruby smiled slowly — not because the hurt was gone, but because the choice was coming back to her.
+
+"Yes," she said. "And next time — meet me at the bridge first."
+
+Miki nodded. "At the bridge first."`,
     },
   ],
   activities: [
@@ -329,51 +374,94 @@ const episode3: Story = {
     {
       id: 'c3-1',
       title: "Billy's Big Idea",
-      content: `Billy the Beaver was proud of his latest invention: a real-time map of the entire forest that showed exactly where every animal was at any moment.
+      content: `Billy the Beaver loved building things. Give him sticks, glass, wire, and a problem — and by evening he would have a solution with moving parts.
 
-"I can use this to help everyone find each other!" he said. "If Ruby is lost, I'll know exactly where she is."
+His latest idea came to him beside the Crystal Stream, where messages flowed past like water and every animal's tablet left tiny ripples in the digital current.
 
-He spent a whole week building it, collecting tiny signals from his friends' tablets while they went about their day. Nobody knew. He was going to reveal it as a surprise.`,
+"What if I could see where everyone is?" he said to himself. "Not to spy. To help. If Ruby is lost, I'll know exactly where she is. If a friend is late for the Campfire, I can send word faster."
+
+He spent a whole week in his workshop, building a real-time map of the entire Digital Bamboo Forest. Glowing dots for every friend. Paths that updated every few minutes. A history scroll that showed where each dot had been.
+
+To make it work, he collected tiny signals from his friends' tablets while they went about their day — at the stream, in the meadow, walking home alone after dusk. He told himself it was for their safety.
+
+He told no one else. He was going to reveal it as a surprise.`,
     },
     {
       id: 'c3-2',
       title: 'The Map Goes Live',
-      content: `The day Billy revealed his map, he expected cheers. Instead, the clearing went very quiet.
+      content: `Billy chose a sunny afternoon in the Open Clearing for the big reveal. He set up his largest screen on a stump and called every friend he had added to the map.
 
-Ruby stared at the glowing screen. Her little dot had been moving all morning — from the stream to the meadow to the Archive, back to her burrow.
+"Ta-da!" he said. "The Forest Finder! You'll never lose each other again."
+
+Po arrived with Ruby and Mika. For a moment, everyone leaned in, curious.
+
+Then Ruby stared at the glowing screen. Her little dot had been moving all morning — from the stream to the meadow to the Great Bamboo Archive, back to her burrow.
 
 "That's everywhere I went today," she said slowly.
 
-"And yesterday," said Mika, pointing to her own dot's trail. "And the day before."
+"And yesterday," said Mika the Owl, pointing to her own dot's trail. "And the day before. And here — look — the evening you stayed home alone."
 
-Billy's smile faded. "I thought you'd be happy. Now you can always find each other!"`,
-      lessonHighlight: 'Information collected without asking — even to be helpful — changes how people feel about being watched.',
+The clearing went very quiet.
+
+Billy's smile faded. "I thought you'd be happy. Now you can always find each other!"
+
+"But we didn't know you were watching," Ruby said. It was not anger in her voice. Something quieter. "I didn't know my path was being collected."
+
+Mika looked at her tablet, then at Billy. "I didn't either."
+
+Billy's ears went flat. "I was trying to help."`,
+      lessonHighlight:
+        'Information collected without asking — even to be helpful — changes how people feel about being watched.',
     },
     {
       id: 'c3-3',
       title: 'What the Archive Remembers',
-      content: `Mika led them to the Great Bamboo Archive.
+      content: `Mika led them along the Crystal Stream to the Great Bamboo Archive — the tower of scrolls and memory pools where the forest stored what had been shared, searched, and saved.
 
-"Look," she said, pulling out a glowing scroll. Every animal's path, recorded for weeks. Where they slept. Where they ate. When they were alone.
+"Look," she said, pulling out a glowing record beside Billy's map. Every animal's path, stored for weeks. Where they slept. Where they ate. When they were alone. When they hurried. When they stopped.
 
-"The Archive doesn't judge what it stores," Mika said carefully. "But the animal who decides what to collect — that animal makes a choice."
+"The Archive doesn't judge what it stores," Mika said carefully. "It remembers because that is what archives do. But the animal who decides what to collect — that animal makes a choice."
 
-Billy looked at the scroll. "I made a choice for everyone."
+Billy looked at the scroll. His invention suddenly looked less like a gift and more like a net.
 
-"Without asking," Po said. Not unkindly. Just clearly.`,
+"I made a choice for everyone," he said.
+
+Po had arrived quietly behind them. He had seen Billy's face and sat down without lecturing.
+
+"Without asking," Po said. Not unkindly. Just clearly. "Even when the reason is kindness."
+
+Billy swallowed. "I thought surprise meant they'd be glad."
+
+"Sometimes surprise means they never got to say no," Mika said. "And no is a real answer."`,
+      lessonHighlight:
+        'The Archive remembers what is put into it. Choosing what to collect is as important as choosing what to share.',
     },
     {
       id: 'c3-4',
       title: 'The Permission Map',
-      content: `Billy deleted the old map that night.
+      content: `That night, Billy deleted the old map.
 
-He built a new one — smaller, quieter, and different in one important way: every animal chose whether to appear on it. Some said yes. Some said no. Billy added a switch so anyone could turn their dot off whenever they wanted.
+He did not sleep much. He kept thinking about Ruby's voice in the clearing — not angry, just surprised in a way that made him feel like he had opened every burrow door at once.
 
-"This feels different," Ruby said when she saw it.
+The next morning he built a new map. Smaller. Slower. Different in one important way: before any dot could appear, Billy had to ask.
 
-"It is different," Billy said. "This time I asked."
+He went to each friend in person.
 
-The new map was smaller than the first one. But for the first time, it felt like something that belonged to everyone — not just to Billy.`,
+"Would you like to be on the Forest Finder?" he said to Ruby. "You can say no. You can turn off your dot anytime."
+
+Ruby thought about it. "Yes — but only my dot near school and the Campfire. Not my burrow."
+
+Miki said yes to paths, no to history scrolls. Po said yes for emergencies only.
+
+Some animals said no entirely. Billy added a switch for each dot so anyone could turn themselves off whenever they wanted — no questions, no guilt.
+
+When he showed the new map in the same clearing, it had fewer lights. But Ruby leaned in and smiled.
+
+"This feels different," she said.
+
+"It is different," Billy said. "This time I asked. And the map belongs to everyone who said yes — not just to me."
+
+Po watched the fewer lights blink on the screen and said nothing for a moment — just sat with them until Billy's shoulders dropped and his smile came back, small but real.`,
     },
   ],
   activities: [
@@ -422,55 +510,94 @@ const episode4: Story = {
     {
       id: 'c4-1',
       title: 'The Exciting New Game',
-      content: `Mika the Owl was known for knowing how everything in the Digital Bamboo Forest worked. So when a glowing new game appeared in the Forest Marketplace — "Bamboo Runner: Ultimate Edition" — she downloaded it immediately.
+      content: `Mika the Owl was known for knowing how everything in the Digital Bamboo Forest worked. She could explain the Crystal Stream and how the Great Bamboo Archive remembered what the forest saved. Other animals came to her when something on their tablet felt confusing.
 
-A long list of permissions appeared on her screen. Mika's eyes skimmed over them quickly. She was too excited to read.
+So when a glowing new game appeared in the Forest Marketplace — "Bamboo Runner: Ultimate Edition" — Mika felt sure she could handle whatever came with it.
 
-"Allow All," she tapped, and the game began.`,
+She downloaded it on a bench in the Privacy Garden, where bamboo walls reminded every visitor that some spaces were meant to stay closed unless you chose to open them.
+
+A long list of permissions appeared on her screen.
+
+Access your location. Read your files. See your contacts. Use your camera. Send notifications day and night.
+
+Mika's eyes skimmed over the words. The Quick Click Wind was blowing — that rushing feeling that says *decide now, read later*.
+
+"Allow All," she tapped, and the game began.
+
+For the first hour, it was wonderful. She ran through digital bamboo groves, leaped over streams, and beat her own score three times. She told herself she would check the permissions tomorrow.`,
     },
     {
       id: 'c4-2',
       title: 'Something Feels Off',
-      content: `For a few days, the game was wonderful. But then small strange things began to happen.
+      content: `For a few days, Bamboo Runner was still wonderful. Mika played after school and told Billy about the new levels.
 
-A Smoke Fox appeared near Mika's favorite thinking spot. "Nice spot by the Crystal Stream," it said.
+But then small strange things began to happen.
+
+A Smoke Fox — one of those shadowy shapes that drifted at the edges of the forest when doors were left open — appeared near Mika's favorite thinking spot by the Crystal Stream.
+
+"Nice spot," it said. "Quiet. Private. I can see why you like it here."
 
 Mika frowned. She had never told anyone where she went to think.
 
-Another Smoke Fox showed up at her reading archive. "Interesting choices," it said.
+The next afternoon, another Smoke Fox showed up in her reading archive. "Interesting choices," it said. "You read a lot about owls and weather."
 
-Mika hadn't shared that either.`,
-      lessonHighlight: 'Every permission is a door. Make sure you know who you are letting in.',
+Mika hadn't shared her reading list with anyone.
+
+That evening, a notification popped up while she was eating dinner with her family: "Bamboo Runner would like to access your contacts."
+
+She had already tapped Allow All. The game did not need to ask again — the door was already open.
+
+Mika put down her bowl. The Quick Click Wind, she realised, had blown straight through her Privacy Garden gate.`,
+      lessonHighlight:
+        'Every permission is a door. Make sure you know who you are letting in.',
     },
     {
       id: 'c4-3',
       title: "Po and Tao's Audit",
-      content: `Mika found Po and Tao under the bamboo tree.
+      content: `Mika found Po at the Harmony Campfire and Tao at the entrance to Tao's Hollow, polishing his lantern.
 
 "I think something got in," she said.
 
 Tao nodded calmly. "Let's check the doors."
 
-Together they reviewed every permission Bamboo Runner had been granted. Location. Files. Contacts. All open.
+Inside the hollow — the oldest, safest place in the forest — they opened Mika's tablet together and reviewed every permission Bamboo Runner had been granted.
+
+Location: on. Files: on. Contacts: on. Camera: on. Notifications: on.
+
+Each line was a bamboo segment in the Privacy Garden gate. Each "Allow" was a lock clicked open.
 
 "I tapped 'Allow All' without reading," Mika said quietly. For someone who prided herself on understanding everything, the words stung.
 
-"It happens to everyone," said Po. "The Quick Click Wind blows fast. The important thing is what you do next."
+"It happens to everyone," said Po. He did not say *except you*. "The Quick Click Wind blows fast. The important thing is what you do next."
 
-Mika closed each unnecessary permission one by one.`,
+Tao pointed to the gate diagram on the wall. "A good lock is long, strange, and chosen on purpose. Permissions are the same. You do not owe every app every door."
+
+One by one, Mika closed what Bamboo Runner did not need. Location: off. Contacts: off. Files: off. She kept only what made the game actually run.
+
+The Smoke Foxes did not vanish instantly. But they stopped whispering from places Mika had never invited them into.`,
+      lessonHighlight:
+        'Closing a door you did not mean to open can make the forest feel like yours again.',
     },
     {
       id: 'c4-4',
       title: 'The Three Questions',
-      content: `Mika began teaching other animals her new rule — "The Three Questions" to ask before tapping Allow:
+      content: `The next week, Mika posted a small sign on the Forest Marketplace board — three questions she wrote for herself, not for a lecture:
 
-One: Does this app really need this to work?
-Two: What could someone do with this information?
-Three: Would I be comfortable if Tao could see this choice?
+Does this app really need this to work?
+What could someone do with this information?
+Would I be comfortable if Tao could see this choice?
 
-If any answer felt uncomfortable: tap "Deny" or ask a trusted adult.
+If any answer felt uncomfortable, she tapped "Deny" or found Po or Tao before she tapped "Allow."
 
-The Smoke Foxes drifted back to the forest edges. And Mika discovered that being wise also means being willing to slow down.`,
+The Smoke Foxes drifted back to the forest edges, where they belonged — reminders that unknown things exist, not punishments for making a mistake.
+
+Mika still played Bamboo Runner sometimes. But before each new download, she read the permission list out loud, slowly, one door at a time.
+
+"Being wise," she told Po at the Campfire, "also means being willing to slow down."
+
+Po nodded. "What will you do," he asked, "the next time the Quick Click Wind blows?"
+
+Mika thought about it. "Read first," she said. "Then play."`,
     },
   ],
   activities: [
@@ -655,9 +782,11 @@ const episode6: Story = {
 
 "bamboo1."
 
-She had chosen it because it was easy to remember. She typed it so often — for her tablet, her message account, her photo collection, her journal — that her paws could do it without her even thinking.
+She had chosen it because it was easy to remember — the same word every animal in the Digital Bamboo Forest joked about, plus a single number, like a tiny bamboo lock with only one segment.
 
-"One key for every door," she told herself. "Isn't that simpler?"
+She typed it so often — for her tablet, her message account, her photo collection, the private journal she kept in the Privacy Garden — that her paws could do it without her even thinking. Tap, tap, tap. Open, open, open.
+
+"One key for every door," she told herself while walking past the Privacy Garden one afternoon — past its tall gate with bamboo locks far longer and stranger than hers. "Isn't that simpler?"
 
 It did make things simpler. Until it didn't.`,
     },
