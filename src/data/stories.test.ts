@@ -44,6 +44,7 @@ describe('stories registry', () => {
     expect(published.every((s) => isStoryPublished(s))).toBe(true);
     expect(published.every((s) => s.season === 1)).toBe(true);
     expect(published.some((s) => s.slug === 'billys-invisible-collection')).toBe(true);
+    expect(isStoryPublished(STORIES.find((s) => s.episodeNumber === 9)!)).toBe(false);
   });
 
   it('lists continuation episodes without the foundation story', () => {
@@ -66,6 +67,7 @@ describe('stories registry', () => {
   it('returns the next scheduled Season 2 story', () => {
     const next = getNextScheduledStory();
     expect(next?.slug).toBe('the-echo-chamber');
+    expect(next?.episodeNumber).toBe(9);
     expect(isStoryPublished(next!)).toBe(false);
   });
 

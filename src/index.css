@@ -10429,15 +10429,27 @@ header.header .nav-actions button.header-icon-btn {
   }
 
   .story-cover-art__img {
-    @apply absolute inset-0 h-full w-full max-h-none max-w-none object-contain;
+    @apply absolute inset-0 h-full w-full object-contain object-center;
+  }
+
+  .story-cover-art--thumb .story-cover-art__img {
+    @apply object-cover;
   }
 
   .story-cover-art--hero {
-    @apply aspect-[4/5] w-28 shrink-0 rounded-2xl border border-emerald-200/80 shadow-sm sm:w-32 dark:border-emerald-800/60;
+    @apply aspect-[4/5] h-36 w-28 shrink-0 rounded-2xl border border-emerald-200/80 shadow-sm sm:h-40 sm:w-32 dark:border-emerald-800/60;
   }
 
   .story-cover-art--card {
-    @apply aspect-[4/5] w-full border-b border-gray-100 dark:border-gray-700;
+    @apply h-40 w-full border-b border-gray-100 sm:h-44 dark:border-gray-700;
+  }
+
+  .story-cover-art--banner {
+    @apply mx-auto aspect-[4/5] w-full max-w-[13.75rem] shrink-0 border-b border-gray-100 sm:mx-0 sm:w-44 sm:max-w-none md:w-52 sm:border-b-0 sm:border-r dark:border-gray-700;
+  }
+
+  .story-cover-art--banner .story-cover-art__img {
+    @apply object-cover;
   }
 
   .story-cover-art--thumb {

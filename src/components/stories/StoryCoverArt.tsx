@@ -6,8 +6,8 @@ const PANDAGARDE_LOGO = '/LogoPandagarde.png';
 
 interface StoryCoverArtProps {
   story: Story;
-  /** hero = list featured block; card = grid tile; inline = compact row (e.g. homepage) */
-  variant: 'hero' | 'card' | 'inline';
+  /** hero = list featured block; card = grid tile; banner = reader header (shorter); inline = compact row */
+  variant: 'hero' | 'card' | 'banner' | 'inline';
 }
 
 function coverPosition(story: Story, variant: StoryCoverArtProps['variant']): string {
@@ -31,7 +31,7 @@ function CoverImage({
       alt=""
       width={512}
       height={640}
-      className={`story-cover-art__img${hoverZoom ? ' transition-transform duration-300 group-hover:scale-105' : ''}`}
+      className={`story-cover-art__img${hoverZoom ? ' transition-transform duration-300 group-hover:scale-[1.02]' : ''}`}
       style={{ objectPosition: position }}
       aria-hidden
       loading="lazy"
@@ -104,14 +104,17 @@ export function StoryCoverArt({ story, variant }: StoryCoverArtProps) {
     return <CoverFallback story={story} sizeClass="story-cover-art--hero" />;
   }
 
+  const cardSizeClass =
+    variant === 'banner' ? 'story-cover-art--banner' : 'story-cover-art--card';
+
   if (coverUrl && !failed) {
     return (
-      <div className="story-cover-art story-cover-art--card">
+      <div className={`story-cover-art ${cardSizeClass}`}>
         <CoverImage
           coverUrl={coverUrl}
           position={position}
           onError={() => setFailed(true)}
-          hoverZoom
+          hoverZoom={variant === 'card'}
         />
         <div
           className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-gray-900/35 via-transparent to-transparent dark:from-gray-950/45"
@@ -121,5 +124,5 @@ export function StoryCoverArt({ story, variant }: StoryCoverArtProps) {
     );
   }
 
-  return <CoverFallback story={story} sizeClass="story-cover-art--card" />;
+  return <CoverFallback story={story} sizeClass={cardSizeClass} />;
 }

@@ -104,6 +104,7 @@ export interface Story {
 // Episodes 1–8. Bible ref: docs/STORYLINE_BIBLE.md §6.1
 // Led primarily by Po and Tao. All five Forest Laws introduced.
 // Path of Wisdom is the primary pillar; others seeded for Season 2.
+// Season 1 (Episodes 1–8) published. Season 2 uses scheduledAt.
 
 const episode1: Story = {
   id: 'story-001',
@@ -346,6 +347,15 @@ Miki nodded. "At the bridge first."`,
       ageGroups: ['early', 'middle', 'older'],
       description: 'Scenario cards where students discuss how the subject of a shared photo might feel.',
     },
+    {
+      id: 'a2-3',
+      title: 'Cross the Bridge First',
+      type: 'role-play',
+      ageGroups: ['early', 'middle'],
+      description:
+        'Students act out asking permission before sharing a photo or story about someone else. One plays the sharer, one the subject — practice stopping at the Bridge of Consent before posting.',
+      materials: ['Bridge of Consent sign', 'Yes / Not yet / No cards', 'Sample photo cards'],
+    },
   ],
 };
 
@@ -479,6 +489,15 @@ Po watched the fewer lights blink on the screen and said nothing for a moment �
       type: 'discussion',
       ageGroups: ['middle', 'older'],
       description: 'Students list every app or device they used yesterday and discuss what information each one might have collected. What surprised them?',
+    },
+    {
+      id: 'a3-3',
+      title: 'Opt-In Map Check-In',
+      type: 'game',
+      ageGroups: ['early', 'middle'],
+      description:
+        'Revisit the classroom Permission Map after one week. Who changed their mind? Practice turning a dot off without guilt — matching Billy\'s switch in the story.',
+      materials: ['Permission Map from a3-1', 'Opt-out cards'],
     },
   ],
 };
@@ -614,6 +633,14 @@ Mika thought about it. "Read first," she said. "Then play."`,
       type: 'worksheet',
       ageGroups: ['middle', 'older'],
       description: 'Students apply the Three Questions framework to real-world app scenarios.',
+    },
+    {
+      id: 'a4-3',
+      title: 'Close the Doors Audit',
+      type: 'discussion',
+      ageGroups: ['middle', 'older'],
+      description:
+        'Walk through one real app settings screen together (or a printed mock). For each permission: keep, deny, or ask an adult — using Mika\'s audit from the story.',
     },
   ],
 };
@@ -786,14 +813,24 @@ She had chosen it because it was easy to remember — the same word every animal
 
 She typed it so often — for her tablet, her message account, her photo collection, the private journal she kept in the Privacy Garden — that her paws could do it without her even thinking. Tap, tap, tap. Open, open, open.
 
-"One key for every door," she told herself while walking past the Privacy Garden one afternoon — past its tall gate with bamboo locks far longer and stranger than hers. "Isn't that simpler?"
+"One key for every door," she told herself while walking past the Privacy Garden one afternoon. The real gate stood tall beside the path, its bamboo lock made of many interlocking pieces — each one different, none of them obvious.
+
+Mika the Owl had mentioned it once at the Campfire: strong locks are long and strange. Hazel had nodded and gone back to "bamboo1" the next morning because changing felt like work.
+
+Po waved from the path. "How's your garden gate?"
+
+"Fine," Hazel said, showing him how fast she could type it in.
+
+Po didn't lecture. He just looked at the tall lock on the Privacy Garden gate, then at Hazel's tablet, and said, "Fast isn't the same as strong."
+
+Hazel laughed. "Maybe for you."
 
 It did make things simpler. Until it didn't.`,
     },
     {
       id: 'c6-2',
       title: 'The Open Gate',
-      content: `One evening, Hazel opened her private journal to write about her day — and stopped.
+      content: `One evening, Hazel opened her private journal in the Privacy Garden to write about her day — and stopped.
 
 Something was different. A few of her entries had been moved. A photo she hadn't shared was now gone.
 
@@ -803,9 +840,13 @@ And in her photo collection, a strange comment had been left by an account she d
 
 A Smoke Fox.
 
-Hazel sat very still. She felt cold all the way through.
+Hazel sat very still on the garden step. She felt cold all the way through.
 
-"bamboo1," she said softly to herself. "I didn't think anyone would guess."`,
+She tried changing the password quickly — but "bamboo2" was the first thing her mind offered, and her paws hesitated on every other idea because she had never practiced anything harder.
+
+"bamboo1," she said softly to herself. "I didn't think anyone would guess."
+
+The garden gate behind her — the one she walked through every day — suddenly felt like it had been open to the whole forest without her knowing.`,
       lessonHighlight: 'Short passwords and common words are the unlocked gates of the Digital Forest.',
     },
     {
@@ -823,7 +864,13 @@ He crouched down. "A good password is the same. Long enough that it would take f
 
 "You build a picture in your mind," Tao said. He showed her how to use three random words — a bamboo stalk, a firefly, a rainstorm — turned into something only she could picture. "Or you ask your family to help you find a safe way to keep track."
 
-Mika added: "The Archive never forgets. Neither does a password manager — a safe place where only you hold the key to all the keys."`,
+Mika added: "The Archive never forgets. Neither does a password manager — a safe place where only you hold the key to all the keys."
+
+Hazel looked at the garden gate again. "So my old key was one segment," she said. "And a real lock is many."
+
+"Many," Tao said. "And yours alone."`,
+      lessonHighlight:
+        'A bamboo lock with many different pieces is harder to guess than one short word repeated everywhere.',
     },
     {
       id: 'c6-4',
@@ -896,7 +943,11 @@ const episode7: Story = {
       title: 'A Small, Sharp Thought',
       content: `Miki the Monkey was having a bad day.
 
-He had tripped over a root. He had dropped his lunch. He had missed the thing he'd been looking forward to all week. And now, opening his tablet at the edge of the Crystal Stream, he saw a photo of Cedar the fox's bamboo sculpture — the one everyone had been praising for days.
+He had tripped over a root on the way to the Crystal Stream. He had dropped his lunch in the mud. He had missed the thing he'd been looking forward to all week — a game at the Harmony Campfire that started without him.
+
+By afternoon he sat at the edge of the Stream with his tablet, tired and scratchy inside, watching the water carry messages past faster than he could read them.
+
+A photo of Cedar the fox's bamboo sculpture appeared — the one everyone had been praising for days. Comments underneath called it the best thing in the forest.
 
 Miki looked at it. Then he typed something.
 
@@ -1290,9 +1341,11 @@ const episode10: Story = {
     {
       id: 'c10-1',
       title: 'The Other Fiona',
-      content: `Fiona the Fox discovered it by accident.
+      content: `Fiona the Fox loved the Open Clearing — the wide, sunny place where forest animals met, shared news, and posted little updates on their tablets. She kept her profile bright and friendly. Her picture was easy to recognise. Her name was always spelled the same way.
 
-She was walking through the Open Clearing when a young deer she barely knew waved at her.
+She thought of it as the front step of her digital home.
+
+She was walking through the Clearing when a young deer she barely knew waved at her.
 
 "Thanks for the advice earlier!" the deer called. "I did what you said — I shared my route home with you so you could check in on me."
 
@@ -1302,11 +1355,11 @@ Fiona stopped. "I'm sorry?"
 
 Fiona pulled out her tablet. There was no outgoing message. Her account showed nothing sent.
 
-But the deer's tablet showed a conversation — full and detailed and friendly — with an account that had Fiona's name and her profile picture, slightly different in a way that was easy to miss.
+But the deer's tablet showed a conversation — full and detailed and friendly — with an account that had Fiona's name and her profile picture, slightly different in a way that was easy to miss if you were in a hurry.
 
 Fiona read the conversation. The account had asked for the deer's schedule, her address, who walked home with her.
 
-The deer had answered all of it, cheerfully, because she thought it was Fiona.`,
+The deer had answered all of it, cheerfully, because she thought it was Fiona standing on the other side of the screen.`,
     },
     {
       id: 'c10-2',
@@ -2030,28 +2083,34 @@ const episode16: Story = {
     {
       id: 'c16-1',
       title: 'The Wonderful New Service',
-      content: `The Clearwater Service arrived in the forest on a warm morning and offered something no animal had been able to resist: free passage across any path in the forest, instant translation between any two animals, a memory system that would remember everything you'd ever learned so you never forgot anything again.
+      content: `The Clearwater Service arrived in the forest on a warm morning at the Bridge of Consent — which was usually where animals paused before crossing into something new.
 
-The price: accept the terms of the Forest Agreement.
+A cheerful banner promised three gifts: free passage across any path in the Digital Bamboo Forest, instant translation between any two animals, and a memory system that would remember everything you had ever learned so you would never forget again.
 
-The Agreement was eleven pages long and written in very small writing.
+The price was written in very small letters beneath the gifts: accept the Forest Agreement.
+
+The Agreement was eleven pages long.
+
+Miki the Owl read the first page and frowned. Billy tapped "Accept All" because the line behind him was long. Ruby asked a friend, "Did you read it?" The friend said, "Not really — did you?"
 
 Most animals tapped "Accept All" in under five seconds.
 
-Po read the first two paragraphs and felt a small uncomfortable feeling. Then another animal bumped into him waiting to accept, and he tapped Accept and moved on.
+Po read the first two paragraphs and felt a small uncomfortable feeling — the kind that sometimes arrived before the Quick Click Wind blew it away. Then another animal bumped into him waiting to accept, and he tapped Accept and moved on.
 
-By the end of the week, the entire forest had agreed to the Clearwater terms. And by the end of the following week, some strange things had begun to happen.`,
+By the end of the week, the entire forest had agreed to the Clearwater terms. By the end of the following week, some strange things had begun to happen.`,
     },
     {
       id: 'c16-2',
       title: 'What the Agreement Said',
-      content: `The strange things: Clearwater began appearing in conversations — not intrusively, but noticeably. Animals mentioned a bamboo shortage to a friend and later saw Clearwater's suggestions about bamboo suppliers. Animals described a health worry to their family and found related resources surfaced without asking.
+      content: `The strange things started small. Clearwater began appearing in conversations — not loudly, but noticeably. Animals mentioned a bamboo shortage to a friend and later saw Clearwater's suggestions about bamboo suppliers. Animals described a health worry to their family and found related resources surfaced without asking.
 
 "It's convenient," some animals said.
 
 "It knows things it shouldn't know," others said.
 
-Po found Tao reading the Clearwater Agreement very slowly, lantern close to the page.
+Miki came to the Great Archive with a list of questions she could not answer from the main screen. Billy discovered his workshop notes had been used to improve a feature he had never heard of. Ruby found her Lantern Path contacts mixed with suggestions from animals she had never met.
+
+Po found Tao at the Bridge of Consent, reading the Clearwater Agreement very slowly, lantern close to the page.
 
 "What does it say?" Po asked.
 
@@ -2061,7 +2120,7 @@ Po was quiet.
 
 "Page seven: Clearwater may share your usage patterns with third-party partners for research and commercial purposes."
 
-"We all agreed to that."
+"We all agreed to that," Po said.
 
 "We all tapped Accept," Tao said. "That is not the same thing."`,
       lessonHighlight: 'Tapping Accept is a choice. Reading what you\'re agreeing to is a right you can always exercise first.',
@@ -2073,7 +2132,7 @@ Po was quiet.
 
 She descended slowly, deliberately, and called a meeting at the Bridge of Consent.
 
-Every animal who came received a single page — a plain-language summary of what the Clearwater Agreement actually meant: what data was collected, who it was shared with, what Clearwater could legally do with everything the forest had said through its service.
+Every animal who came received a single page — a plain-language summary of what the Clearwater Agreement actually meant: what data was collected, who it was shared with, what Clearwater could legally do with everything the forest had said through its service, and what could not be taken back once it had been shared.
 
 It took an hour to read. Several animals left partway through, uncomfortable. Others stayed and asked questions.
 
@@ -2081,9 +2140,13 @@ It took an hour to read. Several animals left partway through, uncomfortable. Ot
 
 "Partially," Sage said. "You can withdraw from the service. Some data can be requested back. Some is already in places you cannot reach." She looked around the gathering. "This is why the Bridge exists. It asks you to pause before you cross. The Clearwater Agreement moved the Bridge behind the Accept button — where almost no one looks."
 
+Po thought about the week in his den, long ago, when he had carried something alone because he did not know where to start. "Reading slowly counts as brave," he said quietly.
+
+Sage heard him. "Yes," she said. "It does."
+
 "Is that legal?" Miki asked.
 
-"In many places, yes," Sage said. "Which is part of what we should be discussing."`,
+"In many places, yes," Sage said. "Which is part of what we should be discussing — and what you can ask for before you tap Accept next time."`,
     },
     {
       id: 'c16-4',
@@ -2133,8 +2196,8 @@ Po thought of eleven pages of small writing. "It should have been one page all a
 };
 
 // ─── STORY REGISTRY ───────────────────────────────────────────────────────────
-// Season 1 — The Privacy Grove — complete (Episodes 1–8)
-// Season 2 — The Kindness Clearing — complete (Episodes 9–16)
+// Season 1 — The Privacy Grove — Episodes 1–8 published
+// Season 2 — The Kindness Clearing — Episodes 9–16 scheduled (Phase 2)
 // Season 3 — The Wisdom Mountain — Phase 3 (Episodes 17+, specced in STORYLINE_BIBLE.md)
 
 export const STORIES: Story[] = [

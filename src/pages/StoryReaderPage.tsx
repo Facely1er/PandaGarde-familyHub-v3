@@ -77,7 +77,11 @@ export function StoryReaderPage() {
   }
 
   return (
-    <PageLayout title={story.title} subtitle={story.privacyTopic} breadcrumbs>
+    <PageLayout
+      title={story.title}
+      subtitle="Interactive journey with narration, or a calm chapter reader—two paths through the same episode."
+      breadcrumbs
+    >
       <ChapterStoryExperience story={story} />
     </PageLayout>
   );

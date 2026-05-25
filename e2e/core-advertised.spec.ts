@@ -66,6 +66,12 @@ test.describe('Core features advertised (How it works + CONTENT_TRUTH)', () => {
     await expect(page.locator('.interactive-story-player, #story-player').first()).toBeVisible();
   });
 
+  test('Stories — continuation episode interactive player', async ({ page }) => {
+    await gotoAndWait(page, '/stories/miki-and-the-photo-that-flew-away');
+    await expect(page.getByText(/Interactive journey|Chapter reader/i).first()).toBeVisible();
+    await expect(page.locator('.interactive-story-player, #story-player').first()).toBeVisible();
+  });
+
   test('Safety alerts — catalog + RSS tabs', async ({ page }) => {
     await gotoAndWait(page, '/safety-alerts');
     await expect(
