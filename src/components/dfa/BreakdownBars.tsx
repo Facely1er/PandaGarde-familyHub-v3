@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import type { DfaBreakdownItem } from '../../lib/dfaScoreEngine';
 
 interface Props {
@@ -14,10 +15,15 @@ const tone = (value: number): string => {
 
 const BreakdownBars: React.FC<Props> = ({ items }) => {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900">
       <div className="mb-4">
-        <h3 className="text-lg font-bold text-slate-900">Score drivers</h3>
-        <p className="mt-1 text-sm text-slate-600">These are the factors pushing the DFA score up or down.</p>
+        <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">Score drivers</h3>
+        <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
+          These are the factors pushing the DFA risk score up or down.{' '}
+          <Link to="/scoring-methodology#dfa-methodology" className="font-semibold text-emerald-700 hover:underline dark:text-emerald-400">
+            How weights work
+          </Link>
+        </p>
       </div>
       <div className="space-y-4">
         {items.map((item) => (

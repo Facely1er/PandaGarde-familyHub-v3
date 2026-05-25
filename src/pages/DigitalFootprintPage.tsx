@@ -5,6 +5,7 @@ import DigitalFootprintVisualizer from '../components/DigitalFootprintVisualizer
 import EmptyStateWithServicePrompt from '../components/EmptyStateWithServicePrompt';
 import DfaJourneyStepper from '../components/journey/DfaJourneyStepper';
 import DfaScoreOverview from '../components/dfa/DfaScoreOverview';
+import DfaMethodologyCallout from '../components/dfa/DfaMethodologyCallout';
 import { useFamily } from '../contexts/FamilyContext';
 import { footprintAnalyzer } from '../lib/footprintAnalyzer';
 import { updateDfaJourneyPhase } from '../lib/dfaJourney';
@@ -130,6 +131,8 @@ const DigitalFootprintPage: React.FC = () => {
         </div>
 
         <DigitalFootprintEducator />
+
+        <DfaMethodologyCallout />
 
         {totalServicesCount < 5 && (
           <div className="mb-6 rounded-xl border-2 border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50 p-5 dark:border-blue-800 dark:from-blue-900/20 dark:to-indigo-900/20">

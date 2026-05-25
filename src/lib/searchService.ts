@@ -126,6 +126,21 @@ class SearchService {
         sort_order: 3,
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString()
+      },
+      {
+        id: 'scoring-methodology',
+        title: 'Scoring methodology',
+        description:
+          'Per-app Privacy Exposure Index and full Digital Footprint Analysis (DFA) methodology—Basic/Advanced weights, risk levels, and limits',
+        content_type: 'guide',
+        url: '/scoring-methodology',
+        category_id: 'privacy',
+        tags: ['scoring', 'methodology', 'exposure', 'dfa', 'digital-footprint'],
+        metadata: { age_groups: ['5-8', '9-12', '13-17'] },
+        is_active: true,
+        sort_order: 4,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
       }
     ];
   }

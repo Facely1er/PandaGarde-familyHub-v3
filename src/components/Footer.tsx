@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import {
   BookOpen,
   Shield,
+  BarChart3,
   LayoutDashboard,
   Mail,
   HelpCircle,
@@ -33,6 +34,7 @@ const Footer: React.FC = () => {
     { icon: Compass, href: '/how-it-works', label: 'How It Works' },
     { icon: PlayCircle, href: '/get-started', label: 'Get Started' },
     { icon: Fingerprint, href: '/digital-footprint', label: 'Digital Footprint Analysis' },
+    { icon: BarChart3, href: '/scoring-methodology', label: 'Scoring methodology' },
     { icon: BookOpen, href: '/resources', label: 'Resources' },
     { icon: Library, href: '/stories', label: 'Stories' },
     { icon: LayoutDashboard, href: '/family-hub', label: 'Family Hub' },
@@ -66,7 +68,7 @@ const Footer: React.FC = () => {
           <div className="footer-brand">
             <Link
               to="/"
-              className="footer-logo"
+              className="logo footer-logo"
               aria-label="PandaGarde — Calmer privacy. Go to homepage"
             >
               <div className="logo-icon">

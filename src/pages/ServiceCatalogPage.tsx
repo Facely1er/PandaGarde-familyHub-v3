@@ -4,7 +4,7 @@ import ServiceCatalog from '../components/ServiceCatalog';
 import EmailCaptureInline from '../components/EmailCaptureInline';
 import { ProgressBar } from '../components/ui/ProgressBar';
 import DfaJourneyStepper from '../components/journey/DfaJourneyStepper';
-import { Bell, BarChart3, ArrowRight, Unlock, CheckCircle, Sparkles, Target, Plus, Heart, School, AlertTriangle, Bot, Signal } from 'lucide-react';
+import { Bell, BarChart3, ArrowRight, Unlock, CheckCircle, Sparkles, Target, Plus, Heart, School, AlertTriangle, Bot, Signal, Info } from 'lucide-react';
 import { useFamily } from '../contexts/FamilyContext';
 import { childServiceCatalog, getHealthServices, getSchoolAssignedServices, getServicesWithLawEnforcementConcerns } from '../data/childServiceCatalog';
 import { getServiceLogoUrlWithBrandColor, hasServiceLogo } from '../utils/serviceLogos';
@@ -69,6 +69,18 @@ const ServiceCatalogPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50 py-8 dark:bg-slate-900">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-6 rounded-xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-800/60">
+          <p className="flex items-start gap-2 text-sm text-slate-700 dark:text-slate-300">
+            <Info className="mt-0.5 h-4 w-4 shrink-0 text-green-700 dark:text-green-400" aria-hidden />
+            <span>
+              Privacy Exposure Index numbers are educational guides from the apps you list—not live monitoring.{' '}
+              <Link to="/scoring-methodology" className="font-semibold text-green-700 hover:underline dark:text-green-400">
+                How scoring works
+              </Link>
+            </span>
+          </p>
+        </div>
+
         <div className="mb-8">
           <DfaJourneyStepper
             currentKey="profile"

@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Download, Gauge, Layers3 } from 'lucide-react';
 import type { FootprintAnalysis } from '../../lib/footprintAnalyzer';
 import { buildDfaScore, type DfaScoreTier } from '../../lib/dfaScoreEngine';
@@ -39,7 +40,10 @@ const DfaScoreOverview: React.FC<Props> = ({ analysis }) => {
           </div>
           <h2 className="mt-3 text-2xl font-bold text-slate-900">Launch-grade scoring, not just a footprint list</h2>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">
-            Use the Basic score for a fast household reading. Switch to Advanced to include data-sharing networks, broker reach, and AI-specific sensitivity.
+            Use the Basic score for a fast household reading. Switch to Advanced to include data-sharing networks, broker reach, and AI-specific sensitivity.{' '}
+            <Link to="/scoring-methodology#dfa-methodology" className="font-semibold text-emerald-700 hover:underline dark:text-emerald-400">
+              Read the DFA methodology
+            </Link>
           </p>
         </div>
 

@@ -73,6 +73,7 @@ const ServiceCatalogPage = lazy(() => import('./pages/ServiceCatalogPage'));
 const ParentalConsentPage = lazy(() => import('./pages/ParentalConsentPage'));
 const ParentalConsentPendingPage = lazy(() => import('./pages/ParentalConsentPendingPage'));
 const DigitalFootprintPage = lazy(() => import('./pages/DigitalFootprintPage'));
+const ScoringMethodologyPage = lazy(() => import('./pages/ScoringMethodologyPage'));
 const PrivacyAssessmentPage = lazy(() => import('./pages/PrivacyAssessmentPage'));
 const AssessmentHistoryPage = lazy(() => import('./pages/AssessmentHistoryPage'));
 const PrivacyGoalsPage = lazy(() => import('./pages/PrivacyGoalsPage'));
@@ -246,6 +247,9 @@ function App() {
             <Route path="/child-safety-alerts" element={<Navigate to="/safety-alerts" replace />} />
             <Route path="/digital-footprint" element={<DigitalFootprintPage />} />
             <Route path="/footprint" element={<DigitalFootprintPage />} />
+            <Route path="/scoring-methodology" element={<ScoringMethodologyPage />} />
+            <Route path="/dfa-methodology" element={<Navigate to="/scoring-methodology#dfa-methodology" replace />} />
+            <Route path="/methodology" element={<Navigate to="/scoring-methodology" replace />} />
             <Route path="/privacy-assessment" element={<PrivacyAssessmentPage />} />
             <Route path="/quick-assessment" element={<QuickAssessmentPage />} />
             <Route path="/assessment" element={<PrivacyAssessmentPage />} />

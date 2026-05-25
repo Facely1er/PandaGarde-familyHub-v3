@@ -736,6 +736,11 @@ const ServiceCatalog: React.FC<ServiceCatalogProps> = ({
                           <p>
                             <strong>{exposureLevel.level}</strong> - {exposureLevel.description}
                           </p>
+                          <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                            <Link to="/scoring-methodology" className="font-semibold text-green-700 hover:underline dark:text-green-400">
+                              How this score is calculated
+                            </Link>
+                          </p>
                         </div>
                       );
                     }
