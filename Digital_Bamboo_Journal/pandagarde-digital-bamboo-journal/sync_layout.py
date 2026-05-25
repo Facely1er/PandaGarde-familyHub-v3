@@ -5,7 +5,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-ASSET_VERSION = "20260601"
+ASSET_VERSION = "20260602"
 
 NAV = [
     ("index.html", "Home"),

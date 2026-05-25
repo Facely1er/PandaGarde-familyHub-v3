@@ -514,6 +514,16 @@ h3 {
   color: #1b5e20;
 }
 
+.btn-sm {
+  padding: 8px 14px;
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
+.btn-sm.primary {
+  box-shadow: 0 6px 16px rgba(27, 94, 32, 0.16);
+}
+
 .section {
   padding: var(--space-section) 0;
 }
@@ -741,9 +751,17 @@ h3 {
 
 .page-title,
 .page-header {
-  padding: clamp(2rem, 4.5vw, 2.75rem) 0 clamp(1.1rem, 2.5vw, 1.4rem);
+  padding: clamp(1.5rem, 3.5vw, 2.25rem) 0 clamp(0.85rem, 2vw, 1.1rem);
   background: rgba(255, 255, 255, 0.38);
   border-bottom: 1px solid rgba(207, 229, 207, 0.9);
+  text-align: center;
+}
+
+.page-title .wrap,
+.page-header .wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .page-title + .section,
@@ -753,17 +771,28 @@ h3 {
 
 .page-title h1,
 .page-header h1 {
-  font-size: clamp(1.75rem, 3.2vw, 2.35rem);
-  margin: 10px 0 12px;
+  font-size: clamp(1.65rem, 3vw, 2.1rem);
+  margin: 8px 0 8px;
   line-height: 1.08;
+  max-width: min(28rem, 100%);
 }
 
 .page-title .lead,
 .page-header .lead {
-  font-size: 1.02rem;
-  line-height: 1.55;
-  max-width: 58ch;
-  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  max-width: 42ch;
+  margin: 0 auto;
+}
+
+.page-title .page-note,
+.page-header .page-note {
+  margin: 8px auto 0;
+  max-width: 38ch;
+  font-size: var(--text-caption);
+  line-height: 1.45;
+  color: var(--muted);
+  font-weight: 650;
 }
 
 .page-title .searchbox,
@@ -774,7 +803,94 @@ h3 {
 
 .page-title .btns,
 .page-header .btns {
-  margin-top: 1.25rem;
+  margin-top: 0.75rem;
+  gap: 8px;
+  justify-content: center;
+}
+
+.section-intro {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto var(--space-block);
+}
+
+.section-intro h2 {
+  font-size: 1.25rem;
+  margin: 0 0 8px;
+}
+
+.section-intro p {
+  margin: 0;
+  font-size: var(--text-small);
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.camp-outline-wrap {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.camp-outline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.camp-week {
+  display: grid;
+  grid-template-columns: 4.25rem 1fr;
+  gap: 12px 14px;
+  align-items: start;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(27, 94, 32, 0.12);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-sm);
+}
+
+.camp-week-num {
+  display: block;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--primary);
+  background: var(--brand-soft);
+  border-radius: 10px;
+  padding: 8px 4px;
+  text-align: center;
+  line-height: 1.25;
+}
+
+.camp-week-theme {
+  margin: 0 0 4px;
+  font-size: 1rem;
+  line-height: 1.2;
+  color: var(--primary-dark);
+  letter-spacing: -0.02em;
+}
+
+.camp-week-desc {
+  margin: 0 0 6px;
+  font-size: var(--text-small);
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.camp-week-mission {
+  margin: 0;
+  font-size: var(--text-small);
+  line-height: 1.4;
+  color: #4a6b5f;
+}
+
+.camp-week-mission strong {
+  color: var(--primary);
+  font-weight: 800;
 }
 
 .article-body {
@@ -1079,6 +1195,17 @@ h3 {
   .section-head {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .camp-week {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .camp-week-num {
+    justify-self: start;
+    width: fit-content;
+    padding: 6px 10px;
   }
 }
 
