@@ -4,6 +4,7 @@ import { newsletterService } from '../../lib/database';
 import { submitContactNetlifyForm } from '../../lib/netlifyForms';
 import { useToast } from '../../hooks/useToast';
 import { logger } from '../../lib/logger';
+import { Button } from '../ui/Button';
 
 interface FormData {
   name: string;
@@ -25,6 +26,16 @@ interface FormErrors {
   inquiryType?: string;
 }
 
+const fieldClass = (hasError: boolean) =>
+  `w-full rounded-lg border px-4 py-3 text-base transition-colors bg-white text-gray-900 placeholder:text-gray-400 dark:bg-gray-800 dark:text-gray-100 dark:placeholder:text-gray-500 ${
+    hasError
+      ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20'
+      : 'border-gray-200 dark:border-gray-600 focus:border-green-600 focus:ring-green-600/20 dark:focus:border-green-500'
+  } focus:outline-none focus:ring-2`;
+
+const labelClass =
+  'mb-2 flex items-center gap-2 text-sm font-semibold text-gray-700 dark:text-gray-200';
+
 const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     name: '',
@@ -34,7 +45,7 @@ const ContactForm: React.FC = () => {
     message: '',
     inquiryType: '',
     ageGroup: '',
-    newsletter: false
+    newsletter: false,
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
@@ -44,12 +55,11 @@ const ContactForm: React.FC = () => {
   const [botField, setBotField] = useState('');
   const { showSuccess, showError } = useToast();
 
-  // Load saved form data from localStorage
   useEffect(() => {
     const savedData = localStorage.getItem('contactFormData');
     if (savedData) {
       try {
-        const parsedData = JSON.parse(savedData);
+        const parsedData = JSON.parse(savedData) as FormData;
         setFormData(parsedData);
       } catch (error) {
         logger.error('Error loading saved form data:', error);
@@ -57,7 +67,6 @@ const ContactForm: React.FC = () => {
     }
   }, []);
 
-  // Save form data to localStorage on change
   useEffect(() => {
     localStorage.setItem('contactFormData', JSON.stringify(formData));
   }, [formData]);
@@ -101,20 +110,21 @@ const ContactForm: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value, type } = e.target;
     const checked = (e.target as HTMLInputElement).checked;
 
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: type === 'checkbox' ? checked : value,
     }));
 
-    // Clear error when user starts typing
     if (errors[name as keyof FormErrors]) {
-      setErrors(prev => ({
+      setErrors((prev) => ({
         ...prev,
-        [name]: undefined
+        [name]: undefined,
       }));
     }
   };
@@ -163,7 +173,7 @@ const ContactForm: React.FC = () => {
       setBotField('');
       localStorage.removeItem('contactFormData');
 
-      showSuccess('Message Sent!', 'Thank you for contacting us. We\'ll get back to you within 24 hours.');
+      showSuccess('Message Sent!', "Thank you for contacting us. We'll get back to you within 24 hours.");
       setIsSubmitted(true);
     } catch (error) {
       logger.error('Contact form submission error:', error);
@@ -183,7 +193,7 @@ const ContactForm: React.FC = () => {
       message: '',
       inquiryType: '',
       ageGroup: '',
-      newsletter: false
+      newsletter: false,
     });
     setErrors({});
     setIsSubmitted(false);
@@ -193,27 +203,25 @@ const ContactForm: React.FC = () => {
 
   if (isSubmitted) {
     return (
-      <div className="contact-form-success">
-        <div className="success-content">
-          <CheckCircle size={64} className="success-icon" />
-          <h2>Message Sent Successfully!</h2>
-          <p>Thank you for contacting us. We'll get back to you within 24 hours.</p>
-          <div className="success-actions">
-            <button onClick={resetForm} className="btn-primary">
-              Send Another Message
-            </button>
-          </div>
-        </div>
+      <div className="mx-auto max-w-xl rounded-2xl border border-gray-200 bg-white p-8 text-center shadow-md dark:border-gray-700 dark:bg-gray-800 sm:p-12">
+        <CheckCircle className="mx-auto mb-6 h-16 w-16 text-green-600 dark:text-green-400" aria-hidden />
+        <h2 className="mb-3 text-2xl font-bold text-gray-900 dark:text-gray-100">Message sent successfully</h2>
+        <p className="mb-8 text-gray-600 dark:text-gray-300">
+          Thank you for contacting us. We&apos;ll get back to you within 24 hours.
+        </p>
+        <Button type="button" variant="primary" onClick={resetForm}>
+          Send another message
+        </Button>
       </div>
     );
   }
 
   return (
-    <div className="contact-form">
+    <div className="mx-auto max-w-3xl">
       <form
         name="contact"
         onSubmit={handleSubmit}
-        className="form"
+        className="rounded-2xl border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800 sm:p-10"
         data-netlify="true"
         data-netlify-honeypot="bot-field"
       >
@@ -232,10 +240,11 @@ const ContactForm: React.FC = () => {
             />
           </label>
         </p>
-        <div className="form-row">
-          <div className="form-group">
-            <label htmlFor="name" className="form-label">
-              <User size={16} />
+
+        <div className="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div>
+            <label htmlFor="name" className={labelClass}>
+              <User size={16} aria-hidden />
               Full Name *
             </label>
             <input
@@ -244,21 +253,22 @@ const ContactForm: React.FC = () => {
               name="name"
               value={formData.name}
               onChange={handleInputChange}
-              className={`form-input ${errors.name ? 'error' : ''}`}
+              className={fieldClass(!!errors.name)}
               placeholder="Enter your full name"
               aria-describedby={errors.name ? 'name-error' : undefined}
+              autoComplete="name"
             />
             {errors.name && (
-              <div id="name-error" className="error-message" role="alert" aria-live="polite">
-                <AlertCircle size={14} aria-hidden="true" />
+              <p id="name-error" className="mt-2 flex items-center gap-1 text-sm text-red-600 dark:text-red-400" role="alert">
+                <AlertCircle size={14} aria-hidden />
                 {errors.name}
-              </div>
+              </p>
             )}
           </div>
 
-          <div className="form-group">
-            <label htmlFor="email" className="form-label">
-              <Mail size={16} />
+          <div>
+            <label htmlFor="email" className={labelClass}>
+              <Mail size={16} aria-hidden />
               Email Address *
             </label>
             <input
@@ -267,23 +277,24 @@ const ContactForm: React.FC = () => {
               name="email"
               value={formData.email}
               onChange={handleInputChange}
-              className={`form-input ${errors.email ? 'error' : ''}`}
+              className={fieldClass(!!errors.email)}
               placeholder="Enter your email address"
               aria-describedby={errors.email ? 'email-error' : undefined}
+              autoComplete="email"
             />
             {errors.email && (
-              <div id="email-error" className="error-message" role="alert" aria-live="polite">
-                <AlertCircle size={14} aria-hidden="true" />
+              <p id="email-error" className="mt-2 flex items-center gap-1 text-sm text-red-600 dark:text-red-400" role="alert">
+                <AlertCircle size={14} aria-hidden />
                 {errors.email}
-              </div>
+              </p>
             )}
           </div>
         </div>
 
-        <div className="form-row">
-          <div className="form-group">
-            <label htmlFor="phone" className="form-label">
-              <Phone size={16} />
+        <div className="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div>
+            <label htmlFor="phone" className={labelClass}>
+              <Phone size={16} aria-hidden />
               Phone Number
             </label>
             <input
@@ -292,21 +303,22 @@ const ContactForm: React.FC = () => {
               name="phone"
               value={formData.phone}
               onChange={handleInputChange}
-              className={`form-input ${errors.phone ? 'error' : ''}`}
-              placeholder="Enter your phone number (optional)"
+              className={fieldClass(!!errors.phone)}
+              placeholder="Optional"
               aria-describedby={errors.phone ? 'phone-error' : undefined}
+              autoComplete="tel"
             />
             {errors.phone && (
-              <div id="phone-error" className="error-message" role="alert" aria-live="polite">
-                <AlertCircle size={14} aria-hidden="true" />
+              <p id="phone-error" className="mt-2 flex items-center gap-1 text-sm text-red-600 dark:text-red-400" role="alert">
+                <AlertCircle size={14} aria-hidden />
                 {errors.phone}
-              </div>
+              </p>
             )}
           </div>
 
-          <div className="form-group">
-            <label htmlFor="inquiryType" className="form-label">
-              <MessageSquare size={16} />
+          <div>
+            <label htmlFor="inquiryType" className={labelClass}>
+              <MessageSquare size={16} aria-hidden />
               Inquiry Type *
             </label>
             <select
@@ -314,7 +326,7 @@ const ContactForm: React.FC = () => {
               name="inquiryType"
               value={formData.inquiryType}
               onChange={handleInputChange}
-              className={`form-select ${errors.inquiryType ? 'error' : ''}`}
+              className={fieldClass(!!errors.inquiryType)}
               aria-describedby={errors.inquiryType ? 'inquiryType-error' : undefined}
             >
               <option value="">Select inquiry type</option>
@@ -326,17 +338,17 @@ const ContactForm: React.FC = () => {
               <option value="other">Other</option>
             </select>
             {errors.inquiryType && (
-              <div id="inquiryType-error" className="error-message" role="alert" aria-live="polite">
-                <AlertCircle size={14} aria-hidden="true" />
+              <p id="inquiryType-error" className="mt-2 flex items-center gap-1 text-sm text-red-600 dark:text-red-400" role="alert">
+                <AlertCircle size={14} aria-hidden />
                 {errors.inquiryType}
-              </div>
+              </p>
             )}
           </div>
         </div>
 
-        <div className="form-group">
-          <label htmlFor="subject" className="form-label">
-            <MessageSquare size={16} />
+        <div className="mb-6">
+          <label htmlFor="subject" className={labelClass}>
+            <MessageSquare size={16} aria-hidden />
             Subject *
           </label>
           <input
@@ -345,29 +357,29 @@ const ContactForm: React.FC = () => {
             name="subject"
             value={formData.subject}
             onChange={handleInputChange}
-            className={`form-input ${errors.subject ? 'error' : ''}`}
+            className={fieldClass(!!errors.subject)}
             placeholder="Brief description of your inquiry"
             aria-describedby={errors.subject ? 'subject-error' : undefined}
           />
           {errors.subject && (
-            <div id="subject-error" className="error-message" role="alert" aria-live="polite">
-              <AlertCircle size={14} aria-hidden="true" />
+            <p id="subject-error" className="mt-2 flex items-center gap-1 text-sm text-red-600 dark:text-red-400" role="alert">
+              <AlertCircle size={14} aria-hidden />
               {errors.subject}
-            </div>
+            </p>
           )}
         </div>
 
-        <div className="form-group">
-          <label htmlFor="ageGroup" className="form-label">
-            <User size={16} />
-            Age Group (Optional)
+        <div className="mb-6">
+          <label htmlFor="ageGroup" className={labelClass}>
+            <User size={16} aria-hidden />
+            Age Group (optional)
           </label>
           <select
             id="ageGroup"
             name="ageGroup"
             value={formData.ageGroup}
             onChange={handleInputChange}
-            className="form-select"
+            className={fieldClass(false)}
           >
             <option value="">Select age group</option>
             <option value="5-8">Ages 5-8</option>
@@ -379,9 +391,9 @@ const ContactForm: React.FC = () => {
           </select>
         </div>
 
-        <div className="form-group">
-          <label htmlFor="message" className="form-label">
-            <MessageSquare size={16} />
+        <div className="mb-6">
+          <label htmlFor="message" className={labelClass}>
+            <MessageSquare size={16} aria-hidden />
             Message *
           </label>
           <textarea
@@ -389,294 +401,59 @@ const ContactForm: React.FC = () => {
             name="message"
             value={formData.message}
             onChange={handleInputChange}
-            className={`form-textarea ${errors.message ? 'error' : ''}`}
+            className={`${fieldClass(!!errors.message)} min-h-[140px] resize-y`}
             placeholder="Please provide details about your inquiry..."
             rows={6}
             aria-describedby={errors.message ? 'message-error' : undefined}
           />
           {errors.message && (
-            <div id="message-error" className="error-message" role="alert" aria-live="polite">
-              <AlertCircle size={14} aria-hidden="true" />
+            <p id="message-error" className="mt-2 flex items-center gap-1 text-sm text-red-600 dark:text-red-400" role="alert">
+              <AlertCircle size={14} aria-hidden />
               {errors.message}
-            </div>
+            </p>
           )}
         </div>
 
-        <div className="form-group checkbox-group">
-          <label className="checkbox-label">
+        <div className="mb-8">
+          <label className="flex cursor-pointer items-start gap-3 text-sm text-gray-600 dark:text-gray-300">
             <input
               type="checkbox"
               name="newsletter"
               checked={formData.newsletter}
               onChange={handleInputChange}
-              className="checkbox-input"
+              className="mt-1 h-4 w-4 shrink-0 rounded border-gray-300 text-green-700 focus:ring-green-600 dark:border-gray-600 dark:bg-gray-800"
             />
-            <span className="checkbox-text">
-              Subscribe to our newsletter for privacy education tips and updates
-            </span>
+            <span>Subscribe to our newsletter for privacy education tips and updates</span>
           </label>
         </div>
 
         {submitError && (
-          <div className="submit-error" role="alert" aria-live="assertive">
-            <AlertCircle size={16} aria-hidden="true" />
+          <div
+            className="mb-6 flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-900 dark:bg-red-950/50 dark:text-red-300"
+            role="alert"
+          >
+            <AlertCircle size={16} aria-hidden />
             {submitError}
           </div>
         )}
 
-        <div className="form-actions">
-          <button
+        <div className="text-center">
+          <Button
             type="submit"
+            variant="primary"
+            size="lg"
+            isLoading={isSubmitting}
+            loadingText="Sending message"
+            leftIcon={!isSubmitting ? <Send size={18} aria-hidden /> : undefined}
             disabled={isSubmitting}
-            className="btn-primary submit-btn"
-            aria-busy={isSubmitting}
-            aria-disabled={isSubmitting}
           >
-            {isSubmitting ? (
-              <>
-                <div className="spinner" aria-hidden="true" />
-                <span>Sending...</span>
-                <span className="sr-only">Please wait while your message is being sent</span>
-              </>
-            ) : (
-              <>
-                <Send size={16} aria-hidden="true" />
-                Send Message
-              </>
-            )}
-          </button>
+            Send Message
+          </Button>
+          <p className="mt-4 text-xs text-gray-500 dark:text-gray-400">
+            Submissions are delivered securely via Netlify Forms.
+          </p>
         </div>
       </form>
-
-      <style jsx>{`
-        .contact-form {
-          max-width: 800px;
-          margin: 0 auto;
-          padding: 20px;
-        }
-
-        .form {
-          background: white;
-          padding: 40px;
-          border-radius: 12px;
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-row {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 20px;
-          margin-bottom: 20px;
-        }
-
-        .form-group {
-          margin-bottom: 24px;
-        }
-
-        .form-label {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          font-weight: 600;
-          color: #2C3E50;
-          margin-bottom: 8px;
-          font-size: 14px;
-        }
-
-        .form-input,
-        .form-select,
-        .form-textarea {
-          width: 100%;
-          padding: 12px 16px;
-          border: 2px solid #e1e5e9;
-          border-radius: 8px;
-          font-size: 16px;
-          transition: all 0.2s;
-          background: white;
-        }
-
-        .form-input:focus,
-        .form-select:focus,
-        .form-textarea:focus {
-          outline: none;
-          border-color: #4CAF50;
-          box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
-        }
-
-        .form-input.error,
-        .form-select.error,
-        .form-textarea.error {
-          border-color: #e74c3c;
-        }
-
-        .form-textarea {
-          resize: vertical;
-          min-height: 120px;
-        }
-
-        .checkbox-group {
-          margin-bottom: 32px;
-        }
-
-        .checkbox-label {
-          display: flex;
-          align-items: flex-start;
-          gap: 12px;
-          cursor: pointer;
-          font-size: 14px;
-          line-height: 1.5;
-        }
-
-        .checkbox-input {
-          margin: 0;
-          width: 18px;
-          height: 18px;
-          flex-shrink: 0;
-          margin-top: 2px;
-        }
-
-        .checkbox-text {
-          color: #666;
-        }
-
-        .error-message {
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          color: #e74c3c;
-          font-size: 14px;
-          margin-top: 6px;
-        }
-
-        .submit-error {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          color: #e74c3c;
-          background: #fdf2f2;
-          padding: 12px 16px;
-          border-radius: 8px;
-          margin-bottom: 20px;
-          font-size: 14px;
-        }
-
-        .form-actions {
-          text-align: center;
-        }
-
-        .submit-btn {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          background: #4CAF50;
-          color: white;
-          border: none;
-          padding: 16px 32px;
-          border-radius: 8px;
-          font-size: 16px;
-          font-weight: 600;
-          cursor: pointer;
-          transition: all 0.2s;
-          min-width: 160px;
-        }
-
-        .submit-btn:hover:not(:disabled) {
-          background: #45a049;
-          transform: translateY(-1px);
-        }
-
-        .submit-btn:disabled {
-          opacity: 0.7;
-          cursor: not-allowed;
-          transform: none;
-        }
-
-        .spinner {
-          width: 16px;
-          height: 16px;
-          border: 2px solid transparent;
-          border-top: 2px solid currentColor;
-          border-radius: 50%;
-          animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-
-        .contact-form-success {
-          max-width: 600px;
-          margin: 0 auto;
-          padding: 40px 20px;
-          text-align: center;
-        }
-
-        .success-content {
-          background: white;
-          padding: 60px 40px;
-          border-radius: 12px;
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .success-icon {
-          color: #4CAF50;
-          margin-bottom: 24px;
-        }
-
-        .success-content h2 {
-          font-size: 2rem;
-          color: #2C3E50;
-          margin-bottom: 16px;
-        }
-
-        .success-content p {
-          font-size: 1.1rem;
-          color: #666;
-          margin-bottom: 32px;
-        }
-
-        .success-actions {
-          display: flex;
-          justify-content: center;
-          gap: 16px;
-        }
-
-        .btn-primary {
-          background: #4CAF50;
-          color: white;
-          border: none;
-          padding: 12px 24px;
-          border-radius: 8px;
-          font-size: 16px;
-          font-weight: 600;
-          cursor: pointer;
-          transition: all 0.2s;
-        }
-
-        .btn-primary:hover {
-          background: #45a049;
-        }
-
-        @media (max-width: 768px) {
-          .form-row {
-            grid-template-columns: 1fr;
-            gap: 0;
-          }
-
-          .form {
-            padding: 24px;
-          }
-
-          .success-content {
-            padding: 40px 24px;
-          }
-
-          .success-actions {
-            flex-direction: column;
-          }
-        }
-      `}</style>
     </div>
   );
 };

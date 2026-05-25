@@ -1,6 +1,6 @@
 import React, { useId, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, MessageCircle, HelpCircle, Search, Clock, Users, BookOpen, Shield } from 'lucide-react';
+import { MessageCircle, HelpCircle, Search, Clock, Users, BookOpen, Shield } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 
 interface FAQItem {
@@ -76,30 +76,20 @@ const faqItems: FAQItem[] = [
     id: '8',
     question: 'How do I contact support for a specific issue?',
     answer:
-      'Use the Contact page or email support@pandagarde.com. We typically respond within 24–48 hours.',
+      'Use the Contact page form—we typically respond within 24–48 hours.',
     category: 'account',
   },
 ];
 
 const supportOptions: SupportOption[] = [
   {
-    id: 'email',
-    title: 'Email Support',
-    description: 'Send us a detailed message and we will get back to you within 24–48 hours.',
-    icon: Mail,
-    responseTime: '24–48 hours',
-    availability: '24/7',
-    href: 'mailto:support@pandagarde.com',
-    external: true,
-  },
-  {
     id: 'contact-form',
     title: 'Contact Form',
-    description: 'Use our online contact form for quick questions and feedback.',
+    description: 'Send questions, feedback, or technical issues through our secure contact form.',
     icon: MessageCircle,
     responseTime: '24–48 hours',
     availability: '24/7',
-    href: '/contact',
+    href: '/contact#contact-form',
   },
   {
     id: 'faq',
@@ -337,19 +327,13 @@ const SupportPage: React.FC = () => {
           <p className="mb-8 text-lg text-gray-600 dark:text-gray-300">
             Our team can help with account questions, technical issues, and educator setup.
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link to="/contact" className="button button-primary inline-flex items-center gap-2">
-              <MessageCircle size={20} aria-hidden />
-              Contact Support
-            </Link>
-            <a
-              href="mailto:support@pandagarde.com"
-              className="button button-secondary inline-flex items-center gap-2"
-            >
-              <Mail size={20} aria-hidden />
-              Email Us
-            </a>
-          </div>
+          <Link
+            to="/contact#contact-form"
+            className="button button-primary inline-flex items-center gap-2"
+          >
+            <MessageCircle size={20} aria-hidden />
+            Contact us
+          </Link>
         </div>
       </section>
 
