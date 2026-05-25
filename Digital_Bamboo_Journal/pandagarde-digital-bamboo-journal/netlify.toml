@@ -1,9 +1,11 @@
 # Static multipage site — journal.pandagarde.com
 # Netlify UI: Base directory = Digital_Bamboo_Journal/pandagarde-digital-bamboo-journal
-# Build command: (none) · Publish directory: .
 
 [build]
   publish = "."
+
+[build.processing]
+  skip_processing = true
 
 [[headers]]
   for = "/assets/*"

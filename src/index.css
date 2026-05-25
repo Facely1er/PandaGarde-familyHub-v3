@@ -7457,6 +7457,18 @@ header.header .nav-actions button.header-icon-btn {
   color: var(--warning);
 }
 
+/* Family Hub — icon-only on desktop (label in aria-label / title) */
+.nav-cta-primary.nav-cta-icon-only {
+  min-width: 40px;
+  padding: 0.65rem;
+  gap: 0;
+}
+
+.nav-cta-primary.nav-cta-icon-only .nav-cta-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
 /* Icon-only compact CTA between lg and xl — label hidden but icon stays visible */
 .nav-cta-secondary .nav-cta-icon {
   display: none;

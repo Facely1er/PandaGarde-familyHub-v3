@@ -212,12 +212,12 @@ function Header() {
             >
               <Link
                 to="/family-hub"
-                className={`nav-cta nav-cta-primary hidden lg:inline-flex ${isActive('/family-hub') ? 'active' : ''}`}
+                className={`nav-cta nav-cta-primary nav-cta-icon-only hidden lg:inline-flex ${isActive('/family-hub') ? 'active' : ''}`}
                 aria-label="Open Family Hub workspace"
+                title="Family Hub"
                 aria-current={isActive('/family-hub') ? 'page' : undefined}
               >
-                <LayoutDashboard size={16} aria-hidden="true" />
-                <span>Family Hub</span>
+                <LayoutDashboard size={18} className="nav-cta-icon" aria-hidden="true" />
               </Link>
 
               <Link
