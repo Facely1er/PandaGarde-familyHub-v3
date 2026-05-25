@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
     { icon: PlayCircle, href: '/get-started', label: 'Get Started' },
   ];
 
-  const supportLinks = [
+  const resourcesLinks = [
     { icon: Info, href: '/about', label: 'About' },
     { icon: Mail, href: '/contact', label: 'Contact' },
     { icon: HelpCircle, href: '/faq', label: 'FAQ' },
@@ -72,9 +72,9 @@ const Footer: React.FC = () => {
             </div>
 
             <div className="footer-column">
-              <h4>Support</h4>
+              <h4>Resources</h4>
               <ul className="footer-menu-list">
-                {supportLinks.map(({ icon: Icon, href, label }) => (
+                {resourcesLinks.map(({ icon: Icon, href, label }) => (
                   <li key={href}>
                     <Link to={href} className="footer-link">
                       <Icon size={16} aria-hidden="true" />

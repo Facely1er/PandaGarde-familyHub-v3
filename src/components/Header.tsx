@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Menu, X, Info, Moon, Sun, Search, BookOpen, ShieldCheck, Users, LifeBuoy, Scale, Wrench, LayoutDashboard, Library } from 'lucide-react';
+import { Menu, X, Home, Moon, Sun, Search, BookOpen, ShieldCheck, Users, Scale, Wrench, LayoutDashboard, Library } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import SearchModal from './SearchModal';
 
@@ -51,23 +51,20 @@ function Header() {
 
   const navItems = useMemo(
     () => [
+      { id: 'nav-home', icon: Home, label: 'Home', href: '/' },
       { id: 'nav-how-it-works', icon: ShieldCheck, label: 'How It Works', href: '/how-it-works' },
       { id: 'nav-stories', icon: Library, label: 'Stories', href: '/stories' },
       { id: 'nav-resources', icon: BookOpen, label: 'Resources', href: '/resources' },
-      { id: 'nav-about', icon: Info, label: 'About', href: '/about' },
-      { id: 'nav-support', icon: LifeBuoy, label: 'Support', href: '/support' },
     ],
     []
   );
 
   const mobilePrimaryItems = useMemo(
     () => [
-      { id: 'mobile-nav-home', icon: ShieldCheck, label: 'Home', href: '/' },
+      { id: 'mobile-nav-home', icon: Home, label: 'Home', href: '/' },
       { id: 'mobile-nav-how-it-works', icon: ShieldCheck, label: 'How It Works', href: '/how-it-works' },
       { id: 'mobile-nav-stories', icon: Library, label: 'Stories', href: '/stories' },
       { id: 'mobile-nav-resources', icon: BookOpen, label: 'Resources', href: '/resources' },
-      { id: 'mobile-nav-about', icon: Info, label: 'About', href: '/about' },
-      { id: 'mobile-nav-support', icon: LifeBuoy, label: 'Support', href: '/support' },
     ],
     []
   );
