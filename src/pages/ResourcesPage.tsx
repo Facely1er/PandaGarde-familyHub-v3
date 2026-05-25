@@ -44,37 +44,32 @@ const ResourcesPage: React.FC = () => {
       breadcrumbs={true}
     >
       <section className="py-4 pb-8">
-        <div className="mx-auto grid max-w-[1100px] gap-6">
+        <div className="flex flex-col gap-5">
           {resourceGroups.map((group) => {
             const Icon = group.icon;
             return (
-              <div
-                key={group.title}
-                className="rounded-3xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-6"
-              >
-                <div className="mb-4 flex flex-col sm:flex-row sm:items-start gap-4">
-                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-green-50 text-green-700 dark:bg-green-950/40 dark:text-green-300">
+              <div key={group.title} className="shell-card p-5">
+                <div className="mb-4 flex flex-col gap-4 sm:flex-row sm:items-start">
+                  <div className="shell-icon h-16 w-16">
                     <Icon size={24} aria-hidden />
                   </div>
-                  <div>
-                    <h2 className="m-0 text-xl font-bold text-gray-900 dark:text-gray-100 sm:text-2xl">
-                      {group.title}
-                    </h2>
-                    <p className="mt-2 text-gray-600 dark:text-gray-300 leading-relaxed">{group.description}</p>
+                  <div className="min-w-0 flex-1">
+                    <h2 className="shell-card__title text-lg sm:text-xl">{group.title}</h2>
+                    <p className="shell-card__body mt-2">{group.description}</p>
                   </div>
                 </div>
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
                   {group.links.map((link) => (
-                    <Link
-                      key={link.href}
-                      to={link.href}
-                      className="rounded-2xl border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-900/50 p-4 no-underline text-inherit transition-all hover:border-green-600 dark:hover:border-green-400"
-                    >
-                      <div className="mb-2 font-bold text-gray-900 dark:text-gray-100">{link.label}</div>
-                      <span className="inline-flex items-center gap-2 font-semibold text-green-700 dark:text-green-400">
+                    <div key={link.href} className="shell-card shell-card--nested flex flex-col gap-3 p-4">
+                      <h3 className="shell-card__title text-base">{link.label}</h3>
+                      <Link
+                        to={link.href}
+                        className="button button-secondary mt-auto inline-flex items-center gap-2 self-start"
+                      >
                         Open <ArrowRight size={16} aria-hidden />
-                      </span>
-                    </Link>
+                      </Link>
+                    </div>
                   ))}
                 </div>
               </div>
