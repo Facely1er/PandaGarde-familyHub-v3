@@ -1,5 +1,5 @@
 import { test, expect, type Page } from '@playwright/test';
-import { seedFamilyCatalogScript } from './helpers/seed-dfa';
+import { E2E_SERVICE_IDS } from './helpers/seed-dfa';
 
 const BASE = process.env.BASE_URL ?? 'http://127.0.0.1:4173';
 
@@ -77,13 +77,18 @@ test.describe('Core features advertised (How it works + CONTENT_TRUTH)', () => {
   });
 
   test('DFA happy path — catalog seed → footprint scores → assessment', async ({ page }) => {
-    await page.addInitScript(seedFamilyCatalogScript());
+    await page.goto(`${BASE}/`, { waitUntil: 'domcontentloaded' });
+    await page.evaluate((ids) => {
+      localStorage.setItem('pandagarde_family_services', JSON.stringify(ids));
+    }, [...E2E_SERVICE_IDS]);
     await gotoAndWait(page, '/digital-footprint');
     await expect(
       page.getByRole('heading', { level: 1, name: /Your family's digital footprint/i })
     ).toBeVisible();
-    await expect(page.getByText(/Family score|Privacy score/i).first()).toBeVisible();
-    await expect(page.locator('.dfa-score-overview, [class*="score"]').first()).toBeVisible();
+    await expect(
+      page.getByRole('heading', { name: /Launch-grade scoring|Executive summary/i }).first()
+    ).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByText(/Services analyzed/i)).toBeVisible();
     const toAssessment = page.getByRole('link', { name: /Continue to assessment/i }).first();
     await expect(toAssessment).toBeVisible();
     await toAssessment.click();
