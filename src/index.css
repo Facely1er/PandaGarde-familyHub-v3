@@ -5603,6 +5603,104 @@ body {
   color: var(--gray-700) !important;
 }
 
+/* Contact form — explicit theme styles (Tailwind gray-* tokens invert in dark mode) */
+.contact-form-panel {
+  border: 1px solid var(--gray-300);
+  background: var(--white);
+  color: #212121;
+  box-shadow: var(--shadow-md);
+}
+
+.contact-form-panel .contact-form-label {
+  color: var(--gray-700);
+  font-weight: 600;
+}
+
+.contact-form-panel .contact-form-checkbox-label {
+  color: var(--gray-600);
+  font-weight: 400;
+}
+
+.contact-form-panel .contact-form-field {
+  border: 1px solid var(--gray-300);
+  background: #ffffff;
+  color: #212121;
+}
+
+.contact-form-panel .contact-form-field::placeholder {
+  color: var(--gray-600);
+}
+
+.contact-form-panel .contact-form-field:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(27, 94, 32, 0.15);
+}
+
+.contact-form-panel .contact-form-field--error {
+  border-color: var(--danger);
+}
+
+.contact-form-panel .contact-form-muted {
+  color: var(--gray-600);
+}
+
+.contact-form-panel .contact-form-success-title {
+  color: #212121;
+}
+
+.contact-form-panel .contact-form-success-body {
+  color: var(--gray-600);
+}
+
+[data-theme="dark"] .page-layout__main .contact-form-panel {
+  border-color: var(--gray-300) !important;
+  background: var(--gray-200) !important;
+  color: var(--gray-800) !important;
+  box-shadow: var(--shadow-md), 0 0 24px rgba(74, 222, 128, 0.08) !important;
+}
+
+[data-theme="dark"] .contact-form-panel .contact-form-label {
+  color: var(--gray-700) !important;
+}
+
+[data-theme="dark"] .contact-form-panel .contact-form-checkbox-label {
+  color: var(--gray-600) !important;
+}
+
+[data-theme="dark"] .contact-form-panel .contact-form-field {
+  border-color: var(--gray-500) !important;
+  background-color: var(--gray-100) !important;
+  color: var(--gray-900) !important;
+}
+
+[data-theme="dark"] .contact-form-panel .contact-form-field::placeholder {
+  color: var(--gray-500) !important;
+  opacity: 1;
+}
+
+[data-theme="dark"] .contact-form-panel .contact-form-field:focus {
+  border-color: var(--primary-light) !important;
+  box-shadow: 0 0 0 2px rgba(110, 231, 183, 0.25) !important;
+}
+
+[data-theme="dark"] .contact-form-panel .contact-form-field option {
+  color: var(--gray-900);
+  background-color: var(--gray-100);
+}
+
+[data-theme="dark"] .contact-form-panel .contact-form-muted {
+  color: var(--gray-600) !important;
+}
+
+[data-theme="dark"] .contact-form-panel .contact-form-success-title {
+  color: var(--gray-900) !important;
+}
+
+[data-theme="dark"] .contact-form-panel .contact-form-success-body {
+  color: var(--gray-700) !important;
+}
+
 [data-theme="dark"] .bg-red-50 {
   background: linear-gradient(135deg, rgba(127, 29, 29, 0.4) 0%, rgba(69, 10, 10, 0.2) 100%) !important;
   border: 1px solid rgba(248, 113, 113, 0.25);

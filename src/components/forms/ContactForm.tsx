@@ -26,15 +26,13 @@ interface FormErrors {
   inquiryType?: string;
 }
 
-const fieldClass = (hasError: boolean) =>
-  `w-full rounded-lg border px-4 py-3 text-base transition-colors bg-white text-gray-900 placeholder:text-gray-400 dark:bg-gray-800 dark:text-gray-100 dark:placeholder:text-gray-500 ${
-    hasError
-      ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20'
-      : 'border-gray-200 dark:border-gray-600 focus:border-green-600 focus:ring-green-600/20 dark:focus:border-green-500'
-  } focus:outline-none focus:ring-2`;
+/** Colors live in index.css (.contact-form-panel) — avoids inverted --gray-* Tailwind tokens. */
+const formPanelClass = 'contact-form-panel rounded-2xl p-6 sm:p-10';
 
-const labelClass =
-  'mb-2 flex items-center gap-2 text-sm font-semibold text-gray-700 dark:text-gray-200';
+const fieldClass = (hasError: boolean) =>
+  `contact-form-field w-full rounded-lg px-4 py-3 text-base transition-colors ${
+    hasError ? 'contact-form-field--error' : ''
+  }`;
 
 const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
@@ -203,10 +201,10 @@ const ContactForm: React.FC = () => {
 
   if (isSubmitted) {
     return (
-      <div className="mx-auto max-w-xl rounded-2xl border border-gray-200 bg-white p-8 text-center shadow-md dark:border-gray-700 dark:bg-gray-800 sm:p-12">
+      <div className="contact-form-panel mx-auto max-w-xl rounded-2xl p-8 text-center sm:p-12">
         <CheckCircle className="mx-auto mb-6 h-16 w-16 text-green-600 dark:text-green-400" aria-hidden />
-        <h2 className="mb-3 text-2xl font-bold text-gray-900 dark:text-gray-100">Message sent successfully</h2>
-        <p className="mb-8 text-gray-600 dark:text-gray-300">
+        <h2 className="contact-form-success-title mb-3 text-2xl font-bold">Message sent successfully</h2>
+        <p className="contact-form-success-body mb-8">
           Thank you for contacting us. We&apos;ll get back to you within 24 hours.
         </p>
         <Button type="button" variant="primary" onClick={resetForm}>
@@ -221,7 +219,7 @@ const ContactForm: React.FC = () => {
       <form
         name="contact"
         onSubmit={handleSubmit}
-        className="rounded-2xl border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800 sm:p-10"
+        className={formPanelClass}
         data-netlify="true"
         data-netlify-honeypot="bot-field"
       >
@@ -243,7 +241,7 @@ const ContactForm: React.FC = () => {
 
         <div className="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2">
           <div>
-            <label htmlFor="name" className={labelClass}>
+            <label htmlFor="name" className="contact-form-label mb-2 flex items-center gap-2 text-sm">
               <User size={16} aria-hidden />
               Full Name *
             </label>
@@ -267,7 +265,7 @@ const ContactForm: React.FC = () => {
           </div>
 
           <div>
-            <label htmlFor="email" className={labelClass}>
+            <label htmlFor="email" className="contact-form-label mb-2 flex items-center gap-2 text-sm">
               <Mail size={16} aria-hidden />
               Email Address *
             </label>
@@ -293,7 +291,7 @@ const ContactForm: React.FC = () => {
 
         <div className="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2">
           <div>
-            <label htmlFor="phone" className={labelClass}>
+            <label htmlFor="phone" className="contact-form-label mb-2 flex items-center gap-2 text-sm">
               <Phone size={16} aria-hidden />
               Phone Number
             </label>
@@ -317,7 +315,7 @@ const ContactForm: React.FC = () => {
           </div>
 
           <div>
-            <label htmlFor="inquiryType" className={labelClass}>
+            <label htmlFor="inquiryType" className="contact-form-label mb-2 flex items-center gap-2 text-sm">
               <MessageSquare size={16} aria-hidden />
               Inquiry Type *
             </label>
@@ -347,7 +345,7 @@ const ContactForm: React.FC = () => {
         </div>
 
         <div className="mb-6">
-          <label htmlFor="subject" className={labelClass}>
+          <label htmlFor="subject" className="contact-form-label mb-2 flex items-center gap-2 text-sm">
             <MessageSquare size={16} aria-hidden />
             Subject *
           </label>
@@ -370,7 +368,7 @@ const ContactForm: React.FC = () => {
         </div>
 
         <div className="mb-6">
-          <label htmlFor="ageGroup" className={labelClass}>
+          <label htmlFor="ageGroup" className="contact-form-label mb-2 flex items-center gap-2 text-sm">
             <User size={16} aria-hidden />
             Age Group (optional)
           </label>
@@ -392,7 +390,7 @@ const ContactForm: React.FC = () => {
         </div>
 
         <div className="mb-6">
-          <label htmlFor="message" className={labelClass}>
+          <label htmlFor="message" className="contact-form-label mb-2 flex items-center gap-2 text-sm">
             <MessageSquare size={16} aria-hidden />
             Message *
           </label>
@@ -415,13 +413,13 @@ const ContactForm: React.FC = () => {
         </div>
 
         <div className="mb-8">
-          <label className="flex cursor-pointer items-start gap-3 text-sm text-gray-600 dark:text-gray-300">
+          <label className="contact-form-checkbox-label flex cursor-pointer items-start gap-3 text-sm">
             <input
               type="checkbox"
               name="newsletter"
               checked={formData.newsletter}
               onChange={handleInputChange}
-              className="mt-1 h-4 w-4 shrink-0 rounded border-gray-300 text-green-700 focus:ring-green-600 dark:border-gray-600 dark:bg-gray-800"
+              className="mt-1 h-4 w-4 shrink-0 rounded border-gray-300 text-green-700 focus:ring-green-600"
             />
             <span>Subscribe to our newsletter for privacy education tips and updates</span>
           </label>
@@ -449,7 +447,7 @@ const ContactForm: React.FC = () => {
           >
             Send Message
           </Button>
-          <p className="mt-4 text-xs text-gray-500 dark:text-gray-400">
+          <p className="contact-form-muted mt-4 text-xs">
             Submissions are delivered securely via Netlify Forms.
           </p>
         </div>
