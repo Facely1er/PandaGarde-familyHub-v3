@@ -46,6 +46,7 @@
     "test:coverage": "vitest run --coverage",
     "test:dfa": "vitest run src/lib/dfaJourney.test.ts src/lib/dfaScoreEngine.test.ts src/components/journey/DfaJourneyStepper.test.tsx src/components/dfa/DfaScoreOverview.test.tsx",
     "test:launch-smoke": "npm run test:dfa && npm run build",
+    "test:e2e": "playwright test e2e/core-advertised.spec.ts",
     "test:watch-dfa": "vitest src/lib/dfaJourney.test.ts src/lib/dfaScoreEngine.test.ts src/components/journey/DfaJourneyStepper.test.tsx src/components/dfa/DfaScoreOverview.test.tsx"
   },
   "dependencies": {
@@ -66,6 +67,7 @@
     "@capacitor/assets": "^3.0.5",
     "@capacitor/cli": "^7.4.2",
     "@eslint/js": "^9.9.1",
+    "@playwright/test": "^1.49.1",
     "@tailwindcss/typography": "^0.5.19",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
