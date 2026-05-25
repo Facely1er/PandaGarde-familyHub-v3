@@ -305,18 +305,18 @@ const FeaturesPage: React.FC = () => {
       </PageSection>
 
       <div className="shell-card shell-card--panel shell-cta-panel">
-        <div>
-          <h2 className="shell-card__title text-xl">Ready to begin?</h2>
-          <p className="shell-card__body mt-2">
-            Start with Digital Footprint Analysis, or open Family Hub if you are already mid-journey.
+        <div className="shell-cta-panel__copy">
+          <h2 className="shell-card__title">Ready to begin?</h2>
+          <p className="shell-card__body">
+            Start with Digital Footprint Analysis, or open Family Hub when you are ready.
           </p>
         </div>
-        <div className="flex flex-wrap gap-3">
-          <Link to="/digital-footprint" className="button button-primary inline-flex items-center gap-2">
-            Start review <ArrowRight size={16} aria-hidden />
+        <div className="shell-cta-panel__actions">
+          <Link to="/digital-footprint" className="button button-primary inline-flex items-center gap-1.5">
+            Start review <ArrowRight size={14} aria-hidden />
           </Link>
-          <Link to="/family-hub" className="button button-secondary inline-flex items-center gap-2">
-            Open Family Hub
+          <Link to="/family-hub" className="button button-secondary inline-flex items-center gap-1.5">
+            Family Hub
           </Link>
         </div>
       </div>

@@ -17,6 +17,7 @@ import {
   Library,
   Fingerprint,
   Compass,
+  Sparkles,
 } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import SearchModal from './SearchModal';
@@ -213,8 +214,10 @@ function Header() {
               <Link
                 to="/get-started"
                 className={`nav-cta nav-cta-secondary hidden lg:inline-flex ${isActive('/get-started') ? 'active' : ''}`}
+                aria-label="Get started with PandaGarde"
                 aria-current={isActive('/get-started') ? 'page' : undefined}
               >
+                <Sparkles size={16} className="nav-cta-icon" aria-hidden="true" />
                 <span>Get Started</span>
               </Link>
 

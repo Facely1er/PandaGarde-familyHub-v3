@@ -162,11 +162,11 @@ export function BambooForestStoryExperience({ story }: BambooForestStoryExperien
       </Link>
 
       <div className="mb-6 space-y-4">
-        <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5 dark:border-emerald-800 dark:bg-emerald-950/40 sm:p-6">
-          <p className="text-xs font-semibold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 mb-2">
+        <div className="story-intro-panel shell-card shell-card--panel p-5 sm:p-6">
+          <p className="story-intro-panel__eyebrow mb-2">
             Episode {story.episodeNumber} · Foundation story
           </p>
-          <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+          <p className="story-intro-panel__body text-sm leading-relaxed">
             Two ways through the same Digital Bamboo Forest: follow illustrated scenes with narration, or read
             chapter-by-chapter at your own pace. Switch anytime—activities unlock when you finish either path.
           </p>
@@ -184,7 +184,7 @@ export function BambooForestStoryExperience({ story }: BambooForestStoryExperien
         <>
           <div
             id="story-player"
-            className="mb-6 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-hidden"
+            className="story-player-shell mb-6 overflow-hidden"
             role="tabpanel"
             aria-label="Interactive story"
           >
