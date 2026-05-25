@@ -5,6 +5,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
+ASSET_VERSION = "20260601"
 
 NAV = [
     ("index.html", "Home"),
@@ -96,11 +97,8 @@ def sync_file(html: Path) -> bool:
     text = ICON_SPAN_RE.sub("", text)
     text, n_nav = NAV_RE.subn(build_nav(pfx, current), text, count=1)
     text, n_footer = FOOTER_RE.subn(build_footer(pfx), text, count=1)
-    text = text.replace("?v=20260526?v=20260526", "?v=20260530")
-    text = text.replace("?v=20260526", "?v=20260530")
-    text = text.replace("?v=20260527", "?v=20260530")
-    text = text.replace("?v=20260528", "?v=20260530")
-    text = text.replace("?v=20260529", "?v=20260530")
+    text = re.sub(r"styles\.css\?v=[^\"']+", f"styles.css?v={ASSET_VERSION}", text)
+    text = re.sub(r"main\.js\?v=[^\"']+", f"main.js?v={ASSET_VERSION}", text)
 
     if n_nav == 0 and n_footer == 0:
         return False
