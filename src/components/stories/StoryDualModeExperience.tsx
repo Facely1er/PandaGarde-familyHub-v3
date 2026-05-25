@@ -178,10 +178,10 @@ export function StoryDualModeExperience({
       </Link>
 
       {showCoverBanner && (
-        <div className="mb-6 overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+        <div className="mb-6 flex flex-col overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 sm:flex-row">
           <StoryCoverArt story={story} variant="banner" />
-          <div className="p-5 sm:p-6">
-            <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{story.summary}</p>
+          <div className="flex min-w-0 flex-1 flex-col justify-center p-5 sm:p-6">
+            <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-300">{story.summary}</p>
             <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
               {chapterCount} chapters · {story.activities.length} activities
             </p>

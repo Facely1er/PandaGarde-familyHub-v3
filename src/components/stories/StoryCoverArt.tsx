@@ -6,7 +6,7 @@ const PANDAGARDE_LOGO = '/LogoPandagarde.png';
 
 interface StoryCoverArtProps {
   story: Story;
-  /** hero = list featured block; card = grid tile; banner = reader header (shorter); inline = compact row */
+  /** hero = list featured block; card = grid tile; banner = reader header band; inline = compact row */
   variant: 'hero' | 'card' | 'banner' | 'inline';
 }
 
@@ -104,25 +104,27 @@ export function StoryCoverArt({ story, variant }: StoryCoverArtProps) {
     return <CoverFallback story={story} sizeClass="story-cover-art--hero" />;
   }
 
-  const cardSizeClass =
+  const bandSizeClass =
     variant === 'banner' ? 'story-cover-art--banner' : 'story-cover-art--card';
 
   if (coverUrl && !failed) {
     return (
-      <div className={`story-cover-art ${cardSizeClass}`}>
+      <div className={`story-cover-art ${bandSizeClass}`}>
         <CoverImage
           coverUrl={coverUrl}
           position={position}
           onError={() => setFailed(true)}
           hoverZoom={variant === 'card'}
         />
-        <div
-          className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-gray-900/35 via-transparent to-transparent dark:from-gray-950/45"
-          aria-hidden
-        />
+        {variant === 'card' && (
+          <div
+            className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-gray-900/35 via-transparent to-transparent dark:from-gray-950/45"
+            aria-hidden
+          />
+        )}
       </div>
     );
   }
 
-  return <CoverFallback story={story} sizeClass={cardSizeClass} />;
+  return <CoverFallback story={story} sizeClass={bandSizeClass} />;
 }
