@@ -1,4 +1,5 @@
 import { test, expect, type Page } from '@playwright/test';
+import { seedFamilyCatalogScript } from './helpers/seed-dfa';
 
 const BASE = process.env.BASE_URL ?? 'http://127.0.0.1:4173';
 
@@ -73,6 +74,23 @@ test.describe('Core features advertised (How it works + CONTENT_TRUTH)', () => {
     await expect(page.getByText(/catalog-based|RSS/i).first()).toBeVisible();
     await expect(page.getByRole('button', { name: /Service Notifications/i })).toBeVisible();
     await expect(page.getByRole('button', { name: /RSS Safety Alerts/i })).toBeVisible();
+  });
+
+  test('DFA happy path — catalog seed → footprint scores → assessment', async ({ page }) => {
+    await page.addInitScript(seedFamilyCatalogScript());
+    await gotoAndWait(page, '/digital-footprint');
+    await expect(
+      page.getByRole('heading', { level: 1, name: /Your family's digital footprint/i })
+    ).toBeVisible();
+    await expect(page.getByText(/Family score|Privacy score/i).first()).toBeVisible();
+    await expect(page.locator('.dfa-score-overview, [class*="score"]').first()).toBeVisible();
+    const toAssessment = page.getByRole('link', { name: /Continue to assessment/i }).first();
+    await expect(toAssessment).toBeVisible();
+    await toAssessment.click();
+    await page.waitForURL(/\/privacy-assessment/);
+    await expect(page.getByRole('heading', { name: /Privacy assessment/i })).toBeVisible();
+    await expect(page.getByText(/Phase 3|Turn findings into action/i).first()).toBeVisible();
+    await expect(page.locator('main, #main-content').first()).toBeVisible();
   });
 
   test('Family Hub — local gate then dashboard', async ({ page }) => {
