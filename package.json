@@ -41,6 +41,7 @@
     "format:check": "prettier --check .",
     "preview": "vite preview",
     "deploy:netlify": "netlify deploy --prod --dir=dist --site 2e41bc3f-2d27-469f-a104-c8ddcee69883 --no-build",
+    "deploy:netlify:journal": "netlify deploy --prod --dir=Digital_Bamboo_Journal/pandagarde-digital-bamboo-journal --site 520d418f-3aaf-4ce0-b0c6-7be6a14ded11 --no-build",
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
