@@ -171,11 +171,20 @@ function Header() {
       <header className={`header ${isScrolled ? 'scrolled' : ''}`} role="banner">
         <div className="container">
           <nav className="nav" role="navigation" aria-label="Main navigation" id="navigation">
-            <Link to="/" className="logo" aria-label="PandaGarde - Go to homepage">
+            <Link
+              to="/"
+              className="logo"
+              aria-label="PandaGarde — Calmer privacy. Go to homepage"
+            >
               <div className="logo-icon">
-                <img src="/LogoPandagarde.png" alt="PandaGarde Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                <img src="/LogoPandagarde.png" alt="" aria-hidden />
               </div>
-              <span>Panda<span className="highlight">Garde</span></span>
+              <span className="logo-text">
+                <span className="logo-wordmark">
+                  Panda<span className="highlight">Garde</span>
+                </span>
+                <span className="logo-tagline">Calmer privacy</span>
+              </span>
             </Link>
 
             <ul className="nav-menu desktop-nav" role="menubar" aria-label="Main navigation menu">
