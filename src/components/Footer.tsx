@@ -48,9 +48,20 @@ const Footer: React.FC = () => {
       <div className="container">
         <div className="footer-shell">
           <div className="footer-brand">
-            <Link to="/" className="footer-logo" aria-label="PandaGarde home">
-              <img src="/LogoPandagarde.png" alt="PandaGarde Logo" style={{ width: 48, height: 48, objectFit: 'contain' }} />
-              <span className="footer-brand-name">PandaGarde</span>
+            <Link
+              to="/"
+              className="footer-logo"
+              aria-label="PandaGarde — Calmer privacy. Go to homepage"
+            >
+              <div className="logo-icon">
+                <img src="/LogoPandagarde.png" alt="" aria-hidden />
+              </div>
+              <span className="logo-text">
+                <span className="logo-wordmark">
+                  Panda<span className="highlight">Garde</span>
+                </span>
+                <span className="logo-tagline">Calmer privacy</span>
+              </span>
             </Link>
             <p className="footer-description">
               Family privacy guidance built around a clear journey: understand exposure, take practical action, and keep progress going in the Family Hub.
