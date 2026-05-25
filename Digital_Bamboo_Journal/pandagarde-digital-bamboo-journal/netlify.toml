@@ -1,3 +1,7 @@
+# Static multipage site — journal.pandagarde.com
+# Netlify UI: Base directory = Digital_Bamboo_Journal/pandagarde-digital-bamboo-journal
+# Build command: (none) · Publish directory: .
+
 [build]
   publish = "."
 
@@ -7,8 +11,3 @@
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 404

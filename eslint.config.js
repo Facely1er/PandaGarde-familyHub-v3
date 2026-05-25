@@ -5,7 +5,17 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
-  { ignores: ['dist', 'family-hub/**', 'vite.family-hub.config.ts', 'eslint-report.json', 'scripts/**'] },
+  {
+    ignores: [
+      'dist',
+      'dist-familyhub',
+      'family-hub/**',
+      'Digital_Bamboo_Journal/**',
+      'vite.family-hub.config.ts',
+      'eslint-report.json',
+      'scripts/**',
+    ],
+  },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
     files: ['**/*.{ts,tsx}'],

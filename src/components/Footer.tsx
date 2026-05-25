@@ -16,7 +16,17 @@ import {
   Info,
   Library,
   Fingerprint,
+  Newspaper,
 } from 'lucide-react';
+
+const JOURNAL_URL = 'https://journal.pandagarde.com';
+
+type FooterLink = {
+  icon: React.ComponentType<{ size?: number; 'aria-hidden'?: boolean }>;
+  href: string;
+  label: string;
+  external?: boolean;
+};
 
 const Footer: React.FC = () => {
   const exploreLinks = [
@@ -28,12 +38,18 @@ const Footer: React.FC = () => {
     { icon: LayoutDashboard, href: '/family-hub', label: 'Family Hub' },
   ];
 
-  const resourcesLinks = [
+  const resourcesLinks: FooterLink[] = [
     { icon: Info, href: '/about', label: 'About' },
     { icon: Mail, href: '/contact', label: 'Contact' },
     { icon: HelpCircle, href: '/faq', label: 'FAQ' },
     { icon: Scale, href: '/digital-rights', label: 'Digital Rights' },
     { icon: HeartHandshake, href: '/support', label: 'Support' },
+    {
+      icon: Newspaper,
+      href: JOURNAL_URL,
+      label: 'Digital Bamboo Journal',
+      external: true,
+    },
   ];
 
   const legalLinks = [
@@ -89,12 +105,25 @@ const Footer: React.FC = () => {
             <div className="footer-column">
               <h4>Resources</h4>
               <ul className="footer-menu-list">
-                {resourcesLinks.map(({ icon: Icon, href, label }) => (
+                {resourcesLinks.map(({ icon: Icon, href, label, external }) => (
                   <li key={href}>
-                    <Link to={href} className="footer-link">
-                      <Icon size={16} aria-hidden="true" />
-                      <span>{label}</span>
-                    </Link>
+                    {external ? (
+                      <a
+                        href={href}
+                        className="footer-link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Icon size={16} aria-hidden="true" />
+                        <span>{label}</span>
+                        <span className="sr-only"> (opens in new tab)</span>
+                      </a>
+                    ) : (
+                      <Link to={href} className="footer-link">
+                        <Icon size={16} aria-hidden="true" />
+                        <span>{label}</span>
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>

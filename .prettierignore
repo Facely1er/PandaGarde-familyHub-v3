@@ -42,3 +42,6 @@ supabase/.temp
 
 # Documentation
 *.md
+
+# Standalone static journal (minified HTML; deploys separately)
+Digital_Bamboo_Journal/

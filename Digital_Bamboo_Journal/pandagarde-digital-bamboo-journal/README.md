@@ -2,11 +2,20 @@
 
 Standalone static HTML blog/magazine project for PandaGarde.
 
-## Deploy on Netlify
+## Deploy on Netlify (journal.pandagarde.com)
 
-1. Drag this folder into Netlify Drop, or connect it as a repository.
-2. Build command: none.
-3. Publish directory: `.`
+From the **PandaGarde-familyHub-v3** repo root, point Netlify at this subfolder:
+
+| Setting | Value |
+|--------|--------|
+| Base directory | `Digital_Bamboo_Journal/pandagarde-digital-bamboo-journal` |
+| Build command | *(empty)* |
+| Publish directory | `.` |
+| Custom domain | `journal.pandagarde.com` |
+
+This site does not run `npm run build` from the main app. The React/Vite app at www and hub is unchanged.
+
+Alternatively: drag this folder into Netlify Drop.
 
 ## Local preview
 
