@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Download, ShoppingBag, ArrowRight, BarChart3, TrendingUp, LayoutDashboard, BookOpen, ChevronDown, ChevronUp } from 'lucide-react';
+import { ArrowLeft, Download, ArrowRight, BarChart3, TrendingUp, LayoutDashboard, BookOpen, ChevronDown, ChevronUp, Map } from 'lucide-react';
 import DigitalFootprintVisualizer from '../components/DigitalFootprintVisualizer';
 import EmptyStateWithServicePrompt from '../components/EmptyStateWithServicePrompt';
 import DfaJourneyStepper from '../components/journey/DfaJourneyStepper';
@@ -12,6 +12,7 @@ import { updateDfaJourneyPhase } from '../lib/dfaJourney';
 import { buildDfaScore, loadDfaScoreTier } from '../lib/dfaScoreEngine';
 import { downloadDfaExecutiveSummary } from '../lib/dfaReport';
 import { logger } from '../lib/logger';
+import { dfaTheme } from '../styles/dfaTheme';
 
 const DigitalFootprintEducator: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -88,49 +89,98 @@ const DigitalFootprintPage: React.FC = () => {
     }
   };
 
-  return (
-    <div className="min-h-screen bg-gray-50 py-12 text-gray-900 dark:bg-[var(--white)] dark:text-gray-100">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-8">
-          <DfaJourneyStepper currentKey="dfa" compact ctaHref={totalServicesCount >= 3 ? '/privacy-assessment' : '/service-catalog'} ctaLabel={totalServicesCount >= 3 ? 'Continue to assessment' : 'Add more services'} subtitle="This is the core PandaGarde phase. Review the footprint, then move directly into action planning instead of losing momentum." />
-        </div>
+  const nextPhaseHref = totalServicesCount >= 3 ? '/privacy-assessment' : '/service-catalog';
+  const nextPhaseLabel = totalServicesCount >= 3 ? 'Continue to assessment' : 'Add more services';
 
-        <div className="mb-8">
-          <p className="mb-3 text-sm text-gray-500 dark:text-gray-400">
-            <span className="font-medium text-gray-700 dark:text-gray-300">Current phase:</span> Digital Footprint Analysis results
-            {' · '}
-            <Link to="/get-started" className="inline-flex items-center gap-1 font-medium text-blue-600 hover:underline dark:text-blue-400">
-              <ShoppingBag size={14} /> Review overall journey
-            </Link>
-          </p>
-          <div className="mb-4 flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Link to="/service-catalog" className="inline-flex items-center gap-2 font-medium text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200">
-                <ArrowLeft size={16} /> Service Catalog
+  return (
+    <div className={dfaTheme.page}>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <header className={`mb-8 overflow-hidden ${dfaTheme.cardLg}`}>
+          <div className={`${dfaTheme.band} px-5 py-3 sm:px-6`}>
+            <p className={`text-sm leading-relaxed ${dfaTheme.bodySm}`}>
+              <span className={`font-medium ${dfaTheme.title}`}>DFA journey:</span>{' '}
+              <Link to="/service-catalog" className="font-medium text-blue-600 hover:underline dark:text-blue-400">
+                Phase 1 — Service catalog
               </Link>
-              <Link to="/family-hub" className="inline-flex items-center gap-2 font-medium text-green-600 transition-colors hover:text-green-700 dark:text-green-400 dark:hover:text-green-300">
-                <LayoutDashboard size={16} /> Family Hub
+              {' → '}
+              <span className="font-medium text-green-700 dark:text-green-400">Phase 2 — Footprint results</span>
+              {' → '}
+              <Link to="/privacy-assessment" className="font-medium text-blue-600 hover:underline dark:text-blue-400">
+                Phase 3 — Assessment &amp; resources
               </Link>
+            </p>
+          </div>
+
+          <div className="px-5 py-6 sm:px-6">
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+              <div className="min-w-0 flex-1">
+                <div className="inline-flex items-center gap-2 rounded-full bg-green-100 px-3 py-1 text-sm font-semibold text-green-900 dark:bg-green-900/50 dark:text-green-100">
+                  <BarChart3 size={16} aria-hidden />
+                  Phase 2 — Digital Footprint Analysis
+                </div>
+                <h1 className={`mt-3 text-3xl tracking-tight sm:text-4xl ${dfaTheme.titleBold}`}>
+                  Your family&apos;s digital footprint
+                </h1>
+                <p className={`mt-3 max-w-3xl text-base leading-relaxed ${dfaTheme.body}`}>
+                  Review where exposure is building across the apps and services you listed. Compare Basic and Advanced scores, then continue into privacy assessment while the context is still fresh.
+                </p>
+                <nav className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm" aria-label="Related pages">
+                  <Link
+                    to="/service-catalog"
+                    className={`inline-flex items-center gap-1.5 ${dfaTheme.link}`}
+                  >
+                    <ArrowLeft size={15} aria-hidden />
+                    Service catalog
+                  </Link>
+                  <Link
+                    to="/family-hub"
+                    className="inline-flex items-center gap-1.5 font-medium text-green-700 transition-colors hover:text-green-800 dark:text-green-400 dark:hover:text-green-300"
+                  >
+                    <LayoutDashboard size={15} aria-hidden />
+                    Family Hub
+                  </Link>
+                  <Link
+                    to="/get-started"
+                    className="inline-flex items-center gap-1.5 font-medium text-blue-600 transition-colors hover:underline dark:text-blue-400"
+                  >
+                    <Map size={15} aria-hidden />
+                    Review overall journey
+                  </Link>
+                </nav>
+              </div>
+
+              <div className="flex shrink-0 flex-col gap-3 sm:flex-row lg:flex-col lg:items-stretch">
+                {analysis && (
+                  <button
+                    type="button"
+                    onClick={() => { void handleExportPdf(); }}
+                    disabled={isExportingPdf}
+                    aria-busy={isExportingPdf}
+                    aria-label="Download digital footprint report as PDF"
+                    className={`inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-70 ${dfaTheme.btnOutline}`}
+                  >
+                    <Download className="h-4 w-4" aria-hidden />
+                    {isExportingPdf ? 'Generating PDF…' : 'Download PDF'}
+                  </button>
+                )}
+                <Link
+                  to={nextPhaseHref}
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-green-700 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500"
+                >
+                  {nextPhaseLabel}
+                  <ArrowRight size={16} aria-hidden />
+                </Link>
+              </div>
             </div>
-            {analysis && (
-              <button
-                type="button"
-                onClick={() => { void handleExportPdf(); }}
-                disabled={isExportingPdf}
-                aria-busy={isExportingPdf}
-                aria-label="Download digital footprint report as PDF"
-                className="flex items-center space-x-2 rounded-lg bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-70"
-              >
-                <Download className="h-4 w-4" aria-hidden />
-                <span>{isExportingPdf ? 'Generating PDF...' : 'Download PDF'}</span>
-              </button>
-            )}
+
+            <DfaJourneyStepper
+              variant="strip"
+              currentKey="dfa"
+              ctaHref={nextPhaseHref}
+              ctaLabel={nextPhaseLabel}
+            />
           </div>
-          <div>
-            <h1 className="mb-2 text-3xl font-bold text-gray-900 dark:text-white">Your family's digital footprint</h1>
-            <p className="text-gray-600 dark:text-gray-400">Review where exposure is building across apps and services, compare the Basic and Advanced Digital Footprint Analysis scores, then continue straight into privacy assessment while the context is still fresh.</p>
-          </div>
-        </div>
+        </header>
 
         <DigitalFootprintEducator />
 
@@ -162,9 +212,9 @@ const DigitalFootprintPage: React.FC = () => {
         {analysis && (
           <div className="mb-6 grid gap-4 md:grid-cols-3">
             {[['Family score', `${analysis.familyScore}/100`], ['Privacy score', `${analysis.privacyScore}/100`], ['Services analyzed', `${analysis.totalServices}`]].map(([label, value]) => (
-              <div key={label} className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-600 dark:bg-gray-200">
-                <div className="text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-600">{label}</div>
-                <div className="mt-2 text-3xl font-bold text-gray-900">{value}</div>
+              <div key={label} className={`p-5 ${dfaTheme.cardLg}`}>
+                <div className="text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-dark-text-tertiary">{label}</div>
+                <div className={`mt-2 text-3xl ${dfaTheme.titleBold}`}>{value}</div>
               </div>
             ))}
           </div>
@@ -172,15 +222,17 @@ const DigitalFootprintPage: React.FC = () => {
 
         <DigitalFootprintVisualizer />
 
-        <div className="mt-8 rounded-2xl border border-green-200 bg-white p-6 shadow-sm dark:border-green-800/50 dark:bg-gray-200">
+        <div className={`mt-8 p-6 ${dfaTheme.cardLg} border-green-200 dark:border-green-800/50`}>
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
-              <h2 className="text-xl font-bold text-gray-900">Turn this into action</h2>
-              <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-700">Do not stop at the visualization. Continue into the assessment phase to translate the footprint into priorities, actions, and Family Hub continuity.</p>
+              <h2 className={`text-xl ${dfaTheme.titleBold}`}>Turn this into action</h2>
+              <p className={`mt-2 text-sm leading-6 ${dfaTheme.bodySm}`}>
+                Continue into the privacy assessment, then use parent guides, Privacy Panda stories, activities, and the Digital Bamboo Journal on the website. Family Hub is optional for kids&apos; missions.
+              </p>
             </div>
             <div className="flex flex-wrap gap-3">
               <Link to="/privacy-assessment" className="inline-flex items-center gap-2 rounded-xl bg-green-700 px-5 py-3 font-semibold text-white hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500">Continue to assessment <ArrowRight size={16} /></Link>
-              <Link to="/family-hub" className="inline-flex items-center gap-2 rounded-xl border border-gray-300 px-5 py-3 font-semibold text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-700 dark:hover:bg-gray-300">Open Family Hub</Link>
+              <Link to="/family-hub" className="inline-flex items-center gap-2 rounded-xl border border-gray-300 px-5 py-3 font-semibold text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-700">Family Hub (optional)</Link>
             </div>
           </div>
         </div>

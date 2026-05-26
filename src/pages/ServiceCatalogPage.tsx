@@ -9,6 +9,7 @@ import { useFamily } from '../contexts/FamilyContext';
 import { childServiceCatalog, getHealthServices, getSchoolAssignedServices, getServicesWithLawEnforcementConcerns } from '../data/childServiceCatalog';
 import { getServiceLogoUrlWithBrandColor, hasServiceLogo } from '../utils/serviceLogos';
 import { updateDfaJourneyPhase } from '../lib/dfaJourney';
+import { dfaTheme } from '../styles/dfaTheme';
 
 const SUGGESTED_SERVICE_IDS = ['youtube', 'instagram', 'whatsapp', 'roblox', 'khan-academy', 'duolingo'] as const;
 const SCHOOL_SERVICE_IDS = ['google-classroom', 'microsoft-teams-edu', 'canvas-lms', 'schoology', 'seesaw', 'zoom', 'classdojo', 'kahoot', 'quizlet', 'ixl', 'remind', 'nearpod', 'prodigy', 'code-org'] as const;
@@ -67,10 +68,10 @@ const ServiceCatalogPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 text-gray-900 dark:bg-[var(--white)] dark:text-gray-100">
+    <div className={dfaTheme.pageTight}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-6 rounded-xl border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-100">
-          <p className="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300">
+        <div className={`mb-6 rounded-xl p-4 ${dfaTheme.cardLg}`}>
+          <p className={`flex items-start gap-2 ${dfaTheme.bodySm}`}>
             <Info className="mt-0.5 h-4 w-4 shrink-0 text-green-700 dark:text-green-400" aria-hidden />
             <span>
               Privacy Exposure Index numbers are educational guides from the apps you list—not live monitoring.{' '}

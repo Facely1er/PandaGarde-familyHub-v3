@@ -1,9 +1,26 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle2, LayoutDashboard, ShieldCheck } from 'lucide-react';
+import {
+  BarChart3,
+  BookOpen,
+  ChevronDown,
+  ExternalLink,
+  LayoutDashboard,
+  ShieldCheck,
+  Users,
+} from 'lucide-react';
 import FamilyPrivacyAssessment from '../components/FamilyPrivacyAssessment';
 import DfaJourneyStepper from '../components/journey/DfaJourneyStepper';
+import {
+  DFA_PHASE_THREE_JOURNAL,
+  DFA_PHASE_THREE_KIDS_RESOURCES,
+  DFA_PHASE_THREE_PARENT_RESOURCES,
+} from '../data/dfaPhaseThreeResources';
 import { updateDfaJourneyPhase } from '../lib/dfaJourney';
+import { dfaTheme } from '../styles/dfaTheme';
+
+const resourceLinkClass =
+  'block rounded-lg border border-gray-200 p-3 text-sm transition-colors hover:border-green-300 hover:bg-green-50/50 dark:border-dark-border dark:bg-dark-surface dark:hover:border-green-700/60 dark:hover:bg-gray-300';
 
 const PrivacyAssessmentPage: React.FC = () => {
   useEffect(() => {
@@ -11,60 +28,168 @@ const PrivacyAssessmentPage: React.FC = () => {
   }, []);
 
   const handleAssessmentComplete = () => {
-    updateDfaJourneyPhase('plan', { visited: true, completed: true, resumePath: '/family-hub/dashboard' });
+    updateDfaJourneyPhase('plan', {
+      visited: true,
+      completed: true,
+      resumePath: '/digital-footprint',
+    });
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className={dfaTheme.page}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-8">
-          <DfaJourneyStepper currentKey="plan" compact ctaHref="/family-hub/dashboard" ctaLabel="Continue to Family Hub" subtitle="This phase turns DFA findings into action. Complete the assessment, then keep the plan alive inside Family Hub." />
-        </div>
+        <header className={`mb-6 overflow-hidden ${dfaTheme.cardLg}`}>
+          <div className={`${dfaTheme.band} px-5 py-3 sm:px-6`}>
+            <p className={`text-sm leading-relaxed ${dfaTheme.bodySm}`}>
+              <span className={`font-medium ${dfaTheme.title}`}>DFA journey:</span>{' '}
+              <Link to="/service-catalog" className="font-medium text-blue-600 hover:underline dark:text-blue-400">
+                Phase 1
+              </Link>
+              {' → '}
+              <Link to="/digital-footprint" className="font-medium text-blue-600 hover:underline dark:text-blue-400">
+                Phase 2
+              </Link>
+              {' → '}
+              <span className="font-medium text-green-700 dark:text-green-400">Phase 3</span>
+            </p>
+          </div>
 
-        <div className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <div>
-              <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-sm font-semibold text-emerald-700">
-                <ShieldCheck size={16} /> Phase 3 — Turn findings into action
-              </div>
-              <h1 className="mt-3 text-3xl font-bold text-slate-900">Privacy assessment</h1>
-              <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">Use this phase to prioritize what matters now. The point is not another abstract score — it is to decide what to fix first, what can wait, and what should move into the Family Hub.</p>
+          <div className="px-5 py-5 sm:px-6">
+            <div className="inline-flex items-center gap-2 rounded-full bg-emerald-100 px-3 py-1 text-sm font-semibold text-emerald-900 dark:bg-emerald-900/50 dark:text-emerald-100">
+              <ShieldCheck size={16} aria-hidden />
+              Phase 3 — Parent assessment
             </div>
-            <div className="flex flex-wrap gap-3">
-              <Link to="/digital-footprint" className="inline-flex items-center gap-2 rounded-xl border border-slate-300 px-4 py-3 font-semibold text-slate-700 hover:bg-slate-50">Review DFA</Link>
-              <Link to="/family-hub/dashboard" className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-4 py-3 font-semibold text-white hover:bg-emerald-700">Open Family Hub <ArrowRight size={16} /></Link>
+            <h1 className={`mt-3 text-2xl tracking-tight sm:text-3xl ${dfaTheme.titleBold}`}>
+              Family privacy assessment
+            </h1>
+            <p className={`mt-2 max-w-3xl sm:text-base ${dfaTheme.bodySm}`}>
+              Answer the questions below from your DFA results. Guides, stories, and the journal are available after—you
+              do not need Family Hub to finish this phase.
+            </p>
+            <nav className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm" aria-label="Related pages">
+              <Link to="/digital-footprint" className={`inline-flex items-center gap-1.5 ${dfaTheme.link}`}>
+                <BarChart3 size={15} aria-hidden />
+                DFA results
+              </Link>
+              <Link
+                to="/resources"
+                className="inline-flex items-center gap-1.5 font-medium text-green-700 hover:underline dark:text-green-400"
+              >
+                <BookOpen size={15} aria-hidden />
+                All resources
+              </Link>
+            </nav>
+
+            <DfaJourneyStepper
+              variant="strip"
+              currentKey="plan"
+              ctaHref="/digital-footprint"
+              ctaLabel="Review DFA results"
+              className="mt-4 border-t-0 pt-0"
+            />
+          </div>
+        </header>
+
+        <section
+          id="family-privacy-assessment"
+          className={`scroll-mt-24 p-5 sm:p-6 ${dfaTheme.cardLg}`}
+          aria-labelledby="assessment-heading"
+        >
+          <h2 id="assessment-heading" className={`text-lg sm:text-xl ${dfaTheme.titleBold}`}>
+            Complete your assessment
+          </h2>
+          <p className={`mt-1 ${dfaTheme.bodySm}`}>
+            Progress saves on this device. You can retake or download a PDF when finished.
+          </p>
+          <div className="mt-5">
+            <FamilyPrivacyAssessment onComplete={handleAssessmentComplete} />
+          </div>
+        </section>
+
+        <details className={`group mt-6 overflow-hidden ${dfaTheme.cardLg} border-green-200 dark:border-green-800/50`}>
+          <summary
+            className={`flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 marker:content-none sm:px-6 ${dfaTheme.titleBold}`}
+          >
+            <span>Website resources for parents &amp; children</span>
+            <ChevronDown
+              className="h-5 w-5 shrink-0 text-gray-500 transition-transform group-open:rotate-180 dark:text-dark-text-tertiary"
+              aria-hidden
+            />
+          </summary>
+          <div className="border-t border-green-100 px-5 pb-5 pt-4 dark:border-green-900/40 sm:px-6 sm:pb-6">
+            <p className={dfaTheme.bodySm}>
+              Use these after or alongside the assessment—parent guides, Privacy Panda stories, activities, and the
+              Digital Bamboo Journal.
+            </p>
+
+            <div className="mt-5 grid gap-6 lg:grid-cols-2">
+              <div>
+                <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-dark-text-tertiary">
+                  <Users size={14} aria-hidden />
+                  For parents
+                </h3>
+                <ul className="mt-2 space-y-2">
+                  {DFA_PHASE_THREE_PARENT_RESOURCES.map((item) => (
+                    <li key={item.href}>
+                      <Link to={item.href} className={resourceLinkClass}>
+                        <span className={`font-semibold ${dfaTheme.title}`}>{item.label}</span>
+                        <span className={`mt-0.5 block ${dfaTheme.bodySm}`}>{item.description}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-dark-text-tertiary">
+                  <BookOpen size={14} aria-hidden />
+                  For children
+                </h3>
+                <ul className="mt-2 space-y-2">
+                  {DFA_PHASE_THREE_KIDS_RESOURCES.map((item) => (
+                    <li key={item.href}>
+                      <Link
+                        to={item.href}
+                        className={`${resourceLinkClass} hover:border-sky-300 hover:bg-sky-50/50 dark:hover:border-sky-700/60 dark:hover:bg-sky-950/30`}
+                      >
+                        <span className={`font-semibold ${dfaTheme.title}`}>{item.label}</span>
+                        <span className={`mt-0.5 block ${dfaTheme.bodySm}`}>{item.description}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="mt-4 rounded-lg border border-dashed border-amber-300 bg-amber-50/80 p-3 dark:border-amber-700/60 dark:bg-amber-950/30">
+              <p className={`text-sm font-semibold ${dfaTheme.title}`}>{DFA_PHASE_THREE_JOURNAL.label}</p>
+              <p className={`mt-1 text-xs ${dfaTheme.bodySm}`}>{DFA_PHASE_THREE_JOURNAL.description}</p>
+              <a
+                href={DFA_PHASE_THREE_JOURNAL.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-amber-900 hover:underline dark:text-amber-200"
+              >
+                Open journal
+                <ExternalLink size={14} aria-hidden />
+              </a>
             </div>
           </div>
-        </div>
+        </details>
 
-        <div className="mb-8 grid gap-4 md:grid-cols-3">
-          {[
-            ['Use your DFA results', 'Keep the assessment grounded in the actual services you already analyzed.'],
-            ['Choose priorities', 'Focus on the most important family actions instead of trying to fix everything at once.'],
-            ['Carry it forward', 'Save the plan into Family Hub so you can continue without redoing this work.'],
-          ].map(([title, description]) => (
-            <div key={title} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <div className="flex items-start gap-3">
-                <CheckCircle2 size={18} className="mt-1 text-emerald-600" />
-                <div>
-                  <h2 className="font-bold text-slate-900">{title}</h2>
-                  <p className="mt-2 text-sm leading-6 text-slate-600">{description}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <FamilyPrivacyAssessment onComplete={handleAssessmentComplete} />
-
-        <div className="mt-8 rounded-2xl border border-emerald-200 bg-white p-6 shadow-sm">
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <div>
-              <h2 className="text-xl font-bold text-slate-900">Continue in Family Hub</h2>
-              <p className="mt-2 text-sm leading-6 text-slate-600">Once this phase is done, Family Hub becomes the place to keep progress visible for the family instead of letting the assessment disappear into a dead-end screen.</p>
-            </div>
-            <Link to="/family-hub/dashboard" onClick={handleAssessmentComplete} className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-5 py-3 font-semibold text-white hover:bg-emerald-700">
-              <LayoutDashboard size={16} /> Continue to Family Hub
+        <div className={`mt-6 p-5 sm:p-6 ${dfaTheme.cardMuted}`}>
+          <h2 className={`text-base ${dfaTheme.titleBold}`}>Optional: Family Hub</h2>
+          <p className={`mt-1 ${dfaTheme.bodySm}`}>
+            Device-local privacy missions for kids—separate from the website assessment above.
+          </p>
+          <div className="mt-3 flex flex-wrap gap-3">
+            <Link to="/stories" className={dfaTheme.btnOutline}>
+              <BookOpen size={15} aria-hidden />
+              Stories
+            </Link>
+            <Link to="/family-hub/dashboard" className={dfaTheme.btnOutline}>
+              <LayoutDashboard size={15} aria-hidden />
+              Family Hub
             </Link>
           </div>
         </div>

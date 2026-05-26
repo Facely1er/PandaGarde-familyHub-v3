@@ -41,9 +41,22 @@ describe('DfaJourneyStepper', () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByText('25% complete')).toBeInTheDocument();
+    expect(screen.getByText('33% complete')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /continue to assessment/i })).toHaveAttribute('href', '/privacy-assessment');
     expect(screen.getByText('Completed')).toBeInTheDocument();
     expect(screen.getByText('In progress')).toBeInTheDocument();
+  });
+
+  it('renders strip variant without full card title', () => {
+    render(
+      <MemoryRouter>
+        <DfaJourneyStepper variant="strip" currentKey="dfa" ctaHref="/privacy-assessment" ctaLabel="Continue to assessment" />
+      </MemoryRouter>
+    );
+
+    expect(screen.queryByText('Your DFA journey')).not.toBeInTheDocument();
+    expect(screen.getByLabelText('DFA journey progress')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /continue to assessment/i })).toHaveAttribute('href', '/privacy-assessment');
+    expect(screen.getByRole('link', { name: /run digital footprint analysis/i })).toHaveAttribute('aria-current', 'step');
   });
 });

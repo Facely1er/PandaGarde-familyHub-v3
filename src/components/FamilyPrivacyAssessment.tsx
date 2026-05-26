@@ -129,7 +129,7 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
       case 'parental-controls':
         return 'bg-pink-100 text-pink-800 dark:bg-pink-900/30 dark:text-pink-300';
       default:
-        return 'bg-gray-100 text-gray-800 dark:bg-gray-100/30 dark:text-gray-300';
+        return 'bg-gray-100 text-gray-800 dark:bg-gray-100/30 dark:text-dark-text-secondary';
     }
   };
 
@@ -148,7 +148,7 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
       case 'high':
         return 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300';
       default:
-        return 'bg-gray-100 text-gray-800 dark:bg-gray-100/30 dark:text-gray-300';
+        return 'bg-gray-100 text-gray-800 dark:bg-gray-100/30 dark:text-dark-text-secondary';
     }
   };
 
@@ -159,10 +159,10 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
         <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl p-6 border-2 border-blue-200 dark:border-blue-800">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-dark-text-primary mb-2">
                 Assessment Complete!
               </h2>
-              <p className="text-gray-600 dark:text-gray-300">
+              <p className="text-gray-600 dark:text-dark-text-secondary">
                 Your family's privacy practices assessment
               </p>
               {personaResult?.profile && (
@@ -178,7 +178,7 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
               <div className={`text-5xl font-bold mb-2 ${getScoreColor(result.overallScore)}`}>
                 {result.overallScore}
               </div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Privacy Score</div>
+              <div className="text-sm text-gray-600 dark:text-dark-text-tertiary">Privacy Score</div>
               <div className={`mt-2 px-3 py-1 rounded-full text-xs font-medium ${getRiskColor(result.riskLevel)}`}>
                 {result.riskLevel.toUpperCase()} RISK
               </div>
@@ -198,8 +198,8 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
         </div>
 
         {/* Category Scores */}
-        <div className="bg-white dark:bg-gray-200 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center space-x-2">
+        <div className="bg-white dark:bg-dark-surface-elevated rounded-lg p-6 border border-gray-200 dark:border-dark-border">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-dark-text-primary mb-4 flex items-center space-x-2">
             <BarChart3 className="h-5 w-5" />
             <span>Category Breakdown</span>
           </h3>
@@ -207,7 +207,7 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
             {Object.entries(result.categoryScores).map(([category, score]) => (
               <div
                 key={category}
-                className="p-4 rounded-lg border-2 border-gray-200 dark:border-gray-700"
+                className="p-4 rounded-lg border-2 border-gray-200 dark:border-dark-border"
               >
                 <div className="flex items-center justify-between mb-2">
                   <span className={`px-2 py-1 rounded text-xs font-medium ${getCategoryColor(category)}`}>
@@ -274,10 +274,10 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
 
         {/* Recommendations */}
         {result.recommendations.length > 0 && (
-          <div className="bg-white dark:bg-gray-200 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+          <div className="bg-white dark:bg-dark-surface-elevated rounded-lg p-6 border border-gray-200 dark:border-dark-border">
             <div className="flex items-center space-x-2 mb-4">
               <Lightbulb className="h-5 w-5 text-yellow-600 dark:text-yellow-400" />
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-dark-text-primary">
                 Personalized Recommendations
               </h3>
             </div>
@@ -294,7 +294,7 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
                   <div className="flex items-start justify-between mb-2">
                     <div className="flex-1">
                       <div className="flex items-center space-x-2 mb-1">
-                        <h4 className="font-semibold text-gray-900 dark:text-white">
+                        <h4 className="font-semibold text-gray-900 dark:text-dark-text-primary">
                           {rec.title}
                         </h4>
                         <span className={`px-2 py-0.5 rounded text-xs font-medium ${
@@ -305,12 +305,12 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
                           {rec.priority.toUpperCase()}
                         </span>
                       </div>
-                      <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">
+                      <p className="text-sm text-gray-700 dark:text-dark-text-secondary mb-3">
                         {rec.description}
                       </p>
                       <ul className="space-y-1">
                         {rec.actionItems.map((item, index) => (
-                          <li key={index} className="flex items-start space-x-2 text-sm text-gray-600 dark:text-gray-400">
+                          <li key={index} className="flex items-start space-x-2 text-sm text-gray-600 dark:text-dark-text-tertiary">
                             <Target className="h-4 w-4 mt-0.5 flex-shrink-0" />
                             <span>{item}</span>
                           </li>
@@ -319,7 +319,7 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
                     </div>
                   </div>
                   {rec.resources && rec.resources.length > 0 && (
-                    <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
+                    <div className="mt-3 pt-3 border-t border-gray-200 dark:border-dark-border">
                       <div className="flex flex-wrap gap-2">
                         {rec.resources.map((resource, index) => (
                           <Link
@@ -353,13 +353,13 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
             </button>
             <button
               onClick={handleRestart}
-              className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+              className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-dark-text-secondary rounded-lg hover:bg-gray-50 dark:hover:bg-gray-300 transition-colors"
             >
               Retake Assessment
             </button>
             <Link
               to="/assessment-history"
-              className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+              className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-dark-text-secondary rounded-lg hover:bg-gray-50 dark:hover:bg-gray-300 transition-colors"
             >
               View History
             </Link>
@@ -387,11 +387,11 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
 
   if (compact) {
     return (
-      <div className="p-4 bg-white dark:bg-gray-200 rounded-lg border border-gray-200 dark:border-gray-700">
+      <div className="p-4 bg-white dark:bg-dark-surface-elevated rounded-lg border border-gray-200 dark:border-dark-border">
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center space-x-2">
             <Shield className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-            <span className="font-semibold text-gray-900 dark:text-white">Privacy Assessment</span>
+            <span className="font-semibold text-gray-900 dark:text-dark-text-primary">Privacy Assessment</span>
           </div>
           <Link
             to="/privacy-assessment"
@@ -400,7 +400,7 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
             Take Assessment →
           </Link>
         </div>
-        <p className="text-sm text-gray-600 dark:text-gray-400">
+        <p className="text-sm text-gray-600 dark:text-dark-text-tertiary">
           Assess your family's privacy practices and get personalized recommendations.
         </p>
       </div>
@@ -410,12 +410,12 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
   return (
     <div className="space-y-6">
       {/* Progress Bar */}
-      <div className="bg-white dark:bg-gray-200 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+      <div className="bg-white dark:bg-dark-surface-elevated rounded-lg p-4 border border-gray-200 dark:border-dark-border">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+          <span className="text-sm font-medium text-gray-700 dark:text-dark-text-secondary">
             Question {currentStep + 1} of {assessmentQuestions.length}
           </span>
-          <span className="text-sm text-gray-600 dark:text-gray-400">
+          <span className="text-sm text-gray-600 dark:text-dark-text-tertiary">
             {Math.round(progress)}% Complete
           </span>
         </div>
@@ -428,14 +428,14 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
       </div>
 
       {/* Question Card */}
-      <div className="bg-white dark:bg-gray-200 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+      <div className="bg-white dark:bg-dark-surface-elevated rounded-lg p-6 border border-gray-200 dark:border-dark-border">
         <div className="mb-4">
           <span className={`px-3 py-1 rounded-full text-xs font-medium ${getCategoryColor(currentQuestion.category)}`}>
             {currentQuestion.category.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
           </span>
         </div>
 
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-dark-text-primary mb-2">
           {currentQuestion.question}
         </h2>
 
@@ -457,7 +457,7 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
                 className={`w-full p-4 text-left rounded-lg border-2 transition-all ${
                   answers[currentQuestion.id] === 'yes'
                     ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30'
-                    : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
+                    : 'border-gray-200 dark:border-dark-border hover:border-gray-300 dark:hover:border-gray-600'
                 }`}
               >
                 <div className="flex items-center space-x-3">
@@ -470,7 +470,7 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
                       <div className="w-3 h-3 rounded-full bg-white" />
                     )}
                   </div>
-                  <span className="font-medium text-gray-900 dark:text-white">Yes</span>
+                  <span className="font-medium text-gray-900 dark:text-dark-text-primary">Yes</span>
                 </div>
               </button>
               <button
@@ -478,7 +478,7 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
                 className={`w-full p-4 text-left rounded-lg border-2 transition-all ${
                   answers[currentQuestion.id] === 'no'
                     ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30'
-                    : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
+                    : 'border-gray-200 dark:border-dark-border hover:border-gray-300 dark:hover:border-gray-600'
                 }`}
               >
                 <div className="flex items-center space-x-3">
@@ -491,7 +491,7 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
                       <div className="w-3 h-3 rounded-full bg-white" />
                     )}
                   </div>
-                  <span className="font-medium text-gray-900 dark:text-white">No</span>
+                  <span className="font-medium text-gray-900 dark:text-dark-text-primary">No</span>
                 </div>
               </button>
             </>
@@ -506,7 +506,7 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
                   className={`w-full p-4 text-left rounded-lg border-2 transition-all ${
                     answers[currentQuestion.id] === option
                       ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30'
-                      : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
+                      : 'border-gray-200 dark:border-dark-border hover:border-gray-300 dark:hover:border-gray-600'
                   }`}
                 >
                   <div className="flex items-center space-x-3">
@@ -519,7 +519,7 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
                         <div className="w-3 h-3 rounded-full bg-white" />
                       )}
                     </div>
-                    <span className="font-medium text-gray-900 dark:text-white">{option}</span>
+                    <span className="font-medium text-gray-900 dark:text-dark-text-primary">{option}</span>
                   </div>
                 </button>
               ))}
@@ -533,7 +533,7 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
         <button
           onClick={handlePrevious}
           disabled={currentStep === 0}
-          className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
+          className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-dark-text-secondary rounded-lg hover:bg-gray-50 dark:hover:bg-gray-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
         >
           <ArrowLeft className="h-4 w-4" />
           <span>Previous</span>

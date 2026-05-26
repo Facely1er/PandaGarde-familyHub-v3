@@ -39,8 +39,8 @@ describe('dfaJourney', () => {
       resumePath: '/privacy-assessment',
     });
 
-    expect(updated.progressPercent).toBe(25);
-    expect(updated.resumePath).toBe('/service-catalog');
+    expect(updated.progressPercent).toBe(33);
+    expect(updated.resumePath).toBe('/privacy-assessment');
 
     const dfaPhase = updated.phases.find((phase) => phase.key === 'dfa');
     expect(dfaPhase).toEqual(expect.objectContaining({
@@ -49,8 +49,8 @@ describe('dfaJourney', () => {
     }));
 
     const reloaded = loadDfaJourneyState();
-    expect(reloaded.progressPercent).toBe(25);
-    expect(reloaded.resumePath).toBe('/service-catalog');
+    expect(reloaded.progressPercent).toBe(33);
+    expect(reloaded.resumePath).toBe('/privacy-assessment');
   });
 
   it('normalizes incomplete saved phases and computes the next incomplete path', () => {
@@ -66,9 +66,29 @@ describe('dfaJourney', () => {
 
     const state = loadDfaJourneyState();
 
-    expect(state.progressPercent).toBe(25);
+    expect(state.progressPercent).toBe(33);
     expect(state.resumePath).toBe('/digital-footprint');
     expect(state.phases.find((phase) => phase.key === 'profile')?.completed).toBe(true);
     expect(state.phases.find((phase) => phase.key === 'plan')?.visited).toBe(false);
+  });
+
+  it('does not count optional Family Hub toward progress or resume path', () => {
+    window.localStorage.setItem(
+      DFA_JOURNEY_STORAGE_KEY,
+      JSON.stringify({
+        phases: [
+          { key: 'profile', visited: true, completed: true },
+          { key: 'dfa', visited: true, completed: true },
+          { key: 'plan', visited: true, completed: true },
+          { key: 'hub', visited: true, completed: true },
+        ],
+      })
+    );
+
+    const state = loadDfaJourneyState();
+
+    expect(state.progressPercent).toBe(100);
+    expect(state.resumePath).toBe('/digital-footprint');
+    expect(state.phases.find((phase) => phase.key === 'hub')?.optional).toBe(true);
   });
 });

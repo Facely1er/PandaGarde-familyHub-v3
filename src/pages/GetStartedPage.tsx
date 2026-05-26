@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Sparkles, ArrowRight, CheckCircle2, LayoutDashboard, ListChecks } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 import DfaJourneyStepper from '../components/journey/DfaJourneyStepper';
-import { loadDfaJourneyState, updateDfaJourneyPhase, type DfaJourneyState } from '../lib/dfaJourney';
+import { getCoreDfaPhases, getOptionalDfaPhases, loadDfaJourneyState, updateDfaJourneyPhase, type DfaJourneyState } from '../lib/dfaJourney';
 
 const GetStartedPage: React.FC = () => {
   const [journey, setJourney] = useState<DfaJourneyState>(() => loadDfaJourneyState());
@@ -12,12 +12,17 @@ const GetStartedPage: React.FC = () => {
     setJourney(updateDfaJourneyPhase('profile', { visited: true, resumePath: '/service-catalog' }));
   }, []);
 
-  const nextPhase = useMemo(() => journey.phases.find((phase) => !phase.completed) ?? journey.phases[journey.phases.length - 1], [journey]);
+  const corePhases = useMemo(() => getCoreDfaPhases(journey.phases), [journey.phases]);
+  const optionalPhases = useMemo(() => getOptionalDfaPhases(journey.phases), [journey.phases]);
+  const nextPhase = useMemo(
+    () => corePhases.find((phase) => !phase.completed) ?? corePhases[corePhases.length - 1],
+    [corePhases]
+  );
 
   return (
     <PageLayout
       title="Start Your Digital Footprint Analysis Journey"
-      subtitle="PandaGarde starts with Digital Footprint Analysis. Move through four phases, save progress locally, and resume without losing your place."
+      subtitle="PandaGarde starts with parent-led Digital Footprint Analysis: three core phases on the website, saved locally. Family Hub is optional—for kids’ privacy missions, not required to finish DFA."
       breadcrumbs={true}
     >
       <section className="py-4 pb-8">
@@ -31,11 +36,11 @@ const GetStartedPage: React.FC = () => {
               </div>
               <h2 className="mt-4 text-3xl font-bold text-gray-900 dark:text-gray-100">The journey revolves around Digital Footprint Analysis</h2>
               <p className="mt-3 max-w-3xl text-base leading-7 text-gray-600 dark:text-gray-300">
-                Instead of dropping families into a pile of tools, PandaGarde uses one sequence: choose the services you want analyzed, run Digital Footprint Analysis, turn findings into an action plan, then continue inside Family Hub.
+                Parents complete a focused sequence on the website: list family services, run Digital Footprint Analysis, then turn findings into a privacy action plan. Family Hub is a separate optional space for children’s missions—not a required step in DFA.
               </p>
 
-              <div className="mt-6 grid gap-4 md:grid-cols-2">
-                {journey.phases.map((phase, index) => (
+              <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {corePhases.map((phase, index) => (
                   <div key={phase.key} className="rounded-2xl border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-100/60">
                     <div className="flex items-start justify-between gap-3">
                       <div>
@@ -51,6 +56,20 @@ const GetStartedPage: React.FC = () => {
                   </div>
                 ))}
               </div>
+              {optionalPhases.length > 0 && (
+                <div className="mt-4 rounded-2xl border border-dashed border-gray-300 bg-white/60 p-4 dark:border-gray-600 dark:bg-gray-900/30">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">Optional</p>
+                  {optionalPhases.map((phase) => (
+                    <div key={phase.key} className="mt-2">
+                      <h3 className="text-base font-bold text-gray-900 dark:text-gray-100">{phase.title}</h3>
+                      <p className="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-300">{phase.description}</p>
+                      <Link to={phase.path} className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-green-700 hover:text-green-800 dark:text-green-400 dark:hover:text-green-300">
+                        Open Family Hub <ArrowRight size={15} />
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
             <div className="space-y-6">

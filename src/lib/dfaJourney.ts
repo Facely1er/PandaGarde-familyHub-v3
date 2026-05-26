@@ -1,13 +1,29 @@
+export type DfaJourneyPhaseKey = 'profile' | 'dfa' | 'plan' | 'hub';
+
+/** Parent-led DFA path on the website — Family Hub is separate (child missions). */
+export const DFA_CORE_PHASE_KEYS: readonly DfaJourneyPhaseKey[] = ['profile', 'dfa', 'plan'];
+
 export interface DfaJourneyPhase {
   id: number;
-  key: 'profile' | 'dfa' | 'plan' | 'hub';
+  key: DfaJourneyPhaseKey;
   title: string;
   description: string;
   path: string;
   completed: boolean;
   visited: boolean;
+  /** When true, phase is not counted toward DFA completion % or resume path. */
+  optional?: boolean;
   updatedAt?: string;
 }
+
+export const isCoreDfaPhase = (phase: Pick<DfaJourneyPhase, 'key' | 'optional'>): boolean =>
+  !phase.optional && DFA_CORE_PHASE_KEYS.includes(phase.key);
+
+export const getCoreDfaPhases = (phases: DfaJourneyPhase[]): DfaJourneyPhase[] =>
+  phases.filter(isCoreDfaPhase);
+
+export const getOptionalDfaPhases = (phases: DfaJourneyPhase[]): DfaJourneyPhase[] =>
+  phases.filter((phase) => phase.optional);
 
 export interface DfaJourneyState {
   phases: DfaJourneyPhase[];
@@ -38,15 +54,18 @@ const phaseBlueprint: Omit<DfaJourneyPhase, 'completed' | 'visited' | 'updatedAt
     id: 3,
     key: 'plan',
     title: 'Turn findings into action',
-    description: 'Use the privacy assessment and goals to decide what to fix first.',
+    description:
+      'Complete the privacy assessment, then use parent guides, Privacy Panda stories, activities, and the Digital Bamboo Journal on the website.',
     path: '/privacy-assessment',
   },
   {
     id: 4,
     key: 'hub',
-    title: 'Keep going in Family Hub',
-    description: 'Save your progress locally and continue your privacy journey without starting over.',
+    title: 'Family Hub (optional)',
+    description:
+      'Separate workspace for age-matched privacy missions and kids’ progress — not required to finish parent Digital Footprint Analysis.',
     path: '/family-hub/dashboard',
+    optional: true,
   },
 ];
 
@@ -94,19 +113,25 @@ const normalizeState = (raw: Partial<DfaJourneyState> | null | undefined): DfaJo
     const matched = rawPhases.find((item) => item?.key === phase.key || item?.id === phase.id);
     return {
       ...phase,
+      optional: phase.optional ?? false,
       completed: Boolean(matched?.completed),
       visited: Boolean(matched?.visited),
       updatedAt: matched?.updatedAt,
     };
   });
 
-  const completedCount = phases.filter((phase) => phase.completed).length;
-  const nextIncomplete = phases.find((phase) => !phase.completed);
+  const corePhases = getCoreDfaPhases(phases);
+  const completedCoreCount = corePhases.filter((phase) => phase.completed).length;
+  const nextIncompleteCore = corePhases.find((phase) => !phase.completed);
+  const defaultResumePath =
+    nextIncompleteCore?.path ??
+    (completedCoreCount >= corePhases.length ? '/digital-footprint' : '/get-started');
 
   return {
     phases,
-    progressPercent: Math.round((completedCount / phases.length) * 100),
-    resumePath: nextIncomplete?.path || '/family-hub/dashboard',
+    progressPercent:
+      corePhases.length > 0 ? Math.round((completedCoreCount / corePhases.length) * 100) : 0,
+    resumePath: raw?.resumePath || defaultResumePath,
     lastUpdated: raw.lastUpdated || new Date().toISOString(),
   };
 };
