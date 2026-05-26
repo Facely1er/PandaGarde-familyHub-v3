@@ -4,6 +4,8 @@ import {
   FOR_FAMILIES_PATH,
   FOOTPRINT_REVIEW_NAV_LABEL,
   GUIDES_STORIES_NAV_LABEL,
+  LEGAL_HUB_LABEL,
+  LEGAL_HUB_PATH,
 } from '../data/siteNavigation';
 
 export interface BreadcrumbItem {
@@ -20,6 +22,15 @@ const FOOTPRINT_WORKFLOW_PATHS = new Set([
   '/footprint',
   '/scoring-methodology',
   '/digital-rights',
+]);
+
+const LEGAL_PAGE_PATHS = new Set([
+  '/privacy',
+  '/terms',
+  '/cookies',
+  '/accessibility',
+  '/parental-consent',
+  '/parental-consent/pending',
 ]);
 
 const LEGACY_PRINTABLE_PATHS = new Set([
@@ -93,6 +104,7 @@ export const BREADCRUMB_PAGE_LABELS: Record<string, string> = {
   '/terms': 'Terms of service',
   '/cookies': 'Cookie policy',
   '/accessibility': 'Accessibility',
+  [LEGAL_HUB_PATH]: LEGAL_HUB_LABEL,
   '/downloads': 'Downloads',
   '/downloads/coloring-sheets': 'Coloring sheets',
   '/coloring-sheets': 'Coloring sheets',
@@ -141,6 +153,27 @@ function footprintAncestor(): BreadcrumbItem {
 
 function printablesAncestor(): BreadcrumbItem {
   return { label: PRINTABLES_HUB_LABEL, path: PRINTABLES_HUB_PATH };
+}
+
+function legalAncestor(): BreadcrumbItem {
+  return { label: LEGAL_HUB_LABEL, path: LEGAL_HUB_PATH };
+}
+
+function resolveLegalAncestors(pathname: string): BreadcrumbItem[] {
+  if (pathname === LEGAL_HUB_PATH) {
+    return [];
+  }
+
+  const ancestors: BreadcrumbItem[] = [legalAncestor()];
+
+  if (pathname.startsWith('/parental-consent/') && pathname !== '/parental-consent') {
+    ancestors.push({
+      label: BREADCRUMB_PAGE_LABELS['/parental-consent'],
+      path: '/parental-consent',
+    });
+  }
+
+  return ancestors;
 }
 
 function resolvePrintableAncestors(pathname: string): BreadcrumbItem[] {
@@ -209,6 +242,10 @@ function resolveAncestors(pathname: string): BreadcrumbItem[] {
       return [];
     }
     return [{ label: BREADCRUMB_PAGE_LABELS['/family-hub'], path: '/family-hub' }];
+  }
+
+  if (pathname === LEGAL_HUB_PATH || LEGAL_PAGE_PATHS.has(pathname)) {
+    return resolveLegalAncestors(pathname);
   }
 
   if (pathname.startsWith('/newsletter')) {

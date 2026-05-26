@@ -31,6 +31,7 @@ const APP_STATIC_PATHS = new Set([
   '/about',
   '/contact',
   '/support',
+  '/legal',
   '/privacy',
   '/terms',
   '/cookies',
@@ -70,7 +71,7 @@ describe('footer navigation links', () => {
     expect(footerFootprintLinks).toHaveLength(4);
     expect(footerFamilyLinks).toHaveLength(4);
     expect(footerHelpCenterLinks).toHaveLength(5);
-    expect(footerLegalLinks).toHaveLength(4);
+    expect(footerLegalLinks).toHaveLength(5);
   });
 
   it('footer column titles do not duplicate header nav labels', () => {

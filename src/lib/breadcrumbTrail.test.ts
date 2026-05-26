@@ -93,4 +93,29 @@ describe('buildBreadcrumbTrail', () => {
   it('help pages stay flat under Home', () => {
     expect(buildBreadcrumbTrail('/faq').map((i) => i.label)).toEqual(['Home', 'FAQ']);
   });
+
+  it('legal hub is Home → Legal', () => {
+    expect(buildBreadcrumbTrail('/legal').map((i) => i.label)).toEqual(['Home', 'Legal']);
+  });
+
+  it('cookie policy is under Legal', () => {
+    expect(buildBreadcrumbTrail('/cookies').map((i) => i.label)).toEqual([
+      'Home',
+      'Legal',
+      'Cookie policy',
+    ]);
+  });
+
+  it('privacy policy is under Legal', () => {
+    expect(buildBreadcrumbTrail('/privacy').map((i) => i.path)).toEqual(['/', '/legal', '/privacy']);
+  });
+
+  it('parental consent pending is under Legal and Parental consent', () => {
+    expect(buildBreadcrumbTrail('/parental-consent/pending').map((i) => i.label)).toEqual([
+      'Home',
+      'Legal',
+      'Parental consent',
+      'Consent pending',
+    ]);
+  });
 });

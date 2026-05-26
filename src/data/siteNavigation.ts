@@ -140,7 +140,12 @@ export const footerJournalLink: FooterExternalNavItem = {
   external: true,
 };
 
+/** Hub for privacy, terms, cookies, accessibility, and consent pages. */
+export const LEGAL_HUB_PATH = '/legal';
+export const LEGAL_HUB_LABEL = 'Legal';
+
 export const footerLegalLinks: SiteNavItem[] = [
+  { id: 'footer-legal-hub', icon: Scale, label: 'Legal overview', href: LEGAL_HUB_PATH },
   { id: 'footer-privacy-policy', icon: Shield, label: 'Privacy', href: '/privacy' },
   { id: 'footer-terms', icon: FileText, label: 'Terms', href: '/terms' },
   { id: 'footer-cookies', icon: Cookie, label: 'Cookies', href: '/cookies' },

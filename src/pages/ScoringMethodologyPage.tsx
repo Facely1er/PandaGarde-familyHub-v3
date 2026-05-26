@@ -1,8 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { BarChart3, Gauge, Info, ShieldCheck } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
+import {
+  AlertTriangle,
+  ArrowRight,
+  BarChart3,
+  Building2,
+  ChevronRight,
+  Gauge,
+  Info,
+  Layers,
+  LayoutGrid,
+  ListChecks,
+  Network,
+  Shield,
+  ShieldCheck,
+  Tags,
+  UserRound,
+} from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
-import { PageLead, PageSection } from '../components/layout/PageContent';
+import {
+  PageContent,
+  PageLead,
+  PageSection,
+  ShellIconCard,
+  ShellRowCard,
+} from '../components/layout/PageContent';
 import {
   dfaMethodology,
   perServiceMethodology,
@@ -12,6 +35,110 @@ import {
   SCORING_METHODOLOGY_VERSION,
 } from '../data/scoringMethodology';
 
+const JUMP_LINKS = [
+  { href: '#score-bands', label: 'Score bands' },
+  { href: '#per-app', label: 'Per-app index' },
+  { href: '#dfa-methodology', label: 'DFA scoring' },
+  { href: '#limitations', label: 'Limitations' },
+] as const;
+
+type ExposureBand = { range: string; label: string; meaning: string };
+
+type BandTone = 'low' | 'medium' | 'high' | 'very-high';
+
+function bandTone(label: string): BandTone {
+  const normalized = label.toLowerCase();
+  if (normalized.includes('very') || normalized === 'critical') return 'very-high';
+  if (normalized === 'high') return 'high';
+  if (normalized === 'moderate' || normalized === 'medium') return 'medium';
+  return 'low';
+}
+
+function parseWeightPercent(weight: string): number {
+  const match = weight.match(/(\d+)/);
+  return match ? Number(match[1]) : 0;
+}
+
+const FACTOR_ICONS: Record<string, LucideIcon> = {
+  'Base risk level': Shield,
+  'Privacy concern tags': Tags,
+  'Minimum age': UserRound,
+  Category: LayoutGrid,
+  'Parent company & siblings': Building2,
+};
+
+function BandList({ bands }: { bands: ExposureBand[] }) {
+  return (
+    <ul className="methodology-bands__list">
+      {bands.map((band) => {
+        const tone = bandTone(band.label);
+        return (
+          <li key={band.range} className={`methodology-band methodology-band--${tone}`}>
+            <div className="methodology-band__range" aria-hidden>
+              <span className="methodology-band__range-text">{band.range}</span>
+            </div>
+            <div className="methodology-band__copy">
+              <span className="methodology-band__label">{band.label}</span>
+              <p className="methodology-band__meaning">{band.meaning}</p>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+function ExposureBandComparison() {
+  return (
+    <section
+      id="score-bands"
+      className="scoring-methodology__section scoring-methodology__section--bands methodology-bands-compare"
+      aria-labelledby="score-bands-heading"
+    >
+      <h2 id="score-bands-heading" className="methodology-bands-compare__title">
+        Score bands at a glance
+      </h2>
+      <p className="methodology-bands-compare__lead">
+        Both scores use 0–100 with the same color idea—green is calmer, red needs more attention. DFA household
+        risk uses slightly different cutoffs than per-app indexes; compare them here once instead of repeating
+        below.
+      </p>
+      <div className="methodology-bands-compare__grid">
+        <div className="methodology-bands-compare__col">
+          <h3 className="methodology-bands-compare__col-title">Per-app Privacy Exposure Index</h3>
+          <p className="methodology-bands-compare__col-hint">Each service in the catalog</p>
+          <BandList bands={perServiceMethodology.bands} />
+        </div>
+        <div className="methodology-bands-compare__col">
+          <h3 className="methodology-bands-compare__col-title">DFA household risk score</h3>
+          <p className="methodology-bands-compare__col-hint">Rollup on the footprint page gauge</p>
+          <BandList bands={dfaMethodology.riskLevels} />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function WeightBar({ label, weight, description }: { label: string; weight: string; description: string }) {
+  const pct = parseWeightPercent(weight);
+  return (
+    <li className="methodology-driver">
+      <div className="methodology-driver__head">
+        <span className="methodology-driver__label">{label}</span>
+        <span className="methodology-driver__weight">{weight}</span>
+      </div>
+      <div
+        className="methodology-driver__track"
+        role="presentation"
+        aria-hidden
+      >
+        <div className="methodology-driver__fill" style={{ width: `${pct}%` }} />
+      </div>
+      <p className="methodology-driver__desc">{description}</p>
+    </li>
+  );
+}
+
 const ScoringMethodologyPage: React.FC = () => {
   return (
     <PageLayout
@@ -19,228 +146,271 @@ const ScoringMethodologyPage: React.FC = () => {
       subtitle={scoringMethodologyIntro.lead}
       breadcrumbs
     >
-      <PageLead>
-        Methodology version {SCORING_METHODOLOGY_VERSION}. Jump to{' '}
-        <a href="#dfa-methodology" className="font-semibold text-green-700 hover:underline dark:text-green-400">
-          Digital Footprint Analysis
-        </a>{' '}
-        or{' '}
-        <a href="#per-app" className="font-semibold text-green-700 hover:underline dark:text-green-400">
-          per-app indexes
-        </a>
-        .
-      </PageLead>
-
-      <PageSection
-        id="per-app"
-        header={{
-          eyebrow: 'Service catalog',
-          title: perServiceMethodology.title,
-          lead: perServiceMethodology.summary,
-        }}
-      >
-        <div className="shell-stack">
-          {perServiceMethodology.factors.map((factor) => (
-            <article
-              key={factor.label}
-              className="shell-card shell-card--panel shell-card--panel-inner rounded-2xl border border-gray-200 p-5 dark:border-gray-700 dark:bg-gray-200"
-            >
-              <h3 className="shell-card__title text-base font-bold text-gray-900 dark:text-gray-100">
-                {factor.label}
-              </h3>
-              <p className="shell-card__body mt-2 text-sm text-gray-600 dark:text-gray-300">{factor.description}</p>
-            </article>
-          ))}
+      <PageContent className="scoring-methodology">
+        <div className="scoring-methodology__hero">
+          <span className="scoring-methodology__version">Methodology v{SCORING_METHODOLOGY_VERSION}</span>
+          <p className="scoring-methodology__hero-lead">
+            Two related views—per-app exposure in the catalog, then household Digital Footprint Analysis when you
+            are ready.
+          </p>
+          <ol className="scoring-methodology__flow" aria-label="How scores connect">
+            <li className="scoring-methodology__flow-step">
+              <span className="scoring-methodology__flow-icon" aria-hidden>
+                <Layers size={22} />
+              </span>
+              <span className="scoring-methodology__flow-label">Service Catalog</span>
+              <span className="scoring-methodology__flow-hint">You list apps</span>
+            </li>
+            <li className="scoring-methodology__flow-arrow" aria-hidden>
+              <ChevronRight size={20} />
+            </li>
+            <li className="scoring-methodology__flow-step">
+              <span className="scoring-methodology__flow-icon scoring-methodology__flow-icon--index" aria-hidden>
+                <Gauge size={22} />
+              </span>
+              <span className="scoring-methodology__flow-label">0–100 index</span>
+              <span className="scoring-methodology__flow-hint">Per-app exposure</span>
+            </li>
+            <li className="scoring-methodology__flow-arrow" aria-hidden>
+              <ChevronRight size={20} />
+            </li>
+            <li className="scoring-methodology__flow-step">
+              <span className="scoring-methodology__flow-icon scoring-methodology__flow-icon--dfa" aria-hidden>
+                <BarChart3 size={22} />
+              </span>
+              <span className="scoring-methodology__flow-label">DFA risk score</span>
+              <span className="scoring-methodology__flow-hint">Household rollup</span>
+            </li>
+          </ol>
         </div>
 
-        <div className="mt-6 overflow-x-auto rounded-2xl border border-gray-200 dark:border-gray-700">
-          <table className="min-w-full text-left text-sm">
-            <thead className="bg-gray-50 dark:bg-gray-200">
-              <tr>
-                <th scope="col" className="px-4 py-3 font-semibold text-gray-900 dark:text-gray-100">
-                  Index range
-                </th>
-                <th scope="col" className="px-4 py-3 font-semibold text-gray-900 dark:text-gray-100">
-                  Label
-                </th>
-                <th scope="col" className="px-4 py-3 font-semibold text-gray-900 dark:text-gray-100">
-                  How to read it
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-              {perServiceMethodology.bands.map((band) => (
-                <tr key={band.range} className="bg-white dark:bg-gray-100">
-                  <td className="px-4 py-3 font-medium text-gray-900 dark:text-gray-100">{band.range}</td>
-                  <td className="px-4 py-3 text-gray-700 dark:text-gray-300">{band.label}</td>
-                  <td className="px-4 py-3 text-gray-600 dark:text-gray-400">{band.meaning}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">
-          <Link to="/service-catalog" className="font-semibold text-green-700 hover:underline dark:text-green-400">
-            Open Service Catalog
-          </Link>{' '}
-          to add apps and see per-service indexes.
-        </p>
-      </PageSection>
-
-      <PageSection
-        id="dfa-methodology"
-        header={{
-          eyebrow: 'Digital Footprint Analysis',
-          title: dfaMethodology.title,
-          lead: dfaMethodology.summary,
-        }}
-      >
-        <div className="shell-card shell-card--panel rounded-2xl border border-gray-200 p-5 dark:border-gray-700 dark:bg-gray-200">
-          <h3 className="text-base font-bold text-gray-900 dark:text-gray-100">Before you run DFA</h3>
-          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-gray-600 dark:text-gray-300">
-            {dfaMethodology.prerequisites.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="mt-6">
-          <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">{dfaMethodology.scoresOnPage.title}</h3>
-          <div className="mt-4 grid gap-4 md:grid-cols-2">
-            {dfaMethodology.scoresOnPage.items.map((item) => (
-              <article
-                key={item.label}
-                className="rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-gray-600 dark:bg-gray-200/80"
-              >
-                <h4 className="font-semibold text-slate-900 dark:text-slate-100">{item.label}</h4>
-                <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">{item.description}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-
-        <div className="mt-8">
-          <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">DFA risk levels</h3>
-          <div className="mt-4 overflow-x-auto rounded-2xl border border-gray-200 dark:border-gray-700">
-            <table className="min-w-full text-left text-sm">
-              <thead className="bg-gray-50 dark:bg-gray-200">
-                <tr>
-                  <th scope="col" className="px-4 py-3 font-semibold text-gray-900 dark:text-gray-100">
-                    Risk score
-                  </th>
-                  <th scope="col" className="px-4 py-3 font-semibold text-gray-900 dark:text-gray-100">
-                    Level
-                  </th>
-                  <th scope="col" className="px-4 py-3 font-semibold text-gray-900 dark:text-gray-100">
-                    How to read it
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                {dfaMethodology.riskLevels.map((band) => (
-                  <tr key={band.range} className="bg-white dark:bg-gray-100">
-                    <td className="px-4 py-3 font-medium text-gray-900 dark:text-gray-100">{band.range}</td>
-                    <td className="px-4 py-3 text-gray-700 dark:text-gray-300">{band.label}</td>
-                    <td className="px-4 py-3 text-gray-600 dark:text-gray-400">{band.meaning}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div className="mt-8 grid gap-6 lg:grid-cols-2">
-          {dfaMethodology.tiers.map((tier) => (
-            <article
-              key={tier.id}
-              className="shell-card shell-card--panel rounded-2xl border border-emerald-200 bg-emerald-50/40 p-5 dark:border-emerald-800 dark:bg-emerald-950/30"
-            >
-              <div className="mb-2 inline-flex items-center gap-2 text-emerald-800 dark:text-emerald-300">
-                <Gauge size={18} aria-hidden />
-                <h3 className="text-lg font-bold">{tier.label}</h3>
-              </div>
-              <p className="text-sm text-gray-700 dark:text-gray-300">{tier.description}</p>
-              <p className="mt-3 rounded-lg bg-white/80 px-3 py-2 font-mono text-xs text-emerald-900 dark:bg-gray-100/60 dark:text-emerald-200">
-                {tier.formula}
-              </p>
-              <ul className="mt-4 space-y-3">
-                {tier.drivers.map((driver) => (
-                  <li key={driver.label} className="text-sm">
-                    <span className="font-semibold text-gray-900 dark:text-gray-100">
-                      {driver.label} ({driver.weight})
-                    </span>
-                    <p className="mt-1 text-gray-600 dark:text-gray-400">{driver.description}</p>
-                  </li>
-                ))}
-              </ul>
-            </article>
-          ))}
-        </div>
-
-        <div className="mt-6 shell-card shell-card--panel rounded-2xl border border-gray-200 p-5 dark:border-gray-700 dark:bg-gray-200">
-          <h3 className="text-base font-bold text-gray-900 dark:text-gray-100">{dfaMethodology.flags.title}</h3>
-          <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">{dfaMethodology.flags.description}</p>
-        </div>
-
-        <div className="mt-6 shell-card shell-card--panel rounded-2xl border border-gray-200 p-5 dark:border-gray-700 dark:bg-gray-200">
-          <h3 className="text-base font-bold text-gray-900 dark:text-gray-100">
-            {dfaMethodology.footprintSnapshot.title}
-          </h3>
-          <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">{dfaMethodology.footprintSnapshot.description}</p>
-          <ul className="mt-3 space-y-2">
-            {dfaMethodology.footprintSnapshot.factors.map((f) => (
-              <li key={f.label} className="text-sm text-gray-700 dark:text-gray-300">
-                <strong>{f.label}</strong> ({f.portion}) — {f.detail}
+        <nav className="scoring-methodology__jump" aria-label="On this page">
+          <ul className="scoring-methodology__jump-list">
+            {JUMP_LINKS.map((link) => (
+              <li key={link.href}>
+                <a href={link.href} className="scoring-methodology__jump-link">
+                  {link.label}
+                </a>
               </li>
             ))}
           </ul>
-        </div>
+        </nav>
 
-        <div className="mt-6">
-          <h3 className="text-base font-bold text-gray-900 dark:text-gray-100">What DFA includes</h3>
-          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-gray-600 dark:text-gray-300">
-            {dfaMethodology.whatDfaIncludes.map((item) => (
-              <li key={item}>{item}</li>
+        <PageLead>
+          Educational scores from catalog metadata you choose—not live monitoring. Jump to any section above.
+        </PageLead>
+
+        <ExposureBandComparison />
+
+        <PageSection
+          id="per-app"
+          className="scoring-methodology__section scoring-methodology__section--catalog"
+          header={{
+            eyebrow: 'Service catalog',
+            title: perServiceMethodology.title,
+            lead: perServiceMethodology.summary,
+            icon: <Layers size={22} strokeWidth={2} />,
+            iconTone: 'sky',
+          }}
+        >
+          <div className="shell-grid shell-grid--2 methodology-factors">
+            {perServiceMethodology.factors.map((factor) => {
+              const Icon = FACTOR_ICONS[factor.label] ?? Shield;
+              return (
+                <ShellIconCard
+                  key={factor.label}
+                  icon={<Icon size={20} strokeWidth={2} />}
+                  title={factor.label}
+                  className="methodology-factor-card"
+                >
+                  <p className="shell-card__body text-sm">{factor.description}</p>
+                </ShellIconCard>
+              );
+            })}
+          </div>
+
+          <p className="methodology-xref">
+            Index ranges and labels are in{' '}
+            <a href="#score-bands" className="scoring-methodology__text-link">
+              Score bands at a glance
+            </a>
+            .
+          </p>
+
+          <p className="scoring-methodology__inline-cta">
+            <Link to="/service-catalog" className="scoring-methodology__text-link">
+              Open Service Catalog
+              <ArrowRight size={16} aria-hidden />
+            </Link>
+            <span className="text-gray-500 dark:text-gray-400"> to add apps and see indexes.</span>
+          </p>
+        </PageSection>
+
+        <PageSection
+          id="dfa-methodology"
+          className="scoring-methodology__section scoring-methodology__section--dfa"
+          header={{
+            eyebrow: 'Digital Footprint Analysis',
+            title: dfaMethodology.title,
+            lead: dfaMethodology.summary,
+            icon: <BarChart3 size={22} strokeWidth={2} />,
+            iconTone: 'emerald',
+          }}
+        >
+          <ol className="methodology-steps">
+            {dfaMethodology.prerequisites.map((item, index) => (
+              <li key={item} className="methodology-steps__item">
+                <span className="methodology-steps__num" aria-hidden>
+                  {index + 1}
+                </span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ol>
+
+          <h3 className="methodology-subhead">{dfaMethodology.scoresOnPage.title}</h3>
+          <div className="shell-grid shell-grid--2">
+            {dfaMethodology.scoresOnPage.items.map((item) => (
+              <ShellIconCard
+                key={item.label}
+                icon={<Gauge size={20} strokeWidth={2} />}
+                title={item.label}
+                className="methodology-score-card"
+              >
+                <p className="shell-card__body text-sm">{item.description}</p>
+              </ShellIconCard>
+            ))}
+          </div>
+
+          <p className="methodology-xref">
+            DFA risk levels use different cutoffs than per-app indexes—see the{' '}
+            <a href="#score-bands" className="scoring-methodology__text-link">
+              household column in Score bands
+            </a>
+            .
+          </p>
+
+          <div className="methodology-tiers">
+            {dfaMethodology.tiers.map((tier) => (
+              <article
+                key={tier.id}
+                className={`methodology-tier methodology-tier--${tier.id}`}
+              >
+                <div className="methodology-tier__head">
+                  <Gauge size={20} aria-hidden />
+                  <h3 className="methodology-tier__title">{tier.label}</h3>
+                </div>
+                <p className="methodology-tier__desc">{tier.description}</p>
+                <p className="methodology-tier__formula">{tier.formula}</p>
+                <ul className="methodology-tier__drivers">
+                  {tier.drivers.map((driver) => (
+                    <WeightBar
+                      key={driver.label}
+                      label={driver.label}
+                      weight={driver.weight}
+                      description={driver.description}
+                    />
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+
+          <div className="shell-stack methodology-callouts">
+            <ShellRowCard
+              icon={<AlertTriangle size={20} />}
+              title={dfaMethodology.flags.title}
+              description={dfaMethodology.flags.description}
+            />
+            <article className="shell-card shell-card--panel methodology-snapshot">
+              <div className="methodology-snapshot__head">
+                <Network size={20} aria-hidden />
+                <h3 className="shell-card__title text-base">{dfaMethodology.footprintSnapshot.title}</h3>
+              </div>
+              <p className="shell-card__body text-sm">{dfaMethodology.footprintSnapshot.description}</p>
+              <ul className="methodology-snapshot__bars">
+                {dfaMethodology.footprintSnapshot.factors.map((f) => {
+                  const portionNum = parseInt(f.portion.replace(/\D/g, ''), 10) || 0;
+                  return (
+                    <li key={f.label} className="methodology-snapshot__row">
+                      <div className="methodology-snapshot__row-head">
+                        <span className="font-semibold text-gray-900 dark:text-gray-100">{f.label}</span>
+                        <span className="text-xs font-medium text-gray-500 dark:text-gray-400">{f.portion}</span>
+                      </div>
+                      <div className="methodology-snapshot__track" role="presentation" aria-hidden>
+                        <div
+                          className="methodology-snapshot__fill"
+                          style={{ width: `${portionNum}%` }}
+                        />
+                      </div>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">{f.detail}</p>
+                    </li>
+                  );
+                })}
+              </ul>
+            </article>
+          </div>
+
+          <div className="methodology-includes">
+            <h3 className="methodology-subhead">
+              <ListChecks size={20} className="inline-block align-text-bottom" aria-hidden /> What DFA includes
+            </h3>
+            <ul className="methodology-includes__list">
+              {dfaMethodology.whatDfaIncludes.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
+
+          <p className="scoring-methodology__inline-cta">
+            <Link to="/digital-footprint" className="scoring-methodology__text-link">
+              Run Digital Footprint Analysis
+              <ArrowRight size={16} aria-hidden />
+            </Link>
+            <span className="text-gray-500 dark:text-gray-400"> after at least three catalog services.</span>
+          </p>
+        </PageSection>
+
+        <PageSection
+          id="limitations"
+          className="scoring-methodology__section scoring-methodology__section--limits"
+          header={{
+            title: 'Important limitations',
+            lead: 'What these scores are not designed to do.',
+            icon: <Info size={22} strokeWidth={2} />,
+            iconTone: 'amber',
+          }}
+        >
+          <ul className="methodology-limits">
+            {scoringLimitations.map((item) => (
+              <li key={item} className="methodology-limits__item">
+                <Info size={18} className="methodology-limits__icon" aria-hidden />
+                <span>{item}</span>
+              </li>
             ))}
           </ul>
-        </div>
+          <p className="methodology-lineage">{scoringLineageNote}</p>
+        </PageSection>
 
-        <p className="mt-6 text-sm text-gray-600 dark:text-gray-400">
-          <Link to="/digital-footprint" className="font-semibold text-green-700 hover:underline dark:text-green-400">
-            Run Digital Footprint Analysis
-          </Link>{' '}
-          after you have at least three services in the catalog.
-        </p>
-      </PageSection>
-
-      <PageSection
-        id="limitations"
-        header={{ title: 'Important limitations', lead: 'What these scores are not designed to do.' }}
-      >
-        <ul className="shell-card shell-card--panel space-y-3 rounded-2xl border border-amber-200 bg-amber-50/60 p-5 text-sm text-amber-950 dark:border-amber-800 dark:bg-amber-950/30 dark:text-amber-100">
-          {scoringLimitations.map((item) => (
-            <li key={item} className="flex gap-2">
-              <Info size={16} className="mt-0.5 shrink-0" aria-hidden />
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
-        <p className="mt-4 text-sm leading-relaxed text-gray-600 dark:text-gray-400">{scoringLineageNote}</p>
-      </PageSection>
-
-      <PageSection header={{ title: 'Put scores to work' }}>
-        <div className="flex flex-wrap gap-3">
-          <Link to="/service-catalog" className="button button-secondary inline-flex items-center gap-2">
-            <ShieldCheck size={16} aria-hidden />
-            Service Catalog
-          </Link>
-          <Link to="/digital-footprint" className="button button-primary inline-flex items-center gap-2">
-            <BarChart3 size={16} aria-hidden />
-            Digital Footprint Analysis
-          </Link>
-        </div>
-      </PageSection>
+        <section className="scoring-methodology__cta" aria-labelledby="methodology-cta-heading">
+          <h2 id="methodology-cta-heading" className="scoring-methodology__cta-title">
+            Put scores to work
+          </h2>
+          <p className="scoring-methodology__cta-lead">
+            Build your catalog, review exposure, then continue with assessment and Family Hub missions.
+          </p>
+          <div className="scoring-methodology__cta-actions">
+            <Link to="/service-catalog" className="button button-secondary inline-flex items-center gap-2">
+              <ShieldCheck size={16} aria-hidden />
+              Service Catalog
+            </Link>
+            <Link to="/digital-footprint" className="button button-primary inline-flex items-center gap-2">
+              <BarChart3 size={16} aria-hidden />
+              Digital Footprint Analysis
+            </Link>
+          </div>
+        </section>
+      </PageContent>
     </PageLayout>
   );
 };

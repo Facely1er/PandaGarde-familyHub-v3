@@ -70,6 +70,7 @@ const PrivacyLearningKitPage = lazy(() => import('./pages/PrivacyLearningKitPage
 const WorksheetsPage = lazy(() => import('./pages/WorksheetsPage'));
 const PilotPage = lazy(() => import('./pages/PilotPage'));
 const ServiceCatalogPage = lazy(() => import('./pages/ServiceCatalogPage'));
+const LegalPage = lazy(() => import('./pages/LegalPage'));
 const ParentalConsentPage = lazy(() => import('./pages/ParentalConsentPage'));
 const ParentalConsentPendingPage = lazy(() => import('./pages/ParentalConsentPendingPage'));
 const DigitalFootprintPage = lazy(() => import('./pages/DigitalFootprintPage'));
@@ -258,6 +259,7 @@ function App() {
             <Route path="/parental-consent/pending" element={<ParentalConsentPendingPage />} />
 
             {/* Legal Pages */}
+            <Route path="/legal" element={<LegalPage />} />
             <Route path="/privacy" element={<PrivacyPolicyPage />} />
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/cookies" element={<CookiesPage />} />
