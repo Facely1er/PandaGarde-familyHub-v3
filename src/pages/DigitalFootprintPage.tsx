@@ -9,6 +9,9 @@ import DfaMethodologyCallout from '../components/dfa/DfaMethodologyCallout';
 import { useFamily } from '../contexts/FamilyContext';
 import { footprintAnalyzer } from '../lib/footprintAnalyzer';
 import { updateDfaJourneyPhase } from '../lib/dfaJourney';
+import { buildDfaScore, loadDfaScoreTier } from '../lib/dfaScoreEngine';
+import { downloadDfaExecutiveSummary } from '../lib/dfaReport';
+import { logger } from '../lib/logger';
 
 const DigitalFootprintEducator: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -32,6 +35,7 @@ const DigitalFootprintEducator: React.FC = () => {
 };
 
 const DigitalFootprintPage: React.FC = () => {
+  const [isExportingPdf, setIsExportingPdf] = useState(false);
   const { familyMembers, getFamilyServices } = useFamily();
   const catalogServices = getFamilyServices();
   const memberServices: Record<string, string[]> = {};
@@ -70,28 +74,18 @@ const DigitalFootprintPage: React.FC = () => {
   const membersForAnalysis = familyMembers.length > 0 ? familyMembers : [{ id: 'family', services: catalogServices.map(id => ({ serviceId: id, status: 'approved' })) }];
   const analysis = footprintAnalyzer.analyzeFamilyFootprint(membersForAnalysis, memberServices);
 
-  const handleExport = () => {
-    if (!analysis) {return;}
-    const exportData = {
-      analysisDate: new Date().toISOString(),
-      familyScore: analysis.familyScore,
-      privacyScore: analysis.privacyScore,
-      totalServices: analysis.totalServices,
-      totalMembers: analysis.totalMembers,
-      averageExposureIndex: analysis.averageExposureIndex,
-      categoryBreakdown: analysis.categoryBreakdown,
-      highRiskServices: analysis.serviceRisks.filter(r => r.exposureIndex >= 70).map(r => ({ name: r.serviceName, exposureIndex: r.exposureIndex, memberCount: r.memberCount })),
-      recommendations: analysis.recommendations.map(r => ({ title: r.title, priority: r.priority, actionItems: r.actionItems }))
-    };
-    const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `pandagarde-footprint-analysis-${new Date().toISOString().split('T')[0]}.json`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+  const handleExportPdf = async () => {
+    if (!analysis || isExportingPdf) {return;}
+    setIsExportingPdf(true);
+    try {
+      const tier = loadDfaScoreTier();
+      const score = buildDfaScore(analysis, tier);
+      await downloadDfaExecutiveSummary(analysis, score);
+    } catch (error) {
+      logger.error('DFA PDF export failed', error);
+    } finally {
+      setIsExportingPdf(false);
+    }
   };
 
   return (
@@ -119,8 +113,16 @@ const DigitalFootprintPage: React.FC = () => {
               </Link>
             </div>
             {analysis && (
-              <button onClick={handleExport} className="flex items-center space-x-2 rounded-lg bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700">
-                <Download className="h-4 w-4" /> <span>Export JSON</span>
+              <button
+                type="button"
+                onClick={() => { void handleExportPdf(); }}
+                disabled={isExportingPdf}
+                aria-busy={isExportingPdf}
+                aria-label="Download digital footprint report as PDF"
+                className="flex items-center space-x-2 rounded-lg bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-70"
+              >
+                <Download className="h-4 w-4" aria-hidden />
+                <span>{isExportingPdf ? 'Generating PDF...' : 'Download PDF'}</span>
               </button>
             )}
           </div>

@@ -13,13 +13,10 @@ interface Props {
   analysis: FootprintAnalysis;
 }
 
-const STORAGE_KEY = 'pandagarde_dfa_score_tier';
-
 const DfaScoreOverview: React.FC<Props> = ({ analysis }) => {
   const [tier, setTier] = useState<DfaScoreTier>(() => {
     if (typeof window === 'undefined') {return 'basic';}
-    const stored = window.localStorage.getItem(STORAGE_KEY);
-    return stored === 'advanced' ? 'advanced' : 'basic';
+    return window.localStorage.getItem(DFA_SCORE_TIER_STORAGE_KEY) === 'advanced' ? 'advanced' : 'basic';
   });
 
   const score = useMemo(() => buildDfaScore(analysis, tier), [analysis, tier]);
@@ -27,7 +24,7 @@ const DfaScoreOverview: React.FC<Props> = ({ analysis }) => {
   const handleTierChange = (next: DfaScoreTier): void => {
     setTier(next);
     if (typeof window !== 'undefined') {
-      window.localStorage.setItem(STORAGE_KEY, next);
+      window.localStorage.setItem(DFA_SCORE_TIER_STORAGE_KEY, next);
     }
   };
 
@@ -95,4 +92,4 @@ const DfaScoreOverview: React.FC<Props> = ({ analysis }) => {
   );
 };
 
-export
+export default DfaScoreOverview;

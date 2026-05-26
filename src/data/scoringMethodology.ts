@@ -168,7 +168,7 @@ export const dfaMethodology = {
     'Per-service exposure list and category/context breakdowns',
     'Data-sharing network and broker convergence views (Advanced context)',
     'AI risk summary when AI tools are in the catalog',
-    'Exportable JSON summary and PDF executive summary (from the DFA panel)',
+    'Downloadable PDF executive summary (from the DFA panel or page header)',
     'Recommended next step: Privacy Assessment and Family Hub missions',
   ],
 };
