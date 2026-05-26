@@ -15,7 +15,7 @@ const PrivacyAssessmentPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 dark:bg-slate-900">
+    <div className="min-h-screen bg-gray-50 py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
           <DfaJourneyStepper currentKey="plan" compact ctaHref="/family-hub/dashboard" ctaLabel="Continue to Family Hub" subtitle="This phase turns DFA findings into action. Complete the assessment, then keep the plan alive inside Family Hub." />

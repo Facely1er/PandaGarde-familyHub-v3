@@ -67,10 +67,10 @@ const ServiceCatalogPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 dark:bg-slate-900">
+    <div className="min-h-screen bg-gray-50 py-8">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-6 rounded-xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-800/60">
-          <p className="flex items-start gap-2 text-sm text-slate-700 dark:text-slate-300">
+        <div className="mb-6 rounded-xl border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800/60">
+          <p className="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300">
             <Info className="mt-0.5 h-4 w-4 shrink-0 text-green-700 dark:text-green-400" aria-hidden />
             <span>
               Privacy Exposure Index numbers are educational guides from the apps you list—not live monitoring.{' '}
@@ -235,13 +235,13 @@ const ServiceCatalogPage: React.FC = () => {
         <ServiceCatalog guidedMode />
 
         <div className="mt-10 grid gap-6 lg:grid-cols-2">
-          <div className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-5 shadow-sm">
-            <h3 className="text-lg font-bold text-slate-900 dark:text-white">Why this phase matters</h3>
-            <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">DFA is only useful if it reflects the real school, home, health, AI, and telecom services touching your family’s data. This step defines the scope without forcing a heavy signup flow.</p>
+          <div className="rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-5 shadow-sm">
+            <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">Why this phase matters</h3>
+            <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">DFA is only useful if it reflects the real school, home, health, AI, and telecom services touching your family’s data. This step defines the scope without forcing a heavy signup flow.</p>
           </div>
-          <div className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-5 shadow-sm">
-            <h3 className="text-lg font-bold text-slate-900 dark:text-white">Continue when ready</h3>
-            <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Once you reach at least three services, continue straight into Digital Footprint Analysis. Your place is saved locally.</p>
+          <div className="rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-5 shadow-sm">
+            <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">Continue when ready</h3>
+            <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">Once you reach at least three services, continue straight into Digital Footprint Analysis. Your place is saved locally.</p>
             <Link to={isReadyForAnalysis ? '/digital-footprint' : '/get-started'} className="mt-4 inline-flex items-center gap-2 font-semibold text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300">
               {isReadyForAnalysis ? 'Go to Digital Footprint Analysis' : 'Review the DFA journey'} <ArrowRight size={16} />
             </Link>
@@ -250,11 +250,11 @@ const ServiceCatalogPage: React.FC = () => {
 
         <div className="mt-12 grid gap-8 lg:grid-cols-2">
           {[{ title: 'School services frequently in scope', icon: School, items: schoolServices.slice(0, 6) }, { title: 'Health & medical apps families report', icon: Heart, items: healthServices.slice(0, 6) }, { title: 'AI tools families are increasingly using', icon: Bot, items: aiServices.slice(0, 6) }, { title: 'Telecom services that shape the household data trail', icon: Signal, items: telecomServices.slice(0, 6) }, { title: 'Services with sharper law-enforcement concerns', icon: AlertTriangle, items: leConcernServices.slice(0, 6) }].map(({ title, icon: Icon, items }) => (
-            <div key={title} className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-5 shadow-sm">
-              <div className="mb-3 flex items-center gap-2 text-slate-900 dark:text-white"><Icon size={18} /><h3 className="text-lg font-bold">{title}</h3></div>
+            <div key={title} className="rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-5 shadow-sm">
+              <div className="mb-3 flex items-center gap-2 text-gray-900 dark:text-gray-100"><Icon size={18} /><h3 className="text-lg font-bold">{title}</h3></div>
               <div className="flex flex-wrap gap-2">
                 {items.map((service) => (
-                  <span key={service.id} className="rounded-full bg-slate-100 dark:bg-slate-700 px-3 py-1 text-sm text-slate-700 dark:text-slate-300">{service.name}</span>
+                  <span key={service.id} className="rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-700 dark:bg-gray-700 dark:text-gray-300">{service.name}</span>
                 ))}
               </div>
             </div>

@@ -5,7 +5,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-ASSET_VERSION = "20260606"
+ASSET_VERSION = "20260528"
 
 STYLES_RE = re.compile(r"styles\.css\?v=[^\"']+")
 MAIN_RE = re.compile(r"main\.js\?v=[^\"']+")

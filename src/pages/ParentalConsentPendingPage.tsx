@@ -6,7 +6,7 @@ const ParentalConsentPendingPage: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 py-12 px-4">
+    <div className="min-h-screen bg-gray-50 py-12 px-4">
       <div className="max-w-2xl mx-auto">
         <div className="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-8">
           <div className="text-center mb-8">

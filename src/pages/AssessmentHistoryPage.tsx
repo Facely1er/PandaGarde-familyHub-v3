@@ -5,7 +5,7 @@ import AssessmentHistory from '../components/AssessmentHistory';
 
 const AssessmentHistoryPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 py-12">
+    <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">

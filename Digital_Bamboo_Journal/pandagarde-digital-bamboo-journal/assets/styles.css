@@ -983,29 +983,29 @@ h3 {
 .site-footer {
   margin-top: auto;
   border-top: 1px solid rgba(27, 94, 32, 0.18);
-  padding: 28px 0 32px;
+  padding: 16px 0 18px;
   background: var(--primary-dark);
   color: #e9f3d7;
 }
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.3fr 1fr 1fr;
-  gap: clamp(24px, 4vw, 40px);
+  grid-template-columns: 1.25fr 1fr 1fr;
+  gap: clamp(16px, 3vw, 28px);
   align-items: start;
 }
 
 .footer-grid > div {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
 }
 
 .footer-grid h3 {
-  margin: 0 0 8px;
-  font-size: 0.95rem;
+  margin: 0 0 5px;
+  font-size: 0.8rem;
   font-weight: 900;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: #fff;
 }
@@ -1016,10 +1016,10 @@ h3 {
   gap: 10px;
   color: #e9f3d7cc;
   margin: 0;
-  padding: 2px 0;
-  font-size: var(--text-small);
+  padding: 1px 0;
+  font-size: 0.8125rem;
   font-weight: 650;
-  line-height: 1.2;
+  line-height: 1.15;
 }
 
 .footer-grid .nav-icon {
@@ -1044,6 +1044,13 @@ h3 {
 .notice {
   font-size: 13px;
   color: #e9f3d7aa;
+}
+
+.site-footer .notice {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  max-width: 34ch;
 }
 
 .pill-list {
@@ -1258,4 +1265,182 @@ h3 {
   .ecosystem-card {
     box-shadow: none;
   }
+}
+
+/* ===== Dark theme (syncs with PandaGarde pandagarde-theme localStorage) ===== */
+html[data-theme='dark'] {
+  --primary: #4ade80;
+  --primary-light: #86efac;
+  --primary-dark: #22c55e;
+  --secondary: #6ee7b7;
+  --tertiary: #a7f3d0;
+  --bg: #040d0a;
+  --panel: #0d1f1a;
+  --panel2: #142b24;
+  --ink: #e8f5ef;
+  --muted: #9cb4a8;
+  --line: #1e3a31;
+  --brand: #4ade80;
+  --brand-light: #86efac;
+  --brand-soft: #142b24;
+  --gold: #fbbf24;
+  --blue: #7dd3fc;
+  --shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
+  --shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --gradient-hero: linear-gradient(135deg, #15803d 0%, #16a34a 50%, #22c55e 100%);
+}
+
+html[data-theme='dark'] body {
+  background:
+    radial-gradient(circle at 18% 0%, rgba(74, 222, 128, 0.12), transparent 30%),
+    linear-gradient(180deg, #040d0a, #0d1f1a 48%, #071712);
+  color: var(--ink);
+}
+
+html[data-theme='dark'] .site-header {
+  background: rgba(13, 31, 26, 0.94);
+  border-bottom-color: rgba(74, 222, 128, 0.2);
+}
+
+html[data-theme='dark'] .skip:focus {
+  background: var(--panel);
+  color: var(--ink);
+}
+
+html[data-theme='dark'] .nav a {
+  color: var(--primary-light);
+}
+
+html[data-theme='dark'] .nav a:hover,
+html[data-theme='dark'] .nav a[aria-current='page'] {
+  background: var(--brand-soft);
+}
+
+html[data-theme='dark'] .menu-btn,
+html[data-theme='dark'] .theme-toggle {
+  background: var(--panel);
+  border-color: var(--line);
+  color: var(--primary-light);
+}
+
+html[data-theme='dark'] .card,
+html[data-theme='dark'] .article-card,
+html[data-theme='dark'] .hero-card,
+html[data-theme='dark'] .ecosystem-card,
+html[data-theme='dark'] .callout {
+  background: var(--panel);
+  border-color: var(--line);
+  box-shadow: var(--shadow-sm);
+}
+
+html[data-theme='dark'] .section--alt {
+  background: var(--panel2);
+}
+
+html[data-theme='dark'] .searchbox {
+  background: var(--panel);
+  border-color: var(--line);
+  color: var(--ink);
+}
+
+html[data-theme='dark'] .searchbox::placeholder {
+  color: var(--muted);
+}
+
+html[data-theme='dark'] .site-footer {
+  background: #071712;
+  border-top-color: var(--line);
+}
+
+@media (max-width: 900px) {
+  html[data-theme='dark'] .nav {
+    background: var(--panel);
+  }
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  border-radius: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+  background: var(--brand-soft);
+}
+
+@media (min-width: 960px) {
+  .theme-toggle {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
+  }
+
+  .menu-btn {
+    margin-right: 52px;
+  }
+}
+
+html[data-theme='dark'] .btn.secondary {
+  background: var(--panel);
+  color: var(--primary-light);
+  border-color: var(--line);
+}
+
+html[data-theme='dark'] .btn.secondary:hover {
+  background: var(--brand-soft);
+}
+
+html[data-theme='dark'] .hero-card,
+html[data-theme='dark'] .feature .card,
+html[data-theme='dark'] .ecosystem-card {
+  background: var(--panel);
+}
+
+html[data-theme='dark'] .hero h1,
+html[data-theme='dark'] .page-header h1,
+html[data-theme='dark'] .page-title h1,
+html[data-theme='dark'] .section-head h2,
+html[data-theme='dark'] .article-card h3 {
+  color: var(--ink);
+}
+
+html[data-theme='dark'] .lead,
+html[data-theme='dark'] .excerpt,
+html[data-theme='dark'] .notice,
+html[data-theme='dark'] .section-lede {
+  color: var(--muted);
+}
+
+html[data-theme='dark'] .nav a {
+  color: var(--primary-light);
+}
+
+html[data-theme='dark'] .tag {
+  background: var(--brand-soft);
+  color: var(--primary-light);
+}
+
+html[data-theme='dark'] .pill {
+  background: var(--panel2);
+  color: var(--ink);
+  border-color: var(--line);
+}
+
+html[data-theme='dark'] .read {
+  color: var(--primary-light);
+}
+
+html[data-theme='dark'] input.searchbox {
+  background: var(--panel);
+  border-color: var(--line);
+  color: var(--ink);
 }

@@ -95,7 +95,7 @@ const DigitalFootprintPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 dark:bg-slate-900">
+    <div className="min-h-screen bg-gray-50 py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
           <DfaJourneyStepper currentKey="dfa" compact ctaHref={totalServicesCount >= 3 ? '/privacy-assessment' : '/service-catalog'} ctaLabel={totalServicesCount >= 3 ? 'Continue to assessment' : 'Add more services'} subtitle="This is the core PandaGarde phase. Review the footprint, then move directly into action planning instead of losing momentum." />
@@ -160,9 +160,9 @@ const DigitalFootprintPage: React.FC = () => {
         {analysis && (
           <div className="mb-6 grid gap-4 md:grid-cols-3">
             {[['Family score', `${analysis.familyScore}/100`], ['Privacy score', `${analysis.privacyScore}/100`], ['Services analyzed', `${analysis.totalServices}`]].map(([label, value]) => (
-              <div key={label} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-                <div className="text-sm font-semibold uppercase tracking-wide text-slate-500">{label}</div>
-                <div className="mt-2 text-3xl font-bold text-slate-900">{value}</div>
+              <div key={label} className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+                <div className="text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">{label}</div>
+                <div className="mt-2 text-3xl font-bold text-gray-900 dark:text-gray-100">{value}</div>
               </div>
             ))}
           </div>
@@ -170,15 +170,15 @@ const DigitalFootprintPage: React.FC = () => {
 
         <DigitalFootprintVisualizer />
 
-        <div className="mt-8 rounded-2xl border border-emerald-200 bg-white p-6 shadow-sm">
+        <div className="mt-8 rounded-2xl border border-green-200 bg-white p-6 shadow-sm dark:border-green-800/50 dark:bg-gray-800">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
-              <h2 className="text-xl font-bold text-slate-900">Turn this into action</h2>
-              <p className="mt-2 text-sm leading-6 text-slate-600">Do not stop at the visualization. Continue into the assessment phase to translate the footprint into priorities, actions, and Family Hub continuity.</p>
+              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">Turn this into action</h2>
+              <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">Do not stop at the visualization. Continue into the assessment phase to translate the footprint into priorities, actions, and Family Hub continuity.</p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <Link to="/privacy-assessment" className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-5 py-3 font-semibold text-white hover:bg-emerald-700">Continue to assessment <ArrowRight size={16} /></Link>
-              <Link to="/family-hub" className="inline-flex items-center gap-2 rounded-xl border border-slate-300 px-5 py-3 font-semibold text-slate-700 hover:bg-slate-50">Open Family Hub</Link>
+              <Link to="/privacy-assessment" className="inline-flex items-center gap-2 rounded-xl bg-green-700 px-5 py-3 font-semibold text-white hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500">Continue to assessment <ArrowRight size={16} /></Link>
+              <Link to="/family-hub" className="inline-flex items-center gap-2 rounded-xl border border-gray-300 px-5 py-3 font-semibold text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-700">Open Family Hub</Link>
             </div>
           </div>
         </div>

@@ -1,4 +1,48 @@
-/** Nav/footer SVG icons + mobile menu + section search */
+/** Theme (PandaGarde localStorage) + nav/footer SVG icons + mobile menu + search */
+
+(function initJournalTheme() {
+  try {
+    const saved = localStorage.getItem('pandagarde-theme');
+    const theme =
+      saved === 'dark' || saved === 'light'
+        ? saved
+        : window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark'
+          : 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+  } catch (_e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+
+function mountThemeToggle() {
+  const topbar = document.querySelector('.topbar');
+  if (!topbar || topbar.querySelector('.theme-toggle')) {
+    return;
+  }
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'theme-toggle';
+  const syncLabel = () => {
+    const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+    btn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+    btn.textContent = dark ? '☀' : '☾';
+  };
+  syncLabel();
+  btn.addEventListener('click', () => {
+    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try {
+      localStorage.setItem('pandagarde-theme', next);
+    } catch (_e) {
+      /* ignore */
+    }
+    syncLabel();
+  });
+  topbar.appendChild(btn);
+}
+
+mountThemeToggle();
 
 const SVG_ATTRS =
   'xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
