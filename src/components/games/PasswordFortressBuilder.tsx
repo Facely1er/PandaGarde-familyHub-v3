@@ -54,13 +54,13 @@ const PasswordFortressBuilder: React.FC<PasswordFortressBuilderProps> = ({ onBac
   const fortress = getFortressLevel();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 dark:from-gray-900 dark:to-gray-200 p-6">
       <div className="max-w-4xl mx-auto">
         <button onClick={onBack} className="mb-6 flex items-center space-x-2 text-gray-600 dark:text-gray-300">
           <ArrowLeft size={20} /><span>Back to Learning Hub</span>
         </button>
         
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
+        <div className="bg-white dark:bg-gray-200 rounded-2xl shadow-xl p-8">
           <div className="text-center mb-8">
             <div className="w-16 h-16 bg-amber-100 dark:bg-amber-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
               <Castle className="text-amber-600 dark:text-amber-400" size={32} />

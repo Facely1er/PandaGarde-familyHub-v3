@@ -181,7 +181,7 @@ const ChildSafetyAlertsPage: React.FC = () => {
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
           <Link
             to="/service-catalog"
-            className="p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-green-500 dark:hover:border-green-600 transition-colors group"
+            className="p-4 bg-white dark:bg-gray-200 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-green-500 dark:hover:border-green-600 transition-colors group"
           >
             <div className="flex items-center justify-between mb-2">
               <ShoppingBag className="h-5 w-5 text-green-600 dark:text-green-400" />
@@ -197,7 +197,7 @@ const ChildSafetyAlertsPage: React.FC = () => {
 
           <Link
             to="/digital-footprint"
-            className="p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-green-500 dark:hover:border-green-600 transition-colors group"
+            className="p-4 bg-white dark:bg-gray-200 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-green-500 dark:hover:border-green-600 transition-colors group"
           >
             <div className="flex items-center justify-between mb-2">
               <BarChart3 className="h-5 w-5 text-green-600 dark:text-green-400" />
@@ -213,7 +213,7 @@ const ChildSafetyAlertsPage: React.FC = () => {
 
           <Link
             to="/privacy-assessment"
-            className="p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-green-500 dark:hover:border-green-600 transition-colors group"
+            className="p-4 bg-white dark:bg-gray-200 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-green-500 dark:hover:border-green-600 transition-colors group"
           >
             <div className="flex items-center justify-between mb-2">
               <Bell className="h-5 w-5 text-green-600 dark:text-green-400" />

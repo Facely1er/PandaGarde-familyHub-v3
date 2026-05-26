@@ -88,7 +88,7 @@ const HubTour: React.FC<HubTourProps> = ({ onDone }) => {
         role="dialog"
         aria-modal="true"
         aria-label="Family Hub tour"
-        className="relative w-full max-w-sm rounded-2xl bg-white dark:bg-gray-800 shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden"
+        className="relative w-full max-w-sm rounded-2xl bg-white dark:bg-gray-200 shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden"
       >
         {/* Progress bar */}
         <div className="h-1 bg-gray-100 dark:bg-gray-700">

@@ -98,7 +98,7 @@ export default function NewsletterIssuePage() {
           )}
         </div>
 
-        <section className="mb-8 rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800">
+        <section className="mb-8 rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-200">
           <h2 className="mb-2 flex items-center gap-2 text-xl font-bold text-gray-900 dark:text-gray-100">
             <Newspaper className="h-5 w-5 text-green-700 dark:text-green-400" aria-hidden />
             {newsletter.featuredTopic.title}
@@ -134,7 +134,7 @@ export default function NewsletterIssuePage() {
               {newsletter.newActivities.map((activity) => (
                 <li
                   key={activity.title}
-                  className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-800"
+                  className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-200"
                 >
                   <h3 className="mb-2 font-bold text-gray-900 dark:text-gray-100">{activity.title}</h3>
                   <p className="mb-3 text-gray-600 dark:text-gray-300">{activity.description}</p>
@@ -162,7 +162,7 @@ export default function NewsletterIssuePage() {
               {newsletter.privacyNews.map((item) => (
                 <li
                   key={item.title}
-                  className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-800"
+                  className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-200"
                 >
                   <h3 className="mb-2 font-bold text-gray-900 dark:text-gray-100">{item.title}</h3>
                   <p className="mb-3 text-gray-600 dark:text-gray-300">{item.summary}</p>
@@ -174,7 +174,7 @@ export default function NewsletterIssuePage() {
         )}
 
         {newsletter.communityHighlight && (
-          <section className="mb-8 rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800">
+          <section className="mb-8 rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-200">
             <h2 className="mb-2 flex items-center gap-2 text-lg font-bold text-gray-900 dark:text-gray-100">
               <Users className="h-5 w-5 text-green-700 dark:text-green-400" aria-hidden />
               {newsletter.communityHighlight.title}
@@ -192,7 +192,7 @@ export default function NewsletterIssuePage() {
         )}
 
         {newsletter.resourceSpotlight && (
-          <section className="mb-8 rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800">
+          <section className="mb-8 rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-200">
             <h2 className="mb-2 text-lg font-bold text-gray-900 dark:text-gray-100">
               {newsletter.resourceSpotlight.title}
             </h2>

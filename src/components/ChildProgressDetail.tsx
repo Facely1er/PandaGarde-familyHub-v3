@@ -88,7 +88,7 @@ const ChildProgressDetail: React.FC<ChildProgressDetailProps> = ({
 
       {/* Overview Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
+        <div className="bg-white dark:bg-gray-200 p-6 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between mb-4">
             <Award className="text-purple-600 dark:text-purple-400" size={24} />
             <span className="text-2xl font-bold text-gray-800 dark:text-gray-100">
@@ -99,7 +99,7 @@ const ChildProgressDetail: React.FC<ChildProgressDetailProps> = ({
           <p className="text-sm text-gray-600 dark:text-gray-300">Overall average</p>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
+        <div className="bg-white dark:bg-gray-200 p-6 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between mb-4">
             <Gamepad2 className="text-blue-600 dark:text-blue-400" size={24} />
             <span className="text-2xl font-bold text-gray-800 dark:text-gray-100">
@@ -110,7 +110,7 @@ const ChildProgressDetail: React.FC<ChildProgressDetailProps> = ({
           <p className="text-sm text-gray-600 dark:text-gray-300">Total completed</p>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
+        <div className="bg-white dark:bg-gray-200 p-6 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between mb-4">
             <TrendingUp className="text-green-600 dark:text-green-400" size={24} />
             <span className="text-2xl font-bold text-gray-800 dark:text-gray-100">
@@ -121,7 +121,7 @@ const ChildProgressDetail: React.FC<ChildProgressDetailProps> = ({
           <p className="text-sm text-gray-600 dark:text-gray-300">Games completed</p>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
+        <div className="bg-white dark:bg-gray-200 p-6 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between mb-4">
             <Clock className="text-orange-600 dark:text-orange-400" size={24} />
             <span className="text-2xl font-bold text-gray-800 dark:text-gray-100">
@@ -134,7 +134,7 @@ const ChildProgressDetail: React.FC<ChildProgressDetailProps> = ({
       </div>
 
       {/* Activity History */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+      <div className="bg-white dark:bg-gray-200 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
         <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-6">Activity History</h2>
         
         {recentActivities.length === 0 ? (
@@ -210,7 +210,7 @@ const ChildProgressDetail: React.FC<ChildProgressDetailProps> = ({
 
       {/* Activity Breakdown by Type */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+        <div className="bg-white dark:bg-gray-200 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
           <div className="flex items-center space-x-2 mb-4">
             <Gamepad2 className="text-blue-600 dark:text-blue-400" size={20} />
             <h3 className="font-semibold text-gray-800 dark:text-gray-100">Games</h3>
@@ -221,7 +221,7 @@ const ChildProgressDetail: React.FC<ChildProgressDetailProps> = ({
           <p className="text-sm text-gray-600 dark:text-gray-300">Interactive games completed</p>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+        <div className="bg-white dark:bg-gray-200 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
           <div className="flex items-center space-x-2 mb-4">
             <BookOpen className="text-purple-600 dark:text-purple-400" size={20} />
             <h3 className="font-semibold text-gray-800 dark:text-gray-100">Journeys</h3>
@@ -232,7 +232,7 @@ const ChildProgressDetail: React.FC<ChildProgressDetailProps> = ({
           <p className="text-sm text-gray-600 dark:text-gray-300">Learning journeys completed</p>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+        <div className="bg-white dark:bg-gray-200 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
           <div className="flex items-center space-x-2 mb-4">
             <GraduationCap className="text-green-600 dark:text-green-400" size={20} />
             <h3 className="font-semibold text-gray-800 dark:text-gray-100">Modules</h3>

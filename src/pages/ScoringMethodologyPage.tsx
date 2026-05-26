@@ -43,7 +43,7 @@ const ScoringMethodologyPage: React.FC = () => {
           {perServiceMethodology.factors.map((factor) => (
             <article
               key={factor.label}
-              className="shell-card shell-card--panel shell-card--panel-inner rounded-2xl border border-gray-200 p-5 dark:border-gray-700 dark:bg-gray-800"
+              className="shell-card shell-card--panel shell-card--panel-inner rounded-2xl border border-gray-200 p-5 dark:border-gray-700 dark:bg-gray-200"
             >
               <h3 className="shell-card__title text-base font-bold text-gray-900 dark:text-gray-100">
                 {factor.label}
@@ -55,7 +55,7 @@ const ScoringMethodologyPage: React.FC = () => {
 
         <div className="mt-6 overflow-x-auto rounded-2xl border border-gray-200 dark:border-gray-700">
           <table className="min-w-full text-left text-sm">
-            <thead className="bg-gray-50 dark:bg-gray-800">
+            <thead className="bg-gray-50 dark:bg-gray-200">
               <tr>
                 <th scope="col" className="px-4 py-3 font-semibold text-gray-900 dark:text-gray-100">
                   Index range
@@ -70,7 +70,7 @@ const ScoringMethodologyPage: React.FC = () => {
             </thead>
             <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
               {perServiceMethodology.bands.map((band) => (
-                <tr key={band.range} className="bg-white dark:bg-gray-900">
+                <tr key={band.range} className="bg-white dark:bg-gray-100">
                   <td className="px-4 py-3 font-medium text-gray-900 dark:text-gray-100">{band.range}</td>
                   <td className="px-4 py-3 text-gray-700 dark:text-gray-300">{band.label}</td>
                   <td className="px-4 py-3 text-gray-600 dark:text-gray-400">{band.meaning}</td>
@@ -96,7 +96,7 @@ const ScoringMethodologyPage: React.FC = () => {
           lead: dfaMethodology.summary,
         }}
       >
-        <div className="shell-card shell-card--panel rounded-2xl border border-gray-200 p-5 dark:border-gray-700 dark:bg-gray-800">
+        <div className="shell-card shell-card--panel rounded-2xl border border-gray-200 p-5 dark:border-gray-700 dark:bg-gray-200">
           <h3 className="text-base font-bold text-gray-900 dark:text-gray-100">Before you run DFA</h3>
           <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-gray-600 dark:text-gray-300">
             {dfaMethodology.prerequisites.map((item) => (
@@ -111,7 +111,7 @@ const ScoringMethodologyPage: React.FC = () => {
             {dfaMethodology.scoresOnPage.items.map((item) => (
               <article
                 key={item.label}
-                className="rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-800/80"
+                className="rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-gray-600 dark:bg-gray-200/80"
               >
                 <h4 className="font-semibold text-slate-900 dark:text-slate-100">{item.label}</h4>
                 <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">{item.description}</p>
@@ -124,7 +124,7 @@ const ScoringMethodologyPage: React.FC = () => {
           <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">DFA risk levels</h3>
           <div className="mt-4 overflow-x-auto rounded-2xl border border-gray-200 dark:border-gray-700">
             <table className="min-w-full text-left text-sm">
-              <thead className="bg-gray-50 dark:bg-gray-800">
+              <thead className="bg-gray-50 dark:bg-gray-200">
                 <tr>
                   <th scope="col" className="px-4 py-3 font-semibold text-gray-900 dark:text-gray-100">
                     Risk score
@@ -139,7 +139,7 @@ const ScoringMethodologyPage: React.FC = () => {
               </thead>
               <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                 {dfaMethodology.riskLevels.map((band) => (
-                  <tr key={band.range} className="bg-white dark:bg-gray-900">
+                  <tr key={band.range} className="bg-white dark:bg-gray-100">
                     <td className="px-4 py-3 font-medium text-gray-900 dark:text-gray-100">{band.range}</td>
                     <td className="px-4 py-3 text-gray-700 dark:text-gray-300">{band.label}</td>
                     <td className="px-4 py-3 text-gray-600 dark:text-gray-400">{band.meaning}</td>
@@ -161,7 +161,7 @@ const ScoringMethodologyPage: React.FC = () => {
                 <h3 className="text-lg font-bold">{tier.label}</h3>
               </div>
               <p className="text-sm text-gray-700 dark:text-gray-300">{tier.description}</p>
-              <p className="mt-3 rounded-lg bg-white/80 px-3 py-2 font-mono text-xs text-emerald-900 dark:bg-slate-900/60 dark:text-emerald-200">
+              <p className="mt-3 rounded-lg bg-white/80 px-3 py-2 font-mono text-xs text-emerald-900 dark:bg-gray-100/60 dark:text-emerald-200">
                 {tier.formula}
               </p>
               <ul className="mt-4 space-y-3">
@@ -178,12 +178,12 @@ const ScoringMethodologyPage: React.FC = () => {
           ))}
         </div>
 
-        <div className="mt-6 shell-card shell-card--panel rounded-2xl border border-gray-200 p-5 dark:border-gray-700 dark:bg-gray-800">
+        <div className="mt-6 shell-card shell-card--panel rounded-2xl border border-gray-200 p-5 dark:border-gray-700 dark:bg-gray-200">
           <h3 className="text-base font-bold text-gray-900 dark:text-gray-100">{dfaMethodology.flags.title}</h3>
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">{dfaMethodology.flags.description}</p>
         </div>
 
-        <div className="mt-6 shell-card shell-card--panel rounded-2xl border border-gray-200 p-5 dark:border-gray-700 dark:bg-gray-800">
+        <div className="mt-6 shell-card shell-card--panel rounded-2xl border border-gray-200 p-5 dark:border-gray-700 dark:bg-gray-200">
           <h3 className="text-base font-bold text-gray-900 dark:text-gray-100">
             {dfaMethodology.footprintSnapshot.title}
           </h3>

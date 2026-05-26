@@ -127,7 +127,7 @@ const DigitalRightsQuiz: React.FC<DigitalRightsQuizProps> = ({ onBack }) => {
     const percentage = Math.round((score / QUIZ_QUESTIONS.length) * 100);
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 p-6">
+      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 dark:from-gray-900 dark:to-gray-200 p-6">
         <div className="max-w-4xl mx-auto">
           <button
             onClick={onBack}
@@ -137,7 +137,7 @@ const DigitalRightsQuiz: React.FC<DigitalRightsQuizProps> = ({ onBack }) => {
             <span>Back to Learning Hub</span>
           </button>
 
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
+          <div className="bg-white dark:bg-gray-200 rounded-2xl shadow-xl p-8">
             <div className="text-center mb-8">
               <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Scale className="text-purple-600 dark:text-purple-400" size={32} />
@@ -218,7 +218,7 @@ const DigitalRightsQuiz: React.FC<DigitalRightsQuizProps> = ({ onBack }) => {
   const question = QUIZ_QUESTIONS[currentQuestion];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 dark:from-gray-900 dark:to-gray-200 p-6">
       <div className="max-w-4xl mx-auto">
         <button
           onClick={onBack}
@@ -228,7 +228,7 @@ const DigitalRightsQuiz: React.FC<DigitalRightsQuizProps> = ({ onBack }) => {
           <span>Back to Learning Hub</span>
         </button>
 
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
+        <div className="bg-white dark:bg-gray-200 rounded-2xl shadow-xl p-8">
           <div className="text-center mb-8">
             <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
               <Scale className="text-purple-600 dark:text-purple-400" size={32} />
@@ -264,7 +264,7 @@ const DigitalRightsQuiz: React.FC<DigitalRightsQuizProps> = ({ onBack }) => {
                   <button
                     key={index}
                     onClick={() => handleAnswer(index)}
-                    className="w-full text-left p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg hover:border-purple-300 dark:hover:border-purple-600 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors"
+                    className="w-full text-left p-4 bg-white dark:bg-gray-200 border border-gray-200 dark:border-gray-600 rounded-lg hover:border-purple-300 dark:hover:border-purple-600 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors"
                   >
                     <div className="flex items-center space-x-3">
                       <div className="w-6 h-6 border-2 border-gray-300 dark:border-gray-500 rounded-full flex items-center justify-center">

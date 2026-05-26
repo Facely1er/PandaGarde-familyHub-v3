@@ -40,7 +40,7 @@ const WorksheetsPage: React.FC = () => {
         <ul className="grid grid-cols-1 md:grid-cols-2 gap-6 list-none p-0 m-0">
           {WORKSHEETS.map((sheet) => (
             <li key={sheet.id}>
-              <article className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-6 h-full">
+              <article className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-200 p-6 h-full">
                 <FileText className="text-teal-600 dark:text-teal-400 mb-2" size={28} aria-hidden />
                 <h2 className="font-semibold text-gray-900 dark:text-white mb-1">{sheet.title}</h2>
                 <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">{sheet.ageGroup}</p>

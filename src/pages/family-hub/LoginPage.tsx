@@ -28,7 +28,7 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="family-hub-theme flex min-h-screen flex-col bg-gradient-to-br from-teal-50 via-white to-amber-50/40 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
+    <div className="family-hub-theme flex min-h-screen flex-col bg-gradient-to-br from-teal-50 via-white to-amber-50/40 dark:from-gray-900 dark:via-gray-900 dark:to-gray-200">
       <div className="flex flex-1 flex-col justify-center px-4 py-10">
         <div className="mx-auto w-full max-w-lg space-y-6">
           <div className="text-center">
@@ -45,7 +45,7 @@ const LoginPage: React.FC = () => {
             </p>
           </div>
 
-          <ul className="space-y-2 rounded-2xl border border-gray-200 bg-white/90 p-4 text-sm dark:border-gray-700 dark:bg-gray-800/90">
+          <ul className="space-y-2 rounded-2xl border border-gray-200 bg-white/90 p-4 text-sm dark:border-gray-700 dark:bg-gray-200/90">
             <li className="flex items-center gap-2 text-gray-700 dark:text-gray-200">
               <CheckCircle2 size={18} className="shrink-0 text-teal-600 dark:text-teal-400" aria-hidden="true" />
               Works offline — no account required

@@ -43,8 +43,8 @@ class NavigationErrorBoundary extends Component<Props, State> {
       }
 
       return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
-          <div className="max-w-md w-full bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 text-center">
+        <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-100">
+          <div className="max-w-md w-full bg-white dark:bg-gray-200 rounded-lg shadow-lg p-6 text-center">
             <div className="flex justify-center mb-4">
               <AlertTriangle size={48} className="text-red-500" />
             </div>

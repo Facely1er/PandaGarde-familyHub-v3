@@ -39,7 +39,7 @@ const TodayMissionCard: React.FC = () => {
 
   return (
     <section
-      className="hub-card-lift overflow-hidden rounded-2xl border-2 border-teal-300 bg-gradient-to-br from-teal-50 via-white to-amber-50/60 p-5 shadow-md dark:border-teal-600/60 dark:from-teal-900/30 dark:via-gray-800 dark:to-amber-900/10"
+      className="hub-card-lift overflow-hidden rounded-2xl border-2 border-teal-300 bg-gradient-to-br from-teal-50 via-white to-amber-50/60 p-5 shadow-md dark:border-teal-600/60 dark:from-teal-900/30 dark:via-gray-200 dark:to-amber-900/10"
       aria-labelledby="today-mission-heading"
     >
       <div className="flex flex-wrap items-start justify-between gap-3">
@@ -111,7 +111,7 @@ const TodayMissionCard: React.FC = () => {
         {familyMembers.length === 0 && (
           <Link
             to={hubPaths.kids}
-            className="inline-flex min-h-[44px] items-center justify-center rounded-xl border border-teal-300 bg-white px-4 py-2.5 text-sm font-semibold text-teal-800 hover:bg-teal-50 dark:border-teal-600 dark:bg-gray-800 dark:text-teal-200"
+            className="inline-flex min-h-[44px] items-center justify-center rounded-xl border border-teal-300 bg-white px-4 py-2.5 text-sm font-semibold text-teal-800 hover:bg-teal-50 dark:border-teal-600 dark:bg-gray-200 dark:text-teal-200"
           >
             Add family members
           </Link>

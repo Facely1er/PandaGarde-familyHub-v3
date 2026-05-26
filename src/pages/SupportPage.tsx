@@ -127,7 +127,7 @@ function SupportOptionCard({
 }) {
   const Icon = option.icon;
   const cardClass =
-    'flex h-full flex-col rounded-2xl border border-gray-200 bg-white p-6 text-left shadow-md transition-all hover:border-green-600 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 dark:border-gray-700 dark:bg-gray-800 dark:hover:border-green-500';
+    'flex h-full flex-col rounded-2xl border border-gray-200 bg-white p-6 text-left shadow-md transition-all hover:border-green-600 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 dark:border-gray-700 dark:bg-gray-200 dark:hover:border-green-500';
 
   const inner = (
     <>
@@ -243,7 +243,7 @@ const SupportPage: React.FC = () => {
               placeholder="Search FAQs…"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-xl border border-gray-300 bg-white py-3 pl-10 pr-4 text-gray-900 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100"
+              className="w-full rounded-xl border border-gray-300 bg-white py-3 pl-10 pr-4 text-gray-900 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500 dark:border-gray-600 dark:bg-gray-200 dark:text-gray-100"
             />
           </div>
 
@@ -264,7 +264,7 @@ const SupportPage: React.FC = () => {
                   className={`flex min-h-[44px] items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 ${
                     isActive
                       ? 'bg-green-700 text-white dark:bg-green-600'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-700'
                   }`}
                 >
                   <Icon size={16} aria-hidden />
@@ -281,7 +281,7 @@ const SupportPage: React.FC = () => {
               return (
                 <div
                   key={item.id}
-                  className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800"
+                  className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-200"
                 >
                   <button
                     type="button"
@@ -321,7 +321,7 @@ const SupportPage: React.FC = () => {
         </div>
       </section>
 
-      <section className="border-t border-gray-200 bg-gray-50 py-12 dark:border-gray-700 dark:bg-gray-900/50">
+      <section className="border-t border-gray-200 bg-gray-50 py-12 dark:border-gray-700 dark:bg-gray-100/50">
         <div className="mx-auto max-w-4xl px-4 text-center sm:px-6">
           <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-gray-100">Still need help?</h2>
           <p className="mb-8 text-lg text-gray-600 dark:text-gray-300">

@@ -1,6 +1,13 @@
 import type { FootprintAnalysis } from './footprintAnalyzer';
 
 export type DfaScoreTier = 'basic' | 'advanced';
+
+export const DFA_SCORE_TIER_STORAGE_KEY = 'pandagarde_dfa_score_tier';
+
+export const loadDfaScoreTier = (): DfaScoreTier => {
+  if (typeof window === 'undefined') {return 'basic';}
+  return window.localStorage.getItem(DFA_SCORE_TIER_STORAGE_KEY) === 'advanced' ? 'advanced' : 'basic';
+};
 export type DfaRiskLevel = 'Low' | 'Moderate' | 'High' | 'Critical';
 
 export interface DfaBreakdownItem {

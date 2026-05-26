@@ -85,7 +85,7 @@ const ChildSafetyAlerts: React.FC = () => {
       </div>
 
       {alerts.length === 0 ? (
-        <div className="p-8 text-center bg-gray-50 dark:bg-gray-800 rounded-lg">
+        <div className="p-8 text-center bg-gray-50 dark:bg-gray-200 rounded-lg">
           <Shield className="h-12 w-12 mx-auto text-gray-400 mb-4" />
           <p className="text-gray-600 dark:text-gray-400">
             No recent RSS headlines matched your catalog. Add services in the catalog or refresh when online.

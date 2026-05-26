@@ -262,7 +262,7 @@ const ServiceNotificationCenter: React.FC<ServiceNotificationCenterProps> = ({
           <select
             value={filter}
             onChange={(e) => setFilter(e.target.value as typeof filter)}
-            className="px-3 py-1.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-sm"
+            className="px-3 py-1.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-200 text-sm"
           >
             <option value="all">All Priorities</option>
             <option value="high">High Priority</option>
@@ -272,7 +272,7 @@ const ServiceNotificationCenter: React.FC<ServiceNotificationCenterProps> = ({
           <select
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
-            className="px-3 py-1.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-sm"
+            className="px-3 py-1.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-200 text-sm"
           >
             <option value="all">All Categories</option>
             <option value="breach">Data Breaches</option>
@@ -286,7 +286,7 @@ const ServiceNotificationCenter: React.FC<ServiceNotificationCenterProps> = ({
 
       {/* Notifications List */}
       {filteredNotifications.length === 0 ? (
-        <div className="p-8 text-center bg-gray-50 dark:bg-gray-800 rounded-lg">
+        <div className="p-8 text-center bg-gray-50 dark:bg-gray-200 rounded-lg">
           <Bell className="h-12 w-12 mx-auto text-gray-400 mb-4" />
           <p className="text-gray-600 dark:text-gray-400">
             {familyServiceIds.length === 0
@@ -349,7 +349,7 @@ const ServiceNotificationCenter: React.FC<ServiceNotificationCenterProps> = ({
                       const exposureLevel = getExposureLevel(exposureIndex);
                       if (exposureIndex !== null) {
                         return (
-                          <div className="mb-2 p-2 rounded-lg bg-gray-50 dark:bg-gray-800/50">
+                          <div className="mb-2 p-2 rounded-lg bg-gray-50 dark:bg-gray-200/50">
                             <div className="flex items-center justify-between mb-1">
                               <span className="text-xs font-medium text-gray-600 dark:text-gray-400">
                                 Privacy Exposure Index:

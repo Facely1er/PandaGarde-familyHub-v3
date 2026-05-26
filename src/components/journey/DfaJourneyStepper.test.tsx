@@ -1,11 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import DfaJourneyStepper from './DfaJourneyStepper';
-import { DFA_JOURNEY_STORAGE_KEY } from '../../lib/dfaJourney';
+import { DFA_JOURNEY_STORAGE_KEY, getDfaJourneySnapshot } from '../../lib/dfaJourney';
 
 describe('DfaJourneyStepper', () => {
   beforeEach(() => {
     window.localStorage.clear();
+    getDfaJourneySnapshot();
   });
 
   it('renders default journey copy when no progress exists', () => {

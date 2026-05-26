@@ -151,7 +151,7 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
   // ── Empty / compact states ────────────────────────────────────────────────────
   if (!analysis) {
     return (
-      <div className="p-8 text-center bg-gray-50 dark:bg-gray-800 rounded-lg">
+      <div className="p-8 text-center bg-gray-50 dark:bg-gray-200 rounded-lg">
         <Globe className="h-12 w-12 mx-auto text-gray-400 mb-4" />
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">No Services Added Yet</h3>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
@@ -167,7 +167,7 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
 
   if (compact) {
     return (
-      <div className="p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+      <div className="p-4 bg-white dark:bg-gray-200 rounded-lg border border-gray-200 dark:border-gray-700">
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center space-x-2">
             <Globe className="h-5 w-5 text-blue-600 dark:text-blue-400" />
@@ -280,7 +280,7 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
           </p>
           <div className="space-y-2">
             {quickWins.map(rec => (
-              <div key={rec.id} className="flex items-start gap-3 p-3 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+              <div key={rec.id} className="flex items-start gap-3 p-3 bg-white dark:bg-gray-200 rounded-lg shadow-sm">
                 <button
                   type="button"
                   onClick={() => toggleDone(rec.id)}
@@ -318,7 +318,7 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
 
       {/* ── Where does your data go? (context breakdown) ─────────────────────── */}
       {analysis.contextBreakdown && analysis.contextBreakdown.length > 0 && (
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border-2 border-green-200 dark:border-green-800">
+        <div className="bg-white dark:bg-gray-200 rounded-xl p-6 border-2 border-green-200 dark:border-green-800">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
             <Globe className="h-5 w-5 text-green-600 dark:text-green-400" />
             Where does your family's data go?
@@ -372,7 +372,7 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
 
       {/* ── Key Metrics ────────────────────────────────────────────────────────── */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+        <div className="bg-white dark:bg-gray-200 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between mb-2">
             <Globe className="h-5 w-5 text-blue-600 dark:text-blue-400" />
             <span className="text-2xl font-bold text-gray-900 dark:text-white">{analysis.totalServices}</span>
@@ -381,7 +381,7 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
           <p className="text-xs mt-1 text-gray-500 dark:text-gray-400">Add more in Service Catalog for a fuller picture</p>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+        <div className="bg-white dark:bg-gray-200 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between mb-2">
             <Users className="h-5 w-5 text-purple-600 dark:text-purple-400" />
             <span className="text-2xl font-bold text-gray-900 dark:text-white">{analysis.totalMembers}</span>
@@ -389,7 +389,7 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
           <p className="text-sm text-gray-600 dark:text-gray-400">Family members</p>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+        <div className="bg-white dark:bg-gray-200 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between mb-2">
             <BarChart3 className="h-5 w-5 text-orange-600 dark:text-orange-400" />
             <span className={`text-2xl font-bold ${
@@ -407,7 +407,7 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
 
       {/* ── Category Breakdown ──────────────────────────────────────────────────── */}
       {analysis.categoryBreakdown.length > 0 && (
-        <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+        <div className="bg-white dark:bg-gray-200 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 flex items-center space-x-2">
             <BarChart3 className="h-5 w-5" />
             <span>Apps by type</span>
@@ -452,7 +452,7 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
               .map((risk) => {
                 const service = getServiceById(risk.serviceId);
                 return (
-                  <div key={risk.serviceId} className="flex items-center space-x-3 p-3 bg-white dark:bg-gray-800 rounded-lg">
+                  <div key={risk.serviceId} className="flex items-center space-x-3 p-3 bg-white dark:bg-gray-200 rounded-lg">
                     {service && hasServiceLogo(service.id) ? (
                       <img src={getServiceLogoUrlWithBrandColor(service.id) || undefined} alt="" className="w-10 h-10 rounded-lg object-contain" />
                     ) : (
@@ -495,7 +495,7 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
               .map((parentCompany) => {
                 const relatedServices = analysis.dataSharingNetwork.filter(n => n.parentCompany === parentCompany);
                 return (
-                  <div key={parentCompany} className="p-4 bg-white dark:bg-gray-800 rounded-lg">
+                  <div key={parentCompany} className="p-4 bg-white dark:bg-gray-200 rounded-lg">
                     <div className="flex items-center space-x-2 mb-3">
                       <Users className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                       <span className="font-semibold text-gray-900 dark:text-white">{parentCompany}</span>
@@ -519,7 +519,7 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
 
       {/* ── Recommendations (with done tracking) ───────────────────────────────── */}
       {analysis.recommendations.length > 0 && (
-        <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+        <div className="bg-white dark:bg-gray-200 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
           {/* Header + progress */}
           <div className="flex items-start justify-between mb-1">
             <div className="flex items-center space-x-2">
@@ -553,7 +553,7 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
                   key={rec.id}
                   className={`rounded-lg border-2 transition-all ${
                     isDone
-                      ? 'bg-gray-50 dark:bg-gray-900/40 border-gray-200 dark:border-gray-700 opacity-70'
+                      ? 'bg-gray-50 dark:bg-gray-100/40 border-gray-200 dark:border-gray-700 opacity-70'
                       : rec.priority === 'high'   ? 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800' :
                         rec.priority === 'medium' ? 'bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800' :
                         'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800'
@@ -648,26 +648,26 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
           </p>
           <div className="space-y-2 mb-4">
             {analysis.aiRiskSummary.keyWarnings.map((warning, i) => (
-              <div key={i} className="flex items-start gap-2 p-3 bg-white dark:bg-gray-800 rounded-lg text-sm">
+              <div key={i} className="flex items-start gap-2 p-3 bg-white dark:bg-gray-200 rounded-lg text-sm">
                 <AlertTriangle className="h-4 w-4 text-purple-600 dark:text-purple-400 mt-0.5 shrink-0" />
                 <span className="text-gray-700 dark:text-gray-300">{warning}</span>
               </div>
             ))}
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center text-sm">
-            <div className="p-3 bg-white dark:bg-gray-800 rounded-lg">
+            <div className="p-3 bg-white dark:bg-gray-200 rounded-lg">
               <div className={`text-xl font-bold mb-1 ${analysis.aiRiskSummary.trainingDataRisk ? 'text-red-600 dark:text-red-400' : 'text-green-600 dark:text-green-400'}`}>
                 {analysis.aiRiskSummary.trainingDataRisk ? 'Yes' : 'No'}
               </div>
               <div className="text-gray-500 dark:text-gray-400 text-xs">Training data risk</div>
             </div>
-            <div className="p-3 bg-white dark:bg-gray-800 rounded-lg">
+            <div className="p-3 bg-white dark:bg-gray-200 rounded-lg">
               <div className={`text-xl font-bold mb-1 ${analysis.aiRiskSummary.noFerpaApps.length > 0 ? 'text-orange-600 dark:text-orange-400' : 'text-green-600 dark:text-green-400'}`}>
                 {analysis.aiRiskSummary.noFerpaApps.length}
               </div>
               <div className="text-gray-500 dark:text-gray-400 text-xs">Apps without FERPA protection</div>
             </div>
-            <div className="p-3 bg-white dark:bg-gray-800 rounded-lg">
+            <div className="p-3 bg-white dark:bg-gray-200 rounded-lg">
               <div className={`text-xl font-bold mb-1 ${analysis.aiRiskSummary.highRiskAiApps.length > 0 ? 'text-red-600 dark:text-red-400' : 'text-green-600 dark:text-green-400'}`}>
                 {analysis.aiRiskSummary.highRiskAiApps.length}
               </div>
@@ -679,7 +679,7 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
 
       {/* ── Deep Trace: Data Broker Chain ───────────────────────────────────────── */}
       {analysis.dataBrokerAnalysis.totalMappedServices > 0 && (
-        <div className="bg-slate-50 dark:bg-slate-800/50 rounded-xl p-6 border-2 border-slate-200 dark:border-slate-700">
+        <div className="bg-slate-50 dark:bg-gray-200/50 rounded-xl p-6 border-2 border-slate-200 dark:border-gray-600">
           <div className="flex items-center gap-2 mb-2">
             <Database className="h-5 w-5 text-slate-600 dark:text-slate-400" />
             <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
@@ -692,15 +692,15 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
 
           {/* Summary row */}
           <div className="grid grid-cols-3 gap-3 my-4 text-center text-sm">
-            <div className="p-3 bg-white dark:bg-gray-800 rounded-lg">
+            <div className="p-3 bg-white dark:bg-gray-200 rounded-lg">
               <div className="text-2xl font-bold text-slate-800 dark:text-slate-200 mb-1">{analysis.dataBrokerAnalysis.totalMappedServices}</div>
               <div className="text-slate-500 dark:text-slate-400 text-xs">Apps with known data chains</div>
             </div>
-            <div className="p-3 bg-white dark:bg-gray-800 rounded-lg">
+            <div className="p-3 bg-white dark:bg-gray-200 rounded-lg">
               <div className="text-2xl font-bold text-orange-600 dark:text-orange-400 mb-1">{analysis.dataBrokerAnalysis.totalUniqueThirdParties}</div>
               <div className="text-slate-500 dark:text-slate-400 text-xs">3rd-party trackers</div>
             </div>
-            <div className="p-3 bg-white dark:bg-gray-800 rounded-lg">
+            <div className="p-3 bg-white dark:bg-gray-200 rounded-lg">
               <div className="text-2xl font-bold text-red-600 dark:text-red-400 mb-1">{analysis.dataBrokerAnalysis.totalUniqueBrokers}</div>
               <div className="text-slate-500 dark:text-slate-400 text-xs">Data brokers (4th party)</div>
             </div>
@@ -720,7 +720,7 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
               </p>
               <div className="space-y-2">
                 {analysis.dataBrokerAnalysis.crossServiceBrokers.slice(0, 4).map(broker => (
-                  <div key={broker.name} className="flex items-start gap-2 text-xs bg-white dark:bg-gray-800 p-2 rounded">
+                  <div key={broker.name} className="flex items-start gap-2 text-xs bg-white dark:bg-gray-200 p-2 rounded">
                     <Zap className="h-3.5 w-3.5 text-red-500 mt-0.5 shrink-0" />
                     <div>
                       <span className="font-semibold text-gray-900 dark:text-white">{broker.name}</span>
@@ -744,12 +744,12 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
               const fullChain = isOpen ? getServiceDataChain(chain.serviceId) : null;
 
               return (
-                <div key={chain.serviceId} className="border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden">
+                <div key={chain.serviceId} className="border border-slate-200 dark:border-gray-600 rounded-lg overflow-hidden">
                   {/* Row header */}
                   <button
                     type="button"
                     onClick={() => setExpandedChain(isOpen ? null : chain.serviceId)}
-                    className="w-full flex items-center justify-between p-3 text-left bg-white dark:bg-gray-800 hover:bg-slate-50 dark:hover:bg-slate-700/40 transition-colors"
+                    className="w-full flex items-center justify-between p-3 text-left bg-white dark:bg-gray-200 hover:bg-slate-50 dark:hover:bg-slate-700/40 transition-colors"
                   >
                     <div className="flex items-center gap-3">
                       <div className={`w-2 h-2 rounded-full shrink-0 ${
@@ -767,7 +767,7 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
 
                   {/* Expanded: visual 3-column flow */}
                   {isOpen && (
-                    <div className="bg-slate-50 dark:bg-slate-900/40 border-t border-slate-200 dark:border-slate-700 p-4">
+                    <div className="bg-slate-50 dark:bg-gray-100/40 border-t border-slate-200 dark:border-gray-600 p-4">
                       {/* Summary sentence */}
                       <p className="text-xs text-slate-600 dark:text-slate-400 mb-4 leading-relaxed">
                         {chain.chainSummary}
@@ -780,7 +780,7 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
 
                             {/* Column 1: App */}
                             <div className="flex flex-col items-center gap-1 w-24 shrink-0 pt-1">
-                              <div className="w-10 h-10 rounded-xl bg-white dark:bg-gray-800 border-2 border-slate-300 dark:border-slate-600 flex items-center justify-center overflow-hidden shadow-sm">
+                              <div className="w-10 h-10 rounded-xl bg-white dark:bg-gray-200 border-2 border-slate-300 dark:border-gray-500 flex items-center justify-center overflow-hidden shadow-sm">
                                 {hasServiceLogo(chain.serviceId)
                                   ? <img src={getServiceLogoUrlWithBrandColor(chain.serviceId) || undefined} alt="" className="w-8 h-8 object-contain" />
                                   : <Globe className="h-5 w-5 text-gray-400" />
@@ -866,7 +866,7 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
 
                       {/* Opt-out links if any brokers have them */}
                       {fullChain && fullChain.fourthPartyBrokers.some(b => b.optOutUrl) && (
-                        <div className="mt-3 pt-3 border-t border-slate-200 dark:border-slate-700">
+                        <div className="mt-3 pt-3 border-t border-slate-200 dark:border-gray-600">
                           <p className="text-xs font-medium text-slate-500 dark:text-slate-400 mb-1.5">Broker opt-out pages:</p>
                           <div className="flex flex-wrap gap-2">
                             {fullChain.fourthPartyBrokers.filter(b => b.optOutUrl).map(b => (
@@ -898,7 +898,7 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
       )}
 
       {/* ── Educational Info ────────────────────────────────────────────────────── */}
-      <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+      <div className="bg-gray-50 dark:bg-gray-200 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
         <div className="flex items-start space-x-3">
           <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5" />
           <div>

@@ -27,10 +27,10 @@ interface WarningSign {
 }
 
 const fieldClass =
-  'w-full px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500';
+  'w-full px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-md bg-white dark:bg-gray-200 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500';
 
 const sectionCardClass =
-  'rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-6 mb-8';
+  'rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-200 p-6 mb-8';
 
 const btnPrimaryClass =
   'inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-green-600 hover:bg-green-700 dark:bg-green-600 dark:hover:bg-green-500 rounded-md transition-colors';
@@ -48,7 +48,7 @@ function guideCardClass(guide: TechGuide): string {
   if (guide.isBackup) {
     return 'relative rounded-lg p-4 border-2 bg-amber-50 dark:bg-amber-950/40 border-amber-500';
   }
-  return 'relative rounded-lg p-4 border-2 bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700';
+  return 'relative rounded-lg p-4 border-2 bg-gray-50 dark:bg-gray-200 border-gray-200 dark:border-gray-700';
 }
 
 function guideIconClass(guide: TechGuide): string {
@@ -172,7 +172,7 @@ const SafetyNetBuilder: React.FC = () => {
         </div>
 
         {showAddTechGuide && (
-          <div className="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-4 sm:p-6 mb-4">
+          <div className="bg-gray-50 dark:bg-gray-100/50 rounded-lg p-4 sm:p-6 mb-4">
             <h4 className="text-base font-semibold text-gray-800 dark:text-gray-100 mb-4">Add New Tech Guide</h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
               <div>
@@ -352,7 +352,7 @@ const SafetyNetBuilder: React.FC = () => {
         </div>
 
         {showAddContact && (
-          <div className="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-4 sm:p-6 mb-4">
+          <div className="bg-gray-50 dark:bg-gray-100/50 rounded-lg p-4 sm:p-6 mb-4">
             <h4 className="text-base font-semibold text-gray-800 dark:text-gray-100 mb-4">Add Point of Contact</h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
               <div>
@@ -460,7 +460,7 @@ const SafetyNetBuilder: React.FC = () => {
             {pointsOfContact.map((contact) => (
               <div
                 key={contact.id}
-                className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 rounded-lg bg-gray-50 dark:bg-gray-900/50 p-4"
+                className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 rounded-lg bg-gray-50 dark:bg-gray-100/50 p-4"
               >
                 <div className="flex-1 min-w-0">
                   <div className="font-semibold text-gray-800 dark:text-gray-100 mb-1">{contact.issueType}</div>
@@ -502,7 +502,7 @@ const SafetyNetBuilder: React.FC = () => {
               className={`flex items-start gap-4 p-4 rounded-lg text-left transition-all ${
                 sign.checked
                   ? 'bg-red-50 dark:bg-red-950/30 border-2 border-red-600 dark:border-red-500'
-                  : 'bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
+                  : 'bg-gray-50 dark:bg-gray-100/50 border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
               }`}
             >
               {sign.checked ? (

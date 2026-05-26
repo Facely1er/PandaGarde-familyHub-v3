@@ -114,7 +114,7 @@ const PrivacyGoals: React.FC<PrivacyGoalsProps> = ({ compact = false, onGoalCrea
       case 'parental-controls':
         return 'bg-pink-100 text-pink-800 dark:bg-pink-900/30 dark:text-pink-300';
       default:
-        return 'bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-300';
+        return 'bg-gray-100 text-gray-800 dark:bg-gray-100/30 dark:text-gray-300';
     }
   };
 
@@ -145,7 +145,7 @@ const PrivacyGoals: React.FC<PrivacyGoalsProps> = ({ compact = false, onGoalCrea
 
   if (compact) {
     return (
-      <div className="p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+      <div className="p-4 bg-white dark:bg-gray-200 rounded-lg border border-gray-200 dark:border-gray-700">
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center space-x-2">
             <Target className="h-5 w-5 text-purple-600 dark:text-purple-400" />
@@ -218,7 +218,7 @@ const PrivacyGoals: React.FC<PrivacyGoalsProps> = ({ compact = false, onGoalCrea
             {activeGoals.map(goal => (
               <div
                 key={goal.id}
-                className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700"
+                className="bg-white dark:bg-gray-200 rounded-lg p-6 border border-gray-200 dark:border-gray-700"
               >
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex-1">
@@ -349,7 +349,7 @@ const PrivacyGoals: React.FC<PrivacyGoalsProps> = ({ compact = false, onGoalCrea
 
       {/* Empty State */}
       {goals.length === 0 && (
-        <div className="p-8 text-center bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+        <div className="p-8 text-center bg-gray-50 dark:bg-gray-200 rounded-lg border border-gray-200 dark:border-gray-700">
           <Target className="h-12 w-12 mx-auto text-gray-400 mb-4" />
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
             No Goals Yet
@@ -369,7 +369,7 @@ const PrivacyGoals: React.FC<PrivacyGoalsProps> = ({ compact = false, onGoalCrea
       {/* Create/Edit Modal */}
       {(showCreateModal || editingGoal) && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+          <div className="bg-white dark:bg-gray-200 rounded-lg p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-xl font-bold text-gray-900 dark:text-white">
                 {editingGoal ? 'Edit Goal' : 'Create New Goal'}

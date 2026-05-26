@@ -192,7 +192,7 @@ const KidsScreen: React.FC = () => {
             return (
               <div
                 key={member.id}
-                className="hub-card-lift rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-shadow dark:border-gray-700 dark:bg-gray-800"
+                className="hub-card-lift rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-shadow dark:border-gray-700 dark:bg-gray-200"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex min-w-0 flex-1 items-center gap-4">
@@ -287,7 +287,7 @@ const KidsScreen: React.FC = () => {
             role="dialog"
             aria-modal="true"
             aria-labelledby="add-member-title"
-            className="w-full max-w-md rounded-xl bg-white p-6 shadow-xl dark:bg-gray-800"
+            className="w-full max-w-md rounded-xl bg-white p-6 shadow-xl dark:bg-gray-200"
           >
             <div className="flex items-center justify-between mb-6">
               <h3 id="add-member-title" className="text-xl font-bold text-gray-900 dark:text-white">
@@ -400,7 +400,7 @@ const KidsScreen: React.FC = () => {
             role="dialog"
             aria-modal="true"
             aria-labelledby="edit-member-title"
-            className="w-full max-w-md rounded-xl bg-white p-6 shadow-xl dark:bg-gray-800"
+            className="w-full max-w-md rounded-xl bg-white p-6 shadow-xl dark:bg-gray-200"
           >
             <div className="flex items-center justify-between mb-6">
               <h3 id="edit-member-title" className="text-xl font-bold text-gray-900 dark:text-white">
@@ -504,7 +504,7 @@ const KidsScreen: React.FC = () => {
             aria-modal="true"
             aria-labelledby="remove-member-title"
             aria-describedby="remove-member-desc"
-            className="w-full max-w-md rounded-xl bg-white p-6 shadow-xl dark:bg-gray-800"
+            className="w-full max-w-md rounded-xl bg-white p-6 shadow-xl dark:bg-gray-200"
           >
             <h3 id="remove-member-title" className="text-xl font-bold text-gray-900 dark:text-white mb-2">
               Remove {memberToRemove.name}?

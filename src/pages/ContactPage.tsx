@@ -39,7 +39,7 @@ const ContactPage: React.FC = () => {
         <ContactForm />
       </section>
 
-      <section className="rounded-2xl border border-gray-200 bg-gray-50 py-12 dark:border-gray-700 dark:bg-gray-900/50">
+      <section className="rounded-2xl border border-gray-200 bg-gray-50 py-12 dark:border-gray-700 dark:bg-gray-100/50">
         <div className="mx-auto max-w-4xl px-4 sm:px-6">
           <div className="mb-10 text-center">
             <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-gray-100 sm:text-3xl">
@@ -54,7 +54,7 @@ const ContactPage: React.FC = () => {
             {faqItems.map((item) => (
               <div
                 key={item.question}
-                className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800"
+                className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-200"
               >
                 <div className="flex items-start gap-4">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-green-100 dark:bg-green-950">

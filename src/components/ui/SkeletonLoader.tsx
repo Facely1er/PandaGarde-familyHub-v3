@@ -123,7 +123,7 @@ export const SkeletonCard: React.FC<SkeletonCardProps> = ({
   return (
     <div
       className={`
-        bg-white dark:bg-gray-800 
+        bg-white dark:bg-gray-200 
         rounded-xl 
         border border-gray-200 dark:border-gray-700
         p-6
@@ -193,7 +193,7 @@ export const SkeletonList: React.FC<SkeletonListProps> = ({
           key={index}
           className={`
             flex items-center gap-4 p-4
-            bg-white dark:bg-gray-800
+            bg-white dark:bg-gray-200
             rounded-lg
             border border-gray-200 dark:border-gray-700
           `}

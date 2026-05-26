@@ -25,7 +25,7 @@ const GetStartedPage: React.FC = () => {
           <DfaJourneyStepper currentKey="profile" ctaHref={nextPhase.path} ctaLabel={`Continue to ${nextPhase.title}`} />
 
           <div className="grid gap-6 lg:grid-cols-[1.35fr_0.9fr]">
-            <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+            <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-200">
               <div className="inline-flex items-center gap-2 rounded-full bg-green-50 px-3 py-1 text-sm font-semibold text-green-800 dark:bg-green-950/50 dark:text-green-300">
                 <Sparkles size={16} /> Low-friction family onboarding
               </div>
@@ -36,7 +36,7 @@ const GetStartedPage: React.FC = () => {
 
               <div className="mt-6 grid gap-4 md:grid-cols-2">
                 {journey.phases.map((phase, index) => (
-                  <div key={phase.key} className="rounded-2xl border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-900/60">
+                  <div key={phase.key} className="rounded-2xl border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-100/60">
                     <div className="flex items-start justify-between gap-3">
                       <div>
                         <div className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">Phase {index + 1}</div>
@@ -63,7 +63,7 @@ const GetStartedPage: React.FC = () => {
                 </ul>
               </div>
 
-              <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+              <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-200">
                 <div className="text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">Current status</div>
                 <div className="mt-2 text-3xl font-bold text-gray-900 dark:text-gray-100">{journey.progressPercent}% complete</div>
                 <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">{journey.progressPercent === 0 ? 'Start with your service catalog so the Digital Footprint Analysis has something real to analyze.' : 'Keep following the Digital Footprint Analysis-led path instead of jumping between disconnected pages.'}</p>

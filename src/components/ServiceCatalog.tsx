@@ -192,14 +192,14 @@ const ServiceCatalog: React.FC<ServiceCatalogProps> = ({
   // Get risk badge
   const getRiskBadge = (riskLevel: string) => {
     const colors = {
-      low: 'bg-green-100 text-green-800 border-green-300',
-      medium: 'bg-yellow-100 text-yellow-800 border-yellow-300',
-      high: 'bg-orange-100 text-orange-800 border-orange-300',
-      'very-high': 'bg-red-100 text-red-800 border-red-300'
+      low: 'bg-green-100 text-green-900 border-green-300 dark:bg-green-950/60 dark:text-green-200 dark:border-green-700',
+      medium: 'bg-yellow-100 text-yellow-900 border-yellow-300 dark:bg-yellow-950/50 dark:text-yellow-100 dark:border-yellow-700',
+      high: 'bg-orange-100 text-orange-900 border-orange-300 dark:bg-orange-950/50 dark:text-orange-100 dark:border-orange-700',
+      'very-high': 'bg-red-100 text-red-900 border-red-300 dark:bg-red-950/50 dark:text-red-100 dark:border-red-700',
     };
     
     return (
-      <span className={`px-2 py-1 rounded-full text-xs font-medium border ${colors[riskLevel as keyof typeof colors] || 'bg-gray-100 text-gray-800'}`}>
+      <span className={`px-2 py-1 rounded-full text-xs font-medium border ${colors[riskLevel as keyof typeof colors] || 'bg-gray-100 text-gray-800 dark:bg-gray-200 dark:text-gray-200 dark:border-gray-500'}`}>
         {riskLevel === 'very-high' ? 'Very High' : riskLevel.charAt(0).toUpperCase() + riskLevel.slice(1)} Risk
       </span>
     );
@@ -509,7 +509,7 @@ const ServiceCatalog: React.FC<ServiceCatalogProps> = ({
                   const exposureLevel = getExposureLevel(exposureIndex);
                   if (exposureIndex !== null) {
                     return (
-                      <div className="mt-3 p-2 rounded-lg bg-gray-50 dark:bg-gray-800">
+                      <div className="mt-3 p-2 rounded-lg bg-gray-50 dark:bg-gray-200">
                         <div className="flex items-center justify-between mb-1">
                           <span className="text-xs font-medium text-gray-600 dark:text-gray-400">
                             Privacy Exposure

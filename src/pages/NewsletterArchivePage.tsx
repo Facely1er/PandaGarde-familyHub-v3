@@ -55,7 +55,7 @@ const NewsletterArchivePage: React.FC = () => {
                       <Link
                         key={newsletter.id}
                         to={newsletterIssuePath(newsletter.id)}
-                        className="block bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-lg transition-all border border-gray-200 dark:border-gray-700"
+                        className="block bg-white dark:bg-gray-200 rounded-xl p-6 shadow-md hover:shadow-lg transition-all border border-gray-200 dark:border-gray-700"
                       >
                         <div className="flex items-start justify-between">
                           <div className="flex-1">

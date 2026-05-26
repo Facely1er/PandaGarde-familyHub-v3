@@ -109,7 +109,7 @@ const ParentDashboard: React.FC<ParentDashboardProps> = ({ progress, onClose }) 
       aria-labelledby="parent-dashboard-title"
     >
       {/* Header */}
-      <div className="flex items-center justify-between px-5 py-4 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+      <div className="flex items-center justify-between px-5 py-4 bg-white dark:bg-gray-200 border-b border-gray-200 dark:border-gray-700">
         <h2 id="parent-dashboard-title" className="m-0 text-2xl font-semibold text-gray-800 dark:text-gray-100">Parent Dashboard</h2>
         <button
           onClick={onClose}
@@ -121,9 +121,9 @@ const ParentDashboard: React.FC<ParentDashboardProps> = ({ progress, onClose }) 
       </div>
 
       {/* Content */}
-      <div className="flex-1 flex flex-col bg-white dark:bg-gray-800 overflow-hidden">
+      <div className="flex-1 flex flex-col bg-white dark:bg-gray-200 overflow-hidden">
         {/* Tabs */}
-        <div className="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 sm:flex-row flex-col">
+        <div className="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-100 sm:flex-row flex-col">
           {[
             { id: 'overview', label: 'Overview', icon: <TrendingUp size={16} /> },
             { id: 'activities', label: 'Activities', icon: <Users size={16} /> },
@@ -133,7 +133,7 @@ const ParentDashboard: React.FC<ParentDashboardProps> = ({ progress, onClose }) 
               key={id}
               className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
                 activeTab === id
-                  ? 'border-green-500 text-green-600 dark:text-green-400 bg-white dark:bg-gray-800'
+                  ? 'border-green-500 text-green-600 dark:text-green-400 bg-white dark:bg-gray-200'
                   : 'border-transparent text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700'
               }`}
               onClick={() => setActiveTab(id as typeof activeTab)}

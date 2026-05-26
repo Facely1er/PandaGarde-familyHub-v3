@@ -5783,9 +5783,22 @@ body {
   border-color: var(--gray-300) !important;
 }
 
+/* Standalone full-page routes (service catalog, DFA, assessments, etc.) */
+.panda-page-shell {
+  min-height: 100vh;
+  background-color: var(--light);
+  color: var(--gray-800);
+}
+
+[data-theme="dark"] .panda-page-shell {
+  background-color: var(--white);
+  color: var(--gray-900);
+}
+
 /* Page shells: forest background (not Tailwind slate-900 blue-gray) */
 [data-theme="dark"] .min-h-screen.bg-gray-50 {
   background-color: var(--white) !important;
+  color: var(--gray-900);
 }
 
 /* dark:bg-slate-* and dark:bg-gray-8xx/9xx — remap to brand surfaces */
@@ -5801,8 +5814,12 @@ body {
   background-color: var(--gray-200) !important;
 }
 
-[data-theme="dark"] .dark\:bg-slate-800\/60 {
-  background-color: color-mix(in srgb, var(--gray-100) 60%, transparent) !important;
+[data-theme="dark"] .dark\:bg-slate-800\/60,
+[data-theme="dark"] .dark\:bg-gray-800\/90,
+[data-theme="dark"] .dark\:bg-gray-800\/95,
+[data-theme="dark"] .dark\:bg-gray-200\/90,
+[data-theme="dark"] .dark\:bg-gray-200\/95 {
+  background-color: color-mix(in srgb, var(--gray-100) 90%, transparent) !important;
 }
 
 [data-theme="dark"] .dark\:bg-slate-900\/60,
@@ -5849,6 +5866,36 @@ body {
 
 [data-theme="dark"] .text-slate-300 {
   color: var(--gray-600) !important;
+}
+
+[data-theme="dark"] .text-slate-900,
+[data-theme="dark"] .text-slate-800 {
+  color: var(--gray-900) !important;
+}
+
+[data-theme="dark"] .text-slate-700,
+[data-theme="dark"] .text-slate-600 {
+  color: var(--gray-600) !important;
+}
+
+[data-theme="dark"] .text-slate-500,
+[data-theme="dark"] .text-slate-400 {
+  color: var(--gray-500) !important;
+}
+
+[data-theme="dark"] .dark\:bg-gray-200,
+[data-theme="dark"] .dark\:bg-gray-100 {
+  background-color: var(--gray-100) !important;
+}
+
+[data-theme="dark"] .dark\:bg-gray-200\/95,
+[data-theme="dark"] .dark\:bg-gray-100\/50 {
+  background-color: color-mix(in srgb, var(--gray-100) 92%, transparent) !important;
+}
+
+[data-theme="dark"] .dark\:hover\:bg-gray-700:hover,
+[data-theme="dark"] .dark\:hover\:bg-gray-600:hover {
+  background-color: var(--gray-300) !important;
 }
 
 [data-theme="dark"] .hover\:bg-slate-100:hover {
@@ -5903,6 +5950,35 @@ body {
 
 [data-theme="dark"] .placeholder\:text-slate-400::placeholder {
   color: var(--gray-500) !important;
+}
+
+/* Risk / severity badges (Tailwind pastels without dark: in markup) */
+[data-theme="dark"] .bg-yellow-100.text-yellow-800,
+[data-theme="dark"] .bg-yellow-100.text-yellow-900 {
+  background-color: rgba(113, 63, 18, 0.45) !important;
+  color: #fef08a !important;
+  border-color: #a16207 !important;
+}
+
+[data-theme="dark"] .bg-orange-100.text-orange-800,
+[data-theme="dark"] .bg-orange-100.text-orange-900 {
+  background-color: rgba(154, 52, 18, 0.4) !important;
+  color: #fed7aa !important;
+  border-color: #c2410c !important;
+}
+
+[data-theme="dark"] .bg-red-100.text-red-800,
+[data-theme="dark"] .bg-red-100.text-red-900 {
+  background-color: rgba(127, 29, 29, 0.45) !important;
+  color: #fecaca !important;
+  border-color: #b91c1c !important;
+}
+
+[data-theme="dark"] .bg-green-100.text-green-800,
+[data-theme="dark"] .bg-green-100.text-green-900 {
+  background-color: rgba(20, 83, 45, 0.45) !important;
+  color: #bbf7d0 !important;
+  border-color: #15803d !important;
 }
 
 /* Contact form — explicit theme styles (Tailwind gray-* tokens invert in dark mode) */

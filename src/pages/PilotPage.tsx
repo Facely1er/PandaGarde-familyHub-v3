@@ -133,7 +133,7 @@ const PilotPage: React.FC = () => {
                 return (
                   <div
                     key={index}
-                    className="bg-white dark:bg-gray-800 rounded-xl p-5 shadow-sm border border-green-100 dark:border-green-900/50 hover:border-green-300 dark:hover:border-green-700 transition-colors"
+                    className="bg-white dark:bg-gray-200 rounded-xl p-5 shadow-sm border border-green-100 dark:border-green-900/50 hover:border-green-300 dark:hover:border-green-700 transition-colors"
                   >
                     <div className="flex items-start gap-3">
                       <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-green-100 dark:bg-green-900/40 flex items-center justify-center">
@@ -176,7 +176,7 @@ const PilotPage: React.FC = () => {
               </div>
 
               <div className="grid md:grid-cols-2 gap-6">
-                <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+                <div className="bg-white dark:bg-gray-200 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
                   <h3 className="text-lg font-bold mb-3 flex items-center text-green-800 dark:text-green-300">
                     <CheckCircle className="w-5 h-5 mr-2 text-green-600 dark:text-green-400" />
                     What We're Testing
@@ -190,7 +190,7 @@ const PilotPage: React.FC = () => {
                     <li>• Mobile and desktop usability</li>
                   </ul>
                 </div>
-                <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+                <div className="bg-white dark:bg-gray-200 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
                   <h3 className="text-lg font-bold mb-3 flex items-center text-green-800 dark:text-green-300">
                     <Star className="w-5 h-5 mr-2 text-amber-500" />
                     What You'll Do
@@ -224,7 +224,7 @@ const PilotPage: React.FC = () => {
                 return (
                   <div
                     key={index}
-                    className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md hover:border-green-200 dark:hover:border-green-800 transition-all"
+                    className="bg-white dark:bg-gray-200 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md hover:border-green-200 dark:hover:border-green-800 transition-all"
                   >
                     <div className="w-12 h-12 bg-green-100 dark:bg-green-900/40 rounded-lg flex items-center justify-center mb-4">
                       <Icon className="w-6 h-6 text-green-700 dark:text-green-400" />
@@ -251,7 +251,7 @@ const PilotPage: React.FC = () => {
               {whatToExpect.map((phase, index) => (
                 <div
                   key={index}
-                  className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700"
+                  className="bg-white dark:bg-gray-200 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700"
                 >
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center text-white font-bold text-lg">
@@ -298,7 +298,7 @@ const PilotPage: React.FC = () => {
                     const Icon = req.icon;
                     return (
                       <div key={index} className="flex items-start gap-3">
-                        <div className="flex-shrink-0 w-10 h-10 bg-white dark:bg-gray-800 rounded-lg flex items-center justify-center border border-green-100 dark:border-green-800">
+                        <div className="flex-shrink-0 w-10 h-10 bg-white dark:bg-gray-200 rounded-lg flex items-center justify-center border border-green-100 dark:border-green-800">
                           <Icon className="w-5 h-5 text-green-600 dark:text-green-400" />
                         </div>
                         <p className="text-gray-700 dark:text-gray-300 font-medium">{req.text}</p>
@@ -321,21 +321,21 @@ const PilotPage: React.FC = () => {
               </p>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
-              <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 text-center">
+              <div className="bg-white dark:bg-gray-200 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 text-center">
                 <TrendingUp className="w-12 h-12 mx-auto mb-4 text-green-600 dark:text-green-400" />
                 <h3 className="text-lg font-bold mb-2 text-green-800 dark:text-green-300">80%+ Engagement</h3>
                 <p className="text-gray-600 dark:text-gray-400 text-sm">
                   Families complete at least 1 journey and try multiple games
                 </p>
               </div>
-              <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 text-center">
+              <div className="bg-white dark:bg-gray-200 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 text-center">
                 <MessageSquare className="w-12 h-12 mx-auto mb-4 text-green-600 dark:text-green-400" />
                 <h3 className="text-lg font-bold mb-2 text-green-800 dark:text-green-300">Weekly Feedback</h3>
                 <p className="text-gray-600 dark:text-gray-400 text-sm">
                   Regular input from parents and children to guide development
                 </p>
               </div>
-              <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 text-center">
+              <div className="bg-white dark:bg-gray-200 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 text-center">
                 <Award className="w-12 h-12 mx-auto mb-4 text-green-600 dark:text-green-400" />
                 <h3 className="text-lg font-bold mb-2 text-green-800 dark:text-green-300">70%+ Satisfaction</h3>
                 <p className="text-gray-600 dark:text-gray-400 text-sm">

@@ -70,7 +70,7 @@ export function StoryCoverArt({ story, variant }: StoryCoverArtProps) {
         <img
           src={PANDAGARDE_LOGO}
           alt=""
-          className="h-12 w-12 shrink-0 rounded-lg bg-white object-contain p-1 shadow-sm dark:bg-gray-900"
+          className="h-12 w-12 shrink-0 rounded-lg bg-white object-contain p-1 shadow-sm dark:bg-gray-100"
           aria-hidden
         />
       );

@@ -95,7 +95,7 @@ const PrivacyGoalsPage: React.FC = () => {
               {suggestedGoals.map((suggestion, index) => (
                 <div
                   key={index}
-                  className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-blue-200 dark:border-blue-800"
+                  className="bg-white dark:bg-gray-200 rounded-lg p-4 border border-blue-200 dark:border-blue-800"
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex-1">

@@ -163,7 +163,7 @@ const AgeSpecificGuidePage: React.FC = () => {
           </div>
         </section>
       {/* Age Group Selector */}
-      <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700" style={{
+      <div className="bg-white dark:bg-gray-200 border-b border-gray-200 dark:border-gray-700" style={{
         padding: '1.5rem 0',
         marginBottom: 'clamp(2rem, 4vw, 3rem)'
       }}>

@@ -581,7 +581,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
   }
 
   return (
-    <div className="min-h-screen bg-teal-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100">
+    <div className="min-h-screen bg-teal-50 text-gray-800 dark:bg-gray-100 dark:text-gray-100">
       {/* Hero Section - Teal Theme - Hidden in app mode */}
       {!appMode && (
       <section className="bg-gradient-to-r from-teal-600 via-teal-500 to-cyan-500 text-white py-6 sm:py-10 relative overflow-hidden">
@@ -621,7 +621,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
       )}
 
       {/* Quick Actions Bar */}
-      <div className="border-b border-teal-100/80 bg-white/90 backdrop-blur-sm dark:border-teal-900/40 dark:bg-gray-900/80">
+      <div className="border-b border-teal-100/80 bg-white/90 backdrop-blur-sm dark:border-teal-900/40 dark:bg-gray-100/80">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-end py-2.5 sm:py-3">
             <button
@@ -643,7 +643,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
               className="absolute inset-0 bg-gradient-to-r from-teal-400 via-cyan-500 to-emerald-500 opacity-90 dark:from-teal-600 dark:via-cyan-600 dark:to-emerald-700"
               aria-hidden
             />
-            <div className="relative flex flex-col gap-4 rounded-2xl bg-white p-4 dark:bg-gray-900 sm:flex-row sm:items-center sm:justify-between sm:p-5">
+            <div className="relative flex flex-col gap-4 rounded-2xl bg-white p-4 dark:bg-gray-100 sm:flex-row sm:items-center sm:justify-between sm:p-5">
               <div className="flex items-start gap-3 sm:items-center">
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-teal-500 to-cyan-600 text-white shadow-inner">
                   <Gamepad2 size={22} aria-hidden />
@@ -660,7 +660,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
                 <select
                   value={currentMemberId ?? familyMembers[0].id}
                   onChange={(e) => setActiveMember(Number(e.target.value))}
-                  className="w-full cursor-pointer appearance-none rounded-xl border-2 border-slate-200 bg-slate-50 py-3 pl-4 pr-10 text-sm font-semibold text-slate-900 shadow-sm transition-colors focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/30 dark:border-slate-600 dark:bg-slate-800 dark:text-white dark:focus:border-teal-400"
+                  className="w-full cursor-pointer appearance-none rounded-xl border-2 border-slate-200 bg-slate-50 py-3 pl-4 pr-10 text-sm font-semibold text-slate-900 shadow-sm transition-colors focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/30 dark:border-gray-500 dark:bg-gray-200 dark:text-white dark:focus:border-teal-400"
                   style={{
                     backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%230d9488' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")`,
                     backgroundRepeat: 'no-repeat',
@@ -680,7 +680,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
         {/* Family Overview Cards - Teal Theme */}
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
           <div 
-            className="family-hub-card bg-white dark:bg-gray-800 p-4 sm:p-5 rounded-xl shadow-md shadow-teal-900/5 hover:shadow-xl transition-all border-2 border-transparent hover:border-teal-200 dark:hover:border-teal-700"
+            className="family-hub-card bg-white dark:bg-gray-200 p-4 sm:p-5 rounded-xl shadow-md shadow-teal-900/5 hover:shadow-xl transition-all border-2 border-transparent hover:border-teal-200 dark:hover:border-teal-700"
           >
             <div className="flex items-center justify-between mb-2 sm:mb-3">
               <div className="w-9 h-9 sm:w-11 sm:h-11 bg-teal-100 rounded-xl flex items-center justify-center">
@@ -695,7 +695,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
           </div>
 
           <div 
-            className="family-hub-card bg-white dark:bg-gray-800 p-4 sm:p-5 rounded-xl shadow-md shadow-teal-900/5 hover:shadow-xl transition-all border-2 border-transparent hover:border-teal-200 dark:hover:border-teal-700"
+            className="family-hub-card bg-white dark:bg-gray-200 p-4 sm:p-5 rounded-xl shadow-md shadow-teal-900/5 hover:shadow-xl transition-all border-2 border-transparent hover:border-teal-200 dark:hover:border-teal-700"
           >
             <div className="flex items-center justify-between mb-2 sm:mb-3">
               <div className="w-9 h-9 sm:w-11 sm:h-11 bg-cyan-100 rounded-xl flex items-center justify-center">
@@ -710,7 +710,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
           </div>
 
           <div 
-            className="family-hub-card bg-white dark:bg-gray-800 p-4 sm:p-5 rounded-xl shadow-md shadow-teal-900/5 hover:shadow-xl transition-all border-2 border-transparent hover:border-teal-200 dark:hover:border-teal-700"
+            className="family-hub-card bg-white dark:bg-gray-200 p-4 sm:p-5 rounded-xl shadow-md shadow-teal-900/5 hover:shadow-xl transition-all border-2 border-transparent hover:border-teal-200 dark:hover:border-teal-700"
           >
             <div className="flex items-center justify-between mb-2 sm:mb-3">
               <div className="w-9 h-9 sm:w-11 sm:h-11 bg-amber-100 rounded-xl flex items-center justify-center">
@@ -725,7 +725,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
           </div>
 
           <div 
-            className="family-hub-card bg-white dark:bg-gray-800 p-4 sm:p-5 rounded-xl shadow-md shadow-teal-900/5 hover:shadow-xl transition-all border-2 border-transparent hover:border-teal-200 dark:hover:border-teal-700"
+            className="family-hub-card bg-white dark:bg-gray-200 p-4 sm:p-5 rounded-xl shadow-md shadow-teal-900/5 hover:shadow-xl transition-all border-2 border-transparent hover:border-teal-200 dark:hover:border-teal-700"
           >
             <div className="flex items-center justify-between mb-2 sm:mb-3">
               <div className="w-9 h-9 sm:w-11 sm:h-11 bg-orange-100 rounded-xl flex items-center justify-center">
@@ -798,7 +798,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
           {/* Family Members Management */}
           <div 
-            className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 sm:p-6"
+            className="bg-white dark:bg-gray-200 rounded-xl shadow-md p-5 sm:p-6"
           >
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0 mb-4 sm:mb-6">
               <h2 className="text-xl sm:text-2xl font-bold text-primary">Family Members</h2>
@@ -841,7 +841,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
                 {familyMembers.map(member => (
                   <div 
                     key={member.id} 
-                    className="border-2 border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50 rounded-lg p-4 hover:border-green-300 dark:hover:border-green-600 transition-all"
+                    className="border-2 border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-100/50 rounded-lg p-4 hover:border-green-300 dark:hover:border-green-600 transition-all"
                   >
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                       <div className="flex items-center gap-4 flex-1">
@@ -918,7 +918,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
 
           {/* Family Goals */}
           <div 
-            className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 sm:p-6"
+            className="bg-white dark:bg-gray-200 rounded-xl shadow-md p-5 sm:p-6"
           >
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0 mb-4 sm:mb-6">
               <h2 className="text-xl sm:text-2xl font-bold text-primary">Privacy Goals</h2>
@@ -963,7 +963,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
                 {familyGoals.map(goal => (
                   <div 
                     key={goal.id} 
-                    className={`border-2 rounded-lg p-4 hover:border-green-300 dark:hover:border-green-600 transition-all bg-gray-50 dark:bg-gray-900/50 ${
+                    className={`border-2 rounded-lg p-4 hover:border-green-300 dark:hover:border-green-600 transition-all bg-gray-50 dark:bg-gray-100/50 ${
                       goal.completed ? 'border-green-200 dark:border-green-800' : 'border-gray-200 dark:border-gray-700'
                     }`}
                   >
@@ -1012,7 +1012,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
       {showAddMember && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 overflow-y-auto">
           <div 
-            className="rounded-xl max-w-md w-full p-4 sm:p-6 my-auto max-h-[90vh] overflow-y-auto shadow-xl bg-white dark:bg-gray-800"
+            className="rounded-xl max-w-md w-full p-4 sm:p-6 my-auto max-h-[90vh] overflow-y-auto shadow-xl bg-white dark:bg-gray-200"
           >
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-xl font-bold text-primary">Add Family Member</h3>
@@ -1042,7 +1042,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
                   type="text"
                   value={newMember.name}
                   onChange={(e) => setNewMember({...newMember, name: e.target.value})}
-                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-teal-600 focus:border-transparent"
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-200 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-teal-600 focus:border-transparent"
                   placeholder="Enter family member's name"
                   maxLength={50}
                   required
@@ -1056,7 +1056,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
                   type="number"
                   value={newMember.age || ''}
                   onChange={(e) => setNewMember({...newMember, age: parseInt(e.target.value, 10) || 0})}
-                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-teal-600 focus:border-transparent"
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-200 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-teal-600 focus:border-transparent"
                   placeholder="Enter age"
                   min="1"
                   max="100"
@@ -1070,7 +1070,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
                   id="add-member-role"
                   value={newMember.role}
                   onChange={(e) => setNewMember({...newMember, role: e.target.value})}
-                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-teal-600 focus:border-transparent"
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-200 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-teal-600 focus:border-transparent"
                 >
                   <option value="Parent">Parent</option>
                   <option value="Child">Child</option>
@@ -1104,7 +1104,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
       {showAddGoal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 overflow-y-auto">
           <div 
-            className="rounded-xl max-w-md w-full p-4 sm:p-6 my-auto max-h-[90vh] overflow-y-auto shadow-xl bg-white dark:bg-gray-800"
+            className="rounded-xl max-w-md w-full p-4 sm:p-6 my-auto max-h-[90vh] overflow-y-auto shadow-xl bg-white dark:bg-gray-200"
           >
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-xl font-bold text-primary">Add Privacy Goal</h3>
@@ -1124,7 +1124,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
                   type="text"
                   value={newGoal.title}
                   onChange={(e) => setNewGoal({...newGoal, title: e.target.value})}
-                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-teal-600 focus:border-transparent"
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-200 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-teal-600 focus:border-transparent"
                   placeholder="e.g., Set up 2FA for all accounts"
                   required
                 />
@@ -1136,7 +1136,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
                   id="add-goal-description"
                   value={newGoal.description}
                   onChange={(e) => setNewGoal({...newGoal, description: e.target.value})}
-                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-teal-600 focus:border-transparent"
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-200 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-teal-600 focus:border-transparent"
                   placeholder="Describe what needs to be done..."
                   rows={3}
                 />
@@ -1149,7 +1149,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
                   type="date"
                   value={newGoal.targetDate}
                   onChange={(e) => setNewGoal({...newGoal, targetDate: e.target.value})}
-                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-teal-600 focus:border-transparent"
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-200 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-teal-600 focus:border-transparent"
                 />
               </div>
               
@@ -1159,7 +1159,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
                   id="add-goal-priority"
                   value={newGoal.priority}
                   onChange={(e) => setNewGoal({...newGoal, priority: e.target.value})}
-                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-teal-600 focus:border-transparent"
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-200 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-teal-600 focus:border-transparent"
                 >
                   <option value="Low">Low Priority</option>
                   <option value="Medium">Medium Priority</option>

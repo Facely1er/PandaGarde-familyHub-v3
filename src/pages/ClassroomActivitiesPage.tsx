@@ -67,7 +67,7 @@ const ClassroomActivitiesPage: React.FC = () => {
             <button
               type="button"
               onClick={handlePrintGuide}
-              className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 font-semibold text-gray-800 transition-colors hover:bg-gray-50 print:hidden dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 font-semibold text-gray-800 transition-colors hover:bg-gray-50 print:hidden dark:border-gray-600 dark:bg-gray-200 dark:text-gray-100 dark:hover:bg-gray-700"
             >
               <FileText size={18} aria-hidden />
               Print this guide
@@ -118,7 +118,7 @@ const ClassroomActivitiesPage: React.FC = () => {
           return (
             <div
               key={chapter.id}
-              className="mb-6 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800"
+              className="mb-6 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-200"
             >
               <button
                 type="button"
@@ -183,7 +183,7 @@ const ClassroomActivitiesPage: React.FC = () => {
                           </button>
 
                           {isActivityExpanded && (
-                            <div className="space-y-4 bg-gray-50 p-4 dark:bg-gray-900/40">
+                            <div className="space-y-4 bg-gray-50 p-4 dark:bg-gray-100/40">
                               {/* Learning Objective */}
                               <div>
                                 <h4 className="mb-2 flex items-center gap-2 font-semibold text-gray-900 dark:text-white">
@@ -295,7 +295,7 @@ const ClassroomActivitiesPage: React.FC = () => {
           );
         })}
 
-        <section className="mb-6 rounded-xl border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800">
+        <section className="mb-6 rounded-xl border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-200">
           <h2 className="mb-6 text-2xl font-bold text-gray-900 dark:text-white">
             Cross-Curricular Connections
           </h2>
@@ -373,7 +373,7 @@ const ClassroomActivitiesPage: React.FC = () => {
           </div>
         </section>
 
-        <section className="mb-6 rounded-xl border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800">
+        <section className="mb-6 rounded-xl border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-200">
           <h2 className="mb-6 flex items-center gap-2 text-2xl font-bold text-gray-900 dark:text-white">
             <FileText size={28} aria-hidden />
             Assessment Tools

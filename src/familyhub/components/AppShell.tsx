@@ -82,7 +82,7 @@ const AppShell: React.FC = () => {
         Skip to main content
       </a>
 
-      <header className="shrink-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm">
+      <header className="shrink-0 bg-white dark:bg-gray-200 border-b border-gray-200 dark:border-gray-700 shadow-sm">
         <div className="pt-[env(safe-area-inset-top,0px)]">
           <div className="flex h-11 max-w-full items-center justify-between gap-2 pl-[max(0.75rem,env(safe-area-inset-left,0px))] pr-[max(0.75rem,env(safe-area-inset-right,0px))]">
             <div className="flex min-w-0 flex-1 items-center gap-2">
@@ -137,7 +137,7 @@ const AppShell: React.FC = () => {
       </main>
 
       <nav
-        className="shrink-0 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 shadow-lg pb-[env(safe-area-inset-bottom,0px)]"
+        className="shrink-0 bg-white dark:bg-gray-200 border-t border-gray-200 dark:border-gray-700 shadow-lg pb-[env(safe-area-inset-bottom,0px)]"
         aria-label="Primary Family Hub navigation"
         onKeyDown={onNavKeyDown}
       >

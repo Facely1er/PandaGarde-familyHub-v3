@@ -17,6 +17,7 @@ export interface DfaJourneyState {
 }
 
 export const DFA_JOURNEY_STORAGE_KEY = 'pandagarde_dfa_journey_v1';
+export const DFA_JOURNEY_CHANGE_EVENT = 'pandagarde-dfa-journey-change';
 
 const phaseBlueprint: Omit<DfaJourneyPhase, 'completed' | 'visited' | 'updatedAt'>[] = [
   {
@@ -55,6 +56,34 @@ export const getDefaultDfaJourneyState = (): DfaJourneyState => ({
   resumePath: '/get-started',
   lastUpdated: new Date().toISOString(),
 });
+
+/** Stable default for SSR and useSyncExternalStore server snapshots. */
+export const DEFAULT_DFA_JOURNEY_STATE: DfaJourneyState = getDefaultDfaJourneyState();
+
+const journeySnapshotFingerprint = (state: DfaJourneyState): string =>
+  JSON.stringify({
+    progressPercent: state.progressPercent,
+    resumePath: state.resumePath,
+    phases: state.phases.map((phase) => ({
+      key: phase.key,
+      visited: phase.visited,
+      completed: phase.completed,
+    })),
+  });
+
+let cachedJourneySnapshot: DfaJourneyState = DEFAULT_DFA_JOURNEY_STATE;
+let cachedJourneyFingerprint = journeySnapshotFingerprint(DEFAULT_DFA_JOURNEY_STATE);
+
+/** Returns a referentially stable snapshot when journey data has not changed. */
+export const getDfaJourneySnapshot = (): DfaJourneyState => {
+  const loaded = loadDfaJourneyState();
+  const fingerprint = journeySnapshotFingerprint(loaded);
+  if (fingerprint !== cachedJourneyFingerprint) {
+    cachedJourneyFingerprint = fingerprint;
+    cachedJourneySnapshot = loaded;
+  }
+  return cachedJourneySnapshot;
+};
 
 const normalizeState = (raw: Partial<DfaJourneyState> | null | undefined): DfaJourneyState => {
   const fallback = getDefaultDfaJourneyState();
@@ -96,6 +125,12 @@ export const loadDfaJourneyState = (): DfaJourneyState => {
 export const saveDfaJourneyState = (state: DfaJourneyState): void => {
   if (typeof window === 'undefined') {return;}
   window.localStorage.setItem(DFA_JOURNEY_STORAGE_KEY, JSON.stringify(state));
+  const fingerprint = journeySnapshotFingerprint(state);
+  if (fingerprint !== cachedJourneyFingerprint) {
+    cachedJourneyFingerprint = fingerprint;
+    cachedJourneySnapshot = state;
+  }
+  window.dispatchEvent(new Event(DFA_JOURNEY_CHANGE_EVENT));
 };
 
 export const updateDfaJourneyPhase = (

@@ -65,7 +65,7 @@ const ServiceRelationshipMap: React.FC<ServiceRelationshipMapProps> = ({
             {siblingServices.map((sibling) => (
               <div
                 key={sibling.id}
-                className="flex items-center space-x-2 p-2 bg-white dark:bg-gray-800 rounded border border-blue-200 dark:border-blue-700 hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors cursor-pointer"
+                className="flex items-center space-x-2 p-2 bg-white dark:bg-gray-200 rounded border border-blue-200 dark:border-blue-700 hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors cursor-pointer"
                 onClick={() => onServiceClick?.(sibling.id)}
               >
                 {hasServiceLogo(sibling.id) ? (

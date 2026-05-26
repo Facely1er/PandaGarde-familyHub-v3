@@ -177,7 +177,7 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose, onResultClic
         {/* Modal */}
         <div
           ref={modalRef}
-          className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full max-h-[80vh] overflow-hidden"
+          className="relative bg-white dark:bg-gray-200 rounded-lg shadow-xl max-w-2xl w-full max-h-[80vh] overflow-hidden"
         >
           <h2 id="search-modal-title" className="sr-only">Search PandaGarde</h2>
           {/* Search Input */}

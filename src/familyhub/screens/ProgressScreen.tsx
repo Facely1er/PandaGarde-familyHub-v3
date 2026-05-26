@@ -87,7 +87,7 @@ const ProgressScreen: React.FC = () => {
       </div>
 
       {/* Progress bar */}
-      <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-800">
+      <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-200">
         <div className="flex items-end justify-between mb-2">
           <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">Overall journey progress</p>
           <p className="text-sm font-bold text-teal-700 dark:text-teal-300">{completedCount} / {totalCount}</p>
@@ -107,7 +107,7 @@ const ProgressScreen: React.FC = () => {
 
       {/* Achievements */}
       {progress.achievements.length > 0 && (
-        <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-800">
+        <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-200">
           <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-4">Badges earned</h2>
           <ul className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {progress.achievements.map((id) => {
@@ -129,7 +129,7 @@ const ProgressScreen: React.FC = () => {
 
       {/* Recent completions */}
       {recentCompletions.length > 0 && (
-        <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-800">
+        <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-200">
           <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-4">Recently completed</h2>
           <ul className="space-y-3">
             {recentCompletions.map(({ activity, detail }) => (
@@ -155,7 +155,7 @@ const ProgressScreen: React.FC = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <button
           onClick={() => setShowCertificates(true)}
-          className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:border-teal-500 dark:hover:border-teal-500 transition-all shadow-sm hover:shadow-md text-left"
+          className="bg-white dark:bg-gray-200 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:border-teal-500 dark:hover:border-teal-500 transition-all shadow-sm hover:shadow-md text-left"
         >
           <div className="flex items-center gap-3 mb-2">
             <Award className="text-teal-600 dark:text-teal-400" size={22} aria-hidden="true" />
@@ -166,7 +166,7 @@ const ProgressScreen: React.FC = () => {
 
         <button
           onClick={() => setShowProgressExport(true)}
-          className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:border-teal-500 dark:hover:border-teal-500 transition-all shadow-sm hover:shadow-md text-left"
+          className="bg-white dark:bg-gray-200 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:border-teal-500 dark:hover:border-teal-500 transition-all shadow-sm hover:shadow-md text-left"
         >
           <div className="flex items-center gap-3 mb-2">
             <Download className="text-teal-600 dark:text-teal-400" size={22} aria-hidden="true" />
@@ -179,7 +179,7 @@ const ProgressScreen: React.FC = () => {
       {/* Certificates Modal */}
       {showCertificates && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-xl relative">
+          <div className="bg-white dark:bg-gray-200 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-xl relative">
             <button
               onClick={() => setShowCertificates(false)}
               className="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 min-w-[44px] min-h-[44px] flex items-center justify-center"
@@ -200,7 +200,7 @@ const ProgressScreen: React.FC = () => {
       {/* Progress Export Modal */}
       {showProgressExport && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-xl relative">
+          <div className="bg-white dark:bg-gray-200 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-xl relative">
             <button
               onClick={() => setShowProgressExport(false)}
               className="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 min-w-[44px] min-h-[44px] flex items-center justify-center"

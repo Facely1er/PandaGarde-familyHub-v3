@@ -12,7 +12,7 @@ export function StoryEpilogue({ story, className = '', id }: StoryEpilogueProps)
   return (
     <section
       id={id}
-      className={`mt-8 space-y-6 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-6 sm:p-8 ${className}`}
+      className={`mt-8 space-y-6 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-200 p-6 sm:p-8 ${className}`}
       aria-labelledby="story-epilogue-heading"
     >
       <h2 id="story-epilogue-heading" className="text-lg font-bold text-gray-900 dark:text-gray-100">

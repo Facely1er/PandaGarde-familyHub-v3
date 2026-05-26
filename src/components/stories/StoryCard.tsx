@@ -15,7 +15,7 @@ export function StoryCard({ story }: { story: Story }) {
   return (
     <Link
       to={`/stories/${story.slug}`}
-      className="group block rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-hidden no-underline text-inherit transition-all hover:border-green-600 dark:hover:border-green-500 hover:shadow-card-hover"
+      className="group block rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-200 overflow-hidden no-underline text-inherit transition-all hover:border-green-600 dark:hover:border-green-500 hover:shadow-card-hover"
     >
       <StoryCoverArt story={story} variant="card" />
 

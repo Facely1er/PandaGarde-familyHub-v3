@@ -128,7 +128,7 @@ const PhishingDetective: React.FC<PhishingDetectiveProps> = ({ onBack }) => {
   const isCorrect = userAnswer === email.isPhishing;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 dark:from-gray-900 dark:to-gray-200 p-6">
       <div className="max-w-6xl mx-auto">
         <button
           onClick={onBack}
@@ -138,7 +138,7 @@ const PhishingDetective: React.FC<PhishingDetectiveProps> = ({ onBack }) => {
           <span>Back to Learning Hub</span>
         </button>
 
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
+        <div className="bg-white dark:bg-gray-200 rounded-2xl shadow-xl p-8">
           <div className="text-center mb-8">
             <div className="w-16 h-16 bg-orange-100 dark:bg-orange-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
               <Search className="text-orange-600 dark:text-orange-400" size={32} />
@@ -165,7 +165,7 @@ const PhishingDetective: React.FC<PhishingDetectiveProps> = ({ onBack }) => {
               {/* Email Display */}
               <div className="lg:col-span-2">
                 <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 mb-6">
-                  <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg p-6">
+                  <div className="bg-white dark:bg-gray-200 border border-gray-200 dark:border-gray-600 rounded-lg p-6">
                     <div className="border-b border-gray-200 dark:border-gray-600 pb-4 mb-4">
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-sm font-medium text-gray-700 dark:text-gray-300">From:</span>
@@ -258,7 +258,7 @@ const PhishingDetective: React.FC<PhishingDetectiveProps> = ({ onBack }) => {
                 </p>
 
                 {email.isPhishing && email.redFlags.length > 0 && (
-                  <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg p-4">
+                  <div className="bg-white dark:bg-gray-200 border border-gray-200 dark:border-gray-600 rounded-lg p-4">
                     <h4 className="font-semibold text-gray-800 dark:text-gray-100 mb-2">🚩 Red Flags in This Email:</h4>
                     <ul className="space-y-1">
                       {email.redFlags.map((flag, index) => (

@@ -225,14 +225,14 @@ const ConversationApproaches: React.FC = () => {
           return (
             <div
               key={approach.id}
-              className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-hidden"
+              className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-200 overflow-hidden"
             >
               <button
                 type="button"
                 className={`w-full p-4 sm:p-6 flex items-center justify-between gap-4 text-left transition-colors ${
                   isExpanded
                     ? 'bg-green-50 dark:bg-green-950/30'
-                    : 'bg-gray-50 dark:bg-gray-900/50 hover:bg-gray-100 dark:hover:bg-gray-900'
+                    : 'bg-gray-50 dark:bg-gray-100/50 hover:bg-gray-100 dark:hover:bg-gray-900'
                 }`}
                 onClick={() => setExpandedApproach(isExpanded ? null : approach.id)}
                 aria-expanded={isExpanded}
@@ -292,7 +292,7 @@ const ConversationApproaches: React.FC = () => {
                       {approach.scenarios.map((scenario, idx) => (
                         <div
                           key={idx}
-                          className="bg-gray-50 dark:bg-gray-900/50 p-4 sm:p-6 rounded-lg mb-4 last:mb-0"
+                          className="bg-gray-50 dark:bg-gray-100/50 p-4 sm:p-6 rounded-lg mb-4 last:mb-0"
                         >
                           <p className="mb-4 text-gray-700 dark:text-gray-300">
                             <strong className="text-gray-800 dark:text-gray-100">Situation: </strong>

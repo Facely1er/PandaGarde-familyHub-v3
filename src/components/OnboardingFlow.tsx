@@ -150,7 +150,7 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ onComplete }) => {
       }}
     >
       <div 
-        className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-2xl w-full overflow-y-auto" 
+        className="bg-white dark:bg-gray-200 rounded-2xl shadow-2xl max-w-2xl w-full overflow-y-auto" 
         style={{ 
           maxHeight: `calc(100vh - ${headerHeight}px - 2rem)`
         }}

@@ -50,7 +50,7 @@ const FeatureUnlockCelebration: React.FC<FeatureUnlockCelebrationProps> = ({
       }`}
       style={{ maxWidth: '400px' }}
     >
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl border-2 border-green-500 overflow-hidden">
+      <div className="bg-white dark:bg-gray-200 rounded-xl shadow-2xl border-2 border-green-500 overflow-hidden">
         {/* Animated Background */}
         <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 via-green-400/10 to-green-500/10 animate-pulse" />
         

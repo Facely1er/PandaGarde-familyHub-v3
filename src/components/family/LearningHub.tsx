@@ -248,7 +248,7 @@ const LearningHub: React.FC = () => {
           </div>
         )}
 
-        <div className="mb-6 rounded-2xl border border-white/60 bg-white/80 p-5 shadow-lg shadow-teal-900/5 backdrop-blur-sm dark:border-gray-700/80 dark:bg-gray-900/80 dark:shadow-black/20 sm:p-6">
+        <div className="mb-6 rounded-2xl border border-white/60 bg-white/80 p-5 shadow-lg shadow-teal-900/5 backdrop-blur-sm dark:border-gray-700/80 dark:bg-gray-100/80 dark:shadow-black/20 sm:p-6">
           <button
             type="button"
             onClick={handleBack}
@@ -271,7 +271,7 @@ const LearningHub: React.FC = () => {
               </p>
             </div>
 
-            <div className="flex shrink-0 items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 dark:border-slate-600 dark:bg-slate-800/80">
+            <div className="flex shrink-0 items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 dark:border-gray-500 dark:bg-gray-200/80">
               <Trophy className="text-amber-500" size={24} aria-hidden />
               <div>
                 <p className="text-lg font-bold tabular-nums text-slate-900 dark:text-white">
@@ -285,7 +285,7 @@ const LearningHub: React.FC = () => {
           </div>
         </div>
 
-        <div className="mb-8 rounded-2xl border border-slate-200/80 bg-white p-4 shadow-md dark:border-gray-700 dark:bg-gray-900 sm:p-5">
+        <div className="mb-8 rounded-2xl border border-slate-200/80 bg-white p-4 shadow-md dark:border-gray-700 dark:bg-gray-100 sm:p-5">
           <div className="flex flex-wrap items-center gap-3">
             <div className="relative min-w-[200px] flex-1">
               <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
@@ -294,11 +294,11 @@ const LearningHub: React.FC = () => {
                 placeholder="Search games…"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full rounded-xl border-2 border-slate-200 bg-slate-50 py-2.5 pl-10 pr-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/25 dark:border-slate-600 dark:bg-slate-800 dark:text-white"
+                className="w-full rounded-xl border-2 border-slate-200 bg-slate-50 py-2.5 pl-10 pr-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/25 dark:border-gray-500 dark:bg-gray-200 dark:text-white"
               />
             </div>
             <div className="flex flex-wrap items-center gap-2">
-              <div className="flex items-center gap-2 rounded-xl border-2 border-slate-200 bg-slate-50 px-2 dark:border-slate-600 dark:bg-slate-800">
+              <div className="flex items-center gap-2 rounded-xl border-2 border-slate-200 bg-slate-50 px-2 dark:border-gray-500 dark:bg-gray-200">
                 <Filter size={16} className="ml-1 text-slate-500" />
                 <select
                   value={filterDifficulty}
@@ -314,7 +314,7 @@ const LearningHub: React.FC = () => {
               <select
                 value={filterAge}
                 onChange={(e) => setFilterAge(e.target.value)}
-                className="cursor-pointer rounded-xl border-2 border-slate-200 bg-slate-50 py-2.5 pl-3 pr-8 text-sm font-medium text-slate-800 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/25 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100"
+                className="cursor-pointer rounded-xl border-2 border-slate-200 bg-slate-50 py-2.5 pl-3 pr-8 text-sm font-medium text-slate-800 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/25 dark:border-gray-500 dark:bg-gray-200 dark:text-slate-100"
               >
                 <option value="all">All ages</option>
                 <option value="elementary">Elementary (6–10)</option>
@@ -332,7 +332,7 @@ const LearningHub: React.FC = () => {
             return (
               <article
                 key={game.id}
-                className="group flex flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-md shadow-slate-900/5 transition duration-200 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-teal-900/10 dark:border-gray-700 dark:bg-gray-900 dark:shadow-black/30"
+                className="group flex flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-md shadow-slate-900/5 transition duration-200 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-teal-900/10 dark:border-gray-700 dark:bg-gray-100 dark:shadow-black/30"
               >
                 <div className={`relative bg-gradient-to-br ${game.color} p-6 text-white`}>
                   <div className="text-5xl drop-shadow-sm transition group-hover:scale-105">{game.icon}</div>
@@ -362,7 +362,7 @@ const LearningHub: React.FC = () => {
                       <Target size={12} aria-hidden />
                       {game.difficulty}
                     </span>
-                    <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-700 dark:bg-gray-200 dark:text-slate-300">
                       <Clock size={12} aria-hidden />
                       {game.duration}
                     </span>
@@ -373,7 +373,7 @@ const LearningHub: React.FC = () => {
                     onClick={() => setSelectedGame(game.id)}
                     className={`mt-auto flex w-full items-center justify-center gap-2 rounded-xl py-3 text-sm font-bold transition active:scale-[0.98] ${
                       isCompleted
-                        ? 'border-2 border-slate-200 bg-slate-50 text-slate-800 hover:bg-slate-100 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700'
+                        ? 'border-2 border-slate-200 bg-slate-50 text-slate-800 hover:bg-slate-100 dark:border-gray-500 dark:bg-gray-200 dark:text-slate-100 dark:hover:bg-slate-700'
                         : `bg-gradient-to-r ${game.color} text-white shadow-md hover:opacity-95 hover:shadow-lg`
                     }`}
                   >
@@ -387,7 +387,7 @@ const LearningHub: React.FC = () => {
         </div>
 
         {filteredGames.length === 0 && (
-          <div className="rounded-2xl border border-dashed border-slate-300 bg-white/60 py-16 text-center dark:border-slate-600 dark:bg-gray-900/50">
+          <div className="rounded-2xl border border-dashed border-slate-300 bg-white/60 py-16 text-center dark:border-gray-500 dark:bg-gray-100/50">
             <div className="mb-3 text-5xl">🎮</div>
             <h3 className="text-lg font-bold text-slate-800 dark:text-white">No games match</h3>
             <p className="mt-1 text-slate-600 dark:text-slate-400">Try clearing search or filters.</p>

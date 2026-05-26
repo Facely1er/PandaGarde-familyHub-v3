@@ -641,7 +641,7 @@ const FamilyHubPage: React.FC = () => {
               </div>
 
               <div className="mb-6 grid gap-4 lg:grid-cols-[1.35fr,0.65fr]">
-                <div className="rounded-2xl border border-green-200 bg-white p-5 shadow-sm dark:border-green-700 dark:bg-gray-900 sm:p-6">
+                <div className="rounded-2xl border border-green-200 bg-white p-5 shadow-sm dark:border-green-700 dark:bg-gray-100 sm:p-6">
                   <div className="grid gap-3 sm:grid-cols-3">
                     <div className="rounded-2xl bg-green-50 p-4 dark:bg-green-900/20">
                       <p className="text-xs font-semibold uppercase tracking-wide text-green-700 dark:text-green-300">Family missions</p>
@@ -678,7 +678,7 @@ const FamilyHubPage: React.FC = () => {
                     <Link
                       key={activity.id}
                       to="/family-hub/activities"
-                      className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-green-300 hover:shadow-lg dark:border-gray-700 dark:bg-gray-900"
+                      className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-green-300 hover:shadow-lg dark:border-gray-700 dark:bg-gray-100"
                     >
                       <div className="mb-4 flex items-start justify-between gap-4">
                         <div className="flex items-center gap-4">
@@ -713,14 +713,14 @@ const FamilyHubPage: React.FC = () => {
                         {activity.ageGroups.map((group) => (
                           <span 
                             key={group}
-                            className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-300"
+                            className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600 dark:bg-gray-200 dark:text-gray-300"
                           >
                             Ages {group}
                           </span>
                         ))}
                       </div>
 
-                      <div className="rounded-2xl bg-gray-50 p-4 dark:bg-gray-800">
+                      <div className="rounded-2xl bg-gray-50 p-4 dark:bg-gray-200">
                         <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">Learning goal</p>
                         <p className="mt-2 text-sm text-gray-700 dark:text-gray-200">{activity.learningObjective}</p>
                       </div>
@@ -755,7 +755,7 @@ const FamilyHubPage: React.FC = () => {
         {activeTab === 'activities' && (
           <div className="space-y-8">
             <div className="grid gap-6 lg:grid-cols-[1.3fr,0.7fr]">
-              <div className="rounded-3xl border border-green-200 bg-white p-6 shadow-sm dark:border-green-700 dark:bg-gray-900 sm:p-8">
+              <div className="rounded-3xl border border-green-200 bg-white p-6 shadow-sm dark:border-green-700 dark:bg-gray-100 sm:p-8">
                 <span className="inline-flex items-center rounded-full bg-green-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-green-700 dark:bg-green-900/20 dark:text-green-200">
                   Family-first learning
                 </span>
@@ -782,7 +782,7 @@ const FamilyHubPage: React.FC = () => {
                 <p className="text-xs font-semibold uppercase tracking-wide text-indigo-700 dark:text-indigo-300">This week in Family Hub</p>
                 <ul className="mt-4 space-y-3">
                   {recentActivities.map((activity) => (
-                    <li key={activity.id} className="rounded-2xl bg-white/80 px-4 py-3 text-sm text-indigo-950 shadow-sm dark:bg-gray-900/50 dark:text-indigo-100">
+                    <li key={activity.id} className="rounded-2xl bg-white/80 px-4 py-3 text-sm text-indigo-950 shadow-sm dark:bg-gray-100/50 dark:text-indigo-100">
                       <span className="font-semibold">{activity.title}</span>
                       <span className="mt-1 block text-indigo-900/80 dark:text-indigo-100/80">{activity.learningObjective}</span>
                     </li>
@@ -798,7 +798,7 @@ const FamilyHubPage: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-              <Link to="/family-hub/activities" className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-green-300 hover:shadow-lg dark:border-gray-700 dark:bg-gray-900">
+              <Link to="/family-hub/activities" className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-green-300 hover:shadow-lg dark:border-gray-700 dark:bg-gray-100">
                 <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-r from-green-500 to-green-600 text-white">
                   <BookOpen size={28} />
                 </div>
@@ -817,7 +817,7 @@ const FamilyHubPage: React.FC = () => {
                 <div className="mt-5 text-sm font-semibold text-green-600 dark:text-green-300">Open Family Hub activities →</div>
               </Link>
 
-              <Link to="/story" className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-lg dark:border-gray-700 dark:bg-gray-900">
+              <Link to="/story" className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-lg dark:border-gray-700 dark:bg-gray-100">
                 <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-r from-blue-500 to-blue-600 text-white">
                   <Book size={28} />
                 </div>
@@ -836,7 +836,7 @@ const FamilyHubPage: React.FC = () => {
                 <div className="mt-5 text-sm font-semibold text-blue-600 dark:text-blue-300">Read the story →</div>
               </Link>
 
-              <Link to="/classroom-activities" className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-purple-300 hover:shadow-lg dark:border-gray-700 dark:bg-gray-900">
+              <Link to="/classroom-activities" className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-purple-300 hover:shadow-lg dark:border-gray-700 dark:bg-gray-100">
                 <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-r from-purple-500 to-purple-600 text-white">
                   <Award size={28} />
                 </div>
@@ -1152,7 +1152,7 @@ const FamilyHubPage: React.FC = () => {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
                 transition={{ duration: 0.2, ease: 'easeOut' }}
-                className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full p-6 sm:p-6 mx-auto"
+                className="relative bg-white dark:bg-gray-200 rounded-lg shadow-xl max-w-md w-full p-6 sm:p-6 mx-auto"
               >
                 <h3 id="create-family-title" className="text-xl font-bold mb-4 text-primary">
                   Create New Family
@@ -1217,7 +1217,7 @@ const FamilyHubPage: React.FC = () => {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
                 transition={{ duration: 0.2, ease: 'easeOut' }}
-                className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full p-6"
+                className="relative bg-white dark:bg-gray-200 rounded-lg shadow-xl max-w-md w-full p-6"
               >
               <h3 id="join-family-title" className="text-xl font-bold mb-4 text-primary">
                 Join Existing Family
@@ -1282,7 +1282,7 @@ const FamilyHubPage: React.FC = () => {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.2, ease: 'easeOut' }}
-              className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full p-6"
+              className="relative bg-white dark:bg-gray-200 rounded-lg shadow-xl max-w-md w-full p-6"
             >
               <h3 id="add-member-title" className="text-xl font-bold mb-4 text-primary">
                 Add Family Member

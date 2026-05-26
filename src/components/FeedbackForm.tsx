@@ -96,7 +96,7 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ onClose, context, memberId 
   if (submitted) {
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-        <div className="bg-white dark:bg-gray-800 rounded-xl max-w-md w-full p-6">
+        <div className="bg-white dark:bg-gray-200 rounded-xl max-w-md w-full p-6">
           <div className="text-center">
             <CheckCircle className="mx-auto text-green-500 mb-4" size={48} />
             <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">
@@ -113,7 +113,7 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ onClose, context, memberId 
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white dark:bg-gray-800 rounded-xl max-w-lg w-full p-6 max-h-[90vh] overflow-y-auto">
+      <div className="bg-white dark:bg-gray-200 rounded-xl max-w-lg w-full p-6 max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center space-x-2">
             <MessageSquare className="text-green-600 dark:text-green-400" size={24} />

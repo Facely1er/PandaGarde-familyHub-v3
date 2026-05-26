@@ -39,7 +39,7 @@ export function StoryListPage() {
       <section className="py-4 pb-8">
         <div className="mx-auto max-w-[1100px] space-y-8">
           {foundationStory && (
-            <div className="story-feature-panel rounded-3xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-white p-6 dark:border-emerald-800 dark:from-emerald-950/50 dark:to-gray-800 sm:p-8">
+            <div className="story-feature-panel rounded-3xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-white p-6 dark:border-emerald-800 dark:from-emerald-950/50 dark:to-gray-200 sm:p-8">
               <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <div className="flex min-w-0 gap-4">
                   <StoryCoverArt story={foundationStory} variant="hero" />
@@ -91,7 +91,7 @@ export function StoryListPage() {
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors min-h-[44px] ${
                   filter === value
                     ? 'bg-green-700 text-white dark:bg-green-600'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-700'
                 }`}
               >
                 {label}

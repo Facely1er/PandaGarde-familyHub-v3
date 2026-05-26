@@ -81,13 +81,13 @@ const AssessmentHistory: React.FC = () => {
       case 'high':
         return 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300';
       default:
-        return 'bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-300';
+        return 'bg-gray-100 text-gray-800 dark:bg-gray-100/30 dark:text-gray-300';
     }
   };
 
   if (history.length === 0) {
     return (
-      <div className="p-8 text-center bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+      <div className="p-8 text-center bg-gray-50 dark:bg-gray-200 rounded-lg border border-gray-200 dark:border-gray-700">
         <BarChart3 className="h-12 w-12 mx-auto text-gray-400 mb-4" />
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
           No Assessment History
@@ -174,7 +174,7 @@ const AssessmentHistory: React.FC = () => {
       </div>
 
       {/* History Timeline */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+      <div className="bg-white dark:bg-gray-200 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center space-x-2">
           <Calendar className="h-5 w-5" />
           <span>Assessment Timeline</span>
@@ -240,7 +240,7 @@ const AssessmentHistory: React.FC = () => {
 
       {/* Selected Entry Details */}
       {selectedEntry && (
-        <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+        <div className="bg-white dark:bg-gray-200 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center space-x-2">
             <Target className="h-5 w-5" />
             <span>Assessment Details</span>

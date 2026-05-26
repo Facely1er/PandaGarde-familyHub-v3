@@ -57,7 +57,7 @@ const WelcomeScreen: React.FC = () => {
   };
 
   return (
-    <div className="family-hub-theme flex min-h-screen flex-col bg-gradient-to-br from-teal-50 via-white to-amber-50/30 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
+    <div className="family-hub-theme flex min-h-screen flex-col bg-gradient-to-br from-teal-50 via-white to-amber-50/30 dark:from-gray-900 dark:via-gray-900 dark:to-gray-200">
       <div className="flex-1 overflow-y-auto px-4 py-8 sm:py-12">
         <div className="max-w-xl mx-auto space-y-8">
 
@@ -86,7 +86,7 @@ const WelcomeScreen: React.FC = () => {
               {sections.map(({ icon: Icon, title, description, color }) => (
                 <li
                   key={title}
-                  className="flex items-start gap-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 shadow-sm"
+                  className="flex items-start gap-3 bg-white dark:bg-gray-200 rounded-xl border border-gray-200 dark:border-gray-700 p-4 shadow-sm"
                 >
                   <span className={`mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${color}`}>
                     <Icon size={20} aria-hidden="true" />
@@ -101,7 +101,7 @@ const WelcomeScreen: React.FC = () => {
           </div>
 
           {/* Journey progress — for users coming from the full assessment */}
-          <details className="group rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm">
+          <details className="group rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-200 shadow-sm">
             <summary className="flex cursor-pointer items-center justify-between px-5 py-4 text-sm font-semibold text-gray-700 dark:text-gray-200 list-none">
               <span>Coming from the Privacy Assessment?</span>
               <span className="ml-2 text-xs font-normal text-gray-400 group-open:hidden">Show steps</span>
@@ -165,7 +165,7 @@ const WelcomeScreen: React.FC = () => {
       </div>
 
       {/* Sticky CTA */}
-      <div className="sticky bottom-0 bg-white/90 dark:bg-gray-900/90 backdrop-blur border-t border-gray-200 dark:border-gray-700 px-4 py-4 safe-area-bottom">
+      <div className="sticky bottom-0 bg-white/90 dark:bg-gray-100/90 backdrop-blur border-t border-gray-200 dark:border-gray-700 px-4 py-4 safe-area-bottom">
         <div className="max-w-xl mx-auto flex flex-col gap-2">
           <button
             type="button"
@@ -178,7 +178,7 @@ const WelcomeScreen: React.FC = () => {
           <button
             type="button"
             onClick={() => handleGetStarted('web')}
-            className="w-full inline-flex items-center justify-center rounded-xl border border-gray-200 bg-white px-6 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
+            className="w-full inline-flex items-center justify-center rounded-xl border border-gray-200 bg-white px-6 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-200 dark:text-gray-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
           >
             I completed the website assessment
           </button>

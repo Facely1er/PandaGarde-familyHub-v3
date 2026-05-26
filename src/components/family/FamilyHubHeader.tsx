@@ -154,7 +154,7 @@ const FamilyHubHeader: React.FC = () => {
               </button>
               {menuOpen && (
                 <div
-                  className="absolute right-0 top-[calc(100%+4px)] w-56 overflow-hidden rounded-2xl border border-gray-200 bg-white py-1 shadow-lg dark:border-gray-600 dark:bg-gray-800"
+                  className="absolute right-0 top-[calc(100%+4px)] w-56 overflow-hidden rounded-2xl border border-gray-200 bg-white py-1 shadow-lg dark:border-gray-600 dark:bg-gray-200"
                   role="menu"
                 >
                   <Link

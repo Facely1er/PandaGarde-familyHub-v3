@@ -120,7 +120,7 @@ const AccessibleCanvas = forwardRef<AccessibleCanvasRef, AccessibleCanvasProps>(
           {fallback || (
             <div 
               className="
-                bg-gray-100 dark:bg-gray-800 
+                bg-gray-100 dark:bg-gray-200 
                 p-6 rounded-lg text-center
               "
             >

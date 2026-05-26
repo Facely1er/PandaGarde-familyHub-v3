@@ -14,14 +14,14 @@ const BrandSplash: React.FC<BrandSplashProps> = ({
 }) => {
   return (
     <div
-      className={`min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4 ${className}`}
+      className={`min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-100 px-4 ${className}`}
       aria-label={message}
       aria-live="polite"
     >
       <div className="text-center">
         <div
           className={[
-            'mx-auto mb-4 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border-2 border-green-200 bg-white shadow-md dark:border-green-800/60 dark:bg-gray-800',
+            'mx-auto mb-4 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border-2 border-green-200 bg-white shadow-md dark:border-green-800/60 dark:bg-gray-200',
             pulsing ? 'animate-pulse' : '',
           ].join(' ')}
         >

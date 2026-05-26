@@ -25,8 +25,8 @@ interface HubBrandLogoProps {
 }
 
 const variantClasses: Record<NonNullable<HubBrandLogoProps['variant']>, string> = {
-  card: 'border-2 border-teal-200 bg-white shadow-lg dark:border-teal-700 dark:bg-gray-800',
-  header: 'border border-white/40 bg-white/95 shadow-md dark:border-teal-700/40 dark:bg-gray-900/90',
+  card: 'border-2 border-teal-200 bg-white shadow-lg dark:border-teal-700 dark:bg-gray-200',
+  header: 'border border-white/40 bg-white/95 shadow-md dark:border-teal-700/40 dark:bg-gray-100/90',
   plain: 'border-0 bg-transparent shadow-none',
 };
 

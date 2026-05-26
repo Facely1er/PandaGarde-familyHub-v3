@@ -245,7 +245,7 @@ const JourneyHub: React.FC = () => {
               return (
                 <div
                   key={activity.id}
-                  className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800"
+                  className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-200"
                 >
                   <div className="flex items-start gap-4">
                     <div className="text-center">
@@ -346,7 +346,7 @@ const JourneyHub: React.FC = () => {
             return (
               <div
                 key={path.id}
-                className="overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-lg shadow-slate-900/5 transition-all hover:-translate-y-1 hover:shadow-xl dark:border-gray-700 dark:bg-gray-900 dark:shadow-black/25"
+                className="overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-lg shadow-slate-900/5 transition-all hover:-translate-y-1 hover:shadow-xl dark:border-gray-700 dark:bg-gray-100 dark:shadow-black/25"
               >
                 <div className={`bg-gradient-to-r ${path.color} p-6 text-white`}>
                   <div className="mb-4 flex items-center justify-between">

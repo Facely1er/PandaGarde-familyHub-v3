@@ -137,7 +137,7 @@ const ParentLandingPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="rounded-card border-2 border-dashed border-gray-300 dark:border-gray-600 bg-light dark:bg-gray-800/50 p-6 sm:p-8">
+          <div className="rounded-card border-2 border-dashed border-gray-300 dark:border-gray-600 bg-light dark:bg-gray-200/50 p-6 sm:p-8">
             <div className="mb-8 grid grid-cols-1 gap-6 sm:grid-cols-3">
               {[
                 { value: '85', label: 'Family Privacy Score', color: 'text-success' },
@@ -176,7 +176,7 @@ const ParentLandingPage: React.FC = () => {
 
           <div className="mx-auto max-w-3xl">
             {faqs.map((faq) => (
-              <article key={faq.question} className="mb-4 rounded-lg bg-surface dark:bg-gray-800 p-6 shadow-card">
+              <article key={faq.question} className="mb-4 rounded-lg bg-surface dark:bg-gray-200 p-6 shadow-card">
                 <div className="flex flex-col sm:flex-row items-start gap-4">
                   <HelpCircle size={24} className="mt-0.5 shrink-0 text-success" aria-hidden />
                   <div>

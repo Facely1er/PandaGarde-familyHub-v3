@@ -233,7 +233,7 @@ const QuickStartPage: React.FC = () => {
               Follow these simple steps to protect your family in the digital age.
             </p>
 
-            <div className="max-w-xl mx-auto mt-6 p-4 rounded-xl bg-gray-100 dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700">
+            <div className="max-w-xl mx-auto mt-6 p-4 rounded-xl bg-gray-100 dark:bg-gray-200 border-2 border-gray-200 dark:border-gray-700">
               <div className="flex justify-between mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
                 <span>Journey Progress</span>
                 <span className="text-green-800 dark:text-green-400">{Math.round(progress.overallProgress)}%</span>
@@ -366,7 +366,7 @@ const QuickStartPage: React.FC = () => {
       </section>
 
       {/* Success Tips */}
-      <section className="success-tips py-16 sm:py-24 bg-slate-50 dark:bg-gray-900/60">
+      <section className="success-tips py-16 sm:py-24 bg-slate-50 dark:bg-gray-100/60">
         <div className="container max-w-6xl mx-auto px-4 sm:px-6">
           <div className="section-header fade-in mb-12 text-center">
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-gray-100 mb-3">Tips for Success</h2>

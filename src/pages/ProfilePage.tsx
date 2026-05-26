@@ -146,7 +146,7 @@ const ProfilePage: React.FC = () => {
           </div>
 
           {/* Profile Card */}
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
+          <div className="bg-white dark:bg-gray-200 rounded-xl shadow-lg p-8">
             <div className="flex items-start space-x-6">
               {/* Avatar */}
               <div className="flex-shrink-0">
@@ -311,7 +311,7 @@ const ProfilePage: React.FC = () => {
       {/* Progress Export Modal */}
       {showProgressExport && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white dark:bg-gray-800 rounded-lg max-w-6xl w-full max-h-[90vh] overflow-y-auto">
+          <div className="bg-white dark:bg-gray-200 rounded-lg max-w-6xl w-full max-h-[90vh] overflow-y-auto">
             <ProgressExport onClose={() => setShowProgressExport(false)} />
           </div>
         </div>

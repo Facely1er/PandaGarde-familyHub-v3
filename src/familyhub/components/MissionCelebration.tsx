@@ -37,7 +37,7 @@ const MissionCelebration: React.FC<MissionCelebrationProps> = ({
         role="dialog"
         aria-modal="true"
         aria-labelledby="mission-celebration-title"
-        className="w-full max-w-md rounded-3xl border border-teal-200 bg-white p-6 shadow-xl dark:border-teal-700/50 dark:bg-gray-800"
+        className="w-full max-w-md rounded-3xl border border-teal-200 bg-white p-6 shadow-xl dark:border-teal-700/50 dark:bg-gray-200"
       >
         <div className="text-center">
           <span className="text-5xl" role="img" aria-hidden="true">

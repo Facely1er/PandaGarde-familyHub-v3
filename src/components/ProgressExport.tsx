@@ -90,7 +90,7 @@ const ProgressExport: React.FC<ProgressExportProps> = ({ onClose }) => {
   const percentage = Math.round((overallProgress / totalActivities) * 100);
 
   return (
-    <div className="max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+    <div className="max-w-4xl mx-auto bg-white dark:bg-gray-200 rounded-lg shadow-lg p-6">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
           <FileText className="text-green-600" size={24} />
@@ -221,7 +221,7 @@ const ProgressExport: React.FC<ProgressExportProps> = ({ onClose }) => {
                     value={importData}
                     onChange={(e) => setImportData(e.target.value)}
                     placeholder="Paste your progress data here..."
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 dark:bg-gray-800 dark:text-white h-32 resize-none"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 dark:bg-gray-200 dark:text-white h-32 resize-none"
                   />
                 </div>
 

@@ -105,7 +105,7 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
   };
 
   const header = (
-    <div className="border-b border-gray-200 bg-white px-4 py-3 dark:border-gray-700 dark:bg-gray-800">
+    <div className="border-b border-gray-200 bg-white px-4 py-3 dark:border-gray-700 dark:bg-gray-200">
       <div className="mx-auto flex max-w-4xl items-center gap-4">
         <button
           type="button"
@@ -146,13 +146,13 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
               <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">{activity.description}</p>
             </div>
             <div className="flex flex-wrap justify-center gap-2 text-xs font-medium">
-              <span className="rounded-full bg-white px-3 py-1 text-teal-700 ring-1 ring-teal-200 dark:bg-gray-800 dark:text-teal-200 dark:ring-teal-700/50">
+              <span className="rounded-full bg-white px-3 py-1 text-teal-700 ring-1 ring-teal-200 dark:bg-gray-200 dark:text-teal-200 dark:ring-teal-700/50">
                 Ages {activity.groupAgeRange}
               </span>
-              <span className="rounded-full bg-white px-3 py-1 text-gray-700 ring-1 ring-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:ring-gray-600">
+              <span className="rounded-full bg-white px-3 py-1 text-gray-700 ring-1 ring-gray-200 dark:bg-gray-200 dark:text-gray-200 dark:ring-gray-600">
                 {activity.duration}
               </span>
-              <span className="rounded-full bg-white px-3 py-1 text-gray-700 ring-1 ring-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:ring-gray-600">
+              <span className="rounded-full bg-white px-3 py-1 text-gray-700 ring-1 ring-gray-200 dark:bg-gray-200 dark:text-gray-200 dark:ring-gray-600">
                 {activity.familyMode}
               </span>
             </div>
@@ -180,7 +180,7 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
 
   if (phase === 'learn') {
     return (
-      <div className="flex h-full flex-col bg-gray-50 dark:bg-gray-900">
+      <div className="flex h-full flex-col bg-gray-50 dark:bg-gray-100">
         {header}
         <div className="flex-1 overflow-auto px-4 py-5 sm:px-6">
           <div className="mx-auto flex max-w-4xl flex-col gap-5">
@@ -222,7 +222,7 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
               </section>
             )}
 
-            <section className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-800">
+            <section className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-200">
               <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-teal-700 dark:text-teal-300">
                 <BookOpen size={14} aria-hidden="true" />
                 Key learnings
@@ -271,7 +271,7 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
               <button
                 type="button"
                 onClick={() => setPhase('intro')}
-                className="inline-flex min-h-[48px] items-center justify-center rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200"
+                className="inline-flex min-h-[48px] items-center justify-center rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-200 dark:text-gray-200"
               >
                 Back
               </button>
@@ -284,7 +284,7 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
 
   if (phase === 'play' && activity.activityManagerId) {
     return (
-      <div className="flex h-full flex-col bg-gray-50 dark:bg-gray-900">
+      <div className="flex h-full flex-col bg-gray-50 dark:bg-gray-100">
         {header}
         <div className="flex-1 overflow-auto">
           <Suspense fallback={<HubScreenFallback />}>
@@ -302,7 +302,7 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
   if (phase === 'complete') {
     return (
       <>
-        <div className="flex h-full flex-col bg-gray-50 dark:bg-gray-900 opacity-40 pointer-events-none">{header}</div>
+        <div className="flex h-full flex-col bg-gray-50 dark:bg-gray-100 opacity-40 pointer-events-none">{header}</div>
         <MissionCelebration
           activity={activity}
           score={completionScore}

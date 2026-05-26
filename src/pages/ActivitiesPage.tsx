@@ -47,7 +47,7 @@ const ActivitiesPage: React.FC = () => {
             <ArrowLeft size={18} aria-hidden />
             Back to all activities
           </button>
-          <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-hidden min-h-[400px]">
+          <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-200 overflow-hidden min-h-[400px]">
             <ActivityManager
               activityId={selectedId}
               onClose={clearSelection}
@@ -94,7 +94,7 @@ const ActivitiesPage: React.FC = () => {
               key={activity.id}
               type="button"
               onClick={() => navigate(`/activities/${activity.slug}`)}
-              className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-6 text-left shadow-sm hover:border-teal-500 hover:shadow-md transition-all min-h-[140px] flex flex-col justify-between"
+              className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-200 p-6 text-left shadow-sm hover:border-teal-500 hover:shadow-md transition-all min-h-[140px] flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-start gap-3 mb-2">
