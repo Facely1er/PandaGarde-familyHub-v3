@@ -27,15 +27,19 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
   className = '',
 }) => (
   <header
-    className={`page-section__header page-section__header--with-icon page-section__header--tone-${iconTone} ${className}`.trim()}
+    className={`page-section__header ${icon ? 'page-section__header--with-icon' : ''} ${icon ? `page-section__header--tone-${iconTone}` : ''} ${className}`.trim()}
   >
-    {icon ? (
-      <div className="page-section__icon" aria-hidden="true">
-        {icon}
-      </div>
-    ) : null}
     {eyebrow ? <span className="page-section__eyebrow">{eyebrow}</span> : null}
-    <h2 className="page-section__title">{title}</h2>
+    {icon ? (
+      <div className="page-section__heading-row">
+        <div className="page-section__icon" aria-hidden="true">
+          {icon}
+        </div>
+        <h2 className="page-section__title">{title}</h2>
+      </div>
+    ) : (
+      <h2 className="page-section__title">{title}</h2>
+    )}
     {lead ? <p className="page-section__lead">{lead}</p> : null}
   </header>
 );

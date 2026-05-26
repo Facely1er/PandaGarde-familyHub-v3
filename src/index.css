@@ -9280,7 +9280,20 @@ header.header .nav-actions button.header-icon-btn:not(.header-search-bar) {
 }
 
 .page-section__header--with-icon {
+  gap: 0.625rem;
+}
+
+.page-section__header--with-icon .page-section__heading-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
   gap: 0.75rem;
+}
+
+.page-section__header--with-icon .page-section__heading-row .page-section__title {
+  text-align: left;
 }
 
 .page-section__icon {

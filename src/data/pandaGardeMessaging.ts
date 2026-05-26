@@ -6,4 +6,8 @@ export const FOOTPRINT_CATALOG_NOTE =
 export const INDEPENDENT_AREAS_LEAD =
   'Pick what fits today: a story with your child, a parent guide, missions in Family Hub, or a footprint review when you want a household snapshot.';
 
+/** Page hero for /for-families — family-facing, no workflow disclaimers. */
+export const GUIDES_STORIES_PAGE_LEAD =
+  'Read with your kids, use parent guides and printables, or open Family Hub for practice—all at your own pace.';
+
 export { WEBSITE_HUB_BOUNDARY_LEAD } from './websiteHubBoundary';
