@@ -12,8 +12,8 @@ import {
   footerFamilyLinks,
   footerFootprintLinks,
   footerHelpCenterLinks,
-  footerJournalLink,
   footerLegalLinks,
+  JOURNAL_PUBLISHED,
 } from './siteNavigation';
 
 const APP_STATIC_PATHS = new Set([
@@ -62,9 +62,10 @@ describe('footer navigation links', () => {
     expect(broken, broken.map((b) => b.href).join(', ')).toEqual([]);
   });
 
-  it('journal link is external', () => {
-    expect(footerJournalLink.external).toBe(true);
-    expect(footerJournalLink.href).toMatch(/^https:\/\//);
+  it('journal link stays out of footer until published', () => {
+    expect(JOURNAL_PUBLISHED).toBe(false);
+    const familyCol = footerColumns.find((c) => c.id === 'family');
+    expect(familyCol?.externalItems ?? []).toHaveLength(0);
   });
 
   it('footer link counts match planned IA', () => {

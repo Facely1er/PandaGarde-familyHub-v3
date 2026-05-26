@@ -13,10 +13,10 @@ import {
 import FamilyPrivacyAssessment from '../components/FamilyPrivacyAssessment';
 import DfaJourneyStepper from '../components/journey/DfaJourneyStepper';
 import {
-  DFA_PHASE_THREE_JOURNAL,
   DFA_PHASE_THREE_KIDS_RESOURCES,
   DFA_PHASE_THREE_PARENT_RESOURCES,
 } from '../data/dfaPhaseThreeResources';
+import { JOURNAL_PUBLISHED } from '../data/siteNavigation';
 import { updateDfaJourneyPhase } from '../lib/dfaJourney';
 import { dfaTheme } from '../styles/dfaTheme';
 
@@ -64,8 +64,8 @@ const PrivacyAssessmentPage: React.FC = () => {
               Family privacy assessment
             </h1>
             <p className={`mt-2 max-w-3xl sm:text-base ${dfaTheme.bodySm}`}>
-              Answer the questions below from your DFA results. Guides, stories, and the journal are available after—you
-              do not need Family Hub to finish this phase.
+              Answer the questions below from your DFA results. Guides and stories are available after—you do not need
+              Family Hub to finish this phase.
             </p>
             <nav className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm" aria-label="Related pages">
               <Link to="/digital-footprint" className={`inline-flex items-center gap-1.5 ${dfaTheme.link}`}>
@@ -133,8 +133,8 @@ const PrivacyAssessmentPage: React.FC = () => {
           </summary>
           <div className="border-t border-green-100 px-5 pb-5 pt-4 dark:border-green-900/40 sm:px-6 sm:pb-6">
             <p className={dfaTheme.bodySm}>
-              Use these after or alongside the assessment—parent guides, Privacy Panda stories, activities, and the
-              Digital Bamboo Journal.
+              Use these after or alongside the assessment—parent guides, Privacy Panda stories, and Family Hub
+              missions.
             </p>
 
             <div className="mt-5 grid gap-6 lg:grid-cols-2">
@@ -189,19 +189,24 @@ const PrivacyAssessmentPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="mt-4 rounded-lg border border-dashed border-amber-300 bg-amber-50/80 p-3 dark:border-amber-700/60 dark:bg-amber-950/30">
-              <p className={`text-sm font-semibold ${dfaTheme.title}`}>{DFA_PHASE_THREE_JOURNAL.label}</p>
-              <p className={`mt-1 text-xs ${dfaTheme.bodySm}`}>{DFA_PHASE_THREE_JOURNAL.description}</p>
-              <a
-                href={DFA_PHASE_THREE_JOURNAL.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-amber-900 hover:underline dark:text-amber-200"
-              >
-                Open journal
-                <ExternalLink size={14} aria-hidden />
-              </a>
-            </div>
+            {JOURNAL_PUBLISHED ? (
+              <div className="mt-4 rounded-lg border border-dashed border-amber-300 bg-amber-50/80 p-3 dark:border-amber-700/60 dark:bg-amber-950/30">
+                <p className={`text-sm font-semibold ${dfaTheme.title}`}>Digital Bamboo Journal</p>
+                <p className={`mt-1 text-xs ${dfaTheme.bodySm}`}>
+                  A separate journal site for reflection and follow-up—aligned with PandaGarde stories, not required to
+                  finish DFA.
+                </p>
+                <a
+                  href="https://journal.pandagarde.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-amber-900 hover:underline dark:text-amber-200"
+                >
+                  Open journal
+                  <ExternalLink size={14} aria-hidden />
+                </a>
+              </div>
+            ) : null}
           </div>
         </details>
 

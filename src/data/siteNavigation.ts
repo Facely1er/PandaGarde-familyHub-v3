@@ -97,7 +97,7 @@ export const footprintReviewLayerLinks: SiteNavItem[] = [
 
 export const footerFootprintLinks: SiteNavItem[] = footprintReviewLayerLinks;
 
-/** Hub index, hub, stories, plan, and journal — family-facing only. */
+/** Hub index, hub, stories, and plan — family-facing only. */
 export const footerFamilyLinks: SiteNavItem[] = [
   {
     id: 'footer-guides-stories',
@@ -132,6 +132,9 @@ export const footerHelpLinks: SiteNavItem[] = footerHelpCenterLinks;
 
 export const JOURNAL_URL = 'https://journal.pandagarde.com';
 
+/** When true, show journal.pandagarde.com in footer and DFA promos. */
+export const JOURNAL_PUBLISHED = false;
+
 export const footerJournalLink: FooterExternalNavItem = {
   id: 'footer-journal',
   icon: Newspaper,
@@ -164,7 +167,7 @@ export const footerColumns: FooterColumnConfig[] = [
     id: 'family',
     title: FOOTER_COLUMN_FAMILY_CONTENT,
     items: footerFamilyLinks,
-    externalItems: [footerJournalLink],
+    externalItems: JOURNAL_PUBLISHED ? [footerJournalLink] : undefined,
   },
   { id: 'footprint', title: FOOTER_COLUMN_REVIEW_WORKFLOW, items: footerFootprintLinks },
   { id: 'help-center', title: FOOTER_COLUMN_HELP_CENTER, items: footerHelpCenterLinks },
