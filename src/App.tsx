@@ -1,4 +1,5 @@
-import React, { Suspense, lazy, useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
+import { lazy } from './lib/lazyWithRetry';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { ORIGIN_STORY_SLUG } from './data/stories';
 import { PARENT_SURFACE_REDIRECTS } from './data/parentSiteSurface';

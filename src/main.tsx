@@ -5,6 +5,20 @@ import './index.css';
 import { initServiceWorker } from './lib/serviceWorker.ts';
 import { logger } from './lib/logger';
 
+const VITE_PRELOAD_RELOAD_KEY = 'pandagarde-vite-preload-reload';
+
+/** Recover from stale route chunks after deploy or Vite HMR (see vite.dev guide). */
+window.addEventListener('vite:preloadError', (event) => {
+  event.preventDefault();
+  const alreadyReloaded = sessionStorage.getItem(VITE_PRELOAD_RELOAD_KEY) === '1';
+  if (!alreadyReloaded) {
+    sessionStorage.setItem(VITE_PRELOAD_RELOAD_KEY, '1');
+    window.location.reload();
+    return;
+  }
+  sessionStorage.removeItem(VITE_PRELOAD_RELOAD_KEY);
+});
+
 // In development, unregister ALL service workers to prevent cache issues
 if (import.meta.env.MODE !== 'production') {
   if ('serviceWorker' in navigator) {
