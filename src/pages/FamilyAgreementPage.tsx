@@ -221,7 +221,7 @@ const FamilyAgreementPage: React.FC = () => {
             </Link>
 
             <Link
-              to="/parent-resources"
+              to="/for-families"
               className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow text-center"
               style={{ backgroundColor: 'var(--card-color)' }}
             >

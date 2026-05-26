@@ -471,7 +471,7 @@ const TeenHandbookPage: React.FC = () => {
             justifyContent: 'center' 
           }}>
             <Link
-              to="/privacy-tools"
+              to="/for-families"
               style={{
                 background: 'white',
                 color: '#4f46e5',

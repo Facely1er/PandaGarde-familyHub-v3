@@ -152,7 +152,7 @@ const PrivacyGoals: React.FC<PrivacyGoalsProps> = ({ compact = false, onGoalCrea
             <span className="font-semibold text-gray-900 dark:text-white">Privacy Goals</span>
           </div>
           <Link
-            to="/privacy-goals"
+            to="/family-privacy-plan"
             className="text-sm text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300"
           >
             View All →

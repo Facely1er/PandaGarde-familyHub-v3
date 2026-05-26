@@ -317,7 +317,7 @@ const ParentResourcesPage: React.FC = () => {
                 </div>
                 <p>Educational worksheets and activity sheets for reinforcing privacy concepts through writing, drawing, and reflection exercises.</p>
                 <div className="flex items-center gap-4 mt-4">
-                  <Link to="/resources" className="button">
+                  <Link to="/for-families" className="button">
                     <Download size={16} />
                     View Worksheets
                   </Link>

@@ -148,11 +148,37 @@ const DigitalRightsPage: React.FC = () => {
 
   return (
     <PageLayout
-      title="Digital Rights & Law"
-      subtitle="Understanding privacy legislation and digital rights—including Maryland’s MODPA for residents—and how to exercise your rights as a digital citizen."
+      title="Digital privacy rights"
+      subtitle="Privacy legislation and your rights as a digital citizen—including Maryland’s MODPA for residents and how to exercise access, correction, and opt-out requests."
       breadcrumbs={true}
     >
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <nav
+          className="mb-6 flex flex-wrap gap-x-4 gap-y-2 text-sm"
+          aria-label="Related privacy pages"
+        >
+          <Link
+            to="/for-families"
+            className="inline-flex items-center gap-1.5 font-medium text-green-700 hover:underline dark:text-green-400"
+          >
+            <ListChecks size={15} aria-hidden />
+            Resources
+          </Link>
+          <Link
+            to="/digital-footprint"
+            className="inline-flex items-center gap-1.5 font-medium text-green-700 hover:underline dark:text-green-400"
+          >
+            Footprint review
+          </Link>
+          <Link
+            to="/for-families"
+            className="inline-flex items-center gap-1.5 font-medium text-green-700 hover:underline dark:text-green-400"
+          >
+            <BookOpen size={15} aria-hidden />
+            All resources
+          </Link>
+        </nav>
+
         <section className="mb-6 rounded-xl border-2 border-teal-200 dark:border-teal-800 bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-teal-900/30 dark:to-cyan-900/30 p-5">
           <h3 className="font-bold text-teal-900 dark:text-teal-100 mb-2">
             Maryland residents: exercise your privacy rights

@@ -32,20 +32,20 @@ const EducatorToolsPage: React.FC = () => {
       id: 'k-5-curriculum',
       title: 'K-5 Privacy Curriculum',
       description:
-        'Roadmap for teaching digital privacy in elementary school. Use the Resources hub, classroom activities, and printables on PandaGarde today.',
+        'Roadmap for teaching digital privacy in elementary school. Use Guides & stories, classroom activities, and printables on PandaGarde today.',
       category: 'curriculum',
       gradeLevel: 'K-5',
       duration: 'Full Year',
       completed: false,
       icon: BookOpen,
-      navigateTo: '/resources',
+      navigateTo: '/for-families',
       actionLabel: 'Open Resources',
       preview: [
-        'Year-long pacing outline via Resources and implementation guide',
-        'Resources page: guides, discussion prompts, and printables you can use now',
+        'Year-long pacing outline via Guides & stories and implementation guide',
+        'Guides & stories: guides, discussion prompts, and printables you can use now',
         'Pair with Privacy Panda story, coloring sheets, and safety posters',
         'Assessment: try Quick Assessment with older students / families',
-        'Digital citizenship: link to age-specific guides from Resources'
+        'Digital citizenship: link to age-specific guides from Guides & stories'
       ]
     },
     {
@@ -58,12 +58,12 @@ const EducatorToolsPage: React.FC = () => {
       duration: 'Full Year',
       completed: false,
       icon: BookOpen,
-      navigateTo: '/resources',
+      navigateTo: '/for-families',
       actionLabel: 'Open Resources',
       preview: [
         'Printable worksheets at /downloads/worksheets',
-        'Use Resources + Privacy Explorers / Teen Handbook pages from the main site',
-        'Classroom discussion guides under Resources → Comprehensive Guides',
+        'Use Guides & stories and Family Hub missions from the main site',
+        'Classroom discussion guides under Guides & stories → Comprehensive Guides',
         'Digital footprint topics: Digital Footprint tool for family/school context'
       ]
     },
@@ -77,7 +77,7 @@ const EducatorToolsPage: React.FC = () => {
       duration: 'Full Year',
       completed: false,
       icon: BookOpen,
-      navigateTo: '/resources',
+      navigateTo: '/for-families',
       actionLabel: 'Open Resources',
       preview: [
         'Pilot program for extended slide decks and educator packs',
@@ -154,7 +154,7 @@ const EducatorToolsPage: React.FC = () => {
       actionLabel: 'Open implementation guide',
       preview: [
         'Step-by-step implementation content on the site',
-        'Pair with Resources → Educator toolkit and discussion guides',
+        'Pair with Guides & stories → Educator toolkit and discussion guides',
         'Contact us for district / PD questions'
       ]
     },
@@ -172,7 +172,7 @@ const EducatorToolsPage: React.FC = () => {
       preview: [
         'No presentation-slides.zip on the server yet (previously advertised in error)',
         'Pilot program: early access to educator materials we are building',
-        'Meanwhile: use safety posters HTML/PDF and Resources for visual aids'
+        'Meanwhile: use safety posters HTML/PDF and Guides & stories for visual aids'
       ]
     },
     {
@@ -187,8 +187,8 @@ const EducatorToolsPage: React.FC = () => {
       navigateTo: '/downloads/coloring-sheets',
       actionLabel: 'Open coloring sheets',
       preview: [
-        'Coloring sheets, certificates, safety posters, family agreement: linked from Resources → Printables',
-        'This button goes to Coloring Sheets first; use Resources for the full printable set',
+        'Coloring sheets, certificates, safety posters, family agreement: linked from Guides & stories → Printables',
+        'This button goes to Coloring Sheets first; use Guides & stories for the full printable set',
         'Bundled “student-handouts.zip” does not exist'
       ]
     }

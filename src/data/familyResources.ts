@@ -43,18 +43,6 @@ export const familyResources: FamilyResource[] = [
     icon: 'FileText'
   },
   {
-    id: 'child-safety-alerts',
-    title: 'Child Safety Alerts',
-    description: 'Catalog-based notifications and RSS safety headlines for services you list (not device monitoring)',
-    type: 'tool',
-    category: ['child-safety', 'alerts'],
-    personaTags: ['cautious-parent', 'concerned-family'],
-    ageGroups: ['all'],
-    url: '/safety-alerts',
-    priority: 'high',
-    icon: 'Bell'
-  },
-  {
     id: 'conversation-starters',
     title: 'Privacy Conversation Starters',
     description: 'Age-appropriate ways to talk to children about online privacy',
@@ -62,7 +50,7 @@ export const familyResources: FamilyResource[] = [
     category: ['education', 'communication'],
     personaTags: ['cautious-parent', 'learning-family'],
     ageGroups: ['all'],
-    url: '/parent-resources',
+    url: '/for-families',
     priority: 'medium',
     icon: 'MessageCircle'
   },
@@ -100,7 +88,7 @@ export const familyResources: FamilyResource[] = [
     category: ['privacy-settings', 'configuration'],
     personaTags: ['privacy-focused-family', 'tech-savvy-family'],
     ageGroups: ['all'],
-    url: '/privacy-tools',
+    url: '/for-families',
     priority: 'high',
     icon: 'Settings'
   },
@@ -112,7 +100,7 @@ export const familyResources: FamilyResource[] = [
     category: ['tools', 'privacy'],
     personaTags: ['privacy-focused-family', 'tech-savvy-family'],
     ageGroups: ['all'],
-    url: '/privacy-tools',
+    url: '/for-families',
     priority: 'medium',
     icon: 'Wrench'
   },
@@ -126,19 +114,19 @@ export const familyResources: FamilyResource[] = [
     category: ['education', 'interactive'],
     personaTags: ['learning-family', 'cautious-parent'],
     ageGroups: ['5-8', '9-12'],
-    url: '/interactive-story',
+    url: '/stories/privacy-panda-and-the-digital-bamboo-forest',
     priority: 'high',
     icon: 'Book'
   },
   {
     id: 'privacy-activities',
-    title: 'Privacy Learning Activities',
-    description: 'Fun, interactive activities to learn about privacy',
+    title: 'Privacy missions (Family Hub)',
+    description: 'Age-matched missions and progress on this device—not a duplicate catalog on the website',
     type: 'activity',
     category: ['education', 'interactive'],
     personaTags: ['learning-family'],
     ageGroups: ['5-8', '9-12', '13-17'],
-    url: '/activities',
+    url: '/family-hub/activities',
     priority: 'high',
     icon: 'Play'
   },
@@ -150,21 +138,9 @@ export const familyResources: FamilyResource[] = [
     category: ['education', 'age-specific'],
     personaTags: ['learning-family', 'cautious-parent'],
     ageGroups: ['all'],
-    url: '/age-groups',
+    url: '/guides/age-specific',
     priority: 'high',
     icon: 'Users'
-  },
-  {
-    id: 'privacy-handbook',
-    title: 'Family Privacy Handbook',
-    description: 'Comprehensive guide to digital privacy for families',
-    type: 'guide',
-    category: ['education', 'comprehensive'],
-    personaTags: ['learning-family', 'privacy-focused-family'],
-    ageGroups: ['all'],
-    url: '/privacy-handbook',
-    priority: 'medium',
-    icon: 'BookOpen'
   },
   {
     id: 'coloring-sheets',
@@ -204,18 +180,6 @@ export const familyResources: FamilyResource[] = [
     priority: 'medium',
     icon: 'Network'
   },
-  {
-    id: 'privacy-assessment',
-    title: 'Family Privacy Assessment',
-    description: 'Comprehensive assessment of your family\'s privacy practices',
-    type: 'tool',
-    category: ['assessment', 'analysis'],
-    personaTags: ['tech-savvy-family', 'privacy-focused-family'],
-    ageGroups: ['all'],
-    url: '/privacy-assessment',
-    priority: 'high',
-    icon: 'ClipboardCheck'
-  },
 
   // Balanced Family Resources
   {
@@ -226,7 +190,7 @@ export const familyResources: FamilyResource[] = [
     category: ['getting-started', 'practical'],
     personaTags: ['balanced-family', 'learning-family'],
     ageGroups: ['all'],
-    url: '/quick-start',
+    url: '/how-it-works',
     priority: 'high',
     icon: 'Rocket'
   },
@@ -238,7 +202,7 @@ export const familyResources: FamilyResource[] = [
     category: ['tips', 'practical'],
     personaTags: ['balanced-family'],
     ageGroups: ['all'],
-    url: '/parent-resources',
+    url: '/for-families',
     priority: 'medium',
     icon: 'Lightbulb'
   },
@@ -276,7 +240,7 @@ export const familyResources: FamilyResource[] = [
     category: ['assessment', 'risk-analysis'],
     personaTags: ['concerned-family'],
     ageGroups: ['all'],
-    url: '/privacy-assessment',
+    url: '/digital-footprint',
     priority: 'high',
     icon: 'AlertCircle'
   },
@@ -288,8 +252,8 @@ export const familyResources: FamilyResource[] = [
     category: ['alerts', 'breaches'],
     personaTags: ['concerned-family', 'privacy-focused-family'],
     ageGroups: ['all'],
-    url: '/safety-alerts',
-    priority: 'high',
+    url: '/service-catalog',
+    priority: 'medium',
     icon: 'Bell'
   }
 ];

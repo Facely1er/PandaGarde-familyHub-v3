@@ -17,7 +17,7 @@ const faqItems = [
   {
     question: 'How do I get started?',
     answer:
-      'Browse our resources, try the activities, and use our Get Started guide—no account needed to explore.',
+      'Browse our resources, try the activities, and start with the service catalog—no account needed to explore.',
   },
   {
     question: 'Can educators use this in schools?',

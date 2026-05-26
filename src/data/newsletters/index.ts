@@ -37,7 +37,7 @@ export const newsletterArchive: NewsletterContent[] = [
         title: 'How to Submit a Deletion Request for Your Child\'s EdTech Data',
         summary:
           'Under MODPA (and FERPA), parents have the right to request deletion of personal data held by educational apps. Start with the service\'s privacy portal or contact form, cite MODPA, and keep a copy of your request.',
-        linkUrl: '/resources'
+        linkurl: '/for-families'
       }
     ],
     publishedAt: '2026-04-15',
@@ -142,7 +142,7 @@ export const newsletterArchive: NewsletterContent[] = [
         title: 'School and EdTech Data Practices',
         summary:
           'Districts and classroom tools often share more data than families expect. Review notices sent at the start of the term and ask how student information is used and protected.',
-        linkUrl: '/resources'
+        linkurl: '/for-families'
       },
       {
         title: 'Maryland: MODPA and student data',

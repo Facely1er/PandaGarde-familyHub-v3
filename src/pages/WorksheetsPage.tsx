@@ -58,7 +58,7 @@ const WorksheetsPage: React.FC = () => {
 
         <p className="text-center mt-10 text-gray-600 dark:text-gray-400">
           Pair worksheets with{' '}
-          <Link to="/activities" className="text-teal-700 dark:text-teal-300 font-semibold hover:underline">
+          <Link to="/family-hub/activities" className="text-teal-700 dark:text-teal-300 font-semibold hover:underline">
             interactive missions
           </Link>
           {' '}or the{' '}

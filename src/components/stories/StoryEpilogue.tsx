@@ -43,8 +43,8 @@ export function StoryEpilogue({ story, className = '', id }: StoryEpilogueProps)
         <Link to="/stories" className="button button-primary">
           Read more stories
         </Link>
-        <Link to="/activity-book" className="button button-secondary">
-          Activity book
+        <Link to="/family-hub/activities" className="button button-secondary">
+          Privacy missions
         </Link>
       </div>
     </section>

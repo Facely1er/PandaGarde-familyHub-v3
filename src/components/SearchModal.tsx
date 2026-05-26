@@ -246,7 +246,7 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose, onResultClic
                       Category
                     </label>
                     <div className="space-y-1">
-                      {['Pages', 'Activities', 'Resources', 'Guides', 'Age Groups'].map(category => (
+                      {['Pages', 'Activities', 'Guides & stories', 'Guides', 'Age Groups'].map(category => (
                         <label key={category} className="flex items-center">
                           <input
                             type="checkbox"

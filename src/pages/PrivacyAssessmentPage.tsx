@@ -6,6 +6,7 @@ import {
   ChevronDown,
   ExternalLink,
   LayoutDashboard,
+  Scale,
   ShieldCheck,
   Users,
 } from 'lucide-react';
@@ -69,10 +70,24 @@ const PrivacyAssessmentPage: React.FC = () => {
             <nav className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm" aria-label="Related pages">
               <Link to="/digital-footprint" className={`inline-flex items-center gap-1.5 ${dfaTheme.link}`}>
                 <BarChart3 size={15} aria-hidden />
-                DFA results
+                Footprint review
               </Link>
               <Link
-                to="/resources"
+                to="/for-families"
+                className="inline-flex items-center gap-1.5 font-medium text-green-700 hover:underline dark:text-green-400"
+              >
+                <ShieldCheck size={15} aria-hidden />
+                Resources
+              </Link>
+              <Link
+                to="/digital-rights"
+                className="inline-flex items-center gap-1.5 font-medium text-green-700 hover:underline dark:text-green-400"
+              >
+                <Scale size={15} aria-hidden />
+                Digital privacy rights
+              </Link>
+              <Link
+                to="/for-families"
                 className="inline-flex items-center gap-1.5 font-medium text-green-700 hover:underline dark:text-green-400"
               >
                 <BookOpen size={15} aria-hidden />
@@ -131,10 +146,23 @@ const PrivacyAssessmentPage: React.FC = () => {
                 <ul className="mt-2 space-y-2">
                   {DFA_PHASE_THREE_PARENT_RESOURCES.map((item) => (
                     <li key={item.href}>
-                      <Link to={item.href} className={resourceLinkClass}>
-                        <span className={`font-semibold ${dfaTheme.title}`}>{item.label}</span>
-                        <span className={`mt-0.5 block ${dfaTheme.bodySm}`}>{item.description}</span>
-                      </Link>
+                      {item.external ? (
+                        <a
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={resourceLinkClass}
+                        >
+                          <span className={`font-semibold ${dfaTheme.title}`}>{item.label}</span>
+                          <span className={`mt-0.5 block ${dfaTheme.bodySm}`}>{item.description}</span>
+                          <span className="sr-only"> (opens in new tab)</span>
+                        </a>
+                      ) : (
+                        <Link to={item.href} className={resourceLinkClass}>
+                          <span className={`font-semibold ${dfaTheme.title}`}>{item.label}</span>
+                          <span className={`mt-0.5 block ${dfaTheme.bodySm}`}>{item.description}</span>
+                        </Link>
+                      )}
                     </li>
                   ))}
                 </ul>

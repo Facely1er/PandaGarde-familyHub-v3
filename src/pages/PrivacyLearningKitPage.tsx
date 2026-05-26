@@ -15,8 +15,8 @@ const sections: { heading: string; items: KitItem[] }[] = [
   {
     heading: 'Learn and play',
     items: [
-      { title: 'Interactive Activities', href: '/activities', badge: 'Missions' },
-      { title: 'Activity Book', href: '/activity-book', badge: 'Activities' },
+      { title: 'Privacy missions', href: '/family-hub/activities', badge: 'Family Hub' },
+      { title: 'Printables & downloads', href: '/downloads/coloring-sheets', badge: 'Printable' },
       { title: 'Family Hub', href: '/family-hub', badge: 'Hub' },
     ],
   },

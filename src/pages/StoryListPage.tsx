@@ -33,7 +33,7 @@ export function StoryListPage() {
   return (
     <PageLayout
       title="Privacy Panda Stories"
-      subtitle="Start with the Digital Bamboo Forest (interactive or chapters), then continue with age-matched episodes."
+      subtitle="Read in any order—no service catalog or footprint review required. Start with the Digital Bamboo Forest or browse by age."
       breadcrumbs
     >
       <section className="py-4 pb-8">

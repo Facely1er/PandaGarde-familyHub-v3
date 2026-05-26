@@ -1,7 +1,13 @@
 import React, { Suspense, lazy, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { ORIGIN_STORY_SLUG } from './data/stories';
+import { PARENT_SURFACE_REDIRECTS } from './data/parentSiteSurface';
+import ExternalProductRedirect from './components/ExternalProductRedirect';
+import { socialCautionFunnelUrl } from './config/socialCaution';
 import { ThemeProvider } from './contexts/ThemeContext';
+
+const SOCIALCAUTION_SAFETY_ALERTS_URL = socialCautionFunnelUrl('app', 'safety-alerts-retired');
+const SOCIALCAUTION_ASSESSMENT_URL = socialCautionFunnelUrl('app', 'privacy-assessment-retired');
 import { ToastProvider } from './contexts/ToastContext';
 import { FamilyProvider } from './contexts/FamilyContext';
 import { SearchProvider } from './contexts/SearchContext';
@@ -17,20 +23,16 @@ import NavigationErrorBoundary from './components/NavigationErrorBoundary';
 import { SentryErrorBoundary } from './lib/sentry';
 
 const HomePage = lazy(() => import('./pages/HomePage'));
-const ActivityBookPage = lazy(() => import('./pages/ActivityBookPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
 const AgeGroupsPage = lazy(() => import('./pages/AgeGroupsPage'));
 const ImplementationPage = lazy(() => import('./pages/ImplementationPage'));
 const FamilyHubWrapper = lazy(() => import('./pages/family-hub/FamilyHubWrapper'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
-const GetStartedPage = lazy(() => import('./pages/GetStartedPage'));
+const GetStartedRedirect = lazy(() => import('./pages/GetStartedRedirect'));
 const TermsPage = lazy(() => import('./pages/TermsPage'));
 const CookiesPage = lazy(() => import('./pages/CookiesPage'));
 const AccessibilityPage = lazy(() => import('./pages/AccessibilityPage'));
-const PrivacyExplorersPage = lazy(() => import('./pages/PrivacyExplorersPage'));
-const PrivacyHandbookPage = lazy(() => import('./pages/PrivacyHandbookPage'));
 const DigitalCitizenshipPage = lazy(() => import('./pages/DigitalCitizenshipPage'));
-const TeenHandbookPage = lazy(() => import('./pages/TeenHandbookPage'));
 const PrivacyToolsPage = lazy(() => import('./pages/PrivacyToolsPage'));
 const DigitalRightsPage = lazy(() => import('./pages/DigitalRightsPage'));
 const FAQPage = lazy(() => import('./pages/FAQPage'));
@@ -59,25 +61,21 @@ const NewsletterArchivePage = lazy(() => import('./pages/NewsletterArchivePage')
 const NewsletterIssuePage = lazy(() => import('./pages/NewsletterIssuePage'));
 const SupportPage = lazy(() => import('./pages/SupportPage'));
 const ImplementationGuidePage = lazy(() => import('./pages/ImplementationGuidePage'));
-const OverviewPage = lazy(() => import('./pages/OverviewPage'));
 const FeaturesPage = lazy(() => import('./pages/FeaturesPage'));
-const ResourcesPage = lazy(() => import('./pages/ResourcesPage'));
+const ForFamiliesPage = lazy(() => import('./pages/ForFamiliesPage'));
 const QuickStartPage = lazy(() => import('./pages/QuickStartPage'));
 const ParentToolkitPage = lazy(() => import('./pages/ParentToolkitPage'));
-const ActivitiesPage = lazy(() => import('./pages/ActivitiesPage'));
+const ActivitiesRedirectPage = lazy(() => import('./pages/ActivitiesRedirectPage'));
 const PrivacyLearningKitPage = lazy(() => import('./pages/PrivacyLearningKitPage'));
 const WorksheetsPage = lazy(() => import('./pages/WorksheetsPage'));
 const PilotPage = lazy(() => import('./pages/PilotPage'));
-const ChildSafetyAlertsPage = lazy(() => import('./pages/ChildSafetyAlertsPage'));
 const ServiceCatalogPage = lazy(() => import('./pages/ServiceCatalogPage'));
 const ParentalConsentPage = lazy(() => import('./pages/ParentalConsentPage'));
 const ParentalConsentPendingPage = lazy(() => import('./pages/ParentalConsentPendingPage'));
 const DigitalFootprintPage = lazy(() => import('./pages/DigitalFootprintPage'));
 const ScoringMethodologyPage = lazy(() => import('./pages/ScoringMethodologyPage'));
-const PrivacyAssessmentPage = lazy(() => import('./pages/PrivacyAssessmentPage'));
 const AssessmentHistoryPage = lazy(() => import('./pages/AssessmentHistoryPage'));
 const PrivacyGoalsPage = lazy(() => import('./pages/PrivacyGoalsPage'));
-const QuickAssessmentPage = lazy(() => import('./pages/QuickAssessmentPage'));
 const SuccessStoriesPage = lazy(() => import('./pages/community/SuccessStoriesPage'));
 const ResourceSharingPage = lazy(() => import('./pages/community/ResourceSharingPage'));
 const PrivacyTipsForumPage = lazy(() => import('./pages/community/PrivacyTipsForumPage'));
@@ -183,6 +181,9 @@ function App() {
                       <ConditionalMain>
                         <Suspense fallback={<PageLoader />}>
                         <Routes>
+            {Object.entries(PARENT_SURFACE_REDIRECTS).map(([from, to]) => (
+              <Route key={`parent-surface-${from}`} path={from} element={<Navigate to={to} replace />} />
+            ))}
             <Route path="/" element={<HomePage />} />
             <Route
               path="/story"
@@ -200,36 +201,17 @@ function App() {
               path="/interactive-story"
               element={<Navigate to={`/stories/${ORIGIN_STORY_SLUG}`} replace />}
             />
-            <Route path="/activity-book" element={<ActivityBookPage />} />
             <Route path="/about" element={<AboutPage />} />
-            <Route path="/age-groups" element={<AgeGroupsPage />} />
-            <Route path="/ages-5-8" element={<Navigate to="/activity-book" replace />} />
-            <Route path="/ages-9-12" element={<Navigate to="/privacy-explorers" replace />} />
-            <Route path="/ages-13-17" element={<Navigate to="/teen-handbook" replace />} />
             <Route path="/mission-hub" element={<Navigate to="/family-hub" replace />} />
-            <Route path="/implementation" element={<ImplementationPage />} />
             <Route path="/family-hub/*" element={<FamilyHubWrapper />} />
-            
-            {/* Age Group Pages */}
-            <Route path="/privacy-explorers" element={<PrivacyExplorersPage />} />
-            <Route path="/privacy-handbook" element={<PrivacyHandbookPage />} />
-            <Route path="/digital-citizenship" element={<DigitalCitizenshipPage />} />
-            <Route path="/teen-handbook" element={<TeenHandbookPage />} />
-            <Route path="/privacy-tools" element={<PrivacyToolsPage />} />
             <Route path="/digital-rights" element={<DigitalRightsPage />} />
 
             {/* General Pages */}
-            <Route path="/overview" element={<OverviewPage />} />
-            <Route path="/features" element={<FeaturesPage />} />
+            <Route path="/overview" element={<Navigate to="/how-it-works" replace />} />
+            <Route path="/features" element={<Navigate to="/how-it-works" replace />} />
             <Route path="/how-it-works" element={<FeaturesPage />} />
-            <Route path="/app-features" element={<AppFeaturesPage />} />
-            <Route path="/app-store-review" element={<AppStoreReviewPage />} />
-            <Route path="/resources" element={<ResourcesPage />} />
-            <Route path="/parent-resources" element={<ResourcesPage />} /> {/* Redirect to consolidated resources */}
-            <Route path="/parent-toolkit" element={<ParentToolkitPage />} />
-            <Route path="/quick-start" element={<QuickStartPage />} />
-            <Route path="/educator-tools" element={<EducatorToolsPage />} />
-            <Route path="/classroom-activities" element={<ClassroomActivitiesPage />} />
+            <Route path="/parent-landing" element={<GetStartedRedirect />} />
+            <Route path="/for-families" element={<ForFamiliesPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/faq" element={<FAQPage />} />
             <Route path="/newsletter" element={<NewsletterPage />} />
@@ -237,33 +219,39 @@ function App() {
             <Route path="/newsletter/unsubscribe" element={<UnsubscribePage />} />
             <Route path="/newsletter/:id" element={<NewsletterIssuePage />} />
             <Route path="/support" element={<SupportPage />} />
-            <Route path="/pilot" element={<PilotPage />} />
-            <Route path="/join-pilot" element={<PilotPage />} />
-            <Route path="/get-started" element={<GetStartedPage />} />
-            <Route path="/implementation-guide" element={<ImplementationGuidePage />} />
+            <Route path="/get-started" element={<GetStartedRedirect />} />
             <Route path="/service-catalog" element={<ServiceCatalogPage />} />
-            <Route path="/safety-alerts" element={<ChildSafetyAlertsPage />} />
-            <Route path="/alerts" element={<ChildSafetyAlertsPage />} />
-            <Route path="/child-safety-alerts" element={<Navigate to="/safety-alerts" replace />} />
+            <Route
+              path="/safety-alerts"
+              element={<ExternalProductRedirect targetUrl={SOCIALCAUTION_SAFETY_ALERTS_URL} />}
+            />
+            <Route
+              path="/alerts"
+              element={<ExternalProductRedirect targetUrl={SOCIALCAUTION_SAFETY_ALERTS_URL} />}
+            />
+            <Route
+              path="/child-safety-alerts"
+              element={<ExternalProductRedirect targetUrl={SOCIALCAUTION_SAFETY_ALERTS_URL} />}
+            />
             <Route path="/digital-footprint" element={<DigitalFootprintPage />} />
             <Route path="/footprint" element={<DigitalFootprintPage />} />
             <Route path="/scoring-methodology" element={<ScoringMethodologyPage />} />
             <Route path="/dfa-methodology" element={<Navigate to="/scoring-methodology#dfa-methodology" replace />} />
             <Route path="/methodology" element={<Navigate to="/scoring-methodology" replace />} />
-            <Route path="/privacy-assessment" element={<PrivacyAssessmentPage />} />
-            <Route path="/quick-assessment" element={<QuickAssessmentPage />} />
-            <Route path="/assessment" element={<PrivacyAssessmentPage />} />
-            <Route path="/assessment-history" element={<AssessmentHistoryPage />} />
-            <Route path="/assessment/history" element={<AssessmentHistoryPage />} />
-            <Route path="/privacy-goals" element={<PrivacyGoalsPage />} />
-            <Route path="/goals" element={<PrivacyGoalsPage />} />
-            
+            <Route
+              path="/privacy-assessment"
+              element={<ExternalProductRedirect targetUrl={SOCIALCAUTION_ASSESSMENT_URL} />}
+            />
+            <Route
+              path="/assessment"
+              element={<ExternalProductRedirect targetUrl={SOCIALCAUTION_ASSESSMENT_URL} />}
+            />
+            <Route
+              path="/quick-assessment"
+              element={<ExternalProductRedirect targetUrl={SOCIALCAUTION_ASSESSMENT_URL} />}
+            />
+
             {/* Community Features */}
-            <Route path="/community/stories" element={<SuccessStoriesPage />} />
-            <Route path="/community/success-stories" element={<SuccessStoriesPage />} />
-            <Route path="/community/resources" element={<ResourceSharingPage />} />
-            <Route path="/community/forum" element={<PrivacyTipsForumPage />} />
-            <Route path="/community/privacy-tips" element={<PrivacyTipsForumPage />} />
             
             {/* COPPA Compliance Pages */}
             <Route path="/parental-consent" element={<ParentalConsentPage />} />
@@ -296,9 +284,7 @@ function App() {
             <Route path="/guides/device-setup" element={<DeviceSetupGuidePage />} />
             <Route path="/guides/parental-controls" element={<Navigate to="/guides/device-setup" replace />} />
             <Route path="/guides/device-security" element={<Navigate to="/guides/device-setup" replace />} />
-            <Route path="/guides/privacy-settings" element={<Navigate to="/privacy-tools" replace />} />
-            <Route path="/guides/privacy-basics" element={<Navigate to="/privacy-handbook" replace />} />
-            <Route path="/guides/social-media-privacy" element={<Navigate to="/teen-handbook" replace />} />
+            <Route path="/guides/privacy-settings" element={<Navigate to="/guides/device-setup" replace />} />
             <Route path="/guides/security" element={<Navigate to="/guides/emergency-safety" replace />} />
             <Route path="/guides/urgent-protection" element={<Navigate to="/guides/emergency-safety" replace />} />
             <Route path="/guides/practical-privacy" element={<Navigate to="/guides/family-privacy" replace />} />
@@ -324,8 +310,7 @@ function App() {
               path="/activities/story"
               element={<Navigate to="/stories/privacy-panda-and-the-digital-bamboo-forest" replace />}
             />
-            <Route path="/activities/:activityId" element={<ActivitiesPage />} />
-            <Route path="/activities" element={<ActivitiesPage />} />
+            <Route path="/activities/:activityId" element={<ActivitiesRedirectPage />} />
             
             {/* Additional Download Pages */}
             <Route path="/downloads/worksheets" element={<WorksheetsPage />} />

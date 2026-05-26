@@ -4,7 +4,7 @@ import ServiceCatalog from '../components/ServiceCatalog';
 import EmailCaptureInline from '../components/EmailCaptureInline';
 import { ProgressBar } from '../components/ui/ProgressBar';
 import DfaJourneyStepper from '../components/journey/DfaJourneyStepper';
-import { Bell, BarChart3, ArrowRight, Unlock, CheckCircle, Sparkles, Target, Plus, Heart, School, AlertTriangle, Bot, Signal, Info } from 'lucide-react';
+import { BarChart3, ArrowRight, Unlock, CheckCircle, Sparkles, Target, Plus, Heart, School, AlertTriangle, Bot, Signal, Info } from 'lucide-react';
 import { useFamily } from '../contexts/FamilyContext';
 import { childServiceCatalog, getHealthServices, getSchoolAssignedServices, getServicesWithLawEnforcementConcerns } from '../data/childServiceCatalog';
 import { getServiceLogoUrlWithBrandColor, hasServiceLogo } from '../utils/serviceLogos';
@@ -88,7 +88,7 @@ const ServiceCatalogPage: React.FC = () => {
             compact
             ctaHref={isReadyForAnalysis ? '/digital-footprint' : '/service-catalog'}
             ctaLabel={isReadyForAnalysis ? 'Continue to Digital Footprint Analysis' : 'Keep adding family services'}
-            subtitle="Phase 1 is where families define the real apps and services they want PandaGarde to analyze. Add at least 3 to reduce friction in the next phase."
+            subtitle="List the apps your family uses—this list is what footprint review analyzes. Stories, guides, and Family Hub do not require finishing the catalog."
           />
         </div>
 
@@ -113,7 +113,7 @@ const ServiceCatalogPage: React.FC = () => {
                   <div className="mt-1 flex items-center gap-3">
                     <ProgressBar value={progressPercent} size="sm" variant={isReadyForAnalysis ? 'low' : 'primary'} aria-label="Services added progress" className="h-2 w-32" />
                     <span className={`text-sm ${isReadyForAnalysis ? 'text-green-700 dark:text-green-300' : 'text-blue-700 dark:text-blue-300'}`}>
-                      {isReadyForAnalysis ? 'Phase 1 complete — continue into DFA.' : servicesCount === 1 ? 'Great start — add 2 more to unlock DFA.' : servicesCount === 2 ? 'Almost there — add 1 more to unlock DFA.' : 'Add 3 services to unlock DFA.'}
+                      {isReadyForAnalysis ? 'Ready for footprint review.' : servicesCount === 1 ? 'Great start — add 2 more for footprint scores.' : servicesCount === 2 ? 'Almost there — add 1 more for footprint scores.' : 'Add 3 services to run footprint review.'}
                     </span>
                   </div>
                 </div>
@@ -151,14 +151,6 @@ const ServiceCatalogPage: React.FC = () => {
               </p>
             </div>
             <div className="flex shrink-0 items-center gap-2">
-              <Link
-                to="/safety-alerts"
-                className={headerActionLinkClass}
-                title="Catalog notifications and RSS safety headlines for services you list"
-              >
-                <Bell className="h-5 w-5 shrink-0" aria-hidden />
-                <span>Safety Alerts</span>
-              </Link>
               <Link to="/digital-footprint" className={headerActionLinkClass}>
                 <BarChart3 className="h-5 w-5 shrink-0" aria-hidden />
                 <span>Footprint</span>
@@ -179,13 +171,13 @@ const ServiceCatalogPage: React.FC = () => {
                   <ol className="mb-4 list-inside list-decimal space-y-2 text-sm text-gray-700 dark:text-gray-300">
                     <li><strong>Choose services</strong> your family actually uses.</li>
                     <li><strong>Tap Add</strong> on each one — no account or backend required.</li>
-                    <li><strong>Reach 3 services</strong> to unlock your Digital Footprint Analysis.</li>
+                    <li><strong>Reach 3 services</strong> to open footprint review (other areas work without this).</li>
                   </ol>
                   <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
                     {[
                       ['Privacy snapshot', 'See your family’s exposure at a glance'],
                       ['Risk per app', 'Understand which apps need more care'],
-                      ['Actionable next steps', 'Move directly into assessment and Family Hub'],
+                      ['Stories & Hub', 'Explore with kids when you have a calm moment'],
                     ].map(([title, desc]) => (
                       <div key={title} className="flex items-start gap-2">
                         <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-green-600 dark:text-green-400" />
@@ -243,9 +235,15 @@ const ServiceCatalogPage: React.FC = () => {
           <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-100">
             <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">Continue when ready</h3>
             <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">Once you reach at least three services, continue straight into Digital Footprint Analysis. Your place is saved locally.</p>
-            <Link to={isReadyForAnalysis ? '/digital-footprint' : '/get-started'} className="mt-4 inline-flex items-center gap-2 font-semibold text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300">
-              {isReadyForAnalysis ? 'Go to Digital Footprint Analysis' : 'Review the DFA journey'} <ArrowRight size={16} />
-            </Link>
+            {isReadyForAnalysis ? (
+              <Link to="/digital-footprint" className="mt-4 inline-flex items-center gap-2 font-semibold text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300">
+                Go to Footprint Review <ArrowRight size={16} />
+              </Link>
+            ) : (
+              <p className="mt-4 text-sm font-medium text-gray-600 dark:text-gray-300">
+                Add at least three services above to continue to Footprint Review.
+              </p>
+            )}
           </div>
         </div>
 

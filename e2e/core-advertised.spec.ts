@@ -53,9 +53,29 @@ test.describe('Core features advertised (How it works + CONTENT_TRUTH)', () => {
     await expect(page.getByRole('heading').first()).toBeVisible();
   });
 
-  test('Resources — hub page', async ({ page }) => {
-    await gotoAndWait(page, '/resources');
-    await expect(page.getByRole('heading').first()).toBeVisible();
+  test('Guides & stories — hub page', async ({ page }) => {
+    await gotoAndWait(page, '/for-families');
+    await expect(page.getByRole('heading', { name: /Guides & stories/i })).toBeVisible();
+  });
+
+  test('Guides & stories — key cards are not 404', async ({ page }) => {
+    await gotoAndWait(page, '/for-families');
+    for (const name of [/Family privacy guide/i, /Printables/i, /Privacy Panda/i]) {
+      const link = page.getByRole('link', { name }).first();
+      await expect(link).toBeVisible();
+      const href = await link.getAttribute('href');
+      expect(href).toBeTruthy();
+      await page.goto(`${BASE}${href}`, { waitUntil: 'networkidle' });
+      await expect(page.getByText(/^404$/)).toHaveCount(0);
+      await expect(page.getByRole('heading').first()).toBeVisible();
+    }
+  });
+
+  test('Legacy resource URLs redirect instead of 404', async ({ page }) => {
+    for (const path of ['/resources', '/privacy-tools', '/parent-resources', '/worksheets']) {
+      await page.goto(`${BASE}${path}`, { waitUntil: 'networkidle' });
+      await expect(page.getByText(/^404$/)).toHaveCount(0);
+    }
   });
 
   test('Stories — list and foundation story player', async ({ page }) => {
@@ -72,36 +92,34 @@ test.describe('Core features advertised (How it works + CONTENT_TRUTH)', () => {
     await expect(page.locator('.interactive-story-player, #story-player').first()).toBeVisible();
   });
 
-  test('Safety alerts — catalog + RSS tabs', async ({ page }) => {
-    await gotoAndWait(page, '/safety-alerts');
-    await expect(
-      page.getByRole('heading', { level: 1, name: /Safety Alerts & Notifications/i })
-    ).toBeVisible();
-    await expect(page.getByText(/catalog-based|RSS/i).first()).toBeVisible();
-    await expect(page.getByRole('button', { name: /Service Notifications/i })).toBeVisible();
-    await expect(page.getByRole('button', { name: /RSS Safety Alerts/i })).toBeVisible();
+  test('Retired safety-alerts route forwards to SocialCaution funnel', async ({ page }) => {
+    await page.goto(`${BASE}/safety-alerts`, { waitUntil: 'domcontentloaded' });
+    await page.waitForURL(/socialcaution\.com/, { timeout: 15_000 });
+    expect(page.url()).toMatch(/socialcaution\.com/);
   });
 
-  test('DFA happy path — catalog seed → footprint scores → assessment', async ({ page }) => {
+  test('DFA happy path — catalog seed → footprint → stories CTA', async ({ page }) => {
     await page.goto(`${BASE}/`, { waitUntil: 'domcontentloaded' });
     await page.evaluate((ids) => {
       localStorage.setItem('pandagarde_family_services', JSON.stringify(ids));
     }, [...E2E_SERVICE_IDS]);
     await gotoAndWait(page, '/digital-footprint');
-    await expect(
-      page.getByRole('heading', { level: 1, name: /Your family's digital footprint/i })
-    ).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: /Footprint Review/i })).toBeVisible();
     await expect(
       page.getByRole('heading', { name: /Launch-grade scoring|Executive summary/i }).first()
     ).toBeVisible({ timeout: 15_000 });
     await expect(page.getByText(/Services analyzed/i)).toBeVisible();
-    const toAssessment = page.getByRole('link', { name: /Continue to assessment/i }).first();
-    await expect(toAssessment).toBeVisible();
-    await toAssessment.click();
-    await page.waitForURL(/\/privacy-assessment/);
-    await expect(page.getByRole('heading', { name: /Privacy assessment/i })).toBeVisible();
-    await expect(page.getByText(/Phase 3|Turn findings into action/i).first()).toBeVisible();
+    const toStory = page.getByRole('link', { name: /Read Privacy Panda story/i }).first();
+    await expect(toStory).toBeVisible();
+    await toStory.click();
+    await page.waitForURL(/\/stories\//);
     await expect(page.locator('main, #main-content').first()).toBeVisible();
+  });
+
+  test('Retired privacy-assessment route forwards to SocialCaution', async ({ page }) => {
+    await page.goto(`${BASE}/privacy-assessment`, { waitUntil: 'domcontentloaded' });
+    await page.waitForURL(/socialcaution\.com/, { timeout: 15_000 });
+    expect(page.url()).toMatch(/socialcaution\.com/);
   });
 
   test('Family Hub — local gate then dashboard', async ({ page }) => {

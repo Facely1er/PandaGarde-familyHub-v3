@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingBag, ArrowRight, Sparkles, CheckCircle, Shield, BarChart3, Bell } from 'lucide-react';
+import { ShoppingBag, ArrowRight, Sparkles, CheckCircle, Shield, BarChart3 } from 'lucide-react';
 
 interface EmptyStateWithServicePromptProps {
   feature: string;
@@ -26,10 +26,10 @@ const EmptyStateWithServicePrompt: React.FC<EmptyStateWithServicePromptProps> = 
               </div>
               <div>
                 <h1>{feature}</h1>
-                <p className="empty-state-prompt__header-sub">One quick setup step to unlock this feature</p>
+                <p className="empty-state-prompt__header-sub">Footprint review needs apps in your catalog first</p>
               </div>
             </div>
-            <span className="empty-state-prompt__badge">Setup required</span>
+            <span className="empty-state-prompt__badge">Catalog needed</span>
           </header>
 
           <div className="empty-state-prompt__body">
@@ -57,15 +57,6 @@ const EmptyStateWithServicePrompt: React.FC<EmptyStateWithServicePromptProps> = 
                   <div>
                     <strong>Risk assessment</strong>
                     <span>Identify higher-exposure services</span>
-                  </div>
-                </div>
-                <div className="empty-state-prompt__unlock-item">
-                  <div className="empty-state-prompt__unlock-icon" aria-hidden>
-                    <Bell size={16} />
-                  </div>
-                  <div>
-                    <strong>Safety alerts</strong>
-                    <span>Catalog and RSS headlines</span>
                   </div>
                 </div>
               </div>
@@ -126,7 +117,7 @@ const EmptyStateWithServicePrompt: React.FC<EmptyStateWithServicePromptProps> = 
 
         <p className="empty-state-prompt__footer">
           Questions about privacy protection?{' '}
-          <Link to="/privacy-handbook">Read our Privacy Handbook</Link>
+          <Link to="/guides/family-privacy">Read the family privacy guide</Link>
         </p>
       </div>
     </div>

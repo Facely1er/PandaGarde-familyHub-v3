@@ -1,216 +1,36 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Wrench, Download, FileText, Shield, MessageCircle, CheckCircle, Users, BookOpen, Settings, Lock, Eye, AlertTriangle, Search, Filter, Star, Clock } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import {
+  Wrench,
+  ArrowRight,
+  FileText,
+  MessageCircle,
+  CheckCircle,
+  BookOpen,
+  Settings,
+  Search,
+  Filter,
+  Clock,
+} from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 import ResourceModal from '../components/ResourceModal';
 import { getToolkitRoute } from '../data/parentToolkitRoutes';
-
-interface ToolkitResource {
-  id: string;
-  title: string;
-  description: string;
-  category: 'templates' | 'guides' | 'checklists' | 'conversations' | 'tools' | 'expert';
-  icon: React.ComponentType<{ size?: number; className?: string }>;
-  preview?: string[];
-  duration?: string;
-}
+import { PARENT_TOOLKIT_RESOURCES, type ParentToolkitResource } from '../data/parentToolkitResources';
 
 const ParentToolkitPage: React.FC = () => {
+  const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedResource, setSelectedResource] = useState<ToolkitResource | null>(null);
+  const [selectedResource, setSelectedResource] = useState<ParentToolkitResource | null>(null);
 
-  const resources: ToolkitResource[] = [
-    {
-      id: 'privacy-policy-template',
-      title: 'Family Privacy Policy Template',
-      description: 'A customizable template to create your own family privacy policy that establishes clear rules and expectations.',
-      category: 'templates',
-      icon: FileText,
-      preview: [
-        'Device usage guidelines',
-        'Social media rules',
-        'Information sharing boundaries',
-        'Consequences and rewards',
-        'Review and update schedule'
-      ],
-      duration: '15 min'
-    },
-    {
-      id: 'device-setup-checklist',
-      title: 'Device Setup Checklist',
-      description: 'Step-by-step checklist for setting up new devices with privacy and safety in mind.',
-      category: 'checklists',
-      icon: CheckCircle,
-      preview: [
-        'Initial security settings',
-        'Privacy configuration steps',
-        'App permission review',
-        'Parental control setup',
-        'Testing and verification'
-      ],
-      duration: '30 min'
-    },
-    {
-      id: 'conversation-starters',
-      title: 'Privacy Conversation Starters',
-      description: 'Age-appropriate questions and prompts to start meaningful conversations about digital privacy.',
-      category: 'conversations',
-      icon: MessageCircle,
-      preview: [
-        'Questions for ages 5-8',
-        'Discussion topics for ages 9-12',
-        'Teen conversation prompts',
-        'Scenario-based discussions',
-        'Follow-up questions'
-      ],
-      duration: '10 min'
-    },
-    {
-      id: 'app-review-guide',
-      title: 'App Review & Selection Guide',
-      description: 'Learn how to evaluate apps for privacy, safety, and age-appropriateness before your child uses them.',
-      category: 'guides',
-      icon: Search,
-      preview: [
-        'Privacy policy analysis',
-        'Permission evaluation',
-        'Age rating considerations',
-        'Content review checklist',
-        'Red flags to watch for'
-      ],
-      duration: '20 min'
-    },
-    {
-      id: 'safety-checklist',
-      title: 'Digital Safety Checklist',
-      description: 'Comprehensive checklist to regularly review your child\'s digital safety and privacy settings.',
-      category: 'checklists',
-      icon: Shield,
-      preview: [
-        'Account security review',
-        'Privacy settings audit',
-        'Friend/follower verification',
-        'Content sharing review',
-        'Location settings check'
-      ],
-      duration: '25 min'
-    },
-    {
-      id: 'privacy-settings-guide',
-      title: 'Privacy Settings Guide',
-      description: 'Detailed guides for configuring privacy settings on popular platforms and devices.',
-      category: 'guides',
-      icon: Settings,
-      preview: [
-        'iOS privacy settings',
-        'Android privacy settings',
-        'Social media platforms',
-        'Gaming platforms',
-        'Browser settings'
-      ],
-      duration: '45 min'
-    },
-    {
-      id: 'monitoring-tools-guide',
-      title: 'Monitoring Tools Guide',
-      description: 'Overview of parental control and monitoring tools, their features, and best practices.',
-      category: 'tools',
-      icon: Eye,
-      preview: [
-        'Tool comparison chart',
-        'Feature explanations',
-        'Setup instructions',
-        'Privacy considerations',
-        'Recommendations by age'
-      ],
-      duration: '30 min'
-    },
-    {
-      id: 'incident-response-plan',
-      title: 'Incident Response Plan Template',
-      description: 'A template to help you respond quickly and effectively if your child encounters online issues.',
-      category: 'templates',
-      icon: AlertTriangle,
-      preview: [
-        'Immediate response steps',
-        'Documentation checklist',
-        'Who to contact',
-        'Follow-up actions',
-        'Prevention strategies'
-      ],
-      duration: '20 min'
-    },
-    {
-      id: 'password-security-guide',
-      title: 'Password Security Guide',
-      description: 'Teach your children about creating strong passwords and managing them securely.',
-      category: 'guides',
-      icon: Lock,
-      preview: [
-        'Password creation rules',
-        'Password manager basics',
-        'Two-factor authentication',
-        'Age-appropriate strategies',
-        'Practice activities'
-      ],
-      duration: '25 min'
-    },
-    {
-      id: 'expert-advice-library',
-      title: 'Expert Advice Library',
-      description: 'Curated articles and advice from privacy experts, child psychologists, and digital safety specialists.',
-      category: 'expert',
-      icon: BookOpen,
-      preview: [
-        'Age-appropriate privacy education',
-        'Balancing safety and independence',
-        'Building trust and communication',
-        'Recognizing warning signs',
-        'When to seek professional help'
-      ],
-      duration: 'Variable'
-    },
-    {
-      id: 'family-agreement-template',
-      title: 'Family Internet Agreement Template',
-      description: 'A comprehensive agreement template that establishes rules and expectations for internet use.',
-      category: 'templates',
-      icon: FileText,
-      preview: [
-        'Device usage rules',
-        'Time limits and schedules',
-        'App and website guidelines',
-        'Communication rules',
-        'Consequences and rewards'
-      ],
-      duration: '30 min'
-    },
-    {
-      id: 'social-media-guide',
-      title: 'Social Media Safety Guide',
-      description: 'Complete guide to helping your child navigate social media safely and responsibly.',
-      category: 'guides',
-      icon: Users,
-      preview: [
-        'Platform-specific safety tips',
-        'Privacy setting walkthroughs',
-        'Content sharing guidelines',
-        'Dealing with cyberbullying',
-        'Building positive online presence'
-      ],
-      duration: '40 min'
-    }
-  ];
+  const resources = PARENT_TOOLKIT_RESOURCES;
 
   const categories = [
-    { id: 'all', label: 'All Resources', icon: Wrench },
-    { id: 'templates', label: 'Templates', icon: FileText },
+    { id: 'all', label: 'All shortcuts', icon: Wrench },
+    { id: 'templates', label: 'Plans & agreements', icon: FileText },
     { id: 'guides', label: 'Guides', icon: BookOpen },
-    { id: 'checklists', label: 'Checklists', icon: CheckCircle },
     { id: 'conversations', label: 'Conversations', icon: MessageCircle },
-    { id: 'tools', label: 'Tools', icon: Settings },
-    { id: 'expert', label: 'Expert Advice', icon: Star }
+    { id: 'tools', label: 'Activities', icon: Settings },
   ];
 
   const filteredResources = resources.filter(resource => {
@@ -225,59 +45,33 @@ const ParentToolkitPage: React.FC = () => {
     switch (category) {
       case 'templates': return 'bg-blue-100 text-blue-800';
       case 'guides': return 'bg-green-100 text-green-800';
-      case 'checklists': return 'bg-yellow-100 text-yellow-800';
       case 'conversations': return 'bg-purple-100 text-purple-800';
       case 'tools': return 'bg-orange-100 text-orange-800';
-      case 'expert': return 'bg-pink-100 text-pink-800';
       default: return 'bg-gray-100 text-gray-800';
     }
   };
 
   return (
     <PageLayout
-      title="Parent Toolkit"
-      subtitle="Comprehensive tools and resources to help parents guide their children's digital journey. Templates, guides, checklists, and expert advice all in one place."
+      title="Toolkit"
+      subtitle="Shortcuts to guides, plans, and activities already on PandaGarde—each card opens a real page. There are no separate PDF kits to download from this screen."
       breadcrumbs={true}
     >
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
         {/* Introduction Section */}
-        <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-8 mb-8 border border-green-200">
-          <h2 className="text-2xl font-bold mb-4 text-primary">
-            Everything You Need to Protect Your Family's Digital Privacy
+        <div className="mb-8 rounded-xl border border-green-200 bg-green-50/80 p-6 dark:border-green-800 dark:bg-green-950/30">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
+            How this page works
           </h2>
-          <p className="text-lg mb-4 text-gray-700">
-            Our Parent Toolkit provides you with practical, ready-to-use resources to help your children navigate the digital world safely. 
-            From privacy policy templates to conversation starters, we've got you covered.
+          <p className="mt-2 text-gray-700 dark:text-gray-300">
+            Each card links to an existing guide, plan, activity, or download page. Use{' '}
+            <strong>View details</strong> to see what is on that page, then <strong>Go to page</strong> to open it.
+            For the full Digital Footprint Analysis path, start from{' '}
+            <Link to="/service-catalog" className="font-semibold text-green-700 underline dark:text-green-400">
+              Service catalog
+            </Link>
+            .
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-            <div className="flex items-start gap-3">
-              <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
-                <FileText size={20} className="text-green-600" />
-              </div>
-              <div>
-                <h3 className="font-semibold mb-1 text-gray-800">Ready-to-Use Templates</h3>
-                <p className="text-sm text-gray-600">Customizable templates for policies, agreements, and plans</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-                <BookOpen size={20} className="text-blue-600" />
-              </div>
-              <div>
-                <h3 className="font-semibold mb-1 text-gray-800">Step-by-Step Guides</h3>
-                <p className="text-sm text-gray-600">Detailed guides for setting up devices and configuring privacy</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0">
-                <MessageCircle size={20} className="text-purple-600" />
-              </div>
-              <div>
-                <h3 className="font-semibold mb-1 text-gray-800">Conversation Starters</h3>
-                <p className="text-sm text-gray-600">Age-appropriate prompts to start meaningful discussions</p>
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* Search and Filter */}
@@ -383,14 +177,14 @@ const ParentToolkitPage: React.FC = () => {
                         {(() => {
                           const route = getToolkitRoute(resource.id);
                           return route ? (
-                          <Link
-                            to={route.href}
-                            className="inline-flex items-center justify-center bg-gray-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-gray-600 transition-all min-h-[44px]"
-                            onClick={(e) => e.stopPropagation()}
-                            aria-label={route.label}
-                          >
-                            <Download size={16} aria-hidden />
-                          </Link>
+                            <Link
+                              to={route.href}
+                              className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-green-600 bg-white px-3 py-2 text-sm font-semibold text-green-800 transition-colors hover:bg-green-50 dark:border-green-500 dark:bg-gray-800 dark:text-green-200 dark:hover:bg-green-950/40"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              Go to page
+                              <ArrowRight size={15} aria-hidden />
+                            </Link>
                           ) : null;
                         })()}
                       </div>
@@ -410,44 +204,49 @@ const ParentToolkitPage: React.FC = () => {
           description={selectedResource?.description || ''}
           preview={selectedResource?.preview}
           duration={selectedResource?.duration}
-          downloadUrl={selectedResource ? getToolkitRoute(selectedResource.id)?.href : undefined}
-          onDownload={() => {
-            const route = selectedResource ? getToolkitRoute(selectedResource.id) : undefined;
-            if (route) {
-              window.location.href = route.href;
-            }
-          }}
+          primaryAction={
+            selectedResource
+              ? (() => {
+                  const route = getToolkitRoute(selectedResource.id);
+                  return route
+                    ? {
+                        label: route.label,
+                        onClick: () => {
+                          setSelectedResource(null);
+                          navigate(route.href);
+                        },
+                      }
+                    : undefined;
+                })()
+              : undefined
+          }
         />
 
         {/* Call to Action */}
-        <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl p-8 text-center mb-8">
-          <h2 className="text-2xl font-bold mb-4">
-            Need More Help?
-          </h2>
-          <p className="text-lg mb-6 opacity-90 max-w-2xl mx-auto">
-            Explore our guides, try the device-local community forum demo, or open Family Hub for privacy missions.
+        <div className="mb-8 rounded-xl border border-gray-200 bg-gray-50 p-6 text-center dark:border-gray-600 dark:bg-gray-800/50">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">Next steps</h2>
+          <p className="mx-auto mt-2 max-w-2xl text-gray-600 dark:text-gray-300">
+            Run Footprint Review after your service catalog, or open Family Hub for optional kids&apos; missions on this device.
           </p>
-          <div className="flex flex-wrap gap-4 justify-center">
+          <div className="mt-5 flex flex-wrap justify-center gap-3">
             <Link
-              to="/guides/age-specific"
-              className="bg-white text-green-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center gap-2"
+              to="/digital-footprint"
+              className="button button-primary inline-flex items-center gap-2"
             >
-              <BookOpen size={20} />
-              View Guides
+              Footprint Review
+              <ArrowRight size={16} aria-hidden />
+            </Link>
+            <Link
+              to="/family-hub"
+              className="button button-secondary inline-flex items-center gap-2"
+            >
+              Family Hub
             </Link>
             <Link
               to="/community/forum"
-              className="bg-green-700 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-800 transition-colors inline-flex items-center gap-2"
+              className="button button-secondary inline-flex items-center gap-2"
             >
-              <MessageCircle size={20} />
-              Join Forum
-            </Link>
-            <Link
-              to="/resources"
-              className="bg-white text-green-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center gap-2"
-            >
-              <Users size={20} />
-              More Resources
+              Community forum (demo)
             </Link>
           </div>
         </div>

@@ -218,7 +218,7 @@ export class FamilyPersonaDetectionEngine {
     const actionMap: Record<string, string[]> = {
       'cautious-parent': [
         'Set up parental controls on all devices',
-        'Review child safety alerts regularly',
+        'Review recommended privacy actions in your service catalog',
         'Create a family internet agreement',
         'Review catalog and RSS safety headlines regularly'
       ],
@@ -249,7 +249,7 @@ export class FamilyPersonaDetectionEngine {
       'concerned-family': [
         'Complete privacy assessment immediately',
         'Review high-priority recommendations',
-        'Add services to the catalog and open Safety Alerts',
+        'Add services to the catalog and complete footprint review',
         'Start with urgent privacy fixes'
       ]
     };

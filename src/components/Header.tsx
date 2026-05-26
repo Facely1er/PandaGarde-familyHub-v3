@@ -4,23 +4,18 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import {
   Menu,
   X,
-  Home,
   Moon,
   Sun,
   Search,
-  BookOpen,
-  ShieldCheck,
-  Users,
-  Scale,
-  Wrench,
   LayoutDashboard,
-  Library,
-  Fingerprint,
-  Compass,
-  Sparkles,
 } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import SearchModal from './SearchModal';
+import {
+  buildMobileQuickNavItems,
+  mobileSecondaryNavItems,
+  primaryNavItems,
+} from '../data/siteNavigation';
 
 function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -66,40 +61,23 @@ function Header() {
     };
   }, [isMobileMenuOpen]);
 
-  const navItems = useMemo(
-    () => [
-      { id: 'nav-home', icon: Home, label: 'Home', href: '/' },
-      { id: 'nav-how-it-works', icon: Compass, label: 'How It Works', href: '/how-it-works' },
-      { id: 'nav-footprint', icon: Fingerprint, label: 'Footprint Review', href: '/digital-footprint' },
-      { id: 'nav-resources', icon: BookOpen, label: 'Resources', href: '/resources' },
-      { id: 'nav-stories', icon: Library, label: 'Stories', href: '/stories' },
-    ],
+  const navItems = primaryNavItems;
+
+  const mobileQuickNavItems = useMemo(
+    () => buildMobileQuickNavItems(primaryNavItems),
     []
   );
 
-  const mobilePrimaryItems = useMemo(
-    () => [
-      { id: 'mobile-nav-home', icon: Home, label: 'Home', href: '/' },
-      { id: 'mobile-nav-how-it-works', icon: Compass, label: 'How It Works', href: '/how-it-works' },
-      { id: 'mobile-nav-footprint', icon: Fingerprint, label: 'Footprint Review', href: '/digital-footprint' },
-      { id: 'mobile-nav-resources', icon: BookOpen, label: 'Resources', href: '/resources' },
-      { id: 'mobile-nav-stories', icon: Library, label: 'Stories', href: '/stories' },
-    ],
-    []
-  );
+  const mobilePrimaryItems = primaryNavItems.map((item) => ({
+    ...item,
+    id: `mobile-${item.id}`,
+  }));
 
-  const mobileSecondaryItems = useMemo(
-    () => [
-      { id: 'mobile-nav-privacy-tools', icon: Wrench, label: 'Privacy Tools', href: '/privacy-tools' },
-      { id: 'mobile-nav-digital-rights', icon: Scale, label: 'Digital Rights', href: '/digital-rights' },
-    ],
-    []
-  );
+  const mobileSecondaryItems = mobileSecondaryNavItems;
 
   const mobileCtaItems = useMemo(
     () => [
-      { id: 'mobile-nav-family-hub', icon: LayoutDashboard, label: 'Open Family Hub', href: '/family-hub', variant: 'primary' },
-      { id: 'mobile-nav-get-started', icon: Users, label: 'Get Started', href: '/get-started', variant: 'secondary' },
+      { id: 'mobile-nav-family-hub', icon: LayoutDashboard, label: 'Open Family Hub', href: '/family-hub', variant: 'primary' as const },
     ],
     []
   );
@@ -207,58 +185,79 @@ function Header() {
             </ul>
 
             <div
-              className="nav-actions flex shrink-0 flex-nowrap items-center gap-1 lg:gap-2"
-              aria-label="Utility actions"
+              className="nav-actions__cluster mobile-quick-nav lg:hidden"
+              role="navigation"
+              aria-label="Quick links"
             >
-              <Link
-                to="/family-hub"
-                className={`nav-cta nav-cta-primary nav-cta-icon-only hidden lg:inline-flex ${isActive('/family-hub') ? 'active' : ''}`}
-                aria-label="Open Family Hub workspace"
-                title="Family Hub"
-                aria-current={isActive('/family-hub') ? 'page' : undefined}
-              >
-                <LayoutDashboard size={18} className="nav-cta-icon" aria-hidden="true" />
-              </Link>
+              {mobileQuickNavItems.map((item) => {
+                const Icon = item.icon;
+                const active = isActive(item.href);
+                return (
+                  <Link
+                    key={item.id}
+                    to={item.href}
+                    className={`nav-actions__icon mobile-quick-nav__link header-icon-btn ${active ? 'mobile-quick-nav__link--active' : ''}`}
+                    aria-label={item.label}
+                    title={item.label}
+                    aria-current={active ? 'page' : undefined}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <Icon size={17} aria-hidden="true" />
+                  </Link>
+                );
+              })}
+            </div>
 
-              <Link
-                to="/get-started"
-                className={`nav-cta nav-cta-secondary hidden lg:inline-flex ${isActive('/get-started') ? 'active' : ''}`}
-                aria-label="Get started with PandaGarde"
-                aria-current={isActive('/get-started') ? 'page' : undefined}
+            <div className="nav-actions" aria-label="Utility actions">
+              <div
+                className="nav-actions__toolbar"
+                role="group"
+                aria-label="Search, Family Hub, and display"
               >
-                <Sparkles size={16} className="nav-cta-icon" aria-hidden="true" />
-                <span>Get Started</span>
-              </Link>
+                <button
+                  type="button"
+                  className="header-search-bar"
+                  onClick={() => setIsSearchModalOpen(true)}
+                  aria-label="Open search"
+                  title="Search (Ctrl/Cmd + K)"
+                >
+                  <Search size={17} className="header-search-bar__icon" aria-hidden="true" />
+                  <span className="header-search-bar__label">Search</span>
+                  <kbd className="header-search-bar__kbd" aria-hidden="true">
+                    ⌘K
+                  </kbd>
+                </button>
 
-              <button
-                type="button"
-                className="search-button header-icon-btn inline-flex h-11 w-11 shrink-0 items-center justify-center p-0"
-                onClick={() => setIsSearchModalOpen(true)}
-                aria-label="Open search"
-                title="Search (Ctrl/Cmd + K)"
-              >
-                <Search size={18} aria-hidden="true" />
-              </button>
+                <Link
+                  to="/family-hub"
+                  className={`nav-actions__icon header-icon-btn inline-flex ${isActive('/family-hub') ? 'mobile-quick-nav__link--active' : ''}`}
+                  aria-label="Open Family Hub"
+                  title="Family Hub"
+                  aria-current={isActive('/family-hub') ? 'page' : undefined}
+                >
+                  <LayoutDashboard size={17} aria-hidden="true" />
+                </Link>
 
-              <button
-                type="button"
-                className="theme-toggle header-icon-btn inline-flex h-11 w-11 shrink-0 items-center justify-center p-0"
-                onClick={toggleTheme}
-                aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
-              >
-                {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
-              </button>
+                <button
+                  type="button"
+                  className="nav-actions__icon theme-toggle header-icon-btn"
+                  onClick={toggleTheme}
+                  aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+                >
+                  {theme === 'light' ? <Moon size={17} aria-hidden /> : <Sun size={17} aria-hidden />}
+                </button>
 
-              <button
-                type="button"
-                className="mobile-menu-toggle header-icon-btn inline-flex h-11 w-11 shrink-0 items-center justify-center p-0 max-lg:inline-flex lg:hidden"
-                onClick={handleMobileMenuToggle}
-                aria-expanded={isMobileMenuOpen}
-                aria-controls="mobile-navigation"
-                aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
-              >
-                {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
-              </button>
+                <button
+                  type="button"
+                  className="nav-actions__icon mobile-menu-toggle header-icon-btn max-lg:inline-flex lg:hidden"
+                  onClick={handleMobileMenuToggle}
+                  aria-expanded={isMobileMenuOpen}
+                  aria-controls="mobile-navigation"
+                  aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+                >
+                  {isMobileMenuOpen ? <X size={18} aria-hidden /> : <Menu size={18} aria-hidden />}
+                </button>
+              </div>
             </div>
           </nav>
         </div>
@@ -326,6 +325,18 @@ function Header() {
                   );
                 })}
               </ul>
+            </div>
+
+            <div className="mobile-nav-theme-bar">
+              <button
+                type="button"
+                className="mobile-nav-theme-toggle"
+                onClick={toggleTheme}
+                aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+              >
+                {theme === 'light' ? <Moon size={18} aria-hidden /> : <Sun size={18} aria-hidden />}
+                <span>{theme === 'light' ? 'Dark mode' : 'Light mode'}</span>
+              </button>
             </div>
 
             <div className="mobile-nav-section mobile-nav-section-cta">

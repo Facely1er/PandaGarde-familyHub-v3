@@ -10,10 +10,12 @@
 
 | Surface | Role | Route |
 |--------|------|--------|
-| **PandaGarde (website)** | Discover exposure (service catalog, DFA, assessment), learn, prioritize | `/`, `/service-catalog`, `/digital-footprint`, etc. |
-| **Family Hub** | Practice and follow through — missions, members, progress on device | `/family-hub/*` |
+| **PandaGarde (website)** | Service catalog + footprint review, stories, parent guides, printables/downloads; emotional path to Family Hub | `/`, `/service-catalog`, `/digital-footprint`, `/stories`, `/for-families`, etc. |
+| **Family Hub** | Practice and follow through — **18 age-matched missions** (family talk + optional embedded games), members, progress on device | `/family-hub/*` |
 
-**Approved one-liner:** The website helps families *see* exposure; Family Hub helps them *practice and follow through* together.
+**Approved one-liner:** Stories and guides are open anytime; the service catalog feeds footprint review when families want a snapshot; Family Hub is optional practice on device.
+
+**Independence rule:** Do **not** imply stories, resources, or Family Hub require completing footprint review or the catalog (except the footprint **page** itself, which needs catalog entries to score).
 
 ---
 
@@ -57,41 +59,48 @@
 
 ---
 
-## 4. Safety alerts & notifications
+## 4. Areas of the site (independent except catalog → footprint)
 
-Two related features on **`/safety-alerts`** (and enabled after **service catalog** entries exist). Neither monitors the child’s device.
+| Area | Requires catalog? | Notes |
+|------|-------------------|--------|
+| **Stories** | No | Emotional, kid-facing; open anytime |
+| **Resources / guides** | No | Supporting parent copy; open anytime |
+| **Family Hub** | No | Missions on device; open anytime |
+| **Service catalog** | — | Builds the list footprint review uses |
+| **Footprint review** | Yes (for scores) | Empty without catalog entries; does not block other areas |
 
-### A. Service notifications (default tab)
+### Website vs Family Hub — activities boundary
 
-- Generated from **services the family listed** in the catalog (`ServiceNotificationCenter`)
-- Includes reminders (e.g. pending privacy actions), catalog-linked messages, and items merged from RSS when available
-- Requires at least one service on a family member — empty catalog → empty notifications
+| Surface | Interactive missions / games | Progress |
+|---------|------------------------------|----------|
+| **Website** | **No** public `/activities` catalog (legacy URLs redirect to Hub). **Guides & stories** hub (`/for-families`) lists printables only—no duplicate mission catalog. | Not for missions |
+| **Family Hub** | **Yes** — `ageBasedActivities` missions; optional `ActivityManager` games **inside** a mission only | Per member, device-local |
 
-### B. RSS safety headlines (`ChildSafetyAlerts` tab)
+Do **not** describe website “Learning activities” and Hub “missions” as the same catalog. Approved website CTAs: **Privacy missions** → `/family-hub/activities`. Legacy `/activities` and `/activities/:slug` redirect to Hub (slug mapped when a mission shares the same game id).
 
-- Headlines from configured **public RSS feeds** (`rssAlertService`), filtered for child/privacy relevance and matched to catalog services when possible
-- User may **refresh** on the alerts page; production does **not** auto-poll feeds on every page load (CORS / on-demand init)
-- Not guaranteed “real-time”; network required to fetch feeds
-
-### Optional email
-
-- **Email capture** on the alerts page is for **newsletter-style updates** (EmailJS when configured), not push alerts from child devices
-
-### Approved phrases
-
-- “Alerts for **apps you add** to your family catalog”
-- “**RSS headlines** about child privacy and safety (when feeds load)”
-- “**Catalog-based** notifications and reminders”
-
-### Avoid
-
-- “Real-time monitoring” of children’s online activity
-- “Automatic alerts for everything your child does online”
-- Implying alerts work with **zero** catalog setup
+Formal **privacy assessment** and **safety alerts** are on **SocialCaution** (legacy URLs redirect). Do not present a single mandatory “complete DFA first” funnel on PandaGarde marketing UI.
 
 ---
 
-## 5. Community routes (`/community/*`)
+## 5. Safety alerts (removed from PandaGarde)
+
+PandaGarde **does not** ship `/safety-alerts`. Legacy URLs (`/safety-alerts`, `/alerts`, `/child-safety-alerts`) **redirect** to SocialCaution (`app.socialcaution.com`, `utm_source=pandagarde`) so old bookmarks still work.
+
+### Mention SocialCaution only when relevant
+
+- **Support / FAQ** when users ask where alerts went
+- **Not** in primary nav, Resources hub, How It Works, service catalog header, or DFA phase 3 cards
+
+### Avoid on PandaGarde
+
+- “Safety Alerts” as a PandaGarde feature or nav item
+- Passive UI promoting SocialCaution on every page
+- “Real-time monitoring” of children’s online activity
+- Implying PandaGarde sends catalog or RSS alerts today
+
+---
+
+## 6. Community routes (`/community/*`)
 
 - **Device-local demos** (forum, stories, resource list) stored in `localStorage` via `communityStorageManager`
 - **Not** connected to Family Hub sync or a live PandaGarde social network
@@ -99,14 +108,14 @@ Two related features on **`/safety-alerts`** (and enabled after **service catalo
 
 ---
 
-## 6. Pilot program
+## 7. Pilot program
 
 - Pilot feedback is through the **program**, not an in-app Family Hub social feature
 - “Exclusive resources” in pilot copy = pilot partner materials, not Family Hub membership perks
 
 ---
 
-## 7. Stale phrases — grep before release
+## 8. Stale phrases — grep before release
 
 Search and fix if found in user-facing copy:
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Download, ArrowRight, BarChart3, TrendingUp, LayoutDashboard, BookOpen, ChevronDown, ChevronUp, Map } from 'lucide-react';
+import { Download, ArrowRight, BarChart3, TrendingUp, BookOpen, ChevronDown, ChevronUp } from 'lucide-react';
+import PageLayout from '../components/layout/PageLayout';
 import DigitalFootprintVisualizer from '../components/DigitalFootprintVisualizer';
 import EmptyStateWithServicePrompt from '../components/EmptyStateWithServicePrompt';
 import DfaJourneyStepper from '../components/journey/DfaJourneyStepper';
@@ -12,6 +13,7 @@ import { updateDfaJourneyPhase } from '../lib/dfaJourney';
 import { buildDfaScore, loadDfaScoreTier } from '../lib/dfaScoreEngine';
 import { downloadDfaExecutiveSummary } from '../lib/dfaReport';
 import { logger } from '../lib/logger';
+import { FOOTPRINT_REVIEW_NAV_LABEL } from '../data/siteNavigation';
 import { dfaTheme } from '../styles/dfaTheme';
 
 const DigitalFootprintEducator: React.FC = () => {
@@ -28,7 +30,7 @@ const DigitalFootprintEducator: React.FC = () => {
         <div className="space-y-4 px-4 pb-4 pt-0 text-sm text-blue-900 dark:text-blue-200">
           <p><strong>Your digital footprint</strong> is the trail of information that apps and websites collect when your family uses them — names, activity, location signals, school usage, purchases, and more.</p>
           <p><strong>Why it matters:</strong> children and parents use school tools, home apps, messaging, games, and AI services across the same household. This page shows how that exposure adds up.</p>
-          <p><strong>How to use this page:</strong> review the privacy score, identify higher-exposure services, then continue straight into assessment so you can act on what you just learned.</p>
+          <p><strong>How to use this page:</strong> review the privacy score, notice which services matter most, then pick stories or Family Hub when it fits your week—no long form required here.</p>
         </div>
       )}
     </div>
@@ -56,19 +58,25 @@ const DigitalFootprintPage: React.FC = () => {
   useEffect(() => {
     updateDfaJourneyPhase('dfa', {
       visited: true,
-      completed: true,
-      resumePath: totalServicesCount >= 3 ? '/privacy-assessment' : '/service-catalog',
+      completed: totalServicesCount >= 3,
+      resumePath: totalServicesCount >= 3 ? '/stories' : '/service-catalog',
     });
   }, [totalServicesCount]);
 
   if (totalServicesCount === 0) {
     return (
-      <EmptyStateWithServicePrompt
-        feature="Your family's digital footprint"
-        description="See how your family's data is used across school, home, and everyday apps. Add at least 3 services first so the Digital Footprint Analysis has something real to analyze."
-        minimumServices={3}
-        icon={<BarChart3 size={24} className="text-white" />}
-      />
+      <PageLayout
+        title={FOOTPRINT_REVIEW_NAV_LABEL}
+        subtitle="Scores come from apps you listed in the service catalog. Add at least three there if this page is empty—stories and guides work without that step."
+        breadcrumbs={true}
+      >
+        <EmptyStateWithServicePrompt
+          feature="Your family's digital footprint"
+          description="Add at least 3 services in the service catalog so Digital Footprint Analysis has something real to analyze."
+          minimumServices={3}
+          icon={<BarChart3 size={24} className="text-white" />}
+        />
+      </PageLayout>
     );
   }
 
@@ -89,100 +97,48 @@ const DigitalFootprintPage: React.FC = () => {
     }
   };
 
-  const nextPhaseHref = totalServicesCount >= 3 ? '/privacy-assessment' : '/service-catalog';
-  const nextPhaseLabel = totalServicesCount >= 3 ? 'Continue to assessment' : 'Add more services';
+  const nextPhaseHref =
+    totalServicesCount >= 3 ? `/stories/privacy-panda-and-the-digital-bamboo-forest` : '/service-catalog';
+  const nextPhaseLabel = totalServicesCount >= 3 ? 'Read Privacy Panda story' : 'Add more services';
 
   return (
-    <div className={dfaTheme.page}>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <header className={`mb-8 overflow-hidden ${dfaTheme.cardLg}`}>
-          <div className={`${dfaTheme.band} px-5 py-3 sm:px-6`}>
-            <p className={`text-sm leading-relaxed ${dfaTheme.bodySm}`}>
-              <span className={`font-medium ${dfaTheme.title}`}>DFA journey:</span>{' '}
-              <Link to="/service-catalog" className="font-medium text-blue-600 hover:underline dark:text-blue-400">
-                Phase 1 — Service catalog
-              </Link>
-              {' → '}
-              <span className="font-medium text-green-700 dark:text-green-400">Phase 2 — Footprint results</span>
-              {' → '}
-              <Link to="/privacy-assessment" className="font-medium text-blue-600 hover:underline dark:text-blue-400">
-                Phase 3 — Assessment &amp; resources
-              </Link>
-            </p>
-          </div>
+    <PageLayout
+      title={FOOTPRINT_REVIEW_NAV_LABEL}
+      subtitle="Review where exposure is building across the apps and services you listed. Compare Basic and Advanced scores, then continue when you are ready."
+      breadcrumbs={true}
+    >
+      <DfaJourneyStepper
+        variant="strip"
+        currentKey="dfa"
+        ctaHref={nextPhaseHref}
+        ctaLabel={nextPhaseLabel}
+        className="mb-6"
+      />
 
-          <div className="px-5 py-6 sm:px-6">
-            <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
-              <div className="min-w-0 flex-1">
-                <div className="inline-flex items-center gap-2 rounded-full bg-green-100 px-3 py-1 text-sm font-semibold text-green-900 dark:bg-green-900/50 dark:text-green-100">
-                  <BarChart3 size={16} aria-hidden />
-                  Phase 2 — Digital Footprint Analysis
-                </div>
-                <h1 className={`mt-3 text-3xl tracking-tight sm:text-4xl ${dfaTheme.titleBold}`}>
-                  Your family&apos;s digital footprint
-                </h1>
-                <p className={`mt-3 max-w-3xl text-base leading-relaxed ${dfaTheme.body}`}>
-                  Review where exposure is building across the apps and services you listed. Compare Basic and Advanced scores, then continue into privacy assessment while the context is still fresh.
-                </p>
-                <nav className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm" aria-label="Related pages">
-                  <Link
-                    to="/service-catalog"
-                    className={`inline-flex items-center gap-1.5 ${dfaTheme.link}`}
-                  >
-                    <ArrowLeft size={15} aria-hidden />
-                    Service catalog
-                  </Link>
-                  <Link
-                    to="/family-hub"
-                    className="inline-flex items-center gap-1.5 font-medium text-green-700 transition-colors hover:text-green-800 dark:text-green-400 dark:hover:text-green-300"
-                  >
-                    <LayoutDashboard size={15} aria-hidden />
-                    Family Hub
-                  </Link>
-                  <Link
-                    to="/get-started"
-                    className="inline-flex items-center gap-1.5 font-medium text-blue-600 transition-colors hover:underline dark:text-blue-400"
-                  >
-                    <Map size={15} aria-hidden />
-                    Review overall journey
-                  </Link>
-                </nav>
-              </div>
+      <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-end">
+        {analysis && (
+          <button
+            type="button"
+            onClick={() => { void handleExportPdf(); }}
+            disabled={isExportingPdf}
+            aria-busy={isExportingPdf}
+            aria-label="Download digital footprint report as PDF"
+            className={`inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-70 ${dfaTheme.btnOutline}`}
+          >
+            <Download className="h-4 w-4" aria-hidden />
+            {isExportingPdf ? 'Generating PDF…' : 'Download PDF'}
+          </button>
+        )}
+        <Link
+          to={nextPhaseHref}
+          className="inline-flex items-center justify-center gap-2 rounded-xl bg-green-700 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500"
+        >
+          {nextPhaseLabel}
+          <ArrowRight size={16} aria-hidden />
+        </Link>
+      </div>
 
-              <div className="flex shrink-0 flex-col gap-3 sm:flex-row lg:flex-col lg:items-stretch">
-                {analysis && (
-                  <button
-                    type="button"
-                    onClick={() => { void handleExportPdf(); }}
-                    disabled={isExportingPdf}
-                    aria-busy={isExportingPdf}
-                    aria-label="Download digital footprint report as PDF"
-                    className={`inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-70 ${dfaTheme.btnOutline}`}
-                  >
-                    <Download className="h-4 w-4" aria-hidden />
-                    {isExportingPdf ? 'Generating PDF…' : 'Download PDF'}
-                  </button>
-                )}
-                <Link
-                  to={nextPhaseHref}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-green-700 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500"
-                >
-                  {nextPhaseLabel}
-                  <ArrowRight size={16} aria-hidden />
-                </Link>
-              </div>
-            </div>
-
-            <DfaJourneyStepper
-              variant="strip"
-              currentKey="dfa"
-              ctaHref={nextPhaseHref}
-              ctaLabel={nextPhaseLabel}
-            />
-          </div>
-        </header>
-
-        <DigitalFootprintEducator />
+      <DigitalFootprintEducator />
 
         <DfaMethodologyCallout />
 
@@ -197,9 +153,9 @@ const DigitalFootprintPage: React.FC = () => {
                   <h3 className="text-lg font-bold text-blue-900 dark:text-blue-100">Improve your analysis</h3>
                   <span className="rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-700 dark:bg-blue-800 dark:text-blue-200">{totalServicesCount} of 5+ services</span>
                 </div>
-                <p className="mb-3 text-sm text-blue-800 dark:text-blue-200">You already have a usable Digital Footprint Analysis. Add more services later if you want a broader household view, but you do not need to wait to continue into assessment.</p>
+                <p className="mb-3 text-sm text-blue-800 dark:text-blue-200">You already have a usable footprint review. Add more services anytime—or explore stories and Family Hub when you are ready.</p>
                 <div className="flex flex-wrap gap-3">
-                  <Link to="/privacy-assessment" className="inline-flex items-center gap-2 rounded-lg bg-blue-700 px-4 py-2 font-semibold text-white hover:bg-blue-800">Continue to assessment <ArrowRight size={16} /></Link>
+                  <Link to={nextPhaseHref} className="inline-flex items-center gap-2 rounded-lg bg-blue-700 px-4 py-2 font-semibold text-white hover:bg-blue-800">{nextPhaseLabel} <ArrowRight size={16} /></Link>
                   <Link to="/service-catalog" className="inline-flex items-center gap-2 rounded-lg border border-blue-300 px-4 py-2 font-semibold text-blue-700 hover:bg-blue-100/60 dark:border-blue-700 dark:text-blue-200">Add more services</Link>
                 </div>
               </div>
@@ -223,21 +179,36 @@ const DigitalFootprintPage: React.FC = () => {
         <DigitalFootprintVisualizer />
 
         <div className={`mt-8 p-6 ${dfaTheme.cardLg} border-green-200 dark:border-green-800/50`}>
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div className="flex flex-col gap-4">
             <div>
-              <h2 className={`text-xl ${dfaTheme.titleBold}`}>Turn this into action</h2>
+              <h2 className={`text-xl ${dfaTheme.titleBold}`}>When you are ready — not before</h2>
               <p className={`mt-2 text-sm leading-6 ${dfaTheme.bodySm}`}>
-                Continue into the privacy assessment, then use parent guides, Privacy Panda stories, activities, and the Digital Bamboo Journal on the website. Family Hub is optional for kids&apos; missions.
+                Your footprint review is complete on PandaGarde. Explore stories with your kids, open Family Hub for missions, or browse guides—all optional and saved on this device.
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <Link to="/privacy-assessment" className="inline-flex items-center gap-2 rounded-xl bg-green-700 px-5 py-3 font-semibold text-white hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500">Continue to assessment <ArrowRight size={16} /></Link>
-              <Link to="/family-hub" className="inline-flex items-center gap-2 rounded-xl border border-gray-300 px-5 py-3 font-semibold text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-700">Family Hub (optional)</Link>
+              <Link
+                to={nextPhaseHref}
+                className="inline-flex items-center gap-2 rounded-xl bg-green-700 px-5 py-3 font-semibold text-white hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500"
+              >
+                {nextPhaseLabel} <ArrowRight size={16} aria-hidden />
+              </Link>
+              <Link
+                to="/family-hub"
+                className="inline-flex items-center gap-2 rounded-xl border border-gray-300 px-5 py-3 font-semibold text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-700"
+              >
+                Family Hub
+              </Link>
+              <Link
+                to="/for-families"
+                className="inline-flex items-center gap-2 rounded-xl border border-gray-300 px-5 py-3 font-semibold text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-700"
+              >
+                Guides
+              </Link>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+    </PageLayout>
   );
 };
 

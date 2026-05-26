@@ -43,7 +43,7 @@ const QuickStartPage: React.FC = () => {
       icon: Download,
       color: 'text-orange-600',
       bgColor: 'bg-orange-50',
-      link: '/resources',
+      link: '/for-families',
       time: '10 min',
       difficulty: 'Medium'
     }

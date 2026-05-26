@@ -1,7 +1,7 @@
 export type DfaJourneyPhaseKey = 'profile' | 'dfa' | 'plan' | 'hub';
 
-/** Parent-led DFA path on the website — Family Hub is separate (child missions). */
-export const DFA_CORE_PHASE_KEYS: readonly DfaJourneyPhaseKey[] = ['profile', 'dfa', 'plan'];
+/** Parent-led DFA on PandaGarde: catalog + footprint only (assessment lives on SocialCaution). */
+export const DFA_CORE_PHASE_KEYS: readonly DfaJourneyPhaseKey[] = ['profile', 'dfa'];
 
 export interface DfaJourneyPhase {
   id: number;
@@ -53,10 +53,11 @@ const phaseBlueprint: Omit<DfaJourneyPhase, 'completed' | 'visited' | 'updatedAt
   {
     id: 3,
     key: 'plan',
-    title: 'Turn findings into action',
+    title: 'Stories & follow-through',
     description:
-      'Complete the privacy assessment, then use parent guides, Privacy Panda stories, activities, and the Digital Bamboo Journal on the website.',
-    path: '/privacy-assessment',
+      'Optional: Privacy Panda stories, Family Hub missions, and guides—when your family has time and energy.',
+    path: '/stories',
+    optional: true,
   },
   {
     id: 4,
@@ -72,7 +73,7 @@ const phaseBlueprint: Omit<DfaJourneyPhase, 'completed' | 'visited' | 'updatedAt
 export const getDefaultDfaJourneyState = (): DfaJourneyState => ({
   phases: phaseBlueprint.map((phase) => ({ ...phase, completed: false, visited: false })),
   progressPercent: 0,
-  resumePath: '/get-started',
+  resumePath: '/service-catalog',
   lastUpdated: new Date().toISOString(),
 });
 
@@ -125,13 +126,21 @@ const normalizeState = (raw: Partial<DfaJourneyState> | null | undefined): DfaJo
   const nextIncompleteCore = corePhases.find((phase) => !phase.completed);
   const defaultResumePath =
     nextIncompleteCore?.path ??
-    (completedCoreCount >= corePhases.length ? '/digital-footprint' : '/get-started');
+    (completedCoreCount >= corePhases.length ? '/digital-footprint' : '/service-catalog');
+
+  const legacyAssessmentPaths = new Set(['/privacy-assessment', '/assessment', '/quick-assessment']);
+  const storedResume =
+    raw?.resumePath === '/get-started' || !raw?.resumePath
+      ? defaultResumePath
+      : legacyAssessmentPaths.has(raw.resumePath)
+        ? defaultResumePath
+        : raw.resumePath;
 
   return {
     phases,
     progressPercent:
       corePhases.length > 0 ? Math.round((completedCoreCount / corePhases.length) * 100) : 0,
-    resumePath: raw?.resumePath || defaultResumePath,
+    resumePath: storedResume,
     lastUpdated: raw.lastUpdated || new Date().toISOString(),
   };
 };

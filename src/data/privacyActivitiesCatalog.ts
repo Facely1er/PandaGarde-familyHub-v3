@@ -1,4 +1,7 @@
-/** Shared privacy activity catalog for public /activities and Family Hub. */
+/**
+ * Legacy mini-game IDs for bookmark redirects (/activities/:slug → Family Hub).
+ * The public game catalog and progress live in Family Hub missions (ageBasedActivities).
+ */
 
 export interface PrivacyActivity {
   id: string;

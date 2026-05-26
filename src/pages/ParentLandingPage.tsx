@@ -96,7 +96,7 @@ const ParentLandingPage: React.FC = () => {
                 Start Protecting Your Family
                 <ArrowRight size={16} />
               </Link>
-              <Link to="/overview" className="btn-marketing-outline">
+              <Link to="/how-it-works" className="btn-marketing-outline">
                 Learn More
               </Link>
             </div>

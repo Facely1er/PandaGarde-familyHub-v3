@@ -6,14 +6,20 @@ export const PARENT_TOOLKIT_ROUTES: Record<string, { href: string; label: string
   'device-setup-checklist': { href: '/guides/device-setup', label: 'Open device setup guide' },
   'conversation-starters': { href: '/guides/conversation-approaches', label: 'Open conversation guide' },
   'app-review-guide': { href: '/guides/app-selection', label: 'Open app selection guide' },
-  'safety-checklist': { href: '/guides/emergency-safety', label: 'Open safety guide' },
-  'privacy-settings-guide': { href: '/privacy-tools', label: 'Open privacy tools' },
-  'monitoring-tools-guide': { href: '/guides/device-setup', label: 'Open device & controls guide' },
-  'incident-response-plan': { href: '/guides/emergency-safety', label: 'Open emergency guide' },
-  'password-security-guide': { href: '/activities/password-safety', label: 'Try password quiz activity' },
-  'expert-advice-library': { href: '/resources', label: 'Browse resources' },
+  'safety-checklist': { href: '/guides/emergency-safety', label: 'Open emergency safety guide' },
+  'privacy-settings-guide': { href: '/guides/device-setup', label: 'Open device setup guide' },
+  'monitoring-tools-guide': { href: '/guides/device-setup', label: 'Open device setup guide' },
+  'incident-response-plan': { href: '/guides/emergency-safety', label: 'Open emergency safety guide' },
+  'password-security-guide': {
+    href: '/family-hub/activities',
+    label: 'Open password missions in Family Hub',
+  },
+  'expert-advice-library': { href: '/guides/family-privacy', label: 'Open family privacy guide' },
   'family-agreement-template': { href: '/downloads/family-agreement', label: 'Open family agreement' },
-  'social-media-guide': { href: '/teen-handbook', label: 'Open teen handbook' },
+  'social-media-guide': {
+    href: '/family-hub/activities',
+    label: 'Open teen missions in Family Hub',
+  },
 };
 
 export function getToolkitRoute(resourceId: string): { href: string; label: string } | undefined {

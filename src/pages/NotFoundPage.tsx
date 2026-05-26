@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Home, Search } from 'lucide-react';
+import { GUIDES_STORIES_NAV_LABEL } from '../data/siteNavigation';
 
 const NotFoundPage: React.FC = () => {
   return (
@@ -23,9 +24,9 @@ const NotFoundPage: React.FC = () => {
             <Home size={18} />
             Go Home
           </Link>
-          <Link to="/resources" className="button button-secondary inline-flex items-center gap-2">
+          <Link to="/for-families" className="button button-secondary inline-flex items-center gap-2">
             <Search size={18} />
-            Browse Resources
+            {GUIDES_STORIES_NAV_LABEL}
           </Link>
         </div>
       </div>

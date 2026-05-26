@@ -67,9 +67,9 @@ const faqItems: FAQItem[] = [
   },
   {
     id: '7',
-    question: 'Safety alerts and notifications feel empty. What should I do?',
+    question: 'Where did Safety Alerts and the privacy assessment go?',
     answer:
-      'Add your family’s apps in the Service Catalog first. Notifications and RSS headlines are generated from that list—they do not monitor your child’s device automatically.',
+      'PandaGarde now focuses on a short footprint review, stories, and Family Hub—not long forms or alert feeds on this site. Catalog-based alerts and the formal privacy assessment live on SocialCaution (app.socialcaution.com) when you need them.',
     category: 'technical',
   },
   {

@@ -18,7 +18,7 @@ describe('DfaJourneyStepper', () => {
 
     expect(screen.getByText('Your DFA journey')).toBeInTheDocument();
     expect(screen.getByText('0% complete')).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /start journey/i })).toHaveAttribute('href', '/get-started');
+    expect(screen.getByRole('link', { name: /start journey/i })).toHaveAttribute('href', '/service-catalog');
   });
 
   it('renders persisted progress and custom CTA when local progress exists', () => {
@@ -37,12 +37,12 @@ describe('DfaJourneyStepper', () => {
 
     render(
       <MemoryRouter>
-        <DfaJourneyStepper currentKey="dfa" ctaHref="/privacy-assessment" ctaLabel="Continue to assessment" />
+        <DfaJourneyStepper currentKey="dfa" ctaHref="/stories" ctaLabel="Read Privacy Panda story" />
       </MemoryRouter>
     );
 
-    expect(screen.getByText('33% complete')).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /continue to assessment/i })).toHaveAttribute('href', '/privacy-assessment');
+    expect(screen.getByText('50% complete')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /read privacy panda story/i })).toHaveAttribute('href', '/stories');
     expect(screen.getByText('Completed')).toBeInTheDocument();
     expect(screen.getByText('In progress')).toBeInTheDocument();
   });
@@ -50,13 +50,13 @@ describe('DfaJourneyStepper', () => {
   it('renders strip variant without full card title', () => {
     render(
       <MemoryRouter>
-        <DfaJourneyStepper variant="strip" currentKey="dfa" ctaHref="/privacy-assessment" ctaLabel="Continue to assessment" />
+        <DfaJourneyStepper variant="strip" currentKey="dfa" ctaHref="/stories" ctaLabel="Read Privacy Panda story" />
       </MemoryRouter>
     );
 
     expect(screen.queryByText('Your DFA journey')).not.toBeInTheDocument();
     expect(screen.getByLabelText('DFA journey progress')).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /continue to assessment/i })).toHaveAttribute('href', '/privacy-assessment');
+    expect(screen.getByRole('link', { name: /read privacy panda story/i })).toHaveAttribute('href', '/stories');
     expect(screen.getByRole('link', { name: /run digital footprint analysis/i })).toHaveAttribute('aria-current', 'step');
   });
 });

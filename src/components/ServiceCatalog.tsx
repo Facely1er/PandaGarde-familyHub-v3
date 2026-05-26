@@ -17,7 +17,6 @@ import {
   Palette,
   ChevronRight,
   Clock,
-  Bell,
   School,
   Bot,
   Signal,
@@ -284,14 +283,6 @@ const ServiceCatalog: React.FC<ServiceCatalogProps> = ({
               <h2 className="catalog-title">Service Catalog</h2>
               <p className="catalog-subtitle">Browse curated EdTech and family apps</p>
             </div>
-            <Link
-              to="/safety-alerts"
-              className="flex items-center space-x-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors text-sm"
-              title="Catalog notifications and RSS headlines for listed services"
-            >
-              <Bell className="h-4 w-4" />
-              <span>Safety Alerts</span>
-            </Link>
           </div>
         </div>
       )}

@@ -7,15 +7,33 @@ export const PageContent: React.FC<{ children: React.ReactNode; className?: stri
   className = '',
 }) => <div className={`page-content ${className}`.trim()}>{children}</div>;
 
+export type SectionIconTone = 'emerald' | 'sky' | 'violet' | 'amber';
+
 export interface SectionHeaderProps {
   eyebrow?: string;
   title: string;
   lead?: string;
+  icon?: React.ReactNode;
+  iconTone?: SectionIconTone;
   className?: string;
 }
 
-export const SectionHeader: React.FC<SectionHeaderProps> = ({ eyebrow, title, lead, className = '' }) => (
-  <header className={`page-section__header ${className}`.trim()}>
+export const SectionHeader: React.FC<SectionHeaderProps> = ({
+  eyebrow,
+  title,
+  lead,
+  icon,
+  iconTone = 'emerald',
+  className = '',
+}) => (
+  <header
+    className={`page-section__header page-section__header--with-icon page-section__header--tone-${iconTone} ${className}`.trim()}
+  >
+    {icon ? (
+      <div className="page-section__icon" aria-hidden="true">
+        {icon}
+      </div>
+    ) : null}
     {eyebrow ? <span className="page-section__eyebrow">{eyebrow}</span> : null}
     <h2 className="page-section__title">{title}</h2>
     {lead ? <p className="page-section__lead">{lead}</p> : null}
@@ -109,11 +127,25 @@ export const ShellLinkCard: React.FC<{
   description?: string;
   tag?: string;
   cta?: React.ReactNode;
-}> = ({ to, title, description, tag, cta = 'Open' }) => (
-  <Link to={to} className="shell-card shell-card--nested shell-link-card">
-    {tag ? <span className="shell-link-card__tag">{tag}</span> : null}
-    <h3 className="shell-card__title">{title}</h3>
-    {description ? <p className="shell-card__body">{description}</p> : null}
+  icon?: React.ReactNode;
+  className?: string;
+}> = ({ to, title, description, tag, cta = 'Open', icon, className = '' }) => (
+  <Link
+    to={to}
+    className={`shell-card shell-card--nested shell-link-card ${icon ? 'shell-link-card--with-icon' : ''} ${className}`.trim()}
+  >
+    <div className="shell-link-card__main">
+      {icon ? (
+        <div className="shell-link-card__icon" aria-hidden="true">
+          {icon}
+        </div>
+      ) : null}
+      <div className="shell-link-card__copy">
+        {tag ? <span className="shell-link-card__tag">{tag}</span> : null}
+        <h3 className="shell-card__title">{title}</h3>
+        {description ? <p className="shell-card__body">{description}</p> : null}
+      </div>
+    </div>
     <span className="shell-link-card__cta">{cta}</span>
   </Link>
 );

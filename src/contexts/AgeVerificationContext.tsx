@@ -36,14 +36,10 @@ export const AgeVerificationProvider: React.FC<AgeVerificationProviderProps> = (
   const location = useLocation();
 
   const autoRouteToAppropriateContent = useCallback((age: number) => {
-    if (age >= 5 && age <= 8) {
-      navigate('/activity-book');
-    } else if (age >= 9 && age <= 12) {
-      navigate('/privacy-explorers');
-    } else if (age >= 13 && age <= 17) {
-      navigate('/teen-handbook');
+    if (age >= 5 && age <= 17) {
+      navigate('/family-hub/activities');
     } else {
-      navigate('/get-started');
+      navigate('/service-catalog');
     }
   }, [navigate]);
 
@@ -202,29 +198,27 @@ export const AgeVerificationProvider: React.FC<AgeVerificationProviderProps> = (
 
     const contentMap = {
       'ages-5-8': [
-        '/activity-book',
+        '/family-hub/activities',
         '/stories',
         '/privacy-panda',
         '/interactive-story',
-        '/coloring-sheets',
-        '/safety-posters',
-        '/downloads/coloring-sheets'
+        '/downloads/coloring-sheets',
+        '/for-families',
       ],
       'ages-9-12': [
-        '/privacy-explorers',
-        '/privacy-handbook',
-        '/digital-citizenship',
-        '/activity-book',
+        '/family-hub/activities',
         '/stories',
-        '/family-hub'
+        '/for-families',
+        '/guides/family-privacy',
+        '/family-hub',
       ],
       'ages-13-17': [
-        '/teen-handbook',
-        '/privacy-tools',
-        '/digital-citizenship',
+        '/family-hub/activities',
+        '/for-families',
+        '/guides/family-privacy',
         '/digital-rights',
-        '/family-hub'
-      ]
+        '/family-hub',
+      ],
     };
 
     return contentMap[ageGroup] || [];

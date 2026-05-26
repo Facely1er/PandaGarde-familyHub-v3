@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle, ChevronRight, ShieldCheck } from 'lucide-react';
 import { loadDfaJourneyState } from '../lib/dfaJourney';
 import { getFoundationStory, getHomepageLatestStory, ORIGIN_STORY_SLUG } from '../data/stories';
+import { INDEPENDENT_AREAS_LEAD } from '../data/pandaGardeMessaging';
+import { GUIDES_STORIES_NAV_LABEL } from '../data/siteNavigation';
 import { PageSection, ShellLinkCard } from '../components/layout/PageContent';
 
 const HomePage: React.FC = () => {
@@ -12,66 +14,88 @@ const HomePage: React.FC = () => {
 
   const trustPoints = [
     'Your data stays on your device',
-    'Guidance for parents and kids',
-    'Pick up where you left off in Family Hub',
+    'Stories and guides work without a footprint review',
+    'Catalog powers footprint scores when you want them',
   ];
 
-  const pathCards = [
+  const entryPoints = [
     {
-      label: 'Best place to begin',
-      value: 'Digital Footprint Analysis',
+      label: 'Read with your kids',
+      value: 'Privacy Panda stories',
+      href: '/stories',
+    },
+    {
+      label: 'Parent guides & plans',
+      value: GUIDES_STORIES_NAV_LABEL,
+      href: '/for-families',
+    },
+    {
+      label: 'List apps → see exposure',
+      value: 'Footprint review',
       href: '/digital-footprint',
     },
-    { label: 'Learn and plan on the site', value: 'Guides & stories', href: '/resources' },
-    { label: 'Practice as a family', value: 'Family Hub', href: '/family-hub' },
+    {
+      label: 'Missions on this device',
+      value: 'Family Hub',
+      href: '/family-hub',
+    },
   ];
 
   const spotlightLinks = useMemo(() => {
     const links = [
       {
-        title: 'Digital Footprint Analysis',
-        description:
-          'See which apps and services shape your household privacy—then decide what to tackle first.',
+        title: 'Privacy Panda stories',
+        description: 'Interactive adventures—open anytime, no catalog setup required.',
+        href: '/stories',
+        tag: 'Open anytime',
+        cta: 'Browse stories',
+      },
+      {
+        title: GUIDES_STORIES_NAV_LABEL,
+        description: 'Stories, parent guides, and printables—independent of footprint review.',
+        href: '/for-families',
+        tag: 'Open anytime',
+        cta: 'Browse',
+      },
+      {
+        title: 'Footprint review',
+        description: 'Add your family’s apps in the catalog, then see exposure scores from that list.',
         href: '/digital-footprint',
-        tag: 'Recommended first step',
+        tag: 'Uses service catalog',
         cta: 'Open',
       },
       {
         title: 'Family Hub',
-        description: 'Missions, members, and progress on your device—continue after your first review.',
+        description: 'Age-matched missions and progress—optional, local to this device.',
         href: '/family-hub',
-        tag: 'Family workspace',
+        tag: 'Open anytime',
         cta: 'Open',
-      },
-      {
-        title: 'Resources by audience',
-        description: 'Parent guides, kids’ stories, and educator materials.',
-        href: '/resources',
-        tag: 'Guides & activities',
-        cta: 'Browse',
       },
     ];
 
     if (foundationStory) {
-      links.push({
-        title: foundationStory.title,
-        description: 'Read together—interactive scenes or chapters',
-        href: `/stories/${ORIGIN_STORY_SLUG}`,
-        tag: 'Story · start here',
-        cta: 'Open story',
-      });
+      const storyLink = links[0];
+      storyLink.title = foundationStory.title;
+      storyLink.description = 'Read together—interactive scenes or chapters';
+      storyLink.href = `/stories/${ORIGIN_STORY_SLUG}`;
+      storyLink.cta = 'Open story';
     } else if (latestStory) {
-      links.push({
-        title: latestStory.title,
-        description: latestStory.privacyTopic,
-        href: `/stories/${latestStory.slug}`,
-        tag: 'Latest story',
-        cta: `Read episode ${latestStory.episodeNumber}`,
-      });
+      const storyLink = links[0];
+      storyLink.title = latestStory.title;
+      storyLink.description = latestStory.privacyTopic;
+      storyLink.href = `/stories/${latestStory.slug}`;
+      storyLink.cta = `Read episode ${latestStory.episodeNumber}`;
     }
 
     return links;
   }, [foundationStory, latestStory]);
+
+  const primaryCta =
+    journey.progressPercent > 0 && journey.resumePath.includes('footprint')
+      ? { href: journey.resumePath, label: 'Continue footprint review' }
+      : journey.progressPercent > 0 && journey.resumePath.includes('catalog')
+        ? { href: journey.resumePath, label: 'Continue service catalog' }
+        : { href: '/stories', label: 'Explore stories' };
 
   return (
     <div className="site-page">
@@ -89,22 +113,25 @@ const HomePage: React.FC = () => {
               className="homepage-hero__logo h-16 w-16 shrink-0 object-contain sm:h-[4.5rem] sm:w-[4.5rem]"
             />
             <p className="page-section__lead homepage-hero__tagline">
-              Review first · Learn together · Act in Family Hub
+              Stories · Guides · Footprint · Family Hub
             </p>
             <h1 id="homepage-hero-title" className="homepage-hero__title">
               A calmer way to protect your family’s
               <span> digital life</span>
             </h1>
-            <p className="page-section__lead">
-              Start with a guided privacy review, use age-appropriate resources when you need them, and keep
-              momentum in Family Hub—without turning privacy into a pile of scattered tabs and notes.
-            </p>
+            <p className="page-section__lead">{INDEPENDENT_AREAS_LEAD}</p>
           </header>
 
           <div className="homepage-hero__actions">
-            <Link to={journey.resumePath} className="button button-primary inline-flex items-center justify-center gap-2">
-              {journey.progressPercent > 0 ? 'Continue your journey' : 'Start Digital Footprint Analysis'}
+            <Link to={primaryCta.href} className="button button-primary inline-flex items-center justify-center gap-2">
+              {primaryCta.label}
               <ArrowRight size={18} aria-hidden />
+            </Link>
+            <Link
+              to="/digital-footprint"
+              className="button button-secondary inline-flex items-center justify-center"
+            >
+              Footprint review
             </Link>
             <Link to="/how-it-works" className="button button-secondary inline-flex items-center justify-center">
               How it works
@@ -128,34 +155,29 @@ const HomePage: React.FC = () => {
             <PageSection
               className="homepage-glance"
               header={{
-                eyebrow: 'At a glance',
-                title: 'Review, learn, and follow through',
-                lead: 'The site helps you map your footprint and find guidance; Family Hub helps you practice and keep progress on your device.',
+                eyebrow: 'Four doors',
+                title: 'Use what fits today',
+                lead: 'Nothing on PandaGarde blocks the rest. Only footprint review needs apps listed in the catalog.',
               }}
             >
-              <ol className="homepage-path shell-grid shell-grid--3">
-                {pathCards.map((item, index) => (
-                  <li key={item.label}>
-                    <Link to={item.href} className="homepage-path__step shell-card">
-                      <div className="homepage-path__head">
-                        <span className="homepage-path__index" aria-hidden>
-                          {index + 1}
-                        </span>
-                        <h3 className="shell-card__title text-base">{item.value}</h3>
-                      </div>
-                      <p className="shell-card__body text-sm">{item.label}</p>
+              <ul className="homepage-path shell-grid shell-grid--2 lg:grid-cols-4">
+                {entryPoints.map((item) => (
+                  <li key={item.href}>
+                    <Link to={item.href} className="homepage-path__step shell-card h-full">
+                      <h3 className="shell-card__title text-base">{item.value}</h3>
+                      <p className="shell-card__body mt-2 text-sm">{item.label}</p>
                     </Link>
                   </li>
                 ))}
-              </ol>
+              </ul>
             </PageSection>
 
             <PageSection
               className="homepage-spotlight"
               header={{
-                eyebrow: 'Start here',
-                title: 'Two places families use most',
-                lead: 'Review on the site first—open Family Hub when you want missions and progress. Stories and guides are there when you want to learn together.',
+                eyebrow: 'Explore',
+                title: 'Popular starting points',
+                lead: 'Same areas as above—pick one; you are not locked into a single path.',
               }}
             >
               <div className="homepage-spotlight__grid">
@@ -187,18 +209,23 @@ const HomePage: React.FC = () => {
             <PageSection
               className="homepage-closing"
               header={{
-                eyebrow: 'Ready when you are',
-                title: 'Start with your family’s digital footprint review.',
-                lead: 'It takes a few minutes to list what your household uses online. Family Hub is there when you want missions and follow-through—no rush to open it on day one.',
+                eyebrow: 'Footprint when you want it',
+                title: 'Catalog establishes the review',
+                lead: 'Add apps in the service catalog when you want scores and charts. Stories, guides, and Hub stay available before, during, and after.',
               }}
             >
-              <Link to="/digital-footprint" className="button button-primary inline-flex items-center gap-1.5">
-                Start Digital Footprint Analysis
-                <ArrowRight size={14} aria-hidden />
-              </Link>
-              <Link to="/family-hub" className="button button-secondary inline-flex items-center gap-1.5">
-                Open Family Hub
-              </Link>
+              <div className="flex flex-wrap justify-center gap-3">
+                <Link to="/service-catalog" className="button button-primary inline-flex items-center gap-1.5">
+                  Service catalog
+                  <ArrowRight size={14} aria-hidden />
+                </Link>
+                <Link to="/digital-footprint" className="button button-secondary inline-flex items-center gap-1.5">
+                  Footprint review
+                </Link>
+                <Link to="/stories" className="button button-secondary inline-flex items-center gap-1.5">
+                  Stories
+                </Link>
+              </div>
               <p className="homepage-closing__followup page-section__lead text-center">
                 Still have questions?{' '}
                 <Link to="/how-it-works#faq" className="font-semibold text-green-700 hover:underline dark:text-green-400">

@@ -27,7 +27,7 @@ export const FamilyPersonaProfiles: Record<string, FamilyPersonaProfile> = {
     primaryConcerns: ['child-safety', 'family-privacy', 'parental-controls', 'online-predators'],
     riskThreshold: 'high',
     preferredActions: ['immediate', 'family-focused', 'monitoring'],
-    dashboardPriorities: ['child-protection', 'family-monitoring', 'school-privacy', 'safety-alerts'],
+    dashboardPriorities: ['child-protection', 'family-monitoring', 'school-privacy', 'service-catalog'],
     resourceFilters: ['family-guides', 'child-safety', 'parental-tools', 'safety-resources'],
     toolkitFocus: ['family-protection', 'monitoring-tools', 'safe-communication', 'parental-controls'],
     color: 'blue',
@@ -39,9 +39,9 @@ export const FamilyPersonaProfiles: Record<string, FamilyPersonaProfile> = {
       'Prioritizes child safety over convenience'
     ],
     recommendedResources: [
-      '/parent-resources',
+      '/for-families',
       '/guides/device-setup',
-      '/safety-alerts',
+      '/service-catalog',
       '/downloads/family-agreement'
     ]
   },
@@ -65,9 +65,9 @@ export const FamilyPersonaProfiles: Record<string, FamilyPersonaProfile> = {
       'Teaches children about privacy from early age'
     ],
     recommendedResources: [
-      '/privacy-tools',
+      '/for-families',
       '/digital-footprint',
-      '/privacy-tools',
+      '/guides/device-setup',
       '/service-catalog'
     ]
   },
@@ -91,10 +91,10 @@ export const FamilyPersonaProfiles: Record<string, FamilyPersonaProfile> = {
       'Tracks progress and achievements'
     ],
     recommendedResources: [
-      '/activities',
-      '/interactive-story',
-      '/age-groups',
-      '/privacy-handbook'
+      '/family-hub/activities',
+      '/stories/privacy-panda-and-the-digital-bamboo-forest',
+      '/guides/age-specific',
+      '/guides/family-privacy'
     ]
   },
   
@@ -117,7 +117,7 @@ export const FamilyPersonaProfiles: Record<string, FamilyPersonaProfile> = {
       'Teaches children technical privacy skills'
     ],
     recommendedResources: [
-      '/privacy-tools',
+      '/for-families',
       '/guides/device-setup',
       '/service-catalog',
       '/digital-footprint'
@@ -143,10 +143,10 @@ export const FamilyPersonaProfiles: Record<string, FamilyPersonaProfile> = {
       'Focuses on reasonable protection'
     ],
     recommendedResources: [
-      '/quick-start',
+      '/how-it-works',
       '/guides/family-privacy',
       '/service-catalog',
-      '/parent-resources'
+      '/for-families'
     ]
   },
   
@@ -157,7 +157,7 @@ export const FamilyPersonaProfiles: Record<string, FamilyPersonaProfile> = {
     primaryConcerns: ['immediate-risks', 'data-breaches', 'online-threats', 'urgent-protection'],
     riskThreshold: 'high',
     preferredActions: ['immediate', 'urgent', 'quick-fixes'],
-    dashboardPriorities: ['risk-assessment', 'immediate-actions', 'safety-alerts', 'quick-fixes'],
+    dashboardPriorities: ['risk-assessment', 'immediate-actions', 'service-catalog', 'quick-fixes'],
     resourceFilters: ['urgent-guides', 'immediate-actions', 'risk-assessment', 'safety-resources'],
     toolkitFocus: ['immediate-protection', 'risk-mitigation', 'safety-tools', 'quick-solutions'],
     color: 'red',
@@ -169,9 +169,9 @@ export const FamilyPersonaProfiles: Record<string, FamilyPersonaProfile> = {
       'High concern about current exposure'
     ],
     recommendedResources: [
-      '/privacy-assessment',
-      '/safety-alerts',
-      '/quick-start',
+      '/digital-footprint',
+      '/service-catalog',
+      '/how-it-works',
       '/guides/emergency-safety'
     ]
   }

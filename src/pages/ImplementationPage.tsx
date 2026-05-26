@@ -216,7 +216,7 @@ const ImplementationPage: React.FC = () => {
                   <BookOpen size={16} />
                   View Detailed Timeline
                 </Link>
-                <Link to="/get-started" className="button secondary">
+                <Link to="/service-catalog" className="button secondary">
                   <ArrowRight size={16} />
                   Get Started Today
                 </Link>
@@ -270,7 +270,7 @@ const ImplementationPage: React.FC = () => {
             <h2>Ready to Implement Privacy Panda?</h2>
             <p>Choose your implementation model and start teaching digital privacy today.</p>
             <div className="cta-buttons">
-              <Link to="/get-started" className="button primary">
+              <Link to="/service-catalog" className="button primary">
                 Start Implementation
               </Link>
               <Link to="/contact" className="button secondary bg-white/20 text-white border-2 border-white">

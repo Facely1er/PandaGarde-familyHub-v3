@@ -366,7 +366,7 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
           </div>
           <div className="flex items-center space-x-2">
             <Link
-              to="/privacy-goals"
+              to="/family-privacy-plan"
               className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors flex items-center space-x-2"
             >
               <Target className="h-4 w-4" />
@@ -391,17 +391,17 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center space-x-2">
             <Shield className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-            <span className="font-semibold text-gray-900 dark:text-dark-text-primary">Privacy Assessment</span>
+            <span className="font-semibold text-gray-900 dark:text-dark-text-primary">Footprint review</span>
           </div>
           <Link
-            to="/privacy-assessment"
+            to="/digital-footprint"
             className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
           >
-            Take Assessment →
+            Open review →
           </Link>
         </div>
         <p className="text-sm text-gray-600 dark:text-dark-text-tertiary">
-          Assess your family's privacy practices and get personalized recommendations.
+          See exposure from your service catalog on PandaGarde—no long form here.
         </p>
       </div>
     );

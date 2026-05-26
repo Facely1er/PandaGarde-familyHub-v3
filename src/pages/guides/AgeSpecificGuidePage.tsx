@@ -327,7 +327,7 @@ const AgeSpecificGuidePage: React.FC = () => {
                   </Link>
 
                   <Link
-                    to="/activity-book"
+                    to="/family-hub/activities"
                     className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow text-center"
                     style={{ backgroundColor: 'var(--card-color)' }}
                   >
@@ -335,10 +335,10 @@ const AgeSpecificGuidePage: React.FC = () => {
                       <Shield size={24} className="text-purple-600" />
                     </div>
                     <h3 className="text-lg font-semibold mb-2 text-primary">
-                      Activity Book
+                      Privacy missions
                     </h3>
                     <p className="text-sm text-gray-600">
-                      Hands-on learning activities
+                      Age-matched missions in Family Hub
                     </p>
                   </Link>
                 </>
@@ -347,7 +347,7 @@ const AgeSpecificGuidePage: React.FC = () => {
               {selectedAgeGroup === '9-12' && (
                 <>
                   <Link
-                    to="/privacy-handbook"
+                    to="/family-hub/activities"
                     className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow text-center"
                     style={{ backgroundColor: 'var(--card-color)' }}
                   >
@@ -355,10 +355,10 @@ const AgeSpecificGuidePage: React.FC = () => {
                       <BookOpen size={24} className="text-blue-600" />
                     </div>
                     <h3 className="text-lg font-semibold mb-2 text-primary">
-                      Privacy Handbook
+                      Privacy missions
                     </h3>
                     <p className="text-sm text-gray-600">
-                      Comprehensive guide for elementary students
+                      Interactive learning in Family Hub
                     </p>
                   </Link>
 
@@ -379,7 +379,7 @@ const AgeSpecificGuidePage: React.FC = () => {
                   </Link>
 
                   <Link
-                    to="/privacy-tools"
+                    to="/for-families"
                     className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow text-center"
                     style={{ backgroundColor: 'var(--card-color)' }}
                   >
@@ -399,7 +399,7 @@ const AgeSpecificGuidePage: React.FC = () => {
               {selectedAgeGroup === '13-17' && (
                 <>
                   <Link
-                    to="/teen-handbook"
+                    to="/family-hub/activities"
                     className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow text-center"
                     style={{ backgroundColor: 'var(--card-color)' }}
                   >
@@ -407,10 +407,10 @@ const AgeSpecificGuidePage: React.FC = () => {
                       <Brain size={24} className="text-purple-600" />
                     </div>
                     <h3 className="text-lg font-semibold mb-2 text-primary">
-                      Teen Handbook
+                      Teen privacy missions
                     </h3>
                     <p className="text-sm text-gray-600">
-                      Advanced privacy concepts for teens
+                      Age-matched scenarios in Family Hub
                     </p>
                   </Link>
 
@@ -481,7 +481,7 @@ const AgeSpecificGuidePage: React.FC = () => {
             justifyContent: 'center' 
           }}>
             <Link
-              to="/resources"
+              to="/for-families"
               style={{
                 background: 'white',
                 color: '#1B5E20',

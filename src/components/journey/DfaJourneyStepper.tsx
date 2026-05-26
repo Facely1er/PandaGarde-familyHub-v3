@@ -11,7 +11,7 @@ import {
 
 interface Props {
   currentKey?: 'profile' | 'dfa' | 'plan' | 'hub';
-  /** Full card with phase grid (catalog / get-started). Strip fits inside a page hero. */
+  /** Full card with phase grid (catalog and other DFA pages). Strip fits inside a page hero. */
   variant?: 'full' | 'strip';
   compact?: boolean;
   title?: string;
@@ -36,7 +36,7 @@ const DfaJourneyStepper: React.FC<Props> = ({
   variant = 'full',
   compact = false,
   title = 'Your DFA journey',
-  subtitle = 'Progress is saved locally on this device so families can resume instead of restarting.',
+  subtitle = 'Footprint review uses your catalog list. Stories, guides, and Family Hub stay available without finishing this.',
   ctaLabel,
   ctaHref,
   className = '',

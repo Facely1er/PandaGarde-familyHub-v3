@@ -1,65 +1,52 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
-  BookOpen,
-  Shield,
-  BarChart3,
-  LayoutDashboard,
-  Mail,
-  HelpCircle,
-  Scale,
-  Accessibility,
-  PlayCircle,
-  HeartHandshake,
-  Compass,
-  FileText,
-  Cookie,
-  Info,
-  Library,
-  Fingerprint,
-  Newspaper,
-} from 'lucide-react';
-
-const JOURNAL_URL = 'https://journal.pandagarde.com';
-
-type FooterLink = {
-  icon: React.ComponentType<{ size?: number; 'aria-hidden'?: boolean }>;
-  href: string;
-  label: string;
-  external?: boolean;
-};
+  footerColumns,
+  type FooterExternalNavItem,
+  type SiteNavItem,
+} from '../data/siteNavigation';
 
 const Footer: React.FC = () => {
-  const exploreLinks = [
-    { icon: Compass, href: '/how-it-works', label: 'How It Works' },
-    { icon: PlayCircle, href: '/get-started', label: 'Get Started' },
-    { icon: Fingerprint, href: '/digital-footprint', label: 'Digital Footprint Analysis' },
-    { icon: BarChart3, href: '/scoring-methodology', label: 'Scoring methodology' },
-    { icon: BookOpen, href: '/resources', label: 'Resources' },
-    { icon: Library, href: '/stories', label: 'Stories' },
-    { icon: LayoutDashboard, href: '/family-hub', label: 'Family Hub' },
-  ];
+  const renderNavLink = (item: SiteNavItem | FooterExternalNavItem) => {
+    const Icon = item.icon;
+    const isExternal = 'external' in item && item.external;
 
-  const resourcesLinks: FooterLink[] = [
-    { icon: Info, href: '/about', label: 'About' },
-    { icon: Mail, href: '/contact', label: 'Contact' },
-    { icon: HelpCircle, href: '/faq', label: 'FAQ' },
-    { icon: Scale, href: '/digital-rights', label: 'Digital Rights' },
-    { icon: HeartHandshake, href: '/support', label: 'Support' },
-    {
-      icon: Newspaper,
-      href: JOURNAL_URL,
-      label: 'Digital Bamboo Journal',
-      external: true,
-    },
-  ];
+    if (isExternal) {
+      return (
+        <a
+          href={item.href}
+          className="footer-link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Icon size={16} aria-hidden="true" />
+          <span>{item.label}</span>
+          <span className="sr-only"> (opens in new tab)</span>
+        </a>
+      );
+    }
 
-  const legalLinks = [
-    { icon: Shield, href: '/privacy', label: 'Privacy' },
-    { icon: FileText, href: '/terms', label: 'Terms' },
-    { icon: Cookie, href: '/cookies', label: 'Cookies' },
-    { icon: Accessibility, href: '/accessibility', label: 'Accessibility' },
-  ];
+    return (
+      <Link to={item.href} className="footer-link">
+        <Icon size={16} aria-hidden="true" />
+        <span>{item.label}</span>
+      </Link>
+    );
+  };
+
+  const renderNavColumn = (title: string, items: SiteNavItem[], extra?: FooterExternalNavItem[]) => (
+    <div className="footer-column">
+      <h4>{title}</h4>
+      <ul className="footer-menu-list">
+        {items.map((item) => (
+          <li key={item.id}>{renderNavLink(item)}</li>
+        ))}
+        {extra?.map((item) => (
+          <li key={item.id}>{renderNavLink(item)}</li>
+        ))}
+      </ul>
+    </div>
+  );
 
   return (
     <footer className="footer" role="contentinfo">
@@ -81,69 +68,21 @@ const Footer: React.FC = () => {
                 <span className="logo-tagline">Calmer privacy</span>
               </span>
             </Link>
+
             <p className="footer-description">
-              Family privacy guidance built around a clear journey: understand exposure, take practical action, and keep progress going in the Family Hub.
+              Stories, guides, footprint review, and Family Hub—use what fits your family. Nothing here
+              blocks the rest.
             </p>
+
             <p className="footer-trust-note">
-              Local-first guidance, family-centered design, and structured next steps instead of scattered privacy advice.
+              Local-first guidance on this device. Formal assessment and safety alerts live on SocialCaution.
             </p>
           </div>
 
-          <div className="footer-grid">
-            <div className="footer-column">
-              <h4>Explore</h4>
-              <ul className="footer-menu-list">
-                {exploreLinks.map(({ icon: Icon, href, label }) => (
-                  <li key={href}>
-                    <Link to={href} className="footer-link">
-                      <Icon size={16} aria-hidden="true" />
-                      <span>{label}</span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="footer-column">
-              <h4>Resources</h4>
-              <ul className="footer-menu-list">
-                {resourcesLinks.map(({ icon: Icon, href, label, external }) => (
-                  <li key={href}>
-                    {external ? (
-                      <a
-                        href={href}
-                        className="footer-link"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <Icon size={16} aria-hidden="true" />
-                        <span>{label}</span>
-                        <span className="sr-only"> (opens in new tab)</span>
-                      </a>
-                    ) : (
-                      <Link to={href} className="footer-link">
-                        <Icon size={16} aria-hidden="true" />
-                        <span>{label}</span>
-                      </Link>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="footer-column">
-              <h4>Legal</h4>
-              <ul className="footer-menu-list">
-                {legalLinks.map(({ icon: Icon, href, label }) => (
-                  <li key={href}>
-                    <Link to={href} className="footer-link">
-                      <Icon size={16} aria-hidden="true" />
-                      <span>{label}</span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="footer-grid footer-grid--privacy">
+            {footerColumns.map((column) =>
+              renderNavColumn(column.title, column.items, column.externalItems)
+            )}
           </div>
         </div>
 

@@ -36,7 +36,7 @@ const helpItems: HelpItem[] = [
     question: 'What are conversation starters?',
     answer: 'Conversation starters are ready-to-use talking points to help you discuss privacy with your children. They\'re based on the apps your children use and their risk levels.',
     category: 'privacy',
-    link: '/parent-resources'
+    link: '/for-families'
   },
   {
     id: '5',
@@ -375,7 +375,7 @@ const HelpSystem: React.FC<HelpSystemProps> = ({ trigger = 'button', position = 
                   Contact Support
                 </Link>
                 <Link
-                  to="/parent-resources"
+                  to="/for-families"
                   onClick={() => setIsOpen(false)}
                   style={{
                     display: 'flex',

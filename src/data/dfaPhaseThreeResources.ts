@@ -1,3 +1,5 @@
+import { GUIDES_STORIES_NAV_LABEL } from './siteNavigation';
+
 /** Shared links for DFA phase 3 — website learning paths (not Family Hub). */
 export const DIGITAL_BAMBOO_JOURNAL_URL = 'https://journal.pandagarde.com';
 
@@ -10,8 +12,8 @@ export interface DfaPhaseResourceLink {
 
 export const DFA_PHASE_THREE_PARENT_RESOURCES: DfaPhaseResourceLink[] = [
   {
-    label: 'Resources hub',
-    href: '/resources',
+    label: GUIDES_STORIES_NAV_LABEL,
+    href: '/for-families',
     description: 'Parent guides, planning tools, and household privacy materials.',
   },
   {
@@ -20,9 +22,9 @@ export const DFA_PHASE_THREE_PARENT_RESOURCES: DfaPhaseResourceLink[] = [
     description: 'Turn assessment priorities into a written plan you can revisit.',
   },
   {
-    label: 'Quick start',
-    href: '/quick-start',
-    description: 'Short next steps when you want a simple checklist after DFA.',
+    label: 'How it works',
+    href: '/how-it-works',
+    description: 'Short overview of the three-step review when you want a checklist after DFA.',
   },
 ];
 
@@ -38,9 +40,9 @@ export const DFA_PHASE_THREE_KIDS_RESOURCES: DfaPhaseResourceLink[] = [
     description: 'Start with the origin story—read together or let kids explore.',
   },
   {
-    label: 'Activities',
-    href: '/activities',
-    description: 'Age-based activities and games that reinforce what parents discuss.',
+    label: 'Privacy missions',
+    href: '/family-hub/activities',
+    description: 'Age-matched missions in Family Hub—progress stays on this device.',
   },
 ];
 

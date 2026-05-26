@@ -389,7 +389,7 @@ const FamilyPrivacyGuidePage: React.FC = () => {
             <Link to="/downloads/family-agreement" className="family-guide-cta-btn-primary inline-flex items-center gap-2">
               Download Family Agreement
             </Link>
-            <Link to="/resources" className="family-guide-cta-btn-outline inline-flex items-center gap-2">
+            <Link to="/for-families" className="family-guide-cta-btn-outline inline-flex items-center gap-2">
               Explore More Resources
             </Link>
           </div>

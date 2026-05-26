@@ -299,7 +299,7 @@ export class FamilyPrivacyAssessment {
           'Review app permissions on all devices'
         ],
         resources: [
-          { label: 'Privacy Settings Guide', url: '/privacy-tools' },
+          { label: 'Privacy Settings Guide', url: '/guides/device-setup' },
           { label: 'Service Catalog', url: '/service-catalog' }
         ]
       });
@@ -361,8 +361,8 @@ export class FamilyPrivacyAssessment {
           'Teach children about safe online behavior'
         ],
         resources: [
-          { label: 'Privacy Education Resources', url: '/parent-resources' },
-          { label: 'Age-Appropriate Guides', url: '/age-groups' }
+          { label: 'Privacy Education Resources', url: '/for-families' },
+          { label: 'Age-Appropriate Guides', url: '/guides/age-specific' }
         ]
       });
     }
@@ -403,7 +403,7 @@ export class FamilyPrivacyAssessment {
           'Use PandaGarde resources to learn more'
         ],
         resources: [
-          { label: 'Privacy Education', url: '/parent-resources' },
+          { label: 'Privacy Education', url: '/for-families' },
           { label: 'Digital Footprint Analysis', url: '/digital-footprint' }
         ]
       });

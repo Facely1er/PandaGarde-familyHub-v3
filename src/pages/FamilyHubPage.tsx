@@ -144,12 +144,12 @@ const FamilyHubPage: React.FC = () => {
       url: '/digital-footprint'
     },
     {
-      title: 'Privacy Assessment',
-      description: 'Evaluate your family\'s privacy practices and get recommendations',
+      title: 'Footprint review',
+      description: 'See household exposure from the apps you listed on the website',
       icon: Shield,
-      action: 'assessment',
+      action: 'footprint',
       color: 'from-blue-500 to-blue-600',
-      url: '/privacy-assessment'
+      url: '/digital-footprint'
     },
     {
       title: 'Privacy Goals',
@@ -157,7 +157,7 @@ const FamilyHubPage: React.FC = () => {
       icon: Target,
       action: 'goals',
       color: 'from-purple-500 to-purple-600',
-      url: '/privacy-goals'
+      url: '/family-privacy-plan'
     }
   ];
 
@@ -316,7 +316,7 @@ const FamilyHubPage: React.FC = () => {
                 { key: 'activities', label: 'Activities', icon: BookOpen },
                 { key: 'progress', label: 'Progress', icon: TrendingUp },
                 { key: 'family', label: 'Family', icon: UserPlus },
-                { key: 'resources', label: 'Resources', icon: Download }
+                { key: 'resources', label: 'Guides & stories', icon: Download }
               ].map(({ key, label, icon: Icon }) => (
                 <button
                   key={key}
@@ -347,7 +347,7 @@ const FamilyHubPage: React.FC = () => {
                   { key: 'activities', icon: BookOpen, shortLabel: 'Learn' },
                   { key: 'progress', icon: TrendingUp, shortLabel: 'Progress' },
                   { key: 'family', icon: UserPlus, shortLabel: 'Family' },
-                  { key: 'resources', icon: Download, shortLabel: 'Resources' }
+                  { key: 'resources', icon: Download, shortLabel: 'Guides' }
                 ].map(({ key, icon: Icon, shortLabel }) => (
                   <button
                     key={key}
@@ -1059,7 +1059,7 @@ const FamilyHubPage: React.FC = () => {
               <EmailCaptureInline
                 title="Stay Updated on Child Safety"
                 description="Optional email updates about privacy news and safety headlines—not live monitoring of your child's device."
-                purpose="safety-alerts"
+                purpose="updates"
                 compact={false}
               />
             </div>

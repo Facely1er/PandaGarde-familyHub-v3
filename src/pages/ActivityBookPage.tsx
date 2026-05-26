@@ -15,13 +15,14 @@ import {
   Filter,
 } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
-import { useToast } from '../contexts/ToastContext';
-import { useProgress } from '../contexts/ProgressContext';
-import ActivityManager from '../components/activities/ActivityManager';
-// import CertificateGenerator from '../components/CertificateGenerator'; // Moved to Family Hub
-import ProgressDisplay from '../components/ProgressDisplay';
-import ParentDashboard from '../components/ParentDashboard';
 import PageLayout from '../components/layout/PageLayout';
+import { resolveLegacyActivitiesPath } from '../lib/legacyActivitiesRedirect';
+import { setHubOrigin } from '../lib/hubMission';
+import {
+  HUB_MISSIONS_CTA,
+  HUB_MISSIONS_PATH,
+  WEBSITE_HUB_BOUNDARY_LEAD,
+} from '../data/websiteHubBoundary';
 
 interface Activity {
   id: string;
@@ -37,16 +38,10 @@ interface Activity {
 const ActivityBookPage: React.FC = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
-  const { showSuccess } = useToast();
-  const { progress, markActivityCompleted, getOverallProgress } = useProgress();
-  const [selectedActivity, setSelectedActivity] = useState<Activity | null>(null);
-  const [showActivity, setShowActivity] = useState(false);
   const [filter, setFilter] = useState<'all' | 'easy' | 'medium' | 'hard'>('all');
   const [sortBy, setSortBy] = useState<'name' | 'difficulty' | 'duration'>('name');
   const [searchTerm, setSearchTerm] = useState('');
   const [showFilters, setShowFilters] = useState(false);
-  // const [showCertificates, setShowCertificates] = useState(false); // Moved to Family Hub
-  const [showParentDashboard, setShowParentDashboard] = useState(false);
 
   const activities: Activity[] = [
     {
@@ -124,59 +119,11 @@ const ActivityBookPage: React.FC = () => {
   ];
 
 
-  const handleActivityStart = (activity: Activity) => {
-    setSelectedActivity(activity);
-    setShowActivity(true);
+  const openMissionInHub = (activity: Activity) => {
+    setHubOrigin('web');
+    const target = resolveLegacyActivitiesPath(activity.id);
+    navigate(target.path, { state: target.state });
   };
-
-  const handleActivityClose = () => {
-    setShowActivity(false);
-    setSelectedActivity(null);
-  };
-
-  const handleActivityComplete = (activityId: string, score?: number) => {
-    markActivityCompleted(activityId, score);
-    const activity = activities.find(a => a.id === activityId);
-    
-    // Add celebration animation
-    setTimeout(() => {
-      const celebration = document.createElement('div');
-      celebration.textContent = '🎉✨🌟';
-      celebration.style.cssText = `
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 48px;
-        z-index: 10000;
-        pointer-events: none;
-        animation: celebrate 2s ease-out forwards;
-      `;
-      
-      const style = document.createElement('style');
-      style.textContent = `
-        @keyframes celebrate {
-          0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-          50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
-          100% { opacity: 0; transform: translate(-50%, -50%) scale(1) translateY(-100px); }
-        }
-      `;
-      document.head.appendChild(style);
-      document.body.appendChild(celebration);
-      
-      setTimeout(() => {
-        document.body.removeChild(celebration);
-        document.head.removeChild(style);
-      }, 2000);
-    }, 100);
-    
-    const scoreMessage = score !== undefined ? ` You scored ${score}%!` : '';
-    showSuccess('Activity Completed!', `Great job completing "${activity?.title}"!${scoreMessage} Keep up the great work!`);
-    setShowActivity(false);
-    setSelectedActivity(null);
-  };
-
-  const overallProgress = getOverallProgress();
 
   // Filter and sort activities
   const filteredActivities = activities
@@ -214,7 +161,7 @@ const ActivityBookPage: React.FC = () => {
   return (
     <PageLayout
       title="Privacy Panda's Activity Adventures"
-      subtitle="Continue Po the Panda's journey with interactive activities that reinforce the privacy lessons from the Digital Bamboo Forest story. Learn through fun games, coloring, and puzzles!"
+      subtitle="Printables and offline ideas from the Digital Bamboo Forest story. Interactive missions and saved progress live in Family Hub—not duplicated here on the website."
       breadcrumbs={true}
     >
       <main id="main-content" className="min-h-screen" style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}>
@@ -264,36 +211,16 @@ const ActivityBookPage: React.FC = () => {
             </div>
           </div>
 
-          <ProgressDisplay
-            completedCount={overallProgress.completedCount}
-            totalCount={overallProgress.totalCount}
-            achievements={progress.achievements}
-            totalTimeSpent={progress.totalTimeSpent}
-            averageScore={overallProgress.averageScore}
-            showDetails={true}
-          />
-
-          {overallProgress.percentage === 100 && (
-            <div className="text-center bg-yellow-50 border border-yellow-200 rounded-lg p-6 mb-8 max-w-3xl mx-auto mt-8" style={{
-              backgroundColor: theme === 'dark' ? 'rgba(251, 191, 36, 0.1)' : '#FFFBEB',
-              borderColor: 'var(--warning)'
-            }}>
-              <Award className="w-16 h-16 mx-auto mb-4" style={{ color: 'var(--warning)' }} />
-              <h3 className="text-xl font-bold mb-2 text-primary">
-                Congratulations! 🎉
-              </h3>
-              <p className="text-gray-700">
-                You've completed all activities and earned your Privacy Champion certificate!
-              </p>
-              <button 
-                onClick={() => navigate('/family-hub')}
-                className="mt-4 bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-green-600 hover:to-green-700 transition-all transform hover:scale-105"
-              >
-                <Award size={20} className="inline mr-2" />
-                Generate Certificate
-              </button>
-            </div>
-          )}
+          <div className="rounded-xl border border-teal-200 bg-teal-50/80 p-6 max-w-3xl mx-auto mt-8 dark:border-teal-800 dark:bg-teal-900/20">
+            <p className="text-sm leading-relaxed text-teal-900 dark:text-teal-100 mb-4">{WEBSITE_HUB_BOUNDARY_LEAD}</p>
+            <Link
+              to={HUB_MISSIONS_PATH}
+              onClick={() => setHubOrigin('web')}
+              className="inline-flex items-center gap-2 rounded-lg bg-teal-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-teal-700 min-h-[44px]"
+            >
+              {HUB_MISSIONS_CTA}
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -305,7 +232,7 @@ const ActivityBookPage: React.FC = () => {
               Choose Your Activity
             </h2>
             <p className="text-base md:text-lg lg:text-xl max-w-2xl mx-auto mb-6 md:mb-8 px-4 text-gray-600">
-              Click on any activity to start learning about digital privacy through interactive games and exercises.
+              Each topic below opens the matching mission in Family Hub. Progress and certificates stay in the Hub on this device.
             </p>
 
             {/* Interactive Controls */}
@@ -403,28 +330,24 @@ const ActivityBookPage: React.FC = () => {
           ) : (
             filteredActivities.map((activity) => {
             const Icon = activity.icon;
-            const isCompleted = progress.completedActivities.includes(activity.id);
 
             return (
               <div
                 key={activity.id}
                 className={`bg-white rounded-xl shadow-md hover:shadow-lg transition-all transform hover:scale-105 cursor-pointer border-2 ${
-                  isCompleted ? 'border-green-500' : 'border-transparent'
+                  'border-transparent'
                 }`}
                 style={{
                   backgroundColor: 'var(--card-color)',
                   boxShadow: 'var(--shadow-md)'
                 }}
-                onClick={() => handleActivityStart(activity)}
+                onClick={() => openMissionInHub(activity)}
               >
                 <div className="p-4 md:p-6 text-center">
                   <div className="flex items-center justify-center mb-4 relative">
                     <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-r from-green-500 to-green-600 flex items-center justify-center text-white">
                       <Icon size={20} className="md:w-6 md:h-6" />
                     </div>
-                    {isCompleted && (
-                      <CheckCircle size={20} className="text-green-500 absolute -top-1 -right-1 md:w-6 md:h-6" />
-                    )}
                   </div>
 
                   <h3 className="text-lg md:text-xl font-bold mb-3 text-primary">
@@ -452,10 +375,10 @@ const ActivityBookPage: React.FC = () => {
                       className="bg-gradient-to-r from-green-500 to-green-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-green-600 hover:to-green-700 transition-all text-sm md:text-base"
                       onClick={(e) => {
                         e.stopPropagation();
-                        handleActivityStart(activity);
+                        openMissionInHub(activity);
                       }}
                     >
-                      {isCompleted ? 'Play Again' : 'Start'}
+                      {HUB_MISSIONS_CTA}
                     </button>
                   </div>
                 </div>
@@ -466,26 +389,6 @@ const ActivityBookPage: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* Interactive Activity */}
-      {showActivity && selectedActivity && (
-        <ActivityManager
-          activityId={selectedActivity.id}
-          onClose={handleActivityClose}
-          onComplete={handleActivityComplete}
-        />
-      )}
-
-      {/* Certificate Generator Modal */}
-      {/* Certificate Generation moved to Family Hub */}
-
-      {/* Parent Dashboard Modal */}
-      {showParentDashboard && (
-        <ParentDashboard
-          progress={progress}
-          onClose={() => setShowParentDashboard(false)}
-        />
-      )}
 
       {/* Parent Resources Section */}
       <section style={{ padding: '4rem 0', backgroundColor: 'var(--light)' }}>
@@ -528,7 +431,7 @@ const ActivityBookPage: React.FC = () => {
               <p className="mb-4 text-sm md:text-base text-gray-600">
                 Conversation starters and questions to discuss privacy concepts with your children after activities.
               </p>
-              <Link to="/resources" className="text-green-600 font-semibold hover:text-green-700 transition-colors text-sm md:text-base">
+              <Link to="/for-families" className="text-green-600 font-semibold hover:text-green-700 transition-colors text-sm md:text-base">
                 View Guides →
               </Link>
             </div>
