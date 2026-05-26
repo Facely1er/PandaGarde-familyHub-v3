@@ -59,7 +59,7 @@ describe('ActivitiesScreen', () => {
     renderScreen();
 
     await user.click(screen.getByRole('button', { name: 'Account security' }));
-    await user.click(screen.getByRole('tab', { name: '🌐 Ages 13–17' }));
+    await user.click(screen.getByRole('tab', { name: 'Ages 13–17' }));
 
     expect(screen.getAllByText(/Password Fortress Builder/i).length).toBeGreaterThan(0);
     expect(screen.queryByText(/Pack Your Digital Backpack/i)).not.toBeInTheDocument();

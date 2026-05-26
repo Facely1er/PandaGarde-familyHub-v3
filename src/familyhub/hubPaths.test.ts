@@ -4,6 +4,7 @@ import { hubPaths } from './hubPaths';
 describe('hubPaths (website build)', () => {
   it('uses /family-hub prefix when not standalone', () => {
     expect(hubPaths.dashboard).toBe('/family-hub/dashboard');
+    expect(hubPaths.journey).toBe('/family-hub/journey');
     expect(hubPaths.activities).toBe('/family-hub/activities');
   });
 });

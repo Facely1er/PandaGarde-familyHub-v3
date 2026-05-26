@@ -1,12 +1,12 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ArrowRight, ShieldCheck, CheckCircle2, Sparkles } from 'lucide-react';
-import { updateDfaJourneyPhase } from '../../lib/dfaJourney';
 import { useAuth } from './AuthWrapper';
 import { HUB_WELCOMED_KEY } from '../../familyhub/constants';
 import { hubPaths, isHubStandalone, pandagardeWebsiteUrl } from '../../familyhub/hubPaths';
 import AgeBandStrip from '../../familyhub/components/AgeBandStrip';
 import HubBrandLogo from '../../familyhub/components/HubBrandLogo';
+import { hubTheme } from '../../familyhub/hubTheme';
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -15,7 +15,6 @@ const LoginPage: React.FC = () => {
 
   const handleContinue = () => {
     signInLocally();
-    updateDfaJourneyPhase('hub', { visited: true, completed: true, resumePath: hubPaths.dashboard });
     const hubWelcomed = localStorage.getItem(HUB_WELCOMED_KEY) === 'true';
     const atHubRoot =
       location.pathname === hubPaths.root || location.pathname === `${hubPaths.root}/`;
@@ -28,11 +27,11 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="family-hub-theme flex min-h-screen flex-col bg-gradient-to-br from-teal-50 via-white to-amber-50/40 dark:from-gray-900 dark:via-gray-900 dark:to-gray-200">
+    <div className={`family-hub-theme ${hubTheme.page}`}>
       <div className="flex flex-1 flex-col justify-center px-4 py-10">
         <div className="mx-auto w-full max-w-lg space-y-6">
           <div className="text-center">
-            <HubBrandLogo size="hero" animated className="mx-auto" />
+            <HubBrandLogo size="hero" variant="plain" animated className="mx-auto" />
             <p className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-teal-100 px-3 py-1 text-xs font-bold uppercase tracking-wide text-teal-800 dark:bg-teal-900/50 dark:text-teal-200">
               <Sparkles size={12} aria-hidden="true" />
               Family privacy adventures
@@ -45,7 +44,7 @@ const LoginPage: React.FC = () => {
             </p>
           </div>
 
-          <ul className="space-y-2 rounded-2xl border border-gray-200 bg-white/90 p-4 text-sm dark:border-gray-700 dark:bg-gray-200/90">
+          <ul className="space-y-2 rounded-2xl border border-gray-200 bg-white p-4 text-sm dark:border-gray-700 dark:bg-gray-800">
             <li className="flex items-center gap-2 text-gray-700 dark:text-gray-200">
               <CheckCircle2 size={18} className="shrink-0 text-teal-600 dark:text-teal-400" aria-hidden="true" />
               Works offline — no account required

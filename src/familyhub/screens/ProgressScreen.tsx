@@ -1,5 +1,6 @@
 import React, { lazy, Suspense, useMemo, useState } from 'react';
-import { Award, CheckCircle2, Clock, Download, Star, TrendingUp, X } from 'lucide-react';
+import { Award, CheckCircle2, Clock, Download, Rocket, Sprout, Star, Timer, TrendingUp, Trophy, X, type LucideIcon } from 'lucide-react';
+import { HubIconBadge } from '../hubIcons';
 import { HubScreenFallback } from '../lazyScreen';
 
 const CertificateGenerator = lazy(() => import('../../components/CertificateGenerator'));
@@ -7,16 +8,22 @@ const ProgressExport = lazy(() => import('../../components/ProgressExport'));
 import { useProgress } from '../../contexts/ProgressContext';
 import { flattenAgeBasedActivities } from '../../data/ageBasedActivities';
 import { getHubActivityCatalogCount } from '../../lib/hubProgress';
+import HubPageLayout from '../components/HubPageLayout';
 import HubScreenHero from '../components/HubScreenHero';
 
-const ACHIEVEMENT_META: Record<string, { label: string; emoji: string; description: string }> = {
-  first_activity: { label: 'First Step', emoji: '🌱', description: 'Completed your first activity' },
-  getting_started: { label: 'Getting Started', emoji: '🚀', description: 'Completed 3 activities' },
-  privacy_champion: { label: 'Privacy Champion', emoji: '🏆', description: 'Completed 8 activities' },
-  dedicated_learner: { label: 'Dedicated Learner', emoji: '⏱️', description: 'Spent 60+ minutes learning' },
+const ACHIEVEMENT_META: Record<string, { label: string; icon: LucideIcon; description: string }> = {
+  first_activity: { label: 'First Step', icon: Sprout, description: 'Completed your first activity' },
+  getting_started: { label: 'Getting Started', icon: Rocket, description: 'Completed 3 activities' },
+  privacy_champion: { label: 'Privacy Champion', icon: Trophy, description: 'Completed 8 activities' },
+  dedicated_learner: { label: 'Dedicated Learner', icon: Timer, description: 'Spent 60+ minutes learning' },
 };
 
-const ProgressScreen: React.FC = () => {
+interface ProgressScreenProps {
+  /** When true, omits page hero — used inside Journey */
+  embedded?: boolean;
+}
+
+const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => {
   const [showCertificates, setShowCertificates] = useState(false);
   const [showProgressExport, setShowProgressExport] = useState(false);
   const { progress, getActivityProgress } = useProgress();
@@ -47,18 +54,20 @@ const ProgressScreen: React.FC = () => {
       .slice(0, 6);
   }, [allActivities, getActivityProgress]);
 
-  return (
-    <div className="mx-auto max-w-4xl space-y-6 p-4 sm:p-6">
-      <HubScreenHero
-        badge="Family rewards"
-        title="Your privacy journey"
-        subtitle={
-          completedCount === 0
-            ? 'Complete your first mission to unlock badges and certificates — every step counts!'
-            : `You've finished ${completedCount} of ${totalCount} missions. Keep your streak going!`
-        }
-        compact
-      />
+  const content = (
+    <>
+      {!embedded && (
+        <HubScreenHero
+          badge="Family rewards"
+          title="Mission progress"
+          subtitle={
+            completedCount === 0
+              ? 'Complete your first mission to unlock badges and certificates — every step counts!'
+              : `You've finished ${completedCount} of ${totalCount} missions. Keep your streak going!`
+          }
+          compact
+        />
+      )}
 
       {/* Summary stats */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -87,14 +96,14 @@ const ProgressScreen: React.FC = () => {
       </div>
 
       {/* Progress bar */}
-      <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-200">
+      <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-800">
         <div className="flex items-end justify-between mb-2">
-          <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">Overall journey progress</p>
+          <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">Mission progress</p>
           <p className="text-sm font-bold text-teal-700 dark:text-teal-300">{completedCount} / {totalCount}</p>
         </div>
         <div className="h-3 w-full rounded-full bg-gray-100 dark:bg-gray-700 overflow-hidden" role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100} aria-label={`${pct}% of activities completed`}>
           <div
-            className="h-full rounded-full bg-gradient-to-r from-teal-400 to-teal-600 transition-all duration-500"
+            className="h-full rounded-full bg-teal-600 transition-all duration-500 dark:bg-teal-500"
             style={{ width: `${pct}%` }}
           />
         </div>
@@ -107,7 +116,7 @@ const ProgressScreen: React.FC = () => {
 
       {/* Achievements */}
       {progress.achievements.length > 0 && (
-        <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-200">
+        <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-800">
           <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-4">Badges earned</h2>
           <ul className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {progress.achievements.map((id) => {
@@ -117,7 +126,9 @@ const ProgressScreen: React.FC = () => {
               }
               return (
                 <li key={id} className="flex flex-col items-center gap-1 rounded-xl border border-amber-100 bg-amber-50 p-3 text-center dark:border-amber-700/40 dark:bg-amber-900/20">
-                  <span className="text-2xl" role="img" aria-label={meta.label}>{meta.emoji}</span>
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300">
+                    <meta.icon size={22} aria-hidden="true" />
+                  </span>
                   <span className="text-xs font-semibold text-amber-800 dark:text-amber-200">{meta.label}</span>
                   <span className="text-[11px] text-amber-700/80 dark:text-amber-300/80">{meta.description}</span>
                 </li>
@@ -129,12 +140,12 @@ const ProgressScreen: React.FC = () => {
 
       {/* Recent completions */}
       {recentCompletions.length > 0 && (
-        <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-200">
+        <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-800">
           <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-4">Recently completed</h2>
           <ul className="space-y-3">
             {recentCompletions.map(({ activity, detail }) => (
               <li key={activity.id} className="flex items-center gap-3">
-                <span className="text-xl flex-shrink-0" role="img" aria-label="">{activity.icon}</span>
+                <HubIconBadge glyph={activity.icon} size={18} className="h-9 w-9 bg-teal-100 text-teal-700 dark:bg-teal-900/40 dark:text-teal-300" />
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-gray-900 dark:text-white truncate">{activity.name}</p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
@@ -155,7 +166,7 @@ const ProgressScreen: React.FC = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <button
           onClick={() => setShowCertificates(true)}
-          className="bg-white dark:bg-gray-200 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:border-teal-500 dark:hover:border-teal-500 transition-all shadow-sm hover:shadow-md text-left"
+          className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:border-teal-500 dark:hover:border-teal-500 transition-all shadow-sm hover:shadow-md text-left"
         >
           <div className="flex items-center gap-3 mb-2">
             <Award className="text-teal-600 dark:text-teal-400" size={22} aria-hidden="true" />
@@ -166,7 +177,7 @@ const ProgressScreen: React.FC = () => {
 
         <button
           onClick={() => setShowProgressExport(true)}
-          className="bg-white dark:bg-gray-200 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:border-teal-500 dark:hover:border-teal-500 transition-all shadow-sm hover:shadow-md text-left"
+          className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:border-teal-500 dark:hover:border-teal-500 transition-all shadow-sm hover:shadow-md text-left"
         >
           <div className="flex items-center gap-3 mb-2">
             <Download className="text-teal-600 dark:text-teal-400" size={22} aria-hidden="true" />
@@ -175,11 +186,17 @@ const ProgressScreen: React.FC = () => {
           <p className="text-sm text-gray-600 dark:text-gray-400">Export your learning progress as a JSON file.</p>
         </button>
       </div>
+    </>
+  );
+
+  return (
+    <>
+      {embedded ? <div className="flex flex-col gap-5">{content}</div> : <HubPageLayout>{content}</HubPageLayout>}
 
       {/* Certificates Modal */}
       {showCertificates && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-gray-200 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-xl relative">
+          <div className="bg-white dark:bg-gray-800 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-xl relative">
             <button
               onClick={() => setShowCertificates(false)}
               className="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 min-w-[44px] min-h-[44px] flex items-center justify-center"
@@ -200,7 +217,7 @@ const ProgressScreen: React.FC = () => {
       {/* Progress Export Modal */}
       {showProgressExport && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-gray-200 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-xl relative">
+          <div className="bg-white dark:bg-gray-800 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-xl relative">
             <button
               onClick={() => setShowProgressExport(false)}
               className="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 min-w-[44px] min-h-[44px] flex items-center justify-center"
@@ -217,7 +234,7 @@ const ProgressScreen: React.FC = () => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

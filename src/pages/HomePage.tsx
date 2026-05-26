@@ -1,43 +1,14 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  ArrowRight,
-  BookOpen,
-  CheckCircle,
-  ChevronRight,
-  Fingerprint,
-  LayoutDashboard,
-  ShieldCheck,
-} from 'lucide-react';
+import { ArrowRight, CheckCircle, ChevronRight, ShieldCheck } from 'lucide-react';
 import { loadDfaJourneyState } from '../lib/dfaJourney';
 import { getFoundationStory, getHomepageLatestStory, ORIGIN_STORY_SLUG } from '../data/stories';
-import { StoryCoverArt } from '../components/stories/StoryCoverArt';
+import { PageSection, ShellLinkCard } from '../components/layout/PageContent';
 
 const HomePage: React.FC = () => {
   const journey = useMemo(() => loadDfaJourneyState(), []);
   const foundationStory = useMemo(() => getFoundationStory(), []);
   const latestStory = useMemo(() => getHomepageLatestStory(), []);
-
-  useEffect(() => {
-    const observerOptions = {
-      threshold: 0.12,
-      rootMargin: '0px 0px -40px 0px',
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-
-    const animationElements = document.querySelectorAll('.reveal-on-scroll, .slide-in-left, .slide-in-right');
-    animationElements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
 
   const trustPoints = [
     'Your data stays on your device',
@@ -45,280 +16,199 @@ const HomePage: React.FC = () => {
     'Pick up where you left off in Family Hub',
   ];
 
-  const flowSteps = [
+  const pathCards = [
     {
-      eyebrow: 'Start',
-      title: 'Map your family’s digital footprint',
-      description: 'List the apps and services your household uses so you know where to focus first.',
-    },
-    {
-      eyebrow: 'Prioritize',
-      title: 'See what matters now',
-      description: 'Turn the review into a short list of practical next steps—not an endless checklist.',
-    },
-    {
-      eyebrow: 'Sustain',
-      title: 'Keep progress in one place',
-      description: 'Use Family Hub for missions, goals, and follow-through after the first review.',
-    },
-  ];
-
-  const quickStats = [
-    { label: 'Best place to begin', value: 'Digital Footprint Analysis' },
-    { label: 'Learn and plan on the site', value: 'Guides & stories' },
-    { label: 'Practice as a family', value: 'Family Hub' },
-  ];
-
-  const spotlightCards = [
-    {
-      title: 'Digital Footprint Analysis',
-      description: 'See which apps and services shape your household privacy—then decide what to tackle first.',
+      label: 'Best place to begin',
+      value: 'Digital Footprint Analysis',
       href: '/digital-footprint',
-      tag: 'Recommended first step',
     },
-    {
-      title: 'Family Hub',
-      description: 'Missions, members, and progress on your device—continue after your first review.',
-      href: '/family-hub',
-      tag: 'Family workspace',
-    },
+    { label: 'Learn and plan on the site', value: 'Guides & stories', href: '/resources' },
+    { label: 'Practice as a family', value: 'Family Hub', href: '/family-hub' },
   ];
+
+  const spotlightLinks = useMemo(() => {
+    const links = [
+      {
+        title: 'Digital Footprint Analysis',
+        description:
+          'See which apps and services shape your household privacy—then decide what to tackle first.',
+        href: '/digital-footprint',
+        tag: 'Recommended first step',
+        cta: 'Open',
+      },
+      {
+        title: 'Family Hub',
+        description: 'Missions, members, and progress on your device—continue after your first review.',
+        href: '/family-hub',
+        tag: 'Family workspace',
+        cta: 'Open',
+      },
+      {
+        title: 'Resources by audience',
+        description: 'Parent guides, kids’ stories, and educator materials.',
+        href: '/resources',
+        tag: 'Guides & activities',
+        cta: 'Browse',
+      },
+    ];
+
+    if (foundationStory) {
+      links.push({
+        title: foundationStory.title,
+        description: 'Read together—interactive scenes or chapters',
+        href: `/stories/${ORIGIN_STORY_SLUG}`,
+        tag: 'Story · start here',
+        cta: 'Open story',
+      });
+    } else if (latestStory) {
+      links.push({
+        title: latestStory.title,
+        description: latestStory.privacyTopic,
+        href: `/stories/${latestStory.slug}`,
+        tag: 'Latest story',
+        cta: `Read episode ${latestStory.episodeNumber}`,
+      });
+    }
+
+    return links;
+  }, [foundationStory, latestStory]);
 
   return (
     <div className="site-page">
-      <section className="homepage-hero premium-hero site-section">
-        <div className="site-shell premium-hero__container">
-          <div className="premium-hero__content slide-in-left">
-            <div className="premium-hero__intro">
-              <span className="premium-hero__eyebrow-pill">
-                <ShieldCheck size={14} aria-hidden />
-                Family privacy guidance
-              </span>
-              <div className="premium-hero__logo-badge">
-                <img src="/LogoPandagarde.png" alt="" aria-hidden />
-              </div>
-              <p className="premium-hero__eyebrow-text">Review first · Learn together · Act in Family Hub</p>
-            </div>
-
-            <div className="premium-hero__copy">
-              <h1>
-                A calmer way to protect your family’s
-                <span> digital life</span>
-              </h1>
-              <p>
-                Start with a guided privacy review, use age-appropriate resources when you need them, and keep
-                momentum in Family Hub—without turning privacy into a pile of scattered tabs and notes.
-              </p>
-            </div>
-
-            <div className="premium-hero__actions">
-              <Link to={journey.resumePath} className="button button-primary premium-hero__primary-action">
-                {journey.progressPercent > 0 ? 'Continue your journey' : 'Start Digital Footprint Analysis'}
-                <ArrowRight size={18} aria-hidden />
-              </Link>
-              <Link to="/how-it-works" className="button button-secondary premium-hero__secondary-action">
-                How it works
-              </Link>
-            </div>
-
-            <div className="premium-hero__trust-row">
-              {trustPoints.map((item) => (
-                <div key={item} className="premium-hero__trust-item">
-                  <CheckCircle size={16} aria-hidden />
-                  <span>{item}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="premium-hero__visual slide-in-right" aria-hidden="true">
-            <div className="premium-hero__glow premium-hero__glow--one" />
-            <div className="premium-hero__glow premium-hero__glow--two" />
-            <div className="premium-hero__floating-chip premium-hero__floating-chip--top premium-hero__floating-chip--accent">
-              <ShieldCheck size={14} />
-              Stays on your device
-            </div>
-            <div className="premium-hero__floating-chip premium-hero__floating-chip--bottom premium-hero__floating-chip--info">
-              <BookOpen size={14} />
-              For the whole household
-            </div>
-
-            <div className="premium-hero__workspace-card">
-              <div className="premium-hero__workspace-topbar">
-                <div className="premium-hero__workspace-brand">
-                  <div className="premium-hero__workspace-icon premium-hero__workspace-icon--logo">
-                    <img src="/LogoPandagarde.png" alt="" />
-                  </div>
-                  <div>
-                    <strong>Family Hub</strong>
-                    <span>Your family workspace</span>
-                  </div>
-                </div>
-                <div className="premium-hero__status-pill">On this device</div>
-              </div>
-
-              <div className="premium-hero__workspace-grid">
-                <div className="premium-hero__metric-card premium-hero__metric-card--primary">
-                  <span className="premium-hero__metric-label">Your path</span>
-                  <strong>Review → plan → Family Hub</strong>
-                  <p>One sequence instead of jumping between unrelated tools.</p>
-                </div>
-
-                <div className="premium-hero__metric-row">
-                  <div className="premium-hero__mini-card">
-                    <span>Step 1</span>
-                    <strong>Footprint review</strong>
-                  </div>
-                  <div className="premium-hero__mini-card">
-                    <span>Step 2</span>
-                    <strong>Family follow-through</strong>
-                  </div>
-                </div>
-
-                <div className="premium-hero__journey-list">
-                  {flowSteps.map((step, index) => (
-                    <div key={step.title} className="premium-hero__journey-item">
-                      <div className="premium-hero__journey-index">0{index + 1}</div>
-                      <div className="premium-hero__journey-copy">
-                        <span>{step.eyebrow}</span>
-                        <strong>{step.title}</strong>
-                        <p>{step.description}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="homepage-stats site-section reveal-on-scroll">
-        <div className="site-shell">
-          <div className="homepage-stats__grid">
-            {quickStats.map((item, index) => (
-              <article key={item.label} className="homepage-stats__card">
-                <div className="homepage-stats__index">0{index + 1}</div>
-                <div className="homepage-stats__content">
-                  <span className="homepage-stats__label">{item.label}</span>
-                  <strong className="homepage-stats__value">{item.value}</strong>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="homepage-spotlight site-section reveal-on-scroll">
-        <div className="site-shell homepage-spotlight__container">
-          <header className="page-section__header homepage-spotlight__copy">
-            <span className="page-section__eyebrow">Start here</span>
-            <h2 className="page-section__title">Two places families use most</h2>
+      <section className="homepage-hero site-section" aria-labelledby="homepage-hero-title">
+        <div className="container homepage-hero__inner">
+          <header className="page-section__header homepage-hero__header">
+            <span className="page-section__eyebrow homepage-hero__eyebrow">
+              <ShieldCheck size={14} aria-hidden />
+              Family privacy guidance
+            </span>
+            <img
+              src="/LogoPandagarde.png"
+              alt=""
+              aria-hidden
+              className="homepage-hero__logo h-16 w-16 shrink-0 object-contain sm:h-[4.5rem] sm:w-[4.5rem]"
+            />
+            <p className="page-section__lead homepage-hero__tagline">
+              Review first · Learn together · Act in Family Hub
+            </p>
+            <h1 id="homepage-hero-title" className="homepage-hero__title">
+              A calmer way to protect your family’s
+              <span> digital life</span>
+            </h1>
             <p className="page-section__lead">
-              Run your first review on the site, then open Family Hub when you are ready for missions and ongoing
-              progress. Stories and guides are there when you want to learn together.
+              Start with a guided privacy review, use age-appropriate resources when you need them, and keep
+              momentum in Family Hub—without turning privacy into a pile of scattered tabs and notes.
             </p>
           </header>
-          <div className="homepage-spotlight__grid">
-            {spotlightCards.map((item) => (
-              <Link key={item.title} to={item.href} className="homepage-spotlight__card">
-                <span className="homepage-spotlight__tag">{item.tag}</span>
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-                <span className="homepage-spotlight__cta">
-                  Open
-                  <ChevronRight size={16} aria-hidden />
-                </span>
-              </Link>
-            ))}
-            <Link to="/resources" className="homepage-spotlight__card">
-              <span className="homepage-spotlight__tag">Guides & activities</span>
-              <h3>Resources by audience</h3>
-              <p>Parent guides, kids’ stories, and educator materials in one place.</p>
-              <span className="homepage-spotlight__cta">
-                Browse resources
-                <ChevronRight size={16} aria-hidden />
-              </span>
+
+          <div className="homepage-hero__actions">
+            <Link to={journey.resumePath} className="button button-primary inline-flex items-center justify-center gap-2">
+              {journey.progressPercent > 0 ? 'Continue your journey' : 'Start Digital Footprint Analysis'}
+              <ArrowRight size={18} aria-hidden />
             </Link>
-            {foundationStory && (
-              <Link
-                to={`/stories/${ORIGIN_STORY_SLUG}`}
-                className="homepage-spotlight__card homepage-spotlight__card--story"
-              >
-                <span className="homepage-spotlight__tag">Story · start here</span>
-                <div className="flex items-start gap-3">
-                  <StoryCoverArt story={foundationStory} variant="inline" />
-                  <div>
-                    <h3>{foundationStory.title}</h3>
-                    <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                      Read together—interactive scenes or chapters
-                    </p>
-                  </div>
-                </div>
-                <span className="homepage-spotlight__cta">
-                  Open story
-                  <ChevronRight size={16} aria-hidden />
-                </span>
-              </Link>
-            )}
-            {latestStory && latestStory.slug !== ORIGIN_STORY_SLUG && (
-              <Link
-                to={`/stories/${latestStory.slug}`}
-                className="homepage-spotlight__card homepage-spotlight__card--story"
-              >
-                <span className="homepage-spotlight__tag">Latest story</span>
-                <div className="flex items-start gap-3">
-                  <span className="text-3xl" aria-hidden="true">
-                    {latestStory.coverEmoji}
-                  </span>
-                  <div>
-                    <h3>{latestStory.title}</h3>
-                    <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">{latestStory.privacyTopic}</p>
-                  </div>
-                </div>
-                <span className="homepage-spotlight__cta">
-                  Read episode {latestStory.episodeNumber}
-                  <ChevronRight size={16} aria-hidden />
-                </span>
-              </Link>
-            )}
+            <Link to="/how-it-works" className="button button-secondary inline-flex items-center justify-center">
+              How it works
+            </Link>
           </div>
-          {(foundationStory || latestStory) && (
-            <p className="homepage-spotlight__see-all mt-4">
-              <Link to="/stories" className="font-medium text-green-700 hover:underline dark:text-green-400">
-                See all stories →
-              </Link>
-            </p>
-          )}
+
+          <ul className="homepage-hero__trust-list">
+            {trustPoints.map((item) => (
+              <li key={item}>
+                <CheckCircle size={14} aria-hidden />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
-      <section className="homepage-closing-cta site-section reveal-on-scroll">
-        <div className="site-shell homepage-closing-cta__container">
-          <div className="homepage-closing-cta__copy">
-            <span className="page-section__eyebrow">Ready when you are</span>
-            <h2 className="page-section__title">Start with your family’s digital footprint review.</h2>
-            <p className="page-section__lead">
-              It takes a few minutes to list what your household uses online. Family Hub is there when you want
-              missions and follow-through—no rush to open it on day one.
-            </p>
+      <main className="page-layout__main">
+        <div className="container">
+          <div className="page-content">
+            <PageSection
+              className="homepage-glance"
+              header={{
+                eyebrow: 'At a glance',
+                title: 'Review, learn, and follow through',
+                lead: 'The site helps you map your footprint and find guidance; Family Hub helps you practice and keep progress on your device.',
+              }}
+            >
+              <ol className="homepage-path shell-grid shell-grid--3">
+                {pathCards.map((item, index) => (
+                  <li key={item.label}>
+                    <Link to={item.href} className="homepage-path__step shell-card">
+                      <div className="homepage-path__head">
+                        <span className="homepage-path__index" aria-hidden>
+                          {index + 1}
+                        </span>
+                        <h3 className="shell-card__title text-base">{item.value}</h3>
+                      </div>
+                      <p className="shell-card__body text-sm">{item.label}</p>
+                    </Link>
+                  </li>
+                ))}
+              </ol>
+            </PageSection>
+
+            <PageSection
+              className="homepage-spotlight"
+              header={{
+                eyebrow: 'Start here',
+                title: 'Two places families use most',
+                lead: 'Review on the site first—open Family Hub when you want missions and progress. Stories and guides are there when you want to learn together.',
+              }}
+            >
+              <div className="homepage-spotlight__grid">
+                {spotlightLinks.map((item) => (
+                  <ShellLinkCard
+                    key={item.href}
+                    to={item.href}
+                    tag={item.tag}
+                    title={item.title}
+                    description={item.description}
+                    cta={
+                      <>
+                        {item.cta}
+                        <ChevronRight size={16} aria-hidden />
+                      </>
+                    }
+                  />
+                ))}
+              </div>
+              {(foundationStory || latestStory) && (
+                <p className="homepage-spotlight__see-all">
+                  <Link to="/stories" className="font-medium text-green-700 hover:underline dark:text-green-400">
+                    See all stories →
+                  </Link>
+                </p>
+              )}
+            </PageSection>
+
+            <PageSection
+              className="homepage-closing"
+              header={{
+                eyebrow: 'Ready when you are',
+                title: 'Start with your family’s digital footprint review.',
+                lead: 'It takes a few minutes to list what your household uses online. Family Hub is there when you want missions and follow-through—no rush to open it on day one.',
+              }}
+            >
+              <Link to="/digital-footprint" className="button button-primary inline-flex items-center gap-1.5">
+                Start Digital Footprint Analysis
+                <ArrowRight size={14} aria-hidden />
+              </Link>
+              <Link to="/family-hub" className="button button-secondary inline-flex items-center gap-1.5">
+                Open Family Hub
+              </Link>
+              <p className="homepage-closing__followup page-section__lead text-center">
+                Still have questions?{' '}
+                <Link to="/how-it-works#faq" className="font-semibold text-green-700 hover:underline dark:text-green-400">
+                  See how PandaGarde works and common answers
+                </Link>
+              </p>
+            </PageSection>
           </div>
-          <div className="homepage-closing-cta__actions">
-            <Link to="/digital-footprint" className="button button-primary">
-              Start Digital Footprint Analysis
-            </Link>
-            <Link to="/family-hub" className="button button-secondary">
-              Open Family Hub
-            </Link>
-          </div>
-          <p className="homepage-closing-cta__followup">
-            Still have questions?{' '}
-            <Link to="/how-it-works#faq" className="font-semibold text-green-700 hover:underline dark:text-green-400">
-              See how PandaGarde works and common answers
-            </Link>
-          </p>
         </div>
-      </section>
+      </main>
     </div>
   );
 };

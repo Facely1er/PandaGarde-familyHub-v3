@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Plus, Eye, Trash2, Pencil } from 'lucide-react';
+import { Plus, Eye, Trash2, Pencil, type LucideIcon } from 'lucide-react';
 import { useHubFamilyMembers } from '../../contexts/HubFamilyContext';
 import { useFamilyProgress } from '../../contexts/FamilyProgressContext';
 import { useActiveMember } from '../../utils/familyProgressIntegration';
@@ -8,6 +8,7 @@ import { useDialogFocusTrap } from '../../hooks/useDialogFocusTrap';
 import { type HubFamilyMember, clearActiveMemberIfMatches } from '../hubFamilyMembers';
 import { HubScreenFallback } from '../lazyScreen';
 import { hubPaths } from '../hubPaths';
+import HubPageLayout from '../components/HubPageLayout';
 import HubScreenHero from '../components/HubScreenHero';
 import { hubAgeBandForAge, HUB_AGE_BANDS } from '../hubAgeBands';
 
@@ -16,7 +17,7 @@ const ChildProgressDetail = lazy(() => import('../../components/ChildProgressDet
 type AgeGroupMeta = {
   range: '5-8' | '9-12' | '13-17';
   label: string;
-  emoji: string;
+  icon: LucideIcon;
   badgeClass: string;
 };
 
@@ -28,7 +29,7 @@ function getAgeGroup(age: number): AgeGroupMeta | null {
   return {
     range: band.range,
     label: band.shortLabel,
-    emoji: band.emoji,
+    icon: band.icon,
     badgeClass: `${band.chipClass} border`,
   };
 }
@@ -141,7 +142,7 @@ const KidsScreen: React.FC = () => {
   }
 
   return (
-    <div className="mx-auto max-w-4xl space-y-6 p-4 sm:p-6">
+    <HubPageLayout>
       <HubScreenHero
         badge="Your crew"
         title="Family members"
@@ -167,10 +168,18 @@ const KidsScreen: React.FC = () => {
 
       {familyMembers.length === 0 ? (
         <div className="rounded-3xl border border-dashed border-teal-200 bg-teal-50/50 py-12 text-center dark:border-teal-700 dark:bg-teal-900/10">
-          <div className="mx-auto mb-4 flex justify-center gap-2 text-3xl" aria-hidden="true">
-            {HUB_AGE_BANDS.map((b) => (
-              <span key={b.range}>{b.emoji}</span>
-            ))}
+          <div className="mx-auto mb-4 flex justify-center gap-3" aria-hidden="true">
+            {HUB_AGE_BANDS.map((b) => {
+              const Icon = b.icon;
+              return (
+                <span
+                  key={b.range}
+                  className={`flex h-10 w-10 items-center justify-center rounded-xl ${b.iconBadgeClass}`}
+                >
+                  <Icon size={20} />
+                </span>
+              );
+            })}
           </div>
           <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-white">Who is learning with you?</h3>
           <p className="mx-auto mb-6 max-w-sm text-gray-600 dark:text-gray-400">
@@ -192,26 +201,29 @@ const KidsScreen: React.FC = () => {
             return (
               <div
                 key={member.id}
-                className="hub-card-lift rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-shadow dark:border-gray-700 dark:bg-gray-200"
+                className="hub-card-lift rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-shadow dark:border-gray-700 dark:bg-gray-800"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex min-w-0 flex-1 items-center gap-4">
                     <div
                       className={[
-                        'flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br text-xl shadow-md',
-                        band ? band.avatarClass : 'from-teal-500 to-cyan-600',
+                        'flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl shadow-md',
+                        band ? band.avatarClass : 'bg-teal-600 text-white dark:bg-teal-700',
                       ].join(' ')}
-                      role="img"
                       aria-label={band ? `${band.label} avatar` : `${member.name} avatar`}
                     >
-                      {band?.emoji ?? member.name.charAt(0).toUpperCase()}
+                      {band ? (
+                        <band.icon size={22} aria-hidden="true" />
+                      ) : (
+                        <span className="text-lg font-bold">{member.name.charAt(0).toUpperCase()}</span>
+                      )}
                     </div>
                     <div className="min-w-0">
                       <h3 className="font-bold text-lg text-gray-900 dark:text-white">{member.name}</h3>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
                         {member.role} &middot; Age {member.age}
                       </p>
-                      <p className="text-xs text-gray-500 dark:text-gray-500 mt-0.5">
+                      <p className="mt-0.5 text-xs text-gray-500 dark:text-gray-400">
                         Privacy Score: {calculateMemberScore(member.id)}/100
                       </p>
                       {ageGroup && (
@@ -222,7 +234,7 @@ const KidsScreen: React.FC = () => {
                           className={`inline-flex items-center gap-1 mt-2 px-2.5 py-0.5 rounded-full border text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 ${ageGroup.badgeClass}`}
                           aria-label={`View ${ageGroup.label} activities for ${member.name}`}
                         >
-                          <span aria-hidden="true">{ageGroup.emoji}</span>
+                          <ageGroup.icon size={14} aria-hidden="true" />
                           {ageGroup.label} activities &rarr;
                         </Link>
                       )}
@@ -287,7 +299,7 @@ const KidsScreen: React.FC = () => {
             role="dialog"
             aria-modal="true"
             aria-labelledby="add-member-title"
-            className="w-full max-w-md rounded-xl bg-white p-6 shadow-xl dark:bg-gray-200"
+            className="w-full max-w-md rounded-xl bg-white p-6 shadow-xl dark:bg-gray-800"
           >
             <div className="flex items-center justify-between mb-6">
               <h3 id="add-member-title" className="text-xl font-bold text-gray-900 dark:text-white">
@@ -340,7 +352,11 @@ const KidsScreen: React.FC = () => {
                   const g = getAgeGroup(newMember.age);
                   return g ? (
                     <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-                      Age-matched activities: <span className="font-medium">{g.emoji} {g.label}</span>
+                      Age-matched activities:{' '}
+                      <span className="inline-flex items-center gap-1 font-medium">
+                        <g.icon size={14} aria-hidden="true" />
+                        {g.label}
+                      </span>
                     </p>
                   ) : null;
                 })()}
@@ -400,7 +416,7 @@ const KidsScreen: React.FC = () => {
             role="dialog"
             aria-modal="true"
             aria-labelledby="edit-member-title"
-            className="w-full max-w-md rounded-xl bg-white p-6 shadow-xl dark:bg-gray-200"
+            className="w-full max-w-md rounded-xl bg-white p-6 shadow-xl dark:bg-gray-800"
           >
             <div className="flex items-center justify-between mb-6">
               <h3 id="edit-member-title" className="text-xl font-bold text-gray-900 dark:text-white">
@@ -504,7 +520,7 @@ const KidsScreen: React.FC = () => {
             aria-modal="true"
             aria-labelledby="remove-member-title"
             aria-describedby="remove-member-desc"
-            className="w-full max-w-md rounded-xl bg-white p-6 shadow-xl dark:bg-gray-200"
+            className="w-full max-w-md rounded-xl bg-white p-6 shadow-xl dark:bg-gray-800"
           >
             <h3 id="remove-member-title" className="text-xl font-bold text-gray-900 dark:text-white mb-2">
               Remove {memberToRemove.name}?
@@ -532,7 +548,7 @@ const KidsScreen: React.FC = () => {
           </div>
         </div>
       )}
-    </div>
+    </HubPageLayout>
   );
 };
 

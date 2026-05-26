@@ -18,7 +18,10 @@ import PageLayout from '../components/layout/PageLayout';
 import {
   PageLead,
   PageSection,
+  ShellIconCard,
+  ShellPillarCard,
   ShellRowCard,
+  ShellTextCard,
 } from '../components/layout/PageContent';
 
 const flow = [
@@ -214,15 +217,13 @@ const FeaturesPage: React.FC = () => {
       >
         <div className="shell-grid shell-grid--2">
           {transformationColumns.map((column) => (
-            <article key={column.title} className="shell-card p-5">
-              <span className="shell-pill">{column.eyebrow}</span>
-              <h3 className="shell-card__title mt-3 text-lg">{column.title}</h3>
-              <ul className="shell-list mt-3">
+            <ShellPillarCard key={column.title} eyebrow={column.eyebrow} title={column.title}>
+              <ul className="shell-list">
                 {column.points.map((point) => (
                   <li key={point}>{point}</li>
                 ))}
               </ul>
-            </article>
+            </ShellPillarCard>
           ))}
         </div>
       </PageSection>
@@ -238,18 +239,14 @@ const FeaturesPage: React.FC = () => {
           {journeyLayers.map((item) => {
             const Icon = item.icon;
             return (
-              <article key={item.title} className="shell-card p-5">
-                <div className="shell-icon shell-icon--md mb-4">
-                  <Icon size={20} aria-hidden />
-                </div>
-                <h3 className="shell-card__title text-base">{item.title}</h3>
-                <p className="shell-card__body mt-2 text-sm">{item.description}</p>
-                <ul className="shell-list mt-3">
+              <ShellIconCard key={item.title} icon={<Icon size={20} aria-hidden />} title={item.title}>
+                <p className="shell-card__body text-sm">{item.description}</p>
+                <ul className="shell-list">
                   {item.points.map((point) => (
                     <li key={point}>{point}</li>
                   ))}
                 </ul>
-              </article>
+              </ShellIconCard>
             );
           })}
         </div>
@@ -260,13 +257,9 @@ const FeaturesPage: React.FC = () => {
           {audienceCards.map((item) => {
             const Icon = item.icon;
             return (
-              <article key={item.title} className="shell-card p-5">
-                <div className="shell-icon shell-icon--md mb-4">
-                  <Icon size={20} aria-hidden />
-                </div>
-                <h3 className="shell-card__title text-base">{item.title}</h3>
-                <p className="shell-card__body mt-2 text-sm">{item.description}</p>
-              </article>
+              <ShellIconCard key={item.title} icon={<Icon size={20} aria-hidden />} title={item.title}>
+                <p className="shell-card__body text-sm">{item.description}</p>
+              </ShellIconCard>
             );
           })}
         </div>
@@ -279,10 +272,9 @@ const FeaturesPage: React.FC = () => {
       >
         <div className="shell-grid shell-grid--3">
           {faqCards.map((item) => (
-            <article key={item.question} className="shell-card p-5">
-              <h3 className="shell-card__title text-base">{item.question}</h3>
-              <p className="shell-card__body mt-2 text-sm">{item.answer}</p>
-            </article>
+            <ShellTextCard key={item.question} title={item.question}>
+              <p className="shell-card__body text-sm">{item.answer}</p>
+            </ShellTextCard>
           ))}
         </div>
       </PageSection>
@@ -292,13 +284,9 @@ const FeaturesPage: React.FC = () => {
           {trustPoints.map((item) => {
             const Icon = item.icon;
             return (
-              <article key={item.title} className="shell-card p-5">
-                <div className="shell-icon shell-icon--md mb-4">
-                  <Icon size={20} aria-hidden />
-                </div>
-                <h3 className="shell-card__title text-base">{item.title}</h3>
-                <p className="shell-card__body mt-2 text-sm">{item.description}</p>
-              </article>
+              <ShellIconCard key={item.title} icon={<Icon size={20} aria-hidden />} title={item.title}>
+                <p className="shell-card__body text-sm">{item.description}</p>
+              </ShellIconCard>
             );
           })}
         </div>
@@ -306,7 +294,7 @@ const FeaturesPage: React.FC = () => {
 
       <div className="shell-card shell-card--panel shell-cta-panel">
         <div className="shell-cta-panel__copy">
-          <h2 className="shell-card__title">Ready to begin?</h2>
+          <h2 className="page-section__title">Ready to begin?</h2>
           <p className="shell-card__body">
             Start with Digital Footprint Analysis, or open Family Hub when you are ready.
           </p>

@@ -14,8 +14,10 @@ export const hubPaths = {
   root: BASE || '/',
   welcome: hubPath('welcome'),
   dashboard: hubPath('dashboard'),
+  journey: hubPath('journey'),
   kids: hubPath('kids'),
   activities: hubPath('activities'),
+  /** @deprecated Use journey — rewards live under Journey */
   progress: hubPath('progress'),
   settings: hubPath('settings'),
 } as const;

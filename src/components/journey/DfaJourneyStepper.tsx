@@ -65,7 +65,7 @@ const DfaJourneyStepper: React.FC<Props> = ({
                     ? 'border-green-300 bg-green-50 text-green-900 dark:border-green-800 dark:bg-green-950/60 dark:text-green-100'
                     : isVisited
                       ? 'border-sky-300 bg-sky-50 text-sky-900 dark:border-sky-800 dark:bg-sky-950/50 dark:text-sky-100'
-                      : 'border-gray-200 bg-white text-gray-600 dark:border-dark-border dark:bg-gray-300 dark:text-dark-text-secondary'
+                      : 'border-gray-200 bg-white text-gray-600 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300'
               }`}
             >
               <span className="tabular-nums opacity-80">{index + 1}.</span>
@@ -88,7 +88,7 @@ const DfaJourneyStepper: React.FC<Props> = ({
       >
         <div className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex min-w-0 flex-1 items-center gap-3">
-            <span className="shrink-0 text-sm font-semibold text-gray-900 dark:text-dark-text-primary">
+            <span className="shrink-0 text-sm font-semibold text-gray-900 dark:text-white">
               {journey.progressPercent}% complete
             </span>
             <div className="h-2 min-w-[120px] flex-1 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-600">
@@ -107,7 +107,7 @@ const DfaJourneyStepper: React.FC<Props> = ({
         </div>
         {renderPhasePills(corePhases)}
         {optionalPhases.length > 0 && (
-          <p className="mt-3 text-xs text-gray-500 dark:text-dark-text-tertiary">
+          <p className="mt-3 text-xs text-gray-500 dark:text-gray-400">
             Optional:{' '}
             <Link to={optionalPhases[0].path} className="font-medium text-green-700 hover:underline dark:text-green-400">
               {optionalPhases[0].title}
@@ -121,20 +121,20 @@ const DfaJourneyStepper: React.FC<Props> = ({
 
   return (
     <section
-      className={`rounded-2xl border border-green-200 bg-gradient-to-br from-green-50 via-white to-sky-50 p-5 shadow-sm dark:border-green-800/50 dark:from-green-950/40 dark:via-gray-900 dark:to-gray-900 ${className}`.trim()}
+      className={`rounded-2xl border border-green-200 bg-green-50 p-5 shadow-sm dark:border-green-800/50 dark:bg-gray-800 ${className}`.trim()}
     >
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
         <div>
-          <div className="inline-flex items-center gap-2 rounded-full bg-white/90 px-3 py-1 text-sm font-semibold text-green-800 ring-1 ring-green-200 dark:bg-gray-200/95 dark:text-green-400 dark:ring-green-700/60">
+          <div className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-sm font-semibold text-green-800 ring-1 ring-green-200 dark:bg-gray-700 dark:text-green-300 dark:ring-green-700/60">
             <PlayCircle size={16} /> DFA-led journey
           </div>
-          <h2 className="mt-3 text-2xl font-bold text-gray-900 dark:text-dark-text-primary">{title}</h2>
-          <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-600 dark:text-dark-text-secondary">{subtitle}</p>
+          <h2 className="mt-3 text-2xl font-bold text-gray-900 dark:text-white">{title}</h2>
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-600 dark:text-gray-300">{subtitle}</p>
         </div>
 
-        <div className="min-w-[220px] rounded-xl border border-green-200 bg-white/95 px-4 py-3 shadow-sm dark:border-green-800/50 dark:bg-gray-200/95">
-          <div className="text-sm font-semibold text-gray-900">{journey.progressPercent}% complete</div>
-          <div className="mt-2 h-2 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-300">
+        <div className="min-w-[220px] rounded-xl border border-green-200 bg-white px-4 py-3 shadow-sm dark:border-green-800/50 dark:bg-gray-700">
+          <div className="text-sm font-semibold text-gray-900 dark:text-white">{journey.progressPercent}% complete</div>
+          <div className="mt-2 h-2 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-600">
             <div className="h-full rounded-full bg-green-600 transition-all dark:bg-green-500" style={{ width: `${journey.progressPercent}%` }} />
           </div>
           <Link
@@ -159,18 +159,18 @@ const DfaJourneyStepper: React.FC<Props> = ({
                 isCurrent
                   ? 'border-green-500 bg-green-700 text-white shadow-md dark:border-green-400 dark:bg-green-600'
                   : isComplete
-                    ? 'border-green-300 bg-green-50 text-gray-900 dark:border-green-800 dark:bg-green-950/50'
+                    ? 'border-green-300 bg-green-50 text-gray-900 dark:border-green-800 dark:bg-green-950/50 dark:text-white'
                     : isVisited
-                      ? 'border-sky-300 bg-sky-50 text-gray-900 dark:border-sky-800 dark:bg-sky-950/40'
-                      : 'border-gray-200 bg-white text-gray-900 dark:border-gray-600 dark:bg-gray-200'
+                      ? 'border-sky-300 bg-sky-50 text-gray-900 dark:border-sky-800 dark:bg-sky-950/40 dark:text-white'
+                      : 'border-gray-200 bg-white text-gray-900 dark:border-gray-600 dark:bg-gray-800 dark:text-white'
               }`}
             >
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <div className={`text-xs font-semibold uppercase tracking-wide ${isCurrent ? 'text-green-100' : 'text-gray-500 dark:text-gray-600'}`}>
+                  <div className={`text-xs font-semibold uppercase tracking-wide ${isCurrent ? 'text-green-100' : 'text-gray-500 dark:text-gray-400'}`}>
                     Phase {index + 1}
                   </div>
-                  <h3 className={`mt-1 text-base font-bold ${isCurrent ? 'text-white' : 'text-gray-900'}`}>{phase.title}</h3>
+                  <h3 className={`mt-1 text-base font-bold ${isCurrent ? 'text-white' : 'text-gray-900 dark:text-white'}`}>{phase.title}</h3>
                 </div>
                 {isComplete ? (
                   <CheckCircle2 size={20} className={isCurrent ? 'text-white' : 'text-green-600 dark:text-green-400'} />
@@ -178,7 +178,7 @@ const DfaJourneyStepper: React.FC<Props> = ({
                   <Circle size={20} className={isCurrent ? 'text-white/80' : 'text-gray-300 dark:text-gray-500'} />
                 )}
               </div>
-              <p className={`mt-2 text-sm leading-6 ${isCurrent ? 'text-green-50' : 'text-gray-600 dark:text-gray-700'}`}>{phase.description}</p>
+              <p className={`mt-2 text-sm leading-6 ${isCurrent ? 'text-green-50' : 'text-gray-600 dark:text-gray-300'}`}>{phase.description}</p>
               <div className={`mt-3 text-sm font-semibold ${isCurrent ? 'text-white' : 'text-green-700 dark:text-green-400'}`}>
                 {isComplete ? 'Completed' : isVisited ? 'In progress' : 'Start here'}
               </div>

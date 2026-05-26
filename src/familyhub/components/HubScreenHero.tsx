@@ -1,5 +1,6 @@
 import React from 'react';
 import HubBrandLogo from './HubBrandLogo';
+import { hubTheme } from '../hubTheme';
 
 interface HubScreenHeroProps {
   badge?: string;
@@ -20,25 +21,16 @@ const HubScreenHero: React.FC<HubScreenHeroProps> = ({
 }) => (
   <section
     className={[
-      'relative overflow-hidden rounded-3xl border border-teal-200/80 shadow-sm dark:border-teal-700/40',
+      hubTheme.hero,
       compact ? 'p-4 sm:p-5' : 'p-5 sm:p-6',
     ].join(' ')}
-    style={{ background: 'var(--fh-header-gradient)' }}
     aria-labelledby="hub-hero-title"
   >
-    <div
-      className="pointer-events-none absolute -right-6 -top-6 h-28 w-28 rounded-full bg-white/15 blur-2xl"
-      aria-hidden="true"
-    />
-    <div
-      className="pointer-events-none absolute -bottom-8 left-1/3 h-24 w-24 rounded-full bg-amber-300/20 blur-2xl"
-      aria-hidden="true"
-    />
     <div className="relative flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-4">
       {mascot === 'panda' && (
         <HubBrandLogo
-          size={compact ? 'md' : 'header'}
-          variant="header"
+          size={compact ? 'lg' : 'hero'}
+          variant="plain"
           animated={!compact}
         />
       )}
@@ -57,7 +49,7 @@ const HubScreenHero: React.FC<HubScreenHeroProps> = ({
         >
           {title}
         </h1>
-        <p className={['mt-1.5 max-w-xl text-teal-50/95', compact ? 'text-sm' : 'text-sm sm:text-base'].join(' ')}>
+        <p className={['mt-1.5 max-w-xl text-teal-100', compact ? 'text-sm' : 'text-sm sm:text-base'].join(' ')}>
           {subtitle}
         </p>
         {children && <div className="mt-3">{children}</div>}

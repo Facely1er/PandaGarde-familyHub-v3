@@ -1,21 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Shield, Users, Gamepad2, Award } from 'lucide-react';
-import { updateDfaJourneyPhase } from '../../lib/dfaJourney';
+import { ArrowRight, ExternalLink, Shield, Users, Gamepad2, Award } from 'lucide-react';
 import { setHubOrigin } from '../../lib/hubMission';
+import { openExternalUrl } from '../../lib/openExternalUrl';
 import AgeBandStrip from '../components/AgeBandStrip';
 import HubBrandLogo from '../components/HubBrandLogo';
 import { HUB_WELCOMED_KEY } from '../constants';
-import { hubPaths } from '../hubPaths';
+import { hubPaths, pandagardeWebsiteUrl } from '../hubPaths';
+import { hubTheme } from '../hubTheme';
 
 export { HUB_WELCOMED_KEY };
-
-const phases = [
-  { label: 'Step 1', name: 'Service Catalog', description: 'Map the apps & services your family uses', done: true },
-  { label: 'Step 2', name: 'Digital Footprint', description: 'Understand your online exposure', done: true },
-  { label: 'Step 3', name: 'Privacy Assessment', description: 'Identify risks and priorities', done: true },
-  { label: 'Step 4', name: 'Family Hub', description: 'Act on your plan — you are here!', done: false, active: true },
-];
 
 const sections = [
   {
@@ -32,8 +26,8 @@ const sections = [
   },
   {
     icon: Award,
-    title: 'Progress',
-    description: 'Track completions, earn badges, and download certificates together.',
+    title: 'Journey',
+    description: 'Mission progress, badges, and certificates for activities your family completes here.',
     color: 'text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/30',
   },
 ];
@@ -41,29 +35,20 @@ const sections = [
 const WelcomeScreen: React.FC = () => {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    updateDfaJourneyPhase('hub', { visited: true, resumePath: '/family-hub/welcome' });
-  }, []);
-
-  const handleGetStarted = (origin: 'standalone' | 'web') => {
-    setHubOrigin(origin);
-    if (origin === 'web') {
-      updateDfaJourneyPhase('profile', { visited: true, completed: true });
-      updateDfaJourneyPhase('dfa', { visited: true, completed: true });
-      updateDfaJourneyPhase('plan', { visited: true, completed: true });
-    }
+  const handleGetStarted = () => {
+    setHubOrigin('standalone');
     localStorage.setItem(HUB_WELCOMED_KEY, 'true');
     navigate(hubPaths.dashboard, { replace: true });
   };
 
   return (
-    <div className="family-hub-theme flex min-h-screen flex-col bg-gradient-to-br from-teal-50 via-white to-amber-50/30 dark:from-gray-900 dark:via-gray-900 dark:to-gray-200">
+    <div className={`family-hub-theme ${hubTheme.page}`}>
       <div className="flex-1 overflow-y-auto px-4 py-8 sm:py-12">
         <div className="max-w-xl mx-auto space-y-8">
 
           {/* Hero */}
           <div className="text-center space-y-4">
-            <HubBrandLogo size="hero" animated className="mx-auto" />
+            <HubBrandLogo size="hero" variant="plain" animated className="mx-auto" />
             <div>
               <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight">
                 Welcome to your<br />
@@ -86,7 +71,7 @@ const WelcomeScreen: React.FC = () => {
               {sections.map(({ icon: Icon, title, description, color }) => (
                 <li
                   key={title}
-                  className="flex items-start gap-3 bg-white dark:bg-gray-200 rounded-xl border border-gray-200 dark:border-gray-700 p-4 shadow-sm"
+                  className="flex items-start gap-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 shadow-sm"
                 >
                   <span className={`mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${color}`}>
                     <Icon size={20} aria-hidden="true" />
@@ -100,59 +85,18 @@ const WelcomeScreen: React.FC = () => {
             </ul>
           </div>
 
-          {/* Journey progress — for users coming from the full assessment */}
-          <details className="group rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-200 shadow-sm">
-            <summary className="flex cursor-pointer items-center justify-between px-5 py-4 text-sm font-semibold text-gray-700 dark:text-gray-200 list-none">
-              <span>Coming from the Privacy Assessment?</span>
-              <span className="ml-2 text-xs font-normal text-gray-400 group-open:hidden">Show steps</span>
-              <span className="ml-2 text-xs font-normal text-gray-400 hidden group-open:inline">Hide</span>
-            </summary>
-            <div className="px-5 pb-5">
-              <p className="mb-4 text-xs text-gray-500 dark:text-gray-400">
-                Your Privacy Journey — four steps from mapping your family's digital life to acting on your plan.
-              </p>
-              <ol className="space-y-3">
-                {phases.map((phase, index) => (
-                  <li key={phase.label} className="flex items-start gap-3">
-                    <span
-                      className={[
-                        'mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold',
-                        phase.active
-                          ? 'bg-teal-600 text-white ring-2 ring-teal-300 dark:ring-teal-700'
-                          : phase.done
-                          ? 'bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300'
-                          : 'bg-gray-100 dark:bg-gray-700 text-gray-500',
-                      ].join(' ')}
-                    >
-                      {phase.done ? (
-                        <svg viewBox="0 0 14 14" width={14} height={14} fill="none" stroke="currentColor" strokeWidth={2} aria-hidden="true"><path d="M2 7l3.5 3.5L12 3.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                      ) : (
-                        index + 1
-                      )}
-                    </span>
-                    <div className="min-w-0">
-                      <p
-                        className={[
-                          'text-sm font-semibold',
-                          phase.active
-                            ? 'text-teal-700 dark:text-teal-300'
-                            : 'text-gray-700 dark:text-gray-200',
-                        ].join(' ')}
-                      >
-                        {phase.label} — {phase.name}
-                        {phase.active && (
-                          <span className="ml-2 inline-block rounded-full bg-teal-100 dark:bg-teal-900/50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-teal-700 dark:text-teal-300">
-                            You are here
-                          </span>
-                        )}
-                      </p>
-                      <p className="text-xs text-gray-500 dark:text-gray-400">{phase.description}</p>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-            </div>
-          </details>
+          <p className="text-center text-sm text-gray-600 dark:text-gray-400">
+            Parent{' '}
+            <button
+              type="button"
+              onClick={() => openExternalUrl(pandagardeWebsiteUrl)}
+              className="inline-flex items-center gap-1 font-medium text-teal-700 hover:underline dark:text-teal-400"
+            >
+              Digital Footprint Analysis
+              <ExternalLink size={14} aria-hidden="true" />
+            </button>{' '}
+            lives on the PandaGarde website — separate from these kids&apos; missions.
+          </p>
 
           {/* Privacy note */}
           <div className="flex items-start gap-3 rounded-xl bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 p-4 text-sm text-green-800 dark:text-green-200">
@@ -165,22 +109,15 @@ const WelcomeScreen: React.FC = () => {
       </div>
 
       {/* Sticky CTA */}
-      <div className="sticky bottom-0 bg-white/90 dark:bg-gray-100/90 backdrop-blur border-t border-gray-200 dark:border-gray-700 px-4 py-4 safe-area-bottom">
+      <div className="sticky bottom-0 bg-white/90 dark:bg-gray-800/90 backdrop-blur border-t border-gray-200 dark:border-gray-700 px-4 py-4 safe-area-bottom">
         <div className="max-w-xl mx-auto flex flex-col gap-2">
           <button
             type="button"
-            onClick={() => handleGetStarted('standalone')}
+            onClick={handleGetStarted}
             className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-teal-600 px-6 py-4 text-base font-semibold text-white shadow-sm hover:bg-teal-700 active:scale-[0.98] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
           >
-            Start fresh in Family Hub
+            Enter Family Hub
             <ArrowRight size={20} aria-hidden="true" />
-          </button>
-          <button
-            type="button"
-            onClick={() => handleGetStarted('web')}
-            className="w-full inline-flex items-center justify-center rounded-xl border border-gray-200 bg-white px-6 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-200 dark:text-gray-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
-          >
-            I completed the website assessment
           </button>
         </div>
       </div>

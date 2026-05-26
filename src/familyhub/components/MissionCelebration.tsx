@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { Award, ArrowRight, Sparkles, Target } from 'lucide-react';
+import HubBrandLogo from './HubBrandLogo';
 import { useDialogFocusTrap } from '../../hooks/useDialogFocusTrap';
 import type { FlattenedAgeBasedActivity } from '../../data/ageBasedActivities';
 
@@ -37,12 +38,10 @@ const MissionCelebration: React.FC<MissionCelebrationProps> = ({
         role="dialog"
         aria-modal="true"
         aria-labelledby="mission-celebration-title"
-        className="w-full max-w-md rounded-3xl border border-teal-200 bg-white p-6 shadow-xl dark:border-teal-700/50 dark:bg-gray-200"
+        className="w-full max-w-md rounded-3xl border border-teal-200 bg-white p-6 shadow-xl dark:border-teal-700/50 dark:bg-gray-800"
       >
         <div className="text-center">
-          <span className="text-5xl" role="img" aria-hidden="true">
-            🐼
-          </span>
+          <HubBrandLogo size="md" variant="card" className="mx-auto" alt="" />
           <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-teal-700 dark:bg-teal-900/40 dark:text-teal-200">
             <Sparkles size={14} aria-hidden="true" />
             Mission complete

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { X, ArrowRight, LayoutDashboard, Users, Gamepad2 } from 'lucide-react';
+import { X, ArrowRight, LayoutDashboard, Map, Users, Gamepad2 } from 'lucide-react';
 import { useDialogFocusTrap } from '../../hooks/useDialogFocusTrap';
 import { hubPaths } from '../hubPaths';
 
@@ -14,22 +14,28 @@ interface TourStep {
 
 const steps: TourStep[] = [
   {
-    title: 'Home — start here',
-    body: "Today's mission is your daily adventure. Finish it with a family talk, then check your streak on the Home tab.",
+    title: 'Dashboard — start here',
+    body: "See today's mission and quick stats. This is your family's daily starting point.",
     icon: LayoutDashboard,
     navTarget: hubPaths.dashboard,
   },
   {
-    title: 'Family — add your crew',
-    body: 'Add each child with their age. We match missions to Little Explorers (5–8), Detectives (9–12), or Digital Citizens (13–17).',
-    icon: Users,
-    navTarget: hubPaths.kids,
+    title: 'Journey — progress & rewards',
+    body: 'See missions completed, badges earned, and certificates — all saved on this device.',
+    icon: Map,
+    navTarget: hubPaths.journey,
   },
   {
-    title: 'Missions — play & learn',
-    body: '18 real-world privacy missions: scenarios, games, and a “try at home” step. Earn rewards as you go!',
+    title: 'Missions — play together',
+    body: 'Age-matched privacy missions with real-life scenarios, family talks, and optional games.',
     icon: Gamepad2,
     navTarget: hubPaths.activities,
+  },
+  {
+    title: 'Family — add profiles',
+    body: 'Add each child with their age so missions match Little Explorers (5–8), Detectives (9–12), or Digital Citizens (13–17).',
+    icon: Users,
+    navTarget: hubPaths.kids,
   },
 ];
 
@@ -88,7 +94,7 @@ const HubTour: React.FC<HubTourProps> = ({ onDone }) => {
         role="dialog"
         aria-modal="true"
         aria-label="Family Hub tour"
-        className="relative w-full max-w-sm rounded-2xl bg-white dark:bg-gray-200 shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden"
+        className="relative w-full max-w-sm rounded-2xl bg-white dark:bg-gray-800 shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden"
       >
         {/* Progress bar */}
         <div className="h-1 bg-gray-100 dark:bg-gray-700">

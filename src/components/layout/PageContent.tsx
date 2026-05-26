@@ -59,6 +59,50 @@ export const ShellRowCard: React.FC<{
   </article>
 );
 
+/** Grid card: icon and title on one row, body content below */
+export const ShellIconCard: React.FC<{
+  icon: React.ReactNode;
+  title: string;
+  children?: React.ReactNode;
+  className?: string;
+}> = ({ icon, title, children, className = '' }) => (
+  <article className={`shell-card shell-card--stack p-5 ${className}`.trim()}>
+    <div className="shell-card__head">
+      <div className="shell-icon shell-icon--md" aria-hidden>
+        {icon}
+      </div>
+      <h3 className="shell-card__title text-base">{title}</h3>
+    </div>
+    {children}
+  </article>
+);
+
+/** Grid card: optional eyebrow pill, title, then body (e.g. bullet list) */
+export const ShellPillarCard: React.FC<{
+  eyebrow?: string;
+  title: string;
+  children?: React.ReactNode;
+  className?: string;
+}> = ({ eyebrow, title, children, className = '' }) => (
+  <article className={`shell-card shell-card--stack p-5 ${className}`.trim()}>
+    {eyebrow ? <span className="shell-pill">{eyebrow}</span> : null}
+    <h3 className="shell-card__title text-base">{title}</h3>
+    {children}
+  </article>
+);
+
+/** Grid card: title + body only (FAQ, simple callouts) */
+export const ShellTextCard: React.FC<{
+  title: string;
+  children?: React.ReactNode;
+  className?: string;
+}> = ({ title, children, className = '' }) => (
+  <article className={`shell-card shell-card--stack p-5 ${className}`.trim()}>
+    <h3 className="shell-card__title text-base">{title}</h3>
+    {children}
+  </article>
+);
+
 export const ShellLinkCard: React.FC<{
   to: string;
   title: string;

@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Flame, Play, RotateCcw } from 'lucide-react';
+import { HubIcon } from '../hubIcons';
 import { useProgress } from '../../contexts/ProgressContext';
 import { useHubFamilyMembers } from '../../contexts/HubFamilyContext';
 import {
@@ -39,7 +40,7 @@ const TodayMissionCard: React.FC = () => {
 
   return (
     <section
-      className="hub-card-lift overflow-hidden rounded-2xl border-2 border-teal-300 bg-gradient-to-br from-teal-50 via-white to-amber-50/60 p-5 shadow-md dark:border-teal-600/60 dark:from-teal-900/30 dark:via-gray-200 dark:to-amber-900/10"
+      className="hub-card-lift overflow-hidden rounded-2xl border-2 border-teal-200 bg-teal-50 p-5 shadow-md dark:border-teal-700/60 dark:bg-teal-900/20"
       aria-labelledby="today-mission-heading"
     >
       <div className="flex flex-wrap items-start justify-between gap-3">
@@ -49,15 +50,13 @@ const TodayMissionCard: React.FC = () => {
           </p>
           <h2 id="today-mission-heading" className="mt-1 flex items-center gap-2 text-lg font-bold text-gray-900 dark:text-white">
             {!missionDone && (
-              <span className="text-2xl" role="img" aria-hidden="true">
-                {todaysMission.icon}
-              </span>
+              <HubIcon glyph={todaysMission.icon} size={22} className="shrink-0 text-teal-700 dark:text-teal-300" />
             )}
             {missionDone ? 'Pick another mission or revisit a favourite' : todaysMission.name}
           </h2>
           {!missionDone && (
             <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
-              {todaysMission.icon} Ages {todaysMission.groupAgeRange} · {todaysMission.duration} · {todaysMission.focus}
+              Ages {todaysMission.groupAgeRange} · {todaysMission.duration} · {todaysMission.focus}
             </p>
           )}
         </div>
@@ -90,7 +89,7 @@ const TodayMissionCard: React.FC = () => {
         </div>
       )}
 
-      <div className="mt-4 flex flex-wrap gap-2">
+      <div className="mt-4 flex flex-wrap justify-center gap-2">
         <Link
           to={hubPaths.activities}
           state={{ startMissionId: todaysMission.id }}
@@ -111,7 +110,7 @@ const TodayMissionCard: React.FC = () => {
         {familyMembers.length === 0 && (
           <Link
             to={hubPaths.kids}
-            className="inline-flex min-h-[44px] items-center justify-center rounded-xl border border-teal-300 bg-white px-4 py-2.5 text-sm font-semibold text-teal-800 hover:bg-teal-50 dark:border-teal-600 dark:bg-gray-200 dark:text-teal-200"
+            className="inline-flex min-h-[44px] items-center justify-center rounded-xl border border-teal-300 bg-white px-4 py-2.5 text-sm font-semibold text-teal-800 hover:bg-teal-50 dark:border-teal-600 dark:bg-gray-800 dark:text-teal-200"
           >
             Add family members
           </Link>

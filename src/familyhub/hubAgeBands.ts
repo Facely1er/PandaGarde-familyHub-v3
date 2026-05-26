@@ -1,17 +1,20 @@
 /** Age-band visuals for Family Hub — aligned with ageBasedActivities groups */
 
+import { Compass, Globe, Search, type LucideIcon } from 'lucide-react';
+
 export type HubAgeRange = '5-8' | '9-12' | '13-17';
 
 export interface HubAgeBand {
   range: HubAgeRange;
   label: string;
   shortLabel: string;
-  emoji: string;
+  icon: LucideIcon;
   tagline: string;
   missionCount: number;
   cardClass: string;
   chipClass: string;
   avatarClass: string;
+  iconBadgeClass: string;
 }
 
 export const HUB_AGE_BANDS: HubAgeBand[] = [
@@ -19,40 +22,44 @@ export const HUB_AGE_BANDS: HubAgeBand[] = [
     range: '5-8',
     label: 'Little Explorers',
     shortLabel: 'Ages 5–8',
-    emoji: '🐼',
+    icon: Compass,
     tagline: 'First steps in safe sharing',
     missionCount: 6,
     cardClass:
-      'border-emerald-200 bg-gradient-to-br from-emerald-50 to-teal-50 dark:border-emerald-700/50 dark:from-emerald-900/25 dark:to-teal-900/20',
+      'border-emerald-200 bg-emerald-50 dark:border-emerald-700/50 dark:bg-emerald-900/20',
     chipClass:
       'border-emerald-200 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 dark:border-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-200 dark:hover:bg-emerald-900/50',
-    avatarClass: 'from-emerald-400 to-teal-500',
+    avatarClass: 'bg-emerald-600 text-white dark:bg-emerald-700',
+    iconBadgeClass:
+      'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300',
   },
   {
     range: '9-12',
     label: 'Privacy Detectives',
     shortLabel: 'Ages 9–12',
-    emoji: '🕵️',
+    icon: Search,
     tagline: 'Games, chats & scams',
     missionCount: 6,
-    cardClass:
-      'border-sky-200 bg-gradient-to-br from-sky-50 to-indigo-50 dark:border-sky-700/50 dark:from-sky-900/25 dark:to-indigo-900/20',
+    cardClass: 'border-sky-200 bg-sky-50 dark:border-sky-700/50 dark:bg-sky-900/20',
     chipClass:
       'border-sky-200 bg-sky-50 text-sky-800 hover:bg-sky-100 dark:border-sky-700 dark:bg-sky-900/30 dark:text-sky-200 dark:hover:bg-sky-900/50',
-    avatarClass: 'from-sky-400 to-indigo-500',
+    avatarClass: 'bg-sky-600 text-white dark:bg-sky-700',
+    iconBadgeClass: 'bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-300',
   },
   {
     range: '13-17',
     label: 'Digital Citizens',
     shortLabel: 'Ages 13–17',
-    emoji: '🌐',
+    icon: Globe,
     tagline: 'Social life & future you',
     missionCount: 6,
     cardClass:
-      'border-violet-200 bg-gradient-to-br from-violet-50 to-fuchsia-50 dark:border-violet-700/50 dark:from-violet-900/25 dark:to-fuchsia-900/20',
+      'border-violet-200 bg-violet-50 dark:border-violet-700/50 dark:bg-violet-900/20',
     chipClass:
       'border-violet-200 bg-violet-50 text-violet-800 hover:bg-violet-100 dark:border-violet-700 dark:bg-violet-900/30 dark:text-violet-200 dark:hover:bg-violet-900/50',
-    avatarClass: 'from-violet-400 to-fuchsia-500',
+    avatarClass: 'bg-violet-600 text-white dark:bg-violet-700',
+    iconBadgeClass:
+      'bg-violet-100 text-violet-700 dark:bg-violet-900/40 dark:text-violet-300',
   },
 ];
 

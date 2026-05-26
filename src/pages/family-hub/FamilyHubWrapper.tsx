@@ -10,7 +10,7 @@ const WelcomeScreen = lazyScreen(() => import('../../familyhub/screens/WelcomeSc
 const DashboardScreen = lazyScreen(() => import('../../familyhub/screens/DashboardScreen'));
 const KidsScreen = lazyScreen(() => import('../../familyhub/screens/KidsScreen'));
 const ActivitiesScreen = lazyScreen(() => import('../../familyhub/screens/ActivitiesScreen'));
-const ProgressScreen = lazyScreen(() => import('../../familyhub/screens/ProgressScreen'));
+const JourneyScreen = lazyScreen(() => import('../../familyhub/screens/JourneyScreen'));
 const SettingsScreen = lazyScreen(() => import('../../familyhub/screens/SettingsScreen'));
 
 const FamilyHubRoutes: React.FC = () => {
@@ -35,13 +35,14 @@ const FamilyHubRoutes: React.FC = () => {
       <Route path="profile" element={<Navigate to="settings" replace />} />
       <Route path="certificates" element={<Navigate to="progress" replace />} />
       <Route path="learning" element={<Navigate to="activities" replace />} />
-      <Route path="journeys" element={<Navigate to="activities" replace />} />
+      <Route path="journeys" element={<Navigate to="journey" replace />} />
+      <Route path="progress" element={<Navigate to="journey" replace />} />
       <Route path="games" element={<Navigate to="activities" replace />} />
       <Route element={<AppShell />}>
         <Route path="dashboard" element={<DashboardScreen />} />
+        <Route path="journey" element={<JourneyScreen />} />
         <Route path="kids" element={<KidsScreen />} />
         <Route path="activities" element={<ActivitiesScreen />} />
-        <Route path="progress" element={<ProgressScreen />} />
         <Route path="settings" element={<SettingsScreen />} />
       </Route>
       <Route path="*" element={<Navigate to="dashboard" replace />} />
