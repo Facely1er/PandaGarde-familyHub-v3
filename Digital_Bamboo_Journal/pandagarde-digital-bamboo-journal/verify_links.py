@@ -12,7 +12,8 @@ errors=[]
 for html in root.rglob('*.html'):
     p=P(); p.feed(html.read_text(encoding='utf-8'))
     for href in p.links:
-        target=(html.parent/href).resolve()
+        base = root if href.startswith('/') else html.parent
+        target=(base/href.lstrip('/')).resolve()
         if not str(target).startswith(str(root.resolve())) or not target.exists(): errors.append((str(html.relative_to(root)),href))
 if errors:
     print('BROKEN LINKS FOUND')
