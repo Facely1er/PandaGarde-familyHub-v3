@@ -1,27 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+@import url('./pandagarde-site.css');
 
 :root {
-  --primary: #1b5e20;
-  --primary-light: #2e7d32;
-  --primary-dark: #0d4a0f;
-  --secondary: #66bb6a;
-  --tertiary: #81c784;
-  --accent: #d32f2f;
-  --warning: #f57c00;
-  --info: #1976d2;
-  --bg: #f5f5f5;
-  --panel: #ffffff;
-  --panel2: #e8f5e8;
-  --ink: #183b34;
-  --muted: #557064;
-  --line: #cfe5cf;
-  --brand: #1b5e20;
-  --brand-light: #2e7d32;
-  --brand-soft: #e8f5e8;
+  /* Journal-only layout tokens (brand colors come from pandagarde-site.css) */
   --gold: #d6a748;
   --blue: #24505a;
-  --shadow: 0 14px 40px rgba(27, 94, 32, 0.12);
-  --shadow-sm: 0 8px 24px rgba(27, 94, 32, 0.09);
   --radius: 22px;
   --space-section: clamp(2.5rem, 4.5vw, 3.25rem);
   --space-section-tight: clamp(1.75rem, 3vw, 2.25rem);
@@ -30,46 +13,17 @@
   --text-body: 1rem;
   --text-small: 0.875rem;
   --text-caption: 0.8125rem;
-  --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-  --gradient-hero: linear-gradient(
-    135deg,
-    var(--primary-dark) 0%,
-    var(--primary) 50%,
-    var(--primary-light) 100%
-  );
 }
 
 * {
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
+/* Base typography, colors, focus rules are provided by pandagarde-site.css.
+   Journal adds only layout specifics. */
 body {
-  margin: 0;
-  min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
-  background:
-    radial-gradient(circle at 18% 0%, rgba(102, 187, 106, 0.22), transparent 30%),
-    linear-gradient(180deg, #f7fbf7, #e8f5e8 48%, #f5f5f5);
-  color: var(--ink);
-  line-height: 1.65;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-a:focus-visible,
-button:focus-visible,
-input:focus-visible {
-  outline: 3px solid var(--secondary);
-  outline-offset: 2px;
 }
 
 .skip {
@@ -1276,34 +1230,7 @@ h3 {
 }
 
 /* ===== Dark theme (syncs with PandaGarde pandagarde-theme localStorage) ===== */
-html[data-theme='dark'] {
-  --primary: #4ade80;
-  --primary-light: #86efac;
-  --primary-dark: #22c55e;
-  --secondary: #6ee7b7;
-  --tertiary: #a7f3d0;
-  --bg: #040d0a;
-  --panel: #0d1f1a;
-  --panel2: #142b24;
-  --ink: #e8f5ef;
-  --muted: #9cb4a8;
-  --line: #1e3a31;
-  --brand: #4ade80;
-  --brand-light: #86efac;
-  --brand-soft: #142b24;
-  --gold: #fbbf24;
-  --blue: #7dd3fc;
-  --shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
-  --shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.35);
-  --gradient-hero: linear-gradient(135deg, #15803d 0%, #16a34a 50%, #22c55e 100%);
-}
-
-html[data-theme='dark'] body {
-  background:
-    radial-gradient(circle at 18% 0%, rgba(74, 222, 128, 0.12), transparent 30%),
-    linear-gradient(180deg, #040d0a, #0d1f1a 48%, #071712);
-  color: var(--ink);
-}
+/* Theme variables + body background now come from assets/pandagarde-site.css. */
 
 html[data-theme='dark'] .site-header {
   background: rgba(13, 31, 26, 0.94);
