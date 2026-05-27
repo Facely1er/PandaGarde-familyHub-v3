@@ -955,8 +955,13 @@ h3 {
 .article-body .callout .btns {
   margin-top: 0.5rem;
   width: 100%;
-  justify-content: center;
+  justify-content: center !important;
   align-items: center;
+}
+
+/* Ensure the Week 8 bridge callout buttons are centered. */
+#bridge .btns {
+  justify-content: center !important;
 }
 
 .breadcrumb {
