@@ -12,10 +12,10 @@ export function StoryEpilogue({ story, className = '', id }: StoryEpilogueProps)
   return (
     <section
       id={id}
-      className={`mt-8 space-y-6 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-200 p-6 sm:p-8 ${className}`}
+      className={`mt-8 space-y-6 rounded-2xl border border-gray-200 dark:border-gray-400 bg-white dark:bg-gray-100 p-6 sm:p-8 ${className}`}
       aria-labelledby="story-epilogue-heading"
     >
-      <h2 id="story-epilogue-heading" className="text-lg font-bold text-gray-900 dark:text-gray-100">
+      <h2 id="story-epilogue-heading" className="text-lg font-bold text-gray-900">
         After the story
       </h2>
 
@@ -30,7 +30,7 @@ export function StoryEpilogue({ story, className = '', id }: StoryEpilogueProps)
 
       {story.activities.length > 0 && (
         <div>
-          <h3 className="text-base font-semibold text-gray-800 dark:text-gray-200 mb-3">
+          <h3 className="text-base font-semibold text-gray-800 mb-3">
             Activities for this story
           </h3>
           {story.activities.map((act) => (

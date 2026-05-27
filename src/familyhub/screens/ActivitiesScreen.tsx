@@ -50,7 +50,7 @@ const ActivityCard: React.FC<{
     className={`group flex min-h-[300px] flex-col rounded-2xl border p-5 text-left shadow-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 ${
       activity.featured
         ? 'border-teal-200 bg-teal-50/50 hover:border-teal-400 hover:shadow-md dark:border-teal-700/40 dark:bg-teal-900/10 dark:hover:border-teal-500'
-        : 'border-gray-200 bg-white hover:border-teal-300 hover:shadow-md dark:border-gray-700 dark:bg-gray-800 dark:hover:border-teal-500'
+        : 'border-gray-200 bg-white hover:border-teal-300 hover:shadow-md dark:border-gray-400 dark:bg-gray-100 dark:hover:border-teal-500'
     }`}
     aria-label={`Start activity: ${activity.name}`}
   >
@@ -58,8 +58,8 @@ const ActivityCard: React.FC<{
       <div className="flex items-center gap-3">
         <HubIconBadge glyph={activity.icon} className="bg-teal-100 text-teal-700 dark:bg-teal-900/40 dark:text-teal-300" />
         <div>
-          <h3 className="text-base font-semibold leading-snug text-gray-900 dark:text-white">{activity.name}</h3>
-          <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">{activity.groupLabel}</p>
+          <h3 className="text-base font-semibold leading-snug text-gray-900">{activity.name}</h3>
+          <p className="mt-1 text-xs text-gray-500">{activity.groupLabel}</p>
         </div>
       </div>
 
@@ -78,10 +78,10 @@ const ActivityCard: React.FC<{
     </div>
 
     <div className="mt-4 flex flex-wrap gap-2 text-[11px] font-medium">
-      <span className="rounded-full bg-white px-2.5 py-1 text-teal-700 ring-1 ring-teal-200 dark:bg-gray-700 dark:text-teal-200 dark:ring-teal-700/50">
+      <span className="rounded-full bg-white px-2.5 py-1 text-teal-700 ring-1 ring-teal-200 dark:bg-gray-200 dark:text-teal-300 dark:ring-teal-700/50">
         Ages {activity.groupAgeRange}
       </span>
-      <span className="rounded-full bg-gray-100 px-2.5 py-1 text-gray-700 dark:bg-gray-700 dark:text-gray-200">
+      <span className="rounded-full bg-gray-100 px-2.5 py-1 text-gray-700 dark:bg-gray-200 dark:text-gray-800 dark:ring-1 dark:ring-gray-500">
         {activity.focus}
       </span>
       <span className="rounded-full bg-amber-50 px-2.5 py-1 text-amber-700 dark:bg-amber-900/30 dark:text-amber-200">
@@ -89,7 +89,7 @@ const ActivityCard: React.FC<{
       </span>
     </div>
 
-    <p className="mt-4 text-sm leading-relaxed text-gray-600 dark:text-gray-300">{activity.description}</p>
+    <p className="mt-4 text-sm leading-relaxed text-gray-600">{activity.description}</p>
 
     <div className="mt-4 rounded-2xl border border-amber-100 bg-amber-50/80 p-4 dark:border-amber-800/40 dark:bg-amber-900/15">
       <p className="text-[11px] font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-300">
@@ -100,11 +100,11 @@ const ActivityCard: React.FC<{
       </p>
     </div>
 
-    <div className="mt-4 rounded-2xl border border-gray-200 bg-gray-50 p-4 dark:border-gray-600 dark:bg-gray-700/50">
-      <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-600 dark:text-gray-300">
+    <div className="mt-4 rounded-2xl border border-gray-200 bg-gray-50 p-4 dark:border-gray-400 dark:bg-gray-200">
+      <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-600">
         Learning goal
       </p>
-      <p className="mt-2 text-sm text-gray-800 dark:text-gray-100">{activity.learningObjective}</p>
+      <p className="mt-2 text-sm leading-relaxed text-gray-800">{activity.learningObjective}</p>
     </div>
 
     <div className="mt-4 rounded-2xl border border-indigo-100 bg-indigo-50 p-4 dark:border-indigo-800/40 dark:bg-indigo-900/25">
@@ -115,7 +115,7 @@ const ActivityCard: React.FC<{
     </div>
 
     <div className="mt-auto flex items-end justify-between gap-3 pt-5">
-      <div className="text-xs text-gray-500 dark:text-gray-400">
+      <div className="text-xs text-gray-500">
         <p className="flex items-center gap-1.5">
           <Clock size={13} aria-hidden="true" />
           {activity.duration}
@@ -243,31 +243,37 @@ const ActivitiesScreen: React.FC = () => {
       <AgeBandStrip activeRange={activeBandRange} title="Jump in by age" />
 
       <div className="grid gap-4 lg:grid-cols-[1.7fr,1fr]">
-        <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-8">
+        <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-400 dark:bg-gray-100 sm:p-8">
           <div className="inline-flex items-center gap-2 rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-teal-700 dark:bg-teal-900/30 dark:text-teal-200">
             <Sparkles size={14} aria-hidden="true" />
             Filter &amp; browse
           </div>
-          <p className="mt-4 text-sm leading-6 text-gray-600 dark:text-gray-300 sm:text-base">
+          <p className="mt-4 text-sm leading-6 text-gray-600 sm:text-base">
             Use age tabs and learning goals below. Every card shows a real-life situation before you start.
           </p>
         </section>
 
         <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
           <div className="rounded-2xl border border-teal-200 bg-teal-50 p-5 dark:border-teal-700/40 dark:bg-teal-900/20">
-            <p className="text-xs font-semibold uppercase tracking-wide text-teal-700 dark:text-teal-300">Ready now</p>
-            <p className="mt-2 text-2xl font-bold text-teal-950 dark:text-teal-100">{filteredActivities.length}</p>
-            <p className="mt-1 text-sm text-teal-900/80 dark:text-teal-100/80">Activities match your current filters.</p>
+            <div className="flex items-start justify-between gap-3">
+              <p className="text-xs font-semibold uppercase tracking-wide text-teal-700 dark:text-teal-300">Ready now</p>
+              <p className="shrink-0 text-2xl font-bold tabular-nums text-teal-950 dark:text-teal-100">{filteredActivities.length}</p>
+            </div>
+            <p className="mt-2 text-sm text-teal-900/80 dark:text-teal-100/80">Activities match your current filters.</p>
           </div>
           <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5 dark:border-emerald-700/40 dark:bg-emerald-900/20">
-            <p className="text-xs font-semibold uppercase tracking-wide text-emerald-700 dark:text-emerald-300">Completed</p>
-            <p className="mt-2 text-2xl font-bold text-emerald-950 dark:text-emerald-100">{completedCount}</p>
-            <p className="mt-1 text-sm text-emerald-900/80 dark:text-emerald-100/80">Interactive missions already finished.</p>
+            <div className="flex items-start justify-between gap-3">
+              <p className="text-xs font-semibold uppercase tracking-wide text-emerald-700 dark:text-emerald-300">Completed</p>
+              <p className="shrink-0 text-2xl font-bold tabular-nums text-emerald-950 dark:text-emerald-100">{completedCount}</p>
+            </div>
+            <p className="mt-2 text-sm text-emerald-900/80 dark:text-emerald-100/80">Interactive missions already finished.</p>
           </div>
           <div className="rounded-2xl border border-indigo-200 bg-indigo-50 p-5 dark:border-indigo-700/40 dark:bg-indigo-900/20">
-            <p className="text-xs font-semibold uppercase tracking-wide text-indigo-700 dark:text-indigo-300">Family time</p>
-            <p className="mt-2 text-2xl font-bold text-indigo-950 dark:text-indigo-100">{totalMinutes} min</p>
-            <p className="mt-1 text-sm text-indigo-900/80 dark:text-indigo-100/80">Estimated time to explore every filtered mission.</p>
+            <div className="flex items-start justify-between gap-3">
+              <p className="text-xs font-semibold uppercase tracking-wide text-indigo-700 dark:text-indigo-300">Family time</p>
+              <p className="shrink-0 text-2xl font-bold tabular-nums text-indigo-950 dark:text-indigo-100">{totalMinutes} min</p>
+            </div>
+            <p className="mt-2 text-sm text-indigo-900/80 dark:text-indigo-100/80">Estimated time to explore every filtered mission.</p>
           </div>
         </div>
       </div>

@@ -713,16 +713,16 @@ const FamilyHubPage: React.FC = () => {
                         {activity.ageGroups.map((group) => (
                           <span 
                             key={group}
-                            className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600 dark:bg-gray-200 dark:text-gray-300"
+                            className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600 dark:bg-gray-200 dark:text-gray-800 dark:ring-1 dark:ring-gray-500"
                           >
                             Ages {group}
                           </span>
                         ))}
                       </div>
 
-                      <div className="rounded-2xl bg-gray-50 p-4 dark:bg-gray-200">
-                        <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">Learning goal</p>
-                        <p className="mt-2 text-sm text-gray-700 dark:text-gray-200">{activity.learningObjective}</p>
+                      <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4 dark:border-gray-400 dark:bg-gray-200">
+                        <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">Learning goal</p>
+                        <p className="mt-2 text-sm text-gray-800">{activity.learningObjective}</p>
                       </div>
 
                       <div className="mt-4 rounded-2xl bg-indigo-50 p-4 dark:bg-indigo-900/20">
