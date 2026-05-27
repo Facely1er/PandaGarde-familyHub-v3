@@ -214,7 +214,7 @@ const HomePage: React.FC = () => {
                 lead: 'Add apps in the service catalog when you want scores and charts. Stories, guides, and Hub stay available before, during, and after.',
               }}
             >
-              <div className="flex flex-wrap justify-center gap-3">
+              <div className="homepage-closing__actions">
                 <Link to="/service-catalog" className="button button-primary inline-flex items-center gap-1.5">
                   Service catalog
                   <ArrowRight size={14} aria-hidden />

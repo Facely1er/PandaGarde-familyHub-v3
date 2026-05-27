@@ -9151,40 +9151,22 @@ header.header .nav-actions button.header-icon-btn:not(.header-search-bar) {
   }
 }
 
-/* Closing CTA — centered buttons without an extra panel wrapper */
+/* Closing CTA — centered action buttons */
 .site-page .homepage-closing.page-section {
-  display: grid;
-  grid-template-columns: 1fr auto auto 1fr;
-  justify-items: center;
-  gap: 0.75rem 0.5rem;
   align-items: center;
 }
 
-.site-page .homepage-closing.page-section > .page-section__header,
-.site-page .homepage-closing.page-section > .homepage-closing__followup {
-  grid-column: 1 / -1;
+.site-page .homepage-closing__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
   width: 100%;
 }
 
-.site-page .homepage-closing.page-section > .button-primary {
-  grid-column: 2;
-  justify-self: end;
-}
-
-.site-page .homepage-closing.page-section > .button-secondary {
-  grid-column: 3;
-  justify-self: start;
-}
-
 @media (max-width: 639px) {
-  .site-page .homepage-closing.page-section {
-    grid-template-columns: 1fr;
-  }
-
-  .site-page .homepage-closing.page-section > .button-primary,
-  .site-page .homepage-closing.page-section > .button-secondary {
-    grid-column: 1;
-    justify-self: center;
+  .site-page .homepage-closing__actions .button {
     width: 100%;
     max-width: 20rem;
     justify-content: center;
