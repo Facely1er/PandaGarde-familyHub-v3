@@ -45,7 +45,7 @@ function mountThemeToggle() {
 mountThemeToggle();
 
 const SVG_ATTRS =
-  'xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
+  'xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"';
 
 const ICONS = {
   home: `<svg ${SVG_ATTRS}><path d="M3 10.5 12 3l9 7.5"/><path d="M5 10v10h14V10"/></svg>`,
@@ -67,6 +67,7 @@ const ICONS = {
 const NAV_ICON_KEYS = {
   'index.html': 'home',
   'family-digital-life.html': 'family',
+  'forest-stories.html': 'campfire',
   'inside-the-forest.html': 'forest',
   'parent-guides.html': 'book',
   'digital-resilience.html': 'shield',

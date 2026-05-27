@@ -31,6 +31,7 @@ Run:
 
 ```bash
 python verify_links.py
+python sync_layout.py   # re-apply shared header nav + footer to every HTML page
 ```
 
 

@@ -1,26 +1,29 @@
-"""Sync header nav (6 items) and footer across all journal HTML pages."""
+"""Sync header nav (6 short labels) and footer across all journal HTML pages."""
 from __future__ import annotations
 
 import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-ASSET_VERSION = "20260527"
+ASSET_VERSION = "20260531"
 
+# (href, short label, optional full title for title= attribute)
+# Order: home → family articles → stories → forest world → guides → research
 NAV = [
-    ("index.html", "Home"),
-    ("family-digital-life.html", "Family Digital Life"),
-    ("inside-the-forest.html", "Inside the Forest"),
-    ("parent-guides.html", "Parent Guides"),
-    ("digital-resilience.html", "Digital Resilience"),
-    ("educator-corner.html", "Educator Corner"),
+    ("index.html", "Home", None),
+    ("family-digital-life.html", "Family", "Family Digital Life"),
+    ("forest-stories.html", "Stories", "Forest Stories"),
+    ("inside-the-forest.html", "Characters", "Inside the Forest — characters & world"),
+    ("parent-guides.html", "Guides", "Parent Guides"),
+    ("research-insights.html", "Research", "Research Insights"),
 ]
 
 FOOTER_MORE = [
-    ("research-insights.html", "Research Insights"),
+    ("digital-resilience.html", "Digital Resilience"),
+    ("educator-corner.html", "Educator Corner"),
+    ("campfire-conversations.html", "Campfire Conversations"),
     ("seasonal-challenges.html", "Seasonal Challenges"),
     ("pandagarde-news.html", "PandaGarde News"),
-    ("campfire-conversations.html", "Campfire Conversations"),
 ]
 
 FOOTER_ECOSYSTEM = [
@@ -40,6 +43,9 @@ FOOTER_RE = re.compile(
 ICON_SPAN_RE = re.compile(
     r'<span class="nav-icon" aria-hidden="true">[^<]*</span>',
 )
+HEADER_RE = re.compile(
+    r'<header class="(?:site-header ite-header|ite-header site-header|site-header|ite-header)">'
+)
 
 
 def prefix_for(html: Path) -> str:
@@ -55,10 +61,11 @@ def page_slug(html: Path) -> str:
 
 def build_nav(pfx: str, current: str) -> str:
     parts = []
-    for href, label in NAV:
+    for href, label, title in NAV:
         full = f"{pfx}{href}"
         cur = ' aria-current="page"' if href == current else ""
-        parts.append(f'<a href="{full}"{cur}><span>{label}</span></a>')
+        title_attr = f' title="{title}"' if title else ""
+        parts.append(f'<a href="{full}"{cur}{title_attr}><span>{label}</span></a>')
     return (
         '<nav class="nav" aria-label="Main navigation">'
         + "".join(parts)
@@ -95,6 +102,7 @@ def sync_file(html: Path) -> bool:
     current = page_slug(html)
 
     text = ICON_SPAN_RE.sub("", text)
+    text = HEADER_RE.sub('<header class="site-header ite-header">', text)
     text, n_nav = NAV_RE.subn(build_nav(pfx, current), text, count=1)
     text, n_footer = FOOTER_RE.subn(build_footer(pfx), text, count=1)
     text = re.sub(r"styles\.css\?v=[^\"']+", f"styles.css?v={ASSET_VERSION}", text)
