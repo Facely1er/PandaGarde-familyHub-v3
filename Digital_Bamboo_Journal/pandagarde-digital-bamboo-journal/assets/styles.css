@@ -1160,6 +1160,21 @@ h3 {
   padding: clamp(1.75rem, 4vw, 2.5rem) 22px clamp(3rem, 6vw, 4rem);
 }
 
+.article-body .article-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  align-items: center;
+  margin: 0 0 1.25rem;
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.article-body .article-meta .dot {
+  opacity: 0.5;
+}
+
 .article-body > h1 {
   font-size: clamp(1.85rem, 3.2vw, 2.5rem);
   margin: 12px 0 14px;

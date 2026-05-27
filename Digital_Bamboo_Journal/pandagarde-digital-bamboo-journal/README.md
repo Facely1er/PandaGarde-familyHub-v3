@@ -25,6 +25,24 @@ python -m http.server 8080
 
 Open `http://localhost:8080`.
 
+## Build pipeline
+
+Article pages, the RSS feed, and the sitemap are generated from content models
+in Python so metadata stays consistent. After editing content, regenerate:
+
+```bash
+python build_posts.py     # rebuild posts/ from the POSTS model (SEO + body)
+python enhance_pages.py   # unique descriptions + OG/Twitter/canonical on root pages
+python gen_feed.py        # regenerate rss.xml and sitemap.xml
+python verify_links.py    # check all internal links resolve
+```
+
+- Each post gets a unique `<meta description>`, Open Graph + Twitter Card tags,
+  a canonical link, JSON-LD `BlogPosting` structured data, and a byline
+  (author, date, reading time).
+- `404.html` is served by Netlify for unknown paths.
+- `rss.xml` is discoverable via `<link rel="alternate">` in every page head.
+
 ## Verification
 
 Run:
