@@ -954,6 +954,9 @@ h3 {
 
 .article-body .callout .btns {
   margin-top: 0.5rem;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 }
 
 .breadcrumb {
