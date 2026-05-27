@@ -506,6 +506,12 @@ h3 {
   margin-bottom: var(--space-block);
 }
 
+.section-head > div:first-child {
+  flex: 1;
+  min-width: 0;
+  max-width: 100%;
+}
+
 .section-head h2 {
   margin: 10px 0 0;
   font-size: clamp(1.45rem, 2.8vw, 2rem);
@@ -515,7 +521,8 @@ h3 {
 
 .section-lede {
   margin: 10px 0 0;
-  max-width: 52ch;
+  max-width: 100%;
+  width: 100%;
   font-size: 0.95rem;
   line-height: 1.55;
   color: var(--muted);
