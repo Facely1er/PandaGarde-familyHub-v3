@@ -61,13 +61,14 @@ const DigitalFootprintPage: React.FC = () => {
       completed: totalServicesCount >= 3,
       resumePath: totalServicesCount >= 3 ? '/stories' : '/service-catalog',
     });
+
   }, [totalServicesCount]);
 
   if (totalServicesCount === 0) {
     return (
       <PageLayout
         title={FOOTPRINT_REVIEW_NAV_LABEL}
-        subtitle="Scores come from apps you listed in the service catalog. Add at least three there if this page is empty—stories and guides work without that step."
+        subtitle="Scores come from apps you listed in the service catalog. Add at least three there to see your family's exposure—stories and guides work without that step."
         breadcrumbs={true}
       >
         <EmptyStateWithServicePrompt
@@ -181,9 +182,9 @@ const DigitalFootprintPage: React.FC = () => {
         <div className={`mt-8 p-6 ${dfaTheme.cardLg} border-green-200 dark:border-green-800/50`}>
           <div className="flex flex-col gap-4">
             <div>
-              <h2 className={`text-xl ${dfaTheme.titleBold}`}>When you are ready — not before</h2>
+              <h2 className={`text-xl ${dfaTheme.titleBold}`}>These scores are a conversation starter</h2>
               <p className={`mt-2 text-sm leading-6 ${dfaTheme.bodySm}`}>
-                Your footprint review is complete on PandaGarde. Explore stories with your kids, open Family Hub for missions, or browse guides—all optional and saved on this device.
+                Now that you can see where your family's data goes, Privacy Panda stories give you a calm, age-matched way to talk about it with your kids. You can also open Family Hub for hands-on privacy missions, or browse the parent guides.
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
@@ -197,13 +198,13 @@ const DigitalFootprintPage: React.FC = () => {
                 to="/family-hub"
                 className="inline-flex items-center gap-2 rounded-xl border border-gray-300 px-5 py-3 font-semibold text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-700"
               >
-                Family Hub
+                Family Hub missions
               </Link>
               <Link
                 to="/for-families"
                 className="inline-flex items-center gap-2 rounded-xl border border-gray-300 px-5 py-3 font-semibold text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-700"
               >
-                Guides
+                Parent guides
               </Link>
             </div>
           </div>

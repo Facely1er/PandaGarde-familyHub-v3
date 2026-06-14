@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle, ChevronRight, ShieldCheck } from 'lucide-react';
 import { loadDfaJourneyState } from '../lib/dfaJourney';
 import { getFoundationStory, getHomepageLatestStory, ORIGIN_STORY_SLUG } from '../data/stories';
-import { INDEPENDENT_AREAS_LEAD } from '../data/pandaGardeMessaging';
+// INDEPENDENT_AREAS_LEAD not used here — replaced with inline mental-model copy in hero
 import { GUIDES_STORIES_NAV_LABEL } from '../data/siteNavigation';
 import { PageSection, ShellLinkCard } from '../components/layout/PageContent';
 
@@ -15,61 +15,38 @@ const HomePage: React.FC = () => {
   const trustPoints = [
     'Your data stays on your device',
     'Stories and guides work without a footprint review',
-    'Catalog powers footprint scores when you want them',
-  ];
-
-  const entryPoints = [
-    {
-      label: 'Read with your kids',
-      value: 'Privacy Panda stories',
-      href: '/stories',
-    },
-    {
-      label: 'Parent guides & plans',
-      value: GUIDES_STORIES_NAV_LABEL,
-      href: '/for-families',
-    },
-    {
-      label: 'List apps → see exposure',
-      value: 'Footprint review',
-      href: '/digital-footprint',
-    },
-    {
-      label: 'Missions on this device',
-      value: 'Family Hub',
-      href: '/family-hub',
-    },
+    'List your apps anytime to see your footprint scores',
   ];
 
   const spotlightLinks = useMemo(() => {
     const links = [
       {
-        title: 'Privacy Panda stories',
-        description: 'Interactive adventures—open anytime, no catalog setup required.',
-        href: '/stories',
-        tag: 'Open anytime',
-        cta: 'Browse stories',
+        title: ‘Privacy Panda stories’,
+        description: ‘Read together with your child—interactive scenes or calm chapters, no setup required.’,
+        href: ‘/stories’,
+        tag: ‘Read together’,
+        cta: ‘Browse stories’,
       },
       {
         title: GUIDES_STORIES_NAV_LABEL,
-        description: 'Stories, parent guides, and printables—independent of footprint review.',
-        href: '/for-families',
-        tag: 'Open anytime',
-        cta: 'Browse',
+        description: ‘Conversation starters, a household privacy plan, and printable activities for families.’,
+        href: ‘/for-families’,
+        tag: ‘Parent reference’,
+        cta: ‘Browse’,
       },
       {
-        title: 'Footprint review',
-        description: 'Add your family’s apps in the catalog, then see exposure scores from that list.',
-        href: '/digital-footprint',
-        tag: 'Uses service catalog',
-        cta: 'Open',
+        title: ‘Footprint review’,
+        description: ‘List the apps your family uses, then see where your data exposure adds up.’,
+        href: ‘/digital-footprint’,
+        tag: ‘List apps first’,
+        cta: ‘Open’,
       },
       {
-        title: 'Family Hub',
-        description: 'Age-matched missions and progress—optional, local to this device.',
-        href: '/family-hub',
-        tag: 'Open anytime',
-        cta: 'Open',
+        title: ‘Family Hub’,
+        description: ‘18 age-matched privacy missions your family completes together, saved on this device.’,
+        href: ‘/family-hub’,
+        tag: ‘Practice on device’,
+        cta: ‘Open’,
       },
     ];
 
@@ -94,7 +71,7 @@ const HomePage: React.FC = () => {
     journey.progressPercent > 0 && journey.resumePath.includes('footprint')
       ? { href: journey.resumePath, label: 'Continue footprint review' }
       : journey.progressPercent > 0 && journey.resumePath.includes('catalog')
-        ? { href: journey.resumePath, label: 'Continue service catalog' }
+        ? { href: journey.resumePath, label: 'Continue adding your apps' }
         : { href: '/stories', label: 'Explore stories' };
 
   return (
@@ -112,14 +89,13 @@ const HomePage: React.FC = () => {
               aria-hidden
               className="homepage-hero__logo h-16 w-16 shrink-0 object-contain sm:h-[4.5rem] sm:w-[4.5rem]"
             />
-            <p className="page-section__lead homepage-hero__tagline">
-              Stories · Guides · Footprint · Family Hub
-            </p>
             <h1 id="homepage-hero-title" className="homepage-hero__title">
-              A calmer way to protect your family’s
-              <span> digital life</span>
+              Your kids are online.
+              <span> Here’s a calm way to talk about it.</span>
             </h1>
-            <p className="page-section__lead">{INDEPENDENT_AREAS_LEAD}</p>
+            <p className="page-section__lead">
+              Stories help your child understand privacy. The footprint review shows where your family’s data goes. Family Hub is where you put it into practice—together.
+            </p>
           </header>
 
           <div className="homepage-hero__actions">
@@ -133,10 +109,13 @@ const HomePage: React.FC = () => {
             >
               Footprint review
             </Link>
-            <Link to="/how-it-works" className="button button-secondary inline-flex items-center justify-center">
-              How it works
-            </Link>
           </div>
+          <p className="mt-3 text-center text-sm text-gray-500 dark:text-gray-400">
+            Not sure where to start?{' '}
+            <Link to="/how-it-works" className="font-medium text-green-700 hover:underline dark:text-green-400">
+              See how it works
+            </Link>
+          </p>
 
           <ul className="homepage-hero__trust-list">
             {trustPoints.map((item) => (
@@ -153,31 +132,11 @@ const HomePage: React.FC = () => {
         <div className="container">
           <div className="page-content">
             <PageSection
-              className="homepage-glance"
-              header={{
-                eyebrow: 'Four doors',
-                title: 'Use what fits today',
-                lead: 'Nothing on PandaGarde blocks the rest. Only footprint review needs apps listed in the catalog.',
-              }}
-            >
-              <ul className="homepage-path shell-grid shell-grid--2 lg:grid-cols-4">
-                {entryPoints.map((item) => (
-                  <li key={item.href}>
-                    <Link to={item.href} className="homepage-path__step shell-card h-full">
-                      <h3 className="shell-card__title text-base">{item.value}</h3>
-                      <p className="shell-card__body mt-2 text-sm">{item.label}</p>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </PageSection>
-
-            <PageSection
               className="homepage-spotlight"
               header={{
-                eyebrow: 'Explore',
-                title: 'Popular starting points',
-                lead: 'Same areas as above—pick one; you are not locked into a single path.',
+                eyebrow: 'Where to start',
+                title: 'Pick what fits this week',
+                lead: 'Each area works on its own—only the footprint review needs your app list first.',
               }}
             >
               <div className="homepage-spotlight__grid">
@@ -210,13 +169,13 @@ const HomePage: React.FC = () => {
               className="homepage-closing"
               header={{
                 eyebrow: 'Footprint when you want it',
-                title: 'Catalog establishes the review',
-                lead: 'Add apps in the service catalog when you want scores and charts. Stories, guides, and Hub stay available before, during, and after.',
+                title: 'List your apps to see your footprint',
+                lead: 'Tell PandaGarde which apps your family uses — that\'s what powers the footprint review. Stories, guides, and Hub are available any time before or after.',
               }}
             >
               <div className="homepage-closing__actions">
                 <Link to="/service-catalog" className="button button-primary inline-flex items-center gap-1.5">
-                  Service catalog
+                  Add your family's apps
                   <ArrowRight size={14} aria-hidden />
                 </Link>
                 <Link to="/digital-footprint" className="button button-secondary inline-flex items-center gap-1.5">

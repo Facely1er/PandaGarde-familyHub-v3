@@ -1,6 +1,5 @@
-import type { LucideIcon } from 'lucide-react';
-
 import {
+  type LucideIcon,
   Activity,
   BookOpen,
   Compass,
@@ -65,6 +64,7 @@ export const primaryNavItems: SiteNavItem[] = [
     href: '/digital-footprint',
   },
   { id: 'nav-guides-stories', icon: BookOpen, label: GUIDES_STORIES_NAV_LABEL, href: FOR_FAMILIES_PATH },
+  { id: 'nav-family-hub', icon: LayoutDashboard, label: 'Family Hub', href: '/family-hub' },
 ];
 
 /** Mobile header icons — same order and destinations as desktop primary nav. */
@@ -75,7 +75,17 @@ export function buildMobileQuickNavItems(items: SiteNavItem[] = primaryNavItems)
   }));
 }
 
-export const mobileQuickNavItems: SiteNavItem[] = buildMobileQuickNavItems();
+/**
+ * Trimmed icon set for the mobile header quick-nav row.
+ * Keep to 3 items so icons do not overlap on small screens.
+ * Home is omitted (logo already navigates there).
+ * How It Works is omitted (reachable via hamburger menu).
+ */
+export const mobileQuickNavItems: SiteNavItem[] = [
+  { id: 'mobile-quick-footprint', icon: Fingerprint, label: FOOTPRINT_REVIEW_NAV_LABEL, href: '/digital-footprint' },
+  { id: 'mobile-quick-guides-stories', icon: BookOpen, label: GUIDES_STORIES_NAV_LABEL, href: FOR_FAMILIES_PATH },
+  { id: 'mobile-quick-family-hub', icon: LayoutDashboard, label: 'Family Hub', href: '/family-hub' },
+];
 
 /** Footprint layer — catalog → review (+ how scores and rights relate). */
 export const dfaWorkflowNavItems: SiteNavItem[] = [
@@ -213,5 +223,3 @@ export const legacyRouteRedirects: Record<string, string> = {
   '/educator-tools': '/how-it-works',
   '/classroom-activities': '/how-it-works',
 };
-
-

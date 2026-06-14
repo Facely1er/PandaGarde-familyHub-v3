@@ -179,11 +179,11 @@ const ForFamiliesPage: React.FC = () => {
 
           header={{
 
-            eyebrow: 'Open anytime',
+            eyebrow: 'Read together',
 
             title: 'Stories',
 
-            lead: 'Read Privacy Panda adventures together—at home or school, one chapter at a time.',
+            lead: 'Read Privacy Panda adventures with your child—at home or school, one chapter at a time.',
 
             icon: <Library size={26} strokeWidth={2} />,
 

@@ -268,13 +268,13 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
   };
 
   return (
-    <div className="privacy-plan-builder bg-white rounded-xl p-6 shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
+    <div className="privacy-plan-builder bg-white dark:bg-gray-800 rounded-xl p-4 sm:p-6 shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
       <div className="flex items-center gap-3 mb-6">
         <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-lg flex items-center justify-center text-white">
           <Shield size={24} />
         </div>
         <div>
-          <h2 className="text-2xl font-bold text-primary">
+          <h2 className="text-xl sm:text-2xl font-bold text-primary">
             Create Your Family Privacy Plan
           </h2>
           <p className="text-sm text-gray-600">
@@ -285,14 +285,14 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
 
       {/* Step 1: Sharing Rules */}
       <section className="mb-8">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-xl font-semibold flex items-center gap-2 text-primary">
+        <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+          <h3 className="text-base sm:text-xl font-semibold flex items-center gap-2 text-primary">
             <Users size={20} />
             Set Clear Sharing Rules
           </h3>
           <button
             onClick={() => setShowAddRule(!showAddRule)}
-            className="px-3 py-1 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm flex items-center gap-2"
+            className="px-3 py-2.5 min-h-[44px] bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm flex items-center gap-2"
           >
             <Plus size={16} />
             Add Rule
@@ -312,7 +312,7 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md mb-3 bg-white dark:bg-gray-200 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
               rows={2}
             />
-            <div className="flex items-center gap-4 mb-3">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-3">
               <label className="text-sm font-medium text-gray-700">
                 Applies to:
               </label>
@@ -360,13 +360,13 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
           {plan.sharingRules.map((rule) => (
             <div
               key={rule.id}
-              className="flex items-start justify-between p-4 border border-gray-200 rounded-lg bg-light"
+              className="flex items-start justify-between p-4 border border-gray-200 rounded-lg bg-light gap-2"
             >
               <div className="flex-1">
                 <p className="font-medium mb-2 text-gray-800">
                   {rule.rule}
                 </p>
-                <div className="flex items-center gap-4 text-sm text-gray-600">
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-gray-600">
                   <span>Applies to: {rule.appliesTo.join(', ')}</span>
                   {rule.requiresApproval && (
                     <span className="px-2 py-1 bg-yellow-100 rounded text-yellow-800 text-xs">
@@ -389,7 +389,7 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
 
       {/* Step 2: Safety Tools */}
       <section className="mb-8">
-        <h3 className="text-xl font-semibold flex items-center gap-2 mb-4 text-primary">
+        <h3 className="text-base sm:text-xl font-semibold flex items-center gap-2 mb-4 text-primary">
           <Settings size={20} />
           Set Up Safety Tools
         </h3>
@@ -397,7 +397,7 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
           {plan.safetyTools.map((tool) => (
             <div
               key={tool.id}
-              className="flex items-center justify-between p-4 border border-gray-200 rounded-lg bg-light"
+              className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 border border-gray-200 rounded-lg bg-light"
             >
               <div className="flex-1">
                 <h4 className="font-medium mb-1 text-gray-800">
@@ -407,7 +407,7 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
                   {tool.category.replace('-', ' ')}
                 </p>
               </div>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4 shrink-0">
                 <label className="flex items-center gap-2 text-sm">
                   <input
                     type="checkbox"
@@ -435,7 +435,7 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
 
       {/* Step 3: Privacy Day Schedule */}
       <section className="mb-8">
-        <h3 className="text-xl font-semibold flex items-center gap-2 mb-4 text-primary">
+        <h3 className="text-base sm:text-xl font-semibold flex items-center gap-2 mb-4 text-primary">
           <Calendar size={20} />
           Plan Regular Check-Ups
         </h3>
@@ -479,7 +479,7 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
             </div>
           )}
 
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
             <label htmlFor="privacy-day-reminders" className="flex items-center gap-2">
               <input
                 id="privacy-day-reminders"
@@ -533,7 +533,7 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
       </section>
 
       {/* Actions */}
-      <div className="flex items-center justify-between pt-6 border-t border-gray-200">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-6 border-t border-gray-200">
         <div className="flex items-center gap-2">
           {saved && (
             <span className="text-sm text-green-600 flex items-center gap-2">
@@ -542,17 +542,17 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
             </span>
           )}
         </div>
-        <div className="flex gap-3">
+        <div className="flex gap-3 w-full sm:w-auto">
           <button
             onClick={handleSave}
-            className="px-6 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors flex items-center gap-2"
+            className="flex-1 sm:flex-none px-6 py-2.5 min-h-[44px] bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors flex items-center justify-center gap-2"
           >
             <Save size={18} />
             Save Plan
           </button>
           <button
             onClick={handleExport}
-            className="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center gap-2"
+            className="flex-1 sm:flex-none px-6 py-2.5 min-h-[44px] bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
           >
             <Download size={18} />
             Export Plan
@@ -564,4 +564,3 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
 };
 
 export default FamilyPrivacyPlanBuilder;
-

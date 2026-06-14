@@ -92,7 +92,7 @@ const journeyLayers = [
     title: 'Family Hub',
     description: 'Missions and progress on your device—before, after, or without a review.',
     icon: Home,
-    points: ['Local progress', 'Parent-guided missions', 'Not blocked by DFA'],
+    points: ['Local progress', 'Parent-guided missions', 'No footprint review required'],
   },
 ];
 

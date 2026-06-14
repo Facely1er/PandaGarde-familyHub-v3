@@ -74,7 +74,7 @@ const ServiceCatalogPage: React.FC = () => {
           <p className={`flex items-start gap-2 ${dfaTheme.bodySm}`}>
             <Info className="mt-0.5 h-4 w-4 shrink-0 text-green-700 dark:text-green-400" aria-hidden />
             <span>
-              Privacy Exposure Index numbers are educational guides from the apps you list—not live monitoring.{' '}
+              <strong>Just tap the apps your kids use.</strong> Most families are done in under 3 minutes. Scores are educational guides—not live monitoring, and nothing is uploaded.{' '}
               <Link to="/scoring-methodology" className="font-semibold text-green-700 hover:underline dark:text-green-400">
                 How scoring works
               </Link>
@@ -87,7 +87,7 @@ const ServiceCatalogPage: React.FC = () => {
             currentKey="profile"
             compact
             ctaHref={isReadyForAnalysis ? '/digital-footprint' : '/service-catalog'}
-            ctaLabel={isReadyForAnalysis ? 'Continue to Digital Footprint Analysis' : 'Keep adding family services'}
+            ctaLabel={isReadyForAnalysis ? 'Continue to footprint review' : 'Keep adding your apps'}
             subtitle="List the apps your family uses—this list is what footprint review analyzes. Stories, guides, and Family Hub do not require finishing the catalog."
           />
         </div>
@@ -102,11 +102,11 @@ const ServiceCatalogPage: React.FC = () => {
                 <div>
                   <div className="flex items-center gap-2">
                     <span className={`text-lg font-bold ${isReadyForAnalysis ? 'text-green-900 dark:text-green-100' : 'text-blue-900 dark:text-blue-100'}`}>
-                      {servicesCount} Service{servicesCount !== 1 ? 's' : ''} Added
+                      {servicesCount} app{servicesCount !== 1 ? 's' : ''} added
                     </span>
                     {isReadyForAnalysis && (
                       <span className="flex items-center gap-1 rounded-full bg-green-100 px-2 py-0.5 text-xs font-bold text-green-700 dark:bg-green-800 dark:text-green-200">
-                        <Sparkles size={12} /> Ready for DFA
+                        <Sparkles size={12} /> Ready for footprint review
                       </span>
                     )}
                   </div>
@@ -121,7 +121,7 @@ const ServiceCatalogPage: React.FC = () => {
               {isReadyForAnalysis && (
                 <Link to="/digital-footprint" className="flex items-center gap-2 rounded-lg bg-green-600 px-5 py-2.5 font-semibold text-white shadow-md transition-all hover:bg-green-700 hover:shadow-lg">
                   <BarChart3 className="h-5 w-5" />
-                  <span>Run DFA</span>
+                  <span>See footprint</span>
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               )}
@@ -131,10 +131,10 @@ const ServiceCatalogPage: React.FC = () => {
 
         <div className="mb-8">
           <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">
-            <span className="font-medium text-gray-700 dark:text-gray-300">DFA journey:</span>{' '}
-            <span className="font-medium text-green-600 dark:text-green-400">Phase 1 — set your starting point</span>
+            <span className="font-medium text-gray-700 dark:text-gray-300">Footprint review:</span>{' '}
+            <span className="font-medium text-green-600 dark:text-green-400">Step 1 — add your family's apps</span>
             {' → '}
-            <Link to="/digital-footprint" className="font-medium text-blue-600 hover:underline dark:text-blue-400">Phase 2 — Digital Footprint Analysis</Link>
+            <Link to="/digital-footprint" className="font-medium text-blue-600 hover:underline dark:text-blue-400">Step 2 — see your footprint</Link>
           </p>
           <div className="mb-4 flex items-center justify-between">
             <div>
@@ -142,7 +142,7 @@ const ServiceCatalogPage: React.FC = () => {
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Service Catalog</h1>
                 {servicesCount === 0 && (
                   <span className="flex items-center gap-1 rounded-full bg-green-700 px-3 py-1 text-xs font-semibold text-white">
-                    <Unlock size={12} /> Phase 1
+                    <Unlock size={12} /> Step 1 of 2
                   </span>
                 )}
               </div>
@@ -230,11 +230,11 @@ const ServiceCatalogPage: React.FC = () => {
         <div className="mt-10 grid gap-6 lg:grid-cols-2">
           <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-100">
             <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">Why this phase matters</h3>
-            <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">DFA is only useful if it reflects the real school, home, health, AI, and telecom services touching your family’s data. This step defines the scope without forcing a heavy signup flow.</p>
+            <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">Your footprint review is only meaningful if it reflects the real school, home, health, AI, and telecom services your family uses. This step defines the scope without a heavy signup flow.</p>
           </div>
           <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-100">
             <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">Continue when ready</h3>
-            <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">Once you reach at least three services, continue straight into Digital Footprint Analysis. Your place is saved locally.</p>
+            <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">Once you reach at least three services, head straight to the footprint review. Your list is saved locally on this device.</p>
             {isReadyForAnalysis ? (
               <Link to="/digital-footprint" className="mt-4 inline-flex items-center gap-2 font-semibold text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300">
                 Go to Footprint Review <ArrowRight size={16} />
@@ -248,7 +248,7 @@ const ServiceCatalogPage: React.FC = () => {
         </div>
 
         <div className="mt-12 grid gap-8 lg:grid-cols-2">
-          {[{ title: 'School services frequently in scope', icon: School, items: schoolServices.slice(0, 6) }, { title: 'Health & medical apps families report', icon: Heart, items: healthServices.slice(0, 6) }, { title: 'AI tools families are increasingly using', icon: Bot, items: aiServices.slice(0, 6) }, { title: 'Telecom services that shape the household data trail', icon: Signal, items: telecomServices.slice(0, 6) }, { title: 'Services with sharper law-enforcement concerns', icon: AlertTriangle, items: leConcernServices.slice(0, 6) }].map(({ title, icon: Icon, items }) => (
+          {[{ title: 'School services frequently in scope', icon: School, items: schoolServices.slice(0, 6) }, { title: 'Health & medical apps families report', icon: Heart, items: healthServices.slice(0, 6) }, { title: 'AI tools families are increasingly using', icon: Bot, items: aiServices.slice(0, 6) }, { title: 'Telecom services that shape the household data trail', icon: Signal, items: telecomServices.slice(0, 6) }, { title: 'High-data-sharing services worth knowing about', icon: AlertTriangle, items: leConcernServices.slice(0, 6) }].map(({ title, icon: Icon, items }) => (
             <div key={title} className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-100">
               <div className="mb-3 flex items-center gap-2 text-gray-900 dark:text-gray-100"><Icon size={18} /><h3 className="text-lg font-bold">{title}</h3></div>
               <div className="flex flex-wrap gap-2">

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Users, Gamepad2, Plus } from 'lucide-react';
+import { Users, Gamepad2, Plus, X, BookOpen, Fingerprint } from 'lucide-react';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { useHubFamilyMembers } from '../../contexts/HubFamilyContext';
 import AgeBandStrip from '../components/AgeBandStrip';
@@ -15,11 +15,59 @@ interface FamilyGoal {
   completed?: boolean;
 }
 
+/** Shown once on first visit — explains how Hub connects to the rest of PandaGarde. */
+const HubWelcomeBanner: React.FC<{ onDismiss: () => void }> = ({ onDismiss }) => (
+  <div
+    role="region"
+    aria-label="Welcome to Family Hub"
+    className="rounded-xl border border-teal-200 bg-teal-50 p-4 dark:border-teal-700/50 dark:bg-teal-900/20"
+  >
+    <div className="flex items-start justify-between gap-3">
+      <div className="flex-1">
+        <p className="text-sm font-semibold text-teal-900 dark:text-teal-100">
+          You're in Family Hub — the practice workspace.
+        </p>
+        <p className="mt-1 text-xs leading-relaxed text-teal-800 dark:text-teal-200">
+          Complete short privacy missions together, earn badges, and build habits — at your own pace. Everything is saved on this device.
+        </p>
+        <div className="mt-3 flex flex-wrap gap-2">
+          <Link
+            to="/stories"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-teal-300 bg-white px-3 py-1.5 text-xs font-semibold text-teal-800 transition-colors hover:bg-teal-100 dark:border-teal-600 dark:bg-teal-900/40 dark:text-teal-200 dark:hover:bg-teal-900/60"
+          >
+            <BookOpen size={12} aria-hidden />
+            Privacy Panda stories
+          </Link>
+          <Link
+            to="/digital-footprint"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-teal-300 bg-white px-3 py-1.5 text-xs font-semibold text-teal-800 transition-colors hover:bg-teal-100 dark:border-teal-600 dark:bg-teal-900/40 dark:text-teal-200 dark:hover:bg-teal-900/60"
+          >
+            <Fingerprint size={12} aria-hidden />
+            Footprint review
+          </Link>
+        </div>
+      </div>
+      <button
+        type="button"
+        onClick={onDismiss}
+        aria-label="Dismiss welcome message"
+        className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-teal-600 transition-colors hover:bg-teal-100 dark:text-teal-300 dark:hover:bg-teal-800/40"
+      >
+        <X size={15} aria-hidden />
+      </button>
+    </div>
+  </div>
+);
+
 const DashboardScreen: React.FC = () => {
   const { members: familyMembers } = useHubFamilyMembers();
   const [familyGoals] = useLocalStorage<FamilyGoal[]>('pandagarde_family_goals', []);
   const completedGoals = familyGoals.filter((goal) => goal?.completed).length;
   const hubOrigin = getHubOrigin();
+  const [welcomeDismissed, setWelcomeDismissed] = useLocalStorage<boolean>(
+    'pandagarde_hub_welcome_dismissed',
+    false,
+  );
 
   useEffect(() => {
     touchHubStreak();
@@ -29,6 +77,10 @@ const DashboardScreen: React.FC = () => {
     <div className="min-h-full min-w-0">
       <HubTour />
       <HubPageLayout>
+        {!welcomeDismissed && (
+          <HubWelcomeBanner onDismiss={() => setWelcomeDismissed(true)} />
+        )}
+
         <HubScreenHero
           badge={hubOrigin === 'web' ? 'Welcome back' : 'Today'}
           title={

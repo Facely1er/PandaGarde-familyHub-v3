@@ -74,7 +74,7 @@ const ParentalConsentPage: React.FC = () => {
 
   if (status === 'loading') {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center px-4">
         <div className="max-w-md w-full bg-white dark:bg-gray-200 rounded-lg shadow-lg p-8 text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
           <p className="text-gray-600 dark:text-gray-400">Verifying consent...</p>
@@ -84,7 +84,7 @@ const ParentalConsentPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 sm:py-12 px-4">
       <div className="max-w-2xl mx-auto">
         <div className="bg-white dark:bg-gray-200 rounded-lg shadow-lg p-8">
           <div className="text-center mb-8">
@@ -99,7 +99,7 @@ const ParentalConsentPage: React.FC = () => {
                 <AlertTriangle size={32} className="text-red-600 dark:text-red-400" />
               )}
             </div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-2">
               {status === 'success' ? 'Consent Verified' : 'Consent Verification Failed'}
             </h1>
           </div>
@@ -165,16 +165,16 @@ const ParentalConsentPage: React.FC = () => {
             </div>
 
             {status === 'success' && (
-              <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <button
                   onClick={() => navigate('/')}
-                  className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors"
+                  className="flex-1 min-h-[44px] bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors text-center"
                 >
                   Go to Home
                 </button>
                 <button
                   onClick={handleRevokeConsent}
-                  className="flex-1 bg-red-600 hover:bg-red-700 text-white font-medium py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2"
+                  className="flex-1 min-h-[44px] bg-red-600 hover:bg-red-700 text-white font-medium py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2"
                 >
                   <X size={16} />
                   Revoke Consent
@@ -198,4 +198,3 @@ const ParentalConsentPage: React.FC = () => {
 };
 
 export default ParentalConsentPage;
-

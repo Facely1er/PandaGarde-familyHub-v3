@@ -12,7 +12,7 @@ import {
 import { useTheme } from '../contexts/ThemeContext';
 import SearchModal from './SearchModal';
 import {
-  buildMobileQuickNavItems,
+  mobileQuickNavItems as staticMobileQuickNavItems,
   mobileSecondaryNavItems,
   primaryNavItems,
 } from '../data/siteNavigation';
@@ -63,10 +63,7 @@ function Header() {
 
   const navItems = primaryNavItems;
 
-  const mobileQuickNavItems = useMemo(
-    () => buildMobileQuickNavItems(primaryNavItems),
-    []
-  );
+  const mobileQuickNavItems = staticMobileQuickNavItems;
 
   const mobilePrimaryItems = primaryNavItems.map((item) => ({
     ...item,
@@ -212,7 +209,7 @@ function Header() {
               <div
                 className="nav-actions__toolbar"
                 role="group"
-                aria-label="Search, Family Hub, and display"
+                aria-label="Search and display"
               >
                 <button
                   type="button"
@@ -230,7 +227,7 @@ function Header() {
 
                 <Link
                   to="/family-hub"
-                  className={`nav-actions__icon header-icon-btn inline-flex ${isActive('/family-hub') ? 'mobile-quick-nav__link--active' : ''}`}
+                  className={`nav-actions__icon header-icon-btn hidden lg:inline-flex ${isActive('/family-hub') ? 'mobile-quick-nav__link--active' : ''}`}
                   aria-label="Open Family Hub"
                   title="Family Hub"
                   aria-current={isActive('/family-hub') ? 'page' : undefined}

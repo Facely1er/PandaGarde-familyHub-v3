@@ -35,7 +35,7 @@ const DfaJourneyStepper: React.FC<Props> = ({
   currentKey,
   variant = 'full',
   compact = false,
-  title = 'Your DFA journey',
+  title = 'Your footprint review',
   subtitle = 'Footprint review uses your catalog list. Stories, guides, and Family Hub stay available without finishing this.',
   ctaLabel,
   ctaHref,
@@ -84,7 +84,7 @@ const DfaJourneyStepper: React.FC<Props> = ({
     return (
       <div
         className={`border-t border-green-200/80 pt-5 dark:border-green-800/50 ${className}`.trim()}
-        aria-label="DFA journey progress"
+        aria-label="Footprint review progress"
       >
         <div className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex min-w-0 flex-1 items-center gap-3">
@@ -112,7 +112,7 @@ const DfaJourneyStepper: React.FC<Props> = ({
             <Link to={optionalPhases[0].path} className="font-medium text-green-700 hover:underline dark:text-green-400">
               {optionalPhases[0].title}
             </Link>
-            {' — '}privacy missions for kids, separate from parent DFA.
+            {' — '}privacy missions for kids, available any time.
           </p>
         )}
       </div>
@@ -126,7 +126,7 @@ const DfaJourneyStepper: React.FC<Props> = ({
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
         <div>
           <div className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-sm font-semibold text-green-800 ring-1 ring-green-200 dark:bg-gray-700 dark:text-green-300 dark:ring-green-700/60">
-            <PlayCircle size={16} /> DFA-led journey
+            <PlayCircle size={16} /> Footprint review
           </div>
           <h2 className="mt-3 text-2xl font-bold text-gray-900 dark:text-white">{title}</h2>
           <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-600 dark:text-gray-300">{subtitle}</p>
@@ -189,7 +189,7 @@ const DfaJourneyStepper: React.FC<Props> = ({
 
       {optionalPhases.length > 0 && (
         <div className="mt-4 rounded-xl border border-dashed border-gray-300 bg-gray-50/80 p-4 dark:border-gray-600 dark:bg-gray-900/40">
-          <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">Optional — not part of parent DFA</p>
+          <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">Optional — available any time, independent of footprint review</p>
           {optionalPhases.map((phase) => (
             <Link
               key={phase.key}

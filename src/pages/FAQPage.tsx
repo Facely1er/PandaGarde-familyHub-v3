@@ -18,7 +18,7 @@ const FAQPage: React.FC = () => {
     {
       id: '1',
       question: 'What is PandaGarde and who is it for?',
-      answer: 'PandaGarde helps kids ages 5–17 learn about online privacy and safety. We use stories, games, and fun activities so the whole family can learn together.',
+      answer: 'PandaGarde helps families with children ages 5–13 learn about online privacy together. It combines Privacy Panda stories, parent guides, a footprint review, and Family Hub missions — use any of them in any order.',
       category: 'general'
     },
     {
@@ -30,13 +30,13 @@ const FAQPage: React.FC = () => {
     {
       id: '3',
       question: 'What age groups does PandaGarde support?',
-      answer: 'We have content for kids ages 5–17, with different activities for each stage: young kids (5–8), tweens (9–12), and teens (13–17).',
+      answer: 'PandaGarde is designed for children ages 5–13, with content matched to three bands: young children (5–7), middle childhood (8–10), and older kids (11–13). Stories, guides, and Family Hub missions are all age-aware.',
       category: 'general'
     },
     {
       id: '4',
       question: 'How do I get started with PandaGarde?',
-      answer: 'It’s easy! Browse our free resources, try the activities in our Activity Book, or start with the Privacy Panda story. There’s no account required to explore.',
+      answer: "Start anywhere — no account required. Most families open a Privacy Panda story first, or browse the parent guides. The footprint review and Family Hub are there when you're ready for them.",
       category: 'getting-started'
     },
     {
@@ -118,24 +118,25 @@ const FAQPage: React.FC = () => {
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 pb-8">
           {/* Category Filter */}
-          <div className="mb-12">
-            <h2 className="text-2xl font-bold mb-6 text-primary">
+          <div className="mb-8 sm:mb-12">
+            <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-primary">
               Browse by Category
             </h2>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2 sm:gap-3">
               {categories.map((category) => {
                 const Icon = category.icon;
                 return (
                   <button
                     key={category.id}
                     onClick={() => setSelectedCategory(category.id)}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-full font-medium transition-all ${
+                    aria-pressed={selectedCategory === category.id}
+                    className={`flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded-full text-sm font-medium transition-all ${
                       selectedCategory === category.id
                         ? 'bg-green-600 text-white shadow-md shadow-green-900/30 ring-2 ring-green-400/40'
                         : 'bg-gray-100 dark:bg-gray-200/80 text-gray-700 dark:text-gray-200 hover:bg-green-100/80 dark:hover:bg-green-900/30 dark:hover:text-green-200 dark:border dark:border-green-500/20'
                     }`}
                   >
-                    <Icon size={16} />
+                    <Icon size={15} aria-hidden />
                     {category.label}
                   </button>
                 );
@@ -152,9 +153,10 @@ const FAQPage: React.FC = () => {
               >
                 <button
                   onClick={() => toggleItem(item.id)}
-                  className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors bg-gray-50/50 dark:bg-gray-200"
+                  aria-expanded={openItems.includes(item.id)}
+                  className="w-full px-4 sm:px-6 py-4 min-h-[56px] text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors bg-gray-50/50 dark:bg-gray-200"
                 >
-                  <h3 className="text-lg font-semibold pr-4 text-primary">
+                  <h3 className="text-base sm:text-lg font-semibold pr-4 text-primary">
                     {item.question}
                   </h3>
                   {openItems.includes(item.id) ? (
@@ -176,25 +178,25 @@ const FAQPage: React.FC = () => {
           </div>
 
           {/* Contact Section */}
-          <div className="mt-16 cta-banner">
-            <h2 className="text-2xl font-bold mb-4">
+          <div className="mt-12 sm:mt-16 cta-banner">
+            <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">
               Still Have Questions?
             </h2>
-            <p className="text-lg mb-6 opacity-90">
-              Can't find what you're looking for? We're here to help!
+            <p className="text-base sm:text-lg mb-5 sm:mb-6 opacity-90">
+              Can't find what you're looking for? We're here to help.
             </p>
-            <div className="flex flex-wrap gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
               <Link
                 to="/contact"
-                className="bg-white/95 text-green-700 px-6 py-3 rounded-lg font-semibold shadow-md hover:bg-white hover:shadow-lg transition-all dark:bg-emerald-950/60 dark:text-green-300 dark:border dark:border-green-400/30 dark:hover:bg-emerald-900/50"
+                className="bg-white/95 text-green-700 px-6 py-3 rounded-lg font-semibold shadow-md hover:bg-white hover:shadow-lg transition-all text-center dark:bg-emerald-950/60 dark:text-green-300 dark:border dark:border-green-400/30 dark:hover:bg-emerald-900/50"
               >
                 Contact Us
               </Link>
               <Link
-                to="/activity-book"
-                className="bg-green-700 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-800 transition-colors"
+                to="/family-hub"
+                className="bg-green-700 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-800 transition-colors text-center"
               >
-                Try Activities
+                Try Family Hub
               </Link>
             </div>
           </div>

@@ -21,7 +21,7 @@ const sections = [
   {
     icon: Gamepad2,
     title: 'Activities',
-    description: 'Age-matched privacy missions for ages 5–17 — grounded in real-life scenarios.',
+    description: 'Age-matched privacy missions for ages 5–13 — grounded in real-life scenarios.',
     color: 'text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30',
   },
   {
@@ -55,7 +55,7 @@ const WelcomeScreen: React.FC = () => {
                 <span className="text-teal-600 dark:text-teal-400">Family Hub</span>
               </h1>
               <p className="mt-3 text-base sm:text-lg text-gray-600 dark:text-gray-300">
-                Play short privacy missions together — real situations, family talks, and fun practice for ages 5–17. Everything stays on this device.
+                Play short privacy missions together — real situations, family talks, and fun practice for ages 5–13. Everything stays on this device.
               </p>
             </div>
           </div>
@@ -86,16 +86,16 @@ const WelcomeScreen: React.FC = () => {
           </div>
 
           <p className="text-center text-sm text-gray-600 dark:text-gray-400">
-            Parent{' '}
+            The{' '}
             <button
               type="button"
               onClick={() => openExternalUrl(pandagardeWebsiteUrl)}
               className="inline-flex items-center gap-1 font-medium text-teal-700 hover:underline dark:text-teal-400"
             >
-              Digital Footprint Analysis
+              footprint review and parent guides
               <ExternalLink size={14} aria-hidden="true" />
             </button>{' '}
-            lives on the PandaGarde website — separate from these kids&apos; missions.
+            live on the main PandaGarde site — open them any time alongside these missions.
           </p>
 
           {/* Privacy note */}
