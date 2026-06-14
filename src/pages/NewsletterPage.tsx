@@ -291,7 +291,7 @@ const NewsletterPage: React.FC = () => {
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link
-              to="/activity-book"
+              to="/for-families"
               className="bg-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center gap-2 text-primary"
             >
               <BookOpen size={20} />

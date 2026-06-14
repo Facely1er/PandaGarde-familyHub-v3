@@ -87,7 +87,7 @@ const ContactPage: React.FC = () => {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
-              to="/activity-book"
+              to="/for-families"
               className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-white px-6 py-3 font-semibold text-green-700 transition-colors hover:bg-gray-100"
             >
               <MessageCircle size={20} aria-hidden />

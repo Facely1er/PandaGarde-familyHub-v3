@@ -370,7 +370,7 @@ const PrivacyPolicyPage: React.FC = () => {
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link
-                to="/activity-book"
+                to="/for-families"
                 className="bg-white text-green-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
               >
                 Try Activities

@@ -226,7 +226,7 @@ const DownloadGuidePage: React.FC<DownloadGuidePageProps> = ({
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link
-                to="/activity-book"
+                to="/for-families"
                 className="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors inline-flex items-center gap-2"
               >
                 <FileText size={20} />
