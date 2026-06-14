@@ -182,7 +182,7 @@ function Header() {
             </ul>
 
             <div
-              className="nav-actions__cluster mobile-quick-nav lg:hidden"
+              className="nav-actions__cluster mobile-quick-nav hidden md:inline-flex lg:hidden"
               role="navigation"
               aria-label="Quick links"
             >
