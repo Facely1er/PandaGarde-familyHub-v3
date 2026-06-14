@@ -21,6 +21,10 @@ const BANNED = [
   { label: 'approve or deny app requests from your children', re: /approve or deny app requests from your children/i },
   { label: 'Real-time alerts about.*children', re: /Real-time alerts about.*children/i },
   { label: 'Enter their name and email.*Child', re: /Enter their name and email.*Child/i },
+  { label: 'Digital Footprint Analysis (deprecated)', re: /Digital Footprint Analysis/i },
+  { label: 'DFA journey (deprecated)', re: /DFA journey/i },
+  { label: 'complete DFA first', re: /complete DFA first/i },
+  { label: 'Start Digital Footprint Analysis', re: /Start Digital Footprint Analysis/i },
 ];
 
 const SKIP_FILES = new Set([

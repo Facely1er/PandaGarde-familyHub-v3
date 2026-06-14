@@ -92,7 +92,7 @@ const DigitalFootprintPage: React.FC = () => {
       const score = buildDfaScore(analysis, tier);
       await downloadDfaExecutiveSummary(analysis, score);
     } catch (error) {
-      logger.error('DFA PDF export failed', error);
+      logger.error('Footprint review PDF export failed', error);
     } finally {
       setIsExportingPdf(false);
     }

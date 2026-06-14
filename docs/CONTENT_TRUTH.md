@@ -26,7 +26,7 @@
 - A **local-first** workspace (browser or app); progress and profiles stay **on the device**
 - **18 age-matched privacy missions** (5–8, 9–12, 13–17) with real-life scenarios, family talk, and one practical action
 - **Parent-guided** — not a social network for children
-- Optional continuation **after** website DFA/assessment, or **standalone** without the website funnel
+- Optional continuation **after** website footprint review / assessment, or **standalone** without the website funnel
 - Local guardian gate on `/family-hub` (not a remote server login)
 
 ### Family Hub IS NOT
@@ -51,11 +51,11 @@
 | “No account required” | Core journey: local profile + `signInLocally()` — no PandaGarde server account |
 | “Encrypted and stored securely” (vague) | Prefer: data stays on device; optional client-side encryption for PII when Web Crypto is available |
 | “See all apps kids use” | **False** — parents **add** services to the catalog; no passive monitoring |
-| “Privacy risk score” | From **catalog + DFA**, not live activity monitoring |
+| “Privacy risk score” | From **catalog + footprint review**, not live activity monitoring |
 | “We analyze your medical records” | **False** — families **list** health/wellness apps they use; no access to EHR or prescription data |
 | “HIPAA-compliant” / “certifies HIPAA compliance” | **False** — educational exposure snapshot, not a compliance audit tool |
 | Health apps in service catalog | **True** — wellness, patient portals, telehealth, pharmacy, and school health portals can be **self-reported** like other services |
-| “Approve/deny child app requests” in Family Hub | **False** — catalog status exists on the **website** for planning/DFA, not a child request workflow in Hub |
+| “Approve/deny child app requests” in Family Hub | **False** — catalog status exists on the **website** for planning/footprint review, not a child request workflow in Hub |
 
 ---
 
@@ -78,7 +78,7 @@
 
 Do **not** describe website “Learning activities” and Hub “missions” as the same catalog. Approved website CTAs: **Privacy missions** → `/family-hub/activities`. Legacy `/activities` and `/activities/:slug` redirect to Hub (slug mapped when a mission shares the same game id).
 
-Formal **privacy assessment** and **safety alerts** are on **SocialCaution** (legacy URLs redirect). Do not present a single mandatory “complete DFA first” funnel on PandaGarde marketing UI.
+Formal **privacy assessment** and **safety alerts** are on **SocialCaution** (legacy URLs redirect). Do not present a single mandatory “complete footprint review first” funnel on PandaGarde marketing UI.
 
 ---
 
@@ -89,7 +89,7 @@ PandaGarde **does not** ship `/safety-alerts`. Legacy URLs (`/safety-alerts`, `/
 ### Mention SocialCaution only when relevant
 
 - **Support / FAQ** when users ask where alerts went
-- **Not** in primary nav, Resources hub, How It Works, service catalog header, or DFA phase 3 cards
+- **Not** in primary nav, Resources hub, How It Works, service catalog header, or footprint review phase 3 cards
 
 ### Avoid on PandaGarde
 
@@ -129,11 +129,15 @@ monitor.*children.*online
 real-time alerts.*children
 privacy monitoring (for child activity)
 Enter their name and email.*Child
+Digital Footprint Analysis
+DFA journey
+complete DFA first
+Start Digital Footprint Analysis
 ```
 
 ---
 
-## 8. Canonical feature bullets (copy-paste safe)
+## 9. Canonical feature bullets (copy-paste safe)
 
 **Family Hub**
 
@@ -147,24 +151,24 @@ Enter their name and email.*Child
 **Service catalog → alerts**
 
 - List apps and services your family uses (self-reported), including optional **health & medical** entries (wellness, portals, telehealth, pharmacy)
-- Digital Footprint Analysis and privacy recommendations from that list — **not** from live medical record access
+- Footprint review and privacy recommendations from that list — **not** from live medical record access
 - Catalog-based service notifications plus RSS safety headlines when feeds load
 
 ---
 
-## 9. Automated check
+## 10. Automated check
 
 ```bash
 npm run check:content-truth
 ```
 
-Scans `src/pages`, `src/components`, `src/familyhub`, and `src/data/familyResources.ts` for §7 banned phrases. Survey copy (`familyPrivacyAssessment.ts`) and service catalog vendor text are excluded.
+Scans `src/pages`, `src/components`, `src/familyhub`, and `src/data/familyResources.ts` for §8 stale phrases. Survey copy (`familyPrivacyAssessment.ts`) and service catalog vendor text are excluded.
 
 Add new patterns to `scripts/check-content-truth.mjs` when product behavior changes.
 
 ---
 
-## 10. Related docs
+## 11. Related docs
 
 - [FAMILYHUB_APP_STORE_COPY.md](./FAMILYHUB_APP_STORE_COPY.md) — store listings (aligned with §2)
 - [FAMILYHUB_MISSIONS_PARENT_GUIDE.md](./FAMILYHUB_MISSIONS_PARENT_GUIDE.md) — parent one-pager

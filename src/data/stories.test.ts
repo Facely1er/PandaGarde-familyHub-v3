@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   ORIGIN_STORY_SLUG,
   STORIES,
@@ -15,6 +15,15 @@ import {
 import { foundationStoryScenes, storyScenes } from './storyScenes';
 
 describe('stories registry', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2025-06-15T12:00:00Z'));
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   it('exposes the origin story slug and foundation story', () => {
     const foundation = getFoundationStory();
     expect(foundation?.slug).toBe(ORIGIN_STORY_SLUG);

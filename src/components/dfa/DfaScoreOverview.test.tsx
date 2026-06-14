@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import DfaScoreOverview from './DfaScoreOverview';
 import type { FootprintAnalysis } from '../../lib/footprintAnalyzer';
 
@@ -51,8 +52,15 @@ describe('DfaScoreOverview', () => {
     vi.clearAllMocks();
   });
 
-  it('renders basic DFA by default and persists tier changes', () => {
-    render(<DfaScoreOverview analysis={analysis} />);
+  const renderOverview = () =>
+    render(
+      <MemoryRouter>
+        <DfaScoreOverview analysis={analysis} />
+      </MemoryRouter>
+    );
+
+  it('renders basic footprint review scoring by default and persists tier changes', () => {
+    renderOverview();
 
     expect(screen.getByText(/Launch-grade scoring/i)).toBeInTheDocument();
     expect(screen.getByText(/Tier:/i)).toBeInTheDocument();
@@ -65,7 +73,7 @@ describe('DfaScoreOverview', () => {
   });
 
   it('calls executive summary export with the current score', () => {
-    render(<DfaScoreOverview analysis={analysis} />);
+    renderOverview();
 
     fireEvent.click(screen.getByRole('button', { name: /export executive summary/i }));
 
