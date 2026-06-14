@@ -14,7 +14,7 @@ import PageLayout from '../components/layout/PageLayout';
 import { getNewsletterById, isNewsletterReservedSegment } from '../data/newsletters';
 
 function InternalLink({ to, children }: { to: string; children: ReactNode }) {
-  if (!to) return <>{children}</>;
+  if (!to) {return <>{children}</>;}
   return (
     <Link
       to={to}

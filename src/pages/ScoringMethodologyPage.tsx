@@ -49,9 +49,9 @@ type BandTone = 'low' | 'medium' | 'high' | 'very-high';
 
 function bandTone(label: string): BandTone {
   const normalized = label.toLowerCase();
-  if (normalized.includes('very') || normalized === 'critical') return 'very-high';
-  if (normalized === 'high') return 'high';
-  if (normalized === 'moderate' || normalized === 'medium') return 'medium';
+  if (normalized.includes('very') || normalized === 'critical') {return 'very-high';}
+  if (normalized === 'high') {return 'high';}
+  if (normalized === 'moderate' || normalized === 'medium') {return 'medium';}
   return 'low';
 }
 

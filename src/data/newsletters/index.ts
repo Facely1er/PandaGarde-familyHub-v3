@@ -168,7 +168,7 @@ export function newsletterIssuePath(id: string): string {
 }
 
 export const getNewsletterById = (id: string): NewsletterContent | undefined => {
-  if (isNewsletterReservedSegment(id)) return undefined;
+  if (isNewsletterReservedSegment(id)) {return undefined;}
   return newsletterArchive.find((newsletter) => newsletter.id === id);
 };
 

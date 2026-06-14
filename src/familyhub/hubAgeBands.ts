@@ -64,9 +64,9 @@ export const HUB_AGE_BANDS: HubAgeBand[] = [
 ];
 
 export function hubAgeBandForAge(age: number): HubAgeBand | undefined {
-  if (age >= 5 && age <= 8) return HUB_AGE_BANDS[0];
-  if (age >= 9 && age <= 12) return HUB_AGE_BANDS[1];
-  if (age >= 13 && age <= 17) return HUB_AGE_BANDS[2];
+  if (age >= 5 && age <= 8) {return HUB_AGE_BANDS[0];}
+  if (age >= 9 && age <= 12) {return HUB_AGE_BANDS[1];}
+  if (age >= 13 && age <= 17) {return HUB_AGE_BANDS[2];}
   return undefined;
 }
 

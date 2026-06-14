@@ -4,7 +4,7 @@ import { logger } from './logger';
 export const CONTACT_FORM_NAME = 'contact';
 
 function shouldSubmitToNetlify(): boolean {
-  if (import.meta.env.PROD) return true;
+  if (import.meta.env.PROD) {return true;}
   return import.meta.env.VITE_NETLIFY_FORMS_DEV === 'true';
 }
 

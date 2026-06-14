@@ -18,9 +18,9 @@ const MOOD_BY_BEAT: StorySceneData['mood'][] = ['peaceful', 'tense', 'mysterious
 const ANIM_BY_BEAT: StorySceneData['animation'][] = ['appear', 'shake', 'nod', 'wave'];
 
 function backgroundForZone(zone: Story['forestZone']): StorySceneData['background'] {
-  if (zone === 'crystal-stream') return 'river';
-  if (zone === 'taos-hollow') return 'cave';
-  if (zone === 'great-archive') return 'digital';
+  if (zone === 'crystal-stream') {return 'river';}
+  if (zone === 'taos-hollow') {return 'cave';}
+  if (zone === 'great-archive') {return 'digital';}
   return 'forest';
 }
 

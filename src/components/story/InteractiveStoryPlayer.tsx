@@ -28,10 +28,10 @@ function splitStoryParagraphs(content: string): string[] {
     .split(/\n\n+/)
     .map((p) => p.trim())
     .filter(Boolean);
-  if (blocks.length > 1) return blocks;
+  if (blocks.length > 1) {return blocks;}
 
   const text = blocks[0] ?? content.trim();
-  if (text.length < 300) return [text];
+  if (text.length < 300) {return [text];}
 
   const sentences =
     text.match(/[^.!?]+[.!?]+(?:\s+|$)|[^.!?]+$/g)?.map((s) => s.trim()) ?? [text];
@@ -47,7 +47,7 @@ function splitStoryParagraphs(content: string): string[] {
       batch = candidate;
     }
   }
-  if (batch) paragraphs.push(batch);
+  if (batch) {paragraphs.push(batch);}
   return paragraphs.length > 0 ? paragraphs : [text];
 }
 
