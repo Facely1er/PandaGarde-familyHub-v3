@@ -300,7 +300,7 @@ const FeaturesPage: React.FC = () => {
         <div className="shell-cta-panel__copy">
           <h2 className="page-section__title">Ready to begin?</h2>
           <p className="shell-card__body">
-            Start with Digital Footprint Analysis, or open Family Hub when you are ready.
+            Start with footprint review, or open Family Hub when you are ready.
           </p>
         </div>
         <div className="shell-cta-panel__actions">

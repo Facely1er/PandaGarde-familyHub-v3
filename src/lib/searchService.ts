@@ -132,7 +132,7 @@ class SearchService {
         id: 'scoring-methodology',
         title: 'Scoring methodology',
         description:
-          'Per-app Privacy Exposure Index and full Digital Footprint Analysis (DFA) methodology—Basic/Advanced weights, risk levels, and limits',
+          'Per-app Privacy Exposure Index and full footprint review methodology—Basic/Advanced weights, risk levels, and limits',
         content_type: 'guide',
         url: '/scoring-methodology',
         category_id: 'privacy',
@@ -160,7 +160,7 @@ class SearchService {
       {
         id: 'get-started',
         title: 'Service catalog',
-        description: 'List family apps and services—the first step of Digital Footprint Analysis',
+        description: 'List family apps and services—the first step of footprint review',
         content_type: 'page',
         url: '/service-catalog',
         category_id: 'privacy',
@@ -187,7 +187,7 @@ class SearchService {
       },
       {
         id: 'digital-footprint',
-        title: 'Digital Footprint Analysis',
+        title: 'Footprint review',
         description: 'See household privacy exposure from your service catalog',
         content_type: 'page',
         url: '/digital-footprint',

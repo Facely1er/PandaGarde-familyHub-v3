@@ -52,7 +52,7 @@ export const BREADCRUMB_PAGE_LABELS: Record<string, string> = {
   '/scoring-methodology': 'Scoring methodology',
   '/implementation': 'Implementation',
   '/implementation-guide': 'Implementation guide',
-  '/get-started': 'DFA journey',
+  '/get-started': 'Footprint review',
   [FOR_FAMILIES_PATH]: GUIDES_STORIES_NAV_LABEL,
   '/resources': GUIDES_STORIES_NAV_LABEL,
   '/parent-resources': GUIDES_STORIES_NAV_LABEL,

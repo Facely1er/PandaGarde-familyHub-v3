@@ -34,11 +34,12 @@ import {
   scoringMethodologyIntro,
   SCORING_METHODOLOGY_VERSION,
 } from '../data/scoringMethodology';
+import { FOOTPRINT_REVIEW_NAV_LABEL } from '../data/siteNavigation';
 
 const JUMP_LINKS = [
   { href: '#score-bands', label: 'Score bands' },
   { href: '#per-app', label: 'Per-app index' },
-  { href: '#dfa-methodology', label: 'DFA scoring' },
+  { href: '#dfa-methodology', label: 'Footprint review scoring' },
   { href: '#limitations', label: 'Limitations' },
 ] as const;
 
@@ -99,8 +100,8 @@ function ExposureBandComparison() {
         Score bands at a glance
       </h2>
       <p className="methodology-bands-compare__lead">
-        Both scores use 0–100 with the same color idea—green is calmer, red needs more attention. DFA household
-        risk uses slightly different cutoffs than per-app indexes; compare them here once instead of repeating
+        Both scores use 0–100 with the same color idea—green is calmer, red needs more attention. Household
+        footprint review risk uses slightly different cutoffs than per-app indexes; compare them here once instead of repeating
         below.
       </p>
       <div className="methodology-bands-compare__grid">
@@ -110,7 +111,7 @@ function ExposureBandComparison() {
           <BandList bands={perServiceMethodology.bands} />
         </div>
         <div className="methodology-bands-compare__col">
-          <h3 className="methodology-bands-compare__col-title">DFA household risk score</h3>
+          <h3 className="methodology-bands-compare__col-title">Household risk score</h3>
           <p className="methodology-bands-compare__col-hint">Rollup on the footprint page gauge</p>
           <BandList bands={dfaMethodology.riskLevels} />
         </div>
@@ -150,7 +151,7 @@ const ScoringMethodologyPage: React.FC = () => {
         <div className="scoring-methodology__hero">
           <span className="scoring-methodology__version">Methodology v{SCORING_METHODOLOGY_VERSION}</span>
           <p className="scoring-methodology__hero-lead">
-            Two related views—per-app exposure in the catalog, then household Digital Footprint Analysis when you
+            Two related views—per-app exposure in the catalog, then household footprint review when you
             are ready.
           </p>
           <ol className="scoring-methodology__flow" aria-label="How scores connect">
@@ -178,7 +179,7 @@ const ScoringMethodologyPage: React.FC = () => {
               <span className="scoring-methodology__flow-icon scoring-methodology__flow-icon--dfa" aria-hidden>
                 <BarChart3 size={22} />
               </span>
-              <span className="scoring-methodology__flow-label">DFA risk score</span>
+              <span className="scoring-methodology__flow-label">Household risk score</span>
               <span className="scoring-methodology__flow-hint">Household rollup</span>
             </li>
           </ol>
@@ -250,7 +251,7 @@ const ScoringMethodologyPage: React.FC = () => {
           id="dfa-methodology"
           className="scoring-methodology__section scoring-methodology__section--dfa"
           header={{
-            eyebrow: 'Digital Footprint Analysis',
+            eyebrow: FOOTPRINT_REVIEW_NAV_LABEL,
             title: dfaMethodology.title,
             lead: dfaMethodology.summary,
             icon: <BarChart3 size={22} strokeWidth={2} />,
@@ -283,7 +284,7 @@ const ScoringMethodologyPage: React.FC = () => {
           </div>
 
           <p className="methodology-xref">
-            DFA risk levels use different cutoffs than per-app indexes—see the{' '}
+            Footprint review risk levels use different cutoffs than per-app indexes—see the{' '}
             <a href="#score-bands" className="scoring-methodology__text-link">
               household column in Score bands
             </a>
@@ -318,14 +319,16 @@ const ScoringMethodologyPage: React.FC = () => {
 
           <div className="shell-stack methodology-callouts">
             <ShellRowCard
-              icon={<AlertTriangle size={20} />}
+              icon={<AlertTriangle size={22} strokeWidth={2} />}
               title={dfaMethodology.flags.title}
               description={dfaMethodology.flags.description}
             />
             <article className="shell-card shell-card--panel methodology-snapshot">
-              <div className="methodology-snapshot__head">
-                <Network size={20} aria-hidden />
-                <h3 className="shell-card__title text-base">{dfaMethodology.footprintSnapshot.title}</h3>
+              <div className="shell-row-card__heading methodology-snapshot__head">
+                <div className="shell-icon shell-icon--md shell-row-card__icon" aria-hidden>
+                  <Network size={22} strokeWidth={2} />
+                </div>
+                <h3 className="shell-card__title">{dfaMethodology.footprintSnapshot.title}</h3>
               </div>
               <p className="shell-card__body text-sm">{dfaMethodology.footprintSnapshot.description}</p>
               <ul className="methodology-snapshot__bars">
@@ -353,7 +356,7 @@ const ScoringMethodologyPage: React.FC = () => {
 
           <div className="methodology-includes">
             <h3 className="methodology-subhead">
-              <ListChecks size={20} className="inline-block align-text-bottom" aria-hidden /> What DFA includes
+              <ListChecks size={20} className="inline-block align-text-bottom" aria-hidden /> What footprint review includes
             </h3>
             <ul className="methodology-includes__list">
               {dfaMethodology.whatDfaIncludes.map((item) => (
@@ -364,7 +367,7 @@ const ScoringMethodologyPage: React.FC = () => {
 
           <p className="scoring-methodology__inline-cta">
             <Link to="/digital-footprint" className="scoring-methodology__text-link">
-              Run Digital Footprint Analysis
+              Open {FOOTPRINT_REVIEW_NAV_LABEL}
               <ArrowRight size={16} aria-hidden />
             </Link>
             <span className="text-gray-500 dark:text-gray-400"> after at least three catalog services.</span>
@@ -406,7 +409,7 @@ const ScoringMethodologyPage: React.FC = () => {
             </Link>
             <Link to="/digital-footprint" className="button button-primary inline-flex items-center gap-2">
               <BarChart3 size={16} aria-hidden />
-              Digital Footprint Analysis
+              {FOOTPRINT_REVIEW_NAV_LABEL}
             </Link>
           </div>
         </section>

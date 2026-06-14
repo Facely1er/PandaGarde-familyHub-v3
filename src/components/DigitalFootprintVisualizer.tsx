@@ -155,7 +155,7 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
         <Globe className="h-12 w-12 mx-auto text-gray-400 mb-4" />
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">No Services Added Yet</h3>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          Add your family's apps and services from the Service Catalog to see your digital footprint analysis.
+          Add your family's apps and services from the Service Catalog to see your footprint review.
         </p>
         <Link to="/service-catalog" className="inline-flex items-center space-x-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors">
           <span>Add Services</span>

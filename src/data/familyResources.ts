@@ -58,8 +58,8 @@ export const familyResources: FamilyResource[] = [
   // Privacy-Focused Family Resources
   {
     id: 'digital-footprint',
-    title: 'Digital Footprint Analysis',
-    description: 'Comprehensive analysis of your family\'s online presence',
+    title: 'Footprint review',
+    description: 'Household exposure scores from the apps and services you list',
     type: 'tool',
     category: ['privacy-analysis', 'data-sharing'],
     personaTags: ['privacy-focused-family', 'tech-savvy-family'],

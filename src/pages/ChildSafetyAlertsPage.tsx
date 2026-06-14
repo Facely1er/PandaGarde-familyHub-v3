@@ -204,7 +204,7 @@ const ChildSafetyAlertsPage: React.FC = () => {
               <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-green-600 transition-colors" />
             </div>
             <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
-              View Digital Footprint
+              View footprint review
             </h3>
             <p className="text-sm text-gray-600 dark:text-gray-400">
               See your family's overall privacy exposure and high-risk services

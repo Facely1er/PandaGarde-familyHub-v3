@@ -12,7 +12,7 @@ test.describe('Core features advertised (How it works + CONTENT_TRUTH)', () => {
   test('Home — hero and primary journey CTA', async ({ page }) => {
     await gotoAndWait(page, '/');
     await expect(page.getByRole('heading', { level: 1 })).toContainText(/digital life/i);
-    const primary = page.getByRole('link', { name: /Continue your journey|Start Digital Footprint Analysis/i });
+    const primary = page.getByRole('link', { name: /Continue footprint review|Explore stories|Footprint review/i });
     await expect(primary.first()).toBeVisible();
     await expect(page.locator('.premium-hero').getByRole('link', { name: /How it works/i })).toBeVisible();
   });
@@ -25,10 +25,10 @@ test.describe('Core features advertised (How it works + CONTENT_TRUTH)', () => {
     await expect(page.getByText(/Does PandaGarde monitor what my child does online/i)).toBeVisible();
   });
 
-  test('Get started — DFA journey stepper', async ({ page }) => {
+  test('Get started — resumes footprint review path', async ({ page }) => {
     await gotoAndWait(page, '/get-started');
-    await expect(page.getByRole('heading', { name: /Digital Footprint Analysis Journey/i })).toBeVisible();
-    await expect(page.getByText(/revolves around Digital Footprint Analysis/i)).toBeVisible();
+    await expect(page).toHaveURL(/\/(service-catalog|digital-footprint)/);
+    await expect(page.getByText(/Footprint review|service catalog/i).first()).toBeVisible();
   });
 
   test('Service catalog — add services UI', async ({ page }) => {
@@ -98,7 +98,7 @@ test.describe('Core features advertised (How it works + CONTENT_TRUTH)', () => {
     expect(page.url()).toMatch(/socialcaution\.com/);
   });
 
-  test('DFA happy path — catalog seed → footprint → stories CTA', async ({ page }) => {
+  test('Footprint review happy path — catalog seed → footprint → stories CTA', async ({ page }) => {
     await page.goto(`${BASE}/`, { waitUntil: 'domcontentloaded' });
     await page.evaluate((ids) => {
       localStorage.setItem('pandagarde_family_services', JSON.stringify(ids));

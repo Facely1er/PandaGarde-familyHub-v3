@@ -22,7 +22,7 @@ const RiskCategoryCards: React.FC<Props> = ({ flags }) => {
       <div className="grid gap-3 md:grid-cols-2">
         {flags.length === 0 ? (
           <div className="rounded-xl border border-green-200 bg-green-50 p-4 text-sm text-green-900 dark:border-green-800 dark:bg-green-950/50 dark:text-green-200">
-            No major DFA flags were triggered in this run.
+            No major risk flags were triggered in this run.
           </div>
         ) : (
           flags.map((flag) => (

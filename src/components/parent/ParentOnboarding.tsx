@@ -42,7 +42,7 @@ const ParentOnboarding: React.FC<ParentOnboardingProps> = ({ onComplete, onSkip 
           <InfoBox type="info" title="What You'll Get">
             <ul className={listClass}>
               <li>List apps and services your family uses in the catalog</li>
-              <li>See privacy risk scores from Digital Footprint Analysis</li>
+              <li>See privacy risk scores from footprint review</li>
               <li>Get conversation starters and Family Hub missions</li>
               <li>Track mission and assessment progress on your device</li>
             </ul>

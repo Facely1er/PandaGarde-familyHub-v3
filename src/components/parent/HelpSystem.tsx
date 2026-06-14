@@ -22,7 +22,7 @@ const helpItems: HelpItem[] = [
   {
     id: '2',
     question: 'What is a privacy risk score?',
-    answer: 'The privacy risk score (0-100) reflects services you add to your family catalog—not live device monitoring. Lower scores are better. Scores come from Digital Footprint Analysis and the service catalog.',
+    answer: 'The privacy risk score (0-100) reflects services you add to your family catalog—not live device monitoring. Lower scores are better. Scores come from footprint review and the service catalog.',
     category: 'dashboard'
   },
   {
@@ -41,7 +41,7 @@ const helpItems: HelpItem[] = [
   {
     id: '5',
     question: 'How do I view my family\'s privacy status?',
-    answer: 'Use Digital Footprint Analysis on the website for household exposure, then Family Hub dashboard for today\'s mission, goals, and per-member progress—all stored locally.',
+    answer: 'Use footprint review on the website for household exposure, then Family Hub dashboard for today\'s mission, goals, and per-member progress—all stored locally.',
     category: 'dashboard'
   },
   {

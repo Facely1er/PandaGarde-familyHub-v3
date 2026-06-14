@@ -60,7 +60,7 @@ export const PageLead: React.FC<{ children: React.ReactNode }> = ({ children }) 
   <p className="page-lead">{children}</p>
 );
 
-/** Standard horizontal card: icon | copy | optional action */
+/** Standard horizontal card: icon + title row, description below, optional action */
 export const ShellRowCard: React.FC<{
   icon: React.ReactNode;
   title: string;
@@ -68,16 +68,21 @@ export const ShellRowCard: React.FC<{
   action?: React.ReactNode;
   iconLabel?: string;
 }> = ({ icon, title, description, action, iconLabel }) => (
-  <article className="shell-card shell-row">
-    <div className="shell-icon shell-icon--lg" aria-hidden={iconLabel ? undefined : true}>
-      {iconLabel ? <span className="shell-icon__step">{iconLabel}</span> : null}
-      {icon}
-    </div>
-    <div className="shell-row__body">
-      <h3 className="shell-card__title">{title}</h3>
+  <article className="shell-card shell-row-card">
+    <div className="shell-row-card__main">
+      <div className="shell-row-card__heading">
+        <div
+          className={`shell-icon ${iconLabel ? 'shell-icon--lg' : 'shell-icon--md'} shell-row-card__icon`}
+          aria-hidden={iconLabel ? undefined : true}
+        >
+          {iconLabel ? <span className="shell-icon__step">{iconLabel}</span> : null}
+          {icon}
+        </div>
+        <h3 className="shell-card__title">{title}</h3>
+      </div>
       <p className="shell-card__body">{description}</p>
     </div>
-    {action ? <div className="shell-row__action">{action}</div> : null}
+    {action ? <div className="shell-row-card__action">{action}</div> : null}
   </article>
 );
 

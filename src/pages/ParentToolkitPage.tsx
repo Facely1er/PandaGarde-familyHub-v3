@@ -66,7 +66,7 @@ const ParentToolkitPage: React.FC = () => {
           <p className="mt-2 text-gray-700 dark:text-gray-300">
             Each card links to an existing guide, plan, activity, or download page. Use{' '}
             <strong>View details</strong> to see what is on that page, then <strong>Go to page</strong> to open it.
-            For the full Digital Footprint Analysis path, start from{' '}
+            For the full footprint review path, start from{' '}
             <Link to="/service-catalog" className="font-semibold text-green-700 underline dark:text-green-400">
               Service catalog
             </Link>

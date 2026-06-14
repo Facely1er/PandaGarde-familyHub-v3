@@ -133,7 +133,7 @@ export const buildDfaScore = (analysis: FootprintAnalysis, tier: DfaScoreTier = 
     flags.push({ label: 'School-related services carry meaningful exposure', severity: 'high' });
   }
 
-  const executiveSummary = `${tier === 'advanced' ? 'Advanced' : 'Basic'} DFA shows a ${level.toLowerCase()} risk posture. Risk score ${score}/100 reflects ${analysis.totalServices} services across ${analysis.totalMembers || 1} family profile${analysis.totalMembers === 1 ? '' : 's'}, with ${highRiskServices} higher-risk service${highRiskServices === 1 ? '' : 's'} in scope.`;
+  const executiveSummary = `${tier === 'advanced' ? 'Advanced' : 'Basic'} footprint review shows a ${level.toLowerCase()} risk posture. Risk score ${score}/100 reflects ${analysis.totalServices} services across ${analysis.totalMembers || 1} family profile${analysis.totalMembers === 1 ? '' : 's'}, with ${highRiskServices} higher-risk service${highRiskServices === 1 ? '' : 's'} in scope.`;
 
   return {
     tier,

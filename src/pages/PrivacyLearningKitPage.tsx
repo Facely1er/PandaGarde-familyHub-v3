@@ -9,7 +9,7 @@ const sections: { heading: string; items: KitItem[] }[] = [
     heading: 'Start here',
     items: [
       { title: 'Privacy Panda Story', href: '/privacy-panda', badge: 'Story' },
-      { title: 'Digital Footprint Analysis', href: '/digital-footprint', badge: 'Assessment' },
+      { title: 'Footprint review', href: '/digital-footprint', badge: 'Assessment' },
     ],
   },
   {

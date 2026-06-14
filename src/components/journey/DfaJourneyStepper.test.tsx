@@ -16,7 +16,7 @@ describe('DfaJourneyStepper', () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByText('Your DFA journey')).toBeInTheDocument();
+    expect(screen.getByText('Your footprint review')).toBeInTheDocument();
     expect(screen.getByText('0% complete')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /start journey/i })).toHaveAttribute('href', '/service-catalog');
   });
@@ -54,9 +54,9 @@ describe('DfaJourneyStepper', () => {
       </MemoryRouter>
     );
 
-    expect(screen.queryByText('Your DFA journey')).not.toBeInTheDocument();
-    expect(screen.getByLabelText('DFA journey progress')).toBeInTheDocument();
+    expect(screen.queryByText('Your footprint review')).not.toBeInTheDocument();
+    expect(screen.getByLabelText('Footprint review progress')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /read privacy panda story/i })).toHaveAttribute('href', '/stories');
-    expect(screen.getByRole('link', { name: /run digital footprint analysis/i })).toHaveAttribute('aria-current', 'step');
+    expect(screen.getByRole('link', { name: /run footprint review/i })).toHaveAttribute('aria-current', 'step');
   });
 });

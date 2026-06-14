@@ -679,7 +679,7 @@ const ServiceCatalog: React.FC<ServiceCatalogProps> = ({
               </button>
               {!isServiceInFamily(selectedService.id) && (
                 <p className="modal-quick-add-hint">
-                  Adding services enables Digital Footprint Analysis
+                  Adding services enables footprint review
                 </p>
               )}
             </div>

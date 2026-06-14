@@ -19,7 +19,7 @@ const BreakdownBars: React.FC<Props> = ({ items }) => {
       <div className="mb-4">
         <h3 className="text-lg font-bold text-gray-900 ">Score drivers</h3>
         <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
-          These are the factors pushing the DFA risk score up or down.{' '}
+          These are the factors pushing the household risk score up or down.{' '}
           <Link to="/scoring-methodology#dfa-methodology" className="font-semibold text-green-700 hover:underline dark:text-green-400">
             How weights work
           </Link>

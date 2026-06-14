@@ -8,7 +8,7 @@ import PageLayout from '../components/layout/PageLayout';
 
 import { PageSection } from '../components/layout/PageContent';
 
-import { dfaWorkflowNavItems } from '../data/siteNavigation';
+import { dfaWorkflowNavItems, FOOTPRINT_REVIEW_NAV_LABEL } from '../data/siteNavigation';
 
 
 
@@ -16,7 +16,7 @@ const groups = [
 
   {
 
-    title: 'Digital Footprint Analysis',
+    title: FOOTPRINT_REVIEW_NAV_LABEL,
 
     description: 'List services and review exposure—the core PandaGarde review (two steps).',
 
@@ -94,7 +94,7 @@ const PrivacyToolsPage: React.FC = () => {
 
       title="Privacy tools"
 
-      subtitle="A link index for the DFA path and related pages. It does not change app settings on its own."
+      subtitle="A link index for the footprint review path and related pages. It does not change app settings on its own."
 
       breadcrumbs={true}
 

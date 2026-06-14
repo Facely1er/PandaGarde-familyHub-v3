@@ -7,14 +7,14 @@ const DfaMethodologyCallout: React.FC = () => (
     <p className="flex items-start gap-2 text-sm leading-relaxed text-emerald-950 dark:text-emerald-100">
       <BookOpen className="mt-0.5 h-4 w-4 shrink-0 text-emerald-700 dark:text-emerald-400" aria-hidden />
       <span>
-        <strong>DFA methodology:</strong> Household scores combine per-app Privacy Exposure Indexes with
+        <strong>Footprint review methodology:</strong> Household scores combine per-app Privacy Exposure Indexes with
         volume, high-risk concentration, and (in Advanced) network, broker, and AI signals—all from apps you
         list, not device monitoring.{' '}
         <Link
           to="/scoring-methodology#dfa-methodology"
           className="font-semibold text-emerald-800 underline hover:text-emerald-900 dark:text-emerald-300 dark:hover:text-emerald-200"
         >
-          Read the full DFA methodology
+          Read the full footprint review methodology
         </Link>
       </span>
     </p>

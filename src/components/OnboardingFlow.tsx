@@ -42,7 +42,7 @@ const onboardingSteps: OnboardingStep[] = [
       link: '/service-catalog'
     },
     tips: [
-      'Add at least 3 services to unlock Digital Footprint Analysis',
+      'Add at least 3 services to unlock footprint review',
       'Each service includes privacy risk ratings and recommendations',
       'You can add more services anytime'
     ]
@@ -65,14 +65,14 @@ const onboardingSteps: OnboardingStep[] = [
   {
     id: 4,
     title: 'Explore Advanced Features',
-    description: 'After your Service Catalog is set up, you can run Digital Footprint Analysis, privacy assessments, and open catalog-based notifications plus RSS safety headlines.',
+    description: 'After your Service Catalog is set up, you can run footprint review, privacy assessments, and open catalog-based notifications plus RSS safety headlines.',
     icon: BarChart3,
     action: {
       label: 'View Features',
       link: '/digital-footprint'
     },
     tips: [
-      'Digital Footprint shows your family\'s online presence',
+      'Footprint review shows your family\'s online presence',
       'Risk Assessments help identify privacy concerns',
       'Alerts page: catalog notifications and RSS headlines for services you listed (not device monitoring)'
     ]

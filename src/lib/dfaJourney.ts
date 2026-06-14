@@ -46,7 +46,7 @@ const phaseBlueprint: Omit<DfaJourneyPhase, 'completed' | 'visited' | 'updatedAt
   {
     id: 2,
     key: 'dfa',
-    title: 'Run Digital Footprint Analysis',
+    title: 'Run footprint review',
     description: 'See where exposure is building across school, home, and everyday services.',
     path: '/digital-footprint',
   },
@@ -64,7 +64,7 @@ const phaseBlueprint: Omit<DfaJourneyPhase, 'completed' | 'visited' | 'updatedAt
     key: 'hub',
     title: 'Family Hub (optional)',
     description:
-      'Separate workspace for age-matched privacy missions and kids’ progress — not required to finish parent Digital Footprint Analysis.',
+      'Separate workspace for age-matched privacy missions and kids’ progress — not required to finish footprint review.',
     path: '/family-hub/dashboard',
     optional: true,
   },

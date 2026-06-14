@@ -33,13 +33,13 @@ const DfaScoreOverview: React.FC<Props> = ({ analysis }) => {
       <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
         <div>
           <div className="inline-flex items-center gap-2 rounded-full bg-green-900 px-3 py-1 text-sm font-semibold text-white dark:bg-green-800">
-            <Gauge size={16} /> DFA scoring engine
+            <Gauge size={16} /> Footprint review scoring
           </div>
           <h2 className="mt-3 text-2xl font-bold text-gray-900">Launch-grade scoring, not just a footprint list</h2>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-600 dark:text-gray-700">
             Use the Basic score for a fast household reading. Switch to Advanced to include data-sharing networks, broker reach, and AI-specific sensitivity.{' '}
             <Link to="/scoring-methodology#dfa-methodology" className="font-semibold text-green-700 hover:underline dark:text-green-400">
-              Read the DFA methodology
+              Read the footprint review methodology
             </Link>
           </p>
         </div>
@@ -53,7 +53,7 @@ const DfaScoreOverview: React.FC<Props> = ({ analysis }) => {
                 onClick={() => handleTierChange(option)}
                 className={`rounded-lg px-4 py-2 text-sm font-semibold transition ${tier === option ? 'bg-green-700 text-white dark:bg-green-600' : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-300'}`}
               >
-                {option === 'basic' ? 'Basic DFA' : 'Advanced DFA'}
+                {option === 'basic' ? 'Basic scoring' : 'Advanced scoring'}
               </button>
             ))}
           </div>

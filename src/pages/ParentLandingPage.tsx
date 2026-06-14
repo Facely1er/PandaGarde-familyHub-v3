@@ -12,7 +12,7 @@ const featureCards = [
       "Get a clear view of your family's privacy status from the apps and services you list in your catalog—not from monitoring their devices.",
     bullets: [
       'List apps and sites your family uses (self-reported)',
-      'See privacy risk scores per service from Digital Footprint Analysis',
+      'See privacy risk scores per service from footprint review',
       'Catalog notifications and RSS headlines when feeds load',
     ],
   },
@@ -49,7 +49,7 @@ const ParentLandingPage: React.FC = () => {
     {
       question: 'How do I see what my children do online?',
       answer:
-        'Family Hub does not monitor children’s devices. You add the apps and services your family uses (or complete Digital Footprint Analysis on the website), then review privacy risk scores and guided next steps for those services.',
+        'Family Hub does not monitor children’s devices. You add the apps and services your family uses (or complete footprint review on the website), then review privacy risk scores and guided next steps for those services.',
     },
     {
       question: 'What is a privacy risk score?',

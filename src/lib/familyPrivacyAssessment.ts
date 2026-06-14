@@ -320,7 +320,7 @@ export class FamilyPrivacyAssessment {
           'Use the Digital Footprint tool to see your data sharing network'
         ],
         resources: [
-          { label: 'Digital Footprint Analysis', url: '/digital-footprint' },
+          { label: 'Footprint review', url: '/digital-footprint' },
           { label: 'Service Relationships', url: '/service-catalog' }
         ]
       });
@@ -404,7 +404,7 @@ export class FamilyPrivacyAssessment {
         ],
         resources: [
           { label: 'Privacy Education', url: '/for-families' },
-          { label: 'Digital Footprint Analysis', url: '/digital-footprint' }
+          { label: 'Footprint review', url: '/digital-footprint' }
         ]
       });
     }

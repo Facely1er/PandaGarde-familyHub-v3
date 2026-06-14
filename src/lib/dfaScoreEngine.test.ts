@@ -64,7 +64,7 @@ describe('buildDfaScore', () => {
       'service-volume',
       'high-risk-apps',
     ]);
-    expect(result.executiveSummary).toContain('Basic DFA');
+    expect(result.executiveSummary).toContain('Basic footprint review');
   });
 
   it('includes advanced-only categories and does not score lower than the same basic snapshot here', () => {

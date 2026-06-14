@@ -58,7 +58,7 @@ describe('DfaScoreOverview', () => {
     expect(screen.getByText(/Tier:/i)).toBeInTheDocument();
     expect(screen.getByText(/Fast household view/i)).toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole('button', { name: /advanced dfa/i }));
+    fireEvent.click(screen.getByRole('button', { name: /advanced scoring/i }));
 
     expect(window.localStorage.getItem('pandagarde_dfa_score_tier')).toBe('advanced');
     expect(screen.getByText(/Expanded risk analysis/i)).toBeInTheDocument();

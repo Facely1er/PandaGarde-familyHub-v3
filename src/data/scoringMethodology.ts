@@ -5,7 +5,7 @@ export const SCORING_METHODOLOGY_VERSION = '1.1.0';
 export const scoringMethodologyIntro = {
   title: 'How PandaGarde scores exposure',
   lead:
-    'PandaGarde uses two related scoring views: a per-app Privacy Exposure Index in the Service Catalog, and household Digital Footprint Analysis (DFA) after you list services. Both are educational guides built from the catalog you choose—not live monitoring of a child’s device.',
+    'PandaGarde uses two related scoring views: a per-app Privacy Exposure Index in the Service Catalog, and household footprint review after you list services. Both are educational guides built from the catalog you choose—not live monitoring of a child’s device.',
 };
 
 export const perServiceMethodology = {
@@ -47,13 +47,13 @@ export const perServiceMethodology = {
   ],
 };
 
-/** Digital Footprint Analysis — full methodology (sync with dfaScoreEngine.ts + footprintAnalyzer.ts). */
+/** Footprint review — full methodology (sync with dfaScoreEngine.ts + footprintAnalyzer.ts). */
 export const dfaMethodology = {
-  title: 'Digital Footprint Analysis (DFA) methodology',
+  title: 'Footprint review methodology',
   summary:
-    'DFA is Phase 2 of the PandaGarde journey. After you add at least three services in the catalog, PandaGarde aggregates them into household-level scores, visualizations, and recommended next steps—all computed locally in your browser.',
+    'Footprint review is the household scoring step after your service catalog. Once you add at least three services, PandaGarde aggregates them into household-level scores, visualizations, and recommended next steps—all computed locally in your browser.',
   prerequisites: [
-    'Add services your family actually uses in the Service Catalog (minimum three to unlock DFA).',
+    'Add services your family actually uses in the Service Catalog (minimum three to unlock footprint review scores).',
     'Optionally assign services to family member profiles for per-person views in the visualization.',
     'No PandaGarde account or cloud upload is required for the core analysis.',
   ],
@@ -61,9 +61,9 @@ export const dfaMethodology = {
     title: 'Two score families on the footprint page',
     items: [
       {
-        label: 'DFA risk score (gauge)',
+        label: 'Household risk score (gauge)',
         description:
-          'Produced by the DFA scoring engine (Basic or Advanced tier). Higher = more household privacy risk. Shown as Risk score with levels Low, Moderate, High, or Critical. Privacy posture is 100 minus this risk score.',
+          'Produced by the footprint review scoring engine (Basic or Advanced tier). Higher = more household privacy risk. Shown as Risk score with levels Low, Moderate, High, or Critical. Privacy posture is 100 minus this risk score.',
       },
       {
         label: 'Family score (summary cards)',
@@ -81,7 +81,7 @@ export const dfaMethodology = {
   tiers: [
     {
       id: 'basic',
-      label: 'Basic DFA',
+      label: 'Basic scoring',
       description: 'Fast household reading for busy parents. Three weighted drivers roll up into one risk score.',
       formula: 'Risk score = 50% service exposure + 20% service volume + 30% high-risk app density',
       drivers: [
@@ -107,7 +107,7 @@ export const dfaMethodology = {
     },
     {
       id: 'advanced',
-      label: 'Advanced DFA',
+      label: 'Advanced scoring',
       description:
         'Adds ecosystem context: corporate data-sharing networks, broker convergence, and AI-specific sensitivity.',
       formula:
@@ -152,7 +152,7 @@ export const dfaMethodology = {
   flags: {
     title: 'Risk flags',
     description:
-      'Beyond the numeric score, DFA surfaces plain-language flags when drivers score ≥ 30 or when specific conditions appear (for example, school-context exposure averages ≥ 50, or AI training-data risk). Flags are conversation starters, not automated judgments.',
+      'Beyond the numeric score, footprint review surfaces plain-language flags when drivers score ≥ 30 or when specific conditions appear (for example, school-context exposure averages ≥ 50, or AI training-data risk). Flags are conversation starters, not automated judgments.',
   },
   footprintSnapshot: {
     title: 'Family score snapshot (visualization)',
@@ -168,7 +168,7 @@ export const dfaMethodology = {
     'Per-service exposure list and category/context breakdowns',
     'Data-sharing network and broker convergence views (Advanced context)',
     'AI risk summary when AI tools are in the catalog',
-    'Downloadable PDF executive summary (from the DFA panel or page header)',
+    'Downloadable PDF executive summary (from the footprint review panel or page header)',
     'Recommended next step: Privacy Assessment and Family Hub missions',
   ],
 };
@@ -190,7 +190,7 @@ export const scoringLimitations = [
   'PandaGarde does not access medical records, school records, or private account contents.',
   'Higher exposure does not mean a company broke the law or acted unethically; it highlights where families may want more conversation and controls.',
   'Catalog entries are curated and updated over time; scores may lag fast-changing products until metadata is refreshed.',
-  'DFA risk score and family score use different formulas; compare them as complementary views, not duplicates.',
+  'Household risk score and family score use different formulas; compare them as complementary views, not duplicates.',
 ];
 
 export const scoringLineageNote =

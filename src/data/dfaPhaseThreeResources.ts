@@ -24,7 +24,7 @@ export const DFA_PHASE_THREE_PARENT_RESOURCES: DfaPhaseResourceLink[] = [
   {
     label: 'How it works',
     href: '/how-it-works',
-    description: 'Short overview of the three-step review when you want a checklist after DFA.',
+    description: 'Short overview of the three-step review when you want a checklist after footprint review.',
   },
 ];
 
@@ -50,6 +50,6 @@ export const DFA_PHASE_THREE_JOURNAL: DfaPhaseResourceLink = {
   label: 'Digital Bamboo Journal',
   href: DIGITAL_BAMBOO_JOURNAL_URL,
   description:
-    'A separate journal site for reflection and follow-up—aligned with PandaGarde stories, not required to finish DFA.',
+    'A separate journal site for reflection and follow-up—aligned with PandaGarde stories, not required to finish footprint review.',
   external: true,
 };

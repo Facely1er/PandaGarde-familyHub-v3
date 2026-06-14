@@ -18,14 +18,14 @@ export const downloadDfaExecutiveSummary = async (analysis: FootprintAnalysis, s
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(20);
   doc.setFont('helvetica', 'bold');
-  doc.text('PandaGarde DFA Executive Summary', 20, 22);
+  doc.text('PandaGarde Footprint Review Summary', 20, 22);
   doc.setFontSize(10);
   doc.setFont('helvetica', 'normal');
   doc.text(`Generated ${new Date().toLocaleString()}`, 20, 30);
 
   doc.setTextColor(15, 23, 42);
   y = 48;
-  line(`${score.tier === 'advanced' ? 'Advanced' : 'Basic'} DFA score: ${score.score}/100`, 16, true);
+  line(`${score.tier === 'advanced' ? 'Advanced' : 'Basic'} footprint review score: ${score.score}/100`, 16, true);
   line(`Risk level: ${score.level}`, 12, true);
   line(score.executiveSummary);
 
@@ -40,7 +40,7 @@ export const downloadDfaExecutiveSummary = async (analysis: FootprintAnalysis, s
 
   line('Priority categories', 13, true);
   if (score.flags.length === 0) {
-    line('• No major DFA flags were triggered in this run.');
+    line('• No major risk flags were triggered in this run.');
   } else {
     score.flags.forEach((flag) => line(`• ${flag.label}`));
   }

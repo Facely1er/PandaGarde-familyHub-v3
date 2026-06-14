@@ -42,7 +42,7 @@ const PrivacyAssessmentPage: React.FC = () => {
         <header className={`mb-6 overflow-hidden ${dfaTheme.cardLg}`}>
           <div className={`${dfaTheme.band} px-5 py-3 sm:px-6`}>
             <p className={`text-sm leading-relaxed ${dfaTheme.bodySm}`}>
-              <span className={`font-medium ${dfaTheme.title}`}>DFA journey:</span>{' '}
+              <span className={`font-medium ${dfaTheme.title}`}>Footprint review path:</span>{' '}
               <Link to="/service-catalog" className="font-medium text-blue-600 hover:underline dark:text-blue-400">
                 Phase 1
               </Link>
@@ -64,7 +64,7 @@ const PrivacyAssessmentPage: React.FC = () => {
               Family privacy assessment
             </h1>
             <p className={`mt-2 max-w-3xl sm:text-base ${dfaTheme.bodySm}`}>
-              Answer the questions below from your DFA results. Guides and stories are available after—you do not need
+              Answer the questions below from your footprint review results. Guides and stories are available after—you do not need
               Family Hub to finish this phase.
             </p>
             <nav className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm" aria-label="Related pages">
@@ -99,7 +99,7 @@ const PrivacyAssessmentPage: React.FC = () => {
               variant="strip"
               currentKey="plan"
               ctaHref="/digital-footprint"
-              ctaLabel="Review DFA results"
+              ctaLabel="Review footprint scores"
               className="mt-4 border-t-0 pt-0"
             />
           </div>
@@ -194,7 +194,7 @@ const PrivacyAssessmentPage: React.FC = () => {
                 <p className={`text-sm font-semibold ${dfaTheme.title}`}>Digital Bamboo Journal</p>
                 <p className={`mt-1 text-xs ${dfaTheme.bodySm}`}>
                   A separate journal site for reflection and follow-up—aligned with PandaGarde stories, not required to
-                  finish DFA.
+                  finish footprint review.
                 </p>
                 <a
                   href="https://journal.pandagarde.com"
