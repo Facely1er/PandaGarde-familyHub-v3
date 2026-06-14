@@ -7563,14 +7563,43 @@ header.header .nav-actions button.header-icon-btn:not(.header-search-bar) {
   }
 }
 
-/* Phone header — hide center quick-nav */
+/* Phone header — hide center quick-nav; keep brand tagline in logo lockup */
 @media (max-width: 767px) {
-  .header .nav > .logo .logo-tagline {
-    display: none;
-  }
-
   header.header .nav > .mobile-quick-nav {
     display: none !important;
+  }
+
+  header.header .nav > .logo {
+    gap: 0.3rem;
+    padding-right: 0.25rem !important;
+    align-items: center;
+  }
+
+  header.header .logo-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  header.header .logo-icon img {
+    transform: scale(1.08);
+  }
+
+  header.header .logo-text {
+    gap: 0.0625rem;
+    justify-content: center;
+  }
+
+  header.header .logo-wordmark {
+    font-size: 0.9375rem;
+    line-height: 1.1;
+  }
+
+  header.header .logo-tagline {
+    display: block;
+    font-size: 0.625rem;
+    line-height: 1.15;
+    letter-spacing: 0.03em;
+    opacity: 0.92;
   }
 }
 
