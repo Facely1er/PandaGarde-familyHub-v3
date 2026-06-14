@@ -5,7 +5,6 @@ import {
   ArrowRight,
   FileText,
   MessageCircle,
-  CheckCircle,
   BookOpen,
   Settings,
   Search,

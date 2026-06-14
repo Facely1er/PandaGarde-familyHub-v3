@@ -1,7 +1,5 @@
 import React, {
-  createContext,
   useCallback,
-  useContext,
   useEffect,
   useMemo,
   useRef,
@@ -18,21 +16,7 @@ import {
 } from '../familyhub/hubFamilySync';
 import { useFamily } from './FamilyContext';
 import { logger } from '../lib/logger';
-
-interface HubFamilyContextValue {
-  members: HubFamilyMember[];
-  syncing: boolean;
-  addMember: (name: string, age: number, role: string) => Promise<HubFamilyMember | null>;
-  updateMember: (
-    member: HubFamilyMember,
-    updates: { name: string; age: number; role: string }
-  ) => Promise<HubFamilyMember | null>;
-  removeMember: (member: HubFamilyMember) => Promise<void>;
-  replaceMembers: (next: HubFamilyMember[]) => void;
-  refreshFromStores: () => Promise<void>;
-}
-
-const HubFamilyContext = createContext<HubFamilyContextValue | undefined>(undefined);
+import { HubFamilyContext } from './hubFamilyContextState';
 
 export const HubFamilyProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { refreshFamily } = useFamily();
@@ -143,11 +127,3 @@ export const HubFamilyProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
   return <HubFamilyContext.Provider value={value}>{children}</HubFamilyContext.Provider>;
 };
-
-export function useHubFamilyMembers(): HubFamilyContextValue {
-  const context = useContext(HubFamilyContext);
-  if (!context) {
-    throw new Error('useHubFamilyMembers must be used within HubFamilyProvider');
-  }
-  return context;
-}

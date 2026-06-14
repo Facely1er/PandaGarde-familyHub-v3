@@ -1,7 +1,8 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { renderHook, waitFor } from '@testing-library/react';
 import React from 'react';
-import { HubFamilyProvider, useHubFamilyMembers } from './HubFamilyContext';
+import { HubFamilyProvider } from './HubFamilyContext';
+import { useHubFamilyMembers } from '../hooks/useHubFamilyMembers';
 import { FamilyProvider } from './FamilyContext';
 import { HUB_FAMILY_STORAGE_KEY } from '../familyhub/hubFamilyMembers';
 

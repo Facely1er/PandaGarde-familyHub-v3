@@ -1,6 +1,5 @@
 import {
   type LucideIcon,
-  Activity,
   BookOpen,
   Compass,
   Fingerprint,

@@ -7,6 +7,13 @@ import {
   isEncryptionAvailable
 } from './encryption';
 
+/** Base64 ciphertext can coincidentally contain short substrings like "10" — compare JSON, not fragments. */
+function expectCiphertextHidesPayload(encrypted: string, payload: unknown): void {
+  const plaintext = JSON.stringify(payload);
+  expect(encrypted).not.toBe(plaintext);
+  expect(encrypted).not.toContain(plaintext);
+}
+
 describe('encryption', () => {
   beforeEach(() => {
     // Ensure Web Crypto API is available (should be in test environment)
@@ -227,11 +234,10 @@ describe('encryption', () => {
       
       const encrypted = await encryptData(familyMember, password);
       
-      // Verify PII is not in plaintext
+      expectCiphertextHidesPayload(encrypted, familyMember);
       expect(encrypted).not.toContain('John');
       expect(encrypted).not.toContain('Doe');
       expect(encrypted).not.toContain('john.doe@example.com');
-      expect(encrypted).not.toContain('10');
       
       // Verify decryption works
       const decrypted = await decryptData<typeof familyMember>(encrypted, password);
@@ -251,9 +257,7 @@ describe('encryption', () => {
       
       const encrypted = await encryptData(ageVerification, password);
       
-      // Verify sensitive data is not in plaintext
-      expect(encrypted).not.toContain('10');
-      expect(encrypted).not.toContain('true');
+      expectCiphertextHidesPayload(encrypted, ageVerification);
       
       // Verify decryption works
       const decrypted = await decryptData<typeof ageVerification>(encrypted, password);

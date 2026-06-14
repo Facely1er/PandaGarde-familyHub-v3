@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useMemo, useState } from 'react';
 import { Award, CheckCircle2, Clock, Download, Rocket, Sprout, Star, Timer, TrendingUp, Trophy, X, type LucideIcon } from 'lucide-react';
 import { HubIconBadge } from '../hubIcons';
-import { HubScreenFallback } from '../lazyScreen';
+import { HubScreenFallback } from '../HubScreenFallback';
 
 const CertificateGenerator = lazy(() => import('../../components/CertificateGenerator'));
 const ProgressExport = lazy(() => import('../../components/ProgressExport'));

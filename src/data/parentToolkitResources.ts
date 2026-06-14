@@ -1,5 +1,5 @@
-import type { LucideIcon } from 'lucide-react';
 import {
+  type LucideIcon,
   AlertTriangle,
   BookOpen,
   CheckCircle,
@@ -10,7 +10,6 @@ import {
   Search,
   Settings,
   Shield,
-  Star,
   Users,
 } from 'lucide-react';
 

@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, useState } from 'react';
 import { ArrowLeft, BookOpen, MessageCircle, MessageCircleHeart, Play, Sparkles, Target } from 'lucide-react';
-import { HubScreenFallback } from '../lazyScreen';
+import { HubScreenFallback } from '../HubScreenFallback';
 
 const ActivityManager = lazy(() => import('../../components/activities/ActivityManager'));
 import MissionCelebration from './MissionCelebration';

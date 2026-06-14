@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Flame, Play, RotateCcw } from 'lucide-react';
 import { HubIcon } from '../hubIcons';
 import { useProgress } from '../../contexts/ProgressContext';
-import { useHubFamilyMembers } from '../../contexts/HubFamilyContext';
+import { useHubFamilyMembers } from '../../hooks/useHubFamilyMembers';
 import {
   getCompletionId,
   getHubStreak,

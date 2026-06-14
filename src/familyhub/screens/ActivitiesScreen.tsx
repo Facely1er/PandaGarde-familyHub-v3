@@ -5,7 +5,7 @@ import AgeBandStrip from '../components/AgeBandStrip';
 import HubPageLayout from '../components/HubPageLayout';
 import HubScreenHero from '../components/HubScreenHero';
 import MissionShell from '../components/MissionShell';
-import type { HubAgeRange } from '../hubAgeBands';
+import { type HubAgeRange, hubAgeBandByRange } from '../hubAgeBands';
 import { useProgress } from '../../contexts/ProgressContext';
 import { findActivityById, getCompletionId } from '../../lib/hubMission';
 import {
@@ -16,7 +16,6 @@ import {
   type AgeGroup,
   type FlattenedAgeBasedActivity,
 } from '../../data/ageBasedActivities';
-import { hubAgeBandByRange } from '../hubAgeBands';
 import { HubIconBadge } from '../hubIcons';
 
 const AGE_TABS = [

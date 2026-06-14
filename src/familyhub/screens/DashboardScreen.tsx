@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Users, Gamepad2, Plus, X, BookOpen, Fingerprint } from 'lucide-react';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
-import { useHubFamilyMembers } from '../../contexts/HubFamilyContext';
+import { useHubFamilyMembers } from '../../hooks/useHubFamilyMembers';
 import AgeBandStrip from '../components/AgeBandStrip';
 import HubPageLayout from '../components/HubPageLayout';
 import HubScreenHero from '../components/HubScreenHero';

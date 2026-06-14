@@ -1,12 +1,12 @@
 import React, { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Plus, Eye, Trash2, Pencil, type LucideIcon } from 'lucide-react';
-import { useHubFamilyMembers } from '../../contexts/HubFamilyContext';
+import { useHubFamilyMembers } from '../../hooks/useHubFamilyMembers';
 import { useFamilyProgress } from '../../contexts/FamilyProgressContext';
 import { useActiveMember } from '../../utils/familyProgressIntegration';
 import { useDialogFocusTrap } from '../../hooks/useDialogFocusTrap';
 import { type HubFamilyMember, clearActiveMemberIfMatches } from '../hubFamilyMembers';
-import { HubScreenFallback } from '../lazyScreen';
+import { HubScreenFallback } from '../HubScreenFallback';
 import { hubPaths } from '../hubPaths';
 import HubPageLayout from '../components/HubPageLayout';
 import HubScreenHero from '../components/HubScreenHero';

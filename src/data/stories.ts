@@ -2278,8 +2278,8 @@ export const getHomepageLatestStory = (): Story | undefined => {
 
 export const getNextScheduledStory = (): Story | undefined =>
   STORIES
-    .filter((s) => !isStoryPublished(s) && s.scheduledAt)
-    .sort((a, b) => new Date(a.scheduledAt!).getTime() - new Date(b.scheduledAt!).getTime())[0];
+    .filter((s): s is Story & { scheduledAt: string } => !isStoryPublished(s) && Boolean(s.scheduledAt))
+    .sort((a, b) => new Date(a.scheduledAt).getTime() - new Date(b.scheduledAt).getTime())[0];
 
 export const getFoundationStory = (): Story | undefined =>
   STORIES.find((s) => isFoundationStory(s));

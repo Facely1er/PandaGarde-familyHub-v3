@@ -5,7 +5,6 @@ import {
   type HubFamilyMember,
 } from './hubFamilyMembers';
 import type { FamilyMember } from '../contexts/FamilyContext';
-import { logger } from '../lib/logger';
 
 const HUB_FAMILY_DEFAULT_NAME = 'My Family';
 
