@@ -10,6 +10,7 @@ import HubTour from '../components/HubTour';
 import TodayMissionCard from '../components/TodayMissionCard';
 import { getHubOrigin, touchHubStreak } from '../../lib/hubMission';
 import { HUB_DASHBOARD_EMPTY, HUB_DASHBOARD_READY } from '../hubCopy';
+import { hubPaths } from '../hubPaths';
 
 interface FamilyGoal {
   completed?: boolean;
