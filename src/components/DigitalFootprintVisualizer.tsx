@@ -198,62 +198,64 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
 
   // ── Full render ───────────────────────────────────────────────────────────────
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 overflow-x-hidden">
 
       {/* ── Score Card ──────────────────────────────────────────────────────── */}
-      <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl p-6 border-2 border-blue-200 dark:border-blue-800">
-        <div className="flex items-center justify-between mb-4">
-          <div>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+      <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl p-4 sm:p-6 border-2 border-blue-200 dark:border-blue-800 overflow-hidden">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-4">
+          <div className="min-w-0">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-2">
               Your family's privacy at a glance
             </h2>
-            <p className="text-gray-600 dark:text-dark-text-secondary">
+            <p className="text-sm text-gray-600 dark:text-dark-text-secondary">
               One number that shows how well your family's data is protected across all the apps you use
             </p>
           </div>
 
           {/* Score + delta */}
-          <div className="text-center shrink-0 ml-4">
-            <div className={`text-5xl font-bold mb-1 ${
+          <div className="flex items-center gap-4 sm:flex-col sm:items-center sm:gap-0 sm:text-center sm:shrink-0">
+            <div className={`text-5xl font-bold sm:mb-1 ${
               analysis.privacyScore >= 70 ? 'text-green-600 dark:text-green-400' :
               analysis.privacyScore >= 40 ? 'text-yellow-600 dark:text-yellow-400' :
               'text-red-600 dark:text-red-400'
             }`}>
               {analysis.privacyScore}
             </div>
-            <div className="text-sm text-gray-600 dark:text-gray-400">Privacy Score</div>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Higher is better</p>
+            <div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">Privacy Score</div>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Higher is better</p>
 
-            {/* Score-level badge */}
-            <div className={`mt-1 px-3 py-1 rounded-full text-xs font-medium ${
-              analysis.privacyScore >= 70 ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300' :
-              analysis.privacyScore >= 40 ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300' :
-              'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300'
-            }`}>
-              {analysis.privacyScore >= 70 ? 'Good' : analysis.privacyScore >= 40 ? 'Moderate' : 'Needs attention'}
-            </div>
-
-            {/* Delta badge — only on repeat visits */}
-            {scoreDelta !== null && (
-              <div className={`mt-2 flex items-center justify-center gap-1 text-xs font-semibold ${
-                scoreDelta > 0  ? 'text-green-600 dark:text-green-400' :
-                scoreDelta < 0  ? 'text-red-500 dark:text-red-400' :
-                'text-gray-400 dark:text-gray-500'
+              {/* Score-level badge */}
+              <div className={`mt-1 inline-block px-3 py-1 rounded-full text-xs font-medium ${
+                analysis.privacyScore >= 70 ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300' :
+                analysis.privacyScore >= 40 ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300' :
+                'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300'
               }`}>
-                {scoreDelta > 0  ? <TrendingUp  className="h-3.5 w-3.5" /> :
-                 scoreDelta < 0  ? <TrendingDown className="h-3.5 w-3.5" /> :
-                 <Minus className="h-3.5 w-3.5" />}
-                {scoreDelta > 0 ? `+${scoreDelta}` : scoreDelta < 0 ? scoreDelta : 'No change'}{' '}
-                <span className="font-normal opacity-80">since last visit</span>
+                {analysis.privacyScore >= 70 ? 'Good' : analysis.privacyScore >= 40 ? 'Moderate' : 'Needs attention'}
               </div>
-            )}
+
+              {/* Delta badge — only on repeat visits */}
+              {scoreDelta !== null && (
+                <div className={`mt-2 flex items-center gap-1 text-xs font-semibold ${
+                  scoreDelta > 0  ? 'text-green-600 dark:text-green-400' :
+                  scoreDelta < 0  ? 'text-red-500 dark:text-red-400' :
+                  'text-gray-400 dark:text-gray-500'
+                }`}>
+                  {scoreDelta > 0  ? <TrendingUp  className="h-3.5 w-3.5" /> :
+                   scoreDelta < 0  ? <TrendingDown className="h-3.5 w-3.5" /> :
+                   <Minus className="h-3.5 w-3.5" />}
+                  {scoreDelta > 0 ? `+${scoreDelta}` : scoreDelta < 0 ? scoreDelta : 'No change'}{' '}
+                  <span className="font-normal opacity-80">since last visit</span>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
         <div className="mt-4 pt-4 border-t border-blue-200 dark:border-blue-800">
-          <div className="flex items-center justify-between mb-1">
-            <span className="font-medium text-gray-900 dark:text-white">How protected is your family's data?</span>
-            <span className="text-sm text-gray-600 dark:text-gray-400">{analysis.privacyScore}/100</span>
+          <div className="flex items-center justify-between gap-2 mb-1">
+            <span className="font-medium text-gray-900 dark:text-white text-sm sm:text-base min-w-0">How protected is your family's data?</span>
+            <span className="text-sm text-gray-600 dark:text-gray-400 shrink-0">{analysis.privacyScore}/100</span>
           </div>
           <ProgressBar
             value={analysis.privacyScore}
@@ -268,10 +270,10 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
       {/* ── Quick Wins panel ─────────────────────────────────────────────────── */}
       {quickWins.length > 0 && (
         <div className="bg-emerald-50 dark:bg-emerald-900/20 rounded-xl border-2 border-emerald-200 dark:border-emerald-800 p-5">
-          <div className="flex items-center gap-2 mb-1">
-            <Zap className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
-            <h3 className="font-semibold text-emerald-900 dark:text-emerald-100">Start here — quick wins</h3>
-            <span className="ml-auto text-xs bg-emerald-200 dark:bg-emerald-800 text-emerald-800 dark:text-emerald-200 px-2 py-0.5 rounded-full font-medium">
+          <div className="flex flex-wrap items-center gap-2 mb-1">
+            <Zap className="h-5 w-5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+            <h3 className="font-semibold text-emerald-900 dark:text-emerald-100 min-w-0">Start here — quick wins</h3>
+            <span className="shrink-0 text-xs bg-emerald-200 dark:bg-emerald-800 text-emerald-800 dark:text-emerald-200 px-2 py-0.5 rounded-full font-medium">
               {quickWins.length} high-priority action{quickWins.length !== 1 ? 's' : ''}
             </span>
           </div>
