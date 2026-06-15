@@ -1,7 +1,41 @@
-import { defineConfig } from 'vite';
+import { defineConfig, type Connect } from 'vite';
 import react from '@vitejs/plugin-react';
 import fs from 'fs';
 import path from 'path';
+import type { IncomingMessage, ServerResponse } from 'node:http';
+
+/** React printable hub routes — must win over public/downloads/*.html clean URLs in dev/preview. */
+const SPA_DOWNLOAD_ROUTES = new Set([
+  '/downloads/coloring-sheets',
+  '/downloads/safety-posters',
+  '/downloads/certificates',
+  '/downloads/family-agreement',
+  '/downloads/worksheets',
+]);
+
+const spaDownloadRoutesPlugin = () => {
+  const middleware: Connect.NextHandleFunction = (
+    req: IncomingMessage,
+    _res: ServerResponse,
+    next,
+  ) => {
+    const pathname = req.url?.split('?')[0] ?? '';
+    if (SPA_DOWNLOAD_ROUTES.has(pathname)) {
+      req.url = '/index.html';
+    }
+    next();
+  };
+
+  return {
+    name: 'spa-download-routes',
+    configureServer(server: Connect.Server) {
+      server.middlewares.use(middleware);
+    },
+    configurePreviewServer(server: Connect.Server) {
+      server.middlewares.use(middleware);
+    },
+  };
+};
 
 const optionalDependenciesPlugin = () => ({
   name: 'optional-dependencies',
@@ -48,7 +82,7 @@ const normalizeStorySceneAssetsPlugin = () => ({
 });
 
 export default defineConfig({
-  plugins: [react(), optionalDependenciesPlugin(), normalizeStorySceneAssetsPlugin()],
+  plugins: [react(), spaDownloadRoutesPlugin(), optionalDependenciesPlugin(), normalizeStorySceneAssetsPlugin()],
   server: {
     port: 5173,
   },

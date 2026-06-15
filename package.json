@@ -48,6 +48,8 @@
     "test:dfa": "vitest run src/lib/dfaJourney.test.ts src/lib/dfaScoreEngine.test.ts src/components/journey/DfaJourneyStepper.test.tsx src/components/dfa/DfaScoreOverview.test.tsx",
     "test:launch-smoke": "npm run test:dfa && npm run build",
     "test:e2e": "playwright test e2e/core-advertised.spec.ts",
+    "test:e2e:routes": "playwright test e2e/all-routes.spec.ts",
+    "test:e2e:all": "playwright test e2e/",
     "test:watch-dfa": "vitest src/lib/dfaJourney.test.ts src/lib/dfaScoreEngine.test.ts src/components/journey/DfaJourneyStepper.test.tsx src/components/dfa/DfaScoreOverview.test.tsx"
   },
   "dependencies": {

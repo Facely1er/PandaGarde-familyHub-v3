@@ -11,6 +11,37 @@
   to = "/LogoPandagarde.png"
   status = 200
 
+# React printable hub pages (shadowed by public/downloads/*.html pretty URLs without force)
+[[redirects]]
+  from = "/downloads/coloring-sheets"
+  to = "/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/downloads/safety-posters"
+  to = "/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/downloads/certificates"
+  to = "/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/downloads/family-agreement"
+  to = "/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/downloads/worksheets"
+  to = "/index.html"
+  status = 200
+  force = true
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
