@@ -47,14 +47,14 @@ const DownloadGuidePage: React.FC<DownloadGuidePageProps> = ({
           break;
         default: {
           // Fallback to HTML view
-          const url = `/downloads/${resourceType}.html`;
+          const url = `/downloads/${resourceType}-print.html`;
           window.open(url, '_blank');
         }
       }
     } catch (error) {
       logger.error('Error downloading resource:', error);
       // Fallback to HTML view if PDF generation fails
-      const url = `/downloads/${resourceType}.html`;
+      const url = `/downloads/${resourceType}-print.html`;
       window.open(url, '_blank');
     } finally {
       setIsDownloading(false);
@@ -62,7 +62,7 @@ const DownloadGuidePage: React.FC<DownloadGuidePageProps> = ({
   };
 
   const handlePrint = (resourceType: string) => {
-    const url = `/downloads/${resourceType}.html`;
+    const url = `/downloads/${resourceType}-print.html`;
     const printWindow = window.open(url, '_blank');
     if (printWindow) {
       printWindow.onload = () => {
@@ -72,7 +72,7 @@ const DownloadGuidePage: React.FC<DownloadGuidePageProps> = ({
   };
 
   const handlePreview = (resourceType: string) => {
-    const url = `/downloads/${resourceType}.html`;
+    const url = `/downloads/${resourceType}-print.html`;
     window.open(url, '_blank');
   };
 

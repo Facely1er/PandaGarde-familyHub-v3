@@ -167,7 +167,7 @@ const FAQPage: React.FC = () => {
                 </button>
 
                 {openItems.includes(item.id) && (
-                  <div className="px-6 pb-4">
+                  <div className="px-6 pt-4 pb-4">
                     <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                       {item.answer}
                     </p>

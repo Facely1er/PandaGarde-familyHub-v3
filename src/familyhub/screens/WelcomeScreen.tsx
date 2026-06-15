@@ -7,6 +7,7 @@ import AgeBandStrip from '../components/AgeBandStrip';
 import HubBrandLogo from '../components/HubBrandLogo';
 import { HUB_WELCOMED_KEY } from '../constants';
 import { hubPaths, pandagardeWebsiteUrl } from '../hubPaths';
+import { hubTheme } from '../hubTheme';
 import { HUB_WELCOME_LEAD, HUB_ENTER_CTA } from '../hubCopy';
 
 export { HUB_WELCOMED_KEY };
