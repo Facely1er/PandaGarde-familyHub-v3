@@ -11690,11 +11690,12 @@ header.header .nav-actions button.header-icon-btn:not(.header-search-bar) {
 
   /* Story list covers — override preflight img sizing and dark .bg-white card rules */
   .story-cover-art {
-    @apply relative isolate overflow-hidden bg-gray-900;
+    /* neutral loading bg: dark enough to not flash white, light enough not to look broken in light mode */
+    @apply relative isolate overflow-hidden bg-gray-200;
   }
 
   [data-theme='dark'] .story-cover-art {
-    @apply bg-gray-950;
+    @apply bg-gray-800;
   }
 
   .story-cover-art__img {
@@ -11710,7 +11711,15 @@ header.header .nav-actions button.header-icon-btn:not(.header-search-bar) {
   }
 
   .story-cover-art--card {
-    @apply h-40 w-full border-b border-gray-100 sm:h-44 dark:border-gray-700;
+    /* Mobile: proportional 4:3 container so portrait covers aren't over-cropped in a wide band */
+    @apply aspect-[4/3] w-full border-b border-gray-100 dark:border-gray-700;
+    /* sm+: fixed height keeps the multi-column grid rows uniform */
+    @apply sm:aspect-auto sm:h-44;
+  }
+
+  /* Cards use object-cover so portrait images fill the band without dark pillar bars */
+  .story-cover-art--card .story-cover-art__img {
+    @apply object-cover;
   }
 
   .story-cover-art--banner {

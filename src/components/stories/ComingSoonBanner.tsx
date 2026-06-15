@@ -21,8 +21,8 @@ export function ComingSoonBanner() {
           <img
             src={coverUrl}
             alt=""
-            className="story-cover-art__img"
-            style={{ objectPosition: next.coverImagePosition ?? 'center' }}
+            className="story-cover-art__img !object-cover"
+            style={{ objectPosition: next.coverImagePosition ?? 'center top' }}
             aria-hidden
             loading="lazy"
           />
