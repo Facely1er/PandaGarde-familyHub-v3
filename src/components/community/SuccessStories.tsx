@@ -400,12 +400,12 @@ const StorySubmissionForm: React.FC<StorySubmissionFormProps> = ({ onSubmit, onC
             ✕
           </button>
           <h2 id="story-submit-title" className="text-2xl font-bold mb-4 text-primary">
-            Share Your Success Story
+            Tell us what worked
           </h2>
 
           <div className="bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-700 rounded-lg p-4 mb-6">
             <p className="text-sm text-green-800 dark:text-green-200">
-              <strong>Privacy Notice:</strong> Your story will be completely anonymous. No personal information will be collected or displayed. All data is stored locally on your device.
+              <strong>Private on your device:</strong> No real names needed. Your story stays on this phone or computer only.
             </p>
           </div>
 
@@ -484,7 +484,7 @@ const StorySubmissionForm: React.FC<StorySubmissionFormProps> = ({ onSubmit, onC
                 type="submit"
                 className="flex-1 bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-green-600 hover:to-green-700 transition-all"
               >
-                Submit Story
+                Submit story
               </button>
               <button
                 type="button"

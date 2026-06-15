@@ -45,7 +45,7 @@ const DfaJourneyStepper: React.FC<Props> = ({
   const corePhases = getCoreDfaPhases(journey.phases);
   const optionalPhases = getOptionalDfaPhases(journey.phases);
   const activePath = ctaHref || journey.resumePath;
-  const activeLabel = ctaLabel || (journey.progressPercent > 0 ? 'Resume journey' : 'Start journey');
+  const activeLabel = ctaLabel || (journey.progressPercent > 0 ? 'Continue where you left off' : 'List your apps');
 
   const renderPhasePills = (phases: typeof corePhases) => (
     <ol className="flex flex-wrap gap-2">

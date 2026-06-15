@@ -148,7 +148,7 @@ const ModelingBehaviorGuidePage: React.FC = () => {
   return (
     <PageLayout
       title="Modeling Good Digital Citizenship"
-      subtitle="Children learn digital behavior by watching adults. This guide shows you how to model healthy online habits and create a positive digital environment for your family."
+      subtitle="Kids copy what you do on your phone. This guide shows everyday habits you can model at home."
       breadcrumbs={true}
     >
       <div style={{ maxWidth: '56rem', margin: '0 auto' }}>
@@ -158,7 +158,7 @@ const ModelingBehaviorGuidePage: React.FC = () => {
             Leading by Example
           </h2>
           <p className="text-lg leading-relaxed mb-8 text-gray-600">
-            Children are always watching and learning from adult behavior. When it comes to digital citizenship, your actions speak louder than your words. This guide helps you become a positive digital role model.
+            Your child notices when you put your phone away at dinner or ask before posting their photo. Small actions teach more than lectures. Pick one habit below and try it this week.
           </p>
           
           <div className="bg-purple-50 border border-purple-200 rounded-xl p-6 mb-8 bg-light">

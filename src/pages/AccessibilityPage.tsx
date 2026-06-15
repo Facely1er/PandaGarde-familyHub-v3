@@ -6,7 +6,7 @@ const AccessibilityPage: React.FC = () => {
   return (
     <PageLayout
       title="Accessibility Statement"
-      subtitle="We are committed to making digital privacy education accessible to all learners, regardless of ability or circumstance."
+      subtitle="How we design for screen readers, keyboard use, and readable text—so every family can use PandaGarde."
     >
       <div className="max-w-4xl mx-auto">
           <div className="prose prose-lg max-w-none">

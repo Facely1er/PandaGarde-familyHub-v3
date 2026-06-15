@@ -62,7 +62,7 @@ const faqItems: FAQItem[] = [
     id: '6',
     question: 'Can I use PandaGarde in my classroom?',
     answer:
-      'Yes. See Educator Tools and Classroom Activities for guides. The device-local community forum demo is optional—not a live classroom network.',
+      'Yes. See Educator Tools and Classroom Activities for guides. The tips forum on this site is optional—a demo that saves posts on your device only, not a live classroom network.',
     category: 'general',
   },
   {

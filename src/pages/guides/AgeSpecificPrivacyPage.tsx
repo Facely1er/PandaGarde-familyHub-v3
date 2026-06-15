@@ -6,7 +6,7 @@ const AgeSpecificPrivacyPage: React.FC = () => {
   return (
     <PageLayout
       title="Age-Specific Privacy Guidance"
-      subtitle="Ready-to-use conversation starters and privacy guidance tailored to your child's age group. Learn what to say and how to say it."
+      subtitle="Pick your child's age group for example questions and simple privacy tips you can use tonight."
       breadcrumbs={true}
     >
       <div style={{ maxWidth: '56rem', margin: '0 auto' }}>

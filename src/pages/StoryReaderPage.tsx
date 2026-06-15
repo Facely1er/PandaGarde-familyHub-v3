@@ -147,7 +147,7 @@ export function StoryReaderPage() {
     return (
       <PageLayout
         title={story.title}
-        subtitle="Interactive scenes with narration, or a calm chapter reader—two paths through the Digital Bamboo Forest."
+        subtitle="Read aloud with sound effects, or switch to quiet chapter mode—same story, two ways."
         breadcrumbs
       >
         <BambooForestStoryExperience story={story} />
@@ -159,7 +159,7 @@ export function StoryReaderPage() {
   return (
     <PageLayout
       title={story.title}
-      subtitle="Interactive journey with narration, or a calm chapter reader—two paths through the same episode."
+      subtitle="Read aloud with sound effects, or switch to quiet chapter mode—same story, two ways."
       breadcrumbs
     >
       <ChapterStoryExperience story={story} />

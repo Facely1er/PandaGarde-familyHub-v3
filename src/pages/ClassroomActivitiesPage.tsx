@@ -35,19 +35,21 @@ const ClassroomActivitiesPage: React.FC = () => {
   return (
     <PageLayout
       title="Privacy Panda Classroom Activities"
-      subtitle="Chapter-by-chapter activities aligned with 'Privacy Panda and the Digital Bamboo Forest' story. Perfect for educators teaching digital privacy to children ages 5-8."
+      subtitle="Read the Privacy Panda story, pick a chapter, then print the worksheet for that lesson. Ages 5–8."
       breadcrumbs={true}
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <section className="mb-8 rounded-r-lg border-l-4 border-green-500 bg-green-50 p-6 dark:border-green-600 dark:bg-green-950/30">
           <h2 className="mb-3 text-2xl font-bold text-green-800 dark:text-green-300">
-            Introduction for Educators
+            How to use this page
           </h2>
           <p className="mb-4 leading-relaxed text-gray-700 dark:text-gray-300">
-            &ldquo;Privacy Panda and the Digital Bamboo Forest&rdquo; provides an excellent framework for introducing essential digital privacy concepts to children ages 5-8. This guide offers classroom activities designed to reinforce the lessons from each chapter of the story, helping you extend the learning experience in an engaging, interactive way.
+            <strong>Step 1:</strong> Read &ldquo;Privacy Panda and the Digital Bamboo Forest&rdquo; with your class (or assign it at home).
+            <strong className="block mt-2">Step 2:</strong> Open the chapter that matches where you left off.
+            <strong className="block mt-2">Step 3:</strong> Print the activity and follow the instructions—each one takes about 20–30 minutes.
           </p>
           <p className="mb-4 leading-relaxed text-gray-700 dark:text-gray-300">
-            Each set of activities includes learning objectives aligned with the story&apos;s themes, materials needed, detailed instructions, discussion prompts, assessment opportunities, and adaptations for different learning needs.
+            Every activity lists what you need, what to say, and simple ways to check that kids understood.
           </p>
           <div className="mt-4 flex flex-wrap gap-4">
             <Link

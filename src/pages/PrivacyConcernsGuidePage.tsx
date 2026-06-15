@@ -206,7 +206,7 @@ const PrivacyConcernsGuidePage: React.FC = () => {
   return (
     <PageLayout
       title="Responding to Privacy Concerns"
-      subtitle="When privacy issues arise, quick and appropriate action is crucial. This guide helps you recognize, respond to, and recover from various privacy concerns."
+      subtitle="Something feel off online? Tap the issue below for what to do first and who to call if it is urgent."
       breadcrumbs={true}
     >
       <div style={{ maxWidth: '56rem', margin: '0 auto' }}>
@@ -216,7 +216,7 @@ const PrivacyConcernsGuidePage: React.FC = () => {
             Quick Response is Key
           </h2>
           <p className="text-lg leading-relaxed mb-8 text-gray-600">
-            Privacy concerns can range from minor inconveniences to serious threats. The key is to recognize the signs early and take appropriate action quickly. This guide covers the most common privacy issues and how to respond effectively.
+            Start with the section that matches what happened—lost password, strange message, oversharing, or a data breach. Each one lists calm first steps and when to get help.
           </p>
           
           <div className="bg-red-50 border border-red-200 rounded-xl p-6 mb-8 bg-light">

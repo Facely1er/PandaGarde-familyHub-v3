@@ -20,7 +20,7 @@ const NewsletterArchivePage: React.FC = () => {
   return (
     <PageLayout
       title="Newsletter Archive"
-      subtitle="Browse past issues of our privacy education newsletter. Find tips, resources, and updates from previous months."
+      subtitle="Past newsletter issues with privacy tips and family activities. Tap an issue to read it."
       breadcrumbs={true}
     >
       <div className="container mx-auto px-6 py-16">
@@ -34,7 +34,7 @@ const NewsletterArchivePage: React.FC = () => {
               Back to Newsletter
             </Link>
             <p className="text-gray-600 dark:text-gray-300">
-              Explore our collection of past newsletters covering privacy education topics, tips, and resources.
+              Pick a month below. Each issue has short tips you can try the same day.
             </p>
           </div>
 

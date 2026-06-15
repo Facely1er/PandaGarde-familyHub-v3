@@ -77,7 +77,7 @@ const PilotPage: React.FC = () => {
       title: 'Active Use',
       items: [
         'Use platform 2-3 times per week',
-        'Complete at least 1 journey path per child',
+        'Finish at least one story or mission per child',
         'Try 3-5 different games',
         'Use family dashboard features'
       ]
@@ -169,9 +169,8 @@ const PilotPage: React.FC = () => {
                   Our Goal
                 </h3>
                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                  We've built a comprehensive family privacy education platform with interactive games,
-                  age-appropriate learning journeys, and a family dashboard. Now we need <strong>real families and educators</strong>
-                  to test it and tell us what works, what doesn't, and what's missing for 2026 and beyond.
+                  PandaGarde helps families learn privacy with stories, printable activities, and a Family Hub on your device.
+                  We need <strong>real families and educators</strong> to try it and tell us what works before we expand in 2026.
                 </p>
               </div>
 
@@ -183,7 +182,7 @@ const PilotPage: React.FC = () => {
                   </h3>
                   <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                     <li>• Progress tracking and family dashboard</li>
-                    <li>• Game and journey completion syncing</li>
+                    <li>• Story and mission progress in Family Hub</li>
                     <li>• Parent-child interaction features</li>
                     <li>• User experience and navigation</li>
                     <li>• COPPA compliance workflows</li>
@@ -197,7 +196,7 @@ const PilotPage: React.FC = () => {
                   </h3>
                   <ul className="space-y-2 text-gray-700 dark:text-gray-300">
                     <li>• Use the platform with your family</li>
-                    <li>• Complete games and learning journeys</li>
+                    <li>• Try stories, games, and Family Hub at home</li>
                     <li>• Provide weekly feedback</li>
                     <li>• Participate in optional interviews</li>
                     <li>• Share your honest opinions</li>
@@ -325,7 +324,7 @@ const PilotPage: React.FC = () => {
                 <TrendingUp className="w-12 h-12 mx-auto mb-4 text-green-600 dark:text-green-400" />
                 <h3 className="text-lg font-bold mb-2 text-green-800 dark:text-green-300">80%+ Engagement</h3>
                 <p className="text-gray-600 dark:text-gray-400 text-sm">
-                  Families complete at least 1 journey and try multiple games
+                  Families finish at least one story or mission and try a few activities
                 </p>
               </div>
               <div className="bg-white dark:bg-gray-200 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700 text-center">

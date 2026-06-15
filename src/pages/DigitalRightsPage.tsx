@@ -491,8 +491,7 @@ const DigitalRightsPage: React.FC = () => {
         <section className="rounded-2xl bg-gradient-to-br from-green-800 to-green-600 dark:from-green-900 dark:to-green-700 text-white py-12 sm:py-16 px-6 text-center mt-8 sm:mt-12">
           <h2 className="text-2xl sm:text-3xl font-bold mb-4">Ready to Know Your Digital Rights?</h2>
           <p className="text-base sm:text-lg mb-8 max-w-2xl mx-auto opacity-90 leading-relaxed">
-            Start your journey to understanding privacy laws and digital rights. Learn how to protect
-            yourself and exercise your rights as a digital citizen.
+            Read the sections below, then open Family Hub or the Teen Handbook and try one privacy habit this week.
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
             <Link

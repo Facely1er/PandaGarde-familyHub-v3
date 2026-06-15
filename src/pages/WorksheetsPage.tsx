@@ -22,7 +22,7 @@ const WorksheetsPage: React.FC = () => {
   return (
     <PageLayout
       title="Privacy Worksheets"
-      subtitle="Printable reflection and writing activities for hands-on privacy learning."
+      subtitle="Print a worksheet, talk through the prompts, and save it or hang it on the fridge."
       breadcrumbs
     >
       <main className="container mx-auto px-4 sm:px-6 py-12 max-w-5xl">

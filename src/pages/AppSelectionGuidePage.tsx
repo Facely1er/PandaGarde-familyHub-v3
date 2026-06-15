@@ -431,7 +431,7 @@ const AppSelectionGuidePage: React.FC = () => {
                 Modeling Behavior
               </h3>
               <p className="text-sm text-gray-600">
-                Tips for demonstrating healthy online behavior
+                Tips for showing good phone habits at home
               </p>
             </Link>
 

@@ -94,10 +94,10 @@ const CertificatesPage: React.FC = () => {
         {/* Introduction */}
         <div className="max-w-4xl mx-auto text-center mb-16">
           <h2 className="font-bold mb-6" style={{ fontSize: 'clamp(1.875rem, 3vw, 2.25rem)', color: 'var(--primary)' }}>
-            Celebrate Learning Achievements
+            Celebrate a finished story or mission
           </h2>
           <p className="text-lg leading-relaxed mb-8 text-gray-600">
-            These certificates recognize and celebrate children's privacy education achievements. They serve as positive reinforcement and create lasting memories of their learning journey.
+            Pick a certificate, add your child&apos;s name, and print it at home. A simple way to say &ldquo;you finished something important.&rdquo;
           </p>
           
           <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-6 mb-8 bg-light">

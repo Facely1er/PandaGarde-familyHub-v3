@@ -31,7 +31,7 @@ const ImplementationGuidePage: React.FC = () => {
     {
       id: 'planning',
       title: 'Planning Phase',
-      description: 'Prepare your school or organization for privacy education implementation',
+      description: 'Get ready: see what you already teach and who needs to sign off',
       duration: '2-4 weeks',
       color: 'blue',
       steps: [
@@ -97,14 +97,14 @@ const ImplementationGuidePage: React.FC = () => {
     {
       id: 'preparation',
       title: 'Preparation Phase',
-      description: 'Train teachers and prepare materials for implementation',
+      description: 'Train teachers and gather the printables and stories you will use in class',
       duration: '3-4 weeks',
       color: 'green',
       steps: [
         {
           id: 'teacher-training',
           title: 'Teacher Training & Professional Development',
-          description: 'Provide comprehensive training for educators on privacy education',
+          description: 'Help teachers feel confident before the first lesson',
           duration: '2 weeks',
           tasks: [
             'Conduct privacy education workshops',
@@ -164,7 +164,7 @@ const ImplementationGuidePage: React.FC = () => {
     {
       id: 'implementation',
       title: 'Implementation Phase',
-      description: 'Roll out the privacy education program across all grade levels',
+      description: 'Teach the lessons—start with younger grades, then add harder topics',
       duration: '8-12 weeks',
       color: 'purple',
       steps: [
@@ -253,7 +253,7 @@ const ImplementationGuidePage: React.FC = () => {
     {
       id: 'evaluation',
       title: 'Evaluation Phase',
-      description: 'Assess program effectiveness and plan for sustainability',
+      description: 'Check what students learned and plan for next year',
       duration: '2-3 weeks',
       color: 'orange',
       steps: [
@@ -354,7 +354,7 @@ const ImplementationGuidePage: React.FC = () => {
   return (
     <PageLayout
       title="Implementation Guide - Step-by-Step Success"
-      subtitle="A comprehensive, step-by-step guide to successfully implementing privacy education in your school or organization. From planning to evaluation, we'll guide you through every step."
+      subtitle="Four steps to bring privacy lessons into your school. Tap a phase below to see what to do that week."
       breadcrumbs={true}
     >
       <div className="min-h-screen" style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}>
@@ -362,10 +362,10 @@ const ImplementationGuidePage: React.FC = () => {
       <section className="container mx-auto px-6 py-12">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-4 text-primary">
-            Implementation Phases
+            Four phases—pick where you are
           </h2>
           <p className="text-lg text-gray-600">
-            Choose a phase to see detailed implementation steps and resources.
+            Tap a phase to see weekly tasks and links to materials on this site.
           </p>
         </div>
 

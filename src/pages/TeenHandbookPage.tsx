@@ -462,7 +462,7 @@ const TeenHandbookPage: React.FC = () => {
             margin: '0 auto 2rem',
             lineHeight: 1.6
           }}>
-            Start your journey to becoming a privacy-savvy teenager. Learn the skills you need to protect yourself and your data online.
+            Pick a chapter below and read the tips that apply to you. Then try one action this week—passwords, posts, or app settings.
           </p>
           <div style={{ 
             display: 'flex', 

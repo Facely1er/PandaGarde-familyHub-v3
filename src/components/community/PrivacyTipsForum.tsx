@@ -172,7 +172,7 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold flex items-center gap-2 text-primary">
             <MessageCircle size={20} />
-            Privacy Tips Forum
+            Tips from parents
           </h3>
           <button
             onClick={() => {
@@ -185,7 +185,7 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
             className="px-3 py-1 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm flex items-center gap-2"
           >
             <Plus size={14} />
-            New Topic
+            Ask or share
           </button>
         </div>
         <div className="space-y-3">
@@ -257,7 +257,7 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
           Share tips and read what others saved
         </h2>
         <p className="text-base text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-          Save privacy tips on this device. Tap <strong>New Topic</strong> below to post one, or browse what is already here.
+          Save privacy tips on this device. Tap <strong>Ask or share</strong> below to post one, or browse what is already here.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
@@ -307,7 +307,7 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
         {!currentUser && (
           <div className="mt-8 p-6 rounded-lg bg-gradient-to-r from-green-700 to-green-600 text-white text-center">
             <p className="text-base mb-4 opacity-95">
-              <strong>Ready to post?</strong> Pick a nickname below, then tap New Topic to share a tip or question.
+              <strong>Ready to post?</strong> Pick a nickname below, then tap Ask or share to post a tip or question.
             </p>
             <button
               type="button"
@@ -342,7 +342,7 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
                     Welcome, {currentUser?.displayName || currentUser?.username || 'User'}!
                   </p>
                   <p className="text-sm leading-relaxed text-green-800 dark:text-green-200">
-                    Posts stay on this device. Your nickname is not your real name—tap New Topic when you are ready to share.
+                    Posts stay on this device. Your nickname is not your real name—tap Ask or share when you are ready.
                   </p>
                 </div>
               </div>
@@ -357,7 +357,7 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
                   Community Discussions
                 </h2>
                 <p className="text-base text-gray-600 dark:text-gray-300">
-                  Browse tips below, or tap New Topic to share your own.
+                  Browse tips below, or tap Ask or share to post your own.
                 </p>
               </div>
               {currentUser ? (
@@ -367,7 +367,7 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
                   className="whitespace-nowrap px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg font-semibold hover:from-green-600 hover:to-green-700 transition-all flex items-center gap-2"
                 >
                   <Plus size={20} />
-                  New Topic
+                  Ask or share
                 </button>
               ) : (
                 <button
@@ -376,7 +376,7 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
                   className="whitespace-nowrap px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg font-semibold hover:from-green-600 hover:to-green-700 transition-all flex items-center gap-2"
                 >
                   <Users size={20} />
-                  Join Forum
+                  Choose a nickname
                 </button>
               )}
             </div>
@@ -429,7 +429,7 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
                 onClick={() => setShowUserForm(true)}
                 className="px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition-colors"
               >
-                Join Forum to Start Discussion
+                Pick a nickname to start
               </button>
             )}
           </div>
@@ -651,7 +651,7 @@ const TopicDetailView: React.FC<TopicDetailViewProps> = ({
                   type="submit"
                   className="px-6 py-2 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition-colors"
                 >
-                  Post Reply
+                  Post reply
                 </button>
                 <button
                   type="button"
@@ -678,7 +678,7 @@ const TopicDetailView: React.FC<TopicDetailViewProps> = ({
             }}
             className="w-full px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition-colors"
           >
-            Reply to Topic
+            Reply to this topic
           </button>
         )}
         </div>
@@ -719,18 +719,18 @@ const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({ onSubmit, o
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!username.trim()) {
-      setError('Username is required');
+      setError('Pick a nickname first');
       return;
     }
     if (username.length < 3) {
-      setError('Username must be at least 3 characters');
+      setError('Use at least 3 letters');
       return;
     }
     // Check if username exists
     const users = communityStorage.getAllForumUsers();
     const exists = Object.values(users).some(u => u.username === username);
     if (exists) {
-      setError('Username already taken');
+      setError('That nickname is taken—try another');
       return;
     }
     onSubmit(username.trim(), displayName.trim() || undefined, avatar);
@@ -763,17 +763,17 @@ const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({ onSubmit, o
             </button>
           )}
           <h2 id="user-reg-title" className="text-2xl font-bold mb-4 text-primary">
-            Join Privacy Tips Forum
+            Pick a nickname to join
           </h2>
           <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
             <p className="text-sm text-green-800">
-              <strong>Privacy First:</strong> Use a pseudonym (not your real name). All data is stored locally on your device.
+              <strong>Stay private:</strong> Use a nickname, not your real name. Posts stay on this device only.
             </p>
           </div>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label htmlFor="forum-username" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
-                Username (Pseudonym) *
+                Nickname (not your real name) *
               </label>
               <input
                 id="forum-username"
@@ -784,7 +784,7 @@ const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({ onSubmit, o
                   setError('');
                 }}
                 className={`w-full px-3 py-2 border rounded-md bg-white dark:bg-gray-200 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 ${error ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'}`}
-                placeholder="Choose a pseudonym"
+                placeholder="e.g., PrivacyParent42"
               />
               {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
             </div>
@@ -828,7 +828,7 @@ const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({ onSubmit, o
                 type="submit"
                 className="flex-1 bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-green-600 hover:to-green-700 transition-all"
               >
-                Join Forum
+                Start posting
               </button>
               {!required && (
                 <button
@@ -897,7 +897,7 @@ const TopicCreationForm: React.FC<TopicCreationFormProps> = ({ onSubmit, onCance
             <X size={24} />
           </button>
           <h2 id="topic-create-title" className="text-2xl font-bold mb-4 text-primary">
-            Create New Topic
+            Start a new topic
           </h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
@@ -951,7 +951,7 @@ const TopicCreationForm: React.FC<TopicCreationFormProps> = ({ onSubmit, onCance
                 type="submit"
                 className="flex-1 bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-green-600 hover:to-green-700 transition-all"
               >
-                Create Topic
+                Post topic
               </button>
               <button
                 type="button"

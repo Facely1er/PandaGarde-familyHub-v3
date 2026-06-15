@@ -61,7 +61,7 @@ const FamilyAgreementPage: React.FC = () => {
     {
       title: 'Respectful Behavior',
       icon: '🤝',
-      description: 'Foster kindness, respect, and positive digital citizenship in your family.',
+      description: 'Foster kindness and respect online and off.',
       features: ['Kind online communication', 'Anti-bullying commitment', 'Standing up for others', 'Think before posting']
     },
     {
@@ -84,10 +84,10 @@ const FamilyAgreementPage: React.FC = () => {
         {/* Introduction */}
         <div className="max-w-4xl mx-auto text-center mb-16">
           <h2 className="text-3xl font-bold mb-6 text-primary">
-            Create Your Family's Digital Safety Foundation
+            Write your family&apos;s screen rules together
           </h2>
           <p className="text-lg leading-relaxed mb-8 text-gray-600">
-            This comprehensive family internet agreement helps you establish clear, age-appropriate rules for safe and responsible internet use. It's designed to grow with your family and adapt to changing technology.
+            Print the agreement, sit down as a family, and fill in the blanks. Post it on the fridge when everyone signs. You can update it as kids get older.
           </p>
           
           <div className="bg-purple-50 border border-purple-200 rounded-xl p-6 mb-8 bg-light">

@@ -121,7 +121,7 @@ const SafetyPostersPage: React.FC = () => {
   return (
     <PageLayout
       title="Digital Safety Posters"
-      subtitle="Professional classroom posters designed to reinforce privacy education concepts. Perfect for schools, libraries, and educational environments."
+      subtitle="Print a poster and hang it in the classroom or at home—one rule per sheet."
       breadcrumbs={true}
     >
       <div className="min-h-screen" style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}>
@@ -130,10 +130,10 @@ const SafetyPostersPage: React.FC = () => {
         {/* Introduction */}
         <div className="max-w-4xl mx-auto text-center mb-16">
           <h2 className="text-3xl font-bold mb-6 text-primary">
-            Visual Learning Tools for Privacy Education
+            Hang a reminder kids will see every day
           </h2>
           <p className="text-lg leading-relaxed mb-8 text-gray-600">
-            These professionally designed posters serve as constant visual reminders of important privacy concepts. They're perfect for classrooms, computer labs, libraries, and home learning spaces.
+            Pick a poster below, print it, and put it where devices are used. Each one states one clear rule in kid-friendly language.
           </p>
           
           <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-8 bg-light">

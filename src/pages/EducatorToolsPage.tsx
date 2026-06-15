@@ -32,7 +32,7 @@ const EducatorToolsPage: React.FC = () => {
       id: 'k-5-curriculum',
       title: 'K-5 Privacy Curriculum',
       description:
-        'Roadmap for teaching digital privacy in elementary school. Use Guides & stories, classroom activities, and printables on PandaGarde today.',
+        'Year-by-year plan for elementary privacy lessons. Start with the Privacy Panda story and classroom activities on this site.',
       category: 'curriculum',
       gradeLevel: 'K-5',
       duration: 'Full Year',
@@ -52,7 +52,7 @@ const EducatorToolsPage: React.FC = () => {
       id: 'middle-school-curriculum',
       title: '6-8 Privacy Curriculum',
       description:
-        'Middle school privacy themes and pacing using live guides, assessments, and Family Hub activities.',
+        'Privacy topics for middle schoolers—use the teen guides, worksheets, and quick assessment on this site.',
       category: 'curriculum',
       gradeLevel: '6-8',
       duration: 'Full Year',
@@ -71,7 +71,7 @@ const EducatorToolsPage: React.FC = () => {
       id: 'high-school-curriculum',
       title: '9-12 Privacy Curriculum',
       description:
-        'Advanced privacy and digital rights themes via Teen Handbook, Digital Rights page, and pilot extras.',
+        'Older teens: digital rights, reputation, and passwords—Teen Handbook and related pages are ready now.',
       category: 'curriculum',
       gradeLevel: '9-12',
       duration: 'Full Year',
@@ -89,7 +89,7 @@ const EducatorToolsPage: React.FC = () => {
       id: 'classroom-activities',
       title: 'Privacy Panda Classroom Activities',
       description:
-        'Chapter-by-chapter activities aligned with the Privacy Panda story — fully on the site (no PDF required).',
+        'Printable activities for each chapter of the Privacy Panda story—open the page and print what you need.',
       category: 'activities',
       gradeLevel: 'K-3',
       duration: '4-6 weeks',
@@ -109,7 +109,7 @@ const EducatorToolsPage: React.FC = () => {
     {
       id: 'interactive-activities',
       title: 'Interactive Activity Library',
-      description: 'Browser-based activities and the Privacy Panda interactive story — use in class or assign for home.',
+      description: 'Story and browser activities kids can do in class or at home—no install needed.',
       category: 'activities',
       gradeLevel: 'All',
       duration: 'Variable',
@@ -127,7 +127,7 @@ const EducatorToolsPage: React.FC = () => {
     {
       id: 'assessment-tools',
       title: 'Assessment & Evaluation Tools',
-      description: 'Use the live privacy assessments on PandaGarde and mark resources complete as you teach.',
+      description: 'Quick check-ins before and after a unit—runs in the browser; mark cards when you use them.',
       category: 'assessments',
       gradeLevel: 'All',
       duration: 'Variable',
@@ -144,7 +144,7 @@ const EducatorToolsPage: React.FC = () => {
     {
       id: 'teacher-training',
       title: 'Teacher Training & Implementation',
-      description: 'Implementation guide and educator-focused context — professional-development PDF is not a separate download yet.',
+      description: 'Step-by-step rollout plan for your school—open the implementation guide to start.',
       category: 'training',
       gradeLevel: 'All',
       duration: '8 hours',
@@ -161,7 +161,7 @@ const EducatorToolsPage: React.FC = () => {
     {
       id: 'presentation-slides',
       title: 'Presentation Slides',
-      description: 'Ready-made slide decks are not hosted as downloads yet. Join the pilot to help prioritize educator decks.',
+      description: 'Slide decks are coming soon. Join the pilot if you want to help us prioritize them.',
       category: 'presentations',
       gradeLevel: 'All',
       duration: 'Variable',
@@ -178,7 +178,7 @@ const EducatorToolsPage: React.FC = () => {
     {
       id: 'student-handouts',
       title: 'Student Handouts & Printables',
-      description: 'Real printables: coloring sheets, certificates, posters, and family agreement — all on the site.',
+      description: 'Coloring sheets, certificates, posters, and family agreement—print from the site today.',
       category: 'handouts',
       gradeLevel: 'All',
       duration: 'Variable',
@@ -267,10 +267,12 @@ const EducatorToolsPage: React.FC = () => {
           className="rounded-xl border border-amber-200 bg-amber-50 dark:bg-amber-950/30 dark:border-amber-800 px-4 py-3 mb-6 text-sm text-gray-800"
           role="status"
         >
-          <strong className="text-amber-900 dark:text-amber-100">Note for educators:</strong>{' '}
-          Each card opens a{' '}
-          <strong>real page</strong> on the site or the <Link to="/pilot" className="underline font-medium text-amber-900 dark:text-amber-100">pilot</Link>{' '}
-          for upcoming packs. Questions?{' '}
+          <strong className="text-amber-900 dark:text-amber-100">New here?</strong>{' '}
+          Start with{' '}
+          <Link to="/classroom-activities" className="underline font-medium text-amber-900 dark:text-amber-100">Classroom Activities</Link>{' '}
+          or{' '}
+          <Link to="/implementation-guide" className="underline font-medium text-amber-900 dark:text-amber-100">Implementation Guide</Link>.
+          Each card opens a real page on this site. Questions?{' '}
           <Link to="/contact" className="underline font-medium text-amber-900 dark:text-amber-100">Contact us</Link>.
         </div>
 
@@ -282,22 +284,22 @@ const EducatorToolsPage: React.FC = () => {
           }}>
             <div className="text-center mb-6">
               <h2 className="text-2xl font-bold mb-4 text-primary">
-                Your Resource Library
+                What you&apos;ve used so far
               </h2>
               <div className="flex items-center justify-center gap-8 mb-6">
                 <div className="text-center">
                   <div className="text-3xl font-bold text-primary">{completedResources.length}</div>
-                  <div className="text-sm text-gray-600">Resources Used</div>
+                  <div className="text-sm text-gray-600">Pages opened</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold" style={{ color: 'var(--primary-light)' }}>{resources.length}</div>
-                  <div className="text-sm text-gray-600">Total Resources</div>
+                  <div className="text-sm text-gray-600">Available</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-primary">
                     {Math.round((completedResources.length / resources.length) * 100)}%
                   </div>
-                  <div className="text-sm text-gray-600">Library Usage</div>
+                  <div className="text-sm text-gray-600">Tried so far</div>
                 </div>
               </div>
             </div>

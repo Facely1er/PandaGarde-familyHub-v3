@@ -92,7 +92,7 @@ const DownloadGuidePage: React.FC<DownloadGuidePageProps> = ({
       },
       'family-agreement': {
         title: 'Family Internet Agreement',
-        description: 'A comprehensive agreement to establish safe internet use rules for your family',
+        description: 'Fill-in rules for safe internet use at home—print and sign together',
         features: ['Customizable rules', 'Signature sections', 'Age-appropriate guidelines', 'Regular review prompts'],
         icon: '📋'
       },
@@ -209,8 +209,8 @@ const DownloadGuidePage: React.FC<DownloadGuidePageProps> = ({
 
               <p className="text-xl mb-8 leading-relaxed text-gray-600">
                 {type === 'download'
-                  ? 'We\'re preparing this downloadable resource for you. It will include high-quality materials designed to support your privacy education journey.'
-                  : 'This comprehensive guide is being developed by our team of privacy experts and educators. It will provide step-by-step instructions and practical tips.'
+                  ? 'We\'re getting this download ready. Check back soon—or browse printables that are available now.'
+                  : 'This guide is still being written. Browse Classroom Activities and the Family Privacy Guide for ready-to-use material today.'
                 }
               </p>
             </div>
