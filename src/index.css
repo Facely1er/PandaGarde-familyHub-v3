@@ -11726,3 +11726,315 @@ header.header .nav-actions button.header-icon-btn:not(.header-search-bar) {
     margin-top: 0;
   }
 }
+
+/* Coloring sheets (/downloads/coloring-sheets) */
+.coloring-sheets-page {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.coloring-sheets-page__intro {
+  max-width: 48rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.coloring-sheets-page__intro-title {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.coloring-sheets-page__intro-lead {
+  margin: 0 0 1.5rem;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--gray-600);
+}
+
+.coloring-sheets-page__tips {
+  padding: 1.25rem 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(16, 185, 129, 0.22);
+  background: rgba(16, 185, 129, 0.06);
+  text-align: left;
+}
+
+.coloring-sheets-page__tips-title {
+  margin: 0 0 1rem;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.coloring-sheets-page__tips-grid {
+  display: grid;
+  gap: 0.85rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 640px) {
+  .coloring-sheets-page__tips-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.coloring-sheets-page__tip {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+}
+
+.coloring-sheets-page__tip-icon {
+  margin-top: 0.15rem;
+  flex-shrink: 0;
+  color: #059669;
+}
+
+.coloring-sheets-page__grid {
+  display: grid;
+  gap: 1.75rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .coloring-sheets-page__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+  }
+}
+
+.coloring-sheets-page__card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid var(--gray-200);
+  background: var(--white);
+  box-shadow: var(--shadow-md);
+}
+
+[data-theme='dark'] .coloring-sheets-page__card {
+  border-color: var(--gray-700);
+  background: var(--gray-800);
+}
+
+.coloring-sheets-page__preview {
+  display: block;
+  width: 100%;
+  min-height: min(52vw, 22rem);
+  padding: 0;
+  border: 0;
+  background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 100%);
+  cursor: zoom-in;
+}
+
+@media (min-width: 768px) {
+  .coloring-sheets-page__preview {
+    min-height: 26rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .coloring-sheets-page__preview {
+    min-height: 28rem;
+  }
+}
+
+[data-theme='dark'] .coloring-sheets-page__preview {
+  background: linear-gradient(180deg, rgba(6, 78, 59, 0.35) 0%, var(--gray-800) 100%);
+}
+
+.coloring-sheets-page__preview-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  object-fit: contain;
+  padding: 0.75rem 1rem 1rem;
+}
+
+.coloring-sheets-page__card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: 1.25rem 1.5rem 1.5rem;
+}
+
+.coloring-sheets-page__card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.coloring-sheets-page__card-title {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1.3;
+}
+
+.coloring-sheets-page__size-badge {
+  flex-shrink: 0;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(16, 185, 129, 0.12);
+  color: #047857;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+[data-theme='dark'] .coloring-sheets-page__size-badge {
+  background: rgba(74, 222, 128, 0.15);
+  color: #6ee7b7;
+}
+
+.coloring-sheets-page__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+}
+
+.coloring-sheets-page__difficulty {
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.coloring-sheets-page__card-desc {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--gray-600);
+}
+
+.coloring-sheets-page__actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.35rem;
+}
+
+.coloring-sheets-page__bulk {
+  padding: 2rem 1.5rem;
+  border-radius: 1rem;
+  text-align: center;
+  color: white;
+  background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.coloring-sheets-page__related-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .coloring-sheets-page__related-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.coloring-sheets-page__related-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.25rem;
+  border-radius: 1rem;
+  border: 1px solid var(--gray-200);
+  background: var(--white);
+  text-decoration: none;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.coloring-sheets-page__related-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+[data-theme='dark'] .coloring-sheets-page__related-card {
+  border-color: var(--gray-700);
+  background: var(--gray-800);
+}
+
+.coloring-sheets-page__modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(15, 23, 42, 0.72);
+}
+
+.coloring-sheets-page__modal-panel {
+  display: flex;
+  flex-direction: column;
+  width: min(100%, 56rem);
+  max-height: min(94vh, 900px);
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid var(--gray-200);
+  background: var(--white);
+  box-shadow: var(--shadow-lg);
+}
+
+[data-theme='dark'] .coloring-sheets-page__modal-panel {
+  border-color: var(--gray-700);
+  background: var(--gray-900);
+}
+
+.coloring-sheets-page__modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+[data-theme='dark'] .coloring-sheets-page__modal-head {
+  border-bottom-color: var(--gray-700);
+}
+
+.coloring-sheets-page__modal-art {
+  flex: 1;
+  min-height: min(70vh, 640px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1.25rem;
+  background: #f8fafc;
+}
+
+[data-theme='dark'] .coloring-sheets-page__modal-art {
+  background: var(--gray-800);
+}
+
+.coloring-sheets-page__modal-image {
+  width: 100%;
+  height: 100%;
+  max-height: min(68vh, 620px);
+  object-fit: contain;
+}
+
+.coloring-sheets-page__modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem 1.25rem;
+  border-top: 1px solid var(--gray-200);
+}
+
+[data-theme='dark'] .coloring-sheets-page__modal-actions {
+  border-top-color: var(--gray-700);
+}

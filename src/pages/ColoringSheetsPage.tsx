@@ -1,324 +1,324 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Download, Palette, Printer, Share2, Star } from 'lucide-react';
+import { Download, ExternalLink, Palette, Printer, Star } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
+import { PageContent } from '../components/layout/PageContent';
+import { pdfService } from '../lib/pdfService';
 import { logger } from '../lib/logger';
+
+type ColoringSheet = {
+  id: string;
+  title: string;
+  description: string;
+  ageGroup: string;
+  difficulty: 'Easy' | 'Medium' | 'Hard';
+  image: string;
+  printUrl: string;
+  svgUrl: string;
+};
+
+const COLORING_SHEETS: ColoringSheet[] = [
+  {
+    id: 'privacy-panda-basic',
+    title: 'Privacy Panda — Basic',
+    description: 'Simple outline of Privacy Panda for younger children.',
+    ageGroup: 'Ages 5–7',
+    difficulty: 'Easy',
+    image: '/images/coloring/privacy-panda-basic.svg',
+    printUrl: '/downloads/coloring-sheets.html#privacy-panda-basic',
+    svgUrl: '/images/coloring/privacy-panda-basic.svg',
+  },
+  {
+    id: 'privacy-shield',
+    title: 'Privacy Shield',
+    description: 'Design your own privacy protection shield.',
+    ageGroup: 'Ages 6–9',
+    difficulty: 'Easy',
+    image: '/images/coloring/privacy-shield.svg',
+    printUrl: '/downloads/coloring-sheets.html#privacy-shield',
+    svgUrl: '/images/coloring/privacy-shield.svg',
+  },
+  {
+    id: 'password-treasure',
+    title: 'Password Treasure Chest',
+    description: 'Color the treasure chest that keeps passwords safe.',
+    ageGroup: 'Ages 7–10',
+    difficulty: 'Medium',
+    image: '/images/coloring/password-treasure.svg',
+    printUrl: '/downloads/coloring-sheets.html#password-treasure',
+    svgUrl: '/images/coloring/password-treasure.svg',
+  },
+  {
+    id: 'digital-footprint',
+    title: 'Digital Footprint Map',
+    description: 'Trace your digital journey and learn about online privacy.',
+    ageGroup: 'Ages 8–12',
+    difficulty: 'Medium',
+    image: '/images/coloring/digital-footprint.svg',
+    printUrl: '/downloads/coloring-sheets.html#digital-footprint',
+    svgUrl: '/images/coloring/digital-footprint.svg',
+  },
+  {
+    id: 'privacy-garden',
+    title: 'Privacy Garden',
+    description: 'Garden scene with privacy-themed elements.',
+    ageGroup: 'Ages 6–11',
+    difficulty: 'Easy',
+    image: '/images/coloring/privacy-garden.svg',
+    printUrl: '/downloads/coloring-sheets.html#privacy-garden',
+    svgUrl: '/images/coloring/privacy-garden.svg',
+  },
+  {
+    id: 'cyber-safety-scene',
+    title: 'Cyber Safety Scene',
+    description: 'Scene showing safe and unsafe online behaviors.',
+    ageGroup: 'Ages 9–12',
+    difficulty: 'Hard',
+    image: '/images/coloring/cyber-safety-scene.svg',
+    printUrl: '/downloads/coloring-sheets.html#cyber-safety-scene',
+    svgUrl: '/images/coloring/cyber-safety-scene.svg',
+  },
+];
+
+const DIFFICULTY_CLASS: Record<ColoringSheet['difficulty'], string> = {
+  Easy: 'bg-green-100 text-green-800 dark:bg-green-950/60 dark:text-green-200',
+  Medium: 'bg-amber-100 text-amber-900 dark:bg-amber-950/50 dark:text-amber-200',
+  Hard: 'bg-rose-100 text-rose-900 dark:bg-rose-950/50 dark:text-rose-200',
+};
 
 const ColoringSheetsPage: React.FC = () => {
   const [isDownloading, setIsDownloading] = useState(false);
+  const [previewId, setPreviewId] = useState<string | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const coloringSheets = [
-    {
-      id: 'privacy-panda-basic',
-      title: 'Privacy Panda - Basic',
-      description: 'Simple outline of Privacy Panda for younger children',
-      ageGroup: 'Ages 5-7',
-      difficulty: 'Easy',
-      image: '/images/coloring/privacy-panda-basic.svg',
-      downloadUrl: '/images/coloring/privacy-panda-basic.svg'
-    },
-    {
-      id: 'privacy-shield',
-      title: 'Privacy Shield',
-      description: 'Design your own privacy protection shield',
-      ageGroup: 'Ages 6-9',
-      difficulty: 'Easy',
-      image: '/images/coloring/privacy-shield.svg',
-      downloadUrl: '/images/coloring/privacy-shield.svg'
-    },
-    {
-      id: 'password-treasure',
-      title: 'Password Treasure Chest',
-      description: 'Color the treasure chest that keeps passwords safe',
-      ageGroup: 'Ages 7-10',
-      difficulty: 'Medium',
-      image: '/images/coloring/password-treasure.svg',
-      downloadUrl: '/images/coloring/password-treasure.svg'
-    },
-    {
-      id: 'digital-footprint',
-      title: 'Digital Footprint Map',
-      description: 'Trace your digital journey and learn about online privacy',
-      ageGroup: 'Ages 8-12',
-      difficulty: 'Medium',
-      image: '/images/coloring/digital-footprint.svg',
-      downloadUrl: '/images/coloring/digital-footprint.svg'
-    },
-    {
-      id: 'privacy-garden',
-      title: 'Privacy Garden',
-      description: 'Beautiful garden scene with privacy-themed elements',
-      ageGroup: 'Ages 6-11',
-      difficulty: 'Easy',
-      image: '/images/coloring/privacy-garden.svg',
-      downloadUrl: '/images/coloring/privacy-garden.svg'
-    },
-    {
-      id: 'cyber-safety-scene',
-      title: 'Cyber Safety Scene',
-      description: 'Complete scene showing safe and unsafe online behaviors',
-      ageGroup: 'Ages 9-12',
-      difficulty: 'Hard',
-      image: '/images/coloring/cyber-safety-scene.svg',
-      downloadUrl: '/images/coloring/cyber-safety-scene.svg'
+  useEffect(() => {
+    if (!previewId) {
+      return undefined;
     }
-  ];
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setPreviewId(null);
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [previewId]);
 
-  const handleDownload = async (sheetId: string, title: string) => {
-    if (sheetId === 'all-sheets') {
-      setIsDownloading(true);
-      try {
-        // Download all individual SVG files
-        for (const sheet of coloringSheets) {
-          const link = document.createElement('a');
-          link.href = sheet.downloadUrl;
-          link.download = `${sheet.title.replace(/\s+/g, '-').toLowerCase()}.svg`;
-          link.target = '_blank';
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          // Small delay between downloads
-          await new Promise(resolve => setTimeout(resolve, 500));
-        }
-      } catch (error) {
-        logger.error('Error downloading coloring sheets:', error);
-        alert('Error downloading coloring sheets. Please try again.');
-      } finally {
-        setIsDownloading(false);
-      }
-    } else {
-      // Individual sheet download
-      const sheet = coloringSheets.find(s => s.id === sheetId);
-      if (sheet) {
-        try {
-          const link = document.createElement('a');
-          link.href = sheet.downloadUrl;
-          link.download = `${title.replace(/\s+/g, '-').toLowerCase()}.svg`;
-          link.target = '_blank';
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-        } catch (error) {
-          logger.error('Error downloading SVG:', error);
-          alert('Error downloading coloring sheet. Please try again.');
-        }
-      }
+  const previewSheet = previewId ? COLORING_SHEETS.find((sheet) => sheet.id === previewId) : null;
+
+  const openPrintView = (sheet: ColoringSheet): void => {
+    window.open(sheet.printUrl, '_blank', 'noopener,noreferrer');
+  };
+
+  const downloadSvg = (sheet: ColoringSheet): void => {
+    try {
+      const link = document.createElement('a');
+      link.href = sheet.svgUrl;
+      link.download = `${sheet.id}.svg`;
+      link.target = '_blank';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      logger.error('Error downloading SVG:', error);
+      alert('Error downloading coloring sheet. Please try again.');
+    }
+  };
+
+  const handleDownloadAll = async (): Promise<void> => {
+    setIsDownloading(true);
+    try {
+      await pdfService.generateColoringSheetsPDF();
+    } catch (error) {
+      logger.error('Error downloading coloring sheets:', error);
+      alert('Error generating the coloring sheets PDF. Please try again.');
+    } finally {
+      setIsDownloading(false);
     }
   };
 
   return (
     <PageLayout
       title="Privacy Panda Coloring Sheets"
-      subtitle="Download and print these fun coloring pages featuring Privacy Panda and privacy concepts. Perfect for offline learning and creative expression!"
-      breadcrumbs={true}
+      subtitle="Printable letter-size coloring pages featuring Privacy Panda and privacy concepts — sized for real crayons, not tiny thumbnails."
+      breadcrumbs
     >
-      <div className="min-h-screen" style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}>
-
-      {/* Main Content */}
-      <main className="container mx-auto px-6 py-20">
-        {/* Introduction */}
-        <div className="max-w-4xl mx-auto text-center mb-16">
-          <h2 className="font-bold mb-6" style={{ fontSize: 'clamp(1.875rem, 3vw, 2.25rem)', color: 'var(--primary)' }}>
-            Creative Learning Through Coloring
-          </h2>
-          <p className="text-lg leading-relaxed mb-8 text-gray-600">
-            These coloring sheets combine creativity with privacy education. Each page teaches important concepts while providing a fun, relaxing activity for children of all ages.
+      <PageContent className="coloring-sheets-page">
+        <section className="coloring-sheets-page__intro">
+          <h2 className="coloring-sheets-page__intro-title">Creative learning through coloring</h2>
+          <p className="coloring-sheets-page__intro-lead">
+            Each sheet opens in a full-page print view. Preview larger below, then print on US Letter paper (8.5&quot; × 11&quot;).
           </p>
-          
-          <div className="bg-green-50 border border-green-200 rounded-xl p-6 mb-8 bg-light">
-            <h3 className="text-xl font-semibold mb-4 text-primary">
-              💡 Coloring Tips for Parents & Educators
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
-              <div className="flex items-start gap-3">
-                <Star size={20} className="text-green-600 mt-1 flex-shrink-0" />
-                <div>
-                  <h4 className="font-semibold mb-1 text-primary">Discuss While Coloring</h4>
-                  <p className="text-sm text-gray-600">Talk about the privacy concepts shown in each picture</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <Star size={20} className="text-green-600 mt-1 flex-shrink-0" />
-                <div>
-                  <h4 className="font-semibold mb-1 text-primary">Display Finished Art</h4>
-                  <p className="text-sm text-gray-600">Hang completed coloring sheets as privacy reminders</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <Star size={20} className="text-green-600 mt-1 flex-shrink-0" />
-                <div>
-                  <h4 className="font-semibold mb-1 text-primary">Use Quality Materials</h4>
-                  <p className="text-sm text-gray-600">Print on good paper for better coloring experience</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <Star size={20} className="text-green-600 mt-1 flex-shrink-0" />
-                <div>
-                  <h4 className="font-semibold mb-1 text-primary">Make It Social</h4>
-                  <p className="text-sm text-gray-600">Color together as a family activity</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        {/* Coloring Sheets Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {coloringSheets.map((sheet) => (
-            <div
-              key={sheet.id}
-              className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
-              style={{ backgroundColor: 'var(--card-color)' }}
-            >
-              <div className="aspect-w-4 aspect-h-3 bg-gray-100">
-                <div className="w-full h-48 bg-gradient-to-br from-green-100 to-green-200 flex items-center justify-center relative overflow-hidden">
-                  <img 
-                    src={sheet.image} 
-                    alt={sheet.title}
-                    className="w-full h-full object-contain p-4"
-                    onError={(e) => {
-                      // Fallback to icon if image fails to load
-                      e.currentTarget.style.display = 'none';
-                      const fallback = e.currentTarget.nextElementSibling as HTMLElement;
-                      if (fallback) {
-                        fallback.style.display = 'flex';
-                      }
-                    }}
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center" style={{ display: 'none' }}>
-                    <div className="text-center">
-                      <Palette size={48} className="text-green-600 mx-auto mb-2" />
-                      <p className="text-sm text-gray-600 dark:text-gray-400">Download SVG to print</p>
-                    </div>
+          <div className="coloring-sheets-page__tips">
+            <h3 className="coloring-sheets-page__tips-title">Coloring tips for parents and educators</h3>
+            <ul className="coloring-sheets-page__tips-grid">
+              {[
+                ['Discuss while coloring', 'Talk about the privacy idea in each picture.'],
+                ['Display finished art', 'Hang completed sheets as gentle privacy reminders.'],
+                ['Use quality paper', 'Print on heavier paper for crayons and markers.'],
+                ['Make it social', 'Color together as a calm family activity.'],
+              ].map(([title, detail]) => (
+                <li key={title} className="coloring-sheets-page__tip">
+                  <Star className="coloring-sheets-page__tip-icon" size={18} aria-hidden />
+                  <div>
+                    <span className="font-semibold text-gray-900 dark:text-gray-100">{title}</span>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">{detail}</p>
                   </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <div className="coloring-sheets-page__grid">
+          {COLORING_SHEETS.map((sheet) => (
+            <article key={sheet.id} className="coloring-sheets-page__card">
+              <button
+                type="button"
+                className="coloring-sheets-page__preview"
+                onClick={() => setPreviewId(sheet.id)}
+                aria-label={`Preview ${sheet.title} full size`}
+              >
+                <img
+                  src={sheet.image}
+                  alt=""
+                  className="coloring-sheets-page__preview-image"
+                  loading="lazy"
+                />
+              </button>
+
+              <div className="coloring-sheets-page__card-body">
+                <div className="coloring-sheets-page__card-head">
+                  <h3 className="coloring-sheets-page__card-title">{sheet.title}</h3>
+                  <span className="coloring-sheets-page__size-badge">8.5&quot; × 11&quot;</span>
                 </div>
-              </div>
-              
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-lg font-bold text-primary">
-                    {sheet.title}
-                  </h3>
-                  <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                    sheet.difficulty === 'Easy' ? 'bg-green-100 text-green-800' :
-                    sheet.difficulty === 'Medium' ? 'bg-yellow-100 text-yellow-800' :
-                    'bg-red-100 text-red-800'
-                  }`}>
+
+                <div className="coloring-sheets-page__meta">
+                  <span className={`coloring-sheets-page__difficulty ${DIFFICULTY_CLASS[sheet.difficulty]}`}>
                     {sheet.difficulty}
                   </span>
+                  <span className="text-sm font-medium text-gray-500 dark:text-gray-400">{sheet.ageGroup}</span>
                 </div>
-                
-                <p className="text-sm mb-4 text-gray-600">
-                  {sheet.description}
-                </p>
-                
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-sm font-medium" style={{ color: 'var(--gray-500)' }}>
-                    {sheet.ageGroup}
-                  </span>
-                </div>
-                
-                <div className="flex gap-2">
+
+                <p className="coloring-sheets-page__card-desc">{sheet.description}</p>
+
+                <div className="coloring-sheets-page__actions">
                   <button
-                    onClick={() => handleDownload(sheet.id, sheet.title)}
-                    className="flex-1 bg-green-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-green-700 transition-colors flex items-center justify-center gap-2"
+                    type="button"
+                    onClick={() => openPrintView(sheet)}
+                    className="button button-primary inline-flex flex-1 items-center justify-center gap-2"
                   >
-                    <Download size={16} />
-                    View & Print
+                    <Printer size={16} aria-hidden />
+                    View &amp; print
                   </button>
                   <button
-                    onClick={() => handleDownload(sheet.id, sheet.title)}
-                    className="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors"
-                    title="Print"
+                    type="button"
+                    onClick={() => downloadSvg(sheet)}
+                    className="button button-secondary inline-flex items-center justify-center gap-2 px-4"
+                    title="Download SVG"
                   >
-                    <Printer size={16} />
+                    <Download size={16} aria-hidden />
+                    <span className="sr-only">Download SVG for {sheet.title}</span>
                   </button>
                 </div>
               </div>
-            </div>
+            </article>
           ))}
         </div>
 
-        {/* Bulk Download Section */}
-        <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-8 text-white text-center mb-16">
-          <h2 className="font-bold mb-4" style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)' }}>
-            Download All Coloring Sheets
-          </h2>
-          <p className="text-lg mb-6 opacity-90">
-            Get all 6 coloring sheets in one convenient PDF package. Perfect for educators and families!
+        <section className="coloring-sheets-page__bulk">
+          <h2 className="text-xl font-bold sm:text-2xl">Download the complete set</h2>
+          <p className="mt-2 text-green-50/95">
+            Get all six sheets in one PDF — same large layouts as the printable HTML pack.
           </p>
           <button
-            onClick={() => handleDownload('all-sheets', 'All Privacy Panda Coloring Sheets')}
+            type="button"
+            onClick={() => void handleDownloadAll()}
             disabled={isDownloading}
-            className="bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="button button-secondary mt-5 inline-flex items-center gap-2 bg-white text-green-700 hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-70"
           >
-            <Download size={20} />
-            {isDownloading ? 'Generating PDF...' : 'Download Complete Set'}
+            <Download size={18} aria-hidden />
+            {isDownloading ? 'Generating PDF…' : 'Download PDF pack'}
           </button>
-        </div>
+        </section>
 
-        {/* Additional Resources */}
-        <div className="max-w-4xl mx-auto">
-          <h2 className="font-bold mb-8 text-center" style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', color: 'var(--primary)' }}>
-            Related Resources
+        <section className="coloring-sheets-page__related">
+          <h2 className="text-center text-xl font-bold text-green-700 dark:text-green-400 sm:text-2xl">
+            Related resources
           </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Link
-              to="/for-families"
-              className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow text-center"
-              style={{ backgroundColor: 'var(--card-color)' }}
-            >
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
-                <Palette size={24} className="text-blue-600" />
-              </div>
-              <h3 className="text-lg font-semibold mb-2 text-primary">
-                Interactive Coloring
-              </h3>
-              <p className="text-sm text-gray-600">
-                Try our digital coloring activity in the Activity Book
-              </p>
+          <div className="coloring-sheets-page__related-grid">
+            <Link to="/stories/privacy-panda-and-the-digital-bamboo-forest" className="coloring-sheets-page__related-card">
+              <Palette size={22} className="text-purple-600 dark:text-purple-400" aria-hidden />
+              <h3 className="font-semibold text-gray-900 dark:text-gray-100">Privacy Panda story</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-300">Read the story behind these sheets.</p>
             </Link>
-
-            <Link
-              to="/story"
-              className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow text-center"
-              style={{ backgroundColor: 'var(--card-color)' }}
-            >
-              <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
-                <Star size={24} className="text-purple-600" />
-              </div>
-              <h3 className="text-lg font-semibold mb-2 text-primary">
-                Privacy Panda Story
-              </h3>
-              <p className="text-sm text-gray-600">
-                Read the full story that inspired these coloring sheets
-              </p>
+            <Link to="/downloads/safety-posters" className="coloring-sheets-page__related-card">
+              <ExternalLink size={22} className="text-amber-600 dark:text-amber-400" aria-hidden />
+              <h3 className="font-semibold text-gray-900 dark:text-gray-100">Safety posters</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-300">Classroom-ready privacy posters.</p>
             </Link>
-
-            <Link
-              to="/downloads/safety-posters"
-              className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow text-center"
-              style={{ backgroundColor: 'var(--card-color)' }}
-            >
-              <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
-                <Share2 size={24} className="text-yellow-600" />
-              </div>
-              <h3 className="text-lg font-semibold mb-2 text-primary">
-                Safety Posters
-              </h3>
-              <p className="text-sm text-gray-600">
-                Download classroom-ready privacy education posters
-              </p>
+            <Link to="/for-families" className="coloring-sheets-page__related-card">
+              <Star size={22} className="text-green-600 dark:text-green-400" aria-hidden />
+              <h3 className="font-semibold text-gray-900 dark:text-gray-100">Guides &amp; stories</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-300">More printables and parent guides.</p>
             </Link>
           </div>
-        </div>
-      </main>
-      </div>
+        </section>
+
+        {previewSheet ? (
+          <div
+            className="coloring-sheets-page__modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="coloring-preview-title"
+            onClick={() => setPreviewId(null)}
+          >
+            <div
+              className="coloring-sheets-page__modal-panel"
+              onClick={(event) => event.stopPropagation()}
+              role="document"
+            >
+              <header className="coloring-sheets-page__modal-head">
+                <h2 id="coloring-preview-title" className="text-lg font-bold text-gray-900 dark:text-gray-100">
+                  {previewSheet.title}
+                </h2>
+                <button
+                  type="button"
+                  className="button button-secondary px-3 py-1.5 text-sm"
+                  onClick={() => setPreviewId(null)}
+                >
+                  Close
+                </button>
+              </header>
+              <div className="coloring-sheets-page__modal-art">
+                <img src={previewSheet.image} alt={previewSheet.title} className="coloring-sheets-page__modal-image" />
+              </div>
+              <div className="coloring-sheets-page__modal-actions">
+                <button
+                  type="button"
+                  className="button button-primary inline-flex items-center gap-2"
+                  onClick={() => openPrintView(previewSheet)}
+                >
+                  <Printer size={16} aria-hidden />
+                  Open print view
+                </button>
+                <button
+                  type="button"
+                  className="button button-secondary inline-flex items-center gap-2"
+                  onClick={() => downloadSvg(previewSheet)}
+                >
+                  <Download size={16} aria-hidden />
+                  Download SVG
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : null}
+      </PageContent>
     </PageLayout>
   );
 };
