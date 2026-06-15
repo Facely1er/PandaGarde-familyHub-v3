@@ -148,7 +148,10 @@ export function StoryReader({ story, embedded = false, showBackLink = true }: St
             <ArrowRight size={16} aria-hidden />
           </button>
         ) : (
-          <span className="text-sm font-semibold text-green-700 dark:text-green-400">The end</span>
+          <Link to="/stories" className="button button-primary inline-flex items-center gap-2">
+            <Library size={16} aria-hidden />
+            More stories
+          </Link>
         )}
       </div>
 
