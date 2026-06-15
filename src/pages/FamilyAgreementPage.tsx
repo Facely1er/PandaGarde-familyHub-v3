@@ -25,12 +25,12 @@ const FamilyAgreementPage: React.FC = () => {
   };
 
   const handlePreview = () => {
-    const url = `/downloads/family-agreement.html`;
+    const url = `/downloads/family-agreement-print.html`;
     window.open(url, '_blank');
   };
 
   const handlePrint = () => {
-    const url = `/downloads/family-agreement.html`;
+    const url = `/downloads/family-agreement-print.html`;
     const printWindow = window.open(url, '_blank');
     if (printWindow) {
       printWindow.onload = () => {

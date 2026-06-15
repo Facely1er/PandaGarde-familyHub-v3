@@ -76,7 +76,7 @@ const CertificatesPage: React.FC = () => {
       }
     } else {
       // For individual certificates, open the HTML version for now
-      const url = `/downloads/certificates.html`;
+      const url = `/downloads/certificates-print.html`;
       window.open(url, '_blank');
     }
   };

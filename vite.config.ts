@@ -13,28 +13,27 @@ const SPA_DOWNLOAD_ROUTES = new Set([
   '/downloads/worksheets',
 ]);
 
-const spaDownloadRoutesPlugin = () => {
-  const middleware: Connect.NextHandleFunction = (
-    req: IncomingMessage,
-    _res: ServerResponse,
-    next,
-  ) => {
-    const pathname = req.url?.split('?')[0] ?? '';
-    if (SPA_DOWNLOAD_ROUTES.has(pathname)) {
-      req.url = '/index.html';
-    }
-    next();
-  };
+const spaDownloadRoutesPlugin = () => ({
+  name: 'spa-download-routes',
+  enforce: 'pre' as const,
+  configureServer(server: Connect.Server) {
+    server.middlewares.use(spaDownloadRouteMiddleware);
+  },
+  configurePreviewServer(server: Connect.Server) {
+    server.middlewares.use(spaDownloadRouteMiddleware);
+  },
+});
 
-  return {
-    name: 'spa-download-routes',
-    configureServer(server: Connect.Server) {
-      server.middlewares.use(middleware);
-    },
-    configurePreviewServer(server: Connect.Server) {
-      server.middlewares.use(middleware);
-    },
-  };
+const spaDownloadRouteMiddleware: Connect.NextHandleFunction = (
+  req: IncomingMessage,
+  _res: ServerResponse,
+  next,
+) => {
+  const pathname = req.url?.split('?')[0] ?? '';
+  if (SPA_DOWNLOAD_ROUTES.has(pathname)) {
+    req.url = '/index.html';
+  }
+  next();
 };
 
 const optionalDependenciesPlugin = () => ({

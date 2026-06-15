@@ -25,7 +25,7 @@ const COLORING_SHEETS: ColoringSheet[] = [
     ageGroup: 'Ages 5–7',
     difficulty: 'Easy',
     image: '/images/coloring/privacy-panda-basic.svg',
-    printUrl: '/downloads/coloring-sheets.html#privacy-panda-basic',
+    printUrl: '/downloads/coloring-sheets-print.html#privacy-panda-basic',
     svgUrl: '/images/coloring/privacy-panda-basic.svg',
   },
   {
@@ -35,7 +35,7 @@ const COLORING_SHEETS: ColoringSheet[] = [
     ageGroup: 'Ages 6–9',
     difficulty: 'Easy',
     image: '/images/coloring/privacy-shield.svg',
-    printUrl: '/downloads/coloring-sheets.html#privacy-shield',
+    printUrl: '/downloads/coloring-sheets-print.html#privacy-shield',
     svgUrl: '/images/coloring/privacy-shield.svg',
   },
   {
@@ -45,7 +45,7 @@ const COLORING_SHEETS: ColoringSheet[] = [
     ageGroup: 'Ages 7–10',
     difficulty: 'Medium',
     image: '/images/coloring/password-treasure.svg',
-    printUrl: '/downloads/coloring-sheets.html#password-treasure',
+    printUrl: '/downloads/coloring-sheets-print.html#password-treasure',
     svgUrl: '/images/coloring/password-treasure.svg',
   },
   {
@@ -55,7 +55,7 @@ const COLORING_SHEETS: ColoringSheet[] = [
     ageGroup: 'Ages 8–12',
     difficulty: 'Medium',
     image: '/images/coloring/digital-footprint.svg',
-    printUrl: '/downloads/coloring-sheets.html#digital-footprint',
+    printUrl: '/downloads/coloring-sheets-print.html#digital-footprint',
     svgUrl: '/images/coloring/digital-footprint.svg',
   },
   {
@@ -65,7 +65,7 @@ const COLORING_SHEETS: ColoringSheet[] = [
     ageGroup: 'Ages 6–11',
     difficulty: 'Easy',
     image: '/images/coloring/privacy-garden.svg',
-    printUrl: '/downloads/coloring-sheets.html#privacy-garden',
+    printUrl: '/downloads/coloring-sheets-print.html#privacy-garden',
     svgUrl: '/images/coloring/privacy-garden.svg',
   },
   {
@@ -75,7 +75,7 @@ const COLORING_SHEETS: ColoringSheet[] = [
     ageGroup: 'Ages 9–12',
     difficulty: 'Hard',
     image: '/images/coloring/cyber-safety-scene.svg',
-    printUrl: '/downloads/coloring-sheets.html#cyber-safety-scene',
+    printUrl: '/downloads/coloring-sheets-print.html#cyber-safety-scene',
     svgUrl: '/images/coloring/cyber-safety-scene.svg',
   },
 ];

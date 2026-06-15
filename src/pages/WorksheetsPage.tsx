@@ -16,7 +16,7 @@ const WorksheetsPage: React.FC = () => {
   }, []);
 
   const openPrintablePack = () => {
-    window.open('/downloads/worksheets.html', '_blank', 'noopener,noreferrer');
+    window.open('/downloads/worksheets-print.html', '_blank', 'noopener,noreferrer');
   };
 
   return (

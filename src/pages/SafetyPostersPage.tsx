@@ -13,7 +13,7 @@ const SafetyPostersPage: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  /* IDs and titles match anchors in /public/downloads/safety-posters.html (single HTML, five distinct sections). */
+  /* IDs and titles match anchors in /public/downloads/safety-posters-print.html (single HTML, five distinct sections). */
   const safetyPosters = [
     {
       id: 'password-safety',
@@ -22,7 +22,7 @@ const SafetyPostersPage: React.FC = () => {
       ageGroup: 'Ages 5–10',
       size: '11" × 17"',
       icon: Lock,
-      downloadUrl: '/downloads/safety-posters.html#password-safety',
+      downloadUrl: '/downloads/safety-posters-print.html#password-safety',
       previewBackground: 'linear-gradient(145deg, #ecfdf5 0%, #6ee7b7 55%, #34d399 100%)',
       iconColor: '#047857'
     },
@@ -33,7 +33,7 @@ const SafetyPostersPage: React.FC = () => {
       ageGroup: 'Ages 6–12',
       size: '11" × 17"',
       icon: Shield,
-      downloadUrl: '/downloads/safety-posters.html#personal-information',
+      downloadUrl: '/downloads/safety-posters-print.html#personal-information',
       previewBackground: 'linear-gradient(145deg, #eff6ff 0%, #93c5fd 50%, #3b82f6 100%)',
       iconColor: '#1e40af'
     },
@@ -44,7 +44,7 @@ const SafetyPostersPage: React.FC = () => {
       ageGroup: 'Ages 6–12',
       size: '11" × 17"',
       icon: AlertTriangle,
-      downloadUrl: '/downloads/safety-posters.html#stranger-danger',
+      downloadUrl: '/downloads/safety-posters-print.html#stranger-danger',
       previewBackground: 'linear-gradient(145deg, #fff7ed 0%, #fdba74 45%, #f97316 100%)',
       iconColor: '#9a3412'
     },
@@ -55,7 +55,7 @@ const SafetyPostersPage: React.FC = () => {
       ageGroup: 'Ages 6–12',
       size: '11" × 17"',
       icon: Smartphone,
-      downloadUrl: '/downloads/safety-posters.html#app-safety',
+      downloadUrl: '/downloads/safety-posters-print.html#app-safety',
       previewBackground: 'linear-gradient(145deg, #faf5ff 0%, #d8b4fe 40%, #a855f7 100%)',
       iconColor: '#6b21a8'
     },
@@ -66,7 +66,7 @@ const SafetyPostersPage: React.FC = () => {
       ageGroup: 'All ages',
       size: '11" × 17"',
       icon: LifeBuoy,
-      downloadUrl: '/downloads/safety-posters.html#ask-for-help',
+      downloadUrl: '/downloads/safety-posters-print.html#ask-for-help',
       previewBackground: 'linear-gradient(145deg, #fef2f2 0%, #fca5a5 40%, #ef4444 100%)',
       iconColor: '#991b1b'
     },
@@ -77,7 +77,7 @@ const SafetyPostersPage: React.FC = () => {
       ageGroup: 'All ages',
       size: '8.5" × 11"',
       icon: Users,
-      downloadUrl: '/downloads/family-agreement.html',
+      downloadUrl: '/downloads/family-agreement-print.html',
       previewBackground: 'linear-gradient(145deg, #f5f3ff 0%, #c4b5fd 45%, #7c3aed 100%)',
       iconColor: '#5b21b6'
     }
@@ -113,7 +113,7 @@ const SafetyPostersPage: React.FC = () => {
         window.open(poster.downloadUrl, '_blank');
       } else {
         // Fallback to general safety posters page
-        window.open('/downloads/safety-posters.html', '_blank');
+        window.open('/downloads/safety-posters-print.html', '_blank');
       }
     }
   };

@@ -199,7 +199,7 @@ export class PDFService {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
       
-      const response = await fetch('/downloads/coloring-sheets.html', {
+      const response = await fetch('/downloads/coloring-sheets-print.html', {
         signal: controller.signal
       });
       
@@ -224,7 +224,7 @@ export class PDFService {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
       
-      const response = await fetch('/downloads/safety-posters.html', {
+      const response = await fetch('/downloads/safety-posters-print.html', {
         signal: controller.signal
       });
       
@@ -249,7 +249,7 @@ export class PDFService {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
       
-      const response = await fetch('/downloads/certificates.html', {
+      const response = await fetch('/downloads/certificates-print.html', {
         signal: controller.signal
       });
       
@@ -274,7 +274,7 @@ export class PDFService {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
       
-      const response = await fetch('/downloads/family-agreement.html', {
+      const response = await fetch('/downloads/family-agreement-print.html', {
         signal: controller.signal
       });
       
