@@ -26,10 +26,10 @@ const EmptyStateWithServicePrompt: React.FC<EmptyStateWithServicePromptProps> = 
               </div>
               <div>
                 <h1>{feature}</h1>
-                <p className="empty-state-prompt__header-sub">Footprint review needs apps in your catalog first</p>
+                <p className="empty-state-prompt__header-sub">First, tell us which apps your family uses</p>
               </div>
             </div>
-            <span className="empty-state-prompt__badge">Catalog needed</span>
+            <span className="empty-state-prompt__badge">About 10 min</span>
           </header>
 
           <div className="empty-state-prompt__body">
@@ -38,7 +38,7 @@ const EmptyStateWithServicePrompt: React.FC<EmptyStateWithServicePromptProps> = 
             <div className="empty-state-prompt__unlock">
               <h3>
                 <CheckCircle size={20} aria-hidden />
-                What you will unlock
+                What you will see after
               </h3>
               <div className="empty-state-prompt__unlock-grid">
                 <div className="empty-state-prompt__unlock-item">
@@ -46,8 +46,8 @@ const EmptyStateWithServicePrompt: React.FC<EmptyStateWithServicePromptProps> = 
                     <BarChart3 size={16} />
                   </div>
                   <div>
-                    <strong>Privacy analysis</strong>
-                    <span>See your exposure score</span>
+                    <strong>Privacy scores</strong>
+                    <span>Which apps collect the most data</span>
                   </div>
                 </div>
                 <div className="empty-state-prompt__unlock-item">
@@ -55,22 +55,22 @@ const EmptyStateWithServicePrompt: React.FC<EmptyStateWithServicePromptProps> = 
                     <Shield size={16} />
                   </div>
                   <div>
-                    <strong>Risk assessment</strong>
-                    <span>Identify higher-exposure services</span>
+                    <strong>Talk prompts</strong>
+                    <span>What to discuss as a family</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            <h3 className="empty-state-prompt__steps-title">Get started in 3 easy steps</h3>
+            <h3 className="empty-state-prompt__steps-title">Three quick steps</h3>
             <ol className="empty-state-prompt__steps">
               <li className="empty-state-prompt__step">
                 <span className="empty-state-prompt__step-index" aria-hidden>
                   1
                 </span>
                 <div>
-                  <strong>Browse the service catalog</strong>
-                  <p>Explore popular apps and services your family might use.</p>
+                  <strong>Open the app list</strong>
+                  <p>Tap the apps and websites your family uses.</p>
                 </div>
               </li>
               <li className="empty-state-prompt__step">
@@ -78,10 +78,8 @@ const EmptyStateWithServicePrompt: React.FC<EmptyStateWithServicePromptProps> = 
                   2
                 </span>
                 <div>
-                  <strong>Add your family&apos;s services</strong>
-                  <p>
-                    Choose at least {minimumServices} services you use and add them to your catalog.
-                  </p>
+                  <strong>Add at least {minimumServices} apps</strong>
+                  <p>School tools, games, social apps, health apps—whatever your kids use.</p>
                 </div>
               </li>
               <li className="empty-state-prompt__step">
@@ -89,8 +87,8 @@ const EmptyStateWithServicePrompt: React.FC<EmptyStateWithServicePromptProps> = 
                   3
                 </span>
                 <div>
-                  <strong>Return to see your analysis</strong>
-                  <p>Come back here to view your {feature.toLowerCase()} and recommendations.</p>
+                  <strong>Come back here</strong>
+                  <p>Your {feature.toLowerCase()} will be ready with scores and next steps.</p>
                 </div>
               </li>
             </ol>
@@ -101,23 +99,21 @@ const EmptyStateWithServicePrompt: React.FC<EmptyStateWithServicePromptProps> = 
                 className="button button-primary inline-flex items-center gap-2"
               >
                 <ShoppingBag size={20} aria-hidden />
-                <span>Open service catalog</span>
+                <span>List your apps</span>
                 <ArrowRight size={18} aria-hidden />
               </Link>
               <div className="empty-state-prompt__meta">
-                <span>2–5 minutes</span>
+                <span>About 10 minutes</span>
                 <span className="empty-state-prompt__meta-dot" aria-hidden />
-                <span>Instant unlock</span>
-                <span className="empty-state-prompt__meta-dot" aria-hidden />
-                <span>Free to use</span>
+                <span>No account needed</span>
               </div>
             </div>
           </div>
         </div>
 
         <p className="empty-state-prompt__footer">
-          Questions about privacy protection?{' '}
-          <Link to="/guides/family-privacy">Read the family privacy guide</Link>
+          Prefer to start with a story?{' '}
+          <Link to="/stories">Read Privacy Panda together (5 min)</Link>
         </p>
       </div>
     </div>

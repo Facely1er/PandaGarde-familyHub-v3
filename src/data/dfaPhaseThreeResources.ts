@@ -14,17 +14,17 @@ export const DFA_PHASE_THREE_PARENT_RESOURCES: DfaPhaseResourceLink[] = [
   {
     label: GUIDES_STORIES_NAV_LABEL,
     href: '/for-families',
-    description: 'Parent guides, planning tools, and household privacy materials.',
+    description: 'Parent guides, printables, and talk prompts—pick one below.',
   },
   {
     label: 'Family privacy plan',
     href: '/family-privacy-plan',
-    description: 'Turn assessment priorities into a written plan you can revisit.',
+    description: 'Write down your household rules together.',
   },
   {
     label: 'How it works',
     href: '/how-it-works',
-    description: 'Short overview of the three-step review when you want a checklist after footprint review.',
+    description: 'A simple overview if you want the big picture.',
   },
 ];
 
@@ -32,17 +32,17 @@ export const DFA_PHASE_THREE_KIDS_RESOURCES: DfaPhaseResourceLink[] = [
   {
     label: 'Privacy Panda stories',
     href: '/stories',
-    description: 'Interactive stories that teach privacy in kid-friendly language.',
+    description: 'Read together—about 5 minutes, no setup.',
   },
   {
     label: 'Digital Bamboo Forest',
     href: '/stories/privacy-panda-and-the-digital-bamboo-forest',
-    description: 'Start with the origin story—read together or let kids explore.',
+    description: 'Best first story—start here.',
   },
   {
     label: 'Privacy missions',
     href: '/family-hub/activities',
-    description: 'Age-matched missions in Family Hub—progress stays on this device.',
+    description: 'Short activities in Family Hub—open and pick one.',
   },
 ];
 
@@ -50,6 +50,6 @@ export const DFA_PHASE_THREE_JOURNAL: DfaPhaseResourceLink = {
   label: 'Digital Bamboo Journal',
   href: DIGITAL_BAMBOO_JOURNAL_URL,
   description:
-    'A separate journal site for reflection and follow-up—aligned with PandaGarde stories, not required to finish footprint review.',
+    'Optional follow-up journal—separate site, not required to use PandaGarde.',
   external: true,
 };

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, ArrowRight, CheckCircle, Sparkles, ShoppingBag, Play, BarChart3, type LucideIcon } from 'lucide-react';
+import { X, ArrowRight, CheckCircle, BookOpen, ShoppingBag, Play, Users, type LucideIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface OnboardingStep {
@@ -19,64 +19,64 @@ const ONBOARDING_STORAGE_KEY = 'pandagarde_onboarding_completed';
 const onboardingSteps: OnboardingStep[] = [
   {
     id: 1,
-    title: 'Welcome to PandaGarde!',
-    description: 'Your comprehensive platform for family digital privacy education. Let\'s get you started with a quick tour.',
-    icon: Sparkles,
+    title: 'Welcome to PandaGarde',
+    description: 'Help your family talk about privacy—without being a tech expert. This quick tour shows you where to start.',
+    icon: BookOpen,
     action: {
-      label: 'Get Started',
-      link: '/family-hub'
+      label: 'Read a story (5 min)',
+      link: '/stories',
     },
     tips: [
-      'PandaGarde helps families learn about digital privacy together',
-      'All features are 100% free and designed for families',
-      'You can start learning immediately, no account required'
-    ]
+      'Start anywhere—nothing is locked behind a long signup',
+      'Stories, app lists, and Family Hub all work on their own',
+      'Your family\'s progress stays on your device',
+    ],
   },
   {
     id: 2,
-    title: 'Set Up Your Service Catalog',
-    description: 'The Service Catalog is the foundation of PandaGarde. Add services your family uses to unlock powerful privacy features.',
+    title: 'List your family\'s apps',
+    description: 'Tap the apps and websites your kids use. We do not watch their devices—you choose what to add.',
     icon: ShoppingBag,
     action: {
-      label: 'Set Up Service Catalog',
-      link: '/service-catalog'
+      label: 'Add your apps',
+      link: '/service-catalog',
     },
     tips: [
-      'Add at least 3 services to unlock footprint review',
-      'Each service includes privacy risk ratings and recommendations',
-      'You can add more services anytime'
-    ]
+      'Add at least 3 apps to see footprint review scores',
+      'Each app gets a simple privacy score',
+      'You can add more anytime',
+    ],
   },
   {
     id: 3,
-    title: 'Start Learning with Privacy Panda',
-    description: 'Privacy Panda is our interactive learning app for children. Age-appropriate stories and activities make privacy education fun!',
+    title: 'Read with your child',
+    description: 'Privacy Panda stories take about 5 minutes. Read one scene together—no setup required.',
     icon: Play,
     action: {
-      label: 'Try Privacy Panda',
-      link: '/privacy-panda'
+      label: 'Browse stories',
+      link: '/stories',
     },
     tips: [
-      'Content is designed for ages 5-17',
-      'Interactive stories and games make learning engaging',
-      'Progress is tracked automatically'
-    ]
+      'Stories work for ages 5–17',
+      'Use them as calm conversation starters',
+      'No app list needed to start',
+    ],
   },
   {
     id: 4,
-    title: 'Explore Advanced Features',
-    description: 'After your Service Catalog is set up, you can run footprint review, privacy assessments, and open catalog-based notifications plus RSS safety headlines.',
-    icon: BarChart3,
+    title: 'Practice in Family Hub',
+    description: 'Do short privacy missions together. Progress saves on this device—no account required.',
+    icon: Users,
     action: {
-      label: 'View Features',
-      link: '/digital-footprint'
+      label: 'Open Family Hub',
+      link: '/family-hub',
     },
     tips: [
-      'Footprint review shows your family\'s online presence',
-      'Risk Assessments help identify privacy concerns',
-      'Alerts page: catalog notifications and RSS headlines for services you listed (not device monitoring)'
-    ]
-  }
+      'Add each child\'s name and age first',
+      'One mission per day is enough',
+      'Footprint scores come from the app list—not from watching phones',
+    ],
+  },
 ];
 
 interface OnboardingFlowProps {
@@ -90,21 +90,18 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ onComplete }) => {
   const [headerHeight, setHeaderHeight] = useState(60);
 
   useEffect(() => {
-    // Get header height for positioning
     const header = document.querySelector('.header');
     if (header) {
       const height = header.getBoundingClientRect().height;
       setHeaderHeight(height);
     }
 
-    // Check if onboarding has been completed
     const completed = localStorage.getItem(ONBOARDING_STORAGE_KEY);
     if (completed === 'true') {
       setIsCompleted(true);
       return;
     }
 
-    // Show onboarding after a short delay
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, 1000);
@@ -155,7 +152,6 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ onComplete }) => {
           maxHeight: `calc(100vh - ${headerHeight}px - 2rem)`
         }}
       >
-        {/* Header */}
         <div className="relative p-6 border-b border-gray-200 dark:border-gray-700">
           <button
             onClick={handleSkip}
@@ -185,7 +181,6 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ onComplete }) => {
           </div>
         </div>
 
-        {/* Content */}
         <div className="p-6">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
             {step.title}
@@ -197,7 +192,7 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ onComplete }) => {
           {step.tips && step.tips.length > 0 && (
             <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-6">
               <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-3">
-                Quick Tips:
+                Good to know:
               </h3>
               <ul className="space-y-2">
                 {step.tips.map((tip, index) => (
@@ -210,13 +205,12 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ onComplete }) => {
             </div>
           )}
 
-          {/* Action Button */}
           <div className="flex items-center justify-between gap-4">
             <button
               onClick={handleSkip}
               className="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
             >
-              Skip Tour
+              Skip tour
             </button>
             <Link
               to={step.action.link}
@@ -229,7 +223,6 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ onComplete }) => {
           </div>
         </div>
 
-        {/* Step Indicators */}
         <div className="p-6 border-t border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-center gap-2">
             {onboardingSteps.map((_, index) => (
@@ -254,4 +247,3 @@ const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ onComplete }) => {
 };
 
 export default OnboardingFlow;
-

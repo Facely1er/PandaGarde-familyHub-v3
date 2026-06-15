@@ -73,7 +73,7 @@ const DigitalFootprintPage: React.FC = () => {
       >
         <EmptyStateWithServicePrompt
           feature="Your family's digital footprint"
-          description="Add at least 3 services in the service catalog so footprint review has something real to score."
+          description="Tap at least 3 apps your family uses in the app list. Then come back here to see your scores."
           minimumServices={3}
           icon={<BarChart3 size={24} className="text-white" />}
         />

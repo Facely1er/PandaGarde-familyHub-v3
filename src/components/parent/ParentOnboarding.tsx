@@ -10,7 +10,7 @@ import {
   BookOpen,
   X,
   UsersRound,
-  Smartphone,
+  ShoppingBag,
   Lightbulb,
 } from 'lucide-react';
 import InfoBox from './InfoBox';
@@ -35,41 +35,40 @@ const ParentOnboarding: React.FC<ParentOnboardingProps> = ({ onComplete, onSkip 
     {
       id: 1,
       title: 'Welcome to PandaGarde',
-      subtitle: 'Local-first privacy education for your household',
+      subtitle: 'Four things you can do—pick any one to start',
       icon: Shield,
       content: (
         <div>
-          <InfoBox type="info" title="What You'll Get">
+          <InfoBox type="info" title="Your options">
             <ul className={listClass}>
-              <li>List apps and services your family uses in the catalog</li>
-              <li>See privacy risk scores from footprint review</li>
-              <li>Get conversation starters and Family Hub missions</li>
-              <li>Track mission and assessment progress on your device</li>
+              <li>Read a Privacy Panda story with your child (about 5 minutes)</li>
+              <li>List the apps your family uses</li>
+              <li>See privacy scores for those apps</li>
+              <li>Do short missions together in Family Hub</li>
             </ul>
           </InfoBox>
           <p className="text-base leading-relaxed text-gray-800 dark:text-gray-200 mt-4">
-            PandaGarde helps you protect your family&apos;s privacy online. We&apos;ll guide you through your local
-            family profile and the website + Family Hub workflow.
+            You do not need to do everything today. This tour shows you where each part lives.
           </p>
         </div>
       ),
     },
     {
       id: 2,
-      title: 'Set Up Your Family Profile',
-      subtitle: 'On this device—no server account required',
+      title: 'Your family on this device',
+      subtitle: 'No PandaGarde account required',
       icon: Users,
       content: (
         <div>
-          <InfoBox type="tip" title="Your profile is ready">
-            <p>You&apos;re signed in locally. Add family members and services when you&apos;re ready.</p>
+          <InfoBox type="tip" title="Already set up locally">
+            <p>Your profile is on this device. Add children in Family Hub when you are ready—name and age only.</p>
           </InfoBox>
           <div className="mt-6">
-            <h4 className="text-base font-semibold mb-3 text-gray-800 dark:text-gray-100">What&apos;s Next:</h4>
+            <h4 className="text-base font-semibold mb-3 text-gray-800 dark:text-gray-100">Good first steps:</h4>
             <ul className={`m-0 ${listClass}`}>
-              <li>Add children in Family Hub (name and age)</li>
-              <li>List services in the catalog for footprint analysis</li>
-              <li>Start privacy missions or website learning paths</li>
+              <li>Read a story together</li>
+              <li>Add apps your family uses to the catalog</li>
+              <li>Open Family Hub and add your kids</li>
             </ul>
           </div>
         </div>
@@ -77,25 +76,24 @@ const ParentOnboarding: React.FC<ParentOnboardingProps> = ({ onComplete, onSkip 
     },
     {
       id: 3,
-      title: 'Add Your Children',
-      subtitle: 'Profiles for missions and progress',
+      title: 'Add your children',
+      subtitle: 'So missions match their age',
       icon: Users,
       content: (
         <div>
-          <InfoBox type="info" title="Add Family Members">
+          <InfoBox type="info" title="Family Hub profiles">
             <p>
               {childCount > 0
-                ? `You have ${childCount} child(ren) added. You can add more from the Family Hub.`
-                : 'Add your children in Family Hub (name and age) to match missions and save progress on this device.'}
+                ? `You have ${childCount} child(ren) added. Open Family Hub anytime to add more or start a mission.`
+                : 'Open Family Hub → Family tab. Enter each child\'s name and age—that\'s all we need.'}
             </p>
           </InfoBox>
           <div className={subBoxClass}>
-            <h4 className="text-base font-semibold mb-3 text-gray-800 dark:text-gray-100">For each child, you can:</h4>
+            <h4 className="text-base font-semibold mb-3 text-gray-800 dark:text-gray-100">After you add a child:</h4>
             <ul className={`m-0 ${listClass}`}>
-              <li>See catalog-based privacy risk scores</li>
-              <li>Review services you listed for each child</li>
-              <li>Plan with requested / approved / denied catalog status</li>
-              <li>Use mission prompts and conversation starters</li>
+              <li>Pick a mission matched to their age</li>
+              <li>Read the family talk prompt together</li>
+              <li>Track badges under Journey</li>
             </ul>
           </div>
         </div>
@@ -103,38 +101,33 @@ const ParentOnboarding: React.FC<ParentOnboardingProps> = ({ onComplete, onSkip 
     },
     {
       id: 4,
-      title: 'First Risk Assessment',
-      subtitle: "See your family's privacy status",
+      title: 'List your apps',
+      subtitle: 'Powers your privacy scores',
       icon: Eye,
       content: (
         <div>
-          <InfoBox type="success" title="Privacy Dashboard">
-            <p>Your privacy dashboard shows you at a glance:</p>
+          <InfoBox type="success" title="What the app list shows you">
+            <p>After you tap the apps your family uses, you will see:</p>
             <ul className={`mt-2 mb-0 ${listClass}`}>
-              <li>Family privacy score (average of all children)</li>
-              <li>Action items (catalog reminders, high-risk services)</li>
-              <li>Individual child risk cards</li>
-              <li>Conversation starters for high-risk services</li>
+              <li>A simple privacy score for each app (lower is safer)</li>
+              <li>Which apps are worth a family conversation</li>
+              <li>Suggested next steps—not live monitoring of phones</li>
             </ul>
           </InfoBox>
           <div className={`${subBoxClass} border-2 border-blue-500 dark:border-blue-600 bg-blue-50 dark:bg-blue-950/30`}>
-            <h4 className="text-base font-semibold mb-3 text-blue-900 dark:text-blue-200">Risk Levels Explained:</h4>
+            <h4 className="text-base font-semibold mb-3 text-blue-900 dark:text-blue-200">Score colors:</h4>
             <ul className="m-0 pl-6 leading-relaxed text-blue-900 dark:text-blue-200 space-y-1">
               <li>
-                <strong className="text-green-600 dark:text-green-400">Low (Green):</strong> Generally safe, minimal
-                privacy concerns
+                <strong className="text-green-600 dark:text-green-400">Green:</strong> Lower risk—still worth knowing what the app collects
               </li>
               <li>
-                <strong className="text-amber-600 dark:text-amber-400">Medium (Yellow):</strong> Some privacy concerns,
-                review settings
+                <strong className="text-amber-600 dark:text-amber-400">Yellow:</strong> Some concerns—review settings together
               </li>
               <li>
-                <strong className="text-orange-600 dark:text-orange-400">High (Orange):</strong> Significant risks,
-                needs attention
+                <strong className="text-orange-600 dark:text-orange-400">Orange:</strong> Worth a family talk soon
               </li>
               <li>
-                <strong className="text-red-600 dark:text-red-400">Very High (Red):</strong> Major privacy risks,
-                immediate action needed
+                <strong className="text-red-600 dark:text-red-400">Red:</strong> High data collection—priority for a conversation
               </li>
             </ul>
           </div>
@@ -143,52 +136,46 @@ const ParentOnboarding: React.FC<ParentOnboardingProps> = ({ onComplete, onSkip 
     },
     {
       id: 5,
-      title: 'Tour of Dashboard',
-      subtitle: 'Learn how to use your privacy hub',
+      title: 'Where to go next',
+      subtitle: 'Four main areas—each works on its own',
       icon: BookOpen,
       content: (
         <div>
-          <InfoBox type="tip" title="Dashboard Overview">
-            <p>Your dashboard has 5 main tabs:</p>
+          <InfoBox type="tip" title="Pick one to try today">
+            <p>Stories, app list, footprint review, and Family Hub missions. You do not need to finish one before starting another.</p>
           </InfoBox>
           <div className="mt-6">
             <div className={tabCardClass}>
-              <h4 className="text-base font-semibold mb-2 text-gray-800 dark:text-gray-100">Overview</h4>
+              <h4 className="text-base font-semibold mb-2 text-gray-800 dark:text-gray-100">Stories</h4>
               <p className="m-0 text-gray-600 dark:text-gray-400 text-[0.9375rem]">
-                See your family&apos;s privacy score, action items, and quick stats
+                Read Privacy Panda with your child—about 5 minutes, no setup
+              </p>
+            </div>
+            <div className={tabCardClass}>
+              <h4 className="text-base font-semibold mb-2 text-gray-800 dark:text-gray-100 flex items-center gap-2">
+                <ShoppingBag size={18} aria-hidden />
+                App list
+              </h4>
+              <p className="m-0 text-gray-600 dark:text-gray-400 text-[0.9375rem]">
+                Tap the apps your family uses to see privacy scores
               </p>
             </div>
             <div className={tabCardClass}>
               <h4 className="text-base font-semibold mb-2 text-gray-800 dark:text-gray-100 flex items-center gap-2">
                 <UsersRound size={18} aria-hidden />
-                Children
+                Family Hub
               </h4>
               <p className="m-0 text-gray-600 dark:text-gray-400 text-[0.9375rem]">
-                View each child&apos;s privacy status and manage their services
-              </p>
-            </div>
-            <div className={tabCardClass}>
-              <h4 className="text-base font-semibold mb-2 text-gray-800 dark:text-gray-100 flex items-center gap-2">
-                <Smartphone size={18} aria-hidden />
-                Services
-              </h4>
-              <p className="m-0 text-gray-600 dark:text-gray-400 text-[0.9375rem]">
-                Browse the catalog and set requested / approved / denied status
+                Short missions you do together—progress saves on this device
               </p>
             </div>
             <div className={tabCardClass}>
               <h4 className="text-base font-semibold mb-2 text-gray-800 dark:text-gray-100 flex items-center gap-2">
                 <Lightbulb size={18} aria-hidden />
-                Insights
+                Guides
               </h4>
               <p className="m-0 text-gray-600 dark:text-gray-400 text-[0.9375rem]">
-                View privacy trends and get recommendations
-              </p>
-            </div>
-            <div className={tabCardClass}>
-              <h4 className="text-base font-semibold mb-2 text-gray-800 dark:text-gray-100">Quick Actions</h4>
-              <p className="m-0 text-gray-600 dark:text-gray-400 text-[0.9375rem]">
-                Common tasks like adding children, updating the catalog, and opening Family Hub
+                Conversation starters, family plans, and printables under Guides &amp; stories
               </p>
             </div>
           </div>

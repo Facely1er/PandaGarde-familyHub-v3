@@ -138,7 +138,7 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
             <div>
               <div className="inline-flex items-center gap-2 rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-teal-700 dark:bg-teal-900/30 dark:text-teal-200">
                 <Sparkles size={14} aria-hidden="true" />
-                Step 1 · Mission intro
+                Step 1 · Read this first
               </div>
               <h3 className="mt-4 text-2xl font-bold text-gray-900 dark:text-white">{activity.name}</h3>
               <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">{activity.description}</p>

@@ -37,33 +37,32 @@ const FamilyPrivacyGuidePage: React.FC = () => {
         {/* Introduction */}
         <section className="family-guide-section">
           <h2 className="family-guide-h2">
-            Why Digital Privacy Education Matters
+            Why talk about privacy now?
           </h2>
           <p className="family-guide-p">
-            In today's digital world, children are growing up with technology as a natural part of their lives. 
-            Teaching them about digital privacy from an early age helps them develop healthy online habits and 
-            protects them from potential risks.
+            Kids use apps, games, and school tools every day. You don&apos;t need a lecture—a short story or one family rule goes a long way.
+            Start with the links above, or read on for age-by-age ideas.
           </p>
           <div className="family-guide-callout">
             <h3>
-              Key Benefits of Early Privacy Education
+              What you get from a few minutes a week
             </h3>
               <ul className="space-y-2">
                 <li className="flex items-start gap-3">
                   <CheckCircle size={20} className="text-green-600 mt-1 flex-shrink-0" />
-                  <span>Builds critical thinking skills about online information sharing</span>
+                  <span>Kids learn what personal info is—and when not to share it</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle size={20} className="text-green-600 mt-1 flex-shrink-0" />
-                  <span>Creates a foundation for responsible digital citizenship</span>
+                  <span>You have ready-made words for tricky online situations</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle size={20} className="text-green-600 mt-1 flex-shrink-0" />
-                  <span>Reduces risk of cyberbullying and online exploitation</span>
+                  <span>Your family agrees on simple rules instead of guessing</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle size={20} className="text-green-600 mt-1 flex-shrink-0" />
-                  <span>Empowers children to make informed decisions about their digital footprint</span>
+                  <span>Children know they can tell you when something online feels wrong</span>
                 </li>
               </ul>
             </div>

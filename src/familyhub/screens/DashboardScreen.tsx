@@ -9,7 +9,7 @@ import HubScreenHero from '../components/HubScreenHero';
 import HubTour from '../components/HubTour';
 import TodayMissionCard from '../components/TodayMissionCard';
 import { getHubOrigin, touchHubStreak } from '../../lib/hubMission';
-import { hubPaths } from '../hubPaths';
+import { HUB_DASHBOARD_EMPTY, HUB_DASHBOARD_READY } from '../hubCopy';
 
 interface FamilyGoal {
   completed?: boolean;
@@ -25,10 +25,10 @@ const HubWelcomeBanner: React.FC<{ onDismiss: () => void }> = ({ onDismiss }) =>
     <div className="flex items-start justify-between gap-3">
       <div className="flex-1">
         <p className="text-sm font-semibold text-teal-900 dark:text-teal-100">
-          You're in Family Hub — the practice workspace.
+          You&apos;re in Family Hub — where you practice together.
         </p>
         <p className="mt-1 text-xs leading-relaxed text-teal-800 dark:text-teal-200">
-          Complete short privacy missions together, earn badges, and build habits — at your own pace. Everything is saved on this device.
+          Do one short mission today. Progress and badges save on this device.
         </p>
         <div className="mt-3 flex flex-wrap gap-2">
           <Link
@@ -90,10 +90,10 @@ const DashboardScreen: React.FC = () => {
           }
           subtitle={
             familyMembers.length === 0
-              ? 'Add each child with their age so we can suggest the right privacy missions.'
+              ? HUB_DASHBOARD_EMPTY
               : hubOrigin === 'web'
-                ? "Start with today's mission below. Badges and certificates are under Journey."
-                : 'Complete one mission together, then check Journey for badges and certificates.'
+                ? HUB_DASHBOARD_READY
+                : 'Tap today\'s mission below to start. Check Journey when you want badges or certificates.'
           }
           compact
         />

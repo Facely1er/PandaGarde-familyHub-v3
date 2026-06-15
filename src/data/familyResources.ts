@@ -21,7 +21,7 @@ export const familyResources: FamilyResource[] = [
   {
     id: 'parental-controls-guide',
     title: 'Complete Parental Controls Guide',
-    description: 'Step-by-step guide to setting up parental controls on all devices',
+    description: 'Set up parental controls on phones, tablets, and computers—pick your device below.',
     type: 'guide',
     category: ['parental-controls', 'child-safety'],
     personaTags: ['cautious-parent', 'concerned-family'],
@@ -33,7 +33,7 @@ export const familyResources: FamilyResource[] = [
   {
     id: 'family-agreement',
     title: 'Family Internet Agreement',
-    description: 'Create a comprehensive safety contract for your family',
+    description: 'Fill in and print a family agreement everyone can follow',
     type: 'download',
     category: ['family-safety', 'agreements'],
     personaTags: ['cautious-parent', 'privacy-focused-family'],
@@ -45,7 +45,7 @@ export const familyResources: FamilyResource[] = [
   {
     id: 'conversation-starters',
     title: 'Privacy Conversation Starters',
-    description: 'Age-appropriate ways to talk to children about online privacy',
+    description: 'Ready-made questions to start privacy talks with your kids',
     type: 'guide',
     category: ['education', 'communication'],
     personaTags: ['cautious-parent', 'learning-family'],
@@ -59,7 +59,7 @@ export const familyResources: FamilyResource[] = [
   {
     id: 'digital-footprint',
     title: 'Footprint review',
-    description: 'Household exposure scores from the apps and services you list',
+    description: 'See which apps from your list collect the most data',
     type: 'tool',
     category: ['privacy-analysis', 'data-sharing'],
     personaTags: ['privacy-focused-family', 'tech-savvy-family'],
@@ -70,8 +70,8 @@ export const familyResources: FamilyResource[] = [
   },
   {
     id: 'service-catalog',
-    title: 'Service Privacy Catalog',
-    description: 'Privacy risk profiles for popular services your family uses',
+    title: 'App list',
+    description: 'Tap the apps your family uses—powers your privacy scores',
     type: 'tool',
     category: ['privacy-analysis', 'services'],
     personaTags: ['privacy-focused-family', 'balanced-family'],
@@ -109,7 +109,7 @@ export const familyResources: FamilyResource[] = [
   {
     id: 'interactive-story',
     title: 'Privacy Panda Interactive Story',
-    description: 'Engaging story that teaches children about privacy',
+    description: 'Read together with your child—about 5 minutes',
     type: 'activity',
     category: ['education', 'interactive'],
     personaTags: ['learning-family', 'cautious-parent'],

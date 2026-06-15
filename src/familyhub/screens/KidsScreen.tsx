@@ -146,7 +146,7 @@ const KidsScreen: React.FC = () => {
       <HubScreenHero
         badge="Your crew"
         title="Family members"
-        subtitle="Add each child’s age so missions and rewards match their world — games, group chats, or first social accounts."
+        subtitle="Add each child's name and age—that's how we pick the right missions. Tap Add Member to start."
         compact
       />
       <div className="flex items-center justify-between">
@@ -224,7 +224,7 @@ const KidsScreen: React.FC = () => {
                         {member.role} &middot; Age {member.age}
                       </p>
                       <p className="mt-0.5 text-xs text-gray-500 dark:text-gray-400">
-                        Privacy Score: {calculateMemberScore(member.id)}/100
+                        Privacy practice score: {calculateMemberScore(member.id)}/100
                       </p>
                       {ageGroup && (
                         <Link

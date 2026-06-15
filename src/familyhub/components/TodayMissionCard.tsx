@@ -103,7 +103,7 @@ const TodayMissionCard: React.FC = () => {
           ) : (
             <>
               <Play size={16} aria-hidden="true" />
-              Continue journey
+              Start mission
             </>
           )}
         </Link>

@@ -7,27 +7,27 @@ import AgeBandStrip from '../components/AgeBandStrip';
 import HubBrandLogo from '../components/HubBrandLogo';
 import { HUB_WELCOMED_KEY } from '../constants';
 import { hubPaths, pandagardeWebsiteUrl } from '../hubPaths';
-import { hubTheme } from '../hubTheme';
+import { HUB_WELCOME_LEAD, HUB_ENTER_CTA } from '../hubCopy';
 
 export { HUB_WELCOMED_KEY };
 
 const sections = [
   {
     icon: Users,
-    title: 'Family Members',
-    description: 'Add your kids and guardians to track everyone\'s progress together.',
+    title: 'Add your family',
+    description: 'Name and age for each child—that\'s all we need to pick the right missions.',
     color: 'text-teal-600 dark:text-teal-400 bg-teal-50 dark:bg-teal-900/30',
   },
   {
     icon: Gamepad2,
-    title: 'Activities',
-    description: 'Age-matched privacy missions for ages 5–13 — grounded in real-life scenarios.',
+    title: 'Do a mission together',
+    description: 'About 10 minutes each. A real situation, a family talk, and one thing to try at home.',
     color: 'text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30',
   },
   {
     icon: Award,
-    title: 'Journey',
-    description: 'Mission progress, badges, and certificates for activities your family completes here.',
+    title: 'Track progress',
+    description: 'Badges and certificates for missions you finish—saved on this device only.',
     color: 'text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/30',
   },
 ];
@@ -55,7 +55,7 @@ const WelcomeScreen: React.FC = () => {
                 <span className="text-teal-600 dark:text-teal-400">Family Hub</span>
               </h1>
               <p className="mt-3 text-base sm:text-lg text-gray-600 dark:text-gray-300">
-                Play short privacy missions together — real situations, family talks, and fun practice for ages 5–13. Everything stays on this device.
+                {HUB_WELCOME_LEAD}
               </p>
             </div>
           </div>
@@ -102,7 +102,7 @@ const WelcomeScreen: React.FC = () => {
           <div className="flex items-start gap-3 rounded-xl bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 p-4 text-sm text-green-800 dark:text-green-200">
             <Shield size={18} className="mt-0.5 shrink-0 text-green-600 dark:text-green-400" aria-hidden="true" />
             <p>
-              <strong>Your data stays on this device.</strong> The Family Hub is local-first — no account, no server, no data leaving your browser.
+              <strong>Nothing leaves this device.</strong> No account, no signup—your family profiles and progress stay here.
             </p>
           </div>
         </div>
@@ -116,7 +116,7 @@ const WelcomeScreen: React.FC = () => {
             onClick={handleGetStarted}
             className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-teal-600 px-6 py-4 text-base font-semibold text-white shadow-sm hover:bg-teal-700 active:scale-[0.98] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
           >
-            Enter Family Hub
+            {HUB_ENTER_CTA}
             <ArrowRight size={20} aria-hidden="true" />
           </button>
         </div>

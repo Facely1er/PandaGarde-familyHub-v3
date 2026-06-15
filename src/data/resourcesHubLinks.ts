@@ -15,12 +15,12 @@ export const resourceStoryLinks: ResourceHubLink[] = [
   {
     label: 'Privacy Panda & the Digital Bamboo Forest',
     href: '/stories/privacy-panda-and-the-digital-bamboo-forest',
-    description: 'Main interactive story.',
+    description: 'Best first story—read together in about 5 minutes.',
   },
   {
     label: 'All stories',
     href: '/stories',
-    description: 'Browse published episodes.',
+    description: 'Browse every episode—pick any one to start.',
   },
 ];
 
@@ -29,17 +29,17 @@ export const resourceGuideLinks: ResourceHubLink[] = [
   {
     label: 'Family privacy guide',
     href: '/guides/family-privacy',
-    description: 'Household basics and how to talk with kids.',
+    description: 'Step-by-step help for talking with kids of any age.',
   },
   {
     label: 'Family privacy plan',
     href: '/family-privacy-plan',
-    description: 'Agree on rules together; saved on this device.',
+    description: 'Write your household rules together.',
   },
   {
     label: 'Emergency safety guide',
     href: '/guides/emergency-safety',
-    description: 'Urgent steps if something goes wrong online.',
+    description: 'If something went wrong online—start here.',
   },
 ];
 
@@ -48,7 +48,7 @@ export const resourcePrintableLinks: ResourceHubLink[] = [
   {
     label: 'Printables & downloads',
     href: '/downloads/coloring-sheets',
-    description: 'Coloring sheets, posters, certificates, and agreements.',
+    description: 'Coloring sheets, posters, and certificates to print at home.',
   },
 ];
 
@@ -60,22 +60,22 @@ export const resourceFootprintLinks: ResourceHubLink[] = [
   {
     label: 'Service catalog',
     href: '/service-catalog',
-    description: 'List apps and services your family uses.',
+    description: 'Tap the apps your family uses—about 10 minutes.',
   },
   {
     label: FOOTPRINT_REVIEW_NAV_LABEL,
     href: '/digital-footprint',
-    description: 'Exposure snapshot from your catalog.',
+    description: 'See which apps collect the most data from your list.',
   },
   {
     label: 'Scoring methodology',
     href: '/scoring-methodology',
-    description: 'How exposure scores are calculated.',
+    description: 'Optional—how scores are calculated.',
   },
   {
     label: 'Digital privacy rights',
     href: '/digital-rights',
-    description: 'Laws and rights that shape what exposure means.',
+    description: 'Helpful for Maryland families; skip if you are just starting.',
   },
 ];
 

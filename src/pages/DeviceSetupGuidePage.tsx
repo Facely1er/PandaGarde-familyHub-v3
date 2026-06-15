@@ -263,15 +263,11 @@ const DeviceSetupGuidePage: React.FC = () => {
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle size={16} />
-                    Decide on screen time limits
+                    Decide how much screen time feels right
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle size={16} />
-                    Choose monitoring level
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle size={16} />
-                    Set up device profiles and parental controls
+                    Choose which apps and settings to restrict
                   </li>
                 </ul>
               </div>
@@ -284,11 +280,11 @@ const DeviceSetupGuidePage: React.FC = () => {
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle size={16} />
-                    Explain rules to children
+                    Walk through the settings with your child
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle size={16} />
-                    Monitor usage regularly
+                    Check in monthly—adjust as they grow
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle size={16} />

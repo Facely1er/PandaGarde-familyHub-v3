@@ -15,25 +15,25 @@ interface TourStep {
 const steps: TourStep[] = [
   {
     title: 'Dashboard — start here',
-    body: "See today's mission and quick stats. This is your family's daily starting point.",
+    body: 'See today\'s mission and add family members. This is your home screen.',
     icon: LayoutDashboard,
     navTarget: hubPaths.dashboard,
   },
   {
-    title: 'Journey — progress & rewards',
-    body: 'See missions completed, badges earned, and certificates — all saved on this device.',
+    title: 'Journey — badges & certificates',
+    body: 'See missions you\'ve finished and print certificates to celebrate.',
     icon: Map,
     navTarget: hubPaths.journey,
   },
   {
-    title: 'Missions — play together',
-    body: 'Age-matched privacy missions with real-life scenarios, family talks, and optional games.',
+    title: 'Missions — pick one to do',
+    body: 'Short activities matched to your child\'s age. Tap one to start together.',
     icon: Gamepad2,
     navTarget: hubPaths.activities,
   },
   {
-    title: 'Family — add profiles',
-    body: 'Add each child with their age so missions match Little Explorers (5–8), Detectives (9–12), or Digital Citizens (13–17).',
+    title: 'Family — add your kids',
+    body: 'Enter each child\'s name and age. That\'s how we pick the right missions.',
     icon: Users,
     navTarget: hubPaths.kids,
   },

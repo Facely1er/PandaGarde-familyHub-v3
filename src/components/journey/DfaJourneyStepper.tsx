@@ -36,7 +36,7 @@ const DfaJourneyStepper: React.FC<Props> = ({
   variant = 'full',
   compact = false,
   title = 'Your footprint review',
-  subtitle = 'Footprint review uses your catalog list. Stories, guides, and Family Hub stay available without finishing this.',
+  subtitle = 'Step 1: list your apps. Step 2: see your scores. Stories and Family Hub work anytime—you do not need to finish both steps first.',
   ctaLabel,
   ctaHref,
   className = '',
