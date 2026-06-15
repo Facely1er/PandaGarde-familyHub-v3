@@ -38,7 +38,7 @@ const PrivacyLearningKitPage: React.FC = () => {
   return (
     <PageLayout
       title="Privacy Learning Kit"
-      subtitle="Story, missions, printables, and parent guides in one place."
+      subtitle="Everything in one place: stories, printables, missions, and guides. Pick a section below—Start here is the best first step."
       breadcrumbs
     >
       <main className="container mx-auto px-4 sm:px-6 py-12 max-w-5xl">

@@ -19,7 +19,7 @@ const ChildSafetyAlertsPage: React.FC = () => {
                 Safety Alerts & Notifications
               </h1>
               <p className="text-gray-600 dark:text-gray-400">
-                Catalog-based notifications and RSS safety headlines for apps you add—not live monitoring of your child&apos;s device
+                Headlines about apps you listed—not live monitoring of your child&apos;s phone. Add apps in the catalog first, then check back here for updates.
               </p>
             </div>
             <div className="flex items-center space-x-2">

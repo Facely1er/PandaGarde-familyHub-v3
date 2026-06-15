@@ -8,7 +8,7 @@ const ResourceSharingPage: React.FC = () => {
     <CommunityErrorBoundary>
       <PageLayout
         title="Community Resources"
-        subtitle="Device-local resource list demo—saved in your browser only. Not a live marketplace or part of Family Hub sync."
+        subtitle="Save helpful links and tips on this device. Tap Add a resource below to get started."
         breadcrumbs={true}
       >
         <ResourceSharing />

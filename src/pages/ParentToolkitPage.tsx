@@ -53,23 +53,24 @@ const ParentToolkitPage: React.FC = () => {
   return (
     <PageLayout
       title="Toolkit"
-      subtitle="Shortcuts to guides, plans, and activities already on PandaGarde—each card opens a real page. There are no separate PDF kits to download from this screen."
+      subtitle="Pick a card below to open a guide, plan, or printable. Each card takes you somewhere useful—start with Family privacy plan if you are not sure."
       breadcrumbs={true}
     >
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
-        {/* Introduction Section */}
         <div className="mb-8 rounded-xl border border-green-200 bg-green-50/80 p-6 dark:border-green-800 dark:bg-green-950/30">
           <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
-            How this page works
+            Recommended first step
           </h2>
           <p className="mt-2 text-gray-700 dark:text-gray-300">
-            Each card links to an existing guide, plan, activity, or download page. Use{' '}
-            <strong>View details</strong> to see what is on that page, then <strong>Go to page</strong> to open it.
-            For the full footprint review path, start from{' '}
-            <Link to="/service-catalog" className="font-semibold text-green-700 underline dark:text-green-400">
-              Service catalog
-            </Link>
-            .
+            New here? Open the{' '}
+            <Link to="/family-privacy-plan" className="font-semibold text-green-700 underline dark:text-green-400">
+              Family privacy plan
+            </Link>{' '}
+            to write down your household rules together, or{' '}
+            <Link to="/stories" className="font-semibold text-green-700 underline dark:text-green-400">
+              read a Privacy Panda story
+            </Link>{' '}
+            with your child (about 5 minutes).
           </p>
         </div>
 

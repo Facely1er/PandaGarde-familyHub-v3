@@ -161,7 +161,7 @@ const ActivityBookPage: React.FC = () => {
   return (
     <PageLayout
       title="Privacy Panda's Activity Adventures"
-      subtitle="Printables and offline ideas from the Digital Bamboo Forest story. Interactive missions and saved progress live in Family Hub—not duplicated here on the website."
+      subtitle="Printable coloring sheets and offline activities from the Privacy Panda story. For interactive missions with saved progress, open Family Hub."
       breadcrumbs={true}
     >
       <main id="main-content" className="min-h-screen" style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}>

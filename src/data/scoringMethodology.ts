@@ -5,7 +5,7 @@ export const SCORING_METHODOLOGY_VERSION = '1.1.0';
 export const scoringMethodologyIntro = {
   title: 'How PandaGarde scores exposure',
   lead:
-    'PandaGarde uses two related scoring views: a per-app Privacy Exposure Index in the Service Catalog, and household footprint review after you list services. Both are educational guides built from the catalog you choose—not live monitoring of a child’s device.',
+    'Optional reading—you do not need this to get started. If you are curious: we score each app you listed on a 0–100 scale. Higher means the app may collect more personal data. We never watch your child\'s device.',
 };
 
 export const perServiceMethodology = {

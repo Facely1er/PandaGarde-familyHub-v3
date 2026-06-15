@@ -9,10 +9,30 @@ const FamilyPrivacyGuidePage: React.FC = () => {
   return (
     <PageLayout
       title="Complete Family Privacy Guide"
-      subtitle="Everything parents need to know about teaching digital privacy to children of all ages. Includes age-specific strategies, conversation starters, and practical implementation tips."
+      subtitle="A step-by-step guide for talking about privacy with kids of any age. Pick where to start below."
       breadcrumbs={true}
     >
       <div className="family-guide-container">
+
+        <section className="family-guide-section">
+          <div className="rounded-xl border border-green-200 bg-green-50/80 p-6 dark:border-green-800 dark:bg-green-950/30 mb-8">
+            <h2 className="family-guide-h2 text-xl mb-3">Where do you want to start?</h2>
+            <p className="family-guide-p mb-4">
+              You do not need to read this whole guide today. Pick one link and come back when you have time.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Link to="/family-privacy-plan" className="inline-flex items-center gap-2 rounded-lg bg-green-700 px-4 py-2 text-sm font-semibold text-white no-underline hover:bg-green-800 dark:bg-green-600">
+                Create your family plan
+              </Link>
+              <Link to="/stories" className="inline-flex items-center gap-2 rounded-lg border border-green-700 px-4 py-2 text-sm font-semibold text-green-700 no-underline hover:bg-green-50 dark:border-green-500 dark:text-green-400">
+                Read a story first (5 min)
+              </Link>
+              <a href="#age-strategies" className="inline-flex items-center gap-2 rounded-lg border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-700 no-underline hover:bg-gray-50 dark:border-gray-600 dark:text-gray-300">
+                Jump to your child&apos;s age
+              </a>
+            </div>
+          </div>
+        </section>
           
         {/* Introduction */}
         <section className="family-guide-section">
@@ -50,7 +70,7 @@ const FamilyPrivacyGuidePage: React.FC = () => {
           </section>
 
         {/* Age-Specific Strategies */}
-        <section className="family-guide-section">
+        <section className="family-guide-section" id="age-strategies">
             <h2 className="family-guide-primary text-3xl font-bold mb-8">
               Age-Specific Teaching Strategies
             </h2>

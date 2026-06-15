@@ -42,30 +42,21 @@ const PrivacyAssessmentPage: React.FC = () => {
         <header className={`mb-6 overflow-hidden ${dfaTheme.cardLg}`}>
           <div className={`${dfaTheme.band} px-5 py-3 sm:px-6`}>
             <p className={`text-sm leading-relaxed ${dfaTheme.bodySm}`}>
-              <span className={`font-medium ${dfaTheme.title}`}>Footprint review path:</span>{' '}
-              <Link to="/service-catalog" className="font-medium text-blue-600 hover:underline dark:text-blue-400">
-                Phase 1
-              </Link>
-              {' → '}
-              <Link to="/digital-footprint" className="font-medium text-blue-600 hover:underline dark:text-blue-400">
-                Phase 2
-              </Link>
-              {' → '}
-              <span className="font-medium text-green-700 dark:text-green-400">Phase 3</span>
+              <span className={`font-medium ${dfaTheme.title}`}>Where you are:</span>{' '}
+              You listed your apps and saw your footprint scores. Now answer a few quick questions about what you learned.
             </p>
           </div>
 
           <div className="px-5 py-5 sm:px-6">
             <div className="inline-flex items-center gap-2 rounded-full bg-emerald-100 px-3 py-1 text-sm font-semibold text-emerald-900 dark:bg-emerald-900/50 dark:text-emerald-100">
               <ShieldCheck size={16} aria-hidden />
-              Phase 3 — Parent assessment
+              Quick family check-in
             </div>
             <h1 className={`mt-3 text-2xl tracking-tight sm:text-3xl ${dfaTheme.titleBold}`}>
-              Family privacy assessment
+              How is your family doing on privacy?
             </h1>
             <p className={`mt-2 max-w-3xl sm:text-base ${dfaTheme.bodySm}`}>
-              Answer the questions below from your footprint review results. Guides and stories are available after—you do not need
-              Family Hub to finish this phase.
+              Answer the questions below based on your app list and footprint scores. When you finish, we will point you to stories and guides that fit.
             </p>
             <nav className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm" aria-label="Related pages">
               <Link to="/digital-footprint" className={`inline-flex items-center gap-1.5 ${dfaTheme.link}`}>

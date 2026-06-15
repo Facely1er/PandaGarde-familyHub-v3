@@ -18,9 +18,9 @@ const DeviceSetupGuidePage: React.FC = () => {
       steps: [
         'Enable parental controls',
         'Set up screen time limits',
-        'Configure app restrictions',
+        'Turn on app restrictions',
         'Enable safe browsing',
-        'Set up location sharing'
+        'Review location sharing settings'
       ]
     },
     {
@@ -47,8 +47,8 @@ const DeviceSetupGuidePage: React.FC = () => {
         'Set up user accounts',
         'Enable parental controls',
         'Configure browser settings',
-        'Install security software',
-        'Set up monitoring tools'
+        'Install security updates',
+        'Set up family user accounts'
       ]
     }
   ];
@@ -73,8 +73,8 @@ const DeviceSetupGuidePage: React.FC = () => {
       importance: 'Medium'
     },
     {
-      title: 'Location Tracking',
-      description: 'Know where your child is when using devices',
+      title: 'Location Sharing',
+      description: 'Decide whether apps can see your child\'s location—and turn it off when not needed',
       icon: Monitor,
       importance: 'Medium'
     },
@@ -85,8 +85,8 @@ const DeviceSetupGuidePage: React.FC = () => {
       importance: 'High'
     },
     {
-      title: 'Communication Monitoring',
-      description: 'Monitor who children communicate with',
+      title: 'Privacy Settings',
+      description: 'Review what each app is allowed to access (camera, contacts, microphone)',
       icon: Shield,
       importance: 'Medium'
     }
@@ -95,17 +95,17 @@ const DeviceSetupGuidePage: React.FC = () => {
   return (
     <PageLayout
       title="Child-Friendly Device Setup"
-      subtitle="Step-by-step guide for configuring devices with appropriate controls to keep children safe while they learn and play online."
+      subtitle="Set up parental controls and privacy settings on phones, tablets, and computers. Pick your device type below to see step-by-step instructions."
       breadcrumbs={true}
     >
       <div style={{ maxWidth: '56rem', margin: '0 auto' }}>
         {/* Introduction */}
         <div className="max-w-4xl mx-auto text-center mb-16">
           <h2 className="text-3xl font-bold mb-6 text-primary">
-            Creating a Safe Digital Environment
+            Pick your device to get started
           </h2>
-          <p className="text-lg leading-relaxed mb-8 text-gray-600">
-            Proper device configuration is the foundation of digital safety. This guide will help you set up devices with appropriate controls while maintaining usability for your children.
+          <p className="text-lg leading-relaxed mb-8 text-gray-600 dark:text-gray-300">
+            Each guide walks you through the settings that matter most. Plan about 15 minutes per device.
           </p>
           
           <div className="bg-green-50 border border-green-200 rounded-xl p-6 mb-8 bg-light">

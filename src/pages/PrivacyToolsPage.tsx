@@ -18,7 +18,7 @@ const groups = [
 
     title: FOOTPRINT_REVIEW_NAV_LABEL,
 
-    description: 'List services and review exposure—the core PandaGarde review (two steps).',
+    description: 'Step 1: tap the apps your family uses. Step 2: see which ones collect the most data.',
 
     icon: ShieldCheck,
 
@@ -33,15 +33,13 @@ const groups = [
 
     title: 'Plans & follow-through',
 
-    description: 'Local goals and household plans—saved on this device.',
+    description: 'Write down your family rules and goals—saved on this device.',
 
     icon: Target,
 
     links: [
 
-      { label: 'Family privacy plan', href: '/family-privacy-plan', note: 'Household plan saved on this device.' },
-
-      { label: 'Family privacy plan', href: '/family-privacy-plan', note: 'Guided household plan.' },
+      { label: 'Family privacy plan', href: '/family-privacy-plan', note: 'Build a simple household plan together.' },
 
     ],
 
@@ -51,13 +49,13 @@ const groups = [
 
     title: 'Rights & reference',
 
-    description: 'Privacy law education and how PandaGarde scores exposure.',
+    description: 'Optional deep dives for when you want more detail—not required to get started.',
 
     icon: Scale,
 
     links: [
-      { label: 'Digital privacy rights', href: '/digital-rights' },
-      { label: 'Scoring methodology', href: '/scoring-methodology', note: 'How exposure scores are calculated.' },
+      { label: 'Digital privacy rights', href: '/digital-rights', note: 'Especially helpful for Maryland families.' },
+      { label: 'How scores are calculated', href: '/scoring-methodology', note: 'Skip this unless you are curious.' },
     ],
 
   },
@@ -66,17 +64,17 @@ const groups = [
 
     title: 'Stories & activities',
 
-    description: 'Kids’ materials on the website.',
+    description: 'Read with your kids or print something to do offline.',
 
     icon: BookOpen,
 
     links: [
 
-      { label: 'Privacy Panda story', href: '/stories/privacy-panda-and-the-digital-bamboo-forest' },
+      { label: 'Privacy Panda story', href: '/stories/privacy-panda-and-the-digital-bamboo-forest', note: 'Best first step—about 5 minutes.' },
 
-      { label: 'Activity book', href: '/activity-book' },
+      { label: 'Activity book', href: '/activity-book', note: 'Printables and coloring sheets.' },
 
-      { label: 'Guides & stories', href: '/for-families', note: 'Guides, stories, and printables.' },
+      { label: 'Guides & stories', href: '/for-families', note: 'All parent guides in one place.' },
 
     ],
 
@@ -94,7 +92,7 @@ const PrivacyToolsPage: React.FC = () => {
 
       title="Privacy tools"
 
-      subtitle="A link index for the footprint review path and related pages. It does not change app settings on its own."
+      subtitle="Tools to review your family's apps, make a plan, and read with your kids. Pick a section below—each link opens a page with its own next step."
 
       breadcrumbs={true}
 

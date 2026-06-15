@@ -84,7 +84,7 @@ const CertificatesPage: React.FC = () => {
   return (
     <PageLayout
       title="Privacy Champion Certificates"
-      subtitle="Celebrate privacy education achievements with these beautiful, printable certificates. Perfect for recognizing children's learning milestones!"
+      subtitle="Print a certificate when your child finishes a story or mission. Pick one below and print it at home."
       breadcrumbs={true}
     >
       <div className="min-h-screen" style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}>

@@ -81,7 +81,7 @@ const NewsletterPage: React.FC = () => {
   return (
     <PageLayout
       title="Newsletter"
-      subtitle="Stay updated with the latest privacy education news, new activities, and expert tips to help your family navigate the digital world safely."
+      subtitle="Privacy tips and new activities by email. Enter your address below to subscribe—unsubscribe anytime."
       breadcrumbs={true}
     >
 

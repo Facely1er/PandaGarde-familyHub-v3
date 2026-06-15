@@ -1,25 +1,36 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Play, Users, BookOpen, Download, CheckCircle, ArrowRight, Clock, Star, Shield, ShoppingBag, BarChart3, Unlock, Baby, User, GraduationCap } from 'lucide-react';
+import { Play, Users, BookOpen, CheckCircle, ArrowRight, Clock, Star, Shield, ShoppingBag, BarChart3, Unlock, Baby, User, GraduationCap } from 'lucide-react';
 import { useJourneyProgress } from '../hooks/useJourneyProgress';
 import PageLayout from '../components/layout/PageLayout';
+import { QUICK_START_LEAD, PARENT_PATH_STEPS } from '../data/pandaGardeMessaging';
 
 const QuickStartPage: React.FC = () => {
   const { progress, markStepVisited, isStepCompleted, isStepVisited } = useJourneyProgress();
   const quickActions = [
     {
-      title: 'Start with Privacy Panda',
-      description: 'Try our interactive story and activities designed for children ages 5-17',
+      title: 'Read a story together',
+      description: 'Open Privacy Panda and read one scene with your child—about 5 minutes, no setup.',
       icon: Play,
       color: 'text-blue-600',
       bgColor: 'bg-blue-50',
-      link: '/privacy-panda',
+      link: '/stories',
       time: '5 min',
-      difficulty: 'Easy'
+      difficulty: 'Easiest start'
+    },
+    {
+      title: 'List your family\'s apps',
+      description: 'Tap the apps and websites your kids use. This powers your footprint review scores.',
+      icon: ShoppingBag,
+      color: 'text-green-600',
+      bgColor: 'bg-green-50',
+      link: '/service-catalog',
+      time: '10 min',
+      difficulty: 'When you\'re ready'
     },
     {
       title: 'Open Family Hub',
-      description: 'Start age-matched privacy missions and track progress on your device',
+      description: 'Do short privacy missions together. Progress saves on this device—no account needed.',
       icon: Users,
       color: 'text-purple-600',
       bgColor: 'bg-purple-50',
@@ -28,24 +39,14 @@ const QuickStartPage: React.FC = () => {
       difficulty: 'Easy'
     },
     {
-      title: 'Download Activity Book',
-      description: 'Get printable activities and coloring sheets for offline learning',
+      title: 'Print an activity',
+      description: 'Download coloring sheets and worksheets to use offline with your child.',
       icon: BookOpen,
-      color: 'text-green-600',
-      bgColor: 'bg-green-50',
+      color: 'text-orange-600',
+      bgColor: 'bg-orange-50',
       link: '/activity-book',
       time: '1 min',
       difficulty: 'Easy'
-    },
-    {
-      title: 'Access Parent Resources',
-      description: 'Browse comprehensive guides and tools for parents and educators',
-      icon: Download,
-      color: 'text-orange-600',
-      bgColor: 'bg-orange-50',
-      link: '/for-families',
-      time: '10 min',
-      difficulty: 'Medium'
     }
   ];
 
@@ -53,25 +54,23 @@ const QuickStartPage: React.FC = () => {
     {
       age: 'Ages 5-8',
       icon: Baby,
-      description: 'Start with Privacy Panda\'s story and coloring activities',
+      description: 'Start with a Privacy Panda story and printable coloring pages.',
       steps: [
-        'Watch Privacy Panda\'s story',
-        'Complete coloring activities',
-        'Try simple privacy games',
-        'Download printable materials'
+        'Read one Privacy Panda story scene together',
+        'Print a coloring sheet for offline fun',
+        'Try a Family Hub mission when you have 10 minutes',
       ],
-      link: '/activity-book',
+      link: '/stories',
       color: 'from-purple-500 to-pink-500'
     },
     {
       age: 'Ages 9-12',
       icon: User,
-      description: 'Explore interactive activities and learn about digital footprints',
+      description: 'Stories plus simple guides about passwords and what apps share.',
       steps: [
-        'Join Privacy Explorers program',
-        'Learn about social media privacy',
-        'Practice password safety',
-        'Complete digital citizenship activities'
+        'Read a story about sharing online',
+        'Try the Privacy Explorers activities',
+        'List the apps your tween uses in the catalog',
       ],
       link: '/privacy-explorers',
       color: 'from-blue-500 to-cyan-500'
@@ -79,60 +78,31 @@ const QuickStartPage: React.FC = () => {
     {
       age: 'Ages 13-17',
       icon: GraduationCap,
-      description: 'Master advanced privacy settings and digital rights',
+      description: 'Teen handbook and privacy settings guides for older kids.',
       steps: [
-        'Access Teen Handbook',
-        'Learn about data protection',
-        'Practice privacy tools',
-        'Join digital citizenship discussions'
+        'Open the Teen Privacy Handbook',
+        'Review social media privacy settings together',
+        'Do a Family Hub mission matched to their age',
       ],
       link: '/teen-handbook',
       color: 'from-green-500 to-emerald-500'
     }
   ];
 
-  const parentQuickSteps = [
-    {
-      step: 1,
-      title: 'Join PandaGarde Platform',
-      description: 'Create your family profile and access the complete privacy education ecosystem',
-      icon: Users,
-      link: '/family-hub',
-      platform: 'PandaGarde'
-    },
-    {
-      step: 2,
-      title: 'Add services for footprint review',
-      description: 'List apps your family uses (self-reported). Enables footprint analysis, recommendations, catalog notifications, and RSS safety headlines when feeds load.',
-      icon: ShoppingBag,
-      link: '/service-catalog',
-      platform: 'PandaGarde',
-      enables: ['Footprint review', 'Privacy recommendations', 'Catalog notifications', 'RSS safety headlines'],
-      isFoundation: true
-    },
-    {
-      step: 3,
-      title: 'Start Privacy Panda Learning',
-      description: 'Begin interactive stories and activities designed for your child\'s age group',
-      icon: Play,
-      link: '/privacy-panda',
-      platform: 'Privacy Panda'
-    },
-    {
-      step: 4,
-      title: 'View your footprint review',
-      description: 'See your family\'s privacy exposure across all services and get personalized recommendations to improve your privacy',
-      icon: BarChart3,
-      link: '/digital-footprint',
-      platform: 'PandaGarde',
-      requires: 'Step 2: Add Services'
-    }
-  ];
+  const parentQuickSteps = PARENT_PATH_STEPS.map((step, index) => ({
+    step: step.step,
+    title: step.title,
+    description: step.description,
+    icon: [Play, ShoppingBag, BarChart3, Users][index] ?? Play,
+    link: step.link,
+    isFoundation: step.step === 2,
+    requires: 'requiresApps' in step && step.requiresApps ? 'Step 2: List your apps' : undefined,
+  }));
 
   return (
     <PageLayout
       title="Quick Start Guide"
-      subtitle="Get started with PandaGarde in minutes. Choose your path and begin your family's privacy education journey today."
+      subtitle={QUICK_START_LEAD}
       breadcrumbs={true}
     >
       {/* Quick Actions */}
@@ -140,10 +110,10 @@ const QuickStartPage: React.FC = () => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="section-header fade-in mb-12 text-center">
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-gray-100 mb-3">
-              Choose Your Starting Point
+              Pick one thing to do now
             </h2>
             <p className="text-lg text-slate-500 dark:text-gray-400 max-w-xl mx-auto leading-relaxed">
-              Pick the option that feels right for your family and start learning today.
+              Each card is a complete starting point. You do not need to do all four.
             </p>
           </div>
 
@@ -182,10 +152,10 @@ const QuickStartPage: React.FC = () => {
         <div className="container max-w-6xl mx-auto px-4 sm:px-6">
           <div className="section-header fade-in mb-12 text-center">
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-gray-100 mb-3">
-              Age-Appropriate Learning Paths
+              How old is your child?
             </h2>
             <p className="text-lg text-slate-500 dark:text-gray-400 max-w-xl mx-auto leading-relaxed">
-              Find the perfect starting point for your child&apos;s age and development level.
+              Tap their age group, then open the first link—we will tell you what to do next on each page.
             </p>
           </div>
 
@@ -227,10 +197,10 @@ const QuickStartPage: React.FC = () => {
         <div className="container max-w-6xl mx-auto px-4 sm:px-6">
           <div className="section-header fade-in mb-12 text-center">
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-gray-100 mb-3">
-              Your PandaGarde Journey
+              A simple path for parents
             </h2>
             <p className="text-lg text-slate-500 dark:text-gray-400 max-w-xl mx-auto leading-relaxed">
-              Follow these simple steps to protect your family in the digital age.
+              Four steps, in order—but start with step 1 if you are not sure. Each step works on its own too.
             </p>
 
             <div className="max-w-xl mx-auto mt-6 p-4 rounded-xl bg-gray-100 dark:bg-gray-200 border-2 border-gray-200 dark:border-gray-700">
@@ -415,18 +385,18 @@ const QuickStartPage: React.FC = () => {
       <section className="cta-section cta-banner py-16 sm:py-24">
         <div className="container max-w-6xl mx-auto px-4 sm:px-6">
           <div className="fade-in text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Ready to Begin?</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Pick one to start</h2>
             <p className="text-lg text-white/90 max-w-2xl mx-auto mb-8 leading-relaxed">
-              Choose your starting point and begin your family&apos;s digital privacy education journey today.
+              Read a story (5 min) or list your apps (10 min). Both are good first steps.
             </p>
             <div className="cta-buttons flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/privacy-panda" className="button primary">
+              <Link to="/stories" className="button primary">
                 <Play size={20} />
-                Start with Privacy Panda
+                Read a story
               </Link>
-              <Link to="/family-hub" className="button secondary bg-white/20 text-white border-2 border-white">
-                <Users size={20} />
-                Open Family Hub
+              <Link to="/service-catalog" className="button secondary bg-white/20 text-white border-2 border-white">
+                <ShoppingBag size={20} />
+                List your apps
               </Link>
             </div>
           </div>

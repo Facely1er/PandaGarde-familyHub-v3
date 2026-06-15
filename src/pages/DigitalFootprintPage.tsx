@@ -105,7 +105,7 @@ const DigitalFootprintPage: React.FC = () => {
   return (
     <PageLayout
       title={FOOTPRINT_REVIEW_NAV_LABEL}
-      subtitle="Review where exposure is building across the apps and services you listed. Compare Basic and Advanced scores, then continue when you are ready."
+      subtitle="See which apps from your list collect the most data. Green scores are lower risk; red scores are worth a family talk. Then pick a story or mission to discuss it together."
       breadcrumbs={true}
     >
       <DfaJourneyStepper

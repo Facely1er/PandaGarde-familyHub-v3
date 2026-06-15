@@ -136,7 +136,7 @@ const PrivacyExplorersPage: React.FC = () => {
   return (
     <PageLayout
       title="Ages 5-8"
-      subtitle="Interactive privacy challenges and games designed specifically for young learners. Learn digital safety through exciting quests and fun activities!"
+      subtitle="Fun quizzes and games for ages 9–12. Pick one activity below—each takes about 10 minutes."
       breadcrumbs={true}
     >
       {/* Progress Section */}

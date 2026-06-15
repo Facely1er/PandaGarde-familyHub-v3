@@ -75,7 +75,7 @@ const FamilyAgreementPage: React.FC = () => {
   return (
     <PageLayout
       title="Family Internet Agreement"
-      subtitle="A comprehensive, customizable agreement to establish safe internet use rules for your family. Perfect for creating a shared understanding of digital safety."
+      subtitle="Fill in the agreement together, print it, and post it where everyone can see it. Tap Start below to begin."
       breadcrumbs={true}
     >
       <div className="min-h-screen" style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}>

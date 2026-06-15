@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Users, Shield, Wrench, Check, BookOpen, Heart, Brain, Play, Baby, ArrowRight, ArrowLeft, ShoppingBag, BarChart3, Unlock, User, GraduationCap, UsersRound } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
+import { QUICK_START_LEAD, PARENT_PATH_STEPS } from '../data/pandaGardeMessaging';
 
 const OverviewPage: React.FC = () => {
   useEffect(() => {
@@ -81,107 +82,76 @@ const OverviewPage: React.FC = () => {
     }
   ];
 
-  const customerJourney = [
-    {
-      step: 1,
-      title: 'Open Family Hub',
-      description: 'Set up family members on your device and open the local-first mission workspace—no server account required',
-      icon: Users,
-      link: '/family-hub',
-      platform: 'PandaGarde'
-    },
-    {
-      step: 2,
-      title: 'Add services for footprint review',
-      description: 'List apps and services your family uses (self-reported). This unlocks footprint review, privacy recommendations, catalog-based notifications, and RSS safety headlines when feeds load.',
-      icon: ShoppingBag,
-      link: '/service-catalog',
-      platform: 'PandaGarde',
-      enables: ['Footprint review', 'Privacy recommendations', 'Catalog notifications', 'RSS safety headlines'],
-      isFoundation: true
-    },
-    {
-      step: 3,
-      title: 'Start Privacy Panda Learning',
-      description: 'Begin interactive stories and activities designed for your child\'s age group',
-      icon: Play,
-      link: '/privacy-panda',
-      platform: 'Privacy Panda'
-    },
-    {
-      step: 4,
-      title: 'View your footprint review',
-      description: 'See your family\'s privacy exposure across all services and get personalized recommendations to improve your privacy',
-      icon: BarChart3,
-      link: '/digital-footprint',
-      platform: 'PandaGarde',
-      requires: 'Step 2: Add Services'
-    }
-  ];
+  const customerJourney = PARENT_PATH_STEPS.map((step, index) => ({
+    step: step.step,
+    title: step.title,
+    description: step.description,
+    icon: [Play, ShoppingBag, BarChart3, Users][index] ?? Play,
+    link: step.link,
+    isFoundation: step.step === 2,
+    requires: 'requiresApps' in step && step.requiresApps ? 'List your apps first (step 2)' : undefined,
+  }));
 
   const products = [
+    {
+      id: 'stories',
+      title: 'Privacy Panda stories',
+      icon: BookOpen,
+      gradient: 'from-blue-500 to-cyan-500',
+      description: 'Read together with your child—about 5 minutes, no setup. The easiest place to start.',
+      features: [
+        'Interactive scenes or calm chapters for ages 5–17',
+        'Conversation starters built into each story',
+        'Works on any phone, tablet, or computer',
+        'No account or app list required',
+      ],
+      ctaText: 'Browse stories',
+      ctaLink: '/stories',
+    },
+    {
+      id: 'catalog',
+      title: 'App list & footprint review',
+      icon: ShoppingBag,
+      gradient: 'from-green-500 to-emerald-500',
+      description: 'Tap the apps your family uses, then see which ones collect the most data.',
+      features: [
+        'You choose what to add—we do not monitor devices',
+        'Simple privacy score for each app',
+        'See where your family\'s data exposure adds up',
+        'Get clear next steps for apps that score high',
+      ],
+      ctaText: 'List your apps',
+      ctaLink: '/service-catalog',
+    },
     {
       id: 'family-hub',
       title: 'Family Hub',
       icon: Users,
       gradient: 'from-purple-500 to-pink-500',
-      description: 'A local-first workspace for age-matched privacy missions, family progress, and follow-through after your digital footprint review.',
+      description: 'Short privacy missions you do together. Progress saves on this device.',
       features: [
-        '18 age-matched privacy missions (ages 5–17)',
-        'Real-life scenarios and family conversation prompts',
-        'Progress, streaks, and certificates on your device',
-        'Parent-guided practice—no child social network',
-        'Works standalone or after the website assessment'
+        '18 age-matched missions (ages 5–17)',
+        'Family talk prompts and one practical action each',
+        'No child social network',
+        'Works on its own or after stories and footprint review',
       ],
       ctaText: 'Open Family Hub',
-      ctaLink: '/family-hub'
+      ctaLink: '/family-hub',
     },
-    {
-      id: 'privacy-panda',
-      title: 'PrivacyPanda',
-      icon: Shield,
-      gradient: 'from-blue-500 to-cyan-500',
-      description: 'Interactive learning platform with gamified activities and stories for children ages 5-17.',
-      features: [
-        'Interactive stories and games',
-        'Age-appropriate learning paths',
-        'Progress tracking and rewards',
-        'Offline activities and printables',
-        'Parent dashboard and insights'
-      ],
-      ctaText: 'Try PrivacyPanda',
-      ctaLink: '/privacy-panda'
-    },
-    {
-      id: 'parent-toolkit',
-      title: 'Parent Toolkit',
-      icon: Wrench,
-      gradient: 'from-green-500 to-emerald-500',
-      description: 'Comprehensive tools and resources to help parents guide their children\'s digital journey.',
-      features: [
-        'Privacy policy templates',
-        'Device management guides',
-        'Conversation starters',
-        'Safety checklists and tools',
-        'Expert advice and support'
-      ],
-      ctaText: 'Access Toolkit',
-      ctaLink: '/parent-toolkit'
-    }
   ];
 
   return (
     <PageLayout
-      title="Overview"
-      subtitle="Everything your family needs for digital privacy. Our platform provides age-appropriate education, interactive tools, and a local-first Family Hub workspace so families can practice and follow through together."
+      title="How it works"
+      subtitle={QUICK_START_LEAD}
     >
 
       {/* Customer Journey */}
       <section className="parent-steps py-8 md:py-12">
         <div className="container px-4 sm:px-6 lg:px-8">
           <div className="section-header fade-in">
-            <h2>Your PandaGarde Journey</h2>
-            <p>Follow these simple steps to protect your family in the digital age.</p>
+            <h2>Four steps—start with whichever fits today</h2>
+            <p>Read a story, list your apps, see your scores, or practice in Family Hub. Each step tells you what to tap next.</p>
           </div>
 
           <div className="parent-steps-grid">
@@ -248,9 +218,9 @@ const OverviewPage: React.FC = () => {
       <section className="curriculum-section py-8 md:py-12" id="curriculum">
         <div className="container px-4 sm:px-6 lg:px-8">
           <div className="section-header fade-in">
-            <span className="badge">AGE-APPROPRIATE CURRICULUM</span>
-            <h2>Learning Paths for Every Family Member</h2>
-            <p>Comprehensive learning paths designed for every family member, from young children to parents.</p>
+            <span className="badge">BY AGE</span>
+            <h2>How old is your child?</h2>
+            <p>Pick their age group to see stories, printables, and missions matched to them.</p>
           </div>
 
           <div className="curriculum-grid">
@@ -285,9 +255,9 @@ const OverviewPage: React.FC = () => {
       <section className="products-section py-8 md:py-12" id="products">
         <div className="container px-4 sm:px-6 lg:px-8">
           <div className="section-header fade-in">
-            <span className="badge">OUR COMPLETE ECOSYSTEM</span>
-            <h2>Three Powerful Tools Working Together</h2>
-            <p>Everything your family needs for comprehensive digital privacy education and protection.</p>
+            <span className="badge">THREE MAIN AREAS</span>
+            <h2>Stories, app review, and practice</h2>
+            <p>Each area works on its own. You do not need to finish one before starting another.</p>
           </div>
 
           <div className="products-grid">
@@ -324,9 +294,9 @@ const OverviewPage: React.FC = () => {
       <section className="features-highlight">
         <div className="container">
           <div className="section-header fade-in">
-            <span className="badge">WHY CHOOSE PANDAGARDE</span>
-            <h2>Built for Families, by Privacy Experts</h2>
-            <p>Our platform combines modern educational design with research-based privacy protection principles.</p>
+            <span className="badge">WHY PANDAGARDE</span>
+            <h2>Built for busy parents</h2>
+            <p>Short sessions, plain language, and one clear next step on every page.</p>
           </div>
 
           <div className="features-grid">
@@ -334,16 +304,16 @@ const OverviewPage: React.FC = () => {
               <div className="feature-icon">
                 <Heart size={32} className="text-red-500" />
               </div>
-              <h3>Family-First Design</h3>
-              <p>Every feature is designed with families in mind, ensuring age-appropriate content and easy parent oversight.</p>
+              <h3>Start anywhere</h3>
+              <p>Read a story today, list apps tomorrow, open Family Hub next week. Nothing is locked behind a long signup.</p>
             </div>
 
             <div className="feature-card fade-in">
               <div className="feature-icon">
                 <Brain size={32} className="text-purple-500" />
               </div>
-              <h3>Evidence-Based Learning</h3>
-              <p>Our curriculum is built on established educational principles and current privacy research to support effective learning outcomes.</p>
+              <h3>Plain language</h3>
+              <p>No privacy-policy jargon. We explain what each app score means and give you words to use with your kids.</p>
             </div>
 
             <div className="feature-card fade-in">
@@ -361,16 +331,16 @@ const OverviewPage: React.FC = () => {
       <section className="cta-section">
         <div className="container">
           <div className="fade-in text-center">
-            <h2>Ready to Get Started?</h2>
-            <p>Choose the path that's right for your family and begin your digital privacy education journey today.</p>
+            <h2>Ready to start?</h2>
+            <p>Got 5 minutes? Read a story with your child. Got 15? List the apps your family uses.</p>
             <div className="cta-buttons">
-              <Link to="/family-hub" className="button primary">
-                <Users size={20} />
-                Open Family Hub
+              <Link to="/stories" className="button primary">
+                <BookOpen size={20} />
+                Browse stories
               </Link>
-              <Link to="/privacy-panda" className="button secondary" style={{ background: 'rgba(255,255,255,0.2)', color: 'white', border: '2px solid white' }}>
-                <Shield size={20} />
-                Try PrivacyPanda
+              <Link to="/service-catalog" className="button secondary" style={{ background: 'rgba(255,255,255,0.2)', color: 'white', border: '2px solid white' }}>
+                <ShoppingBag size={20} />
+                List your apps
               </Link>
             </div>
           </div>

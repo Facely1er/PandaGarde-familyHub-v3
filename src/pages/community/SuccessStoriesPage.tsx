@@ -11,7 +11,7 @@ const SuccessStoriesPage: React.FC = () => {
     <CommunityErrorBoundary>
       <PageLayout
         title="Success Stories"
-        subtitle="Device-local success stories demo—stories you add stay on your browser. Not a public social feed or Family Hub feature."
+        subtitle="Read how other families improved their privacy, or share your own story below."
         breadcrumbs={true}
       >
         {/* MODPA awareness callout for Maryland families */}

@@ -6,7 +6,7 @@ const ConversationApproachesPage: React.FC = () => {
   return (
     <PageLayout
       title="8 Ways to Talk About Privacy With Your Children"
-      subtitle="Effective approaches to help your children understand online privacy and stay safe. Learn how to have meaningful conversations that build trust and understanding."
+      subtitle="Pick one approach below that fits your child's age and mood. Each includes ready-to-use words you can say tonight."
       breadcrumbs={true}
     >
       <div style={{ maxWidth: '56rem', margin: '0 auto' }}>

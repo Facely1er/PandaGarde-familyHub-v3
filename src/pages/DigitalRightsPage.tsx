@@ -149,7 +149,7 @@ const DigitalRightsPage: React.FC = () => {
   return (
     <PageLayout
       title="Digital privacy rights"
-      subtitle="Privacy legislation and your rights as a digital citizen—including Maryland’s MODPA for residents and how to exercise access, correction, and opt-out requests."
+      subtitle="Privacy laws and your rights—especially helpful for Maryland families. Skip this page if you are just getting started with stories or your app list."
       breadcrumbs={true}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6">

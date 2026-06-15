@@ -148,7 +148,7 @@ const AppSelectionGuidePage: React.FC = () => {
   return (
     <PageLayout
       title="Choosing Child-Safe Apps"
-      subtitle="Comprehensive guide to selecting appropriate digital content and apps for children of all ages. Learn what to look for and what to avoid."
+      subtitle="How to pick apps and games that respect your child's privacy. Use the checklist below before downloading something new."
       breadcrumbs={true}
     >
       <div style={{ maxWidth: '56rem', margin: '0 auto' }}>

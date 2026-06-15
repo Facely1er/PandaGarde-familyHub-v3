@@ -65,7 +65,7 @@ const ageGroups = [
       {
         icon: Wrench,
         title: "Privacy Tools Workshop",
-        description: "Hands-on tutorials for setting up VPNs, password managers, encrypted messaging, and other real privacy tools that teens can use.",
+        description: "Step-by-step guides for password managers, app privacy settings, and other tools teens can set up with a parent's help.",
         link: '/privacy-tools'
       },
       {
@@ -93,7 +93,7 @@ const AgeGroupsPage: React.FC = () => {
   return (
     <PageLayout
       title="Age-Appropriate Learning Paths"
-      subtitle="Tailored content and interactions designed specifically for different developmental stages. Each age group has unique learning needs and capabilities when it comes to understanding digital privacy."
+      subtitle="How old is your child? Tap their age below to see stories, printables, and activities matched to them."
       breadcrumbs={true}
     >
 
@@ -165,8 +165,8 @@ const AgeGroupsPage: React.FC = () => {
       <section className="cta-section py-8 md:py-12">
         <div className="container px-4 sm:px-6 lg:px-8">
           <div className="cta-content">
-            <h2>Ready to Start Learning?</h2>
-            <p>Choose your age group above to begin your privacy education journey with Privacy Panda.</p>
+            <h2>Ready to start?</h2>
+            <p>Pick your child&apos;s age above, or jump straight to a story or activity book.</p>
             <div className="cta-buttons">
               <button 
                 className="button primary"

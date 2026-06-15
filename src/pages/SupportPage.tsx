@@ -69,7 +69,7 @@ const faqItems: FAQItem[] = [
     id: '7',
     question: 'Where did Safety Alerts and the privacy assessment go?',
     answer:
-      'PandaGarde now focuses on a short footprint review, stories, and Family Hub—not long forms or alert feeds on this site. Catalog-based alerts and the formal privacy assessment live on SocialCaution (app.socialcaution.com) when you need them.',
+      'Safety alerts and the formal privacy assessment are still here on PandaGarde. Open Child Safety Alerts from the menu, or finish your footprint review and use the family privacy assessment page for a quick check-in.',
     category: 'technical',
   },
   {
@@ -94,7 +94,7 @@ const supportOptions: SupportOption[] = [
   {
     id: 'faq',
     title: 'FAQ Section',
-    description: 'Jump to answers about Family Hub, local storage, and troubleshooting.',
+    description: 'Jump to answers about Family Hub, saving progress on your device, and common fixes.',
     icon: HelpCircle,
     responseTime: 'Immediate',
     availability: '24/7',
@@ -195,7 +195,7 @@ const SupportPage: React.FC = () => {
   return (
     <PageLayout
       title="Support"
-      subtitle="Get help using PandaGarde: Family Hub missions, local storage, troubleshooting, and how to reach our team."
+      subtitle="Something not working? Contact us below, or scroll to common questions. We usually reply within 24–48 hours."
       breadcrumbs
     >
       <section className="py-8 sm:py-12">

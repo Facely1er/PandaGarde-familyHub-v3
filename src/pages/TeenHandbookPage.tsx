@@ -229,7 +229,7 @@ const TeenHandbookPage: React.FC = () => {
   return (
     <PageLayout
       title="Ages 13-17"
-      subtitle="Comprehensive privacy guide for teenagers covering social media, data rights, online reputation, and advanced security concepts. Take control of your digital life!"
+      subtitle="Practical privacy tips for teens—social media settings, passwords, and online reputation. Open the section that matches what you want to fix today."
       breadcrumbs={true}
     >
       <div style={{ maxWidth: '75rem', margin: '0 auto' }}>

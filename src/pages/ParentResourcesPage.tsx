@@ -13,11 +13,26 @@ const ParentResourcesPage: React.FC = () => {
   return (
     <PageLayout
       title="Parent & Educator Resources"
-      subtitle="Comprehensive tools, guides, and materials to help adults facilitate privacy education for children."
+      subtitle="Guides, printables, and talk prompts for parents. Pick a tab below—or start with the Complete Family Privacy Guide."
       breadcrumbs={true}
     >
       <section className="resources-section">
         <div className="container">
+          <div className="mb-8 rounded-xl border border-green-200 bg-green-50/80 p-6 dark:border-green-800 dark:bg-green-950/30">
+            <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">Not sure where to start?</h2>
+            <p className="text-gray-700 dark:text-gray-300 mb-4">
+              Open the Complete Family Privacy Guide for a walkthrough, or read a Privacy Panda story with your child (about 5 minutes).
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Link to="/guides/family-privacy" className="button button-primary inline-flex items-center gap-2">
+                <BookOpen size={16} />
+                Open family privacy guide
+              </Link>
+              <Link to="/stories" className="button button-secondary inline-flex items-center gap-2">
+                Read a story
+              </Link>
+            </div>
+          </div>
           <div className="resources-tabs">
             <div
               className={`resource-tab ${activeTab === 'comprehensive-guides' ? 'active' : ''}`}
