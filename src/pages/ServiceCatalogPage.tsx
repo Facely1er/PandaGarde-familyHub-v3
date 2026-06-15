@@ -199,22 +199,22 @@ const ServiceCatalogPage: React.FC = () => {
                 <Heart className="h-5 w-5 text-green-600 dark:text-green-400" /> Start with these — popular with families
               </h3>
               <p className="mb-3 text-sm text-gray-600 dark:text-gray-400">Tap <strong>Add</strong> on any app your family uses. You can add more from the full list below.</p>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 {suggestedServices.map((service) => {
                   const isAdded = familyServiceIds.includes(service.id);
                   const isAdding = addingId === service.id;
                   return (
-                    <div key={service.id} className={`flex items-center gap-3 rounded-xl border-2 px-4 py-3 transition-all ${isAdded ? 'border-green-300 bg-green-50 dark:border-green-700 dark:bg-green-950/40' : 'border-gray-200 bg-white hover:border-green-400 dark:border-gray-700 dark:bg-gray-100 dark:hover:border-green-500'}`}>
+                    <div key={service.id} className={`flex items-center gap-3 rounded-xl border-2 px-4 py-3 transition-all sm:w-auto ${isAdded ? 'border-green-300 bg-green-50 dark:border-green-700 dark:bg-green-950/40' : 'border-gray-200 bg-white hover:border-green-400 dark:border-gray-700 dark:bg-gray-100 dark:hover:border-green-500'}`}>
                       {hasServiceLogo(service.id) ? (
                         <img src={getServiceLogoUrlWithBrandColor(service.id, 32)} alt={`${service.name} logo`} className="h-8 w-8 rounded" />
                       ) : (
                         <div className="flex h-8 w-8 items-center justify-center rounded bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-200"><Plus size={16} /></div>
                       )}
-                      <div>
-                        <div className="text-sm font-semibold text-gray-900 dark:text-white">{service.name}</div>
+                      <div className="min-w-0 flex-1">
+                        <div className="text-sm font-semibold text-gray-900 dark:text-white truncate">{service.name}</div>
                         <div className="text-xs text-gray-500 dark:text-gray-400">{service.category}</div>
                       </div>
-                      <button onClick={() => handleSuggestedAddRemove(service.id)} disabled={isAdding} className={`rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${isAdded ? 'bg-green-100 text-green-700 hover:bg-green-200 dark:bg-green-800 dark:text-green-200' : 'bg-green-600 text-white hover:bg-green-700'} disabled:cursor-not-allowed disabled:opacity-60`}>
+                      <button onClick={() => handleSuggestedAddRemove(service.id)} disabled={isAdding} className={`shrink-0 rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${isAdded ? 'bg-green-100 text-green-700 hover:bg-green-200 dark:bg-green-800 dark:text-green-200' : 'bg-green-600 text-white hover:bg-green-700'} disabled:cursor-not-allowed disabled:opacity-60`}>
                         {isAdding ? 'Updating…' : isAdded ? 'Remove' : 'Add'}
                       </button>
                     </div>
