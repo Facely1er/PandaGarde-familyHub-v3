@@ -47,6 +47,24 @@ export async function submitNetlifyForm(
   }
 }
 
+export const NEWSLETTER_FORM_NAME = 'newsletter';
+
+export async function submitNewsletterNetlifyForm(fields: {
+  email: string;
+  purpose?: string;
+  botField?: string;
+}): Promise<void> {
+  if (fields.botField?.trim()) {
+    logger.debug('Newsletter form honeypot triggered — skipping submission');
+    return;
+  }
+
+  await submitNetlifyForm(NEWSLETTER_FORM_NAME, {
+    email: fields.email.trim(),
+    purpose: fields.purpose ?? 'newsletter',
+  });
+}
+
 export async function submitContactNetlifyForm(fields: {
   name: string;
   email: string;

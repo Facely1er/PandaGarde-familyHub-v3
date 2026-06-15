@@ -4,7 +4,7 @@ import { Mail, CheckCircle, Users, Calendar, BookOpen, Shield } from 'lucide-rea
 import PageLayout from '../components/layout/PageLayout';
 import { useToast } from '../contexts/ToastContext';
 import { newsletterArchive, newsletterIssuePath } from '../data/newsletters';
-import { newsletterService } from '../lib/database';
+import { submitNewsletterNetlifyForm } from '../lib/netlifyForms';
 import { logger } from '../lib/logger';
 
 const NewsletterPage: React.FC = () => {
@@ -29,23 +29,13 @@ const NewsletterPage: React.FC = () => {
     setIsSubscribing(true);
 
     try {
-      const result = await newsletterService.subscribe(email);
-      
-      if (result) {
-        setIsSubscribed(true);
-        showSuccess('Successfully Subscribed!', 'Thank you for joining our privacy education newsletter.');
-        setEmail('');
-      } else {
-        showError('Subscription Failed', 'There was an error subscribing. Please try again.');
-      }
+      await submitNewsletterNetlifyForm({ email, purpose: 'newsletter' });
+      setIsSubscribed(true);
+      showSuccess('Successfully Subscribed!', 'Thank you for joining our privacy education newsletter.');
+      setEmail('');
     } catch (error) {
       logger.error('Newsletter subscription error:', error);
-      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-      if (errorMessage.includes('Invalid email')) {
-        showError('Invalid Email', 'Please enter a valid email address.');
-      } else {
-        showError('Subscription Failed', 'There was an error subscribing. Please try again.');
-      }
+      showError('Subscription Failed', 'There was an error subscribing. Please try again.');
     } finally {
       setIsSubscribing(false);
     }

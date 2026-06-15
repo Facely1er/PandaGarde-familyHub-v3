@@ -49,6 +49,11 @@
       })();
     </script>
     <!-- Netlify Forms: static markup so Netlify detects fields at build (SPA submits via fetch) -->
+    <form name="newsletter" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+      <input type="email" name="email" />
+      <input type="text" name="purpose" />
+      <input type="text" name="bot-field" />
+    </form>
     <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
       <input type="text" name="name" />
       <input type="email" name="email" />

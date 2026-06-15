@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Mail, CheckCircle } from 'lucide-react';
 import { useToast } from '../hooks/useToast';
 import { logger } from '../lib/logger';
+import { submitNewsletterNetlifyForm } from '../lib/netlifyForms';
 import type { EmailSubscription } from '../types/emailSubscription';
 
 interface EmailCaptureInlineProps {
@@ -58,6 +59,14 @@ const EmailCaptureInline: React.FC<EmailCaptureInlineProps> = ({
           }
         });
         localStorage.setItem('pandagarde_email_subscriptions', JSON.stringify(subscriptions));
+      }
+
+      // Submit to Netlify Forms so signups are captured server-side
+      try {
+        await submitNewsletterNetlifyForm({ email, purpose });
+      } catch (netlifyError) {
+        logger.error('Netlify newsletter form error:', netlifyError);
+        // Don't block UX — localStorage save already succeeded
       }
 
       if (onSubmit) {
