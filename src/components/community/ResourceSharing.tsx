@@ -185,10 +185,10 @@ const ResourceSharing: React.FC<ResourceSharingProps> = ({ compact = false }) =>
           <div className="flex items-center justify-between mb-4">
             <div>
               <h2 className="text-3xl font-bold mb-2 text-primary">
-                Community Resources
+                Saved links and tips
               </h2>
               <p className="text-lg text-gray-600 dark:text-gray-300">
-                Device-local demo list—resources you save stay in this browser only (not synced or verified by PandaGarde).
+                Tap Add a resource to save a helpful link on this device. Browse below or search by topic.
               </p>
             </div>
             <button
@@ -196,7 +196,7 @@ const ResourceSharing: React.FC<ResourceSharingProps> = ({ compact = false }) =>
               className="px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg font-semibold hover:from-green-600 hover:to-green-700 transition-all flex items-center gap-2"
             >
               <Plus size={20} />
-              Share Resource
+              Add a resource
             </button>
           </div>
 
@@ -252,12 +252,13 @@ const ResourceSharing: React.FC<ResourceSharingProps> = ({ compact = false }) =>
         {filteredResources.length === 0 ? (
           <div className="text-center py-12">
             <BookOpen size={48} className="mx-auto text-gray-300 mb-4" />
-            <p className="text-gray-500 mb-4">No resources found. Be the first to share a resource!</p>
+            <p className="text-gray-500 mb-2">Nothing saved yet.</p>
+            <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm">Tap below to add the first link—a guide, article, or tool your family found useful.</p>
             <button
               onClick={() => setShowForm(true)}
               className="px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition-colors"
             >
-              Share Resource
+              Add a resource
             </button>
           </div>
         ) : (
@@ -461,7 +462,7 @@ const ResourceSubmissionForm: React.FC<ResourceSubmissionFormProps> = ({ onSubmi
             ✕
           </button>
           <h2 id="resource-submit-title" className="text-2xl font-bold mb-4 text-primary">
-            Share a Resource
+            Add a resource
           </h2>
 
           <div className="bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-700 rounded-lg p-4 mb-6">
@@ -482,7 +483,7 @@ const ResourceSubmissionForm: React.FC<ResourceSubmissionFormProps> = ({ onSubmi
                 onChange={(e) => setTitle(e.target.value)}
                 maxLength={200}
                 className={`w-full px-3 py-2 border rounded-md bg-white dark:bg-gray-200 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 ${errors.title ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'}`}
-                placeholder="Name of the resource"
+                placeholder="e.g. Common Sense Media app review"
               />
               {errors.title && <p className="text-red-500 text-sm mt-1">{errors.title}</p>}
             </div>
@@ -534,7 +535,7 @@ const ResourceSubmissionForm: React.FC<ResourceSubmissionFormProps> = ({ onSubmi
                 maxLength={500}
                 rows={4}
                 className={`w-full px-3 py-2 border rounded-md bg-white dark:bg-gray-200 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 ${errors.description ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'}`}
-                placeholder="Brief description of the resource and why it's useful for privacy education"
+                placeholder="Why is this helpful for your family? (one or two sentences)"
               />
               {errors.description && <p className="text-red-500 text-sm mt-1">{errors.description}</p>}
               <p className="text-xs text-gray-500 mt-1">{description.length}/500 characters</p>
@@ -559,7 +560,7 @@ const ResourceSubmissionForm: React.FC<ResourceSubmissionFormProps> = ({ onSubmi
                 type="submit"
                 className="flex-1 bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-green-600 hover:to-green-700 transition-all"
               >
-                Submit Resource
+                Save resource
               </button>
               <button
                 type="button"

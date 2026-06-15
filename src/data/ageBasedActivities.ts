@@ -51,7 +51,7 @@ export const ageBasedActivities: AgeGroup[] = [
     ageRange: '5-8',
     label: 'Little Explorers',
     emoji: '🐼',
-    description: 'First fun steps into online safety — keeping secrets and making safe choices',
+    description: 'Simple rules about secrets, strangers, and asking a grown-up first',
     activities: [
       {
         id: 'pack-digital-backpack',
@@ -223,7 +223,7 @@ export const ageBasedActivities: AgeGroup[] = [
     ageRange: '9-12',
     label: 'Privacy Detectives',
     emoji: '🕵️',
-    description: 'Hands-on investigations into social media, gaming apps, and real online threats',
+    description: 'Spot scams, check app settings, and see what apps learn about you over time',
     activities: [
       {
         id: 'digital-footprint-trail',
@@ -395,7 +395,7 @@ export const ageBasedActivities: AgeGroup[] = [
     ageRange: '13-17',
     label: 'Digital Citizens',
     emoji: '🌐',
-    description: 'Real-world privacy skills for social media, future careers, and digital rights',
+    description: 'Passwords, social media, and your rights—skills teens use in real life',
     activities: [
       {
         id: 'password-fortress-builder',
@@ -405,11 +405,11 @@ export const ageBasedActivities: AgeGroup[] = [
           'Build a complete personal security system: passphrases, a password manager strategy, and two-factor authentication on key accounts.',
         realLifeScenario:
           'You have 25 different online accounts. One gets hacked and you realise you used the same password everywhere. Fix this now.',
-        learningObjective: 'Help teens create a realistic account security plan they will actually keep using.',
+        learningObjective: 'Help teens build a security plan they will actually keep using.',
         keyLearnings: [
-          'Use a password manager (e.g. Bitwarden) — it is free and secure',
-          'Enable 2FA (two-factor authentication) on email, banking, and social accounts',
-          'Your email account is the master key — protect it most carefully',
+          'A password manager stores strong unique passwords for every account',
+          'Turn on two-factor authentication (2FA) on email and social accounts',
+          'Your email account unlocks everything else—protect it most carefully',
         ],
         discussionPrompts: [
           'Which account would cause the most damage if it were compromised first?',
@@ -430,14 +430,14 @@ export const ageBasedActivities: AgeGroup[] = [
         name: 'Online Reputation Audit',
         icon: '🔎',
         description:
-          'Simulate what a college admissions officer or future employer finds when they search your name. Learn to manage your digital reputation.',
+          'See what shows up when someone searches your name online—and decide what you want to change before a job or college application.',
         realLifeScenario:
-          'You are applying for a summer job at a local café. The manager Googles your name before the interview. What do they find?',
-        learningObjective: 'Show teens how digital reputation affects opportunities long after a post is shared.',
+          'You are applying for a summer job. The manager searches your name before the interview. What do they find?',
+        learningObjective: 'Help teens understand that old posts can affect future opportunities.',
         keyLearnings: [
-          'Google yourself regularly to know what is publicly visible',
-          'Old posts and tagged photos can surface years later',
-          'A LinkedIn profile with good content can outrank embarrassing old posts',
+          'Search your name every few months so you know what is public',
+          'Old posts and tagged photos can still appear years later',
+          'Adding positive content (school projects, volunteering) can balance what people see',
         ],
         discussionPrompts: [
           'What parts of your current online footprint would you be proud to have a future employer see?',
@@ -458,14 +458,14 @@ export const ageBasedActivities: AgeGroup[] = [
         name: 'Data Broker Discovery',
         icon: '📊',
         description:
-          'Discover what data broker websites have gathered about your family, and walk through the opt-out process to reclaim your information.',
+          'Find out what data-broker websites may list about your family—and how to request removal.',
         realLifeScenario:
-          'You find a website listing your home address, family members, and estimated income — all publicly searchable. How did they get it?',
-        learningObjective: 'Reveal how public records and commercial data create detailed family profiles online.',
+          'You find a website listing your home address and family members—searchable by anyone. How did it get there?',
+        learningObjective: 'Show how public records and purchases can create detailed online profiles.',
         keyLearnings: [
-          'Data brokers collect information from public records, social media, and purchases',
-          'Most brokers have an opt-out page — it takes time but is effective',
-          'Services like DeleteMe automate removal requests for a subscription fee',
+          'Data brokers collect info from public records, social media, and purchases',
+          'Most broker sites have an opt-out page—it takes time but works',
+          'Paid removal services exist if you want help with many sites at once',
         ],
         discussionPrompts: [
           'Which personal details feel most surprising or invasive when listed by a broker?',
@@ -485,14 +485,14 @@ export const ageBasedActivities: AgeGroup[] = [
         name: 'Privacy Rights Challenge',
         icon: '⚖️',
         description:
-          'Test your knowledge of COPPA, GDPR, and the “right to be forgotten”. Understand what schools and companies can and cannot do with your data.',
+          'Learn what privacy laws mean for teens—when schools and apps need permission before sharing student data.',
         realLifeScenario:
-          'Your school wants to share student assessment data with a third-party tutoring app. Do they need your parents’ permission first?',
-        learningObjective: 'Help teens connect privacy laws to their real rights at school, online, and in everyday apps.',
+          'Your school wants to share student assessment data with a tutoring app. Do they need your parents\' permission first?',
+        learningObjective: 'Connect privacy laws to everyday school and app situations.',
         keyLearnings: [
-          'COPPA (USA) and GDPR (Europe) give you rights over how your data is used',
-          'You can request that a company delete your personal data in many countries',
-          'Schools are covered by FERPA in the US — parents can inspect all education records',
+          'US and EU laws give families rights over how children\'s data is used',
+          'In many places you can ask a company to delete your personal data',
+          'US schools follow FERPA—parents can review education records on request',
         ],
         discussionPrompts: [
           'Which privacy right would you use first if a company collected too much about you?',

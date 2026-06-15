@@ -254,11 +254,10 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
     <div className="max-w-6xl mx-auto px-4 sm:px-6">
       <div className="max-w-3xl mx-auto text-left bg-white dark:bg-gray-200 rounded-xl p-6 sm:p-8 shadow-md mt-8">
         <h2 className="text-2xl font-bold text-green-800 dark:text-green-300 mb-4">
-          What is the Privacy Tips Forum?
+          Share tips and read what others saved
         </h2>
         <p className="text-base text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-          A device-local demo forum: pseudonymous posts are stored in your browser only. Use it to practice
-          discussion prompts—not as a live social network or part of Family Hub.
+          Save privacy tips on this device. Tap <strong>New Topic</strong> below to post one, or browse what is already here.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
@@ -266,30 +265,27 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
             <div className={featureIconClass}>
               <MessageCircle size={24} className="text-white" aria-hidden />
             </div>
-            <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">Share Tips & Strategies</h3>
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">Post a tip</h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-              Exchange practical advice on teaching privacy concepts, managing screen time, and protecting your
-              family&apos;s digital footprint.
+              Share what worked for your family—conversation openers, app settings, or screen-time rules.
             </p>
           </div>
           <div className="p-4">
             <div className={featureIconClass}>
               <Users size={24} className="text-white" aria-hidden />
             </div>
-            <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">Ask Questions</h3>
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">Ask a question</h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-              Get answers from experienced parents and educators about age-appropriate privacy education, app
-              safety, and digital citizenship.
+              Not sure how to talk about an app or age group? Start a topic and note what you tried.
             </p>
           </div>
           <div className="p-4">
             <div className={featureIconClass}>
               <Shield size={24} className="text-white" aria-hidden />
             </div>
-            <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">Privacy First</h3>
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">Stays on this device</h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-              All data is stored locally on your device. No backend required. Use pseudonymous usernames.
-              Completely anonymous and secure.
+              Posts save in your browser only—not a public social network. Pick a nickname; no real name required.
             </p>
           </div>
         </div>
@@ -311,15 +307,14 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
         {!currentUser && (
           <div className="mt-8 p-6 rounded-lg bg-gradient-to-r from-green-700 to-green-600 text-white text-center">
             <p className="text-base mb-4 opacity-95">
-              <strong>Ready to join the conversation?</strong> Browse topics below or sign up to start sharing
-              your own tips and questions.
+              <strong>Ready to post?</strong> Pick a nickname below, then tap New Topic to share a tip or question.
             </p>
             <button
               type="button"
               onClick={() => setShowUserForm(true)}
               className="px-8 py-3 bg-white text-green-800 rounded-lg text-base font-semibold hover:opacity-90 transition-opacity"
             >
-              Join Forum
+              Choose a nickname
             </button>
           </div>
         )}
@@ -347,7 +342,7 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
                     Welcome, {currentUser?.displayName || currentUser?.username || 'User'}!
                   </p>
                   <p className="text-sm leading-relaxed text-green-800 dark:text-green-200">
-                    <strong>Privacy First:</strong> Your username is pseudonymous. All data is stored locally on your device. No backend required, completely anonymous.
+                    Posts stay on this device. Your nickname is not your real name—tap New Topic when you are ready to share.
                   </p>
                 </div>
               </div>
@@ -362,7 +357,7 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
                   Community Discussions
                 </h2>
                 <p className="text-base text-gray-600 dark:text-gray-300">
-                  Join conversations and share your privacy tips
+                  Browse tips below, or tap New Topic to share your own.
                 </p>
               </div>
               {currentUser ? (
@@ -420,13 +415,14 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
         {filteredTopics.length === 0 ? (
           <div className="text-center py-12">
             <MessageCircle size={48} className="mx-auto text-gray-300 mb-4" />
-            <p className="text-gray-500 mb-4">No topics found. Start a new discussion!</p>
+            <p className="text-gray-500 mb-2">No topics yet.</p>
+            <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm">Be the first—tap below to start a discussion.</p>
             {currentUser ? (
               <button
                 onClick={() => setShowTopicForm(true)}
                 className="px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition-colors"
               >
-                Create First Topic
+                Create first topic
               </button>
             ) : (
               <button
@@ -914,7 +910,7 @@ const TopicCreationForm: React.FC<TopicCreationFormProps> = ({ onSubmit, onCance
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-200 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
-                placeholder="What's your topic about?"
+                placeholder="What's your tip or question?"
               />
             </div>
             <div>
@@ -947,7 +943,7 @@ const TopicCreationForm: React.FC<TopicCreationFormProps> = ({ onSubmit, onCance
                 onChange={(e) => setDescription(e.target.value)}
                 rows={4}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-200 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
-                placeholder="Add more details about your topic..."
+                placeholder="A few sentences about what worked for your family…"
               />
             </div>
             <div className="flex gap-3 pt-4">

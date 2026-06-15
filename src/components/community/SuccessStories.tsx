@@ -153,7 +153,7 @@ const SuccessStories: React.FC<SuccessStoriesProps> = ({ compact = false }) => {
             <span className="badge">COMMUNITY</span>
             <p className="text-2xl font-bold text-primary">Success Stories</p>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Real-world examples of families teaching privacy to their children. Share your anonymous success story and inspire others.
+              Read how other families handled privacy wins—or share your own story below. Everything stays on this device.
             </p>
           </div>
         </div>
@@ -169,7 +169,7 @@ const SuccessStories: React.FC<SuccessStoriesProps> = ({ compact = false }) => {
                 Success Stories
               </h2>
               <p className="text-lg text-gray-600">
-                Real-world examples of families teaching privacy to their children
+                Tap Share Your Story below, or browse what others saved on this device.
               </p>
             </div>
             <button
@@ -184,7 +184,7 @@ const SuccessStories: React.FC<SuccessStoriesProps> = ({ compact = false }) => {
           {/* Privacy Notice */}
           <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6 fade-in">
             <p className="text-sm text-green-800">
-              <strong>Privacy First:</strong> All stories are completely anonymous. No personal information is collected or displayed. All data is stored locally on your device.
+              <strong>Private by design:</strong> Stories are anonymous and saved only on this device—no account or public feed.
             </p>
           </div>
         </div>
@@ -232,7 +232,8 @@ const SuccessStories: React.FC<SuccessStoriesProps> = ({ compact = false }) => {
         {filteredStories.length === 0 ? (
           <div className="text-center py-12">
             <Heart size={48} className="mx-auto text-gray-300 mb-4" />
-            <p className="text-gray-500 mb-4">No stories found. Be the first to share your success story!</p>
+            <p className="text-gray-500 mb-2">No stories yet.</p>
+            <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm">Tap below to share what worked for your family—no names or personal details needed.</p>
             <button
               onClick={() => setShowForm(true)}
               className="px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition-colors"
@@ -458,7 +459,7 @@ const StorySubmissionForm: React.FC<StorySubmissionFormProps> = ({ onSubmit, onC
                 maxLength={2000}
                 rows={8}
                 className={`w-full px-3 py-2 border rounded-md bg-white dark:bg-gray-200 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 ${errors['story'] ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'}`}
-                placeholder="Share your success story about teaching privacy to your children. Remember: no personal information, names, or identifying details."
+                placeholder="What happened? (no names or addresses)"
               />
               {errors['story'] && <p className="text-red-500 text-sm mt-1">{errors['story']}</p>}
               <p className="text-xs text-gray-500 mt-1">{story.length}/2000 characters (minimum 50)</p>

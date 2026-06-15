@@ -70,9 +70,10 @@ const FamilyPrivacyGuidePage: React.FC = () => {
 
         {/* Age-Specific Strategies */}
         <section className="family-guide-section" id="age-strategies">
-            <h2 className="family-guide-primary text-3xl font-bold mb-8">
-              Age-Specific Teaching Strategies
+            <h2 className="family-guide-primary text-3xl font-bold mb-2">
+              Pick your child&apos;s age
             </h2>
+            <p className="family-guide-p mb-8 text-sm">Tap a card that matches your child, then try the activity or story linked at the bottom of this page.</p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Ages 5-8 */}
@@ -83,18 +84,18 @@ const FamilyPrivacyGuidePage: React.FC = () => {
                   </div>
                   <h3 className="text-xl font-bold family-guide-primary">Ages 5-8</h3>
                 </div>
-                <h4 className="font-semibold mb-3 family-guide-primary">Basic Concepts</h4>
+                <h4 className="font-semibold mb-3 family-guide-primary">What to teach</h4>
                 <ul className="space-y-2 text-sm family-guide-muted">
-                  <li>• Personal information is like a secret - only share with trusted adults</li>
-                  <li>• The internet is like a big playground - stay where adults can see you</li>
-                  <li>• If something online makes you feel uncomfortable, tell an adult</li>
-                  <li>• Never share your name, address, or school with strangers</li>
+                  <li>• Some things are private—like your address—and only trusted adults should know them</li>
+                  <li>• The internet has strangers, just like a busy playground—stay where a grown-up can help</li>
+                  <li>• If something online feels weird or scary, tell a parent right away</li>
+                  <li>• Never give your full name, address, or school to someone you only know online</li>
                 </ul>
-                <h4 className="font-semibold mb-3 mt-4 family-guide-primary">Activities</h4>
+                <h4 className="font-semibold mb-3 mt-4 family-guide-primary">Try this next</h4>
                 <ul className="space-y-2 text-sm family-guide-muted">
-                  <li>• Privacy Panda coloring activities</li>
-                  <li>• "Safe or Unsafe" sorting games</li>
-                  <li>• Role-playing scenarios</li>
+                  <li>• <Link to="/stories" className="text-green-700 underline dark:text-green-400">Read a Privacy Panda story</Link> (5 min)</li>
+                  <li>• Print a coloring sheet from the activity book</li>
+                  <li>• Open Family Hub and do one mission together</li>
                 </ul>
               </div>
 
@@ -106,18 +107,18 @@ const FamilyPrivacyGuidePage: React.FC = () => {
                   </div>
                   <h3 className="text-xl font-bold family-guide-primary">Ages 9-12</h3>
                 </div>
-                <h4 className="font-semibold mb-3 family-guide-primary">Intermediate Concepts</h4>
+                <h4 className="font-semibold mb-3 family-guide-primary">What to teach</h4>
                 <ul className="space-y-2 text-sm family-guide-muted">
-                  <li>• Understanding digital footprints and permanence</li>
-                  <li>• Password security and why it matters</li>
-                  <li>• Recognizing phishing and suspicious content</li>
-                  <li>• Privacy settings and how to use them</li>
+                  <li>• Posts and photos can stick around—even after you delete them</li>
+                  <li>• Strong passwords and not reusing them keeps accounts safer</li>
+                  <li>• Messages that rush you (“Click now!”) are often scams</li>
+                  <li>• App permissions (camera, location) can be turned off in settings</li>
                 </ul>
-                <h4 className="font-semibold mb-3 mt-4 family-guide-primary">Activities</h4>
+                <h4 className="font-semibold mb-3 mt-4 family-guide-primary">Try this next</h4>
                 <ul className="space-y-2 text-sm family-guide-muted">
-                  <li>• Password strength challenges</li>
-                  <li>• Digital footprint mapping</li>
-                  <li>• Privacy settings exploration</li>
+                  <li>• Review privacy settings on one app together</li>
+                  <li>• <Link to="/privacy-explorers" className="text-green-700 underline dark:text-green-400">Try Privacy Explorers activities</Link></li>
+                  <li>• List the apps your tween uses in the app catalog</li>
                 </ul>
               </div>
 
@@ -129,18 +130,18 @@ const FamilyPrivacyGuidePage: React.FC = () => {
                   </div>
                   <h3 className="text-xl font-bold family-guide-primary">Ages 13-17</h3>
                 </div>
-                <h4 className="font-semibold mb-3 family-guide-primary">Advanced Concepts</h4>
+                <h4 className="font-semibold mb-3 family-guide-primary">What to teach</h4>
                 <ul className="space-y-2 text-sm family-guide-muted">
-                  <li>• Data privacy and how companies collect information</li>
-                  <li>• Social media privacy and reputation management</li>
-                  <li>• Cybersecurity threats and protection strategies</li>
-                  <li>• Digital rights and responsibilities</li>
+                  <li>• What they post today can show up in searches years from now</li>
+                  <li>• Apps collect more data than most people realise—settings matter</li>
+                  <li>• They can ask companies to delete or stop selling their data (varies by state)</li>
+                  <li>• Two-factor authentication and a password manager are worth setting up</li>
                 </ul>
-                <h4 className="font-semibold mb-3 mt-4 family-guide-primary">Activities</h4>
+                <h4 className="font-semibold mb-3 mt-4 family-guide-primary">Try this next</h4>
                 <ul className="space-y-2 text-sm family-guide-muted">
-                  <li>• Privacy policy analysis</li>
-                  <li>• Social media audit projects</li>
-                  <li>• Cybersecurity simulations</li>
+                  <li>• <Link to="/teen-handbook" className="text-green-700 underline dark:text-green-400">Open the Teen Privacy Handbook</Link></li>
+                  <li>• Google their name together and talk about what is public</li>
+                  <li>• Do a Family Hub mission matched to their age</li>
                 </ul>
               </div>
 
@@ -150,20 +151,20 @@ const FamilyPrivacyGuidePage: React.FC = () => {
                   <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
                     <Heart size={24} className="text-yellow-600" />
                   </div>
-                  <h3 className="text-xl font-bold family-guide-primary">All Ages</h3>
+                  <h3 className="text-xl font-bold family-guide-primary">All ages</h3>
                 </div>
-                <h4 className="font-semibold mb-3 family-guide-primary">Universal Principles</h4>
+                <h4 className="font-semibold mb-3 family-guide-primary">House rules that work</h4>
                 <ul className="space-y-2 text-sm family-guide-muted">
-                  <li>• Think before you share</li>
-                  <li>• Treat others online with respect</li>
-                  <li>• Ask for help when unsure</li>
-                  <li>• Keep personal information private</li>
+                  <li>• Pause before you share—would you say this out loud at the dinner table?</li>
+                  <li>• Be kind online, the same as in person</li>
+                  <li>• Ask a parent when you are not sure</li>
+                  <li>• Keep passwords and private details in the family only</li>
                 </ul>
-                <h4 className="font-semibold mb-3 mt-4 family-guide-primary">Family Activities</h4>
+                <h4 className="font-semibold mb-3 mt-4 family-guide-primary">Try this next</h4>
                 <ul className="space-y-2 text-sm family-guide-muted">
-                  <li>• Family internet agreement</li>
-                  <li>• Regular privacy check-ins</li>
-                  <li>• Device-free time together</li>
+                  <li>• <Link to="/family-privacy-plan" className="text-green-700 underline dark:text-green-400">Create a family privacy plan</Link></li>
+                  <li>• Print a <Link to="/downloads/family-agreement" className="text-green-700 underline dark:text-green-400">family agreement</Link> and sign it together</li>
+                  <li>• Pick one night a month for a 10-minute privacy check-in</li>
                 </ul>
               </div>
             </div>
@@ -171,9 +172,10 @@ const FamilyPrivacyGuidePage: React.FC = () => {
 
           {/* Conversation Starters */}
           <section className="mb-16">
-            <h2 className="text-3xl font-bold mb-8 family-guide-primary">
-              Conversation Starters by Topic
+            <h2 className="text-3xl font-bold mb-2 family-guide-primary">
+              Words you can use tonight
             </h2>
+            <p className="family-guide-p mb-8 text-sm">Copy these questions into a conversation—no lecture required.</p>
             
             <div className="space-y-8">
               <div className="bg-white rounded-xl p-6 shadow-md family-guide-card">
@@ -226,48 +228,49 @@ const FamilyPrivacyGuidePage: React.FC = () => {
 
           {/* Implementation Tips */}
           <section className="mb-16">
-            <h2 className="text-3xl font-bold mb-8 family-guide-primary">
-              Practical Implementation Tips
+            <h2 className="text-3xl font-bold mb-2 family-guide-primary">
+              Simple habits that stick
             </h2>
+            <p className="family-guide-p mb-8 text-sm">You do not need a perfect plan—pick one card and try it this week.</p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="bg-white rounded-xl p-6 shadow-md family-guide-card">
-                <h3 className="text-xl font-bold mb-4 family-guide-primary">Start Early and Be Consistent</h3>
+                <h3 className="text-xl font-bold mb-4 family-guide-primary">Start early, keep it short</h3>
                 <ul className="space-y-2 text-sm family-guide-muted">
-                  <li>• Introduce privacy concepts as soon as children start using devices</li>
-                  <li>• Use age-appropriate language and examples</li>
-                  <li>• Make privacy education a regular part of family conversations</li>
-                  <li>• Lead by example with your own online behavior</li>
+                  <li>• Five minutes beats a long talk—stories and missions count</li>
+                  <li>• Use words your child already knows</li>
+                  <li>• Bring it up when you are already online together</li>
+                  <li>• Show good habits on your own phone too</li>
                 </ul>
               </div>
 
               <div className="bg-white rounded-xl p-6 shadow-md family-guide-card">
-                <h3 className="text-xl font-bold mb-4 family-guide-primary">Create a Safe Learning Environment</h3>
+                <h3 className="text-xl font-bold mb-4 family-guide-primary">Make it safe to ask questions</h3>
                 <ul className="space-y-2 text-sm family-guide-muted">
-                  <li>• Use devices in common areas where you can supervise</li>
-                  <li>• Set up parental controls appropriate for your child's age</li>
-                  <li>• Encourage questions and open communication</li>
-                  <li>• Celebrate good privacy practices</li>
+                  <li>• Keep devices in shared spaces when you can</li>
+                  <li>• Turn on parental controls that fit their age</li>
+                  <li>• Say “thank you for telling me” when they share a concern</li>
+                  <li>• Celebrate when they pause before posting or sharing</li>
                 </ul>
               </div>
 
               <div className="bg-white rounded-xl p-6 shadow-md family-guide-card">
-                <h3 className="text-xl font-bold mb-4 family-guide-primary">Use Real-World Examples</h3>
+                <h3 className="text-xl font-bold mb-4 family-guide-primary">Use real examples</h3>
                 <ul className="space-y-2 text-sm family-guide-muted">
-                  <li>• Discuss news stories about privacy and cybersecurity</li>
-                  <li>• Share your own experiences with online privacy</li>
-                  <li>• Use current events to start conversations</li>
-                  <li>• Point out privacy settings in apps and websites</li>
+                  <li>• Talk about an app your family actually uses</li>
+                  <li>• Share a time you changed a privacy setting</li>
+                  <li>• Point out a news story if it comes up naturally</li>
+                  <li>• Walk through one app&apos;s settings together</li>
                 </ul>
               </div>
 
               <div className="bg-white rounded-xl p-6 shadow-md family-guide-card">
-                <h3 className="text-xl font-bold mb-4 family-guide-primary">Make It Interactive and Fun</h3>
+                <h3 className="text-xl font-bold mb-4 family-guide-primary">Make it fun</h3>
                 <ul className="space-y-2 text-sm family-guide-muted">
-                  <li>• Use games and activities to teach concepts</li>
-                  <li>• Create family challenges around privacy practices</li>
-                  <li>• Use the Privacy Panda activities and stories</li>
-                  <li>• Celebrate milestones and achievements</li>
+                  <li>• Read Privacy Panda together</li>
+                  <li>• Do a Family Hub mission as a family challenge</li>
+                  <li>• Print a certificate when they finish a story or mission</li>
+                  <li>• Keep score of “green light” good choices for younger kids</li>
                 </ul>
               </div>
             </div>
@@ -287,7 +290,7 @@ const FamilyPrivacyGuidePage: React.FC = () => {
               </div>
 
               <p className="text-sm family-guide-muted mb-6 leading-relaxed">
-                If you live in Maryland, the MODPA gives your family legal tools to take control of personal data held by apps, games, and EdTech platforms — not just one-time privacy tips. Here's how to act in three steps.
+                If you live in Maryland, state law (MODPA) lets you ask apps what they know about your family, request deletion, and opt out of data sales. Three steps below—only if this applies to you.
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
@@ -360,7 +363,7 @@ const FamilyPrivacyGuidePage: React.FC = () => {
                   Family Internet Agreement
                 </h3>
                 <p className="text-sm family-guide-muted">
-                  Customizable template for family rules
+                  Fill in together, print, and post on the fridge
                 </p>
               </Link>
 
@@ -375,7 +378,7 @@ const FamilyPrivacyGuidePage: React.FC = () => {
                   Learning Activities Kit
                 </h3>
                 <p className="text-sm family-guide-muted">
-                  Hands-on activities for all ages
+                  Printables and coloring sheets for ages 5–8
                 </p>
               </Link>
 
@@ -390,7 +393,7 @@ const FamilyPrivacyGuidePage: React.FC = () => {
                   Age-Specific Guides
                 </h3>
                 <p className="text-sm family-guide-muted">
-                  Detailed guides for each age group
+                  Conversation prompts matched to each age group
                 </p>
               </Link>
             </div>
