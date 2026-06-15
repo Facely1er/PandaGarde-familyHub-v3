@@ -147,7 +147,7 @@ const AssessmentHistory: React.FC = () => {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-3 gap-4 mt-4 pt-4 border-t border-blue-200 dark:border-blue-800">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4 pt-4 border-t border-blue-200 dark:border-blue-800">
           <div className="text-center">
             <div className="text-2xl font-bold text-gray-900 dark:text-white">
               {history.length}

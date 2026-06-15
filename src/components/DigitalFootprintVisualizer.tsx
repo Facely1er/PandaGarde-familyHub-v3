@@ -701,7 +701,7 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
           </p>
 
           {/* Summary row */}
-          <div className="grid grid-cols-3 gap-3 my-4 text-center text-sm">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 my-4 text-center text-sm">
             <div className="p-3 bg-white dark:bg-dark-surface-elevated rounded-lg">
               <div className="text-2xl font-bold text-slate-800 dark:text-slate-200 mb-1">{analysis.dataBrokerAnalysis.totalMappedServices}</div>
               <div className="text-slate-500 dark:text-slate-400 text-xs">Apps with known data chains</div>
