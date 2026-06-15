@@ -93,11 +93,12 @@ const PasswordFortressBuilder: React.FC<PasswordFortressBuilderProps> = ({ onBac
 
           {/* Password Input */}
           <div className="mb-8">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label htmlFor="fortress-password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               <Lock className="inline mr-2" size={16} />
               Create your fortress password:
             </label>
             <input
+              id="fortress-password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}

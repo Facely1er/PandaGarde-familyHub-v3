@@ -103,6 +103,7 @@ const EmailCaptureInline: React.FC<EmailCaptureInlineProps> = ({
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
+              aria-label="Email address"
               required
               className="flex-1 px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 text-sm focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-200 dark:text-gray-100"
             />
@@ -157,6 +158,7 @@ const EmailCaptureInline: React.FC<EmailCaptureInlineProps> = ({
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email address"
+                aria-label="Email address"
                 required
                 className="flex-1 px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:border-gray-600 dark:bg-gray-200 dark:text-gray-100"
               />

@@ -130,11 +130,12 @@ const PasswordStrengthLab: React.FC<PasswordStrengthLabProps> = ({ onBack }) => 
             </div>
             
             <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label htmlFor="password-lab-input" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 🔐 Enter a password to test your superhero skills:
               </label>
               <div className="relative">
                 <input
+                  id="password-lab-input"
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => {

@@ -92,8 +92,9 @@ const PasswordPetCreator: React.FC<PasswordPetCreatorProps> = ({ onBack }) => {
           {/* Input Section */}
           <div className="space-y-4 mb-8">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Name your pet:</label>
+              <label htmlFor="pet-name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Name your pet:</label>
               <input
+                id="pet-name"
                 type="text"
                 value={petName}
                 onChange={(e) => setPetName(e.target.value)}
@@ -103,8 +104,9 @@ const PasswordPetCreator: React.FC<PasswordPetCreatorProps> = ({ onBack }) => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Create a password to power up your pet:</label>
+              <label htmlFor="pet-password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Create a password to power up your pet:</label>
               <input
+                id="pet-password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}

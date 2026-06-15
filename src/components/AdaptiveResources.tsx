@@ -257,6 +257,7 @@ const AdaptiveResources: React.FC<AdaptiveResourcesProps> = ({
                 <input
                   type="text"
                   placeholder="Search resources..."
+                  aria-label="Search resources"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-200 text-gray-900 dark:text-gray-100"
@@ -264,6 +265,7 @@ const AdaptiveResources: React.FC<AdaptiveResourcesProps> = ({
               </div>
             </div>
             <select
+              aria-label="Filter by category"
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
               className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-200 text-gray-900 dark:text-gray-100"
@@ -275,6 +277,7 @@ const AdaptiveResources: React.FC<AdaptiveResourcesProps> = ({
               ))}
             </select>
             <select
+              aria-label="Filter by type"
               value={selectedType}
               onChange={(e) => setSelectedType(e.target.value)}
               className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-200 text-gray-900 dark:text-gray-100"

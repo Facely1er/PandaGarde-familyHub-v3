@@ -8165,9 +8165,29 @@ header.header .nav-actions button.header-icon-btn:not(.header-search-bar) {
   min-width: 0;
 }
 
-.footer-shell .footer-column ul > li > .footer-link span:not(.sr-only),
-.footer-shell .footer-column ul > li > a.footer-link span:not(.sr-only) {
+.footer-shell .footer-link-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  min-width: 1rem;
+  min-height: 1rem;
+}
+
+.footer-shell .footer-link-icon svg {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+.footer-shell .footer-column ul > li > .footer-link .footer-link-label,
+.footer-shell .footer-column ul > li > a.footer-link .footer-link-label {
+  min-width: 0;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .footer-shell .footer-column ul > li > .footer-link:hover,

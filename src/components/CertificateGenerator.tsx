@@ -165,10 +165,11 @@ const CertificateGenerator: React.FC<CertificateGeneratorProps> = ({ onClose }) 
             
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label htmlFor="cert-achievement" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Select Achievement
                 </label>
                 <select
+                  id="cert-achievement"
                   value={selectedAchievement}
                   onChange={(e) => setSelectedAchievement(e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 dark:bg-gray-200 dark:text-white"
@@ -183,10 +184,11 @@ const CertificateGenerator: React.FC<CertificateGeneratorProps> = ({ onClose }) 
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label htmlFor="cert-custom" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Or Custom Achievement
                 </label>
                 <input
+                  id="cert-custom"
                   type="text"
                   value={customAchievement}
                   onChange={(e) => setCustomAchievement(e.target.value)}

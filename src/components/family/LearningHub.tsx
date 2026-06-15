@@ -292,6 +292,7 @@ const LearningHub: React.FC = () => {
               <input
                 type="search"
                 placeholder="Search games…"
+                aria-label="Search games"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full rounded-xl border-2 border-slate-200 bg-slate-50 py-2.5 pl-10 pr-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/25 dark:border-gray-500 dark:bg-gray-200 dark:text-white"
@@ -301,6 +302,7 @@ const LearningHub: React.FC = () => {
               <div className="flex items-center gap-2 rounded-xl border-2 border-slate-200 bg-slate-50 px-2 dark:border-gray-500 dark:bg-gray-200">
                 <Filter size={16} className="ml-1 text-slate-500" />
                 <select
+                  aria-label="Filter by difficulty"
                   value={filterDifficulty}
                   onChange={(e) => setFilterDifficulty(e.target.value)}
                   className="cursor-pointer rounded-lg bg-transparent py-2.5 pl-1 pr-8 text-sm font-medium text-slate-800 focus:outline-none dark:text-slate-100"
@@ -312,6 +314,7 @@ const LearningHub: React.FC = () => {
                 </select>
               </div>
               <select
+                aria-label="Filter by age group"
                 value={filterAge}
                 onChange={(e) => setFilterAge(e.target.value)}
                 className="cursor-pointer rounded-xl border-2 border-slate-200 bg-slate-50 py-2.5 pl-3 pr-8 text-sm font-medium text-slate-800 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/25 dark:border-gray-500 dark:bg-gray-200 dark:text-slate-100"

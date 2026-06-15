@@ -6,9 +6,16 @@ import {
   type SiteNavItem,
 } from '../data/siteNavigation';
 
+const FOOTER_ICON_SIZE = 16;
+
 const Footer: React.FC = () => {
+  const renderLinkIcon = (Icon: SiteNavItem['icon']) => (
+    <span className="footer-link-icon" aria-hidden="true">
+      <Icon size={FOOTER_ICON_SIZE} strokeWidth={2} />
+    </span>
+  );
+
   const renderNavLink = (item: SiteNavItem | FooterExternalNavItem) => {
-    const Icon = item.icon;
     const isExternal = 'external' in item && item.external;
 
     if (isExternal) {
@@ -19,8 +26,8 @@ const Footer: React.FC = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Icon size={16} aria-hidden="true" />
-          <span>{item.label}</span>
+          {renderLinkIcon(item.icon)}
+          <span className="footer-link-label">{item.label}</span>
           <span className="sr-only"> (opens in new tab)</span>
         </a>
       );
@@ -28,8 +35,8 @@ const Footer: React.FC = () => {
 
     return (
       <Link to={item.href} className="footer-link">
-        <Icon size={16} aria-hidden="true" />
-        <span>{item.label}</span>
+        {renderLinkIcon(item.icon)}
+        <span className="footer-link-label">{item.label}</span>
       </Link>
     );
   };

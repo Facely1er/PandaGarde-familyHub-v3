@@ -293,10 +293,11 @@ export const ConversationStarter: React.FC<ConversationStarterProps> = ({
       {/* Filters */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
         <div>
-          <label className="block text-sm font-medium mb-2 text-gray-700">
+          <label htmlFor="conv-age-group" className="block text-sm font-medium mb-2 text-gray-700">
             Age Group
           </label>
           <select
+            id="conv-age-group"
             value={selectedAge}
             onChange={(e) => {
               setSelectedAge(e.target.value as ConversationAgeGroup);
@@ -321,10 +322,11 @@ export const ConversationStarter: React.FC<ConversationStarterProps> = ({
         </div>
         
         <div>
-          <label className="block text-sm font-medium mb-2 text-gray-700">
+          <label htmlFor="conv-topic" className="block text-sm font-medium mb-2 text-gray-700">
             Topic
           </label>
           <select
+            id="conv-topic"
             value={selectedTopic}
             onChange={(e) => {
               setSelectedTopic(e.target.value as ConversationTopic);

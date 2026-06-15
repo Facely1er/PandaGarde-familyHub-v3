@@ -17,6 +17,7 @@ import {
   Shield,
   Cookie,
   Accessibility,
+  ClipboardList,
 } from 'lucide-react';
 
 
@@ -95,7 +96,7 @@ export const dfaWorkflowNavItems: SiteNavItem[] = [
 export const footprintReviewLayerLinks: SiteNavItem[] = [
   { id: 'footprint-catalog', icon: ListChecks, label: 'Service catalog', href: '/service-catalog' },
   { id: 'footprint-review', icon: Fingerprint, label: FOOTPRINT_REVIEW_NAV_LABEL, href: '/digital-footprint' },
-  { id: 'footprint-scoring', icon: BookOpen, label: 'Scoring methodology', href: '/scoring-methodology' },
+  { id: 'footprint-scoring', icon: ClipboardList, label: 'Scoring methodology', href: '/scoring-methodology' },
   { id: 'footprint-digital-rights', icon: Scale, label: 'Digital privacy rights', href: '/digital-rights' },
 ];
 

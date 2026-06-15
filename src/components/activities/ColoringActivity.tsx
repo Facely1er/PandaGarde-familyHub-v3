@@ -396,6 +396,7 @@ const ColoringActivity: React.FC<ColoringActivityProps> = ({ onComplete, onClose
               max="25"
               value={brushSize}
               onChange={(e) => setBrushSize(Number(e.target.value))}
+              aria-label="Brush size"
               className="brush-slider"
             />
             <span className="brush-size">{brushSize}px</span>

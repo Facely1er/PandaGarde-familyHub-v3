@@ -68,6 +68,12 @@ describe('footer navigation links', () => {
     expect(familyCol?.externalItems ?? []).toHaveLength(0);
   });
 
+  it('every footer link defines an icon component', () => {
+    for (const item of allInternal) {
+      expect(item.icon).toBeTruthy();
+    }
+  });
+
   it('footer link counts match planned IA', () => {
     expect(footerFootprintLinks).toHaveLength(4);
     expect(footerFamilyLinks).toHaveLength(4);
