@@ -16,28 +16,28 @@ const AGE_LABELS: Record<string, string> = {
 
 export function ActivityCard({ activity }: { activity: Activity }) {
   return (
-    <div className="rounded-xl border border-gray-200 dark:border-gray-400 bg-gray-50 dark:bg-gray-200 p-4 mb-3">
+    <div className="rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 p-4 mb-3">
       <div className="flex items-start gap-3">
         <span className="text-2xl" aria-hidden="true">
           {TYPE_ICONS[activity.type] ?? '📌'}
         </span>
         <div className="flex-1">
           <div className="flex items-center gap-2 flex-wrap mb-1">
-            <h4 className="font-semibold text-gray-900 text-sm">{activity.title}</h4>
-            <span className="text-xs text-gray-500 bg-white dark:bg-gray-300 border border-gray-200 dark:border-gray-500 px-2 py-0.5 rounded-full capitalize">
+            <h4 className="font-semibold text-gray-900 dark:text-gray-100 text-sm">{activity.title}</h4>
+            <span className="text-xs text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-600 border border-gray-200 dark:border-gray-500 px-2 py-0.5 rounded-full capitalize">
               {activity.type}
             </span>
           </div>
-          <p className="text-sm text-gray-600 mb-2">{activity.description}</p>
+          <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">{activity.description}</p>
 
           {activity.materials && activity.materials.length > 0 && (
             <div>
-              <p className="text-xs font-medium text-gray-500 mb-1">Materials:</p>
+              <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Materials:</p>
               <ul className="flex flex-wrap gap-1">
                 {activity.materials.map((m) => (
                   <li
                     key={m}
-                    className="text-xs bg-white dark:bg-gray-300 border border-gray-200 dark:border-gray-500 rounded px-2 py-0.5 text-gray-600"
+                    className="text-xs bg-white dark:bg-gray-600 border border-gray-200 dark:border-gray-500 rounded px-2 py-0.5 text-gray-600 dark:text-gray-300"
                   >
                     {m}
                   </li>

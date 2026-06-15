@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Library } from 'lucide-react';
 import { Story } from '../../data/stories';
 import { StoryEpilogue } from './StoryEpilogue';
 
@@ -15,10 +15,17 @@ interface StoryReaderProps {
 export function StoryReader({ story, embedded = false, showBackLink = true }: StoryReaderProps) {
   const [currentChapter, setCurrentChapter] = useState(0);
   const chapter = story.chapters[currentChapter];
+  const chapterPanelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setCurrentChapter(0);
   }, [story.id]);
+
+  useEffect(() => {
+    if (chapterPanelRef.current) {
+      chapterPanelRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [currentChapter]);
   const isFirst = currentChapter === 0;
   const isLast = currentChapter === story.chapters.length - 1;
 
@@ -67,6 +74,7 @@ export function StoryReader({ story, embedded = false, showBackLink = true }: St
       )}
 
       <div
+        ref={chapterPanelRef}
         className="story-chapter-panel shell-card shell-card--nested mb-6 p-6"
         role="tablist"
         aria-label="Chapter progress"
@@ -81,14 +89,18 @@ export function StoryReader({ story, embedded = false, showBackLink = true }: St
               aria-label={`Chapter ${i + 1}: ${ch.title}`}
               onClick={() => setCurrentChapter(i)}
               title={ch.title}
-              className={`h-2 flex-1 rounded-full transition-colors duration-200 ${
-                i === currentChapter
-                  ? 'bg-green-600 dark:bg-green-500'
-                  : i < currentChapter
-                    ? 'bg-green-200 dark:bg-green-800'
-                    : 'bg-gray-200 dark:bg-gray-600'
-              }`}
-            />
+              className="flex-1 flex items-center min-h-[44px] py-[21px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 rounded"
+            >
+              <span
+                className={`block h-2 w-full rounded-full transition-colors duration-200 ${
+                  i === currentChapter
+                    ? 'bg-green-600 dark:bg-green-500'
+                    : i < currentChapter
+                      ? 'bg-green-200 dark:bg-green-800'
+                      : 'bg-gray-200 dark:bg-gray-600'
+                }`}
+              />
+            </button>
           ))}
         </div>
 
