@@ -200,11 +200,11 @@ const AppShell: React.FC = () => {
           </div>
         </header>
 
-        <main id="family-hub-main" className={hubTheme.main}>
+        <div id="family-hub-main" className={hubTheme.main}>
           <div className="min-h-full">
             <Outlet />
           </div>
-        </main>
+        </div>
 
         <nav
           className={hubTheme.chromeNav}

@@ -90,14 +90,14 @@ const EmailCaptureInline: React.FC<EmailCaptureInlineProps> = ({
 
   if (compact) {
     return (
-      <div className="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+      <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
         {isSubmitted ? (
           <div className="flex items-center space-x-2 text-green-600 dark:text-green-400">
             <CheckCircle className="h-5 w-5" />
             <span className="text-sm font-medium">Subscribed! Check your email.</span>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="flex space-x-2">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-2 sm:flex-row">
             <input
               type="email"
               value={email}
@@ -105,12 +105,12 @@ const EmailCaptureInline: React.FC<EmailCaptureInlineProps> = ({
               placeholder="Enter your email"
               aria-label="Email address"
               required
-              className="flex-1 px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 text-sm focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-200 dark:text-gray-100"
+              className="flex-1 min-w-0 px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 text-sm focus:ring-2 focus:ring-green-500 dark:border-gray-600 dark:bg-gray-200 dark:text-gray-100"
             />
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 text-sm font-medium transition-colors"
+              className="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 disabled:opacity-50 text-sm font-medium transition-colors"
             >
               {isSubmitting ? '...' : 'Subscribe'}
             </button>
@@ -121,7 +121,7 @@ const EmailCaptureInline: React.FC<EmailCaptureInlineProps> = ({
   }
 
   return (
-    <div className="p-6 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+    <div className="p-6 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border border-green-200 dark:border-green-800 rounded-lg">
       {isSubmitted ? (
         <div className="text-center">
           <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 dark:bg-green-900/30 mb-3">
@@ -138,8 +138,8 @@ const EmailCaptureInline: React.FC<EmailCaptureInlineProps> = ({
         <>
           <div className="flex items-start space-x-3 mb-4">
             <div className="flex-shrink-0">
-              <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
-                <Mail className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+              <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
+                <Mail className="h-5 w-5 text-green-700 dark:text-green-400" />
               </div>
             </div>
             <div className="flex-1">
@@ -152,7 +152,7 @@ const EmailCaptureInline: React.FC<EmailCaptureInlineProps> = ({
             </div>
           </div>
           <form onSubmit={handleSubmit} className="space-y-3">
-            <div className="flex space-x-2">
+            <div className="flex flex-col gap-2 sm:flex-row">
               <input
                 type="email"
                 value={email}
@@ -160,12 +160,12 @@ const EmailCaptureInline: React.FC<EmailCaptureInlineProps> = ({
                 placeholder="Enter your email address"
                 aria-label="Email address"
                 required
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:border-gray-600 dark:bg-gray-200 dark:text-gray-100"
+                className="flex-1 min-w-0 px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-green-500 focus:border-transparent dark:border-gray-600 dark:bg-gray-200 dark:text-gray-100"
               />
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors"
+                className="px-6 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors"
               >
                 {isSubmitting ? 'Subscribing...' : 'Subscribe'}
               </button>

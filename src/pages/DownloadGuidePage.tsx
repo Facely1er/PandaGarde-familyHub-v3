@@ -116,7 +116,7 @@ const DownloadGuidePage: React.FC<DownloadGuidePageProps> = ({
     >
       <div className="min-h-screen bg-white">
       {/* Main Content */}
-      <main className="container mx-auto px-6 py-20">
+      <div className="container mx-auto px-6 py-20">
         <div className="max-w-4xl mx-auto">
           {resourceInfo ? (
             <>
@@ -248,7 +248,7 @@ const DownloadGuidePage: React.FC<DownloadGuidePageProps> = ({
             </div>
           </div>
         </div>
-      </main>
+      </div>
     </div>
     </PageLayout>
   );

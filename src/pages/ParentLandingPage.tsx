@@ -77,7 +77,7 @@ const ParentLandingPage: React.FC = () => {
   ];
 
   return (
-    <main id="main-content">
+    <div>
       <section className="marketing-hero">
         <div className="container">
           <div className="fade-in text-center">
@@ -231,7 +231,7 @@ const ParentLandingPage: React.FC = () => {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 };
 

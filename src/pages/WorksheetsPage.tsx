@@ -25,7 +25,7 @@ const WorksheetsPage: React.FC = () => {
       subtitle="Print a worksheet, talk through the prompts, and save it or hang it on the fridge."
       breadcrumbs
     >
-      <main className="container mx-auto px-4 sm:px-6 py-12 max-w-5xl">
+      <div className="container mx-auto px-4 sm:px-6 py-12 max-w-5xl">
         <div className="text-center mb-10">
           <button
             type="button"
@@ -67,7 +67,7 @@ const WorksheetsPage: React.FC = () => {
           </Link>
           .
         </p>
-      </main>
+      </div>
     </PageLayout>
   );
 };

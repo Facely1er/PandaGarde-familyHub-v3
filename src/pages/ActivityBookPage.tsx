@@ -164,7 +164,7 @@ const ActivityBookPage: React.FC = () => {
       subtitle="Printable coloring sheets and offline activities from the Privacy Panda story. For interactive missions with saved progress, open Family Hub."
       breadcrumbs={true}
     >
-      <main id="main-content" className="min-h-screen" style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}>
+      <div className="min-h-screen" style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}>
 
       {/* Story Connection Section */}
       <section style={{ padding: '3rem 0' }}>
@@ -480,7 +480,7 @@ const ActivityBookPage: React.FC = () => {
           </div>
         </div>
       </section>
-      </main>
+      </div>
     </PageLayout>
   );
 };

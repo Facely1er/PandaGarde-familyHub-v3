@@ -90,7 +90,7 @@ const CertificatesPage: React.FC = () => {
       <div className="min-h-screen" style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}>
 
       {/* Main Content */}
-      <main className="container mx-auto px-6 py-20">
+      <div className="container mx-auto px-6 py-20">
         {/* Introduction */}
         <div className="max-w-4xl mx-auto text-center mb-16">
           <h2 className="font-bold mb-6" style={{ fontSize: 'clamp(1.875rem, 3vw, 2.25rem)', color: 'var(--primary)' }}>
@@ -279,7 +279,7 @@ const CertificatesPage: React.FC = () => {
             </Link>
           </div>
         </div>
-      </main>
+      </div>
       </div>
     </PageLayout>
   );

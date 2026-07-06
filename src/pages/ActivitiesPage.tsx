@@ -65,7 +65,7 @@ const ActivitiesPage: React.FC = () => {
       subtitle="Interactive missions that teach password safety, safe sharing, and digital wellbeing."
       breadcrumbs
     >
-      <main className="container mx-auto px-4 sm:px-6 py-12 max-w-5xl">
+      <div className="container mx-auto px-4 sm:px-6 py-12 max-w-5xl">
         <section className="mb-10 rounded-xl border border-emerald-200 bg-emerald-50 p-6 dark:border-emerald-800 dark:bg-emerald-900/20">
           <p className="text-emerald-900 dark:text-emerald-100 leading-relaxed mb-4">
             Each activity teaches one privacy concept with a clear goal. Start with the story, then pick a mission.
@@ -120,7 +120,7 @@ const ActivitiesPage: React.FC = () => {
             </button>
           ))}
         </div>
-      </main>
+      </div>
     </PageLayout>
   );
 };

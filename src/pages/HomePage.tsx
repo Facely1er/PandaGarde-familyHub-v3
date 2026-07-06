@@ -128,7 +128,7 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-      <main className="page-layout__main">
+      <div className="page-layout__main">
         <div className="container">
           <div className="page-content">
             <PageSection
@@ -194,7 +194,7 @@ const HomePage: React.FC = () => {
             </PageSection>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 };

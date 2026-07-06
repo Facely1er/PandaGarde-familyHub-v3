@@ -27,9 +27,9 @@ const CertificatePage: React.FC = () => {
       </header>
 
       {/* Main Content */}
-      <main className="container mx-auto px-6 py-12">
+      <div className="container mx-auto px-6 py-12">
         <CertificateGenerator />
-      </main>
+      </div>
     </div>
   );
 };
