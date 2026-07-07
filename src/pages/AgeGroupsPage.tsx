@@ -14,7 +14,7 @@ const ageGroups = [
         icon: BookOpen,
         title: "Beginner's Privacy Activity Book",
         description: "Colorful activities that introduce privacy concepts with fun characters and simple exercises. Features Privacy Panda guiding children through basic online safety.",
-        link: '/activity-book'
+        link: '/family-hub/activities'
       },
       {
         icon: Palette,
@@ -34,19 +34,19 @@ const ageGroups = [
         icon: Puzzle,
         title: "Digital Privacy Challenge",
         description: "Interactive puzzles, quizzes and games that help tweens understand social media privacy, digital footprints, and online safety concepts.",
-        link: '/privacy-explorers'
+        link: '/family-hub/activities'
       },
       {
         icon: Shield,
         title: "Privacy Protector's Guide",
         description: "Hands-on projects and practical guides that teach tweens how to protect personal information and navigate online spaces safely.",
-        link: '/privacy-handbook'
+        link: '/family-hub/activities'
       },
       {
         icon: Globe,
         title: "Digital Citizenship Academy",
         description: "Interactive modules that teach tweens about responsible online behavior, critical thinking, and evaluating digital information.",
-        link: '/digital-citizenship'
+        link: '/how-it-works'
       }
     ]
   },
@@ -60,7 +60,7 @@ const ageGroups = [
         icon: Smartphone,
         title: "Teen Privacy Handbook",
         description: "Comprehensive guide covering social media privacy, data rights, online reputation management, and advanced security concepts for teenagers.",
-        link: '/teen-handbook'
+        link: '/family-hub/activities'
       },
       {
         icon: Wrench,
@@ -170,7 +170,7 @@ const AgeGroupsPage: React.FC = () => {
             <div className="cta-buttons">
               <button 
                 className="button primary"
-                onClick={() => navigate('/activity-book')}
+                onClick={() => navigate('/family-hub/activities')}
               >
                 Start with Activity Book
               </button>

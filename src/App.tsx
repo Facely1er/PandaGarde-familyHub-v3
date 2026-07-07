@@ -64,6 +64,7 @@ const ParentalConsentPage = lazy(() => import('./pages/ParentalConsentPage'));
 const ParentalConsentPendingPage = lazy(() => import('./pages/ParentalConsentPendingPage'));
 const DigitalFootprintPage = lazy(() => import('./pages/DigitalFootprintPage'));
 const ScoringMethodologyPage = lazy(() => import('./pages/ScoringMethodologyPage'));
+const AssessmentHistoryPage = lazy(() => import('./pages/AssessmentHistoryPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const StoryListPage = lazy(() =>
   import('./pages/StoryListPage').then((m) => ({ default: m.StoryListPage }))
@@ -215,6 +216,8 @@ function App() {
             <Route path="/privacy-assessment" element={<PrivacyAssessmentPage />} />
             <Route path="/assessment" element={<Navigate to="/privacy-assessment" replace />} />
             <Route path="/quick-assessment" element={<QuickAssessmentPage />} />
+            <Route path="/assessment-history" element={<AssessmentHistoryPage />} />
+            <Route path="/assessment/history" element={<Navigate to="/assessment-history" replace />} />
 
             {/* Community Features */}
             

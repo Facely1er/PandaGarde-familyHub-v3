@@ -45,10 +45,6 @@ export const PARENT_SURFACE_REDIRECTS: Record<string, string> = {
   '/community/success-stories': '/how-it-works',
   '/community/resources': '/how-it-works',
 
-  // Assessment history (folded into the on-site privacy assessment)
-  '/assessment-history': '/for-families',
-  '/assessment/history': '/for-families',
-
   // Implementation / pilot / meta marketing
   '/implementation': '/how-it-works',
   '/implementation-guide': '/how-it-works',

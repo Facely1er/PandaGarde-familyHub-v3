@@ -126,7 +126,7 @@ const AppStoreReviewPage: React.FC = () => {
         <div className="bg-gradient-to-r from-teal-600 to-green-600 text-white py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <Link
-              to="/app-features"
+              to="/how-it-works"
               className="inline-flex items-center text-teal-100 hover:text-white mb-4"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />

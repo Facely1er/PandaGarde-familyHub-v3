@@ -44,7 +44,7 @@ const QuickStartPage: React.FC = () => {
       icon: BookOpen,
       color: 'text-orange-600',
       bgColor: 'bg-orange-50',
-      link: '/activity-book',
+      link: '/downloads/worksheets',
       time: '1 min',
       difficulty: 'Easy'
     }
@@ -72,7 +72,7 @@ const QuickStartPage: React.FC = () => {
         'Try the Privacy Explorers activities',
         'List the apps your tween uses in the catalog',
       ],
-      link: '/privacy-explorers',
+      link: '/family-hub/activities',
       color: 'from-blue-500 to-cyan-500'
     },
     {
@@ -84,7 +84,7 @@ const QuickStartPage: React.FC = () => {
         'Review social media privacy settings together',
         'Do a Family Hub mission matched to their age',
       ],
-      link: '/teen-handbook',
+      link: '/family-hub/activities',
       color: 'from-green-500 to-emerald-500'
     }
   ];

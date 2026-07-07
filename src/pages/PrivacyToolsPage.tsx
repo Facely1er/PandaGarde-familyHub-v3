@@ -72,7 +72,7 @@ const groups = [
 
       { label: 'Privacy Panda story', href: '/stories/privacy-panda-and-the-digital-bamboo-forest', note: 'Best first step—about 5 minutes.' },
 
-      { label: 'Activity book', href: '/activity-book', note: 'Printables and coloring sheets.' },
+      { label: 'Activity book', href: '/downloads/worksheets', note: 'Printables and coloring sheets.' },
 
       { label: 'Guides & stories', href: '/for-families', note: 'All parent guides in one place.' },
 

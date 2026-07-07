@@ -559,7 +559,7 @@ const ImplementationGuidePage: React.FC = () => {
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link
-              to="/educator-tools"
+              to="/how-it-works"
               className="bg-white text-indigo-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center gap-2"
             >
               <BookOpen size={20} />

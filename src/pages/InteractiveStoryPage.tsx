@@ -826,7 +826,7 @@ const InteractiveStoryPage: React.FC = () => {
               </p>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center' }}>
                 <Link
-                  to="/activity-book"
+                  to="/family-hub/activities"
                   className="group"
                   style={{
                     background: 'white',

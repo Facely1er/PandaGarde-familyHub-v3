@@ -63,7 +63,7 @@ const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => 
           subtitle={
             completedCount === 0
               ? 'Finish your first mission to earn a badge. Tap Missions on the menu to pick one.'
-              : `You\'ve finished ${completedCount} of ${totalCount} missions. Do another to keep going!`
+              : `You've finished ${completedCount} of ${totalCount} missions. Do another to keep going!`
           }
           compact
         />

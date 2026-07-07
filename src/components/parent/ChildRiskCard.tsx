@@ -108,7 +108,7 @@ const ChildRiskCard: React.FC<ChildRiskCardProps> = ({ child, riskScore, onViewS
           <div className="flex flex-wrap gap-2">
             {approvedServices.slice(0, 3).map((serviceUsage) => {
               const service = getServiceById(serviceUsage.serviceId);
-              if (!service) return null;
+              if (!service) {return null;}
               return (
                 <span
                   key={serviceUsage.serviceId}

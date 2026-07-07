@@ -13,6 +13,17 @@ function read(file) {
   return fs.readFileSync(path.join(root, file), 'utf8');
 }
 
+function extractParentSurfaceRedirects() {
+  const content = read('src/data/parentSiteSurface.ts');
+  const routes = new Set();
+  const entryRe = /['"](\/[^'"]+)['"]\s*:\s*(?:HUB_MISSIONS_PATH|['"][^'"]+['"])/g;
+  let m;
+  while ((m = entryRe.exec(content)) !== null) {
+    routes.add(m[1]);
+  }
+  return routes;
+}
+
 function extractAppRoutes(appTsx) {
   const routes = new Set(['/']);
   const re = /path=["']([^"']+)["']/g;
@@ -26,6 +37,10 @@ function extractAppRoutes(appTsx) {
   const navRe = /<Navigate\s+to=["'](\/[^"']+)["']/g;
   while ((m = navRe.exec(appTsx)) !== null) {
     routes.add(m[1].split('#')[0].replace(/\/$/, '') || '/');
+  }
+  // Bookmark redirects registered in App.tsx from parentSiteSurface
+  for (const path of extractParentSurfaceRedirects()) {
+    routes.add(path);
   }
   return routes;
 }

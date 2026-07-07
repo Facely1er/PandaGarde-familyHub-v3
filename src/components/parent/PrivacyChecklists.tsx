@@ -203,7 +203,7 @@ const PrivacyChecklists: React.FC = () => {
       </div>
 
       <div className="rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800 sm:p-6">
-        {currentChecklist.items.map((item, index) => (
+        {currentChecklist.items.map((item) => (
           <button
             key={item.id}
             type="button"

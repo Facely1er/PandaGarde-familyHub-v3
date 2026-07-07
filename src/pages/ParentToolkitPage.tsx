@@ -243,7 +243,7 @@ const ParentToolkitPage: React.FC = () => {
               Family Hub
             </Link>
             <Link
-              to="/community/forum"
+              to="/how-it-works"
               className="button button-secondary inline-flex items-center gap-2"
             >
               Community forum (demo)

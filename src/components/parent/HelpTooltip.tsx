@@ -33,15 +33,15 @@ const HelpTooltip: React.FC<HelpTooltipProps> = ({
   const [isVisible, setIsVisible] = useState(false);
 
   const handleMouseEnter = () => {
-    if (trigger === 'hover') setIsVisible(true);
+    if (trigger === 'hover') {setIsVisible(true);}
   };
 
   const handleMouseLeave = () => {
-    if (trigger === 'hover') setIsVisible(false);
+    if (trigger === 'hover') {setIsVisible(false);}
   };
 
   const handleClick = () => {
-    if (trigger === 'click') setIsVisible(!isVisible);
+    if (trigger === 'click') {setIsVisible(!isVisible);}
   };
 
   return (

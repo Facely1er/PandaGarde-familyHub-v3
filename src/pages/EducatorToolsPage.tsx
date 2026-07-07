@@ -95,7 +95,7 @@ const EducatorToolsPage: React.FC = () => {
       duration: '4-6 weeks',
       completed: false,
       icon: Presentation,
-      navigateTo: '/classroom-activities',
+      navigateTo: '/how-it-works',
       actionLabel: 'Open activities',
       preview: [
         '8 hands-on activities (2 per chapter)',
@@ -115,7 +115,7 @@ const EducatorToolsPage: React.FC = () => {
       duration: 'Variable',
       completed: false,
       icon: Presentation,
-      navigateTo: '/activity-book',
+      navigateTo: '/family-hub/activities',
       actionLabel: 'Open Activity Book',
       preview: [
         'Activity Book: structured activities on the site',
@@ -150,7 +150,7 @@ const EducatorToolsPage: React.FC = () => {
       duration: '8 hours',
       completed: false,
       icon: GraduationCap,
-      navigateTo: '/implementation-guide',
+      navigateTo: '/how-it-works',
       actionLabel: 'Open implementation guide',
       preview: [
         'Step-by-step implementation content on the site',
@@ -167,7 +167,7 @@ const EducatorToolsPage: React.FC = () => {
       duration: 'Variable',
       completed: false,
       icon: Presentation,
-      navigateTo: '/pilot',
+      navigateTo: '/contact',
       actionLabel: 'Learn about the pilot',
       preview: [
         'No presentation-slides.zip on the server yet (previously advertised in error)',
@@ -269,9 +269,9 @@ const EducatorToolsPage: React.FC = () => {
         >
           <strong className="text-amber-900 dark:text-amber-100">New here?</strong>{' '}
           Start with{' '}
-          <Link to="/classroom-activities" className="underline font-medium text-amber-900 dark:text-amber-100">Classroom Activities</Link>{' '}
+          <Link to="/how-it-works" className="underline font-medium text-amber-900 dark:text-amber-100">Classroom Activities</Link>{' '}
           or{' '}
-          <Link to="/implementation-guide" className="underline font-medium text-amber-900 dark:text-amber-100">Implementation Guide</Link>.
+          <Link to="/how-it-works" className="underline font-medium text-amber-900 dark:text-amber-100">Implementation Guide</Link>.
           Each card opens a real page on this site. Questions?{' '}
           <Link to="/contact" className="underline font-medium text-amber-900 dark:text-amber-100">Contact us</Link>.
         </div>
@@ -470,7 +470,7 @@ const EducatorToolsPage: React.FC = () => {
               Family Hub
             </Link>
             <Link
-              to="/pilot"
+              to="/contact"
               className="bg-green-700 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-800 transition-colors inline-flex items-center gap-2"
             >
               <Presentation size={20} />
