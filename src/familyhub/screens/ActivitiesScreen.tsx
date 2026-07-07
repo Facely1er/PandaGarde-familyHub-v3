@@ -1,17 +1,15 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Clock, Play, Sparkles } from 'lucide-react';
-import AgeBandStrip from '../components/AgeBandStrip';
 import HubPageLayout from '../components/HubPageLayout';
 import HubScreenHero from '../components/HubScreenHero';
 import MissionShell from '../components/MissionShell';
-import { type HubAgeRange, hubAgeBandByRange } from '../hubAgeBands';
+import { HUB_AGE_BANDS, type HubAgeRange, hubAgeBandByRange } from '../hubAgeBands';
 import { useProgress } from '../../contexts/ProgressContext';
 import { findActivityById, getCompletionId } from '../../lib/hubMission';
 import {
   ageBasedActivities,
   flattenAgeBasedActivities,
-  getFeaturedAgeBasedActivities,
   type ActivityFocus,
   type AgeGroup,
   type FlattenedAgeBasedActivity,
@@ -245,54 +243,53 @@ const ActivitiesScreen: React.FC = () => {
     );
   }
 
-  const activeBandRange: HubAgeRange | 'all' =
-    activeAge === 'all' ? 'all' : (activeAge as HubAgeRange);
-
   return (
     <HubPageLayout>
       <HubScreenHero
-        badge="Activity catalogue"
+        badge={`${allActivities.length} missions`}
         title="Choose your mission"
-        subtitle="Each mission starts with a real situation from games, school, or social life — then you talk and practice together. Filter by age and learning goal below."
+        subtitle="Pick an age group and a goal — every mission starts with a real situation you talk through together."
         compact
-      >
-        <div className="flex flex-wrap gap-2 text-xs font-semibold">
-          <span className="rounded-full bg-white/25 px-3 py-1 text-white">{allActivities.length} missions</span>
-          <span className="rounded-full bg-white/25 px-3 py-1 text-white">
-            {getFeaturedAgeBasedActivities(allActivities).length} featured
-          </span>
-          <span className="rounded-full bg-white/25 px-3 py-1 text-white">Completed missions get a green badge</span>
-        </div>
-      </HubScreenHero>
-
-      <div className="flex flex-wrap gap-2" role="toolbar" aria-label="Filter by learning goal">
-        {focusTabs.map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => {
-              hasInteractedRef.current = true;
-              setActiveFocus(tab.id);
-            }}
-            className={`rounded-full border px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 ${
-              activeFocus === tab.id
-                ? 'border-teal-500 bg-teal-50 text-teal-700 dark:border-teal-400 dark:bg-teal-900/30 dark:text-teal-200'
-                : 'border-gray-200 bg-white text-gray-700 hover:border-teal-300 hover:text-teal-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:border-teal-500 dark:hover:text-teal-200'
-            }`}
-            aria-pressed={activeFocus === tab.id}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
-
-      <AgeBandStrip
-        activeRange={activeBandRange}
-        title="Jump in by age"
-        onSelectRange={(range) => {
-          hasInteractedRef.current = true;
-          setActiveAge(range);
-        }}
       />
+
+      <div className="flex flex-wrap justify-center gap-2" role="tablist" aria-label="Filter by age group">
+        <button
+          role="tab"
+          aria-selected={activeAge === 'all'}
+          onClick={() => {
+            hasInteractedRef.current = true;
+            setActiveAge('all');
+          }}
+          className={`flex items-center gap-1.5 whitespace-nowrap rounded-full border px-3 py-1.5 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 ${
+            activeAge === 'all'
+              ? 'border-teal-500 bg-teal-600 text-white shadow-sm'
+              : 'border-gray-200 bg-white text-gray-700 hover:border-teal-300 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200'
+          }`}
+        >
+          All ages
+        </button>
+        {HUB_AGE_BANDS.map((band) => {
+          const isActive = activeAge === band.range;
+          return (
+            <button
+              key={band.range}
+              role="tab"
+              aria-selected={isActive}
+              onClick={() => {
+                hasInteractedRef.current = true;
+                setActiveAge(band.range);
+              }}
+              className={`flex items-center gap-1.5 whitespace-nowrap rounded-full border px-3 py-1.5 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 ${
+                isActive ? `${band.chipClass} ring-2 ring-inset ring-teal-500 dark:ring-teal-400` : band.chipClass
+              }`}
+            >
+              <band.icon size={15} className="hidden sm:block" aria-hidden="true" />
+              <span>{band.shortLabel}</span>
+              <span className="hidden text-xs font-medium opacity-75 md:inline">{band.label}</span>
+            </button>
+          );
+        })}
+      </div>
 
       <section ref={catalogueRef} className="scroll-mt-2" aria-labelledby="activities-catalogue-heading">
         {(() => {
@@ -301,7 +298,7 @@ const ActivitiesScreen: React.FC = () => {
               ? ageBasedActivities.find((candidate) => candidate.ageRange === activeAge)
               : undefined;
           const headingText = activeGroup
-            ? `${activeGroup.label} missions`
+            ? `Missions for ages ${activeGroup.ageRange}`
             : activeFocus !== 'all'
               ? `${activeFocus} missions`
               : 'All missions';
@@ -333,6 +330,26 @@ const ActivitiesScreen: React.FC = () => {
             </div>
           );
         })()}
+
+        <div className="mb-5 flex flex-wrap gap-2" role="toolbar" aria-label="Filter by learning goal">
+          {focusTabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => {
+                hasInteractedRef.current = true;
+                setActiveFocus(tab.id);
+              }}
+              className={`rounded-full border px-3 py-1.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 ${
+                activeFocus === tab.id
+                  ? 'border-teal-500 bg-teal-50 text-teal-700 dark:border-teal-400 dark:bg-teal-900/30 dark:text-teal-200'
+                  : 'border-gray-200 bg-white text-gray-700 hover:border-teal-300 hover:text-teal-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:border-teal-500 dark:hover:text-teal-200'
+              }`}
+              aria-pressed={activeFocus === tab.id}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
 
         {filteredActivities.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-gray-300 bg-white px-6 py-10 text-center dark:border-gray-700 dark:bg-gray-800">
