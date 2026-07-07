@@ -3,12 +3,7 @@ import { lazy } from './lib/lazyWithRetry';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { ORIGIN_STORY_SLUG } from './data/stories';
 import { PARENT_SURFACE_REDIRECTS } from './data/parentSiteSurface';
-import ExternalProductRedirect from './components/ExternalProductRedirect';
-import { socialCautionFunnelUrl } from './config/socialCaution';
 import { ThemeProvider } from './contexts/ThemeContext';
-
-const SOCIALCAUTION_SAFETY_ALERTS_URL = socialCautionFunnelUrl('app', 'safety-alerts-retired');
-const SOCIALCAUTION_ASSESSMENT_URL = socialCautionFunnelUrl('app', 'privacy-assessment-retired');
 import { ToastProvider } from './contexts/ToastContext';
 import { FamilyProvider } from './contexts/FamilyContext';
 import { SearchProvider } from './contexts/SearchContext';
@@ -28,6 +23,9 @@ const AboutPage = lazy(() => import('./pages/AboutPage'));
 const FamilyHubWrapper = lazy(() => import('./pages/family-hub/FamilyHubWrapper'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 const GetStartedRedirect = lazy(() => import('./pages/GetStartedRedirect'));
+const ChildSafetyAlertsPage = lazy(() => import('./pages/ChildSafetyAlertsPage'));
+const PrivacyAssessmentPage = lazy(() => import('./pages/PrivacyAssessmentPage'));
+const QuickAssessmentPage = lazy(() => import('./pages/QuickAssessmentPage'));
 const TermsPage = lazy(() => import('./pages/TermsPage'));
 const CookiesPage = lazy(() => import('./pages/CookiesPage'));
 const AccessibilityPage = lazy(() => import('./pages/AccessibilityPage'));
@@ -206,35 +204,17 @@ function App() {
             <Route path="/support" element={<SupportPage />} />
             <Route path="/get-started" element={<GetStartedRedirect />} />
             <Route path="/service-catalog" element={<ServiceCatalogPage />} />
-            <Route
-              path="/safety-alerts"
-              element={<ExternalProductRedirect targetUrl={SOCIALCAUTION_SAFETY_ALERTS_URL} />}
-            />
-            <Route
-              path="/alerts"
-              element={<ExternalProductRedirect targetUrl={SOCIALCAUTION_SAFETY_ALERTS_URL} />}
-            />
-            <Route
-              path="/child-safety-alerts"
-              element={<ExternalProductRedirect targetUrl={SOCIALCAUTION_SAFETY_ALERTS_URL} />}
-            />
+            <Route path="/safety-alerts" element={<Navigate to="/child-safety-alerts" replace />} />
+            <Route path="/alerts" element={<Navigate to="/child-safety-alerts" replace />} />
+            <Route path="/child-safety-alerts" element={<ChildSafetyAlertsPage />} />
             <Route path="/digital-footprint" element={<DigitalFootprintPage />} />
             <Route path="/footprint" element={<DigitalFootprintPage />} />
             <Route path="/scoring-methodology" element={<ScoringMethodologyPage />} />
             <Route path="/dfa-methodology" element={<Navigate to="/scoring-methodology#dfa-methodology" replace />} />
             <Route path="/methodology" element={<Navigate to="/scoring-methodology" replace />} />
-            <Route
-              path="/privacy-assessment"
-              element={<ExternalProductRedirect targetUrl={SOCIALCAUTION_ASSESSMENT_URL} />}
-            />
-            <Route
-              path="/assessment"
-              element={<ExternalProductRedirect targetUrl={SOCIALCAUTION_ASSESSMENT_URL} />}
-            />
-            <Route
-              path="/quick-assessment"
-              element={<ExternalProductRedirect targetUrl={SOCIALCAUTION_ASSESSMENT_URL} />}
-            />
+            <Route path="/privacy-assessment" element={<PrivacyAssessmentPage />} />
+            <Route path="/assessment" element={<Navigate to="/privacy-assessment" replace />} />
+            <Route path="/quick-assessment" element={<QuickAssessmentPage />} />
 
             {/* Community Features */}
             
