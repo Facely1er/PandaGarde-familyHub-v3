@@ -29,6 +29,9 @@ export const STATIC_APP_PATHS: string[] = [
   '/service-catalog',
   '/digital-footprint',
   '/footprint',
+  '/privacy-assessment',
+  '/quick-assessment',
+  '/child-safety-alerts',
   '/scoring-methodology',
   '/parental-consent',
   '/parental-consent/pending',
@@ -86,17 +89,10 @@ export const REDIRECT_SOURCE_PATHS: string[] = uniquePaths([
   '/guides/urgent-protection',
   '/guides/practical-privacy',
   '/activities/story',
-]);
-
-/** Retired PandaGarde routes that forward to SocialCaution (not a 404). */
-export const EXTERNAL_FUNNEL_PATHS: string[] = [
-  '/privacy-assessment',
   '/assessment',
-  '/quick-assessment',
   '/safety-alerts',
   '/alerts',
-  '/child-safety-alerts',
-];
+]);
 
 export const STORY_PATHS: string[] = getPublishedStories().map((s) => `/stories/${s.slug}`);
 

@@ -1,7 +1,6 @@
 import { test, expect, type Page } from '@playwright/test';
 import {
   ALL_IN_APP_PATHS,
-  EXTERNAL_FUNNEL_PATHS,
   HUB_PATHS,
   STATIC_APP_PATHS,
   REDIRECT_SOURCE_PATHS,
@@ -90,7 +89,7 @@ test.describe('All advertised routes — no 404', () => {
 
     for (const href of hrefs) {
       const path = href.split('#')[0].split('?')[0];
-      if (!path || path.startsWith('//') || EXTERNAL_FUNNEL_PATHS.some((p) => path.startsWith(p))) {
+      if (!path || path.startsWith('//')) {
         continue;
       }
       if (path.startsWith('/family-hub')) {
@@ -100,13 +99,4 @@ test.describe('All advertised routes — no 404', () => {
       await assertNot404(page);
     }
   });
-});
-
-test.describe('External funnel routes — not 404', () => {
-  for (const path of EXTERNAL_FUNNEL_PATHS) {
-    test(`${path} forwards off-site`, async ({ page }) => {
-      await page.goto(`${BASE}${path}`, { waitUntil: 'domcontentloaded' });
-      await page.waitForURL(/socialcaution\.com/, { timeout: 15_000 });
-    });
-  }
 });
