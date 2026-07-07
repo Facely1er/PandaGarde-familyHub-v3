@@ -60,6 +60,8 @@ interface InteractiveStoryPlayerProps {
   currentSceneIndex?: number;
   onSceneIndexChange?: (index: number) => void;
   initialViewMode?: 'interactive' | 'fulltext';
+  /** When true, player fills a parent `.story-player-shell` without extra margin or card chrome. */
+  shellLayout?: boolean;
 }
 
 const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
@@ -70,7 +72,8 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
   hideControls = false,
   currentSceneIndex: controlledSceneIndex,
   onSceneIndexChange,
-  initialViewMode = 'interactive'
+  initialViewMode = 'interactive',
+  shellLayout = false,
 }) => {
   const { theme } = useTheme();
   const [internalSceneIndex, setInternalSceneIndex] = useState(0);
@@ -478,7 +481,9 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
   }
 
   return (
-    <div className="interactive-story-player">
+    <div
+      className={`interactive-story-player${shellLayout ? ' interactive-story-player--shell' : ''}`}
+    >
       {/* Audio element */}
       {currentScene?.audioUrl && (
         <audio
@@ -887,6 +892,14 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
             : '1px solid rgba(0, 0, 0, 0.05)'};
           position: relative;
           width: 100%;
+        }
+
+        .interactive-story-player--shell {
+          max-width: 100%;
+          margin: 0;
+          border-radius: 0;
+          box-shadow: none;
+          border: none;
         }
 
         .interactive-story-player::before {
@@ -1967,10 +1980,19 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
         }
 
         @media (max-width: 480px) {
-          .interactive-story-player {
+          .interactive-story-player:not(.interactive-story-player--shell) {
             margin: 0.25rem;
             border-radius: 8px;
             max-width: calc(100% - 0.5rem);
+          }
+
+          .interactive-story-player--shell .story-header {
+            flex-direction: column;
+            align-items: stretch;
+          }
+
+          .interactive-story-player--shell .story-controls {
+            justify-content: center;
           }
 
           .story-header {

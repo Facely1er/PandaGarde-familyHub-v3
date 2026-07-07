@@ -170,7 +170,7 @@ export function StoryDualModeExperience({
   const chapterCount = story.chapters.length;
 
   return (
-    <div className="mx-auto max-w-5xl px-4 sm:px-6 pb-12">
+    <div className="story-page-stack">
       <Link
         to="/stories"
         className="mb-6 inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-green-700 hover:bg-green-50 dark:text-green-400 dark:hover:bg-green-950/50 min-h-[44px]"
@@ -230,6 +230,7 @@ export function StoryDualModeExperience({
               onStoryComplete={handleStoryComplete}
               onChoiceMade={handleChoiceMade}
               hideControls={false}
+              shellLayout
             />
           </div>
 

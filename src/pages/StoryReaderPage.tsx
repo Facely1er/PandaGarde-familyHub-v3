@@ -170,8 +170,10 @@ export function StoryReaderPage() {
         subtitle="Read aloud with sound effects, or switch to quiet chapter mode—same story, two ways."
         breadcrumbs
       >
-        <BambooForestStoryExperience story={story} />
-        <StoryNextSteps />
+        <div className="story-page-shell">
+          <BambooForestStoryExperience story={story} />
+          <StoryNextSteps />
+        </div>
       </PageLayout>
     );
   }
@@ -182,8 +184,10 @@ export function StoryReaderPage() {
       subtitle="Read aloud with sound effects, or switch to quiet chapter mode—same story, two ways."
       breadcrumbs
     >
-      <ChapterStoryExperience story={story} />
-      <StoryNextSteps />
+      <div className="story-page-shell">
+        <ChapterStoryExperience story={story} />
+        <StoryNextSteps />
+      </div>
     </PageLayout>
   );
 }

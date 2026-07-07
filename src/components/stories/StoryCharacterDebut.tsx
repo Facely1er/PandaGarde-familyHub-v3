@@ -24,7 +24,7 @@ export function StoryCharacterDebut({ story }: StoryCharacterDebutProps) {
       >
         Meet a new friend
       </h3>
-      <ul className="mt-3 flex flex-wrap gap-4">
+      <ul className="mt-3 flex flex-wrap justify-center gap-4 sm:justify-start">
         {debuts.map((character) => (
           <li key={character.id} className="flex max-w-[9rem] flex-col items-center gap-2 text-center">
             <StoryCharacterPortrait character={character} size="lg" highlight />

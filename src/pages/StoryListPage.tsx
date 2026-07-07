@@ -67,7 +67,7 @@ export function StoryListPage() {
       breadcrumbs
     >
       <section className="py-4 pb-8">
-        <div className="mx-auto max-w-[1100px] space-y-8">
+        <div className="story-page-shell story-page-shell--wide space-y-8">
           {foundationStory && (
             <div className="story-feature-panel rounded-3xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-white p-6 dark:border-emerald-800 dark:from-emerald-950/50 dark:to-gray-900 sm:p-8">
               <div className="story-feature-panel__layout">

@@ -30,7 +30,7 @@ export function StoryReader({ story, embedded = false, showBackLink = true }: St
   const isLast = currentChapter === story.chapters.length - 1;
 
   return (
-    <div className={`mx-auto ${embedded ? 'max-w-3xl pb-8' : 'max-w-2xl px-4 py-8'}`}>
+    <div className={`mx-auto w-full min-w-0 ${embedded ? 'max-w-3xl pb-8' : 'max-w-2xl px-4 py-8'}`}>
       {showBackLink && (
         <Link
           to="/stories"
@@ -64,18 +64,9 @@ export function StoryReader({ story, embedded = false, showBackLink = true }: St
         </div>
       )}
 
-      {embedded && (
-        <div className="mb-6 flex flex-wrap items-center gap-2">
-          <span className="rounded-full bg-green-50 px-2 py-0.5 text-xs font-medium text-green-700 dark:bg-green-950 dark:text-green-400">
-            Episode {story.episodeNumber}
-          </span>
-          <span className="text-sm text-gray-500 dark:text-gray-400">{story.privacyTopic}</span>
-        </div>
-      )}
-
       <div
         ref={chapterPanelRef}
-        className="story-chapter-panel shell-card shell-card--nested mb-6 p-6"
+        className="story-chapter-panel shell-card shell-card--nested mb-6 p-4 sm:p-6"
         role="tablist"
         aria-label="Chapter progress"
       >
@@ -89,7 +80,7 @@ export function StoryReader({ story, embedded = false, showBackLink = true }: St
               aria-label={`Chapter ${i + 1}: ${ch.title}`}
               onClick={() => setCurrentChapter(i)}
               title={ch.title}
-              className="flex-1 flex items-center min-h-[44px] py-[21px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 rounded"
+              className="flex min-h-[44px] flex-1 items-center py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 rounded"
             >
               <span
                 className={`block h-2 w-full rounded-full transition-colors duration-200 ${
@@ -123,32 +114,35 @@ export function StoryReader({ story, embedded = false, showBackLink = true }: St
         </div>
       </div>
 
-      <div className="flex items-center justify-between border-t border-gray-200 dark:border-gray-700 pt-6">
+      <div className="flex flex-col gap-4 border-t border-gray-200 pt-6 dark:border-gray-700 sm:flex-row sm:items-center sm:justify-between">
         <button
           type="button"
           onClick={() => setCurrentChapter((c) => c - 1)}
           disabled={isFirst}
-          className="button button-secondary disabled:opacity-30 disabled:cursor-not-allowed"
+          className="button button-secondary w-full justify-center disabled:cursor-not-allowed disabled:opacity-30 sm:w-auto"
         >
           <ArrowLeft size={16} aria-hidden />
           Previous
         </button>
 
-        <span className="text-xs text-gray-500 dark:text-gray-400">
-          {currentChapter + 1} / {story.chapters.length}
+        <span className="text-center text-xs text-gray-500 dark:text-gray-400">
+          Chapter {currentChapter + 1} of {story.chapters.length}
         </span>
 
         {!isLast ? (
           <button
             type="button"
             onClick={() => setCurrentChapter((c) => c + 1)}
-            className="button button-primary"
+            className="button button-primary w-full justify-center sm:w-auto"
           >
             Next
             <ArrowRight size={16} aria-hidden />
           </button>
         ) : (
-          <Link to="/stories" className="button button-primary inline-flex items-center gap-2">
+          <Link
+            to="/stories"
+            className="button button-primary inline-flex w-full items-center justify-center gap-2 sm:w-auto"
+          >
             <Library size={16} aria-hidden />
             More stories
           </Link>

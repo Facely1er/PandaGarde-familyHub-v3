@@ -11,7 +11,7 @@ export function StoryCastPage() {
       breadcrumbs
     >
       <section className="py-4 pb-10">
-        <div className="mx-auto max-w-[1100px] space-y-6">
+        <div className="story-page-shell story-page-shell--wide space-y-6">
           <p>
             <Link
               to="/stories"
