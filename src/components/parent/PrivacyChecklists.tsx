@@ -136,199 +136,115 @@ const PrivacyChecklists: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: '2rem', maxWidth: '1000px', margin: '0 auto' }}>
-      <div style={{ marginBottom: '2rem' }}>
-        <h2 style={{ fontSize: '2rem', fontWeight: 'bold', color: '#2C3E50', marginBottom: '0.5rem' }}>
+    <div className="mx-auto max-w-4xl p-4 sm:p-8">
+      <div className="mb-6 sm:mb-8">
+        <h2 className="mb-2 text-2xl font-bold text-gray-900 sm:text-3xl dark:text-gray-100">
           Interactive Privacy Checklists
         </h2>
-        <p style={{ color: '#666', fontSize: '1.125rem' }}>
-          Track your family's privacy progress with age-appropriate checklists
+        <p className="text-base text-gray-600 sm:text-lg dark:text-gray-300">
+          Track your family&apos;s privacy progress with age-appropriate checklists
         </p>
       </div>
 
-      {/* Age Group Selector */}
-      <div style={{ 
-        display: 'flex', 
-        gap: '1rem', 
-        marginBottom: '2rem',
-        flexWrap: 'wrap'
-      }}>
-        {Object.values(checklists).map(checklist => (
-          <button
-            key={checklist.id}
-            onClick={() => setSelectedAgeGroup(checklist.id)}
-            style={{
-              padding: '1rem 1.5rem',
-              borderRadius: '8px',
-              border: selectedAgeGroup === checklist.id ? '2px solid #4CAF50' : '2px solid #e5e7eb',
-              backgroundColor: selectedAgeGroup === checklist.id ? '#f0fdf4' : 'white',
-              color: selectedAgeGroup === checklist.id ? '#4CAF50' : '#666',
-              fontWeight: selectedAgeGroup === checklist.id ? 600 : 400,
-              cursor: 'pointer',
-              transition: 'all 0.2s',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-start',
-              gap: '0.25rem'
-            }}
-          >
-            <span>{checklist.title}</span>
-            <span style={{ fontSize: '0.75rem', opacity: 0.8 }}>
-              {getCompletionPercentage(checklist)}% complete
-            </span>
-          </button>
-        ))}
+      <div className="mb-6 flex flex-wrap gap-3 sm:mb-8 sm:gap-4">
+        {Object.values(checklists).map((checklist) => {
+          const selected = selectedAgeGroup === checklist.id;
+          return (
+            <button
+              key={checklist.id}
+              type="button"
+              onClick={() => setSelectedAgeGroup(checklist.id)}
+              className={`flex flex-col items-start gap-1 rounded-lg border-2 px-4 py-3 text-left transition-colors sm:px-6 ${
+                selected
+                  ? 'border-green-600 bg-green-50 text-green-700 dark:border-green-500 dark:bg-green-950/30 dark:text-green-300'
+                  : 'border-gray-200 bg-white text-gray-600 hover:border-green-300 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300'
+              }`}
+            >
+              <span className={selected ? 'font-semibold' : 'font-normal'}>{checklist.title}</span>
+              <span className="text-xs opacity-80">{getCompletionPercentage(checklist)}% complete</span>
+            </button>
+          );
+        })}
       </div>
 
-      {/* Progress Bar */}
-      <div style={{
-        backgroundColor: '#f8f9fa',
-        borderRadius: '12px',
-        padding: '1.5rem',
-        marginBottom: '2rem'
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-          <h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: '#2C3E50', margin: 0 }}>
+      <div className="mb-6 rounded-xl bg-gray-50 p-4 dark:bg-gray-800/60 sm:mb-8 sm:p-6">
+        <div className="mb-2 flex items-center justify-between gap-4">
+          <h3 className="text-lg font-semibold text-gray-900 sm:text-xl dark:text-gray-100">
             {currentChecklist.title}
           </h3>
-          <span style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#4CAF50' }}>
+          <span className="text-lg font-bold text-green-700 sm:text-xl dark:text-green-400">
             {completionPercentage}%
           </span>
         </div>
-        <div style={{
-          width: '100%',
-          height: '12px',
-          backgroundColor: '#e5e7eb',
-          borderRadius: '6px',
-          overflow: 'hidden'
-        }}>
-          <div style={{
-            width: `${completionPercentage}%`,
-            height: '100%',
-            backgroundColor: '#4CAF50',
-            transition: 'width 0.3s ease'
-          }} />
+        <div className="h-3 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
+          <div
+            className="h-full bg-green-600 transition-[width] duration-300 dark:bg-green-500"
+            style={{ width: `${completionPercentage}%` }}
+          />
         </div>
-        <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+        <div className="mt-4 flex flex-wrap gap-3">
           <button
+            type="button"
             onClick={exportChecklist}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              padding: '0.5rem 1rem',
-              backgroundColor: '#f3f4f6',
-              border: 'none',
-              borderRadius: '6px',
-              cursor: 'pointer',
-              fontSize: '0.875rem',
-              color: '#666'
-            }}
+            className="inline-flex items-center gap-2 rounded-md bg-gray-100 px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
           >
-            <Download size={16} />
+            <Download size={16} aria-hidden />
             Export
           </button>
           <button
+            type="button"
             onClick={shareChecklist}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              padding: '0.5rem 1rem',
-              backgroundColor: '#f3f4f6',
-              border: 'none',
-              borderRadius: '6px',
-              cursor: 'pointer',
-              fontSize: '0.875rem',
-              color: '#666'
-            }}
+            className="inline-flex items-center gap-2 rounded-md bg-gray-100 px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
           >
-            <Share2 size={16} />
+            <Share2 size={16} aria-hidden />
             Share Progress
           </button>
         </div>
       </div>
 
-      {/* Checklist Items */}
-      <div style={{
-        backgroundColor: 'white',
-        borderRadius: '12px',
-        border: '1px solid #e5e7eb',
-        padding: '1.5rem'
-      }}>
+      <div className="rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800 sm:p-6">
         {currentChecklist.items.map((item, index) => (
-          <div
+          <button
             key={item.id}
+            type="button"
             onClick={() => toggleItem(selectedAgeGroup, item.id)}
-            style={{
-              display: 'flex',
-              alignItems: 'start',
-              gap: '1rem',
-              padding: '1rem',
-              borderRadius: '8px',
-              cursor: 'pointer',
-              transition: 'background-color 0.2s',
-              marginBottom: index < currentChecklist.items.length - 1 ? '0.5rem' : 0,
-              backgroundColor: item.completed ? '#f0fdf4' : 'transparent'
-            }}
-            onMouseEnter={(e) => {
-              if (!item.completed) {
-                e.currentTarget.style.backgroundColor = '#f8f9fa';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (!item.completed) {
-                e.currentTarget.style.backgroundColor = 'transparent';
-              }
-            }}
+            className={`mb-2 flex w-full items-start gap-4 rounded-lg p-4 text-left transition-colors last:mb-0 ${
+              item.completed
+                ? 'bg-green-50 dark:bg-green-950/20'
+                : 'hover:bg-gray-50 dark:hover:bg-gray-700/50'
+            }`}
           >
             {item.completed ? (
-              <CheckCircle size={24} style={{ color: '#4CAF50', flexShrink: 0, marginTop: '2px' }} />
+              <CheckCircle size={24} className="mt-0.5 flex-shrink-0 text-green-600 dark:text-green-400" aria-hidden />
             ) : (
-              <Circle size={24} style={{ color: '#9ca3af', flexShrink: 0, marginTop: '2px' }} />
+              <Circle size={24} className="mt-0.5 flex-shrink-0 text-gray-400" aria-hidden />
             )}
-            <span style={{
-              fontSize: '1rem',
-              color: item.completed ? '#065f46' : '#2C3E50',
-              textDecoration: item.completed ? 'line-through' : 'none',
-              opacity: item.completed ? 0.7 : 1,
-              lineHeight: 1.6
-            }}>
+            <span
+              className={`text-base leading-relaxed ${
+                item.completed
+                  ? 'text-green-800 line-through opacity-70 dark:text-green-200'
+                  : 'text-gray-900 dark:text-gray-100'
+              }`}
+            >
               {item.text}
             </span>
-          </div>
+          </button>
         ))}
       </div>
 
-      {/* Completion Certificate */}
       {completionPercentage === 100 && (
-        <div style={{
-          backgroundColor: '#fef3c7',
-          border: '2px solid #f59e0b',
-          borderRadius: '12px',
-          padding: '2rem',
-          marginTop: '2rem',
-          textAlign: 'center'
-        }}>
-          <Award size={48} style={{ color: '#f59e0b', marginBottom: '1rem' }} />
-          <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#92400e', marginBottom: '0.5rem' }}>
+        <div className="mt-6 rounded-xl border-2 border-amber-500 bg-amber-50 p-6 text-center dark:border-amber-600 dark:bg-amber-950/30 sm:mt-8 sm:p-8">
+          <Award size={48} className="mx-auto mb-4 text-amber-500" aria-hidden />
+          <h3 className="mb-2 text-xl font-bold text-amber-900 sm:text-2xl dark:text-amber-100">
             Congratulations!
           </h3>
-          <p style={{ color: '#92400e', fontSize: '1rem', marginBottom: '1rem' }}>
-            You've completed the {currentChecklist.title}
+          <p className="mb-4 text-amber-900 dark:text-amber-200">
+            You&apos;ve completed the {currentChecklist.title}
           </p>
           <button
+            type="button"
             onClick={exportChecklist}
-            style={{
-              padding: '0.75rem 1.5rem',
-              backgroundColor: '#f59e0b',
-              color: 'white',
-              border: 'none',
-              borderRadius: '8px',
-              cursor: 'pointer',
-              fontSize: '1rem',
-              fontWeight: 600
-            }}
+            className="rounded-lg bg-amber-500 px-6 py-3 font-semibold text-white transition-colors hover:bg-amber-600"
           >
             Download Certificate
           </button>

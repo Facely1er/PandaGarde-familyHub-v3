@@ -173,7 +173,7 @@ const AppPermissionsAnalyzer: React.FC = () => {
             onClick={() => setSelectedPlatform('ios')}
             className={`px-6 py-3 rounded-lg font-medium transition-colors ${
               selectedPlatform === 'ios'
-                ? 'bg-blue-600 text-white'
+                ? 'bg-green-700 text-white dark:bg-green-600'
                 : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
             }`}
           >
@@ -215,7 +215,7 @@ const AppPermissionsAnalyzer: React.FC = () => {
                 <div className="flex justify-between items-center">
                   <button
                     onClick={() => handleAppSelect(app)}
-                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                    className="rounded-lg bg-green-700 px-4 py-2 text-white transition-colors hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500"
                   >
                     Analyze
                   </button>

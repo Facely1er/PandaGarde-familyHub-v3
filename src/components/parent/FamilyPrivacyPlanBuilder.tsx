@@ -268,7 +268,7 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
   };
 
   return (
-    <div className="privacy-plan-builder bg-white dark:bg-gray-800 rounded-xl p-4 sm:p-6 shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
+    <div className="privacy-plan-builder rounded-xl bg-white p-4 shadow-md dark:bg-gray-800 sm:p-6">
       <div className="flex items-center gap-3 mb-6">
         <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-lg flex items-center justify-center text-white">
           <Shield size={24} />

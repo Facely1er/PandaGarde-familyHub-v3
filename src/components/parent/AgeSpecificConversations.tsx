@@ -137,167 +137,127 @@ const AgeSpecificConversations: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: '2rem', maxWidth: '1000px', margin: '0 auto' }}>
-      <div style={{ marginBottom: '2rem' }}>
-        <h2 style={{ fontSize: '2rem', fontWeight: 'bold', color: '#2C3E50', marginBottom: '0.5rem' }}>
+    <div className="mx-auto max-w-4xl p-4 sm:p-8">
+      <div className="mb-6 sm:mb-8">
+        <h2 className="mb-2 text-2xl font-bold text-gray-900 sm:text-3xl dark:text-gray-100">
           Age-Specific Conversation Starters
         </h2>
-        <p style={{ color: '#666', fontSize: '1.125rem' }}>
-          Ready-to-use conversation scripts tailored to your child's age group
+        <p className="text-base text-gray-600 sm:text-lg dark:text-gray-300">
+          Ready-to-use conversation scripts tailored to your child&apos;s age group
         </p>
       </div>
 
-      {/* Age Group Selector */}
-      <div style={{ 
-        display: 'flex', 
-        gap: '1rem', 
-        marginBottom: '2rem',
-        flexWrap: 'wrap'
-      }}>
-        {ageGroups.map(group => (
-          <button
-            key={group.id}
-            onClick={() => {
-              setSelectedAgeGroup(group.id);
-              setExpandedTemplate(null);
-            }}
-            style={{
-              padding: '1rem 1.5rem',
-              borderRadius: '8px',
-              border: selectedAgeGroup === group.id ? '2px solid #4CAF50' : '2px solid #e5e7eb',
-              backgroundColor: selectedAgeGroup === group.id ? '#f0fdf4' : 'white',
-              color: selectedAgeGroup === group.id ? '#4CAF50' : '#666',
-              fontWeight: selectedAgeGroup === group.id ? 600 : 400,
-              cursor: 'pointer',
-              transition: 'all 0.2s'
-            }}
-          >
-            {group.label}
-          </button>
-        ))}
+      <div className="mb-6 flex flex-wrap gap-3 sm:mb-8 sm:gap-4">
+        {ageGroups.map((group) => {
+          const selected = selectedAgeGroup === group.id;
+          return (
+            <button
+              key={group.id}
+              type="button"
+              onClick={() => {
+                setSelectedAgeGroup(group.id);
+                setExpandedTemplate(null);
+              }}
+              className={`rounded-lg border-2 px-4 py-3 text-sm transition-colors sm:px-6 sm:text-base ${
+                selected
+                  ? 'border-green-600 bg-green-50 font-semibold text-green-700 dark:border-green-500 dark:bg-green-950/30 dark:text-green-300'
+                  : 'border-gray-200 bg-white font-normal text-gray-600 hover:border-green-300 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300'
+              }`}
+            >
+              {group.label}
+            </button>
+          );
+        })}
       </div>
 
-      {/* Templates */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-        {currentGroup.templates.map(template => (
-          <div
-            key={template.id}
-            style={{
-              backgroundColor: 'white',
-              borderRadius: '12px',
-              border: '1px solid #e5e7eb',
-              overflow: 'hidden'
-            }}
-          >
+      <div className="flex flex-col gap-4 sm:gap-6">
+        {currentGroup.templates.map((template) => {
+          const expanded = expandedTemplate === template.id;
+          const panelId = `conversation-panel-${template.id}`;
+          return (
             <div
-              style={{
-                padding: '1.5rem',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                backgroundColor: '#f8f9fa'
-              }}
-              onClick={() => setExpandedTemplate(expandedTemplate === template.id ? null : template.id)}
+              key={template.id}
+              className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800"
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <MessageCircle size={24} style={{ color: '#4CAF50' }} />
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: '#2C3E50', margin: 0 }}>
-                  {template.title}
-                </h3>
-              </div>
-              {expandedTemplate === template.id ? (
-                <ChevronUp size={20} style={{ color: '#666' }} />
-              ) : (
-                <ChevronDown size={20} style={{ color: '#666' }} />
+              <button
+                type="button"
+                id={`conversation-trigger-${template.id}`}
+                aria-expanded={expanded}
+                aria-controls={panelId}
+                onClick={() => setExpandedTemplate(expanded ? null : template.id)}
+                className="flex w-full cursor-pointer items-center justify-between bg-gray-50 p-4 text-left dark:bg-gray-800/80 sm:p-6"
+              >
+                <div className="flex items-center gap-3 sm:gap-4">
+                  <MessageCircle size={24} className="flex-shrink-0 text-green-600 dark:text-green-400" aria-hidden />
+                  <h3 className="m-0 text-lg font-semibold text-gray-900 sm:text-xl dark:text-gray-100">
+                    {template.title}
+                  </h3>
+                </div>
+                {expanded ? (
+                  <ChevronUp size={20} className="flex-shrink-0 text-gray-500" aria-hidden />
+                ) : (
+                  <ChevronDown size={20} className="flex-shrink-0 text-gray-500" aria-hidden />
+                )}
+              </button>
+
+              {expanded && (
+                <div id={panelId} role="region" aria-labelledby={`conversation-trigger-${template.id}`} className="p-4 sm:p-6">
+                  <div className="mb-6">
+                    <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+                      <h4 className="text-base font-semibold text-gray-900 dark:text-gray-100">What to Say:</h4>
+                      <button
+                        type="button"
+                        onClick={() => copyToClipboard(template.script, `script-${template.id}`)}
+                        className="inline-flex items-center gap-2 rounded-md bg-gray-100 px-3 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
+                      >
+                        {copiedId === `script-${template.id}` ? (
+                          <>
+                            <Check size={16} aria-hidden />
+                            Copied!
+                          </>
+                        ) : (
+                          <>
+                            <Copy size={16} aria-hidden />
+                            Copy
+                          </>
+                        )}
+                      </button>
+                    </div>
+                    <div className="rounded-lg border-l-4 border-green-600 bg-gray-50 p-4 italic leading-relaxed text-gray-900 dark:border-green-500 dark:bg-gray-900/50 dark:text-gray-100">
+                      {template.script}
+                    </div>
+                  </div>
+
+                  {template.followUpQuestions.length > 0 && (
+                    <div className="mb-6">
+                      <h4 className="mb-3 text-base font-semibold text-gray-900 dark:text-gray-100">
+                        Follow-up Questions:
+                      </h4>
+                      <ul className="m-0 list-disc space-y-2 pl-5 leading-relaxed text-gray-600 dark:text-gray-300">
+                        {template.followUpQuestions.map((question, idx) => (
+                          <li key={idx}>{question}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {template.tips.length > 0 && (
+                    <div className="rounded-lg border border-amber-500 bg-amber-50 p-4 dark:border-amber-600 dark:bg-amber-950/30">
+                      <h4 className="mb-3 text-base font-semibold text-amber-900 dark:text-amber-100">
+                        Tips for This Conversation:
+                      </h4>
+                      <ul className="m-0 list-disc space-y-2 pl-5 leading-relaxed text-amber-900 dark:text-amber-200">
+                        {template.tips.map((tip, idx) => (
+                          <li key={idx}>{tip}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
               )}
             </div>
-
-            {expandedTemplate === template.id && (
-              <div style={{ padding: '1.5rem' }}>
-                {/* Script */}
-                <div style={{ marginBottom: '1.5rem' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
-                    <h4 style={{ fontSize: '1rem', fontWeight: 600, color: '#2C3E50' }}>
-                      What to Say:
-                    </h4>
-                    <button
-                      onClick={() => copyToClipboard(template.script, `script-${template.id}`)}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.5rem',
-                        padding: '0.5rem 1rem',
-                        backgroundColor: '#f3f4f6',
-                        border: 'none',
-                        borderRadius: '6px',
-                        cursor: 'pointer',
-                        fontSize: '0.875rem',
-                        color: '#666'
-                      }}
-                    >
-                      {copiedId === `script-${template.id}` ? (
-                        <>
-                          <Check size={16} />
-                          Copied!
-                        </>
-                      ) : (
-                        <>
-                          <Copy size={16} />
-                          Copy
-                        </>
-                      )}
-                    </button>
-                  </div>
-                  <div style={{
-                    backgroundColor: '#f8f9fa',
-                    padding: '1rem',
-                    borderRadius: '8px',
-                    borderLeft: '3px solid #4CAF50',
-                    fontStyle: 'italic',
-                    color: '#2C3E50',
-                    lineHeight: 1.8
-                  }}>
-                    {template.script}
-                  </div>
-                </div>
-
-                {/* Follow-up Questions */}
-                {template.followUpQuestions.length > 0 && (
-                  <div style={{ marginBottom: '1.5rem' }}>
-                    <h4 style={{ fontSize: '1rem', fontWeight: 600, color: '#2C3E50', marginBottom: '0.75rem' }}>
-                      Follow-up Questions:
-                    </h4>
-                    <ul style={{ margin: 0, paddingLeft: '1.25rem', color: '#666', lineHeight: 1.8 }}>
-                      {template.followUpQuestions.map((question, idx) => (
-                        <li key={idx} style={{ marginBottom: '0.5rem' }}>{question}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                {/* Tips */}
-                {template.tips.length > 0 && (
-                  <div style={{
-                    backgroundColor: '#fef3c7',
-                    padding: '1rem',
-                    borderRadius: '8px',
-                    border: '1px solid #f59e0b'
-                  }}>
-                    <h4 style={{ fontSize: '1rem', fontWeight: 600, color: '#92400e', marginBottom: '0.75rem' }}>
-                      Tips for This Conversation:
-                    </h4>
-                    <ul style={{ margin: 0, paddingLeft: '1.25rem', color: '#92400e', lineHeight: 1.8 }}>
-                      {template.tips.map((tip, idx) => (
-                        <li key={idx} style={{ marginBottom: '0.5rem' }}>{tip}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

@@ -11,113 +11,69 @@ interface InfoBoxProps {
   onClose?: () => void;
 }
 
+const typeClasses: Record<
+  InfoBoxType,
+  { container: string; icon: string; DefaultIcon: typeof Info }
+> = {
+  success: {
+    container: 'border-green-500 bg-green-100 text-green-900 dark:border-green-600 dark:bg-green-900/30 dark:text-green-100',
+    icon: 'text-green-600 dark:text-green-400',
+    DefaultIcon: CheckCircle,
+  },
+  warning: {
+    container: 'border-amber-500 bg-amber-100 text-amber-900 dark:border-amber-600 dark:bg-amber-900/30 dark:text-amber-100',
+    icon: 'text-amber-600 dark:text-amber-400',
+    DefaultIcon: AlertTriangle,
+  },
+  error: {
+    container: 'border-red-500 bg-red-100 text-red-900 dark:border-red-600 dark:bg-red-900/30 dark:text-red-100',
+    icon: 'text-red-600 dark:text-red-400',
+    DefaultIcon: AlertCircle,
+  },
+  tip: {
+    container: 'border-green-500 bg-green-50 text-green-900 dark:border-green-600 dark:bg-green-900/20 dark:text-green-100',
+    icon: 'text-green-700 dark:text-green-400',
+    DefaultIcon: Lightbulb,
+  },
+  info: {
+    container: 'border-sky-500 bg-sky-50 text-sky-900 dark:border-sky-600 dark:bg-sky-900/20 dark:text-sky-100',
+    icon: 'text-sky-600 dark:text-sky-400',
+    DefaultIcon: Info,
+  },
+};
+
 const InfoBox: React.FC<InfoBoxProps> = ({
   type = 'info',
   title,
   children,
   icon,
-  onClose
+  onClose,
 }) => {
-  const getConfig = () => {
-    switch (type) {
-      case 'success':
-        return {
-          bgColor: '#d1fae5',
-          borderColor: '#10b981',
-          textColor: '#065f46',
-          iconColor: '#10b981',
-          defaultIcon: CheckCircle
-        };
-      case 'warning':
-        return {
-          bgColor: '#fef3c7',
-          borderColor: '#f59e0b',
-          textColor: '#92400e',
-          iconColor: '#f59e0b',
-          defaultIcon: AlertTriangle
-        };
-      case 'error':
-        return {
-          bgColor: '#fee2e2',
-          borderColor: '#dc2626',
-          textColor: '#991b1b',
-          iconColor: '#dc2626',
-          defaultIcon: AlertCircle
-        };
-      case 'tip':
-        return {
-          bgColor: '#dbeafe',
-          borderColor: '#3b82f6',
-          textColor: '#1e40af',
-          iconColor: '#3b82f6',
-          defaultIcon: Lightbulb
-        };
-      default: // info
-        return {
-          bgColor: '#e0f2fe',
-          borderColor: '#0ea5e9',
-          textColor: '#0c4a6e',
-          iconColor: '#0ea5e9',
-          defaultIcon: Info
-        };
-    }
-  };
-
-  const config = getConfig();
-  const Icon = icon || config.defaultIcon;
+  const config = typeClasses[type];
+  const DefaultIcon = config.DefaultIcon;
 
   return (
     <div
-      style={{
-        backgroundColor: config.bgColor,
-        border: `2px solid ${config.borderColor}`,
-        borderRadius: '12px',
-        padding: '1rem 1.25rem',
-        marginBottom: '1rem',
-        display: 'flex',
-        gap: '0.75rem',
-        alignItems: 'flex-start',
-        position: 'relative'
-      }}
+      className={`relative mb-4 flex items-start gap-3 rounded-xl border-2 p-4 pr-10 sm:pr-4 ${config.container}`}
     >
-      <div style={{ flexShrink: 0, marginTop: '0.125rem' }}>
-        {React.isValidElement(Icon) ? (
-          Icon
+      <div className="mt-0.5 flex-shrink-0">
+        {React.isValidElement(icon) ? (
+          icon
         ) : (
-          <Icon size={20} style={{ color: config.iconColor }} />
+          <DefaultIcon size={20} className={config.icon} aria-hidden />
         )}
       </div>
 
-      <div style={{ flex: 1, color: config.textColor }}>
-        {title && (
-          <div
-            style={{
-              fontSize: '1rem',
-              fontWeight: 600,
-              marginBottom: '0.5rem',
-              color: config.textColor
-            }}
-          >
-            {title}
-          </div>
-        )}
-        <div style={{ fontSize: '0.9375rem', lineHeight: '1.6' }}>{children}</div>
+      <div className="min-w-0 flex-1">
+        {title && <div className="mb-2 text-base font-semibold">{title}</div>}
+        <div className="text-[0.9375rem] leading-relaxed">{children}</div>
       </div>
 
       {onClose && (
         <button
+          type="button"
           onClick={onClose}
-          style={{
-            position: 'absolute',
-            top: '0.5rem',
-            right: '0.5rem',
-            background: 'none',
-            border: 'none',
-            color: config.textColor,
-            cursor: 'pointer',
-            padding: '0.25rem',
-            opacity: 0.7
-          }}
+          className="absolute right-2 top-2 rounded p-1 opacity-70 transition-opacity hover:opacity-100"
           aria-label="Close"
         >
           ×
@@ -128,4 +84,3 @@ const InfoBox: React.FC<InfoBoxProps> = ({
 };
 
 export default InfoBox;
-

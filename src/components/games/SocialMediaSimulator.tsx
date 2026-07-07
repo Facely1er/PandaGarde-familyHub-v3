@@ -101,7 +101,7 @@ const SocialMediaSimulator: React.FC<SocialMediaSimulatorProps> = ({ onBack }) =
                'Keep practicing! Social media safety takes time to master.'}
             </p>
             <div className="flex justify-center space-x-4">
-              <button onClick={resetGame} className="bg-blue-600 text-white px-6 py-3 rounded-lg">Try Again</button>
+              <button onClick={resetGame} className="rounded-lg bg-green-700 px-6 py-3 text-white hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500">Try Again</button>
               <button onClick={onBack} className="bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-200 px-6 py-3 rounded-lg">Back to Hub</button>
             </div>
           </div>
@@ -134,7 +134,7 @@ const SocialMediaSimulator: React.FC<SocialMediaSimulatorProps> = ({ onBack }) =
               <span>Score: {score}</span>
             </div>
             <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2">
-              <div className="bg-blue-600 h-2 rounded-full transition-all" style={{ width: `${((currentScenario + 1) / scenarios.length) * 100}%` }} />
+              <div className="h-2 rounded-full bg-green-600 transition-all dark:bg-green-500" style={{ width: `${((currentScenario + 1) / scenarios.length) * 100}%` }} />
             </div>
           </div>
 

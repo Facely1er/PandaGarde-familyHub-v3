@@ -9,97 +9,44 @@ interface HelpTooltipProps {
   children?: React.ReactNode;
 }
 
+const positionClasses = {
+  top: 'bottom-full left-1/2 mb-2 -translate-x-1/2',
+  bottom: 'top-full left-1/2 mt-2 -translate-x-1/2',
+  left: 'right-full top-1/2 mr-2 -translate-y-1/2',
+  right: 'left-full top-1/2 ml-2 -translate-y-1/2',
+};
+
+const arrowClasses = {
+  top: 'top-full left-1/2 -translate-x-1/2 border-x-transparent border-b-transparent border-t-gray-700',
+  bottom: 'bottom-full left-1/2 -translate-y-0 border-x-transparent border-t-transparent border-b-gray-700',
+  left: 'left-full top-1/2 -translate-y-1/2 border-y-transparent border-r-transparent border-l-gray-700',
+  right: 'right-full top-1/2 -translate-y-1/2 border-y-transparent border-l-transparent border-r-gray-700',
+};
+
 const HelpTooltip: React.FC<HelpTooltipProps> = ({
   content,
   title,
   position = 'top',
   trigger = 'hover',
-  children
+  children,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const handleMouseEnter = () => {
-    if (trigger === 'hover') {
-      setIsVisible(true);
-    }
+    if (trigger === 'hover') setIsVisible(true);
   };
 
   const handleMouseLeave = () => {
-    if (trigger === 'hover') {
-      setIsVisible(false);
-    }
+    if (trigger === 'hover') setIsVisible(false);
   };
 
   const handleClick = () => {
-    if (trigger === 'click') {
-      setIsVisible(!isVisible);
-    }
-  };
-
-  const positionStyles = {
-    top: {
-      bottom: '100%',
-      left: '50%',
-      transform: 'translateX(-50%)',
-      marginBottom: '8px'
-    },
-    bottom: {
-      top: '100%',
-      left: '50%',
-      transform: 'translateX(-50%)',
-      marginTop: '8px'
-    },
-    left: {
-      right: '100%',
-      top: '50%',
-      transform: 'translateY(-50%)',
-      marginRight: '8px'
-    },
-    right: {
-      left: '100%',
-      top: '50%',
-      transform: 'translateY(-50%)',
-      marginLeft: '8px'
-    }
-  };
-
-  const arrowStyles = {
-    top: {
-      top: '100%',
-      left: '50%',
-      transform: 'translateX(-50%)',
-      borderTopColor: '#374151',
-      borderBottom: 'none'
-    },
-    bottom: {
-      bottom: '100%',
-      left: '50%',
-      transform: 'translateX(-50%)',
-      borderBottomColor: '#374151',
-      borderTop: 'none'
-    },
-    left: {
-      left: '100%',
-      top: '50%',
-      transform: 'translateY(-50%)',
-      borderLeftColor: '#374151',
-      borderRight: 'none'
-    },
-    right: {
-      right: '100%',
-      top: '50%',
-      transform: 'translateY(-50%)',
-      borderRightColor: '#374151',
-      borderLeft: 'none'
-    }
+    if (trigger === 'click') setIsVisible(!isVisible);
   };
 
   return (
     <div
-      style={{
-        position: 'relative',
-        display: 'inline-block'
-      }}
+      className="relative inline-block"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
@@ -107,70 +54,37 @@ const HelpTooltip: React.FC<HelpTooltipProps> = ({
       {children || (
         <HelpCircle
           size={16}
-          style={{
-            color: '#6b7280',
-            cursor: 'pointer',
-            verticalAlign: 'middle'
-          }}
+          className="cursor-pointer align-middle text-gray-500 dark:text-gray-400"
+          aria-hidden
         />
       )}
 
       {isVisible && (
         <div
-          style={{
-            position: 'absolute',
-            zIndex: 1000,
-            ...positionStyles[position],
-            minWidth: '200px',
-            maxWidth: '300px',
-            padding: '0.75rem',
-            backgroundColor: '#374151',
-            color: 'white',
-            borderRadius: '8px',
-            fontSize: '0.875rem',
-            lineHeight: '1.5',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
-            pointerEvents: trigger === 'click' ? 'auto' : 'none'
-          }}
+          className={`absolute z-[1000] min-w-[200px] max-w-[300px] rounded-lg bg-gray-700 p-3 text-sm leading-relaxed text-white shadow-lg dark:bg-gray-800 ${positionClasses[position]} ${trigger === 'click' ? 'pointer-events-auto' : 'pointer-events-none'}`}
+          role="tooltip"
         >
           {trigger === 'click' && (
             <button
+              type="button"
               onClick={(e) => {
                 e.stopPropagation();
                 setIsVisible(false);
               }}
-              style={{
-                position: 'absolute',
-                top: '0.5rem',
-                right: '0.5rem',
-                background: 'none',
-                border: 'none',
-                color: 'white',
-                cursor: 'pointer',
-                padding: '0.25rem'
-              }}
+              className="absolute right-2 top-2 rounded p-0.5 text-white hover:bg-white/10"
+              aria-label="Close tooltip"
             >
               <X size={14} />
             </button>
           )}
 
-          {title && (
-            <div style={{ fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.9375rem' }}>
-              {title}
-            </div>
-          )}
+          {title && <div className="mb-2 pr-4 text-[0.9375rem] font-semibold">{title}</div>}
 
           <div>{content}</div>
 
-          {/* Arrow */}
           <div
-            style={{
-              position: 'absolute',
-              width: 0,
-              height: 0,
-              border: '6px solid transparent',
-              ...arrowStyles[position]
-            }}
+            className={`absolute h-0 w-0 border-[6px] border-transparent ${arrowClasses[position]}`}
+            aria-hidden
           />
         </div>
       )}
@@ -179,4 +93,3 @@ const HelpTooltip: React.FC<HelpTooltipProps> = ({
 };
 
 export default HelpTooltip;
-
