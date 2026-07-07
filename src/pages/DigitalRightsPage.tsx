@@ -495,7 +495,7 @@ const DigitalRightsPage: React.FC = () => {
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
             <Link
-              to="/teen-handbook"
+              to="/family-hub/activities"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white text-gray-800 font-semibold hover:bg-gray-100 transition-colors"
             >
               <BookOpen size={20} aria-hidden />

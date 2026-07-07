@@ -28,7 +28,7 @@ const ActivitiesPage: React.FC = () => {
 
   const clearSelection = () => {
     setSelectedId(null);
-    if (routeSlug) {navigate('/activities', { replace: true });}
+    if (routeSlug) {navigate('/family-hub/activities', { replace: true });}
   };
 
   if (selectedId && selected) {

@@ -415,7 +415,7 @@ const AgeSpecificGuidePage: React.FC = () => {
                   </Link>
 
                   <Link
-                    to="/digital-citizenship"
+                    to="/how-it-works"
                     className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow text-center"
                     style={{ backgroundColor: 'var(--card-color)' }}
                   >

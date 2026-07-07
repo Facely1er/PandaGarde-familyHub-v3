@@ -99,7 +99,7 @@ const ParentResourcesPage: React.FC = () => {
                 </div>
                 <p>Comprehensive resources for teachers and educators, including curriculum guides, lesson plans, assessment tools, and professional development materials.</p>
                 <div className="flex items-center gap-4 mt-4">
-                  <Link to="/educator-tools" className="button">
+                  <Link to="/how-it-works" className="button">
                     <Download size={16} />
                     View Toolkit
                   </Link>
@@ -272,7 +272,7 @@ const ParentResourcesPage: React.FC = () => {
                 </div>
                 <p>20 hands-on activities including games, crafts, role-playing scenarios, and interactive exercises to teach privacy concepts through play.</p>
                 <div className="flex items-center gap-4 mt-4">
-                  <Link to="/classroom-activities" className="button">
+                  <Link to="/how-it-works" className="button">
                     <Download size={16} />
                     View Activities
                   </Link>

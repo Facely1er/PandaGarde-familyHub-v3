@@ -335,7 +335,7 @@ const AppFeaturesPage: React.FC = () => {
               
               <div className="mt-8 pt-8 border-t border-teal-500">
                 <Link
-                  to="/app-store-review"
+                  to="/how-it-works"
                   className="inline-flex items-center px-6 py-3 bg-white text-teal-600 rounded-lg font-semibold hover:bg-teal-50 transition-colors"
                 >
                   View Detailed Reviewer Guide

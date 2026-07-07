@@ -481,7 +481,7 @@ const DigitalCitizenshipPage: React.FC = () => {
             justifyContent: 'center' 
           }}>
             <Link
-              to="/privacy-handbook"
+              to="/family-hub/activities"
               style={{
                 background: 'white',
                 color: '#9333ea',

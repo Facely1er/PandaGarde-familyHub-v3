@@ -35,7 +35,7 @@ const ProgressVisualization: React.FC<ProgressVisualizationProps> = ({
   }
 
   const calculateTrend = () => {
-    if (data.length < 2) return null;
+    if (data.length < 2) {return null;}
     const first = data[0].value;
     const last = data[data.length - 1].value;
     const diff = last - first;

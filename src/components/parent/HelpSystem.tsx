@@ -82,7 +82,7 @@ const HelpSystem: React.FC<HelpSystemProps> = ({ trigger = 'button', position = 
   }, []);
 
   useEffect(() => {
-    if (!isOpen || !modalRef.current) return;
+    if (!isOpen || !modalRef.current) {return;}
 
     const modal = modalRef.current;
     const focusableElements = modal.querySelectorAll(
@@ -94,7 +94,7 @@ const HelpSystem: React.FC<HelpSystemProps> = ({ trigger = 'button', position = 
     firstElement?.focus();
 
     const handleTabKey = (e: KeyboardEvent) => {
-      if (e.key !== 'Tab') return;
+      if (e.key !== 'Tab') {return;}
 
       if (e.shiftKey) {
         if (document.activeElement === firstElement) {
@@ -108,7 +108,7 @@ const HelpSystem: React.FC<HelpSystemProps> = ({ trigger = 'button', position = 
     };
 
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') closeHelp();
+      if (e.key === 'Escape') {closeHelp();}
     };
 
     modal.addEventListener('keydown', handleTabKey);

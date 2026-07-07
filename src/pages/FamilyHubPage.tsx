@@ -836,7 +836,7 @@ const FamilyHubPage: React.FC = () => {
                 <div className="mt-5 text-sm font-semibold text-blue-600 dark:text-blue-300">Read the story →</div>
               </Link>
 
-              <Link to="/classroom-activities" className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-purple-300 hover:shadow-lg dark:border-gray-700 dark:bg-gray-100">
+              <Link to="/how-it-works" className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-purple-300 hover:shadow-lg dark:border-gray-700 dark:bg-gray-100">
                 <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-r from-purple-500 to-purple-600 text-white">
                   <Award size={28} />
                 </div>

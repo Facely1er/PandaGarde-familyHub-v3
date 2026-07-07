@@ -117,7 +117,7 @@ const FamilyPrivacyGuidePage: React.FC = () => {
                 <h4 className="font-semibold mb-3 mt-4 family-guide-primary">Try this next</h4>
                 <ul className="space-y-2 text-sm family-guide-muted">
                   <li>• Review privacy settings on one app together</li>
-                  <li>• <Link to="/privacy-explorers" className="text-green-700 underline dark:text-green-400">Try Privacy Explorers activities</Link></li>
+                  <li>• <Link to="/family-hub/activities" className="text-green-700 underline dark:text-green-400">Try Privacy Explorers activities</Link></li>
                   <li>• List the apps your tween uses in the app catalog</li>
                 </ul>
               </div>
@@ -139,7 +139,7 @@ const FamilyPrivacyGuidePage: React.FC = () => {
                 </ul>
                 <h4 className="font-semibold mb-3 mt-4 family-guide-primary">Try this next</h4>
                 <ul className="space-y-2 text-sm family-guide-muted">
-                  <li>• <Link to="/teen-handbook" className="text-green-700 underline dark:text-green-400">Open the Teen Privacy Handbook</Link></li>
+                  <li>• <Link to="/family-hub/activities" className="text-green-700 underline dark:text-green-400">Open the Teen Privacy Handbook</Link></li>
                   <li>• Google their name together and talk about what is public</li>
                   <li>• Do a Family Hub mission matched to their age</li>
                 </ul>
@@ -368,7 +368,7 @@ const FamilyPrivacyGuidePage: React.FC = () => {
               </Link>
 
               <Link
-                to="/classroom-activities"
+                to="/how-it-works"
                 className="family-guide-card bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow text-center"
               >
                 <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 mx-auto">

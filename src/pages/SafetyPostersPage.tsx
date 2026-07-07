@@ -282,7 +282,7 @@ const SafetyPostersPage: React.FC = () => {
             </Link>
 
             <Link
-              to="/educator-tools"
+              to="/how-it-works"
               className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow text-center"
               style={{ backgroundColor: 'var(--card-color)' }}
             >

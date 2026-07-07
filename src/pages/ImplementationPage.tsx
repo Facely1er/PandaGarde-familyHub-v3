@@ -212,7 +212,7 @@ const ImplementationPage: React.FC = () => {
               </div>
 
               <div className="timeline-actions flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <Link to="/implementation-guide" className="button primary">
+                <Link to="/how-it-works" className="button primary">
                   <BookOpen size={16} />
                   View Detailed Timeline
                 </Link>

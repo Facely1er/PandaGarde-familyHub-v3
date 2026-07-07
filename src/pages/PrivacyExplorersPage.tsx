@@ -399,7 +399,7 @@ const PrivacyExplorersPage: React.FC = () => {
             justifyContent: 'center' 
           }}>
             <Link
-              to="/activity-book"
+              to="/family-hub/activities"
               style={{
                 background: 'white',
                 color: '#3b82f6',

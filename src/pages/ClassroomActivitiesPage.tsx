@@ -461,7 +461,7 @@ const ClassroomActivitiesPage: React.FC = () => {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
-              to="/educator-tools"
+              to="/how-it-works"
               className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-white px-6 py-3 font-semibold text-green-600 transition-colors hover:bg-gray-100"
             >
               <Users size={20} aria-hidden />
