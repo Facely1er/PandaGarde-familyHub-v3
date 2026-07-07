@@ -247,8 +247,8 @@ const ActivitiesScreen: React.FC = () => {
     <HubPageLayout>
       <HubScreenHero
         badge={`${allActivities.length} missions`}
-        title="Choose your mission"
-        subtitle="Pick an age group and a goal — every mission starts with a real situation you talk through together."
+        title="Family privacy missions"
+        subtitle="Pick an age group below to find your next mission — each one starts with a real situation you talk through together."
         compact
       />
 
@@ -308,14 +308,14 @@ const ActivitiesScreen: React.FC = () => {
               ? `Across all age groups, focused on ${activeFocus.toLowerCase()}`
               : 'Browse every mission, grouped by age';
           return (
-            <div className="mb-4 flex flex-wrap items-end justify-between gap-2">
+            <div className="mb-4 flex flex-col items-center gap-2 text-center">
               <div>
                 <h2 id="activities-catalogue-heading" className="text-lg font-bold text-gray-900 dark:text-white">
                   {headingText}
                 </h2>
                 <p className="mt-0.5 text-sm text-gray-600 dark:text-gray-300">{subText}</p>
               </div>
-              <div className="flex flex-wrap items-center gap-2 text-xs font-medium">
+              <div className="flex flex-wrap items-center justify-center gap-2 text-xs font-medium">
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-teal-50 px-2.5 py-1 text-teal-800 dark:bg-teal-900/30 dark:text-teal-200">
                   <Sparkles size={12} aria-hidden="true" />
                   <strong className="font-bold tabular-nums">{filteredActivities.length}</strong> missions
@@ -331,7 +331,7 @@ const ActivitiesScreen: React.FC = () => {
           );
         })()}
 
-        <div className="mb-5 flex flex-wrap gap-2" role="toolbar" aria-label="Filter by learning goal">
+        <div className="mb-4 flex flex-wrap justify-center gap-1.5" role="toolbar" aria-label="Filter by learning goal">
           {focusTabs.map((tab) => (
             <button
               key={tab.id}
@@ -339,7 +339,7 @@ const ActivitiesScreen: React.FC = () => {
                 hasInteractedRef.current = true;
                 setActiveFocus(tab.id);
               }}
-              className={`rounded-full border px-3 py-1.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 ${
+              className={`rounded-full border px-2.5 py-1 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 ${
                 activeFocus === tab.id
                   ? 'border-teal-500 bg-teal-50 text-teal-700 dark:border-teal-400 dark:bg-teal-900/30 dark:text-teal-200'
                   : 'border-gray-200 bg-white text-gray-700 hover:border-teal-300 hover:text-teal-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:border-teal-500 dark:hover:text-teal-200'

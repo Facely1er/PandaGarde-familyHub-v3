@@ -35,20 +35,22 @@ const HubScreenHero: React.FC<HubScreenHeroProps> = ({
         />
       )}
       <div className="min-w-0 flex-1">
-        {badge && (
-          <p className="inline-flex rounded-full bg-white/20 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wide text-white">
-            {badge}
-          </p>
-        )}
-        <h1
-          id="hub-hero-title"
-          className={[
-            'font-extrabold tracking-tight text-white',
-            compact ? 'mt-1 text-xl sm:text-2xl' : 'mt-2 text-2xl sm:text-3xl',
-          ].join(' ')}
-        >
-          {title}
-        </h1>
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+          <h1
+            id="hub-hero-title"
+            className={[
+              'font-extrabold tracking-tight text-white',
+              compact ? 'text-xl sm:text-2xl' : 'text-2xl sm:text-3xl',
+            ].join(' ')}
+          >
+            {title}
+          </h1>
+          {badge && (
+            <p className="inline-flex rounded-full bg-white/20 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wide text-white">
+              {badge}
+            </p>
+          )}
+        </div>
         <p className={['mt-1.5 max-w-xl text-teal-100', compact ? 'text-sm' : 'text-sm sm:text-base'].join(' ')}>
           {subtitle}
         </p>
