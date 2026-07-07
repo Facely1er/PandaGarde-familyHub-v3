@@ -21,6 +21,13 @@ export interface Achievement {
   };
 }
 
+export interface AchievementProgress {
+  completedActivities: string[];
+  activityDetails: Record<string, { score?: number }>;
+  totalTimeSpent: number;
+  achievements: string[];
+}
+
 export const ACHIEVEMENTS: Achievement[] = [
   {
     id: 'first_activity',
@@ -284,7 +291,7 @@ export class CertificateService {
     });
   }
 
-  static checkAchievements(progress: { completedActivities: number; activityDetails: Record<string, { score?: number }> }): Achievement[] {
+  static checkAchievements(progress: AchievementProgress): Achievement[] {
     const earnedAchievements: Achievement[] = [];
     
     for (const achievement of ACHIEVEMENTS) {
@@ -292,7 +299,7 @@ export class CertificateService {
       
       switch (achievement.requirements.type) {
         case 'activities':
-          earned = progress.completedActivities >= achievement.requirements.value;
+          earned = progress.completedActivities.length >= achievement.requirements.value;
           break;
         case 'score': {
           const avgScore = Object.values(progress.activityDetails)
