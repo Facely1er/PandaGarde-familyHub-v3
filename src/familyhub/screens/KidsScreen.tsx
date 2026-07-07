@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Plus, Eye, Trash2, Pencil, type LucideIcon } from 'lucide-react';
+import { Plus, Eye, Trash2, Pencil, Lock, type LucideIcon } from 'lucide-react';
 import { useHubFamilyMembers } from '../../hooks/useHubFamilyMembers';
 import { useFamilyProgress } from '../../contexts/FamilyProgressContext';
 import { useActiveMember } from '../../utils/familyProgressIntegration';
@@ -192,6 +192,16 @@ const KidsScreen: React.FC = () => {
           >
             Add Your First Member
           </button>
+          <p className="mx-auto mt-6 flex max-w-sm items-start justify-center gap-1.5 px-4 text-xs text-gray-500 dark:text-gray-400">
+            <Lock size={14} className="mt-0.5 shrink-0" aria-hidden="true" />
+            <span>
+              Privacy notice: only a first name and age are needed — no email, no account. Nothing is
+              sent to us; profiles and progress stay on this device.{' '}
+              <Link to="/privacy" className="underline hover:text-teal-700 dark:hover:text-teal-300">
+                Privacy policy
+              </Link>
+            </span>
+          </p>
         </div>
       ) : (
         <div className="space-y-4">
@@ -378,6 +388,14 @@ const KidsScreen: React.FC = () => {
                   <option value="Guardian">Guardian</option>
                 </select>
               </div>
+
+              <p className="flex items-start gap-1.5 text-xs text-gray-500 dark:text-gray-400">
+                <Lock size={14} className="mt-0.5 shrink-0" aria-hidden="true" />
+                <span>
+                  A first name or nickname is enough. This information stays on this device and is
+                  never sent to PandaGarde.
+                </span>
+              </p>
 
               <div className="flex gap-3 pt-4">
                 <button

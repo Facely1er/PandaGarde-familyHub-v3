@@ -214,6 +214,11 @@ const CertificateGenerator: React.FC<CertificateGeneratorProps> = ({ onClose }) 
                   </>
                 )}
               </button>
+
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                Certificates are a fun educational keepsake for your family — they celebrate
+                learning progress on this device and are not an accredited certification.
+              </p>
             </div>
           </div>
 

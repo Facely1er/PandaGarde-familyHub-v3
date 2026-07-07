@@ -195,6 +195,12 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
               style={{ width: `${result.overallScore}%` }}
             />
           </div>
+
+          <p className="mt-4 text-xs text-gray-500 dark:text-dark-text-tertiary">
+            This score is an educational snapshot based on the answers you provided — it is not a
+            compliance audit, live monitoring, or professional advice. Results are saved on this
+            device only.
+          </p>
         </div>
 
         {/* Category Scores */}

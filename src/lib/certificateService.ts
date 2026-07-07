@@ -197,7 +197,18 @@ export class CertificateService {
     pdf.setFontSize(12);
     pdf.setTextColor(46, 125, 50);
     pdf.setFont('helvetica', 'bold');
-    pdf.text('🐼 PandaGarde Privacy Education Platform 🐼', pageWidth / 2, 270, { align: 'center' });
+    pdf.text('🐼 PandaGarde Privacy Education Platform 🐼', pageWidth / 2, 265, { align: 'center' });
+
+    // Educational disclaimer
+    pdf.setFontSize(8);
+    pdf.setTextColor(120, 120, 120);
+    pdf.setFont('helvetica', 'normal');
+    pdf.text(
+      'This is a fun educational keepsake based on self-reported family activities — not an accredited certification or compliance credential.',
+      pageWidth / 2,
+      273,
+      { align: 'center' }
+    );
     
     // Bottom decorative stars
     pdf.setFillColor(255, 193, 7); // Gold

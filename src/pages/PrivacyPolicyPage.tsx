@@ -65,11 +65,16 @@ const PrivacyPolicyPage: React.FC = () => {
                 <ul className="list-disc pl-6 space-y-1 text-red-700"
                     style={{ color: theme === 'dark' ? '#F87171' : '#B91C1C' }}>
                   <li>Personal information from children under 13</li>
-                  <li>Names, addresses, or contact details of children</li>
+                  <li>Addresses, emails, or contact details of children</li>
                   <li>Photos or videos of children</li>
                   <li>Location data or device identifiers</li>
                   <li>Browsing history or search queries</li>
                 </ul>
+                <p className="mt-3 text-sm text-red-700"
+                   style={{ color: theme === 'dark' ? '#F87171' : '#B91C1C' }}>
+                  Note: Family Hub profiles use a first name (or nickname) and age to match missions.
+                  These stay in your browser's local storage on your device and are never transmitted to us.
+                </p>
               </div>
             </section>
 
@@ -143,9 +148,10 @@ const PrivacyPolicyPage: React.FC = () => {
                   <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Shield size={32} className="text-green-600" />
                   </div>
-                  <h3 className="font-semibold mb-2 text-primary">No Tracking</h3>
+                  <h3 className="font-semibold mb-2 text-primary">No Ad Tracking</h3>
                   <p className="text-sm text-gray-600">
-                    We don't use tracking cookies or analytics
+                    No advertising or cross-site tracking cookies — only anonymous, privacy-focused
+                    analytics (see our Cookie Policy)
                   </p>
                 </div>
 

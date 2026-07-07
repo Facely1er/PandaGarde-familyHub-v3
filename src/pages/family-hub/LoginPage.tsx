@@ -72,6 +72,19 @@ const LoginPage: React.FC = () => {
         </div>
       </div>
 
+      <p className="pb-2 text-center text-xs text-gray-500 dark:text-gray-400">
+        <a href="/privacy" className="underline hover:text-teal-700 dark:hover:text-teal-300">
+          Privacy
+        </a>
+        <span className="mx-2" aria-hidden="true">·</span>
+        <a href="/terms" className="underline hover:text-teal-700 dark:hover:text-teal-300">
+          Terms
+        </a>
+        <span className="mx-2" aria-hidden="true">·</span>
+        <a href="/cookies" className="underline hover:text-teal-700 dark:hover:text-teal-300">
+          Cookies
+        </a>
+      </p>
       <p className="pb-[max(1rem,env(safe-area-inset-bottom))] text-center text-xs text-gray-500 dark:text-gray-400">
         {!isHubStandalone ? (
           <a href="/" className="underline hover:text-teal-700 dark:hover:text-teal-300">

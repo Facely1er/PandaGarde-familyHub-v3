@@ -116,6 +116,15 @@ const EmailCaptureInline: React.FC<EmailCaptureInlineProps> = ({
             </button>
           </form>
         )}
+        {!isSubmitted && (
+          <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+            We respect your privacy.{' '}
+            <a href="/newsletter/unsubscribe" className="underline hover:text-green-700 dark:hover:text-green-300">
+              Unsubscribe anytime
+            </a>
+            .
+          </p>
+        )}
       </div>
     );
   }
@@ -171,7 +180,11 @@ const EmailCaptureInline: React.FC<EmailCaptureInlineProps> = ({
               </button>
             </div>
             <p className="text-xs text-gray-500 dark:text-gray-400">
-              We respect your privacy. Unsubscribe anytime.
+              We respect your privacy.{' '}
+              <a href="/newsletter/unsubscribe" className="underline hover:text-green-700 dark:hover:text-green-300">
+                Unsubscribe anytime
+              </a>
+              .
             </p>
           </form>
         </>

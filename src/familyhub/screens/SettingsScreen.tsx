@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Moon, Sun, Shield, HelpCircle, ExternalLink, Home } from 'lucide-react';
+import { Moon, Sun, Shield, HelpCircle, ExternalLink, Home, Scale } from 'lucide-react';
 import { useTheme } from '../../contexts/ThemeContext';
 import { hubTheme } from '../hubTheme';
 import HubPageLayout from '../components/HubPageLayout';
@@ -61,6 +61,37 @@ const SettingsScreen: React.FC = () => {
           View Privacy Policy
           <ExternalLink size={14} aria-hidden />
         </Link>
+      </section>
+
+      <section className={`${hubTheme.card} p-5 sm:p-6`} aria-labelledby="settings-legal-heading">
+        <div className="mb-4 flex items-center gap-3">
+          <Scale className="shrink-0 text-teal-600 dark:text-teal-400" size={20} aria-hidden />
+          <h2 id="settings-legal-heading" className={`font-semibold ${hubTheme.heading}`}>
+            Legal
+          </h2>
+        </div>
+        <ul className="space-y-3">
+          <li>
+            <Link to="/terms" className={externalLinkClass}>
+              Terms of Service
+            </Link>
+          </li>
+          <li>
+            <Link to="/cookies" className={externalLinkClass}>
+              Cookie Policy
+            </Link>
+          </li>
+          <li>
+            <Link to="/accessibility" className={externalLinkClass}>
+              Accessibility Statement
+            </Link>
+          </li>
+          <li>
+            <Link to="/legal" className={externalLinkClass}>
+              Legal Overview
+            </Link>
+          </li>
+        </ul>
       </section>
 
       <section className={`${hubTheme.card} p-5 sm:p-6`} aria-labelledby="settings-help-heading">

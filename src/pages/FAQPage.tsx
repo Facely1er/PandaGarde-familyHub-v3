@@ -18,7 +18,7 @@ const FAQPage: React.FC = () => {
     {
       id: '1',
       question: 'What is PandaGarde and who is it for?',
-      answer: 'PandaGarde helps families with children ages 5–13 learn about online privacy together. It combines Privacy Panda stories, parent guides, a footprint review, and Family Hub missions — use any of them in any order.',
+      answer: 'PandaGarde helps families with children and teens ages 5–17 learn about online privacy together. It combines Privacy Panda stories, parent guides, a footprint review, and Family Hub missions — use any of them in any order.',
       category: 'general'
     },
     {
@@ -30,7 +30,7 @@ const FAQPage: React.FC = () => {
     {
       id: '3',
       question: 'What age groups does PandaGarde support?',
-      answer: 'PandaGarde is designed for children ages 5–13, with content matched to three bands: young children (5–7), middle childhood (8–10), and older kids (11–13). Stories, guides, and Family Hub missions are all age-aware.',
+      answer: 'PandaGarde is designed for ages 5–17, with Family Hub missions matched to three bands: young children (5–8), older kids (9–12), and teens (13–17). Stories, guides, and missions are all age-aware.',
       category: 'general'
     },
     {
@@ -48,7 +48,7 @@ const FAQPage: React.FC = () => {
     {
       id: '6',
       question: 'How do the interactive activities work?',
-      answer: 'Our activities are designed to be engaging and educational. They include coloring pages, drag-and-drop games, mazes, word searches, and matching games. Each activity teaches specific privacy concepts while being fun to complete.',
+      answer: 'Interactive missions and games live in the Family Hub. Each mission pairs a real-life scenario and family conversation with an optional hands-on game — coloring, mazes, sorting, and word searches for younger kids, and simulations like the Phishing Detective for teens. Everything runs on your device.',
       category: 'activities'
     },
     {
@@ -60,7 +60,7 @@ const FAQPage: React.FC = () => {
     {
       id: '8',
       question: 'Can I track my child\'s progress?',
-      answer: 'Yes! You can see which activities your child has done, their scores, and how they’re doing. That makes it easier to talk about what they’ve learned.',
+      answer: 'Yes! In the Family Hub you can see which missions your child has done, their scores, and streaks — all saved on this device only. It’s a record of learning activities completed together, not monitoring of what your child does elsewhere online.',
       category: 'progress'
     },
     {
