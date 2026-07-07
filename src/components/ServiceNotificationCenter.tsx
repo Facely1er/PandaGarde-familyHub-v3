@@ -201,7 +201,7 @@ const ServiceNotificationCenter: React.FC<ServiceNotificationCenterProps> = ({
     return (
       <Link
         to="/safety-alerts"
-        className="relative inline-flex items-center space-x-2 px-3 py-2 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-lg transition-colors"
+        className="relative inline-flex items-center space-x-2 px-3 py-2 bg-green-50 dark:bg-green-900/20 hover:bg-green-100 dark:hover:bg-green-900/30 rounded-lg transition-colors"
       >
         <Bell className="h-5 w-5 text-blue-600 dark:text-blue-400" />
         <span className="text-sm font-medium text-blue-900 dark:text-blue-100">

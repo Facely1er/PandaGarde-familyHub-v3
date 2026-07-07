@@ -627,7 +627,7 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
                         <div className="mt-3 pt-3 border-t border-gray-200 dark:border-dark-border">
                           <Link
                             to={`/service-catalog?services=${rec.affectedServices.join(',')}`}
-                            className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 flex items-center space-x-1"
+                            className="text-sm text-green-700 dark:text-green-400 hover:text-green-800 flex items-center space-x-1"
                           >
                             <span>View affected services</span>
                             <ArrowRight className="h-3 w-3" />
@@ -885,7 +885,7 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
                                 href={b.optOutUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1 text-xs text-blue-600 dark:text-blue-400 hover:underline"
+                                className="inline-flex items-center gap-1 text-xs text-green-700 dark:text-green-400 hover:underline"
                               >
                                 <ExternalLink className="h-3 w-3" />
                                 {b.name} opt-out

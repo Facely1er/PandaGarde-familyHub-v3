@@ -86,7 +86,7 @@ const PrivacyGoalsPage: React.FC = () => {
               </div>
               <button
                 onClick={() => setShowSuggestions(false)}
-                className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
+                className="text-green-700 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300"
               >
                 ×
               </button>

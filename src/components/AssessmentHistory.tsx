@@ -116,7 +116,7 @@ const AssessmentHistory: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Summary Card */}
-      <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl p-6 border-2 border-blue-200 dark:border-blue-800">
+      <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl p-6 border-2 border-green-200 dark:border-green-800">
         <div className="flex items-center justify-between mb-4">
           <div>
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
@@ -147,7 +147,7 @@ const AssessmentHistory: React.FC = () => {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-3 gap-4 mt-4 pt-4 border-t border-blue-200 dark:border-blue-800">
+        <div className="grid grid-cols-3 gap-4 mt-4 pt-4 border-t border-green-200 dark:border-green-800">
           <div className="text-center">
             <div className="text-2xl font-bold text-gray-900 dark:text-white">
               {history.length}
@@ -193,7 +193,7 @@ const AssessmentHistory: React.FC = () => {
                 onClick={() => setSelectedEntry(entry)}
                 className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
                   isSelected
-                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30'
+                    ? 'border-green-500 bg-green-50 dark:bg-green-900/30'
                     : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
                 }`}
               >

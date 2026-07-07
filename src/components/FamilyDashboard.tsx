@@ -870,7 +870,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
                               setActiveMember(member.id);
                               setSelectedChildId(member.id);
                             }}
-                            className="p-2 text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-colors touch-manipulation min-w-[44px] min-h-[44px] flex items-center justify-center"
+                            className="p-2 text-green-700 hover:text-green-800 hover:bg-green-50 dark:text-green-400 dark:hover:bg-green-900/20 rounded-lg transition-colors touch-manipulation min-w-[44px] min-h-[44px] flex items-center justify-center"
                             title="View detailed progress"
                           >
                             <Eye size={18} />
