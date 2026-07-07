@@ -118,7 +118,7 @@ export function StoryCoverArt({ story, variant }: StoryCoverArtProps) {
         />
         {variant === 'card' && (
           <div
-            className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-gray-900/35 via-transparent to-transparent dark:from-gray-950/45"
+            className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-8 bg-gradient-to-t from-gray-900/20 to-transparent dark:from-gray-950/30"
             aria-hidden
           />
         )}

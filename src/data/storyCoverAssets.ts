@@ -1,7 +1,7 @@
 import type { Story } from './stories';
 
-/** Episode order must match crop script grid: row-major 1–8. */
-const EPISODE_SLUGS = [
+/** Season 1 only — episodes 9+ need dedicated poster art (zone map ≠ episode covers). */
+const SEASON1_EPISODE_SLUGS = [
   'privacy-panda-and-the-digital-bamboo-forest',
   'miki-and-the-photo-that-flew-away',
   'billys-invisible-collection',
@@ -18,27 +18,29 @@ const coverModules = import.meta.glob('../assets/story-covers/episode-*-cover.we
 }) as Record<string, string>;
 
 function coverUrlForEpisode(episodeNumber: number): string | undefined {
+  if (episodeNumber < 1 || episodeNumber > SEASON1_EPISODE_SLUGS.length) {
+    return undefined;
+  }
   const key = `../assets/story-covers/episode-${episodeNumber}-cover.webp`;
   return coverModules[key];
 }
 
-/** Bundled cover URLs (Vite resolves at build time). Only existing WebPs are included. */
+/** Bundled cover URLs for Season 1 episodes only. */
 export const STORY_COVER_BY_SLUG: Record<string, string> = Object.fromEntries(
-  EPISODE_SLUGS.flatMap((slug, index) => {
+  SEASON1_EPISODE_SLUGS.flatMap((slug, index) => {
     const url = coverUrlForEpisode(index + 1);
     return url ? [[slug, url] as const] : [];
   }),
 );
 
-/** Per-episode object-position hints (contain mode — usually centered). */
-const COVER_POSITION_BY_SLUG: Record<string, string> = {
-  'privacy-panda-and-the-digital-bamboo-forest': 'center',
-  'mika-and-the-photo-that-flew-away': 'center',
-  'billys-invisible-collection': 'center',
-  'mika-and-the-sneaky-settings': 'center',
-};
+export function hasStoryBundledCover(story: Story): boolean {
+  return Boolean(STORY_COVER_BY_SLUG[story.slug]);
+}
 
 export function getStoryCoverUrl(story: Story): string | undefined {
+  if (story.season > 1) {
+    return story.coverImage;
+  }
   return STORY_COVER_BY_SLUG[story.slug] ?? story.coverImage;
 }
 
@@ -49,5 +51,5 @@ export function getStoryCoverPosition(story: Story, variant: 'hero' | 'card'): s
   if (story.coverImagePosition) {
     return story.coverImagePosition;
   }
-  return COVER_POSITION_BY_SLUG[story.slug] ?? 'center';
+  return 'center';
 }

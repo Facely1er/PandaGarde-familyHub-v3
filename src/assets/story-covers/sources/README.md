@@ -10,7 +10,9 @@ npm run assets:story-covers
 
 | Save attached file as | Contents |
 |---|---|
-| **`sources/season-1-covers-4x2.png`** | 4×2 grid of episode posters (PANDAGARDE Episodes 1–8). Crop order: row 1 → Ep 1–4, row 2 → Ep 5–8. |
+| **`sources/cover-stories.png`** | **Preferred** — 4×2 text-free illustration grid (Ep 1–8). |
+| `sources/cover-stories-banner.png` | Alternate text-free 4×2 grid (fallback if primary missing). |
+| `sources/season-1-covers-4x2.png` | Legacy titled poster grid (extra chrome trim applied). |
 
 The crop script trims ~11.5% top (title pill) and ~13.5% bottom (logo) per cell, plus **7.5% per side** on shared column borders and **4.5%** on the row split — so neighboring panels should not bleed into the card frame.
 
@@ -43,7 +45,7 @@ If a panel still shows a sliver of the neighbor, increase `INNER_COL_GUTTER` (e.
 | Save as | Use |
 |---|---|
 | `episodes-1-3-storyboard.png` | Ep 1–3 cover columns + 10 scene thumbs each + zone/pillar/character icons (future chapter crops) |
-| `season-2-zones-4x4.png` | 16 zone posters — **not** wired to Ep 9–16 story slugs (different titles); use for forest map / zone unlock art |
+| `season-2-zones-4x4.png` | 16 zone posters — **forest map art only**; do not use as episode 9–16 covers |
 
 ## Legacy (fallback if grid missing)
 

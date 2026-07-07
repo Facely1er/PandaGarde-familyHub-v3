@@ -17,7 +17,12 @@ import {
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, '..');
 const coversDir = path.join(root, 'src', 'assets', 'story-covers');
-const sourcePath = path.join(coversDir, 'sources', 'season-1-covers-4x2.png');
+const sourceCandidates = [
+  path.join(coversDir, 'sources', 'cover-stories.png'),
+  path.join(coversDir, 'sources', 'cover-stories-banner.png'),
+  path.join(coversDir, 'sources', 'season-1-covers-4x2.png'),
+];
+const sourcePath = sourceCandidates.find((candidate) => fs.existsSync(candidate));
 const outDir = path.join(coversDir, 'sources', '_crop-verify');
 
 const COLS = 4;
@@ -77,8 +82,8 @@ function gradeEpisode(edges) {
   return { status: 'PASS', flags: ['clean edges'] };
 }
 
-if (!fs.existsSync(sourcePath)) {
-  console.error('Missing source:', sourcePath);
+if (!sourcePath) {
+  console.error('Missing source: add sources/cover-stories.png (or legacy season-1-covers-4x2.png)');
   process.exit(1);
 }
 
@@ -100,6 +105,8 @@ for (let row = 0; row < ROWS; row += 1) {
       COLS,
       ROWS,
       gutters,
+      row * COLS + col + 1,
+      path.basename(sourcePath).startsWith('cover-stories') ? 'clean' : 'titled',
     );
     rects.push({ bounds, cell, col, row, ep: row * COLS + col + 1 });
   }

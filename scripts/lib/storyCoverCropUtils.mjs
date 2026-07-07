@@ -5,12 +5,29 @@ export const OUTPUT_WIDTH = 512;
 export const OUTPUT_HEIGHT = 640;
 export const MIN_INSET_PX = 4;
 
-/** Episode badge (top) + PANDAGARDE logo band (bottom) only — not illustration. */
-export const CHROME_TOP = 0.105;
-export const CHROME_BOTTOM = 0.105;
+/** Episode badge (top) + title + PANDAGARDE logo band (bottom) — not illustration. */
+export const CHROME_TOP = 0.13;
+export const CHROME_BOTTOM = 0.16;
 
-export const OUTER_EDGE = 0.01;
-export const INNER_PAD = 0.008;
+export const OUTER_EDGE = 0.02;
+/** Shave at shared column borders (each adjacent cell takes half). */
+export const INNER_COL_GUTTER = 0.042;
+export const INNER_ROW_GUTTER = 0.028;
+
+/** Extra trim for titled poster cells that still show title/chrome after default crop. */
+export const EPISODE_CHROME_OVERRIDES = {
+  2: { top: 0.24, bottom: 0.22 },
+  3: { top: 0.24, bottom: 0.22 },
+  4: { top: 0.24, bottom: 0.22 },
+  5: { top: 0.24, bottom: 0.22 },
+};
+
+/** Text-free illustration grids — only shave gutters, keep full art. */
+export const CLEAN_CHROME_TOP = 0.01;
+export const CLEAN_CHROME_BOTTOM = 0.01;
+export const CLEAN_OUTER_EDGE = 0.01;
+export const CLEAN_INNER_COL_GUTTER = 0.014;
+export const CLEAN_INNER_ROW_GUTTER = 0.012;
 
 export const LETTERBOX = { r: 17, g: 24, b: 39, alpha: 1 };
 
@@ -122,20 +139,49 @@ export function getCellBounds(width, height, col, row, cols, rows, gutters) {
 
 /**
  * Illustration-only rect: gutters + title/logo chrome removed, full art kept.
+ * @param {number} [episodeNumber] 1-based index in grid (for per-episode chrome overrides)
+ * @param {'titled' | 'clean'} [cropProfile] titled = poster sheets with badges; clean = text-free art
  * @returns {{ left: number, top: number, width: number, height: number }}
  */
-export function getCellExtractRect(width, height, col, row, cols, rows, gutters) {
+export function getCellExtractRect(
+  width,
+  height,
+  col,
+  row,
+  cols,
+  rows,
+  gutters,
+  episodeNumber,
+  cropProfile = 'titled',
+) {
   const cell = getCellBounds(width, height, col, row, cols, rows, gutters);
   const cellW = cell.width;
   const cellH = cell.height;
 
-  const padL = Math.max(MIN_INSET_PX, Math.floor(cellW * (col === 0 ? OUTER_EDGE : INNER_PAD)));
+  const isClean = cropProfile === 'clean';
+  const chrome = isClean ? {} : EPISODE_CHROME_OVERRIDES[episodeNumber] ?? {};
+  const chromeTop = chrome.top ?? (isClean ? CLEAN_CHROME_TOP : CHROME_TOP);
+  const chromeBottom = chrome.bottom ?? (isClean ? CLEAN_CHROME_BOTTOM : CHROME_BOTTOM);
+  const outerEdge = isClean ? CLEAN_OUTER_EDGE : OUTER_EDGE;
+  const innerColGutter = isClean ? CLEAN_INNER_COL_GUTTER : INNER_COL_GUTTER;
+  const innerRowGutter = isClean ? CLEAN_INNER_ROW_GUTTER : INNER_ROW_GUTTER;
+
+  const padL = Math.max(
+    MIN_INSET_PX,
+    Math.floor(cellW * (col === 0 ? outerEdge : innerColGutter)),
+  );
   const padR = Math.max(
     MIN_INSET_PX,
-    Math.floor(cellW * (col === cols - 1 ? OUTER_EDGE : INNER_PAD)),
+    Math.floor(cellW * (col === cols - 1 ? outerEdge : innerColGutter)),
   );
-  const padT = Math.max(MIN_INSET_PX, Math.floor(cellH * CHROME_TOP));
-  const padB = Math.max(MIN_INSET_PX, Math.floor(cellH * CHROME_BOTTOM));
+  const padT = Math.max(
+    MIN_INSET_PX,
+    Math.floor(cellH * chromeTop + (row > 0 ? cellH * innerRowGutter : 0)),
+  );
+  const padB = Math.max(
+    MIN_INSET_PX,
+    Math.floor(cellH * chromeBottom + (row < rows - 1 ? cellH * innerRowGutter : 0)),
+  );
 
   const extractWidth = cellW - padL - padR;
   const extractHeight = cellH - padT - padB;
