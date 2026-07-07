@@ -93,7 +93,7 @@ const ServiceCatalogPage: React.FC = () => {
         </div>
 
         {servicesCount > 0 && (
-          <div className={`mb-6 rounded-xl border-2 p-4 transition-all ${isReadyForAnalysis ? 'border-green-300 bg-gradient-to-r from-green-50 to-emerald-50 dark:border-green-700 dark:from-green-900/20 dark:to-emerald-900/20' : 'border-blue-300 bg-gradient-to-r from-blue-50 to-indigo-50 dark:border-blue-700 dark:from-blue-900/20 dark:to-indigo-900/20'}`}>
+          <div className={`mb-6 rounded-xl border-2 p-4 transition-all ${isReadyForAnalysis ? 'border-green-300 bg-gradient-to-r from-green-50 to-emerald-50 dark:border-green-700 dark:from-green-900/20 dark:to-emerald-900/20' : 'border-amber-300 bg-gradient-to-r from-amber-50 to-orange-50 dark:border-amber-700 dark:from-amber-900/20 dark:to-orange-900/20'}`}>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <div className={`flex h-12 w-12 items-center justify-center rounded-full ${isReadyForAnalysis ? 'bg-green-600' : 'bg-amber-500'}`}>
@@ -101,7 +101,7 @@ const ServiceCatalogPage: React.FC = () => {
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className={`text-lg font-bold ${isReadyForAnalysis ? 'text-green-900 dark:text-green-100' : 'text-blue-900 dark:text-blue-100'}`}>
+                    <span className={`text-lg font-bold ${isReadyForAnalysis ? 'text-green-900 dark:text-green-100' : 'text-amber-900 dark:text-amber-100'}`}>
                       {servicesCount} app{servicesCount !== 1 ? 's' : ''} added
                     </span>
                     {isReadyForAnalysis && (
@@ -112,7 +112,7 @@ const ServiceCatalogPage: React.FC = () => {
                   </div>
                   <div className="mt-1 flex items-center gap-3">
                     <ProgressBar value={progressPercent} size="sm" variant={isReadyForAnalysis ? 'low' : 'primary'} aria-label="Services added progress" className="h-2 w-32" />
-                    <span className={`text-sm ${isReadyForAnalysis ? 'text-green-700 dark:text-green-300' : 'text-blue-700 dark:text-blue-300'}`}>
+                    <span className={`text-sm ${isReadyForAnalysis ? 'text-green-700 dark:text-green-300' : 'text-amber-700 dark:text-amber-300'}`}>
                       {isReadyForAnalysis ? 'Ready for footprint review.' : servicesCount === 1 ? 'Great start — add 2 more for footprint scores.' : servicesCount === 2 ? 'Almost there — add 1 more for footprint scores.' : 'Add 3 services to run footprint review.'}
                     </span>
                   </div>
@@ -134,7 +134,7 @@ const ServiceCatalogPage: React.FC = () => {
             <span className="font-medium text-gray-700 dark:text-gray-300">Footprint review:</span>{' '}
             <span className="font-medium text-green-600 dark:text-green-400">Step 1 — add your family's apps</span>
             {' → '}
-            <Link to="/digital-footprint" className="font-medium text-blue-600 hover:underline dark:text-blue-400">Step 2 — see your footprint</Link>
+            <Link to="/digital-footprint" className="font-medium text-green-700 hover:text-green-800 hover:underline dark:text-green-400 dark:hover:text-green-300">Step 2 — see your footprint</Link>
           </p>
           <div className="mb-4 flex items-center justify-between">
             <div>
@@ -159,7 +159,7 @@ const ServiceCatalogPage: React.FC = () => {
           </div>
 
           {servicesCount < 3 && (
-            <div className="mb-6 rounded-xl border-2 border-green-200 bg-gradient-to-r from-green-50 to-blue-50 p-6 dark:border-green-800 dark:from-green-900/20 dark:to-blue-900/20">
+            <div className="mb-6 rounded-xl border-2 border-green-200 bg-gradient-to-r from-green-50 to-emerald-50 p-6 dark:border-green-800 dark:from-green-900/20 dark:to-emerald-900/20">
               <div className="flex items-start space-x-4">
                 <div className="flex-shrink-0">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-700">
