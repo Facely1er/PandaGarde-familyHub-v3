@@ -10,8 +10,11 @@ import sharp from 'sharp';
 import {
   OUTPUT_HEIGHT,
   OUTPUT_WIDTH,
+  PANEL_LETTERBOX,
+  SEASON1_CELL_BY_EPISODE,
   getCellExtractRect,
   detectGridGutters,
+  gridCellForEpisode,
 } from './lib/storyCoverCropUtils.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -44,19 +47,11 @@ const SEASON2_GRID = {
   ],
 };
 
-function isCleanCropSource(sourceName) {
-  return (
-    sourceName === 'cover-stories.png' ||
-    sourceName === 'cover-stories-banner.png' ||
-    sourceName === 'cover-stories-season-2.png' ||
-    sourceName === 'cover-stories-season-2-alt.png'
-  );
-}
-
 const SEASON1_GRID = {
   cols: 4,
   rows: 2,
   episodeBase: 1,
+  cellByEpisode: SEASON1_CELL_BY_EPISODE,
   episodes: [
     'episode-1-cover.webp',
     'episode-2-cover.webp',
@@ -73,8 +68,9 @@ async function buildCoverFromExtract(sourcePath, cellRect) {
   return sharp(sourcePath)
     .extract(cellRect)
     .resize(OUTPUT_WIDTH, OUTPUT_HEIGHT, {
-      fit: 'cover',
+      fit: 'contain',
       position: 'centre',
+      background: PANEL_LETTERBOX,
     })
     .webp({ quality: 90 });
 }
@@ -95,39 +91,37 @@ async function writeSeasonGrid(gridConfig, resolveSourcePath, label) {
   }
 
   const sourceName = path.basename(sourcePath);
-  const cropProfile = isCleanCropSource(sourceName) ? 'clean' : 'titled';
+  /** Always use clean gutters-only extract; scale full panel with contain (no chrome chop). */
+  const cropProfile = 'clean';
 
   const { width, height } = await sharp(sourcePath).metadata();
   const { data } = await sharp(sourcePath).raw().toBuffer({ resolveWithObject: true });
-  const { cols, rows, episodes, episodeBase = 1 } = gridConfig;
+  const { cols, rows, episodes, episodeBase = 1, cellByEpisode = {} } = gridConfig;
   const gutters = detectGridGutters(data, width, height, cols, rows);
 
   console.log(`${label} source: ${path.relative(root, sourcePath)} (${width}×${height}, ${cropProfile})`);
   console.log(`Detected gutters: x=[${gutters.xGutters.join(', ')}] y=[${gutters.yGutters.join(', ')}]`);
 
-  let index = 0;
-  for (let row = 0; row < rows; row += 1) {
-    for (let col = 0; col < cols; col += 1) {
-      const file = episodes[index];
-      if (!file) break;
-      const outPath = path.join(coversDir, file);
-      const episodeNumber = episodeBase + index;
-      const cellRect = getCellExtractRect(
-        width,
-        height,
-        col,
-        row,
-        cols,
-        rows,
-        gutters,
-        episodeNumber,
-        cropProfile,
-      );
-      await (await buildCoverFromExtract(sourcePath, cellRect)).toFile(outPath);
-      await validateOutput(outPath);
-      console.log(`Wrote ${file} (col=${col} row=${row})`);
-      index += 1;
-    }
+  for (let index = 0; index < episodes.length; index += 1) {
+    const file = episodes[index];
+    if (!file) break;
+    const episodeNumber = episodeBase + index;
+    const { col, row } = gridCellForEpisode(episodeNumber, index, cols, cellByEpisode);
+    const outPath = path.join(coversDir, file);
+    const cellRect = getCellExtractRect(
+      width,
+      height,
+      col,
+      row,
+      cols,
+      rows,
+      gutters,
+      episodeNumber,
+      cropProfile,
+    );
+    await (await buildCoverFromExtract(sourcePath, cellRect)).toFile(outPath);
+    await validateOutput(outPath);
+    console.log(`Wrote ${file} (ep=${episodeNumber} col=${col} row=${row})`);
   }
   return true;
 }
@@ -175,7 +169,11 @@ async function writeEpisode1HeroFallback() {
   }
   const outPath = path.join(coversDir, 'episode-1-cover.webp');
   await sharp(episode1SourcePath)
-    .resize(OUTPUT_WIDTH, OUTPUT_HEIGHT, { fit: 'cover', position: 'centre' })
+    .resize(OUTPUT_WIDTH, OUTPUT_HEIGHT, {
+      fit: 'contain',
+      position: 'centre',
+      background: PANEL_LETTERBOX,
+    })
     .webp({ quality: 90 })
     .toFile(outPath);
   await validateOutput(outPath);
@@ -209,7 +207,11 @@ async function writeLegacyMasterBands() {
         width: cropWidth - padL,
         height: extractHeight,
       })
-      .resize(OUTPUT_WIDTH, OUTPUT_HEIGHT, { fit: 'cover', position: 'centre' })
+      .resize(OUTPUT_WIDTH, OUTPUT_HEIGHT, {
+        fit: 'contain',
+        position: 'centre',
+        background: PANEL_LETTERBOX,
+      })
       .webp({ quality: 82 })
       .toFile(outPath);
     await validateOutput(outPath);

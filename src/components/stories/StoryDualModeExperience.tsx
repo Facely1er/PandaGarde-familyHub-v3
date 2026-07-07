@@ -8,6 +8,8 @@ import { Story } from '../../data/stories';
 import { migrateLegacyStoryStorage, storyChoicesKey, storyProgressKey } from '../../lib/storyStorageKeys';
 import { logger } from '../../lib/logger';
 import { StoryCoverArt } from './StoryCoverArt';
+import { StoryCastStrip } from './StoryCastStrip';
+import { StoryCharacterDebut } from './StoryCharacterDebut';
 import { StoryEpilogue } from './StoryEpilogue';
 import { StoryModeSwitcher, StoryViewMode } from './StoryModeSwitcher';
 import { StoryReader } from './StoryReader';
@@ -191,11 +193,14 @@ export function StoryDualModeExperience({
             <p className="text-xs text-gray-500 dark:text-gray-400">
               {chapterCount} chapters · {story.activities.length} activities
             </p>
+            <StoryCastStrip story={story} />
           </div>
         </div>
       )}
 
       <div className="mb-6 space-y-4">
+        <StoryCharacterDebut story={story} />
+
         <div className="story-intro-panel shell-card shell-card--panel p-5 sm:p-6">
           <p className="story-intro-panel__eyebrow mb-2">{introEyebrow}</p>
           <p className="story-intro-panel__body text-sm leading-relaxed">{introBody}</p>

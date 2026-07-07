@@ -4,70 +4,84 @@ Place production art here, then run from repo root:
 
 ```bash
 npm run assets:story-covers
+npm run assets:story-covers:verify
 ```
 
-## Required for Season 1 (Episodes 1–8)
+## Season 1 sources (Episodes 1–8)
 
-| Save attached file as | Contents |
+| Save as | Contents |
 |---|---|
-| **`sources/cover-stories.png`** | **Preferred** — 4×2 text-free illustration grid (Ep 1–8). |
-| `sources/cover-stories-banner.png` | Alternate text-free 4×2 grid (fallback if primary missing). |
-| `sources/season-1-covers-4x2.png` | Legacy titled poster grid (extra chrome trim applied). |
+| **`cover-stories.png`** | **Preferred** — 4×2 zone-labeled illustration grid (Ep 1–8) |
+| `cover-stories-banner.png` | Alternate text-free grid |
+| `season-1-covers-4x2.png` | Legacy **titled** poster grid |
+| `season-1-covers-4x2-titled-reference.png` | Design reference — poster labels for audit |
 
-The crop script trims ~11.5% top (title pill) and ~13.5% bottom (logo) per cell, plus **7.5% per side** on shared column borders and **4.5%** on the row split — so neighboring panels should not bleed into the card frame.
+### UI wiring (`storyCoverAssets.ts`)
 
-### Tunables (in `scripts/crop-story-covers.mjs`)
+All Season 1 episodes **1–8** use bundled WebP covers cropped from `cover-stories.png` (full panel scaled with `fit: contain` — no chrome chop).
 
-| Constant | Default | Purpose |
+### Grid → slug (canonical order)
+
+| Ep | Slug | Source cell |
 |---|---|---|
-| `INNER_COL_GUTTER` | 0.075 | Horizontal shave at column boundaries (each cell takes half) |
-| `INNER_ROW_GUTTER` | 0.045 | Vertical shave between row 1 and row 2 |
-| `CHROME_TOP` / `CHROME_BOTTOM` | 0.115 / 0.135 | Title badge and bottom logo |
-| `OUTER_EDGE` | 0.02 | Sheet outer margin only |
+| 1 | `privacy-panda-and-the-digital-bamboo-forest` | R0C0 |
+| 2 | `miki-and-the-photo-that-flew-away` | R0C1 |
+| 3 | `billys-invisible-collection` | R0C2 |
+| 4 | `mika-and-the-sneaky-settings` | R0C3 |
+| 5 | `ruby-and-the-very-friendly-stranger` | R1C0 |
+| 6 | `the-day-the-password-was-too-short` | R1C1 |
+| 7 | `when-miki-said-something-unkind` | R1C2 |
+| 8 | `pos-toughest-question` | R1C3 |
 
-If a panel still shows a sliver of the neighbor, increase `INNER_COL_GUTTER` (e.g. `0.09`) and re-run `npm run assets:story-covers`.
+## Season 2 sources (Episodes 9–16)
 
-### Canonical slug mapping (grid position → `stories.ts`)
-
-| Grid cell | Episode | `stories.ts` slug | Notes |
-|---|---|---|---|
-| Row 0, Col 0 | 1 | `privacy-panda-and-the-digital-bamboo-forest` | ✓ |
-| Row 0, Col 1 | 2 | `miki-and-the-photo-that-flew-away` | ✓ |
-| Row 0, Col 2 | 3 | `billys-invisible-collection` | ✓ Art title matches |
-| Row 0, Col 3 | 4 | `mika-and-the-sneaky-settings` | Art says "Owen" — owl/tablet still fits Mika |
-| Row 1, Col 0 | 5 | `ruby-and-the-very-friendly-stranger` | Art: Bridge of Consent — reuse until stranger art exists |
-| Row 1, Col 1 | 6 | `the-day-the-password-was-too-short` | Art: Tao backup — reuse until password art exists |
-| Row 1, Col 2 | 7 | `when-miki-said-something-unkind` | Art: Shadow Mist — reuse until stream/unkind art exists |
-| Row 1, Col 3 | 8 | `pos-toughest-question` | Art: Campfire + firefly — Lumi fits Ep 8 |
-
-## Required for Season 2 (Episodes 9–16)
-
-| Save attached file as | Contents |
+| Save as | Contents |
 |---|---|
-| **`sources/cover-stories-season-2.png`** | **Preferred** — 4×2 text-free illustration grid (Ep 9–16). |
-| `sources/cover-stories-season-2-alt.png` | Alternate text-free 4×2 grid (fallback if primary missing). |
+| **`cover-stories-season-2.png`** | Preferred 4×2 text-free grid |
+| `cover-stories-season-2-alt.png` | Alternate grid |
 
-### Canonical slug mapping — Season 2 (grid position → `stories.ts`)
+All Season 2 episodes **9–16** use bundled WebP covers from `cover-stories-season-2.png` (full panel scaled with `fit: contain` — same pipeline as Season 1).
 
-| Grid cell | Episode | `stories.ts` slug |
-|---|---|---|
-| Row 0, Col 0 | 9 | `the-echo-chamber` |
-| Row 0, Col 1 | 10 | `vex-and-the-borrowed-face` |
-| Row 0, Col 2 | 11 | `what-mika-forgot-to-forget` |
-| Row 0, Col 3 | 12 | `kais-accidental-machine` |
-| Row 1, Col 0 | 13 | `the-night-the-stream-went-dark` |
-| Row 1, Col 1 | 14 | `lumis-light` |
-| Row 1, Col 2 | 15 | `the-weight-of-a-screenshot` |
-| Row 1, Col 3 | 16 | `the-forest-agreement` |
+### Grid → slug (canonical order)
 
-## Optional — chapter & brand assets
+| Ep | Slug | Source cell | Panel theme | Fit |
+|---|---|---|---|---|
+| 9 | `the-echo-chamber` | R0C0 | Drawing pile-on at Crystal Stream | ✅ |
+| 10 | `vex-and-the-borrowed-face` | R0C1 | Vex chameleon + Fiona/Ruby tablets | ✅ |
+| 11 | `what-mika-forgot-to-forget` | R0C2 | Archive scroll + warning hologram | ⚠️ Rabbit lead (story: Mika owl) |
+| 12 | `kais-accidental-machine` | R0C3 | Kai fox + holographic map / robot | ✅ |
+| 13 | `the-night-the-stream-went-dark` | R1C0 | Storm + bamboo relay repair | ✅ |
+| 14 | `lumis-light` | R1C1 | Glowing art on easel | ⚠️ Deer artist (story: Lumi firefly) |
+| 15 | `the-weight-of-a-screenshot` | R1C2 | Phone photo + crying otter | ✅ |
+| 16 | `the-forest-agreement` | R1C3 | Po + forest crest / agreement | ✅ |
+
+Soft spots (11, 14) are species swaps only — plot and mood match. Regenerate those two panels if pixel-perfect canon is needed.
+
+## Optional assets
 
 | Save as | Use |
 |---|---|
-| `episodes-1-3-storyboard.png` | Ep 1–3 cover columns + 10 scene thumbs each + zone/pillar/character icons (future chapter crops) |
-| `season-2-zones-4x4.png` | 16 zone posters — **forest map art only**; do not use as episode 9–16 covers |
+| **`casting.png`** | 2×6 character casting sheet → `npm run assets:character-portraits` |
+| `episodes-1-3-storyboard.png` | Scene thumbs + brand kit |
+| `season-2-zones-4x4.png` | Forest zone map — not episode covers |
 
-## Legacy (fallback if grid missing)
+### Casting sheet → portrait (`forestCharacters.ts`)
+
+Run `npm run assets:character-portraits` to write `public/images/characters/{role}-portrait.webp`.
+
+Sheet labels do not always match canon species — crop uses **grid cell → role id** (see `scripts/lib/characterPortraitCropUtils.mjs`):
+
+| Cell | Sheet label | Canon role |
+|---|---|---|
+| R0C3 | Billy (owl art) | **mika** |
+| R0C5 | Owen (beaver art) | **billy** |
+| R1C1 | Mika (squirrel) | *(skipped — wrong species)* |
+| R1C4 | Fiona (pangolin art) | **fiona** (fox in bible) |
+| R1C5 | Rocco | *(skipped — not in bible)* |
+
+Sage (Ep 16) has no portrait on the sheet yet.
+
+## Legacy fallbacks
 
 - `../episode-1-hero-source.png` — single Ep 1 hero
 - `../story-covers-master.png` — stacked Ep 2–3 only

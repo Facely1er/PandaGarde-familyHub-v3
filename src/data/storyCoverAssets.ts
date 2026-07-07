@@ -1,6 +1,6 @@
 import type { Story } from './stories';
 
-/** Grid order → slug (Ep 1–16). Art may be thematic placeholder until panels are remapped. */
+/** Grid order → slug (Ep 1–16). */
 const EPISODE_SLUGS = [
   'privacy-panda-and-the-digital-bamboo-forest',
   'miki-and-the-photo-that-flew-away',
@@ -20,6 +20,12 @@ const EPISODE_SLUGS = [
   'the-forest-agreement',
 ] as const;
 
+/** Episodes wired to bundled WebP covers in the UI (all 16). */
+const EPISODES_WITH_SHIPPED_COVER_ART = new Set([
+  1, 2, 3, 4, 5, 6, 7, 8,
+  9, 10, 11, 12, 13, 14, 15, 16,
+]);
+
 const coverModules = import.meta.glob('../assets/story-covers/episode-*-cover.webp', {
   eager: true,
   import: 'default',
@@ -33,10 +39,14 @@ function coverUrlForEpisode(episodeNumber: number): string | undefined {
   return coverModules[key];
 }
 
-/** Bundled cover URLs keyed by story slug (Episodes 1–16 when webp assets exist). */
+/** Bundled cover URLs keyed by story slug (only story-accurate episodes). */
 export const STORY_COVER_BY_SLUG: Record<string, string> = Object.fromEntries(
   EPISODE_SLUGS.flatMap((slug, index) => {
-    const url = coverUrlForEpisode(index + 1);
+    const episodeNumber = index + 1;
+    if (!EPISODES_WITH_SHIPPED_COVER_ART.has(episodeNumber)) {
+      return [];
+    }
+    const url = coverUrlForEpisode(episodeNumber);
     return url ? [[slug, url] as const] : [];
   }),
 );

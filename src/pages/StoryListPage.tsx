@@ -11,6 +11,7 @@ import {
   Story,
 } from '../data/stories';
 import { StoryCard } from '../components/stories/StoryCard';
+import { StoryCastGallery } from '../components/stories/StoryCastGallery';
 import { StoryCoverArt } from '../components/stories/StoryCoverArt';
 import { ComingSoonBanner } from '../components/stories/ComingSoonBanner';
 import PageLayout from '../components/layout/PageLayout';
@@ -164,7 +165,15 @@ export function StoryListPage() {
                       </h2>
                       <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">{meta.subtitle}</p>
                       {meta.note ? (
-                        <p className="mt-2 text-sm text-teal-800 dark:text-teal-200">{meta.note}</p>
+                        <p
+                          className={`mt-2 text-sm ${
+                            isSeason2
+                              ? 'text-teal-800 dark:text-teal-200'
+                              : 'text-green-800 dark:text-green-200'
+                          }`}
+                        >
+                          {meta.note}
+                        </p>
                       ) : null}
                     </header>
 
@@ -178,6 +187,7 @@ export function StoryListPage() {
               })}
             </div>
           )}
+          <StoryCastGallery />
         </div>
       </section>
     </PageLayout>

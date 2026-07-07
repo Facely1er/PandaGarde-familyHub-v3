@@ -11,6 +11,7 @@ export function BambooForestStoryExperience({ story }: BambooForestStoryExperien
     <StoryDualModeExperience
       story={story}
       scenes={foundationStoryScenes}
+      showCoverBanner
       introEyebrow={`Episode ${story.episodeNumber} · Foundation story`}
       introBody="Two ways through the same Digital Bamboo Forest: follow illustrated scenes with narration, or read chapter-by-chapter at your own pace. Switch anytime—activities unlock when you finish either path."
     />

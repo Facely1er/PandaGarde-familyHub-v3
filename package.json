@@ -36,6 +36,7 @@
     "check:story-assets": "node scripts/verify-story-scene-assets.mjs",
     "assets:story-covers": "node scripts/crop-story-covers.mjs",
     "assets:story-covers:verify": "node scripts/verify-story-covers.mjs",
+    "assets:character-portraits": "node scripts/crop-character-portraits.mjs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",

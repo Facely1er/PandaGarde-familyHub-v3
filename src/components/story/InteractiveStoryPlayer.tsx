@@ -1213,7 +1213,8 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
             margin: 0;
             max-width: 100%;
             width: 100%;
-            height: clamp(11rem, 28vw, 20rem);
+            aspect-ratio: 4 / 5;
+            height: auto;
           }
         }
 
@@ -1297,8 +1298,9 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
         .story-image-container {
           position: relative;
           width: 100%;
-          max-width: min(100%, 28rem);
-          height: clamp(11rem, 32vw, 22rem);
+          max-width: min(100%, 16rem);
+          aspect-ratio: 4 / 5;
+          height: auto;
           margin: clamp(0.75rem, 2vw, 1.25rem) auto;
           border-radius: 16px;
           overflow: hidden;
@@ -1321,7 +1323,7 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
           height: 100%;
           display: block;
           margin: 0;
-          object-fit: cover;
+          object-fit: contain;
           object-position: center;
           transition: opacity 0.5s ease-in-out;
         }
@@ -1822,8 +1824,9 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
           }
 
           .story-image-container {
-            max-width: min(100%, 24rem);
-            height: min(38vh, 18rem);
+            max-width: min(100%, 14rem);
+            aspect-ratio: 4 / 5;
+            height: auto;
             margin: 0.75rem auto;
             border-radius: 12px;
           }
@@ -2032,8 +2035,9 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
           }
 
           .story-image-container {
-            max-width: min(100%, 20rem);
-            height: min(32vh, 14rem);
+            max-width: min(100%, 12rem);
+            aspect-ratio: 4 / 5;
+            height: auto;
             margin: 0.5rem auto;
             border-radius: 8px;
           }

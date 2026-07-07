@@ -11697,11 +11697,11 @@ header.header .nav-actions button.header-icon-btn:not(.header-search-bar) {
   }
 
   .story-cover-art__img {
-    @apply absolute inset-0 h-full w-full object-cover object-center;
+    @apply absolute inset-0 h-full w-full object-contain object-center;
   }
 
   .story-cover-art--thumb .story-cover-art__img {
-    @apply object-cover;
+    @apply object-contain;
   }
 
   .story-cover-art--hero {
@@ -11715,22 +11715,23 @@ header.header .nav-actions button.header-icon-btn:not(.header-search-bar) {
   }
 
   .story-cover-art--card .story-cover-art__img {
-    @apply object-cover object-center;
+    @apply object-contain object-center;
   }
 
   .story-cover-art--banner {
-    @apply min-h-[8.5rem] w-full shrink-0 self-stretch border-r border-gray-100 dark:border-gray-700;
-    @apply sm:min-h-[10rem] md:min-h-[11rem];
+    @apply aspect-[4/5] mx-auto w-full max-w-[10.5rem] shrink-0;
+    @apply border-b border-gray-100 dark:border-gray-700;
+    @apply sm:mx-0 sm:w-32 sm:max-w-none sm:border-b-0 sm:border-r;
+    @apply md:w-36;
   }
 
   .story-cover-art--banner .story-cover-art__img {
-    @apply object-cover object-center;
+    @apply object-contain object-center;
   }
 
   .story-cover-banner {
-    @apply mb-6 grid grid-cols-[minmax(5.75rem,34%)_1fr] items-stretch overflow-hidden rounded-2xl border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800;
-    @apply sm:grid-cols-[minmax(7rem,30%)_1fr];
-    @apply md:grid-cols-[minmax(8.5rem,26%)_1fr];
+    @apply mb-6 grid grid-cols-1 overflow-hidden rounded-2xl border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800;
+    @apply sm:grid-cols-[auto_1fr] sm:items-center;
   }
 
   .story-cover-banner__body {

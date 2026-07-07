@@ -14,12 +14,16 @@ export const OUTER_EDGE = 0.02;
 export const INNER_COL_GUTTER = 0.042;
 export const INNER_ROW_GUTTER = 0.028;
 
-/** Extra trim for titled poster cells that still show title/chrome after default crop. */
+/** Extra trim for zone-labeled Season 1 cells (signage at top of each panel). */
 export const EPISODE_CHROME_OVERRIDES = {
+  1: { top: 0.24, bottom: 0.22 },
   2: { top: 0.24, bottom: 0.22 },
   3: { top: 0.24, bottom: 0.22 },
   4: { top: 0.24, bottom: 0.22 },
   5: { top: 0.24, bottom: 0.22 },
+  6: { top: 0.24, bottom: 0.22 },
+  7: { top: 0.24, bottom: 0.22 },
+  8: { top: 0.24, bottom: 0.22 },
 };
 
 /** Text-free illustration grids — only shave gutters, keep full art. */
@@ -30,6 +34,25 @@ export const CLEAN_INNER_COL_GUTTER = 0.014;
 export const CLEAN_INNER_ROW_GUTTER = 0.012;
 
 export const LETTERBOX = { r: 17, g: 24, b: 39, alpha: 1 };
+
+/** Transparent pad when scaling panels to 512×640 (container bg shows through). */
+export const PANEL_LETTERBOX = { r: 0, g: 0, b: 0, alpha: 0 };
+
+/** Default row-major grid. Season 1 uses titled crop profile when source is cover-stories.png. */
+export const SEASON1_CELL_BY_EPISODE = {};
+
+export function gridCellForEpisode(
+  episodeNumber,
+  index,
+  cols,
+  cellByEpisode = {},
+) {
+  const override = cellByEpisode[episodeNumber];
+  if (override) {
+    return override;
+  }
+  return { col: index % cols, row: Math.floor(index / cols) };
+}
 
 /** True when RGB matches baked-in letterbox bars from legacy contain exports. */
 export function isLetterboxRgb(r, g, b, tolerance = 8) {

@@ -9,9 +9,11 @@ import sharp from 'sharp';
 import {
   OUTPUT_HEIGHT,
   OUTPUT_WIDTH,
+  SEASON1_CELL_BY_EPISODE,
   detectGridGutters,
   getCellBounds,
   getCellExtractRect,
+  gridCellForEpisode,
   isLetterboxRgb,
 } from './lib/storyCoverCropUtils.mjs';
 
@@ -29,6 +31,7 @@ const SEASON_CONFIGS = [
     label: 'season-1',
     episodeBase: 1,
     episodeCount: 8,
+    cellByEpisode: SEASON1_CELL_BY_EPISODE,
     sourceCandidates: [
       path.join(sourcesDir, 'cover-stories.png'),
       path.join(sourcesDir, 'cover-stories-banner.png'),
@@ -50,8 +53,8 @@ const SEASON_CONFIGS = [
   },
 ];
 
-function isCleanCropSource(sourceName) {
-  return sourceName.startsWith('cover-stories');
+function isCleanCropSource() {
+  return true;
 }
 
 function edgeStats(data, w, h, edge, sample = 4) {
@@ -124,25 +127,25 @@ async function verifySeason(config) {
   const { data } = await sharp(sourcePath).raw().toBuffer({ resolveWithObject: true });
   const gutters = detectGridGutters(data, sourceMeta.width, sourceMeta.height, COLS, ROWS);
   const cropProfile = isCleanCropSource(path.basename(sourcePath)) ? 'clean' : 'titled';
+  const cellByEpisode = config.cellByEpisode ?? {};
 
   const rects = [];
-  for (let row = 0; row < ROWS; row += 1) {
-    for (let col = 0; col < COLS; col += 1) {
-      const bounds = getCellBounds(sourceMeta.width, sourceMeta.height, col, row, COLS, ROWS, gutters);
-      const ep = config.episodeBase + row * COLS + col;
-      const cell = getCellExtractRect(
-        sourceMeta.width,
-        sourceMeta.height,
-        col,
-        row,
-        COLS,
-        ROWS,
-        gutters,
-        ep,
-        cropProfile,
-      );
-      rects.push({ bounds, cell, col, row, ep });
-    }
+  for (let index = 0; index < config.episodeCount; index += 1) {
+    const ep = config.episodeBase + index;
+    const { col, row } = gridCellForEpisode(ep, index, COLS, cellByEpisode);
+    const bounds = getCellBounds(sourceMeta.width, sourceMeta.height, col, row, COLS, ROWS, gutters);
+    const cell = getCellExtractRect(
+      sourceMeta.width,
+      sourceMeta.height,
+      col,
+      row,
+      COLS,
+      ROWS,
+      gutters,
+      ep,
+      cropProfile,
+    );
+    rects.push({ bounds, cell, col, row, ep });
   }
 
   const svgParts = rects

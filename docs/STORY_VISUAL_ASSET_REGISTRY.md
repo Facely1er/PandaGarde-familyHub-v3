@@ -74,16 +74,26 @@ See [sources/README.md](../src/assets/story-covers/sources/README.md) for grid�
 
 | Status | Ep | Bundled path | Source panel |
 |---|---|---|---|
-| [x] | 1 | `src/assets/story-covers/episode-1-cover.webp` | Grid R0C0 (`pandastories-2.png`) |
-| [x] | 2 | `episode-2-cover.webp` | Grid R0C1 |
-| [x] | 3 | `episode-3-cover.webp` | Grid R0C2 |
-| [x] | 4 | `episode-4-cover.webp` | Grid R0C3 |
-| [x] | 5 | `episode-5-cover.webp` | Grid R1C0 |
-| [x] | 6 | `episode-6-cover.webp` | Grid R1C1 |
-| [x] | 7 | `episode-7-cover.webp` | Grid R1C2 |
-| [x] | 8 | `episode-8-cover.webp` | Grid R1C3 |
+| [x] | 1 | `episode-1-cover.webp` | S1 grid R0C0 |
+| [x] | 2 | `episode-2-cover.webp` | S1 grid R0C1 |
+| [x] | 3 | `episode-3-cover.webp` | S1 grid R0C2 |
+| [x] | 4 | `episode-4-cover.webp` | S1 grid R0C3 |
+| [x] | 5 | `episode-5-cover.webp` | S1 grid R1C0 |
+| [x] | 6 | `episode-6-cover.webp` | S1 grid R1C1 |
+| [x] | 7 | `episode-7-cover.webp` | S1 grid R1C2 |
+| [x] | 8 | `episode-8-cover.webp` | S1 grid R1C3 |
+| [x] | 9 | `episode-9-cover.webp` | S2 grid R0C0 — Echo Chamber |
+| [x] | 10 | `episode-10-cover.webp` | S2 grid R0C1 — Vex |
+| [x] | 11 | `episode-11-cover.webp` | S2 grid R0C2 — Archive (rabbit vs owl lead) |
+| [x] | 12 | `episode-12-cover.webp` | S2 grid R0C3 — Kai |
+| [x] | 13 | `episode-13-cover.webp` | S2 grid R1C0 — Stream went dark |
+| [x] | 14 | `episode-14-cover.webp` | S2 grid R1C1 — Lumi (deer vs firefly lead) |
+| [x] | 15 | `episode-15-cover.webp` | S2 grid R1C2 — Screenshot |
+| [x] | 16 | `episode-16-cover.webp` | S2 grid R1C3 — Forest Agreement |
 
-**Art vs. canon (Ep 5–8 panels):** attached posters use zone-themed titles (Bridge, Backup, Shadow Mist, Campfire). They are **interim card art** until story-specific covers ship at `public/stories/{slug}/cover.webp`.
+**Season 1 (ep 1–8):** `cover-stories.png` — full cell, `fit: contain`.
+
+**Season 2 (ep 9–16):** `cover-stories-season-2.png` — full cell, `fit: contain`.
 
 ---
 
