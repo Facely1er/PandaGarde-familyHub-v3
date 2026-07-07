@@ -72,7 +72,7 @@ describe('ActivitiesScreen', () => {
     renderScreen();
 
     await user.click(screen.getAllByRole('button', { name: /Start activity: Digital Footprint Trail/i })[0]);
-    expect(screen.getByText(/Step 1 · Mission intro/i)).toBeInTheDocument();
+    expect(screen.getByText(/Step 1 · Read this first/i)).toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: /Let's go/i }));
 

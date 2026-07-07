@@ -17,6 +17,8 @@ import {
   type FlattenedAgeBasedActivity,
 } from '../../data/ageBasedActivities';
 import { HubIconBadge } from '../hubIcons';
+import { getForestCharacter } from '../../data/forestCharacters';
+import { StoryCharacterPortrait } from '../../components/stories/StoryCharacterPortrait';
 
 const AGE_TABS = [
   { id: 'all', label: 'All Ages' },
@@ -43,7 +45,9 @@ const ActivityCard: React.FC<{
   isCompleted: boolean;
   score?: number;
   onStart: () => void;
-}> = ({ activity, isCompleted, score, onStart }) => (
+}> = ({ activity, isCompleted, score, onStart }) => {
+  const guide = activity.guideCharacter ? getForestCharacter(activity.guideCharacter) : undefined;
+  return (
   <button
     onClick={onStart}
     className={`group flex min-h-[300px] flex-col rounded-2xl border p-5 text-left shadow-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 ${
@@ -90,6 +94,20 @@ const ActivityCard: React.FC<{
 
     <p className="mt-4 text-sm leading-relaxed text-gray-600">{activity.description}</p>
 
+    {guide && (
+      <div className="mt-4 flex items-center gap-3 rounded-2xl border border-green-100 bg-green-50/70 p-3 dark:border-green-800/40 dark:bg-green-900/15">
+        <StoryCharacterPortrait character={guide} size="sm" />
+        <div className="min-w-0">
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-green-700 dark:text-green-300">
+            Your forest guide
+          </p>
+          <p className="mt-0.5 text-sm font-semibold text-gray-900">
+            {guide.name} <span className="font-normal text-gray-500">· {guide.epithet}</span>
+          </p>
+        </div>
+      </div>
+    )}
+
     <div className="mt-4 rounded-2xl border border-amber-100 bg-amber-50/80 p-4 dark:border-amber-800/40 dark:bg-amber-900/15">
       <p className="text-[11px] font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-300">
         Real-life situation
@@ -127,7 +145,8 @@ const ActivityCard: React.FC<{
       </div>
     </div>
   </button>
-);
+  );
+};
 
 const GroupHeading: React.FC<{ group: AgeGroup }> = ({ group }) => {
   const band = hubAgeBandByRange(group.ageRange as '5-8' | '9-12' | '13-17');

@@ -15,6 +15,8 @@ import {
 import type { FlattenedAgeBasedActivity } from '../../data/ageBasedActivities';
 import HubBrandLogo from './HubBrandLogo';
 import { HubIcon } from '../hubIcons';
+import { getForestCharacter } from '../../data/forestCharacters';
+import { StoryCharacterPortrait } from '../../components/stories/StoryCharacterPortrait';
 
 export type MissionPhase = 'intro' | 'learn' | 'play' | 'complete';
 
@@ -79,6 +81,7 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
   const { currentMemberId } = useActiveMember();
 
   const nextMission = pickNextMission(activity, completedIds);
+  const guide = activity.guideCharacter ? getForestCharacter(activity.guideCharacter) : undefined;
 
   const finishMission = (score?: number) => {
     const completionId = getCompletionId(activity);
@@ -155,6 +158,20 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
               </span>
             </div>
             <p className="text-sm leading-relaxed text-gray-700 dark:text-gray-200">{activity.learningObjective}</p>
+            {guide && (
+              <div className="flex items-center gap-3 rounded-2xl border border-green-200 bg-green-50 p-4 text-left dark:border-green-700/40 dark:bg-green-900/20">
+                <StoryCharacterPortrait character={guide} size="md" />
+                <div className="min-w-0">
+                  <p className="text-[11px] font-semibold uppercase tracking-wide text-green-700 dark:text-green-300">
+                    Your forest guide
+                  </p>
+                  <p className="mt-1 text-sm font-semibold text-gray-900 dark:text-white">
+                    {guide.name} · {guide.epithet}
+                  </p>
+                  <p className="mt-0.5 text-xs text-gray-600 dark:text-gray-300">{guide.tagline}</p>
+                </div>
+              </div>
+            )}
             <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-left dark:border-amber-700/40 dark:bg-amber-900/20">
               <p className="text-[11px] font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-300">
                 Real-life situation

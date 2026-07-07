@@ -3,6 +3,8 @@ import { Award, ArrowRight, Sparkles, Target } from 'lucide-react';
 import HubBrandLogo from './HubBrandLogo';
 import { useDialogFocusTrap } from '../../hooks/useDialogFocusTrap';
 import type { FlattenedAgeBasedActivity } from '../../data/ageBasedActivities';
+import { CHARACTER_CELEBRATION_LINES, getForestCharacter } from '../../data/forestCharacters';
+import { StoryCharacterPortrait } from '../../components/stories/StoryCharacterPortrait';
 
 interface MissionCelebrationProps {
   activity: FlattenedAgeBasedActivity;
@@ -22,6 +24,8 @@ const MissionCelebration: React.FC<MissionCelebrationProps> = ({
   onNextMission,
 }) => {
   const doneRef = useRef<HTMLButtonElement>(null);
+  const guide = activity.guideCharacter ? getForestCharacter(activity.guideCharacter) : undefined;
+  const guideLine = activity.guideCharacter ? CHARACTER_CELEBRATION_LINES[activity.guideCharacter] : undefined;
   const dialogRef = useDialogFocusTrap({
     isOpen: true,
     onClose: onDone,
@@ -41,7 +45,13 @@ const MissionCelebration: React.FC<MissionCelebrationProps> = ({
         className="w-full max-w-md rounded-3xl border border-teal-200 bg-white p-6 shadow-xl dark:border-teal-700/50 dark:bg-gray-800"
       >
         <div className="text-center">
-          <HubBrandLogo size="md" variant="card" className="mx-auto" alt="" />
+          {guide ? (
+            <div className="mx-auto flex w-fit justify-center">
+              <StoryCharacterPortrait character={guide} size="lg" highlight />
+            </div>
+          ) : (
+            <HubBrandLogo size="md" variant="card" className="mx-auto" alt="" />
+          )}
           <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-teal-700 dark:bg-teal-900/40 dark:text-teal-200">
             <Sparkles size={14} aria-hidden="true" />
             Mission complete
@@ -51,8 +61,17 @@ const MissionCelebration: React.FC<MissionCelebrationProps> = ({
           </h2>
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
             You finished <strong>{activity.name}</strong>
-            {score !== undefined ? ` with ${score}%` : ''}. Privacy Panda is proud of your teamwork.
+            {score !== undefined ? ` with ${score}%` : ''}.
+            {guide ? '' : ' Privacy Panda is proud of your teamwork.'}
           </p>
+          {guide && guideLine && (
+            <p className="mt-3 rounded-2xl border border-green-100 bg-green-50 p-3 text-sm italic leading-relaxed text-green-900 dark:border-green-800/40 dark:bg-green-900/20 dark:text-green-100">
+              {guideLine}
+              <span className="mt-1 block text-xs font-semibold not-italic text-green-700 dark:text-green-300">
+                — {guide.name}, {guide.epithet}
+              </span>
+            </p>
+          )}
           {streak > 0 && (
             <p className="mt-3 text-sm font-medium text-amber-700 dark:text-amber-300">
               <Award size={16} className="mr-1 inline" aria-hidden="true" />

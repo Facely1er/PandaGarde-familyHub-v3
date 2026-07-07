@@ -152,6 +152,18 @@ export const CAST_TIER_LABELS: Record<ForestCharacter['tier'], string> = {
   3: 'Tricksters & elders',
 };
 
+/** In-character lines shown when a Family Hub mission guided by this character is completed. */
+export const CHARACTER_CELEBRATION_LINES: Partial<Record<CharacterRole, string>> = {
+  po: '“We must be as careful with our information as we are with our real bamboo treasures. You just proved it.”',
+  tao: '“Slow, steady, and safe. The forest paths are stronger because of what you practised today.”',
+  ruby: '“Kind choices travel far in the forest — and yours will echo for a long time.”',
+  mika: '“You checked before you trusted. That is exactly how the Archive stays true.”',
+  billy: '“Asking first is how the best things get built. Well done, builder.”',
+  lumi: '“You chose what to share and how to share it. That light is yours.”',
+  fiona: '“Your story online belongs to you. Today you decided how it gets told.”',
+  sage: '“Knowing your rights is how fair agreements begin. The forest is wiser with you in it.”',
+};
+
 export function getForestCharacter(id: CharacterRole): ForestCharacter | undefined {
   return CHARACTER_BY_ID[id];
 }

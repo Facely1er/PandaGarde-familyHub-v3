@@ -1,3 +1,5 @@
+import type { CharacterRole } from './stories';
+
 export type ActivityDifficulty = 'Beginner' | 'Intermediate' | 'Advanced';
 
 export type ActivityFocus =
@@ -30,6 +32,8 @@ export interface AgeBasedActivity {
   activityManagerId?: string;
   /** In-app tool page when there is no bundled game (e.g. full DFA) */
   sitePath?: string;
+  /** Forest character (docs/STORYLINE_BIBLE.md §3) who guides this mission */
+  guideCharacter?: CharacterRole;
 }
 
 export interface AgeGroup {
@@ -80,6 +84,7 @@ export const ageBasedActivities: AgeGroup[] = [
         familyMode: 'Play together',
         featured: true,
         activityManagerId: 'sorting',
+        guideCharacter: 'po',
       },
       {
         id: 'traffic-light-safety',
@@ -107,6 +112,7 @@ export const ageBasedActivities: AgeGroup[] = [
         focus: 'Safe sharing',
         familyMode: 'Play together',
         activityManagerId: 'maze',
+        guideCharacter: 'tao',
       },
       {
         id: 'secret-keeper-club',
@@ -135,6 +141,7 @@ export const ageBasedActivities: AgeGroup[] = [
         familyMode: 'Play together',
         featured: true,
         activityManagerId: 'connectdots',
+        guideCharacter: 'tao',
       },
       {
         id: 'trusted-adults-online',
@@ -162,6 +169,7 @@ export const ageBasedActivities: AgeGroup[] = [
         focus: 'Safe sharing',
         familyMode: 'Talk together',
         activityManagerId: 'coloring',
+        guideCharacter: 'ruby',
       },
       {
         id: 'my-info-collage',
@@ -189,6 +197,7 @@ export const ageBasedActivities: AgeGroup[] = [
         focus: 'Digital footprint',
         familyMode: 'Play together',
         activityManagerId: 'memory',
+        guideCharacter: 'po',
       },
       {
         id: 'permission-please',
@@ -216,6 +225,7 @@ export const ageBasedActivities: AgeGroup[] = [
         focus: 'Safe sharing',
         familyMode: 'Talk together',
         activityManagerId: 'wordsearch',
+        guideCharacter: 'billy',
       },
     ],
   },
@@ -252,6 +262,7 @@ export const ageBasedActivities: AgeGroup[] = [
         familyMode: 'Talk together',
         featured: true,
         activityManagerId: 'digital-footprint',
+        guideCharacter: 'billy',
       },
       {
         id: 'phishing-patrol',
@@ -280,6 +291,7 @@ export const ageBasedActivities: AgeGroup[] = [
         familyMode: 'Play together',
         featured: true,
         activityManagerId: 'phishing-detective',
+        guideCharacter: 'mika',
       },
       {
         id: 'app-permission-inspector',
@@ -307,6 +319,7 @@ export const ageBasedActivities: AgeGroup[] = [
         focus: 'Privacy settings',
         familyMode: 'Talk together',
         activityManagerId: 'privacy-settings',
+        guideCharacter: 'billy',
       },
       {
         id: 'privacy-settings-pro',
@@ -334,6 +347,7 @@ export const ageBasedActivities: AgeGroup[] = [
         focus: 'Privacy settings',
         familyMode: 'Talk together',
         activityManagerId: 'privacy-settings',
+        guideCharacter: 'mika',
       },
       {
         id: 'screenshot-safety',
@@ -361,6 +375,7 @@ export const ageBasedActivities: AgeGroup[] = [
         focus: 'Digital footprint',
         familyMode: 'Talk together',
         activityManagerId: 'safe-unsafe',
+        guideCharacter: 'ruby',
       },
       {
         id: 'password-strength-lab',
@@ -388,6 +403,7 @@ export const ageBasedActivities: AgeGroup[] = [
         focus: 'Account security',
         familyMode: 'Play together',
         activityManagerId: 'password-strength',
+        guideCharacter: 'tao',
       },
     ],
   },
@@ -424,6 +440,7 @@ export const ageBasedActivities: AgeGroup[] = [
         familyMode: 'Teen-led reflection',
         featured: true,
         activityManagerId: 'password-fortress',
+        guideCharacter: 'tao',
       },
       {
         id: 'online-reputation-audit',
@@ -452,6 +469,7 @@ export const ageBasedActivities: AgeGroup[] = [
         familyMode: 'Teen-led reflection',
         featured: true,
         activityManagerId: 'social-media-audit',
+        guideCharacter: 'fiona',
       },
       {
         id: 'data-broker-discovery',
@@ -479,6 +497,7 @@ export const ageBasedActivities: AgeGroup[] = [
         focus: 'Digital footprint',
         familyMode: 'Talk together',
         activityManagerId: 'digital-footprint',
+        guideCharacter: 'billy',
       },
       {
         id: 'privacy-rights-challenge',
@@ -506,6 +525,7 @@ export const ageBasedActivities: AgeGroup[] = [
         focus: 'Digital rights',
         familyMode: 'Talk together',
         activityManagerId: 'digital-rights',
+        guideCharacter: 'sage',
       },
       {
         id: 'social-media-simulator',
@@ -533,6 +553,7 @@ export const ageBasedActivities: AgeGroup[] = [
         focus: 'Safe sharing',
         familyMode: 'Teen-led reflection',
         activityManagerId: 'social-simulator',
+        guideCharacter: 'lumi',
       },
       {
         id: 'ai-and-your-privacy',
@@ -560,6 +581,7 @@ export const ageBasedActivities: AgeGroup[] = [
         focus: 'Digital footprint',
         familyMode: 'Talk together',
         activityManagerId: 'privacy-decoder',
+        guideCharacter: 'mika',
       },
     ],
   },

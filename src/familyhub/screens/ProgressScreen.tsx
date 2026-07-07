@@ -8,6 +8,8 @@ const ProgressExport = lazy(() => import('../../components/ProgressExport'));
 import { useProgress } from '../../contexts/ProgressContext';
 import { flattenAgeBasedActivities } from '../../data/ageBasedActivities';
 import { getHubActivityCatalogCount } from '../../lib/hubProgress';
+import { getForestCharacter, type ForestCharacter } from '../../data/forestCharacters';
+import { StoryCharacterPortrait } from '../../components/stories/StoryCharacterPortrait';
 import HubPageLayout from '../components/HubPageLayout';
 import HubScreenHero from '../components/HubScreenHero';
 
@@ -41,6 +43,24 @@ const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => 
     [progress.activityDetails]
   );
   const avgScore = scores.length > 0 ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) : null;
+
+  const forestFriends = useMemo(() => {
+    const byGuide = new Map<string, { character: ForestCharacter; total: number; completed: number }>();
+    for (const activity of allActivities) {
+      if (!activity.guideCharacter) continue;
+      const character = getForestCharacter(activity.guideCharacter);
+      if (!character) continue;
+      const entry = byGuide.get(character.id) ?? { character, total: 0, completed: 0 };
+      entry.total += 1;
+      const detail = getActivityProgress(activity.activityManagerId ?? activity.id);
+      if (detail?.completed) entry.completed += 1;
+      byGuide.set(character.id, entry);
+    }
+    return [...byGuide.values()].sort(
+      (a, b) => a.character.debutEpisode - b.character.debutEpisode || a.character.name.localeCompare(b.character.name)
+    );
+  }, [allActivities, getActivityProgress]);
+  const friendsMet = forestFriends.filter((friend) => friend.completed > 0).length;
 
   const recentCompletions = useMemo(() => {
     return allActivities
@@ -113,6 +133,48 @@ const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => 
           </p>
         )}
       </div>
+
+      {/* Forest friends */}
+      {forestFriends.length > 0 && (
+        <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-800">
+          <div className="mb-4 flex items-end justify-between gap-3">
+            <div>
+              <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-200">Forest friends</h2>
+              <p className="mt-0.5 text-xs text-gray-500 dark:text-gray-400">
+                Each guide from the Digital Bamboo Forest leads a set of missions.
+              </p>
+            </div>
+            <p className="shrink-0 text-sm font-bold text-green-700 dark:text-green-300">
+              {friendsMet} / {forestFriends.length} met
+            </p>
+          </div>
+          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {forestFriends.map(({ character, total, completed }) => (
+              <li
+                key={character.id}
+                className={`flex flex-col items-center gap-2 rounded-xl border p-3 text-center ${
+                  completed > 0
+                    ? 'border-green-200 bg-green-50 dark:border-green-700/40 dark:bg-green-900/20'
+                    : 'border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-900/40'
+                }`}
+              >
+                <StoryCharacterPortrait character={character} size="sm" highlight={completed > 0 && completed === total} />
+                <div>
+                  <p className="text-xs font-semibold text-gray-900 dark:text-gray-100">{character.name}</p>
+                  <p className="text-[11px] text-gray-500 dark:text-gray-400">{character.epithet}</p>
+                </div>
+                <p
+                  className={`text-[11px] font-semibold ${
+                    completed > 0 ? 'text-green-700 dark:text-green-300' : 'text-gray-400 dark:text-gray-500'
+                  }`}
+                >
+                  {completed} / {total} missions
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {/* Achievements */}
       {progress.achievements.length > 0 && (
