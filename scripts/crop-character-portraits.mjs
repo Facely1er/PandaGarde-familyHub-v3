@@ -25,6 +25,52 @@ const root = path.join(__dirname, '..');
 const sourcePath = path.join(root, 'src', 'assets', 'story-covers', 'sources', 'casting.png');
 const outDir = path.join(root, 'public', 'images', 'characters');
 
+async function shaveBrightEdge(inputPath, maxShave = 8) {
+  const { data, info } = await sharp(inputPath)
+    .ensureAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+
+  const isBright = (x, y) => {
+    const i = (y * info.width + x) * info.channels;
+    const r = data[i];
+    const g = data[i + 1];
+    const b = data[i + 2];
+    const a = data[i + 3];
+    return a > 20 && r > 232 && g > 232 && b > 232;
+  };
+
+  let shaveLeft = 0;
+  for (let x = 0; x < Math.min(maxShave, info.width - 32); x += 1) {
+    let bright = 0;
+    for (let y = 0; y < info.height; y += 2) {
+      if (isBright(x, y)) bright += 1;
+    }
+    if (bright / Math.ceil(info.height / 2) > 0.65) {
+      shaveLeft = x + 1;
+    } else {
+      break;
+    }
+  }
+
+  if (shaveLeft === 0 || shaveLeft > maxShave) return;
+
+  const shaved = await sharp(inputPath)
+    .extract({
+      left: shaveLeft,
+      top: 0,
+      width: info.width - shaveLeft,
+      height: info.height,
+    })
+    .resize(PORTRAIT_SIZE, PORTRAIT_SIZE, { fit: 'fill', background: PANEL_LETTERBOX })
+    .webp({ quality: 88 })
+    .toBuffer();
+
+  const tempPath = `${inputPath}.tmp`;
+  fs.writeFileSync(tempPath, shaved);
+  fs.renameSync(tempPath, inputPath);
+}
+
 if (!fs.existsSync(sourcePath)) {
   console.error(`Missing casting source: ${path.relative(root, sourcePath)}`);
   process.exit(1);
@@ -47,6 +93,8 @@ for (const [role, { col, row }] of Object.entries(CASTING_ROLE_CELLS)) {
     })
     .webp({ quality: 88 })
     .toFile(outPath);
+
+  await shaveBrightEdge(outPath);
 
   const meta = await sharp(outPath).metadata();
   console.log(
@@ -71,10 +119,8 @@ for (const [role, relativeSource] of Object.entries(STANDALONE_PORTRAIT_SOURCES)
 
   await sharp(trimmedBuffer)
     .extract(sageRect)
-    .trim({ threshold: 22 })
     .resize(PORTRAIT_SIZE, PORTRAIT_SIZE, {
-      fit: 'cover',
-      position: 'north',
+      fit: 'fill',
       background: PANEL_LETTERBOX,
     })
     .webp({ quality: 88 })

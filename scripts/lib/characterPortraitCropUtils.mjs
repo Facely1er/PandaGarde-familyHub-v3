@@ -60,7 +60,7 @@ export const CASTING_CALIBRATION_ROLE = 'mika';
  * focusTop / focusLeft position the face square within the illustration band.
  */
 export const CASTING_ROLE_CROP = {
-  po: { insetLeft: 0.12, insetRight: 0.04, insetTop: 0.08, focusTop: 0.62, focusLeft: 0.5 },
+  po: { insetLeft: 0.16, insetRight: 0.04, insetTop: 0.1, focusTop: 0.6, focusLeft: 0.5 },
   ruby: { insetLeft: 0.08, insetRight: 0.04, insetTop: 0.03, focusTop: 0.36, focusLeft: 0.5 },
   miki: { insetLeft: 0.09, insetRight: 0.03, insetTop: 0.02, focusTop: 0.26, focusLeft: 0.58 },
   mika: { insetLeft: 0.03, insetRight: 0.03, insetTop: 0, focusTop: 0.32, focusLeft: 0.5 },
@@ -78,9 +78,10 @@ export const CASTING_ROLE_FOCUS_TOP = Object.fromEntries(
 );
 
 /** Standalone Sage — head and shoulders only (scroll excluded). */
-export const SAGE_HEAD_FRAC = 0.46;
-export const SAGE_HEAD_INSET_X = 0.14;
-export const SAGE_FACE_FOCUS_TOP = 0.1;
+export const SAGE_HEAD_FRAC = 0.34;
+export const SAGE_HEAD_TOP_FRAC = 0.04;
+export const SAGE_HEAD_INSET_X = 0.18;
+export const SAGE_FACE_FOCUS_TOP = 0.05;
 export const SAGE_FACE_FOCUS_LEFT = 0.5;
 
 const DEFAULT_CROP = {
@@ -196,9 +197,10 @@ export function getCastingExtractRect(width, height, col, row, _gutters) {
 export function getSagePortraitRect(width, height) {
   const headHeight = Math.round(height * SAGE_HEAD_FRAC);
   const padX = Math.round(width * SAGE_HEAD_INSET_X);
+  const top = Math.round(height * SAGE_HEAD_TOP_FRAC);
   const headRect = {
     left: padX,
-    top: 0,
+    top,
     width: width - padX * 2,
     height: Math.max(32, headHeight),
   };

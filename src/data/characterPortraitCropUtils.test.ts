@@ -69,8 +69,8 @@ describe('characterPortraitCropUtils', () => {
 
   it('crops Sage head from trimmed standalone art', () => {
     const rect = getSagePortraitRect(758, 1001);
-    expect(rect.top).toBe(0);
-    expect(rect.height).toBeLessThan(500);
+    expect(rect.top).toBeGreaterThan(0);
+    expect(rect.height).toBeLessThan(400);
     expect(rect.left).toBeGreaterThan(50);
   });
 });
