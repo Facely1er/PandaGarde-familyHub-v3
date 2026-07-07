@@ -82,7 +82,7 @@ const Footer: React.FC = () => {
             </p>
 
             <p className="footer-trust-note">
-              Local-first guidance on this device. Formal assessment and safety alerts live on SocialCaution.
+              Local-first guidance on this device. Nothing is uploaded and no child device is monitored.
             </p>
           </div>
 

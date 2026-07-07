@@ -92,10 +92,14 @@ test.describe('Core features advertised (How it works + CONTENT_TRUTH)', () => {
     await expect(page.locator('.interactive-story-player, #story-player').first()).toBeVisible();
   });
 
-  test('Retired safety-alerts route forwards to SocialCaution funnel', async ({ page }) => {
-    await page.goto(`${BASE}/safety-alerts`, { waitUntil: 'domcontentloaded' });
-    await page.waitForURL(/socialcaution\.com/, { timeout: 15_000 });
-    expect(page.url()).toMatch(/socialcaution\.com/);
+  test('Safety alerts alias routes render in-app alerts page', async ({ page }) => {
+    for (const path of ['/safety-alerts', '/alerts']) {
+      await page.goto(`${BASE}${path}`, { waitUntil: 'domcontentloaded' });
+      await page.waitForURL(/\/child-safety-alerts/, { timeout: 15_000 });
+      await expect(
+        page.getByRole('heading', { level: 1, name: /Safety Alerts & Notifications/i }),
+      ).toBeVisible();
+    }
   });
 
   test('Footprint review happy path — catalog seed → footprint → stories CTA', async ({ page }) => {
@@ -116,10 +120,12 @@ test.describe('Core features advertised (How it works + CONTENT_TRUTH)', () => {
     await expect(page.locator('main, #main-content').first()).toBeVisible();
   });
 
-  test('Retired privacy-assessment route forwards to SocialCaution', async ({ page }) => {
-    await page.goto(`${BASE}/privacy-assessment`, { waitUntil: 'domcontentloaded' });
-    await page.waitForURL(/socialcaution\.com/, { timeout: 15_000 });
-    expect(page.url()).toMatch(/socialcaution\.com/);
+  test('Assessment alias route renders in-app privacy assessment', async ({ page }) => {
+    await page.goto(`${BASE}/assessment`, { waitUntil: 'domcontentloaded' });
+    await page.waitForURL(/\/privacy-assessment/, { timeout: 15_000 });
+    await expect(
+      page.getByRole('heading', { level: 1, name: /How is your family doing on privacy/i }),
+    ).toBeVisible();
   });
 
   test('Family Hub — local gate then dashboard', async ({ page }) => {
