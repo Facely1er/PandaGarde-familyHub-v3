@@ -22,7 +22,7 @@ describe('ActivitiesScreen', () => {
     localStorage.clear();
   });
 
-  it('shows richer featured metadata and completion cues', async () => {
+  it('shows rich card metadata and completion cues', async () => {
     localStorage.setItem(
       'pandagarde_progress',
       JSON.stringify({
@@ -43,7 +43,7 @@ describe('ActivitiesScreen', () => {
 
     renderScreen();
 
-    expect(screen.getByRole('heading', { name: /Featured family picks/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /All missions/i })).toBeInTheDocument();
     expect(screen.getAllByText(/Family cue/i).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/Real-life situation/i).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/Completed · 88%/i).length).toBeGreaterThan(0);
@@ -59,7 +59,7 @@ describe('ActivitiesScreen', () => {
     renderScreen();
 
     await user.click(screen.getByRole('button', { name: 'Account security' }));
-    await user.click(screen.getByRole('tab', { name: 'Ages 13–17' }));
+    await user.click(screen.getByRole('button', { name: /Digital Citizens/i }));
 
     expect(screen.getAllByText(/Password Fortress Builder/i).length).toBeGreaterThan(0);
     expect(screen.queryByText(/Pack Your Digital Backpack/i)).not.toBeInTheDocument();

@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { CheckCircle2, Clock, Info, Play, Sparkles, Users } from 'lucide-react';
+import { Clock, Play, Sparkles } from 'lucide-react';
 import AgeBandStrip from '../components/AgeBandStrip';
 import HubPageLayout from '../components/HubPageLayout';
 import HubScreenHero from '../components/HubScreenHero';
@@ -20,13 +20,6 @@ import { HubIconBadge } from '../hubIcons';
 import { getForestCharacter } from '../../data/forestCharacters';
 import { StoryCharacterPortrait } from '../../components/stories/StoryCharacterPortrait';
 
-const AGE_TABS = [
-  { id: 'all', label: 'All Ages' },
-  { id: '5-8', label: 'Ages 5–8' },
-  { id: '9-12', label: 'Ages 9–12' },
-  { id: '13-17', label: 'Ages 13–17' },
-] as const;
-
 const FOCUS_ORDER: ActivityFocus[] = [
   'Safe sharing',
   'Account security',
@@ -36,7 +29,7 @@ const FOCUS_ORDER: ActivityFocus[] = [
   'Digital rights',
 ];
 
-type AgeTabId = (typeof AGE_TABS)[number]['id'];
+type AgeTabId = HubAgeRange | 'all';
 type FocusTabId = 'all' | ActivityFocus;
 
 const extractDurationNumber = (duration: string) => Number.parseInt(duration, 10) || 0;
@@ -175,6 +168,23 @@ const ActivitiesScreen: React.FC = () => {
   const [activeAge, setActiveAge] = useState<AgeTabId>(initialAge);
   const [activeFocus, setActiveFocus] = useState<FocusTabId>('all');
   const { progress, getActivityProgress } = useProgress();
+  const catalogueRef = useRef<HTMLElement>(null);
+  const hasInteractedRef = useRef(false);
+
+  // Bring the results into view when a filter changes, since the hero,
+  // age cards, and filter chips otherwise push the catalogue below the fold.
+  useEffect(() => {
+    if (!hasInteractedRef.current) {
+      return;
+    }
+    catalogueRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, [activeAge, activeFocus]);
+
+  useEffect(() => {
+    if (locationState?.initialAgeFilter) {
+      setActiveAge(locationState.initialAgeFilter);
+    }
+  }, [locationState?.initialAgeFilter]);
 
   useEffect(() => {
     const missionId = locationState?.startMissionId;
@@ -209,10 +219,6 @@ const ActivitiesScreen: React.FC = () => {
   );
 
   const completedIds = useMemo(() => new Set(progress.completedActivities), [progress.completedActivities]);
-  const featuredActivities = useMemo(() => {
-    const featuredMatches = getFeaturedAgeBasedActivities(filteredActivities);
-    return (featuredMatches.length > 0 ? featuredMatches : filteredActivities).slice(0, 3);
-  }, [filteredActivities]);
 
   const completedCount = useMemo(
     () => filteredActivities.filter((activity) => completedIds.has(getCompletionId(activity))).length,
@@ -245,80 +251,28 @@ const ActivitiesScreen: React.FC = () => {
   return (
     <HubPageLayout>
       <HubScreenHero
-        badge="18 privacy missions"
+        badge="Activity catalogue"
         title="Choose your mission"
-        subtitle="Each mission starts with a real situation from games, school, or social life — then you talk and practice together."
+        subtitle="Each mission starts with a real situation from games, school, or social life — then you talk and practice together. Filter by age and learning goal below."
         compact
       >
         <div className="flex flex-wrap gap-2 text-xs font-semibold">
-          <span className="rounded-full bg-white/25 px-3 py-1 text-white">{allActivities.length} total</span>
+          <span className="rounded-full bg-white/25 px-3 py-1 text-white">{allActivities.length} missions</span>
           <span className="rounded-full bg-white/25 px-3 py-1 text-white">
             {getFeaturedAgeBasedActivities(allActivities).length} featured
           </span>
+          <span className="rounded-full bg-white/25 px-3 py-1 text-white">Completed missions get a green badge</span>
         </div>
       </HubScreenHero>
 
-      <AgeBandStrip activeRange={activeBandRange} title="Jump in by age" />
-
-      <div className="grid gap-4 lg:grid-cols-[1.7fr,1fr]">
-        <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-400 dark:bg-gray-100 sm:p-8">
-          <div className="inline-flex items-center gap-2 rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-teal-700 dark:bg-teal-900/30 dark:text-teal-200">
-            <Sparkles size={14} aria-hidden="true" />
-            Filter &amp; browse
-          </div>
-          <p className="mt-4 text-sm leading-6 text-gray-600 sm:text-base">
-            Use age tabs and learning goals below. Every card shows a real-life situation before you start.
-          </p>
-        </section>
-
-        <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
-          <div className="rounded-2xl border border-teal-200 bg-teal-50 p-5 dark:border-teal-700/40 dark:bg-teal-900/20">
-            <div className="flex items-start justify-between gap-3">
-              <p className="text-xs font-semibold uppercase tracking-wide text-teal-700 dark:text-teal-300">Ready now</p>
-              <p className="shrink-0 text-2xl font-bold tabular-nums text-teal-950 dark:text-teal-100">{filteredActivities.length}</p>
-            </div>
-            <p className="mt-2 text-sm text-teal-900/80 dark:text-teal-100/80">Activities match your current filters.</p>
-          </div>
-          <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5 dark:border-emerald-700/40 dark:bg-emerald-900/20">
-            <div className="flex items-start justify-between gap-3">
-              <p className="text-xs font-semibold uppercase tracking-wide text-emerald-700 dark:text-emerald-300">Completed</p>
-              <p className="shrink-0 text-2xl font-bold tabular-nums text-emerald-950 dark:text-emerald-100">{completedCount}</p>
-            </div>
-            <p className="mt-2 text-sm text-emerald-900/80 dark:text-emerald-100/80">Interactive missions already finished.</p>
-          </div>
-          <div className="rounded-2xl border border-indigo-200 bg-indigo-50 p-5 dark:border-indigo-700/40 dark:bg-indigo-900/20">
-            <div className="flex items-start justify-between gap-3">
-              <p className="text-xs font-semibold uppercase tracking-wide text-indigo-700 dark:text-indigo-300">Family time</p>
-              <p className="shrink-0 text-2xl font-bold tabular-nums text-indigo-950 dark:text-indigo-100">{totalMinutes} min</p>
-            </div>
-            <p className="mt-2 text-sm text-indigo-900/80 dark:text-indigo-100/80">Estimated time to explore every filtered mission.</p>
-          </div>
-        </div>
-      </div>
-
-      <div className="flex flex-wrap gap-2" role="tablist" aria-label="Filter by age group">
-        {AGE_TABS.map((tab) => (
-          <button
-            key={tab.id}
-            role="tab"
-            aria-selected={activeAge === tab.id}
-            onClick={() => setActiveAge(tab.id)}
-            className={`rounded-full px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 ${
-              activeAge === tab.id
-                ? 'bg-teal-600 text-white shadow-sm'
-                : 'bg-gray-100 text-gray-700 hover:bg-teal-50 hover:text-teal-700 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-teal-900/30 dark:hover:text-teal-300'
-            }`}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
-
-      <div className="mt-3 flex flex-wrap gap-2" role="toolbar" aria-label="Filter by learning goal">
+      <div className="flex flex-wrap gap-2" role="toolbar" aria-label="Filter by learning goal">
         {focusTabs.map((tab) => (
           <button
             key={tab.id}
-            onClick={() => setActiveFocus(tab.id)}
+            onClick={() => {
+              hasInteractedRef.current = true;
+              setActiveFocus(tab.id);
+            }}
             className={`rounded-full border px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 ${
               activeFocus === tab.id
                 ? 'border-teal-500 bg-teal-50 text-teal-700 dark:border-teal-400 dark:bg-teal-900/30 dark:text-teal-200'
@@ -331,71 +285,54 @@ const ActivitiesScreen: React.FC = () => {
         ))}
       </div>
 
-      {activeAge !== 'all' && (() => {
-        const group = ageBasedActivities.find((candidate) => candidate.ageRange === activeAge);
-        return group ? (
-          <div className="mt-5 flex items-start gap-3 rounded-2xl border border-teal-200 bg-teal-50 p-4 dark:border-teal-700/40 dark:bg-teal-900/20">
-            <Info size={18} className="mt-0.5 shrink-0 text-teal-600 dark:text-teal-300" />
-            <div>
-              <p className="text-sm text-teal-800 dark:text-teal-100">{group.description}</p>
-              {activeFocus !== 'all' && (
-                <p className="mt-2 text-xs font-medium uppercase tracking-wide text-teal-700 dark:text-teal-300">
-                  Focused on {activeFocus}
-                </p>
-              )}
-            </div>
-          </div>
-        ) : null;
-      })()}
+      <AgeBandStrip
+        activeRange={activeBandRange}
+        title="Jump in by age"
+        onSelectRange={(range) => {
+          hasInteractedRef.current = true;
+          setActiveAge(range);
+        }}
+      />
 
-      {featuredActivities.length > 0 && (
-        <section className="mt-8" aria-labelledby="featured-activities-heading">
-          <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <h2 id="featured-activities-heading" className="text-xl font-bold text-gray-900 dark:text-white">
-                Featured family picks
-              </h2>
-              <p className="text-sm text-gray-600 dark:text-gray-300">
-                Recommended for high-impact conversations, quick wins, or a great next mission.
-              </p>
+      <section ref={catalogueRef} className="scroll-mt-2" aria-labelledby="activities-catalogue-heading">
+        {(() => {
+          const activeGroup =
+            activeAge !== 'all'
+              ? ageBasedActivities.find((candidate) => candidate.ageRange === activeAge)
+              : undefined;
+          const headingText = activeGroup
+            ? `${activeGroup.label} missions`
+            : activeFocus !== 'all'
+              ? `${activeFocus} missions`
+              : 'All missions';
+          const subText = activeGroup
+            ? `${activeGroup.description}${activeFocus !== 'all' ? ` · focused on ${activeFocus.toLowerCase()}` : ''}`
+            : activeFocus !== 'all'
+              ? `Across all age groups, focused on ${activeFocus.toLowerCase()}`
+              : 'Browse every mission, grouped by age';
+          return (
+            <div className="mb-4 flex flex-wrap items-end justify-between gap-2">
+              <div>
+                <h2 id="activities-catalogue-heading" className="text-lg font-bold text-gray-900 dark:text-white">
+                  {headingText}
+                </h2>
+                <p className="mt-0.5 text-sm text-gray-600 dark:text-gray-300">{subText}</p>
+              </div>
+              <div className="flex flex-wrap items-center gap-2 text-xs font-medium">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-teal-50 px-2.5 py-1 text-teal-800 dark:bg-teal-900/30 dark:text-teal-200">
+                  <Sparkles size={12} aria-hidden="true" />
+                  <strong className="font-bold tabular-nums">{filteredActivities.length}</strong> missions
+                </span>
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-200">
+                  <strong className="font-bold tabular-nums">{completedCount}</strong> completed
+                </span>
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-indigo-50 px-2.5 py-1 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-200">
+                  <strong className="font-bold tabular-nums">{totalMinutes} min</strong> together
+                </span>
+              </div>
             </div>
-            <div className="inline-flex items-center gap-2 rounded-full bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-700 dark:bg-amber-900/30 dark:text-amber-200">
-              <Users size={14} aria-hidden="true" />
-              Built for family learning
-            </div>
-          </div>
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-            {featuredActivities.map((activity) => {
-              const progressDetails = getActivityProgress(getCompletionId(activity));
-              return (
-                <ActivityCard
-                  key={activity.id}
-                  activity={activity}
-                  isCompleted={Boolean(progressDetails?.completed)}
-                  score={progressDetails?.score}
-                  onStart={() => handleStart(activity)}
-                />
-              );
-            })}
-          </div>
-        </section>
-      )}
-
-      <section className="mt-10" aria-labelledby="activities-catalogue-heading">
-        <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <h2 id="activities-catalogue-heading" className="text-xl font-bold text-gray-900 dark:text-white">
-              Activity catalogue
-            </h2>
-            <p className="text-sm text-gray-600 dark:text-gray-300">
-              Explore by age, learning focus, and the kind of family support each mission invites.
-            </p>
-          </div>
-          <div className="inline-flex items-center gap-2 rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-300">
-            <CheckCircle2 size={14} aria-hidden="true" />
-            Completion cues appear on interactive activities you have already finished.
-          </div>
-        </div>
+          );
+        })()}
 
         {filteredActivities.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-gray-300 bg-white px-6 py-10 text-center dark:border-gray-700 dark:bg-gray-800">
@@ -406,7 +343,8 @@ const ActivitiesScreen: React.FC = () => {
           </div>
         ) : showGroupedGrid ? (
           <div className="space-y-10">
-            {ageBasedActivities.map((group) => (
+            {ageBasedActivities.map((group) => {
+              return (
               <section key={group.ageRange} aria-labelledby={`group-${group.ageRange}`}>
                 <div id={`group-${group.ageRange}`}>
                   <GroupHeading group={group} />
@@ -433,7 +371,8 @@ const ActivitiesScreen: React.FC = () => {
                   })}
                 </div>
               </section>
-            ))}
+              );
+            })}
           </div>
         ) : (
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">

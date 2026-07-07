@@ -111,7 +111,7 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
 
   const header = (
     <div className="border-b border-gray-200 bg-white px-4 py-3 dark:border-gray-700 dark:bg-gray-800">
-      <div className="mx-auto flex max-w-4xl items-center gap-4">
+      <div className="mx-auto flex w-full max-w-4xl items-center gap-4">
         <button
           type="button"
           onClick={onExit}
@@ -198,7 +198,7 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
       <div className="flex h-full flex-col bg-gray-50 dark:bg-gray-900">
         {header}
         <div className="flex-1 overflow-auto px-4 py-5 sm:px-6">
-          <div className="mx-auto flex max-w-4xl flex-col gap-5">
+          <div className="mx-auto flex w-full max-w-4xl flex-col gap-5">
             <p className="text-xs font-semibold uppercase tracking-wide text-teal-700 dark:text-teal-300">
               Step 2 · Talk together
             </p>

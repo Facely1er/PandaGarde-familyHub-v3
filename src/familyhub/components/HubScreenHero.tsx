@@ -26,10 +26,10 @@ const HubScreenHero: React.FC<HubScreenHeroProps> = ({
     ].join(' ')}
     aria-labelledby="hub-hero-title"
   >
-    <div className="relative flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-4">
+    <div className="relative flex flex-row items-start gap-3 sm:gap-4">
       {mascot === 'panda' && (
         <HubBrandLogo
-          size={compact ? 'lg' : 'hero'}
+          size={compact ? 'md' : 'lg'}
           variant="plain"
           animated={!compact}
         />

@@ -7090,11 +7090,13 @@ body {
     padding: 1rem;
   }
   
-  /* Better mobile buttons — scoped to page content, not header chrome */
-  main .button,
-  main button[type="button"]:not(.header-icon-btn),
-  main button[type="submit"],
-  form button[type="submit"] {
+  /* Better mobile buttons — scoped to page content, not header chrome.
+     The Family Hub (.family-hub-theme) is excluded: it sizes its own buttons
+     with Tailwind, and forcing width:100% breaks icon buttons and chips. */
+  main .button:not(.family-hub-theme *),
+  main button[type="button"]:not(.header-icon-btn):not(.family-hub-theme *),
+  main button[type="submit"]:not(.family-hub-theme *),
+  form button[type="submit"]:not(.family-hub-theme *) {
     min-height: 48px;
     padding: 0.75rem 1.5rem;
     font-size: 1rem;
