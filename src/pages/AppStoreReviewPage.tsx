@@ -343,7 +343,7 @@ const AppStoreReviewPage: React.FC = () => {
                 href="https://apps.apple.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                className="inline-flex items-center rounded-lg bg-green-700 px-6 py-3 font-semibold text-white transition-colors hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500"
               >
                 <Download className="w-5 h-5 mr-2" />
                 Apple App Store

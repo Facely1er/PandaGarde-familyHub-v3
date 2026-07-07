@@ -150,7 +150,7 @@ const SocialMediaAudit: React.FC<SocialMediaAuditProps> = ({ onBack }) => {
             <div className="grid grid-cols-2 gap-3">
               <button onClick={() => handleAction('hide')} className="p-3 bg-green-500 text-white rounded-lg hover:bg-green-600">Hide/Restrict</button>
               <button onClick={() => handleAction('review')} className="p-3 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600">Review Later</button>
-              <button onClick={() => handleAction('fix')} className="p-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Fix Now</button>
+              <button onClick={() => handleAction('fix')} className="rounded-lg bg-green-700 p-3 text-white hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500">Fix Now</button>
               <button onClick={() => handleAction('keep')} className="p-3 bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-400">Keep As Is</button>
             </div>
           </div>

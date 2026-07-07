@@ -17,169 +17,109 @@ interface ChildRiskCardProps {
   onViewServices: () => void;
 }
 
-const ChildRiskCard: React.FC<ChildRiskCardProps> = ({
-  child,
-  riskScore,
-  onViewServices
-}) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const getRiskLevel = (score: number): { level: string; color: string; bgColor: string } => {
-    if (score >= 70) {return { level: 'High', color: '#dc2626', bgColor: '#fee2e2' };}
-    if (score >= 40) {return { level: 'Medium', color: '#f59e0b', bgColor: '#fef3c7' };}
-    return { level: 'Low', color: '#10b981', bgColor: '#d1fae5' };
+const getRiskClasses = (score: number) => {
+  if (score >= 70) {
+    return {
+      level: 'High',
+      border: 'border-red-500 dark:border-red-600',
+      avatar: 'bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300',
+      text: 'text-red-600 dark:text-red-400',
+      bar: 'bg-red-500',
+    };
+  }
+  if (score >= 40) {
+    return {
+      level: 'Medium',
+      border: 'border-amber-500 dark:border-amber-600',
+      avatar: 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300',
+      text: 'text-amber-600 dark:text-amber-400',
+      bar: 'bg-amber-500',
+    };
+  }
+  return {
+    level: 'Low',
+    border: 'border-green-500 dark:border-green-600',
+    avatar: 'bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300',
+    text: 'text-green-600 dark:text-green-400',
+    bar: 'bg-green-500',
   };
+};
 
-  const riskLevel = getRiskLevel(riskScore);
-  const approvedServices = child.services?.filter(s => s.status === 'approved') || [];
+const serviceRiskBadge: Record<string, string> = {
+  low: 'bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-200',
+  medium: 'bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-200',
+  high: 'bg-red-100 text-red-900 dark:bg-red-900/40 dark:text-red-200',
+  'very-high': 'bg-red-100 text-red-900 dark:bg-red-900/40 dark:text-red-200',
+};
+
+const ChildRiskCard: React.FC<ChildRiskCardProps> = ({ child, riskScore, onViewServices }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const risk = getRiskClasses(riskScore);
+  const approvedServices = child.services?.filter((s) => s.status === 'approved') || [];
 
   return (
-    <div
-      style={{
-        backgroundColor: 'white',
-        borderRadius: '12px',
-        padding: '1.5rem',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-        border: `2px solid ${riskLevel.color}`,
-        cursor: 'pointer',
-        transition: 'all 0.2s'
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
-      }}
+    <button
+      type="button"
+      className={`w-full cursor-pointer rounded-xl border-2 bg-white p-4 text-left shadow-sm transition-shadow hover:shadow-md dark:bg-gray-800 sm:p-6 ${risk.border}`}
       onClick={() => setIsExpanded(!isExpanded)}
     >
-      {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
+      <div className="mb-4 flex items-center gap-4">
         <div
-          style={{
-            width: '48px',
-            height: '48px',
-            borderRadius: '50%',
-            backgroundColor: riskLevel.bgColor,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '1.5rem',
-            fontWeight: 'bold',
-            color: riskLevel.color,
-            flexShrink: 0
-          }}
+          className={`flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full text-2xl font-bold ${risk.avatar}`}
         >
           {child.first_name.charAt(0)}
         </div>
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <div
-            style={{
-              fontSize: '1.25rem',
-              fontWeight: 'bold',
-              color: '#2C3E50',
-              marginBottom: '0.25rem'
-            }}
-          >
+        <div className="min-w-0 flex-1">
+          <div className="mb-1 text-xl font-bold text-gray-900 dark:text-gray-100">
             {child.first_name} {child.last_name}
           </div>
-          <div style={{ fontSize: '0.875rem', color: '#666' }}>
+          <div className="text-sm text-gray-600 dark:text-gray-400">
             {child.profile_data?.age && `Age ${child.profile_data.age}`}
             {child.profile_data?.age && approvedServices.length > 0 && ' • '}
-            {approvedServices.length > 0 && `${approvedServices.length} active ${approvedServices.length === 1 ? 'service' : 'services'}`}
+            {approvedServices.length > 0 &&
+              `${approvedServices.length} active ${approvedServices.length === 1 ? 'service' : 'services'}`}
           </div>
         </div>
         {isExpanded ? (
-          <ChevronUp size={20} style={{ color: '#666', flexShrink: 0 }} />
+          <ChevronUp size={20} className="flex-shrink-0 text-gray-500" aria-hidden />
         ) : (
-          <ChevronDown size={20} style={{ color: '#666', flexShrink: 0 }} />
+          <ChevronDown size={20} className="flex-shrink-0 text-gray-500" aria-hidden />
         )}
       </div>
 
-      {/* Risk Indicator */}
-      <div style={{ marginBottom: '1rem' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-          <span style={{ fontSize: '0.875rem', color: '#666', fontWeight: 500 }}>
-            Privacy Safety Level
-          </span>
-          <span
-            style={{
-              fontSize: '1rem',
-              fontWeight: 'bold',
-              color: riskLevel.color
-            }}
-          >
-            {riskScore}/100 - {riskLevel.level}
+      <div className="mb-4">
+        <div className="mb-2 flex items-center justify-between">
+          <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Privacy Safety Level</span>
+          <span className={`text-base font-bold ${risk.text}`}>
+            {riskScore}/100 - {risk.level}
           </span>
         </div>
-        <div
-          style={{
-            width: '100%',
-            height: '8px',
-            backgroundColor: '#e5e7eb',
-            borderRadius: '4px',
-            overflow: 'hidden'
-          }}
-        >
+        <div className="h-2 w-full overflow-hidden rounded bg-gray-200 dark:bg-gray-700">
           <div
-            style={{
-              width: `${riskScore}%`,
-              height: '100%',
-              backgroundColor: riskLevel.color,
-              transition: 'width 0.3s ease'
-            }}
+            className={`h-full transition-[width] duration-300 ${risk.bar}`}
+            style={{ width: `${riskScore}%` }}
           />
         </div>
       </div>
 
-      {/* Services Preview */}
       {approvedServices.length > 0 && (
-        <div style={{ marginTop: '1rem' }}>
-          <div style={{ fontSize: '0.875rem', color: '#666', marginBottom: '0.5rem', fontWeight: 500 }}>
-            Active Services:
-          </div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-            {approvedServices.slice(0, 3).map(serviceUsage => {
+        <div className="mt-4">
+          <div className="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">Active Services:</div>
+          <div className="flex flex-wrap gap-2">
+            {approvedServices.slice(0, 3).map((serviceUsage) => {
               const service = getServiceById(serviceUsage.serviceId);
-              if (!service) {return null;}
-              const bgColors: Record<string, string> = {
-                low: '#d1fae5',
-                medium: '#fef3c7',
-                high: '#fee2e2',
-                'very-high': '#fee2e2'
-              };
-              const textColors: Record<string, string> = {
-                low: '#065f46',
-                medium: '#92400e',
-                high: '#991b1b',
-                'very-high': '#991b1b'
-              };
+              if (!service) return null;
               return (
                 <span
                   key={serviceUsage.serviceId}
-                  style={{
-                    padding: '0.25rem 0.75rem',
-                    borderRadius: '12px',
-                    fontSize: '0.75rem',
-                    fontWeight: 500,
-                    backgroundColor: bgColors[service.riskLevel] || '#e5e7eb',
-                    color: textColors[service.riskLevel] || '#666'
-                  }}
+                  className={`rounded-xl px-3 py-1 text-xs font-medium ${serviceRiskBadge[service.riskLevel] || 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300'}`}
                 >
                   {service.name}
                 </span>
               );
             })}
             {approvedServices.length > 3 && (
-              <span
-                style={{
-                  padding: '0.25rem 0.75rem',
-                  borderRadius: '12px',
-                  fontSize: '0.75rem',
-                  fontWeight: 500,
-                  backgroundColor: '#e5e7eb',
-                  color: '#666'
-                }}
-              >
+              <span className="rounded-xl bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600 dark:bg-gray-700 dark:text-gray-300">
                 +{approvedServices.length - 3} more
               </span>
             )}
@@ -187,40 +127,22 @@ const ChildRiskCard: React.FC<ChildRiskCardProps> = ({
         </div>
       )}
 
-      {/* Expanded Content */}
       {isExpanded && (
-        <div style={{ marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid #e5e7eb' }}>
+        <div className="mt-4 border-t border-gray-200 pt-4 dark:border-gray-700">
           <button
+            type="button"
             onClick={(e) => {
               e.stopPropagation();
               onViewServices();
             }}
-            style={{
-              width: '100%',
-              padding: '0.75rem',
-              backgroundColor: '#4CAF50',
-              color: 'white',
-              border: 'none',
-              borderRadius: '8px',
-              fontSize: '0.875rem',
-              fontWeight: 500,
-              cursor: 'pointer',
-              transition: 'background-color 0.2s'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#45a049';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#4CAF50';
-            }}
+            className="w-full rounded-lg bg-green-700 py-3 text-sm font-medium text-white transition-colors hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500"
           >
             View All Services
           </button>
         </div>
       )}
-    </div>
+    </button>
   );
 };
 
 export default ChildRiskCard;
-

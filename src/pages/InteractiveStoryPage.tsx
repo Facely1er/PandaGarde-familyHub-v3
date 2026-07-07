@@ -492,7 +492,7 @@ const InteractiveStoryPage: React.FC = () => {
                 </div>
               </div>
               <div className={`flex items-center gap-3 px-4 py-3 rounded-xl border-2 shadow-md hover:shadow-lg transition-all transform hover:scale-105 ${isDark ? 'bg-gradient-to-br from-blue-900/40 to-blue-800/40 border-blue-600' : 'bg-gradient-to-br from-blue-50 to-blue-100 border-blue-300'}`}>
-                <div className={`p-2 rounded-lg ${isDark ? 'bg-blue-600' : 'bg-blue-400'}`}>
+                <div className={`rounded-lg p-2 ${isDark ? 'bg-green-600' : 'bg-green-400'}`}>
                   <Book size={20} className={isDark ? 'text-blue-100' : 'text-blue-900'} />
                 </div>
                 <div>

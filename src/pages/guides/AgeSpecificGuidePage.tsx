@@ -178,7 +178,7 @@ const AgeSpecificGuidePage: React.FC = () => {
                   unselected: 'bg-green-100 text-green-700 hover:bg-green-200 dark:bg-green-900/30 dark:text-green-300 dark:hover:bg-green-900/50',
                 },
                 blue: {
-                  selected: 'bg-blue-600 text-white',
+                  selected: 'bg-green-700 text-white dark:bg-green-600',
                   unselected: 'bg-blue-100 text-blue-700 hover:bg-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:hover:bg-blue-900/50',
                 },
                 purple: {

@@ -102,7 +102,7 @@ export const LearningTimer: React.FC<LearningTimerProps> = ({
         {!isActive && timeRemaining === duration && (
           <button
             onClick={handleStart}
-            className="flex items-center space-x-2 px-3 py-1 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            className="flex items-center space-x-2 rounded-lg bg-green-700 px-3 py-1 text-sm text-white transition-colors hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500"
           >
             <Play size={14} />
             <span>Start</span>

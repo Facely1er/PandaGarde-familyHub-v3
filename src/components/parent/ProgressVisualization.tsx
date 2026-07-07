@@ -22,21 +22,20 @@ const ProgressVisualization: React.FC<ProgressVisualizationProps> = ({
   title,
   maxValue = 100,
   minValue = 0,
-  color = '#4CAF50',
+  color = '#16a34a',
   showTrend = true,
-  formatValue = (val) => val.toString()
+  formatValue = (val) => val.toString(),
 }) => {
   if (!data || data.length === 0) {
     return (
-      <div style={{ padding: '2rem', textAlign: 'center', color: '#666' }}>
+      <div className="p-8 text-center text-gray-600 dark:text-gray-400">
         <p>No data available yet</p>
       </div>
     );
   }
 
-  // Calculate trend
   const calculateTrend = () => {
-    if (data.length < 2) {return null;}
+    if (data.length < 2) return null;
     const first = data[0].value;
     const last = data[data.length - 1].value;
     const diff = last - first;
@@ -46,118 +45,65 @@ const ProgressVisualization: React.FC<ProgressVisualizationProps> = ({
 
   const trend = showTrend ? calculateTrend() : null;
 
-  // Normalize values for display
-  const normalizedData = data.map(point => ({
+  const normalizedData = data.map((point) => ({
     ...point,
-    normalizedValue: ((point.value - minValue) / (maxValue - minValue)) * 100
+    normalizedValue: ((point.value - minValue) / (maxValue - minValue)) * 100,
   }));
 
-  // Simple bar chart visualization
   const maxBarHeight = 120;
-  const _barWidth = Math.max(40, Math.min(80, 400 / data.length));
+
+  const trendClasses =
+    trend?.direction === 'up'
+      ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-200'
+      : trend?.direction === 'down'
+        ? 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-200'
+        : 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200';
 
   return (
-    <div style={{ padding: '1.5rem', backgroundColor: 'white', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+    <div className="rounded-xl bg-white p-4 shadow-sm dark:bg-gray-800 sm:p-6">
       {title && (
-        <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#2C3E50', marginBottom: '1rem' }}>
-          {title}
-        </h3>
+        <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-gray-100">{title}</h3>
       )}
 
       {trend && (
-        <div style={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          gap: '0.5rem', 
-          marginBottom: '1rem',
-          padding: '0.75rem',
-          backgroundColor: trend.direction === 'up' ? '#d1fae5' : trend.direction === 'down' ? '#fee2e2' : '#f3f4f6',
-          borderRadius: '8px'
-        }}>
-          {trend.direction === 'up' && <TrendingUp size={18} style={{ color: '#10b981' }} />}
-          {trend.direction === 'down' && <TrendingDown size={18} style={{ color: '#dc2626' }} />}
-          {trend.direction === 'stable' && <Minus size={18} style={{ color: '#6b7280' }} />}
-          <span style={{ 
-            fontSize: '0.875rem', 
-            color: trend.direction === 'up' ? '#065f46' : trend.direction === 'down' ? '#991b1b' : '#374151',
-            fontWeight: 500
-          }}>
-            {trend.direction === 'up' ? 'Improving' : trend.direction === 'down' ? 'Needs Attention' : 'Stable'}: 
-            {' '}{Math.abs(trend.percentChange).toFixed(1)}% change
+        <div className={`mb-4 flex items-center gap-2 rounded-lg p-3 ${trendClasses}`}>
+          {trend.direction === 'up' && <TrendingUp size={18} className="text-green-600" aria-hidden />}
+          {trend.direction === 'down' && <TrendingDown size={18} className="text-red-600" aria-hidden />}
+          {trend.direction === 'stable' && <Minus size={18} className="text-gray-500" aria-hidden />}
+          <span className="text-sm font-medium">
+            {trend.direction === 'up' ? 'Improving' : trend.direction === 'down' ? 'Needs Attention' : 'Stable'}:{' '}
+            {Math.abs(trend.percentChange).toFixed(1)}% change
           </span>
         </div>
       )}
 
-      <div style={{ 
-        display: 'flex', 
-        alignItems: 'flex-end', 
-        gap: '0.5rem', 
-        height: `${maxBarHeight + 40}px`,
-        paddingBottom: '2rem',
-        borderBottom: '1px solid #e5e7eb'
-      }}>
+      <div
+        className="flex items-end gap-2 border-b border-gray-200 pb-8 dark:border-gray-700"
+        style={{ height: `${maxBarHeight + 40}px` }}
+      >
         {normalizedData.map((point, index) => (
-          <div
-            key={index}
-            style={{
-              flex: 1,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '0.5rem'
-            }}
-          >
+          <div key={index} className="flex flex-1 flex-col items-center gap-2">
             <div
+              className="relative w-full min-h-[4px] rounded-t transition-[height] duration-300"
               style={{
-                width: '100%',
                 height: `${(point.normalizedValue / 100) * maxBarHeight}px`,
                 backgroundColor: color,
-                borderRadius: '4px 4px 0 0',
                 minHeight: point.normalizedValue > 0 ? '4px' : '0',
-                transition: 'height 0.3s ease',
-                position: 'relative'
               }}
               title={`${point.label || point.date}: ${formatValue(point.value)}`}
             >
-              <div
-                style={{
-                  position: 'absolute',
-                  top: '-1.5rem',
-                  left: '50%',
-                  transform: 'translateX(-50%)',
-                  fontSize: '0.75rem',
-                  color: '#666',
-                  whiteSpace: 'nowrap'
-                }}
-              >
+              <div className="absolute -top-6 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs text-gray-600 dark:text-gray-400">
                 {formatValue(point.value)}
               </div>
             </div>
-            <div
-              style={{
-                fontSize: '0.75rem',
-                color: '#666',
-                textAlign: 'center',
-                transform: 'rotate(-45deg)',
-                transformOrigin: 'center',
-                whiteSpace: 'nowrap',
-                width: '60px',
-                marginTop: '0.5rem'
-              }}
-            >
+            <div className="mt-2 w-[60px] origin-center -rotate-45 whitespace-nowrap text-center text-xs text-gray-600 dark:text-gray-400">
               {new Date(point.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
             </div>
           </div>
         ))}
       </div>
 
-      <div style={{ 
-        marginTop: '1rem', 
-        display: 'flex', 
-        justifyContent: 'space-between', 
-        fontSize: '0.875rem', 
-        color: '#666' 
-      }}>
+      <div className="mt-4 flex justify-between text-sm text-gray-600 dark:text-gray-400">
         <span>Min: {formatValue(minValue)}</span>
         <span>Max: {formatValue(maxValue)}</span>
       </div>
@@ -166,4 +112,3 @@ const ProgressVisualization: React.FC<ProgressVisualizationProps> = ({
 };
 
 export default ProgressVisualization;
-
