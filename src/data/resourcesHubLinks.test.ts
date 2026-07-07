@@ -13,6 +13,7 @@ const APP_STATIC_PATHS = new Set([
   '/for-families',
   '/family-hub',
   '/stories',
+  '/stories/cast',
   '/stories/privacy-panda-and-the-digital-bamboo-forest',
   '/guides/family-privacy',
   '/family-privacy-plan',

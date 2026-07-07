@@ -7,14 +7,18 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 import {
-  CASTING_COLS,
   CASTING_ROLE_CELLS,
-  CASTING_ROWS,
   PANEL_LETTERBOX,
   PORTRAIT_SIZE,
-  detectGridGutters,
-  getCastingExtractRect,
+  getCastingPortraitRect,
+  getCastingPortraitRectForRole,
+  getSagePortraitRect,
 } from './lib/characterPortraitCropUtils.mjs';
+
+/** Standalone character art not on the 2×6 casting sheet. */
+const STANDALONE_PORTRAIT_SOURCES = {
+  sage: path.join('src', 'assets', 'story-covers', 'sources', 'sage-portrait.png'),
+};
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, '..');
@@ -29,21 +33,48 @@ if (!fs.existsSync(sourcePath)) {
 fs.mkdirSync(outDir, { recursive: true });
 
 const { width, height } = await sharp(sourcePath).metadata();
-const { data } = await sharp(sourcePath).raw().toBuffer({ resolveWithObject: true });
-const gutters = detectGridGutters(data, width, height, CASTING_COLS, CASTING_ROWS);
-
 console.log(`Casting source: ${path.relative(root, sourcePath)} (${width}×${height})`);
-console.log(`Gutters: x=[${gutters.xGutters.join(', ')}] y=[${gutters.yGutters.join(', ')}]`);
 
 for (const [role, { col, row }] of Object.entries(CASTING_ROLE_CELLS)) {
-  const cellRect = getCastingExtractRect(width, height, col, row, gutters);
+  const faceRect = getCastingPortraitRectForRole(width, height, role);
   const outPath = path.join(outDir, `${role}-portrait.webp`);
 
   await sharp(sourcePath)
-    .extract(cellRect)
+    .extract(faceRect)
     .resize(PORTRAIT_SIZE, PORTRAIT_SIZE, {
-      fit: 'contain',
-      position: 'centre',
+      fit: 'fill',
+      background: PANEL_LETTERBOX,
+    })
+    .webp({ quality: 88 })
+    .toFile(outPath);
+
+  const meta = await sharp(outPath).metadata();
+  console.log(
+    `Wrote ${path.relative(root, outPath)} (${meta.width}×${meta.height}) from cell R${row}C${col}`,
+  );
+}
+
+for (const [role, relativeSource] of Object.entries(STANDALONE_PORTRAIT_SOURCES)) {
+  const standalonePath = path.join(root, relativeSource);
+  if (!fs.existsSync(standalonePath)) {
+    console.warn(`Skip ${role}: missing ${path.relative(root, standalonePath)}`);
+    continue;
+  }
+
+  const outPath = path.join(outDir, `${role}-portrait.webp`);
+  const trimmedBuffer = await sharp(standalonePath).trim({ threshold: 18 }).toBuffer();
+  const { width: sw, height: sh } = await sharp(trimmedBuffer).metadata();
+  const sageRect = getSagePortraitRect(sw, sh);
+  console.log(
+    `Standalone source: ${path.relative(root, standalonePath)} (trimmed ${sw}×${sh})`,
+  );
+
+  await sharp(trimmedBuffer)
+    .extract(sageRect)
+    .trim({ threshold: 22 })
+    .resize(PORTRAIT_SIZE, PORTRAIT_SIZE, {
+      fit: 'cover',
+      position: 'north',
       background: PANEL_LETTERBOX,
     })
     .webp({ quality: 88 })
@@ -53,4 +84,9 @@ for (const [role, { col, row }] of Object.entries(CASTING_ROLE_CELLS)) {
   console.log(`Wrote ${path.relative(root, outPath)} (${meta.width}×${meta.height})`);
 }
 
-console.log(`Done — ${Object.keys(CASTING_ROLE_CELLS).length} portraits in public/images/characters/`);
+const portraitCount =
+  Object.keys(CASTING_ROLE_CELLS).length +
+  Object.values(STANDALONE_PORTRAIT_SOURCES).filter((relativeSource) =>
+    fs.existsSync(path.join(root, relativeSource)),
+  ).length;
+console.log(`Done — ${portraitCount} portraits in public/images/characters/`);

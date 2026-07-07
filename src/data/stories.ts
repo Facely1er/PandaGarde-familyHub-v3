@@ -2091,7 +2091,7 @@ The price was written in very small letters beneath the gifts: accept the Forest
 
 The Agreement was eleven pages long.
 
-Miki the Owl read the first page and frowned. Billy tapped "Accept All" because the line behind him was long. Ruby asked a friend, "Did you read it?" The friend said, "Not really — did you?"
+Mika the Owl read the first page and frowned. Billy tapped "Accept All" because the line behind him was long. Ruby asked a friend, "Did you read it?" The friend said, "Not really — did you?"
 
 Most animals tapped "Accept All" in under five seconds.
 

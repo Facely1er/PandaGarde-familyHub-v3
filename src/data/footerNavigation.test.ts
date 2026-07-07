@@ -23,6 +23,7 @@ const APP_STATIC_PATHS = new Set([
   '/digital-rights',
   '/for-families',
   '/stories',
+  '/stories/cast',
   '/family-privacy-plan',
   '/family-hub',
   '/family-hub/activities',
@@ -76,7 +77,7 @@ describe('footer navigation links', () => {
 
   it('footer link counts match planned IA', () => {
     expect(footerFootprintLinks).toHaveLength(4);
-    expect(footerFamilyLinks).toHaveLength(4);
+    expect(footerFamilyLinks).toHaveLength(5);
     expect(footerHelpCenterLinks).toHaveLength(5);
     expect(footerLegalLinks).toHaveLength(5);
   });

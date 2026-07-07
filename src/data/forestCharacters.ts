@@ -9,6 +9,8 @@ export interface ForestCharacter {
   tier: 1 | 2 | 3;
   debutEpisode: number;
   portraitUrl: string;
+  /** Shown when portraitUrl is missing or fails to load */
+  emoji: string;
 }
 
 /** Canon roster — copy from docs/STORYLINE_BIBLE.md §3 (not casting sheet labels). */
@@ -22,6 +24,7 @@ export const FOREST_CHARACTERS: ForestCharacter[] = [
     tier: 1,
     debutEpisode: 1,
     portraitUrl: '/images/characters/po-portrait.webp',
+    emoji: '🐼',
   },
   {
     id: 'ruby',
@@ -32,6 +35,7 @@ export const FOREST_CHARACTERS: ForestCharacter[] = [
     tier: 1,
     debutEpisode: 1,
     portraitUrl: '/images/characters/ruby-portrait.webp',
+    emoji: '🐰',
   },
   {
     id: 'miki',
@@ -42,6 +46,7 @@ export const FOREST_CHARACTERS: ForestCharacter[] = [
     tier: 1,
     debutEpisode: 1,
     portraitUrl: '/images/characters/miki-portrait.webp',
+    emoji: '🐵',
   },
   {
     id: 'tao',
@@ -52,6 +57,7 @@ export const FOREST_CHARACTERS: ForestCharacter[] = [
     tier: 1,
     debutEpisode: 1,
     portraitUrl: '/images/characters/tao-portrait.webp',
+    emoji: '🐢',
   },
   {
     id: 'billy',
@@ -62,6 +68,7 @@ export const FOREST_CHARACTERS: ForestCharacter[] = [
     tier: 1,
     debutEpisode: 3,
     portraitUrl: '/images/characters/billy-portrait.webp',
+    emoji: '🦫',
   },
   {
     id: 'mika',
@@ -72,6 +79,7 @@ export const FOREST_CHARACTERS: ForestCharacter[] = [
     tier: 1,
     debutEpisode: 4,
     portraitUrl: '/images/characters/mika-portrait.webp',
+    emoji: '🦉',
   },
   {
     id: 'lumi',
@@ -82,6 +90,7 @@ export const FOREST_CHARACTERS: ForestCharacter[] = [
     tier: 2,
     debutEpisode: 8,
     portraitUrl: '/images/characters/lumi-portrait.webp',
+    emoji: '✨',
   },
   {
     id: 'vex',
@@ -92,6 +101,7 @@ export const FOREST_CHARACTERS: ForestCharacter[] = [
     tier: 3,
     debutEpisode: 10,
     portraitUrl: '/images/characters/vex-portrait.webp',
+    emoji: '🦎',
   },
   {
     id: 'fiona',
@@ -102,6 +112,7 @@ export const FOREST_CHARACTERS: ForestCharacter[] = [
     tier: 2,
     debutEpisode: 10,
     portraitUrl: '/images/characters/fiona-portrait.webp',
+    emoji: '🦊',
   },
   {
     id: 'kai',
@@ -112,6 +123,7 @@ export const FOREST_CHARACTERS: ForestCharacter[] = [
     tier: 2,
     debutEpisode: 12,
     portraitUrl: '/images/characters/kai-portrait.webp',
+    emoji: '🦊',
   },
   {
     id: 'sage',
@@ -121,7 +133,8 @@ export const FOREST_CHARACTERS: ForestCharacter[] = [
     tagline: 'Helps the forest understand rights and fair agreements.',
     tier: 3,
     debutEpisode: 16,
-    portraitUrl: '',
+    portraitUrl: '/images/characters/sage-portrait.webp',
+    emoji: '🦢',
   },
 ];
 
@@ -130,6 +143,14 @@ const CHARACTER_BY_ID: Record<CharacterRole, ForestCharacter | undefined> = Obje
 ) as Record<CharacterRole, ForestCharacter | undefined>;
 
 const TIER_ORDER: Record<ForestCharacter['tier'], number> = { 1: 0, 2: 1, 3: 2 };
+
+export const STORY_CAST_PATH = '/stories/cast';
+
+export const CAST_TIER_LABELS: Record<ForestCharacter['tier'], string> = {
+  1: 'Core friends',
+  2: 'Allies & explorers',
+  3: 'Tricksters & elders',
+};
 
 export function getForestCharacter(id: CharacterRole): ForestCharacter | undefined {
   return CHARACTER_BY_ID[id];
@@ -166,7 +187,7 @@ export function getCharactersForStory(story: Story): ForestCharacter[] {
 
   return [...roleIds]
     .map((id) => getForestCharacter(id))
-    .filter((character): character is ForestCharacter => Boolean(character?.portraitUrl))
+    .filter((character): character is ForestCharacter => Boolean(character))
     .sort((a, b) => {
       const leadDelta = Number(b.id === story.leadCharacter) - Number(a.id === story.leadCharacter);
       if (leadDelta !== 0) return leadDelta;
@@ -175,13 +196,11 @@ export function getCharactersForStory(story: Story): ForestCharacter[] {
 }
 
 export function getCharactersDebutingInEpisode(episodeNumber: number): ForestCharacter[] {
-  return FOREST_CHARACTERS.filter(
-    (character) => character.debutEpisode === episodeNumber && character.portraitUrl,
-  );
+  return FOREST_CHARACTERS.filter((character) => character.debutEpisode === episodeNumber);
 }
 
 export function getCastGalleryCharacters(): ForestCharacter[] {
-  return FOREST_CHARACTERS.filter((character) => character.portraitUrl).sort(
+  return [...FOREST_CHARACTERS].sort(
     (a, b) => a.debutEpisode - b.debutEpisode || TIER_ORDER[a.tier] - TIER_ORDER[b.tier],
   );
 }

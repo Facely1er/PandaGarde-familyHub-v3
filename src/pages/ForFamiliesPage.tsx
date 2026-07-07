@@ -47,6 +47,7 @@ const LINK_ICONS: Record<string, LucideIcon> = {
   '/stories/privacy-panda-and-the-digital-bamboo-forest': Sparkles,
 
   '/stories': Library,
+  '/stories/cast': Library,
 
   '/guides/family-privacy': BookOpen,
 

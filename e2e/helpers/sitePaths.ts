@@ -65,6 +65,7 @@ export const STATIC_APP_PATHS: string[] = [
   '/family-privacy-plan',
   '/guides/family-privacy-plan',
   '/stories',
+  '/stories/cast',
   '/activities/privacy-learning-kit',
   '/downloads/worksheets',
 ];

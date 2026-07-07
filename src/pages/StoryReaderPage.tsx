@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Fingerprint, LayoutDashboard, Library } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Fingerprint, LayoutDashboard, Library, Users } from 'lucide-react';
 import { getStoryBySlug, isFoundationStory, isStoryPublished } from '../data/stories';
+import { STORY_CAST_PATH } from '../data/forestCharacters';
 import { BambooForestStoryExperience } from '../components/stories/BambooForestStoryExperience';
 import { ChapterStoryExperience } from '../components/stories/ChapterStoryExperience';
 import PageLayout from '../components/layout/PageLayout';
@@ -22,7 +23,7 @@ function StoryNextSteps() {
       <p className="mb-5 text-sm text-gray-600 dark:text-gray-300">
         Stories are a starting point — here are three ways to keep the conversation going with your family.
       </p>
-      <ul className="grid gap-3 sm:grid-cols-3">
+      <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <li>
           <Link
             to="/digital-footprint"
@@ -77,6 +78,25 @@ function StoryNextSteps() {
             </span>
             <span className="mt-auto inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 dark:text-emerald-400">
               All stories <ArrowRight size={13} aria-hidden />
+            </span>
+          </Link>
+        </li>
+        <li>
+          <Link
+            to={STORY_CAST_PATH}
+            className="group flex h-full flex-col gap-2 rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-all hover:border-amber-400 hover:shadow-md dark:border-gray-700 dark:bg-gray-700 dark:hover:border-amber-500"
+          >
+            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300">
+              <Users size={18} aria-hidden />
+            </span>
+            <span className="block text-sm font-semibold text-gray-900 dark:text-white">
+              Meet the cast
+            </span>
+            <span className="block text-xs leading-relaxed text-gray-500 dark:text-gray-400">
+              See who lives in the forest and which episode they debut in.
+            </span>
+            <span className="mt-auto inline-flex items-center gap-1 text-xs font-semibold text-amber-700 dark:text-amber-400">
+              Story cast <ArrowRight size={13} aria-hidden />
             </span>
           </Link>
         </li>

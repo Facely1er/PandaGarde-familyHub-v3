@@ -73,6 +73,9 @@ const StoryListPage = lazy(() =>
 const StoryReaderPage = lazy(() =>
   import('./pages/StoryReaderPage').then((m) => ({ default: m.StoryReaderPage }))
 );
+const StoryCastPage = lazy(() =>
+  import('./pages/StoryCastPage').then((m) => ({ default: m.StoryCastPage }))
+);
 
 // Component to handle hash navigation
 const HashHandler: React.FC = () => {
@@ -273,6 +276,7 @@ function App() {
 
             {/* Privacy Panda Stories */}
             <Route path="/stories" element={<StoryListPage />} />
+            <Route path="/stories/cast" element={<StoryCastPage />} />
             <Route path="/stories/:slug" element={<StoryReaderPage />} />
 
             {/* Activity Pages */}

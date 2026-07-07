@@ -69,7 +69,9 @@ Soft spots (11, 14) are species swaps only — plot and mood match. Regenerate t
 
 Run `npm run assets:character-portraits` to write `public/images/characters/{role}-portrait.webp`.
 
-Sheet labels do not always match canon species — crop uses **grid cell → role id** (see `scripts/lib/characterPortraitCropUtils.mjs`):
+Portrait crops use measured illustration bands (no white gutters on this sheet) and a **face-square** extract. **Mika (R0C3)** at focus `0.32` is the calibration reference; other roles use per-role focus overrides in `characterPortraitCropUtils.mjs`.
+
+Sheet labels do not always match canon species — crop uses **grid cell → role id** (see `scripts/lib/characterPortraitCropUtils.mjs`). Portrait crops use **measured illustration bands** (not even grid splits — the sheet has no white gutters) and `fit: cover` anchored on faces.
 
 | Cell | Sheet label | Canon role |
 |---|---|---|
@@ -79,7 +81,7 @@ Sheet labels do not always match canon species — crop uses **grid cell → rol
 | R1C4 | Fiona (pangolin art) | **fiona** (fox in bible) |
 | R1C5 | Rocco | *(skipped — not in bible)* |
 
-Sage (Ep 16) has no portrait on the sheet yet.
+Sage (Ep 16) uses standalone art — save as **`sage-portrait.png`** (not on the casting grid).
 
 ## Legacy fallbacks
 

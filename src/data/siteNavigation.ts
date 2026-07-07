@@ -117,6 +117,7 @@ export const footerFamilyLinks: SiteNavItem[] = [
   },
   { id: 'footer-family-hub', icon: LayoutDashboard, label: 'Family Hub', href: '/family-hub' },
   { id: 'footer-stories', icon: Library, label: 'Privacy Panda Stories', href: '/stories' },
+  { id: 'footer-story-cast', icon: Library, label: 'Story cast', href: '/stories/cast' },
   { id: 'footer-family-plan', icon: FileText, label: 'Family privacy plan', href: '/family-privacy-plan' },
 ];
 

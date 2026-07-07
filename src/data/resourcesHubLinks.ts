@@ -22,6 +22,11 @@ export const resourceStoryLinks: ResourceHubLink[] = [
     href: '/stories',
     description: 'Browse every episode—pick any one to start.',
   },
+  {
+    label: 'Meet the cast',
+    href: '/stories/cast',
+    description: 'Who lives in the Digital Bamboo Forest—and when you meet them.',
+  },
 ];
 
 /** Parent conversation & plans — static guides only (missions live in Family Hub). */

@@ -14,6 +14,7 @@ import { StoryCard } from '../components/stories/StoryCard';
 import { StoryCastGallery } from '../components/stories/StoryCastGallery';
 import { StoryCoverArt } from '../components/stories/StoryCoverArt';
 import { ComingSoonBanner } from '../components/stories/ComingSoonBanner';
+import { STORY_CAST_PATH } from '../data/forestCharacters';
 import PageLayout from '../components/layout/PageLayout';
 
 type Filter = AgeGroup | 'all';
@@ -108,6 +109,17 @@ export function StoryListPage() {
 
           <ComingSoonBanner />
 
+          <p className="text-sm text-gray-600 dark:text-gray-300">
+            <Link
+              to={STORY_CAST_PATH}
+              className="font-semibold text-green-700 hover:underline dark:text-green-400"
+            >
+              Meet the cast
+            </Link>
+            {' '}
+            — see who appears in each episode before you read.
+          </p>
+
           <div role="group" aria-label="Filter by age" className="flex flex-wrap gap-2">
             {FILTERS.map(({ value, label }) => (
               <button
@@ -187,7 +199,7 @@ export function StoryListPage() {
               })}
             </div>
           )}
-          <StoryCastGallery />
+          <StoryCastGallery showFullPageLink />
         </div>
       </section>
     </PageLayout>
