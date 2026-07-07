@@ -22,9 +22,9 @@ const CookiesPage: React.FC = () => {
                 websites remember information about your visit, such as your preferences and settings, to make
                 your next visit easier and more personalized.
               </p>
-              <div className="bg-blue-50 p-6 rounded-lg mb-6 bg-light">
+              <div className="bg-green-50 dark:bg-green-950/30 p-6 rounded-lg mb-6 border border-green-200 dark:border-green-800">
                 <div className="flex items-start gap-3">
-                  <Info size={24} className="text-blue-600 mt-1 text-primary" />
+                  <Info size={24} className="text-green-700 dark:text-green-400 mt-1 text-primary" />
                   <div>
                     <h3 className="font-semibold mb-2 text-primary">
                       Our Privacy-First Approach
@@ -255,7 +255,7 @@ const CookiesPage: React.FC = () => {
                 </p>
                 <p className="mb-2 text-gray-600">
                   <strong>Website:</strong>{' '}
-                  <Link to="/contact" className="text-blue-600 hover:underline">
+                  <Link to="/contact" className="text-green-700 hover:text-green-800 hover:underline dark:text-green-400 dark:hover:text-green-300">
                     pandagarde.com/contact
                   </Link>
                 </p>
@@ -267,7 +267,7 @@ const CookiesPage: React.FC = () => {
 
             {/* Effective Date */}
             <section className="mb-12">
-              <div className="bg-blue-50 p-6 rounded-lg text-center bg-light">
+              <div className="bg-green-50 dark:bg-green-950/30 p-6 rounded-lg text-center border border-green-200 dark:border-green-800">
                 <p className="text-lg font-semibold text-primary">
                   This Cookie Policy is effective as of December 2024
                 </p>

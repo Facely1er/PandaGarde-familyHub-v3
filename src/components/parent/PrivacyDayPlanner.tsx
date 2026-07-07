@@ -79,7 +79,7 @@ const PrivacyDayPlanner: React.FC = () => {
 
   const eventBorderClass = (event: PrivacyDayEvent) => {
     if (event.completed) {return 'border-green-500 dark:border-green-600';}
-    if (isUpcoming(event.date)) {return 'border-blue-500 dark:border-blue-500';}
+    if (isUpcoming(event.date)) {return 'border-green-500 dark:border-green-500';}
     return 'border-gray-400 dark:border-gray-600';
   };
 
@@ -94,9 +94,9 @@ const PrivacyDayPlanner: React.FC = () => {
         </p>
       </div>
 
-      <div className="rounded-xl border-2 border-blue-500 dark:border-blue-600 bg-blue-50 dark:bg-blue-950/30 p-6 mb-8">
-        <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-200 mb-3">What is a Privacy Day?</h3>
-        <p className="text-blue-900 dark:text-blue-200/90 leading-relaxed m-0">
+      <div className="rounded-xl border-2 border-green-600 dark:border-green-500 bg-green-50 dark:bg-green-950/30 p-6 mb-8">
+        <h3 className="text-lg font-semibold text-green-900 dark:text-green-200 mb-3">What is a Privacy Day?</h3>
+        <p className="text-green-900 dark:text-green-200/90 leading-relaxed m-0">
           A Privacy Day is a scheduled time (every 3 months) when your family comes together to review online accounts,
           update privacy settings, remove unused apps, and discuss new platforms. It&apos;s a great way to make privacy
           maintenance a regular family activity.
@@ -170,7 +170,7 @@ const PrivacyDayPlanner: React.FC = () => {
                   <div className="flex flex-wrap items-center gap-2 mb-2">
                     <Calendar
                       size={20}
-                      className={isUpcoming(event.date) ? 'text-blue-600 dark:text-blue-400' : 'text-gray-400'}
+                      className={isUpcoming(event.date) ? 'text-green-600 dark:text-green-400' : 'text-gray-400'}
                       aria-hidden
                     />
                     <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100 m-0">

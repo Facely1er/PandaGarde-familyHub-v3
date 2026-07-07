@@ -65,6 +65,7 @@ const ParentalConsentPendingPage = lazy(() => import('./pages/ParentalConsentPen
 const DigitalFootprintPage = lazy(() => import('./pages/DigitalFootprintPage'));
 const ScoringMethodologyPage = lazy(() => import('./pages/ScoringMethodologyPage'));
 const AssessmentHistoryPage = lazy(() => import('./pages/AssessmentHistoryPage'));
+const CertificatePage = lazy(() => import('./pages/CertificatePage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const StoryListPage = lazy(() =>
   import('./pages/StoryListPage').then((m) => ({ default: m.StoryListPage }))
@@ -240,6 +241,7 @@ function App() {
             <Route path="/safety-posters" element={<SafetyPostersPage />} />
             <Route path="/downloads/certificates" element={<CertificatesPage />} />
             <Route path="/certificates" element={<CertificatesPage />} />
+            <Route path="/certificate" element={<CertificatePage />} />
             <Route path="/downloads/family-agreement" element={<FamilyAgreementPage />} />
             <Route path="/family-agreement" element={<FamilyAgreementPage />} />
             

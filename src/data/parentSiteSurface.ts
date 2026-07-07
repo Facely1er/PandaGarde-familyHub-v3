@@ -54,6 +54,10 @@ export const PARENT_SURFACE_REDIRECTS: Record<string, string> = {
   '/app-store-review': '/how-it-works',
   '/age-groups': '/how-it-works',
 
+  // Retired page components (bookmarks use PARENT_SURFACE_REDIRECTS above):
+  // AgeGroupsPage, ImplementationPage, OverviewPage, ParentLandingPage,
+  // ParentResourcesPage, PrivacyToolsPage, QuickStartPage — removed from bundle.
+
   // Secondary goals index (low value vs plan + assessment)
   '/privacy-goals': '/family-privacy-plan',
   '/goals': '/family-privacy-plan',

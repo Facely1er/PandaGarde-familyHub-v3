@@ -114,9 +114,9 @@ const ParentOnboarding: React.FC<ParentOnboardingProps> = ({ onComplete, onSkip 
               <li>Suggested next steps—not live monitoring of phones</li>
             </ul>
           </InfoBox>
-          <div className={`${subBoxClass} border-2 border-blue-500 dark:border-blue-600 bg-blue-50 dark:bg-blue-950/30`}>
-            <h4 className="text-base font-semibold mb-3 text-blue-900 dark:text-blue-200">Score colors:</h4>
-            <ul className="m-0 pl-6 leading-relaxed text-blue-900 dark:text-blue-200 space-y-1">
+          <div className={`${subBoxClass} border-2 border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-900/30`}>
+            <h4 className="text-base font-semibold mb-3 text-gray-900 dark:text-gray-100">Score colors:</h4>
+            <ul className="m-0 pl-6 leading-relaxed text-gray-800 dark:text-gray-200 space-y-1">
               <li>
                 <strong className="text-green-600 dark:text-green-400">Green:</strong> Lower risk—still worth knowing what the app collects
               </li>

@@ -70,7 +70,7 @@ export const BREADCRUMB_PAGE_LABELS: Record<string, string> = {
   '/stories': 'Privacy Panda Stories',
   '/story': 'Privacy Panda Story',
   '/privacy-panda': 'Privacy Panda',
-  '/activity-book': 'Activity book',
+  '/certificate': 'Certificate generator',
   '/interactive-story': 'Interactive story',
   '/privacy-explorers': 'Privacy explorers',
   '/privacy-handbook': 'Privacy handbook',

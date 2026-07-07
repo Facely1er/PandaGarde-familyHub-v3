@@ -76,7 +76,7 @@ const ParentalConsentPage: React.FC = () => {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center px-4">
         <div className="max-w-md w-full bg-white dark:bg-gray-200 rounded-lg shadow-lg p-8 text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 dark:border-green-400 mx-auto mb-4"></div>
           <p className="text-gray-600 dark:text-gray-400">Verifying consent...</p>
         </div>
       </div>
@@ -120,7 +120,7 @@ const ParentalConsentPage: React.FC = () => {
             </div>
 
             {status === 'success' && consentRecord?.record && (
-              <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+              <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-6">
                 <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
                   <Shield size={20} />
                   Consent Details
