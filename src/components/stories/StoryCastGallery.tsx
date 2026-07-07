@@ -27,7 +27,7 @@ function groupByTier(characters: ForestCharacter[]): { tier: ForestCharacter['ti
 
 export function StoryCastGallery({ showTiers = false, showFullPageLink = false }: StoryCastGalleryProps) {
   const cast = getCastGalleryCharacters();
-  if (cast.length === 0) return null;
+  if (cast.length === 0) {return null;}
 
   const tierGroups = showTiers ? groupByTier(cast) : null;
 

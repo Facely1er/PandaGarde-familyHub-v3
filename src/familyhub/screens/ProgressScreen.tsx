@@ -47,13 +47,13 @@ const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => 
   const forestFriends = useMemo(() => {
     const byGuide = new Map<string, { character: ForestCharacter; total: number; completed: number }>();
     for (const activity of allActivities) {
-      if (!activity.guideCharacter) continue;
+      if (!activity.guideCharacter) {continue;}
       const character = getForestCharacter(activity.guideCharacter);
-      if (!character) continue;
+      if (!character) {continue;}
       const entry = byGuide.get(character.id) ?? { character, total: 0, completed: 0 };
       entry.total += 1;
       const detail = getActivityProgress(activity.activityManagerId ?? activity.id);
-      if (detail?.completed) entry.completed += 1;
+      if (detail?.completed) {entry.completed += 1;}
       byGuide.set(character.id, entry);
     }
     return [...byGuide.values()].sort(

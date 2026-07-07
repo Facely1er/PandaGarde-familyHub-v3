@@ -176,17 +176,17 @@ export function getForestCharacterPortraitUrl(id: CharacterRole): string | undef
 /** Match story.characters strings ("Mika the Owl") to canonical roles. */
 export function roleFromCharacterLabel(label: string): CharacterRole | undefined {
   const lower = label.toLowerCase();
-  if (lower.includes('miki')) return 'miki';
-  if (lower.includes('mika')) return 'mika';
-  if (lower.includes('ruby')) return 'ruby';
-  if (lower.includes('billy')) return 'billy';
-  if (lower.includes('lumi')) return 'lumi';
-  if (lower.includes('fiona')) return 'fiona';
-  if (lower.includes('kai')) return 'kai';
-  if (lower.includes('vex')) return 'vex';
-  if (lower.includes('sage')) return 'sage';
-  if (lower.includes('tao') || lower.includes('turtle')) return 'tao';
-  if (lower.includes('po') || lower.includes('panda')) return 'po';
+  if (lower.includes('miki')) {return 'miki';}
+  if (lower.includes('mika')) {return 'mika';}
+  if (lower.includes('ruby')) {return 'ruby';}
+  if (lower.includes('billy')) {return 'billy';}
+  if (lower.includes('lumi')) {return 'lumi';}
+  if (lower.includes('fiona')) {return 'fiona';}
+  if (lower.includes('kai')) {return 'kai';}
+  if (lower.includes('vex')) {return 'vex';}
+  if (lower.includes('sage')) {return 'sage';}
+  if (lower.includes('tao') || lower.includes('turtle')) {return 'tao';}
+  if (lower.includes('po') || lower.includes('panda')) {return 'po';}
   return undefined;
 }
 
@@ -194,7 +194,7 @@ export function getCharactersForStory(story: Story): ForestCharacter[] {
   const roleIds = new Set<CharacterRole>([story.leadCharacter]);
   for (const label of story.characters) {
     const role = roleFromCharacterLabel(label);
-    if (role) roleIds.add(role);
+    if (role) {roleIds.add(role);}
   }
 
   return [...roleIds]
@@ -202,7 +202,7 @@ export function getCharactersForStory(story: Story): ForestCharacter[] {
     .filter((character): character is ForestCharacter => Boolean(character))
     .sort((a, b) => {
       const leadDelta = Number(b.id === story.leadCharacter) - Number(a.id === story.leadCharacter);
-      if (leadDelta !== 0) return leadDelta;
+      if (leadDelta !== 0) {return leadDelta;}
       return TIER_ORDER[a.tier] - TIER_ORDER[b.tier] || a.name.localeCompare(b.name);
     });
 }

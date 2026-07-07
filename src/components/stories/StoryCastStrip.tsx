@@ -8,7 +8,7 @@ interface StoryCastStripProps {
 
 export function StoryCastStrip({ story }: StoryCastStripProps) {
   const cast = getCharactersForStory(story);
-  if (cast.length === 0) return null;
+  if (cast.length === 0) {return null;}
 
   return (
     <section

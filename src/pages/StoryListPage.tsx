@@ -148,7 +148,7 @@ export function StoryListPage() {
             <div className="space-y-10">
               {seasonGroups.map(({ season, stories }) => {
                 const meta = SEASON_SECTIONS.find((section) => section.season === season);
-                if (!meta) return null;
+                if (!meta) {return null;}
                 const isSeason2 = season === 2;
 
                 return (

@@ -11,7 +11,7 @@ export function StoryCharacterDebut({ story }: StoryCharacterDebutProps) {
     (character) => character.id !== 'po' && character.id !== 'ruby' && character.id !== 'miki' && character.id !== 'tao',
   );
 
-  if (debuts.length === 0) return null;
+  if (debuts.length === 0) {return null;}
 
   return (
     <section
