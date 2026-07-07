@@ -419,7 +419,7 @@ const FamilyHubPage: React.FC = () => {
                     </button>
                     <button
                       onClick={() => setShowJoinFamily(true)}
-                      className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors shadow-sm hover:shadow-md active:scale-[0.98]"
+                      className="bg-green-700 hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500 text-white px-6 py-3 rounded-lg font-semibold transition-colors shadow-sm hover:shadow-md active:scale-[0.98]"
                     >
                       Join Family
                     </button>
@@ -957,7 +957,7 @@ const FamilyHubPage: React.FC = () => {
                   </button>
                   <button
                     onClick={() => setShowJoinFamily(true)}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+                    className="bg-green-700 hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500 text-white px-6 py-3 rounded-lg font-medium transition-colors"
                   >
                     Join Family
                   </button>
@@ -1243,7 +1243,7 @@ const FamilyHubPage: React.FC = () => {
                   <button
                     onClick={handleJoinFamily}
                     disabled={!joinFamilyId.trim() || loading}
-                    className="flex-1 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white px-4 py-3 rounded-md font-medium transition-colors min-h-[44px]"
+                    className="flex-1 bg-green-700 hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500 disabled:bg-gray-400 disabled:cursor-not-allowed text-white px-4 py-3 rounded-md font-medium transition-colors min-h-[44px]"
                     aria-label="Join family"
                   >
                     {loading ? 'Joining...' : 'Join Family'}

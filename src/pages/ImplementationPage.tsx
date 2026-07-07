@@ -148,8 +148,8 @@ const ImplementationPage: React.FC = () => {
       breadcrumbs={true}
     >
 
-      <section className="timeline-section">
-        <div className="container">
+      <section className="timeline-section py-12 sm:py-16 lg:py-24">
+        <div className="container px-4 sm:px-6 lg:px-8">
           <div className="timeline-intro">
             <p>The Privacy Panda curriculum is designed to be flexible and adaptable to different educational settings and timeframes. Each implementation model includes detailed lesson plans, activities, and assessment tools.</p>
           </div>
@@ -211,7 +211,7 @@ const ImplementationPage: React.FC = () => {
                 ))}
               </div>
 
-              <div className="timeline-actions">
+              <div className="timeline-actions flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <Link to="/implementation-guide" className="button primary">
                   <BookOpen size={16} />
                   View Detailed Timeline
@@ -226,8 +226,8 @@ const ImplementationPage: React.FC = () => {
         </div>
       </section>
 
-      <section className="implementation-features">
-        <div className="container">
+      <section className="implementation-features py-12 sm:py-16 lg:py-24">
+        <div className="container px-4 sm:px-6 lg:px-8">
           <h2>What's Included in Each Implementation</h2>
           <div className="features-grid">
             <div className="feature-item">
@@ -264,8 +264,8 @@ const ImplementationPage: React.FC = () => {
         </div>
       </section>
 
-      <section className="cta-section">
-        <div className="container">
+      <section className="cta-section py-12 sm:py-16 lg:py-24">
+        <div className="container px-4 sm:px-6 lg:px-8">
           <div className="cta-content">
             <h2>Ready to Implement Privacy Panda?</h2>
             <p>Choose your implementation model and start teaching digital privacy today.</p>

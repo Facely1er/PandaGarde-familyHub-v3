@@ -19,15 +19,15 @@ import { dfaTheme } from '../styles/dfaTheme';
 const DigitalFootprintEducator: React.FC = () => {
   const [open, setOpen] = useState(false);
   return (
-    <div className="mb-6 overflow-hidden rounded-xl border-2 border-blue-200 bg-blue-50/50 dark:border-blue-800 dark:bg-blue-900/20">
-      <button type="button" onClick={() => setOpen(!open)} className="w-full p-4 text-left transition-colors hover:bg-blue-100/50 dark:hover:bg-blue-900/30" aria-expanded={open ? 'true' : 'false'}>
-        <span className="flex items-center justify-between font-semibold text-blue-900 dark:text-blue-100">
+    <div className="mb-6 overflow-hidden rounded-xl border-2 border-green-200 bg-green-50/50 dark:border-green-800 dark:bg-green-900/20">
+      <button type="button" onClick={() => setOpen(!open)} className="w-full p-4 text-left transition-colors hover:bg-green-100/50 dark:hover:bg-green-900/30" aria-expanded={open ? 'true' : 'false'}>
+        <span className="flex items-center justify-between font-semibold text-green-900 dark:text-green-100">
           <span className="flex items-center gap-2"><BookOpen className="h-5 w-5" /> What is a digital footprint, and why does it matter?</span>
           {open ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
         </span>
       </button>
       {open && (
-        <div className="space-y-4 px-4 pb-4 pt-0 text-sm text-blue-900 dark:text-blue-200">
+        <div className="space-y-4 px-4 pb-4 pt-0 text-sm text-green-900 dark:text-green-200">
           <p><strong>Your digital footprint</strong> is the trail of information that apps and websites collect when your family uses them — names, activity, location signals, school usage, purchases, and more.</p>
           <p><strong>Why it matters:</strong> children and parents use school tools, home apps, messaging, games, and AI services across the same household. This page shows how that exposure adds up.</p>
           <p><strong>How to use this page:</strong> review the privacy score, notice which services matter most, then pick stories or Family Hub when it fits your week—no long form required here.</p>
@@ -144,20 +144,20 @@ const DigitalFootprintPage: React.FC = () => {
         <DfaMethodologyCallout />
 
         {totalServicesCount < 5 && (
-          <div className="mb-6 rounded-xl border-2 border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50 p-5 dark:border-blue-800 dark:from-blue-900/20 dark:to-indigo-900/20">
-            <div className="flex items-start space-x-4">
+          <div className="mb-6 rounded-xl border-2 border-green-200 bg-gradient-to-r from-green-50 to-emerald-50 p-4 sm:p-5 dark:border-green-800 dark:from-green-900/20 dark:to-emerald-900/20">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
               <div className="flex-shrink-0">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-600"><TrendingUp className="h-6 w-6 text-white" /></div>
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-700 dark:bg-green-600"><TrendingUp className="h-6 w-6 text-white" /></div>
               </div>
-              <div className="flex-1">
-                <div className="mb-2 flex items-center gap-2">
-                  <h3 className="text-lg font-bold text-blue-900 dark:text-blue-100">Improve your analysis</h3>
-                  <span className="rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-700 dark:bg-blue-800 dark:text-blue-200">{totalServicesCount} of 5+ services</span>
+              <div className="min-w-0 flex-1">
+                <div className="mb-2 flex flex-wrap items-center gap-2">
+                  <h3 className="text-lg font-bold text-green-900 dark:text-green-100">Improve your analysis</h3>
+                  <span className="rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700 dark:bg-green-800 dark:text-green-200">{totalServicesCount} of 5+ services</span>
                 </div>
-                <p className="mb-3 text-sm text-blue-800 dark:text-blue-200">You already have a usable footprint review. Add more services anytime—or explore stories and Family Hub when you are ready.</p>
-                <div className="flex flex-wrap gap-3">
-                  <Link to={nextPhaseHref} className="inline-flex items-center gap-2 rounded-lg bg-blue-700 px-4 py-2 font-semibold text-white hover:bg-blue-800">{nextPhaseLabel} <ArrowRight size={16} /></Link>
-                  <Link to="/service-catalog" className="inline-flex items-center gap-2 rounded-lg border border-blue-300 px-4 py-2 font-semibold text-blue-700 hover:bg-blue-100/60 dark:border-blue-700 dark:text-blue-200">Add more services</Link>
+                <p className="mb-3 text-sm text-green-800 dark:text-green-200">You already have a usable footprint review. Add more services anytime—or explore stories and Family Hub when you are ready.</p>
+                <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-3">
+                  <Link to={nextPhaseHref} className="inline-flex items-center justify-center gap-2 rounded-lg bg-green-700 px-4 py-2 font-semibold text-white hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500">{nextPhaseLabel} <ArrowRight size={16} /></Link>
+                  <Link to="/service-catalog" className="inline-flex items-center justify-center gap-2 rounded-lg border border-green-300 px-4 py-2 font-semibold text-green-700 hover:bg-green-100/60 dark:border-green-700 dark:text-green-200">Add more services</Link>
                 </div>
               </div>
             </div>

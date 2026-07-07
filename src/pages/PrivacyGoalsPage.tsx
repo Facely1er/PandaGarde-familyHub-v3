@@ -52,7 +52,7 @@ const PrivacyGoalsPage: React.FC = () => {
             {suggestedGoals.length > 0 && (
               <button
                 onClick={() => setShowSuggestions(!showSuggestions)}
-                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center space-x-2"
+                className="px-4 py-2 bg-green-700 hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500 text-white rounded-lg transition-colors flex items-center space-x-2"
               >
                 <Lightbulb className="h-4 w-4" />
                 <span>View Suggestions</span>
@@ -113,7 +113,7 @@ const PrivacyGoalsPage: React.FC = () => {
                     </div>
                     <button
                       onClick={() => handleCreateFromSuggestion(suggestion)}
-                      className="ml-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm transition-colors"
+                      className="ml-4 px-4 py-2 bg-green-700 hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500 text-white rounded-lg text-sm transition-colors"
                     >
                       Create Goal
                     </button>

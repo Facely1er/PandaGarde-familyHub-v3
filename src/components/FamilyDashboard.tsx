@@ -831,7 +831,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
                   </button>
                   <button 
                     onClick={loadDemoData}
-                    className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold shadow-sm hover:shadow-md active:scale-[0.98] flex items-center justify-center gap-2"
+                    className="bg-green-700 text-white px-6 py-3 rounded-lg hover:bg-green-800 transition-colors font-semibold shadow-sm hover:shadow-md active:scale-[0.98] flex items-center justify-center gap-2 dark:bg-green-600 dark:hover:bg-green-500"
                   >
                     <Sparkles size={18} />
                     Load Demo Data
@@ -952,7 +952,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
                   {familyMembers.length === 0 && (
                     <button 
                       onClick={loadDemoData}
-                      className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold shadow-sm hover:shadow-md active:scale-[0.98] flex items-center justify-center gap-2"
+                      className="bg-green-700 text-white px-6 py-3 rounded-lg hover:bg-green-800 transition-colors font-semibold shadow-sm hover:shadow-md active:scale-[0.98] flex items-center justify-center gap-2 dark:bg-green-600 dark:hover:bg-green-500"
                     >
                       <Sparkles size={18} />
                       Load Demo Data
