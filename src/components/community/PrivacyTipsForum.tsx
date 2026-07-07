@@ -534,7 +534,7 @@ const TopicDetailView: React.FC<TopicDetailViewProps> = ({
   const author = communityStorage.getForumUser(topic.authorId);
 
   return (
-    <main id="main-content" className="bg-white dark:bg-gray-100">
+    <div className="bg-white dark:bg-gray-100">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6">
         <button
           type="button"
@@ -683,7 +683,7 @@ const TopicDetailView: React.FC<TopicDetailViewProps> = ({
         )}
         </div>
       </section>
-    </main>
+    </div>
   );
 };
 

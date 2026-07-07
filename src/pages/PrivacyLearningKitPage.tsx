@@ -41,7 +41,7 @@ const PrivacyLearningKitPage: React.FC = () => {
       subtitle="Everything in one place: stories, printables, missions, and guides. Pick a section below—Start here is the best first step."
       breadcrumbs
     >
-      <main className="container mx-auto px-4 sm:px-6 py-12 max-w-5xl">
+      <div className="container mx-auto px-4 sm:px-6 py-12 max-w-5xl">
         {sections.map((section) => (
           <section key={section.heading} className="mb-10">
             <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{section.heading}</h2>
@@ -62,7 +62,7 @@ const PrivacyLearningKitPage: React.FC = () => {
             </ul>
           </section>
         ))}
-      </main>
+      </div>
     </PageLayout>
   );
 };

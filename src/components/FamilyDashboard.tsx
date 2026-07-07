@@ -642,7 +642,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
       </div>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 sm:px-6 py-4 sm:py-6">
+      <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-6">
         {familyMembers.length > 0 && (
           <div className="mb-6 overflow-hidden rounded-2xl border border-teal-200 bg-white shadow-md shadow-teal-900/5 dark:border-teal-800 dark:bg-gray-800 dark:shadow-black/20">
             <div className="flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
@@ -1008,7 +1008,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({ appMode = false }) =>
             )}
           </div>
         </div>
-      </main>
+      </div>
 
       {/* Add Member Modal - Mobile Optimized */}
       {showAddMember && (

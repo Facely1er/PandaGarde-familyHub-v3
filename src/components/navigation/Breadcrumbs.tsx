@@ -20,86 +20,33 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className = '' }) => {
   return (
     <nav
       aria-label="Breadcrumb"
-      className={`breadcrumb-container ${className}`}
-      style={{
-        background: 'rgba(255, 255, 255, 0.1)',
-        backdropFilter: 'blur(10px)',
-        borderRadius: '8px',
-        padding: '12px 16px',
-        display: 'inline-block',
-        marginBottom: '1.5rem',
-      }}
+      className={`inline-block rounded-lg bg-white/10 px-4 py-2 backdrop-blur-md dark:border dark:border-green-300/25 ${className}`}
     >
-      <ol
-        className="breadcrumb-list"
-        style={{
-          margin: 0,
-          padding: 0,
-          listStyle: 'none',
-          display: 'flex',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: '0.5rem',
-        }}
-      >
+      <ol className="m-0 flex list-none flex-wrap items-center gap-x-2 gap-y-1 p-0 text-sm">
         {breadcrumbs.map((item, index) => {
           const isLast = index === breadcrumbs.length - 1;
 
           return (
-            <li
-              key={`${item.path}-${index}`}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-              }}
-            >
+            <li key={`${item.path}-${index}`} className="flex items-center gap-2">
               {index > 0 && (
-                <ChevronRight
-                  size={16}
-                  style={{
-                    color: 'rgba(255, 255, 255, 0.6)',
-                    flexShrink: 0,
-                  }}
-                />
+                <ChevronRight size={14} aria-hidden="true" className="flex-shrink-0 text-white/60" />
               )}
               {isLast ? (
                 <span
-                  className="breadcrumb-current"
-                  style={{
-                    color: 'white',
-                    fontWeight: 600,
-                  }}
+                  aria-current="page"
+                  className="max-w-[16rem] truncate font-semibold text-white sm:max-w-xs"
                 >
                   {item.label}
                 </span>
               ) : (
                 <Link
                   to={item.path}
-                  className="breadcrumb-link"
-                  style={{
-                    textDecoration: 'none',
-                    color: 'rgba(255, 255, 255, 0.8)',
-                    transition: 'color 0.2s ease',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = 'white';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)';
-                  }}
+                  className="inline-flex max-w-[10rem] items-center gap-1 text-white/80 no-underline transition-colors hover:text-white sm:max-w-[14rem]"
                 >
-                  {index === 0 ? (
-                    <>
-                      <Home
-                        size={16}
-                        style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: '0.25rem' }}
-                      />
-                      {item.label}
-                    </>
-                  ) : (
-                    item.label
+                  {index === 0 && (
+                    <Home size={14} aria-hidden="true" className="flex-shrink-0" />
                   )}
+                  <span className="truncate">{item.label}</span>
                 </Link>
               )}
             </li>

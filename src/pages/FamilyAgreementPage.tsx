@@ -80,7 +80,7 @@ const FamilyAgreementPage: React.FC = () => {
     >
       <div className="min-h-screen" style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}>
       {/* Main Content */}
-      <main className="container mx-auto px-6 py-20">
+      <div className="container mx-auto px-6 py-20">
         {/* Introduction */}
         <div className="max-w-4xl mx-auto text-center mb-16">
           <h2 className="text-3xl font-bold mb-6 text-primary">
@@ -252,7 +252,7 @@ const FamilyAgreementPage: React.FC = () => {
             </Link>
           </div>
         </div>
-      </main>
+      </div>
     </div>
     </PageLayout>
   );

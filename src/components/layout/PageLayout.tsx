@@ -24,11 +24,11 @@ const PageLayout: React.FC<PageLayoutProps> = ({
         breadcrumbs={breadcrumbs}
       />
 
-      <main className="page-layout__main relative z-10 min-h-96">
+      <div className="page-layout__main relative z-10 min-h-96">
         <div className="container relative z-20">
           <div className="page-content">{children}</div>
         </div>
-      </main>
+      </div>
     </div>
   );
 };

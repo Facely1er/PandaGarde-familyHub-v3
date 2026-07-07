@@ -137,7 +137,7 @@ const SuccessStories: React.FC<SuccessStoriesProps> = ({ compact = false }) => {
   }
 
   return (
-    <main id="main-content">
+    <div>
       {/* Back Navigation */}
       <div className="container py-6">
         <Link to="/" className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors">
@@ -261,7 +261,7 @@ const SuccessStories: React.FC<SuccessStoriesProps> = ({ compact = false }) => {
           />
         )}
       </section>
-    </main>
+    </div>
   );
 };
 
