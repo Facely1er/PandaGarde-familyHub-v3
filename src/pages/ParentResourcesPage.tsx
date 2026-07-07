@@ -16,9 +16,9 @@ const ParentResourcesPage: React.FC = () => {
       subtitle="Guides, printables, and talk prompts for parents. Pick a tab below—or start with the Complete Family Privacy Guide."
       breadcrumbs={true}
     >
-      <section className="resources-section">
-        <div className="container">
-          <div className="mb-8 rounded-xl border border-green-200 bg-green-50/80 p-6 dark:border-green-800 dark:bg-green-950/30">
+      <section className="resources-section py-12 sm:py-16 lg:py-24">
+        <div className="container px-4 sm:px-6 lg:px-8">
+          <div className="mb-6 rounded-xl border border-green-200 bg-green-50/80 p-4 sm:mb-8 sm:p-6 dark:border-green-800 dark:bg-green-950/30">
             <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">Not sure where to start?</h2>
             <p className="text-gray-700 dark:text-gray-300 mb-4">
               Open the Complete Family Privacy Guide for a walkthrough, or read a Privacy Panda story with your child (about 5 minutes).
@@ -359,8 +359,8 @@ const ParentResourcesPage: React.FC = () => {
         </div>
       </section>
 
-      <section className="cta-section">
-        <div className="container">
+      <section className="cta-section py-12 sm:py-16 lg:py-24">
+        <div className="container px-4 sm:px-6 lg:px-8">
           <div className="cta-content">
             <h2>Need More Help?</h2>
             <p>Our team is here to support you in implementing privacy education for your family or classroom.</p>

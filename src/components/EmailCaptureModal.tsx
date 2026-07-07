@@ -140,8 +140,8 @@ const EmailCaptureModal: React.FC<EmailCaptureModalProps> = ({
         ) : (
           <>
             <div className="mb-6">
-              <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 dark:bg-blue-900/30 mb-4">
-                <Mail className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+              <div className="mx-auto flex items-center justify-center mb-4 h-12 w-12 rounded-full bg-green-100 dark:bg-green-900/30">
+                <Mail className="h-6 w-6 text-green-700 dark:text-green-400" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
                 {title || message.title}
@@ -163,7 +163,7 @@ const EmailCaptureModal: React.FC<EmailCaptureModalProps> = ({
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder={message.placeholder}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-transparent focus:ring-2 focus:ring-green-500 dark:border-gray-600 dark:bg-slate-700 dark:text-gray-100"
                 />
               </div>
 
@@ -182,7 +182,7 @@ const EmailCaptureModal: React.FC<EmailCaptureModalProps> = ({
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="flex-1 rounded-lg bg-green-700 px-4 py-2 text-white transition-colors hover:bg-green-800 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-green-600 dark:hover:bg-green-500"
                 >
                   {isSubmitting ? 'Subscribing...' : 'Subscribe'}
                 </button>

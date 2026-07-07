@@ -6,14 +6,14 @@ const ParentalConsentPendingPage: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4">
-      <div className="max-w-2xl mx-auto">
-        <div className="bg-white dark:bg-gray-200 rounded-lg shadow-lg p-8">
+    <div className="min-h-screen bg-gray-50 px-4 py-8 sm:py-12 dark:bg-gray-900">
+      <div className="mx-auto max-w-2xl">
+        <div className="rounded-lg bg-white p-6 shadow-lg dark:bg-gray-800 sm:p-8">
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-yellow-100 dark:bg-yellow-900/30 mb-4">
               <Mail size={32} className="text-yellow-600 dark:text-yellow-400" />
             </div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+            <h1 className="mb-2 text-2xl font-bold text-gray-900 sm:text-3xl dark:text-white">
               Parental Consent Pending
             </h1>
             <p className="text-gray-600 dark:text-gray-400">
@@ -22,22 +22,22 @@ const ParentalConsentPendingPage: React.FC = () => {
           </div>
 
           <div className="space-y-6">
-            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+            <div className="rounded-lg border border-green-200 bg-green-50 p-4 sm:p-6 dark:border-green-800 dark:bg-green-900/20">
+              <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-gray-900 dark:text-white">
                 <Shield size={20} />
                 What Happens Next?
               </h2>
               <ol className="space-y-3 text-sm text-gray-600 dark:text-gray-400">
                 <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-semibold">1</span>
+                  <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-green-700 text-xs font-semibold text-white dark:bg-green-600">1</span>
                   <span>We've sent an email to your parent's email address with a consent link</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-semibold">2</span>
+                  <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-green-700 text-xs font-semibold text-white dark:bg-green-600">2</span>
                   <span>Your parent needs to click the link in the email to approve your use of PandaGarde</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-semibold">3</span>
+                  <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-green-700 text-xs font-semibold text-white dark:bg-green-600">3</span>
                   <span>Once approved, you'll be able to use all features of PandaGarde</span>
                 </li>
               </ol>
@@ -67,7 +67,7 @@ const ParentalConsentPendingPage: React.FC = () => {
               </p>
               <Link
                 to="/privacy"
-                className="text-blue-600 dark:text-blue-400 hover:underline text-sm font-medium"
+                className="text-sm font-medium text-green-700 hover:underline dark:text-green-400"
               >
                 Read our Privacy Policy →
               </Link>
@@ -76,7 +76,7 @@ const ParentalConsentPendingPage: React.FC = () => {
             <div className="flex gap-4">
               <button
                 onClick={() => navigate('/')}
-                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors"
+                className="flex-1 rounded-lg bg-green-700 py-3 px-6 font-medium text-white transition-colors hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500"
               >
                 Return to Home
               </button>

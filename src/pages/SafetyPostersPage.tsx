@@ -124,9 +124,8 @@ const SafetyPostersPage: React.FC = () => {
       subtitle="Print a poster and hang it in the classroom or at home—one rule per sheet."
       breadcrumbs={true}
     >
-      <div className="min-h-screen" style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}>
-      {/* Main Content */}
-      <div className="container mx-auto px-6 py-20">
+      <div className="bg-white dark:bg-gray-900">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
         {/* Introduction */}
         <div className="max-w-4xl mx-auto text-center mb-16">
           <h2 className="text-3xl font-bold mb-6 text-primary">
@@ -136,34 +135,34 @@ const SafetyPostersPage: React.FC = () => {
             Pick a poster below, print it, and put it where devices are used. Each one states one clear rule in kid-friendly language.
           </p>
           
-          <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-8 bg-light">
-            <h3 className="text-xl font-semibold mb-4 text-primary">
+          <div className="mb-8 rounded-xl border border-green-200 bg-green-50 p-4 sm:p-6 dark:border-green-800 dark:bg-green-950/30">
+            <h3 className="mb-4 text-lg font-semibold text-primary sm:text-xl">
               📋 Printing & Display Guidelines
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+            <div className="grid grid-cols-1 gap-4 text-left md:grid-cols-2">
               <div className="flex items-start gap-3">
-                <Shield size={20} className="text-blue-600 mt-1 flex-shrink-0" />
+                <Shield size={20} className="mt-1 flex-shrink-0 text-green-600 dark:text-green-400" />
                 <div>
                   <h4 className="font-semibold mb-1 text-primary">Print Quality</h4>
                   <p className="text-sm text-gray-600">Use high-quality paper and color printing for best results</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <Shield size={20} className="text-blue-600 mt-1 flex-shrink-0" />
+                <Shield size={20} className="mt-1 flex-shrink-0 text-green-600 dark:text-green-400" />
                 <div>
                   <h4 className="font-semibold mb-1 text-primary">Placement</h4>
                   <p className="text-sm text-gray-600">Display at eye level for children in learning areas</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <Shield size={20} className="text-blue-600 mt-1 flex-shrink-0" />
+                <Shield size={20} className="mt-1 flex-shrink-0 text-green-600 dark:text-green-400" />
                 <div>
                   <h4 className="font-semibold mb-1 text-primary">Lamination</h4>
                   <p className="text-sm text-gray-600">Consider laminating for durability and easy cleaning</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <Shield size={20} className="text-blue-600 mt-1 flex-shrink-0" />
+                <Shield size={20} className="mt-1 flex-shrink-0 text-green-600 dark:text-green-400" />
                 <div>
                   <h4 className="font-semibold mb-1 text-primary">Discussion</h4>
                   <p className="text-sm text-gray-600">Use posters as conversation starters about privacy</p>
@@ -174,7 +173,7 @@ const SafetyPostersPage: React.FC = () => {
         </div>
 
         {/* Posters Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <div className="mb-12 grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
           {safetyPosters.map((poster) => {
             const IconComponent = poster.icon;
             return (
@@ -197,7 +196,7 @@ const SafetyPostersPage: React.FC = () => {
                     <h3 className="text-lg font-bold text-primary">
                       {poster.title}
                     </h3>
-                    <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-semibold">
+                    <span className="rounded-full bg-green-100 px-2 py-1 text-xs font-semibold text-green-800 dark:bg-green-900/40 dark:text-green-200">
                       {poster.size}
                     </span>
                   </div>
@@ -214,7 +213,7 @@ const SafetyPostersPage: React.FC = () => {
                   
                   <button
                     onClick={() => handleDownload(poster.id, poster.title)}
-                    className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
+                    className="flex w-full items-center justify-center gap-2 rounded-lg bg-green-700 px-4 py-2 font-semibold text-white transition-colors hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500"
                   >
                     <Download size={16} />
                     View & Print
@@ -226,17 +225,17 @@ const SafetyPostersPage: React.FC = () => {
         </div>
 
         {/* Bulk Download Section */}
-        <div className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl p-8 text-white text-center mb-16">
-          <h2 className="text-2xl font-bold mb-4">
+        <div className="mb-12 rounded-xl bg-gradient-to-r from-green-600 to-green-700 p-6 text-center text-white sm:p-8">
+          <h2 className="mb-4 text-xl font-bold sm:text-2xl">
             Complete Poster Collection
           </h2>
-          <p className="text-lg mb-6 opacity-90">
+          <p className="mb-6 text-base opacity-90 sm:text-lg">
             Download all five safety posters in one PDF. (The family agreement is a separate printable — see the card above.)
           </p>
           <button
             onClick={() => handleDownload('all-posters', 'Complete Safety Poster Collection')}
             disabled={isDownloading}
-            className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 font-semibold text-green-700 transition-colors hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50 sm:px-8"
           >
             <Download size={20} />
             {isDownloading ? 'Generating PDF...' : 'Download Complete Set'}

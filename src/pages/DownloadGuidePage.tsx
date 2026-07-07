@@ -114,9 +114,8 @@ const DownloadGuidePage: React.FC<DownloadGuidePageProps> = ({
       subtitle={description}
       breadcrumbs={true}
     >
-      <div className="min-h-screen bg-white">
-      {/* Main Content */}
-      <div className="container mx-auto px-6 py-20">
+      <div className="bg-white dark:bg-gray-900">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
         <div className="max-w-4xl mx-auto">
           {resourceInfo ? (
             <>
@@ -126,7 +125,7 @@ const DownloadGuidePage: React.FC<DownloadGuidePageProps> = ({
                   <span className="text-6xl">{resourceInfo.icon}</span>
                 </div>
 
-                <h2 className="font-bold mb-6 text-gray-900" style={{ fontSize: 'clamp(1.875rem, 3vw, 2.25rem)' }}>
+                <h2 className="mb-6 text-2xl font-bold text-gray-900 sm:text-3xl dark:text-gray-100">
                   {resourceInfo.title}
                 </h2>
 
@@ -136,11 +135,11 @@ const DownloadGuidePage: React.FC<DownloadGuidePageProps> = ({
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-wrap gap-4 justify-center mb-12">
+              <div className="mb-12 flex flex-col flex-wrap justify-center gap-3 sm:flex-row sm:gap-4">
                 <button
                   onClick={() => resourceType && handleDownload(resourceType)}
                   disabled={isDownloading}
-                  className="bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white px-8 py-4 rounded-lg font-semibold transition-colors inline-flex items-center gap-2"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-green-700 px-6 py-3 font-semibold text-white transition-colors hover:bg-green-800 disabled:bg-gray-400 sm:px-8 sm:py-4 dark:bg-green-600 dark:hover:bg-green-500"
                 >
                   <Download size={20} />
                   {isDownloading ? 'Opening...' : 'Download & Print'}
@@ -148,7 +147,7 @@ const DownloadGuidePage: React.FC<DownloadGuidePageProps> = ({
                 
                 <button
                   onClick={() => resourceType && handlePreview(resourceType)}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition-colors inline-flex items-center gap-2"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-green-700 px-6 py-3 font-semibold text-green-700 transition-colors hover:bg-green-50 sm:px-8 sm:py-4 dark:border-green-400 dark:text-green-400 dark:hover:bg-green-900/20"
                 >
                   <Eye size={20} />
                   Preview
@@ -156,7 +155,7 @@ const DownloadGuidePage: React.FC<DownloadGuidePageProps> = ({
                 
                 <button
                   onClick={() => resourceType && handlePrint(resourceType)}
-                  className="bg-gray-600 hover:bg-gray-700 text-white px-8 py-4 rounded-lg font-semibold transition-colors inline-flex items-center gap-2"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-gray-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-gray-700 sm:px-8 sm:py-4"
                 >
                   <Printer size={20} />
                   Print Directly
@@ -164,8 +163,8 @@ const DownloadGuidePage: React.FC<DownloadGuidePageProps> = ({
               </div>
 
               {/* Features */}
-              <div className="bg-gray-50 rounded-xl p-8 mb-12">
-                <h3 className="font-bold mb-6 text-gray-900" style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)' }}>
+              <div className="mb-12 rounded-xl bg-gray-50 p-6 sm:p-8 dark:bg-gray-800">
+                <h3 className="mb-6 text-xl font-bold text-gray-900 sm:text-2xl dark:text-gray-100">
                   What's Included
                 </h3>
 
@@ -184,8 +183,8 @@ const DownloadGuidePage: React.FC<DownloadGuidePageProps> = ({
               </div>
 
               {/* Instructions */}
-              <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-8 text-white mb-12">
-                <h3 className="font-bold mb-4" style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)' }}>
+              <div className="mb-12 rounded-xl bg-gradient-to-r from-green-500 to-green-600 p-6 text-white sm:p-8">
+                <h3 className="mb-4 text-xl font-bold sm:text-2xl">
                   How to Use
                 </h3>
                 <div className="space-y-4 text-lg">
@@ -203,7 +202,7 @@ const DownloadGuidePage: React.FC<DownloadGuidePageProps> = ({
                 <IconComponent size={64} className="text-white" />
               </div>
 
-              <h2 className="font-bold mb-6 text-gray-900" style={{ fontSize: 'clamp(1.875rem, 3vw, 2.25rem)' }}>
+              <h2 className="mb-6 text-2xl font-bold text-gray-900 sm:text-3xl dark:text-gray-100">
                 {type === 'download' ? 'Download Available' : 'Guide Available'}
               </h2>
 
@@ -217,31 +216,31 @@ const DownloadGuidePage: React.FC<DownloadGuidePageProps> = ({
           )}
 
           {/* Call to Action */}
-          <div className="bg-gray-50 rounded-xl p-8 text-center">
-            <h2 className="font-bold mb-4 text-gray-900" style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)' }}>
+          <div className="rounded-xl bg-gray-50 p-6 text-center sm:p-8 dark:bg-gray-800">
+            <h2 className="mb-4 text-xl font-bold text-gray-900 sm:text-2xl dark:text-gray-100">
               Explore More Resources
             </h2>
             <p className="text-lg mb-6 text-gray-600">
               Check out our other privacy education resources and activities.
             </p>
-            <div className="flex flex-wrap gap-4 justify-center">
+            <div className="flex flex-col flex-wrap justify-center gap-3 sm:flex-row sm:gap-4">
               <Link
                 to="/for-families"
-                className="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors inline-flex items-center gap-2"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-green-700 px-6 py-3 font-semibold text-white transition-colors hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500"
               >
                 <FileText size={20} />
                 Activity Book
               </Link>
               <Link
                 to="/downloads/certificates"
-                className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors inline-flex items-center gap-2"
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-green-700 px-6 py-3 font-semibold text-green-700 transition-colors hover:bg-green-50 dark:border-green-400 dark:text-green-400 dark:hover:bg-green-900/20"
               >
                 <Download size={20} />
                 Certificates
               </Link>
               <Link
                 to="/"
-                className="bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 transition-colors inline-flex items-center gap-2"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-gray-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-gray-700"
               >
                 All Resources
               </Link>

@@ -78,9 +78,8 @@ const FamilyAgreementPage: React.FC = () => {
       subtitle="Fill in the agreement together, print it, and post it where everyone can see it. Tap Start below to begin."
       breadcrumbs={true}
     >
-      <div className="min-h-screen" style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}>
-      {/* Main Content */}
-      <div className="container mx-auto px-6 py-20">
+      <div className="bg-white dark:bg-gray-900">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
         {/* Introduction */}
         <div className="max-w-4xl mx-auto text-center mb-16">
           <h2 className="text-3xl font-bold mb-6 text-primary">
@@ -169,11 +168,11 @@ const FamilyAgreementPage: React.FC = () => {
             Download, print, and customize this comprehensive agreement for your family.
           </p>
           
-          <div className="flex flex-wrap gap-4 justify-center">
+          <div className="flex flex-col flex-wrap justify-center gap-3 sm:flex-row sm:gap-4">
             <button
               onClick={handleDownload}
               disabled={isDownloading}
-              className="bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white px-8 py-4 rounded-lg font-semibold transition-colors inline-flex items-center gap-2"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-green-700 px-6 py-3 font-semibold text-white transition-colors hover:bg-green-800 disabled:bg-gray-400 sm:px-8 sm:py-4 dark:bg-green-600 dark:hover:bg-green-500"
             >
               <Download size={20} />
               {isDownloading ? 'Generating PDF...' : 'Download & Print'}
@@ -181,7 +180,7 @@ const FamilyAgreementPage: React.FC = () => {
             
             <button
               onClick={handlePreview}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition-colors inline-flex items-center gap-2"
+              className="inline-flex items-center justify-center gap-2 rounded-lg border border-green-700 px-6 py-3 font-semibold text-green-700 transition-colors hover:bg-green-50 sm:px-8 sm:py-4 dark:border-green-400 dark:text-green-400 dark:hover:bg-green-900/20"
             >
               <FileText size={20} />
               Preview
@@ -189,7 +188,7 @@ const FamilyAgreementPage: React.FC = () => {
             
             <button
               onClick={handlePrint}
-              className="bg-gray-600 hover:bg-gray-700 text-white px-8 py-4 rounded-lg font-semibold transition-colors inline-flex items-center gap-2"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-gray-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-gray-700 sm:px-8 sm:py-4"
             >
               <Shield size={20} />
               Print Directly

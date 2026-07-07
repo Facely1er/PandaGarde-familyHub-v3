@@ -168,7 +168,7 @@ const ParentalConsentPage: React.FC = () => {
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <button
                   onClick={() => navigate('/')}
-                  className="flex-1 min-h-[44px] bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors text-center"
+                  className="flex-1 min-h-[44px] rounded-lg bg-green-700 py-3 px-6 text-center font-medium text-white transition-colors hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500"
                 >
                   Go to Home
                 </button>
@@ -185,7 +185,7 @@ const ParentalConsentPage: React.FC = () => {
             {status === 'error' && (
               <button
                 onClick={() => navigate('/')}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors"
+                className="w-full rounded-lg bg-green-700 py-3 px-6 font-medium text-white transition-colors hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500"
               >
                 Return to Home
               </button>

@@ -472,7 +472,7 @@ const ActivityBookPage: React.FC = () => {
               Read Privacy Panda's Story
             </Link>
             <Link to="/family-hub"
-              className="bg-blue-600 text-white px-4 md:px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors inline-flex items-center justify-center gap-2 text-sm md:text-base"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-4 py-3 text-sm font-semibold text-green-700 transition-colors hover:bg-gray-100 sm:px-6 sm:text-base"
             >
               <Users size={18} className="md:w-5 md:h-5" />
               Open Family Hub
