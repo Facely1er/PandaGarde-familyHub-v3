@@ -386,7 +386,7 @@ const ServiceNotificationCenter: React.FC<ServiceNotificationCenterProps> = ({
                       {notification.action && (
                         <button
                           onClick={() => handleAction(notification)}
-                          className="flex items-center space-x-1 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors"
+                          className="flex items-center space-x-1 rounded-lg bg-green-700 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500"
                         >
                           <span>{notification.action.label}</span>
                           {notification.action.url ? (

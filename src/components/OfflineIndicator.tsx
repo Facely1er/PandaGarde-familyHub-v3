@@ -151,7 +151,7 @@ const OfflineIndicator: React.FC<OfflineIndicatorProps> = ({ className = '' }) =
                       // Force sync
                       setShowDetails(false);
                     }}
-                    className="flex-1 px-3 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-colors"
+                    className="flex-1 rounded-lg bg-green-700 px-3 py-2 text-sm text-white transition-colors hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500"
                   >
                     Sync Now
                   </button>

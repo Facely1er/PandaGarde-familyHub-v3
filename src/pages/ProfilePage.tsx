@@ -119,7 +119,7 @@ const ProfilePage: React.FC = () => {
               {!isEditing ? (
                 <button
                   onClick={() => setIsEditing(true)}
-                  className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  className="flex items-center rounded-lg bg-green-700 px-4 py-2 text-white transition-colors hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500"
                 >
                   <Edit3 size={16} className="mr-2" />
                   Edit Profile

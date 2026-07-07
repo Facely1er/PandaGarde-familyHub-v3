@@ -96,7 +96,7 @@ const ServiceCatalogPage: React.FC = () => {
           <div className={`mb-6 rounded-xl border-2 p-4 transition-all ${isReadyForAnalysis ? 'border-green-300 bg-gradient-to-r from-green-50 to-emerald-50 dark:border-green-700 dark:from-green-900/20 dark:to-emerald-900/20' : 'border-blue-300 bg-gradient-to-r from-blue-50 to-indigo-50 dark:border-blue-700 dark:from-blue-900/20 dark:to-indigo-900/20'}`}>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <div className={`flex h-12 w-12 items-center justify-center rounded-full ${isReadyForAnalysis ? 'bg-green-600' : 'bg-blue-600'}`}>
+                <div className={`flex h-12 w-12 items-center justify-center rounded-full ${isReadyForAnalysis ? 'bg-green-600' : 'bg-amber-500'}`}>
                   {isReadyForAnalysis ? <CheckCircle className="h-6 w-6 text-white" /> : <Target className="h-6 w-6 text-white" />}
                 </div>
                 <div>

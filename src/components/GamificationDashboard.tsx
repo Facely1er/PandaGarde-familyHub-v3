@@ -142,7 +142,7 @@ const GamificationDashboard: React.FC<GamificationDashboardProps> = ({ userId, a
             </div>
             <div className="w-full bg-gray-200 rounded-full h-3">
               <div 
-                className="bg-blue-600 h-3 rounded-full transition-all duration-500"
+                className="bg-green-600 h-3 rounded-full transition-all duration-500 dark:bg-green-500"
                 style={{ width: `${Math.min(100, progressPercentage)}%` }}
               ></div>
             </div>
@@ -296,7 +296,7 @@ const GamificationDashboard: React.FC<GamificationDashboardProps> = ({ userId, a
                         </div>
                         <button
                           onClick={() => completeMission(mission.id)}
-                          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                          className="rounded-lg bg-green-700 px-4 py-2 text-white transition-colors hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500"
                         >
                           Start Mission
                         </button>
