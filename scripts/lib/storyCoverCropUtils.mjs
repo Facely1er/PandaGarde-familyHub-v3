@@ -31,6 +31,15 @@ export const CLEAN_INNER_ROW_GUTTER = 0.012;
 
 export const LETTERBOX = { r: 17, g: 24, b: 39, alpha: 1 };
 
+/** True when RGB matches baked-in letterbox bars from legacy contain exports. */
+export function isLetterboxRgb(r, g, b, tolerance = 8) {
+  return (
+    Math.abs(r - LETTERBOX.r) <= tolerance &&
+    Math.abs(g - LETTERBOX.g) <= tolerance &&
+    Math.abs(b - LETTERBOX.b) <= tolerance
+  );
+}
+
 /**
  * Find 1px white gutters between grid cells.
  * @returns {{ xGutters: number[], yGutters: number[] }}

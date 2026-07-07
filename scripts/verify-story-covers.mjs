@@ -12,6 +12,7 @@ import {
   detectGridGutters,
   getCellBounds,
   getCellExtractRect,
+  isLetterboxRgb,
 } from './lib/storyCoverCropUtils.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -34,6 +35,7 @@ function edgeStats(data, w, h, edge, sample = 4) {
   let g = 0;
   let b = 0;
   let nearWhite = 0;
+  let nearLetterbox = 0;
 
   const span = edge === 'top' || edge === 'bottom' ? w : h;
   for (let s = 0; s < sample; s += 1) {
@@ -62,22 +64,27 @@ function edgeStats(data, w, h, edge, sample = 4) {
       b += bi;
       n += 1;
       if (ri > 235 && gi > 235 && bi > 235) nearWhite += 1;
+      if (isLetterboxRgb(ri, gi, bi)) nearLetterbox += 1;
     }
   }
 
   return {
     avg: [Math.round(r / n), Math.round(g / n), Math.round(b / n)],
     nearWhitePct: +((100 * nearWhite) / n).toFixed(1),
+    nearLetterboxPct: +((100 * nearLetterbox) / n).toFixed(1),
   };
 }
 
 function gradeEpisode(edges) {
   const flags = [];
   for (const [side, stats] of Object.entries(edges)) {
-    if (stats.nearWhitePct > 15) flags.push(`${side}:white-gutter(${stats.nearWhitePct}%)`);
+    if (stats.nearLetterboxPct > 12) flags.push(`${side}:letterbox(${stats.nearLetterboxPct}%)`);
+    else if (stats.nearWhitePct > 15) flags.push(`${side}:white-gutter(${stats.nearWhitePct}%)`);
     else if (stats.nearWhitePct > 8) flags.push(`${side}:watch(${stats.nearWhitePct}%)`);
   }
-  if (flags.some((f) => f.includes('white-gutter'))) return { status: 'WARN', flags };
+  if (flags.some((f) => f.includes('letterbox') || f.includes('white-gutter'))) {
+    return { status: 'WARN', flags };
+  }
   if (flags.length) return { status: 'OK', flags };
   return { status: 'PASS', flags: ['clean edges'] };
 }

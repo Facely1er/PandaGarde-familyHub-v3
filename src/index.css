@@ -68,7 +68,8 @@
   --radius-shell-lg: 22px;
   --radius-shell-md: 16px;
   --radius-shell-pill: 999px;
-  --shell-offset-top: 60px;
+  --chrome-height: 48px;
+  --shell-offset-top: var(--chrome-height);
   --shell-section-gap: clamp(3.5rem, 6vw, 5.5rem);
   --heading-tight: -0.04em;
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -167,7 +168,7 @@
   min-height: 100vh;
   min-height: 100dvh;
   background: var(--fh-bg-gradient);
-  margin-top: -60px; /* Offset the main-content-wrapper padding since Family Hub has its own header */
+  margin-top: calc(-1 * var(--shell-offset-top)); /* Offset main-content-wrapper padding — Family Hub has its own header */
   padding-top: 0;
 }
 
@@ -1103,7 +1104,7 @@ body {
   align-items: center;
   gap: clamp(0.5rem, 1vw, 0.875rem) !important;
   padding: 0.125rem 0;
-  min-height: 36px;
+  min-height: var(--chrome-height);
   width: 100%;
   position: relative;
   overflow: visible;
@@ -1664,8 +1665,8 @@ body {
 /* ===== HERO SECTION ===== */
 .hero {
   background: var(--gradient-hero);
-  margin-top: -60px;
-  padding: 168px 0 18px; /* 60px (header offset) + 108px (original padding) */
+  margin-top: calc(-1 * var(--shell-offset-top));
+  padding: calc(108px + var(--shell-offset-top)) 0 18px;
   position: relative;
   overflow: hidden;
   min-height: 54vh;
@@ -3890,8 +3891,8 @@ body {
   }
   
   .hero-simple {
-    margin-top: -60px;
-    padding-top: 60px !important;
+    margin-top: calc(-1 * var(--shell-offset-top));
+    padding-top: var(--shell-offset-top) !important;
   }
   
   .hero-simple > .container {
@@ -4646,8 +4647,8 @@ body {
 
 /* Hero Simple */
 .hero-simple {
-  margin-top: -60px;
-  padding-top: 60px !important; /* Offset for fixed header */
+  margin-top: calc(-1 * var(--shell-offset-top));
+  padding-top: var(--shell-offset-top) !important; /* Offset for fixed header */
   padding-bottom: 0;
   padding-left: 0;
   padding-right: 0;
@@ -11696,7 +11697,7 @@ header.header .nav-actions button.header-icon-btn:not(.header-search-bar) {
   }
 
   .story-cover-art__img {
-    @apply absolute inset-0 h-full w-full object-contain object-center;
+    @apply absolute inset-0 h-full w-full object-cover object-center;
   }
 
   .story-cover-art--thumb .story-cover-art__img {
@@ -11714,7 +11715,7 @@ header.header .nav-actions button.header-icon-btn:not(.header-search-bar) {
   }
 
   .story-cover-art--card .story-cover-art__img {
-    @apply object-contain object-center;
+    @apply object-cover object-center;
   }
 
   .story-cover-art--banner {

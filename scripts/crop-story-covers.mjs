@@ -8,7 +8,6 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 import {
-  LETTERBOX,
   OUTPUT_HEIGHT,
   OUTPUT_WIDTH,
   getCellExtractRect,
@@ -49,8 +48,8 @@ async function buildCoverFromExtract(sourcePath, cellRect) {
   return sharp(sourcePath)
     .extract(cellRect)
     .resize(OUTPUT_WIDTH, OUTPUT_HEIGHT, {
-      fit: 'contain',
-      background: LETTERBOX,
+      fit: 'cover',
+      position: 'centre',
     })
     .webp({ quality: 90 });
 }
@@ -137,7 +136,7 @@ async function writeEpisode1HeroFallback() {
   }
   const outPath = path.join(coversDir, 'episode-1-cover.webp');
   await sharp(episode1SourcePath)
-    .resize(OUTPUT_WIDTH, OUTPUT_HEIGHT, { fit: 'contain', background: LETTERBOX })
+    .resize(OUTPUT_WIDTH, OUTPUT_HEIGHT, { fit: 'cover', position: 'centre' })
     .webp({ quality: 90 })
     .toFile(outPath);
   await validateOutput(outPath);
@@ -171,7 +170,7 @@ async function writeLegacyMasterBands() {
         width: cropWidth - padL,
         height: extractHeight,
       })
-      .resize(OUTPUT_WIDTH, OUTPUT_HEIGHT, { fit: 'contain', background: LETTERBOX })
+      .resize(OUTPUT_WIDTH, OUTPUT_HEIGHT, { fit: 'cover', position: 'centre' })
       .webp({ quality: 82 })
       .toFile(outPath);
     await validateOutput(outPath);
