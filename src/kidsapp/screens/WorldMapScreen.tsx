@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { StoryCoverArt } from '../../components/stories/StoryCoverArt';
 import { useKidsProgress } from '../KidsProgressContext';
-import { getKidsEpisodes, PILLAR_META } from '../kidsContent';
+import { getKidsEpisodes, EPISODE_GAME_OVERRIDES, PILLAR_META } from '../kidsContent';
 
 /**
  * The Bamboo Forest journey: Season 1 episodes as stops along a winding path.
@@ -33,6 +33,7 @@ const WorldMapScreen: React.FC = () => {
           const unlocked = previousComplete;
           previousComplete = complete;
           const pillar = PILLAR_META[story.questPillar];
+          const specialGame = EPISODE_GAME_OVERRIDES[story.slug];
 
           const stopMarker = (
             <span
@@ -71,6 +72,12 @@ const WorldMapScreen: React.FC = () => {
                   <span aria-hidden>{pillar.emoji}</span>
                   {pillar.label}
                 </span>
+                {specialGame && (
+                  <span className="mt-1 inline-flex items-center gap-1 rounded-full bg-violet-100 px-2 py-0.5 text-xs font-semibold text-violet-800 dark:bg-violet-900/50 dark:text-violet-200">
+                    <span aria-hidden>{specialGame.emoji}</span>
+                    {specialGame.name}
+                  </span>
+                )}
               </div>
               {complete && (
                 <span className="text-2xl" role="img" aria-label="Badge earned">

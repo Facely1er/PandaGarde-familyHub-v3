@@ -178,34 +178,32 @@ const EpisodeScreen: React.FC = () => {
           <p className="mt-1">{story.keyLesson}</p>
         </div>
         <p className="mt-3 text-gray-500 dark:text-gray-400">
-          🌿 This is a great place to take a break — the forest will be here when you come back!
+          🌿 One episode is plenty for today — take a break when you&apos;re ready!
         </p>
         <div className="mt-8 flex w-full flex-col gap-3">
+          <button
+            type="button"
+            onClick={() => setPhase('rest')}
+            className="min-h-[56px] w-full rounded-2xl bg-emerald-700 text-lg font-extrabold text-white hover:bg-emerald-800 dark:bg-emerald-500 dark:text-gray-900 dark:hover:bg-emerald-400"
+          >
+            I&apos;m done for now — great job! 🌙
+          </button>
           {familyActivity && (
             <button
               type="button"
               onClick={() => setPhase('family')}
-              className="min-h-[56px] w-full rounded-2xl bg-emerald-700 text-lg font-extrabold text-white hover:bg-emerald-800 dark:bg-emerald-500 dark:text-gray-900 dark:hover:bg-emerald-400"
+              className="min-h-[56px] w-full rounded-2xl border-2 border-emerald-700 text-lg font-extrabold text-emerald-800 hover:bg-emerald-100 dark:border-emerald-400 dark:text-emerald-300 dark:hover:bg-emerald-900/40"
             >
               Bonus: Family Quest with a grown-up 👨‍👩‍👧
             </button>
           )}
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <button
-              type="button"
-              onClick={() => navigate('/')}
-              className="min-h-[56px] flex-1 rounded-2xl border-2 border-emerald-700 text-lg font-extrabold text-emerald-800 hover:bg-emerald-100 dark:border-emerald-400 dark:text-emerald-300 dark:hover:bg-emerald-900/40"
-            >
-              Back to the Forest Map 🗺️
-            </button>
-            <button
-              type="button"
-              onClick={() => navigate('/badges')}
-              className="min-h-[56px] flex-1 rounded-2xl border-2 border-emerald-700 text-lg font-extrabold text-emerald-800 hover:bg-emerald-100 dark:border-emerald-400 dark:text-emerald-300 dark:hover:bg-emerald-900/40"
-            >
-              See My Badges 🏅
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={() => navigate('/badges')}
+            className="min-h-[56px] w-full rounded-2xl border-2 border-gray-300 text-lg font-extrabold text-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-800"
+          >
+            See My Badges 🏅
+          </button>
         </div>
       </div>
     );

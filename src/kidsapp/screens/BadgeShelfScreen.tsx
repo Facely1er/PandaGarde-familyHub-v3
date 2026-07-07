@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { getStoryBySlug } from '../../data/stories';
 import { logger } from '../../lib/logger';
 import { useKidsProgress } from '../KidsProgressContext';
+import { TRUSTED_ROLES } from '../kidsTrustedRoles';
 import { getAvatar, getKidsEpisodes, PILLAR_META } from '../kidsContent';
 
 /** Badge shelf: one badge per completed episode, plus the season certificate. */
 const BadgeShelfScreen: React.FC = () => {
-  const { profile, earnedBadges, seasonComplete } = useKidsProgress();
+  const { profile, earnedBadges, seasonComplete, trustedTeam } = useKidsProgress();
   const [generating, setGenerating] = useState(false);
   const [certificateError, setCertificateError] = useState(false);
   const avatar = getAvatar(profile?.avatarId ?? null);
@@ -87,6 +89,43 @@ const BadgeShelfScreen: React.FC = () => {
           })}
         </ul>
       )}
+
+      <div className="mt-8 rounded-2xl border border-emerald-200 bg-emerald-50 p-5 dark:border-emerald-800 dark:bg-emerald-900/30">
+        <h2 className="text-xl font-extrabold text-emerald-900 dark:text-emerald-100">
+          🛡️ My Tao Circle
+        </h2>
+        {trustedTeam ? (
+          <>
+            <p className="mt-1 text-emerald-900 dark:text-emerald-100">
+              Code word: <span className="font-extrabold">{trustedTeam.codeWord}</span>
+            </p>
+            <div className="mt-2 flex flex-wrap gap-2">
+              {trustedTeam.roleIds.map((id) => {
+                const role = TRUSTED_ROLES.find((r) => r.id === id);
+                return role ? (
+                  <span
+                    key={id}
+                    className="rounded-full bg-white px-2 py-1 text-sm font-semibold text-emerald-800 dark:bg-gray-800 dark:text-emerald-200"
+                  >
+                    {role.emoji} {role.label}
+                  </span>
+                ) : null;
+              })}
+            </div>
+          </>
+        ) : (
+          <p className="mt-1 text-emerald-900 dark:text-emerald-100">
+            Build your trusted grown-up team in Episode 8 — it helps you know who to tell when
+            something online feels wrong.
+          </p>
+        )}
+        <Link
+          to="/tao-circle"
+          className="mt-4 flex min-h-[48px] w-full items-center justify-center rounded-2xl border-2 border-emerald-700 font-bold text-emerald-800 hover:bg-emerald-100 dark:border-emerald-400 dark:text-emerald-300 dark:hover:bg-emerald-900/40"
+        >
+          {trustedTeam ? 'View my Tao Circle' : 'Build my Tao Circle'}
+        </Link>
+      </div>
 
       <div className="mt-8 rounded-2xl border border-amber-200 bg-amber-50 p-5 dark:border-amber-800 dark:bg-amber-900/30">
         <h2 className="text-xl font-extrabold text-amber-900 dark:text-amber-100">

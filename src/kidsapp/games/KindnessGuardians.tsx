@@ -202,17 +202,19 @@ const KindnessGuardians: React.FC<KindnessGuardiansProps> = ({ onBack, onComplet
       return;
     }
     setSelected(choiceIndex);
-    if (scenario.choices[choiceIndex].isUpstander) {
-      setCorrectCount((c) => c + 1);
-    }
   };
 
   const next = () => {
+    const wasUpstander = selected !== null && scenario.choices[selected].isUpstander;
+    const newCount = correctCount + (wasUpstander ? 1 : 0);
+
     if (index >= SCENARIOS.length - 1) {
+      setCorrectCount(newCount);
       setFinished(true);
-      onComplete?.(Math.round((correctCount / SCENARIOS.length) * 100));
+      onComplete?.(Math.round((newCount / SCENARIOS.length) * 100));
       return;
     }
+    setCorrectCount(newCount);
     setIndex((i) => i + 1);
     setSelected(null);
   };

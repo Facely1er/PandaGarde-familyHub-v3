@@ -1,7 +1,7 @@
 import React, { Suspense, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useKidsProgress } from '../KidsProgressContext';
-import { TRUSTED_ROLES } from '../games/TrustedTeamBuilder';
+import { TRUSTED_ROLES } from '../kidsTrustedRoles';
 
 const GameFallback: React.FC = () => (
   <div className="flex min-h-[40vh] items-center justify-center" role="status" aria-live="polite">

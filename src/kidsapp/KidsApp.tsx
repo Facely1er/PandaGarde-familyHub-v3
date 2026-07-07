@@ -8,6 +8,7 @@ import EpisodeScreen from './screens/EpisodeScreen';
 import BadgeShelfScreen from './screens/BadgeShelfScreen';
 import ProfileSetupScreen from './screens/ProfileSetupScreen';
 import GrownUpsScreen from './screens/GrownUpsScreen';
+import TaoCircleScreen from './screens/TaoCircleScreen';
 
 const ScreenFallback: React.FC = () => (
   <div className="flex min-h-[50vh] items-center justify-center" role="status" aria-live="polite">
@@ -53,6 +54,16 @@ const KidsRoutes: React.FC = () => (
         <RequireProfile>
           <KidsShell>
             <BadgeShelfScreen />
+          </KidsShell>
+        </RequireProfile>
+      }
+    />
+    <Route
+      path="/tao-circle"
+      element={
+        <RequireProfile>
+          <KidsShell>
+            <TaoCircleScreen />
           </KidsShell>
         </RequireProfile>
       }

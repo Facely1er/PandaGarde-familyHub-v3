@@ -1,31 +1,11 @@
 import React, { useState } from 'react';
 import { useKidsProgress } from '../KidsProgressContext';
+import { CODE_WORDS, TRUSTED_ROLES } from '../kidsTrustedRoles';
 
 interface TrustedTeamBuilderProps {
   onBack: () => void;
   onComplete?: (score?: number) => void;
 }
-
-export interface TrustedRole {
-  id: string;
-  label: string;
-  emoji: string;
-}
-
-/** Generic roles only — the app never asks for or stores real names. */
-export const TRUSTED_ROLES: TrustedRole[] = [
-  { id: 'mom', label: 'Mom', emoji: '👩' },
-  { id: 'dad', label: 'Dad', emoji: '👨' },
-  { id: 'grandparent', label: 'Grandparent', emoji: '👵' },
-  { id: 'teacher', label: 'A teacher', emoji: '🧑‍🏫' },
-  { id: 'sibling', label: 'Big brother / sister', emoji: '🧑' },
-  { id: 'aunt-uncle', label: 'Aunt / Uncle', emoji: '🧢' },
-  { id: 'coach', label: 'A coach', emoji: '🏀' },
-  { id: 'counselor', label: 'School counselor', emoji: '💼' },
-  { id: 'other', label: 'Another grown-up I trust', emoji: '🌟' },
-];
-
-const CODE_WORDS = ['Bamboo', 'Lantern', 'Firefly', 'Campfire', 'River Stone', 'Moon Leaf'];
 
 const OPENERS = [
   { text: '"Can I tell you something that\'s been bothering me online?"', good: true },
