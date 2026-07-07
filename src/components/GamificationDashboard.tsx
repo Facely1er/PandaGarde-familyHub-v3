@@ -185,7 +185,7 @@ const GamificationDashboard: React.FC<GamificationDashboardProps> = ({ userId, a
                 onClick={() => setSelectedTab(tab.id as typeof selectedTab)}
                 className={`flex-1 flex items-center justify-center space-x-2 py-3 px-4 rounded-md transition-colors ${
                   selectedTab === tab.id
-                    ? 'bg-white text-blue-600 shadow-sm'
+                    ? 'bg-white text-green-700 dark:text-green-400 shadow-sm'
                     : 'text-gray-600 hover:text-gray-900'
                 }`}
               >
@@ -207,9 +207,9 @@ const GamificationDashboard: React.FC<GamificationDashboardProps> = ({ userId, a
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <button
                   onClick={() => addXP(25, 'Daily check-in')}
-                  className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors text-left"
+                  className="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg hover:bg-green-100 dark:hover:bg-green-900/30 transition-colors text-left"
                 >
-                  <div className="mb-2 text-blue-600"><Calendar size={24} /></div>
+                  <div className="mb-2 text-green-700 dark:text-green-400"><Calendar size={24} /></div>
                   <h4 className="font-medium text-gray-900">Daily Check-in</h4>
                   <p className="text-sm text-gray-600">+25 XP</p>
                 </button>

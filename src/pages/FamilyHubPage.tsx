@@ -117,7 +117,7 @@ const FamilyHubPage: React.FC = () => {
       description: 'See detailed progress for all family members',
       icon: TrendingUp,
       action: 'view-progress',
-      color: 'from-blue-500 to-blue-600'
+      color: 'from-teal-500 to-teal-600'
     },
     {
       title: 'Generate Certificates',
@@ -148,7 +148,7 @@ const FamilyHubPage: React.FC = () => {
       description: 'See household exposure from the apps you listed on the website',
       icon: Shield,
       action: 'footprint',
-      color: 'from-blue-500 to-blue-600',
+      color: 'from-teal-500 to-teal-600',
       url: '/digital-footprint'
     },
     {
@@ -817,8 +817,8 @@ const FamilyHubPage: React.FC = () => {
                 <div className="mt-5 text-sm font-semibold text-green-600 dark:text-green-300">Open Family Hub activities →</div>
               </Link>
 
-              <Link to="/story" className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-lg dark:border-gray-700 dark:bg-gray-100">
-                <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-r from-blue-500 to-blue-600 text-white">
+              <Link to="/story" className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-green-300 hover:shadow-lg dark:border-gray-700 dark:bg-gray-100">
+                <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-r from-green-500 to-green-600 text-white">
                   <Book size={28} />
                 </div>
                 <h3 className="text-xl font-bold text-primary">Story + Reflection</h3>
@@ -826,14 +826,14 @@ const FamilyHubPage: React.FC = () => {
                   Follow Privacy Panda’s story, then bring the lesson back to Family Hub conversations using the mission prompts and scenarios.
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
-                  <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 dark:bg-blue-900/20 dark:text-blue-200">
+                  <span className="rounded-full bg-green-50 px-3 py-1 text-xs font-medium text-green-700 dark:bg-green-900/20 dark:text-green-200">
                     Story connection
                   </span>
                   <span className="rounded-full bg-indigo-50 px-3 py-1 text-xs font-medium text-indigo-700 dark:bg-indigo-900/20 dark:text-indigo-200">
                     Family discussion
                   </span>
                 </div>
-                <div className="mt-5 text-sm font-semibold text-blue-600 dark:text-blue-300">Read the story →</div>
+                <div className="mt-5 text-sm font-semibold text-green-600 dark:text-green-300">Read the story →</div>
               </Link>
 
               <Link to="/how-it-works" className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-purple-300 hover:shadow-lg dark:border-gray-700 dark:bg-gray-100">
@@ -1085,8 +1085,8 @@ const FamilyHubPage: React.FC = () => {
               </Link>
 
               <div className="bg-white rounded-xl p-6" style={{ backgroundColor: 'var(--card-color)' }}>
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                  <Download size={24} className="text-blue-600" />
+                <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                  <Download size={24} className="text-green-600" />
                 </div>
                 <h3 className="text-xl font-bold mb-3 text-primary">
                   Printable Activities
@@ -1094,9 +1094,9 @@ const FamilyHubPage: React.FC = () => {
                 <p className="mb-4 text-gray-600">
                   Coloring sheets, certificates, and offline activities for screen-free learning.
                 </p>
-                <button className="text-blue-600 font-semibold hover:text-blue-700 transition-colors">
+                <Link to="/downloads/worksheets" className="text-green-700 font-semibold hover:text-green-800 dark:text-green-400 dark:hover:text-green-300 transition-colors">
                   Download Resources →
-                </button>
+                </Link>
               </div>
 
               <div className="bg-white rounded-xl p-6" style={{ backgroundColor: 'var(--card-color)' }}>

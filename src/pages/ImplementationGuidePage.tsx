@@ -33,7 +33,7 @@ const ImplementationGuidePage: React.FC = () => {
       title: 'Planning Phase',
       description: 'Get ready: see what you already teach and who needs to sign off',
       duration: '2-4 weeks',
-      color: 'blue',
+      color: 'teal',
       steps: [
         {
           id: 'assess-needs',
@@ -331,7 +331,7 @@ const ImplementationGuidePage: React.FC = () => {
 
   const getPhaseColor = (color: string) => {
     const colors = {
-      blue: 'from-blue-500 to-blue-600',
+      teal: 'from-teal-500 to-teal-600',
       green: 'from-green-500 to-green-600',
       purple: 'from-purple-500 to-purple-600',
       orange: 'from-orange-500 to-orange-600'
@@ -341,7 +341,7 @@ const ImplementationGuidePage: React.FC = () => {
 
   const getPhaseBorderColor = (color: string) => {
     const colors = {
-      blue: 'border-blue-200',
+      teal: 'border-teal-200',
       green: 'border-green-200',
       purple: 'border-purple-200',
       orange: 'border-orange-200'

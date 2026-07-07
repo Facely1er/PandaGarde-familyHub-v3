@@ -259,7 +259,7 @@ const KidsScreen: React.FC = () => {
                       className={`p-2 rounded-lg transition-all hover:scale-105 min-w-[44px] min-h-[44px] flex items-center justify-center ${
                         currentMemberId === member.id
                           ? 'text-teal-700 bg-teal-50 dark:text-teal-300 dark:bg-teal-900/30'
-                          : 'text-blue-600 hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-900/20'
+                          : 'text-green-700 hover:text-green-800 hover:bg-green-50 dark:text-green-400 dark:hover:bg-green-900/20'
                       }`}
                       title={currentMemberId === member.id ? 'Active for missions — view progress' : 'Set as active and view progress'}
                       aria-label={`View detailed progress for ${member.name}`}

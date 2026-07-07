@@ -279,7 +279,7 @@ const PrivacyExplorersPage: React.FC = () => {
                       {challenge.points} points
                     </span>
                     <button
-                      className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all"
+                      className="bg-green-700 hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500 text-white px-4 py-2 rounded-lg font-semibold transition-colors"
                       onClick={(e) => {
                         e.stopPropagation();
                         handleChallengeStart(challenge);
@@ -356,7 +356,7 @@ const PrivacyExplorersPage: React.FC = () => {
                 <div className="text-center">
                   <button
                     onClick={() => handleChallengeComplete(selectedChallenge.id)}
-                    className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all"
+                    className="bg-green-700 hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500 text-white px-8 py-3 rounded-lg font-semibold transition-colors"
                   >
                     Mark as Complete
                   </button>

@@ -308,7 +308,7 @@ const DigitalCitizenshipPage: React.FC = () => {
               >
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-blue-600 flex items-center justify-center text-white">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-purple-600 flex items-center justify-center text-white">
                       <Icon size={24} />
                     </div>
                     {isCompleted && (
@@ -339,7 +339,7 @@ const DigitalCitizenshipPage: React.FC = () => {
                   </div>
 
                   <button
-                    className="w-full bg-gradient-to-r from-purple-500 to-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-purple-600 hover:to-blue-700 transition-all"
+                    className="w-full bg-green-700 hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500 text-white px-4 py-2 rounded-lg font-semibold transition-colors"
                     onClick={(e) => {
                       e.stopPropagation();
                       handleModuleStart(module);
@@ -403,7 +403,7 @@ const DigitalCitizenshipPage: React.FC = () => {
                     <div className="flex gap-3">
                       <button
                         onClick={() => setShowQuiz(true)}
-                        className="bg-gradient-to-r from-purple-500 to-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:from-purple-600 hover:to-blue-700 transition-all"
+                        className="bg-green-700 hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500 text-white px-6 py-2 rounded-lg font-semibold transition-colors"
                       >
                         Take Quiz
                       </button>

@@ -90,7 +90,7 @@ const ServiceRelationshipMap: React.FC<ServiceRelationshipMapProps> = ({
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
-                    className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
+                    className="text-green-700 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300"
                   >
                     <ExternalLink className="h-3 w-3" />
                   </a>

@@ -325,7 +325,7 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
                           <Link
                             key={index}
                             to={resource.url}
-                            className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 flex items-center space-x-1"
+                            className="text-sm text-green-700 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300 flex items-center space-x-1"
                           >
                             <span>{resource.label}</span>
                             <ArrowRight className="h-3 w-3" />
@@ -395,7 +395,7 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
           </div>
           <Link
             to="/digital-footprint"
-            className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
+            className="text-sm text-green-700 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300"
           >
             Open review →
           </Link>

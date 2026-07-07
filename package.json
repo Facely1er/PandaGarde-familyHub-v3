@@ -32,6 +32,7 @@
     "deploy:netlify:all": "npm run deploy:check && npm run deploy:netlify && npm run deploy:netlify:familyhub",
     "check:content-truth": "node scripts/check-content-truth.mjs",
     "check:routes": "node scripts/verify-routes.mjs",
+    "check:primary-blue": "node scripts/check-primary-blue.mjs",
     "check:story-assets": "node scripts/verify-story-scene-assets.mjs",
     "assets:story-covers": "node scripts/crop-story-covers.mjs",
     "assets:story-covers:verify": "node scripts/verify-story-covers.mjs",

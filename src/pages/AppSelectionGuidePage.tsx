@@ -345,7 +345,7 @@ const AppSelectionGuidePage: React.FC = () => {
 
         {/* App Review Process */}
         <div className="max-w-4xl mx-auto mb-16">
-          <div className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl p-8 text-white">
+          <div className="bg-gradient-to-r from-green-600 to-green-700 rounded-xl p-8 text-white">
             <h2 className="text-2xl font-bold mb-6">
               How to Review Apps Before Downloading
             </h2>
