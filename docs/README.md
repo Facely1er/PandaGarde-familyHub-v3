@@ -6,7 +6,7 @@
 
 ## Product & story canon
 
-**[PRODUCT_VISION.md](./PRODUCT_VISION.md)** — Product definition (forest, cast, three layers). Product vs. Summer Camp boundary in §10.
+**[PRODUCT_VISION.md](./PRODUCT_VISION.md)** — Product north star (July 2026): forest canon, four surfaces (website, Kids App, Family Hub, institutional), DFA journey, roadmap status. Product vs. camp/pilot boundary in §10.
 
 **[STORYLINE_BIBLE.md](./STORYLINE_BIBLE.md)** — Canonical world reference: characters, zones, quest pillars, story registry.
 
