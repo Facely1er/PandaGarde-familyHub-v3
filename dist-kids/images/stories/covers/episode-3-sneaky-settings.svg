@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" role="img" aria-label="Check app permissions">
+  <defs>
+    <linearGradient id="ep3-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#312e81"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" fill="url(#ep3-bg)"/>
+  <text x="320" y="330" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#ede9fe">Pause before Allow All</text>
+</svg>

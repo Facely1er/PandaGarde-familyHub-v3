@@ -1,0 +1,63 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="400" height="300" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+  
+  <!-- Title -->
+  <text x="200" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1f2937">Cyber Safety Scene</text>
+  
+  <!-- Computer Screen -->
+  <rect x="80" y="100" width="80" height="60" rx="5" fill="none" stroke="#1f2937" stroke-width="3"/>
+  <rect x="85" y="105" width="70" height="50" fill="none" stroke="#1f2937" stroke-width="1"/>
+  
+  <!-- Safe Side (Left) -->
+  <text x="120" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#059669">SAFE</text>
+  
+  <!-- Privacy Panda (Safe) -->
+  <circle cx="120" cy="130" r="15" fill="none" stroke="#059669" stroke-width="2"/>
+  <circle cx="115" cy="125" r="3" fill="none" stroke="#059669" stroke-width="1"/>
+  <circle cx="125" cy="125" r="3" fill="none" stroke="#059669" stroke-width="1"/>
+  <ellipse cx="120" cy="135" rx="2" ry="1" fill="none" stroke="#059669" stroke-width="1"/>
+  
+  <!-- Shield -->
+  <path d="M 120 100 L 105 110 L 120 130 L 135 110 Z" fill="none" stroke="#059669" stroke-width="2"/>
+  
+  <!-- Check Mark -->
+  <path d="M 110 120 L 115 125 L 130 110" fill="none" stroke="#059669" stroke-width="2"/>
+  
+  <!-- Unsafe Side (Right) -->
+  <text x="280" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#dc2626">UNSAFE</text>
+  
+  <!-- Warning Panda (Unsafe) -->
+  <circle cx="280" cy="130" r="15" fill="none" stroke="#dc2626" stroke-width="2"/>
+  <circle cx="275" cy="125" r="3" fill="none" stroke="#dc2626" stroke-width="1"/>
+  <circle cx="285" cy="125" r="3" fill="none" stroke="#dc2626" stroke-width="1"/>
+  <ellipse cx="280" cy="135" rx="2" ry="1" fill="none" stroke="#dc2626" stroke-width="1"/>
+  
+  <!-- Warning Sign -->
+  <path d="M 280 100 L 270 120 L 290 120 Z" fill="none" stroke="#dc2626" stroke-width="2"/>
+  <path d="M 280 105 L 280 115" fill="none" stroke="#dc2626" stroke-width="2"/>
+  <circle cx="280" cy="118" r="1" fill="none" stroke="#dc2626" stroke-width="1"/>
+  
+  <!-- X Mark -->
+  <path d="M 275 120 L 285 130 M 285 120 L 275 130" fill="none" stroke="#dc2626" stroke-width="2"/>
+  
+  <!-- Internet Connection Lines -->
+  <path d="M 120 100 L 200 80" fill="none" stroke="#059669" stroke-width="2"/>
+  <path d="M 280 100 L 200 80" fill="none" stroke="#dc2626" stroke-width="2"/>
+  
+  <!-- Cloud -->
+  <path d="M 200 60 Q 190 50 200 40 Q 210 30 220 40 Q 230 30 240 40 Q 250 50 240 60 Q 230 70 220 60 Q 210 70 200 60" fill="none" stroke="#1f2937" stroke-width="2"/>
+  
+  <!-- Data Flow -->
+  <circle cx="200" cy="80" r="3" fill="none" stroke="#1f2937" stroke-width="1"/>
+  <path d="M 200 80 L 200 100" fill="none" stroke="#1f2937" stroke-width="1" stroke-dasharray="2,2"/>
+  
+  <!-- Decorative Elements -->
+  <circle cx="50" cy="50" r="3" fill="none" stroke="#1f2937" stroke-width="1"/>
+  <circle cx="350" cy="50" r="3" fill="none" stroke="#1f2937" stroke-width="1"/>
+  <circle cx="50" cy="250" r="3" fill="none" stroke="#1f2937" stroke-width="1"/>
+  <circle cx="350" cy="250" r="3" fill="none" stroke="#1f2937" stroke-width="1"/>
+  
+  <!-- Instructions -->
+  <text x="200" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#6b7280">Complete scene showing safe and unsafe online behaviors!</text>
+</svg>

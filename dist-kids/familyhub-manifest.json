@@ -1,0 +1,44 @@
+{
+  "name": "PandaGarde Family Hub",
+  "short_name": "Family Hub",
+  "description": "Daily privacy missions, family progress, and age-matched activities. Local-first on your device.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f0fdfa",
+  "theme_color": "#0d9488",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/LogoPandagarde.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/LogoPandagarde.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["education", "kids", "privacy", "family"],
+  "lang": "en",
+  "scope": "/",
+  "prefer_related_applications": false,
+  "shortcuts": [
+    {
+      "name": "Today's mission",
+      "short_name": "Mission",
+      "description": "Continue your family privacy journey",
+      "url": "/",
+      "icons": [{ "src": "/LogoPandagarde.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Activities",
+      "short_name": "Activities",
+      "description": "Browse privacy missions",
+      "url": "/activities",
+      "icons": [{ "src": "/LogoPandagarde.png", "sizes": "96x96" }]
+    }
+  ]
+}

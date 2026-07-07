@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" role="img" aria-label="Digital Bamboo Forest">
+  <defs>
+    <linearGradient id="ep1-sky" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#064e3b"/>
+      <stop offset="45%" stop-color="#047857"/>
+      <stop offset="100%" stop-color="#10b981"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" fill="url(#ep1-sky)"/>
+  <g fill="#065f46" opacity="0.85">
+    <rect x="40" y="80" width="18" height="280" rx="9"/>
+    <rect x="520" y="90" width="20" height="270" rx="10"/>
+  </g>
+  <path d="M320 130 L280 155 v55 l40 35 40-35 v-55z" fill="#064e3b" stroke="#a7f3d0" stroke-width="3"/>
+</svg>
