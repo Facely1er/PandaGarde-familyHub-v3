@@ -78,25 +78,22 @@
 
 Do **not** describe website “Learning activities” and Hub “missions” as the same catalog. Approved website CTAs: **Privacy missions** → `/family-hub/activities`. Legacy `/activities` and `/activities/:slug` redirect to Hub (slug mapped when a mission shares the same game id).
 
-Formal **privacy assessment** and **safety alerts** are on **SocialCaution** (legacy URLs redirect). Do not present a single mandatory “complete footprint review first” funnel on PandaGarde marketing UI.
+Formal **privacy assessment** (`/privacy-assessment`) and **safety alerts** (`/child-safety-alerts`) ship on PandaGarde as device-local features. Do not present a single mandatory “complete footprint review first” funnel on PandaGarde marketing UI.
 
 ---
 
-## 5. Safety alerts (removed from PandaGarde)
+## 5. Safety alerts & privacy assessment (on PandaGarde, device-local)
 
-PandaGarde **does not** ship `/safety-alerts`. Legacy URLs (`/safety-alerts`, `/alerts`, `/child-safety-alerts`) **redirect** to SocialCaution (`app.socialcaution.com`, `utm_source=pandagarde`) so old bookmarks still work.
+PandaGarde serves these **in-app**; SocialCaution is a separate, non-integrated project and no PandaGarde route may redirect to it.
 
-### Mention SocialCaution only when relevant
-
-- **Support / FAQ** when users ask where alerts went
-- **Not** in primary nav, Resources hub, How It Works, service catalog header, or footprint review phase 3 cards
+- `/child-safety-alerts` — catalog-based notifications and RSS safety headlines for apps the family listed (refresh happens on the page while online; nothing is pushed and no child device is monitored). Legacy `/safety-alerts` and `/alerts` redirect here.
+- `/privacy-assessment` — the family privacy assessment (progress saves on device). Legacy `/assessment` redirects here; `/quick-assessment` offers short themed check-ins that feed into it.
 
 ### Avoid on PandaGarde
 
-- “Safety Alerts” as a PandaGarde feature or nav item
-- Passive UI promoting SocialCaution on every page
+- Linking or redirecting to SocialCaution (`app.socialcaution.com`) — not integrated
 - “Real-time monitoring” of children’s online activity
-- Implying PandaGarde sends catalog or RSS alerts today
+- Implying alerts arrive without services listed in the catalog, or while offline
 
 ---
 

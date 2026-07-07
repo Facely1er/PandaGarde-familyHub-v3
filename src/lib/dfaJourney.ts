@@ -1,6 +1,6 @@
 export type DfaJourneyPhaseKey = 'profile' | 'dfa' | 'plan' | 'hub';
 
-/** Parent-led DFA on PandaGarde: catalog + footprint only (assessment lives on SocialCaution). */
+/** Parent-led DFA on PandaGarde: catalog + footprint only (formal assessment is its own page). */
 export const DFA_CORE_PHASE_KEYS: readonly DfaJourneyPhaseKey[] = ['profile', 'dfa'];
 
 export interface DfaJourneyPhase {

@@ -10,29 +10,29 @@ const ChildSafetyAlertsPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'alerts' | 'notifications'>('notifications');
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 sm:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between mb-4">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-2">
                 Safety Alerts & Notifications
               </h1>
               <p className="text-gray-600 dark:text-gray-400">
                 Headlines about apps you listed—not live monitoring of your child&apos;s phone. Add apps in the catalog first, then check back here for updates.
               </p>
             </div>
-            <div className="flex items-center space-x-2">
+            <div className="flex flex-wrap items-center gap-2 lg:flex-shrink-0">
               <Link
                 to="/service-catalog"
-                className="flex items-center space-x-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
+                className="flex items-center gap-2 px-4 py-2 bg-green-700 hover:bg-green-800 text-white rounded-lg transition-colors"
               >
                 <ShoppingBag className="h-5 w-5" />
                 <span>Add Services</span>
               </Link>
               <Link
                 to="/digital-footprint"
-                className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                className="flex items-center gap-2 px-4 py-2 border border-green-700 text-green-700 hover:bg-green-50 dark:border-green-400 dark:text-green-400 dark:hover:bg-green-900/20 rounded-lg transition-colors"
               >
                 <BarChart3 className="h-5 w-5" />
                 <span>Footprint</span>

@@ -45,7 +45,7 @@ export const PARENT_SURFACE_REDIRECTS: Record<string, string> = {
   '/community/success-stories': '/how-it-works',
   '/community/resources': '/how-it-works',
 
-  // Assessment history (formal assessment on SocialCaution)
+  // Assessment history (folded into the on-site privacy assessment)
   '/assessment-history': '/for-families',
   '/assessment/history': '/for-families',
 
@@ -81,7 +81,7 @@ export const PARENT_CORE_PATH = [
 ] as const;
 
 export const DEPRIORITIZED_FOR_GENERAL_PARENTS = [
-  'Safety alerts and privacy assessment (SocialCaution — not on PandaGarde)',
+  'Safety alerts and privacy assessment (on PandaGarde, but not in main parent nav)',
   'Privacy tools (link index only — redirects to Guides & stories hub)',
   'Toolkit (shortcut cards — redirects to Guides & stories hub)',
   'Quick Start, Educator Tools, Classroom Activities',
