@@ -22,10 +22,10 @@ const PrivacyPolicyPage: React.FC = () => {
                    backgroundColor: 'var(--light)',
                    borderLeftColor: 'var(--primary-light)'
                  }}>
-              <h2 className="text-2xl font-bold text-green-800 mb-3 text-primary">
+              <h2 className="text-2xl font-bold mb-3 text-primary">
                 Our Commitment to Privacy
               </h2>
-              <p className="text-gray-700 leading-relaxed text-gray-600">
+              <p className="leading-relaxed text-gray-600">
                 At PandaGarde, we believe that privacy education should be taught through example.
                 We are committed to protecting your privacy and the privacy of your children while
                 providing valuable educational content about digital safety.
@@ -124,10 +124,10 @@ const PrivacyPolicyPage: React.FC = () => {
                      backgroundColor: 'var(--tertiary)',
                      borderColor: 'var(--secondary)'
                    }}>
-                <h3 className="text-xl font-semibold mb-4 text-green-800 text-primary">
+                <h3 className="text-xl font-semibold mb-4 text-primary">
                   Local Storage First
                 </h3>
-                <p className="text-green-800 mb-4 text-primary">
+                <p className="mb-4 text-primary">
                   All progress data is stored locally on your device using secure browser storage.
                   This means your child's learning progress never leaves your device unless you choose to export it.
                 </p>

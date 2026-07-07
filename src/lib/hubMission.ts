@@ -11,9 +11,14 @@ export const HUB_LAST_ACTIVE_KEY = 'pandagarde_hub_last_active_date';
 
 export type HubOrigin = 'standalone' | 'web';
 
-/** Completion key — matches ProgressContext / ActivityManager */
+/**
+ * Completion key for ProgressContext / FamilyProgressContext.
+ * Uses the mission id (always unique) — some games (e.g. `privacy-settings`,
+ * `digital-footprint`) are shared by two missions, so the game id cannot
+ * distinguish which mission was completed.
+ */
 export function getCompletionId(activity: Pick<FlattenedAgeBasedActivity, 'id' | 'activityManagerId'>): string {
-  return activity.activityManagerId ?? activity.id;
+  return activity.id;
 }
 
 function todayDateKey(): string {
