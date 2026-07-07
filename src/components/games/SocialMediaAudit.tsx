@@ -4,9 +4,10 @@ import { useGameCompletion } from '../../utils/familyProgressIntegration';
 
 interface SocialMediaAuditProps {
   onBack: () => void;
+  onComplete?: (score?: number) => void;
 }
 
-const SocialMediaAudit: React.FC<SocialMediaAuditProps> = ({ onBack }) => {
+const SocialMediaAudit: React.FC<SocialMediaAuditProps> = ({ onBack, onComplete }) => {
   const [currentItem, setCurrentItem] = useState(0);
   const [score, setScore] = useState(0);
   const [completed, setCompleted] = useState(false);
@@ -61,13 +62,15 @@ const SocialMediaAudit: React.FC<SocialMediaAuditProps> = ({ onBack }) => {
       setCurrentItem(currentItem + 1);
     } else {
       setCompleted(true);
+      const finalScore = score + (correctActions.includes(action) && action !== 'keep' ? 20 : 0);
       recordGameCompletion(
         'social-media-audit',
         'Social Media Audit',
-        score + (correctActions.includes(action) && action !== 'keep' ? 20 : 0),
+        finalScore,
         100,
         { itemsAudited: auditItems.length }
       );
+      onComplete?.(finalScore);
     }
   };
 

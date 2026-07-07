@@ -4,6 +4,7 @@ import { useGameCompletion } from '../../utils/familyProgressIntegration';
 
 interface DigitalRightsQuizProps {
   onBack: () => void;
+  onComplete?: (score?: number) => void;
 }
 
 const QUIZ_QUESTIONS = [
@@ -75,7 +76,7 @@ const QUIZ_QUESTIONS = [
     }
 ];
 
-const DigitalRightsQuiz: React.FC<DigitalRightsQuizProps> = ({ onBack }) => {
+const DigitalRightsQuiz: React.FC<DigitalRightsQuizProps> = ({ onBack, onComplete }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<number[]>([]);
   const [showResults, setShowResults] = useState(false);
@@ -111,9 +112,10 @@ const DigitalRightsQuiz: React.FC<DigitalRightsQuizProps> = ({ onBack }) => {
         100,
         { correctAnswers: score, totalQuestions: QUIZ_QUESTIONS.length }
       );
+      onComplete?.(percentage);
       setProgressRecorded(true);
     }
-  }, [showResults, progressRecorded, answers.length, recordGameCompletion, calculateScore]);
+  }, [showResults, progressRecorded, answers.length, recordGameCompletion, calculateScore, onComplete]);
 
   const resetQuiz = () => {
     setCurrentQuestion(0);

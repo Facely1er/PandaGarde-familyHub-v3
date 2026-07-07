@@ -4,9 +4,10 @@ import { useGameCompletion } from '../../utils/familyProgressIntegration';
 
 interface DigitalFootprintVisualizerProps {
   onBack: () => void;
+  onComplete?: (score?: number) => void;
 }
 
-const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({ onBack }) => {
+const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({ onBack, onComplete }) => {
   const [activities, setActivities] = useState<string[]>([]);
   const [completed, setCompleted] = useState(false);
   const { recordGameCompletion } = useGameCompletion();
@@ -32,13 +33,15 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
 
   const handleComplete = () => {
     setCompleted(true);
+    const finalScore = Math.round((activities.length / onlineActivities.length) * 100);
     recordGameCompletion(
       'digital-footprint',
       'Digital Footprint Visualizer',
-      Math.round((activities.length / onlineActivities.length) * 100),
+      finalScore,
       100,
       { activitiesExplored: activities.length }
     );
+    onComplete?.(finalScore);
   };
 
   if (completed) {

@@ -4,9 +4,10 @@ import { useGameCompletion } from '../../utils/familyProgressIntegration';
 
 interface PrivacySettingsTrainerProps {
   onBack: () => void;
+  onComplete?: (score?: number) => void;
 }
 
-const PrivacySettingsTrainer: React.FC<PrivacySettingsTrainerProps> = ({ onBack }) => {
+const PrivacySettingsTrainer: React.FC<PrivacySettingsTrainerProps> = ({ onBack, onComplete }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [score, setScore] = useState(0);
   const [completed, setCompleted] = useState(false);
@@ -68,6 +69,7 @@ const PrivacySettingsTrainer: React.FC<PrivacySettingsTrainerProps> = ({ onBack 
         100,
         { settingsConfigured: settings.length }
       );
+      onComplete?.(finalScore);
     }
   };
 

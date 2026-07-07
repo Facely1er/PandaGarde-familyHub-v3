@@ -4,9 +4,10 @@ import { useGameCompletion } from '../../utils/familyProgressIntegration';
 
 interface PhishingDetectiveProps {
   onBack: () => void;
+  onComplete?: (score?: number) => void;
 }
 
-const PhishingDetective: React.FC<PhishingDetectiveProps> = ({ onBack }) => {
+const PhishingDetective: React.FC<PhishingDetectiveProps> = ({ onBack, onComplete }) => {
   const [currentEmail, setCurrentEmail] = useState(0);
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
@@ -111,9 +112,10 @@ const PhishingDetective: React.FC<PhishingDetectiveProps> = ({ onBack }) => {
         100,
         { emailsCompleted: emails.length, totalScore: score }
       );
+      onComplete?.(finalScore);
       setProgressRecorded(true);
     }
-  }, [currentEmail, showResult, progressRecorded, score, emails.length, recordGameCompletion]);
+  }, [currentEmail, showResult, progressRecorded, score, emails.length, recordGameCompletion, onComplete]);
 
   const resetGame = () => {
     setCurrentEmail(0);

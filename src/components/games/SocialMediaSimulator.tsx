@@ -4,9 +4,10 @@ import { useGameCompletion } from '../../utils/familyProgressIntegration';
 
 interface SocialMediaSimulatorProps {
   onBack: () => void;
+  onComplete?: (score?: number) => void;
 }
 
-const SocialMediaSimulator: React.FC<SocialMediaSimulatorProps> = ({ onBack }) => {
+const SocialMediaSimulator: React.FC<SocialMediaSimulatorProps> = ({ onBack, onComplete }) => {
   const [currentScenario, setCurrentScenario] = useState(0);
   const [score, setScore] = useState(0);
   const [completed, setCompleted] = useState(false);
@@ -73,6 +74,7 @@ const SocialMediaSimulator: React.FC<SocialMediaSimulatorProps> = ({ onBack }) =
         100,
         { scenariosCompleted: scenarios.length }
       );
+      onComplete?.(score + points);
     }
   };
 

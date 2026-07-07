@@ -1,11 +1,6 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react';
+import React, { useState, useEffect, useRef, Suspense, lazy } from 'react';
 import { Play, RotateCcw } from 'lucide-react';
-import { useProgress } from '../../contexts/ProgressContext';
-import { useFamilyProgress } from '../../contexts/FamilyProgressContext';
-import { useActiveMember } from '../../utils/familyProgressIntegration';
 import { useToast } from '../../contexts/ToastContext';
-import { logger } from '../../lib/logger';
-// import { useAuth } from '../../contexts/AuthContext';
 
 // Lazy load activity components
 const ColoringActivity = lazy(() => import('./ColoringActivity'));
@@ -28,20 +23,36 @@ const DigitalFootprintVisualizer = lazy(() => import('../games/DigitalFootprintV
 const SafeUnsafeSorting = lazy(() => import('../games/SafeUnsafeSorting'));
 const PrivacyPolicyDecoder = lazy(() => import('../games/PrivacyPolicyDecoder'));
 
-type GameWithBack = React.ComponentType<{ onBack: () => void }>;
+type GameWithBack = React.ComponentType<{
+  onBack: () => void;
+  onComplete?: (score?: number) => void;
+}>;
 
+/**
+ * Wraps teen games that only expose onBack navigation. The game reports its
+ * real completion via onComplete; leaving with the back button only counts as
+ * mission completion if the game was actually finished (with the real score).
+ */
 const FamilyHubGame: React.FC<{
   Game: GameWithBack;
   onClose: () => void;
   onComplete: (score?: number) => void;
-}> = ({ Game, onClose, onComplete }) => (
-  <Game
-    onBack={() => {
-      onComplete(100);
-      onClose();
-    }}
-  />
-);
+}> = ({ Game, onClose, onComplete }) => {
+  const completedScoreRef = useRef<number | null>(null);
+  return (
+    <Game
+      onComplete={(score) => {
+        completedScoreRef.current = score ?? 100;
+      }}
+      onBack={() => {
+        if (completedScoreRef.current !== null) {
+          onComplete(completedScoreRef.current);
+        }
+        onClose();
+      }}
+    />
+  );
+};
 
 interface ActivityManagerProps {
   activityId: string;
@@ -51,11 +62,7 @@ interface ActivityManagerProps {
 
 const ActivityManager: React.FC<ActivityManagerProps> = ({ activityId, onClose, onComplete }) => {
   const [showInstructions, setShowInstructions] = useState(true);
-  const [startTime, setStartTime] = useState<Date | null>(null);
-  const { markActivityCompleted } = useProgress();
-  const { recordActivityCompletion } = useFamilyProgress();
-  const { currentMemberId } = useActiveMember();
-  const { showSuccess, showError } = useToast();
+  const { showSuccess } = useToast();
 
   const activityInstructions = {
     coloring: {
@@ -223,44 +230,16 @@ const ActivityManager: React.FC<ActivityManagerProps> = ({ activityId, onClose, 
     setShowInstructions(true);
   }, [activityId]);
 
-  const handleComplete = async (score?: number) => {
-    const timeSpent = startTime ? Math.round((Date.now() - startTime.getTime()) / 1000) : 0;
-
-    try {
-      // Ensure score is a valid number or undefined
-      const validScore = score !== undefined && !isNaN(score) ? Math.round(score) : undefined;
-
-      // Save to ProgressContext (for general app usage)
-      await markActivityCompleted(activityId, validScore, timeSpent);
-
-      // Also save to FamilyProgressContext if a family member is selected (for Family Hub)
-      if (currentMemberId !== null) {
-        const activityName = currentActivity?.title || activityId;
-        recordActivityCompletion(
-          currentMemberId,
-          activityId,
-          activityName,
-          'game', // Activity type for Family Hub tracking
-          validScore || 0, // Score (0 if undefined)
-          100, // Max score is always 100%
-          {
-            timeSpent,
-            completedAt: new Date().toISOString()
-          }
-        );
-      }
-
-      const scoreMessage = validScore !== undefined ? ` You scored ${validScore}%!` : '';
-      showSuccess('Activity Completed!', `Great job! Your progress has been saved.${scoreMessage}`);
-      onComplete(activityId, validScore);
-    } catch (error) {
-      logger.error('Error saving activity progress:', error);
-      showError('Error', 'Failed to save progress. Please try again.');
-    }
+  // Progress persistence is handled by the parent (MissionShell.finishMission)
+  // to avoid duplicate records — this only reports completion upward.
+  const handleComplete = (score?: number) => {
+    const validScore = score !== undefined && !isNaN(score) ? Math.round(score) : undefined;
+    const scoreMessage = validScore !== undefined ? ` You scored ${validScore}%!` : '';
+    showSuccess('Activity Completed!', `Great job!${scoreMessage}`);
+    onComplete(activityId, validScore);
   };
 
-  const handleStart = async () => {
-    setStartTime(new Date());
+  const handleStart = () => {
     setShowInstructions(false);
   };
 

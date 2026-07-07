@@ -26,10 +26,10 @@ describe('ActivitiesScreen', () => {
     localStorage.setItem(
       'pandagarde_progress',
       JSON.stringify({
-        completedActivities: ['sorting'],
+        completedActivities: ['pack-digital-backpack'],
         activityDetails: {
-          sorting: {
-            activityId: 'sorting',
+          'pack-digital-backpack': {
+            activityId: 'pack-digital-backpack',
             completed: true,
             score: 88,
             completedAt: '2026-05-20T08:00:00.000Z',

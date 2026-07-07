@@ -4,9 +4,10 @@ import { useGameCompletion } from '../../utils/familyProgressIntegration';
 
 interface PrivacyPolicyDecoderProps {
   onBack: () => void;
+  onComplete?: (score?: number) => void;
 }
 
-const PrivacyPolicyDecoder: React.FC<PrivacyPolicyDecoderProps> = ({ onBack }) => {
+const PrivacyPolicyDecoder: React.FC<PrivacyPolicyDecoderProps> = ({ onBack, onComplete }) => {
   const [currentClause, setCurrentClause] = useState(0);
   const [score, setScore] = useState(0);
   const [completed, setCompleted] = useState(false);
@@ -78,6 +79,7 @@ const PrivacyPolicyDecoder: React.FC<PrivacyPolicyDecoderProps> = ({ onBack }) =
         100,
         { clausesDecoded: clauses.length }
       );
+      onComplete?.(score + points);
     }
   };
 

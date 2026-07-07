@@ -4,9 +4,10 @@ import { useGameCompletion } from '../../utils/familyProgressIntegration';
 
 interface PasswordFortressBuilderProps {
   onBack: () => void;
+  onComplete?: (score?: number) => void;
 }
 
-const PasswordFortressBuilder: React.FC<PasswordFortressBuilderProps> = ({ onBack }) => {
+const PasswordFortressBuilder: React.FC<PasswordFortressBuilderProps> = ({ onBack, onComplete }) => {
   const [password, setPassword] = useState('');
   const [completed, setCompleted] = useState(false);
   const { recordGameCompletion } = useGameCompletion();
@@ -40,8 +41,9 @@ const PasswordFortressBuilder: React.FC<PasswordFortressBuilderProps> = ({ onBac
         100,
         { defensesBuilt: activeDefenses.length }
       );
+      onComplete?.(score);
     }
-  }, [score, completed, activeDefenses.length, recordGameCompletion]);
+  }, [score, completed, activeDefenses.length, recordGameCompletion, onComplete]);
 
   const getFortressLevel = () => {
     if (score >= 90) {return { name: 'Legendary Citadel', emoji: '🏰', color: 'text-purple-600' };}

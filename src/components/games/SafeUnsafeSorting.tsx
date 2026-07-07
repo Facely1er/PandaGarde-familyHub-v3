@@ -4,6 +4,7 @@ import { useGameCompletion } from '../../utils/familyProgressIntegration';
 
 interface SafeUnsafeSortingProps {
   onBack: () => void;
+  onComplete?: (score?: number) => void;
 }
 
 interface SortingItem {
@@ -13,7 +14,7 @@ interface SortingItem {
   explanation: string;
 }
 
-const SafeUnsafeSorting: React.FC<SafeUnsafeSortingProps> = ({ onBack }) => {
+const SafeUnsafeSorting: React.FC<SafeUnsafeSortingProps> = ({ onBack, onComplete }) => {
   const [currentItems, setCurrentItems] = useState<SortingItem[]>([]);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
@@ -106,9 +107,10 @@ const SafeUnsafeSorting: React.FC<SafeUnsafeSortingProps> = ({ onBack }) => {
         100,
         { itemsCompleted, totalScore: score }
       );
+      onComplete?.(finalScore);
       setProgressRecorded(true);
     }
-  }, [gameOver, progressRecorded, itemsCompleted, score, recordGameCompletion]);
+  }, [gameOver, progressRecorded, itemsCompleted, score, recordGameCompletion, onComplete]);
 
   const resetGame = () => {
     setCurrentItems(getRandomItems());

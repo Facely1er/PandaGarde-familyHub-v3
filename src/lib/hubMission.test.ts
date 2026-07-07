@@ -15,10 +15,10 @@ describe('hubMission', () => {
     localStorage.clear();
   });
 
-  it('getCompletionId prefers activityManagerId', () => {
+  it('getCompletionId uses the unique mission id, not the (possibly shared) game id', () => {
     expect(
       getCompletionId({ id: 'pack-digital-backpack', activityManagerId: 'sorting' })
-    ).toBe('sorting');
+    ).toBe('pack-digital-backpack');
     expect(getCompletionId({ id: 'conversation-only' })).toBe('conversation-only');
   });
 

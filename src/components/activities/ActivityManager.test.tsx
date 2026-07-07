@@ -93,7 +93,7 @@ describe('ActivityManager', () => {
     });
   });
 
-  it('should save to FamilyProgressContext when family member is selected', async () => {
+  it('should delegate progress persistence to the parent (no duplicate family record)', async () => {
     // Set a family member ID in localStorage
     localStorage.setItem(HUB_CURRENT_MEMBER_KEY, JSON.stringify(1));
 
@@ -113,16 +113,14 @@ describe('ActivityManager', () => {
       completeButton.click();
     });
 
-    // Verify completion was tracked
+    // Completion is reported upward — MissionShell records progress once
     await waitFor(() => {
       expect(mockOnComplete).toHaveBeenCalledWith('quiz', 85);
     });
 
-    // Verify family progress was saved to localStorage
+    // ActivityManager itself must not write a duplicate family progress record
     const familyProgress = JSON.parse(localStorage.getItem('pandagarde_family_progress') || '{}');
-    expect(familyProgress[1]).toBeDefined();
-    expect(familyProgress[1].activities).toHaveLength(1);
-    expect(familyProgress[1].activities[0].score).toBe(85);
+    expect(familyProgress[1]).toBeUndefined();
   });
 
   it('should validate and round scores correctly', async () => {

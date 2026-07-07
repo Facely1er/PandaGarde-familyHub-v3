@@ -6,9 +6,10 @@ import { useGameCompletion } from '../../utils/familyProgressIntegration';
 
 interface PasswordStrengthLabProps {
   onBack: () => void;
+  onComplete?: (score?: number) => void;
 }
 
-const PasswordStrengthLab: React.FC<PasswordStrengthLabProps> = ({ onBack }) => {
+const PasswordStrengthLab: React.FC<PasswordStrengthLabProps> = ({ onBack, onComplete }) => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [timeSpent, setTimeSpent] = useState(0);
@@ -47,9 +48,10 @@ const PasswordStrengthLab: React.FC<PasswordStrengthLabProps> = ({ onBack }) => 
         100,
         { timeSpent, questionsAnswered, correctAnswers }
       );
+      onComplete?.(finalScore);
       setGameCompleted(true);
     }
-  }, [score, password, gameCompleted, timeSpent, questionsAnswered, correctAnswers, recordGameCompletion]);
+  }, [score, password, gameCompleted, timeSpent, questionsAnswered, correctAnswers, recordGameCompletion, onComplete]);
 
   const getStrengthColor = () => {
     if (score <= 2) {return 'text-red-600';}

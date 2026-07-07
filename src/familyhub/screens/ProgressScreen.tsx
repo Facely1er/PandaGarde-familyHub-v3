@@ -16,7 +16,7 @@ import HubScreenHero from '../components/HubScreenHero';
 const ACHIEVEMENT_META: Record<string, { label: string; icon: LucideIcon; description: string }> = {
   first_activity: { label: 'First Step', icon: Sprout, description: 'Completed your first activity' },
   getting_started: { label: 'Getting Started', icon: Rocket, description: 'Completed 3 activities' },
-  privacy_champion: { label: 'Privacy Champion', icon: Trophy, description: 'Completed 8 activities' },
+  privacy_champion: { label: 'Privacy Champion', icon: Trophy, description: 'Completed every mission in the catalog' },
   dedicated_learner: { label: 'Dedicated Learner', icon: Timer, description: 'Spent 60+ minutes learning' },
 };
 
