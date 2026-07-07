@@ -3,9 +3,10 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { getStoryBySlug } from '../../data/stories';
 import { StoryCoverArt } from '../../components/stories/StoryCoverArt';
 import { useKidsProgress } from '../KidsProgressContext';
+import SessionRest from '../components/SessionRest';
 import { getEpisodeGame, getFamilyActivity, PILLAR_META } from '../kidsContent';
 
-type Phase = 'story' | 'game' | 'ceremony' | 'family';
+type Phase = 'story' | 'game' | 'ceremony' | 'family' | 'rest';
 
 const ACTIVITY_TYPE_LABELS: Record<string, string> = {
   discussion: '💬 Talk together',
@@ -94,6 +95,16 @@ const EpisodeScreen: React.FC = () => {
     );
   }
 
+  if (phase === 'rest') {
+    return (
+      <SessionRest
+        episodeTitle={story.title}
+        onDone={() => navigate('/')}
+        onContinue={() => navigate('/')}
+      />
+    );
+  }
+
   if (phase === 'family' && familyActivity) {
     return (
       <div className="mx-auto flex min-h-screen max-w-2xl flex-col justify-center px-4 py-10 sm:px-6">
@@ -136,10 +147,10 @@ const EpisodeScreen: React.FC = () => {
 
         <button
           type="button"
-          onClick={() => navigate('/')}
+          onClick={() => setPhase('rest')}
           className="mt-6 min-h-[56px] w-full rounded-2xl bg-emerald-700 text-lg font-extrabold text-white hover:bg-emerald-800 dark:bg-emerald-500 dark:text-gray-900 dark:hover:bg-emerald-400"
         >
-          Back to the Forest Map 🗺️
+          All done — time to rest! 🌙
         </button>
       </div>
     );
