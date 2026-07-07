@@ -151,3 +151,40 @@ export const PILLAR_GAMES: Record<QuestPillar, KidsGame> = {
     Component: lazy(() => import('../components/games/PrivacySettingsTrainer')),
   },
 };
+
+/**
+ * Per-episode game overrides, keyed by story slug. Used where an episode's
+ * theme calls for a topic-specific game rather than the pillar default —
+ * notably the cyberbullying and trusted-adults episodes (research §1.4, §4.4).
+ */
+export const EPISODE_GAME_OVERRIDES: Record<string, KidsGame> = {
+  // Episode 7 — "When Miki Said Something Unkind" (digital kindness)
+  'when-miki-said-something-unkind': {
+    id: 'kindness-guardians',
+    name: 'Kindness Guardians',
+    emoji: '💚',
+    description: 'Spot unkindness and choose the guardian move!',
+    Component: lazy(() => import('./games/KindnessGuardians')),
+  },
+  // Episode 8 — "Po's Toughest Question" (trusted adults & disclosure)
+  'pos-toughest-question': {
+    id: 'trusted-team-builder',
+    name: 'Build Your Tao Circle',
+    emoji: '🛡️',
+    description: 'Choose your trusted grown-ups and a family code word!',
+    Component: lazy(() => import('./games/TrustedTeamBuilder')),
+  },
+  // Season 2 episode 9 — "The Echo Chamber" (bystander's choice) reuses the
+  // kindness game if/when Season 2 ships in the kids app.
+  'the-echo-chamber': {
+    id: 'kindness-guardians',
+    name: 'Kindness Guardians',
+    emoji: '💚',
+    description: 'Spot unkindness and choose the guardian move!',
+    Component: lazy(() => import('./games/KindnessGuardians')),
+  },
+};
+
+export function getEpisodeGame(story: Story): KidsGame {
+  return EPISODE_GAME_OVERRIDES[story.slug] ?? PILLAR_GAMES[story.questPillar];
+}

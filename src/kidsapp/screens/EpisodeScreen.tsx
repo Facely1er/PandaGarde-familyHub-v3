@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { getStoryBySlug } from '../../data/stories';
 import { StoryCoverArt } from '../../components/stories/StoryCoverArt';
 import { useKidsProgress } from '../KidsProgressContext';
-import { getFamilyActivity, PILLAR_GAMES, PILLAR_META } from '../kidsContent';
+import { getEpisodeGame, getFamilyActivity, PILLAR_META } from '../kidsContent';
 
 type Phase = 'story' | 'game' | 'ceremony' | 'family';
 
@@ -55,7 +55,7 @@ const EpisodeScreen: React.FC = () => {
   }
 
   const pillar = PILLAR_META[story.questPillar];
-  const game = PILLAR_GAMES[story.questPillar];
+  const game = getEpisodeGame(story);
   const familyActivity = getFamilyActivity(story, profile?.ageBand ?? 'early');
   const chapter = story.chapters[chapterIndex];
   const isLastChapter = chapterIndex >= story.chapters.length - 1;
@@ -166,6 +166,9 @@ const EpisodeScreen: React.FC = () => {
           <p className="font-bold">Forest Wisdom</p>
           <p className="mt-1">{story.keyLesson}</p>
         </div>
+        <p className="mt-3 text-gray-500 dark:text-gray-400">
+          🌿 This is a great place to take a break — the forest will be here when you come back!
+        </p>
         <div className="mt-8 flex w-full flex-col gap-3">
           {familyActivity && (
             <button

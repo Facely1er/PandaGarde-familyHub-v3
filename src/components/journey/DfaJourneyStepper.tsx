@@ -53,7 +53,30 @@ const DfaJourneyStepper: React.FC<Props> = ({
   hideStripCta = false,
   className = '',
 }) => {
-  const journey = useSyncExternalStore(subscribeJourney, getDfaJourneySnapshot, () => DEFAULT_DFA_JOURNEY_STATE);
+  const storedJourney = useSyncExternalStore(subscribeJourney, getDfaJourneySnapshot, () => DEFAULT_DFA_JOURNEY_STATE);
+  // The stored journey state can lag one tick behind live page data (contexts hydrate
+  // after mount), so when the host page passes a live catalog count we overlay it to
+  // keep the headline, progress bar, and pills consistent with what the user sees.
+  const journey = React.useMemo(() => {
+    if (catalogServicesCount === undefined) {return storedJourney;}
+    const catalogReady = catalogServicesCount >= 3;
+    const phases = storedJourney.phases.map((phase) => {
+      if (phase.key === 'profile') {
+        return { ...phase, visited: phase.visited || catalogServicesCount > 0, completed: catalogReady };
+      }
+      if (phase.key === 'dfa' && currentKey === 'dfa') {
+        return { ...phase, visited: true, completed: catalogReady };
+      }
+      return phase;
+    });
+    const core = getCoreDfaPhases(phases);
+    const completedCore = core.filter((phase) => phase.completed).length;
+    return {
+      ...storedJourney,
+      phases,
+      progressPercent: core.length > 0 ? Math.round((completedCore / core.length) * 100) : 0,
+    };
+  }, [storedJourney, catalogServicesCount, currentKey]);
   const corePhases = getCoreDfaPhases(journey.phases);
   const optionalPhases = getOptionalDfaPhases(journey.phases);
   const progressHeadline = getJourneyProgressHeadline(journey);

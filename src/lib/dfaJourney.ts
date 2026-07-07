@@ -227,6 +227,13 @@ export const saveDfaJourneyState = (state: DfaJourneyState): void => {
   window.dispatchEvent(new Event(DFA_JOURNEY_CHANGE_EVENT));
 };
 
+/** Clears journey progress so a family can redo the footprint review from scratch. */
+export const resetDfaJourney = (): DfaJourneyState => {
+  const next = getDefaultDfaJourneyState();
+  saveDfaJourneyState(next);
+  return next;
+};
+
 export const updateDfaJourneyPhase = (
   phaseKey: DfaJourneyPhase['key'],
   updates: Partial<Pick<DfaJourneyPhase, 'visited' | 'completed'>> & { resumePath?: string }

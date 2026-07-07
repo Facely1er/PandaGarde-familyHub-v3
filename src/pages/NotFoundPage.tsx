@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Home, Search } from 'lucide-react';
-import { GUIDES_STORIES_NAV_LABEL } from '../data/siteNavigation';
+import { Home, Search, Fingerprint, Users } from 'lucide-react';
+import { GUIDES_STORIES_NAV_LABEL, FOOTPRINT_REVIEW_NAV_LABEL } from '../data/siteNavigation';
 
 const NotFoundPage: React.FC = () => {
   return (
@@ -28,6 +28,32 @@ const NotFoundPage: React.FC = () => {
             <Search size={18} />
             {GUIDES_STORIES_NAV_LABEL}
           </Link>
+        </div>
+
+        <div className="mt-8 rounded-2xl border border-gray-200 bg-gray-50 p-4 text-left dark:border-gray-700 dark:bg-gray-800">
+          <p className="text-sm font-semibold text-gray-800 dark:text-gray-100 mb-3">
+            Looking for one of these?
+          </p>
+          <ul className="space-y-2">
+            <li>
+              <Link
+                to="/digital-footprint"
+                className="inline-flex items-center gap-2 text-sm font-medium text-green-700 hover:underline dark:text-green-400"
+              >
+                <Fingerprint size={16} aria-hidden />
+                {FOOTPRINT_REVIEW_NAV_LABEL} — see where your family&apos;s data goes
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/family-hub"
+                className="inline-flex items-center gap-2 text-sm font-medium text-green-700 hover:underline dark:text-green-400"
+              >
+                <Users size={16} aria-hidden />
+                Family Hub — short privacy missions to do together
+              </Link>
+            </li>
+          </ul>
         </div>
       </div>
     </div>

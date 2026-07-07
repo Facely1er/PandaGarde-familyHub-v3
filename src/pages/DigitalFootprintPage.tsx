@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Download, ArrowRight, BarChart3, TrendingUp, BookOpen, ChevronDown, ChevronUp } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Download, ArrowRight, BarChart3, TrendingUp, BookOpen, ChevronDown, ChevronUp, RotateCcw } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 import DigitalFootprintVisualizer from '../components/DigitalFootprintVisualizer';
 import EmptyStateWithServicePrompt from '../components/EmptyStateWithServicePrompt';
@@ -9,7 +9,7 @@ import DfaScoreOverview from '../components/dfa/DfaScoreOverview';
 import DfaMethodologyCallout from '../components/dfa/DfaMethodologyCallout';
 import { useFamily } from '../contexts/FamilyContext';
 import { footprintAnalyzer } from '../lib/footprintAnalyzer';
-import { updateDfaJourneyPhase } from '../lib/dfaJourney';
+import { resetDfaJourney, updateDfaJourneyPhase } from '../lib/dfaJourney';
 import { buildDfaScore, loadDfaScoreTier } from '../lib/dfaScoreEngine';
 import { downloadDfaExecutiveSummary } from '../lib/dfaReport';
 import { logger } from '../lib/logger';
@@ -39,7 +39,9 @@ const DigitalFootprintEducator: React.FC = () => {
 
 const DigitalFootprintPage: React.FC = () => {
   const [isExportingPdf, setIsExportingPdf] = useState(false);
-  const { familyMembers, getFamilyServices } = useFamily();
+  const [isResetting, setIsResetting] = useState(false);
+  const navigate = useNavigate();
+  const { familyMembers, getFamilyServices, removeServiceFromFamily } = useFamily();
   const catalogServices = getFamilyServices();
   const memberServices: Record<string, string[]> = {};
   let totalServicesCount = 0;
@@ -97,6 +99,24 @@ const DigitalFootprintPage: React.FC = () => {
     }
   };
 
+  const handleStartOver = async () => {
+    if (isResetting) {return;}
+    const confirmed = window.confirm(
+      'Start over? This clears your app list and footprint review progress on this device. Family Hub and story progress are not affected.'
+    );
+    if (!confirmed) {return;}
+    setIsResetting(true);
+    try {
+      for (const serviceId of getFamilyServices()) {
+        await removeServiceFromFamily(serviceId);
+      }
+      resetDfaJourney();
+      navigate('/service-catalog');
+    } finally {
+      setIsResetting(false);
+    }
+  };
+
   const storyHref = '/stories/privacy-panda-and-the-digital-bamboo-forest';
 
   return (
@@ -110,6 +130,7 @@ const DigitalFootprintPage: React.FC = () => {
           <DfaJourneyStepper
             variant="strip"
             currentKey="dfa"
+            catalogServicesCount={totalServicesCount}
             embedded
             hideStripCta
           />
@@ -134,6 +155,16 @@ const DigitalFootprintPage: React.FC = () => {
           >
             Update app list
           </Link>
+          <button
+            type="button"
+            onClick={() => { void handleStartOver(); }}
+            disabled={isResetting}
+            aria-busy={isResetting}
+            className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold text-gray-500 hover:text-gray-700 disabled:cursor-not-allowed disabled:opacity-70 dark:text-gray-400 dark:hover:text-gray-200"
+          >
+            <RotateCcw className="h-3.5 w-3.5" aria-hidden />
+            {isResetting ? 'Clearing…' : 'Start over'}
+          </button>
         </div>
       </section>
 

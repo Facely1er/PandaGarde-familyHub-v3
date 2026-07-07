@@ -6,6 +6,7 @@ import { getKidsEpisodes, type KidAgeBand } from './kidsContent';
 /** All kids-app persistence is anonymous and device-local (no name, no email). */
 const KIDS_PROFILE_KEY = 'pandagarde-kids-profile';
 const KIDS_EPISODES_KEY = 'pandagarde-kids-episodes';
+const KIDS_TRUSTED_TEAM_KEY = 'pandagarde-kids-trusted-team';
 
 export interface KidProfile {
   avatarId: string;
@@ -21,6 +22,12 @@ export interface EpisodeRecord {
 
 type EpisodeMap = Record<string, EpisodeRecord>;
 
+/** Disclosure scaffold (research §1.4): generic roles + a code word — never names. */
+export interface TrustedTeam {
+  roleIds: string[];
+  codeWord: string;
+}
+
 interface KidsProgressContextType {
   profile: KidProfile | null;
   setProfile: (profile: KidProfile) => void;
@@ -31,6 +38,8 @@ interface KidsProgressContextType {
   isEpisodeComplete: (slug: string) => boolean;
   earnedBadges: { slug: string; pillar: QuestPillar; completedAt: string }[];
   seasonComplete: boolean;
+  trustedTeam: TrustedTeam | null;
+  setTrustedTeam: (team: TrustedTeam) => void;
 }
 
 const KidsProgressContext = createContext<KidsProgressContextType | undefined>(undefined);
@@ -50,6 +59,14 @@ export const KidsProgressProvider: React.FC<{ children: React.ReactNode }> = ({ 
   const [episodes, setEpisodes] = useState<EpisodeMap>(() =>
     appStorage.get<EpisodeMap>(KIDS_EPISODES_KEY, {})
   );
+  const [trustedTeam, setTrustedTeamState] = useState<TrustedTeam | null>(() =>
+    appStorage.get<TrustedTeam | null>(KIDS_TRUSTED_TEAM_KEY, null)
+  );
+
+  const setTrustedTeam = useCallback((team: TrustedTeam) => {
+    setTrustedTeamState(team);
+    appStorage.set(KIDS_TRUSTED_TEAM_KEY, team);
+  }, []);
 
   const setProfile = useCallback((next: KidProfile) => {
     setProfileState(next);
@@ -59,8 +76,10 @@ export const KidsProgressProvider: React.FC<{ children: React.ReactNode }> = ({ 
   const resetAll = useCallback(() => {
     setProfileState(null);
     setEpisodes({});
+    setTrustedTeamState(null);
     appStorage.remove(KIDS_PROFILE_KEY);
     appStorage.remove(KIDS_EPISODES_KEY);
+    appStorage.remove(KIDS_TRUSTED_TEAM_KEY);
   }, []);
 
   const updateEpisodes = useCallback((updater: (prev: EpisodeMap) => EpisodeMap) => {
@@ -138,6 +157,8 @@ export const KidsProgressProvider: React.FC<{ children: React.ReactNode }> = ({ 
       isEpisodeComplete,
       earnedBadges,
       seasonComplete,
+      trustedTeam,
+      setTrustedTeam,
     }),
     [
       profile,
@@ -149,6 +170,8 @@ export const KidsProgressProvider: React.FC<{ children: React.ReactNode }> = ({ 
       isEpisodeComplete,
       earnedBadges,
       seasonComplete,
+      trustedTeam,
+      setTrustedTeam,
     ]
   );
 

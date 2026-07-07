@@ -1,4 +1,5 @@
 import React, { lazy, Suspense, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Award, CheckCircle2, Clock, Download, Rocket, Sprout, Star, Timer, TrendingUp, Trophy, X, type LucideIcon } from 'lucide-react';
 import { HubIconBadge } from '../hubIcons';
 import { HubScreenFallback } from '../HubScreenFallback';
@@ -133,6 +134,45 @@ const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => 
           </p>
         )}
       </div>
+
+      {/* All missions complete — where to go next */}
+      {totalCount > 0 && completedCount >= totalCount && (
+        <div className="rounded-xl border border-amber-200 bg-amber-50 p-5 dark:border-amber-700/50 dark:bg-amber-900/20">
+          <div className="flex items-center gap-2">
+            <Trophy size={20} className="shrink-0 text-amber-600 dark:text-amber-300" aria-hidden="true" />
+            <h2 className="text-sm font-semibold text-amber-900 dark:text-amber-100">
+              You finished every mission — amazing work!
+            </h2>
+          </div>
+          <p className="mt-2 text-sm leading-relaxed text-amber-800 dark:text-amber-200">
+            Celebrate with a certificate below, then keep the conversation going: revisit missions
+            as your kids grow, read a Privacy Panda story together, or refresh your family&apos;s
+            footprint review with any new apps.
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={() => setShowCertificates(true)}
+              className="inline-flex items-center gap-1.5 rounded-lg bg-amber-600 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-amber-700 dark:bg-amber-500 dark:hover:bg-amber-400 dark:text-amber-950"
+            >
+              <Award size={13} aria-hidden="true" />
+              Get your certificate
+            </button>
+            <Link
+              to="/stories"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-amber-300 bg-white px-3 py-1.5 text-xs font-semibold text-amber-800 transition-colors hover:bg-amber-100 dark:border-amber-600 dark:bg-amber-900/40 dark:text-amber-200 dark:hover:bg-amber-900/60"
+            >
+              Privacy Panda stories
+            </Link>
+            <Link
+              to="/digital-footprint"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-amber-300 bg-white px-3 py-1.5 text-xs font-semibold text-amber-800 transition-colors hover:bg-amber-100 dark:border-amber-600 dark:bg-amber-900/40 dark:text-amber-200 dark:hover:bg-amber-900/60"
+            >
+              Update footprint review
+            </Link>
+          </div>
+        </div>
+      )}
 
       {/* Forest friends */}
       {forestFriends.length > 0 && (
