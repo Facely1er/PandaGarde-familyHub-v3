@@ -87,13 +87,12 @@ const CertificatesPage: React.FC = () => {
       subtitle="Print a certificate when your child finishes a story or mission. Pick one below and print it at home."
       breadcrumbs={true}
     >
-      <div className="min-h-screen" style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}>
+      <div className="bg-white dark:bg-gray-900">
 
-      {/* Main Content */}
-      <div className="container mx-auto px-6 py-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
         {/* Introduction */}
         <div className="max-w-4xl mx-auto text-center mb-16">
-          <h2 className="font-bold mb-6" style={{ fontSize: 'clamp(1.875rem, 3vw, 2.25rem)', color: 'var(--primary)' }}>
+          <h2 className="mb-6 text-2xl font-bold text-green-700 sm:text-3xl dark:text-green-400">
             Celebrate a finished story or mission
           </h2>
           <p className="text-lg leading-relaxed mb-8 text-gray-600">
@@ -138,7 +137,7 @@ const CertificatesPage: React.FC = () => {
         </div>
 
         {/* Certificates Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <div className="mb-12 grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
           {certificates.map((cert) => {
             const IconComponent = cert.icon;
             return (
@@ -190,8 +189,8 @@ const CertificatesPage: React.FC = () => {
         </div>
 
         {/* Custom Certificate Generator */}
-        <div className="bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-xl p-8 text-white text-center mb-16">
-          <h2 className="font-bold mb-4" style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)' }}>
+        <div className="mb-12 rounded-xl bg-gradient-to-r from-yellow-500 to-yellow-600 p-6 text-center text-white sm:p-8">
+          <h2 className="mb-4 text-xl font-bold sm:text-2xl">
             Generate Custom Certificate
           </h2>
           <p className="text-lg mb-6 opacity-90">
@@ -207,8 +206,8 @@ const CertificatesPage: React.FC = () => {
         </div>
 
         {/* Bulk Download Section */}
-        <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-8 text-white text-center mb-16">
-          <h2 className="font-bold mb-4" style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)' }}>
+        <div className="mb-12 rounded-xl bg-gradient-to-r from-green-500 to-green-600 p-6 text-center text-white sm:p-8">
+          <h2 className="mb-4 text-xl font-bold sm:text-2xl">
             Complete Certificate Collection
           </h2>
           <p className="text-lg mb-6 opacity-90">
@@ -226,7 +225,7 @@ const CertificatesPage: React.FC = () => {
 
         {/* Additional Resources */}
         <div className="max-w-4xl mx-auto">
-          <h2 className="font-bold mb-8 text-center" style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', color: 'var(--primary)' }}>
+          <h2 className="mb-6 text-center text-xl font-bold text-green-700 sm:mb-8 sm:text-2xl dark:text-green-400">
             Related Resources
           </h2>
           

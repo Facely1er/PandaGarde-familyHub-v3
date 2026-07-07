@@ -23,8 +23,8 @@ const NewsletterArchivePage: React.FC = () => {
       subtitle="Past newsletter issues with privacy tips and family activities. Tap an issue to read it."
       breadcrumbs={true}
     >
-      <div className="container mx-auto px-6 py-16">
-        <div className="max-w-4xl mx-auto">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+        <div className="mx-auto max-w-4xl">
           <div className="mb-8">
             <Link
               to="/newsletter"
@@ -47,7 +47,7 @@ const NewsletterArchivePage: React.FC = () => {
             <div className="space-y-12">
               {years.map((year) => (
                 <div key={year}>
-                  <h2 className="mb-6 text-2xl font-bold text-gray-900 dark:text-gray-100">
+                  <h2 className="mb-4 text-xl font-bold text-gray-900 sm:mb-6 sm:text-2xl dark:text-gray-100">
                     {year}
                   </h2>
                   <div className="space-y-4">
@@ -55,7 +55,7 @@ const NewsletterArchivePage: React.FC = () => {
                       <Link
                         key={newsletter.id}
                         to={newsletterIssuePath(newsletter.id)}
-                        className="block bg-white dark:bg-gray-200 rounded-xl p-6 shadow-md hover:shadow-lg transition-all border border-gray-200 dark:border-gray-700"
+                        className="block rounded-xl border border-gray-200 bg-white p-4 shadow-md transition-all hover:shadow-lg dark:border-gray-700 dark:bg-gray-800 sm:p-6"
                       >
                         <div className="flex items-start justify-between">
                           <div className="flex-1">
@@ -71,7 +71,7 @@ const NewsletterArchivePage: React.FC = () => {
                                 </span>
                               )}
                             </div>
-                            <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-gray-100">
+                            <h3 className="mb-2 text-lg font-bold text-gray-900 sm:text-xl dark:text-gray-100">
                               {newsletter.title}
                             </h3>
                             <p className="mb-3 text-gray-600 dark:text-gray-300">{newsletter.featuredTopic.description}</p>

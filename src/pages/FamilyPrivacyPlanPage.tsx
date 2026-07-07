@@ -20,7 +20,7 @@ const FamilyPrivacyPlanPage: React.FC = () => {
       subtitle="Set clear rules, choose safety tools, and schedule check-ins—best when everyone helps build it together."
       breadcrumbs={true}
     >
-      <p className="page-lead">
+      <p className="page-lead px-4 sm:px-0">
         <Link
           to="/guides/family-privacy"
           className="inline-flex items-center gap-1.5 font-medium text-green-700 hover:underline dark:text-green-400"
@@ -32,7 +32,7 @@ const FamilyPrivacyPlanPage: React.FC = () => {
 
       <PageSection>
         <FamilyPrivacyPlanBuilder onSave={handleSave} onExport={handleExport} />
-        <div className="shell-card shell-card--nested p-5">
+        <div className="shell-card shell-card--nested p-4 sm:p-5">
           <h3 className="shell-card__title text-base">Tips for success</h3>
           <ul className="shell-list mt-3 space-y-2 text-sm text-gray-600 dark:text-gray-300">
             <li>Hold a family meeting so kids and teens can share ideas—not just parents dictating rules.</li>

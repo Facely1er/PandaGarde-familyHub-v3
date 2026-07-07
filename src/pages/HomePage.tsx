@@ -129,7 +129,7 @@ const HomePage: React.FC = () => {
       </section>
 
       <div className="page-layout__main">
-        <div className="container">
+        <div className="container px-4 sm:px-6 lg:px-8">
           <div className="page-content">
             <PageSection
               className="homepage-spotlight"

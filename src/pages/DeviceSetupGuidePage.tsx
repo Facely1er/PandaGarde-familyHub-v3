@@ -98,7 +98,7 @@ const DeviceSetupGuidePage: React.FC = () => {
       subtitle="Set up parental controls and privacy settings on phones, tablets, and computers. Pick your device type below to see step-by-step instructions."
       breadcrumbs={true}
     >
-      <div style={{ maxWidth: '56rem', margin: '0 auto' }}>
+      <div className="max-w-4xl mx-auto">
         {/* Introduction */}
         <div className="max-w-4xl mx-auto text-center mb-16">
           <h2 className="text-3xl font-bold mb-6 text-primary">
@@ -171,7 +171,7 @@ const DeviceSetupGuidePage: React.FC = () => {
                       <h3 className="text-lg font-bold text-primary">
                         {device.title}
                       </h3>
-                      <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-semibold">
+                      <span className="rounded-full bg-green-100 px-2 py-1 text-xs font-semibold text-green-800 dark:bg-green-900/40 dark:text-green-200">
                         {device.ageGroup}
                       </span>
                     </div>
@@ -187,14 +187,14 @@ const DeviceSetupGuidePage: React.FC = () => {
                       <ul className="text-sm space-y-1 text-gray-600">
                         {device.steps.map((step, index) => (
                           <li key={index} className="flex items-start gap-2">
-                            <span className="text-blue-600 font-bold">{index + 1}.</span>
+                            <span className="font-bold text-green-700 dark:text-green-400">{index + 1}.</span>
                             {step}
                           </li>
                         ))}
                       </ul>
                     </div>
                     
-                    <button className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                    <button className="w-full rounded-lg bg-green-700 px-4 py-2 font-semibold text-white transition-colors hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500">
                       View Detailed Guide
                     </button>
                   </div>

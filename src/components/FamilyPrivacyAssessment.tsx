@@ -374,7 +374,7 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
             </Link>
             <Link
               to="/digital-footprint"
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center space-x-2"
+              className="px-4 py-2 bg-green-700 hover:bg-green-800 text-white rounded-lg transition-colors flex items-center space-x-2 dark:bg-green-600 dark:hover:bg-green-500"
             >
               <span>View footprint review</span>
               <ArrowRight className="h-4 w-4" />
@@ -421,7 +421,7 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
         </div>
         <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
           <div
-            className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+            className="bg-green-600 h-2 rounded-full transition-all duration-300 dark:bg-green-500"
             style={{ width: `${progress}%` }}
           />
         </div>
@@ -440,7 +440,7 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
         </h2>
 
         {currentQuestion.description && (
-          <div className="flex items-start space-x-2 mb-6 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+          <div className="flex items-start space-x-2 mb-6 p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
             <Info className="h-4 w-4 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
             <p className="text-sm text-blue-800 dark:text-blue-200">
               {currentQuestion.description}
@@ -456,14 +456,14 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
                 onClick={() => handleAnswer('yes')}
                 className={`w-full p-4 text-left rounded-lg border-2 transition-all ${
                   answers[currentQuestion.id] === 'yes'
-                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30'
+                    ? 'border-green-500 bg-green-50 dark:bg-green-900/30'
                     : 'border-gray-200 dark:border-dark-border hover:border-gray-300 dark:hover:border-gray-600'
                 }`}
               >
                 <div className="flex items-center space-x-3">
                   <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
                     answers[currentQuestion.id] === 'yes'
-                      ? 'border-blue-500 bg-blue-500'
+                      ? 'border-green-500 bg-green-500'
                       : 'border-gray-300 dark:border-gray-600'
                   }`}>
                     {answers[currentQuestion.id] === 'yes' && (
@@ -477,14 +477,14 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
                 onClick={() => handleAnswer('no')}
                 className={`w-full p-4 text-left rounded-lg border-2 transition-all ${
                   answers[currentQuestion.id] === 'no'
-                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30'
+                    ? 'border-green-500 bg-green-50 dark:bg-green-900/30'
                     : 'border-gray-200 dark:border-dark-border hover:border-gray-300 dark:hover:border-gray-600'
                 }`}
               >
                 <div className="flex items-center space-x-3">
                   <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
                     answers[currentQuestion.id] === 'no'
-                      ? 'border-blue-500 bg-blue-500'
+                      ? 'border-green-500 bg-green-500'
                       : 'border-gray-300 dark:border-gray-600'
                   }`}>
                     {answers[currentQuestion.id] === 'no' && (
@@ -505,14 +505,14 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
                   onClick={() => handleAnswer(option)}
                   className={`w-full p-4 text-left rounded-lg border-2 transition-all ${
                     answers[currentQuestion.id] === option
-                      ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30'
+                      ? 'border-green-500 bg-green-50 dark:bg-green-900/30'
                       : 'border-gray-200 dark:border-dark-border hover:border-gray-300 dark:hover:border-gray-600'
                   }`}
                 >
                   <div className="flex items-center space-x-3">
                     <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
                       answers[currentQuestion.id] === option
-                        ? 'border-blue-500 bg-blue-500'
+                        ? 'border-green-500 bg-green-500'
                         : 'border-gray-300 dark:border-gray-600'
                     }`}>
                       {answers[currentQuestion.id] === option && (
@@ -542,7 +542,7 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
         <button
           onClick={handleNext}
           disabled={!answers[currentQuestion.id]}
-          className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
+          className="px-4 py-2 bg-green-700 hover:bg-green-800 text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2 dark:bg-green-600 dark:hover:bg-green-500"
         >
           <span>{currentStep === assessmentQuestions.length - 1 ? 'Complete' : 'Next'}</span>
           <ArrowRight className="h-4 w-4" />

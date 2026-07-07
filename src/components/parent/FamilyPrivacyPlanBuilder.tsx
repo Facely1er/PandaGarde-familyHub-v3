@@ -552,7 +552,7 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
           </button>
           <button
             onClick={handleExport}
-            className="flex-1 sm:flex-none px-6 py-2.5 min-h-[44px] bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
+            className="flex min-h-[44px] flex-1 items-center justify-center gap-2 rounded-lg bg-green-700 px-6 py-2.5 font-medium text-white transition-colors hover:bg-green-800 sm:flex-none dark:bg-green-600 dark:hover:bg-green-500"
           >
             <Download size={18} />
             Export Plan

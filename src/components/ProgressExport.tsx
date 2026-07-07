@@ -168,7 +168,7 @@ const ProgressExport: React.FC<ProgressExportProps> = ({ onClose }) => {
 
               <button
                 onClick={copyToClipboard}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-md transition-colors flex items-center justify-center gap-2"
+                className="w-full bg-green-700 hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500 text-white font-medium py-3 px-4 rounded-md transition-colors flex items-center justify-center gap-2"
               >
                 <Copy size={16} />
                 Copy to Clipboard
@@ -193,7 +193,7 @@ const ProgressExport: React.FC<ProgressExportProps> = ({ onClose }) => {
                 <div className="space-y-3">
                   <button
                     onClick={() => setShowImportForm(true)}
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-md transition-colors flex items-center justify-center gap-2"
+                    className="w-full bg-green-700 hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500 text-white font-medium py-3 px-4 rounded-md transition-colors flex items-center justify-center gap-2"
                   >
                     <Upload size={16} />
                     Import Progress Data

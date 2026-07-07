@@ -1,36 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import PageLayout from '../components/layout/PageLayout';
 import CertificateGenerator from '../components/CertificateGenerator';
 
 const CertificatePage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-100">
-      {/* Header */}
-      <header className="bg-white dark:bg-gray-200 shadow-sm border-b">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <Link to="/family-hub"
-              className="inline-flex items-center gap-2 text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 font-medium transition-colors"
-            >
-              <ArrowLeft size={16} />
-              Back to Family Hub
-            </Link>
-            
-            <h1 className="text-xl font-bold text-gray-900 dark:text-white">
-              Certificate Generator
-            </h1>
-            
-            <div className="w-20"></div> {/* Spacer for centering */}
-          </div>
-        </div>
-      </header>
-
-      {/* Main Content */}
-      <div className="container mx-auto px-6 py-12">
+    <PageLayout
+      title="Certificate Generator"
+      subtitle="Create and print a Privacy Champion certificate for your child."
+      breadcrumbs={true}
+    >
+      <div className="px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <Link
+          to="/family-hub"
+          className="mb-6 inline-flex items-center gap-2 font-medium text-green-700 transition-colors hover:text-green-800 dark:text-green-400 dark:hover:text-green-300"
+        >
+          <ArrowLeft size={16} aria-hidden />
+          Back to Family Hub
+        </Link>
         <CertificateGenerator />
       </div>
-    </div>
+    </PageLayout>
   );
 };
 

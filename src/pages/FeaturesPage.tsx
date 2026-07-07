@@ -296,14 +296,14 @@ const FeaturesPage: React.FC = () => {
         </div>
       </PageSection>
 
-      <div className="shell-card shell-card--panel shell-cta-panel">
+      <div className="shell-card shell-card--panel shell-cta-panel flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="shell-cta-panel__copy">
           <h2 className="page-section__title">Ready to begin?</h2>
           <p className="shell-card__body">
             Start with footprint review, or open Family Hub when you are ready.
           </p>
         </div>
-        <div className="shell-cta-panel__actions">
+        <div className="shell-cta-panel__actions flex flex-col gap-2 sm:flex-row sm:flex-wrap">
           <Link to="/digital-footprint" className="button button-primary inline-flex items-center gap-1.5">
             Start review <ArrowRight size={14} aria-hidden />
           </Link>
