@@ -3,9 +3,17 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { getStoryBySlug } from '../../data/stories';
 import { StoryCoverArt } from '../../components/stories/StoryCoverArt';
 import { useKidsProgress } from '../KidsProgressContext';
-import { PILLAR_GAMES, PILLAR_META } from '../kidsContent';
+import { getFamilyActivity, PILLAR_GAMES, PILLAR_META } from '../kidsContent';
 
-type Phase = 'story' | 'game' | 'ceremony';
+type Phase = 'story' | 'game' | 'ceremony' | 'family';
+
+const ACTIVITY_TYPE_LABELS: Record<string, string> = {
+  discussion: '💬 Talk together',
+  'role-play': '🎭 Act it out together',
+  craft: '✂️ Make together',
+  game: '🎲 Play together',
+  worksheet: '📝 Work on together',
+};
 
 const GameFallback: React.FC = () => (
   <div className="flex min-h-[40vh] items-center justify-center" role="status" aria-live="polite">
@@ -20,7 +28,7 @@ const GameFallback: React.FC = () => (
 const EpisodeScreen: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
-  const { markStoryRead, markEpisodeComplete } = useKidsProgress();
+  const { profile, markStoryRead, markEpisodeComplete } = useKidsProgress();
   const [phase, setPhase] = useState<Phase>('story');
   const [chapterIndex, setChapterIndex] = useState(0);
   const [gameScore, setGameScore] = useState<number | null>(null);
@@ -48,6 +56,7 @@ const EpisodeScreen: React.FC = () => {
 
   const pillar = PILLAR_META[story.questPillar];
   const game = PILLAR_GAMES[story.questPillar];
+  const familyActivity = getFamilyActivity(story, profile?.ageBand ?? 'early');
   const chapter = story.chapters[chapterIndex];
   const isLastChapter = chapterIndex >= story.chapters.length - 1;
 
@@ -85,6 +94,57 @@ const EpisodeScreen: React.FC = () => {
     );
   }
 
+  if (phase === 'family' && familyActivity) {
+    return (
+      <div className="mx-auto flex min-h-screen max-w-2xl flex-col justify-center px-4 py-10 sm:px-6">
+        <div className="text-center">
+          <span className="text-6xl" aria-hidden>
+            👨‍👩‍👧
+          </span>
+          <h1 className="mt-3 text-2xl font-extrabold text-emerald-800 dark:text-emerald-300 sm:text-3xl">
+            Family Quest
+          </h1>
+          <p className="mt-1 text-gray-600 dark:text-gray-300">
+            Find a grown-up and do this together — it makes the lesson stick!
+          </p>
+        </div>
+
+        <div className="mt-6 rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-800 sm:p-6">
+          <span className="inline-block rounded-full bg-emerald-100 px-3 py-1 text-sm font-semibold text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-200">
+            {ACTIVITY_TYPE_LABELS[familyActivity.type] ?? '🌟 Do together'}
+          </span>
+          <h2 className="mt-3 text-xl font-bold text-gray-900 dark:text-gray-100">
+            {familyActivity.title}
+          </h2>
+          <p className="mt-2 text-lg text-gray-700 dark:text-gray-200">
+            {familyActivity.description}
+          </p>
+          {familyActivity.materials && familyActivity.materials.length > 0 && (
+            <div className="mt-4">
+              <p className="font-semibold text-gray-900 dark:text-gray-100">You will need:</p>
+              <ul className="mt-1 list-disc space-y-0.5 pl-5 text-gray-600 dark:text-gray-300">
+                {familyActivity.materials.map((material) => (
+                  <li key={material}>{material}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+          <p className="mt-4 rounded-xl bg-amber-100 p-3 font-semibold text-amber-900 dark:bg-amber-900/50 dark:text-amber-100">
+            💡 Remember: {story.keyLesson}
+          </p>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => navigate('/')}
+          className="mt-6 min-h-[56px] w-full rounded-2xl bg-emerald-700 text-lg font-extrabold text-white hover:bg-emerald-800 dark:bg-emerald-500 dark:text-gray-900 dark:hover:bg-emerald-400"
+        >
+          Back to the Forest Map 🗺️
+        </button>
+      </div>
+    );
+  }
+
   if (phase === 'ceremony') {
     return (
       <div className="mx-auto flex min-h-screen max-w-2xl flex-col items-center justify-center px-4 py-10 text-center">
@@ -106,21 +166,32 @@ const EpisodeScreen: React.FC = () => {
           <p className="font-bold">Forest Wisdom</p>
           <p className="mt-1">{story.keyLesson}</p>
         </div>
-        <div className="mt-8 flex w-full flex-col gap-3 sm:flex-row">
-          <button
-            type="button"
-            onClick={() => navigate('/')}
-            className="min-h-[56px] flex-1 rounded-2xl bg-emerald-700 text-lg font-extrabold text-white hover:bg-emerald-800 dark:bg-emerald-500 dark:text-gray-900 dark:hover:bg-emerald-400"
-          >
-            Back to the Forest Map 🗺️
-          </button>
-          <button
-            type="button"
-            onClick={() => navigate('/badges')}
-            className="min-h-[56px] flex-1 rounded-2xl border-2 border-emerald-700 text-lg font-extrabold text-emerald-800 hover:bg-emerald-100 dark:border-emerald-400 dark:text-emerald-300 dark:hover:bg-emerald-900/40"
-          >
-            See My Badges 🏅
-          </button>
+        <div className="mt-8 flex w-full flex-col gap-3">
+          {familyActivity && (
+            <button
+              type="button"
+              onClick={() => setPhase('family')}
+              className="min-h-[56px] w-full rounded-2xl bg-emerald-700 text-lg font-extrabold text-white hover:bg-emerald-800 dark:bg-emerald-500 dark:text-gray-900 dark:hover:bg-emerald-400"
+            >
+              Bonus: Family Quest with a grown-up 👨‍👩‍👧
+            </button>
+          )}
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <button
+              type="button"
+              onClick={() => navigate('/')}
+              className="min-h-[56px] flex-1 rounded-2xl border-2 border-emerald-700 text-lg font-extrabold text-emerald-800 hover:bg-emerald-100 dark:border-emerald-400 dark:text-emerald-300 dark:hover:bg-emerald-900/40"
+            >
+              Back to the Forest Map 🗺️
+            </button>
+            <button
+              type="button"
+              onClick={() => navigate('/badges')}
+              className="min-h-[56px] flex-1 rounded-2xl border-2 border-emerald-700 text-lg font-extrabold text-emerald-800 hover:bg-emerald-100 dark:border-emerald-400 dark:text-emerald-300 dark:hover:bg-emerald-900/40"
+            >
+              See My Badges 🏅
+            </button>
+          </div>
         </div>
       </div>
     );

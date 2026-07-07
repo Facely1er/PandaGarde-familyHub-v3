@@ -1,5 +1,10 @@
 import { lazy, type ComponentType, type LazyExoticComponent } from 'react';
-import { getStoriesBySeason, type QuestPillar, type Story } from '../data/stories';
+import {
+  getStoriesBySeason,
+  type Activity,
+  type QuestPillar,
+  type Story,
+} from '../data/stories';
 
 /** Season 1 — The Privacy Grove — is the kids app v1 campaign. */
 export const KIDS_SEASON = 1 as const;
@@ -75,6 +80,25 @@ export const PILLAR_META: Record<QuestPillar, PillarMeta> = {
     chipClass: 'bg-orange-100 text-orange-800 dark:bg-orange-900/50 dark:text-orange-200',
   },
 };
+
+/**
+ * Family reinforcement pick: research shows family-engaged interventions are
+ * more durable, so each episode ends with one adult-child activity. Prefers
+ * discussion/role-play types matched to the kid's age band, then falls back
+ * to any age-appropriate activity.
+ */
+export function getFamilyActivity(story: Story, ageBand: KidAgeBand): Activity | null {
+  const togetherTypes: Activity['type'][] = ['discussion', 'role-play'];
+  const forAge = story.activities.filter((a) => a.ageGroups.includes(ageBand));
+  const preferred = forAge.find((a) => togetherTypes.includes(a.type));
+  if (preferred) {
+    return preferred;
+  }
+  if (forAge.length > 0) {
+    return forAge[0];
+  }
+  return story.activities.find((a) => togetherTypes.includes(a.type)) ?? story.activities[0] ?? null;
+}
 
 export interface GameComponentProps {
   onBack: () => void;
