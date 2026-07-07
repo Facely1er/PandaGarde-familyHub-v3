@@ -104,7 +104,7 @@ export interface Story {
 // Episodes 1–8. Bible ref: docs/STORYLINE_BIBLE.md §6.1
 // Led primarily by Po and Tao. All five Forest Laws introduced.
 // Path of Wisdom is the primary pillar; others seeded for Season 2.
-// Season 1 (Episodes 1–8) published. Season 2 uses scheduledAt.
+// All 16 episodes published. Season 2 originally used staggered scheduledAt (now released).
 
 const episode1: Story = {
   id: 'story-001',
@@ -2073,8 +2073,8 @@ const episode16: Story = {
   leadCharacter: 'po',
   characters: ['Po', 'Tao', 'Sage the Crane'],
   ageGroups: ['middle', 'older'],
-  scheduledAt: '2026-08-01',
-  publishedAt: '2026-08-01',
+  scheduledAt: '2026-07-01',
+  publishedAt: '2026-07-01',
   coverEmoji: '🦢',
   coverColor: 'bg-sky-100',
   summary: 'A new service arrives in the forest offering wonderful things — but its terms of agreement are long, dense, and filled with things no animal reads. When the service starts using what animals agreed to in ways they didn\'t expect, Sage the Crane helps the forest understand what rights they have — and what they gave away by tapping "Accept."',

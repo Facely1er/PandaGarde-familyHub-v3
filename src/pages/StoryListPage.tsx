@@ -39,7 +39,6 @@ const SEASON_SECTIONS: {
     season: 2,
     title: 'Season 2 — The Kindness Clearing',
     subtitle: 'Episodes 9–16 · deeper topics for ages 8–13',
-    note: 'Cover illustrations are in progress. Story text and activities are complete — cards use emoji placeholders until dedicated poster art ships.',
   },
 ];
 

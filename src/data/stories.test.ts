@@ -17,7 +17,7 @@ import { foundationStoryScenes, storyScenes } from './storyScenes';
 describe('stories registry', () => {
   beforeEach(() => {
     vi.useFakeTimers();
-    vi.setSystemTime(new Date('2025-06-15T12:00:00Z'));
+    vi.setSystemTime(new Date('2026-07-07T12:00:00Z'));
   });
 
   afterEach(() => {
@@ -47,37 +47,34 @@ describe('stories registry', () => {
     ]);
   });
 
-  it('publishes Season 1 only until Season 2 scheduled dates', () => {
+  it('publishes all sixteen episodes across both seasons', () => {
     const published = getPublishedStories();
-    expect(published).toHaveLength(8);
+    expect(published).toHaveLength(16);
     expect(published.every((s) => isStoryPublished(s))).toBe(true);
-    expect(published.every((s) => s.season === 1)).toBe(true);
-    expect(published.some((s) => s.slug === 'billys-invisible-collection')).toBe(true);
-    expect(isStoryPublished(STORIES.find((s) => s.episodeNumber === 9)!)).toBe(false);
+    expect(published.filter((s) => s.season === 1)).toHaveLength(8);
+    expect(published.filter((s) => s.season === 2)).toHaveLength(8);
+    expect(published.some((s) => s.slug === 'the-forest-agreement')).toBe(true);
   });
 
   it('lists continuation episodes without the foundation story', () => {
     const continuation = getContinuationStories();
     expect(continuation.every((s) => !isFoundationStory(s))).toBe(true);
     expect(continuation[0]?.episodeNumber).toBe(2);
-    expect(continuation).toHaveLength(7);
+    expect(continuation).toHaveLength(15);
   });
 
   it('uses the latest published continuation for registry helpers', () => {
     const latest = getLatestStory();
-    expect(latest?.slug).toBe('pos-toughest-question');
-    expect(latest?.episodeNumber).toBe(8);
+    expect(latest?.slug).toBe('the-forest-agreement');
+    expect(latest?.episodeNumber).toBe(16);
   });
 
   it('hides homepage Latest Story spotlight until enabled', () => {
     expect(getHomepageLatestStory()).toBeUndefined();
   });
 
-  it('returns the next scheduled Season 2 story', () => {
-    const next = getNextScheduledStory();
-    expect(next?.slug).toBe('the-echo-chamber');
-    expect(next?.episodeNumber).toBe(9);
-    expect(isStoryPublished(next!)).toBe(false);
+  it('returns no scheduled story when the full catalog is published', () => {
+    expect(getNextScheduledStory()).toBeUndefined();
   });
 
   it('resolves slugs for all registry entries', () => {

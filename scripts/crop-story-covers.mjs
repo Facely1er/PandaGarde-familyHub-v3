@@ -28,6 +28,31 @@ const LEGACY_BAND_INSET_TOP = 0.08;
 const LEGACY_BAND_INSET_BOTTOM = 0.08;
 const LEGACY_BAND_INSET_LEFT = 0.03;
 
+const SEASON2_GRID = {
+  cols: 4,
+  rows: 2,
+  episodeBase: 9,
+  episodes: [
+    'episode-9-cover.webp',
+    'episode-10-cover.webp',
+    'episode-11-cover.webp',
+    'episode-12-cover.webp',
+    'episode-13-cover.webp',
+    'episode-14-cover.webp',
+    'episode-15-cover.webp',
+    'episode-16-cover.webp',
+  ],
+};
+
+function isCleanCropSource(sourceName) {
+  return (
+    sourceName === 'cover-stories.png' ||
+    sourceName === 'cover-stories-banner.png' ||
+    sourceName === 'cover-stories-season-2.png' ||
+    sourceName === 'cover-stories-season-2-alt.png'
+  );
+}
+
 const SEASON1_GRID = {
   cols: 4,
   rows: 2,
@@ -70,10 +95,7 @@ async function writeSeasonGrid(gridConfig, resolveSourcePath, label) {
   }
 
   const sourceName = path.basename(sourcePath);
-  const cropProfile =
-    sourceName === 'cover-stories.png' || sourceName === 'cover-stories-banner.png'
-      ? 'clean'
-      : 'titled';
+  const cropProfile = isCleanCropSource(sourceName) ? 'clean' : 'titled';
 
   const { width, height } = await sharp(sourcePath).metadata();
   const { data } = await sharp(sourcePath).raw().toBuffer({ resolveWithObject: true });
@@ -129,6 +151,23 @@ async function writeSeason1Grid() {
   return writeSeasonGrid(SEASON1_GRID, resolveSeason1SourcePath, 'Season-1 grid');
 }
 
+function resolveSeason2SourcePath() {
+  const candidates = [
+    path.join(sourcesDir, 'cover-stories-season-2.png'),
+    path.join(sourcesDir, 'cover-stories-season-2-alt.png'),
+  ];
+  for (const candidate of candidates) {
+    if (fs.existsSync(candidate)) {
+      return candidate;
+    }
+  }
+  return null;
+}
+
+async function writeSeason2Grid() {
+  return writeSeasonGrid(SEASON2_GRID, resolveSeason2SourcePath, 'Season-2 grid');
+}
+
 async function writeEpisode1HeroFallback() {
   const episode1SourcePath = path.join(coversDir, 'episode-1-hero-source.png');
   if (!fs.existsSync(episode1SourcePath)) {
@@ -179,6 +218,7 @@ async function writeLegacyMasterBands() {
 }
 
 const usedSeason1 = await writeSeason1Grid();
+await writeSeason2Grid();
 if (!usedSeason1) {
   await writeEpisode1HeroFallback();
   await writeLegacyMasterBands();

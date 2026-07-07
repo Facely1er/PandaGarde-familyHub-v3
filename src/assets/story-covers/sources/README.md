@@ -40,6 +40,26 @@ If a panel still shows a sliver of the neighbor, increase `INNER_COL_GUTTER` (e.
 | Row 1, Col 2 | 7 | `when-miki-said-something-unkind` | Art: Shadow Mist — reuse until stream/unkind art exists |
 | Row 1, Col 3 | 8 | `pos-toughest-question` | Art: Campfire + firefly — Lumi fits Ep 8 |
 
+## Required for Season 2 (Episodes 9–16)
+
+| Save attached file as | Contents |
+|---|---|
+| **`sources/cover-stories-season-2.png`** | **Preferred** — 4×2 text-free illustration grid (Ep 9–16). |
+| `sources/cover-stories-season-2-alt.png` | Alternate text-free 4×2 grid (fallback if primary missing). |
+
+### Canonical slug mapping — Season 2 (grid position → `stories.ts`)
+
+| Grid cell | Episode | `stories.ts` slug |
+|---|---|---|
+| Row 0, Col 0 | 9 | `the-echo-chamber` |
+| Row 0, Col 1 | 10 | `vex-and-the-borrowed-face` |
+| Row 0, Col 2 | 11 | `what-mika-forgot-to-forget` |
+| Row 0, Col 3 | 12 | `kais-accidental-machine` |
+| Row 1, Col 0 | 13 | `the-night-the-stream-went-dark` |
+| Row 1, Col 1 | 14 | `lumis-light` |
+| Row 1, Col 2 | 15 | `the-weight-of-a-screenshot` |
+| Row 1, Col 3 | 16 | `the-forest-agreement` |
+
 ## Optional — chapter & brand assets
 
 | Save as | Use |
