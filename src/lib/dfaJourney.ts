@@ -25,6 +25,66 @@ export const getCoreDfaPhases = (phases: DfaJourneyPhase[]): DfaJourneyPhase[] =
 export const getOptionalDfaPhases = (phases: DfaJourneyPhase[]): DfaJourneyPhase[] =>
   phases.filter((phase) => phase.optional);
 
+export const areCoreDfaPhasesComplete = (state: Pick<DfaJourneyState, 'phases'>): boolean =>
+  getCoreDfaPhases(state.phases).every((phase) => phase.completed);
+
+export const getJourneyProgressHeadline = (state: DfaJourneyState): string =>
+  areCoreDfaPhasesComplete(state) ? 'Footprint review complete' : `${state.progressPercent}% complete`;
+
+export interface JourneyCtaOptions {
+  catalogServicesCount?: number;
+  currentKey?: DfaJourneyPhaseKey;
+  ctaHref?: string;
+  ctaLabel?: string;
+}
+
+/** Resolves resume CTA from journey state; pages may override href/label or pass catalog context. */
+export const resolveJourneyCta = (
+  state: DfaJourneyState,
+  options: JourneyCtaOptions = {}
+): { href: string; label: string } => {
+  if (options.ctaLabel) {
+    return { href: options.ctaHref ?? state.resumePath, label: options.ctaLabel };
+  }
+
+  const corePhases = getCoreDfaPhases(state.phases);
+  const allCoreComplete = areCoreDfaPhasesComplete(state);
+  const nextIncomplete = corePhases.find((phase) => !phase.completed);
+
+  if (options.currentKey === 'profile' && options.catalogServicesCount !== undefined) {
+    const ready = options.catalogServicesCount >= 3;
+    if (!ready) {
+      return { href: '/service-catalog', label: 'Keep adding your apps' };
+    }
+    if (allCoreComplete) {
+      return { href: '/digital-footprint', label: 'View footprint scores' };
+    }
+    return { href: '/digital-footprint', label: 'Continue to footprint review' };
+  }
+
+  const href = options.ctaHref ?? state.resumePath;
+
+  if (allCoreComplete) {
+    return { href: '/digital-footprint', label: 'View footprint scores' };
+  }
+
+  if (nextIncomplete?.key === 'profile') {
+    return {
+      href,
+      label: state.progressPercent > 0 ? 'Continue adding apps' : 'List your apps',
+    };
+  }
+
+  if (nextIncomplete?.key === 'dfa') {
+    return { href: nextIncomplete.path, label: 'Continue to footprint review' };
+  }
+
+  return {
+    href,
+    label: state.progressPercent > 0 ? 'Continue where you left off' : 'List your apps',
+  };
+};
+
 export interface DfaJourneyState {
   phases: DfaJourneyPhase[];
   progressPercent: number;

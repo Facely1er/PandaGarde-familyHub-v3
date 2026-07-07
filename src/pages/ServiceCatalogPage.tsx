@@ -86,8 +86,7 @@ const ServiceCatalogPage: React.FC = () => {
           <DfaJourneyStepper
             currentKey="profile"
             compact
-            ctaHref={isReadyForAnalysis ? '/digital-footprint' : '/service-catalog'}
-            ctaLabel={isReadyForAnalysis ? 'Continue to footprint review' : 'Keep adding your apps'}
+            catalogServicesCount={servicesCount}
             subtitle="List the apps your family uses—this list is what footprint review analyzes. Stories, guides, and Family Hub do not require finishing the catalog."
           />
         </div>

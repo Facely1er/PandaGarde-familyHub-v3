@@ -4,9 +4,12 @@ import { CheckCircle2, Circle, ArrowRight, PlayCircle } from 'lucide-react';
 import {
   DFA_JOURNEY_CHANGE_EVENT,
   DEFAULT_DFA_JOURNEY_STATE,
+  areCoreDfaPhasesComplete,
   getCoreDfaPhases,
   getDfaJourneySnapshot,
+  getJourneyProgressHeadline,
   getOptionalDfaPhases,
+  resolveJourneyCta,
 } from '../../lib/dfaJourney';
 
 interface Props {
@@ -18,6 +21,12 @@ interface Props {
   subtitle?: string;
   ctaLabel?: string;
   ctaHref?: string;
+  /** When on the service catalog, drives accurate CTA copy from live service count. */
+  catalogServicesCount?: number;
+  /** Strip inside a parent card: no top border/padding. */
+  embedded?: boolean;
+  /** Hide the inline text CTA in strip variant (e.g. user is already on the target page). */
+  hideStripCta?: boolean;
   className?: string;
 }
 
@@ -39,13 +48,22 @@ const DfaJourneyStepper: React.FC<Props> = ({
   subtitle = 'Step 1: list your apps. Step 2: see your scores. Stories and Family Hub work anytime—you do not need to finish both steps first.',
   ctaLabel,
   ctaHref,
+  catalogServicesCount,
+  embedded = false,
+  hideStripCta = false,
   className = '',
 }) => {
   const journey = useSyncExternalStore(subscribeJourney, getDfaJourneySnapshot, () => DEFAULT_DFA_JOURNEY_STATE);
   const corePhases = getCoreDfaPhases(journey.phases);
   const optionalPhases = getOptionalDfaPhases(journey.phases);
-  const activePath = ctaHref || journey.resumePath;
-  const activeLabel = ctaLabel || (journey.progressPercent > 0 ? 'Continue where you left off' : 'List your apps');
+  const progressHeadline = getJourneyProgressHeadline(journey);
+  const coreComplete = areCoreDfaPhasesComplete(journey);
+  const { href: activePath, label: activeLabel } = resolveJourneyCta(journey, {
+    catalogServicesCount,
+    currentKey,
+    ctaHref,
+    ctaLabel,
+  });
 
   const renderPhasePills = (phases: typeof corePhases) => (
     <ol className="flex flex-wrap gap-2">
@@ -81,33 +99,39 @@ const DfaJourneyStepper: React.FC<Props> = ({
   );
 
   if (variant === 'strip') {
+    const stripRootClass = embedded
+      ? 'pt-0'
+      : 'border-t border-green-200/80 pt-5 dark:border-green-800/50';
+
     return (
       <div
-        className={`border-t border-green-200/80 pt-5 dark:border-green-800/50 ${className}`.trim()}
+        className={`${stripRootClass} ${className}`.trim()}
         aria-label="Footprint review progress"
       >
-        <div className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className={`flex flex-col gap-2 ${hideStripCta ? '' : 'mb-3 sm:flex-row sm:items-center sm:justify-between sm:gap-3'}`}>
           <div className="flex min-w-0 flex-1 items-center gap-3">
-            <span className="shrink-0 text-sm font-semibold text-gray-900 dark:text-white">
-              {journey.progressPercent}% complete
+            <span className="shrink-0 text-xs font-semibold text-gray-900 dark:text-gray-100 sm:text-sm">
+              {progressHeadline}
             </span>
-            <div className="h-2 min-w-[120px] flex-1 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-600">
+            <div className="h-1.5 min-w-[100px] flex-1 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-600">
               <div
                 className="h-full rounded-full bg-green-600 transition-all dark:bg-green-500"
                 style={{ width: `${journey.progressPercent}%` }}
               />
             </div>
           </div>
-          <Link
-            to={activePath}
-            className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-green-700 hover:text-green-800 dark:text-green-400 dark:hover:text-green-300"
-          >
-            {activeLabel} <ArrowRight size={15} aria-hidden />
-          </Link>
+          {!hideStripCta ? (
+            <Link
+              to={activePath}
+              className="inline-flex shrink-0 items-center gap-1.5 text-xs font-semibold text-green-700 hover:text-green-800 dark:text-green-300 dark:hover:text-green-200 sm:text-sm"
+            >
+              {activeLabel} <ArrowRight size={14} aria-hidden />
+            </Link>
+          ) : null}
         </div>
         {renderPhasePills(corePhases)}
         {optionalPhases.length > 0 && (
-          <p className="mt-3 text-xs text-gray-500 dark:text-gray-400">
+          <p className="mt-2 text-xs text-gray-500 dark:text-gray-300">
             Optional:{' '}
             <Link to={optionalPhases[0].path} className="font-medium text-green-700 hover:underline dark:text-green-400">
               {optionalPhases[0].title}
@@ -132,14 +156,25 @@ const DfaJourneyStepper: React.FC<Props> = ({
           <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-600 dark:text-gray-300">{subtitle}</p>
         </div>
 
-        <div className="min-w-[220px] rounded-xl border border-green-200 bg-white px-4 py-3 shadow-sm dark:border-green-800/50 dark:bg-gray-700">
-          <div className="text-sm font-semibold text-gray-900 dark:text-white">{journey.progressPercent}% complete</div>
-          <div className="mt-2 h-2 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-600">
+        <div
+          className={`min-w-[220px] rounded-xl border px-4 py-3 shadow-sm ${
+            coreComplete
+              ? 'border-green-300 bg-green-50 dark:border-green-700/60 dark:bg-green-950/40'
+              : 'border-green-200 bg-white dark:border-green-800/60 dark:bg-gray-900'
+          }`}
+          role="region"
+          aria-label="Footprint review progress"
+        >
+          <div className="flex items-center gap-2 text-sm font-semibold text-gray-900 dark:text-gray-100">
+            {coreComplete ? <CheckCircle2 size={16} className="shrink-0 text-green-600 dark:text-green-400" aria-hidden /> : null}
+            {progressHeadline}
+          </div>
+          <div className="mt-2 h-2 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-600" aria-hidden>
             <div className="h-full rounded-full bg-green-600 transition-all dark:bg-green-500" style={{ width: `${journey.progressPercent}%` }} />
           </div>
           <Link
             to={activePath}
-            className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-green-700 hover:text-green-800 dark:text-green-400 dark:hover:text-green-300"
+            className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-green-700 hover:text-green-800 dark:text-green-300 dark:hover:text-green-200"
           >
             {activeLabel} <ArrowRight size={15} />
           </Link>
@@ -188,16 +223,18 @@ const DfaJourneyStepper: React.FC<Props> = ({
       </div>
 
       {optionalPhases.length > 0 && (
-        <div className="mt-4 rounded-xl border border-dashed border-gray-300 bg-gray-50/80 p-4 dark:border-gray-600 dark:bg-gray-900/40">
-          <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">Optional — available any time, independent of footprint review</p>
+        <div className="mt-4 rounded-xl border border-dashed border-gray-300 bg-gray-50/80 p-4 dark:border-green-800/50 dark:bg-gray-900">
+          <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-green-300">
+            Optional — available any time, independent of footprint review
+          </p>
           {optionalPhases.map((phase) => (
             <Link
               key={phase.key}
               to={phase.path}
-              className="mt-2 flex flex-col gap-1 rounded-lg p-3 transition-colors hover:bg-white/80 dark:hover:bg-gray-800/60"
+              className="mt-2 flex flex-col gap-1 rounded-lg p-3 transition-colors hover:bg-white/80 dark:hover:bg-gray-800"
             >
               <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">{phase.title}</span>
-              <span className="text-sm leading-6 text-gray-600 dark:text-gray-400">{phase.description}</span>
+              <span className="text-sm leading-6 text-gray-600 dark:text-gray-300">{phase.description}</span>
             </Link>
           ))}
         </div>

@@ -1,6 +1,8 @@
 import {
   DFA_JOURNEY_STORAGE_KEY,
+  getJourneyProgressHeadline,
   loadDfaJourneyState,
+  resolveJourneyCta,
   updateDfaJourneyPhase,
 } from './dfaJourney';
 
@@ -103,5 +105,45 @@ describe('dfaJourney', () => {
     expect(state.progressPercent).toBe(100);
     expect(state.resumePath).toBe('/digital-footprint');
     expect(state.phases.find((phase) => phase.key === 'hub')?.optional).toBe(true);
+  });
+
+  it('reports complete headline and view-scores CTA when core phases are done', () => {
+    window.localStorage.setItem(
+      DFA_JOURNEY_STORAGE_KEY,
+      JSON.stringify({
+        phases: [
+          { key: 'profile', visited: true, completed: true },
+          { key: 'dfa', visited: true, completed: true },
+        ],
+      })
+    );
+
+    const state = loadDfaJourneyState();
+
+    expect(getJourneyProgressHeadline(state)).toBe('Footprint review complete');
+    expect(resolveJourneyCta(state)).toEqual({
+      href: '/digital-footprint',
+      label: 'View footprint scores',
+    });
+  });
+
+  it('resolves catalog CTA from service count and completion state', () => {
+    const inProgress = loadDfaJourneyState();
+
+    expect(
+      resolveJourneyCta(inProgress, { currentKey: 'profile', catalogServicesCount: 1 })
+    ).toEqual({ href: '/service-catalog', label: 'Keep adding your apps' });
+
+    expect(
+      resolveJourneyCta(inProgress, { currentKey: 'profile', catalogServicesCount: 4 })
+    ).toEqual({ href: '/digital-footprint', label: 'Continue to footprint review' });
+
+    updateDfaJourneyPhase('profile', { visited: true, completed: true });
+    updateDfaJourneyPhase('dfa', { visited: true, completed: true });
+    const complete = loadDfaJourneyState();
+
+    expect(
+      resolveJourneyCta(complete, { currentKey: 'profile', catalogServicesCount: 5 })
+    ).toEqual({ href: '/digital-footprint', label: 'View footprint scores' });
   });
 });

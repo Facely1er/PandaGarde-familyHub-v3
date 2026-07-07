@@ -18,7 +18,33 @@ describe('DfaJourneyStepper', () => {
 
     expect(screen.getByText('Your footprint review')).toBeInTheDocument();
     expect(screen.getByText('0% complete')).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /start journey/i })).toHaveAttribute('href', '/service-catalog');
+    expect(screen.getByRole('link', { name: /list your apps/i })).toHaveAttribute('href', '/service-catalog');
+  });
+
+  it('shows view-scores CTA on catalog when core journey is complete', () => {
+    window.localStorage.setItem(
+      DFA_JOURNEY_STORAGE_KEY,
+      JSON.stringify({
+        phases: [
+          { key: 'profile', visited: true, completed: true },
+          { key: 'dfa', visited: true, completed: true },
+          { key: 'plan', visited: false, completed: false },
+          { key: 'hub', visited: false, completed: false },
+        ],
+      })
+    );
+
+    render(
+      <MemoryRouter>
+        <DfaJourneyStepper currentKey="profile" catalogServicesCount={5} />
+      </MemoryRouter>
+    );
+
+    expect(screen.getByText('Footprint review complete')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /view footprint scores/i })).toHaveAttribute(
+      'href',
+      '/digital-footprint'
+    );
   });
 
   it('renders persisted progress and custom CTA when local progress exists', () => {
