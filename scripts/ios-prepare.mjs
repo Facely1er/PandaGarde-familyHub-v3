@@ -28,8 +28,11 @@ function run(command, args, cwd = root) {
 console.log('[ios:prepare] Building Family Hub web bundle…');
 run('npm', ['run', 'build:familyhub']);
 
-console.log('[ios:prepare] Syncing Capacitor iOS project…');
-run('npx', ['cap', 'sync', 'ios']);
+console.log('[ios:prepare] Copying web assets to ios/App/App/public…');
+run('npx', ['cap', 'copy', 'ios']);
+
+console.log('[ios:prepare] Installing CocoaPods dependencies…');
+run('pod', ['install'], iosAppDir);
 
 console.log('[ios:prepare] Done. Open Xcode with: npm run cap:ios');
 console.log('[ios:prepare] Archive: Product → Archive → Distribute App → App Store Connect');

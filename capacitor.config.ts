@@ -8,7 +8,8 @@ const config: CapacitorConfig = {
     androidScheme: 'https',
   },
   ios: {
-    contentInset: 'automatic',
+    // Let CSS env(safe-area-inset-*) handle home indicator; 'automatic' fights fixed bottom nav.
+    contentInset: 'never',
   },
 };
 
