@@ -3,10 +3,23 @@
  * This connects game completion events to the FamilyProgressContext
  */
 
+import React, { createContext, useContext } from 'react';
 import { useFamilyProgress } from '../contexts/FamilyProgressContext';
 import { HUB_CURRENT_MEMBER_KEY } from '../familyhub/hubFamilyMembers';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { logger } from '../lib/logger';
+
+/**
+ * When true, games are embedded in MissionShell via ActivityManager.
+ * MissionShell records journey progress with the mission id — games must not
+ * also write a separate game record (avoids duplicate per-child history).
+ */
+const MissionShellGameContext = createContext(false);
+
+export const MissionShellGameProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =>
+  React.createElement(MissionShellGameContext.Provider, { value: true }, children);
+
+export const useIsMissionShellGame = () => useContext(MissionShellGameContext);
 
 /**
  * Hook to record game completion
@@ -15,6 +28,7 @@ import { logger } from '../lib/logger';
 export const useGameCompletion = () => {
   const { recordActivityCompletion } = useFamilyProgress();
   const [currentMemberId] = useLocalStorage<number | null>(HUB_CURRENT_MEMBER_KEY, null);
+  const isMissionShellGame = useIsMissionShellGame();
 
   const recordGameCompletion = (
     gameId: string,
@@ -23,6 +37,10 @@ export const useGameCompletion = () => {
     maxScore: number = 100,
     additionalData?: Record<string, unknown>
   ) => {
+    if (isMissionShellGame) {
+      return;
+    }
+
     if (!currentMemberId) {
       logger.warn('No active family member selected. Progress not recorded.');
       return;

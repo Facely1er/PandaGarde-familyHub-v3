@@ -64,4 +64,27 @@ describe('MissionShell', () => {
     expect(familyProgress['12'].activities[0].activityId).toBe(getCompletionId(conversationOnlyMission));
     expect(familyProgress['12'].activities[0].score).toBe(100);
   });
+
+  it('records household mission progress in ProgressContext', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <Wrapper>
+        <MissionShell
+          activity={conversationOnlyMission}
+          completedIds={new Set()}
+          onExit={() => undefined}
+        />
+      </Wrapper>
+    );
+
+    await user.click(screen.getByRole('button', { name: /we had our family conversation/i }));
+
+    const household = JSON.parse(localStorage.getItem('pandagarde_progress') || '{}') as {
+      completedActivities: string[];
+      activityDetails: Record<string, { score?: number }>;
+    };
+    expect(household.completedActivities).toContain(getCompletionId(conversationOnlyMission));
+    expect(household.activityDetails[getCompletionId(conversationOnlyMission)]?.score).toBe(100);
+  });
 });

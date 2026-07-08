@@ -8,6 +8,7 @@ const CertificateGenerator = lazy(() => import('../../components/CertificateGene
 const ProgressExport = lazy(() => import('../../components/ProgressExport'));
 import { useProgress } from '../../contexts/ProgressContext';
 import { flattenAgeBasedActivities } from '../../data/ageBasedActivities';
+import { getCompletionId } from '../../lib/hubMission';
 import { getHubActivityCatalogCount } from '../../lib/hubProgress';
 import { getForestCharacter, type ForestCharacter } from '../../data/forestCharacters';
 import { StoryCharacterPortrait } from '../../components/stories/StoryCharacterPortrait';
@@ -53,7 +54,7 @@ const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => 
       if (!character) {continue;}
       const entry = byGuide.get(character.id) ?? { character, total: 0, completed: 0 };
       entry.total += 1;
-      const detail = getActivityProgress(activity.activityManagerId ?? activity.id);
+      const detail = getActivityProgress(getCompletionId(activity));
       if (detail?.completed) {entry.completed += 1;}
       byGuide.set(character.id, entry);
     }
@@ -66,8 +67,7 @@ const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => 
   const recentCompletions = useMemo(() => {
     return allActivities
       .map((a) => {
-        const key = a.activityManagerId ?? a.id;
-        const detail = getActivityProgress(key);
+        const detail = getActivityProgress(getCompletionId(a));
         return detail?.completed ? { activity: a, detail } : null;
       })
       .filter((x): x is NonNullable<typeof x> => x !== null)

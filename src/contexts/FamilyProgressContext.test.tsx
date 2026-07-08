@@ -29,4 +29,49 @@ describe('FamilyProgressContext', () => {
     const stored = JSON.parse(localStorage.getItem(HUB_FAMILY_PROGRESS_KEY) || '{}') as Record<string, unknown>;
     expect(stored['5']).toBeUndefined();
   });
+
+  it('updates score when the same journey activity is completed again with a higher score', () => {
+    const { result } = renderHook(() => useFamilyProgress(), { wrapper });
+
+    act(() => {
+      result.current.recordActivityCompletion(3, 'ai-and-your-privacy', 'AI & Your Privacy', 'journey', 60, 100);
+    });
+    act(() => {
+      result.current.recordActivityCompletion(3, 'ai-and-your-privacy', 'AI & Your Privacy', 'journey', 90, 100);
+    });
+
+    const member = result.current.getMemberProgress(3);
+    expect(member?.activities).toHaveLength(1);
+    expect(member?.activities[0]?.score).toBe(90);
+    expect(member?.completedCount).toBe(1);
+  });
+
+  it('keeps separate records for missions that share the same game id', () => {
+    const { result } = renderHook(() => useFamilyProgress(), { wrapper });
+
+    act(() => {
+      result.current.recordActivityCompletion(
+        2,
+        'app-permission-inspector',
+        'App Permission Inspector',
+        'journey',
+        85,
+        100
+      );
+    });
+    act(() => {
+      result.current.recordActivityCompletion(
+        2,
+        'privacy-settings-pro',
+        'Privacy Settings Pro',
+        'journey',
+        92,
+        100
+      );
+    });
+
+    const member = result.current.getMemberProgress(2);
+    expect(member?.activities).toHaveLength(2);
+    expect(member?.completedCount).toBe(2);
+  });
 });

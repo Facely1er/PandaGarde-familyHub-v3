@@ -44,7 +44,7 @@ describe('ActivityManager', () => {
       </Wrapper>
     );
 
-    expect(screen.getByText(/Privacy Knowledge Quiz/i)).toBeInTheDocument();
+    expect(screen.getByText(/Privacy Quiz/i)).toBeInTheDocument();
   });
 
   it('should properly handle completion with score', async () => {

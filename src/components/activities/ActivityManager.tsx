@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, Suspense, lazy } from 'react';
 import { Play, RotateCcw } from 'lucide-react';
 import { useToast } from '../../contexts/ToastContext';
+import { MissionShellGameProvider } from '../../utils/familyProgressIntegration';
 import { type ActivityContext } from './ActivityPurposeBanner';
 
 // Lazy load activity components
@@ -41,17 +42,19 @@ const FamilyHubGame: React.FC<{
 }> = ({ Game, onClose, onComplete }) => {
   const completedScoreRef = useRef<number | null>(null);
   return (
-    <Game
-      onComplete={(score) => {
-        completedScoreRef.current = score ?? 100;
-      }}
-      onBack={() => {
-        if (completedScoreRef.current !== null) {
-          onComplete(completedScoreRef.current);
-        }
-        onClose();
-      }}
-    />
+    <MissionShellGameProvider>
+      <Game
+        onComplete={(score) => {
+          completedScoreRef.current = score ?? 100;
+        }}
+        onBack={() => {
+          if (completedScoreRef.current !== null) {
+            onComplete(completedScoreRef.current);
+          }
+          onClose();
+        }}
+      />
+    </MissionShellGameProvider>
   );
 };
 
