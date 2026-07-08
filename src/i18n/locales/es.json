@@ -107,5 +107,121 @@
     "independentAreasLead": "Elige lo que encaje hoy: una historia con tu hijo, una guía para padres, misiones en Family Hub, o una revisión de huella cuando quieras una instantánea del hogar.",
     "guidesStoriesLead": "Lee con tus hijos, usa guías para padres e imprimibles, o abre Family Hub para practicar — a tu propio ritmo.",
     "quickStartLead": "¿5 minutos? Lee una historia con tu hijo. ¿15? Lista las aplicaciones de tu familia. Todo lo demás puede esperar."
+  },
+  "faq": {
+    "title": "Preguntas frecuentes",
+    "subtitle": "Respuestas rápidas sobre PandaGarde y cómo usarlo con tu familia.",
+    "browseByCategory": "Explorar por categoría",
+    "stillQuestions": "¿Aún tienes preguntas?",
+    "stillQuestionsBody": "¿No encuentras lo que buscas? Estamos aquí para ayudarte.",
+    "contactUs": "Contáctanos",
+    "tryFamilyHub": "Probar Family Hub",
+    "categories": [
+      { "id": "all", "label": "Todas las preguntas" },
+      { "id": "general", "label": "General" },
+      { "id": "getting-started", "label": "Primeros pasos" },
+      { "id": "activities", "label": "Actividades" },
+      { "id": "privacy", "label": "Privacidad y seguridad" },
+      { "id": "educators", "label": "Para educadores" },
+      { "id": "technical", "label": "Técnico" }
+    ],
+    "items": [
+      { "id": "1", "category": "general", "question": "¿Qué es PandaGarde y para quién es?", "answer": "PandaGarde ayuda a las familias con niños y adolescentes de 5 a 17 años a aprender juntos sobre privacidad en línea. Combina las historias de Privacy Panda, guías para padres, una revisión de huella y misiones de Family Hub — usa cualquiera en cualquier orden." },
+      { "id": "2", "category": "general", "question": "¿PandaGarde es gratuito?", "answer": "¡Sí! PandaGarde es completamente gratuito para familias y educadores. Creemos que la educación sobre privacidad debe ser accesible para todos, por eso todos nuestros recursos, actividades y contenidos están disponibles sin costo." },
+      { "id": "3", "category": "general", "question": "¿Qué grupos de edad admite PandaGarde?", "answer": "PandaGarde está diseñado para edades de 5 a 17 años, con misiones de Family Hub adaptadas a tres franjas: niños pequeños (5–8), niños mayores (9–12) y adolescentes (13–17). Historias, guías y misiones tienen en cuenta la edad." },
+      { "id": "4", "category": "getting-started", "question": "¿Cómo empiezo con PandaGarde?", "answer": "Empieza por donde quieras — no se requiere cuenta. La mayoría de las familias abren primero una historia de Privacy Panda o exploran las guías para padres. La revisión de huella y Family Hub están ahí cuando estés listo." },
+      { "id": "5", "category": "educators", "question": "¿Pueden los educadores usar PandaGarde en las escuelas?", "answer": "¡Por supuesto! Ofrecemos recursos y guías curriculares específicos para el aula. Los docentes pueden usar nuestras actividades, historias y guías de discusión para enseñar conceptos de privacidad digital en sus clases." },
+      { "id": "6", "category": "activities", "question": "¿Cómo funcionan las actividades interactivas?", "answer": "Las misiones y juegos interactivos están en Family Hub. Cada misión combina una situación real y una conversación familiar con un juego práctico opcional — colorear, laberintos, clasificación y sopas de letras para los más pequeños, y simulaciones como el Detective de Phishing para adolescentes. Todo funciona en tu dispositivo." },
+      { "id": "7", "category": "privacy", "question": "¿Los datos de mi hijo están seguros en PandaGarde?", "answer": "Sí. No recopilamos información personal de los niños, y el progreso se guarda en tu dispositivo. No compartimos tus datos con nadie más." },
+      { "id": "8", "category": "progress", "question": "¿Puedo seguir el progreso de mi hijo?", "answer": "¡Sí! En Family Hub puedes ver qué misiones ha hecho tu hijo, sus puntuaciones y sus rachas — todo guardado solo en este dispositivo. Es un registro de las actividades de aprendizaje realizadas juntos, no una vigilancia de lo que tu hijo hace en otros lugares en línea." },
+      { "id": "9", "category": "support", "question": "¿Qué hago si mi hijo tiene preguntas sobre privacidad?", "answer": "Ofrecemos guías de discusión e iniciadores de conversación para que los padres respondan preguntas sobre privacidad. Nuestros recursos están diseñados para que estas conversaciones importantes sean más fáciles y atractivas para padres e hijos." },
+      { "id": "10", "category": "resources", "question": "¿Hay recursos disponibles sin conexión?", "answer": "¡Sí! Ofrecemos hojas para colorear, certificados, acuerdos familiares y actividades imprimibles descargables que puedes usar sin conexión. Son perfectos para continuar el aprendizaje lejos de las pantallas." },
+      { "id": "11", "category": "content", "question": "¿Con qué frecuencia se agrega contenido nuevo?", "answer": "Agregamos regularmente nuevas actividades, historias y recursos para mantener la experiencia de aprendizaje fresca y atractiva. También actualizamos nuestro contenido según los comentarios de familias y educadores." },
+      { "id": "12", "category": "technical", "question": "¿Puedo usar PandaGarde en dispositivos móviles?", "answer": "¡Sí! PandaGarde funciona en teléfonos, tabletas y computadoras. Incluso puedes agregarlo a tu pantalla de inicio y usarlo como una app." }
+    ]
+  },
+  "howItWorks": {
+    "title": "Cómo funciona PandaGarde",
+    "subtitle": "Historias, guías y Family Hub funcionan por sí solos. El catálogo alimenta la revisión de huella cuando quieres una instantánea.",
+    "lead": "PandaGarde no es una larga lista de tareas. Las familias leen historias, usan guías, abren Family Hub o hacen una revisión de huella cuando ayuda — solo la revisión necesita aplicaciones listadas en el catálogo.",
+    "yourPath": "Tu camino",
+    "fourAreas": "Cuatro áreas — elige la que encaje",
+    "whatYouGet": "Lo que obtienes",
+    "beforeAfter": "Antes y después",
+    "beforeAfterTitle": "De la preocupación dispersa a un plan que puedes mantener",
+    "beforeAfterLead": "Las familias a menudo ya se preocupan por la privacidad — lo que falta es una secuencia que no se derrumbe tras el primer fin de semana de buenas intenciones.",
+    "journeyEyebrow": "Cómo está organizado el recorrido",
+    "journeyTitle": "Tres niveles, un camino",
+    "journeyLead": "Cada etapa tiene un propósito claro para que no se te pida aprender, planificar y operar en la misma pantalla a la vez.",
+    "whoEyebrow": "Para quién es",
+    "whoTitle": "Una familia, diferentes puntos de entrada",
+    "faqEyebrow": "Preguntas comunes",
+    "faqTitle": "Respuestas rápidas",
+    "approachEyebrow": "Nuestro enfoque",
+    "approachTitle": "Diseñado para el uso familiar real",
+    "readyTitle": "¿Listo para empezar?",
+    "readyBody": "Empieza con la revisión de huella, o abre Family Hub cuando estés listo.",
+    "startReview": "Empezar revisión",
+    "flow": [
+      { "title": "Historias y guías", "description": "Aventuras de Privacy Panda y materiales para padres — disponibles en cualquier momento. No requiere catálogo ni revisión de huella." },
+      { "title": "Huella desde tu catálogo", "description": "Lista aplicaciones en el catálogo de servicios cuando quieras puntuaciones. La revisión de huella lee esa lista — no desbloquea el resto del sitio." },
+      { "title": "Family Hub", "description": "Misiones y progreso en tu dispositivo — opcional, antes o después de una revisión de huella." }
+    ],
+    "benefits": [
+      "Historias, guías, Hub y revisión de huella — entra por la puerta que quieras",
+      "El catálogo lista aplicaciones; la revisión de huella lee esa lista (nada más está bloqueado)",
+      "Progreso guardado en tu dispositivo — no se requiere cuenta de PandaGarde",
+      "Contenido emocional y adaptado a la edad — no una única lista obligatoria"
+    ],
+    "transformationColumns": [
+      { "eyebrow": "Sin un plan compartido", "title": "El trabajo de privacidad se dispersa y reinicia", "points": ["Notas, pestañas y conversaciones puntuales nunca se convierten en una rutina del hogar.", "Es difícil saber qué ajuste o aplicación arreglar primero.", "Los niños escuchan reglas diferentes en momentos diferentes, sin una historia común."] },
+      { "eyebrow": "Con PandaGarde", "title": "Revisen, aprendan y actúen juntos", "points": ["La revisión de huella da una instantánea cuando listas aplicaciones en el catálogo.", "Historias y recursos funcionan por sí solos cuando necesitas un momento tranquilo.", "Family Hub mantiene misiones y progreso en un solo lugar en tu dispositivo."] }
+    ],
+    "journeyLayers": [
+      { "title": "Historias y guías", "description": "Privacy Panda y materiales para padres — disponibles en cualquier momento, sin catálogo.", "points": ["Leer juntos", "Independiente de la huella", "Tono adaptado a la edad"] },
+      { "title": "Huella desde el catálogo", "description": "Lista aplicaciones una vez; revisa la exposición cuando quieras una instantánea del hogar.", "points": ["El catálogo crea la lista", "La revisión usa esa lista", "Momento opcional"] },
+      { "title": "Family Hub", "description": "Misiones y progreso en tu dispositivo — antes, después o sin una revisión.", "points": ["Progreso local", "Misiones guiadas por padres", "No requiere revisión de huella"] }
+    ],
+    "audienceCards": [
+      { "title": "Para padres", "description": "Prioriza lo que importa, lidera conversaciones más tranquilas y sigue el progreso sin agobios." },
+      { "title": "Para niños", "description": "Aprende a través de historias y misiones adaptadas a la edad — no advertencias basadas en el miedo." },
+      { "title": "Para el hogar", "description": "Un ritmo compartido para cuentas, dispositivos y hábitos en línea de toda la familia." }
+    ],
+    "faqCards": [
+      { "question": "¿Tenemos que terminar la revisión de huella antes de las historias o Family Hub?", "answer": "No. Historias, guías y Family Hub son independientes. Solo la página de revisión de huella necesita aplicaciones en tu catálogo de servicios para que las puntuaciones tengan algo que analizar." },
+      { "question": "¿Tenemos que abrir Family Hub el primer día?", "answer": "No. Muchas familias empiezan con una historia o una guía, usan la revisión de huella cuando quieren una instantánea, y abren Family Hub cuando las misiones encajan en la semana." },
+      { "question": "¿PandaGarde supervisa lo que hace mi hijo en línea?", "answer": "No. Tú listas los servicios que usa tu familia; PandaGarde no observa la actividad en vivo en el dispositivo de un niño." },
+      { "question": "¿Para qué sirve el catálogo de servicios?", "answer": "Es la lista de aplicaciones y servicios que usa tu familia. La revisión de huella lee esa lista para mostrar la exposición. El catálogo no bloquea historias, recursos ni Family Hub." }
+    ],
+    "trustPoints": [
+      { "title": "Privado por defecto", "description": "El progreso principal permanece en tu dispositivo. PandaGarde está hecho para familias que quieren orientación sin recopilación innecesaria de datos." },
+      { "title": "Una tarea por paso", "description": "El sitio te ayuda a revisar y aprender. Family Hub te ayuda a practicar y dar seguimiento — para que cada visita tenga un propósito claro." },
+      { "title": "Hecho para hogares", "description": "Padres, niños y educadores tienen cada uno un punto de entrada, sin dividir a la familia en productos separados." }
+    ]
+  },
+  "stories": {
+    "title": "Historias de Privacy Panda",
+    "subtitle": "Lee en cualquier orden — no se requiere catálogo de servicios ni revisión de huella. Empieza con el Bosque de Bambú Digital o explora por edad.",
+    "foundationBadge": "Temporada 1 · Episodio 1 · Empieza aquí",
+    "interactiveScenes": "Escenas interactivas",
+    "chapterReader": "Lector de capítulos",
+    "narration": "Narración",
+    "beginJourney": "Comenzar la aventura",
+    "meetTheCast": "Conoce a los personajes",
+    "meetTheCastSuffix": "— mira quién aparece en cada episodio antes de leer.",
+    "filterByAge": "Filtrar por edad",
+    "emptyAll": "Más episodios están en camino. Empieza con la historia fundacional de arriba.",
+    "emptyFiltered": "Aún no hay episodios de continuación para este grupo de edad. Prueba Todas las edades o empieza con la historia fundacional.",
+    "seasonLabel": "Temporada {{number}}",
+    "season1Title": "Temporada 1 — La Arboleda de la Privacidad",
+    "season1Subtitle": "Episodios 2–8 · lecciones fundamentales de privacidad para edades 5–10",
+    "season2Title": "Temporada 2 — El Claro de la Amabilidad",
+    "season2Subtitle": "Episodios 9–16 · temas más profundos para edades 8–13",
+    "filters": {
+      "all": "Todas las edades",
+      "early": "5–7 años",
+      "middle": "8–10 años",
+      "older": "11–13 años"
+    }
   }
 }

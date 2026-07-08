@@ -54,7 +54,6 @@ describe('MissionShell', () => {
       </Wrapper>
     );
 
-    await user.click(screen.getByRole('button', { name: /let's go/i }));
     await user.click(screen.getByRole('button', { name: /we had our family conversation/i }));
 
     const familyProgress = JSON.parse(localStorage.getItem(HUB_FAMILY_PROGRESS_KEY) || '{}') as Record<

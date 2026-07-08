@@ -18,7 +18,7 @@ import { HubIcon } from '../hubIcons';
 import { getForestCharacter } from '../../data/forestCharacters';
 import { StoryCharacterPortrait } from '../../components/stories/StoryCharacterPortrait';
 
-export type MissionPhase = 'intro' | 'learn' | 'play' | 'complete';
+export type MissionPhase = 'intro' | 'play' | 'complete';
 
 interface MissionShellProps {
   activity: FlattenedAgeBasedActivity;
@@ -29,11 +29,11 @@ interface MissionShellProps {
 
 const MissionStepProgress: React.FC<{ phase: MissionPhase; hasGame: boolean }> = ({ phase, hasGame }) => {
   const steps = hasGame
-    ? (['Intro', 'Talk', 'Practice', 'Done'] as const)
-    : (['Intro', 'Talk', 'Done'] as const);
+    ? (['Read & talk', 'Practice', 'Done'] as const)
+    : (['Read & talk', 'Done'] as const);
   const phaseIndex: Record<MissionPhase, number> = hasGame
-    ? { intro: 0, learn: 1, play: 2, complete: 3 }
-    : { intro: 0, learn: 1, play: 1, complete: 2 };
+    ? { intro: 0, play: 1, complete: 2 }
+    : { intro: 0, complete: 1 };
   const current = phaseIndex[phase];
 
   return (
@@ -135,31 +135,35 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
     return (
       <div className="flex h-full flex-col bg-gray-50 dark:bg-gray-950">
         {header}
-        <div className="flex-1 overflow-auto px-4 py-6 sm:px-6">
-          <div className="mx-auto max-w-lg space-y-6 text-center">
-            <HubBrandLogo size="lg" variant="card" className="mx-auto" alt="PandaGarde" />
-            <div>
-              <div className="inline-flex items-center gap-2 rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-teal-700 dark:bg-teal-900/30 dark:text-teal-200">
+        <div className="flex-1 overflow-auto px-4 py-5 sm:px-6">
+          <div className="mx-auto flex w-full max-w-4xl flex-col gap-5">
+            <div className="text-center">
+              <HubBrandLogo size="md" variant="card" className="mx-auto" alt="PandaGarde" />
+              <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-teal-700 dark:bg-teal-900/30 dark:text-teal-200">
                 <Sparkles size={14} aria-hidden="true" />
-                Step 1 · Read this first
+                Family mission
               </div>
-              <h3 className="mt-4 text-2xl font-bold text-gray-900 dark:text-white">{activity.name}</h3>
+              <h3 className="mt-3 text-2xl font-bold text-gray-900 dark:text-white">{activity.name}</h3>
               <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">{activity.description}</p>
+              <div className="mt-3 flex flex-wrap justify-center gap-2 text-xs font-medium">
+                <span className="rounded-full bg-white px-3 py-1 text-teal-700 ring-1 ring-teal-200 dark:bg-gray-800 dark:text-teal-200 dark:ring-teal-700/50">
+                  Ages {activity.groupAgeRange}
+                </span>
+                <span className="rounded-full bg-white px-3 py-1 text-gray-700 ring-1 ring-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:ring-gray-600">
+                  {activity.duration}
+                </span>
+                <span className="rounded-full bg-white px-3 py-1 text-gray-700 ring-1 ring-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:ring-gray-600">
+                  {activity.familyMode}
+                </span>
+              </div>
             </div>
-            <div className="flex flex-wrap justify-center gap-2 text-xs font-medium">
-              <span className="rounded-full bg-white px-3 py-1 text-teal-700 ring-1 ring-teal-200 dark:bg-gray-800 dark:text-teal-200 dark:ring-teal-700/50">
-                Ages {activity.groupAgeRange}
-              </span>
-              <span className="rounded-full bg-white px-3 py-1 text-gray-700 ring-1 ring-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:ring-gray-600">
-                {activity.duration}
-              </span>
-              <span className="rounded-full bg-white px-3 py-1 text-gray-700 ring-1 ring-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:ring-gray-600">
-                {activity.familyMode}
-              </span>
-            </div>
-            <p className="text-sm leading-relaxed text-gray-700 dark:text-gray-200">{activity.learningObjective}</p>
+
+            <p className="rounded-2xl border border-gray-200 bg-white p-4 text-sm leading-relaxed text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200">
+              {activity.learningObjective}
+            </p>
+
             {guide && (
-              <div className="flex items-center gap-3 rounded-2xl border border-green-200 bg-green-50 p-4 text-left dark:border-green-700/40 dark:bg-green-900/20">
+              <div className="flex items-center gap-3 rounded-2xl border border-green-200 bg-green-50 p-4 dark:border-green-700/40 dark:bg-green-900/20">
                 <StoryCharacterPortrait character={guide} size="md" />
                 <div className="min-w-0">
                   <p className="text-[11px] font-semibold uppercase tracking-wide text-green-700 dark:text-green-300">
@@ -172,36 +176,6 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
                 </div>
               </div>
             )}
-            <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-left dark:border-amber-700/40 dark:bg-amber-900/20">
-              <p className="text-[11px] font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-300">
-                Real-life situation
-              </p>
-              <p className="mt-2 text-sm leading-relaxed text-amber-950 dark:text-amber-100">{activity.realLifeScenario}</p>
-            </div>
-            <MissionStepProgress phase={phase} hasGame={hasGame} />
-            <button
-              type="button"
-              onClick={() => setPhase('learn')}
-              className="inline-flex min-h-[48px] w-full max-w-xs items-center justify-center gap-2 rounded-xl bg-teal-600 px-6 py-3 text-base font-semibold text-white hover:bg-teal-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
-            >
-              Let&apos;s go
-              <Play size={18} aria-hidden="true" />
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (phase === 'learn') {
-    return (
-      <div className="flex h-full flex-col bg-gray-50 dark:bg-gray-900">
-        {header}
-        <div className="flex-1 overflow-auto px-4 py-5 sm:px-6">
-          <div className="mx-auto flex w-full max-w-4xl flex-col gap-5">
-            <p className="text-xs font-semibold uppercase tracking-wide text-teal-700 dark:text-teal-300">
-              Step 2 · Talk together
-            </p>
 
             <section className="rounded-2xl border border-amber-200 bg-amber-50 p-5 dark:border-amber-700/40 dark:bg-amber-900/20">
               <p className="text-xs font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-300">
@@ -264,12 +238,12 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
 
             <MissionStepProgress phase={phase} hasGame={hasGame} />
 
-            <div className="flex flex-col gap-2 pb-4 sm:flex-row">
+            <div className="pb-4">
               {hasGame ? (
                 <button
                   type="button"
                   onClick={() => setPhase('play')}
-                  className="inline-flex min-h-[48px] flex-1 items-center justify-center gap-2 rounded-xl bg-teal-600 px-4 py-3 text-sm font-semibold text-white hover:bg-teal-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
+                  className="inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-teal-600 px-4 py-3 text-base font-semibold text-white hover:bg-teal-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
                 >
                   <Play size={18} aria-hidden="true" />
                   Start interactive activity
@@ -278,18 +252,11 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
                 <button
                   type="button"
                   onClick={() => finishMission(100)}
-                  className="inline-flex min-h-[48px] flex-1 items-center justify-center rounded-xl bg-teal-600 px-4 py-3 text-sm font-semibold text-white hover:bg-teal-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
+                  className="inline-flex min-h-[48px] w-full items-center justify-center rounded-xl bg-teal-600 px-4 py-3 text-base font-semibold text-white hover:bg-teal-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
                 >
                   We had our family conversation
                 </button>
               )}
-              <button
-                type="button"
-                onClick={() => setPhase('intro')}
-                className="inline-flex min-h-[48px] items-center justify-center rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200"
-              >
-                Back
-              </button>
             </div>
           </div>
         </div>
@@ -305,7 +272,7 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
           <Suspense fallback={<HubScreenFallback />}>
             <ActivityManager
               activityId={activity.activityManagerId}
-              onClose={() => setPhase('learn')}
+              onClose={() => setPhase('intro')}
               onComplete={(_id, score) => finishMission(score)}
             />
           </Suspense>
