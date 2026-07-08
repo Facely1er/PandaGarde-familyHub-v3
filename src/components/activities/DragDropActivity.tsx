@@ -1,9 +1,11 @@
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { Shuffle, CheckCircle2, RotateCcw, X, Shield, Users, Sparkles } from 'lucide-react';
+import ActivityPurposeBanner, { type ActivityContext } from './ActivityPurposeBanner';
 
 interface DragDropActivityProps {
   onComplete: (score?: number) => void;
   onClose: () => void;
+  context?: ActivityContext;
 }
 
 type Category = 'safe' | 'private';
@@ -40,7 +42,7 @@ const shuffle = <T,>(arr: T[]): T[] => {
   return copy;
 };
 
-const DragDropActivity: React.FC<DragDropActivityProps> = ({ onComplete, onClose }) => {
+const DragDropActivity: React.FC<DragDropActivityProps> = ({ onComplete, onClose, context }) => {
   const [order, setOrder] = useState<string[]>(() => shuffle(ITEMS.map((i) => i.id)));
   const [placement, setPlacement] = useState<Record<string, Slot>>(
     () => Object.fromEntries(ITEMS.map((i) => [i.id, 'tray'])) as Record<string, Slot>
@@ -241,6 +243,8 @@ const DragDropActivity: React.FC<DragDropActivityProps> = ({ onComplete, onClose
 
         {/* Scrollable body */}
         <div className="flex-1 overflow-y-auto px-5 py-4">
+          {context && <ActivityPurposeBanner context={context} />}
+
           <p className="mb-3 text-center text-sm text-gray-500 dark:text-gray-400">
             Tap a card, then tap a basket — or drag it across.
           </p>

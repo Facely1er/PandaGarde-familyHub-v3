@@ -1,17 +1,22 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { RotateCcw, Download, CheckCircle } from 'lucide-react';
+import { RotateCcw, CheckCircle2, Palette, Sparkles } from 'lucide-react';
+import ActivityGameShell, { shellBtn, shellBtnPrimary } from './ActivityGameShell';
+import ActivityPurposeBanner, { type ActivityContext } from './ActivityPurposeBanner';
 
 interface ColoringActivityProps {
   onComplete: (score?: number) => void;
   onClose: () => void;
+  context?: ActivityContext;
 }
 
-const ColoringActivity: React.FC<ColoringActivityProps> = ({ onComplete, onClose }) => {
+const ColoringActivity: React.FC<ColoringActivityProps> = ({ onComplete, onClose, context }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [selectedColor, setSelectedColor] = useState('#FF6B6B');
   const [brushSize, setBrushSize] = useState(10);
   const [isCompleted, setIsCompleted] = useState(false);
+  const [score, setScore] = useState(0);
+  const [feedback, setFeedback] = useState<string | null>(null);
 
   const colors = [
     '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7',

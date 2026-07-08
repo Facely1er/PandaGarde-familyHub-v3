@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, Suspense, lazy } from 'react';
 import { Play, RotateCcw } from 'lucide-react';
 import { useToast } from '../../contexts/ToastContext';
+import { type ActivityContext } from './ActivityPurposeBanner';
 
 // Lazy load activity components
 const ColoringActivity = lazy(() => import('./ColoringActivity'));
@@ -78,28 +79,26 @@ const ActivityManager: React.FC<ActivityManagerProps> = ({ activityId, onClose, 
       tips: "Take your time and be creative! The more you color, the better you'll understand privacy protection. The shield represents how we protect our personal information online."
     },
     sorting: {
-      title: "Information Sorting Game",
-      description: "Learn what information is safe to share and what should be kept private. This activity helps you understand the difference between public and private information.",
+      title: "Safe or Private?",
+      description: "Sort everyday facts into two baskets — Safe to share and Keep private. Together you'll learn which details are friendly to share and which ones protect your family.",
       instructions: [
-        "Drag each item to the correct category",
-        "Green zone: Safe to Share (things you can tell friends)",
-        "Red zone: Keep Private (personal information to protect)",
-        "Click 'Check Answer' when you're done sorting",
-        "Try to get 100% correct!"
+        "Tap a card, then tap a basket — or drag it across",
+        "Green basket: Safe to share (okay to tell friends)",
+        "Red basket: Keep private (protect this information)",
+        "Sort every card, then press 'Check answer'",
       ],
-      tips: "Think about what information strangers could use to find you or pretend to be you. Personal details like your full name, address, and phone number should always be kept private."
+      tips: "Think about what a stranger could use to find you or pretend to be you. Your full name, address, and phone number stay private."
     },
     maze: {
-      title: "Safe Online Journey Maze",
-      description: "Help Privacy Panda navigate safely through the digital world. Learn to identify online dangers and make safe choices.",
+      title: "Safe Online Journey",
+      description: "Guide Privacy Panda along the open paths to reach safety. It's a calm way to practise steering around things that don't feel right online.",
       instructions: [
-        "Use arrow keys or touch to move the panda",
-        "Avoid the red danger zones (like suspicious websites)",
-        "Collect green privacy shields (safe practices)",
-        "Reach the finish line safely",
-        "Try to collect all shields for bonus points!"
+        "Use the arrow keys, WASD, or the on-screen buttons to move",
+        "Guide Privacy Panda 🐼 along the open paths",
+        "Dark blocks are walls — you can't pass through them",
+        "Reach the goal flag 🏁 to finish",
       ],
-      tips: "Move carefully and plan your path. Real online safety requires thinking ahead! The red zones represent dangerous websites or situations you should avoid."
+      tips: "Plan your path and take it slow — staying safe online means thinking a step ahead."
     },
     wordsearch: {
       title: "Privacy Word Search",
@@ -114,16 +113,15 @@ const ActivityManager: React.FC<ActivityManagerProps> = ({ activityId, onClose, 
       tips: "These words are important for understanding digital privacy. Words like 'password', 'secure', and 'privacy' help you stay safe online!"
     },
     connectdots: {
-      title: "Privacy Shield Connect-the-Dots",
-      description: "Connect the dots to reveal Privacy Panda's protection shield. Learn about the importance of protecting your personal information.",
+      title: "Privacy Shield",
+      description: "Connect the dots in order to build Privacy Panda's shield. The finished shield stands for the protection a strong password gives your accounts.",
       instructions: [
-        "Click on the dots in numerical order",
-        "Start with dot 1 and work your way up",
-        "Complete the shield outline",
-        "Color the shield when you're done",
-        "The shield represents your privacy protection!"
+        "Tap the glowing yellow dot to start",
+        "Connect the dots in order: 1, 2, 3 …",
+        "Wrong taps flash red — just try the next number",
+        "Finish the outline to reveal the shield 🛡️",
       ],
-      tips: "Take your time and follow the numbers carefully. The shield represents how we protect our personal information from strangers online!"
+      tips: "The shield stands for protection — like a strong password that keeps your accounts locked to everyone but your family."
     },
     matching: {
       title: "Privacy Symbol Matching",
@@ -223,6 +221,27 @@ const ActivityManager: React.FC<ActivityManagerProps> = ({ activityId, onClose, 
     },
   };
 
+  const activityContext: Record<string, ActivityContext> = {
+    sorting: {
+      missionTitle: 'Pack Your Digital Backpack',
+      guideEmoji: '🐼',
+      why: 'Some facts are friendly to share, and some are private — like your address or phone number. Sorting helps you tell them apart.',
+      familyTalk: 'Name one thing that is safe to share and one thing to keep private on a favourite app.',
+    },
+    maze: {
+      missionTitle: 'Traffic Light: Safe or Not?',
+      guideEmoji: '🐼',
+      why: 'Going online is like finding a safe path — you steer around anything that feels wrong and keep heading toward safety.',
+      familyTalk: 'Talk about one “red light” moment online and what to do when something feels off.',
+    },
+    connectdots: {
+      missionTitle: 'Secret Keeper Club',
+      guideEmoji: '🛡️',
+      why: 'Each dot builds a shield. A strong password works the same way — it locks your accounts so only your family gets in.',
+      familyTalk: 'Agree on why a password stays secret, even from good friends.',
+    },
+  };
+
   const currentActivity = activityInstructions[activityId as keyof typeof activityInstructions];
 
   useEffect(() => {
@@ -264,13 +283,13 @@ const ActivityManager: React.FC<ActivityManagerProps> = ({ activityId, onClose, 
       case 'sorting':
         return (
           <Suspense fallback={<div className="loading-spinner">Loading sorting activity...</div>}>
-            <DragDropActivity {...activityProps} />
+            <DragDropActivity {...activityProps} context={activityContext.sorting} />
           </Suspense>
         );
       case 'maze':
         return (
           <Suspense fallback={<div className="loading-spinner">Loading maze activity...</div>}>
-            <MazeActivity {...activityProps} />
+            <MazeActivity {...activityProps} context={activityContext.maze} />
           </Suspense>
         );
       case 'wordsearch':
@@ -282,7 +301,7 @@ const ActivityManager: React.FC<ActivityManagerProps> = ({ activityId, onClose, 
       case 'connectdots':
         return (
           <Suspense fallback={<div className="loading-spinner">Loading connect dots activity...</div>}>
-            <ConnectDotsActivity {...activityProps} />
+            <ConnectDotsActivity {...activityProps} context={activityContext.connectdots} />
           </Suspense>
         );
       case 'matching':

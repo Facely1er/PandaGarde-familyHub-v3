@@ -10,10 +10,12 @@ import {
   Footprints,
   MapPin,
 } from 'lucide-react';
+import ActivityPurposeBanner, { type ActivityContext } from './ActivityPurposeBanner';
 
 interface MazeActivityProps {
   onComplete: (score?: number) => void;
   onClose: () => void;
+  context?: ActivityContext;
 }
 
 interface Position {
@@ -24,7 +26,7 @@ interface Position {
 const MAZE_SIZE = { width: 15, height: 15 };
 const CELL = 30;
 
-const MazeActivity: React.FC<MazeActivityProps> = ({ onComplete, onClose }) => {
+const MazeActivity: React.FC<MazeActivityProps> = ({ onComplete, onClose, context }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const previouslyFocused = useRef<HTMLElement | null>(null);
@@ -267,6 +269,8 @@ const MazeActivity: React.FC<MazeActivityProps> = ({ onComplete, onClose }) => {
 
         {/* Body */}
         <div className="flex-1 overflow-y-auto px-5 py-4">
+          {context && <ActivityPurposeBanner context={context} />}
+
           {/* Legend */}
           <div className="mb-4 flex flex-wrap justify-center gap-x-4 gap-y-2" role="list" aria-label="Maze legend">
             {legend.map((l) => (

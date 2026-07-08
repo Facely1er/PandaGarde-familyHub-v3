@@ -1,424 +1,321 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
-import { RotateCcw, CheckCircle, Download } from 'lucide-react';
+import { RotateCcw, X, ShieldCheck } from 'lucide-react';
+import ActivityPurposeBanner, { type ActivityContext } from './ActivityPurposeBanner';
 
 interface ConnectDotsActivityProps {
   onComplete: (score?: number) => void;
   onClose: () => void;
+  context?: ActivityContext;
 }
 
 interface Dot {
   id: number;
   x: number;
   y: number;
-  connected: boolean;
-  order?: number;
 }
 
-const ConnectDotsActivity: React.FC<ConnectDotsActivityProps> = ({ onComplete, onClose }) => {
+const CANVAS = { width: 440, height: 440 };
+
+// Shield outline, ordered clockwise from the top point.
+const DOTS: Dot[] = [
+  { id: 1, x: 220, y: 60 },
+  { id: 2, x: 150, y: 90 },
+  { id: 3, x: 100, y: 150 },
+  { id: 4, x: 90, y: 230 },
+  { id: 5, x: 120, y: 300 },
+  { id: 6, x: 175, y: 355 },
+  { id: 7, x: 220, y: 385 },
+  { id: 8, x: 265, y: 355 },
+  { id: 9, x: 320, y: 300 },
+  { id: 10, x: 350, y: 230 },
+  { id: 11, x: 340, y: 150 },
+  { id: 12, x: 290, y: 90 },
+];
+
+const ConnectDotsActivity: React.FC<ConnectDotsActivityProps> = ({ onComplete, onClose, context }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [dots, setDots] = useState<Dot[]>([]);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const previouslyFocused = useRef<HTMLElement | null>(null);
   const [connectedDots, setConnectedDots] = useState<number[]>([]);
   const [isCompleted, setIsCompleted] = useState(false);
-  const [currentDot, setCurrentDot] = useState<number | null>(null);
+  const [wrongDot, setWrongDot] = useState<number | null>(null);
   const [moves, setMoves] = useState(0);
-  const [startTime, setStartTime] = useState<Date | null>(null);
+  const [score, setScore] = useState(0);
+  const [startTime, setStartTime] = useState<Date>(() => new Date());
 
-  const generateDots = () => {
-    // Create a shield shape with dots
-    const newDots: Dot[] = [
-      { id: 1, x: 300, y: 100, connected: false },
-      { id: 2, x: 250, y: 150, connected: false },
-      { id: 3, x: 200, y: 200, connected: false },
-      { id: 4, x: 200, y: 250, connected: false },
-      { id: 5, x: 200, y: 300, connected: false },
-      { id: 6, x: 200, y: 350, connected: false },
-      { id: 7, x: 250, y: 400, connected: false },
-      { id: 8, x: 300, y: 420, connected: false },
-      { id: 9, x: 350, y: 400, connected: false },
-      { id: 10, x: 400, y: 350, connected: false },
-      { id: 11, x: 400, y: 300, connected: false },
-      { id: 12, x: 400, y: 250, connected: false },
-      { id: 13, x: 400, y: 200, connected: false },
-      { id: 14, x: 350, y: 150, connected: false },
-      { id: 15, x: 300, y: 100, connected: false }, // Close the shape
-    ];
+  const total = DOTS.length;
+  const nextExpected = connectedDots.length + 1;
 
-    setDots(newDots);
+  const reset = useCallback(() => {
     setConnectedDots([]);
     setIsCompleted(false);
-    setCurrentDot(null);
+    setWrongDot(null);
     setMoves(0);
+    setScore(0);
     setStartTime(new Date());
-  };
+  }, []);
 
   const drawCanvas = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) {return;}
-
     const ctx = canvas.getContext('2d');
     if (!ctx) {return;}
 
-    canvas.width = 600;
-    canvas.height = 500;
+    const isDark =
+      document.documentElement.classList.contains('dark') ||
+      document.documentElement.getAttribute('data-theme') === 'dark';
+    const c = isDark
+      ? { bg: '#0b1220', line: '#34d399', dot: '#64748b', label: '#e5e7eb', fill: 'rgba(52,211,153,0.18)' }
+      : { bg: '#ffffff', line: '#16a34a', dot: '#94a3b8', label: '#ffffff', fill: 'rgba(22,163,74,0.14)' };
 
-    // Clear canvas
+    canvas.width = CANVAS.width;
+    canvas.height = CANVAS.height;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Draw background
-    ctx.fillStyle = '#f8f9fa';
+    ctx.fillStyle = c.bg;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Draw title
-    ctx.fillStyle = '#2C3E50';
-    ctx.font = 'bold 24px Arial';
-    ctx.textAlign = 'center';
-    ctx.fillText('Privacy Shield Connect the Dots', 300, 40);
+    // Fill the shield once complete.
+    if (isCompleted) {
+      ctx.beginPath();
+      DOTS.forEach((d, i) => (i === 0 ? ctx.moveTo(d.x, d.y) : ctx.lineTo(d.x, d.y)));
+      ctx.closePath();
+      ctx.fillStyle = c.fill;
+      ctx.fill();
+    }
 
-    // Draw instructions
-    ctx.font = '16px Arial';
-    ctx.fillStyle = '#666';
-    ctx.fillText('Connect the dots in order to reveal Privacy Panda\'s protection shield!', 300, 70);
-
-    // Draw connected lines
-    ctx.strokeStyle = '#4CAF50';
-    ctx.lineWidth = 3;
+    // Connecting lines.
+    ctx.strokeStyle = c.line;
+    ctx.lineWidth = 4;
+    ctx.lineJoin = 'round';
+    ctx.lineCap = 'round';
     ctx.beginPath();
-
-    for (let i = 0; i < connectedDots.length - 1; i++) {
-      const dot1 = dots.find(d => d.id === connectedDots[i]);
-      const dot2 = dots.find(d => d.id === connectedDots[i + 1]);
-
-      if (dot1 && dot2) {
-        if (i === 0) {
-          ctx.moveTo(dot1.x, dot1.y);
-        }
-        ctx.lineTo(dot2.x, dot2.y);
-      }
+    connectedDots.forEach((id, i) => {
+      const dot = DOTS.find((d) => d.id === id);
+      if (!dot) {return;}
+      if (i === 0) {ctx.moveTo(dot.x, dot.y);}
+      else {ctx.lineTo(dot.x, dot.y);}
+    });
+    if (isCompleted) {
+      const first = DOTS[0];
+      ctx.lineTo(first.x, first.y);
     }
     ctx.stroke();
 
-    // Draw dots
-    dots.forEach((dot) => {
+    // Dots.
+    DOTS.forEach((dot) => {
       const isConnected = connectedDots.includes(dot.id);
-      const isCurrent = currentDot === dot.id;
+      const isNext = !isCompleted && dot.id === nextExpected;
+      const isWrong = wrongDot === dot.id;
 
-      // Dot circle
+      if (isNext) {
+        ctx.beginPath();
+        ctx.arc(dot.x, dot.y, 16, 0, 2 * Math.PI);
+        ctx.fillStyle = 'rgba(250,204,21,0.35)';
+        ctx.fill();
+      }
+
       ctx.beginPath();
-      ctx.arc(dot.x, dot.y, isConnected ? 12 : 8, 0, 2 * Math.PI);
-      ctx.fillStyle = isConnected ? '#4CAF50' : (isCurrent ? '#FFD700' : '#2C3E50');
+      ctx.arc(dot.x, dot.y, isConnected ? 13 : 11, 0, 2 * Math.PI);
+      ctx.fillStyle = isConnected
+        ? c.line
+        : isWrong
+          ? '#ef4444'
+          : isNext
+            ? '#f59e0b'
+            : c.dot;
       ctx.fill();
-
-      // Dot border
-      ctx.strokeStyle = isConnected ? '#2E7D32' : '#2C3E50';
       ctx.lineWidth = 2;
+      ctx.strokeStyle = isDark ? '#0b1220' : '#ffffff';
       ctx.stroke();
 
-      // Dot number
-      ctx.fillStyle = 'white';
+      ctx.fillStyle = c.label;
       ctx.font = 'bold 12px Arial';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillText(dot.id.toString(), dot.x, dot.y);
+      ctx.fillText(dot.id.toString(), dot.x, dot.y + 0.5);
     });
 
-    // Draw completion message
+    // Shield emoji center when complete.
     if (isCompleted) {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      ctx.fillStyle = '#4CAF50';
-      ctx.font = 'bold 32px Arial';
+      ctx.font = '64px serif';
       ctx.textAlign = 'center';
-      ctx.fillText('Shield Complete!', 300, 200);
-
-      ctx.fillStyle = 'white';
-      ctx.font = '18px Arial';
-      ctx.fillText('Privacy Panda\'s protection shield is now active!', 300, 240);
+      ctx.textBaseline = 'middle';
+      ctx.fillText('🛡️', CANVAS.width / 2, 235);
     }
-  }, [dots, connectedDots, currentDot, isCompleted]);
-
-  useEffect(() => {
-    generateDots();
-  }, []);
+  }, [connectedDots, isCompleted, wrongDot, nextExpected]);
 
   useEffect(() => {
     drawCanvas();
   }, [drawCanvas]);
 
+  useEffect(() => {
+    previouslyFocused.current = document.activeElement as HTMLElement;
+    panelRef.current?.focus();
+    return () => previouslyFocused.current?.focus();
+  }, []);
+
+  useEffect(() => {
+    const onEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {onClose();}
+    };
+    document.addEventListener('keydown', onEsc);
+    return () => document.removeEventListener('keydown', onEsc);
+  }, [onClose]);
+
   const handleDotClick = (dotId: number) => {
     if (isCompleted) {return;}
+    setMoves((prev) => prev + 1);
 
-    const dot = dots.find(d => d.id === dotId);
-    if (!dot) {return;}
-
-    setMoves(prev => prev + 1);
-
-    // Check if this is the next dot in sequence
-    const expectedNext = connectedDots.length === 0 ? 1 : connectedDots[connectedDots.length - 1] + 1;
-
-    if (dotId === expectedNext || (connectedDots.length === 0 && dotId === 1)) {
-      setConnectedDots(prev => [...prev, dotId]);
-      setCurrentDot(dotId);
-
-      // Check if all dots are connected
-      if (connectedDots.length + 1 === dots.length - 1) { // -1 because last dot is duplicate
-        setTimeout(() => {
-          setIsCompleted(true);
-          // Calculate score based on efficiency and accuracy
-          const timeSpent = startTime ? Math.round((Date.now() - startTime.getTime()) / 1000) : 0;
-          const totalDots = dots.length - 1; // Exclude duplicate
-          const accuracy = Math.round((totalDots / moves) * 100);
-          const timeBonus = Math.max(0, Math.round((60 - timeSpent) / 60 * 30)); // Bonus for speed
-          const finalScore = Math.min(100, Math.max(0, accuracy + timeBonus));
-          onComplete(finalScore);
-        }, 500);
+    if (dotId === nextExpected) {
+      const updated = [...connectedDots, dotId];
+      setConnectedDots(updated);
+      if (updated.length === total) {
+        const totalMoves = moves + 1;
+        const timeSpent = Math.round((Date.now() - startTime.getTime()) / 1000);
+        const accuracy = Math.round((total / totalMoves) * 100);
+        const timeBonus = Math.max(0, Math.round(((60 - timeSpent) / 60) * 30));
+        const finalScore = Math.min(100, Math.max(0, accuracy + timeBonus));
+        setScore(finalScore);
+        setIsCompleted(true);
+        onComplete(finalScore);
       }
     } else {
-      // Wrong dot - show feedback
-      setCurrentDot(dotId);
-      setTimeout(() => setCurrentDot(null), 200);
+      setWrongDot(dotId);
+      setTimeout(() => setWrongDot(null), 250);
     }
   };
 
-  const resetActivity = () => {
-    generateDots();
-  };
-
-  const downloadImage = () => {
+  const handleCanvasClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    if (isCompleted) {return;}
     const canvas = canvasRef.current;
-    if (!canvas) {return;}
+    const rect = canvas?.getBoundingClientRect();
+    if (!canvas || !rect) {return;}
 
-    const link = document.createElement('a');
-    link.download = 'privacy-shield-connect-dots.png';
-    link.href = canvas.toDataURL();
-    link.click();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    const x = (e.clientX - rect.left) * scaleX;
+    const y = (e.clientY - rect.top) * scaleY;
+
+    const hit = DOTS.find((dot) => Math.hypot(x - dot.x, y - dot.y) <= 20);
+    if (hit) {handleDotClick(hit.id);}
   };
 
   return (
-    <div className="connect-dots-activity">
-      <div className="activity-header">
-        <h2 className="activity-title">Privacy Shield Connect the Dots</h2>
-        <button onClick={onClose} className="close-button">×</button>
-      </div>
+    <div
+      className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/70 p-3 sm:p-6"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="dots-game-title"
+    >
+      <div
+        ref={panelRef}
+        tabIndex={-1}
+        className="relative flex max-h-[95vh] w-full max-w-xl flex-col overflow-hidden rounded-3xl bg-white shadow-2xl outline-none dark:bg-gray-900"
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between gap-4 bg-gradient-to-r from-green-600 to-emerald-500 px-5 py-4">
+          <div className="min-w-0">
+            <h2 id="dots-game-title" className="flex items-center gap-2 text-lg font-bold text-white sm:text-xl">
+              <ShieldCheck className="h-5 w-5 shrink-0" aria-hidden="true" />
+              Privacy Shield
+            </h2>
+            <p className="mt-0.5 text-sm text-green-50">
+              Connect the dots in order to build the shield.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close game"
+            className="shrink-0 rounded-full bg-white/20 p-2 text-white transition-colors hover:bg-white/30"
+          >
+            <X className="h-5 w-5" aria-hidden="true" />
+          </button>
+        </div>
 
-      <div className="activity-content">
-        <div className="instructions">
-          <p>Connect the dots in numerical order to reveal Privacy Panda's protection shield!</p>
-          <div className="progress">
-            Connected: {connectedDots.length} / {dots.length - 1} dots
+        {/* Progress */}
+        <div className="border-b border-gray-200 bg-gray-50 px-5 py-3 dark:border-gray-800 dark:bg-gray-800/50">
+          <div className="mb-1 flex items-center justify-between text-xs font-medium text-gray-600 dark:text-gray-300">
+            <span>
+              {connectedDots.length} of {total} connected
+            </span>
+            <span>Next: dot {isCompleted ? '—' : nextExpected}</span>
+          </div>
+          <div className="h-2 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
+            <div
+              className="h-full rounded-full bg-gradient-to-r from-green-500 to-emerald-400 transition-all duration-300"
+              style={{ width: `${(connectedDots.length / total) * 100}%` }}
+            />
           </div>
         </div>
 
-        <div className="canvas-container">
-          <canvas
-            ref={canvasRef}
-            className="connect-dots-canvas"
-            onClick={(e) => {
-              if (isCompleted) {return;}
+        {/* Canvas */}
+        <div className="flex-1 overflow-y-auto px-5 py-4">
+          {context && <ActivityPurposeBanner context={context} />}
 
-              const rect = canvasRef.current?.getBoundingClientRect();
-              if (!rect) {return;}
-
-              const x = e.clientX - rect.left;
-              const y = e.clientY - rect.top;
-
-              // Find clicked dot
-              const clickedDot = dots.find(dot => {
-                const distance = Math.sqrt((x - dot.x) ** 2 + (y - dot.y) ** 2);
-                return distance <= 15;
-              });
-
-              if (clickedDot) {
-                handleDotClick(clickedDot.id);
-              }
-            }}
-          />
-
-          {isCompleted && (
-            <div className="completion-overlay">
-              <div className="completion-message">
-                <CheckCircle size={48} className="success-icon" />
-                <h3>Shield Complete!</h3>
-                <p>You've successfully connected all the dots!</p>
-                <p>Privacy Panda's protection shield is now active and ready to guard your digital privacy!</p>
-              </div>
-            </div>
-          )}
+          <div className="flex justify-center rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 p-3 dark:from-gray-800 dark:to-gray-950">
+            <canvas
+              ref={canvasRef}
+              onClick={handleCanvasClick}
+              className="h-auto w-full max-w-[400px] cursor-pointer rounded-xl shadow-md"
+              role="img"
+              aria-label={`Connect the dots to form a privacy shield. ${connectedDots.length} of ${total} dots connected.${
+                isCompleted ? ' Shield complete!' : ` Tap dot number ${nextExpected} next.`
+              }`}
+            />
+          </div>
+          <p className="mt-3 text-center text-xs text-gray-500 dark:text-gray-400">
+            Tap the glowing yellow dot to continue the sequence.
+          </p>
         </div>
 
-        <div className="controls">
-          <button onClick={resetActivity} className="control-button">
-            <RotateCcw size={16} />
+        {/* Controls */}
+        <div className="flex items-center justify-center border-t border-gray-200 bg-gray-50 px-5 py-4 dark:border-gray-800 dark:bg-gray-800/50">
+          <button
+            type="button"
+            onClick={reset}
+            className="inline-flex items-center gap-2 rounded-xl border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
+          >
+            <RotateCcw className="h-4 w-4" aria-hidden="true" />
             Reset
           </button>
-          <button onClick={downloadImage} className="control-button">
-            <Download size={16} />
-            Download
-          </button>
         </div>
+
+        {/* Completion overlay */}
+        {isCompleted && (
+          <div className="absolute inset-0 z-10 flex items-center justify-center bg-gray-900/70 p-6">
+            <div className="w-full max-w-sm rounded-2xl bg-white p-8 text-center shadow-2xl dark:bg-gray-900">
+              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/50">
+                <ShieldCheck className="h-8 w-8 text-green-600 dark:text-green-400" aria-hidden="true" />
+              </div>
+              <h3 className="mb-2 text-2xl font-bold text-gray-900 dark:text-gray-100">Shield complete!</h3>
+              <p className="mb-1 text-gray-600 dark:text-gray-300">
+                You connected every dot and scored {score}%.
+              </p>
+              <p className="mb-6 text-sm text-gray-500 dark:text-gray-400">
+                Privacy Panda&rsquo;s protection shield is now active.
+              </p>
+              <div className="flex justify-center gap-3">
+                <button
+                  type="button"
+                  onClick={reset}
+                  className="inline-flex items-center gap-2 rounded-xl border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
+                >
+                  <RotateCcw className="h-4 w-4" aria-hidden="true" />
+                  Play again
+                </button>
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="rounded-xl bg-green-600 px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-400"
+                >
+                  Done
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
-
-      <style jsx>{`
-        .connect-dots-activity {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: rgba(0, 0, 0, 0.8);
-          display: flex;
-          flex-direction: column;
-          z-index: 1000;
-        }
-
-        .activity-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 20px;
-          background: white;
-          border-bottom: 1px solid #e0e0e0;
-        }
-
-        .activity-title {
-          margin: 0;
-          color: #2C3E50;
-          font-size: 24px;
-        }
-
-        .close-button {
-          background: none;
-          border: none;
-          font-size: 24px;
-          cursor: pointer;
-          color: #666;
-        }
-
-        .activity-content {
-          flex: 1;
-          background: white;
-          display: flex;
-          flex-direction: column;
-        }
-
-        .instructions {
-          padding: 20px;
-          background: #f8f9fa;
-          border-bottom: 1px solid #e0e0e0;
-        }
-
-        .instructions p {
-          margin: 0 0 15px 0;
-          color: #2C3E50;
-          font-size: 16px;
-        }
-
-        .progress {
-          font-size: 16px;
-          font-weight: bold;
-          color: #4CAF50;
-        }
-
-        .canvas-container {
-          flex: 1;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          padding: 20px;
-          background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-          position: relative;
-        }
-
-        .connect-dots-canvas {
-          border: 2px solid #ddd;
-          border-radius: 8px;
-          background: white;
-          cursor: crosshair;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        .completion-overlay {
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: rgba(0, 0, 0, 0.8);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          z-index: 10;
-        }
-
-        .completion-message {
-          background: white;
-          padding: 40px;
-          border-radius: 12px;
-          text-align: center;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-          max-width: 400px;
-        }
-
-        .success-icon {
-          color: #4CAF50;
-          margin-bottom: 20px;
-        }
-
-        .completion-message h3 {
-          margin: 0 0 15px 0;
-          color: #2C3E50;
-          font-size: 24px;
-        }
-
-        .completion-message p {
-          margin: 0 0 10px 0;
-          color: #666;
-          font-size: 16px;
-        }
-
-        .controls {
-          padding: 20px;
-          background: #f8f9fa;
-          border-top: 1px solid #e0e0e0;
-          display: flex;
-          gap: 15px;
-          justify-content: center;
-        }
-
-        .control-button {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          padding: 12px 24px;
-          border: 1px solid #ddd;
-          background: white;
-          border-radius: 8px;
-          cursor: pointer;
-          transition: all 0.2s;
-          font-size: 14px;
-          font-weight: 500;
-        }
-
-        .control-button:hover {
-          background: #f0f0f0;
-        }
-
-        @media (max-width: 768px) {
-          .canvas-container {
-            padding: 10px;
-          }
-
-          .connect-dots-canvas {
-            max-width: 100%;
-            height: auto;
-          }
-
-          .controls {
-            flex-direction: column;
-            align-items: center;
-          }
-        }
-      `}</style>
     </div>
   );
 };
