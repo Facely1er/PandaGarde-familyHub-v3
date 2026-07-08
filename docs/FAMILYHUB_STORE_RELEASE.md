@@ -193,6 +193,8 @@ npm run mobile:prepare
 
 ## Related docs
 
+- [FAMILYHUB_STORE_SUBMIT_CHECKLIST.md](./FAMILYHUB_STORE_SUBMIT_CHECKLIST.md) — **single submit checklist** (Play + Apple, copy-paste)
+- [FAMILYHUB_STORE_PRIVACY_FORMS.md](./FAMILYHUB_STORE_PRIVACY_FORMS.md) — Data safety & App Privacy answers
 - [FAMILYHUB_RELEASE_SYNC.md](./FAMILYHUB_RELEASE_SYNC.md) — web + Android + iOS on one commit
 - [FAMILYHUB_MOBILE.md](./FAMILYHUB_MOBILE.md) — dev workflow
 - [PRE_DEPLOYMENT_UI_UX_QA_AUDIT.md](./sdlc/PRE_DEPLOYMENT_UI_UX_QA_AUDIT.md) — store UX gates
