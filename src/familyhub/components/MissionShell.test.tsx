@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ProgressProvider } from '../../contexts/ProgressContext';
 import { FamilyProgressProvider } from '../../contexts/FamilyProgressContext';
+import { FamilyProvider } from '../../contexts/FamilyContext';
 import { HUB_CURRENT_MEMBER_KEY, HUB_FAMILY_PROGRESS_KEY } from '../hubFamilyMembers';
 import type { FlattenedAgeBasedActivity } from '../../data/ageBasedActivities';
 import { getCompletionId } from '../../lib/hubMission';
@@ -30,9 +31,11 @@ const conversationOnlyMission: FlattenedAgeBasedActivity = {
 };
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
-  <ProgressProvider>
-    <FamilyProgressProvider>{children}</FamilyProgressProvider>
-  </ProgressProvider>
+  <FamilyProvider>
+    <ProgressProvider>
+      <FamilyProgressProvider>{children}</FamilyProgressProvider>
+    </ProgressProvider>
+  </FamilyProvider>
 );
 
 describe('MissionShell', () => {

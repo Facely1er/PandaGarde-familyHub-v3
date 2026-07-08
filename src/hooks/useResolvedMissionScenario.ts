@@ -1,16 +1,16 @@
 import { useCallback, useMemo, useState } from 'react';
 import { useFamily } from '../contexts/FamilyContext';
-import { footprintAnalyzer } from './footprintAnalyzer';
-import type { FootprintAnalysis } from './footprintAnalyzer';
+import { footprintAnalyzer } from '../lib/footprintAnalyzer';
+import type { FootprintAnalysis } from '../lib/footprintAnalyzer';
 import type { FlattenedAgeBasedActivity } from '../data/ageBasedActivities';
 import {
   getScenarioOverride,
   loadScenarioOverrides,
   saveScenarioOverride,
   type ParentScenarioInput,
-} from './missionScenarioConfig';
-import { isPremiumActive } from './premiumEntitlement';
-import { resolveMissionScenario, type ResolvedMissionScenario } from './personalizeActivity';
+} from '../lib/missionScenarioConfig';
+import { isPremiumActive } from '../lib/premiumEntitlement';
+import { resolveMissionScenario, type ResolvedMissionScenario } from '../lib/personalizeActivity';
 
 const buildFootprintAnalysis = (
   familyMembers: ReturnType<typeof useFamily>['familyMembers'],

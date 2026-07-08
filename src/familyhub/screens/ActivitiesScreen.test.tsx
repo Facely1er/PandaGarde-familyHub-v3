@@ -88,4 +88,22 @@ describe('ActivitiesScreen', () => {
       screen.getByRole('button', { name: /Start interactive activity/i })
     ).toBeInTheDocument();
   });
+
+  it('shows personalized scenario when premium and parent sets app name', async () => {
+    localStorage.setItem(
+      'pandagarde_premium_entitlement',
+      JSON.stringify({ active: true, source: 'pilot-code' })
+    );
+    localStorage.setItem(
+      'pandagarde_mission_scenario_overrides',
+      JSON.stringify({
+        'digital-footprint-trail': { appName: 'Minecraft', childName: 'Sam', usageFrequency: 'every weekend' },
+      })
+    );
+
+    renderScreen();
+
+    expect(screen.getAllByText(/Sam has played Minecraft every weekend/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Personalized/i).length).toBeGreaterThan(0);
+  });
 });

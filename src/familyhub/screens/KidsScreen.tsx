@@ -1,4 +1,5 @@
-import React, { lazy, Suspense, useEffect, useRef, useState } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
+import { lazy } from '../../lib/lazyWithRetry';
 import { Link } from 'react-router-dom';
 import { Plus, Eye, Trash2, Pencil, Lock, type LucideIcon } from 'lucide-react';
 import { useHubFamilyMembers } from '../../hooks/useHubFamilyMembers';

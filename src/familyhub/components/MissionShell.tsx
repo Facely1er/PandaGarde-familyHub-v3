@@ -1,4 +1,5 @@
-import React, { lazy, Suspense, useState } from 'react';
+import React, { Suspense, useState } from 'react';
+import { lazy } from '../../lib/lazyWithRetry';
 import { ArrowLeft, BookOpen, HelpCircle, MessageCircle, MessageCircleHeart, Play, Sparkles, Target } from 'lucide-react';
 import { HubScreenFallback } from '../HubScreenFallback';
 

@@ -43,9 +43,17 @@ const ActivityCard: React.FC<{
 }> = ({ activity, isCompleted, score, onStart, scenario }) => {
   const guide = activity.guideCharacter ? getForestCharacter(activity.guideCharacter) : undefined;
   return (
-  <button
+  <div
+    role="button"
+    tabIndex={0}
     onClick={onStart}
-    className={`group flex min-h-[300px] flex-col rounded-2xl border p-5 text-left shadow-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 ${
+    onKeyDown={(event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        onStart();
+      }
+    }}
+    className={`group flex min-h-[300px] cursor-pointer flex-col rounded-2xl border p-5 text-left shadow-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 ${
       activity.featured
         ? 'border-teal-200 bg-teal-50/50 hover:border-teal-400 hover:shadow-md dark:border-teal-700/40 dark:bg-teal-900/10 dark:hover:border-teal-500'
         : 'border-gray-200 bg-white hover:border-teal-300 hover:shadow-md dark:border-gray-400 dark:bg-gray-100 dark:hover:border-teal-500'
@@ -145,7 +153,7 @@ const ActivityCard: React.FC<{
         {activity.activityManagerId ? 'Start mission' : 'Start conversation'}
       </div>
     </div>
-  </button>
+  </div>
   );
 };
 

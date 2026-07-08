@@ -1,4 +1,5 @@
-import React, { lazy, Suspense, useMemo, useState } from 'react';
+import React, { Suspense, useMemo, useState } from 'react';
+import { lazy } from '../../lib/lazyWithRetry';
 import { Link } from 'react-router-dom';
 import { Award, BookOpen, CheckCircle2, Clock, Download, Fingerprint, Rocket, Sprout, Star, Timer, TrendingUp, Trophy, X, type LucideIcon } from 'lucide-react';
 import { HubIconBadge } from '../hubIcons';
