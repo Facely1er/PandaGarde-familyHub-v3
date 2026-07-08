@@ -18,6 +18,8 @@ import { HubIcon } from '../hubIcons';
 import { getForestCharacter } from '../../data/forestCharacters';
 import { StoryCharacterPortrait } from '../../components/stories/StoryCharacterPortrait';
 import RelatedStoryLink from './RelatedStoryLink';
+import MissionScenarioCustomize from './MissionScenarioCustomize';
+import { useFootprintAnalysis, useResolvedMissionScenario } from '../../hooks/useResolvedMissionScenario';
 
 export type MissionPhase = 'intro' | 'play' | 'complete';
 
@@ -80,6 +82,9 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
   const { markActivityCompleted } = useProgress();
   const { recordActivityCompletion } = useFamilyProgress();
   const { currentMemberId } = useActiveMember();
+  const footprintAnalysis = useFootprintAnalysis();
+  const { scenario, isPremium, parentInput, saveParentInput, clearParentInput } =
+    useResolvedMissionScenario(activity);
 
   const nextMission = pickNextMission(activity, completedIds);
   const guide = activity.guideCharacter ? getForestCharacter(activity.guideCharacter) : undefined;
@@ -184,8 +189,23 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
               <p className="text-xs font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-300">
                 Real-life scenario
               </p>
-              <p className="mt-2 text-sm leading-relaxed text-amber-950 dark:text-amber-100">{activity.realLifeScenario}</p>
+              <p className="mt-2 text-sm leading-relaxed text-amber-950 dark:text-amber-100">{scenario.text}</p>
+              {scenario.isPersonalized && (
+                <p className="mt-2 text-xs font-medium text-amber-800 dark:text-amber-200">
+                  Personalized for your family
+                </p>
+              )}
             </section>
+
+            <MissionScenarioCustomize
+              activity={activity}
+              scenario={scenario}
+              isPremium={isPremium}
+              parentInput={parentInput}
+              onSave={saveParentInput}
+              onClear={clearParentInput}
+              hasFootprintData={footprintAnalysis !== null}
+            />
 
             <section className="rounded-2xl border border-indigo-200 bg-indigo-50 p-5 dark:border-indigo-700/40 dark:bg-indigo-900/20">
               <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-indigo-700 dark:text-indigo-300">

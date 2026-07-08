@@ -18,6 +18,8 @@ import { HubIconBadge } from '../hubIcons';
 import { getForestCharacter } from '../../data/forestCharacters';
 import { StoryCharacterPortrait } from '../../components/stories/StoryCharacterPortrait';
 import RelatedStoryLink from '../components/RelatedStoryLink';
+import { useResolvedMissionScenario } from '../../hooks/useResolvedMissionScenario';
+import type { ResolvedMissionScenario } from '../../lib/personalizeActivity';
 
 const FOCUS_ORDER: ActivityFocus[] = [
   'Safe sharing',
@@ -37,7 +39,8 @@ const ActivityCard: React.FC<{
   isCompleted: boolean;
   score?: number;
   onStart: () => void;
-}> = ({ activity, isCompleted, score, onStart }) => {
+  scenario: ResolvedMissionScenario;
+}> = ({ activity, isCompleted, score, onStart, scenario }) => {
   const guide = activity.guideCharacter ? getForestCharacter(activity.guideCharacter) : undefined;
   return (
   <button
@@ -106,8 +109,13 @@ const ActivityCard: React.FC<{
         Real-life situation
       </p>
       <p className="mt-2 text-sm leading-relaxed text-amber-950 dark:text-amber-100">
-        {activity.realLifeScenario}
+        {scenario.text}
       </p>
+      {scenario.isPersonalized && (
+        <p className="mt-2 text-[11px] font-semibold uppercase tracking-wide text-violet-700 dark:text-violet-300">
+          Personalized
+        </p>
+      )}
     </div>
 
     <div className="mt-4 rounded-2xl border border-gray-200 bg-gray-50 p-4 dark:border-gray-400 dark:bg-gray-800">
@@ -139,6 +147,16 @@ const ActivityCard: React.FC<{
     </div>
   </button>
   );
+};
+
+const ActivityCardWithScenario: React.FC<{
+  activity: FlattenedAgeBasedActivity;
+  isCompleted: boolean;
+  score?: number;
+  onStart: () => void;
+}> = (props) => {
+  const { scenario } = useResolvedMissionScenario(props.activity);
+  return <ActivityCard {...props} scenario={scenario} />;
 };
 
 const GroupHeading: React.FC<{ group: AgeGroup }> = ({ group }) => {
@@ -380,7 +398,7 @@ const ActivitiesScreen: React.FC = () => {
 
                     const progressDetails = getActivityProgress(getCompletionId(fullActivity));
                     return (
-                      <ActivityCard
+                      <ActivityCardWithScenario
                         key={activity.id}
                         activity={fullActivity}
                         isCompleted={Boolean(progressDetails?.completed)}
@@ -399,7 +417,7 @@ const ActivitiesScreen: React.FC = () => {
             {filteredActivities.map((activity) => {
               const progressDetails = getActivityProgress(getCompletionId(activity));
               return (
-                <ActivityCard
+                <ActivityCardWithScenario
                   key={activity.id}
                   activity={activity}
                   isCompleted={Boolean(progressDetails?.completed)}

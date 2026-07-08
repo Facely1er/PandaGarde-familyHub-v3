@@ -4,16 +4,19 @@ import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { ProgressProvider } from '../../contexts/ProgressContext';
 import { FamilyProgressProvider } from '../../contexts/FamilyProgressContext';
+import { FamilyProvider } from '../../contexts/FamilyContext';
 import ActivitiesScreen from './ActivitiesScreen';
 
 const renderScreen = () =>
   render(
     <MemoryRouter>
-      <ProgressProvider>
-        <FamilyProgressProvider>
-          <ActivitiesScreen />
-        </FamilyProgressProvider>
-      </ProgressProvider>
+      <FamilyProvider>
+        <ProgressProvider>
+          <FamilyProgressProvider>
+            <ActivitiesScreen />
+          </FamilyProgressProvider>
+        </ProgressProvider>
+      </FamilyProvider>
     </MemoryRouter>
   );
 

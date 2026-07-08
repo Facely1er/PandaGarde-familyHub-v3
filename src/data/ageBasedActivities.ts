@@ -1,4 +1,5 @@
 import type { CharacterRole } from './stories';
+import type { PersonalizationCategory } from '../lib/missionPersonalizationTypes';
 
 export type ActivityDifficulty = 'Beginner' | 'Intermediate' | 'Advanced';
 
@@ -34,6 +35,14 @@ export interface AgeBasedActivity {
   sitePath?: string;
   /** Forest character (docs/STORYLINE_BIBLE.md §3) who guides this mission */
   guideCharacter?: CharacterRole;
+  /**
+   * Premium: template for personalized real-life scenarios.
+   * Tokens: {app}, {topApp}, {topGame}, {childName}, {frequency}, {childPrefix}
+   * Free users always see `realLifeScenario`.
+   */
+  scenarioTemplate?: string;
+  /** Premium: DFA catalog category used to pick {app} when parent has not set one. */
+  personalizationCategory?: PersonalizationCategory;
 }
 
 export interface AgeGroup {
@@ -263,6 +272,9 @@ export const ageBasedActivities: AgeGroup[] = [
         featured: true,
         activityManagerId: 'digital-footprint',
         guideCharacter: 'billy',
+        scenarioTemplate:
+          '{childPrefix}played {app} {frequency}. What does {app} probably know about you by now?',
+        personalizationCategory: 'gaming',
       },
       {
         id: 'phishing-patrol',
@@ -292,6 +304,9 @@ export const ageBasedActivities: AgeGroup[] = [
         featured: true,
         activityManagerId: 'phishing-detective',
         guideCharacter: 'mika',
+        scenarioTemplate:
+          '"You won a huge prize in {app}! Click here and log in to claim your reward." Is this message real or a trick?',
+        personalizationCategory: 'gaming',
       },
       {
         id: 'app-permission-inspector',
@@ -320,6 +335,9 @@ export const ageBasedActivities: AgeGroup[] = [
         familyMode: 'Talk together',
         activityManagerId: 'privacy-settings',
         guideCharacter: 'billy',
+        scenarioTemplate:
+          'A new app called {app} asks for access to your location, contacts, and microphone. Should you allow all of these?',
+        personalizationCategory: 'gaming',
       },
       {
         id: 'privacy-settings-pro',
@@ -348,6 +366,9 @@ export const ageBasedActivities: AgeGroup[] = [
         familyMode: 'Talk together',
         activityManagerId: 'privacy-settings',
         guideCharacter: 'mika',
+        scenarioTemplate:
+          'Your parent just allowed you to create a {app} account. Walk through making it private and safe, step by step.',
+        personalizationCategory: 'social-media',
       },
       {
         id: 'screenshot-safety',
@@ -470,6 +491,9 @@ export const ageBasedActivities: AgeGroup[] = [
         featured: true,
         activityManagerId: 'social-media-audit',
         guideCharacter: 'fiona',
+        scenarioTemplate:
+          'You are applying for a summer job. The manager searches your name and finds posts from {app}. What do they see?',
+        personalizationCategory: 'social-media',
       },
       {
         id: 'data-broker-discovery',
@@ -554,6 +578,9 @@ export const ageBasedActivities: AgeGroup[] = [
         familyMode: 'Teen-led reflection',
         activityManagerId: 'social-simulator',
         guideCharacter: 'lumi',
+        scenarioTemplate:
+          'You post a photo on {app} from a party. Three days later it causes drama at school. Walk through removing it, managing reposts, and the aftermath.',
+        personalizationCategory: 'social-media',
       },
       {
         id: 'ai-and-your-privacy',
@@ -582,6 +609,9 @@ export const ageBasedActivities: AgeGroup[] = [
         familyMode: 'Talk together',
         activityManagerId: 'privacy-decoder',
         guideCharacter: 'mika',
+        scenarioTemplate:
+          'You paste a friend\'s personal essay into {app} to get feedback. What are the privacy implications for your friend — and for you?',
+        personalizationCategory: 'ai',
       },
     ],
   },
