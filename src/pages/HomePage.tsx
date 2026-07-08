@@ -83,12 +83,6 @@ const HomePage: React.FC = () => {
               <ShieldCheck size={14} aria-hidden />
               Family privacy guidance
             </span>
-            <img
-              src="/LogoPandagarde.png"
-              alt=""
-              aria-hidden
-              className="homepage-hero__logo h-16 w-16 shrink-0 object-contain sm:h-[4.5rem] sm:w-[4.5rem]"
-            />
             <h1 id="homepage-hero-title" className="homepage-hero__title">
               Your kids are online.
               <span> Here’s a calm way to talk about it.</span>

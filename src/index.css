@@ -8290,10 +8290,24 @@ header.header .nav-actions button.header-icon-btn:not(.header-search-bar) {
 ========================= */
 .homepage-hero {
   position: relative;
-  padding-block: clamp(1.25rem, 3vw, 2rem) 0;
+  overflow: hidden;
+  padding-block: clamp(1.5rem, 4vw, 2.25rem) 0;
   background:
     radial-gradient(ellipse 60% 50% at top left, rgba(16, 185, 129, 0.12), transparent 55%),
     linear-gradient(180deg, rgba(240, 253, 244, 0.95) 0%, var(--white) 100%);
+}
+
+.homepage-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url('/LogoPandagarde.png');
+  background-repeat: no-repeat;
+  background-position: center 40%;
+  background-size: clamp(18rem, 52vw, 30rem);
+  opacity: 0.06;
 }
 
 [data-theme='dark'] .homepage-hero {
@@ -8302,7 +8316,13 @@ header.header .nav-actions button.header-icon-btn:not(.header-search-bar) {
     linear-gradient(180deg, rgba(7, 23, 18, 0.98) 0%, var(--white) 100%);
 }
 
+[data-theme='dark'] .homepage-hero::before {
+  opacity: 0.045;
+}
+
 .homepage-hero__inner {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8315,16 +8335,7 @@ header.header .nav-actions button.header-icon-btn:not(.header-search-bar) {
 
 .homepage-hero__eyebrow {
   gap: 0.5rem;
-}
-
-.homepage-hero__logo {
-  display: block;
-  width: 4rem;
-  height: 4rem;
-  max-width: 4rem;
-  max-height: 4rem;
-  object-fit: contain;
-  flex-shrink: 0;
+  padding: 0.55rem 1.1rem;
 }
 
 .homepage-hero__tagline {
@@ -8402,13 +8413,6 @@ header.header .nav-actions button.header-icon-btn:not(.header-search-bar) {
 
   .homepage-hero__actions .button {
     width: auto;
-  }
-
-  .homepage-hero__logo {
-    width: 4.5rem;
-    height: 4.5rem;
-    max-width: 4.5rem;
-    max-height: 4.5rem;
   }
 }
 
@@ -9372,7 +9376,8 @@ header.header .nav-actions button.header-icon-btn:not(.header-search-bar) {
 }
 
 .site-page > .site-section.homepage-hero {
-  padding-block: 0;
+  /* Space below fixed header so eyebrow pill clears chrome contour */
+  padding-block: clamp(1.5rem, 4vw, 2.25rem) 0;
   margin: 0;
 }
 
