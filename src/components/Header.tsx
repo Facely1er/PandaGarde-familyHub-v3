@@ -9,8 +9,11 @@ import {
   Search,
   LayoutDashboard,
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useTheme } from '../contexts/ThemeContext';
+import { useLocalizedNavItems } from '../hooks/useLocalizedNav';
 import SearchModal from './SearchModal';
+import LanguageSwitcher from './LanguageSwitcher';
 import {
   mobileQuickNavItems as staticMobileQuickNavItems,
   mobileSecondaryNavItems,
@@ -18,6 +21,7 @@ import {
 } from '../data/siteNavigation';
 
 function Header() {
+  const { t } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
@@ -61,22 +65,28 @@ function Header() {
     };
   }, [isMobileMenuOpen]);
 
-  const navItems = primaryNavItems;
+  const navItems = useLocalizedNavItems(primaryNavItems);
 
-  const mobileQuickNavItems = staticMobileQuickNavItems;
+  const mobileQuickNavItems = useLocalizedNavItems(staticMobileQuickNavItems);
 
-  const mobilePrimaryItems = primaryNavItems.map((item) => ({
+  const mobilePrimaryItems = useLocalizedNavItems(primaryNavItems).map((item) => ({
     ...item,
     id: `mobile-${item.id}`,
   }));
 
-  const mobileSecondaryItems = mobileSecondaryNavItems;
+  const mobileSecondaryItems = useLocalizedNavItems(mobileSecondaryNavItems);
 
   const mobileCtaItems = useMemo(
     () => [
-      { id: 'mobile-nav-family-hub', icon: LayoutDashboard, label: 'Open Family Hub', href: '/family-hub', variant: 'primary' as const },
+      {
+        id: 'mobile-nav-family-hub',
+        icon: LayoutDashboard,
+        label: t('common.openFamilyHub'),
+        href: '/family-hub',
+        variant: 'primary' as const,
+      },
     ],
-    []
+    [t]
   );
 
   const isActive = (href: string) => {
@@ -139,8 +149,8 @@ function Header() {
   return (
     <>
       <div className="skip-links">
-        <a href="#main-content" className="skip-link">Skip to main content</a>
-        <a href="#navigation" className="skip-link">Skip to navigation</a>
+        <a href="#main-content" className="skip-link">{t('common.skipToContent')}</a>
+        <a href="#navigation" className="skip-link">{t('common.skipToNav')}</a>
       </div>
 
       <header className={`header ${isScrolled ? 'scrolled' : ''}`} role="banner">
@@ -149,7 +159,7 @@ function Header() {
             <Link
               to="/"
               className="logo"
-              aria-label="PandaGarde — Calmer privacy. Go to homepage"
+              aria-label={t('common.logoAriaLabel')}
             >
               <div className="logo-icon">
                 <img src="/LogoPandagarde.png" alt="" aria-hidden />
@@ -158,7 +168,7 @@ function Header() {
                 <span className="logo-wordmark">
                   Panda<span className="highlight">Garde</span>
                 </span>
-                <span className="logo-tagline">Calmer privacy</span>
+                <span className="logo-tagline">{t('common.brandTagline')}</span>
               </span>
             </Link>
 
@@ -215,11 +225,11 @@ function Header() {
                   type="button"
                   className="header-search-bar"
                   onClick={() => setIsSearchModalOpen(true)}
-                  aria-label="Open search"
-                  title="Search (Ctrl/Cmd + K)"
+                  aria-label={t('common.openSearch')}
+                  title={t('common.searchShortcut')}
                 >
                   <Search size={17} className="header-search-bar__icon" aria-hidden="true" />
-                  <span className="header-search-bar__label">Search</span>
+                  <span className="header-search-bar__label">{t('common.search')}</span>
                   <kbd className="header-search-bar__kbd" aria-hidden="true">
                     ⌘K
                   </kbd>
@@ -228,18 +238,20 @@ function Header() {
                 <Link
                   to="/family-hub"
                   className={`nav-actions__icon header-icon-btn hidden lg:inline-flex ${isActive('/family-hub') ? 'mobile-quick-nav__link--active' : ''}`}
-                  aria-label="Open Family Hub"
-                  title="Family Hub"
+                  aria-label={t('common.openFamilyHub')}
+                  title={t('common.familyHub')}
                   aria-current={isActive('/family-hub') ? 'page' : undefined}
                 >
                   <LayoutDashboard size={17} aria-hidden="true" />
                 </Link>
 
+                <LanguageSwitcher compact className="hidden sm:inline-flex" />
+
                 <button
                   type="button"
                   className="nav-actions__icon theme-toggle header-icon-btn"
                   onClick={toggleTheme}
-                  aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+                  aria-label={theme === 'light' ? t('common.switchToDark') : t('common.switchToLight')}
                 >
                   {theme === 'light' ? <Moon size={17} aria-hidden /> : <Sun size={17} aria-hidden />}
                 </button>
@@ -250,7 +262,7 @@ function Header() {
                   onClick={handleMobileMenuToggle}
                   aria-expanded={isMobileMenuOpen}
                   aria-controls="mobile-navigation"
-                  aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+                  aria-label={isMobileMenuOpen ? t('common.closeMenu') : t('common.openMenu')}
                 >
                   {isMobileMenuOpen ? <X size={18} aria-hidden /> : <Menu size={18} aria-hidden />}
                 </button>
@@ -273,17 +285,19 @@ function Header() {
             onKeyDown={handleMobileMenuKeyDown}
             role="dialog"
             aria-modal="true"
-            aria-label="Mobile navigation menu"
+            aria-label={t('common.menu')}
           >
             <div className="mobile-nav-header">
-              <span className="mobile-nav-title">Menu</span>
-              <button type="button" className="mobile-nav-close" onClick={() => setIsMobileMenuOpen(false)} aria-label="Close menu">
+              <span className="mobile-nav-title">{t('common.menu')}</span>
+              <button type="button" className="mobile-nav-close" onClick={() => setIsMobileMenuOpen(false)} aria-label={t('common.closeMenu')}>
                 <X size={20} />
               </button>
             </div>
 
+            <LanguageSwitcher />
+
             <div className="mobile-nav-section">
-              <p className="mobile-nav-section-label">Explore</p>
+              <p className="mobile-nav-section-label">{t('common.explore')}</p>
               <ul className="mobile-nav-list">
                 {mobilePrimaryItems.map((item) => {
                   const Icon = item.icon;
@@ -304,7 +318,7 @@ function Header() {
             </div>
 
             <div className="mobile-nav-section">
-              <p className="mobile-nav-section-label">Tools</p>
+              <p className="mobile-nav-section-label">{t('common.tools')}</p>
               <ul className="mobile-nav-list">
                 {mobileSecondaryItems.map((item) => {
                   const Icon = item.icon;
@@ -329,15 +343,15 @@ function Header() {
                 type="button"
                 className="mobile-nav-theme-toggle"
                 onClick={toggleTheme}
-                aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+                aria-label={theme === 'light' ? t('common.switchToDark') : t('common.switchToLight')}
               >
                 {theme === 'light' ? <Moon size={18} aria-hidden /> : <Sun size={18} aria-hidden />}
-                <span>{theme === 'light' ? 'Dark mode' : 'Light mode'}</span>
+                <span>{theme === 'light' ? t('common.darkMode') : t('common.lightMode')}</span>
               </button>
             </div>
 
             <div className="mobile-nav-section mobile-nav-section-cta">
-              <p className="mobile-nav-section-label">Start here</p>
+              <p className="mobile-nav-section-label">{t('common.startHere')}</p>
               <ul className="mobile-nav-list">
                 {mobileCtaItems.map((item) => {
                   const Icon = item.icon;

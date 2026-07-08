@@ -1,78 +1,78 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { ArrowRight, CheckCircle, ChevronRight, ShieldCheck } from 'lucide-react';
 import { loadDfaJourneyState } from '../lib/dfaJourney';
 import { getFoundationStory, getHomepageLatestStory, ORIGIN_STORY_SLUG } from '../data/stories';
-// INDEPENDENT_AREAS_LEAD not used here — replaced with inline mental-model copy in hero
-import { GUIDES_STORIES_NAV_LABEL } from '../data/siteNavigation';
 import { PageSection, ShellLinkCard } from '../components/layout/PageContent';
 
 const HomePage: React.FC = () => {
+  const { t } = useTranslation();
   const journey = useMemo(() => loadDfaJourneyState(), []);
   const foundationStory = useMemo(() => getFoundationStory(), []);
   const latestStory = useMemo(() => getHomepageLatestStory(), []);
 
   const trustPoints = [
-    'Your data stays on your device',
-    'Stories and guides work without a footprint review',
-    'List your apps anytime to see your footprint scores',
+    t('home.trustDataStays'),
+    t('home.trustStoriesIndependent'),
+    t('home.trustListApps'),
   ];
 
   const spotlightLinks = useMemo(() => {
     const links = [
       {
-        title: 'Privacy Panda stories',
-        description: 'Read together with your child—interactive scenes or calm chapters, no setup required.',
+        title: t('home.spotlightStoriesTitle'),
+        description: t('home.spotlightStoriesDesc'),
         href: '/stories',
-        tag: 'Read together',
-        cta: 'Browse stories',
+        tag: t('home.spotlightStoriesTag'),
+        cta: t('home.spotlightStoriesCta'),
       },
       {
-        title: GUIDES_STORIES_NAV_LABEL,
-        description: 'Conversation starters, a household privacy plan, and printable activities for families.',
+        title: t('nav.guidesStories'),
+        description: t('home.spotlightGuidesDesc'),
         href: '/for-families',
-        tag: 'Parent reference',
-        cta: 'Browse',
+        tag: t('home.spotlightGuidesTag'),
+        cta: t('common.browse'),
       },
       {
-        title: 'Footprint review',
-        description: 'List the apps your family uses, then see where your data exposure adds up.',
+        title: t('common.footprintReview'),
+        description: t('home.spotlightFootprintDesc'),
         href: '/digital-footprint',
-        tag: 'List apps first',
-        cta: 'Open',
+        tag: t('home.spotlightFootprintTag'),
+        cta: t('common.open'),
       },
       {
-        title: 'Family Hub',
-        description: '18 age-matched privacy missions your family completes together, saved on this device.',
+        title: t('common.familyHub'),
+        description: t('home.spotlightHubDesc'),
         href: '/family-hub',
-        tag: 'Practice on device',
-        cta: 'Open',
+        tag: t('home.spotlightHubTag'),
+        cta: t('common.open'),
       },
     ];
 
     if (foundationStory) {
       const storyLink = links[0];
       storyLink.title = foundationStory.title;
-      storyLink.description = 'Read together—interactive scenes or chapters';
+      storyLink.description = t('home.readTogether');
       storyLink.href = `/stories/${ORIGIN_STORY_SLUG}`;
-      storyLink.cta = 'Open story';
+      storyLink.cta = t('home.openStory');
     } else if (latestStory) {
       const storyLink = links[0];
       storyLink.title = latestStory.title;
       storyLink.description = latestStory.privacyTopic;
       storyLink.href = `/stories/${latestStory.slug}`;
-      storyLink.cta = `Read episode ${latestStory.episodeNumber}`;
+      storyLink.cta = t('home.readEpisode', { number: latestStory.episodeNumber });
     }
 
     return links;
-  }, [foundationStory, latestStory]);
+  }, [foundationStory, latestStory, t]);
 
   const primaryCta =
     journey.progressPercent > 0 && journey.resumePath.includes('footprint')
-      ? { href: journey.resumePath, label: 'Continue footprint review' }
+      ? { href: journey.resumePath, label: t('home.continueFootprint') }
       : journey.progressPercent > 0 && journey.resumePath.includes('catalog')
-        ? { href: journey.resumePath, label: 'Continue adding your apps' }
-        : { href: '/stories', label: 'Explore stories' };
+        ? { href: journey.resumePath, label: t('home.continueApps') }
+        : { href: '/stories', label: t('home.exploreStories') };
 
   return (
     <div className="site-page">
@@ -81,14 +81,14 @@ const HomePage: React.FC = () => {
           <header className="page-section__header homepage-hero__header">
             <span className="page-section__eyebrow homepage-hero__eyebrow">
               <ShieldCheck size={14} aria-hidden />
-              Family privacy guidance
+              {t('home.eyebrow')}
             </span>
             <h1 id="homepage-hero-title" className="homepage-hero__title">
-              Your kids are online.
-              <span> Here’s a calm way to talk about it.</span>
+              {t('home.title')}
+              <span>{t('home.titleAccent')}</span>
             </h1>
             <p className="page-section__lead">
-              Stories help your child understand privacy. The footprint review shows where your family’s data goes. Family Hub is where you put it into practice—together.
+              {t('home.lead')}
             </p>
           </header>
 
@@ -101,13 +101,13 @@ const HomePage: React.FC = () => {
               to="/digital-footprint"
               className="button button-secondary inline-flex items-center justify-center"
             >
-              Footprint review
+              {t('common.footprintReview')}
             </Link>
           </div>
           <p className="mt-3 text-center text-sm text-gray-500 dark:text-gray-400">
-            Not sure where to start?{' '}
+            {t('home.notSure')}{' '}
             <Link to="/how-it-works" className="font-medium text-green-700 hover:underline dark:text-green-400">
-              See how it works
+              {t('common.seeHowItWorks')}
             </Link>
           </p>
 
@@ -128,9 +128,9 @@ const HomePage: React.FC = () => {
             <PageSection
               className="homepage-spotlight"
               header={{
-                eyebrow: 'Where to start',
-                title: 'Pick what fits this week',
-                lead: 'Each area works on its own—only the footprint review needs your app list first.',
+                eyebrow: t('home.spotlightEyebrow'),
+                title: t('home.spotlightTitle'),
+                lead: t('home.spotlightLead'),
               }}
             >
               <div className="homepage-spotlight__grid">
@@ -153,7 +153,7 @@ const HomePage: React.FC = () => {
               {(foundationStory || latestStory) && (
                 <p className="homepage-spotlight__see-all">
                   <Link to="/stories" className="font-medium text-green-700 hover:underline dark:text-green-400">
-                    See all stories →
+                    {t('common.seeAllStories')}
                   </Link>
                 </p>
               )}
@@ -162,27 +162,27 @@ const HomePage: React.FC = () => {
             <PageSection
               className="homepage-closing"
               header={{
-                eyebrow: 'Footprint when you want it',
-                title: 'List your apps to see your footprint',
-                lead: 'Tell PandaGarde which apps your family uses — that\'s what powers the footprint review. Stories, guides, and Hub are available any time before or after.',
+                eyebrow: t('home.closingEyebrow'),
+                title: t('home.closingTitle'),
+                lead: t('home.closingLead'),
               }}
             >
               <div className="homepage-closing__actions">
                 <Link to="/service-catalog" className="button button-primary inline-flex items-center gap-1.5">
-                  Add your family's apps
+                  {t('home.addFamilyApps')}
                   <ArrowRight size={14} aria-hidden />
                 </Link>
                 <Link to="/digital-footprint" className="button button-secondary inline-flex items-center gap-1.5">
-                  Footprint review
+                  {t('common.footprintReview')}
                 </Link>
                 <Link to="/stories" className="button button-secondary inline-flex items-center gap-1.5">
-                  Stories
+                  {t('common.stories')}
                 </Link>
               </div>
               <p className="homepage-closing__followup page-section__lead text-center">
-                Still have questions?{' '}
+                {t('home.stillQuestions')}{' '}
                 <Link to="/how-it-works#faq" className="font-semibold text-green-700 hover:underline dark:text-green-400">
-                  See how PandaGarde works and common answers
+                  {t('home.howItWorksFaq')}
                 </Link>
               </p>
             </PageSection>

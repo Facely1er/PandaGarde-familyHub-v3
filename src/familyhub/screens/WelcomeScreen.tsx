@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { ArrowRight, ExternalLink, Shield, Users, Gamepad2, Award } from 'lucide-react';
 import { setHubOrigin } from '../../lib/hubMission';
 import { openExternalUrl } from '../../lib/openExternalUrl';
@@ -8,7 +9,6 @@ import HubBrandLogo from '../components/HubBrandLogo';
 import { HUB_WELCOMED_KEY } from '../constants';
 import { hubPaths, pandagardeWebsiteUrl } from '../hubPaths';
 import { hubTheme } from '../hubTheme';
-import { HUB_WELCOME_LEAD, HUB_ENTER_CTA } from '../hubCopy';
 
 export { HUB_WELCOMED_KEY };
 
@@ -34,6 +34,7 @@ const sections = [
 ];
 
 const WelcomeScreen: React.FC = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const handleGetStarted = () => {
@@ -56,7 +57,7 @@ const WelcomeScreen: React.FC = () => {
                 <span className="text-teal-600 dark:text-teal-400">Family Hub</span>
               </h1>
               <p className="mt-3 text-base sm:text-lg text-gray-600 dark:text-gray-300">
-                {HUB_WELCOME_LEAD}
+                {t('hub.welcomeLead')}
               </p>
             </div>
           </div>
@@ -117,7 +118,7 @@ const WelcomeScreen: React.FC = () => {
             onClick={handleGetStarted}
             className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-teal-600 px-6 py-4 text-base font-semibold text-white shadow-sm hover:bg-teal-700 active:scale-[0.98] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
           >
-            {HUB_ENTER_CTA}
+            {t('hub.enterCta')}
             <ArrowRight size={20} aria-hidden="true" />
           </button>
         </div>

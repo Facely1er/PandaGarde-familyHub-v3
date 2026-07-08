@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Users, Gamepad2, Plus, X, BookOpen, Fingerprint, ListChecks } from 'lucide-react';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { useHubFamilyMembers } from '../../hooks/useHubFamilyMembers';
@@ -9,7 +10,6 @@ import HubScreenHero from '../components/HubScreenHero';
 import HubTour from '../components/HubTour';
 import TodayMissionCard from '../components/TodayMissionCard';
 import { getHubOrigin, touchHubStreak } from '../../lib/hubMission';
-import { HUB_DASHBOARD_EMPTY, HUB_DASHBOARD_READY } from '../hubCopy';
 import { hubPaths } from '../hubPaths';
 
 interface FamilyGoal {

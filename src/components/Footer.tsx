@@ -1,14 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import {
-  footerColumns,
   type FooterExternalNavItem,
   type SiteNavItem,
 } from '../data/siteNavigation';
+import { useLocalizedFooterColumns } from '../hooks/useLocalizedNav';
 
 const FOOTER_ICON_SIZE = 16;
 
 const Footer: React.FC = () => {
+  const { t } = useTranslation();
+  const footerColumns = useLocalizedFooterColumns();
+
   const renderLinkIcon = (Icon: SiteNavItem['icon']) => (
     <span className="footer-link-icon" aria-hidden="true">
       <Icon size={FOOTER_ICON_SIZE} strokeWidth={2} />
@@ -28,7 +32,7 @@ const Footer: React.FC = () => {
         >
           {renderLinkIcon(item.icon)}
           <span className="footer-link-label">{item.label}</span>
-          <span className="sr-only"> (opens in new tab)</span>
+          <span className="sr-only">{t('common.opensNewTab')}</span>
         </a>
       );
     }
@@ -63,7 +67,7 @@ const Footer: React.FC = () => {
             <Link
               to="/"
               className="logo footer-logo"
-              aria-label="PandaGarde — Calmer privacy. Go to homepage"
+              aria-label={t('common.logoAriaLabel')}
             >
               <div className="logo-icon">
                 <img src="/LogoPandagarde.png" alt="" aria-hidden />
@@ -72,17 +76,16 @@ const Footer: React.FC = () => {
                 <span className="logo-wordmark">
                   Panda<span className="highlight">Garde</span>
                 </span>
-                <span className="logo-tagline">Calmer privacy</span>
+                <span className="logo-tagline">{t('common.brandTagline')}</span>
               </span>
             </Link>
 
             <p className="footer-description">
-              Stories, guides, footprint review, and Family Hub—use what fits your family. Nothing here
-              blocks the rest.
+              {t('footer.description')}
             </p>
 
             <p className="footer-trust-note">
-              Local-first guidance on this device. Nothing is uploaded and no child device is monitored.
+              {t('footer.trustNote')}
             </p>
           </div>
 
@@ -94,7 +97,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="footer-bottom">
-          <p>© {new Date().getFullYear()} PandaGarde. All rights reserved.</p>
+          <p>{t('common.copyright', { year: new Date().getFullYear() })}</p>
         </div>
       </div>
     </footer>
