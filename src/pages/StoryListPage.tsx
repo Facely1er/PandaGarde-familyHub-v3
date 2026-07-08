@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { BookOpen, Play, Volume2 } from 'lucide-react';
 import {
   getContinuationStories,
@@ -19,41 +20,29 @@ import PageLayout from '../components/layout/PageLayout';
 
 type Filter = AgeGroup | 'all';
 
-const FILTERS: { value: Filter; label: string }[] = [
-  { value: 'all', label: 'All Ages' },
-  { value: 'early', label: 'Ages 5–7' },
-  { value: 'middle', label: 'Ages 8–10' },
-  { value: 'older', label: 'Ages 11–13' },
-];
-
-const SEASON_SECTIONS: {
-  season: 1 | 2;
-  title: string;
-  subtitle: string;
-  note?: string;
-}[] = [
-  {
-    season: 1,
-    title: 'Season 1 — The Privacy Grove',
-    subtitle: 'Episodes 2–8 · foundational privacy lessons for ages 5–10',
-  },
-  {
-    season: 2,
-    title: 'Season 2 — The Kindness Clearing',
-    subtitle: 'Episodes 9–16 · deeper topics for ages 8–13',
-  },
-];
+const FILTER_VALUES: Filter[] = ['all', 'early', 'middle', 'older'];
+const SEASON_NUMBERS: (1 | 2)[] = [1, 2];
 
 function groupBySeason(stories: Story[]): { season: 1 | 2; stories: Story[] }[] {
-  return SEASON_SECTIONS.map(({ season }) => ({
+  return SEASON_NUMBERS.map((season) => ({
     season,
     stories: stories.filter((story) => story.season === season),
   })).filter((group) => group.stories.length > 0);
 }
 
 export function StoryListPage() {
+  const { t } = useTranslation();
   const [filter, setFilter] = useState<Filter>('all');
   const foundationStory = getFoundationStory();
+
+  const filters = FILTER_VALUES.map((value) => ({
+    value,
+    label: t(`stories.filters.${value}`),
+  }));
+  const seasonMeta: Record<1 | 2, { title: string; subtitle: string }> = {
+    1: { title: t('stories.season1Title'), subtitle: t('stories.season1Subtitle') },
+    2: { title: t('stories.season2Title'), subtitle: t('stories.season2Subtitle') },
+  };
 
   const continuationStories =
     filter === 'all' ? getContinuationStories() : getStoriesByAgeGroup(filter).filter((s) => !isFoundationStory(s));
@@ -62,8 +51,8 @@ export function StoryListPage() {
 
   return (
     <PageLayout
-      title="Privacy Panda Stories"
-      subtitle="Read in any order—no service catalog or footprint review required. Start with the Digital Bamboo Forest or browse by age."
+      title={t('stories.title')}
+      subtitle={t('stories.subtitle')}
       breadcrumbs
     >
       <section className="py-4 pb-8">
@@ -74,7 +63,7 @@ export function StoryListPage() {
                 <StoryCoverArt story={foundationStory} variant="hero" />
                 <div className="story-feature-panel__copy">
                   <p className="text-xs font-semibold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 mb-1">
-                    Season 1 · Episode 1 · Start here
+                    {t('stories.foundationBadge')}
                   </p>
                   <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 sm:text-2xl">
                     {foundationStory.title}
@@ -85,15 +74,15 @@ export function StoryListPage() {
                   <ul className="mt-3 flex flex-wrap gap-3 text-xs text-gray-500 dark:text-gray-400">
                     <li className="inline-flex items-center gap-1">
                       <Play size={14} aria-hidden />
-                      Interactive scenes
+                      {t('stories.interactiveScenes')}
                     </li>
                     <li className="inline-flex items-center gap-1">
                       <BookOpen size={14} aria-hidden />
-                      Chapter reader
+                      {t('stories.chapterReader')}
                     </li>
                     <li className="inline-flex items-center gap-1">
                       <Volume2 size={14} aria-hidden />
-                      Narration
+                      {t('stories.narration')}
                     </li>
                   </ul>
                 </div>
@@ -101,7 +90,7 @@ export function StoryListPage() {
                   to={`/stories/${ORIGIN_STORY_SLUG}`}
                   className="story-feature-panel__cta button button-primary shrink-0"
                 >
-                  Begin the journey
+                  {t('stories.beginJourney')}
                 </Link>
               </div>
             </div>
@@ -114,14 +103,14 @@ export function StoryListPage() {
               to={STORY_CAST_PATH}
               className="font-semibold text-green-700 hover:underline dark:text-green-400"
             >
-              Meet the cast
+              {t('stories.meetTheCast')}
             </Link>
             {' '}
-            — see who appears in each episode before you read.
+            {t('stories.meetTheCastSuffix')}
           </p>
 
-          <div role="group" aria-label="Filter by age" className="flex flex-wrap gap-2">
-            {FILTERS.map(({ value, label }) => (
+          <div role="group" aria-label={t('stories.filterByAge')} className="flex flex-wrap gap-2">
+            {filters.map(({ value, label }) => (
               <button
                 key={value}
                 type="button"
@@ -140,14 +129,12 @@ export function StoryListPage() {
 
           {continuationStories.length === 0 ? (
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              {filter === 'all'
-                ? 'More episodes are on the way. Start with the foundation story above.'
-                : 'No continuation episodes for this age group yet. Try All Ages or begin with the foundation story.'}
+              {filter === 'all' ? t('stories.emptyAll') : t('stories.emptyFiltered')}
             </p>
           ) : (
             <div className="space-y-10">
               {seasonGroups.map(({ season, stories }) => {
-                const meta = SEASON_SECTIONS.find((section) => section.season === season);
+                const meta = seasonMeta[season];
                 if (!meta) {return null;}
                 const isSeason2 = season === 2;
 
@@ -167,7 +154,7 @@ export function StoryListPage() {
                           isSeason2 ? 'text-teal-700 dark:text-teal-300' : 'text-green-700 dark:text-green-400'
                         }`}
                       >
-                        Season {season}
+                        {t('stories.seasonLabel', { number: season })}
                       </p>
                       <h2
                         id={`season-${season}-heading`}
@@ -176,17 +163,6 @@ export function StoryListPage() {
                         {meta.title}
                       </h2>
                       <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">{meta.subtitle}</p>
-                      {meta.note ? (
-                        <p
-                          className={`mt-2 text-sm ${
-                            isSeason2
-                              ? 'text-teal-800 dark:text-teal-200'
-                              : 'text-green-800 dark:text-green-200'
-                          }`}
-                        >
-                          {meta.note}
-                        </p>
-                      ) : null}
                     </header>
 
                     <div className="grid grid-cols-1 items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-3">

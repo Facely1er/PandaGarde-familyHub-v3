@@ -1,703 +1,400 @@
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
-import { Shuffle, CheckCircle, Download } from 'lucide-react';
+import { Shuffle, CheckCircle2, RotateCcw, X, Shield, Users, Sparkles } from 'lucide-react';
 
 interface DragDropActivityProps {
   onComplete: (score?: number) => void;
   onClose: () => void;
 }
 
+type Category = 'safe' | 'private';
+type Slot = 'tray' | Category;
+
 interface Item {
   id: string;
   text: string;
-  category: 'safe' | 'private';
-  x: number;
-  y: number;
-  isDragging: boolean;
+  emoji: string;
+  category: Category;
 }
 
+const ITEMS: Item[] = [
+  { id: '1', text: 'My full name', emoji: '🧑', category: 'private' },
+  { id: '2', text: 'My favorite color', emoji: '🎨', category: 'safe' },
+  { id: '3', text: 'My home address', emoji: '🏠', category: 'private' },
+  { id: '4', text: "My pet's name", emoji: '🐶', category: 'safe' },
+  { id: '5', text: 'My phone number', emoji: '📱', category: 'private' },
+  { id: '6', text: 'My favorite food', emoji: '🍕', category: 'safe' },
+  { id: '7', text: 'My school name', emoji: '🏫', category: 'private' },
+  { id: '8', text: 'My favorite game', emoji: '🎮', category: 'safe' },
+  { id: '9', text: 'My social security number', emoji: '🔢', category: 'private' },
+  { id: '10', text: 'My favorite movie', emoji: '🎬', category: 'safe' },
+  { id: '11', text: 'My password', emoji: '🔑', category: 'private' },
+  { id: '12', text: 'My favorite book', emoji: '📚', category: 'safe' },
+];
+
+const shuffle = <T,>(arr: T[]): T[] => {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+};
+
 const DragDropActivity: React.FC<DragDropActivityProps> = ({ onComplete, onClose }) => {
-  const [items, setItems] = useState<Item[]>([]);
-  const [draggedItem, setDraggedItem] = useState<Item | null>(null);
+  const [order, setOrder] = useState<string[]>(() => shuffle(ITEMS.map((i) => i.id)));
+  const [placement, setPlacement] = useState<Record<string, Slot>>(
+    () => Object.fromEntries(ITEMS.map((i) => [i.id, 'tray'])) as Record<string, Slot>
+  );
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [dragId, setDragId] = useState<string | null>(null);
+  const [checked, setChecked] = useState(false);
+  const [feedback, setFeedback] = useState<string | null>(null);
   const [isCompleted, setIsCompleted] = useState(false);
   const [score, setScore] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
 
-  const initialItems: Omit<Item, 'x' | 'y' | 'isDragging'>[] = useMemo(() => [
-    { id: '1', text: 'My full name', category: 'private' },
-    { id: '2', text: 'My favorite color', category: 'safe' },
-    { id: '3', text: 'My home address', category: 'private' },
-    { id: '4', text: 'My pet\'s name', category: 'safe' },
-    { id: '5', text: 'My phone number', category: 'private' },
-    { id: '6', text: 'My favorite food', category: 'safe' },
-    { id: '7', text: 'My school name', category: 'private' },
-    { id: '8', text: 'My favorite game', category: 'safe' },
-    { id: '9', text: 'My social security number', category: 'private' },
-    { id: '10', text: 'My favorite movie', category: 'safe' },
-    { id: '11', text: 'My password', category: 'private' },
-    { id: '12', text: 'My favorite book', category: 'safe' },
-  ], []);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const previouslyFocused = useRef<HTMLElement | null>(null);
 
-  const shuffleItems = useCallback(() => {
-    const shuffled = initialItems.map((item, index) => ({
-      ...item,
-      x: 50 + (index % 4) * 120, // Adjusted for better mobile spacing
-      y: 100 + Math.floor(index / 4) * 80,
-      isDragging: false,
-    }));
-    setItems(shuffled);
-    setIsCompleted(false);
-    setScore(0);
-  }, [initialItems]);
+  const itemsById = useMemo(() => Object.fromEntries(ITEMS.map((i) => [i.id, i])), []);
+  const total = ITEMS.length;
+  const placedCount = useMemo(
+    () => Object.values(placement).filter((s) => s !== 'tray').length,
+    [placement]
+  );
+
+  const trayItems = order.filter((id) => placement[id] === 'tray');
+  const safeItems = order.filter((id) => placement[id] === 'safe');
+  const privateItems = order.filter((id) => placement[id] === 'private');
 
   useEffect(() => {
-    shuffleItems();
-  }, [shuffleItems]);
+    previouslyFocused.current = document.activeElement as HTMLElement;
+    panelRef.current?.focus();
+    return () => previouslyFocused.current?.focus();
+  }, []);
 
-  const getEventPos = (e: React.MouseEvent | React.TouchEvent) => {
-    const rect = containerRef.current?.getBoundingClientRect();
-    if (!rect) {return { x: 0, y: 0 };}
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {onClose();}
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [onClose]);
 
-    if ('touches' in e) {
-      // Touch event
-      const touch = e.touches[0];
-      return {
-        x: touch.clientX - rect.left - 50,
-        y: touch.clientY - rect.top - 25
-      };
-    } else {
-      // Mouse event
-      return {
-        x: e.clientX - rect.left - 50,
-        y: e.clientY - rect.top - 25
-      };
-    }
+  const moveItem = useCallback((id: string, slot: Slot) => {
+    setPlacement((prev) => ({ ...prev, [id]: slot }));
+    setSelectedId(null);
+    setChecked(false);
+    setFeedback(null);
+  }, []);
+
+  const handleItemClick = (id: string) => {
+    setChecked(false);
+    setFeedback(null);
+    setSelectedId((cur) => (cur === id ? null : id));
   };
 
-  const handleStart = (e: React.MouseEvent | React.TouchEvent, item: Item) => {
-    e.preventDefault();
-    setDraggedItem({ ...item, isDragging: true });
+  const handleZoneActivate = (slot: Slot) => {
+    if (selectedId) {moveItem(selectedId, slot);}
   };
 
-  const handleMove = (e: React.MouseEvent | React.TouchEvent) => {
-    if (!draggedItem) {return;}
+  const reset = useCallback(() => {
+    setOrder(shuffle(ITEMS.map((i) => i.id)));
+    setPlacement(Object.fromEntries(ITEMS.map((i) => [i.id, 'tray'])) as Record<string, Slot>);
+    setSelectedId(null);
+    setChecked(false);
+    setFeedback(null);
+    setIsCompleted(false);
+    setScore(0);
+  }, []);
 
-    const rect = containerRef.current?.getBoundingClientRect();
-    if (!rect) {return;}
+  const reshuffle = useCallback(() => {
+    setOrder((prev) => shuffle(prev));
+  }, []);
 
-    const { x, y } = getEventPos(e);
-
-    setItems(prev => prev.map(item =>
-      item.id === draggedItem.id
-        ? { ...item, x: Math.max(0, Math.min(x, rect.width - 100)), y: Math.max(0, Math.min(y, rect.height - 50)) }
-        : item
-    ));
-  };
-
-  const handleEnd = () => {
-    if (!draggedItem) {return;}
-
-    setItems(prev => prev.map(item =>
-      item.id === draggedItem.id
-        ? { ...item, isDragging: false }
-        : item
-    ));
-    setDraggedItem(null);
-    checkCompletion();
-  };
-
-  const checkCompletion = () => {
-    const safeZone = { x: 50, y: 300, width: 200, height: 100 };
-    const privateZone = { x: 350, y: 300, width: 200, height: 100 };
-
-    let correctPlacements = 0;
-    const totalItems = items.length;
-
-    items.forEach(item => {
-      const itemCenterX = item.x + 50;
-      const itemCenterY = item.y + 25;
-
-      if (item.category === 'safe') {
-        if (itemCenterX >= safeZone.x && itemCenterX <= safeZone.x + safeZone.width &&
-            itemCenterY >= safeZone.y && itemCenterY <= safeZone.y + safeZone.height) {
-          correctPlacements++;
-        }
-      } else if (item.category === 'private') {
-        if (itemCenterX >= privateZone.x && itemCenterX <= privateZone.x + privateZone.width &&
-            itemCenterY >= privateZone.y && itemCenterY <= privateZone.y + privateZone.height) {
-          correctPlacements++;
-        }
-      }
-    });
-
-    const newScore = Math.round((correctPlacements / totalItems) * 100);
+  const checkAnswer = () => {
+    const correct = ITEMS.filter((i) => placement[i.id] === i.category).length;
+    const newScore = Math.round((correct / total) * 100);
     setScore(newScore);
+    setChecked(true);
 
-    if (correctPlacements === totalItems) {
+    if (placedCount < total) {
+      setFeedback(`Sort every card into a basket first — ${total - placedCount} still waiting in the tray.`);
+      return;
+    }
+    if (correct === total) {
+      setFeedback(null);
       setIsCompleted(true);
       onComplete(newScore);
-      
-      // Add celebration animation
-      setTimeout(() => {
-        const celebration = document.createElement('div');
-        celebration.textContent = '🎉✅🛡️';
-        celebration.style.cssText = `
-          position: fixed;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          font-size: 48px;
-          z-index: 10000;
-          pointer-events: none;
-          animation: celebrate 2s ease-out forwards;
-        `;
-        
-        const style = document.createElement('style');
-        style.textContent = `
-          @keyframes celebrate {
-            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
-            100% { opacity: 0; transform: translate(-50%, -50%) scale(1) translateY(-100px); }
-          }
-        `;
-        document.head.appendChild(style);
-        document.body.appendChild(celebration);
-        
-        setTimeout(() => {
-          document.body.removeChild(celebration);
-          document.head.removeChild(style);
-        }, 2000);
-      }, 100);
     } else {
-      // Show progress feedback
-      const feedback = correctPlacements > 0 ? 
-        `Great progress! You've correctly placed ${correctPlacements} out of ${totalItems} items. Keep going!` :
-        `Try placing the items in the correct zones. Remember: Green = Safe to Share, Red = Keep Private!`;
-      
-      // Create a temporary feedback message
-      const feedbackDiv = document.createElement('div');
-      feedbackDiv.textContent = feedback;
-      feedbackDiv.style.cssText = `
-        position: fixed;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: #4CAF50;
-        color: white;
-        padding: 15px 25px;
-        border-radius: 25px;
-        font-size: 16px;
-        font-weight: bold;
-        z-index: 10000;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        animation: slideDown 3s ease-out forwards;
-      `;
-      
-      const style = document.createElement('style');
-      style.textContent = `
-        @keyframes slideDown {
-          0% { opacity: 0; transform: translateX(-50%) translateY(-50px); }
-          20% { opacity: 1; transform: translateX(-50%) translateY(0); }
-          80% { opacity: 1; transform: translateX(-50%) translateY(0); }
-          100% { opacity: 0; transform: translateX(-50%) translateY(-50px); }
-        }
-      `;
-      document.head.appendChild(style);
-      document.body.appendChild(feedbackDiv);
-      
-      setTimeout(() => {
-        document.body.removeChild(feedbackDiv);
-        document.head.removeChild(style);
-      }, 3000);
+      setFeedback(`So close! ${correct} of ${total} are in the right basket. Fix the highlighted cards and try again.`);
     }
   };
 
-  const downloadImage = () => {
-    const container = containerRef.current;
-    if (!container) {return;}
-
-    // Create a canvas to capture the activity
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    if (!ctx) {return;}
-
-    // Set canvas size
-    canvas.width = 600;
-    canvas.height = 500;
-
-    // Draw background
-    ctx.fillStyle = '#F8F9FA';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    // Draw title
-    ctx.fillStyle = '#2C3E50';
-    ctx.font = 'bold 24px Arial';
-    ctx.textAlign = 'center';
-    ctx.fillText('Information Sorting Game', canvas.width / 2, 40);
-
-    // Draw instructions
-    ctx.font = '16px Arial';
-    ctx.fillStyle = '#6C757D';
-    ctx.fillText('Safe to Share vs Keep Private', canvas.width / 2, 70);
-
-    // Draw categories
-    ctx.fillStyle = '#28A745';
-    ctx.fillRect(50, 300, 200, 80);
-    ctx.fillStyle = 'white';
-    ctx.font = 'bold 18px Arial';
-    ctx.fillText('Safe to Share', 150, 345);
-
-    ctx.fillStyle = '#DC3545';
-    ctx.fillRect(350, 300, 200, 80);
-    ctx.fillStyle = 'white';
-    ctx.fillText('Keep Private', 450, 345);
-
-    // Draw items
-    ctx.fillStyle = '#2C3E50';
-    ctx.font = '14px Arial';
-    items.forEach(item => {
-      ctx.fillStyle = item.category === 'safe' ? '#28A745' : '#DC3545';
-      ctx.fillRect(item.x - 40, item.y - 15, 80, 30);
-      ctx.fillStyle = 'white';
-      ctx.textAlign = 'center';
-      ctx.fillText(item.text, item.x, item.y + 5);
-    });
-
-    // Download
-    const link = document.createElement('a');
-    link.download = 'privacy-sorting-game.png';
-    link.href = canvas.toDataURL();
-    link.click();
+  const chipStateClasses = (id: string, inZone: boolean) => {
+    const item = itemsById[id];
+    if (checked && inZone) {
+      const right = placement[id] === item.category;
+      return right
+        ? 'border-green-500 bg-green-50 ring-2 ring-green-500/60 dark:bg-green-950/50 dark:border-green-500'
+        : 'border-rose-500 bg-rose-50 ring-2 ring-rose-500/60 dark:bg-rose-950/50 dark:border-rose-500';
+    }
+    if (selectedId === id) {
+      return 'border-blue-500 bg-blue-50 ring-2 ring-blue-500 dark:bg-blue-950/50 dark:border-blue-400';
+    }
+    return 'border-gray-200 bg-white hover:border-gray-300 hover:-translate-y-0.5 dark:border-gray-700 dark:bg-gray-800 dark:hover:border-gray-600';
   };
 
-  const getItemStyle = (item: Item) => ({
-    left: `${item.x}px`,
-    top: `${item.y}px`,
-    zIndex: item.isDragging ? 1000 : 1,
-    transform: item.isDragging ? 'scale(1.1)' : 'scale(1)',
-    boxShadow: item.isDragging ? '0 8px 25px rgba(0,0,0,0.3)' : '0 2px 8px rgba(0,0,0,0.1)',
+  const renderChip = (id: string, inZone: boolean) => {
+    const item = itemsById[id];
+    return (
+      <button
+        key={id}
+        type="button"
+        draggable
+        onDragStart={(e) => {
+          setDragId(id);
+          e.dataTransfer.effectAllowed = 'move';
+          e.dataTransfer.setData('text/plain', id);
+        }}
+        onDragEnd={() => setDragId(null)}
+        onClick={() => handleItemClick(id)}
+        aria-pressed={selectedId === id}
+        aria-label={`${item.text} — ${
+          inZone ? 'tap to move, or drag back to the tray' : 'tap to pick up, or drag to a basket'
+        }`}
+        className={`flex items-center gap-2 rounded-xl border-2 px-3 py-2 text-left text-sm font-medium text-gray-800 shadow-sm transition-all duration-150 cursor-grab active:cursor-grabbing dark:text-gray-100 ${chipStateClasses(
+          id,
+          inZone
+        )} ${dragId === id ? 'opacity-40' : ''}`}
+      >
+        <span aria-hidden="true" className="text-lg leading-none">
+          {item.emoji}
+        </span>
+        <span>{item.text}</span>
+      </button>
+    );
+  };
+
+  const zoneBase =
+    'flex min-h-[9rem] flex-col rounded-2xl border-2 border-dashed p-4 transition-colors';
+  const dropProps = (slot: Slot) => ({
+    onDragOver: (e: React.DragEvent) => {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+    },
+    onDrop: (e: React.DragEvent) => {
+      e.preventDefault();
+      const id = e.dataTransfer.getData('text/plain') || dragId;
+      if (id) {moveItem(id, slot);}
+      setDragId(null);
+    },
   });
 
-  const getItemClassName = (item: Item) => {
-    const safeZone = { x: 50, y: 300, width: 200, height: 100 };
-    const privateZone = { x: 350, y: 300, width: 200, height: 100 };
-
-    const itemCenterX = item.x + 50;
-    const itemCenterY = item.y + 25;
-
-    let isInCorrectZone = false;
-    if (item.category === 'safe') {
-      isInCorrectZone = itemCenterX >= safeZone.x && itemCenterX <= safeZone.x + safeZone.width &&
-                       itemCenterY >= safeZone.y && itemCenterY <= safeZone.y + safeZone.height;
-    } else if (item.category === 'private') {
-      isInCorrectZone = itemCenterX >= privateZone.x && itemCenterX <= privateZone.x + privateZone.width &&
-                        itemCenterY >= privateZone.y && itemCenterY <= privateZone.y + privateZone.height;
-    }
-
-    return `drag-item ${item.category} ${isInCorrectZone ? 'correct' : ''}`;
-  };
-
   return (
-    <div className="drag-drop-activity">
-      <div className="activity-header">
-        <h2 className="activity-title">Information Sorting Game</h2>
-        <button onClick={onClose} className="close-button">×</button>
-      </div>
-
-      <div className="activity-content">
-        <div className="instructions">
-          <p>Drag each item to the correct category: <strong>Safe to Share</strong> or <strong>Keep Private</strong></p>
-          <div className="score">Score: {score}%</div>
+    <div
+      className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/70 p-3 sm:p-6"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="sort-game-title"
+    >
+      <div
+        ref={panelRef}
+        tabIndex={-1}
+        className="relative flex max-h-[95vh] w-full max-w-3xl flex-col overflow-hidden rounded-3xl bg-white shadow-2xl outline-none dark:bg-gray-900"
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between gap-4 border-b border-gray-200 bg-gradient-to-r from-green-600 to-emerald-500 px-5 py-4 dark:border-gray-800">
+          <div className="min-w-0">
+            <h2 id="sort-game-title" className="flex items-center gap-2 text-lg font-bold text-white sm:text-xl">
+              <Shield className="h-5 w-5 shrink-0" aria-hidden="true" />
+              Safe or Private?
+            </h2>
+            <p className="mt-0.5 text-sm text-green-50">
+              Sort each card into the right basket.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close game"
+            className="shrink-0 rounded-full bg-white/20 p-2 text-white transition-colors hover:bg-white/30"
+          >
+            <X className="h-5 w-5" aria-hidden="true" />
+          </button>
         </div>
 
-        <div
-          ref={containerRef}
-          className="game-container"
-          onMouseMove={handleMove}
-          onMouseUp={handleEnd}
-          onMouseLeave={handleEnd}
-          onTouchMove={handleMove}
-          onTouchEnd={handleEnd}
-          style={{ touchAction: 'none' }}
-        >
-          {/* Drop Zones */}
-          <div className="drop-zone safe-zone">
-            <h3>Safe to Share</h3>
-            <p>Things you can tell friends</p>
-          </div>
-
-          <div className="drop-zone private-zone">
-            <h3>Keep Private</h3>
-            <p>Personal information to protect</p>
-          </div>
-
-          {/* Draggable Items */}
-          {items.map(item => (
-            <div
-              key={item.id}
-              className={getItemClassName(item)}
-              style={getItemStyle(item)}
-              onMouseDown={(e) => handleStart(e, item)}
-              onTouchStart={(e) => handleStart(e, item)}
-            >
-              {item.text}
+        {/* Progress + score */}
+        <div className="flex items-center gap-4 border-b border-gray-200 bg-gray-50 px-5 py-3 dark:border-gray-800 dark:bg-gray-800/50">
+          <div className="flex-1">
+            <div className="mb-1 flex items-center justify-between text-xs font-medium text-gray-600 dark:text-gray-300">
+              <span>{placedCount} of {total} sorted</span>
+              <span>Score: {score}%</span>
             </div>
-          ))}
+            <div className="h-2 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
+              <div
+                className="h-full rounded-full bg-gradient-to-r from-green-500 to-emerald-400 transition-all duration-300"
+                style={{ width: `${(placedCount / total) * 100}%` }}
+              />
+            </div>
+          </div>
         </div>
 
-        <div className="controls">
-          <button onClick={shuffleItems} className="control-button">
-            <Shuffle size={16} />
+        {/* Scrollable body */}
+        <div className="flex-1 overflow-y-auto px-5 py-4">
+          <p className="mb-3 text-center text-sm text-gray-500 dark:text-gray-400">
+            Tap a card, then tap a basket — or drag it across.
+          </p>
+
+          {/* Tray */}
+          <div
+            {...dropProps('tray')}
+            className={`mb-5 rounded-2xl border-2 border-dashed p-3 transition-colors ${
+              trayItems.length === 0
+                ? 'border-gray-200 dark:border-gray-800'
+                : 'border-gray-300 bg-gray-50 dark:border-gray-700 dark:bg-gray-800/40'
+            }`}
+          >
+            {trayItems.length === 0 ? (
+              <p className="py-2 text-center text-sm text-gray-400 dark:text-gray-500">
+                All cards sorted — press <span className="font-semibold">Check answer</span>.
+              </p>
+            ) : (
+              <div className="flex flex-wrap justify-center gap-2">
+                {trayItems.map((id) => renderChip(id, false))}
+              </div>
+            )}
+          </div>
+
+          {/* Drop zones */}
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {/* Safe */}
+            <div
+              {...dropProps('safe')}
+              role="button"
+              tabIndex={0}
+              aria-label="Safe to share basket — tap to place the selected card here"
+              onClick={() => handleZoneActivate('safe')}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  handleZoneActivate('safe');
+                }
+              }}
+              className={`${zoneBase} cursor-pointer border-green-400 bg-green-50/60 hover:bg-green-50 dark:border-green-700 dark:bg-green-950/30 dark:hover:bg-green-950/50`}
+            >
+              <div className="mb-3 flex items-center gap-2 text-green-800 dark:text-green-200">
+                <Users className="h-5 w-5" aria-hidden="true" />
+                <div>
+                  <h3 className="text-sm font-bold leading-tight">Safe to share</h3>
+                  <p className="text-xs text-green-700/80 dark:text-green-300/80">Okay to tell friends</p>
+                </div>
+              </div>
+              <div className="flex flex-wrap content-start gap-2">
+                {safeItems.map((id) => renderChip(id, true))}
+              </div>
+            </div>
+
+            {/* Private */}
+            <div
+              {...dropProps('private')}
+              role="button"
+              tabIndex={0}
+              aria-label="Keep private basket — tap to place the selected card here"
+              onClick={() => handleZoneActivate('private')}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  handleZoneActivate('private');
+                }
+              }}
+              className={`${zoneBase} cursor-pointer border-rose-400 bg-rose-50/60 hover:bg-rose-50 dark:border-rose-700 dark:bg-rose-950/30 dark:hover:bg-rose-950/50`}
+            >
+              <div className="mb-3 flex items-center gap-2 text-rose-800 dark:text-rose-200">
+                <Shield className="h-5 w-5" aria-hidden="true" />
+                <div>
+                  <h3 className="text-sm font-bold leading-tight">Keep private</h3>
+                  <p className="text-xs text-rose-700/80 dark:text-rose-300/80">Protect this information</p>
+                </div>
+              </div>
+              <div className="flex flex-wrap content-start gap-2">
+                {privateItems.map((id) => renderChip(id, true))}
+              </div>
+            </div>
+          </div>
+
+          {feedback && (
+            <div
+              role="status"
+              className="mt-4 rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-center text-sm font-medium text-amber-800 dark:border-amber-700 dark:bg-amber-950/40 dark:text-amber-200"
+            >
+              {feedback}
+            </div>
+          )}
+        </div>
+
+        {/* Controls */}
+        <div className="flex flex-wrap items-center justify-center gap-2 border-t border-gray-200 bg-gray-50 px-5 py-4 dark:border-gray-800 dark:bg-gray-800/50">
+          <button
+            type="button"
+            onClick={reshuffle}
+            className="inline-flex items-center gap-2 rounded-xl border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
+          >
+            <Shuffle className="h-4 w-4" aria-hidden="true" />
             Shuffle
           </button>
-          <button onClick={downloadImage} className="control-button">
-            <Download size={16} />
-            Download
+          <button
+            type="button"
+            onClick={reset}
+            className="inline-flex items-center gap-2 rounded-xl border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
+          >
+            <RotateCcw className="h-4 w-4" aria-hidden="true" />
+            Reset
           </button>
-          <button onClick={checkCompletion} className="control-button primary">
-            <CheckCircle size={16} />
-            Check Answer
+          <button
+            type="button"
+            onClick={checkAnswer}
+            className="inline-flex items-center gap-2 rounded-xl bg-green-600 px-5 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-400"
+          >
+            <CheckCircle2 className="h-4 w-4" aria-hidden="true" />
+            Check answer
           </button>
         </div>
 
+        {/* Completion overlay */}
         {isCompleted && (
-          <div className="completion-overlay">
-            <div className="completion-message">
-              <CheckCircle size={48} className="success-icon" />
-              <h3>Excellent Work!</h3>
-              <p>You've correctly sorted all the information! You scored {score}%</p>
-              <p>You now know what information is safe to share and what to keep private.</p>
+          <div className="absolute inset-0 z-10 flex items-center justify-center bg-gray-900/70 p-6">
+            <div className="w-full max-w-sm rounded-2xl bg-white p-8 text-center shadow-2xl dark:bg-gray-900">
+              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/50">
+                <Sparkles className="h-8 w-8 text-green-600 dark:text-green-400" aria-hidden="true" />
+              </div>
+              <h3 className="mb-2 text-2xl font-bold text-gray-900 dark:text-gray-100">Excellent work!</h3>
+              <p className="mb-1 text-gray-600 dark:text-gray-300">
+                You sorted every card correctly and scored {score}%.
+              </p>
+              <p className="mb-6 text-sm text-gray-500 dark:text-gray-400">
+                Now you know what&rsquo;s safe to share and what to keep private.
+              </p>
+              <div className="flex justify-center gap-3">
+                <button
+                  type="button"
+                  onClick={reset}
+                  className="inline-flex items-center gap-2 rounded-xl border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
+                >
+                  <RotateCcw className="h-4 w-4" aria-hidden="true" />
+                  Play again
+                </button>
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="rounded-xl bg-green-600 px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-400"
+                >
+                  Done
+                </button>
+              </div>
             </div>
           </div>
         )}
       </div>
-
-      <style jsx>{`
-        .drag-drop-activity {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: rgba(0, 0, 0, 0.8);
-          display: flex;
-          flex-direction: column;
-          z-index: 1000;
-        }
-
-        .activity-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 20px;
-          background: white;
-          border-bottom: 1px solid #e0e0e0;
-        }
-
-        .activity-title {
-          margin: 0;
-          color: #2C3E50;
-          font-size: 24px;
-        }
-
-        .close-button {
-          background: none;
-          border: none;
-          font-size: 24px;
-          cursor: pointer;
-          color: #666;
-        }
-
-        .activity-content {
-          flex: 1;
-          background: white;
-          display: flex;
-          flex-direction: column;
-        }
-
-        .instructions {
-          padding: 20px;
-          background: #f8f9fa;
-          border-bottom: 1px solid #e0e0e0;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-
-        .instructions p {
-          margin: 0;
-          color: #2C3E50;
-          font-size: 16px;
-        }
-
-        .score {
-          font-size: 18px;
-          font-weight: bold;
-          color: #4CAF50;
-        }
-
-        .game-container {
-          flex: 1;
-          position: relative;
-          background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-          overflow: hidden;
-        }
-
-        .drop-zone {
-          position: absolute;
-          width: 200px;
-          height: 100px;
-          border: 3px dashed #ccc;
-          border-radius: 12px;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          text-align: center;
-          background: rgba(255, 255, 255, 0.8);
-          transition: all 0.3s ease;
-        }
-
-        .safe-zone {
-          top: 300px;
-          left: 50px;
-          border-color: #4CAF50;
-          background: rgba(76, 175, 80, 0.1);
-        }
-
-        .private-zone {
-          top: 300px;
-          right: 50px;
-          border-color: #f44336;
-          background: rgba(244, 67, 54, 0.1);
-        }
-
-        .drop-zone h3 {
-          margin: 0 0 5px 0;
-          font-size: 16px;
-          color: #2C3E50;
-        }
-
-        .drop-zone p {
-          margin: 0;
-          font-size: 12px;
-          color: #666;
-        }
-
-        .drag-item {
-          position: absolute;
-          width: 100px;
-          height: 50px;
-          background: white;
-          border: 2px solid #ddd;
-          border-radius: 8px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: grab;
-          user-select: none;
-          font-size: 12px;
-          font-weight: 500;
-          text-align: center;
-          padding: 5px;
-          transition: all 0.2s ease;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .drag-item:hover {
-          transform: scale(1.05);
-        }
-
-        .drag-item:active {
-          cursor: grabbing;
-        }
-
-        .drag-item.safe {
-          border-color: #4CAF50;
-          background: #E8F5E8;
-        }
-
-        .drag-item.private {
-          border-color: #f44336;
-          background: #FFEBEE;
-        }
-
-        .drag-item.correct {
-          border-color: #4CAF50;
-          background: #C8E6C9;
-          box-shadow: 0 0 0 2px #4CAF50;
-        }
-
-        .controls {
-          padding: 20px;
-          background: #f8f9fa;
-          border-top: 1px solid #e0e0e0;
-          display: flex;
-          gap: 15px;
-          justify-content: center;
-        }
-
-        .control-button {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          padding: 12px 24px;
-          border: 1px solid #ddd;
-          background: white;
-          border-radius: 8px;
-          cursor: pointer;
-          transition: all 0.2s;
-          font-size: 14px;
-          font-weight: 500;
-        }
-
-        .control-button:hover {
-          background: #f0f0f0;
-        }
-
-        .control-button.primary {
-          background: #4CAF50;
-          color: white;
-          border-color: #4CAF50;
-        }
-
-        .control-button.primary:hover {
-          background: #45a049;
-        }
-
-        .completion-overlay {
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: rgba(0, 0, 0, 0.8);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          z-index: 10;
-        }
-
-        .completion-message {
-          background: white;
-          padding: 40px;
-          border-radius: 12px;
-          text-align: center;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-          max-width: 400px;
-        }
-
-        .success-icon {
-          color: #4CAF50;
-          margin-bottom: 20px;
-        }
-
-        .completion-message h3 {
-          margin: 0 0 15px 0;
-          color: #2C3E50;
-          font-size: 24px;
-        }
-
-        .completion-message p {
-          margin: 0 0 10px 0;
-          color: #666;
-          font-size: 16px;
-        }
-
-        @media (max-width: 768px) {
-          .game-container {
-            padding: 15px;
-            min-height: 400px;
-          }
-
-          .drop-zone {
-            width: 140px;
-            height: 70px;
-            font-size: 12px;
-          }
-
-          .safe-zone {
-            left: 15px;
-            top: 250px;
-          }
-
-          .private-zone {
-            right: 15px;
-            top: 250px;
-          }
-
-          .drag-item {
-            width: 90px;
-            height: 45px;
-            font-size: 11px;
-            padding: 8px;
-            min-height: 45px;
-            touch-action: none;
-            user-select: none;
-          }
-
-          .controls {
-            flex-direction: row;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-          }
-
-          .control-button {
-            flex: 1;
-            min-width: 120px;
-            padding: 10px 16px;
-            font-size: 13px;
-          }
-
-          .instructions {
-            padding: 15px;
-            font-size: 14px;
-          }
-
-          .score {
-            font-size: 16px;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .game-container {
-            padding: 10px;
-            min-height: 350px;
-          }
-
-          .drop-zone {
-            width: 120px;
-            height: 60px;
-            font-size: 11px;
-          }
-
-          .safe-zone {
-            left: 10px;
-            top: 200px;
-          }
-
-          .private-zone {
-            right: 10px;
-            top: 200px;
-          }
-
-          .drag-item {
-            width: 80px;
-            height: 40px;
-            font-size: 10px;
-            padding: 6px;
-          }
-
-          .controls {
-            flex-direction: column;
-          }
-
-          .control-button {
-            width: 100%;
-            margin-bottom: 8px;
-          }
-        }
-      `}</style>
     </div>
   );
 };

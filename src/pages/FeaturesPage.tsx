@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import {
   ShieldCheck,
   BookOpen,
@@ -12,6 +13,7 @@ import {
   Fingerprint,
   Home,
   WifiOff,
+  type LucideIcon,
 } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 import {
@@ -23,154 +25,69 @@ import {
   ShellTextCard,
 } from '../components/layout/PageContent';
 
-const flow = [
-  {
-    title: 'Stories & guides',
-    description:
-      'Privacy Panda adventures and parent materials—open anytime. No catalog or footprint review required.',
-    icon: BookOpen,
-    href: '/stories',
-  },
-  {
-    title: 'Footprint from your catalog',
-    description:
-      'List apps in the service catalog when you want scores. Footprint review reads that list—it does not unlock the rest of the site.',
-    icon: ShieldCheck,
-    href: '/service-catalog',
-  },
-  {
-    title: 'Family Hub',
-    description:
-      'Missions and progress on your device—optional, before or after a footprint review.',
-    icon: LayoutDashboard,
-    href: '/family-hub',
-  },
-];
+const FLOW_ICONS: LucideIcon[] = [BookOpen, ShieldCheck, LayoutDashboard];
+const FLOW_HREFS = ['/stories', '/service-catalog', '/family-hub'];
+const JOURNEY_ICONS: LucideIcon[] = [BookOpen, Fingerprint, Home];
+const AUDIENCE_ICONS: LucideIcon[] = [Users, GraduationCap, Lock];
+const TRUST_ICONS: LucideIcon[] = [WifiOff, ShieldCheck, Users];
 
-const benefits = [
-  'Stories, guides, Hub, and footprint review—use any door first',
-  'Catalog lists apps; footprint review reads that list (nothing else is gated)',
-  'Progress saved on your device—no PandaGarde account required',
-  'Emotional, age-matched content—not a single forced checklist',
-];
-
-const transformationColumns = [
-  {
-    eyebrow: 'Without a shared plan',
-    title: 'Privacy work scatters and restarts',
-    points: [
-      'Notes, tabs, and one-off conversations never become a household routine.',
-      'It is hard to know which setting or app to fix first.',
-      'Kids hear different rules in different moments, without a shared story.',
-    ],
-  },
-  {
-    eyebrow: 'With PandaGarde',
-    title: 'Review, learn, and follow through together',
-    points: [
-      'Footprint review gives a snapshot when you list apps in the catalog.',
-      'Stories and resources work on their own when you need a calm moment.',
-      'Family Hub keeps missions and progress in one place on your device.',
-    ],
-  },
-];
-
-const journeyLayers = [
-  {
-    title: 'Stories & guides',
-    description: 'Privacy Panda and parent materials—open anytime, no catalog required.',
-    icon: BookOpen,
-    points: ['Read together', 'Independent of footprint', 'Age-matched tone'],
-  },
-  {
-    title: 'Footprint from catalog',
-    description: 'List apps once; review exposure when you want a household snapshot.',
-    icon: Fingerprint,
-    points: ['Catalog builds the list', 'Review uses that list', 'Optional timing'],
-  },
-  {
-    title: 'Family Hub',
-    description: 'Missions and progress on your device—before, after, or without a review.',
-    icon: Home,
-    points: ['Local progress', 'Parent-guided missions', 'No footprint review required'],
-  },
-];
-
-const audienceCards = [
-  {
-    title: 'For parents',
-    description: 'Prioritize what matters, lead calmer conversations, and track follow-through without overwhelm.',
-    icon: Users,
-  },
-  {
-    title: 'For children',
-    description: 'Learn through stories and missions matched to age—not fear-based warnings.',
-    icon: GraduationCap,
-  },
-  {
-    title: 'For the household',
-    description: 'One shared rhythm for accounts, devices, and online habits across the family.',
-    icon: Lock,
-  },
-];
-
-const faqCards = [
-  {
-    question: 'Do we have to finish footprint review before stories or Family Hub?',
-    answer:
-      'No. Stories, guides, and Family Hub are independent. Only the footprint review page needs apps in your service catalog so scores have something to analyze.',
-  },
-  {
-    question: 'Do we have to open Family Hub on day one?',
-    answer:
-      'No. Many families start with a story or a guide, use footprint review when they want a snapshot, and open Family Hub whenever missions fit the week.',
-  },
-  {
-    question: 'Does PandaGarde monitor what my child does online?',
-    answer:
-      'No. You list services your family uses; PandaGarde does not watch live activity on a child’s device.',
-  },
-  {
-    question: 'What is the service catalog for?',
-    answer:
-      'It is the list of apps and services your family uses. Footprint review reads that list to show exposure. The catalog does not gate stories, resources, or Family Hub.',
-  },
-];
-
-const trustPoints = [
-  {
-    title: 'Private by default',
-    description:
-      'Core progress stays on your device. PandaGarde is built for families who want guidance without unnecessary data collection.',
-    icon: WifiOff,
-  },
-  {
-    title: 'One job per step',
-    description:
-      'The site helps you review and learn. Family Hub helps you practice and follow through—so each visit has a clear purpose.',
-    icon: ShieldCheck,
-  },
-  {
-    title: 'Built for households',
-    description:
-      'Parents, kids, and educators each have an entry point, without splitting the family into separate products.',
-    icon: Users,
-  },
-];
+interface FlowItem {
+  title: string;
+  description: string;
+}
+interface CardWithPoints {
+  title: string;
+  description: string;
+  points: string[];
+}
+interface TransformationColumn {
+  eyebrow: string;
+  title: string;
+  points: string[];
+}
+interface TitleDescription {
+  title: string;
+  description: string;
+}
+interface QAItem {
+  question: string;
+  answer: string;
+}
 
 const FeaturesPage: React.FC = () => {
+  const { t } = useTranslation();
+
+  const flow = (t('howItWorks.flow', { returnObjects: true }) as FlowItem[]).map((item, index) => ({
+    ...item,
+    icon: FLOW_ICONS[index],
+    href: FLOW_HREFS[index],
+  }));
+  const benefits = t('howItWorks.benefits', { returnObjects: true }) as string[];
+  const transformationColumns = t('howItWorks.transformationColumns', {
+    returnObjects: true,
+  }) as TransformationColumn[];
+  const journeyLayers = (
+    t('howItWorks.journeyLayers', { returnObjects: true }) as CardWithPoints[]
+  ).map((item, index) => ({ ...item, icon: JOURNEY_ICONS[index] }));
+  const audienceCards = (
+    t('howItWorks.audienceCards', { returnObjects: true }) as TitleDescription[]
+  ).map((item, index) => ({ ...item, icon: AUDIENCE_ICONS[index] }));
+  const faqCards = t('howItWorks.faqCards', { returnObjects: true }) as QAItem[];
+  const trustPoints = (
+    t('howItWorks.trustPoints', { returnObjects: true }) as TitleDescription[]
+  ).map((item, index) => ({ ...item, icon: TRUST_ICONS[index] }));
+
   return (
     <PageLayout
-      title="How PandaGarde Works"
-      subtitle="Stories, guides, and Family Hub stand on their own. The catalog feeds footprint review when you want a snapshot."
+      title={t('howItWorks.title')}
+      subtitle={t('howItWorks.subtitle')}
       breadcrumbs={true}
     >
       <PageLead>
-        PandaGarde is not one long checklist. Families read stories, use guides, open Family Hub, or run a footprint
-        review when it helps—only the review needs apps listed in the catalog.
+        {t('howItWorks.lead')}
       </PageLead>
 
-      <PageSection header={{ eyebrow: 'Your path', title: 'Four areas—pick what fits' }}>
+      <PageSection header={{ eyebrow: t('howItWorks.yourPath'), title: t('howItWorks.fourAreas') }}>
         <div className="shell-stack">
           {flow.map((item, index) => {
             const Icon = item.icon;
@@ -186,7 +103,7 @@ const FeaturesPage: React.FC = () => {
                     to={item.href}
                     className="button button-secondary inline-flex items-center gap-2 whitespace-nowrap"
                   >
-                    Open <ArrowRight size={16} aria-hidden />
+                    {t('common.open')} <ArrowRight size={16} aria-hidden />
                   </Link>
                 }
               />
@@ -195,7 +112,7 @@ const FeaturesPage: React.FC = () => {
         </div>
       </PageSection>
 
-      <PageSection header={{ title: 'What you get' }}>
+      <PageSection header={{ title: t('howItWorks.whatYouGet') }}>
         <div className="shell-card shell-card--panel shell-card--panel-inner">
           <div className="shell-grid shell-grid--2">
             {benefits.map((item) => (
@@ -214,9 +131,9 @@ const FeaturesPage: React.FC = () => {
 
       <PageSection
         header={{
-          eyebrow: 'Before and after',
-          title: 'From scattered worry to a plan you can keep',
-          lead: 'Families often already care about privacy—the missing piece is a sequence that does not fall apart after the first weekend of good intentions.',
+          eyebrow: t('howItWorks.beforeAfter'),
+          title: t('howItWorks.beforeAfterTitle'),
+          lead: t('howItWorks.beforeAfterLead'),
         }}
       >
         <div className="shell-grid shell-grid--2">
@@ -234,9 +151,9 @@ const FeaturesPage: React.FC = () => {
 
       <PageSection
         header={{
-          eyebrow: 'How the journey is organized',
-          title: 'Three layers, one path',
-          lead: 'Each stage has a clear purpose so you are not asked to learn, plan, and operate in the same screen at once.',
+          eyebrow: t('howItWorks.journeyEyebrow'),
+          title: t('howItWorks.journeyTitle'),
+          lead: t('howItWorks.journeyLead'),
         }}
       >
         <div className="shell-grid shell-grid--3">
@@ -256,7 +173,7 @@ const FeaturesPage: React.FC = () => {
         </div>
       </PageSection>
 
-      <PageSection header={{ eyebrow: 'Who it is for', title: 'One family, different entry points' }}>
+      <PageSection header={{ eyebrow: t('howItWorks.whoEyebrow'), title: t('howItWorks.whoTitle') }}>
         <div className="shell-grid shell-grid--3">
           {audienceCards.map((item) => {
             const Icon = item.icon;
@@ -272,7 +189,7 @@ const FeaturesPage: React.FC = () => {
       <PageSection
         id="faq"
         className="scroll-mt-24"
-        header={{ eyebrow: 'Common questions', title: 'Quick answers' }}
+        header={{ eyebrow: t('howItWorks.faqEyebrow'), title: t('howItWorks.faqTitle') }}
       >
         <div className="shell-grid shell-grid--3">
           {faqCards.map((item) => (
@@ -283,7 +200,7 @@ const FeaturesPage: React.FC = () => {
         </div>
       </PageSection>
 
-      <PageSection header={{ eyebrow: 'Our approach', title: 'Designed for real family use' }}>
+      <PageSection header={{ eyebrow: t('howItWorks.approachEyebrow'), title: t('howItWorks.approachTitle') }}>
         <div className="shell-grid shell-grid--3">
           {trustPoints.map((item) => {
             const Icon = item.icon;
@@ -298,17 +215,17 @@ const FeaturesPage: React.FC = () => {
 
       <div className="shell-card shell-card--panel shell-cta-panel flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="shell-cta-panel__copy">
-          <h2 className="page-section__title">Ready to begin?</h2>
+          <h2 className="page-section__title">{t('howItWorks.readyTitle')}</h2>
           <p className="shell-card__body">
-            Start with footprint review, or open Family Hub when you are ready.
+            {t('howItWorks.readyBody')}
           </p>
         </div>
         <div className="shell-cta-panel__actions flex flex-col gap-2 sm:flex-row sm:flex-wrap">
           <Link to="/digital-footprint" className="button button-primary inline-flex items-center gap-1.5">
-            Start review <ArrowRight size={14} aria-hidden />
+            {t('howItWorks.startReview')} <ArrowRight size={14} aria-hidden />
           </Link>
           <Link to="/family-hub" className="button button-secondary inline-flex items-center gap-1.5">
-            Family Hub
+            {t('common.familyHub')}
           </Link>
         </div>
       </div>

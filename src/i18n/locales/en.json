@@ -107,5 +107,121 @@
     "independentAreasLead": "Pick what fits today: a story with your child, a parent guide, missions in Family Hub, or a footprint review when you want a household snapshot.",
     "guidesStoriesLead": "Read with your kids, use parent guides and printables, or open Family Hub for practice—all at your own pace.",
     "quickStartLead": "Got 5 minutes? Read a story with your child. Got 15? List the apps your family uses. Everything else can wait until you are ready."
+  },
+  "faq": {
+    "title": "FAQ",
+    "subtitle": "Quick answers to questions about PandaGarde and how to use it with your family.",
+    "browseByCategory": "Browse by Category",
+    "stillQuestions": "Still Have Questions?",
+    "stillQuestionsBody": "Can't find what you're looking for? We're here to help.",
+    "contactUs": "Contact Us",
+    "tryFamilyHub": "Try Family Hub",
+    "categories": [
+      { "id": "all", "label": "All Questions" },
+      { "id": "general", "label": "General" },
+      { "id": "getting-started", "label": "Getting Started" },
+      { "id": "activities", "label": "Activities" },
+      { "id": "privacy", "label": "Privacy & Safety" },
+      { "id": "educators", "label": "For Educators" },
+      { "id": "technical", "label": "Technical" }
+    ],
+    "items": [
+      { "id": "1", "category": "general", "question": "What is PandaGarde and who is it for?", "answer": "PandaGarde helps families with children and teens ages 5–17 learn about online privacy together. It combines Privacy Panda stories, parent guides, a footprint review, and Family Hub missions — use any of them in any order." },
+      { "id": "2", "category": "general", "question": "Is PandaGarde free to use?", "answer": "Yes! PandaGarde is completely free for families and educators. We believe privacy education should be accessible to everyone, so all our resources, activities, and content are available at no cost." },
+      { "id": "3", "category": "general", "question": "What age groups does PandaGarde support?", "answer": "PandaGarde is designed for ages 5–17, with Family Hub missions matched to three bands: young children (5–8), older kids (9–12), and teens (13–17). Stories, guides, and missions are all age-aware." },
+      { "id": "4", "category": "getting-started", "question": "How do I get started with PandaGarde?", "answer": "Start anywhere — no account required. Most families open a Privacy Panda story first, or browse the parent guides. The footprint review and Family Hub are there when you're ready for them." },
+      { "id": "5", "category": "educators", "question": "Can educators use PandaGarde in schools?", "answer": "Absolutely! We provide educator-specific resources and curriculum guides for classroom use. Teachers can use our activities, stories, and discussion guides to teach digital privacy concepts in their classrooms." },
+      { "id": "6", "category": "activities", "question": "How do the interactive activities work?", "answer": "Interactive missions and games live in the Family Hub. Each mission pairs a real-life scenario and family conversation with an optional hands-on game — coloring, mazes, sorting, and word searches for younger kids, and simulations like the Phishing Detective for teens. Everything runs on your device." },
+      { "id": "7", "category": "privacy", "question": "Is my child's data safe on PandaGarde?", "answer": "Yes. We don't collect personal info from kids, and progress is saved on your device. We don't share your data with anyone else." },
+      { "id": "8", "category": "progress", "question": "Can I track my child's progress?", "answer": "Yes! In the Family Hub you can see which missions your child has done, their scores, and streaks — all saved on this device only. It's a record of learning activities completed together, not monitoring of what your child does elsewhere online." },
+      { "id": "9", "category": "support", "question": "What if my child has questions about privacy?", "answer": "We provide discussion guides and conversation starters for parents to help answer questions about privacy. Our resources are designed to make these important conversations easier and more engaging for both parents and children." },
+      { "id": "10", "category": "resources", "question": "Are there offline resources available?", "answer": "Yes! We offer downloadable coloring sheets, certificates, family agreements, and printable activities that you can use offline. These are perfect for continuing the learning away from screens." },
+      { "id": "11", "category": "content", "question": "How often is new content added?", "answer": "We regularly add new activities, stories, and resources to keep the learning experience fresh and engaging. We also update our content based on feedback from families and educators." },
+      { "id": "12", "category": "technical", "question": "Can I use PandaGarde on mobile devices?", "answer": "Yes! PandaGarde works on phones, tablets, and computers. You can even add it to your home screen and use it like an app." }
+    ]
+  },
+  "howItWorks": {
+    "title": "How PandaGarde Works",
+    "subtitle": "Stories, guides, and Family Hub stand on their own. The catalog feeds footprint review when you want a snapshot.",
+    "lead": "PandaGarde is not one long checklist. Families read stories, use guides, open Family Hub, or run a footprint review when it helps—only the review needs apps listed in the catalog.",
+    "yourPath": "Your path",
+    "fourAreas": "Four areas—pick what fits",
+    "whatYouGet": "What you get",
+    "beforeAfter": "Before and after",
+    "beforeAfterTitle": "From scattered worry to a plan you can keep",
+    "beforeAfterLead": "Families often already care about privacy—the missing piece is a sequence that does not fall apart after the first weekend of good intentions.",
+    "journeyEyebrow": "How the journey is organized",
+    "journeyTitle": "Three layers, one path",
+    "journeyLead": "Each stage has a clear purpose so you are not asked to learn, plan, and operate in the same screen at once.",
+    "whoEyebrow": "Who it is for",
+    "whoTitle": "One family, different entry points",
+    "faqEyebrow": "Common questions",
+    "faqTitle": "Quick answers",
+    "approachEyebrow": "Our approach",
+    "approachTitle": "Designed for real family use",
+    "readyTitle": "Ready to begin?",
+    "readyBody": "Start with footprint review, or open Family Hub when you are ready.",
+    "startReview": "Start review",
+    "flow": [
+      { "title": "Stories & guides", "description": "Privacy Panda adventures and parent materials—open anytime. No catalog or footprint review required." },
+      { "title": "Footprint from your catalog", "description": "List apps in the service catalog when you want scores. Footprint review reads that list—it does not unlock the rest of the site." },
+      { "title": "Family Hub", "description": "Missions and progress on your device—optional, before or after a footprint review." }
+    ],
+    "benefits": [
+      "Stories, guides, Hub, and footprint review—use any door first",
+      "Catalog lists apps; footprint review reads that list (nothing else is gated)",
+      "Progress saved on your device—no PandaGarde account required",
+      "Emotional, age-matched content—not a single forced checklist"
+    ],
+    "transformationColumns": [
+      { "eyebrow": "Without a shared plan", "title": "Privacy work scatters and restarts", "points": ["Notes, tabs, and one-off conversations never become a household routine.", "It is hard to know which setting or app to fix first.", "Kids hear different rules in different moments, without a shared story."] },
+      { "eyebrow": "With PandaGarde", "title": "Review, learn, and follow through together", "points": ["Footprint review gives a snapshot when you list apps in the catalog.", "Stories and resources work on their own when you need a calm moment.", "Family Hub keeps missions and progress in one place on your device."] }
+    ],
+    "journeyLayers": [
+      { "title": "Stories & guides", "description": "Privacy Panda and parent materials—open anytime, no catalog required.", "points": ["Read together", "Independent of footprint", "Age-matched tone"] },
+      { "title": "Footprint from catalog", "description": "List apps once; review exposure when you want a household snapshot.", "points": ["Catalog builds the list", "Review uses that list", "Optional timing"] },
+      { "title": "Family Hub", "description": "Missions and progress on your device—before, after, or without a review.", "points": ["Local progress", "Parent-guided missions", "No footprint review required"] }
+    ],
+    "audienceCards": [
+      { "title": "For parents", "description": "Prioritize what matters, lead calmer conversations, and track follow-through without overwhelm." },
+      { "title": "For children", "description": "Learn through stories and missions matched to age—not fear-based warnings." },
+      { "title": "For the household", "description": "One shared rhythm for accounts, devices, and online habits across the family." }
+    ],
+    "faqCards": [
+      { "question": "Do we have to finish footprint review before stories or Family Hub?", "answer": "No. Stories, guides, and Family Hub are independent. Only the footprint review page needs apps in your service catalog so scores have something to analyze." },
+      { "question": "Do we have to open Family Hub on day one?", "answer": "No. Many families start with a story or a guide, use footprint review when they want a snapshot, and open Family Hub whenever missions fit the week." },
+      { "question": "Does PandaGarde monitor what my child does online?", "answer": "No. You list services your family uses; PandaGarde does not watch live activity on a child's device." },
+      { "question": "What is the service catalog for?", "answer": "It is the list of apps and services your family uses. Footprint review reads that list to show exposure. The catalog does not gate stories, resources, or Family Hub." }
+    ],
+    "trustPoints": [
+      { "title": "Private by default", "description": "Core progress stays on your device. PandaGarde is built for families who want guidance without unnecessary data collection." },
+      { "title": "One job per step", "description": "The site helps you review and learn. Family Hub helps you practice and follow through—so each visit has a clear purpose." },
+      { "title": "Built for households", "description": "Parents, kids, and educators each have an entry point, without splitting the family into separate products." }
+    ]
+  },
+  "stories": {
+    "title": "Privacy Panda Stories",
+    "subtitle": "Read in any order—no service catalog or footprint review required. Start with the Digital Bamboo Forest or browse by age.",
+    "foundationBadge": "Season 1 · Episode 1 · Start here",
+    "interactiveScenes": "Interactive scenes",
+    "chapterReader": "Chapter reader",
+    "narration": "Narration",
+    "beginJourney": "Begin the journey",
+    "meetTheCast": "Meet the cast",
+    "meetTheCastSuffix": "— see who appears in each episode before you read.",
+    "filterByAge": "Filter by age",
+    "emptyAll": "More episodes are on the way. Start with the foundation story above.",
+    "emptyFiltered": "No continuation episodes for this age group yet. Try All Ages or begin with the foundation story.",
+    "seasonLabel": "Season {{number}}",
+    "season1Title": "Season 1 — The Privacy Grove",
+    "season1Subtitle": "Episodes 2–8 · foundational privacy lessons for ages 5–10",
+    "season2Title": "Season 2 — The Kindness Clearing",
+    "season2Subtitle": "Episodes 9–16 · deeper topics for ages 8–13",
+    "filters": {
+      "all": "All Ages",
+      "early": "Ages 5–7",
+      "middle": "Ages 8–10",
+      "older": "Ages 11–13"
+    }
   }
 }
