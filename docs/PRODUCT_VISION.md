@@ -5,7 +5,8 @@
 > **Author:** Facely Kandé, ERMITS Advisory  
 > **Scope:** Product definition and north star. Operational claims must match
 > [`CONTENT_TRUTH.md`](./CONTENT_TRUTH.md). Creative canon lives in
-> [`STORYLINE_BIBLE.md`](./STORYLINE_BIBLE.md). Summer Camp is a separate GTM program
+> [`STORYLINE_BIBLE.md`](./STORYLINE_BIBLE.md). Federal policy mapping (H.R. 7757):
+> [`KIDS_ACT_ALIGNMENT.md`](./KIDS_ACT_ALIGNMENT.md). Summer Camp is a separate GTM program
 > (`docs/SUMMER_CAMP_STRATEGY.md` when present).
 
 ---
@@ -47,12 +48,20 @@ the **capability gap**: parents already know screens, cyberbullying, and social 
 risky; what they lack is language, ritual, framework, and a structured way to engage their
 child.
 
-### The Product Truth
+### The Policy Truth (H.R. 7757 — KIDS Act)
 
-The forest is a **container**, not a feature. Privacy is the first grove in a world that
-will expand to cyberbullying, AI literacy, social pressure, identity, and belonging. The
-product exists **year-round** — before, during, and after any camp or pilot cohort. Camp
-and pilot programs are **additive GTM wrappers**, not the platform definition.
+The *Kids Internet and Digital Safety Act* (H.R. 7757, 119th Congress) tells **platforms**
+what safeguards and parental tools they must build. PandaGarde is **not** a covered platform
+— it does not host social messaging, operate child-facing AI chatbots, sell in-app purchases,
+or collect behavioral profiles for advertising.
+
+PandaGarde **complements** the bill by closing the capability gap Title V assumes but does
+not supply: helping families understand *why* safeguards matter and *how* to use them in
+real life. Full requirement-by-requirement mapping: [`KIDS_ACT_ALIGNMENT.md`](./KIDS_ACT_ALIGNMENT.md).
+
+**Positioning in one line:** The KIDS Act tells platforms what they must build; PandaGarde
+helps families learn to use those tools — calmly, locally, and without surveillance framing.
+
 
 ### The Architectural Truth (July 2026)
 
@@ -185,6 +194,10 @@ export PDFs, evidence-base documents.
 
 **Requires backend:** Cohort analytics, district admin dashboard, aggregate anonymized
 outcomes, white-label deployment. Tag as Phase 3 until a sync/analytics tier exists.
+
+**Policy fit (H.R. 7757):** Strongest alignment with **Title V** (§522 education campaign,
+§526 Kids Internet Safety Partnership). Institutional docs and pilot evidence support
+nonprofit/school partnership positioning — see §12.
 
 ---
 
@@ -443,12 +456,162 @@ language and action they did not have before.
 
 ---
 
-## 12. Related Documents
+## 12. Federal Policy Alignment — H.R. 7757 (KIDS Act)
+
+> **Bill status (July 2026):** Passed House (June 29, 2026); pending Senate.  
+> **Source:** [`BILLS-119hr7757eh.pdf`](./BILLS-119hr7757eh.pdf)  
+> **Full analysis:** [`KIDS_ACT_ALIGNMENT.md`](./KIDS_ACT_ALIGNMENT.md) — mission catalog, grant
+> narrative, gaps, approved positioning language.  
+> **Disclaimer:** Engineering/product alignment only — not legal advice.
+
+### PandaGarde's role in the policy ecosystem
+
+| Role | What it means |
+|---|---|
+| **Not a covered operator** | No platform duties under Titles I–IV or VI enforcement |
+| **Title V education partner** | Age-banded missions, parent guides, stories, institutional docs |
+| **Privacy-by-design exemplar** | Local-first Kids App; no behavioral ads; data minimization |
+| **Anti-addictive design model** | Calm UX; no streak anxiety; no manipulative child engagement |
+
+```
+H.R. 7757 operator duties (Titles I–IV, VI)  →  regulated platforms (social, games, AI)
+H.R. 7757 education & partnerships (Title V) →  PandaGarde (website, Hub, Kids App)
+Platforms must build safeguards            →  PandaGarde teaches families to use them
+```
+
+### Bill titles at a glance
+
+| Title | Subject | Regulated actors | PandaGarde fit |
+|---|---|---|---|
+| **I** | Shielding minors from obscenity | Adult-content sites | N/A — education only (red/yellow/green missions) |
+| **II** | Online platform safety | Social media platforms | **Education** — settings, messaging, compulsive-design literacy |
+| **III** | Social gaming safeguards | Game providers | **Education** — in-game chat, purchase scrutiny via catalog |
+| **IV** | AI chatbots | Chatbot operators | **Education** — Echo arc, teen AI mission; PandaGarde does not operate child AI chat |
+| **V** | Research, education, partnerships | FTC, HHS, schools, nonprofits | **Strongest fit** — missions, DFA, pilot evidence |
+| **VI** | Kids privacy (COPPA 2.0) | Data-collecting operators | **Architecture** — local-first, no teen profiling, no behavioral ads |
+| **VII** | Enforcement | FTC, state AGs | N/A — PandaGarde is not an enforcement target |
+
+### Requirement mapping by title
+
+#### Title II — Platform safety & parental tools (§213–§214)
+
+| Bill requirement *(platforms)* | PandaGarde contribution | Evidence |
+|---|---|---|
+| Limit compulsive design | Models anti-addictive child UX | No infinite scroll; calm aesthetic (§3) |
+| Default protective privacy settings | Teaches families to find and set safer defaults | *Privacy Settings Pro* (9–12); *Social Media Privacy Simulator* (13–17) |
+| Parental tools to view/manage settings | **Educates** parents to use platform tools — does not provide them | *App Permission Inspector*; DFA catalog → footprint |
+| Limit messaging with strangers | Family conversation + practice | *Who Can I Talk To Online?* (5–8); Trusted Team Builder (Kids App) |
+| Restrict geolocation sharing | Teaches location-sharing risks | *Social Media Privacy Simulator* (13–17) |
+
+**Honesty rule:** Copy must say families **learn to use** third-party controls — PandaGarde
+does not implement §214 tools on Instagram, Roblox, Snapchat, etc.
+
+#### Title III — Social gaming safeguards
+
+| Bill requirement *(game platforms)* | PandaGarde contribution | Evidence |
+|---|---|---|
+| Parental communication limits | Education on in-game chat risks | *Who Can I Talk To Online?*; game entries in service catalog |
+| Purchase restrictions | Teaches scrutiny at sign-up | *Pack Your Digital Backpack* (5–8) |
+| Gaming-specific privacy | Self-reported catalog + footprint | Roblox, Fortnite, etc. in catalog; scores drive conversation |
+
+#### Title IV — AI chatbots & AWARE Act (§524)
+
+| Bill requirement *(chatbot operators)* | PandaGarde contribution | Evidence |
+|---|---|---|
+| Disclose AI is not human | Education on AI nature and limits | Echo character arc; *AI & Your Privacy* (13–17) |
+| Crisis hotline disclosure | **Gap** — recommended on teen AI content | See `KIDS_ACT_ALIGNMENT.md` §Gaps |
+| AWARE parent/educator resources | Strong thematic alignment | Teen mission; parent guides; DFA journey |
+
+#### Title V — Research, education, best practices *(primary alignment)*
+
+| Bill provision | PandaGarde contribution | Evidence |
+|---|---|---|
+| §522 — Public awareness & education campaign | Direct — nonprofit education for parents, educators, minors | 18 missions; stories; DFA journey |
+| §522 — Facilitate nonprofit/school education | Institutional layer + pilot docs | Layer 3 (aspirational); educator tools |
+| §522(C) — Effective use of safeguards & parental controls | Missions end with one real settings/action step | Hub mission model: talk → activity → **do this after** |
+| §524 — Safe chatbot use resources | Teen AI mission + Echo stories | `ageBasedActivities.ts`; Season 2 stories |
+| §526 — Age-differentiated best practices | Three age bands (5–8, 9–12, 13–17) | `hubAgeBands.ts`, `ageBasedActivities.ts` |
+| §526 — Partnership stakeholders (nonprofit, academic) | Positioning opportunity | ERMITS Advisory; governance suite |
+
+**§522 definition of "online safety" — PandaGarde coverage:**
+
+| Statutory element | Product support |
+|---|---|
+| (A) Protect from cybercrime, narcotics, gambling, alcohol, adult content | Phishing missions; stranger messaging; red/yellow/green sorting |
+| (B) Prevent compulsive behavior and adverse health impacts | Anti-addictive design; no streak anxiety in child layer |
+| (C) Facilitate effective use of safeguards and parental controls | Settings missions; catalog; DFA path; parent-guided Hub |
+
+#### Title VI — COPPA 2.0 (kids privacy)
+
+| COPPA 2.0 direction | PandaGarde contribution | Evidence |
+|---|---|---|
+| Expand protections to teens | Teen band missions (13–17); no teen behavioral profiling | `CONTENT_TRUTH.md` §3 |
+| Limit targeted advertising | Zero behavioral advertising | Kids App has no analytics |
+| Data minimization | Local-first; avatar + age band only in Kids App | `KidsProgressContext.tsx` |
+| Deletion rights | Device-local data; user can reset | Kids App grown-ups corner |
+
+### Four-surface policy contribution
+
+| Surface | KIDS Act contribution |
+|---|---|
+| **Website** | DFA journey; self-reported catalog; footprint review; safety alerts; parent guides; privacy assessment |
+| **Family Hub** | 18 structured missions with family ritual and real-world action steps |
+| **Kids App** | Calm immersive learning; Trusted Team Builder; no analytics; parental gate |
+| **Institutional** *(aspirational)* | Evidence base, pilot outcomes, curriculum alignment for §526 partnership |
+
+### Mission-to-policy quick reference (Family Hub)
+
+Full catalog: [`FAMILYHUB_MISSIONS_PARENT_GUIDE.md`](./FAMILYHUB_MISSIONS_PARENT_GUIDE.md).
+
+| Age band | Mission | KIDS Act theme |
+|---|---|---|
+| 5–8 | Traffic Light: Safe or Not? | Harm avoidance; social-engineering precursors |
+| 5–8 | Who Can I Talk To Online? | Messaging safety; stranger controls (§214 education) |
+| 5–8 | Secret Keeper Club | Account security; password literacy |
+| 9–12 | Privacy Settings Pro | Parental-tool literacy (§214(B)) |
+| 9–12 | App Permission Inspector | Permissions; geolocation/contacts/mic (§214(E) education) |
+| 9–12 | Phishing Patrol | Financial/deceptive harm (§213(4)) |
+| 9–12 | Screenshot Safety Challenge | Social harm; bullying prevention |
+| 13–17 | Social Media Privacy Simulator | Messaging, audience, location (§214) |
+| 13–17 | Data Broker Discovery | Personal information disclosure (Title VI) |
+| 13–17 | Privacy Rights Challenge | Consent and deletion literacy (COPPA 2.0) |
+| 13–17 | AI & Your Privacy | AWARE Act / Title IV education |
+
+### Approved positioning language (grants / pilots)
+
+- PandaGarde is a **family digital resilience** system that helps parents and children
+  practice online safety, privacy settings, and responsible technology use — complementing
+  platform safeguards required under federal child-safety legislation.
+- Family Hub provides **18 age-matched privacy missions** (ages 5–17) with parent-guided
+  conversation and one concrete action per mission — aligned with empowering parents and
+  strengthening families.
+- PandaGarde teaches families to **use** parental controls and privacy settings on apps they
+  already use; it is **not** a monitoring tool or substitute for platform safeguards.
+
+**Avoid:** monitoring claims, third-party parental-control claims, HIPAA/COPPA certification
+claims — see `CONTENT_TRUTH.md` §8.
+
+### Policy-driven roadmap enhancements
+
+| Priority | Enhancement | Bill hook |
+|---|---|---|
+| High | Platform settings deep-links appendix (per-mission parent cards) | §214; §522(C) |
+| High | AWARE parent one-pager (chatbot risks, printable PDF) | §524 |
+| Medium | Crisis resources block on teen AI content (988 / Crisis Text Line) | Title IV spirit |
+| Medium | Pilot evidence package (parent confidence pre/post) | §526 |
+| Medium | Educator/district brief (mission map → ISTE / digital citizenship) | §522; §526 |
+
+---
+
+## 13. Related Documents
 
 | Document | Role |
 |---|---|
 | [`CONTENT_TRUTH.md`](./CONTENT_TRUTH.md) | Shipped behavior — grep before release |
+| [`KIDS_ACT_ALIGNMENT.md`](./KIDS_ACT_ALIGNMENT.md) | Full H.R. 7757 requirement mapping, gaps, grant narrative |
+| [`BILLS-119hr7757eh.pdf`](./BILLS-119hr7757eh.pdf) | Source legislation (KIDS Act) |
 | [`STORYLINE_BIBLE.md`](./STORYLINE_BIBLE.md) | Creative canon — characters, zones, pillars |
+| [`FAMILYHUB_MISSIONS_PARENT_GUIDE.md`](./FAMILYHUB_MISSIONS_PARENT_GUIDE.md) | Mission catalog for parents and policy conversations |
 | [`sdlc/VISION.md`](./sdlc/VISION.md) | FamilyHub authoritative identity (SDLC suite) |
 | `CLAUDE.md` | Engineering standards and production blockers |
 

@@ -4,9 +4,13 @@
 
 **[CONTENT_TRUTH.md](./CONTENT_TRUTH.md)** — What Family Hub and the website actually do (local-first, missions, catalog/RSS alerts). Grep §7 before release to catch stale copy.
 
+## Policy & grants
+
+**[KIDS_ACT_ALIGNMENT.md](./KIDS_ACT_ALIGNMENT.md)** — How PandaGarde complements H.R. 7757 (KIDS Act): Title V education fit, mission-to-policy mapping, approved positioning language, pilot narrative template. Source bill: [`BILLS-119hr7757eh.pdf`](./BILLS-119hr7757eh.pdf).
+
 ## Product & story canon
 
-**[PRODUCT_VISION.md](./PRODUCT_VISION.md)** — Product north star (July 2026): forest canon, four surfaces (website, Kids App, Family Hub, institutional), DFA journey, roadmap status. Product vs. camp/pilot boundary in §10.
+**[PRODUCT_VISION.md](./PRODUCT_VISION.md)** — Product north star (July 2026): forest canon, four surfaces (website, Kids App, Family Hub, institutional), DFA journey, H.R. 7757 (KIDS Act) mapping in §12, roadmap status. Product vs. camp/pilot boundary in §10.
 
 **[STORYLINE_BIBLE.md](./STORYLINE_BIBLE.md)** — Canonical world reference: characters, zones, quest pillars, story registry.
 
