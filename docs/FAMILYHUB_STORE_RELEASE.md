@@ -91,11 +91,38 @@ See `src/pages/AppStoreReviewPage.tsx` on the marketing site for copy you can mi
 
 ## Google Play
 
-1. `npm run cap:android` → Android Studio → **Build → Generate Signed Bundle / APK** (AAB recommended).
-2. Play Console → Create app → same package `com.pandagarde.familyhub`.
-3. Privacy policy URL (required): use `https://www.pandagarde.com/privacy` or dedicated hub policy.
-4. Data safety: declare local storage only; no account, no ads to children (per governance suite).
-5. Screenshots: capture from hub standalone build (`npm run dev:familyhub` or device).
+### Already prepared on Windows
+
+| Item | State |
+|------|-------|
+| Android project + synced web assets | ✅ `npm run cap:sync:android` |
+| `targetSdkVersion` 35 | ✅ Play requirement met |
+| App icon + splash (all densities) | ✅ `android/app/src/main/res/` |
+| Store marketing assets | ✅ `store-assets/play-store-icon-512.png` · `play-feature-graphic-1024x500.png` |
+| Upload keystore + signing config | ✅ `npm run android:keystore` → gitignored `.jks` + `keystore.properties` |
+| Signed release AAB | ✅ `npm run android:bundleRelease` → `android/app/build/outputs/bundle/release/app-release.aab` |
+| Debug APK (screenshots) | ✅ `npm run android:debug` → `app-debug.apk` |
+
+**Full Play Console walkthrough:** [FAMILYHUB_PLAY_STORE.md](./FAMILYHUB_PLAY_STORE.md)
+
+**Refresh release AAB after code changes:**
+
+```bash
+npm run test:run
+npm run cap:sync:android
+npm run android:bundleRelease
+```
+
+**Back up** `android/pandagarde-familyhub-upload.jks` and passwords offline before first upload.
+
+### Play Console (human steps)
+
+1. Create app → package `com.pandagarde.familyhub` → enroll in Play App Signing on first upload.
+2. **Internal testing** → upload `app-release.aab` → smoke test.
+3. Store listing: icon, feature graphic, copy from [FAMILYHUB_APP_STORE_COPY.md](./FAMILYHUB_APP_STORE_COPY.md), screenshots (capture with debug APK or emulator).
+4. Privacy policy: `https://www.pandagarde.com/privacy`
+5. Data safety: **No data collected** — [FAMILYHUB_STORE_PRIVACY_FORMS.md](./FAMILYHUB_STORE_PRIVACY_FORMS.md)
+6. Content rating (IARC) → promote to production with staged rollout.
 
 ---
 
@@ -229,6 +256,7 @@ npm run mobile:prepare
 
 ## Related docs
 
+- [FAMILYHUB_PLAY_STORE.md](./FAMILYHUB_PLAY_STORE.md) — **Google Play** step-by-step (AAB, console, screenshots)
 - [FAMILYHUB_STORE_SUBMIT_CHECKLIST.md](./FAMILYHUB_STORE_SUBMIT_CHECKLIST.md) — **single submit checklist** (Play + Apple, copy-paste)
 - [FAMILYHUB_STORE_PRIVACY_FORMS.md](./FAMILYHUB_STORE_PRIVACY_FORMS.md) — Data safety & App Privacy answers
 - [FAMILYHUB_RELEASE_SYNC.md](./FAMILYHUB_RELEASE_SYNC.md) — web + Android + iOS on one commit

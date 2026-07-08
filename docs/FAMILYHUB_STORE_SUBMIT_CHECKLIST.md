@@ -13,7 +13,7 @@ One document to complete **Google Play** and **Apple App Store** listings for **
 | Support | `support@pandagarde.com` |
 | Website | `https://www.pandagarde.com` |
 
-**Related docs:** [FAMILYHUB_APP_STORE_COPY.md](./FAMILYHUB_APP_STORE_COPY.md) · [FAMILYHUB_STORE_PRIVACY_FORMS.md](./FAMILYHUB_STORE_PRIVACY_FORMS.md) · [FAMILYHUB_STORE_RELEASE.md](./FAMILYHUB_STORE_RELEASE.md)
+**Related docs:** [FAMILYHUB_PLAY_STORE.md](./FAMILYHUB_PLAY_STORE.md) (Play walkthrough) · [FAMILYHUB_APP_STORE_COPY.md](./FAMILYHUB_APP_STORE_COPY.md) · [FAMILYHUB_STORE_PRIVACY_FORMS.md](./FAMILYHUB_STORE_PRIVACY_FORMS.md) · [FAMILYHUB_STORE_RELEASE.md](./FAMILYHUB_STORE_RELEASE.md)
 
 ---
 
