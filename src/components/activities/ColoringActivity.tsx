@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+﻿import React, { useRef, useEffect, useState } from 'react';
 import { RotateCcw, CheckCircle2, Palette, Sparkles } from 'lucide-react';
 import ActivityGameShell, { shellBtn, shellBtnPrimary } from './ActivityGameShell';
 import ActivityPurposeBanner, { type ActivityContext } from './ActivityPurposeBanner';
@@ -151,7 +151,7 @@ const ColoringActivity: React.FC<ColoringActivityProps> = ({ onComplete, onClose
     ctx.fillStyle = '#4CAF50';
     ctx.font = 'bold 16px Arial';
     ctx.textAlign = 'center';
-    ctx.fillText('🔒', 300, 320);
+    ctx.fillText('ðŸ”’', 300, 320);
 
     // Text with better styling
     ctx.fillStyle = '#2C3E50';
@@ -165,10 +165,10 @@ const ColoringActivity: React.FC<ColoringActivityProps> = ({ onComplete, onClose
     // Add some stars for decoration
     ctx.fillStyle = '#FFD700';
     ctx.font = '20px Arial';
-    ctx.fillText('⭐', 50, 50);
-    ctx.fillText('⭐', 550, 50);
-    ctx.fillText('⭐', 50, 350);
-    ctx.fillText('⭐', 550, 350);
+    ctx.fillText('â­', 50, 50);
+    ctx.fillText('â­', 550, 50);
+    ctx.fillText('â­', 50, 350);
+    ctx.fillText('â­', 550, 350);
   };
 
   useEffect(() => {
@@ -275,16 +275,8 @@ const ColoringActivity: React.FC<ColoringActivityProps> = ({ onComplete, onClose
 
     drawColoringPage(ctx);
     setIsCompleted(false);
-  };
-
-  const downloadImage = () => {
-    const canvas = canvasRef.current;
-    if (!canvas) {return;}
-
-    const link = document.createElement('a');
-    link.download = 'privacy-panda-coloring.png';
-    link.href = canvas.toDataURL();
-    link.click();
+    setScore(0);
+    setFeedback(null);
   };
 
   const checkCompletion = () => {
@@ -327,103 +319,88 @@ const ColoringActivity: React.FC<ColoringActivityProps> = ({ onComplete, onClose
     
     // If more than 30% of the drawing area is colored, consider it complete
     if (completionPercentage > 30) {
-      setIsCompleted(true);
-      // Calculate score based on completion percentage (capped at 100)
       const finalScore = Math.min(100, Math.round(completionPercentage));
+      setScore(finalScore);
+      setIsCompleted(true);
+      setFeedback(null);
       onComplete(finalScore);
-      
-      // Add celebration animation
-      setTimeout(() => {
-        const celebration = document.createElement('div');
-        celebration.textContent = '🎉🎨✨';
-        celebration.style.cssText = `
-          position: fixed;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          font-size: 48px;
-          z-index: 10000;
-          pointer-events: none;
-          animation: celebrate 2s ease-out forwards;
-        `;
-        
-        const style = document.createElement('style');
-        style.textContent = `
-          @keyframes celebrate {
-            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
-            100% { opacity: 0; transform: translate(-50%, -50%) scale(1) translateY(-100px); }
-          }
-        `;
-        document.head.appendChild(style);
-        document.body.appendChild(celebration);
-        
-        setTimeout(() => {
-          document.body.removeChild(celebration);
-          document.head.removeChild(style);
-        }, 2000);
-      }, 100);
     } else {
-      // Show progress feedback
-      const progressMessage = `Keep coloring! You've filled ${Math.round(completionPercentage)}% of the drawing area.`;
-      alert(progressMessage);
+      setFeedback(`Keep coloring! About ${Math.round(completionPercentage)}% filled â€” add more color to the panda and shield.`);
     }
   };
 
   return (
-    <div className="coloring-activity">
-      <div className="activity-header">
-        <h2 className="activity-title">Privacy Panda Coloring Activity</h2>
-        <button onClick={onClose} className="close-button">×</button>
-      </div>
+    <ActivityGameShell
+      titleId="coloring-title"
+      title="Color Privacy Panda"
+      subtitle="Color the panda and shield â€” then check when you're proud of it."
+      titleIcon={<Palette className="h-5 w-5" aria-hidden="true" />}
+      onClose={onClose}
+      progressPercent={isCompleted ? 100 : score}
+      progressLeft={isCompleted ? 'Complete!' : 'Paint the panda & shield'}
+      progressRight={score > 0 ? `Score: ${score}%` : 'Tap Done when ready'}
+      headerGradient="from-rose-500 to-pink-500"
+      maxWidthClass="max-w-3xl"
+      footer={
+        <>
+          <button type="button" onClick={clearCanvas} className={shellBtn}>
+            <RotateCcw className="h-4 w-4" aria-hidden="true" />
+            Clear
+          </button>
+          <button type="button" onClick={checkCompletion} className={shellBtnPrimary}>
+            <CheckCircle2 className="h-4 w-4" aria-hidden="true" />
+            I&apos;m done
+          </button>
+        </>
+      }
+      completed={
+        isCompleted
+          ? {
+              title: 'Beautiful work!',
+              message: `Your Privacy Panda artwork scored ${score}%.`,
+              submessage: 'The shield stands for protecting people you trust online.',
+              onPlayAgain: clearCanvas,
+              onDone: onClose,
+              icon: <Sparkles className="h-8 w-8 text-rose-500 dark:text-rose-400" aria-hidden="true" />,
+            }
+          : undefined
+      }
+    >
+      {context && <ActivityPurposeBanner context={context} />}
 
-      <div className="activity-content">
-        <div className="tools-panel">
-          <div className="color-palette">
-            <h3>Colors</h3>
-            <div className="colors-grid">
-              {colors.map((color) => (
-                <button
-                  key={color}
-                  className={`color-button ${selectedColor === color ? 'selected' : ''}`}
-                  style={{ backgroundColor: color }}
-                  onClick={() => setSelectedColor(color)}
-                />
-              ))}
-            </div>
+      <div className="flex flex-col gap-4 lg:flex-row">
+        <aside className="shrink-0 rounded-2xl border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800/50 lg:w-48">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">Colors</p>
+          <div className="mb-4 grid grid-cols-5 gap-2">
+            {colors.map((color) => (
+              <button
+                key={color}
+                type="button"
+                onClick={() => setSelectedColor(color)}
+                aria-label={`Select color ${color}`}
+                className={`h-8 w-8 rounded-full border-2 transition-transform hover:scale-110 ${
+                  selectedColor === color ? 'border-gray-900 ring-2 ring-offset-2 dark:border-white' : 'border-white/50'
+                }`}
+                style={{ backgroundColor: color }}
+              />
+            ))}
           </div>
+          <label className="mb-1 block text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+            Brush size
+          </label>
+          <input
+            type="range"
+            min={5}
+            max={25}
+            value={brushSize}
+            onChange={(e) => setBrushSize(Number(e.target.value))}
+            aria-label="Brush size"
+            className="w-full accent-rose-500"
+          />
+          <p className="mt-1 text-center text-xs text-gray-500">{brushSize}px</p>
+        </aside>
 
-          <div className="brush-controls">
-            <h3>Brush Size</h3>
-            <input
-              type="range"
-              min="5"
-              max="25"
-              value={brushSize}
-              onChange={(e) => setBrushSize(Number(e.target.value))}
-              aria-label="Brush size"
-              className="brush-slider"
-            />
-            <span className="brush-size">{brushSize}px</span>
-          </div>
-
-          <div className="action-buttons">
-            <button onClick={clearCanvas} className="action-button">
-              <RotateCcw size={16} />
-              Clear
-            </button>
-            <button onClick={downloadImage} className="action-button">
-              <Download size={16} />
-              Download
-            </button>
-            <button onClick={checkCompletion} className="action-button primary">
-              <CheckCircle size={16} />
-              Check Complete
-            </button>
-          </div>
-        </div>
-
-        <div className="canvas-container">
+        <div className="flex flex-1 justify-center rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 p-3 dark:from-gray-800 dark:to-gray-950">
           <canvas
             ref={canvasRef}
             onMouseDown={startDrawing}
@@ -434,294 +411,21 @@ const ColoringActivity: React.FC<ColoringActivityProps> = ({ onComplete, onClose
             onTouchMove={draw}
             onTouchEnd={stopDrawing}
             onKeyDown={handleKeyDown}
-            className="coloring-canvas"
+            className="h-auto max-w-full cursor-crosshair rounded-xl bg-white shadow-md"
             style={{ touchAction: 'none' }}
             role="img"
-            aria-label="Privacy Panda coloring page with panda and shield outline. Use mouse or touch to color, or press Enter or Space to add color. Press C to check completion, R to reset."
+            aria-label="Privacy Panda coloring page. Draw with mouse or touch. Press C to check completion, R to reset."
             tabIndex={0}
           />
-          {isCompleted && (
-            <div className="completion-overlay">
-              <div className="completion-message">
-                <CheckCircle size={48} className="success-icon" />
-                <h3>Great Job!</h3>
-                <p>You've completed the Privacy Panda coloring activity!</p>
-              </div>
-            </div>
-          )}
         </div>
       </div>
 
-      <style jsx>{`
-        .coloring-activity {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: rgba(0, 0, 0, 0.8);
-          display: flex;
-          flex-direction: column;
-          z-index: 1000;
-        }
-
-        .activity-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 20px;
-          background: white;
-          border-bottom: 1px solid #e0e0e0;
-        }
-
-        .activity-title {
-          margin: 0;
-          color: #2C3E50;
-          font-size: 24px;
-        }
-
-        .close-button {
-          background: none;
-          border: none;
-          font-size: 24px;
-          cursor: pointer;
-          color: #666;
-        }
-
-        .activity-content {
-          display: flex;
-          flex: 1;
-          background: white;
-        }
-
-        .tools-panel {
-          width: 250px;
-          padding: 20px;
-          background: #f8f9fa;
-          border-right: 1px solid #e0e0e0;
-          overflow-y: auto;
-        }
-
-        .color-palette h3,
-        .brush-controls h3 {
-          margin: 0 0 15px 0;
-          color: #2C3E50;
-          font-size: 16px;
-        }
-
-        .colors-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 10px;
-          margin-bottom: 30px;
-        }
-
-        .color-button {
-          width: 40px;
-          height: 40px;
-          border: 2px solid transparent;
-          border-radius: 8px;
-          cursor: pointer;
-          transition: all 0.2s;
-        }
-
-        .color-button:hover {
-          transform: scale(1.1);
-        }
-
-        .color-button.selected {
-          border-color: #2C3E50;
-          transform: scale(1.1);
-        }
-
-        .brush-controls {
-          margin-bottom: 30px;
-        }
-
-        .brush-slider {
-          width: 100%;
-          margin: 10px 0;
-        }
-
-        .brush-size {
-          display: block;
-          text-align: center;
-          color: #666;
-          font-size: 14px;
-        }
-
-        .action-buttons {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-        }
-
-        .action-button {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          padding: 12px 16px;
-          border: 1px solid #ddd;
-          background: white;
-          border-radius: 8px;
-          cursor: pointer;
-          transition: all 0.2s;
-          font-size: 14px;
-        }
-
-        .action-button:hover {
-          background: #f0f0f0;
-        }
-
-        .action-button.primary {
-          background: #4CAF50;
-          color: white;
-          border-color: #4CAF50;
-        }
-
-        .action-button.primary:hover {
-          background: #45a049;
-        }
-
-        .canvas-container {
-          flex: 1;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          padding: 20px;
-          position: relative;
-        }
-
-        .coloring-canvas {
-          border: 2px solid #ddd;
-          border-radius: 8px;
-          cursor: crosshair;
-          background: white;
-        }
-
-        .completion-overlay {
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: rgba(0, 0, 0, 0.8);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          z-index: 10;
-        }
-
-        .completion-message {
-          background: white;
-          padding: 40px;
-          border-radius: 12px;
-          text-align: center;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .success-icon {
-          color: #4CAF50;
-          margin-bottom: 20px;
-        }
-
-        .completion-message h3 {
-          margin: 0 0 10px 0;
-          color: #2C3E50;
-          font-size: 24px;
-        }
-
-        .completion-message p {
-          margin: 0;
-          color: #666;
-          font-size: 16px;
-        }
-
-        @media (max-width: 768px) {
-          .activity-content {
-            flex-direction: column;
-          }
-
-          .tools-panel {
-            width: 100%;
-            height: auto;
-            max-height: 250px;
-            overflow-y: auto;
-            padding: 15px;
-          }
-
-          .colors-grid {
-            grid-template-columns: repeat(6, 1fr);
-            gap: 8px;
-          }
-
-          .color-button {
-            width: 35px;
-            height: 35px;
-            min-width: 35px;
-            min-height: 35px;
-          }
-
-          .action-buttons {
-            flex-direction: row;
-            flex-wrap: wrap;
-            gap: 8px;
-          }
-
-          .action-button {
-            flex: 1;
-            min-width: 80px;
-            padding: 10px 12px;
-            font-size: 13px;
-          }
-
-          .coloring-canvas {
-            width: 100%;
-            max-width: 350px;
-            height: 250px;
-            touch-action: none;
-          }
-
-          .canvas-container {
-            padding: 15px;
-            min-height: 300px;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .tools-panel {
-            max-height: 200px;
-            padding: 10px;
-          }
-
-          .colors-grid {
-            grid-template-columns: repeat(5, 1fr);
-            gap: 6px;
-          }
-
-          .color-button {
-            width: 30px;
-            height: 30px;
-            min-width: 30px;
-            min-height: 30px;
-          }
-
-          .action-buttons {
-            flex-direction: column;
-          }
-
-          .action-button {
-            width: 100%;
-            margin-bottom: 5px;
-          }
-
-          .coloring-canvas {
-            max-width: 300px;
-            height: 200px;
-          }
-        }
-      `}</style>
-    </div>
+      {feedback && (
+        <p role="status" className="mt-3 rounded-xl border border-amber-300 bg-amber-50 px-4 py-2 text-center text-sm text-amber-800 dark:border-amber-700 dark:bg-amber-950/40 dark:text-amber-200">
+          {feedback}
+        </p>
+      )}
+    </ActivityGameShell>
   );
 };
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { RotateCcw, Brain, Clock, Sparkles } from 'lucide-react';
+import { RotateCcw, Brain, Sparkles } from 'lucide-react';
 import ActivityGameShell, { shellBtn } from './ActivityGameShell';
 import ActivityPurposeBanner, { type ActivityContext } from './ActivityPurposeBanner';
 

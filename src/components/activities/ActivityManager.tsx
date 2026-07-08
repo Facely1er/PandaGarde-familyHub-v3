@@ -67,16 +67,15 @@ const ActivityManager: React.FC<ActivityManagerProps> = ({ activityId, onClose, 
 
   const activityInstructions = {
     coloring: {
-      title: "Privacy Panda Coloring Activity",
-      description: "Color the Privacy Panda and learn about protecting your digital treasure! This activity teaches you about the importance of keeping your personal information safe online.",
+      title: "Color Privacy Panda",
+      description: "Color the panda and shield together. The shield represents people you can trust when something online feels confusing.",
       instructions: [
-        "Choose a color from the palette",
-        "Click and drag to color the panda and shield",
-        "Adjust brush size if needed",
-        "Click 'Check Complete' when you're done coloring",
-        "Download your artwork to save it!"
+        "Pick a color from the palette",
+        "Paint on the canvas with mouse or finger",
+        "Adjust brush size if you want",
+        "Press I'm done when you're proud of your artwork",
       ],
-      tips: "Take your time and be creative! The more you color, the better you'll understand privacy protection. The shield represents how we protect our personal information online."
+      tips: "Use this calm moment to talk about who your child can go to when a message feels uncomfortable online."
     },
     sorting: {
       title: "Safe or Private?",
@@ -102,15 +101,14 @@ const ActivityManager: React.FC<ActivityManagerProps> = ({ activityId, onClose, 
     },
     wordsearch: {
       title: "Privacy Word Search",
-      description: "Find important privacy words hidden in the puzzle. Learn key vocabulary that helps you understand online safety.",
+      description: "Find privacy words hidden in the grid. Each word is vocabulary your family can use when talking about online safety.",
       instructions: [
-        "Look for the words listed below the puzzle",
-        "Click and drag to highlight words",
-        "Words can go in any direction",
-        "Find all words to complete the activity",
-        "Take your time - there's no rush!"
+        "Look at the word list above the grid",
+        "Tap letters one by one to spell a word",
+        "Found words turn green in the list",
+        "Find every word to finish",
       ],
-      tips: "These words are important for understanding digital privacy. Words like 'password', 'secure', and 'privacy' help you stay safe online!"
+      tips: "When you find PASSWORD or SECURE, ask your child where they've seen those ideas in real apps."
     },
     connectdots: {
       title: "Privacy Shield",
@@ -124,40 +122,37 @@ const ActivityManager: React.FC<ActivityManagerProps> = ({ activityId, onClose, 
       tips: "The shield stands for protection — like a strong password that keeps your accounts locked to everyone but your family."
     },
     matching: {
-      title: "Privacy Symbol Matching",
-      description: "Match privacy symbols with their meanings to learn digital safety signs. These symbols help you identify safe and secure websites.",
+      title: "Privacy Symbols",
+      description: "Match each privacy icon to what it means. These symbols show up on websites and apps your family uses.",
       instructions: [
-        "Click on a symbol card to flip it",
-        "Click on another card to see if they match",
-        "Match all pairs to complete the activity",
-        "Remember what each symbol means",
-        "Try to complete it in as few moves as possible!"
+        "Tap a card to flip it",
+        "Flip two cards at a time",
+        "Match each emoji to its meaning",
+        "Match every pair to finish",
       ],
-      tips: "These symbols appear on websites and apps. The lock symbol means a website is secure, and the warning symbol means you should be careful!"
+      tips: "The lock and shield icons appear in browsers and apps — point them out on a site you visit together."
     },
     memory: {
-      title: "Privacy Memory Game",
-      description: "Test your memory by matching privacy symbols with their meanings! This game helps you remember important online safety concepts.",
+      title: "Privacy Memory",
+      description: "Flip cards to match privacy symbols with their meanings. Remembering the pairs helps you spot them in real life.",
       instructions: [
-        "Click on cards to flip them and see what's underneath",
-        "Find matching pairs of symbols and meanings",
-        "Remember where cards are located",
-        "Complete all pairs to win the game",
-        "Try to finish in as few moves as possible!"
+        "Tap a card to flip it",
+        "Find matching symbol-and-meaning pairs",
+        "Take your time — no rush",
+        "Match all pairs to win",
       ],
-      tips: "This game helps you remember important privacy symbols and what they mean. The better you remember these symbols, the safer you'll be online!"
+      tips: "Talk about which symbol your child has seen before while you play."
     },
     quiz: {
-      title: "Privacy Knowledge Quiz",
-      description: "Test your knowledge about online privacy and safety! This quiz helps you learn important concepts about staying safe online.",
+      title: "Privacy Quiz",
+      description: "Answer short questions about passwords, sharing, and staying safe. Every answer includes an explanation you can discuss.",
       instructions: [
-        "Read each question carefully",
-        "Choose the best answer from the options",
-        "You have 30 seconds per question",
-        "Learn from the explanations after each answer",
-        "Try to get as many correct as possible!"
+        "Read each question together",
+        "Pick the best answer",
+        "Read the explanation before moving on",
+        "Optional 30-second timer per question",
       ],
-      tips: "This quiz helps you learn important privacy concepts. Don't worry if you get some wrong - you'll learn from the explanations and become safer online!"
+      tips: "Wrong answers are fine — the explanations are where the real learning happens."
     },
     'password-strength': {
       title: 'Password Strength Lab',
@@ -240,6 +235,34 @@ const ActivityManager: React.FC<ActivityManagerProps> = ({ activityId, onClose, 
       why: 'Each dot builds a shield. A strong password works the same way — it locks your accounts so only your family gets in.',
       familyTalk: 'Agree on why a password stays secret, even from good friends.',
     },
+    coloring: {
+      missionTitle: 'Who Can I Talk To Online?',
+      guideEmoji: '👨‍👩‍👧',
+      why: 'While you color, think about trusted grown-ups — the people you can tell if an online message feels wrong.',
+      familyTalk: 'Name two trusted adults your child can go to if a stranger messages them.',
+    },
+    memory: {
+      missionTitle: 'My Public & Private Collage',
+      guideEmoji: '🎨',
+      why: 'Matching public vs private ideas is like sorting what belongs on a school website and what stays at home.',
+      familyTalk: 'Name one hobby that is okay to share publicly and one detail to keep private.',
+    },
+    wordsearch: {
+      missionTitle: 'Permission Please!',
+      guideEmoji: '🤝',
+      why: 'Privacy words like SECURE and PROTECT are the same language families use when asking before posting a photo.',
+      familyTalk: 'Practice asking permission before sharing a family photo online.',
+    },
+    matching: {
+      guideEmoji: '🔒',
+      why: 'These icons appear on websites and apps — knowing them helps your family spot safer choices.',
+      familyTalk: 'Open one app together and find a lock or privacy icon.',
+    },
+    quiz: {
+      guideEmoji: '🧠',
+      why: 'Quick questions turn privacy rules into habits you can use every day online.',
+      familyTalk: 'Pick one answer you got wrong and decide what your family will do differently.',
+    },
   };
 
   const currentActivity = activityInstructions[activityId as keyof typeof activityInstructions];
@@ -277,7 +300,7 @@ const ActivityManager: React.FC<ActivityManagerProps> = ({ activityId, onClose, 
       case 'coloring':
         return (
           <Suspense fallback={<div className="loading-spinner">Loading coloring activity...</div>}>
-            <ColoringActivity {...activityProps} />
+            <ColoringActivity {...activityProps} context={activityContext.coloring} />
           </Suspense>
         );
       case 'sorting':
@@ -295,7 +318,7 @@ const ActivityManager: React.FC<ActivityManagerProps> = ({ activityId, onClose, 
       case 'wordsearch':
         return (
           <Suspense fallback={<div className="loading-spinner">Loading word search activity...</div>}>
-            <WordSearchActivity {...activityProps} />
+            <WordSearchActivity {...activityProps} context={activityContext.wordsearch} />
           </Suspense>
         );
       case 'connectdots':
@@ -307,19 +330,19 @@ const ActivityManager: React.FC<ActivityManagerProps> = ({ activityId, onClose, 
       case 'matching':
         return (
           <Suspense fallback={<div className="loading-spinner">Loading matching activity...</div>}>
-            <MatchingActivity {...activityProps} />
+            <MatchingActivity {...activityProps} context={activityContext.matching} />
           </Suspense>
         );
       case 'memory':
         return (
           <Suspense fallback={<div className="loading-spinner">Loading memory game...</div>}>
-            <MemoryGameActivity {...activityProps} />
+            <MemoryGameActivity {...activityProps} context={activityContext.memory} />
           </Suspense>
         );
       case 'quiz':
         return (
           <Suspense fallback={<div className="loading-spinner">Loading quiz...</div>}>
-            <QuizActivity {...activityProps} />
+            <QuizActivity {...activityProps} context={activityContext.quiz} />
           </Suspense>
         );
       case 'password-strength':
