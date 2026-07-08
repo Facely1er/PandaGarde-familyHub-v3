@@ -29,11 +29,13 @@ function StoryNextSteps() {
             to="/digital-footprint"
             className="group flex h-full flex-col gap-2 rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-all hover:border-green-400 hover:shadow-md dark:border-gray-700 dark:bg-gray-700 dark:hover:border-green-500"
           >
-            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300">
-              <Fingerprint size={18} aria-hidden />
-            </span>
-            <span className="block text-sm font-semibold text-gray-900 dark:text-white">
-              See your family's footprint
+            <span className="flex items-center gap-2">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300">
+                <Fingerprint size={18} aria-hidden />
+              </span>
+              <span className="block text-sm font-semibold text-gray-900 dark:text-white">
+                See your family's footprint
+              </span>
             </span>
             <span className="block text-xs leading-relaxed text-gray-500 dark:text-gray-400">
               List the apps your family uses and see where your data goes.
@@ -48,11 +50,13 @@ function StoryNextSteps() {
             to="/family-hub"
             className="group flex h-full flex-col gap-2 rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-all hover:border-teal-400 hover:shadow-md dark:border-gray-700 dark:bg-gray-700 dark:hover:border-teal-500"
           >
-            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-teal-100 text-teal-700 dark:bg-teal-900/40 dark:text-teal-300">
-              <LayoutDashboard size={18} aria-hidden />
-            </span>
-            <span className="block text-sm font-semibold text-gray-900 dark:text-white">
-              Try a privacy mission
+            <span className="flex items-center gap-2">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-teal-100 text-teal-700 dark:bg-teal-900/40 dark:text-teal-300">
+                <LayoutDashboard size={18} aria-hidden />
+              </span>
+              <span className="block text-sm font-semibold text-gray-900 dark:text-white">
+                Try a privacy mission
+              </span>
             </span>
             <span className="block text-xs leading-relaxed text-gray-500 dark:text-gray-400">
               Age-matched activities your family does together, saved on this device.
@@ -67,11 +71,13 @@ function StoryNextSteps() {
             to="/stories"
             className="group flex h-full flex-col gap-2 rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-all hover:border-emerald-400 hover:shadow-md dark:border-gray-700 dark:bg-gray-700 dark:hover:border-emerald-500"
           >
-            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300">
-              <Library size={18} aria-hidden />
-            </span>
-            <span className="block text-sm font-semibold text-gray-900 dark:text-white">
-              Read another episode
+            <span className="flex items-center gap-2">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300">
+                <Library size={18} aria-hidden />
+              </span>
+              <span className="block text-sm font-semibold text-gray-900 dark:text-white">
+                Read another episode
+              </span>
             </span>
             <span className="block text-xs leading-relaxed text-gray-500 dark:text-gray-400">
               Browse all Privacy Panda stories, filtered by age.
@@ -86,11 +92,13 @@ function StoryNextSteps() {
             to={STORY_CAST_PATH}
             className="group flex h-full flex-col gap-2 rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-all hover:border-amber-400 hover:shadow-md dark:border-gray-700 dark:bg-gray-700 dark:hover:border-amber-500"
           >
-            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300">
-              <Users size={18} aria-hidden />
-            </span>
-            <span className="block text-sm font-semibold text-gray-900 dark:text-white">
-              Meet the cast
+            <span className="flex items-center gap-2">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300">
+                <Users size={18} aria-hidden />
+              </span>
+              <span className="block text-sm font-semibold text-gray-900 dark:text-white">
+                Meet the cast
+              </span>
             </span>
             <span className="block text-xs leading-relaxed text-gray-500 dark:text-gray-400">
               See who lives in the forest and which episode they debut in.
