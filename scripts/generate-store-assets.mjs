@@ -55,6 +55,9 @@ async function iconOnSquare(size, iconScale) {
     },
   })
     .composite([{ input: iconBuffer, gravity: 'centre' }])
+    // App Store / Play icons must be fully opaque (no alpha channel).
+    .flatten({ background: BRAND_BG })
+    .removeAlpha()
     .png();
 }
 

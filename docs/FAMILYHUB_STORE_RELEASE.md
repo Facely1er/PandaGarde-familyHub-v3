@@ -15,6 +15,8 @@ Automated gates passing on `main` for the v1.0.0 hub bundle:
 | `npm run test:run` | ✅ 214 tests pass |
 | `npm run build:familyhub` | ✅ builds; jsPDF/html2canvas lazy-split |
 | `npx cap sync android` | ✅ web assets copied |
+| `npx cap copy ios` | ✅ web assets copied to `ios/App/App/public` |
+| iOS `Info.plist` + privacy manifest | ✅ export-compliance flag + `PrivacyInfo.xcprivacy` (no data collected) |
 | `npm run check:content-truth` | ✅ no banned phrases |
 | Native launcher icon + splash | ✅ real PandaGarde branding (all densities) |
 | App name / bundle ID / version | ✅ `PandaGarde Family Hub` · `com.pandagarde.familyhub` · 1.0.0 (code 1) |
@@ -97,17 +99,51 @@ See `src/pages/AppStoreReviewPage.tsx` on the marketing site for copy you can mi
 
 ---
 
-## Apple App Store (macOS required)
+## Apple App Store
+
+### Already prepared on Windows (no Mac needed)
+
+The `ios/` Capacitor project is committed and pre-configured so the Mac steps are minimal:
+
+| Item | State |
+|------|-------|
+| `ios/` native project (`npx cap add ios`) | ✅ present in repo |
+| App icon (1024², no alpha) | ✅ `ios/App/App/Assets.xcassets/AppIcon.appiconset` |
+| Splash screen | ✅ `Splash.imageset` (light + dark) |
+| Bundle ID / display name | ✅ `com.pandagarde.familyhub` · `PandaGarde Family Hub` |
+| Version / build | ✅ `MARKETING_VERSION 1.0.0` · `CURRENT_PROJECT_VERSION 1` (in `project.pbxproj`) |
+| Web assets | ✅ `npm run build:familyhub && npx cap copy ios` copies to `ios/App/App/public` |
+| Export compliance | ✅ `ITSAppUsesNonExemptEncryption=false` in `Info.plist` (no per-upload encryption prompt) |
+| Deployment target | ✅ iOS 14.0 · device family iPhone + iPad · `arm64` |
+| **Privacy manifest** | ✅ `ios/App/App/PrivacyInfo.xcprivacy` — no tracking, no data collected, `UserDefaults`/`CA92.1` required-reason API. Already added to the Xcode target (Copy Bundle Resources). |
+| App Store marketing icon | ✅ `store-assets/apple-app-store-icon-1024.png` (opaque) via `npm run assets:store` |
+
+**To refresh web assets after any code change (works on Windows):**
 
 ```bash
-npx cap add ios          # once, on Mac
-npm run assets:generate -- --ios
-npm run cap:ios
+npm run build:familyhub
+npx cap copy ios          # copies dist-familyhub → ios/App/App/public (no CocoaPods needed)
 ```
 
-1. Xcode → Signing & Capabilities → Team + bundle `com.pandagarde.familyhub`.
-2. Archive → Distribute to App Store Connect.
-3. App Privacy questionnaire: align with local-only storage story.
+> `npx cap sync ios` additionally runs `pod install`, which requires macOS + CocoaPods.
+> On Windows use `cap copy ios`; run the full `cap sync ios` once on the Mac.
+
+### Remaining steps (require a Mac with Xcode)
+
+```bash
+# On the Mac, after cloning/pulling this repo:
+npm install
+npm run build:familyhub
+npx cap sync ios          # runs pod install (Mac-only)
+npm run cap:ios           # opens ios/App/App.xcworkspace in Xcode
+```
+
+1. Xcode → target **App** → Signing & Capabilities → select your **Team** (bundle `com.pandagarde.familyhub` is already set). Enable automatic signing.
+2. Confirm the **PrivacyInfo.xcprivacy** file shows under Target → Build Phases → *Copy Bundle Resources* (already wired in `project.pbxproj`).
+3. Select **Any iOS Device (arm64)** → Product → **Archive** → **Distribute App** → App Store Connect.
+4. In App Store Connect, create the app (bundle `com.pandagarde.familyhub`), complete the **App Privacy** questionnaire = *No data collected* (matches the privacy manifest), attach screenshots, and submit. See [FAMILYHUB_STORE_SUBMIT_CHECKLIST.md](./FAMILYHUB_STORE_SUBMIT_CHECKLIST.md) Phase 3.
+
+Screenshots can be captured from the iOS Simulator (Mac) or with the standalone build; see the submit checklist Phase 1.
 
 ---
 
