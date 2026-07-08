@@ -25,6 +25,13 @@ const renderShell = (initialEntry = '/family-hub/dashboard') =>
   );
 
 describe('AppShell navigation', () => {
+  it('shows full branding and screen tagline in the header', () => {
+    renderShell('/family-hub/dashboard');
+
+    expect(screen.getByRole('heading', { level: 1, name: 'PandaGarde Family Hub' })).toBeInTheDocument();
+    expect(screen.getByText('Dashboard — today and quick stats')).toBeInTheDocument();
+  });
+
   it('marks the current route with aria-current', () => {
     renderShell('/family-hub/dashboard');
 

@@ -18,6 +18,7 @@ import { openExternalUrl } from '../../lib/openExternalUrl';
 import { hubPaths, pandagardeWebsiteUrl, isHubStandalone } from '../hubPaths';
 import HubBrandLogo from './HubBrandLogo';
 import { hubTheme } from '../hubTheme';
+import { HUB_DISPLAY_NAME } from '../constants';
 
 interface TabItem {
   id: string;
@@ -138,9 +139,8 @@ const AppShell: React.FC = () => {
         </a>
 
         <header className={hubTheme.chromeHeader}>
-          <div className="pt-[env(safe-area-inset-top,0px)]">
-            <div className="flex h-11 max-w-full items-center justify-between gap-2 pl-[max(0.75rem,env(safe-area-inset-left,0px))] pr-[max(0.75rem,env(safe-area-inset-right,0px))]">
-              <div className="flex min-w-0 flex-1 items-center gap-2">
+          <div className="hub-header-row flex h-11 max-w-full items-center justify-between gap-2 pl-[max(0.75rem,env(safe-area-inset-left,0px))] pr-[max(0.75rem,env(safe-area-inset-right,0px))]">
+              <div className="flex min-w-0 flex-1 items-center gap-1.5">
                 <a
                   href={isHubStandalone ? pandagardeWebsiteUrl : '/'}
                   onClick={onOpenWebsite}
@@ -152,16 +152,15 @@ const AppShell: React.FC = () => {
                   }
                   title={hubOrigin === 'standalone' || isHubStandalone ? 'Website' : 'Back to PandaGarde'}
                 >
-                  <HubBrandLogo size="xs" variant="plain" alt="PandaGarde" />
+                  <HubBrandLogo size="xs" variant="plain" alt="" className="!h-8 !w-8" />
                 </a>
-                <div className="flex min-w-0 items-center gap-1.5">
-                  <h1 className="truncate text-sm font-bold text-teal-700 dark:text-teal-400">PandaGarde</h1>
-                  <span className="shrink-0 text-gray-300 dark:text-gray-600" aria-hidden="true">
-                    ·
-                  </span>
-                  <span className="truncate text-xs font-medium text-gray-600 dark:text-gray-400">
+                <div className="min-w-0 flex-1 leading-[1.15]">
+                  <p className="whitespace-nowrap font-medium text-gray-500 dark:text-gray-400 text-[length:clamp(8px,2.35vw,10px)]">
                     {currentTab.label}
-                  </span>
+                  </p>
+                  <h1 className="whitespace-nowrap font-bold text-teal-700 dark:text-teal-400 text-[length:clamp(9px,2.65vw,11px)]">
+                    {HUB_DISPLAY_NAME}
+                  </h1>
                 </div>
               </div>
               <div className="flex shrink-0 items-center gap-1">
@@ -197,7 +196,6 @@ const AppShell: React.FC = () => {
                 </a>
               </div>
             </div>
-          </div>
         </header>
 
         <div id="family-hub-main" className={hubTheme.main}>
@@ -211,7 +209,7 @@ const AppShell: React.FC = () => {
           aria-label="Primary Family Hub navigation"
           onKeyDown={onNavKeyDown}
         >
-          <ul className="grid h-16 max-w-full grid-cols-4">
+          <ul className="hub-bottom-nav-tabs grid max-w-full grid-cols-4">
             {primaryTabs.map((tab, index) => {
               const Icon = tab.icon;
               const active = isTabActive(tab.path);
@@ -225,8 +223,8 @@ const AppShell: React.FC = () => {
                     to={tab.path}
                     aria-label={tab.label}
                     className={[
-                      'group flex flex-col items-center justify-center gap-0.5',
-                      'min-h-[64px] w-full min-w-0 touch-manipulation rounded-none',
+                      'group flex min-h-[52px] flex-col items-center justify-center gap-0.5 py-1',
+                      'w-full min-w-0 touch-manipulation rounded-none',
                       'transition-all duration-200 active:scale-95',
                       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-teal-500',
                       active
@@ -237,17 +235,17 @@ const AppShell: React.FC = () => {
                   >
                     <span
                       className={[
-                        'flex h-8 w-8 items-center justify-center rounded-lg transition-colors',
+                        'flex h-7 w-7 items-center justify-center rounded-lg transition-colors',
                         active
                           ? 'bg-teal-100 text-teal-700 dark:bg-teal-800/60 dark:text-teal-200'
                           : 'text-gray-500 group-hover:text-teal-700 dark:text-gray-400 dark:group-hover:text-teal-300',
                       ].join(' ')}
                     >
-                      <Icon size={20} strokeWidth={active ? 2.5 : 2} aria-hidden="true" />
+                      <Icon size={18} strokeWidth={active ? 2.5 : 2} aria-hidden="true" />
                     </span>
                     <span
                       className={[
-                        'text-[10px] sm:text-xs',
+                        'text-[10px] leading-tight sm:text-xs',
                         active ? 'font-semibold' : 'font-medium',
                       ].join(' ')}
                     >

@@ -38,7 +38,7 @@ function FamilyHubStandaloneApp() {
               <Router>
                 <SentryErrorBoundary fallback={<ErrorFallback />}>
                   <NavigationErrorBoundary>
-                    <div className="App min-h-screen">
+                    <div className="App flex h-full min-h-[100dvh] flex-col">
                       <PageTracker />
                       <Suspense fallback={<PageLoader />}>
                         <Routes>

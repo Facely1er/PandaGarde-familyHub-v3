@@ -7203,6 +7203,53 @@ body {
   padding-bottom: env(safe-area-inset-bottom);
 }
 
+/* Family Hub — Capacitor native shell + safe areas */
+.family-hub-theme {
+  --hub-nav-tab-height: 3.25rem;
+  --hub-nav-offset: calc(var(--hub-nav-tab-height) + env(safe-area-inset-bottom, 0px));
+}
+
+/* Web / PWA: respect notch & home indicator via CSS env */
+.hub-chrome-header {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.hub-bottom-nav {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.hub-bottom-nav-tabs {
+  min-height: var(--hub-nav-tab-height);
+}
+
+html.capacitor.platform-ios,
+html.capacitor.platform-ios body {
+  height: 100%;
+  overflow: hidden;
+}
+
+html.capacitor.platform-ios #root {
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+html.capacitor.platform-ios .family-hub-theme {
+  height: 100%;
+  min-height: 100%;
+  min-height: -webkit-fill-available;
+}
+
+/* Capacitor iOS WebView already lays out below the status bar — avoid double top inset */
+html.capacitor.platform-ios .hub-chrome-header {
+  padding-top: 0;
+}
+
+html.capacitor.platform-android .hub-chrome-header {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
 
 /* ===== HEADER / FOOTER COHERENCE PATCH ===== */
 .nav-menu.desktop-nav {
