@@ -37,11 +37,14 @@ const applyTokens = (
   tokens: { app: string; childName?: string; frequency: string }
 ): string => {
   const childPrefix = tokens.childName ? `${tokens.childName} has ` : 'You have ';
+  const childWantPhrase = tokens.childName ? `${tokens.childName} wants` : 'You want';
+  const childSubject = tokens.childName ?? 'you';
   return template
     .replaceAll('{app}', tokens.app)
     .replaceAll('{topApp}', tokens.app)
     .replaceAll('{topGame}', tokens.app)
-    .replaceAll('{childName}', tokens.childName ?? 'you')
+    .replaceAll('{childName}', childSubject)
+    .replaceAll('{childWantPhrase}', childWantPhrase)
     .replaceAll('{frequency}', tokens.frequency)
     .replaceAll('{childPrefix}', childPrefix);
 };

@@ -238,3 +238,12 @@ export const ProgressProvider: React.FC<ProgressProviderProps> = ({ children }) 
     </ProgressContext.Provider>
   );
 };
+
+/** Renders ProgressProvider only when an ancestor has not already provided one. */
+export const ProgressProviderOptional: React.FC<ProgressProviderProps> = ({ children }) => {
+  const existing = useContext(ProgressContext);
+  if (existing) {
+    return <>{children}</>;
+  }
+  return <ProgressProvider>{children}</ProgressProvider>;
+};

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import AppShell from '../../familyhub/components/AppShell';
+import HubExperienceProviders from '../../familyhub/components/HubExperienceProviders';
 import { HUB_WELCOMED_KEY } from '../../familyhub/constants';
 import { lazyScreen } from '../../familyhub/lazyScreen';
 import AuthWrapper, { useAuth } from './AuthWrapper';
@@ -52,9 +53,11 @@ const FamilyHubRoutes: React.FC = () => {
 
 const FamilyHubWrapper: React.FC = () => {
   return (
-    <AuthWrapper>
-      <FamilyHubRoutes />
-    </AuthWrapper>
+    <HubExperienceProviders>
+      <AuthWrapper>
+        <FamilyHubRoutes />
+      </AuthWrapper>
+    </HubExperienceProviders>
   );
 };
 

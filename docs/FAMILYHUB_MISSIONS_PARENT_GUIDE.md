@@ -85,6 +85,27 @@ Works **standalone** or **after** the website privacy journey — same local-onl
 
 ---
 
+## Premium missions (optional)
+
+**Footprint review on the website stays free.** Premium ($4.99/month when subscriptions launch) adds personalized real-life scenarios inside Family Hub so parents can teach with examples that match their family — not generic “Roblox” placeholders.
+
+| What stays free | What Premium adds |
+|-----------------|-------------------|
+| All 18 missions, games, family prompts | **Tailored scenarios** on mission cards and intros |
+| Digital Footprint Analysis on the website | Pull app names from your **self-reported app list** |
+| Default example situations (baseline) | **Parent Customize** — child name, app, frequency, or your own scenario |
+
+**How parents use it**
+
+1. **Settings → Premium missions** — unlock with a pilot code or subscription when live.
+2. Open any mission → tap **Customize**.
+3. Enter your child’s app (e.g. Minecraft), name, how often they use it — or write a fully custom situation.
+4. Talk through the updated scenario together; optional private parent note stays off-screen for kids.
+
+Personalization priority: your custom text → your app/name → apps from footprint review → gentle generic wording → original baseline.
+
+---
+
 ## Privacy & data
 
 - Progress and family members stored **on your device only**

@@ -746,3 +746,12 @@ export const FamilyProvider: React.FC<FamilyProviderProps> = ({ children }) => {
     </FamilyContext.Provider>
   );
 };
+
+/** Renders FamilyProvider only when an ancestor has not already provided one. */
+export const FamilyProviderOptional: React.FC<FamilyProviderProps> = ({ children }) => {
+  const existing = useContext(FamilyContext);
+  if (existing) {
+    return <>{children}</>;
+  }
+  return <FamilyProvider>{children}</FamilyProvider>;
+};

@@ -37,7 +37,7 @@ export interface AgeBasedActivity {
   guideCharacter?: CharacterRole;
   /**
    * Premium: template for personalized real-life scenarios.
-   * Tokens: {app}, {topApp}, {topGame}, {childName}, {frequency}, {childPrefix}
+   * Tokens: {app}, {topApp}, {topGame}, {childName}, {childWantPhrase}, {frequency}, {childPrefix}
    * Free users always see `realLifeScenario`.
    */
   scenarioTemplate?: string;
@@ -94,6 +94,9 @@ export const ageBasedActivities: AgeGroup[] = [
         featured: true,
         activityManagerId: 'sorting',
         guideCharacter: 'po',
+        scenarioTemplate:
+          '{childWantPhrase} to join {app}. It asks for a name, school, and home address. What should you share?',
+        personalizationCategory: 'gaming',
       },
       {
         id: 'traffic-light-safety',
@@ -122,6 +125,9 @@ export const ageBasedActivities: AgeGroup[] = [
         familyMode: 'Play together',
         activityManagerId: 'maze',
         guideCharacter: 'tao',
+        scenarioTemplate:
+          '{app} says: "You won a prize! Tell us your address to receive it." Red, yellow, or green?',
+        personalizationCategory: 'gaming',
       },
       {
         id: 'secret-keeper-club',
@@ -151,6 +157,9 @@ export const ageBasedActivities: AgeGroup[] = [
         featured: true,
         activityManagerId: 'connectdots',
         guideCharacter: 'tao',
+        scenarioTemplate:
+          'Your best friend asks for the password to {app} so they can show something cool. What should you do?',
+        personalizationCategory: 'gaming',
       },
       {
         id: 'trusted-adults-online',
@@ -179,6 +188,9 @@ export const ageBasedActivities: AgeGroup[] = [
         familyMode: 'Talk together',
         activityManagerId: 'coloring',
         guideCharacter: 'ruby',
+        scenarioTemplate:
+          'While playing {app}, someone you do not know sends {childName} a message asking where you live. What do you do?',
+        personalizationCategory: 'gaming',
       },
       {
         id: 'my-info-collage',
@@ -207,6 +219,9 @@ export const ageBasedActivities: AgeGroup[] = [
         familyMode: 'Play together',
         activityManagerId: 'memory',
         guideCharacter: 'po',
+        scenarioTemplate:
+          'Your class is making a profile on {app}. Which things about yourself can you put on it for everyone to see?',
+        personalizationCategory: 'social-media',
       },
       {
         id: 'permission-please',
@@ -235,6 +250,9 @@ export const ageBasedActivities: AgeGroup[] = [
         familyMode: 'Talk together',
         activityManagerId: 'wordsearch',
         guideCharacter: 'billy',
+        scenarioTemplate:
+          'Someone wants to post a photo of you and a friend from the park on {app}. Should they ask your friend first?',
+        personalizationCategory: 'social-media',
       },
     ],
   },
@@ -397,6 +415,9 @@ export const ageBasedActivities: AgeGroup[] = [
         familyMode: 'Talk together',
         activityManagerId: 'safe-unsafe',
         guideCharacter: 'ruby',
+        scenarioTemplate:
+          'A classmate sends a funny screenshot from {app} of another friend looking silly. They want you to share it in the class group chat.',
+        personalizationCategory: 'messaging',
       },
       {
         id: 'password-strength-lab',
@@ -425,6 +446,9 @@ export const ageBasedActivities: AgeGroup[] = [
         familyMode: 'Play together',
         activityManagerId: 'password-strength',
         guideCharacter: 'tao',
+        scenarioTemplate:
+          'The {app} account password is weak and was found in a data breach. Create a better one now.',
+        personalizationCategory: 'gaming',
       },
     ],
   },
@@ -462,6 +486,9 @@ export const ageBasedActivities: AgeGroup[] = [
         featured: true,
         activityManagerId: 'password-fortress',
         guideCharacter: 'tao',
+        scenarioTemplate:
+          'You have many online accounts including {app}. One gets hacked and you realise the same password was used everywhere. Fix this now.',
+        personalizationCategory: 'social-media',
       },
       {
         id: 'online-reputation-audit',
@@ -522,6 +549,9 @@ export const ageBasedActivities: AgeGroup[] = [
         familyMode: 'Talk together',
         activityManagerId: 'digital-footprint',
         guideCharacter: 'billy',
+        scenarioTemplate:
+          'You find a people-search site listing your home address — partly built from data linked to apps like {app}. How did it get there?',
+        personalizationCategory: 'social-media',
       },
       {
         id: 'privacy-rights-challenge',
@@ -550,6 +580,9 @@ export const ageBasedActivities: AgeGroup[] = [
         familyMode: 'Talk together',
         activityManagerId: 'digital-rights',
         guideCharacter: 'sage',
+        scenarioTemplate:
+          'Your school wants to share student assessment data with {app}. Do they need your parents\' permission first?',
+        personalizationCategory: 'edtech',
       },
       {
         id: 'social-media-simulator',
