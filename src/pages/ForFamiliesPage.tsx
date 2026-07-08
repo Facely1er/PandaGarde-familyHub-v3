@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import {
   type LucideIcon,
   AlertTriangle,
@@ -15,8 +16,6 @@ import {
 } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 import { PageSection, ShellLinkCard, type SectionIconTone } from '../components/layout/PageContent';
-import { GUIDES_STORIES_PAGE_LEAD } from '../data/pandaGardeMessaging';
-import { FOOTPRINT_REVIEW_NAV_LABEL, GUIDES_STORIES_NAV_LABEL } from '../data/siteNavigation';
 import {
   resourceGuideLinks,
   resourcePrintableLinks,
@@ -134,6 +133,7 @@ function HubLinkGrid({
 
 
 const ForFamiliesPage: React.FC = () => {
+  const { t } = useTranslation();
 
   const sectionTone = {
     stories: 'emerald' as SectionIconTone,
@@ -144,7 +144,7 @@ const ForFamiliesPage: React.FC = () => {
 
   return (
 
-    <PageLayout title={GUIDES_STORIES_NAV_LABEL} subtitle={GUIDES_STORIES_PAGE_LEAD} breadcrumbs={true}>
+    <PageLayout title={t('nav.guidesStories')} subtitle={t('messaging.guidesStoriesLead')} breadcrumbs={true}>
 
       <div className="guides-stories-hub">
 
@@ -300,7 +300,7 @@ const ForFamiliesPage: React.FC = () => {
             </div>
             <div className="shell-cta-panel__copy">
               <p className="shell-pill mb-2 self-start">When you want a snapshot</p>
-              <h2 className="shell-card__title m-0 text-lg">{FOOTPRINT_REVIEW_NAV_LABEL}</h2>
+              <h2 className="shell-card__title m-0 text-lg">{t('nav.footprintReview')}</h2>
               <p className="shell-card__body mt-2 mb-0">
                 List the apps your family uses, then see exposure scores and what to do next—all on the
                 Footprint Review page.
@@ -311,7 +311,7 @@ const ForFamiliesPage: React.FC = () => {
                 to="/digital-footprint"
                 className="button button-primary inline-flex shrink-0 items-center gap-2"
               >
-                {FOOTPRINT_REVIEW_NAV_LABEL}
+                {t('nav.footprintReview')}
                 <ArrowRight size={16} aria-hidden />
               </Link>
             </div>

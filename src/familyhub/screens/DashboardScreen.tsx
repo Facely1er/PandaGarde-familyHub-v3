@@ -99,6 +99,7 @@ const HowMissionsWorkCard: React.FC<{ onDismiss: () => void }> = ({ onDismiss })
 );
 
 const DashboardScreen: React.FC = () => {
+  const { t } = useTranslation();
   const { members: familyMembers } = useHubFamilyMembers();
   const [familyGoals] = useLocalStorage<FamilyGoal[]>('pandagarde_family_goals', []);
   const completedGoals = familyGoals.filter((goal) => goal?.completed).length;
@@ -133,9 +134,9 @@ const DashboardScreen: React.FC = () => {
           }
           subtitle={
             familyMembers.length === 0
-              ? HUB_DASHBOARD_EMPTY
+              ? t('hub.dashboardEmpty')
               : hubOrigin === 'web'
-                ? HUB_DASHBOARD_READY
+                ? t('hub.dashboardReady')
                 : 'Tap today\'s mission below to start. Check Journey when you want badges or certificates.'
           }
           compact
