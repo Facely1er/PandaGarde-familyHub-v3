@@ -103,7 +103,7 @@ const ActivityCard: React.FC<{
       <p className="text-[11px] font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-300">
         Real-life situation
       </p>
-      <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-amber-950 dark:text-amber-100">
+      <p className="mt-2 text-sm leading-relaxed text-amber-950 dark:text-amber-100">
         {activity.realLifeScenario}
       </p>
     </div>
@@ -119,7 +119,7 @@ const ActivityCard: React.FC<{
       <p className="text-[11px] font-semibold uppercase tracking-wide text-indigo-700 dark:text-indigo-300">
         Family cue
       </p>
-      <p className="mt-2 line-clamp-3 text-sm text-indigo-900 dark:text-indigo-100">{activity.familyPrompt}</p>
+      <p className="mt-2 text-sm text-indigo-900 dark:text-indigo-100">{activity.familyPrompt}</p>
     </div>
 
     <div className="mt-auto flex items-end justify-between gap-3 pt-5">

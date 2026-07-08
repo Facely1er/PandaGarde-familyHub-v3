@@ -66,17 +66,15 @@ describe('ActivitiesScreen', () => {
     expect(screen.queryByText(/Privacy Rights Challenge/i)).not.toBeInTheDocument();
   });
 
-  it('opens mission shell with family talk step for footprint activities', async () => {
+  it('opens mission shell intro with family talk content for footprint activities', async () => {
     const user = userEvent.setup();
 
     renderScreen();
 
     await user.click(screen.getAllByRole('button', { name: /Start activity: Digital Footprint Trail/i })[0]);
-    expect(screen.getByText(/Step 1 · Read this first/i)).toBeInTheDocument();
 
-    await user.click(screen.getByRole('button', { name: /Let's go/i }));
-
-    expect(screen.getByText(/Step 2 · Talk together/i)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 3, name: /Digital Footprint Trail/i })).toBeInTheDocument();
+    expect(screen.getByText(/Read & talk/i)).toBeInTheDocument();
     expect(screen.getByText(/Family prompt/i)).toBeInTheDocument();
     expect(screen.getByText(/Discussion starters/i)).toBeInTheDocument();
     expect(

@@ -20,6 +20,16 @@ vi.mock('./QuizActivity', () => ({
   ),
 }));
 
+vi.mock('./MazeActivity', () => ({
+  default: ({ onComplete }: { onComplete: (score?: number) => void }) => (
+    <div data-testid="maze-activity">
+      <button onClick={() => onComplete(87.6)} data-testid="complete-decimal">
+        Complete with decimal
+      </button>
+    </div>
+  ),
+}));
+
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
   <ToastProvider>
     <ProgressProvider>
@@ -123,33 +133,21 @@ describe('ActivityManager', () => {
     expect(familyProgress[1]).toBeUndefined();
   });
 
-  it('should validate and round scores correctly', async () => {
-    // Mock a component that returns a non-integer score
-    vi.mock('./MazeActivity', () => ({
-      default: ({ onComplete }: { onComplete: (score?: number) => void }) => (
-        <div data-testid="maze-activity">
-          <button onClick={() => onComplete(87.6)} data-testid="complete-decimal">
-            Complete with decimal
-          </button>
-        </div>
-      ),
-    }));
-
+  it('rounds decimal scores before reporting completion', async () => {
     const { getByText } = render(
       <Wrapper>
         <ActivityManager activityId="maze" onClose={mockOnClose} onComplete={mockOnComplete} />
       </Wrapper>
     );
 
-    // Click start button
-    const startButton = getByText(/Start Activity/i);
-    startButton.click();
+    getByText(/Start Activity/i).click();
 
-    // The score should be rounded to 88
     await waitFor(() => {
-      // Since we're testing the validation logic, we expect the score to be rounded
-      // This is validated in the handleComplete function
-      expect(true).toBe(true); // Placeholder as we can't directly test internal rounding
+      screen.getByTestId('complete-decimal').click();
+    });
+
+    await waitFor(() => {
+      expect(mockOnComplete).toHaveBeenCalledWith('maze', 88);
     });
   });
 });
