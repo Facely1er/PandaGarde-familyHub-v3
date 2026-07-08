@@ -23,15 +23,26 @@ One document to complete **Google Play** and **Apple App Store** listings for **
 npm run test:run
 npm run build:familyhub
 npm run mobile:prepare          # build + cap sync
+npm run assets:store            # 512 icon + 1024×500 feature graphic → store-assets/
 ```
 
-**Android signed AAB** (one-time keystore setup first — see FAMILYHUB_STORE_RELEASE.md):
+**Android signing (one-time):**
 
 ```bash
-# Copy android/keystore.properties.example → android/keystore.properties
-# Generate android/pandagarde-familyhub-upload.jks — BACK UP OFFLINE
-npm run android:bundleRelease
-# Output: android/app/build/outputs/bundle/release/app-release.aab
+# Requires JDK keytool (Android Studio JBR works):
+#   $env:JAVA_HOME="C:\Program Files\Android\Android Studio\jbr"
+npm run android:keystore        # creates android/pandagarde-familyhub-upload.jks + keystore.properties
+npm run android:bundleRelease   # → android/app/build/outputs/bundle/release/app-release.aab
+```
+
+Back up `android/pandagarde-familyhub-upload.jks` and passwords offline — losing them blocks all future Play updates.
+
+**Manual keystore alternative** (if script fails):
+
+```powershell
+cd android
+keytool -genkey -v -keystore pandagarde-familyhub-upload.jks -keyalg RSA -keysize 2048 -validity 10000 -alias upload
+# Then copy android/keystore.properties.example → keystore.properties and fill in passwords
 ```
 
 **iOS** (Mac required):
@@ -100,8 +111,8 @@ Create app → package name **`com.pandagarde.familyhub`** → upload AAB to **I
 | **App name** | `PandaGarde Family Hub` |
 | **Short description** (80 chars) | `18 family privacy missions, ages 5–17. Practice, talk, fix—on your device only.` |
 | **Full description** | See [Full description](#full-description-both-stores) below |
-| **App icon** | 512×512 PNG (use `assets/icon.png` or export from launcher) |
-| **Feature graphic** | 1024×500 — dashboard or mission collage + tagline |
+| **App icon** | 512×512 PNG → `store-assets/play-store-icon-512.png` (`npm run assets:store`) |
+| **Feature graphic** | 1024×500 → `store-assets/play-feature-graphic-1024x500.png` |
 | **Screenshots** | Upload Phase 1 set |
 | **Category** | Education (primary) |
 | **Tags** | Family, Parenting, Education, Privacy (as available) |
