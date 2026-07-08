@@ -10,6 +10,7 @@ import { HubScreenFallback } from '../HubScreenFallback';
 import { hubPaths } from '../hubPaths';
 import HubPageLayout from '../components/HubPageLayout';
 import HubScreenHero from '../components/HubScreenHero';
+import HubWebsiteLink from '../components/HubWebsiteLink';
 import { hubAgeBandForAge, HUB_AGE_BANDS } from '../hubAgeBands';
 
 const ChildProgressDetail = lazy(() => import('../../components/ChildProgressDetail'));
@@ -197,9 +198,9 @@ const KidsScreen: React.FC = () => {
             <span>
               Privacy notice: only a first name and age are needed — no email, no account. Nothing is
               sent to us; profiles and progress stay on this device.{' '}
-              <Link to="/privacy" className="underline hover:text-teal-700 dark:hover:text-teal-300">
+              <HubWebsiteLink path="/privacy" className="underline hover:text-teal-700 dark:hover:text-teal-300">
                 Privacy policy
-              </Link>
+              </HubWebsiteLink>
             </span>
           </p>
         </div>

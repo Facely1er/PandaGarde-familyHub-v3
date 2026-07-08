@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Moon, Sun, Shield, HelpCircle, ExternalLink, Home, Scale } from 'lucide-react';
 import { useTheme } from '../../contexts/ThemeContext';
 import { hubTheme } from '../hubTheme';
 import HubPageLayout from '../components/HubPageLayout';
+import HubWebsiteLink from '../components/HubWebsiteLink';
 
 const externalLinkClass =
   'inline-flex items-center gap-2 text-sm font-medium text-teal-600 hover:underline dark:text-teal-400';
@@ -57,10 +57,10 @@ const SettingsScreen: React.FC = () => {
           Your privacy is important to us. All data is stored locally on your device and is never shared with
           third parties.
         </p>
-        <Link to="/privacy" className={externalLinkClass}>
+        <HubWebsiteLink path="/privacy" className={externalLinkClass}>
           View Privacy Policy
           <ExternalLink size={14} aria-hidden />
-        </Link>
+        </HubWebsiteLink>
       </section>
 
       <section className={`${hubTheme.card} p-5 sm:p-6`} aria-labelledby="settings-legal-heading">
@@ -72,24 +72,24 @@ const SettingsScreen: React.FC = () => {
         </div>
         <ul className="space-y-3">
           <li>
-            <Link to="/terms" className={externalLinkClass}>
+            <HubWebsiteLink path="/terms" className={externalLinkClass}>
               Terms of Service
-            </Link>
+            </HubWebsiteLink>
           </li>
           <li>
-            <Link to="/cookies" className={externalLinkClass}>
+            <HubWebsiteLink path="/cookies" className={externalLinkClass}>
               Cookie Policy
-            </Link>
+            </HubWebsiteLink>
           </li>
           <li>
-            <Link to="/accessibility" className={externalLinkClass}>
+            <HubWebsiteLink path="/accessibility" className={externalLinkClass}>
               Accessibility Statement
-            </Link>
+            </HubWebsiteLink>
           </li>
           <li>
-            <Link to="/legal" className={externalLinkClass}>
+            <HubWebsiteLink path="/legal" className={externalLinkClass}>
               Legal Overview
-            </Link>
+            </HubWebsiteLink>
           </li>
         </ul>
       </section>
@@ -103,20 +103,20 @@ const SettingsScreen: React.FC = () => {
         </div>
         <ul className="space-y-3">
           <li>
-            <Link to="/faq" className={externalLinkClass}>
+            <HubWebsiteLink path="/faq" className={externalLinkClass}>
               Frequently Asked Questions
-            </Link>
+            </HubWebsiteLink>
           </li>
           <li>
-            <Link to="/contact" className={externalLinkClass}>
+            <HubWebsiteLink path="/contact" className={externalLinkClass}>
               Contact Support
-            </Link>
+            </HubWebsiteLink>
           </li>
           <li>
-            <a href="/" className={externalLinkClass}>
+            <HubWebsiteLink path="/" className={externalLinkClass}>
               <Home size={14} aria-hidden />
               Back to PandaGarde website
-            </a>
+            </HubWebsiteLink>
           </li>
         </ul>
       </section>

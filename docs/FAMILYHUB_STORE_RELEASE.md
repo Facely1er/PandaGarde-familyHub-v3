@@ -4,6 +4,37 @@ Checklist for Google Play, Apple App Store, and the standalone web host.
 
 ---
 
+## Release readiness snapshot (verified 2026-07-08)
+
+Automated gates passing on `main` for the v1.0.0 hub bundle:
+
+| Gate | Status |
+|------|--------|
+| `npm run lint` | ✅ 0 errors (2 warnings) |
+| `npx tsc --noEmit` | ✅ clean |
+| `npm run test:run` | ✅ 214 tests pass |
+| `npm run build:familyhub` | ✅ builds; jsPDF/html2canvas lazy-split |
+| `npx cap sync android` | ✅ web assets copied |
+| `npm run check:content-truth` | ✅ no banned phrases |
+| Native launcher icon + splash | ✅ real PandaGarde branding (all densities) |
+| App name / bundle ID / version | ✅ `PandaGarde Family Hub` · `com.pandagarde.familyhub` · 1.0.0 (code 1) |
+| Analytics in packaged app | ✅ none — `familyhub.html` ships no GA; declare "no data collected" |
+| Standalone legal/story links | ✅ open the website via `HubWebsiteLink` / `openExternalUrl` (no dead in-app routes) |
+
+**Story ↔ mission linking:** each mission links to its Season 1 episode via
+`src/data/storyMissionLinks.ts`; story epilogue offers "Practice in Family Hub" and
+missions offer an optional "Read the story" that opens the website in the system browser
+when standalone.
+
+Remaining steps are human-only (cannot be automated in-repo):
+
+1. Generate & back up the upload keystore (see [Google Play](#google-play) below).
+2. Host the privacy policy URL and confirm it loads.
+3. Capture real device/emulator screenshots (see `FAMILYHUB_APP_STORE_COPY.md`).
+4. Create the Play Console / App Store Connect listings and complete Data safety / App Privacy forms.
+
+---
+
 ## Store identifiers (must match everywhere)
 
 | Platform | Field | Value |

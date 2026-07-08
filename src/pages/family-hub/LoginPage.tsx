@@ -3,10 +3,13 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { ArrowRight, ShieldCheck, CheckCircle2, Sparkles } from 'lucide-react';
 import { useAuth } from './AuthWrapper';
 import { HUB_WELCOMED_KEY } from '../../familyhub/constants';
-import { hubPaths, isHubStandalone, pandagardeWebsiteUrl } from '../../familyhub/hubPaths';
+import { hubPaths } from '../../familyhub/hubPaths';
 import AgeBandStrip from '../../familyhub/components/AgeBandStrip';
 import HubBrandLogo from '../../familyhub/components/HubBrandLogo';
+import HubWebsiteLink from '../../familyhub/components/HubWebsiteLink';
 import { hubTheme } from '../../familyhub/hubTheme';
+
+const footerLinkClass = 'underline hover:text-teal-700 dark:hover:text-teal-300';
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -73,33 +76,22 @@ const LoginPage: React.FC = () => {
       </div>
 
       <p className="pb-2 text-center text-xs text-gray-500 dark:text-gray-400">
-        <a href="/privacy" className="underline hover:text-teal-700 dark:hover:text-teal-300">
+        <HubWebsiteLink path="/privacy" className={footerLinkClass}>
           Privacy
-        </a>
+        </HubWebsiteLink>
         <span className="mx-2" aria-hidden="true">·</span>
-        <a href="/terms" className="underline hover:text-teal-700 dark:hover:text-teal-300">
+        <HubWebsiteLink path="/terms" className={footerLinkClass}>
           Terms
-        </a>
+        </HubWebsiteLink>
         <span className="mx-2" aria-hidden="true">·</span>
-        <a href="/cookies" className="underline hover:text-teal-700 dark:hover:text-teal-300">
+        <HubWebsiteLink path="/cookies" className={footerLinkClass}>
           Cookies
-        </a>
+        </HubWebsiteLink>
       </p>
       <p className="pb-[max(1rem,env(safe-area-inset-bottom))] text-center text-xs text-gray-500 dark:text-gray-400">
-        {!isHubStandalone ? (
-          <a href="/" className="underline hover:text-teal-700 dark:hover:text-teal-300">
-            Back to PandaGarde website
-          </a>
-        ) : (
-          <a
-            href={pandagardeWebsiteUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline hover:text-teal-700 dark:hover:text-teal-300"
-          >
-            Visit PandaGarde website
-          </a>
-        )}
+        <HubWebsiteLink path="/" className={footerLinkClass}>
+          Visit PandaGarde website
+        </HubWebsiteLink>
       </p>
     </div>
   );
