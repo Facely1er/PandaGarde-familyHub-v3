@@ -1,5 +1,5 @@
 import React, { lazy, Suspense, useState } from 'react';
-import { ArrowLeft, BookOpen, MessageCircle, MessageCircleHeart, Play, Sparkles, Target } from 'lucide-react';
+import { ArrowLeft, BookOpen, HelpCircle, MessageCircle, MessageCircleHeart, Play, Sparkles, Target } from 'lucide-react';
 import { HubScreenFallback } from '../HubScreenFallback';
 
 const ActivityManager = lazy(() => import('../../components/activities/ActivityManager'));
@@ -138,7 +138,7 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
         <div className="flex-1 overflow-auto px-4 py-5 sm:px-6">
           <div className="mx-auto flex w-full max-w-4xl flex-col gap-5">
             <div className="text-center">
-              <HubBrandLogo size="md" variant="card" className="mx-auto" alt="PandaGarde" />
+              <HubBrandLogo size="lg" variant="plain" className="mx-auto" alt="PandaGarde" />
               <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-teal-700 dark:bg-teal-900/30 dark:text-teal-200">
                 <Sparkles size={14} aria-hidden="true" />
                 Family mission
@@ -201,9 +201,11 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
                 <ul className="mt-3 space-y-2">
                   {activity.discussionPrompts.map((prompt) => (
                     <li key={prompt} className="flex items-start gap-2 text-sm text-violet-950 dark:text-violet-100">
-                      <span className="mt-0.5 text-violet-500" aria-hidden="true">
-                        ?
-                      </span>
+                      <HelpCircle
+                        size={16}
+                        className="mt-0.5 shrink-0 text-violet-500"
+                        aria-hidden="true"
+                      />
                       {prompt}
                     </li>
                   ))}
