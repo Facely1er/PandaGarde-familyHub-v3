@@ -30,7 +30,7 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className={`family-hub-theme ${hubTheme.page}`}>
+    <div className={`family-hub-theme hub-standalone-page ${hubTheme.page}`}>
       <div className="flex flex-1 flex-col justify-center px-4 py-10">
         <div className="mx-auto w-full max-w-lg space-y-6">
           <div className="text-center">
@@ -88,7 +88,7 @@ const LoginPage: React.FC = () => {
           Cookies
         </HubWebsiteLink>
       </p>
-      <p className="pb-[max(1rem,env(safe-area-inset-bottom))] text-center text-xs text-gray-500 dark:text-gray-400">
+      <p className="pb-[max(1rem,var(--hub-nav-safe-bottom,env(safe-area-inset-bottom,0px)))] text-center text-xs text-gray-500 dark:text-gray-400">
         <HubWebsiteLink path="/" className={footerLinkClass}>
           Visit PandaGarde website
         </HubWebsiteLink>

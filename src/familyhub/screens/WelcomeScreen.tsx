@@ -44,7 +44,7 @@ const WelcomeScreen: React.FC = () => {
   };
 
   return (
-    <div className={`family-hub-theme ${hubTheme.page}`}>
+    <div className={`family-hub-theme hub-standalone-page ${hubTheme.page}`}>
       <div className="flex-1 overflow-y-auto px-4 py-8 sm:py-12">
         <div className="max-w-xl mx-auto space-y-8">
 
@@ -111,7 +111,7 @@ const WelcomeScreen: React.FC = () => {
       </div>
 
       {/* Sticky CTA */}
-      <div className="sticky bottom-0 bg-white/90 dark:bg-gray-800/90 backdrop-blur border-t border-gray-200 dark:border-gray-700 px-4 py-4 safe-area-bottom">
+      <div className="sticky bottom-0 border-t border-gray-200 bg-white/90 px-4 py-4 backdrop-blur dark:border-gray-700 dark:bg-gray-800/90 pb-[max(0.75rem,var(--hub-nav-safe-bottom,env(safe-area-inset-bottom,0px)))]">
         <div className="max-w-xl mx-auto flex flex-col gap-2">
           <button
             type="button"

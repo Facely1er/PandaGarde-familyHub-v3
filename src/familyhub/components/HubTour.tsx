@@ -82,7 +82,7 @@ const HubTour: React.FC<HubTourProps> = ({ onDone }) => {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4 bg-black/40 backdrop-blur-[2px]"
+      className="hub-tour-overlay fixed inset-0 z-50 flex items-end justify-center bg-black/40 p-4 backdrop-blur-[2px] sm:items-center sm:pb-4"
       onClick={(e) => {
         if (e.target === e.currentTarget) {
           dismiss();

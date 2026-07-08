@@ -7205,21 +7205,28 @@ body {
 
 /* Family Hub — Capacitor native shell + safe areas */
 .family-hub-theme {
-  --hub-nav-tab-height: 3.25rem;
-  --hub-nav-offset: calc(var(--hub-nav-tab-height) + env(safe-area-inset-bottom, 0px));
+  --hub-nav-tab-height: 3.5rem;
+  --hub-nav-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --hub-nav-offset: calc(var(--hub-nav-tab-height) + var(--hub-nav-safe-bottom));
+  --hub-safe-top: env(safe-area-inset-top, 0px);
 }
 
 /* Web / PWA: respect notch & home indicator via CSS env */
 .hub-chrome-header {
-  padding-top: env(safe-area-inset-top, 0px);
+  padding-top: var(--hub-safe-top);
 }
 
 .hub-bottom-nav {
-  padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-bottom: var(--hub-nav-safe-bottom);
 }
 
 .hub-bottom-nav-tabs {
-  min-height: var(--hub-nav-tab-height);
+  height: var(--hub-nav-tab-height);
+}
+
+/* Login / welcome — no AppShell header; pad top on web PWA only */
+.hub-standalone-page {
+  padding-top: var(--hub-safe-top);
 }
 
 html.capacitor.platform-ios,
@@ -7241,13 +7248,20 @@ html.capacitor.platform-ios .family-hub-theme {
   min-height: -webkit-fill-available;
 }
 
-/* Capacitor iOS WebView already lays out below the status bar — avoid double top inset */
-html.capacitor.platform-ios .hub-chrome-header {
+/* Capacitor iOS WebView already lays out below the status bar */
+html.capacitor.platform-ios .hub-chrome-header,
+html.capacitor.platform-ios .hub-standalone-page {
   padding-top: 0;
 }
 
-html.capacitor.platform-android .hub-chrome-header {
-  padding-top: env(safe-area-inset-top, 0px);
+html.capacitor.platform-android .hub-chrome-header,
+html.capacitor.platform-android .hub-standalone-page {
+  padding-top: var(--hub-safe-top);
+}
+
+/* Tour card clears bottom tab bar on phones */
+.hub-tour-overlay {
+  padding-bottom: calc(var(--hub-nav-offset, 4.5rem) + 1rem);
 }
 
 
