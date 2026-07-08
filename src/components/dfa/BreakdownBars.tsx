@@ -15,7 +15,7 @@ const tone = (value: number): string => {
 
 const BreakdownBars: React.FC<Props> = ({ items }) => {
   return (
-    <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-600 dark:bg-gray-200">
+    <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-600 dark:bg-gray-800">
       <div className="mb-4">
         <h3 className="text-lg font-bold text-gray-900 ">Score drivers</h3>
         <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">

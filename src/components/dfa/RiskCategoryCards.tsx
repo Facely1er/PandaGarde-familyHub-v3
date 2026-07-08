@@ -14,7 +14,7 @@ const styles: Record<DfaRiskFlag['severity'], string> = {
 
 const RiskCategoryCards: React.FC<Props> = ({ flags }) => {
   return (
-    <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-600 dark:bg-gray-200">
+    <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-600 dark:bg-gray-800">
       <div className="mb-4">
         <h3 className="text-lg font-bold text-gray-900 ">Priority categories</h3>
         <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">Use these categories to decide what to address first.</p>

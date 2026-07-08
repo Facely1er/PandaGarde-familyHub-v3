@@ -713,14 +713,14 @@ const FamilyHubPage: React.FC = () => {
                         {activity.ageGroups.map((group) => (
                           <span 
                             key={group}
-                            className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600 dark:bg-gray-200 dark:text-gray-800 dark:ring-1 dark:ring-gray-500"
+                            className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:ring-1 dark:ring-gray-500"
                           >
                             Ages {group}
                           </span>
                         ))}
                       </div>
 
-                      <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4 dark:border-gray-400 dark:bg-gray-200">
+                      <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4 dark:border-gray-400 dark:bg-gray-800">
                         <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">Learning goal</p>
                         <p className="mt-2 text-sm text-gray-800">{activity.learningObjective}</p>
                       </div>
@@ -1152,7 +1152,7 @@ const FamilyHubPage: React.FC = () => {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
                 transition={{ duration: 0.2, ease: 'easeOut' }}
-                className="relative bg-white dark:bg-gray-200 rounded-lg shadow-xl max-w-md w-full p-6 sm:p-6 mx-auto"
+                className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full p-6 sm:p-6 mx-auto"
               >
                 <h3 id="create-family-title" className="text-xl font-bold mb-4 text-primary">
                   Create New Family
@@ -1217,7 +1217,7 @@ const FamilyHubPage: React.FC = () => {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
                 transition={{ duration: 0.2, ease: 'easeOut' }}
-                className="relative bg-white dark:bg-gray-200 rounded-lg shadow-xl max-w-md w-full p-6"
+                className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full p-6"
               >
               <h3 id="join-family-title" className="text-xl font-bold mb-4 text-primary">
                 Join Existing Family
@@ -1282,7 +1282,7 @@ const FamilyHubPage: React.FC = () => {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.2, ease: 'easeOut' }}
-              className="relative bg-white dark:bg-gray-200 rounded-lg shadow-xl max-w-md w-full p-6"
+              className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full p-6"
             >
               <h3 id="add-member-title" className="text-xl font-bold mb-4 text-primary">
                 Add Family Member

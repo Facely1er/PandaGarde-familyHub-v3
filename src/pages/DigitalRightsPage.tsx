@@ -134,7 +134,7 @@ const DigitalRightsPage: React.FC = () => {
       case 'Advanced':
         return 'bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300';
       default:
-        return 'bg-gray-100 text-gray-800 dark:bg-gray-200 dark:text-gray-300';
+        return 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300';
     }
   };
 
@@ -211,7 +211,7 @@ const DigitalRightsPage: React.FC = () => {
         </section>
 
         <section className="py-8 sm:py-12">
-          <div className="rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-200 shadow-lg p-6 sm:p-8 mb-8 sm:mb-12">
+          <div className="rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-lg p-6 sm:p-8 mb-8 sm:mb-12">
             <h2 className="text-center text-xl sm:text-2xl font-bold mb-6 text-green-700 dark:text-green-400">
               Your Legal Knowledge Progress
             </h2>
@@ -267,7 +267,7 @@ const DigitalRightsPage: React.FC = () => {
                   className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full text-sm font-medium transition-all ${
                     isActive
                       ? 'bg-green-700 text-white dark:bg-green-600'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-700'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700'
                   }`}
                 >
                   <Icon size={16} aria-hidden />
@@ -290,7 +290,7 @@ const DigitalRightsPage: React.FC = () => {
                   key={module.id}
                   role="button"
                   tabIndex={0}
-                  className={`rounded-2xl border bg-white dark:bg-gray-200 shadow-md hover:shadow-lg transition-shadow cursor-pointer ${
+                  className={`rounded-2xl border bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-shadow cursor-pointer ${
                     isCompleted
                       ? 'border-green-500 dark:border-green-600'
                       : 'border-gray-200 dark:border-gray-700'
@@ -453,7 +453,7 @@ const DigitalRightsPage: React.FC = () => {
                 </div>
 
                 <section
-                  className="rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-200/60 p-4 sm:p-5"
+                  className="rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/60 p-4 sm:p-5"
                   aria-labelledby="module-actions-heading"
                 >
                   <h4

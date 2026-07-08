@@ -245,7 +245,7 @@ const JourneyHub: React.FC = () => {
               return (
                 <div
                   key={activity.id}
-                  className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-200"
+                  className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800"
                 >
                   <div className="flex items-start gap-4">
                     <div className="text-center">

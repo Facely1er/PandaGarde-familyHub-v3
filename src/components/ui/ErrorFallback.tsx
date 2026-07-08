@@ -26,7 +26,7 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({
       className="min-h-screen flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-100 px-4"
     >
       <div className="text-center max-w-md">
-        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border-2 border-green-200 bg-white shadow-md dark:border-green-800/60 dark:bg-gray-200">
+        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border-2 border-green-200 bg-white shadow-md dark:border-green-800/60 dark:bg-gray-800">
           <img
             src="/LogoPandagarde.png"
             alt="PandaGarde"

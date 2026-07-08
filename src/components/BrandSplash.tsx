@@ -21,7 +21,7 @@ const BrandSplash: React.FC<BrandSplashProps> = ({
       <div className="text-center">
         <div
           className={[
-            'mx-auto mb-4 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border-2 border-green-200 bg-white shadow-md dark:border-green-800/60 dark:bg-gray-200',
+            'mx-auto mb-4 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl border-2 border-green-200 bg-white shadow-md dark:border-green-800/60 dark:bg-gray-800',
             pulsing ? 'animate-pulse' : '',
           ].join(' ')}
         >

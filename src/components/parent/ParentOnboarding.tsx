@@ -217,7 +217,7 @@ const ParentOnboarding: React.FC<ParentOnboardingProps> = ({ onComplete, onSkip 
   };
 
   const btnOutline =
-    'inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium border-2 border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-200 text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors';
+    'inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium border-2 border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors';
 
   const btnPrimary =
     'inline-flex items-center justify-center gap-2 flex-1 px-6 py-3 rounded-lg font-medium bg-green-600 hover:bg-green-700 dark:bg-green-600 dark:hover:bg-green-500 text-white transition-colors';
@@ -232,7 +232,7 @@ const ParentOnboarding: React.FC<ParentOnboardingProps> = ({ onComplete, onSkip 
         role="dialog"
         aria-modal="true"
         aria-labelledby="onboarding-title"
-        className="bg-white dark:bg-gray-200 rounded-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col"
+        className="bg-white dark:bg-gray-800 rounded-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="p-4 sm:p-6 border-b border-gray-200 dark:border-gray-700 flex justify-between items-start gap-4">

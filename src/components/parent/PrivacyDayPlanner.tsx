@@ -21,7 +21,7 @@ const defaultActivities = [
 ];
 
 const fieldClass =
-  'px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-md bg-white dark:bg-gray-200 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500';
+  'px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500';
 
 const btnPrimary =
   'inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-green-600 hover:bg-green-700 dark:bg-green-600 dark:hover:bg-green-500 rounded-lg transition-colors';
@@ -117,7 +117,7 @@ const PrivacyDayPlanner: React.FC = () => {
             Schedule Next Privacy Day
           </button>
         ) : (
-          <div className="rounded-xl border-2 border-green-500 dark:border-green-600 bg-white dark:bg-gray-200 p-6">
+          <div className="rounded-xl border-2 border-green-500 dark:border-green-600 bg-white dark:bg-gray-800 p-6">
             <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4">Schedule Privacy Day</h3>
             <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-4">
               <label htmlFor="privacy-day-date" className="text-sm font-medium text-gray-700 dark:text-gray-300 shrink-0">
@@ -161,7 +161,7 @@ const PrivacyDayPlanner: React.FC = () => {
           {events.map((event) => (
             <div
               key={event.id}
-              className={`rounded-xl border-2 bg-white dark:bg-gray-200 p-6 ${eventBorderClass(event)} ${
+              className={`rounded-xl border-2 bg-white dark:bg-gray-800 p-6 ${eventBorderClass(event)} ${
                 event.completed ? 'opacity-70' : ''
               }`}
             >

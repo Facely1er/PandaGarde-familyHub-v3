@@ -27,10 +27,10 @@ interface WarningSign {
 }
 
 const fieldClass =
-  'w-full px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-md bg-white dark:bg-gray-200 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500';
+  'w-full px-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500';
 
 const sectionCardClass =
-  'rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-200 p-6 mb-8';
+  'rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-6 mb-8';
 
 const btnPrimaryClass =
   'inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-green-600 hover:bg-green-700 dark:bg-green-600 dark:hover:bg-green-500 rounded-md transition-colors';
@@ -48,7 +48,7 @@ function guideCardClass(guide: TechGuide): string {
   if (guide.isBackup) {
     return 'relative rounded-lg p-4 border-2 bg-amber-50 dark:bg-amber-950/40 border-amber-500';
   }
-  return 'relative rounded-lg p-4 border-2 bg-gray-50 dark:bg-gray-200 border-gray-200 dark:border-gray-700';
+  return 'relative rounded-lg p-4 border-2 bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700';
 }
 
 function guideIconClass(guide: TechGuide): string {

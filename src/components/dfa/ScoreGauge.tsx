@@ -44,7 +44,7 @@ const ScoreGauge: React.FC<Props> = ({ score, level, label = 'Risk score' }) => 
   const stroke = strokeColor(level);
 
   return (
-    <div className="flex flex-col items-center justify-center rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-600 dark:bg-gray-200">
+    <div className="flex flex-col items-center justify-center rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-600 dark:bg-gray-800">
       <div className="relative h-40 w-40">
         <svg viewBox="0 0 160 100" className="h-full w-full overflow-visible">
           <path d="M 18 82 A 62 62 0 0 1 142 82" fill="none" stroke="#e2e8f0" strokeWidth="14" strokeLinecap="round" />

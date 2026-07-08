@@ -168,7 +168,7 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
   if (compact) {
     const recentTopics = filteredTopics.slice(0, 5);
     return (
-      <div className="bg-white dark:bg-gray-200 rounded-lg p-4 shadow-md">
+      <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold flex items-center gap-2 text-primary">
             <MessageCircle size={20} />
@@ -252,7 +252,7 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6">
-      <div className="max-w-3xl mx-auto text-left bg-white dark:bg-gray-200 rounded-xl p-6 sm:p-8 shadow-md mt-8">
+      <div className="max-w-3xl mx-auto text-left bg-white dark:bg-gray-800 rounded-xl p-6 sm:p-8 shadow-md mt-8">
         <h2 className="text-2xl font-bold text-green-800 dark:text-green-300 mb-4">
           Share tips and read what others saved
         </h2>
@@ -296,7 +296,7 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
             {categories.filter((c) => c.value !== 'all').map((category) => (
               <span
                 key={category.value}
-                className="inline-block px-4 py-2 bg-white dark:bg-gray-200 rounded-full text-sm text-green-800 dark:text-green-300 border border-green-300 dark:border-green-600"
+                className="inline-block px-4 py-2 bg-white dark:bg-gray-800 rounded-full text-sm text-green-800 dark:text-green-300 border border-green-300 dark:border-green-600"
               >
                 {category.label}
               </span>
@@ -383,7 +383,7 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
           </div>
 
         {/* Filters */}
-        <div className="bg-white dark:bg-gray-200 rounded-lg p-4 shadow-md mb-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-md mb-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
@@ -394,7 +394,7 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 aria-label="Search forum topics"
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-200 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
               />
             </div>
             <select
@@ -402,7 +402,7 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
               aria-label="Filter topics by category"
-              className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-200 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
             >
               {categories.map(cat => (
                 <option key={cat.value} value={cat.value}>{cat.label}</option>
@@ -442,7 +442,7 @@ const PrivacyTipsForum: React.FC<PrivacyTipsForumProps> = ({ compact = false }) 
                   type="button"
                   key={topic.id}
                   onClick={() => setSelectedTopic(topic)}
-                  className="w-full text-left bg-white dark:bg-gray-200 rounded-lg p-6 shadow-md hover:shadow-lg transition-all cursor-pointer"
+                  className="w-full text-left bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md hover:shadow-lg transition-all cursor-pointer"
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
@@ -546,7 +546,7 @@ const TopicDetailView: React.FC<TopicDetailViewProps> = ({
         </button>
       </div>
 
-      <section className="py-12 sm:py-16 bg-gray-100 dark:bg-gray-200/50">
+      <section className="py-12 sm:py-16 bg-gray-100 dark:bg-gray-800/50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <h1 className="text-3xl sm:text-4xl font-extrabold leading-tight mb-4 text-gray-900 dark:text-gray-100">
             {topic.title}
@@ -561,7 +561,7 @@ const TopicDetailView: React.FC<TopicDetailViewProps> = ({
 
       <section className="py-12 sm:py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="bg-white dark:bg-gray-200 rounded-lg p-6 shadow-md mb-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md mb-6">
           <h2 className="text-3xl font-bold mb-3 text-primary">
             {topic.title}
           </h2>
@@ -590,7 +590,7 @@ const TopicDetailView: React.FC<TopicDetailViewProps> = ({
             return (
               <div
                 key={post.id}
-                className="bg-white dark:bg-gray-200 rounded-lg p-6 shadow-md"
+                className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md"
               >
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center text-white flex-shrink-0">
@@ -633,7 +633,7 @@ const TopicDetailView: React.FC<TopicDetailViewProps> = ({
 
         {/* Reply Form */}
         {showPostForm ? (
-          <div className="bg-white dark:bg-gray-200 rounded-lg p-6 shadow-md">
+          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md">
             <form onSubmit={handleSubmitPost}>
               <label htmlFor="forum-post-reply" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                 Your reply
@@ -643,7 +643,7 @@ const TopicDetailView: React.FC<TopicDetailViewProps> = ({
                 value={postContent}
                 onChange={(e) => setPostContent(e.target.value)}
                 rows={6}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-200 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 mb-4"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 mb-4"
                 placeholder="Write your reply..."
               />
               <div className="flex gap-3">
@@ -748,7 +748,7 @@ const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({ onSubmit, o
         )}
         <div
           ref={required ? modalRef : undefined}
-          className={`relative bg-white dark:bg-gray-200 rounded-lg shadow-xl ${required ? 'max-w-md w-full' : 'w-full'} p-6`}
+          className={`relative bg-white dark:bg-gray-800 rounded-lg shadow-xl ${required ? 'max-w-md w-full' : 'w-full'} p-6`}
           role={required ? 'dialog' : undefined}
           aria-modal={required ? 'true' : undefined}
           aria-labelledby="user-reg-title"
@@ -783,7 +783,7 @@ const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({ onSubmit, o
                   setUsername(e.target.value);
                   setError('');
                 }}
-                className={`w-full px-3 py-2 border rounded-md bg-white dark:bg-gray-200 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 ${error ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'}`}
+                className={`w-full px-3 py-2 border rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 ${error ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'}`}
                 placeholder="e.g., PrivacyParent42"
               />
               {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
@@ -797,7 +797,7 @@ const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({ onSubmit, o
                 type="text"
                 value={displayName}
                 onChange={(e) => setDisplayName(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-200 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
                 placeholder="Optional display name"
               />
             </div>
@@ -884,7 +884,7 @@ const TopicCreationForm: React.FC<TopicCreationFormProps> = ({ onSubmit, onCance
         <div className="fixed inset-0 bg-black bg-opacity-50" onClick={onCancel} aria-hidden="true" />
         <div
           ref={modalRef}
-          className="relative bg-white dark:bg-gray-200 rounded-lg shadow-xl max-w-2xl w-full p-6"
+          className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full p-6"
           role="dialog"
           aria-modal="true"
           aria-labelledby="topic-create-title"
@@ -909,7 +909,7 @@ const TopicCreationForm: React.FC<TopicCreationFormProps> = ({ onSubmit, onCance
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-200 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
                 placeholder="What's your tip or question?"
               />
             </div>
@@ -921,7 +921,7 @@ const TopicCreationForm: React.FC<TopicCreationFormProps> = ({ onSubmit, onCance
                 id="forum-topic-category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value as ForumTopic['category'])}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-200 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
               >
                 <option value="privacy-tips">Privacy Tips</option>
                 <option value="conversation-starters">Conversation Starters</option>
@@ -942,7 +942,7 @@ const TopicCreationForm: React.FC<TopicCreationFormProps> = ({ onSubmit, onCance
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 rows={4}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-200 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
                 placeholder="A few sentences about what worked for your family…"
               />
             </div>

@@ -45,7 +45,7 @@ const DfaScoreOverview: React.FC<Props> = ({ analysis }) => {
         </div>
 
         <div className="flex flex-wrap gap-3">
-          <div className="inline-flex rounded-xl border border-gray-200 bg-white p-1 shadow-sm dark:border-gray-600 dark:bg-gray-200">
+          <div className="inline-flex rounded-xl border border-gray-200 bg-white p-1 shadow-sm dark:border-gray-600 dark:bg-gray-800">
             {(['basic', 'advanced'] as DfaScoreTier[]).map((option) => (
               <button
                 key={option}
@@ -70,7 +70,7 @@ const DfaScoreOverview: React.FC<Props> = ({ analysis }) => {
       <div className="mt-6 grid gap-6 xl:grid-cols-[320px,1fr]">
         <div className="space-y-6">
           <ScoreGauge score={score.score} level={score.level} />
-          <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-600 dark:bg-gray-200">
+          <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-600 dark:bg-gray-800">
             <div className="flex items-center gap-2 text-gray-900 ">
               <Layers3 size={18} />
               <h3 className="text-lg font-bold">Executive summary</h3>

@@ -72,10 +72,10 @@ const ActivityCard: React.FC<{
     </div>
 
     <div className="mt-4 flex flex-wrap gap-2 text-[11px] font-medium">
-      <span className="rounded-full bg-white px-2.5 py-1 text-teal-700 ring-1 ring-teal-200 dark:bg-gray-200 dark:text-teal-300 dark:ring-teal-700/50">
+      <span className="rounded-full bg-white px-2.5 py-1 text-teal-700 ring-1 ring-teal-200 dark:bg-gray-800 dark:text-teal-300 dark:ring-teal-700/50">
         Ages {activity.groupAgeRange}
       </span>
-      <span className="rounded-full bg-gray-100 px-2.5 py-1 text-gray-700 dark:bg-gray-200 dark:text-gray-800 dark:ring-1 dark:ring-gray-500">
+      <span className="rounded-full bg-gray-100 px-2.5 py-1 text-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:ring-1 dark:ring-gray-500">
         {activity.focus}
       </span>
       <span className="rounded-full bg-amber-50 px-2.5 py-1 text-amber-700 dark:bg-amber-900/30 dark:text-amber-200">
@@ -108,7 +108,7 @@ const ActivityCard: React.FC<{
       </p>
     </div>
 
-    <div className="mt-4 rounded-2xl border border-gray-200 bg-gray-50 p-4 dark:border-gray-400 dark:bg-gray-200">
+    <div className="mt-4 rounded-2xl border border-gray-200 bg-gray-50 p-4 dark:border-gray-400 dark:bg-gray-800">
       <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-600">
         Learning goal
       </p>

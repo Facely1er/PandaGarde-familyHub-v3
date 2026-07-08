@@ -66,7 +66,7 @@ const FAQPage: React.FC = () => {
                     className={`flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded-full text-sm font-medium transition-all ${
                       selectedCategory === category.id
                         ? 'bg-green-600 text-white shadow-md shadow-green-900/30 ring-2 ring-green-400/40'
-                        : 'bg-gray-100 dark:bg-gray-200/80 text-gray-700 dark:text-gray-200 hover:bg-green-100/80 dark:hover:bg-green-900/30 dark:hover:text-green-200 dark:border dark:border-green-500/20'
+                        : 'bg-gray-100 dark:bg-gray-800/80 text-gray-700 dark:text-gray-200 hover:bg-green-100/80 dark:hover:bg-green-900/30 dark:hover:text-green-200 dark:border dark:border-green-500/20'
                     }`}
                   >
                     <Icon size={15} aria-hidden />
@@ -87,7 +87,7 @@ const FAQPage: React.FC = () => {
                 <button
                   onClick={() => toggleItem(item.id)}
                   aria-expanded={openItems.includes(item.id)}
-                  className="w-full px-4 sm:px-6 py-4 min-h-[56px] text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors bg-gray-50/50 dark:bg-gray-200"
+                  className="w-full px-4 sm:px-6 py-4 min-h-[56px] text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors bg-gray-50/50 dark:bg-gray-800"
                 >
                   <h3 className="text-base sm:text-lg font-semibold pr-4 text-primary">
                     {item.question}

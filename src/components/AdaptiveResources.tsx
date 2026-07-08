@@ -192,7 +192,7 @@ const AdaptiveResources: React.FC<AdaptiveResourcesProps> = ({
               <Link
                 key={resource.id}
                 to={resource.url}
-                className="p-4 bg-white dark:bg-gray-200 border border-gray-200 dark:border-gray-600 rounded-lg hover:shadow-md transition-shadow"
+                className="p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg hover:shadow-md transition-shadow"
               >
                 <div className="flex items-start space-x-3">
                   <div className="flex-shrink-0">
@@ -260,7 +260,7 @@ const AdaptiveResources: React.FC<AdaptiveResourcesProps> = ({
                   aria-label="Search resources"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-200 text-gray-900 dark:text-gray-100"
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                 />
               </div>
             </div>
@@ -268,7 +268,7 @@ const AdaptiveResources: React.FC<AdaptiveResourcesProps> = ({
               aria-label="Filter by category"
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-200 text-gray-900 dark:text-gray-100"
+              className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
             >
               {categories.map(cat => (
                 <option key={cat} value={cat}>
@@ -280,7 +280,7 @@ const AdaptiveResources: React.FC<AdaptiveResourcesProps> = ({
               aria-label="Filter by type"
               value={selectedType}
               onChange={(e) => setSelectedType(e.target.value)}
-              className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-200 text-gray-900 dark:text-gray-100"
+              className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
             >
               {types.map(type => (
                 <option key={type} value={type}>
@@ -308,7 +308,7 @@ const AdaptiveResources: React.FC<AdaptiveResourcesProps> = ({
                 <Link
                   key={resource.id}
                   to={resource.url}
-                  className="p-6 bg-white dark:bg-gray-200 border border-gray-200 dark:border-gray-600 rounded-lg hover:shadow-lg transition-all hover:border-blue-500 dark:hover:border-blue-400"
+                  className="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg hover:shadow-lg transition-all hover:border-blue-500 dark:hover:border-blue-400"
                 >
                   <div className="flex items-start space-x-4 mb-4">
                     <div className="flex-shrink-0">

@@ -271,7 +271,7 @@ const LearningHub: React.FC = () => {
               </p>
             </div>
 
-            <div className="flex shrink-0 items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 dark:border-gray-500 dark:bg-gray-200/80">
+            <div className="flex shrink-0 items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 dark:border-gray-500 dark:bg-gray-800/80">
               <Trophy className="text-amber-500" size={24} aria-hidden />
               <div>
                 <p className="text-lg font-bold tabular-nums text-slate-900 dark:text-white">
@@ -295,11 +295,11 @@ const LearningHub: React.FC = () => {
                 aria-label="Search games"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full rounded-xl border-2 border-slate-200 bg-slate-50 py-2.5 pl-10 pr-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/25 dark:border-gray-500 dark:bg-gray-200 dark:text-white"
+                className="w-full rounded-xl border-2 border-slate-200 bg-slate-50 py-2.5 pl-10 pr-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/25 dark:border-gray-500 dark:bg-gray-800 dark:text-white"
               />
             </div>
             <div className="flex flex-wrap items-center gap-2">
-              <div className="flex items-center gap-2 rounded-xl border-2 border-slate-200 bg-slate-50 px-2 dark:border-gray-500 dark:bg-gray-200">
+              <div className="flex items-center gap-2 rounded-xl border-2 border-slate-200 bg-slate-50 px-2 dark:border-gray-500 dark:bg-gray-800">
                 <Filter size={16} className="ml-1 text-slate-500" />
                 <select
                   aria-label="Filter by difficulty"
@@ -317,7 +317,7 @@ const LearningHub: React.FC = () => {
                 aria-label="Filter by age group"
                 value={filterAge}
                 onChange={(e) => setFilterAge(e.target.value)}
-                className="cursor-pointer rounded-xl border-2 border-slate-200 bg-slate-50 py-2.5 pl-3 pr-8 text-sm font-medium text-slate-800 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/25 dark:border-gray-500 dark:bg-gray-200 dark:text-slate-100"
+                className="cursor-pointer rounded-xl border-2 border-slate-200 bg-slate-50 py-2.5 pl-3 pr-8 text-sm font-medium text-slate-800 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/25 dark:border-gray-500 dark:bg-gray-800 dark:text-slate-100"
               >
                 <option value="all">All ages</option>
                 <option value="elementary">Elementary (6–10)</option>
@@ -365,7 +365,7 @@ const LearningHub: React.FC = () => {
                       <Target size={12} aria-hidden />
                       {game.difficulty}
                     </span>
-                    <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-700 dark:bg-gray-200 dark:text-slate-300">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-700 dark:bg-gray-800 dark:text-slate-300">
                       <Clock size={12} aria-hidden />
                       {game.duration}
                     </span>
@@ -376,7 +376,7 @@ const LearningHub: React.FC = () => {
                     onClick={() => setSelectedGame(game.id)}
                     className={`mt-auto flex w-full items-center justify-center gap-2 rounded-xl py-3 text-sm font-bold transition active:scale-[0.98] ${
                       isCompleted
-                        ? 'border-2 border-slate-200 bg-slate-50 text-slate-800 hover:bg-slate-100 dark:border-gray-500 dark:bg-gray-200 dark:text-slate-100 dark:hover:bg-slate-700'
+                        ? 'border-2 border-slate-200 bg-slate-50 text-slate-800 hover:bg-slate-100 dark:border-gray-500 dark:bg-gray-800 dark:text-slate-100 dark:hover:bg-slate-700'
                         : `bg-gradient-to-r ${game.color} text-white shadow-md hover:opacity-95 hover:shadow-lg`
                     }`}
                   >
