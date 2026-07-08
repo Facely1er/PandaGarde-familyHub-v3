@@ -1,6 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import FamilyHubStandaloneApp from './FamilyHubStandaloneApp';
+import './i18n';
 import './index.css';
 import { initServiceWorker } from './lib/serviceWorker.ts';
 import { logger } from './lib/logger';
