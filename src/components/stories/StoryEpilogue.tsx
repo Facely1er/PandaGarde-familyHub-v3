@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Story } from '../../data/stories';
+import { getPrimaryMissionForStory } from '../../data/storyMissionLinks';
+import { buildMissionHubUrl } from '../../lib/storyHubLinks';
 import { ActivityCard } from './ActivityCard';
 
 interface StoryEpilogueProps {
@@ -9,6 +11,9 @@ interface StoryEpilogueProps {
 }
 
 export function StoryEpilogue({ story, className = '', id }: StoryEpilogueProps) {
+  const primaryMissionId = getPrimaryMissionForStory(story.slug);
+  const missionHref = primaryMissionId ? buildMissionHubUrl(primaryMissionId) : '/family-hub/activities';
+
   return (
     <section
       id={id}
@@ -43,8 +48,8 @@ export function StoryEpilogue({ story, className = '', id }: StoryEpilogueProps)
         <Link to="/stories" className="button button-primary">
           Read more stories
         </Link>
-        <Link to="/family-hub/activities" className="button button-secondary">
-          Privacy missions
+        <Link to={missionHref} className="button button-secondary">
+          {primaryMissionId ? 'Practice in Family Hub' : 'Privacy missions'}
         </Link>
       </div>
     </section>

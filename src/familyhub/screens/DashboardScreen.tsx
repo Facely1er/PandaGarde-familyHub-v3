@@ -11,6 +11,7 @@ import HubTour from '../components/HubTour';
 import TodayMissionCard from '../components/TodayMissionCard';
 import { getHubOrigin, touchHubStreak } from '../../lib/hubMission';
 import { hubPaths } from '../hubPaths';
+import HubWebsiteLink from '../components/HubWebsiteLink';
 
 interface FamilyGoal {
   completed?: boolean;
@@ -32,20 +33,22 @@ const HubWelcomeBanner: React.FC<{ onDismiss: () => void }> = ({ onDismiss }) =>
           Do one short mission today. Progress and badges save on this device.
         </p>
         <div className="mt-3 flex flex-wrap gap-2">
-          <Link
-            to="/stories"
+          <HubWebsiteLink
+            path="/stories"
             className="inline-flex items-center gap-1.5 rounded-lg border border-teal-300 bg-white px-3 py-1.5 text-xs font-semibold text-teal-800 transition-colors hover:bg-teal-100 dark:border-teal-600 dark:bg-teal-900/40 dark:text-teal-200 dark:hover:bg-teal-900/60"
+            showExternalIcon
           >
             <BookOpen size={12} aria-hidden />
             Privacy Panda stories
-          </Link>
-          <Link
-            to="/digital-footprint"
+          </HubWebsiteLink>
+          <HubWebsiteLink
+            path="/digital-footprint"
             className="inline-flex items-center gap-1.5 rounded-lg border border-teal-300 bg-white px-3 py-1.5 text-xs font-semibold text-teal-800 transition-colors hover:bg-teal-100 dark:border-teal-600 dark:bg-teal-900/40 dark:text-teal-200 dark:hover:bg-teal-900/60"
+            showExternalIcon
           >
             <Fingerprint size={12} aria-hidden />
             Footprint review
-          </Link>
+          </HubWebsiteLink>
         </div>
       </div>
       <button

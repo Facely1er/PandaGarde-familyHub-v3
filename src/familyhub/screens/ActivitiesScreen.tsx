@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import { Clock, Play, Sparkles } from 'lucide-react';
 import HubPageLayout from '../components/HubPageLayout';
 import HubScreenHero from '../components/HubScreenHero';
@@ -17,6 +17,7 @@ import {
 import { HubIconBadge } from '../hubIcons';
 import { getForestCharacter } from '../../data/forestCharacters';
 import { StoryCharacterPortrait } from '../../components/stories/StoryCharacterPortrait';
+import RelatedStoryLink from '../components/RelatedStoryLink';
 
 const FOCUS_ORDER: ActivityFocus[] = [
   'Safe sharing',
@@ -72,6 +73,7 @@ const ActivityCard: React.FC<{
     </div>
 
     <div className="mt-4 flex flex-wrap gap-2 text-[11px] font-medium">
+      <RelatedStoryLink missionId={activity.id} variant="chip" />
       <span className="rounded-full bg-white px-2.5 py-1 text-teal-700 ring-1 ring-teal-200 dark:bg-gray-800 dark:text-teal-300 dark:ring-teal-700/50">
         Ages {activity.groupAgeRange}
       </span>
@@ -159,6 +161,7 @@ const GroupHeading: React.FC<{ group: AgeGroup }> = ({ group }) => {
 
 const ActivitiesScreen: React.FC = () => {
   const location = useLocation();
+  const [searchParams] = useSearchParams();
   const locationState = location.state as { initialAgeFilter?: AgeTabId; startMissionId?: string } | null;
   const initialAge: AgeTabId = locationState?.initialAgeFilter ?? 'all';
 
@@ -185,14 +188,14 @@ const ActivitiesScreen: React.FC = () => {
   }, [locationState?.initialAgeFilter]);
 
   useEffect(() => {
-    const missionId = locationState?.startMissionId;
+    const missionId = searchParams.get('mission') ?? locationState?.startMissionId;
     if (missionId) {
       const found = findActivityById(missionId);
       if (found) {
         setActiveMission(found);
       }
     }
-  }, [locationState?.startMissionId]);
+  }, [locationState?.startMissionId, searchParams]);
 
   const allActivities = useMemo(() => flattenAgeBasedActivities(), []);
   const focusTabs = useMemo(

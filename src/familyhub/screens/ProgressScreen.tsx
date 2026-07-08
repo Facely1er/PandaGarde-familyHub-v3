@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Award, CheckCircle2, Clock, Download, Rocket, Sprout, Star, Timer, TrendingUp, Trophy, X, type LucideIcon } from 'lucide-react';
+import { Award, BookOpen, CheckCircle2, Clock, Download, Fingerprint, Rocket, Sprout, Star, Timer, TrendingUp, Trophy, X, type LucideIcon } from 'lucide-react';
 import { HubIconBadge } from '../hubIcons';
 import { HubScreenFallback } from '../HubScreenFallback';
 
@@ -14,6 +14,8 @@ import { getForestCharacter, type ForestCharacter } from '../../data/forestChara
 import { StoryCharacterPortrait } from '../../components/stories/StoryCharacterPortrait';
 import HubPageLayout from '../components/HubPageLayout';
 import HubScreenHero from '../components/HubScreenHero';
+import HubWebsiteLink from '../components/HubWebsiteLink';
+import { hubPaths } from '../hubPaths';
 
 const ACHIEVEMENT_META: Record<string, { label: string; icon: LucideIcon; description: string }> = {
   first_activity: { label: 'First Step', icon: Sprout, description: 'Completed your first activity' },
@@ -159,17 +161,27 @@ const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => 
               Get your certificate
             </button>
             <Link
-              to="/stories"
+              to={hubPaths.activities}
               className="inline-flex items-center gap-1.5 rounded-lg border border-amber-300 bg-white px-3 py-1.5 text-xs font-semibold text-amber-800 transition-colors hover:bg-amber-100 dark:border-amber-600 dark:bg-amber-900/40 dark:text-amber-200 dark:hover:bg-amber-900/60"
             >
+              Revisit missions
+            </Link>
+            <HubWebsiteLink
+              path="/stories"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-amber-300 bg-white px-3 py-1.5 text-xs font-semibold text-amber-800 transition-colors hover:bg-amber-100 dark:border-amber-600 dark:bg-amber-900/40 dark:text-amber-200 dark:hover:bg-amber-900/60"
+              showExternalIcon
+            >
+              <BookOpen size={13} aria-hidden />
               Privacy Panda stories
-            </Link>
-            <Link
-              to="/digital-footprint"
+            </HubWebsiteLink>
+            <HubWebsiteLink
+              path="/digital-footprint"
               className="inline-flex items-center gap-1.5 rounded-lg border border-amber-300 bg-white px-3 py-1.5 text-xs font-semibold text-amber-800 transition-colors hover:bg-amber-100 dark:border-amber-600 dark:bg-amber-900/40 dark:text-amber-200 dark:hover:bg-amber-900/60"
+              showExternalIcon
             >
+              <Fingerprint size={13} aria-hidden />
               Update footprint review
-            </Link>
+            </HubWebsiteLink>
           </div>
         </div>
       )}

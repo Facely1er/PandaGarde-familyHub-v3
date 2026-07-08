@@ -17,6 +17,7 @@ import HubBrandLogo from './HubBrandLogo';
 import { HubIcon } from '../hubIcons';
 import { getForestCharacter } from '../../data/forestCharacters';
 import { StoryCharacterPortrait } from '../../components/stories/StoryCharacterPortrait';
+import RelatedStoryLink from './RelatedStoryLink';
 
 export type MissionPhase = 'intro' | 'play' | 'complete';
 
@@ -176,6 +177,8 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
                 </div>
               </div>
             )}
+
+            <RelatedStoryLink missionId={activity.id} variant="panel" />
 
             <section className="rounded-2xl border border-amber-200 bg-amber-50 p-5 dark:border-amber-700/40 dark:bg-amber-900/20">
               <p className="text-xs font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-300">
