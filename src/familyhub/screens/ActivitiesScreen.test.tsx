@@ -47,13 +47,27 @@ describe('ActivitiesScreen', () => {
     renderScreen();
 
     expect(screen.getByRole('heading', { name: /All missions/i })).toBeInTheDocument();
-    expect(screen.getAllByText(/Family cue/i).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/Real-life situation/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Start mission/i).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/Completed · 88%/i).length).toBeGreaterThan(0);
     expect(
       screen.getAllByText(/Help younger children tell the difference between friendly facts and private details\./i)
         .length
     ).toBeGreaterThan(0);
+  });
+
+  it('keeps age and goal filters visible after selection', async () => {
+    const user = userEvent.setup();
+
+    renderScreen();
+
+    await user.click(screen.getByRole('tab', { name: /Digital Citizens/i }));
+    expect(screen.getByRole('tab', { name: /Digital Citizens/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'All goals' })).toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: 'Account security' }));
+    expect(screen.getByRole('tab', { name: /Digital Citizens/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Account security' })).toBeInTheDocument();
   });
 
   it('filters activities by age and learning goal', async () => {
@@ -76,7 +90,7 @@ describe('ActivitiesScreen', () => {
 
     await user.click(screen.getAllByRole('button', { name: /Start activity: Digital Footprint Trail/i })[0]);
 
-    expect(screen.getByRole('heading', { level: 3, name: /Digital Footprint Trail/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 2, name: /Digital Footprint Trail/i })).toBeInTheDocument();
     expect(screen.getByText(/Read & talk/i)).toBeInTheDocument();
     expect(screen.getByText(/Family prompt/i)).toBeInTheDocument();
     expect(screen.getByText(/Discussion starters/i)).toBeInTheDocument();
