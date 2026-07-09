@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ArrowRight, BookMarked, BookOpen, ChevronRight, LayoutDashboard, ListChecks, ShieldCheck } from 'lucide-react';
+import { ArrowRight, BookMarked, BookOpen, CheckCircle, ChevronRight, LayoutDashboard, ListChecks, ShieldCheck } from 'lucide-react';
 import { loadDfaJourneyState } from '../lib/dfaJourney';
 import { getFoundationStory, getHomepageLatestStory, ORIGIN_STORY_SLUG } from '../data/stories';
 import { PageSection, ShellLinkCard, type ShellLinkCardVisual } from '../components/layout/PageContent';
 
-const SPOTLIGHT_ICON_SIZE = 20;
+const SPOTLIGHT_ICON_SIZE = 26;
 
 const spotlightVisuals = {
   stories: {
@@ -35,7 +35,8 @@ const HomePage: React.FC = () => {
 
   const trustPoints = [
     t('home.trustDataStays'),
-    t('home.trustFree'),
+    t('home.trustStoriesIndependent'),
+    t('home.trustListApps'),
   ];
 
   const spotlightLinks = useMemo(() => {
@@ -111,15 +112,15 @@ const HomePage: React.FC = () => {
               {t('home.title')}
               <span>{t('home.titleAccent')}</span>
             </h1>
-            <p className="page-section__lead homepage-hero__lead">
+            <p className="page-section__lead">
               {t('home.lead')}
             </p>
           </header>
 
           <div className="homepage-hero__actions">
-            <Link to={primaryCta.href} className="button button-primary inline-flex items-center justify-center gap-1.5">
+            <Link to={primaryCta.href} className="button button-primary inline-flex items-center justify-center gap-2">
               {primaryCta.label}
-              <ArrowRight size={16} aria-hidden />
+              <ArrowRight size={18} aria-hidden />
             </Link>
             <Link
               to="/digital-footprint"
@@ -128,21 +129,21 @@ const HomePage: React.FC = () => {
               {t('common.footprintReview')}
             </Link>
           </div>
-          <p className="homepage-hero__helper">
+          <p className="mt-3 text-center text-sm text-gray-500 dark:text-gray-400">
             {t('home.notSure')}{' '}
             <Link to="/how-it-works" className="font-medium text-green-700 hover:underline dark:text-green-400">
               {t('common.seeHowItWorks')}
             </Link>
           </p>
 
-          <p className="homepage-hero__trust-note">
-            {trustPoints.map((item, index) => (
-              <span key={item} className="homepage-hero__trust-item">
-                {index > 0 ? <span className="homepage-hero__trust-sep" aria-hidden="true"> · </span> : null}
-                {item}
-              </span>
+          <ul className="homepage-hero__trust-list">
+            {trustPoints.map((item) => (
+              <li key={item}>
+                <CheckCircle size={14} aria-hidden />
+                <span>{item}</span>
+              </li>
             ))}
-          </p>
+          </ul>
         </div>
       </section>
 
@@ -166,12 +167,10 @@ const HomePage: React.FC = () => {
                     title={item.title}
                     description={item.description}
                     visual={item.visual}
-                    layout="stacked"
-                    className="homepage-spotlight__card"
                     cta={
                       <>
                         {item.cta}
-                        <ChevronRight size={14} aria-hidden />
+                        <ChevronRight size={16} aria-hidden />
                       </>
                     }
                   />
@@ -201,6 +200,9 @@ const HomePage: React.FC = () => {
                 </Link>
                 <Link to="/digital-footprint" className="button button-secondary inline-flex items-center gap-1.5">
                   {t('common.footprintReview')}
+                </Link>
+                <Link to="/stories" className="button button-secondary inline-flex items-center gap-1.5">
+                  {t('common.stories')}
                 </Link>
               </div>
               <p className="homepage-closing__followup page-section__lead text-center">
