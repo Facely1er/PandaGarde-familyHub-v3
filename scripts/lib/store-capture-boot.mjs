@@ -1,12 +1,54 @@
 /** Screen definitions shared with storeScreenshotMode.ts — keep in sync manually. */
 export const CAPTURE_SCREENS = [
-  { id: '01-login', path: '/', auth: false, waitMs: 7000 },
-  { id: '02-dashboard', path: '/dashboard', auth: true, waitMs: 6000 },
-  { id: '03-activities', path: '/activities', auth: true, waitMs: 6000 },
-  { id: '04-mission-intro', path: '/activities?mission=pack-digital-backpack', auth: true, waitMs: 7000 },
-  { id: '05-journey', path: '/journey', auth: true, waitMs: 6000 },
-  { id: '06-kids', path: '/kids', auth: true, waitMs: 6000 },
-  { id: '07-settings', path: '/settings', auth: true, waitMs: 6000 },
+  {
+    id: '01-login',
+    path: '/',
+    auth: false,
+    waitMs: 7000,
+    waitFor: ["Let's go!"],
+  },
+  {
+    id: '02-dashboard',
+    path: '/dashboard',
+    auth: true,
+    waitMs: 6000,
+    waitFor: ["Today's mission", 'Browse missions', 'Family Hub'],
+  },
+  {
+    id: '03-activities',
+    path: '/activities',
+    auth: true,
+    waitMs: 6000,
+    waitFor: ['All missions', 'Real-life situation'],
+  },
+  {
+    id: '04-mission-intro',
+    path: '/activities?mission=pack-digital-backpack',
+    auth: true,
+    waitMs: 7000,
+    waitFor: ['Real-life scenario', 'Family prompt'],
+  },
+  {
+    id: '05-journey',
+    path: '/journey',
+    auth: true,
+    waitMs: 6000,
+    waitFor: ['Mission progress', 'Family rewards'],
+  },
+  {
+    id: '06-kids',
+    path: '/kids',
+    auth: true,
+    waitMs: 6000,
+    waitFor: ['Family members', 'Maya', 'Jordan'],
+  },
+  {
+    id: '07-settings',
+    path: '/settings',
+    auth: true,
+    waitMs: 6000,
+    waitFor: ['Settings', 'Privacy Policy', 'Help & Support'],
+  },
 ];
 
 const SAMPLE_FAMILY = [
