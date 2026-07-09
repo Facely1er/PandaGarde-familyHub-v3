@@ -21,4 +21,13 @@ end
 
 post_install do |installer|
   assertDeploymentTarget(installer)
+
+  # CapacitorCordova still references WKProcessPool (deprecated iOS 15+, harmless).
+  installer.pods_project.targets.each do |target|
+    next unless target.name == 'CapacitorCordova'
+
+    target.build_configurations.each do |config|
+      config.build_settings['GCC_WARN_DEPRECATED_FUNCTIONS'] = 'NO'
+    end
+  end
 end

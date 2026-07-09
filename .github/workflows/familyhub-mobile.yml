@@ -91,7 +91,7 @@ jobs:
           name: dist-familyhub
           path: dist-familyhub/
       - run: npm ci --ignore-scripts
-      - run: npx cap sync ios
+      - run: npx cap copy ios
       - name: Pod install
         working-directory: ios/App
         run: pod install --repo-update

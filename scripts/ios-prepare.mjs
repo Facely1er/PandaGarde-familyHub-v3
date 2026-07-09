@@ -3,14 +3,19 @@
  * Prepare iOS native project for Xcode archive / App Store upload.
  * Sets UTF-8 locale (CocoaPods fails on ASCII-8BIT terminals) and runs pod install.
  *
+ * Uses `cap copy ios` instead of `cap sync ios` to avoid xcodebuild clean, which
+ * fails when ios/App/build was created outside Xcode (e.g. CLI -derivedDataPath build).
+ *
  * Usage: node scripts/ios-prepare.mjs
  */
 import { spawnSync } from 'child_process';
+import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const iosAppDir = path.join(root, 'ios', 'App');
+const staleBuildDir = path.join(iosAppDir, 'build');
 
 const env = {
   ...process.env,
@@ -25,11 +30,21 @@ function run(command, args, cwd = root) {
   }
 }
 
+function removeStaleXcodeBuildDir() {
+  if (!fs.existsSync(staleBuildDir)) {
+    return;
+  }
+  console.log('[ios:prepare] Removing stale ios/App/build (blocks cap sync clean)…');
+  fs.rmSync(staleBuildDir, { recursive: true, force: true });
+}
+
 console.log('[ios:prepare] Building Family Hub web bundle…');
 run('npm', ['run', 'build:familyhub']);
 
 console.log('[ios:prepare] Copying web assets to ios/App/App/public…');
 run('npx', ['cap', 'copy', 'ios']);
+
+removeStaleXcodeBuildDir();
 
 console.log('[ios:prepare] Installing CocoaPods dependencies…');
 run('pod', ['install'], iosAppDir);

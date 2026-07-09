@@ -64,5 +64,8 @@ android/local.properties
 android/.idea/
 *.iml
 
+# iOS local build output (CLI xcodebuild -derivedDataPath build breaks cap sync clean)
+ios/App/build/
+
 # Local Netlify folder
 .netlify
