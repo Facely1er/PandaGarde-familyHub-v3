@@ -1,11 +1,12 @@
 import { Capacitor } from '@capacitor/core';
+import { isStoreScreenshotBuild } from '../familyhub/storeScreenshotMode';
 
 /**
  * Open a URL in the system browser on native (Capacitor) or a new tab on web.
  */
 export async function openExternalUrl(url: string): Promise<void> {
   const trimmed = url.trim();
-  if (!trimmed) {
+  if (!trimmed || isStoreScreenshotBuild()) {
     return;
   }
 

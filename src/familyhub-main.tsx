@@ -5,10 +5,12 @@ import './i18n';
 import './index.css';
 import { initServiceWorker } from './lib/serviceWorker.ts';
 import { initHubNativeShell } from './lib/hubNativeShell';
+import { initStoreScreenshotEarly } from './familyhub/storeScreenshotMode';
 import { clearNativeWebCachesOnBoot, shouldEnableServiceWorker } from './lib/nativeWebCache';
 import { logger } from './lib/logger';
 
 clearNativeWebCachesOnBoot();
+initStoreScreenshotEarly();
 initHubNativeShell();
 
 if (import.meta.env.MODE !== 'production') {

@@ -12,6 +12,7 @@ import TodayMissionCard from '../components/TodayMissionCard';
 import { getHubOrigin, touchHubStreak } from '../../lib/hubMission';
 import { hubPaths } from '../hubPaths';
 import HubWebsiteLink from '../components/HubWebsiteLink';
+import { isStoreScreenshotBuild } from '../storeScreenshotMode';
 
 interface FamilyGoal {
   completed?: boolean;
@@ -124,11 +125,13 @@ const DashboardScreen: React.FC = () => {
     touchHubStreak();
   }, []);
 
+  const hideOnboardingChrome = isStoreScreenshotBuild();
+
   return (
     <div className="min-h-full min-w-0">
-      <HubTour />
+      {!hideOnboardingChrome && <HubTour />}
       <HubPageLayout>
-        {!welcomeDismissed && (
+        {!hideOnboardingChrome && !welcomeDismissed && (
           <HubWelcomeBanner onDismiss={() => setWelcomeDismissed(true)} />
         )}
 
@@ -161,7 +164,7 @@ const DashboardScreen: React.FC = () => {
 
         <TodayMissionCard />
 
-        {!missionHintDismissed && (
+        {!hideOnboardingChrome && !missionHintDismissed && (
           <HowMissionsWorkCard onDismiss={() => setMissionHintDismissed(true)} />
         )}
 

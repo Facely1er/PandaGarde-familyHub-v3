@@ -1,24 +1,32 @@
 #!/usr/bin/env node
 /**
- * Capture App Store screenshots from Xcode Simulator (native resolution + status bar).
+ * Capture App Store screenshots from Xcode Simulator.
  *
- * Requires: Xcode, bootable simulators SC-Store-iPhone-6.5 and iPad Pro 13-inch (M5).
- * Deep links: familyhub://capture/{screenId}
+ * Navigation uses a local HTTP server (no familyhub:// openurl — avoids the iOS
+ * "Open in PandaGarde Family Hub?" dialog). Output is composited inside a device bezel.
+ *
+ * Requires: Xcode, simulators SC-Store-iPhone-6.5 and iPad Pro 13-inch (M5).
  *
  * Output:
- *   store-assets/app-store/iphone-6.5/*.png  (1284×2778)
- *   store-assets/app-store/ipad-13/*.png     (2064×2752)
+ *   store-assets/app-store/iphone-6.5/*.png  (1284×2778, framed)
+ *   store-assets/app-store/ipad-13/*.png     (2064×2752, framed)
+ *   store-assets/app-store/_raw/{device}/*.png (raw simulator captures)
  *
  * Usage:
- *   npm run assets:screenshots:ios
  *   npm run assets:screenshots:ios:build
  *   node scripts/capture-ios-simulator-screenshots.mjs --device=iphone-6.5
  */
 import { spawnSync } from 'node:child_process';
+import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
+import {
+  assertFramedDimensions,
+  compositeWithDeviceFrame,
+  FRAMED_DEVICE_PROFILES,
+} from './lib/store-device-frames.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const iosAppDir = path.join(root, 'ios', 'App');
@@ -27,6 +35,7 @@ const appBundle = path.join(derivedData, 'Build', 'Products', 'Debug-iphonesimul
 const bundleId = 'com.pandagarde.familyhub';
 const outRoot = path.join(root, 'store-assets', 'app-store');
 const rawRoot = path.join(outRoot, '_raw');
+const CAPTURE_PORT = 4177;
 
 const env = {
   ...process.env,
@@ -36,28 +45,27 @@ const env = {
 
 const DEVICE_TARGETS = {
   'iphone-6.5': {
-    slug: 'iphone-6.5',
+    profile: FRAMED_DEVICE_PROFILES['iphone-6.5'],
     simName: 'SC-Store-iPhone-6.5',
-    width: 1284,
-    height: 2778,
   },
   'ipad-13': {
-    slug: 'ipad-13',
+    profile: FRAMED_DEVICE_PROFILES['ipad-13'],
     simName: 'iPad Pro 13-inch (M5)',
-    width: 2064,
-    height: 2752,
   },
 };
 
 const SCREENS = [
-  { id: '01-login', waitMs: 2500 },
-  { id: '02-dashboard', waitMs: 3500 },
-  { id: '03-activities', waitMs: 3500 },
-  { id: '04-mission-intro', waitMs: 4500 },
-  { id: '05-journey', waitMs: 3500 },
-  { id: '06-kids', waitMs: 3500 },
-  { id: '07-settings', waitMs: 3500 },
+  { id: '01-login', waitMs: 3500 },
+  { id: '02-dashboard', waitMs: 4000 },
+  { id: '03-activities', waitMs: 4000 },
+  { id: '04-mission-intro', waitMs: 5000 },
+  { id: '05-journey', waitMs: 4000 },
+  { id: '06-kids', waitMs: 4000 },
+  { id: '07-settings', waitMs: 4000 },
 ];
+
+let currentScreen = null;
+let captureServer;
 
 function parseArgs() {
   const doBuild = process.argv.includes('--build');
@@ -82,6 +90,37 @@ function run(command, args, options = {}) {
 
 function sleep(ms) {
   spawnSync('sleep', [String(Math.max(1, Math.ceil(ms / 1000)))], { stdio: 'ignore' });
+}
+
+function startCaptureServer() {
+  return new Promise((resolve, reject) => {
+    captureServer = http.createServer((req, res) => {
+      if (req.method === 'GET' && req.url === '/screen') {
+        res.writeHead(200, {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Cache-Control': 'no-store',
+        });
+        res.end(JSON.stringify({ screen: currentScreen }));
+        return;
+      }
+      res.writeHead(404);
+      res.end();
+    });
+    captureServer.on('error', reject);
+    captureServer.listen(CAPTURE_PORT, '0.0.0.0', () => {
+      console.log(`[ios-screenshots] Capture server on http://127.0.0.1:${CAPTURE_PORT}/screen`);
+      resolve(undefined);
+    });
+  });
+}
+
+function stopCaptureServer() {
+  if (!captureServer) {
+    return;
+  }
+  captureServer.close();
+  captureServer = undefined;
 }
 
 function resolveSimulatorUdid(name) {
@@ -135,13 +174,12 @@ function prepareWebBundle() {
     fs.unlinkSync(iosPublicSw);
   }
 
-  console.log('[ios-screenshots] Installing CocoaPods (Capacitor App plugin for deep links)…');
+  console.log('[ios-screenshots] Installing CocoaPods…');
   run('pod', ['install'], { cwd: iosAppDir });
 }
 
 function buildSimulatorApp() {
   console.log('[ios-screenshots] Building iOS app for Simulator…');
-  const destination = 'generic/platform=iOS Simulator';
   run(
     'xcodebuild',
     [
@@ -152,7 +190,7 @@ function buildSimulatorApp() {
       '-configuration',
       'Debug',
       '-destination',
-      destination,
+      'generic/platform=iOS Simulator',
       '-derivedDataPath',
       derivedData,
       'CODE_SIGNING_ALLOWED=NO',
@@ -167,25 +205,13 @@ function buildSimulatorApp() {
   }
 }
 
-async function normalizeScreenshot(buffer, profile) {
-  const meta = await sharp(buffer).metadata();
-  if (meta.width === profile.width && meta.height === profile.height) {
-    return buffer;
-  }
-  console.warn(
-    `[ios-screenshots] ${profile.slug}: raw ${meta.width}×${meta.height} → normalizing to ${profile.width}×${profile.height}`
-  );
-  return sharp(buffer)
-    .resize(profile.width, profile.height, { fit: 'cover', position: 'top' })
-    .png()
-    .toBuffer();
-}
+async function captureDevice(target) {
+  const { profile, simName } = target;
+  const udid = resolveSimulatorUdid(simName);
+  bootSimulator(udid, simName);
 
-async function captureDevice(profile) {
-  const udid = resolveSimulatorUdid(profile.simName);
-  bootSimulator(udid, profile.simName);
-
-  console.log(`[ios-screenshots] Installing app on ${profile.simName}…`);
+  console.log(`[ios-screenshots] Installing app on ${simName}…`);
+  run('xcrun', ['simctl', 'terminate', udid, bundleId], { allowFail: true });
   run('xcrun', ['simctl', 'uninstall', udid, bundleId], { allowFail: true });
   run('xcrun', ['simctl', 'install', udid, appBundle]);
 
@@ -194,27 +220,34 @@ async function captureDevice(profile) {
   fs.mkdirSync(outDir, { recursive: true });
   fs.mkdirSync(rawDir, { recursive: true });
 
+  currentScreen = SCREENS[0].id;
+  console.log(`[ios-screenshots] Launching app (screen=${currentScreen})…`);
+  run('xcrun', ['simctl', 'launch', udid, bundleId]);
+  sleep(2500);
+
   for (const screen of SCREENS) {
-    const url = `familyhub://capture/${screen.id}`;
+    currentScreen = screen.id;
     const rawPath = path.join(rawDir, `${screen.id}.png`);
     const outPath = path.join(outDir, `${screen.id}.png`);
 
-    console.log(`[ios-screenshots] ${profile.slug}/${screen.id} ← ${url}`);
-    run('xcrun', ['simctl', 'terminate', udid, bundleId], { allowFail: true });
-    run('xcrun', ['simctl', 'launch', udid, bundleId], { allowFail: true });
-    sleep(1500);
-    run('xcrun', ['simctl', 'openurl', udid, url]);
+    console.log(`[ios-screenshots] ${profile.slug}/${screen.id}`);
     sleep(screen.waitMs);
 
     run('xcrun', ['simctl', 'io', udid, 'screenshot', rawPath]);
 
     const raw = fs.readFileSync(rawPath);
-    const normalized = await normalizeScreenshot(raw, profile);
-    fs.writeFileSync(outPath, normalized);
+    const framed = await compositeWithDeviceFrame(raw, profile, sharp);
+    fs.writeFileSync(outPath, framed);
 
-    const meta = await sharp(outPath).metadata();
-    console.log(`  ✓ ${outPath} (${meta.width}×${meta.height})`);
+    const rawMeta = await sharp(raw).metadata();
+    const { ok, width, height } = await assertFramedDimensions(framed, profile, sharp);
+    console.log(
+      `  ✓ ${path.relative(root, outPath)} (${width}×${height}${ok ? '' : ' — dimension mismatch'}) [raw ${rawMeta.width}×${rawMeta.height}]`
+    );
   }
+
+  currentScreen = null;
+  run('xcrun', ['simctl', 'terminate', udid, bundleId], { allowFail: true });
 }
 
 async function main() {
@@ -237,16 +270,23 @@ async function main() {
     process.exit(1);
   }
 
-  for (const profile of targets) {
-    await captureDevice(profile);
+  await startCaptureServer();
+
+  try {
+    for (const target of targets) {
+      await captureDevice(target);
+    }
+  } finally {
+    stopCaptureServer();
   }
 
   console.log('\n[ios-screenshots] Done.');
-  console.log(`  iPhone 6.5": ${path.join(outRoot, 'iphone-6.5')}`);
-  console.log(`  iPad 13":    ${path.join(outRoot, 'ipad-13')}`);
+  console.log(`  Framed: ${path.join(outRoot, 'iphone-6.5')} + ipad-13/`);
+  console.log(`  Raw:    ${rawRoot}/`);
 }
 
 main().catch((err) => {
   console.error('[ios-screenshots] FAILED:', err);
+  stopCaptureServer();
   process.exit(1);
 });

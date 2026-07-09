@@ -3,6 +3,7 @@ import { X, ArrowRight, LayoutDashboard, Map, Users, Gamepad2 } from 'lucide-rea
 import { useDialogFocusTrap } from '../../hooks/useDialogFocusTrap';
 import { hubPaths } from '../hubPaths';
 import { useHubI18n } from '../hubI18n';
+import { isStoreScreenshotBuild } from '../storeScreenshotMode';
 
 export const HUB_TOUR_KEY = 'pandagarde_hub_tour_done';
 
@@ -34,9 +35,16 @@ const HubTour: React.FC<HubTourProps> = ({ onDone }) => {
   }, [t]);
 
   useEffect(() => {
-    const done = localStorage.getItem(HUB_TOUR_KEY);
-    if (done === 'true') {return;}
-    const timer = setTimeout(() => setVisible(true), 600);
+    if (isStoreScreenshotBuild()) {
+      return undefined;
+    }
+    const timer = setTimeout(() => {
+      const done = localStorage.getItem(HUB_TOUR_KEY);
+      if (done === 'true' || isStoreScreenshotBuild()) {
+        return;
+      }
+      setVisible(true);
+    }, 600);
     return () => clearTimeout(timer);
   }, []);
 

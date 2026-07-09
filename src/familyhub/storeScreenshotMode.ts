@@ -1,11 +1,11 @@
 /**
  * Dev-only store screenshot automation (VITE_STORE_SCREENSHOTS=true).
- * Deep links: familyhub://capture/{screenId}
+ * The iOS capture script drives navigation via a local HTTP server (no URL scheme dialogs).
  */
-import { App, type URLOpenListenerEvent } from '@capacitor/app';
 import type { NavigateFunction } from 'react-router-dom';
 
-export const STORE_SCREENSHOT_SCHEME = 'familyhub';
+export const STORE_CAPTURE_SERVER_PORT = 4177;
+export const STORE_CAPTURE_SERVER = `http://127.0.0.1:${STORE_CAPTURE_SERVER_PORT}`;
 
 export const STORE_SCREENSHOTS = [
   { id: '01-login', path: '/', auth: false },
@@ -73,19 +73,25 @@ export function isStoreScreenshotBuild(): boolean {
   return import.meta.env.VITE_STORE_SCREENSHOTS === 'true';
 }
 
-export function parseStoreScreenshotId(url: string): StoreScreenshotId | null {
-  const match = url.match(/familyhub:\/\/capture\/([^/?#]+)/i);
-  const id = match?.[1];
-  return STORE_SCREENSHOTS.some((screen) => screen.id === id) ? (id as StoreScreenshotId) : null;
+/** Hide first-run overlays so simulator captures stay clean. */
+export function suppressHubOnboardingForCapture(): void {
+  localStorage.setItem('pandagarde_hub_tour_done', 'true');
+  localStorage.setItem('pandagarde_hub_welcome_dismissed', 'true');
+  localStorage.setItem('pandagarde_hub_mission_hint_dismissed', 'true');
+}
+
+export function initStoreScreenshotEarly(): void {
+  if (!isStoreScreenshotBuild()) {
+    return;
+  }
+  suppressHubOnboardingForCapture();
 }
 
 export function applyStoreScreenshotSeed(auth: boolean): void {
   localStorage.setItem('pandagarde-theme', 'light');
   localStorage.setItem('pandagarde-language', 'en');
   localStorage.setItem('pandagarde_hub_origin', 'standalone');
-  localStorage.setItem('pandagarde_hub_tour_done', 'true');
-  localStorage.setItem('pandagarde_hub_welcome_dismissed', 'true');
-  localStorage.setItem('pandagarde_hub_mission_hint_dismissed', 'true');
+  suppressHubOnboardingForCapture();
 
   if (auth) {
     localStorage.setItem('pandagarde_local_auth_v1', 'true');
@@ -109,33 +115,46 @@ function navigateToScreen(navigate: NavigateFunction, screenId: StoreScreenshotI
   navigate(screen.path);
 }
 
-async function handleStoreScreenshotUrl(url: string, navigate: NavigateFunction): Promise<void> {
-  const screenId = parseStoreScreenshotId(url);
-  if (!screenId) {
-    return;
-  }
-  navigateToScreen(navigate, screenId);
+function isStoreScreenshotId(value: string): value is StoreScreenshotId {
+  return STORE_SCREENSHOTS.some((screen) => screen.id === value);
 }
 
+/** Poll the local capture server so simctl never needs familyhub:// openurl (avoids iOS dialog). */
 export function initStoreScreenshotMode(navigate: NavigateFunction): () => void {
   if (!isStoreScreenshotBuild()) {
     return () => undefined;
   }
 
-  let listenerHandle: { remove: () => Promise<void> } | undefined;
+  let lastScreen: StoreScreenshotId | null = null;
+  let active = true;
 
-  void (async () => {
-    listenerHandle = await App.addListener('appUrlOpen', (event: URLOpenListenerEvent) => {
-      void handleStoreScreenshotUrl(event.url, navigate);
-    });
-
-    const launch = await App.getLaunchUrl();
-    if (launch?.url) {
-      await handleStoreScreenshotUrl(launch.url, navigate);
+  const poll = async () => {
+    if (!active) {
+      return;
     }
-  })();
+    try {
+      const response = await fetch(`${STORE_CAPTURE_SERVER}/screen`);
+      if (!response.ok) {
+        return;
+      }
+      const payload = (await response.json()) as { screen?: string | null };
+      const next = payload.screen ?? null;
+      if (next && isStoreScreenshotId(next) && next !== lastScreen) {
+        lastScreen = next;
+        navigateToScreen(navigate, next);
+      }
+    } catch {
+      // Capture server not running yet.
+    }
+  };
+
+  const timer = window.setInterval(() => {
+    void poll();
+  }, 400);
+  void poll();
 
   return () => {
-    void listenerHandle?.remove();
+    active = false;
+    window.clearInterval(timer);
   };
 }

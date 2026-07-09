@@ -97,12 +97,21 @@ function applyCapacitorPlatformClasses(): void {
   root.classList.add('capacitor', `platform-${Capacitor.getPlatform()}`);
 }
 
+/** Close any SFSafariViewController left open after simulator terminate/relaunch cycles. */
+function dismissStaleInAppBrowser(): void {
+  if (!Capacitor.isNativePlatform()) {
+    return;
+  }
+  void import('@capacitor/browser').then(({ Browser }) => Browser.close()).catch(() => undefined);
+}
+
 /**
  * Native shell bootstrap for Family Hub Capacitor builds.
  * Applies platform classes and measured safe-area CSS variables before first paint.
  */
 export function initHubNativeShell(): void {
   applyCapacitorPlatformClasses();
+  dismissStaleInAppBrowser();
   applySafeAreaCssVars();
 
   const onViewportChange = (): void => {

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { initStoreScreenshotMode, isStoreScreenshotBuild } from '../storeScreenshotMode';
 
-/** Listens for familyhub://capture/{screen} deep links (iOS Simulator automation). */
+/** Polls the local capture server for the next screen (iOS Simulator automation). */
 const StoreScreenshotNavigator: React.FC = () => {
   const navigate = useNavigate();
 

@@ -14,13 +14,13 @@ npm run assets:store
 
 ## App Store screenshots (generated)
 
-**Recommended — Xcode Simulator (native resolution, real status bar):**
+**Recommended — Xcode Simulator (native resolution, device frame, real status bar):**
 
 ```bash
 npm run assets:screenshots:ios:build
 ```
 
-Uses deep links (`familyhub://capture/{screen}`) on simulators **SC-Store-iPhone-6.5** and **iPad Pro 13-inch (M5)**.
+Uses simulators **SC-Store-iPhone-6.5** and **iPad Pro 13-inch (M5)**. A local HTTP server drives in-app navigation (no `familyhub://` dialogs). Output PNGs are composited **inside a device bezel** on a soft teal background at exact App Store dimensions. Raw simulator captures are kept in `_raw/`.
 
 **Alternative — Playwright preview (browser):**
 
