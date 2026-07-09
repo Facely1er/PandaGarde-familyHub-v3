@@ -4,6 +4,10 @@ export const HUB_WELCOMED_KEY = 'pandagarde_hub_welcomed';
 /** App Store / shell display name — keep in sync with capacitor.config.ts appName */
 export const HUB_DISPLAY_NAME = 'PandaGarde Family Hub';
 
+/** Header lockup — two lines beside the logo */
+export const HUB_BRAND_LINE_1 = 'PandaGarde';
+export const HUB_BRAND_LINE_2 = 'Family Hub';
+
 export {
   HUB_ORIGIN_KEY,
   HUB_LAST_MISSION_KEY,

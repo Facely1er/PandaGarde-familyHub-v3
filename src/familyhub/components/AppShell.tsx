@@ -18,7 +18,7 @@ import { openExternalUrl } from '../../lib/openExternalUrl';
 import { hubPaths, pandagardeWebsiteUrl, isHubStandalone } from '../hubPaths';
 import HubBrandLogo from './HubBrandLogo';
 import { hubTheme } from '../hubTheme';
-import { HUB_DISPLAY_NAME } from '../constants';
+import { HUB_BRAND_LINE_1, HUB_BRAND_LINE_2 } from '../constants';
 
 interface TabItem {
   id: string;
@@ -89,10 +89,6 @@ const AppShell: React.FC = () => {
     return location.pathname === path || location.pathname.startsWith(`${path}/`);
   };
 
-  const currentTab =
-    allTabs.find((tab) => isTabActive(tab.path)) ??
-    (location.pathname.startsWith(hubPaths.settings) ? settingsTab : primaryTabs[0]);
-
   const hubOrigin = getHubOrigin();
   const onSettingsPage = isTabActive(hubPaths.settings);
 
@@ -139,7 +135,7 @@ const AppShell: React.FC = () => {
         </a>
 
         <header className={hubTheme.chromeHeader}>
-          <div className="hub-header-row flex max-w-full items-center justify-between gap-2 pl-[max(0.75rem,var(--hub-safe-left,env(safe-area-inset-left,0px)))] pr-[max(0.75rem,var(--hub-safe-right,env(safe-area-inset-right,0px)))]">
+          <div className="hub-header-row flex max-w-full items-center justify-between gap-1 pl-[max(0.5rem,var(--hub-safe-left,env(safe-area-inset-left,0px)))] pr-[max(0.5rem,var(--hub-safe-right,env(safe-area-inset-right,0px)))]">
             <div className="hub-header-brand flex min-w-0 flex-1 items-center">
               <a
                 href={isHubStandalone ? pandagardeWebsiteUrl : '/'}
@@ -155,30 +151,25 @@ const AppShell: React.FC = () => {
                 <HubBrandLogo size="shell" variant="plain" alt="" />
               </a>
               <div className="hub-header-brand__text flex min-w-0 flex-col justify-center gap-px leading-none">
-                <h1 className="whitespace-nowrap font-bold text-teal-700 dark:text-teal-400 text-[length:clamp(11px,3vw,13px)]">
-                  {HUB_DISPLAY_NAME}
+                <h1 className="whitespace-nowrap font-bold text-teal-700 dark:text-teal-400 text-[length:clamp(13px,3.4vw,15px)]">
+                  <span className="block">{HUB_BRAND_LINE_1}</span>
+                  <span className="block">{HUB_BRAND_LINE_2}</span>
                 </h1>
-                <p
-                  className="whitespace-nowrap font-medium text-gray-500 dark:text-gray-400 text-[length:clamp(9px,2.5vw,11px)]"
-                  title={currentTab.label}
-                >
-                  {currentTab.shortLabel}
-                </p>
               </div>
             </div>
-            <div className="flex shrink-0 items-center gap-1">
+            <div className="flex shrink-0 items-center gap-0.5">
               <button
                   type="button"
                   onClick={toggleTheme}
-                  className="flex h-8 w-8 items-center justify-center rounded-md text-gray-500 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
+                  className="flex h-9 w-9 items-center justify-center rounded-md text-gray-500 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
                   aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
                 >
-                  {theme === 'light' ? <Moon size={18} aria-hidden="true" /> : <Sun size={18} aria-hidden="true" />}
+                  {theme === 'light' ? <Moon size={20} aria-hidden="true" /> : <Sun size={20} aria-hidden="true" />}
                 </button>
                 <NavLink
                   to={hubPaths.settings}
                   className={[
-                    'flex h-8 w-8 items-center justify-center rounded-md transition-colors',
+                    'flex h-9 w-9 items-center justify-center rounded-md transition-colors',
                     onSettingsPage
                       ? 'bg-teal-100 text-teal-700 dark:bg-teal-900/40 dark:text-teal-300'
                       : 'text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700',
@@ -186,7 +177,7 @@ const AppShell: React.FC = () => {
                   aria-label={settingsTab.label}
                   aria-current={onSettingsPage ? 'page' : undefined}
                 >
-                  <Settings size={18} aria-hidden="true" />
+                  <Settings size={20} aria-hidden="true" />
                 </NavLink>
                 <a
                   href={isHubStandalone ? pandagardeWebsiteUrl : '/'}
@@ -226,7 +217,7 @@ const AppShell: React.FC = () => {
                     to={tab.path}
                     aria-label={tab.label}
                     className={[
-                      'group flex h-full flex-col items-center justify-center gap-0.5',
+                      'group flex h-full flex-col items-center justify-center gap-px',
                       'w-full min-w-0 touch-manipulation rounded-none',
                       'transition-all duration-200 active:scale-95',
                       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-teal-500',
@@ -238,17 +229,17 @@ const AppShell: React.FC = () => {
                   >
                     <span
                       className={[
-                        'flex h-7 w-7 items-center justify-center rounded-md transition-colors',
+                        'flex h-8 w-8 items-center justify-center rounded-md transition-colors',
                         active
                           ? 'bg-teal-100 text-teal-700 dark:bg-teal-800/60 dark:text-teal-200'
                           : 'text-gray-500 group-hover:text-teal-700 dark:text-gray-400 dark:group-hover:text-teal-300',
                       ].join(' ')}
                     >
-                      <Icon size={18} strokeWidth={active ? 2.5 : 2} aria-hidden="true" />
+                      <Icon size={20} strokeWidth={active ? 2.5 : 2} aria-hidden="true" />
                     </span>
                     <span
                       className={[
-                        'pb-px text-[11px] leading-tight sm:text-xs',
+                        'pb-px text-[12px] leading-none sm:text-[13px]',
                         active ? 'font-semibold' : 'font-medium',
                       ].join(' ')}
                     >
