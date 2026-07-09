@@ -31,10 +31,38 @@
     <div id="root"></div>
     <script>
       (function () {
+        var root = document.documentElement;
         var c = window.Capacitor;
         if (c && c.isNativePlatform && c.isNativePlatform()) {
-          document.documentElement.classList.add('capacitor', 'platform-' + c.getPlatform());
+          root.classList.add('capacitor', 'platform-' + c.getPlatform());
         }
+
+        function applyEarlySafeAreas() {
+          var probe = document.createElement('div');
+          probe.style.cssText =
+            'position:fixed;top:0;left:0;visibility:hidden;pointer-events:none;' +
+            'padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);';
+          root.appendChild(probe);
+          var style = getComputedStyle(probe);
+          var top = parseFloat(style.paddingTop) || 0;
+          var bottom = parseFloat(style.paddingBottom) || 0;
+          probe.remove();
+
+          if (c && c.getPlatform && c.getPlatform() === 'ios') {
+            var longSide = Math.max(window.screen.height, window.screen.width);
+            if (top < 1) {
+              top = longSide >= 932 ? 59 : longSide >= 812 ? 47 : 20;
+            }
+            if (bottom < 1 && longSide >= 812) {
+              bottom = 34;
+            }
+          }
+
+          root.style.setProperty('--hub-safe-top', top + 'px');
+          root.style.setProperty('--hub-nav-safe-bottom', bottom + 'px');
+        }
+
+        applyEarlySafeAreas();
       })();
     </script>
     <script type="module" src="/src/familyhub-main.tsx"></script>

@@ -2,6 +2,10 @@ import { Capacitor } from '@capacitor/core';
 
 /** Typical home-indicator inset when WKWebView reports env(safe-area-inset-bottom) as 0 */
 const IOS_HOME_INDICATOR_FALLBACK_PX = 34;
+/** Notch iPhones — status bar + notch */
+const IOS_NOTCH_TOP_FALLBACK_PX = 47;
+/** Dynamic Island class devices */
+const IOS_DYNAMIC_ISLAND_TOP_FALLBACK_PX = 59;
 
 function measureSafeAreaInsets(): {
   top: number;
@@ -45,6 +49,22 @@ function iosLikelyHasHomeIndicator(): boolean {
   return longSide >= 812 && shortSide >= 375;
 }
 
+function iosTopFallback(): number {
+  const visualTop = window.visualViewport?.offsetTop ?? 0;
+  if (visualTop > 0) {
+    return visualTop;
+  }
+
+  const longSide = Math.max(window.screen.height, window.screen.width);
+  if (longSide >= 932) {
+    return IOS_DYNAMIC_ISLAND_TOP_FALLBACK_PX;
+  }
+  if (longSide >= 812) {
+    return IOS_NOTCH_TOP_FALLBACK_PX;
+  }
+  return 20;
+}
+
 function applySafeAreaCssVars(): void {
   const root = document.documentElement;
   const platform = Capacitor.getPlatform();
@@ -54,8 +74,10 @@ function applySafeAreaCssVars(): void {
   let safeBottom = measured.bottom;
 
   if (Capacitor.isNativePlatform() && platform === 'ios') {
-    // Capacitor contentInset:never — WebView content already starts below status bar.
-    safeTop = 0;
+    // contentInset:never + viewport-fit=cover — web content extends under status bar.
+    if (safeTop < 1) {
+      safeTop = iosTopFallback();
+    }
     if (safeBottom < 1 && iosLikelyHasHomeIndicator()) {
       safeBottom = IOS_HOME_INDICATOR_FALLBACK_PX;
     }
@@ -94,5 +116,6 @@ export function initHubNativeShell(): void {
 
   if (window.visualViewport) {
     window.visualViewport.addEventListener('resize', onViewportChange);
+    window.visualViewport.addEventListener('scroll', onViewportChange);
   }
 }

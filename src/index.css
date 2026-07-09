@@ -7227,22 +7227,22 @@ body {
   margin-left: -0.125rem;
 }
 
-/* Web / PWA: respect notch & home indicator via CSS env */
+/* Web / PWA / Capacitor: respect notch & home indicator */
 .hub-chrome-header {
-  padding-top: var(--hub-safe-top);
+  padding-top: max(var(--hub-safe-top, 0px), env(safe-area-inset-top, 0px));
 }
 
 .hub-bottom-nav {
-  padding-bottom: var(--hub-nav-safe-bottom);
+  padding-bottom: max(var(--hub-nav-safe-bottom, 0px), env(safe-area-inset-bottom, 0px));
 }
 
 .hub-bottom-nav-tabs {
   height: var(--hub-nav-tab-height);
 }
 
-/* Login / welcome — no AppShell header; pad top on web PWA only */
+/* Login / welcome — no AppShell header */
 .hub-standalone-page {
-  padding-top: var(--hub-safe-top);
+  padding-top: max(var(--hub-safe-top, 0px), env(safe-area-inset-top, 0px));
 }
 
 html.capacitor,
@@ -7269,17 +7269,6 @@ html.capacitor .hub-app-shell {
   height: 100%;
   min-height: 0;
   min-height: -webkit-fill-available;
-}
-
-/* Capacitor iOS WebView already lays out below the status bar */
-html.capacitor.platform-ios .hub-chrome-header,
-html.capacitor.platform-ios .hub-standalone-page {
-  padding-top: 0;
-}
-
-html.capacitor.platform-android .hub-chrome-header,
-html.capacitor.platform-android .hub-standalone-page {
-  padding-top: var(--hub-safe-top);
 }
 
 /* Tour card clears bottom tab bar on phones */
