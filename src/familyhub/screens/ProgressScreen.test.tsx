@@ -1,11 +1,12 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { ProgressProvider } from '../../contexts/ProgressContext';
 import ProgressScreen from './ProgressScreen';
+import { renderWithHubI18n } from '../../test/renderWithHubI18n';
 
 const renderScreen = () =>
-  render(
+  renderWithHubI18n(
     <MemoryRouter>
       <ProgressProvider>
         <ProgressScreen />

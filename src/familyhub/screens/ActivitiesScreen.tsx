@@ -19,7 +19,9 @@ import { getForestCharacter } from '../../data/forestCharacters';
 import { StoryCharacterPortrait } from '../../components/stories/StoryCharacterPortrait';
 import RelatedStoryLink from '../components/RelatedStoryLink';
 import { useResolvedMissionScenario } from '../../hooks/useResolvedMissionScenario';
-import { useHubI18n } from '../hubI18n'; ActivityFocus[] = [
+import { useHubI18n } from '../hubI18n';
+
+const FOCUS_ORDER: ActivityFocus[] = [
   'Safe sharing',
   'Account security',
   'Spotting scams',

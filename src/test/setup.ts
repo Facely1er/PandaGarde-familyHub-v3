@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom/vitest';
+import '../i18n';
 
 /** jsdom sometimes exposes a broken localStorage without clear(); polyfill for tests. */
 if (typeof window !== 'undefined') {

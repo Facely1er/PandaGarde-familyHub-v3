@@ -77,7 +77,7 @@ if (versionCodeMatch && versionNameMatch) {
 
 const settings = read('src/familyhub/screens/SettingsScreen.tsx');
 track(settings.includes('path="/privacy"'), 'Settings privacy policy link');
-track(settings.includes('mailto:support@pandagarde.com'), 'Settings support email link');
+track(settings.includes('HUB_SUPPORT_EMAIL'), 'Settings support email link');
 track(!settings.includes('PREMIUM_PRICING_LABEL'), 'Settings hides store pricing (no IAP in v1)');
 
 const keystoreProps = path.join(root, 'android/keystore.properties');

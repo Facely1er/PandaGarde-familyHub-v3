@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ProgressProvider } from '../../contexts/ProgressContext';
 import { FamilyProgressProvider } from '../../contexts/FamilyProgressContext';
@@ -8,6 +8,8 @@ import { HUB_CURRENT_MEMBER_KEY, HUB_FAMILY_PROGRESS_KEY } from '../hubFamilyMem
 import type { FlattenedAgeBasedActivity } from '../../data/ageBasedActivities';
 import { getCompletionId } from '../../lib/hubMission';
 import MissionShell from './MissionShell';
+import { MemoryRouter } from 'react-router-dom';
+import { renderWithHubI18n } from '../../test/renderWithHubI18n';
 
 const conversationOnlyMission: FlattenedAgeBasedActivity = {
   id: 'test-conversation-mission',
@@ -31,11 +33,13 @@ const conversationOnlyMission: FlattenedAgeBasedActivity = {
 };
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
-  <FamilyProvider>
-    <ProgressProvider>
-      <FamilyProgressProvider>{children}</FamilyProgressProvider>
-    </ProgressProvider>
-  </FamilyProvider>
+  <MemoryRouter>
+    <FamilyProvider>
+      <ProgressProvider>
+        <FamilyProgressProvider>{children}</FamilyProgressProvider>
+      </ProgressProvider>
+    </FamilyProvider>
+  </MemoryRouter>
 );
 
 describe('MissionShell', () => {
@@ -47,7 +51,7 @@ describe('MissionShell', () => {
     const user = userEvent.setup();
     localStorage.setItem(HUB_CURRENT_MEMBER_KEY, JSON.stringify(12));
 
-    render(
+    renderWithHubI18n(
       <Wrapper>
         <MissionShell
           activity={conversationOnlyMission}
@@ -71,7 +75,7 @@ describe('MissionShell', () => {
   it('records household mission progress in ProgressContext', async () => {
     const user = userEvent.setup();
 
-    render(
+    renderWithHubI18n(
       <Wrapper>
         <MissionShell
           activity={conversationOnlyMission}

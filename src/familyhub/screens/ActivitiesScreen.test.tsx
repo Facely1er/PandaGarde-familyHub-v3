@@ -1,14 +1,15 @@
 import { describe, expect, it, beforeEach } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { ProgressProvider } from '../../contexts/ProgressContext';
 import { FamilyProgressProvider } from '../../contexts/FamilyProgressContext';
 import { FamilyProvider } from '../../contexts/FamilyContext';
 import ActivitiesScreen from './ActivitiesScreen';
+import { renderWithHubI18n } from '../../test/renderWithHubI18n';
 
 const renderScreen = () =>
-  render(
+  renderWithHubI18n(
     <MemoryRouter>
       <FamilyProvider>
         <ProgressProvider>
@@ -50,10 +51,7 @@ describe('ActivitiesScreen', () => {
     expect(screen.getAllByText(/Real-life situation/i).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/Start mission/i).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/Completed · 88%/i).length).toBeGreaterThan(0);
-    expect(
-      screen.getAllByText(/Help younger children tell the difference between friendly facts and private details\./i)
-        .length
-    ).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Pack Your Digital Backpack/i).length).toBeGreaterThan(0);
   });
 
   it('keeps age and goal filters visible after selection', async () => {

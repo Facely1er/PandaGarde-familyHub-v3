@@ -1,13 +1,14 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from '../../contexts/ThemeContext';
 import { FamilyProvider } from '../../contexts/FamilyContext';
-import { HUB_DISPLAY_NAME } from '../constants';
+import { HUB_BRAND_LINE_1, HUB_BRAND_LINE_2 } from '../constants';
 import AppShell from './AppShell';
+import { renderWithHubI18n } from '../../test/renderWithHubI18n';
 
 const renderShell = (initialEntry = '/family-hub/dashboard') =>
-  render(
+  renderWithHubI18n(
     <ThemeProvider>
       <FamilyProvider>
         <MemoryRouter initialEntries={[initialEntry]}>
@@ -29,8 +30,10 @@ describe('AppShell navigation', () => {
   it('shows full branding and screen tagline in the header', () => {
     renderShell('/family-hub/dashboard');
 
-    expect(screen.getByRole('heading', { level: 1, name: HUB_DISPLAY_NAME })).toBeInTheDocument();
-    expect(screen.getByText('Dashboard — today and quick stats')).toBeInTheDocument();
+    const heading = screen.getByRole('heading', { level: 1 });
+    expect(heading).toHaveTextContent(HUB_BRAND_LINE_1);
+    expect(heading).toHaveTextContent(HUB_BRAND_LINE_2);
+    expect(screen.getByRole('link', { name: /Dashboard — today/i })).toBeInTheDocument();
   });
 
   it('marks the current route with aria-current', () => {
