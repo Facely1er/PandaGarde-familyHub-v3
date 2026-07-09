@@ -4,12 +4,12 @@
  */
 export const hubTheme = {
   shell:
-    'family-hub-theme flex h-full min-h-[100dvh] w-full max-w-full flex-col overflow-x-hidden bg-gray-50 dark:bg-gray-950',
+    'hub-app-shell family-hub-theme flex h-full min-h-0 w-full max-w-full flex-1 flex-col overflow-x-hidden bg-gray-50 dark:bg-gray-950',
   chromeHeader:
     'hub-chrome-header shrink-0 border-b border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800',
   chromeNav:
     'hub-bottom-nav fixed inset-x-0 bottom-0 z-40 box-border border-t border-gray-200 bg-white pl-[max(0px,env(safe-area-inset-left,0px))] pr-[max(0px,env(safe-area-inset-right,0px))] shadow-lg dark:border-gray-700 dark:bg-gray-800',
-  main: 'min-w-0 flex-1 overflow-x-hidden overflow-y-auto overscroll-contain pb-[var(--hub-nav-offset,4.5rem)]',
+  main: 'min-h-0 min-w-0 flex-1 overflow-x-hidden overflow-y-auto overscroll-contain pb-[var(--hub-nav-offset,4.75rem)]',
   page: 'min-h-screen flex flex-col bg-gray-50 dark:bg-gray-950',
   /** Inner tab content — match HubPageLayout */
   pageContent:

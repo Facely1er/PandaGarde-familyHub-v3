@@ -4,7 +4,10 @@ import FamilyHubStandaloneApp from './FamilyHubStandaloneApp';
 import './i18n';
 import './index.css';
 import { initServiceWorker } from './lib/serviceWorker.ts';
+import { initHubNativeShell } from './lib/hubNativeShell';
 import { logger } from './lib/logger';
+
+initHubNativeShell();
 
 if (import.meta.env.MODE !== 'production') {
   if ('serviceWorker' in navigator) {

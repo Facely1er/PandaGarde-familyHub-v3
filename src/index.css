@@ -7205,10 +7205,26 @@ body {
 
 /* Family Hub — Capacitor native shell + safe areas */
 .family-hub-theme {
-  --hub-nav-tab-height: 3.5rem;
+  --hub-nav-tab-height: 3.75rem;
   --hub-nav-safe-bottom: env(safe-area-inset-bottom, 0px);
   --hub-nav-offset: calc(var(--hub-nav-tab-height) + var(--hub-nav-safe-bottom));
   --hub-safe-top: env(safe-area-inset-top, 0px);
+  --hub-safe-left: env(safe-area-inset-left, 0px);
+  --hub-safe-right: env(safe-area-inset-right, 0px);
+}
+
+.hub-app-shell {
+  min-height: 0;
+}
+
+.hub-header-brand {
+  gap: 0.125rem;
+  min-width: 0;
+}
+
+.hub-header-brand__text {
+  min-width: 0;
+  margin-left: -0.125rem;
 }
 
 /* Web / PWA: respect notch & home indicator via CSS env */
@@ -7229,22 +7245,29 @@ body {
   padding-top: var(--hub-safe-top);
 }
 
-html.capacitor.platform-ios,
-html.capacitor.platform-ios body {
+html.capacitor,
+html.capacitor body {
   height: 100%;
   overflow: hidden;
+  background-color: #f9fafb;
 }
 
-html.capacitor.platform-ios #root {
+html.capacitor[data-theme='dark'] body {
+  background-color: #030712;
+}
+
+html.capacitor #root {
   height: 100%;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  min-height: 0;
 }
 
-html.capacitor.platform-ios .family-hub-theme {
+html.capacitor .family-hub-theme,
+html.capacitor .hub-app-shell {
   height: 100%;
-  min-height: 100%;
+  min-height: 0;
   min-height: -webkit-fill-available;
 }
 
@@ -7261,7 +7284,7 @@ html.capacitor.platform-android .hub-standalone-page {
 
 /* Tour card clears bottom tab bar on phones */
 .hub-tour-overlay {
-  padding-bottom: calc(var(--hub-nav-offset, 4.5rem) + 1rem);
+  padding-bottom: calc(var(--hub-nav-offset, 4.75rem) + 1rem);
 }
 
 

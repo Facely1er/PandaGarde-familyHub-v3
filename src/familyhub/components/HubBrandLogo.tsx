@@ -3,11 +3,12 @@ import React from 'react';
 /** Public asset copied to dist / dist-familyhub at build time */
 export const HUB_LOGO_SRC = '/LogoPandagarde.png';
 
-export type HubBrandLogoSize = 'xs' | 'sm' | 'md' | 'lg' | 'hero' | 'header';
+export type HubBrandLogoSize = 'xs' | 'sm' | 'shell' | 'md' | 'lg' | 'hero' | 'header';
 
 const framedSizeClasses: Record<HubBrandLogoSize, string> = {
   xs: 'h-7 w-7 rounded-lg',
   sm: 'h-10 w-10 rounded-xl',
+  shell: 'h-11 w-11 rounded-xl',
   md: 'h-14 w-14 rounded-2xl',
   lg: 'h-20 w-20 rounded-2xl sm:h-24 sm:w-24',
   hero: 'h-20 w-20 rounded-2xl sm:h-24 sm:w-24',
@@ -18,6 +19,7 @@ const framedSizeClasses: Record<HubBrandLogoSize, string> = {
 const plainSizeClasses: Record<HubBrandLogoSize, string> = {
   xs: 'h-10 w-10',
   sm: 'h-11 w-11',
+  shell: 'h-12 w-12',
   md: 'h-16 w-16',
   lg: 'h-24 w-24 sm:h-28 sm:w-28',
   hero: 'h-28 w-28 sm:h-32 sm:w-32',

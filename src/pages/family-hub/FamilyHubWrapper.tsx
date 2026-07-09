@@ -53,11 +53,13 @@ const FamilyHubRoutes: React.FC = () => {
 
 const FamilyHubWrapper: React.FC = () => {
   return (
-    <HubExperienceProviders>
-      <AuthWrapper>
-        <FamilyHubRoutes />
-      </AuthWrapper>
-    </HubExperienceProviders>
+    <div className="flex min-h-0 flex-1 flex-col">
+      <HubExperienceProviders>
+        <AuthWrapper>
+          <FamilyHubRoutes />
+        </AuthWrapper>
+      </HubExperienceProviders>
+    </div>
   );
 };
 

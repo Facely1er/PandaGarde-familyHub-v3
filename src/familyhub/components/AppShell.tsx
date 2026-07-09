@@ -139,8 +139,8 @@ const AppShell: React.FC = () => {
         </a>
 
         <header className={hubTheme.chromeHeader}>
-          <div className="hub-header-row flex min-h-11 max-w-full items-center justify-between gap-2 py-0.5 pl-[max(0.75rem,env(safe-area-inset-left,0px))] pr-[max(0.75rem,env(safe-area-inset-right,0px))]">
-            <div className="flex min-w-0 flex-1 items-center gap-1">
+          <div className="hub-header-row flex min-h-12 max-w-full items-center justify-between gap-2 py-0.5 pl-[max(0.75rem,var(--hub-safe-left,env(safe-area-inset-left,0px)))] pr-[max(0.75rem,var(--hub-safe-right,env(safe-area-inset-right,0px)))]">
+            <div className="hub-header-brand flex min-w-0 flex-1 items-center">
               <a
                 href={isHubStandalone ? pandagardeWebsiteUrl : '/'}
                 onClick={onOpenWebsite}
@@ -152,9 +152,9 @@ const AppShell: React.FC = () => {
                 }
                 title={hubOrigin === 'standalone' || isHubStandalone ? 'Website' : 'Back to PandaGarde'}
               >
-                <HubBrandLogo size="xs" variant="plain" alt="" className="!h-8 !w-8" />
+                <HubBrandLogo size="shell" variant="plain" alt="" />
               </a>
-              <div className="flex min-w-0 flex-col justify-center gap-px leading-none">
+              <div className="hub-header-brand__text flex min-w-0 flex-col justify-center gap-px leading-none">
                 <h1 className="whitespace-nowrap font-bold text-teal-700 dark:text-teal-400 text-[length:clamp(10px,2.75vw,12px)]">
                   {HUB_DISPLAY_NAME}
                 </h1>
@@ -245,7 +245,7 @@ const AppShell: React.FC = () => {
                     </span>
                     <span
                       className={[
-                        'text-[10px] leading-none sm:text-[11px]',
+                        'pb-px text-[10px] leading-tight sm:text-[11px]',
                         active ? 'font-semibold' : 'font-medium',
                       ].join(' ')}
                     >

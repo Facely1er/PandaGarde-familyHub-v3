@@ -29,6 +29,14 @@
       })();
     </script>
     <div id="root"></div>
+    <script>
+      (function () {
+        var c = window.Capacitor;
+        if (c && c.isNativePlatform && c.isNativePlatform()) {
+          document.documentElement.classList.add('capacitor', 'platform-' + c.getPlatform());
+        }
+      })();
+    </script>
     <script type="module" src="/src/familyhub-main.tsx"></script>
   </body>
 </html>
