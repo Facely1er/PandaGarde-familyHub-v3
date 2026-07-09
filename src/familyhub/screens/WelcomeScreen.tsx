@@ -44,52 +44,57 @@ const WelcomeScreen: React.FC = () => {
   };
 
   return (
-    <div className={`family-hub-theme hub-standalone-page ${hubTheme.page}`}>
-      <div className="flex-1 overflow-y-auto px-4 pb-4 pt-[var(--hub-content-pt,1rem)] sm:pt-6">
-        <div className="mx-auto max-w-xl space-y-4 sm:space-y-5">
-          <div className="space-y-2 text-center">
-            <HubBrandLogo size="md" variant="plain" className="mx-auto" alt="" />
-            <div>
-              <h1 className="text-2xl font-extrabold leading-tight tracking-tight text-gray-900 dark:text-white sm:text-3xl">
-                {t('hub.welcome.title')}{' '}
-                <span className="text-teal-600 dark:text-teal-400">{HUB_BRAND_LINE_2}</span>
-              </h1>
-              <p className="mx-auto mt-1.5 max-w-sm text-sm leading-snug text-gray-600 dark:text-gray-300">
-                {t('hub.welcomeLead')}
-              </p>
-            </div>
-          </div>
+    <div className={`family-hub-theme hub-standalone-page hub-welcome-landing ${hubTheme.page}`}>
+      <div className="hub-welcome-landing__scroll flex-1 overflow-y-auto px-4 pb-3 pt-3 sm:px-5 sm:pt-4">
+        <div className="hub-welcome-landing__inner mx-auto w-full max-w-xl">
+          <header className="hub-welcome-landing__hero text-center">
+            <HubBrandLogo size="sm" variant="plain" className="mx-auto" alt="" />
+            <h1 className="hub-welcome-landing__title text-gray-900 dark:text-white">
+              {t('hub.welcome.title')}{' '}
+              <span className="text-teal-600 dark:text-teal-400">{HUB_BRAND_LINE_2}</span>
+            </h1>
+            <p className="hub-welcome-landing__lead text-gray-600 dark:text-gray-300">{t('hub.welcomeLead')}</p>
+          </header>
 
           <AgeBandStrip title={t('hub.welcome.adventurePaths')} density="compact" />
 
-          <div className="space-y-3">
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+          <section className="hub-welcome-landing__section" aria-labelledby="hub-welcome-inside-heading">
+            <h2
+              id="hub-welcome-inside-heading"
+              className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400"
+            >
               {t('hub.welcome.whatsInside')}
             </h2>
-            <ul className="grid gap-3">
+            <ul className="grid gap-2">
               {sections.map(({ icon: Icon, title, description, color }) => (
                 <li
                   key={title}
-                  className="flex items-start gap-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 shadow-sm"
+                  className="flex items-start gap-2.5 rounded-xl border border-gray-200 bg-white p-3 shadow-sm dark:border-gray-700 dark:bg-gray-800"
                 >
-                  <span className={`mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${color}`}>
-                    <Icon size={20} aria-hidden="true" />
+                  <span
+                    className={`mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${color}`}
+                  >
+                    <Icon size={18} aria-hidden="true" />
                   </span>
-                  <span>
-                    <span className="block text-sm font-semibold text-gray-900 dark:text-white">{title}</span>
-                    <span className="block text-xs text-gray-600 dark:text-gray-400">{description}</span>
+                  <span className="min-w-0">
+                    <span className="block text-sm font-semibold leading-snug text-gray-900 dark:text-white">
+                      {title}
+                    </span>
+                    <span className="block text-xs leading-snug text-gray-600 dark:text-gray-400">
+                      {description}
+                    </span>
                   </span>
                 </li>
               ))}
             </ul>
-          </div>
+          </section>
 
-          <p className="text-center text-sm text-gray-600 dark:text-gray-400">
+          <p className="hub-welcome-landing__note text-center text-xs leading-snug text-gray-600 dark:text-gray-400">
             {t('hub.welcome.websiteNote')}
           </p>
 
-          <div className="flex items-start gap-3 rounded-xl bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 p-4 text-sm text-green-800 dark:text-green-200">
-            <Shield size={18} className="mt-0.5 shrink-0 text-green-600 dark:text-green-400" aria-hidden="true" />
+          <div className="flex items-start gap-2.5 rounded-xl border border-green-200 bg-green-50 p-3 text-xs leading-snug text-green-800 dark:border-green-800 dark:bg-green-900/20 dark:text-green-200">
+            <Shield size={16} className="mt-0.5 shrink-0 text-green-600 dark:text-green-400" aria-hidden="true" />
             <p>
               <strong>{t('hub.welcome.privacyStrong')}</strong> {t('hub.welcome.privacyNote')}
             </p>
@@ -97,15 +102,15 @@ const WelcomeScreen: React.FC = () => {
         </div>
       </div>
 
-      <div className="sticky bottom-0 border-t border-gray-200 bg-white/90 px-4 py-3 backdrop-blur dark:border-gray-700 dark:bg-gray-800/90 pb-[max(0.5rem,var(--hub-nav-safe-bottom,env(safe-area-inset-bottom,0px)))]">
-        <div className="mx-auto flex max-w-xl flex-col gap-2">
+      <div className="hub-welcome-landing__cta sticky bottom-0 border-t border-gray-200 bg-white/90 px-4 py-2.5 backdrop-blur dark:border-gray-700 dark:bg-gray-800/90 pb-[max(0.5rem,var(--hub-nav-safe-bottom,env(safe-area-inset-bottom,0px)))]">
+        <div className="mx-auto max-w-xl">
           <button
             type="button"
             onClick={handleGetStarted}
-            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-teal-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition-all hover:bg-teal-700 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 sm:text-base"
+            className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl bg-teal-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-teal-700 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
           >
             {t('hub.enterCta')}
-            <ArrowRight size={20} aria-hidden="true" />
+            <ArrowRight size={18} aria-hidden="true" />
           </button>
         </div>
       </div>

@@ -16,9 +16,8 @@ const LANGUAGE_LABELS: Record<SupportedLanguage, string> = {
 
 type LanguageSwitcherProps = {
   className?: string;
-  /** Compact flag overlay for the marketing header toolbar */
-  variant?: 'toolbar' | 'segmented' | 'hub';
-  /** Slightly tighter segmented control for dense forms */
+  variant?: 'default' | 'toolbar' | 'segmented' | 'hub';
+  /** Slightly tighter segmented control for dense Family Hub settings */
   compact?: boolean;
 };
 
@@ -48,7 +47,7 @@ function nextLanguage(current: SupportedLanguage): SupportedLanguage {
 
 const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
   className = '',
-  variant = 'segmented',
+  variant = 'default',
   compact = false,
 }) => {
   const { t, i18n } = useTranslation();
@@ -120,15 +119,21 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
     void i18n.changeLanguage(event.target.value);
   };
 
+  const isToolbar = variant === 'toolbar';
+
   return (
-    <div className={`language-switcher language-switcher--toolbar ${className}`.trim()}>
+    <div
+      className={`language-switcher ${isToolbar ? 'language-switcher--toolbar' : ''} ${className}`.trim()}
+    >
       <label htmlFor={selectId} className="sr-only">
         {t('common.selectLanguage')}
       </label>
-      <div className="language-switcher__control header-icon-btn">
-        <span className="language-switcher__flag" aria-hidden="true">
-          {LANGUAGE_FLAGS[currentLang]}
-        </span>
+      <div className={`language-switcher__control${isToolbar ? ' header-icon-btn' : ''}`.trim()}>
+        {isToolbar ? (
+          <span className="language-switcher__flag" aria-hidden="true">
+            {LANGUAGE_FLAGS[currentLang]}
+          </span>
+        ) : null}
         <select
           id={selectId}
           className="language-switcher__select"
@@ -138,8 +143,8 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
           title={LANGUAGE_LABELS[currentLang]}
         >
           {SUPPORTED_LANGUAGES.map((code) => (
-            <option key={code} value={code}>
-              {LANGUAGE_FLAGS[code]} {LANGUAGE_LABELS[code]}
+            <option key={code} value={code} aria-label={LANGUAGE_LABELS[code]}>
+              {LANGUAGE_FLAGS[code]}
             </option>
           ))}
         </select>
