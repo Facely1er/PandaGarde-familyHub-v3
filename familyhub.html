@@ -100,6 +100,18 @@
           root.classList.add('capacitor', 'platform-' + c.getPlatform());
         }
 
+        function isIpadDevice() {
+          if (/iPad/.test(navigator.userAgent)) return true;
+          if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) return true;
+          var minSide = Math.min(screen.width, screen.height);
+          var maxSide = Math.max(screen.width, screen.height);
+          return minSide >= 744 && maxSide >= 1024;
+        }
+
+        if (isIpadDevice()) {
+          root.classList.add('platform-ipad');
+        }
+
         function applyEarlySafeAreas() {
           var probe = document.createElement('div');
           probe.style.cssText =

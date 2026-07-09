@@ -2,15 +2,15 @@
 /**
  * Capture App Store screenshots from Xcode Simulator.
  *
- * Injects synchronous boot script into index.html per screen (no URL schemes,
- * no async fetch). Output is composited inside a device bezel.
+ * Builds a fresh web bundle per screen (VITE_CAPTURE_SCREEN) so each cold launch
+ * lands on the correct route with seeded data — no URL schemes or HTML patching.
  */
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
-import { CAPTURE_SCREENS, injectCaptureBootIntoHtml } from './lib/store-capture-boot.mjs';
+import { CAPTURE_SCREENS } from './lib/store-capture-boot.mjs';
 import {
   assertFramedDimensions,
   compositeWithDeviceFrame,
@@ -26,6 +26,7 @@ const bundlePublicDir = path.join(appBundle, 'public');
 const bundleId = 'com.pandagarde.familyhub';
 const outRoot = path.join(root, 'store-assets', 'app-store');
 const rawRoot = path.join(outRoot, '_raw');
+const distDir = path.join(root, 'dist-familyhub');
 
 const env = {
   ...process.env,
@@ -33,30 +34,39 @@ const env = {
   LC_ALL: 'en_US.UTF-8',
 };
 
+const STORE_IPHONE_SIM = {
+  name: 'SC-Store-iPhone-6.5',
+  deviceType: 'com.apple.CoreSimulator.SimDeviceType.iPhone-14-Pro-Max',
+  rawWidth: 1284,
+  rawHeight: 2778,
+};
+
 const DEVICE_TARGETS = {
   'iphone-6.5': {
     profile: FRAMED_DEVICE_PROFILES['iphone-6.5'],
-    simName: 'SC-Store-iPhone-6.5',
+    simName: STORE_IPHONE_SIM.name,
     waitExtraMs: 0,
   },
   'ipad-13': {
     profile: FRAMED_DEVICE_PROFILES['ipad-13'],
     simName: 'iPad Pro 13-inch (M5)',
-    waitExtraMs: 3000,
+    waitExtraMs: 4000,
   },
 };
 
 function parseArgs() {
-  const doBuild = process.argv.includes('--build');
+  const doNativeBuild = process.argv.includes('--build');
   const deviceArg = process.argv.find((a) => a.startsWith('--device='));
+  const screenArg = process.argv.find((a) => a.startsWith('--screen='));
   const deviceFilter = deviceArg?.split('=')[1] ?? 'all';
-  return { doBuild, deviceFilter };
+  const screenFilter = screenArg?.split('=')[1] ?? null;
+  return { doNativeBuild, deviceFilter, screenFilter };
 }
 
 function run(command, args, options = {}) {
   const result = spawnSync(command, args, {
     cwd: options.cwd ?? root,
-    env,
+    env: options.env ?? env,
     stdio: options.quiet ? 'pipe' : 'inherit',
     encoding: options.quiet ? 'utf8' : undefined,
     shell: false,
@@ -71,19 +81,35 @@ function sleep(ms) {
   spawnSync('sleep', [String(Math.max(1, Math.ceil(ms / 1000)))], { stdio: 'ignore' });
 }
 
-function patchBundleHtml(screenId) {
-  for (const htmlPath of [
-    path.join(bundlePublicDir, 'index.html'),
-    path.join(bundlePublicDir, 'familyhub.html'),
-    path.join(iosPublicDir, 'index.html'),
-    path.join(iosPublicDir, 'familyhub.html'),
-  ]) {
-    if (!fs.existsSync(htmlPath)) {
-      continue;
-    }
-    const html = fs.readFileSync(htmlPath, 'utf8');
-    fs.writeFileSync(htmlPath, injectCaptureBootIntoHtml(html, screenId));
+function syncPublicToAppBundle() {
+  if (!fs.existsSync(distDir)) {
+    throw new Error('dist-familyhub missing — build failed');
   }
+  fs.rmSync(bundlePublicDir, { recursive: true, force: true });
+  fs.cpSync(distDir, bundlePublicDir, { recursive: true });
+  fs.rmSync(iosPublicDir, { recursive: true, force: true });
+  fs.cpSync(distDir, iosPublicDir, { recursive: true });
+  for (const sw of [path.join(bundlePublicDir, 'sw.js'), path.join(iosPublicDir, 'sw.js')]) {
+    if (fs.existsSync(sw)) {
+      fs.unlinkSync(sw);
+    }
+  }
+}
+
+function buildWebBundleForScreen(screenId) {
+  console.log(`[ios-screenshots] Building web bundle for ${screenId}…`);
+  run('npm', ['run', 'build:familyhub'], {
+    env: {
+      ...env,
+      VITE_STORE_SCREENSHOTS: 'true',
+      VITE_CAPTURE_SCREEN: screenId,
+    },
+  });
+  const distSw = path.join(distDir, 'sw.js');
+  if (fs.existsSync(distSw)) {
+    fs.unlinkSync(distSw);
+  }
+  syncPublicToAppBundle();
 }
 
 function resolveSimulatorUdid(name) {
@@ -98,40 +124,82 @@ function resolveSimulatorUdid(name) {
   throw new Error(`Simulator not found: "${name}". Create it in Xcode → Window → Devices and Simulators.`);
 }
 
-function bootSimulator(udid, name) {
-  run('xcrun', ['simctl', 'shutdown', udid], { allowFail: true });
-  sleep(1500);
-  console.log(`[ios-screenshots] Booting ${name}…`);
-  run('xcrun', ['simctl', 'boot', udid]);
-  run('open', ['-a', 'Simulator', '--args', '-CurrentDeviceUDID', udid], { allowFail: true });
-  sleep(3000);
+function resolveLatestIosRuntime() {
+  const list = run('xcrun', ['simctl', 'list', 'runtimes', 'available', '-j'], { quiet: true });
+  const runtimes = JSON.parse(list.stdout).runtimes.filter((rt) => rt.isAvailable && rt.platform === 'iOS');
+  if (runtimes.length === 0) {
+    throw new Error('No available iOS Simulator runtime found.');
+  }
+  return runtimes.sort((a, b) => b.version.localeCompare(a.version, undefined, { numeric: true }))[0]
+    .identifier;
 }
 
-function prepareWebBundle() {
-  console.log('[ios-screenshots] Building Family Hub with VITE_STORE_SCREENSHOTS=true…');
-  run('npm', ['run', 'build:familyhub'], {
-    env: { ...env, VITE_STORE_SCREENSHOTS: 'true' },
-  });
+function findSimulatorByName(name) {
+  const list = run('xcrun', ['simctl', 'list', 'devices', 'available', '-j'], { quiet: true });
+  const data = JSON.parse(list.stdout);
+  for (const runtime of Object.keys(data.devices).sort().reverse()) {
+    const match = data.devices[runtime]?.find((d) => d.isAvailable && d.name === name);
+    if (match) {
+      return { ...match, runtime };
+    }
+  }
+  return null;
+}
 
-  const distSw = path.join(root, 'dist-familyhub', 'sw.js');
-  if (fs.existsSync(distSw)) {
-    fs.unlinkSync(distSw);
+function ensureStoreIphoneSimulator() {
+  const { name, deviceType } = STORE_IPHONE_SIM;
+  const existing = findSimulatorByName(name);
+  if (existing?.deviceTypeIdentifier === deviceType) {
+    return existing.udid;
   }
 
+  if (existing) {
+    console.log(
+      `[ios-screenshots] Recreating ${name} (${existing.deviceTypeIdentifier ?? 'unknown'} → ${deviceType}) for 1284×2778 captures…`
+    );
+    run('xcrun', ['simctl', 'shutdown', existing.udid], { allowFail: true });
+    run('xcrun', ['simctl', 'delete', existing.udid]);
+  } else {
+    console.log(`[ios-screenshots] Creating ${name} (${deviceType})…`);
+  }
+
+  const runtime = existing?.runtime ?? resolveLatestIosRuntime();
+  const create = run('xcrun', ['simctl', 'create', name, deviceType, runtime], { quiet: true });
+  const udid = create.stdout?.trim();
+  if (!udid) {
+    throw new Error(`Failed to create simulator ${name}`);
+  }
+  return udid;
+}
+
+function bootSimulator(udid, name) {
+  const state = run('xcrun', ['simctl', 'list', 'devices', '-j'], { quiet: true });
+  const data = JSON.parse(state.stdout);
+  const match = Object.values(data.devices)
+    .flat()
+    .find((d) => d.udid === udid);
+  if (match?.state !== 'Booted') {
+    console.log(`[ios-screenshots] Booting ${name}…`);
+    run('xcrun', ['simctl', 'boot', udid]);
+    sleep(3000);
+  }
+  run('open', ['-a', 'Simulator', '--args', '-CurrentDeviceUDID', udid], { allowFail: true });
+  sleep(2000);
+}
+
+function prepareNativeApp() {
   run('node', ['scripts/patch-capacitor-wkprocesspool.mjs']);
   run('node', ['scripts/optimize-ios-splash.mjs']);
   run('npx', ['cap', 'copy', 'ios']);
-
   const iosPublicSw = path.join(iosPublicDir, 'sw.js');
   if (fs.existsSync(iosPublicSw)) {
     fs.unlinkSync(iosPublicSw);
   }
-
   console.log('[ios-screenshots] Installing CocoaPods…');
   run('pod', ['install'], { cwd: iosAppDir });
 }
 
-function buildSimulatorApp() {
+function buildNativeApp() {
   console.log('[ios-screenshots] Building iOS app for Simulator…');
   run(
     'xcodebuild',
@@ -151,21 +219,21 @@ function buildSimulatorApp() {
     ],
     { cwd: iosAppDir }
   );
-
   if (!fs.existsSync(appBundle)) {
-    console.error(`[ios-screenshots] App bundle not found at ${appBundle}`);
-    process.exit(1);
+    throw new Error(`App bundle not found at ${appBundle}`);
   }
 }
 
 function launchApp(udid) {
   run('xcrun', ['simctl', 'terminate', udid, bundleId], { allowFail: true });
   run('xcrun', ['simctl', 'launch', udid, bundleId]);
+  run('osascript', ['-e', 'tell application "Simulator" to activate'], { allowFail: true });
 }
 
-async function captureDevice(target) {
+async function captureDevice(target, screenFilter) {
   const { profile, simName, waitExtraMs } = target;
-  const udid = resolveSimulatorUdid(simName);
+  const udid =
+    profile.slug === 'iphone-6.5' ? ensureStoreIphoneSimulator() : resolveSimulatorUdid(simName);
   bootSimulator(udid, simName);
 
   const outDir = path.join(outRoot, profile.slug);
@@ -173,8 +241,16 @@ async function captureDevice(target) {
   fs.mkdirSync(outDir, { recursive: true });
   fs.mkdirSync(rawDir, { recursive: true });
 
-  for (const screen of CAPTURE_SCREENS) {
-    patchBundleHtml(screen.id);
+  const screens = screenFilter
+    ? CAPTURE_SCREENS.filter((s) => s.id === screenFilter)
+    : CAPTURE_SCREENS;
+
+  if (screens.length === 0) {
+    throw new Error(`Unknown --screen=${screenFilter}`);
+  }
+
+  for (const screen of screens) {
+    buildWebBundleForScreen(screen.id);
 
     console.log(`[ios-screenshots] ${profile.slug}/${screen.id} — install + launch`);
     run('xcrun', ['simctl', 'uninstall', udid, bundleId], { allowFail: true });
@@ -191,9 +267,11 @@ async function captureDevice(target) {
     fs.writeFileSync(outPath, framed);
 
     const rawMeta = await sharp(raw).metadata();
+    const rawOk =
+      rawMeta.width === profile.rawWidth && rawMeta.height === profile.rawHeight;
     const { ok, width, height } = await assertFramedDimensions(framed, profile, sharp);
     console.log(
-      `  ✓ ${path.relative(root, outPath)} (${width}×${height}${ok ? '' : ' — dimension mismatch'}) [raw ${rawMeta.width}×${rawMeta.height}]`
+      `  ✓ ${path.relative(root, outPath)} (${width}×${height}${ok ? '' : ' — dimension mismatch'}) [raw ${rawMeta.width}×${rawMeta.height}${rawOk ? '' : ` — expected ${profile.rawWidth}×${profile.rawHeight}`}]`
     );
   }
 
@@ -201,13 +279,13 @@ async function captureDevice(target) {
 }
 
 async function main() {
-  const { doBuild, deviceFilter } = parseArgs();
+  const { doNativeBuild, deviceFilter, screenFilter } = parseArgs();
 
-  if (doBuild || !fs.existsSync(appBundle)) {
-    prepareWebBundle();
-    buildSimulatorApp();
+  if (doNativeBuild || !fs.existsSync(appBundle)) {
+    prepareNativeApp();
+    buildNativeApp();
   } else {
-    console.log('[ios-screenshots] Reusing existing Simulator build (pass --build to rebuild)');
+    console.log('[ios-screenshots] Reusing native .app shell (pass --build to rebuild native)');
   }
 
   const targets =
@@ -221,12 +299,10 @@ async function main() {
   }
 
   for (const target of targets) {
-    await captureDevice(target);
+    await captureDevice(target, screenFilter);
   }
 
   console.log('\n[ios-screenshots] Done.');
-  console.log(`  Framed: ${path.join(outRoot, 'iphone-6.5')} + ipad-13/`);
-  console.log(`  Raw:    ${rawRoot}/`);
 }
 
 main().catch((err) => {

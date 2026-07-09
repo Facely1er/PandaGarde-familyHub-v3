@@ -11,6 +11,8 @@ const config: CapacitorConfig = {
   ios: {
     contentInset: 'never',
     backgroundColor: '#f9fafb',
+    // iPad defaults to desktop WKWebView mode (narrow phone layout). Force mobile viewport.
+    preferredContentMode: 'mobile',
   },
 };
 

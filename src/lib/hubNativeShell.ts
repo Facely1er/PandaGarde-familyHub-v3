@@ -1,4 +1,5 @@
 import { Capacitor } from '@capacitor/core';
+import { isIpadDevice } from './isIpadDevice';
 
 /** Typical home-indicator inset when WKWebView reports env(safe-area-inset-bottom) as 0 */
 const IOS_HOME_INDICATOR_FALLBACK_PX = 28;
@@ -95,6 +96,9 @@ function applyCapacitorPlatformClasses(): void {
   }
   const root = document.documentElement;
   root.classList.add('capacitor', `platform-${Capacitor.getPlatform()}`);
+  if (isIpadDevice()) {
+    root.classList.add('platform-ipad');
+  }
 }
 
 /** Close any SFSafariViewController left open after simulator terminate/relaunch cycles. */

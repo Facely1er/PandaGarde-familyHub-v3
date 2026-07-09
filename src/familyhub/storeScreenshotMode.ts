@@ -1,6 +1,6 @@
 /**
  * Dev-only store screenshot automation (VITE_STORE_SCREENSHOTS=true).
- * The iOS capture script injects window.__PG_CAPTURE_SCREEN__ into index.html before each install.
+ * The iOS capture script sets VITE_CAPTURE_SCREEN per build (most reliable).
  */
 import type { NavigateFunction } from 'react-router-dom';
 
@@ -18,7 +18,6 @@ export type StoreScreenshotId = (typeof STORE_SCREENSHOTS)[number]['id'];
 
 declare global {
   interface Window {
-    __PG_CAPTURE_SCREEN__?: string;
     __PG_STORE_CAPTURE__?: boolean;
   }
 }
@@ -87,6 +86,8 @@ export function initStoreScreenshotEarly(): void {
   if (!isStoreScreenshotBuild()) {
     return;
   }
+  window.__PG_STORE_CAPTURE__ = true;
+  document.documentElement.classList.add('store-capture');
   suppressHubOnboardingForCapture();
 }
 
@@ -113,12 +114,12 @@ export function applyStoreScreenshotSeed(auth: boolean): void {
   }
 }
 
-/** Read capture target injected synchronously by the iOS capture script. */
+/** Screen id baked in at build time via VITE_CAPTURE_SCREEN. */
 export function prepareStoreScreenshotBootSync(): string | null {
   if (!isStoreScreenshotBuild()) {
     return null;
   }
-  const screenId = window.__PG_CAPTURE_SCREEN__;
+  const screenId = import.meta.env.VITE_CAPTURE_SCREEN;
   if (!screenId || !isStoreScreenshotId(screenId)) {
     return null;
   }
@@ -130,22 +131,6 @@ export function prepareStoreScreenshotBootSync(): string | null {
   return screen.path;
 }
 
-/** No-op — bootstrapping happens in familyhub-main before render. */
 export function initStoreScreenshotMode(_navigate: NavigateFunction): () => void {
   return () => undefined;
-}
-
-/** @deprecated Use prepareStoreScreenshotBootSync — kept for type compatibility */
-export async function prepareStoreScreenshotBoot(): Promise<string | null> {
-  return prepareStoreScreenshotBootSync();
-}
-
-/** @deprecated Capture script injects screen id directly */
-export async function bootstrapStoreScreenshotFromBundle(): Promise<(typeof STORE_SCREENSHOTS)[number] | null> {
-  const path = prepareStoreScreenshotBootSync();
-  if (!path) {
-    return null;
-  }
-  const screenId = window.__PG_CAPTURE_SCREEN__;
-  return STORE_SCREENSHOTS.find((screen) => screen.id === screenId) ?? null;
 }
