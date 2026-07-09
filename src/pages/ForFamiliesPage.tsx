@@ -22,6 +22,7 @@ import {
   resourceStoryLinks,
   type ResourceHubLink,
 } from '../data/resourcesHubLinks';
+import { PREMIUM_PRICING_LABEL } from '../lib/premiumEntitlement';
 
 
 
@@ -337,6 +338,12 @@ const ForFamiliesPage: React.FC = () => {
               <p className="shell-card__body mt-2 mb-0">
 
                 The only place for age-matched privacy missions and saved progress on this device.
+
+              </p>
+
+              <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+
+                Missions are free. Optional Premium ({PREMIUM_PRICING_LABEL}, app stores soon) personalizes scenarios with your family&apos;s apps.
 
               </p>
 

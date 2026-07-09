@@ -26,7 +26,8 @@ const LegalPage: React.FC = () => {
       </PageLead>
 
       <PageSection header={{ title: 'Policies & compliance', lead: 'Open any document below.' }}>
-        <div className="shell-grid shell-grid--2">
+        <div className="mx-auto max-w-4xl">
+          <div className="shell-grid shell-grid--2">
           {documentLinks.map((link) => {
             const Icon = link.icon;
             return (
@@ -45,6 +46,7 @@ const LegalPage: React.FC = () => {
               />
             );
           })}
+          </div>
         </div>
       </PageSection>
     </PageLayout>

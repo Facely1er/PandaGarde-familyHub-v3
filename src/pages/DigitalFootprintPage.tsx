@@ -21,9 +21,12 @@ const DigitalFootprintEducator: React.FC = () => {
   return (
     <div className="mb-6 overflow-hidden rounded-xl border-2 border-green-200 bg-green-50/50 dark:border-green-800 dark:bg-green-900/20">
       <button type="button" onClick={() => setOpen(!open)} className="w-full p-4 text-left transition-colors hover:bg-green-100/50 dark:hover:bg-green-900/30" aria-expanded={open ? 'true' : 'false'}>
-        <span className="flex items-center justify-between font-semibold text-green-900 dark:text-green-100">
-          <span className="flex items-center gap-2"><BookOpen className="h-5 w-5" /> What is a digital footprint, and why does it matter?</span>
-          {open ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
+        <span className="flex w-full items-start justify-between gap-3 font-semibold text-green-900 dark:text-green-100">
+          <span className="flex min-w-0 flex-1 items-start gap-2 text-sm sm:text-base">
+            <BookOpen className="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
+            <span>What is a digital footprint, and why does it matter?</span>
+          </span>
+          {open ? <ChevronUp className="h-5 w-5 shrink-0" aria-hidden="true" /> : <ChevronDown className="h-5 w-5 shrink-0" aria-hidden="true" />}
         </span>
       </button>
       {open && (

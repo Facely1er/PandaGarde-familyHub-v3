@@ -81,34 +81,23 @@ const SettingsScreen: React.FC = () => {
       </section>
 
       <section className={`${hubTheme.card} p-5 sm:p-6`} aria-labelledby="settings-premium-heading">
-        <div className="mb-4 flex items-center gap-3">
-          <Sparkles className="shrink-0 text-violet-600 dark:text-violet-400" size={20} aria-hidden />
-          <h2 id="settings-premium-heading" className={`font-semibold ${hubTheme.heading}`}>
-            Premium missions
-          </h2>
-        </div>
-        <p className={`mb-3 text-sm ${hubTheme.body}`}>
-          Footprint review on the website stays free. Premium adds personalized real-life scenarios in Family
-          Hub — use your app list or write your own situations to teach privacy with examples that fit your
-          family.
-        </p>
-        <p className={`mb-4 text-sm font-medium ${hubTheme.heading}`}>
-          {premiumActive ? (
-            <span className="text-violet-700 dark:text-violet-300">Active on this device</span>
-          ) : (
-            <span>
-              {PREMIUM_PRICING_LABEL} · subscription coming to app stores
-            </span>
-          )}
-        </p>
         {premiumActive ? (
-          <div className="space-y-3">
-            <p className={`text-sm ${hubTheme.body}`}>
-              Open any mission and tap <strong>Customize</strong> to set your child&apos;s app, name, or a
-              custom scenario. Changes stay on this device.
+          <>
+            <div className="mb-3 flex items-center gap-3">
+              <Sparkles className="shrink-0 text-violet-600 dark:text-violet-400" size={20} aria-hidden />
+              <h2 id="settings-premium-heading" className={`font-semibold ${hubTheme.heading}`}>
+                Premium missions
+              </h2>
+              <span className="rounded-full bg-violet-100 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-violet-800 dark:bg-violet-900/40 dark:text-violet-200">
+                Active
+              </span>
+            </div>
+            <p className={`mb-3 text-sm ${hubTheme.body}`}>
+              Open any mission → <strong>Customize</strong> to set apps, names, or your own scenario. Stored on
+              this device only.
             </p>
             {entitlement.unlockedAt && (
-              <p className="text-xs text-gray-500 dark:text-gray-400">
+              <p className="mb-3 text-xs text-gray-500 dark:text-gray-400">
                 Unlocked {new Date(entitlement.unlockedAt).toLocaleDateString()}
                 {entitlement.source ? ` · ${entitlement.source}` : ''}
               </p>
@@ -120,45 +109,67 @@ const SettingsScreen: React.FC = () => {
             >
               Sign out of Premium (this device)
             </button>
-          </div>
+          </>
         ) : (
-          <div className="space-y-3">
-            <p className={`text-sm ${hubTheme.body}`}>
-              Have a pilot code? Enter it below to try personalized missions before subscriptions launch.
-            </p>
-            <div className="flex flex-col gap-2 sm:flex-row sm:items-start">
-              <div className="flex-1">
-                <label htmlFor={unlockInputId} className="sr-only">
-                  Premium unlock code
-                </label>
-                <input
-                  id={unlockInputId}
-                  type="text"
-                  value={unlockCode}
-                  onChange={(e) => setUnlockCode(e.target.value)}
-                  placeholder="Enter unlock code"
-                  className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2.5 text-sm text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 min-h-[44px]"
-                />
+          <details className="group">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-3 marker:content-none [&::-webkit-details-marker]:hidden">
+              <span className="flex min-w-0 items-center gap-3">
+                <Sparkles className="shrink-0 text-violet-600 dark:text-violet-400" size={20} aria-hidden />
+                <span className="min-w-0">
+                  <span id="settings-premium-heading" className={`block font-semibold ${hubTheme.heading}`}>
+                    Premium missions
+                  </span>
+                  <span className={`mt-0.5 block text-xs ${hubTheme.muted}`}>
+                    {PREMIUM_PRICING_LABEL} · coming to app stores
+                  </span>
+                </span>
+              </span>
+              <span className="shrink-0 text-xs font-medium text-violet-600 group-open:hidden dark:text-violet-400">
+                Learn more
+              </span>
+            </summary>
+            <div className="mt-4 space-y-3 border-t border-gray-100 pt-4 dark:border-gray-700">
+              <p className={`text-sm ${hubTheme.body}`}>
+                Footprint review stays free. Premium personalizes mission scenarios with your family&apos;s apps and
+                situations — optional, on this device.
+              </p>
+              <p className={`text-sm ${hubTheme.body}`}>
+                Have a pilot code? Enter it below before subscriptions launch.
+              </p>
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-start">
+                <div className="flex-1">
+                  <label htmlFor={unlockInputId} className="sr-only">
+                    Premium unlock code
+                  </label>
+                  <input
+                    id={unlockInputId}
+                    type="text"
+                    value={unlockCode}
+                    onChange={(e) => setUnlockCode(e.target.value)}
+                    placeholder="Enter unlock code"
+                    className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2.5 text-sm text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 min-h-[44px]"
+                  />
+                </div>
+                <button
+                  type="button"
+                  onClick={handleUnlock}
+                  className="rounded-lg bg-violet-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-violet-700 min-h-[44px] sm:shrink-0"
+                >
+                  Unlock
+                </button>
               </div>
-              <button
-                type="button"
-                onClick={handleUnlock}
-                className="rounded-lg bg-violet-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-violet-700 min-h-[44px] sm:shrink-0"
-              >
-                Unlock
-              </button>
+              {unlockMessage && (
+                <p className="text-sm text-emerald-700 dark:text-emerald-300" role="status">
+                  {unlockMessage}
+                </p>
+              )}
+              {unlockError && (
+                <p className="text-sm text-red-700 dark:text-red-300" role="alert">
+                  {unlockError}
+                </p>
+              )}
             </div>
-            {unlockMessage && (
-              <p className="text-sm text-emerald-700 dark:text-emerald-300" role="status">
-                {unlockMessage}
-              </p>
-            )}
-            {unlockError && (
-              <p className="text-sm text-red-700 dark:text-red-300" role="alert">
-                {unlockError}
-              </p>
-            )}
-          </div>
+          </details>
         )}
       </section>
 
