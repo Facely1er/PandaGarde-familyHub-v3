@@ -7,6 +7,8 @@ import { hubPaths } from '../hubPaths';
 interface AgeBandStripProps {
   activeRange?: HubAgeRange | 'all';
   title?: string;
+  /** Tighter cards for welcome / small viewports */
+  density?: 'default' | 'compact';
   /**
    * When provided, cards act as in-place filter toggles instead of navigation
    * links (used on the Activities screen where the filter lives on-page).
@@ -14,42 +16,56 @@ interface AgeBandStripProps {
   onSelectRange?: (range: HubAgeRange | 'all') => void;
 }
 
-const AgeBandStrip: React.FC<AgeBandStripProps> = ({ activeRange, title = 'Pick your adventure', onSelectRange }) => (
+const AgeBandStrip: React.FC<AgeBandStripProps> = ({
+  activeRange,
+  title = 'Pick your adventure',
+  density = 'default',
+  onSelectRange,
+}) => {
+  const compact = density === 'compact';
+  return (
   <section className="min-w-0" aria-labelledby="age-band-strip-heading">
-    <h2 id="age-band-strip-heading" className="mb-3 text-sm font-semibold text-gray-800 dark:text-gray-200">
+    <h2
+      id="age-band-strip-heading"
+      className={[
+        'font-semibold text-gray-800 dark:text-gray-200',
+        compact ? 'mb-2 text-xs uppercase tracking-wide' : 'mb-3 text-sm',
+      ].join(' ')}
+    >
       {title}
     </h2>
-    <ul className="grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-3">
+    <ul className={['grid min-w-0 grid-cols-1', compact ? 'gap-2' : 'gap-3 sm:grid-cols-3'].join(' ')}>
       {HUB_AGE_BANDS.map((band) => {
         const isActive = activeRange === band.range;
         const isFilter = Boolean(onSelectRange);
         const cardClassName = [
           'hub-card-lift flex h-full w-full min-w-0 rounded-2xl border text-left transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500',
-          isFilter ? 'items-center gap-3 p-3' : 'items-start gap-3 p-4',
+          isFilter || compact ? 'items-center gap-2.5 p-2.5' : 'items-start gap-3 p-4',
           band.cardClass,
           isActive ? 'ring-2 ring-inset ring-teal-500 dark:ring-teal-400' : '',
         ].join(' ');
-        const cardContent = isFilter ? (
+        const cardContent = isFilter || compact ? (
           <>
             <span
               className={[
-                'flex h-9 w-9 shrink-0 items-center justify-center rounded-lg',
+                'flex shrink-0 items-center justify-center rounded-lg',
+                compact ? 'h-8 w-8' : 'h-9 w-9',
                 band.iconBadgeClass,
               ].join(' ')}
             >
-              <band.icon size={18} aria-hidden="true" />
+              <band.icon size={compact ? 16 : 18} aria-hidden="true" />
             </span>
             <span className="min-w-0 flex-1">
-              <span className="block truncate text-sm font-bold leading-snug text-gray-900 dark:text-white">
+              <span className="block truncate text-sm font-bold leading-tight text-gray-900 dark:text-white">
                 {band.label}
               </span>
-              <span className="block truncate text-xs font-medium text-gray-600 dark:text-gray-300">
+              <span className="block truncate text-[11px] font-medium leading-tight text-gray-600 dark:text-gray-300">
                 {band.shortLabel}
               </span>
             </span>
-            <span className="flex shrink-0 items-center gap-1 text-xs font-semibold text-teal-700 dark:text-teal-300">
-              {band.missionCount} missions
-              <ChevronRight size={14} className="shrink-0" aria-hidden="true" />
+            <span className="flex shrink-0 items-center gap-0.5 text-[11px] font-semibold text-teal-700 dark:text-teal-300">
+              {band.missionCount}
+              <ChevronRight size={12} className="shrink-0" aria-hidden="true" />
             </span>
           </>
         ) : (
@@ -101,6 +117,7 @@ const AgeBandStrip: React.FC<AgeBandStripProps> = ({ activeRange, title = 'Pick 
       })}
     </ul>
   </section>
-);
+  );
+};
 
 export default AgeBandStrip;

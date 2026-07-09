@@ -155,11 +155,11 @@ const AppShell: React.FC = () => {
                 <HubBrandLogo size="shell" variant="plain" alt="" />
               </a>
               <div className="hub-header-brand__text flex min-w-0 flex-col justify-center gap-px leading-none">
-                <h1 className="whitespace-nowrap font-bold text-teal-700 dark:text-teal-400 text-[length:clamp(10px,2.75vw,12px)]">
+                <h1 className="whitespace-nowrap font-bold text-teal-700 dark:text-teal-400 text-[length:clamp(11px,3vw,13px)]">
                   {HUB_DISPLAY_NAME}
                 </h1>
                 <p
-                  className="whitespace-nowrap font-medium text-gray-500 dark:text-gray-400 text-[length:clamp(8px,2.2vw,10px)]"
+                  className="whitespace-nowrap font-medium text-gray-500 dark:text-gray-400 text-[length:clamp(9px,2.5vw,11px)]"
                   title={currentTab.label}
                 >
                   {currentTab.shortLabel}
@@ -173,7 +173,7 @@ const AppShell: React.FC = () => {
                   className="flex h-8 w-8 items-center justify-center rounded-md text-gray-500 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
                   aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
                 >
-                  {theme === 'light' ? <Moon size={16} aria-hidden="true" /> : <Sun size={16} aria-hidden="true" />}
+                  {theme === 'light' ? <Moon size={18} aria-hidden="true" /> : <Sun size={18} aria-hidden="true" />}
                 </button>
                 <NavLink
                   to={hubPaths.settings}
@@ -186,15 +186,15 @@ const AppShell: React.FC = () => {
                   aria-label={settingsTab.label}
                   aria-current={onSettingsPage ? 'page' : undefined}
                 >
-                  <Settings size={16} aria-hidden="true" />
+                  <Settings size={18} aria-hidden="true" />
                 </NavLink>
                 <a
                   href={isHubStandalone ? pandagardeWebsiteUrl : '/'}
                   onClick={onOpenWebsite}
-                  className="hidden h-8 items-center gap-1 rounded-full bg-teal-50 px-2.5 text-[10px] font-semibold uppercase tracking-wide text-teal-700 transition-colors hover:bg-teal-100 dark:bg-teal-900/40 dark:text-teal-200 dark:hover:bg-teal-900/60 sm:inline-flex"
+                  className="hidden h-8 items-center gap-1 rounded-full bg-teal-50 px-2.5 text-[11px] font-semibold uppercase tracking-wide text-teal-700 transition-colors hover:bg-teal-100 dark:bg-teal-900/40 dark:text-teal-200 dark:hover:bg-teal-900/60 sm:inline-flex"
                   aria-label="Open PandaGarde website"
                 >
-                  <ArrowLeft size={11} aria-hidden="true" />
+                  <ArrowLeft size={12} aria-hidden="true" />
                   Site
                 </a>
             </div>
@@ -238,17 +238,17 @@ const AppShell: React.FC = () => {
                   >
                     <span
                       className={[
-                        'flex h-6 w-6 items-center justify-center rounded-md transition-colors',
+                        'flex h-7 w-7 items-center justify-center rounded-md transition-colors',
                         active
                           ? 'bg-teal-100 text-teal-700 dark:bg-teal-800/60 dark:text-teal-200'
                           : 'text-gray-500 group-hover:text-teal-700 dark:text-gray-400 dark:group-hover:text-teal-300',
                       ].join(' ')}
                     >
-                      <Icon size={16} strokeWidth={active ? 2.5 : 2} aria-hidden="true" />
+                      <Icon size={18} strokeWidth={active ? 2.5 : 2} aria-hidden="true" />
                     </span>
                     <span
                       className={[
-                        'pb-px text-[10px] leading-tight sm:text-[11px]',
+                        'pb-px text-[11px] leading-tight sm:text-xs',
                         active ? 'font-semibold' : 'font-medium',
                       ].join(' ')}
                     >

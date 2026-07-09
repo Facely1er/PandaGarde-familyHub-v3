@@ -45,24 +45,24 @@ const WelcomeScreen: React.FC = () => {
 
   return (
     <div className={`family-hub-theme hub-standalone-page ${hubTheme.page}`}>
-      <div className="flex-1 overflow-y-auto px-4 py-8 sm:py-12">
-        <div className="max-w-xl mx-auto space-y-8">
+      <div className="flex-1 overflow-y-auto px-4 pb-4 pt-[var(--hub-content-pt,1rem)] sm:pt-6">
+        <div className="mx-auto max-w-xl space-y-4 sm:space-y-5">
 
-          {/* Hero */}
-          <div className="text-center space-y-4">
-            <HubBrandLogo size="hero" variant="plain" animated className="mx-auto" />
+          {/* Hero — compact on phones so adventure cards stay above sticky CTA */}
+          <div className="space-y-2 text-center">
+            <HubBrandLogo size="md" variant="plain" className="mx-auto" alt="" />
             <div>
-              <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight">
-                Welcome to your<br />
+              <h1 className="text-2xl font-extrabold leading-tight tracking-tight text-gray-900 dark:text-white sm:text-3xl">
+                Welcome to your{' '}
                 <span className="text-teal-600 dark:text-teal-400">Family Hub</span>
               </h1>
-              <p className="mt-3 text-base sm:text-lg text-gray-600 dark:text-gray-300">
+              <p className="mx-auto mt-1.5 max-w-sm text-sm leading-snug text-gray-600 dark:text-gray-300">
                 {t('hub.welcomeLead')}
               </p>
             </div>
           </div>
 
-          <AgeBandStrip title="Three adventure paths" />
+          <AgeBandStrip title="Three adventure paths" density="compact" />
 
           {/* What's inside */}
           <div className="space-y-3">
@@ -111,12 +111,12 @@ const WelcomeScreen: React.FC = () => {
       </div>
 
       {/* Sticky CTA */}
-      <div className="sticky bottom-0 border-t border-gray-200 bg-white/90 px-4 py-4 backdrop-blur dark:border-gray-700 dark:bg-gray-800/90 pb-[max(0.75rem,var(--hub-nav-safe-bottom,env(safe-area-inset-bottom,0px)))]">
-        <div className="max-w-xl mx-auto flex flex-col gap-2">
+      <div className="sticky bottom-0 border-t border-gray-200 bg-white/90 px-4 py-3 backdrop-blur dark:border-gray-700 dark:bg-gray-800/90 pb-[max(0.5rem,var(--hub-nav-safe-bottom,env(safe-area-inset-bottom,0px)))]">
+        <div className="mx-auto flex max-w-xl flex-col gap-2">
           <button
             type="button"
             onClick={handleGetStarted}
-            className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-teal-600 px-6 py-4 text-base font-semibold text-white shadow-sm hover:bg-teal-700 active:scale-[0.98] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-teal-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition-all hover:bg-teal-700 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 sm:text-base"
           >
             {t('hub.enterCta')}
             <ArrowRight size={20} aria-hidden="true" />

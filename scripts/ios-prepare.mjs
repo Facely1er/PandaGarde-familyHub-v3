@@ -41,6 +41,9 @@ function removeStaleXcodeBuildDir() {
 console.log('[ios:prepare] Building Family Hub web bundle…');
 run('npm', ['run', 'build:familyhub']);
 
+console.log('[ios:prepare] Patching upstream Capacitor WKProcessPool deprecation…');
+run('node', ['scripts/patch-capacitor-wkprocesspool.mjs']);
+
 console.log('[ios:prepare] Optimizing iOS splash assets (prevents Xcode asset-catalog hangs)…');
 run('node', ['scripts/optimize-ios-splash.mjs']);
 
