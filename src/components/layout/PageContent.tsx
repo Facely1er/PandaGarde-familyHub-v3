@@ -130,6 +130,15 @@ export const ShellTextCard: React.FC<{
   </article>
 );
 
+export type ShellLinkCardVisual = {
+  imageSrc?: string;
+  imageAlt?: string;
+  icon?: React.ReactNode;
+  tone?: SectionIconTone;
+  imageFit?: 'cover' | 'contain';
+  imagePosition?: string;
+};
+
 export const ShellLinkCard: React.FC<{
   to: string;
   title: string;
@@ -137,24 +146,48 @@ export const ShellLinkCard: React.FC<{
   tag?: string;
   cta?: React.ReactNode;
   icon?: React.ReactNode;
+  visual?: ShellLinkCardVisual;
   className?: string;
-}> = ({ to, title, description, tag, cta = 'Open', icon, className = '' }) => (
-  <Link
-    to={to}
-    className={`shell-card shell-card--nested shell-link-card ${icon ? 'shell-link-card--with-icon' : ''} ${className}`.trim()}
-  >
-    <div className="shell-link-card__main">
-      {icon ? (
-        <div className="shell-link-card__icon" aria-hidden="true">
-          {icon}
+}> = ({ to, title, description, tag, cta = 'Open', icon, visual, className = '' }) => {
+  const visualMode = visual?.imageSrc ? 'image' : visual?.icon ? 'icon' : null;
+
+  return (
+    <Link
+      to={to}
+      className={`shell-card shell-card--nested shell-link-card ${icon ? 'shell-link-card--with-icon' : ''} ${visual ? `shell-link-card--with-visual shell-link-card--visual-${visual.tone ?? 'emerald'}` : ''} ${visualMode === 'icon' ? 'shell-link-card--visual-icon-led' : ''} ${className}`.trim()}
+    >
+      {visual ? (
+        <div
+          className={`shell-link-card__visual ${visualMode === 'icon' ? 'shell-link-card__visual--icon-led' : ''}`.trim()}
+          aria-hidden="true"
+        >
+          {visual.imageSrc ? (
+            <img
+              src={visual.imageSrc}
+              alt={visual.imageAlt ?? ''}
+              className={`shell-link-card__visual-image ${visual.imageFit === 'contain' ? 'shell-link-card__visual-image--contain' : ''}`.trim()}
+              style={visual.imagePosition ? { objectPosition: visual.imagePosition } : undefined}
+              loading="lazy"
+            />
+          ) : null}
+          {visual.icon ? (
+            <div className="shell-link-card__visual-badge">{visual.icon}</div>
+          ) : null}
         </div>
       ) : null}
-      <div className="shell-link-card__copy">
-        {tag ? <span className="shell-link-card__tag">{tag}</span> : null}
-        <h3 className="shell-card__title">{title}</h3>
-        {description ? <p className="shell-card__body">{description}</p> : null}
+      <div className="shell-link-card__main">
+        {icon && !visual ? (
+          <div className="shell-link-card__icon" aria-hidden="true">
+            {icon}
+          </div>
+        ) : null}
+        <div className="shell-link-card__copy">
+          {tag ? <span className="shell-link-card__tag">{tag}</span> : null}
+          <h3 className="shell-card__title">{title}</h3>
+          {description ? <p className="shell-card__body">{description}</p> : null}
+        </div>
       </div>
-    </div>
-    <span className="shell-link-card__cta">{cta}</span>
-  </Link>
-);
+      <span className="shell-link-card__cta">{cta}</span>
+    </Link>
+  );
+};

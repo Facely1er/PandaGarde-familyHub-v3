@@ -179,9 +179,17 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose, onResultClic
           ref={modalRef}
           className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-2xl w-full max-h-[80vh] overflow-hidden"
         >
+          <button
+            type="button"
+            onClick={onClose}
+            className="absolute top-3 right-3 z-10 inline-flex h-9 w-9 items-center justify-center rounded-lg text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-gray-700 dark:hover:text-gray-200"
+            aria-label="Close search"
+          >
+            <X size={20} aria-hidden />
+          </button>
           <h2 id="search-modal-title" className="sr-only">Search PandaGarde</h2>
           {/* Search Input */}
-          <div className="p-4 border-b border-gray-200 dark:border-gray-700">
+          <div className="p-4 pr-14 border-b border-gray-200 dark:border-gray-700">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
               <input

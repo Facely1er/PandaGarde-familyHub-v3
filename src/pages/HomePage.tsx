@@ -1,10 +1,31 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ArrowRight, CheckCircle, ChevronRight, ShieldCheck } from 'lucide-react';
+import { ArrowRight, BookMarked, BookOpen, CheckCircle, ChevronRight, LayoutDashboard, ListChecks, ShieldCheck } from 'lucide-react';
 import { loadDfaJourneyState } from '../lib/dfaJourney';
 import { getFoundationStory, getHomepageLatestStory, ORIGIN_STORY_SLUG } from '../data/stories';
-import { PageSection, ShellLinkCard } from '../components/layout/PageContent';
+import { PageSection, ShellLinkCard, type ShellLinkCardVisual } from '../components/layout/PageContent';
+
+const SPOTLIGHT_ICON_SIZE = 26;
+
+const spotlightVisuals = {
+  stories: {
+    icon: <BookOpen size={SPOTLIGHT_ICON_SIZE} strokeWidth={1.75} aria-hidden />,
+    tone: 'emerald',
+  },
+  guides: {
+    icon: <BookMarked size={SPOTLIGHT_ICON_SIZE} strokeWidth={1.75} aria-hidden />,
+    tone: 'sky',
+  },
+  footprint: {
+    icon: <ListChecks size={SPOTLIGHT_ICON_SIZE} strokeWidth={1.75} aria-hidden />,
+    tone: 'violet',
+  },
+  hub: {
+    icon: <LayoutDashboard size={SPOTLIGHT_ICON_SIZE} strokeWidth={1.75} aria-hidden />,
+    tone: 'amber',
+  },
+} as const satisfies Record<string, ShellLinkCardVisual>;
 
 const HomePage: React.FC = () => {
   const { t } = useTranslation();
@@ -26,6 +47,7 @@ const HomePage: React.FC = () => {
         href: '/stories',
         tag: t('home.spotlightStoriesTag'),
         cta: t('home.spotlightStoriesCta'),
+        visual: spotlightVisuals.stories,
       },
       {
         title: t('nav.guidesStories'),
@@ -33,6 +55,7 @@ const HomePage: React.FC = () => {
         href: '/for-families',
         tag: t('home.spotlightGuidesTag'),
         cta: t('common.browse'),
+        visual: spotlightVisuals.guides,
       },
       {
         title: t('common.footprintReview'),
@@ -40,6 +63,7 @@ const HomePage: React.FC = () => {
         href: '/digital-footprint',
         tag: t('home.spotlightFootprintTag'),
         cta: t('common.open'),
+        visual: spotlightVisuals.footprint,
       },
       {
         title: t('common.familyHub'),
@@ -47,6 +71,7 @@ const HomePage: React.FC = () => {
         href: '/family-hub',
         tag: t('home.spotlightHubTag'),
         cta: t('common.open'),
+        visual: spotlightVisuals.hub,
       },
     ];
 
@@ -141,6 +166,7 @@ const HomePage: React.FC = () => {
                     tag={item.tag}
                     title={item.title}
                     description={item.description}
+                    visual={item.visual}
                     cta={
                       <>
                         {item.cta}
