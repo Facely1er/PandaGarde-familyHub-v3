@@ -1,6 +1,6 @@
 /**
  * Dev-only store screenshot automation (VITE_STORE_SCREENSHOTS=true).
- * The iOS capture script writes public/capture-target.json before each install.
+ * The iOS capture script injects window.__PG_CAPTURE_SCREEN__ into index.html before each install.
  */
 import type { NavigateFunction } from 'react-router-dom';
 
@@ -15,6 +15,13 @@ export const STORE_SCREENSHOTS = [
 ] as const;
 
 export type StoreScreenshotId = (typeof STORE_SCREENSHOTS)[number]['id'];
+
+declare global {
+  interface Window {
+    __PG_CAPTURE_SCREEN__?: string;
+    __PG_STORE_CAPTURE__?: boolean;
+  }
+}
 
 const SAMPLE_FAMILY = [
   {
@@ -106,33 +113,16 @@ export function applyStoreScreenshotSeed(auth: boolean): void {
   }
 }
 
-/** Read capture-target.json bundled by scripts/capture-ios-simulator-screenshots.mjs */
-export async function bootstrapStoreScreenshotFromBundle(): Promise<(typeof STORE_SCREENSHOTS)[number] | null> {
+/** Read capture target injected synchronously by the iOS capture script. */
+export function prepareStoreScreenshotBootSync(): string | null {
   if (!isStoreScreenshotBuild()) {
     return null;
   }
-  try {
-    const response = await fetch(`/capture-target.json?ts=${Date.now()}`, { cache: 'no-store' });
-    if (!response.ok) {
-      return null;
-    }
-    const payload = (await response.json()) as { screen?: string };
-    const screenId = payload.screen;
-    if (!screenId || !isStoreScreenshotId(screenId)) {
-      return null;
-    }
-    return STORE_SCREENSHOTS.find((screen) => screen.id === screenId) ?? null;
-  } catch {
+  const screenId = window.__PG_CAPTURE_SCREEN__;
+  if (!screenId || !isStoreScreenshotId(screenId)) {
     return null;
   }
-}
-
-/** Apply bundled target before React mounts (AuthProvider reads localStorage on init). */
-export async function prepareStoreScreenshotBoot(): Promise<string | null> {
-  if (!isStoreScreenshotBuild()) {
-    return null;
-  }
-  const screen = await bootstrapStoreScreenshotFromBundle();
+  const screen = STORE_SCREENSHOTS.find((entry) => entry.id === screenId);
   if (!screen) {
     return null;
   }
@@ -143,4 +133,19 @@ export async function prepareStoreScreenshotBoot(): Promise<string | null> {
 /** No-op — bootstrapping happens in familyhub-main before render. */
 export function initStoreScreenshotMode(_navigate: NavigateFunction): () => void {
   return () => undefined;
+}
+
+/** @deprecated Use prepareStoreScreenshotBootSync — kept for type compatibility */
+export async function prepareStoreScreenshotBoot(): Promise<string | null> {
+  return prepareStoreScreenshotBootSync();
+}
+
+/** @deprecated Capture script injects screen id directly */
+export async function bootstrapStoreScreenshotFromBundle(): Promise<(typeof STORE_SCREENSHOTS)[number] | null> {
+  const path = prepareStoreScreenshotBootSync();
+  if (!path) {
+    return null;
+  }
+  const screenId = window.__PG_CAPTURE_SCREEN__;
+  return STORE_SCREENSHOTS.find((screen) => screen.id === screenId) ?? null;
 }

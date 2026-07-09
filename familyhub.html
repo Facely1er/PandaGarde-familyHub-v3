@@ -42,6 +42,12 @@
           return;
         }
 
+        // Store screenshot automation — never reload or purge caches (causes blank captures).
+        if (window.__PG_STORE_CAPTURE__) {
+          sessionStorage.removeItem(RELOAD_KEY);
+          return;
+        }
+
         // Stale SW may have served old index.html with missing JS chunks — reload once after purge.
         if (
           'serviceWorker' in navigator &&

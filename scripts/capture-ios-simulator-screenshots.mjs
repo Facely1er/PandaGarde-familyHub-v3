@@ -2,15 +2,15 @@
 /**
  * Capture App Store screenshots from Xcode Simulator.
  *
- * Each screen gets its own cold launch with public/capture-target.json set in the
- * app bundle (no familyhub:// openurl — avoids the iOS confirmation dialog).
- * Output is composited inside a device bezel at exact App Store dimensions.
+ * Injects synchronous boot script into index.html per screen (no URL schemes,
+ * no async fetch). Output is composited inside a device bezel.
  */
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
+import { CAPTURE_SCREENS, injectCaptureBootIntoHtml } from './lib/store-capture-boot.mjs';
 import {
   assertFramedDimensions,
   compositeWithDeviceFrame,
@@ -26,7 +26,6 @@ const bundlePublicDir = path.join(appBundle, 'public');
 const bundleId = 'com.pandagarde.familyhub';
 const outRoot = path.join(root, 'store-assets', 'app-store');
 const rawRoot = path.join(outRoot, '_raw');
-const distDir = path.join(root, 'dist-familyhub');
 
 const env = {
   ...process.env,
@@ -38,22 +37,14 @@ const DEVICE_TARGETS = {
   'iphone-6.5': {
     profile: FRAMED_DEVICE_PROFILES['iphone-6.5'],
     simName: 'SC-Store-iPhone-6.5',
+    waitExtraMs: 0,
   },
   'ipad-13': {
     profile: FRAMED_DEVICE_PROFILES['ipad-13'],
     simName: 'iPad Pro 13-inch (M5)',
+    waitExtraMs: 3000,
   },
 };
-
-const SCREENS = [
-  { id: '01-login', waitMs: 5000 },
-  { id: '02-dashboard', waitMs: 5500 },
-  { id: '03-activities', waitMs: 5500 },
-  { id: '04-mission-intro', waitMs: 6500 },
-  { id: '05-journey', waitMs: 5500 },
-  { id: '06-kids', waitMs: 5500 },
-  { id: '07-settings', waitMs: 5500 },
-];
 
 function parseArgs() {
   const doBuild = process.argv.includes('--build');
@@ -80,13 +71,18 @@ function sleep(ms) {
   spawnSync('sleep', [String(Math.max(1, Math.ceil(ms / 1000)))], { stdio: 'ignore' });
 }
 
-function writeCaptureTarget(screenId) {
-  const payload = JSON.stringify({ screen: screenId }, null, 2);
-  fs.mkdirSync(distDir, { recursive: true });
-  fs.mkdirSync(iosPublicDir, { recursive: true });
-  fs.mkdirSync(bundlePublicDir, { recursive: true });
-  for (const dir of [distDir, iosPublicDir, bundlePublicDir]) {
-    fs.writeFileSync(path.join(dir, 'capture-target.json'), payload);
+function patchBundleHtml(screenId) {
+  for (const htmlPath of [
+    path.join(bundlePublicDir, 'index.html'),
+    path.join(bundlePublicDir, 'familyhub.html'),
+    path.join(iosPublicDir, 'index.html'),
+    path.join(iosPublicDir, 'familyhub.html'),
+  ]) {
+    if (!fs.existsSync(htmlPath)) {
+      continue;
+    }
+    const html = fs.readFileSync(htmlPath, 'utf8');
+    fs.writeFileSync(htmlPath, injectCaptureBootIntoHtml(html, screenId));
   }
 }
 
@@ -103,22 +99,12 @@ function resolveSimulatorUdid(name) {
 }
 
 function bootSimulator(udid, name) {
-  const state = run('xcrun', ['simctl', 'list', 'devices', '-j'], { quiet: true });
-  const data = JSON.parse(state.stdout);
-  let booted = false;
-  for (const devs of Object.values(data.devices)) {
-    const match = devs.find((d) => d.udid === udid);
-    if (match?.state === 'Booted') {
-      booted = true;
-      break;
-    }
-  }
-  if (!booted) {
-    console.log(`[ios-screenshots] Booting ${name}…`);
-    run('xcrun', ['simctl', 'boot', udid]);
-  }
+  run('xcrun', ['simctl', 'shutdown', udid], { allowFail: true });
+  sleep(1500);
+  console.log(`[ios-screenshots] Booting ${name}…`);
+  run('xcrun', ['simctl', 'boot', udid]);
   run('open', ['-a', 'Simulator', '--args', '-CurrentDeviceUDID', udid], { allowFail: true });
-  sleep(2000);
+  sleep(3000);
 }
 
 function prepareWebBundle() {
@@ -127,7 +113,7 @@ function prepareWebBundle() {
     env: { ...env, VITE_STORE_SCREENSHOTS: 'true' },
   });
 
-  const distSw = path.join(distDir, 'sw.js');
+  const distSw = path.join(root, 'dist-familyhub', 'sw.js');
   if (fs.existsSync(distSw)) {
     fs.unlinkSync(distSw);
   }
@@ -172,8 +158,13 @@ function buildSimulatorApp() {
   }
 }
 
+function launchApp(udid) {
+  run('xcrun', ['simctl', 'terminate', udid, bundleId], { allowFail: true });
+  run('xcrun', ['simctl', 'launch', udid, bundleId]);
+}
+
 async function captureDevice(target) {
-  const { profile, simName } = target;
+  const { profile, simName, waitExtraMs } = target;
   const udid = resolveSimulatorUdid(simName);
   bootSimulator(udid, simName);
 
@@ -182,15 +173,14 @@ async function captureDevice(target) {
   fs.mkdirSync(outDir, { recursive: true });
   fs.mkdirSync(rawDir, { recursive: true });
 
-  for (const screen of SCREENS) {
-    writeCaptureTarget(screen.id);
+  for (const screen of CAPTURE_SCREENS) {
+    patchBundleHtml(screen.id);
 
     console.log(`[ios-screenshots] ${profile.slug}/${screen.id} — install + launch`);
-    run('xcrun', ['simctl', 'terminate', udid, bundleId], { allowFail: true });
     run('xcrun', ['simctl', 'uninstall', udid, bundleId], { allowFail: true });
     run('xcrun', ['simctl', 'install', udid, appBundle]);
-    run('xcrun', ['simctl', 'launch', udid, bundleId]);
-    sleep(screen.waitMs);
+    launchApp(udid);
+    sleep(screen.waitMs + waitExtraMs);
 
     const rawPath = path.join(rawDir, `${screen.id}.png`);
     const outPath = path.join(outDir, `${screen.id}.png`);

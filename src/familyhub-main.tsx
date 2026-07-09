@@ -5,23 +5,23 @@ import './i18n';
 import './index.css';
 import { initServiceWorker } from './lib/serviceWorker.ts';
 import { initHubNativeShell } from './lib/hubNativeShell';
-import { initStoreScreenshotEarly, prepareStoreScreenshotBoot } from './familyhub/storeScreenshotMode';
+import { initStoreScreenshotEarly, prepareStoreScreenshotBootSync } from './familyhub/storeScreenshotMode';
 import { clearNativeWebCachesOnBoot, shouldEnableServiceWorker } from './lib/nativeWebCache';
 import { logger } from './lib/logger';
 
 async function bootFamilyHub() {
-  clearNativeWebCachesOnBoot();
   initStoreScreenshotEarly();
-  initHubNativeShell();
 
-  const capturePath = await prepareStoreScreenshotBoot();
+  const capturePath = prepareStoreScreenshotBootSync();
   if (capturePath) {
-    const target = `${capturePath}${window.location.hash || ''}`;
     const current = `${window.location.pathname}${window.location.search}`;
     if (current !== capturePath) {
-      window.history.replaceState(null, '', target);
+      window.history.replaceState(null, '', capturePath);
     }
   }
+
+  clearNativeWebCachesOnBoot();
+  initHubNativeShell();
 
   if (import.meta.env.MODE !== 'production') {
     if ('serviceWorker' in navigator) {

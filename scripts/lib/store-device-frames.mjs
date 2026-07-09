@@ -39,20 +39,12 @@ async function roundedMask(width, height, radius, sharp) {
 }
 
 function frameSvg(profile) {
-  const { outputWidth, outputHeight, screen, type } = profile;
+  const { outputWidth, outputHeight, screen } = profile;
   const bodyX = screen.x - 14;
   const bodyY = screen.y - 14;
   const bodyW = screen.width + 28;
   const bodyH = screen.height + 28;
   const bodyRadius = screen.radius + 10;
-  const island =
-    type === 'iphone'
-      ? `<rect x="${screen.x + screen.width / 2 - 62}" y="${screen.y + 10}" width="124" height="36" rx="18" fill="#0a0a0a"/>`
-      : '';
-  const camera =
-    type === 'ipad'
-      ? `<circle cx="${screen.x + screen.width / 2}" cy="${bodyY + 8}" r="5" fill="#2d2d2d"/>`
-      : '';
 
   return Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${outputWidth}" height="${outputHeight}">
   <defs>
@@ -68,8 +60,6 @@ function frameSvg(profile) {
   <rect width="${outputWidth}" height="${outputHeight}" fill="url(#bg)"/>
   <rect x="${bodyX}" y="${bodyY}" width="${bodyW}" height="${bodyH}" rx="${bodyRadius}" fill="#111827" filter="url(#deviceShadow)"/>
   <rect x="${screen.x - 2}" y="${screen.y - 2}" width="${screen.width + 4}" height="${screen.height + 4}" rx="${screen.radius + 2}" fill="#030712"/>
-  ${camera}
-  ${island}
 </svg>`);
 }
 
