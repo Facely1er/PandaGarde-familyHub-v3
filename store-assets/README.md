@@ -17,8 +17,10 @@ npm run assets:store
 **Recommended — Xcode Simulator (native resolution, device frame, real status bar):**
 
 ```bash
-npm run assets:screenshots:ios:build
+npm run assets:screenshots:ios
 ```
+
+Rebuilds the Family Hub web bundle and Simulator app before every capture. Use `npm run assets:screenshots:ios:fast` only when re-shooting with an already-fresh build (`--skip-build`).
 
 Uses simulators **SC-Store-iPhone-6.5** and **iPad Pro 13-inch (M5)**. A local HTTP server drives in-app navigation (no `familyhub://` dialogs). Output PNGs are composited **inside a device bezel** on a soft teal background at exact App Store dimensions. Raw simulator captures are kept in `_raw/`.
 

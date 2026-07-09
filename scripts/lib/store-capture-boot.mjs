@@ -1,12 +1,12 @@
 /** Screen definitions shared with storeScreenshotMode.ts — keep in sync manually. */
 export const CAPTURE_SCREENS = [
-  { id: '01-login', path: '/', auth: false, waitMs: 7000 },
-  { id: '02-dashboard', path: '/dashboard', auth: true, waitMs: 6000 },
-  { id: '03-activities', path: '/activities', auth: true, waitMs: 6000 },
-  { id: '04-mission-intro', path: '/activities?mission=pack-digital-backpack', auth: true, waitMs: 7000 },
-  { id: '05-journey', path: '/journey', auth: true, waitMs: 6000 },
-  { id: '06-kids', path: '/kids', auth: true, waitMs: 6000 },
-  { id: '07-settings', path: '/settings', auth: true, waitMs: 6000 },
+  { id: '01-login', path: '/', auth: false, waitMs: 9000 },
+  { id: '02-dashboard', path: '/dashboard', auth: true, waitMs: 8000 },
+  { id: '03-activities', path: '/activities', auth: true, waitMs: 8000 },
+  { id: '04-mission-intro', path: '/activities?mission=pack-digital-backpack', auth: true, waitMs: 8000 },
+  { id: '05-journey', path: '/journey', auth: true, waitMs: 8000 },
+  { id: '06-kids', path: '/kids', auth: true, waitMs: 8000 },
+  { id: '07-settings', path: '/settings', auth: true, waitMs: 8000 },
 ];
 
 const SAMPLE_FAMILY = [

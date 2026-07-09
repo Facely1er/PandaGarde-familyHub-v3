@@ -3,7 +3,8 @@
  * Capture App Store screenshots from Xcode Simulator.
  *
  * Injects synchronous boot script into index.html per screen (no URL schemes,
- * no async fetch). Output is composited inside a device bezel.
+ * no async fetch). Rebuilds web bundle + Simulator app by default before capture.
+ * Output is composited inside a device bezel.
  */
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
@@ -42,15 +43,15 @@ const DEVICE_TARGETS = {
   'ipad-13': {
     profile: FRAMED_DEVICE_PROFILES['ipad-13'],
     simName: 'iPad Pro 13-inch (M5)',
-    waitExtraMs: 3000,
+    waitExtraMs: 5000,
   },
 };
 
 function parseArgs() {
-  const doBuild = process.argv.includes('--build');
+  const skipBuild = process.argv.includes('--skip-build');
   const deviceArg = process.argv.find((a) => a.startsWith('--device='));
   const deviceFilter = deviceArg?.split('=')[1] ?? 'all';
-  return { doBuild, deviceFilter };
+  return { skipBuild, deviceFilter };
 }
 
 function run(command, args, options = {}) {
@@ -161,12 +162,25 @@ function buildSimulatorApp() {
 function launchApp(udid) {
   run('xcrun', ['simctl', 'terminate', udid, bundleId], { allowFail: true });
   run('xcrun', ['simctl', 'launch', udid, bundleId]);
+  run('osascript', ['-e', 'tell application "Simulator" to activate'], { allowFail: true });
+}
+
+function warmUpSimulatorApp(udid) {
+  console.log('[ios-screenshots] Warm-up launch (WebView cold start)…');
+  patchBundleHtml('02-dashboard');
+  run('xcrun', ['simctl', 'uninstall', udid, bundleId], { allowFail: true });
+  run('xcrun', ['simctl', 'install', udid, appBundle]);
+  launchApp(udid);
+  sleep(12000);
+  run('xcrun', ['simctl', 'terminate', udid, bundleId], { allowFail: true });
+  sleep(2000);
 }
 
 async function captureDevice(target) {
   const { profile, simName, waitExtraMs } = target;
   const udid = resolveSimulatorUdid(simName);
   bootSimulator(udid, simName);
+  warmUpSimulatorApp(udid);
 
   const outDir = path.join(outRoot, profile.slug);
   const rawDir = path.join(rawRoot, profile.slug);
@@ -201,13 +215,18 @@ async function captureDevice(target) {
 }
 
 async function main() {
-  const { doBuild, deviceFilter } = parseArgs();
+  const { skipBuild, deviceFilter } = parseArgs();
 
-  if (doBuild || !fs.existsSync(appBundle)) {
+  if (skipBuild && !fs.existsSync(appBundle)) {
+    console.error('[ios-screenshots] No Simulator build found — run without --skip-build first.');
+    process.exit(1);
+  }
+
+  if (!skipBuild) {
     prepareWebBundle();
     buildSimulatorApp();
   } else {
-    console.log('[ios-screenshots] Reusing existing Simulator build (pass --build to rebuild)');
+    console.log('[ios-screenshots] Skipping rebuild (--skip-build); reusing existing Simulator app bundle');
   }
 
   const targets =
