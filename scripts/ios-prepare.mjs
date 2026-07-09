@@ -47,6 +47,12 @@ run('node', ['scripts/optimize-ios-splash.mjs']);
 console.log('[ios:prepare] Copying web assets to ios/App/App/public…');
 run('npx', ['cap', 'copy', 'ios']);
 
+const iosPublicSw = path.join(iosAppDir, 'App', 'public', 'sw.js');
+if (fs.existsSync(iosPublicSw)) {
+  console.log('[ios:prepare] Removing sw.js from iOS bundle (service workers break native WebView)…');
+  fs.unlinkSync(iosPublicSw);
+}
+
 removeStaleXcodeBuildDir();
 
 console.log('[ios:prepare] Installing CocoaPods dependencies…');

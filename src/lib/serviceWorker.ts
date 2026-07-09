@@ -1,3 +1,4 @@
+import { Capacitor } from '@capacitor/core';
 import { logger } from './logger';
 
 interface ServiceWorkerConfig {
@@ -267,10 +268,12 @@ class ServiceWorkerManager {
   }
 }
 
-// Default configuration
-// DISABLED in development to prevent cache issues
+// Default configuration — disabled in development and on Capacitor native (breaks WKWebView).
 const defaultConfig: ServiceWorkerConfig = {
-  enabled: import.meta.env.MODE === 'production' && import.meta.env.VITE_SW_ENABLED !== 'false',
+  enabled:
+    import.meta.env.MODE === 'production' &&
+    import.meta.env.VITE_SW_ENABLED !== 'false' &&
+    !Capacitor.isNativePlatform(),
   updateInterval: 24 * 60 * 60 * 1000, // 24 hours
   cacheStrategy: 'conservative',
 };
