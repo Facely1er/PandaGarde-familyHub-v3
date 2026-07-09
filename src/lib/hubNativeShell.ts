@@ -1,11 +1,11 @@
 import { Capacitor } from '@capacitor/core';
 
 /** Typical home-indicator inset when WKWebView reports env(safe-area-inset-bottom) as 0 */
-const IOS_HOME_INDICATOR_FALLBACK_PX = 34;
+const IOS_HOME_INDICATOR_FALLBACK_PX = 28;
 /** Notch iPhones — status bar + notch */
 const IOS_NOTCH_TOP_FALLBACK_PX = 47;
-/** Dynamic Island class devices */
-const IOS_DYNAMIC_ISLAND_TOP_FALLBACK_PX = 59;
+/** Dynamic Island class devices — slightly under full inset to avoid double gap in WKWebView */
+const IOS_DYNAMIC_ISLAND_TOP_FALLBACK_PX = 54;
 
 function measureSafeAreaInsets(): {
   top: number;

@@ -7207,10 +7207,20 @@ body {
 .family-hub-theme {
   --hub-nav-tab-height: 3.75rem;
   --hub-nav-safe-bottom: env(safe-area-inset-bottom, 0px);
-  --hub-nav-offset: calc(var(--hub-nav-tab-height) + var(--hub-nav-safe-bottom));
+  --hub-nav-offset: calc(
+    var(--hub-nav-tab-height) + max(
+      0px,
+      calc(
+        max(var(--hub-nav-safe-bottom, 0px), env(safe-area-inset-bottom, 0px)) - var(--hub-nav-bottom-trim, 0px)
+      )
+    )
+  );
   --hub-safe-top: env(safe-area-inset-top, 0px);
   --hub-safe-left: env(safe-area-inset-left, 0px);
   --hub-safe-right: env(safe-area-inset-right, 0px);
+  --hub-chrome-top-trim: 0px;
+  --hub-nav-bottom-trim: 0px;
+  --hub-content-pt: 1rem;
 }
 
 .hub-app-shell {
@@ -7227,13 +7237,31 @@ body {
   margin-left: -0.125rem;
 }
 
+.hub-header-row {
+  min-height: 2.75rem;
+}
+
+.hub-page-inner {
+  padding-top: var(--hub-content-pt);
+}
+
 /* Web / PWA / Capacitor: respect notch & home indicator */
 .hub-chrome-header {
-  padding-top: max(var(--hub-safe-top, 0px), env(safe-area-inset-top, 0px));
+  padding-top: max(
+    0px,
+    calc(
+      max(var(--hub-safe-top, 0px), env(safe-area-inset-top, 0px)) - var(--hub-chrome-top-trim, 0px)
+    )
+  );
 }
 
 .hub-bottom-nav {
-  padding-bottom: max(var(--hub-nav-safe-bottom, 0px), env(safe-area-inset-bottom, 0px));
+  padding-bottom: max(
+    0px,
+    calc(
+      max(var(--hub-nav-safe-bottom, 0px), env(safe-area-inset-bottom, 0px)) - var(--hub-nav-bottom-trim, 0px)
+    )
+  );
 }
 
 .hub-bottom-nav-tabs {
@@ -7242,7 +7270,12 @@ body {
 
 /* Login / welcome — no AppShell header */
 .hub-standalone-page {
-  padding-top: max(var(--hub-safe-top, 0px), env(safe-area-inset-top, 0px));
+  padding-top: max(
+    0px,
+    calc(
+      max(var(--hub-safe-top, 0px), env(safe-area-inset-top, 0px)) - var(--hub-chrome-top-trim, 0px)
+    )
+  );
 }
 
 html.capacitor,
@@ -7269,6 +7302,13 @@ html.capacitor .hub-app-shell {
   height: 100%;
   min-height: 0;
   min-height: -webkit-fill-available;
+}
+
+/* Native iOS — trim excess safe-area padding (still clears status bar / home indicator) */
+html.capacitor.platform-ios .family-hub-theme {
+  --hub-chrome-top-trim: 10px;
+  --hub-nav-bottom-trim: 6px;
+  --hub-content-pt: 0.625rem;
 }
 
 /* Tour card clears bottom tab bar on phones */

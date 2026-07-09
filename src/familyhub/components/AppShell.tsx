@@ -139,7 +139,7 @@ const AppShell: React.FC = () => {
         </a>
 
         <header className={hubTheme.chromeHeader}>
-          <div className="hub-header-row flex min-h-12 max-w-full items-center justify-between gap-2 py-0.5 pl-[max(0.75rem,var(--hub-safe-left,env(safe-area-inset-left,0px)))] pr-[max(0.75rem,var(--hub-safe-right,env(safe-area-inset-right,0px)))]">
+          <div className="hub-header-row flex max-w-full items-center justify-between gap-2 pl-[max(0.75rem,var(--hub-safe-left,env(safe-area-inset-left,0px)))] pr-[max(0.75rem,var(--hub-safe-right,env(safe-area-inset-right,0px)))]">
             <div className="hub-header-brand flex min-w-0 flex-1 items-center">
               <a
                 href={isHubStandalone ? pandagardeWebsiteUrl : '/'}
