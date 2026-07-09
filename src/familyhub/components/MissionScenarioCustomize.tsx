@@ -5,13 +5,7 @@ import type { ParentScenarioInput } from '../../lib/missionScenarioConfig';
 import type { ResolvedMissionScenario } from '../../lib/personalizeActivity';
 import type { FlattenedAgeBasedActivity } from '../../data/ageBasedActivities';
 
-const SOURCE_LABELS: Record<ResolvedMissionScenario['source'], string> = {
-  baseline: 'Default example',
-  'parent-custom': 'Your custom scenario',
-  'parent-template': 'Personalized with your input',
-  'dfa-template': 'Personalized from your app list',
-  'generic-template': 'Personalized template',
-};
+import { useHubI18n } from '../hubI18n';
 
 interface MissionScenarioCustomizeProps {
   activity: FlattenedAgeBasedActivity;
@@ -32,6 +26,14 @@ const MissionScenarioCustomize: React.FC<MissionScenarioCustomizeProps> = ({
   onClear,
   hasFootprintData,
 }) => {
+  const { t } = useHubI18n();
+  const sourceLabels: Record<ResolvedMissionScenario['source'], string> = {
+    baseline: t('hub.customize.sourceBaseline'),
+    'parent-custom': t('hub.customize.sourceParentCustom'),
+    'parent-template': t('hub.customize.sourceParentTemplate'),
+    'dfa-template': t('hub.customize.sourceDfaTemplate'),
+    'generic-template': t('hub.customize.sourceGenericTemplate'),
+  };
   const formId = useId();
   const [expanded, setExpanded] = useState(false);
   const [appName, setAppName] = useState(parentInput?.appName ?? '');
@@ -65,10 +67,10 @@ const MissionScenarioCustomize: React.FC<MissionScenarioCustomizeProps> = ({
         <div className="min-w-0">
           <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-violet-700 dark:text-violet-300">
             <Sparkles size={14} aria-hidden="true" />
-            Premium · tailor this scenario
+            {t('hub.customize.title')}
           </p>
           <p className="mt-1 text-sm text-violet-950 dark:text-violet-100">
-            Add your child&apos;s app or write your own situation so the conversation fits your family.
+            {t('hub.customize.body')}
           </p>
         </div>
         <button
@@ -79,14 +81,14 @@ const MissionScenarioCustomize: React.FC<MissionScenarioCustomizeProps> = ({
           aria-controls={`${formId}-panel`}
         >
           <Pencil size={14} aria-hidden="true" />
-          Customize
+          {t('hub.customize.button')}
           {expanded ? <ChevronUp size={14} aria-hidden="true" /> : <ChevronDown size={14} aria-hidden="true" />}
         </button>
       </div>
 
       {scenario.isPersonalized && (
         <p className="mt-3 text-xs font-medium text-violet-700 dark:text-violet-300">
-          {SOURCE_LABELS[scenario.source]}
+          {sourceLabels[scenario.source]}
           {scenario.appName ? ` · ${scenario.appName}` : ''}
         </p>
       )}
@@ -97,19 +99,19 @@ const MissionScenarioCustomize: React.FC<MissionScenarioCustomizeProps> = ({
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
                 <label htmlFor={`${formId}-app`} className="mb-1 block text-sm font-medium text-gray-800 dark:text-gray-200">
-                  App or platform
+                  {t('hub.customize.appLabel')}
                 </label>
                 <input
                   id={`${formId}-app`}
                   type="text"
                   value={appName}
                   onChange={(e) => setAppName(e.target.value)}
-                  placeholder="e.g. Minecraft, TikTok, Discord"
+                  placeholder={t('hub.customize.appPlaceholder')}
                   className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100"
                 />
                 {!appName && hasFootprintData && (
                   <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-                    Leave blank to use an app from your footprint review list.
+                    {t('hub.customize.appFootprintHint')}
                   </p>
                 )}
               </div>
@@ -118,14 +120,14 @@ const MissionScenarioCustomize: React.FC<MissionScenarioCustomizeProps> = ({
                   htmlFor={`${formId}-child`}
                   className="mb-1 block text-sm font-medium text-gray-800 dark:text-gray-200"
                 >
-                  Child&apos;s name (optional)
+                  {t('hub.customize.childLabel')}
                 </label>
                 <input
                   id={`${formId}-child`}
                   type="text"
                   value={childName}
                   onChange={(e) => setChildName(e.target.value)}
-                  placeholder="e.g. Alex"
+                  placeholder={t('hub.customize.childPlaceholder')}
                   className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100"
                 />
               </div>
@@ -134,14 +136,14 @@ const MissionScenarioCustomize: React.FC<MissionScenarioCustomizeProps> = ({
                   htmlFor={`${formId}-frequency`}
                   className="mb-1 block text-sm font-medium text-gray-800 dark:text-gray-200"
                 >
-                  How often (optional)
+                  {t('hub.customize.frequencyLabel')}
                 </label>
                 <input
                   id={`${formId}-frequency`}
                   type="text"
                   value={usageFrequency}
                   onChange={(e) => setUsageFrequency(e.target.value)}
-                  placeholder="e.g. every day, on weekends, after school"
+                  placeholder={t('hub.customize.frequencyPlaceholder')}
                   className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100"
                 />
               </div>
@@ -153,14 +155,14 @@ const MissionScenarioCustomize: React.FC<MissionScenarioCustomizeProps> = ({
               htmlFor={`${formId}-custom`}
               className="mb-1 block text-sm font-medium text-gray-800 dark:text-gray-200"
             >
-              Or write your own scenario
+              {t('hub.customize.customLabel')}
             </label>
             <textarea
               id={`${formId}-custom`}
               value={customScenario}
               onChange={(e) => setCustomScenario(e.target.value)}
               rows={3}
-              placeholder="Describe a real situation from your family to discuss together…"
+              placeholder={t('hub.customize.customPlaceholder')}
               className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100"
             />
           </div>
@@ -170,14 +172,14 @@ const MissionScenarioCustomize: React.FC<MissionScenarioCustomizeProps> = ({
               htmlFor={`${formId}-note`}
               className="mb-1 block text-sm font-medium text-gray-800 dark:text-gray-200"
             >
-              Parent note (private)
+              {t('hub.customize.noteLabel')}
             </label>
             <input
               id={`${formId}-note`}
               type="text"
               value={parentNote}
               onChange={(e) => setParentNote(e.target.value)}
-              placeholder="Reminder for yourself — not shown during the mission"
+              placeholder={t('hub.customize.notePlaceholder')}
               className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100"
             />
           </div>
@@ -188,7 +190,7 @@ const MissionScenarioCustomize: React.FC<MissionScenarioCustomizeProps> = ({
               onClick={handleSave}
               className="inline-flex min-h-[44px] items-center justify-center rounded-lg bg-violet-600 px-4 py-2 text-sm font-semibold text-white hover:bg-violet-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500"
             >
-              Save for this mission
+              {t('hub.customize.save')}
             </button>
             {(parentInput?.appName ||
               parentInput?.customScenario ||
@@ -200,7 +202,7 @@ const MissionScenarioCustomize: React.FC<MissionScenarioCustomizeProps> = ({
                 className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
               >
                 <RotateCcw size={14} aria-hidden="true" />
-                Reset to default
+                {t('hub.customize.reset')}
               </button>
             )}
           </div>

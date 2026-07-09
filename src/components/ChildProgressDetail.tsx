@@ -2,7 +2,7 @@ import React from 'react';
 import { useFamilyProgress } from '../contexts/FamilyProgressContext';
 import { Award, Clock, TrendingUp, Calendar, Gamepad2, BookOpen, GraduationCap, ArrowLeft } from 'lucide-react';
 import { ProgressBar } from './ui/ProgressBar';
-import { logger } from '../lib/logger';
+import { useHubI18n } from '../familyhub/hubI18n';
 
 interface ChildProgressDetailProps {
   memberId: number;
@@ -17,6 +17,7 @@ const ChildProgressDetail: React.FC<ChildProgressDetailProps> = ({
   memberAge,
   onBack
 }) => {
+  const { t, i18n } = useHubI18n();
   const { getMemberProgress, getActivityHistory } = useFamilyProgress();
   const progress = getMemberProgress(memberId);
   const recentActivities = getActivityHistory(memberId, 20) || [];
@@ -52,7 +53,7 @@ const ChildProgressDetail: React.FC<ChildProgressDetailProps> = ({
       if (isNaN(date.getTime())) {
         return 'Invalid Date';
       }
-      return date.toLocaleDateString('en-US', { 
+      return date.toLocaleDateString(i18n.language, { 
         month: 'short', 
         day: 'numeric', 
         year: 'numeric',
@@ -71,10 +72,10 @@ const ChildProgressDetail: React.FC<ChildProgressDetailProps> = ({
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-2">
-            {memberName}'s Progress
+            {t('hub.childProgress.memberTitle', { name: memberName })}
           </h1>
           <p className="text-gray-600 dark:text-gray-300">
-            Age {memberAge} • Detailed learning activity history
+            {t('hub.childProgress.memberSubtitle', { age: memberAge })}
           </p>
         </div>
         <button
@@ -82,7 +83,7 @@ const ChildProgressDetail: React.FC<ChildProgressDetailProps> = ({
           className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors flex items-center space-x-2"
         >
           <ArrowLeft size={18} />
-          <span>Back to Dashboard</span>
+          <span>{t('hub.childProgress.back')}</span>
         </button>
       </div>
 
@@ -95,8 +96,8 @@ const ChildProgressDetail: React.FC<ChildProgressDetailProps> = ({
               {progress?.totalScore || 0}
             </span>
           </div>
-          <h3 className="font-semibold text-gray-800 dark:text-gray-100">Privacy Score</h3>
-          <p className="text-sm text-gray-600 dark:text-gray-300">Overall average</p>
+          <h3 className="font-semibold text-gray-800 dark:text-gray-100">{t('hub.childProgress.privacyScore')}</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-300">{t('hub.childProgress.overallAverage')}</p>
         </div>
 
         <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
@@ -106,8 +107,8 @@ const ChildProgressDetail: React.FC<ChildProgressDetailProps> = ({
               {progress?.completedCount || 0}
             </span>
           </div>
-          <h3 className="font-semibold text-gray-800 dark:text-gray-100">Activities</h3>
-          <p className="text-sm text-gray-600 dark:text-gray-300">Total completed</p>
+          <h3 className="font-semibold text-gray-800 dark:text-gray-100">{t('hub.childProgress.activities')}</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-300">{t('hub.childProgress.totalCompleted')}</p>
         </div>
 
         <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
@@ -117,8 +118,8 @@ const ChildProgressDetail: React.FC<ChildProgressDetailProps> = ({
               {activitiesByType.game.length}
             </span>
           </div>
-          <h3 className="font-semibold text-gray-800 dark:text-gray-100">Games</h3>
-          <p className="text-sm text-gray-600 dark:text-gray-300">Games completed</p>
+          <h3 className="font-semibold text-gray-800 dark:text-gray-100">{t('hub.childProgress.games')}</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-300">{t('hub.childProgress.gamesCompleted')}</p>
         </div>
 
         <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
@@ -128,21 +129,21 @@ const ChildProgressDetail: React.FC<ChildProgressDetailProps> = ({
               {progress?.lastActive ? formatDate(progress.lastActive).split(',')[0] : 'N/A'}
             </span>
           </div>
-          <h3 className="font-semibold text-gray-800 dark:text-gray-100">Last Active</h3>
-          <p className="text-sm text-gray-600 dark:text-gray-300">Most recent activity</p>
+          <h3 className="font-semibold text-gray-800 dark:text-gray-100">{t('hub.childProgress.lastActive')}</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-300">{t('hub.childProgress.mostRecent')}</p>
         </div>
       </div>
 
       {/* Activity History */}
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-        <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-6">Activity History</h2>
+        <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-6">{t('hub.childProgress.historyTitle')}</h2>
         
         {recentActivities.length === 0 ? (
           <div className="text-center py-12">
             <Award className="mx-auto text-gray-400 dark:text-gray-500 mb-4" size={48} />
-            <p className="text-gray-600 dark:text-gray-300 mb-2">No activities completed yet</p>
+            <p className="text-gray-600 dark:text-gray-300 mb-2">{t('hub.childProgress.emptyTitle')}</p>
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              Activities will appear here once {memberName} starts learning!
+              {t('hub.childProgress.emptyBodyNamed', { name: memberName })}
             </p>
           </div>
         ) : (

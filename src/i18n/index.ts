@@ -7,21 +7,32 @@ import es from './locales/es.json';
 import hubEn from './hub/en.json';
 import hubFr from './hub/fr.json';
 import hubEs from './hub/es.json';
+import missionsEn from './hub/missions/en.json';
+import missionsFr from './hub/missions/fr.json';
+import missionsEs from './hub/missions/es.json';
 
 export const SUPPORTED_LANGUAGES = ['en', 'fr', 'es'] as const;
 export type SupportedLanguage = (typeof SUPPORTED_LANGUAGES)[number];
 
 export const LANGUAGE_STORAGE_KEY = 'pandagarde-language';
 
-const mergeHub = <T extends { hub?: unknown }>(base: T, hub: typeof hubEn) => ({
+const mergeHub = <T extends { hub?: unknown }>(
+  base: T,
+  hub: typeof hubEn,
+  missions: typeof missionsEn
+) => ({
   ...base,
-  hub,
+  hub: {
+    ...hub,
+    missions: missions.missions,
+    ageGroupDescriptions: missions.ageGroupDescriptions,
+  },
 });
 
 const resources = {
-  en: { translation: mergeHub(en, hubEn) },
-  fr: { translation: mergeHub(fr, hubFr) },
-  es: { translation: mergeHub(es, hubEs) },
+  en: { translation: mergeHub(en, hubEn, missionsEn) },
+  fr: { translation: mergeHub(fr, hubFr, missionsFr) },
+  es: { translation: mergeHub(es, hubEs, missionsEs) },
 };
 
 void i18n

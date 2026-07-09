@@ -3,12 +3,14 @@ import { Download, Upload, FileText, AlertCircle, CheckCircle, Copy } from 'luci
 import { useProgress } from '../contexts/ProgressContext';
 import { useToast } from '../contexts/ToastContext';
 import { logger } from '../lib/logger';
+import { useHubI18n } from '../familyhub/hubI18n';
 
 interface ProgressExportProps {
   onClose?: () => void;
 }
 
 const ProgressExport: React.FC<ProgressExportProps> = ({ onClose }) => {
+  const { t } = useHubI18n();
   const [isExporting, setIsExporting] = useState(false);
   const [isImporting, setIsImporting] = useState(false);
   const [importData, setImportData] = useState('');
@@ -29,10 +31,10 @@ const ProgressExport: React.FC<ProgressExportProps> = ({ onClose }) => {
       link.click();
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
-      showSuccess('Progress exported successfully!', 'Your learning progress has been saved to a file.');
+      showSuccess(t('hub.progressExport.toastExportSuccess'), t('hub.progressExport.toastExportDetail'));
     } catch (error) {
       logger.error('Export error:', error);
-      showError('Export failed', 'There was an error exporting your progress. Please try again.');
+      showError(t('hub.progressExport.toastExportFail'), t('hub.progressExport.toastExportFailDetail'));
     } finally {
       setIsExporting(false);
     }
@@ -40,7 +42,7 @@ const ProgressExport: React.FC<ProgressExportProps> = ({ onClose }) => {
 
   const handleImport = async () => {
     if (!importData.trim()) {
-      showError('No data provided', 'Please paste your progress data to import.');
+      showError(t('hub.progressExport.toastImportNoData'), t('hub.progressExport.toastImportNoDataDetail'));
       return;
     }
 
@@ -48,15 +50,15 @@ const ProgressExport: React.FC<ProgressExportProps> = ({ onClose }) => {
     try {
       const success = importProgress(importData);
       if (success) {
-        showSuccess('Progress imported successfully!', 'Your learning progress has been restored.');
+        showSuccess(t('hub.progressExport.toastImportSuccess'), t('hub.progressExport.toastImportSuccessDetail'));
         setImportData('');
         setShowImportForm(false);
       } else {
-        showError('Import failed', 'The data format is invalid. Please check your progress file.');
+        showError(t('hub.progressExport.toastImportFail'), t('hub.progressExport.toastImportInvalid'));
       }
     } catch (error) {
       logger.error('Import error:', error);
-      showError('Import failed', 'There was an error importing your progress. Please check the data format.');
+      showError(t('hub.progressExport.toastImportFail'), t('hub.progressExport.toastImportError'));
     } finally {
       setIsImporting(false);
     }
@@ -66,10 +68,10 @@ const ProgressExport: React.FC<ProgressExportProps> = ({ onClose }) => {
     try {
       const data = exportProgress();
       await navigator.clipboard.writeText(data);
-      showSuccess('Copied to clipboard!', 'Your progress data has been copied to the clipboard.');
+      showSuccess(t('hub.progressExport.toastCopySuccess'), t('hub.progressExport.toastCopyDetail'));
     } catch (error) {
       logger.error('Copy error:', error);
-      showError('Copy failed', 'Could not copy to clipboard. Please try downloading instead.');
+      showError(t('hub.progressExport.toastCopyFail'), t('hub.progressExport.toastCopyFailDetail'));
     }
   };
 
@@ -94,7 +96,7 @@ const ProgressExport: React.FC<ProgressExportProps> = ({ onClose }) => {
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
           <FileText className="text-green-600" size={24} />
-          Progress Export & Import
+          {t('hub.progressExport.title')}
         </h2>
         {onClose && (
           <button
@@ -111,29 +113,29 @@ const ProgressExport: React.FC<ProgressExportProps> = ({ onClose }) => {
         <div className="space-y-6">
           <div className="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-lg p-6">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-              Your Current Progress
+              {t('hub.progressExport.currentProgress')}
             </h3>
             <div className="space-y-3">
               <div className="flex justify-between items-center">
-                <span className="text-gray-600 dark:text-gray-300">Activities Completed</span>
+                <span className="text-gray-600 dark:text-gray-300">{t('hub.progressExport.activitiesCompleted')}</span>
                 <span className="font-semibold text-gray-900 dark:text-white">
                   {overallProgress}/{totalActivities}
                 </span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-gray-600 dark:text-gray-300">Overall Progress</span>
+                <span className="text-gray-600 dark:text-gray-300">{t('hub.progressExport.overallProgress')}</span>
                 <span className="font-semibold text-gray-900 dark:text-white">
                   {percentage}%
                 </span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-gray-600 dark:text-gray-300">Time Spent</span>
+                <span className="text-gray-600 dark:text-gray-300">{t('hub.progressExport.timeSpent')}</span>
                 <span className="font-semibold text-gray-900 dark:text-white">
-                  {progress.totalTimeSpent} minutes
+                  {t('hub.common.minutes', { count: progress.totalTimeSpent })}
                 </span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-gray-600 dark:text-gray-300">Achievements</span>
+                <span className="text-gray-600 dark:text-gray-300">{t('hub.progressExport.achievements')}</span>
                 <span className="font-semibold text-gray-900 dark:text-white">
                   {progress.achievements.length}
                 </span>
@@ -144,7 +146,7 @@ const ProgressExport: React.FC<ProgressExportProps> = ({ onClose }) => {
           {/* Export Actions */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-              Export Your Progress
+              {t('hub.progressExport.exportTitle')}
             </h3>
             
             <div className="space-y-3">
@@ -156,12 +158,12 @@ const ProgressExport: React.FC<ProgressExportProps> = ({ onClose }) => {
                 {isExporting ? (
                   <>
                     <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>
-                    Exporting...
+                    {t('hub.progressExport.exporting')}
                   </>
                 ) : (
                   <>
                     <Download size={16} />
-                    Download Progress File
+                    {t('hub.progressExport.downloadFile')}
                   </>
                 )}
               </button>
@@ -171,7 +173,7 @@ const ProgressExport: React.FC<ProgressExportProps> = ({ onClose }) => {
                 className="w-full bg-green-700 hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500 text-white font-medium py-3 px-4 rounded-md transition-colors flex items-center justify-center gap-2"
               >
                 <Copy size={16} />
-                Copy to Clipboard
+                {t('hub.progressExport.copyClipboard')}
               </button>
             </div>
           </div>
@@ -181,13 +183,13 @@ const ProgressExport: React.FC<ProgressExportProps> = ({ onClose }) => {
         <div className="space-y-6">
           <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-              Import Progress
+              {t('hub.progressExport.importTitle')}
             </h3>
             
             {!showImportForm ? (
               <div className="space-y-4">
                 <p className="text-gray-600 dark:text-gray-300">
-                  Restore your progress from a previously exported file or clipboard data.
+                  {t('hub.progressExport.importIntro')}
                 </p>
                 
                 <div className="space-y-3">
@@ -196,12 +198,12 @@ const ProgressExport: React.FC<ProgressExportProps> = ({ onClose }) => {
                     className="w-full bg-green-700 hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500 text-white font-medium py-3 px-4 rounded-md transition-colors flex items-center justify-center gap-2"
                   >
                     <Upload size={16} />
-                    Import Progress Data
+                    {t('hub.progressExport.importData')}
                   </button>
 
                   <label className="w-full bg-gray-600 hover:bg-gray-700 text-white font-medium py-3 px-4 rounded-md transition-colors flex items-center justify-center gap-2 cursor-pointer">
                     <Upload size={16} />
-                    Upload Progress File
+                    {t('hub.progressExport.uploadFile')}
                     <input
                       type="file"
                       accept=".json"
@@ -215,12 +217,12 @@ const ProgressExport: React.FC<ProgressExportProps> = ({ onClose }) => {
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Paste Progress Data
+                    {t('hub.progressExport.pasteLabel')}
                   </label>
                   <textarea
                     value={importData}
                     onChange={(e) => setImportData(e.target.value)}
-                    placeholder="Paste your progress data here..."
+                    placeholder={t('hub.progressExport.pastePlaceholder')}
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 dark:bg-gray-800 dark:text-white h-32 resize-none"
                   />
                 </div>
@@ -234,12 +236,12 @@ const ProgressExport: React.FC<ProgressExportProps> = ({ onClose }) => {
                     {isImporting ? (
                       <>
                         <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>
-                        Importing...
+                        {t('hub.progressExport.importing')}
                       </>
                     ) : (
                       <>
                         <CheckCircle size={16} />
-                        Import
+                        {t('hub.progressExport.import')}
                       </>
                     )}
                   </button>
@@ -251,7 +253,7 @@ const ProgressExport: React.FC<ProgressExportProps> = ({ onClose }) => {
                     }}
                     className="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-md transition-colors"
                   >
-                    Cancel
+                    {t('hub.kids.cancel')}
                   </button>
                 </div>
               </div>
@@ -264,13 +266,12 @@ const ProgressExport: React.FC<ProgressExportProps> = ({ onClose }) => {
               <AlertCircle className="text-yellow-600 dark:text-yellow-400 mt-1 flex-shrink-0" size={20} />
               <div>
                 <h4 className="font-medium text-yellow-800 dark:text-yellow-200 mb-1">
-                  Important Notes
+                  {t('hub.progressExport.importantNotes')}
                 </h4>
                 <ul className="text-sm text-yellow-700 dark:text-yellow-300 space-y-1">
-                  <li>• Export your progress regularly to avoid losing your achievements</li>
-                  <li>• Importing will replace your current progress completely</li>
-                  <li>• Keep your progress files safe - they contain your learning history</li>
-                  <li>• Progress files are stored locally and never sent to external servers</li>
+                  {(t('hub.progressExport.notes', { returnObjects: true }) as string[]).map((note) => (
+                    <li key={note}>• {note}</li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -279,21 +280,21 @@ const ProgressExport: React.FC<ProgressExportProps> = ({ onClose }) => {
           {/* Reset Option */}
           <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
             <h4 className="font-medium text-red-800 dark:text-red-200 mb-2">
-              Reset Progress
+              {t('hub.progressExport.resetTitle')}
             </h4>
             <p className="text-sm text-red-700 dark:text-red-300 mb-3">
-              This will permanently delete all your progress and achievements. Make sure to export your progress first!
+              {t('hub.progressExport.resetBody')}
             </p>
             <button
               onClick={() => {
-                if (window.confirm('Are you sure you want to reset all progress? This action cannot be undone.')) {
+                if (window.confirm(t('hub.progressExport.resetConfirm'))) {
                   resetProgress();
-                  showSuccess('Progress reset', 'All progress has been cleared.');
+                  showSuccess(t('hub.progressExport.toastResetSuccess'), t('hub.progressExport.toastResetDetail'));
                 }
               }}
               className="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-md transition-colors text-sm"
             >
-              Reset All Progress
+              {t('hub.progressExport.resetButton')}
             </button>
           </div>
         </div>

@@ -1,0 +1,63 @@
+{
+  "missions": {
+    "pack-digital-backpack": {
+      "name": "Prépare ton sac numérique"
+    },
+    "traffic-light-safety": {
+      "name": "Feu tricolore : sûr ou pas ?"
+    },
+    "secret-keeper-club": {
+      "name": "Club des secrets"
+    },
+    "trusted-adults-online": {
+      "name": "À qui puis-je parler en ligne ?"
+    },
+    "my-info-collage": {
+      "name": "Mon collage public et privé"
+    },
+    "permission-please": {
+      "name": "Permission, s'il vous plaît !"
+    },
+    "digital-footprint-trail": {
+      "name": "La trace numérique"
+    },
+    "phishing-patrol": {
+      "name": "Patrouille anti-hameçonnage"
+    },
+    "app-permission-inspector": {
+      "name": "Inspecteur des permissions"
+    },
+    "privacy-settings-pro": {
+      "name": "Pro des paramètres de confidentialité"
+    },
+    "screenshot-safety": {
+      "name": "Défi sécurité des captures d'écran"
+    },
+    "password-strength-lab": {
+      "name": "Labo de mots de passe"
+    },
+    "password-fortress-builder": {
+      "name": "Construis ta forteresse de mots de passe"
+    },
+    "online-reputation-audit": {
+      "name": "Audit de réputation en ligne"
+    },
+    "data-broker-discovery": {
+      "name": "Découverte des courtiers de données"
+    },
+    "privacy-rights-challenge": {
+      "name": "Défi des droits à la vie privée"
+    },
+    "social-media-simulator": {
+      "name": "Simulateur de confidentialité sur les réseaux"
+    },
+    "ai-and-your-privacy": {
+      "name": "IA et ta vie privée"
+    }
+  },
+  "ageGroupDescriptions": {
+    "5-8": "Règles simples sur les secrets, les inconnus et le fait de demander à un adulte d'abord",
+    "9-12": "Repérer les arnaques, vérifier les paramètres des apps et voir ce qu'elles apprennent sur vous",
+    "13-17": "Mots de passe, réseaux sociaux et vos droits — des compétences que les ados utilisent dans la vraie vie"
+  }
+}

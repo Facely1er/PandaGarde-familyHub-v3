@@ -5,12 +5,14 @@ import { useProgress } from '../contexts/ProgressContext';
 import { useAuth } from '../pages/family-hub/AuthWrapper';
 import { useFamily } from '../contexts/FamilyContext';
 import { logger } from '../lib/logger';
+import { useHubI18n } from '../familyhub/hubI18n';
 
 interface CertificateGeneratorProps {
   onClose?: () => void;
 }
 
 const CertificateGenerator: React.FC<CertificateGeneratorProps> = ({ onClose }) => {
+  const { t, i18n } = useHubI18n();
   const [selectedAchievement, setSelectedAchievement] = useState<string>('');
   const [customAchievement, setCustomAchievement] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
@@ -33,9 +35,9 @@ const CertificateGenerator: React.FC<CertificateGeneratorProps> = ({ onClose }) 
       const certificateData: CertificateData = {
         recipientName: profile?.profile_data?.firstName 
           ? `${profile.profile_data.firstName} ${profile.profile_data.lastName || ''}`.trim()
-          : profile?.email?.split('@')[0] || 'Privacy Learner',
-        achievement: achievement?.name || customAchievement || 'Privacy Education',
-        date: new Date().toLocaleDateString('en-US', {
+          : profile?.email?.split('@')[0] || t('hub.certificateGen.defaultRecipient'),
+        achievement: achievement?.name || customAchievement || t('hub.certificateGen.defaultAchievement'),
+        date: new Date().toLocaleDateString(i18n.language, {
           year: 'numeric',
           month: 'long',
           day: 'numeric'
@@ -49,7 +51,7 @@ const CertificateGenerator: React.FC<CertificateGeneratorProps> = ({ onClose }) 
       await CertificateService.downloadCertificate(certificateData);
     } catch (error) {
       logger.error('Error generating certificate:', error);
-      alert('Error generating certificate. Please try again.');
+      alert(t('hub.certificateGen.errorGenerate'));
     } finally {
       setIsGenerating(false);
     }
@@ -59,12 +61,12 @@ const CertificateGenerator: React.FC<CertificateGeneratorProps> = ({ onClose }) 
     try {
       const recipientName = profile?.profile_data?.firstName 
         ? `${profile.profile_data.firstName} ${profile.profile_data.lastName || ''}`.trim()
-        : profile?.email?.split('@')[0] || 'Privacy Learner';
+        : profile?.email?.split('@')[0] || t('hub.certificateGen.defaultRecipient');
       
       await CertificateService.downloadAchievementBadge(achievement, recipientName);
     } catch (error) {
       logger.error('Error generating achievement badge:', error);
-      alert('Error generating achievement badge. Please try again.');
+      alert(t('hub.certificateGen.errorBadge'));
     }
   };
 
@@ -73,7 +75,7 @@ const CertificateGenerator: React.FC<CertificateGeneratorProps> = ({ onClose }) 
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
           <Award className="text-green-600" size={24} />
-          Certificate Generator
+          {t('hub.certificateGen.title')}
         </h2>
         {onClose && (
           <button
@@ -90,25 +92,25 @@ const CertificateGenerator: React.FC<CertificateGeneratorProps> = ({ onClose }) 
         <div className="space-y-6">
           <div className="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-lg p-6">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-              Your Progress
+              {t('hub.certificateGen.yourProgress')}
             </h3>
             <div className="space-y-3">
               <div className="flex justify-between items-center">
-                <span className="text-gray-600 dark:text-gray-300">Activities Completed</span>
+                <span className="text-gray-600 dark:text-gray-300">{t('hub.certificateGen.activitiesCompleted')}</span>
                 <span className="font-semibold text-gray-900 dark:text-white">
                   {overallProgress.completedCount}/{overallProgress.totalCount}
                 </span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-gray-600 dark:text-gray-300">Overall Progress</span>
+                <span className="text-gray-600 dark:text-gray-300">{t('hub.certificateGen.overallProgress')}</span>
                 <span className="font-semibold text-gray-900 dark:text-white">
                   {Math.round(overallProgress.percentage)}%
                 </span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-gray-600 dark:text-gray-300">Time Spent</span>
+                <span className="text-gray-600 dark:text-gray-300">{t('hub.certificateGen.timeSpent')}</span>
                 <span className="font-semibold text-gray-900 dark:text-white">
-                  {progress.totalTimeSpent} minutes
+                  {t('hub.common.minutes', { count: progress.totalTimeSpent })}
                 </span>
               </div>
             </div>
@@ -117,7 +119,7 @@ const CertificateGenerator: React.FC<CertificateGeneratorProps> = ({ onClose }) 
           {/* Achievements */}
           <div>
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-              Earned Achievements
+              {t('hub.certificateGen.earnedAchievements')}
             </h3>
             <div className="space-y-3">
               {earnedAchievements.length > 0 ? (
@@ -140,7 +142,7 @@ const CertificateGenerator: React.FC<CertificateGeneratorProps> = ({ onClose }) 
                     <button
                       onClick={() => generateAchievementBadge(achievement)}
                       className="p-2 text-gray-400 hover:text-green-600 transition-colors"
-                      title="Download Badge"
+                      title={t('hub.certificateGen.downloadBadge')}
                     >
                       <Download size={16} />
                     </button>
@@ -149,7 +151,7 @@ const CertificateGenerator: React.FC<CertificateGeneratorProps> = ({ onClose }) 
               ) : (
                 <div className="text-center py-6 text-gray-500 dark:text-gray-400">
                   <Star size={32} className="mx-auto mb-2 opacity-50" />
-                  <p>Complete activities to earn achievements!</p>
+                  <p>{t('hub.certificateGen.emptyAchievements')}</p>
                 </div>
               )}
             </div>
@@ -160,13 +162,13 @@ const CertificateGenerator: React.FC<CertificateGeneratorProps> = ({ onClose }) 
         <div className="space-y-6">
           <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-              Generate Certificate
+              {t('hub.certificateGen.generateTitle')}
             </h3>
             
             <div className="space-y-4">
               <div>
                 <label htmlFor="cert-achievement" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Select Achievement
+                  {t('hub.certificateGen.selectAchievement')}
                 </label>
                 <select
                   id="cert-achievement"
@@ -174,7 +176,7 @@ const CertificateGenerator: React.FC<CertificateGeneratorProps> = ({ onClose }) 
                   onChange={(e) => setSelectedAchievement(e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 dark:bg-gray-800 dark:text-white"
                 >
-                  <option value="">Choose an achievement</option>
+                  <option value="">{t('hub.certificateGen.chooseAchievement')}</option>
                   {ACHIEVEMENTS.map((achievement) => (
                     <option key={achievement.id} value={achievement.id}>
                       {achievement.icon} {achievement.name}
@@ -185,14 +187,14 @@ const CertificateGenerator: React.FC<CertificateGeneratorProps> = ({ onClose }) 
 
               <div>
                 <label htmlFor="cert-custom" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Or Custom Achievement
+                  {t('hub.certificateGen.customAchievement')}
                 </label>
                 <input
                   id="cert-custom"
                   type="text"
                   value={customAchievement}
                   onChange={(e) => setCustomAchievement(e.target.value)}
-                  placeholder="Enter custom achievement name"
+                  placeholder={t('hub.certificateGen.customPlaceholder')}
                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 dark:bg-gray-800 dark:text-white"
                 />
               </div>
@@ -205,26 +207,25 @@ const CertificateGenerator: React.FC<CertificateGeneratorProps> = ({ onClose }) 
                 {isGenerating ? (
                   <>
                     <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>
-                    Generating...
+                    {t('hub.certificateGen.generating')}
                   </>
                 ) : (
                   <>
                     <FileText size={16} />
-                    Generate Certificate
+                    {t('hub.certificateGen.generateButton')}
                   </>
                 )}
               </button>
 
               <p className="text-xs text-gray-500 dark:text-gray-400">
-                Certificates are a fun educational keepsake for your family — they celebrate
-                learning progress on this device and are not an accredited certification.
+                {t('hub.certificateGen.disclaimer')}
               </p>
             </div>
           </div>
 
           {/* Quick Actions */}
           <div className="space-y-3">
-            <h4 className="font-medium text-gray-900 dark:text-white">Quick Actions</h4>
+            <h4 className="font-medium text-gray-900 dark:text-white">{t('hub.certificateGen.quickActions')}</h4>
             
             <button
               onClick={() => {
@@ -235,7 +236,7 @@ const CertificateGenerator: React.FC<CertificateGeneratorProps> = ({ onClose }) 
             >
               <div className="flex items-center gap-3">
                 <Award className="text-yellow-600" size={20} />
-                <span className="font-medium">Privacy Champion Certificate</span>
+                <span className="font-medium">{t('hub.certificateGen.privacyChampion')}</span>
               </div>
               <Download size={16} className="text-gray-400" />
             </button>
@@ -243,14 +244,14 @@ const CertificateGenerator: React.FC<CertificateGeneratorProps> = ({ onClose }) 
             <button
               onClick={() => {
                 setSelectedAchievement('');
-                setCustomAchievement('Privacy Education Completion');
+                setCustomAchievement(t('hub.certificateGen.completionCustom'));
                 generateCertificate();
               }}
               className="w-full flex items-center justify-between p-3 bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-lg hover:from-green-100 hover:to-blue-100 dark:hover:from-green-900/30 dark:hover:to-blue-900/30 transition-colors"
             >
               <div className="flex items-center gap-3">
                 <CheckCircle className="text-green-600" size={20} />
-                <span className="font-medium">Completion Certificate</span>
+                <span className="font-medium">{t('hub.certificateGen.completion')}</span>
               </div>
               <Download size={16} className="text-gray-400" />
             </button>

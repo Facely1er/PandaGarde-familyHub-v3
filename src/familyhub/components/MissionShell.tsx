@@ -107,7 +107,15 @@ const MissionIntroDetails: React.FC<{
 };
 
 const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onExit, onStartNext }) => {
-  const { t } = useHubI18n();
+  const {
+    t,
+    characterEpithet,
+    getMissionName,
+    getMissionText,
+    getMissionList,
+    getFamilyModeLabel,
+    getDurationLabel,
+  } = useHubI18n();
   const hasGame = Boolean(activity.activityManagerId);
   const [phase, setPhase] = useState<MissionPhase>('intro');
   const [completionScore, setCompletionScore] = useState<number | undefined>();
@@ -163,7 +171,7 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
           <p className="text-xs font-semibold uppercase tracking-wide text-teal-600 dark:text-teal-400">
             {t('hub.mission.familyMission')}
           </p>
-          <h2 className="truncate text-lg font-semibold text-gray-900 dark:text-white">{activity.name}</h2>
+          <h2 className="truncate text-lg font-semibold text-gray-900 dark:text-white">{getMissionName(activity)}</h2>
         </div>
         <HubIcon glyph={activity.icon} size={22} className="shrink-0 text-teal-600 dark:text-teal-400" />
       </div>
@@ -177,16 +185,18 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
         <div className="min-h-0 flex-1 overflow-auto px-4 py-3 sm:px-6">
           <div className="mx-auto flex w-full max-w-4xl flex-col gap-3">
             <div>
-              <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-300">{activity.description}</p>
+              <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+                {getMissionText(activity.id, 'description', activity.description)}
+              </p>
               <div className="mt-2 flex flex-wrap gap-1.5 text-xs font-medium">
                 <span className="rounded-full bg-white px-2.5 py-0.5 text-teal-700 ring-1 ring-teal-200 dark:bg-gray-800 dark:text-teal-200 dark:ring-teal-700/50">
                   {t('hub.activities.ages', { range: activity.groupAgeRange })}
                 </span>
                 <span className="rounded-full bg-white px-2.5 py-0.5 text-gray-700 ring-1 ring-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:ring-gray-600">
-                  {activity.duration}
+                  {getDurationLabel(activity.duration)}
                 </span>
                 <span className="rounded-full bg-white px-2.5 py-0.5 text-gray-700 ring-1 ring-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:ring-gray-600">
-                  {activity.familyMode}
+                  {getFamilyModeLabel(activity.familyMode)}
                 </span>
                 <RelatedStoryLink missionId={activity.id} variant="chip" />
               </div>
@@ -194,7 +204,7 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
 
             <p className="rounded-xl border border-gray-200 bg-white p-3 text-sm leading-relaxed text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200">
               <span className="font-semibold text-gray-900 dark:text-white">{t('hub.mission.learningGoal')} </span>
-              {activity.learningObjective}
+              {getMissionText(activity.id, 'learningObjective', activity.learningObjective)}
             </p>
 
             {guide && (
@@ -205,7 +215,7 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
                     {t('hub.mission.forestGuide')}
                   </p>
                   <p className="text-sm font-semibold text-gray-900 dark:text-white">
-                    {guide.name} · {guide.epithet}
+                    {guide.name} · {characterEpithet(guide.id) || guide.epithet}
                   </p>
                 </div>
               </div>
@@ -238,7 +248,9 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
                 <MessageCircleHeart size={14} aria-hidden="true" />
                 {t('hub.mission.familyPrompt')}
               </p>
-              <p className="mt-1.5 text-sm leading-relaxed text-indigo-950 dark:text-indigo-100">{activity.familyPrompt}</p>
+              <p className="mt-1.5 text-sm leading-relaxed text-indigo-950 dark:text-indigo-100">
+                {getMissionText(activity.id, 'familyPrompt', activity.familyPrompt)}
+              </p>
             </section>
 
             {activity.discussionPrompts.length > 0 && (
@@ -247,7 +259,7 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
                 icon={<MessageCircle size={14} className="text-violet-500" aria-hidden="true" />}
               >
                 <ul className="space-y-1.5">
-                  {activity.discussionPrompts.map((prompt) => (
+                  {getMissionList(activity.id, 'discussionPrompts', activity.discussionPrompts).map((prompt) => (
                     <li key={prompt} className="flex items-start gap-2 text-sm text-violet-950 dark:text-violet-100">
                       <HelpCircle size={15} className="mt-0.5 shrink-0 text-violet-500" aria-hidden="true" />
                       {prompt}
@@ -262,7 +274,7 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
               icon={<BookOpen size={14} className="text-teal-600 dark:text-teal-400" aria-hidden="true" />}
             >
               <ul className="space-y-1.5">
-                {activity.keyLearnings.slice(0, 3).map((tip) => (
+                {getMissionList(activity.id, 'keyLearnings', activity.keyLearnings).slice(0, 3).map((tip) => (
                   <li key={tip} className="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-200">
                     <span className="text-teal-500" aria-hidden="true">
                       ✓
@@ -277,7 +289,9 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
               title={t('hub.mission.afterMission')}
               icon={<Target size={14} className="text-emerald-600 dark:text-emerald-400" aria-hidden="true" />}
             >
-              <p className="text-sm text-emerald-950 dark:text-emerald-100">{activity.nextStep}</p>
+              <p className="text-sm text-emerald-950 dark:text-emerald-100">
+                {getMissionText(activity.id, 'nextStep', activity.nextStep)}
+              </p>
             </MissionIntroDetails>
           </div>
         </div>

@@ -19,9 +19,7 @@ import { getForestCharacter } from '../../data/forestCharacters';
 import { StoryCharacterPortrait } from '../../components/stories/StoryCharacterPortrait';
 import RelatedStoryLink from '../components/RelatedStoryLink';
 import { useResolvedMissionScenario } from '../../hooks/useResolvedMissionScenario';
-import { useHubI18n } from '../hubI18n';
-
-const FOCUS_ORDER: ActivityFocus[] = [
+import { useHubI18n } from '../hubI18n'; ActivityFocus[] = [
   'Safe sharing',
   'Account security',
   'Spotting scams',
@@ -41,7 +39,7 @@ const ActivityCard: React.FC<{
   onStart: () => void;
   scenario: ResolvedMissionScenario;
 }> = ({ activity, isCompleted, score, onStart, scenario }) => {
-  const { t } = useHubI18n();
+  const { t, focusLabel, characterEpithet, getMissionName, getMissionText, getDifficultyLabel, getFamilyModeLabel, getDurationLabel, ageBandLabel } = useHubI18n();
   const guide = activity.guideCharacter ? getForestCharacter(activity.guideCharacter) : undefined;
   return (
   <div
@@ -59,14 +57,14 @@ const ActivityCard: React.FC<{
         ? 'border-teal-200 bg-teal-50/50 hover:border-teal-400 hover:shadow-md dark:border-teal-700/40 dark:bg-teal-900/10 dark:hover:border-teal-500'
         : 'border-gray-200 bg-white hover:border-teal-300 hover:shadow-md dark:border-gray-400 dark:bg-gray-100 dark:hover:border-teal-500'
     }`}
-    aria-label={t('hub.activities.startActivityAria', { name: activity.name })}
+    aria-label={t('hub.activities.startActivityAria', { name: getMissionName(activity) })}
   >
     <div className="flex items-start justify-between gap-3">
       <div className="flex items-center gap-3">
         <HubIconBadge glyph={activity.icon} className="bg-teal-100 text-teal-700 dark:bg-teal-900/40 dark:text-teal-300" />
         <div>
-          <h3 className="text-base font-semibold leading-snug text-gray-900">{activity.name}</h3>
-          <p className="mt-1 text-xs text-gray-500">{activity.groupLabel}</p>
+          <h3 className="text-base font-semibold leading-snug text-gray-900">{getMissionName(activity)}</h3>
+          <p className="mt-1 text-xs text-gray-500">{ageBandLabel(activity.groupAgeRange as '5-8' | '9-12' | '13-17')}</p>
         </div>
       </div>
 
@@ -90,14 +88,16 @@ const ActivityCard: React.FC<{
         {t('hub.activities.ages', { range: activity.groupAgeRange })}
       </span>
       <span className="rounded-full bg-gray-100 px-2.5 py-1 text-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:ring-1 dark:ring-gray-500">
-        {activity.focus}
+        {focusLabel(activity.focus)}
       </span>
       <span className="rounded-full bg-amber-50 px-2.5 py-1 text-amber-700 dark:bg-amber-900/30 dark:text-amber-200">
-        {activity.difficulty}
+        {getDifficultyLabel(activity.difficulty)}
       </span>
     </div>
 
-    <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-gray-600">{activity.description}</p>
+    <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-gray-600">
+      {getMissionText(activity.id, 'description', activity.description)}
+    </p>
 
     {guide && (
       <div className="mt-3 flex items-center gap-2.5 rounded-xl border border-green-100 bg-green-50/70 p-2.5 dark:border-green-800/40 dark:bg-green-900/15">
@@ -107,7 +107,7 @@ const ActivityCard: React.FC<{
             {t('hub.activities.forestGuide')}
           </p>
           <p className="mt-0.5 text-sm font-semibold text-gray-900">
-            {guide.name} <span className="font-normal text-gray-500">· {guide.epithet}</span>
+            {guide.name} <span className="font-normal text-gray-500">· {characterEpithet(guide.id) || guide.epithet}</span>
           </p>
         </div>
       </div>
@@ -131,9 +131,9 @@ const ActivityCard: React.FC<{
       <div className="text-xs text-gray-500">
         <p className="flex items-center gap-1.5">
           <Clock size={13} aria-hidden="true" />
-          {activity.duration}
+          {getDurationLabel(activity.duration)}
         </p>
-        <p className="mt-1">{activity.familyMode}</p>
+        <p className="mt-1">{getFamilyModeLabel(activity.familyMode)}</p>
       </div>
       <div className="flex items-center gap-1 text-sm font-semibold text-teal-600 transition-transform group-hover:translate-x-0.5 dark:text-teal-300">
         <Play size={15} aria-hidden="true" />
@@ -155,6 +155,7 @@ const ActivityCardWithScenario: React.FC<{
 };
 
 const GroupHeading: React.FC<{ group: AgeGroup }> = ({ group }) => {
+  const { t, ageBandLabel, getAgeGroupDescription } = useHubI18n();
   const band = hubAgeBandByRange(group.ageRange as '5-8' | '9-12' | '13-17');
   return (
   <div className="mb-4 flex items-start gap-3">
@@ -163,10 +164,14 @@ const GroupHeading: React.FC<{ group: AgeGroup }> = ({ group }) => {
     </span>
     <div>
       <h2 className="text-lg font-bold text-gray-900 dark:text-white">
-        {group.label}
-        <span className="ml-2 text-sm font-normal text-gray-400 dark:text-gray-500">(Ages {group.ageRange})</span>
+        {ageBandLabel(group.ageRange as '5-8' | '9-12' | '13-17')}
+        <span className="ml-2 text-sm font-normal text-gray-400 dark:text-gray-500">
+          ({t('hub.activities.ages', { range: group.ageRange })})
+        </span>
       </h2>
-      <p className="mt-0.5 text-sm text-gray-500 dark:text-gray-400">{group.description}</p>
+      <p className="mt-0.5 text-sm text-gray-500 dark:text-gray-400">
+        {getAgeGroupDescription(group.ageRange, group.description)}
+      </p>
     </div>
   </div>
   );

@@ -19,11 +19,11 @@ import HubWebsiteLink from '../components/HubWebsiteLink';
 import { hubPaths } from '../hubPaths';
 import { useHubI18n } from '../hubI18n';
 
-const ACHIEVEMENT_META: Record<string, { label: string; icon: LucideIcon; description: string }> = {
-  first_activity: { label: 'First Step', icon: Sprout, description: 'Completed your first activity' },
-  getting_started: { label: 'Getting Started', icon: Rocket, description: 'Completed 3 activities' },
-  privacy_champion: { label: 'Privacy Champion', icon: Trophy, description: 'Completed every mission in the catalog' },
-  dedicated_learner: { label: 'Dedicated Learner', icon: Timer, description: 'Spent 60+ minutes learning' },
+const ACHIEVEMENT_ICONS: Record<string, LucideIcon> = {
+  first_activity: Sprout,
+  getting_started: Rocket,
+  privacy_champion: Trophy,
+  dedicated_learner: Timer,
 };
 
 type SummaryStatTone = 'teal' | 'indigo' | 'amber' | 'emerald';
@@ -91,7 +91,7 @@ interface ProgressScreenProps {
 }
 
 const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => {
-  const { t } = useHubI18n();
+  const { t, i18n, focusLabel, characterEpithet, getMissionName } = useHubI18n();
   const [showCertificates, setShowCertificates] = useState(false);
   const [showProgressExport, setShowProgressExport] = useState(false);
   const { progress, getActivityProgress } = useProgress();
@@ -207,13 +207,11 @@ const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => 
           <div className="flex items-center gap-2">
             <Trophy size={20} className="shrink-0 text-amber-600 dark:text-amber-300" aria-hidden="true" />
             <h2 className="text-sm font-semibold text-amber-900 dark:text-amber-100">
-              You finished every mission — amazing work!
+              {t('hub.progress.allComplete.title')}
             </h2>
           </div>
           <p className="mt-2 text-sm leading-relaxed text-amber-800 dark:text-amber-200">
-            Celebrate with a certificate below, then keep the conversation going: revisit missions
-            as your kids grow, read a Privacy Panda story together, or refresh your family&apos;s
-            footprint review with any new apps.
+            {t('hub.progress.allComplete.body')}
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
             <button
@@ -222,13 +220,13 @@ const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => 
               className="inline-flex items-center gap-1.5 rounded-lg bg-amber-600 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-amber-700 dark:bg-amber-500 dark:hover:bg-amber-400 dark:text-amber-950"
             >
               <Award size={13} aria-hidden="true" />
-              Get your certificate
+              {t('hub.progress.allComplete.certificate')}
             </button>
             <Link
               to={hubPaths.activities}
               className="inline-flex items-center gap-1.5 rounded-lg border border-amber-300 bg-white px-3 py-1.5 text-xs font-semibold text-amber-800 transition-colors hover:bg-amber-100 dark:border-amber-600 dark:bg-amber-900/40 dark:text-amber-200 dark:hover:bg-amber-900/60"
             >
-              Revisit missions
+              {t('hub.progress.allComplete.revisitMissions')}
             </Link>
             <HubWebsiteLink
               path="/stories"
@@ -236,7 +234,7 @@ const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => 
               showExternalIcon
             >
               <BookOpen size={13} aria-hidden />
-              Privacy Panda stories
+              {t('hub.progress.allComplete.stories')}
             </HubWebsiteLink>
             <HubWebsiteLink
               path="/digital-footprint"
@@ -244,7 +242,7 @@ const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => 
               showExternalIcon
             >
               <Fingerprint size={13} aria-hidden />
-              Update footprint review
+              {t('hub.progress.allComplete.footprint')}
             </HubWebsiteLink>
           </div>
         </div>
@@ -255,13 +253,15 @@ const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => 
         <div className="rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800">
           <div className="mb-3 flex items-end justify-between gap-3">
             <div>
-              <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-200">Forest friends</h2>
+              <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-200">
+                {t('hub.progress.forestFriends.title')}
+              </h2>
               <p className="mt-0.5 text-xs text-gray-500 dark:text-gray-400">
-                Each guide from the Digital Bamboo Forest leads a set of missions.
+                {t('hub.progress.forestFriends.description')}
               </p>
             </div>
             <p className="shrink-0 text-sm font-bold text-green-700 dark:text-green-300">
-              {friendsMet} / {forestFriends.length} met
+              {t('hub.progress.forestFriends.metCount', { met: friendsMet, total: forestFriends.length })}
             </p>
           </div>
           <ul className="grid grid-cols-1 gap-2 min-[400px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
@@ -284,14 +284,14 @@ const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => 
                     {character.name}
                   </p>
                   <p className="truncate text-[0.625rem] leading-tight text-gray-500 dark:text-gray-400">
-                    {character.epithet}
+                    {characterEpithet(character.id) || character.epithet}
                   </p>
                   <p
                     className={`mt-0.5 text-[0.625rem] font-semibold leading-tight ${
                       completed > 0 ? 'text-green-700 dark:text-green-300' : 'text-gray-400 dark:text-gray-500'
                     }`}
                   >
-                    {completed} / {total} missions
+                    {t('hub.progress.forestFriends.missionCount', { completed, total })}
                   </p>
                 </div>
               </li>
@@ -303,20 +303,26 @@ const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => 
       {/* Achievements */}
       {progress.achievements.length > 0 && (
         <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-800">
-          <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-4">Badges earned</h2>
+          <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-4">
+            {t('hub.progress.badgesEarned')}
+          </h2>
           <ul className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {progress.achievements.map((id) => {
-              const meta = ACHIEVEMENT_META[id];
-              if (!meta) {
+              const Icon = ACHIEVEMENT_ICONS[id];
+              if (!Icon) {
                 return null;
               }
               return (
                 <li key={id} className="flex flex-col items-center gap-1 rounded-xl border border-amber-100 bg-amber-50 p-3 text-center dark:border-amber-700/40 dark:bg-amber-900/20">
                   <span className="flex h-10 w-10 items-center justify-center rounded-full bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300">
-                    <meta.icon size={22} aria-hidden="true" />
+                    <Icon size={22} aria-hidden="true" />
                   </span>
-                  <span className="text-xs font-semibold text-amber-800 dark:text-amber-200">{meta.label}</span>
-                  <span className="text-[11px] text-amber-700/80 dark:text-amber-300/80">{meta.description}</span>
+                  <span className="text-xs font-semibold text-amber-800 dark:text-amber-200">
+                    {t(`hub.progress.achievements.${id}.label`)}
+                  </span>
+                  <span className="text-[11px] text-amber-700/80 dark:text-amber-300/80">
+                    {t(`hub.progress.achievements.${id}.description`)}
+                  </span>
                 </li>
               );
             })}
@@ -327,20 +333,22 @@ const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => 
       {/* Recent completions */}
       {recentCompletions.length > 0 && (
         <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-800">
-          <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-4">Recently completed</h2>
+          <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-4">
+            {t('hub.progress.recentlyCompleted')}
+          </h2>
           <ul className="space-y-3">
             {recentCompletions.map(({ activity, detail }) => (
               <li key={activity.id} className="flex items-center gap-3">
                 <HubIconBadge glyph={activity.icon} size={18} className="h-9 w-9 bg-teal-100 text-teal-700 dark:bg-teal-900/40 dark:text-teal-300" />
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-900 dark:text-white truncate">{activity.name}</p>
+                  <p className="text-sm font-medium text-gray-900 dark:text-white truncate">{getMissionName(activity)}</p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    Ages {activity.groupAgeRange} &middot; {activity.focus}
+                    {t('hub.activities.ages', { range: activity.groupAgeRange })} &middot; {focusLabel(activity.focus)}
                     {detail.score !== undefined ? ` &middot; ${detail.score}%` : ''}
                   </p>
                 </div>
                 <span className="flex-shrink-0 text-xs text-gray-400 dark:text-gray-500">
-                  {new Date(detail.completedAt).toLocaleDateString()}
+                  {new Date(detail.completedAt).toLocaleDateString(i18n.language)}
                 </span>
               </li>
             ))}
@@ -356,9 +364,9 @@ const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => 
         >
           <div className="flex items-center gap-3 mb-2">
             <Award className="text-teal-600 dark:text-teal-400" size={22} aria-hidden="true" />
-            <h3 className="font-semibold text-gray-900 dark:text-white">Certificates</h3>
+            <h3 className="font-semibold text-gray-900 dark:text-white">{t('hub.progress.certificates.title')}</h3>
           </div>
-          <p className="text-sm text-gray-600 dark:text-gray-400">Generate and download certificates for completed activities.</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400">{t('hub.progress.certificates.description')}</p>
         </button>
 
         <button
@@ -367,9 +375,9 @@ const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => 
         >
           <div className="flex items-center gap-3 mb-2">
             <Download className="text-teal-600 dark:text-teal-400" size={22} aria-hidden="true" />
-            <h3 className="font-semibold text-gray-900 dark:text-white">Export Progress</h3>
+            <h3 className="font-semibold text-gray-900 dark:text-white">{t('hub.progress.export.title')}</h3>
           </div>
-          <p className="text-sm text-gray-600 dark:text-gray-400">Export your learning progress as a JSON file.</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400">{t('hub.progress.export.description')}</p>
         </button>
       </div>
     </>
@@ -386,12 +394,14 @@ const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => 
             <button
               onClick={() => setShowCertificates(false)}
               className="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 min-w-[44px] min-h-[44px] flex items-center justify-center"
-              aria-label="Close certificates"
+              aria-label={t('hub.progress.certificates.closeAria')}
             >
               <X size={20} />
             </button>
             <div className="p-6">
-              <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Certificate Generator</h2>
+              <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+                {t('hub.progress.certificates.modalTitle')}
+              </h2>
               <Suspense fallback={<HubScreenFallback />}>
                 <CertificateGenerator />
               </Suspense>
@@ -407,12 +417,14 @@ const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => 
             <button
               onClick={() => setShowProgressExport(false)}
               className="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 min-w-[44px] min-h-[44px] flex items-center justify-center"
-              aria-label="Close export"
+              aria-label={t('hub.progress.export.closeAria')}
             >
               <X size={20} />
             </button>
             <div className="p-6">
-              <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Export Progress</h2>
+              <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+                {t('hub.progress.export.modalTitle')}
+              </h2>
               <Suspense fallback={<HubScreenFallback />}>
                 <ProgressExport onClose={() => setShowProgressExport(false)} />
               </Suspense>

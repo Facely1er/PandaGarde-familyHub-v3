@@ -1,0 +1,63 @@
+{
+  "missions": {
+    "pack-digital-backpack": {
+      "name": "Prepara tu mochila digital"
+    },
+    "traffic-light-safety": {
+      "name": "Semáforo: ¿seguro o no?"
+    },
+    "secret-keeper-club": {
+      "name": "Club de secretos"
+    },
+    "trusted-adults-online": {
+      "name": "¿Con quién puedo hablar en línea?"
+    },
+    "my-info-collage": {
+      "name": "Mi collage público y privado"
+    },
+    "permission-please": {
+      "name": "¡Permiso, por favor!"
+    },
+    "digital-footprint-trail": {
+      "name": "Rastro de huella digital"
+    },
+    "phishing-patrol": {
+      "name": "Patrulla anti-phishing"
+    },
+    "app-permission-inspector": {
+      "name": "Inspector de permisos"
+    },
+    "privacy-settings-pro": {
+      "name": "Pro de ajustes de privacidad"
+    },
+    "screenshot-safety": {
+      "name": "Reto de seguridad en capturas"
+    },
+    "password-strength-lab": {
+      "name": "Laboratorio de contraseñas"
+    },
+    "password-fortress-builder": {
+      "name": "Construye tu fortaleza de contraseñas"
+    },
+    "online-reputation-audit": {
+      "name": "Auditoría de reputación en línea"
+    },
+    "data-broker-discovery": {
+      "name": "Descubrimiento de brokers de datos"
+    },
+    "privacy-rights-challenge": {
+      "name": "Reto de derechos de privacidad"
+    },
+    "social-media-simulator": {
+      "name": "Simulador de privacidad en redes"
+    },
+    "ai-and-your-privacy": {
+      "name": "IA y tu privacidad"
+    }
+  },
+  "ageGroupDescriptions": {
+    "5-8": "Reglas sencillas sobre secretos, desconocidos y pedir permiso a un adulto primero",
+    "9-12": "Detectar estafas, revisar ajustes de apps y ver qué aprenden sobre ti con el tiempo",
+    "13-17": "Contraseñas, redes sociales y tus derechos — habilidades que los adolescentes usan en la vida real"
+  }
+}

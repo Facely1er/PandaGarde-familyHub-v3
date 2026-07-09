@@ -39,7 +39,7 @@ function getAgeGroup(age: number, labelForRange: (range: '5-8' | '9-12' | '13-17
 }
 
 const KidsScreen: React.FC = () => {
-  const { t, ageBandLabel } = useHubI18n();
+  const { t, ageBandLabel, getRoleLabel } = useHubI18n();
   const { members: familyMembers, syncing, addMember, updateMember, removeMember } = useHubFamilyMembers();
   const { calculateMemberScore, removeMemberProgress } = useFamilyProgress();
   const { currentMemberId, setActiveMember } = useActiveMember();
@@ -231,7 +231,7 @@ const KidsScreen: React.FC = () => {
                         'flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl shadow-md',
                         band ? band.avatarClass : 'bg-teal-600 text-white dark:bg-teal-700',
                       ].join(' ')}
-                      aria-label={band ? `${band.label} avatar` : `${member.name} avatar`}
+                      aria-label={t('hub.kids.avatar', { label: band ? ageBandLabel(band.range) : member.name })}
                     >
                       {band ? (
                         <band.icon size={22} aria-hidden="true" />
@@ -242,10 +242,10 @@ const KidsScreen: React.FC = () => {
                     <div className="min-w-0">
                       <h3 className="font-bold text-lg text-gray-900 dark:text-white">{member.name}</h3>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
-                        {member.role} &middot; Age {member.age}
+                        {t('hub.kids.roleAge', { role: getRoleLabel(member.role), age: member.age })}
                       </p>
                       <p className="mt-0.5 text-xs text-gray-500 dark:text-gray-400">
-                        Privacy practice score: {calculateMemberScore(member.id)}/100
+                        {t('hub.kids.practiceScore', { score: calculateMemberScore(member.id) })}
                       </p>
                       {ageGroup && (
                         <Link
@@ -253,10 +253,10 @@ const KidsScreen: React.FC = () => {
                           state={{ initialAgeFilter: ageGroup.range }}
                           onClick={() => selectMember(member.id)}
                           className={`inline-flex items-center gap-1 mt-2 px-2.5 py-0.5 rounded-full border text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 ${ageGroup.badgeClass}`}
-                          aria-label={`View ${ageGroup.label} activities for ${member.name}`}
+                          aria-label={t('hub.kids.activitiesFor', { label: ageGroup.label, name: member.name })}
                         >
                           <ageGroup.icon size={14} aria-hidden="true" />
-                          {ageGroup.label} activities &rarr;
+                          {t('hub.kids.activitiesFor', { label: ageGroup.label })}
                         </Link>
                       )}
                     </div>
@@ -266,8 +266,8 @@ const KidsScreen: React.FC = () => {
                       type="button"
                       onClick={(e) => openEditMember(member, e.currentTarget)}
                       className="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-200 dark:hover:bg-gray-700/50 rounded-lg transition-all hover:scale-105 min-w-[44px] min-h-[44px] flex items-center justify-center"
-                      title="Edit family member"
-                      aria-label={`Edit ${member.name}`}
+                      title={t('hub.kids.editMember')}
+                      aria-label={t('hub.kids.editName', { name: member.name })}
                     >
                       <Pencil size={18} aria-hidden="true" />
                     </button>
@@ -282,8 +282,8 @@ const KidsScreen: React.FC = () => {
                           ? 'text-teal-700 bg-teal-50 dark:text-teal-300 dark:bg-teal-900/30'
                           : 'text-green-700 hover:text-green-800 hover:bg-green-50 dark:text-green-400 dark:hover:bg-green-900/20'
                       }`}
-                      title={currentMemberId === member.id ? 'Active for missions — view progress' : 'Set as active and view progress'}
-                      aria-label={`View detailed progress for ${member.name}`}
+                      title={currentMemberId === member.id ? t('hub.kids.activeProgress') : t('hub.kids.setActiveProgress')}
+                      aria-label={t('hub.kids.viewProgress', { name: member.name })}
                       aria-pressed={currentMemberId === member.id}
                     >
                       <Eye size={18} aria-hidden="true" />
@@ -295,8 +295,8 @@ const KidsScreen: React.FC = () => {
                         setMemberToRemove(member);
                       }}
                       className="p-2 text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all hover:scale-105 min-w-[44px] min-h-[44px] flex items-center justify-center"
-                      title="Remove family member"
-                      aria-label={`Remove ${member.name} from family`}
+                      title={t('hub.kids.removeMember')}
+                      aria-label={t('hub.kids.removeName', { name: member.name })}
                     >
                       <Trash2 size={18} aria-hidden="true" />
                     </button>
@@ -328,13 +328,13 @@ const KidsScreen: React.FC = () => {
           >
             <div className="flex items-center justify-between mb-6">
               <h3 id="add-member-title" className="text-xl font-bold text-gray-900 dark:text-white">
-                Add Family Member
+                {t('hub.kids.addTitle')}
               </h3>
               <button
                 type="button"
                 onClick={closeAddMember}
                 className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 min-w-[44px] min-h-[44px] flex items-center justify-center text-3xl leading-none transition-colors"
-                aria-label="Close dialog"
+                aria-label={t('hub.kids.closeDialog')}
               >
                 &times;
               </button>
@@ -343,7 +343,7 @@ const KidsScreen: React.FC = () => {
             <div className="space-y-4">
               <div>
                 <label htmlFor="member-name" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
-                  Name
+                  {t('hub.kids.nameLabel')}
                 </label>
                 <input
                   id="member-name"
@@ -351,7 +351,7 @@ const KidsScreen: React.FC = () => {
                   value={newMember.name}
                   onChange={(e) => setNewMember({ ...newMember, name: e.target.value })}
                   className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-600 dark:bg-gray-700 dark:text-white"
-                  placeholder="Enter family member's name"
+                  placeholder={t('hub.kids.namePlaceholder')}
                   maxLength={50}
                   autoFocus
                   aria-required="true"
@@ -360,7 +360,7 @@ const KidsScreen: React.FC = () => {
 
               <div>
                 <label htmlFor="member-age" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
-                  Age
+                  {t('hub.kids.ageLabel')}
                 </label>
                 <input
                   id="member-age"
@@ -368,7 +368,7 @@ const KidsScreen: React.FC = () => {
                   value={newMember.age || ''}
                   onChange={(e) => setNewMember({ ...newMember, age: parseInt(e.target.value, 10) || 0 })}
                   className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-600 dark:bg-gray-700 dark:text-white"
-                  placeholder="Enter age"
+                  placeholder={t('hub.kids.agePlaceholder')}
                   min="1"
                   max="100"
                   aria-required="true"
@@ -377,7 +377,7 @@ const KidsScreen: React.FC = () => {
                   const g = getAgeGroup(newMember.age);
                   return g ? (
                     <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-                      Age-matched activities:{' '}
+                      {t('hub.kids.ageMatched')}{' '}
                       <span className="inline-flex items-center gap-1 font-medium">
                         <g.icon size={14} aria-hidden="true" />
                         {g.label}
@@ -389,7 +389,7 @@ const KidsScreen: React.FC = () => {
 
               <div>
                 <label htmlFor="member-role" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
-                  Role
+                  {t('hub.kids.roleLabel')}
                 </label>
                 <select
                   id="member-role"
@@ -397,18 +397,17 @@ const KidsScreen: React.FC = () => {
                   onChange={(e) => setNewMember({ ...newMember, role: e.target.value })}
                   className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-600 dark:bg-gray-700 dark:text-white"
                 >
-                  <option value="Parent">Parent</option>
-                  <option value="Child">Child</option>
-                  <option value="Teen">Teen</option>
-                  <option value="Guardian">Guardian</option>
+                  <option value="Parent">{t('hub.roles.parent')}</option>
+                  <option value="Child">{t('hub.roles.child')}</option>
+                  <option value="Teen">{t('hub.roles.teen')}</option>
+                  <option value="Guardian">{t('hub.roles.guardian')}</option>
                 </select>
               </div>
 
               <p className="flex items-start gap-1.5 text-xs text-gray-500 dark:text-gray-400">
                 <Lock size={14} className="mt-0.5 shrink-0" aria-hidden="true" />
                 <span>
-                  A first name or nickname is enough. This information stays on this device and is
-                  never sent to PandaGarde.
+                  {t('hub.kids.privacyFormNote')}
                 </span>
               </p>
 
@@ -418,7 +417,7 @@ const KidsScreen: React.FC = () => {
                   onClick={closeAddMember}
                   className="flex-1 bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-200 py-3 rounded-lg hover:bg-gray-400 dark:hover:bg-gray-500 transition-colors min-h-[44px] font-medium"
                 >
-                  Cancel
+                  {t('hub.kids.cancel')}
                 </button>
                 <button
                   type="button"
@@ -426,7 +425,7 @@ const KidsScreen: React.FC = () => {
                   disabled={syncing}
                   className="flex-1 bg-teal-600 text-white py-3 rounded-lg hover:bg-teal-700 transition-colors min-h-[44px] font-medium disabled:opacity-60"
                 >
-                  {syncing ? 'Saving…' : 'Add Member'}
+                  {syncing ? t('hub.kids.saving') : t('hub.kids.addMember')}
                 </button>
               </div>
             </div>
@@ -453,13 +452,13 @@ const KidsScreen: React.FC = () => {
           >
             <div className="flex items-center justify-between mb-6">
               <h3 id="edit-member-title" className="text-xl font-bold text-gray-900 dark:text-white">
-                Edit {memberToEdit.name}
+                {t('hub.kids.editTitle', { name: memberToEdit.name })}
               </h3>
               <button
                 type="button"
                 onClick={closeEditMember}
                 className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 min-w-[44px] min-h-[44px] flex items-center justify-center text-3xl leading-none transition-colors"
-                aria-label="Close dialog"
+                aria-label={t('hub.kids.closeDialog')}
               >
                 &times;
               </button>
@@ -468,7 +467,7 @@ const KidsScreen: React.FC = () => {
             <div className="space-y-4">
               <div>
                 <label htmlFor="edit-member-name" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
-                  Name
+                  {t('hub.kids.nameLabel')}
                 </label>
                 <input
                   id="edit-member-name"
@@ -484,7 +483,7 @@ const KidsScreen: React.FC = () => {
 
               <div>
                 <label htmlFor="edit-member-age" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
-                  Age
+                  {t('hub.kids.ageLabel')}
                 </label>
                 <input
                   id="edit-member-age"
@@ -500,7 +499,7 @@ const KidsScreen: React.FC = () => {
 
               <div>
                 <label htmlFor="edit-member-role" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
-                  Role
+                  {t('hub.kids.roleLabel')}
                 </label>
                 <select
                   id="edit-member-role"
@@ -508,10 +507,10 @@ const KidsScreen: React.FC = () => {
                   onChange={(e) => setEditMember({ ...editMember, role: e.target.value })}
                   className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-600 dark:bg-gray-700 dark:text-white"
                 >
-                  <option value="Parent">Parent</option>
-                  <option value="Child">Child</option>
-                  <option value="Teen">Teen</option>
-                  <option value="Guardian">Guardian</option>
+                  <option value="Parent">{t('hub.roles.parent')}</option>
+                  <option value="Child">{t('hub.roles.child')}</option>
+                  <option value="Teen">{t('hub.roles.teen')}</option>
+                  <option value="Guardian">{t('hub.roles.guardian')}</option>
                 </select>
               </div>
 
@@ -521,7 +520,7 @@ const KidsScreen: React.FC = () => {
                   onClick={closeEditMember}
                   className="flex-1 bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-200 py-3 rounded-lg hover:bg-gray-400 dark:hover:bg-gray-500 transition-colors min-h-[44px] font-medium"
                 >
-                  Cancel
+                  {t('hub.kids.cancel')}
                 </button>
                 <button
                   type="button"
@@ -529,7 +528,7 @@ const KidsScreen: React.FC = () => {
                   disabled={syncing}
                   className="flex-1 bg-teal-600 text-white py-3 rounded-lg hover:bg-teal-700 transition-colors min-h-[44px] font-medium disabled:opacity-60"
                 >
-                  {syncing ? 'Saving…' : 'Save changes'}
+                  {syncing ? t('hub.kids.saving') : t('hub.kids.saveChanges')}
                 </button>
               </div>
             </div>
@@ -556,10 +555,10 @@ const KidsScreen: React.FC = () => {
             className="w-full max-w-md rounded-xl bg-white p-6 shadow-xl dark:bg-gray-800"
           >
             <h3 id="remove-member-title" className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-              Remove {memberToRemove.name}?
+              {t('hub.kids.removeTitle', { name: memberToRemove.name })}
             </h3>
             <p id="remove-member-desc" className="text-sm text-gray-600 dark:text-gray-400 mb-6">
-              This removes their profile and local progress on this device. This cannot be undone.
+              {t('hub.kids.removeBody')}
             </p>
             <div className="flex gap-3">
               <button
@@ -567,7 +566,7 @@ const KidsScreen: React.FC = () => {
                 onClick={closeRemoveConfirm}
                 className="flex-1 bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-200 py-3 rounded-lg hover:bg-gray-400 dark:hover:bg-gray-500 transition-colors min-h-[44px] font-medium"
               >
-                Cancel
+                {t('hub.kids.cancel')}
               </button>
               <button
                 type="button"
@@ -575,7 +574,7 @@ const KidsScreen: React.FC = () => {
                 disabled={syncing}
                 className="flex-1 bg-red-600 text-white py-3 rounded-lg hover:bg-red-700 transition-colors min-h-[44px] font-medium disabled:opacity-60"
               >
-                {syncing ? 'Removing…' : 'Remove'}
+                {syncing ? t('hub.kids.removing') : t('hub.kids.remove')}
               </button>
             </div>
           </div>

@@ -5,6 +5,7 @@ import { useDialogFocusTrap } from '../../hooks/useDialogFocusTrap';
 import type { FlattenedAgeBasedActivity } from '../../data/ageBasedActivities';
 import { CHARACTER_CELEBRATION_LINES, getForestCharacter } from '../../data/forestCharacters';
 import { StoryCharacterPortrait } from '../../components/stories/StoryCharacterPortrait';
+import { useHubI18n } from '../hubI18n';
 
 interface MissionCelebrationProps {
   activity: FlattenedAgeBasedActivity;
@@ -23,14 +24,30 @@ const MissionCelebration: React.FC<MissionCelebrationProps> = ({
   onDone,
   onNextMission,
 }) => {
+  const {
+    t,
+    characterEpithet,
+    getMissionName,
+    getMissionText,
+    getCelebrationLine,
+  } = useHubI18n();
   const doneRef = useRef<HTMLButtonElement>(null);
   const guide = activity.guideCharacter ? getForestCharacter(activity.guideCharacter) : undefined;
-  const guideLine = activity.guideCharacter ? CHARACTER_CELEBRATION_LINES[activity.guideCharacter] : undefined;
+  const guideLine = activity.guideCharacter
+    ? getCelebrationLine(
+        activity.guideCharacter,
+        CHARACTER_CELEBRATION_LINES[activity.guideCharacter] ?? ''
+      )
+    : undefined;
   const dialogRef = useDialogFocusTrap({
     isOpen: true,
     onClose: onDone,
     returnFocusRef: doneRef,
   });
+  const missionName = getMissionName(activity);
+  const scorePart = score !== undefined ? t('hub.celebration.scorePart', { score }) : '';
+  const finishedHtml =
+    t('hub.celebration.finished', { name: missionName, scorePart }) + (!guide ? t('hub.celebration.pandaProud') : '');
 
   return (
     <div
@@ -54,28 +71,27 @@ const MissionCelebration: React.FC<MissionCelebrationProps> = ({
           )}
           <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-teal-700 dark:bg-teal-900/40 dark:text-teal-200">
             <Sparkles size={14} aria-hidden="true" />
-            Mission complete
+            {t('hub.celebration.badge')}
           </p>
           <h2 id="mission-celebration-title" className="mt-3 text-xl font-bold text-gray-900 dark:text-white">
-            Nice work, family!
+            {t('hub.celebration.title')}
           </h2>
-          <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
-            You finished <strong>{activity.name}</strong>
-            {score !== undefined ? ` with ${score}%` : ''}.
-            {guide ? '' : ' Privacy Panda is proud of your teamwork.'}
-          </p>
+          <p
+            className="mt-2 text-sm text-gray-600 dark:text-gray-300"
+            dangerouslySetInnerHTML={{ __html: finishedHtml }}
+          />
           {guide && guideLine && (
             <p className="mt-3 rounded-2xl border border-green-100 bg-green-50 p-3 text-sm italic leading-relaxed text-green-900 dark:border-green-800/40 dark:bg-green-900/20 dark:text-green-100">
               {guideLine}
               <span className="mt-1 block text-xs font-semibold not-italic text-green-700 dark:text-green-300">
-                — {guide.name}, {guide.epithet}
+                — {guide.name}, {characterEpithet(guide.id) || guide.epithet}
               </span>
             </p>
           )}
           {streak > 0 && (
             <p className="mt-3 text-sm font-medium text-amber-700 dark:text-amber-300">
               <Award size={16} className="mr-1 inline" aria-hidden="true" />
-              {streak}-day family learning streak
+              {t('hub.celebration.streak', { count: streak })}
             </p>
           )}
         </div>
@@ -83,20 +99,27 @@ const MissionCelebration: React.FC<MissionCelebrationProps> = ({
         <div className="mt-5 rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-left dark:border-emerald-700/40 dark:bg-emerald-900/20">
           <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-emerald-700 dark:text-emerald-300">
             <Target size={14} aria-hidden="true" />
-            Try this at home
+            {t('hub.celebration.tryAtHome')}
           </p>
-          <p className="mt-2 text-sm leading-relaxed text-emerald-950 dark:text-emerald-100">{activity.nextStep}</p>
+          <p className="mt-2 text-sm leading-relaxed text-emerald-950 dark:text-emerald-100">
+            {getMissionText(activity.id, 'nextStep', activity.nextStep)}
+          </p>
         </div>
 
         {nextMission && (
           <div className="mt-5 rounded-2xl border border-indigo-100 bg-indigo-50 p-4 dark:border-indigo-700/40 dark:bg-indigo-900/20">
             <p className="text-xs font-semibold uppercase tracking-wide text-indigo-700 dark:text-indigo-300">
-              Up next
+              {t('hub.celebration.upNext')}
             </p>
             <p className="mt-1 text-sm font-semibold text-indigo-950 dark:text-indigo-100">
-              {nextMission.icon} {nextMission.name}
+              {nextMission.icon} {getMissionName(nextMission)}
             </p>
-            <p className="mt-1 text-xs text-indigo-800/80 dark:text-indigo-200/80">{nextMission.duration} · Ages {nextMission.groupAgeRange}</p>
+            <p className="mt-1 text-xs text-indigo-800/80 dark:text-indigo-200/80">
+              {t('hub.celebration.agesDuration', {
+                duration: getDurationLabel(nextMission.duration),
+                range: nextMission.groupAgeRange,
+              })}
+            </p>
           </div>
         )}
 
@@ -107,7 +130,7 @@ const MissionCelebration: React.FC<MissionCelebrationProps> = ({
               onClick={onNextMission}
               className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl bg-teal-600 px-4 py-3 text-sm font-semibold text-white hover:bg-teal-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
             >
-              Continue to next mission
+              {t('hub.celebration.continueNext')}
               <ArrowRight size={18} aria-hidden="true" />
             </button>
           )}
@@ -121,7 +144,7 @@ const MissionCelebration: React.FC<MissionCelebrationProps> = ({
                 : 'bg-teal-600 text-white hover:bg-teal-700'
             }`}
           >
-            {nextMission ? 'Back to activities' : 'Done for now'}
+            {nextMission ? t('hub.celebration.backToActivities') : t('hub.celebration.doneForNow')}
           </button>
         </div>
       </div>
