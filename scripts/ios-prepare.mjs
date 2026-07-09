@@ -41,6 +41,9 @@ function removeStaleXcodeBuildDir() {
 console.log('[ios:prepare] Building Family Hub web bundle…');
 run('npm', ['run', 'build:familyhub']);
 
+console.log('[ios:prepare] Optimizing iOS splash assets (prevents Xcode asset-catalog hangs)…');
+run('node', ['scripts/optimize-ios-splash.mjs']);
+
 console.log('[ios:prepare] Copying web assets to ios/App/App/public…');
 run('npx', ['cap', 'copy', 'ios']);
 

@@ -21,6 +21,8 @@
     "cap:sync:android": "npm run build:familyhub && npx cap sync android",
     "cap:sync:ios": "node scripts/ios-prepare.mjs",
     "ios:prepare": "node scripts/ios-prepare.mjs",
+    "ios:optimize-splash": "node scripts/optimize-ios-splash.mjs",
+    "ios:build": "node scripts/ios-xcodebuild.mjs",
     "cap:android": "npm run android:local-props && npm run cap:sync:android && npx cap open android",
     "cap:ios": "npm run ios:prepare && npx cap open ios",
     "mobile:prepare": "npm run build:familyhub && npx cap sync",

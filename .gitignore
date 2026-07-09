@@ -66,6 +66,7 @@ android/.idea/
 
 # iOS local build output (CLI xcodebuild -derivedDataPath build breaks cap sync clean)
 ios/App/build/
+ios/App/.derivedData/
 
 # Local Netlify folder
 .netlify
