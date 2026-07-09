@@ -38,6 +38,8 @@
     "assets:store": "node scripts/generate-store-assets.mjs",
     "assets:screenshots": "node scripts/capture-store-screenshots.mjs",
     "assets:screenshots:build": "node scripts/capture-store-screenshots.mjs --build",
+    "assets:screenshots:ios": "node scripts/capture-ios-simulator-screenshots.mjs",
+    "assets:screenshots:ios:build": "node scripts/capture-ios-simulator-screenshots.mjs --build",
     "store:check": "node scripts/verify-store-readiness.mjs",
     "assets:pwa": "node scripts/generate-pwa-icons.mjs",
     "deploy:check": "npm run test:launch-smoke && npm run build:familyhub && node scripts/verify-deploy-assets.mjs",
@@ -72,6 +74,7 @@
   },
   "dependencies": {
     "@capacitor/android": "^7.4.2",
+    "@capacitor/app": "^7.1.2",
     "@capacitor/browser": "^7.0.5",
     "@capacitor/core": "^7.4.2",
     "@capacitor/ios": "^7.4.2",

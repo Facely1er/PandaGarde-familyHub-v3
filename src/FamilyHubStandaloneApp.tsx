@@ -12,6 +12,7 @@ import PageLoader from './components/ui/PageLoader';
 import { SentryErrorBoundary } from './lib/sentry';
 import { usePageTracking } from './hooks/useAnalytics';
 import { setHubOrigin } from './lib/hubMission';
+import StoreScreenshotNavigator from './familyhub/components/StoreScreenshotNavigator';
 
 const PageTracker: React.FC = () => {
   usePageTracking();
@@ -39,6 +40,7 @@ function FamilyHubStandaloneApp() {
                 <SentryErrorBoundary fallback={<ErrorFallback />}>
                   <NavigationErrorBoundary>
                     <div className="App flex h-full min-h-0 flex-1 flex-col">
+                      <StoreScreenshotNavigator />
                       <PageTracker />
                       <Suspense fallback={<PageLoader />}>
                         <div className="flex min-h-0 flex-1 flex-col">

@@ -1,17 +1,17 @@
 #!/usr/bin/env node
 /**
- * Capture App Store screenshots for Family Hub.
+ * Capture App Store screenshots — full-bleed app UI at exact Apple dimensions.
  *
- * Output (exact Apple dimensions, device contour):
+ * Output:
  *   store-assets/app-store/iphone-6.5/*.png  (1284×2778)
  *   store-assets/app-store/ipad-13/*.png     (2064×2752)
  *
- * Raw screen captures (no bezel): store-assets/app-store/_raw/{device}/
+ * These are edge-to-edge app screenshots (what Apple expects), not marketing
+ * mockups with outer device bezels.
  *
  * Usage:
  *   npm run assets:screenshots
  *   npm run assets:screenshots -- --build
- *   npm run assets:screenshots -- --no-frame   # full-bleed only
  */
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
@@ -22,17 +22,15 @@ import { chromium } from '@playwright/test';
 import sharp from 'sharp';
 import {
   assertExactDimensions,
-  compositeWithDeviceFrame,
+  captureStyleSheet,
   DEVICE_PROFILES,
-  normalizeFullBleed,
+  normalizeScreenshot,
 } from './lib/store-device-frames.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const PORT = Number(process.env.HUB_SCREENSHOT_PORT ?? 4174);
 const BASE = `http://127.0.0.1:${PORT}`;
 const OUT_ROOT = path.join(root, 'store-assets', 'app-store');
-const RAW_ROOT = path.join(OUT_ROOT, '_raw');
-const USE_FRAME = !process.argv.includes('--no-frame');
 
 const DEVICES = [DEVICE_PROFILES['iphone-6.5'], DEVICE_PROFILES['ipad-13']];
 
@@ -78,8 +76,7 @@ const SCREENS = [
     path: '/kids',
     auth: true,
     welcomed: true,
-    seedFamily: true,
-    waitFor: /Family members|Add a child/i,
+    waitFor: /Family members|Maya|Jordan/i,
   },
   {
     file: '07-settings',
@@ -114,7 +111,7 @@ const SAMPLE_FAMILY = [
 ];
 
 const SAMPLE_PROGRESS = {
-  completedActivities: ['pack-digital-backpack', 'password-treasure-hunt'],
+  completedActivities: ['pack-digital-backpack', 'password-treasure-hunt', 'traffic-light-safety'],
   activityDetails: {
     'pack-digital-backpack': {
       activityId: 'pack-digital-backpack',
@@ -128,8 +125,14 @@ const SAMPLE_PROGRESS = {
       score: 88,
       completedAt: '2026-07-02T10:00:00.000Z',
     },
+    'traffic-light-safety': {
+      activityId: 'traffic-light-safety',
+      completed: true,
+      score: 95,
+      completedAt: '2026-07-03T10:00:00.000Z',
+    },
   },
-  totalTimeSpent: 28,
+  totalTimeSpent: 36,
   achievements: ['first_activity'],
   lastUpdated: '2026-07-08T10:00:00.000Z',
 };
@@ -195,8 +198,8 @@ function startPreview() {
   );
 }
 
-function seedStorage(auth, welcomed, seedFamily) {
-  const entries = {
+function baseStorage(auth, welcomed) {
+  return {
     'pandagarde-theme': 'light',
     'pandagarde-language': 'en',
     'pandagarde_local_auth_v1': auth ? 'true' : 'false',
@@ -206,111 +209,75 @@ function seedStorage(auth, welcomed, seedFamily) {
     pandagarde_hub_welcome_dismissed: 'true',
     pandagarde_hub_mission_hint_dismissed: 'true',
   };
+}
 
-  if (seedFamily) {
+function seedStorage(auth, welcomed) {
+  const entries = baseStorage(auth, welcomed);
+  if (auth) {
     entries['pandagarde_family'] = JSON.stringify(SAMPLE_FAMILY);
     entries['pandagarde_progress'] = JSON.stringify(SAMPLE_PROGRESS);
   }
-
   return entries;
 }
 
-async function applyDeviceChrome(page, profile) {
-  await page.evaluate(({ safeTop, safeBottom, deviceType }) => {
+async function preparePage(page, profile) {
+  await page.addStyleTag({ content: captureStyleSheet(profile) });
+  await page.evaluate(({ safeTop, safeBottom, platformClass }) => {
     const root = document.documentElement;
-    root.classList.add('capacitor', 'platform-ios', 'store-screenshot-capture');
+    root.classList.add('store-capture', 'capacitor', ...platformClass.split(/\s+/));
     root.style.setProperty('--hub-safe-top', `${safeTop}px`);
     root.style.setProperty('--hub-nav-safe-bottom', `${safeBottom}px`);
     root.style.setProperty('--hub-safe-left', '0px');
     root.style.setProperty('--hub-safe-right', '0px');
-
-    const existing = document.getElementById('store-screenshot-status-bar');
-    if (existing) {
-      existing.remove();
-    }
-
-    const bar = document.createElement('div');
-    bar.id = 'store-screenshot-status-bar';
-    bar.setAttribute('aria-hidden', 'true');
-    bar.style.cssText = [
-      'position:fixed',
-      'top:0',
-      'left:0',
-      'right:0',
-      `height:${safeTop}px`,
-      'z-index:99999',
-      'pointer-events:none',
-      'display:flex',
-      'align-items:flex-end',
-      'justify-content:space-between',
-      'padding:0 22px 7px',
-      'box-sizing:border-box',
-      'font:600 14px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif',
-      'color:#111827',
-      'background:linear-gradient(180deg,#ffffff 0%,#f9fafb 100%)',
-    ].join(';');
-
-    const time = document.createElement('span');
-    time.textContent = '9:41';
-
-    const icons = document.createElement('span');
-    icons.style.cssText = 'display:flex;align-items:center;gap:5px;font-size:12px;letter-spacing:0.02em';
-    icons.textContent = deviceType === 'ipad' ? 'WiFi  100%' : '●●●●  WiFi  100%';
-
-    bar.append(time, icons);
-    document.body.prepend(bar);
-
-    const home = document.getElementById('store-screenshot-home-indicator');
-    if (home) {
-      home.remove();
-    }
-    const indicator = document.createElement('div');
-    indicator.id = 'store-screenshot-home-indicator';
-    indicator.setAttribute('aria-hidden', 'true');
-    indicator.style.cssText = [
-      'position:fixed',
-      'left:50%',
-      `bottom:${Math.max(6, safeBottom - 18)}px`,
-      'transform:translateX(-50%)',
-      'width:134px',
-      'height:5px',
-      'border-radius:999px',
-      'background:#111827',
-      'opacity:0.28',
-      'z-index:99999',
-      'pointer-events:none',
-    ].join(';');
-    document.body.append(indicator);
-  }, { safeTop: profile.safeArea.top, safeBottom: profile.safeArea.bottom, deviceType: profile.type });
+    root.style.setProperty('--hub-chrome-top-trim', '10px');
+    root.style.setProperty('--hub-nav-bottom-trim', '6px');
+    root.style.setProperty('--hub-content-pt', '0.625rem');
+  }, {
+    safeTop: profile.safeTop,
+    safeBottom: profile.safeBottom,
+    platformClass: profile.platformClass,
+  });
 }
 
 async function dismissOverlays(page) {
   const skipTour = page.getByRole('button', { name: /skip tour/i });
   if (await skipTour.isVisible().catch(() => false)) {
     await skipTour.click();
-    await page.waitForTimeout(300);
+    await page.waitForTimeout(250);
   }
 }
 
 async function captureScreenBuffer(page, screen, profile) {
   await page.goto(`${BASE}${screen.path}`, { waitUntil: 'networkidle' });
-  await page.waitForTimeout(500);
-  await applyDeviceChrome(page, profile);
+  await page.waitForTimeout(400);
+  await preparePage(page, profile);
   await dismissOverlays(page);
 
   if (screen.missionIntro) {
     const card = page.getByRole('button', { name: new RegExp(screen.missionIntro, 'i') }).first();
     await card.waitFor({ state: 'visible', timeout: 15_000 });
     await card.click();
-    await page.waitForTimeout(700);
-    await applyDeviceChrome(page, profile);
+    await page.waitForTimeout(600);
+    await preparePage(page, profile);
   }
 
   if (screen.waitFor) {
     await page.getByText(screen.waitFor).first().waitFor({ state: 'visible', timeout: 15_000 });
   }
 
-  await page.waitForTimeout(350);
+  if (screen.file === '01-login') {
+    await page.getByRole('button', { name: /Let's go!/i }).scrollIntoViewIfNeeded();
+  } else {
+    await page.evaluate(() => {
+      const main = document.getElementById('family-hub-main');
+      if (main) {
+        main.scrollTop = 0;
+      }
+      window.scrollTo(0, 0);
+    });
+  }
+
+  await page.waitForTimeout(300);
   return page.screenshot({ fullPage: false, animations: 'disabled', type: 'png' });
 }
 
@@ -322,7 +289,7 @@ async function main() {
   }
 
   console.log(`[assets:screenshots] Starting preview on ${BASE}`);
-  console.log(`[assets:screenshots] Mode: ${USE_FRAME ? 'device frame (App Store dimensions)' : 'full-bleed'}`);
+  console.log('[assets:screenshots] Mode: full-bleed app UI (exact App Store dimensions)');
   const preview = startPreview();
 
   try {
@@ -332,19 +299,18 @@ async function main() {
 
     for (const device of DEVICES) {
       const deviceDir = path.join(OUT_ROOT, device.slug);
-      const rawDir = path.join(RAW_ROOT, device.slug);
       fs.mkdirSync(deviceDir, { recursive: true });
-      fs.mkdirSync(rawDir, { recursive: true });
 
-      console.log(`\n[assets:screenshots] ${device.label}`);
-      console.log(`  Capture ${device.captureWidth}×${device.captureHeight} → output ${device.outputWidth}×${device.outputHeight}`);
+      console.log(
+        `\n[assets:screenshots] ${device.label} — ${device.viewportWidth}×${device.viewportHeight} @${device.deviceScaleFactor}x → ${device.width}×${device.height}px`
+      );
 
       const context = await browser.newContext({
-        viewport: { width: device.captureWidth, height: device.captureHeight },
-        deviceScaleFactor: 1,
+        viewport: { width: device.viewportWidth, height: device.viewportHeight },
+        deviceScaleFactor: device.deviceScaleFactor,
         colorScheme: 'light',
         locale: 'en-US',
-        isMobile: device.type === 'iphone',
+        isMobile: device.slug === 'iphone-6.5',
         hasTouch: true,
       });
 
@@ -355,30 +321,19 @@ async function main() {
           for (const [key, value] of Object.entries(entries)) {
             localStorage.setItem(key, value);
           }
-        }, seedStorage(screen.auth, screen.welcomed, Boolean(screen.seedFamily)));
+        }, seedStorage(screen.auth, screen.welcomed));
 
         const captureBuffer = await captureScreenBuffer(page, screen, device);
         await page.close();
 
-        const rawFile = path.join(rawDir, `${screen.file}.png`);
-        await fs.promises.writeFile(rawFile, captureBuffer);
-
-        const finalBuffer = USE_FRAME
-          ? await compositeWithDeviceFrame(captureBuffer, device, sharp)
-          : await normalizeFullBleed(captureBuffer, device, sharp);
-
+        const finalBuffer = await normalizeScreenshot(captureBuffer, device, sharp);
         const outFile = path.join(deviceDir, `${screen.file}.png`);
         await fs.promises.writeFile(outFile, finalBuffer);
 
         const { ok, width, height } = await assertExactDimensions(finalBuffer, device, sharp);
-        console.log(
-          `  ${ok ? '✓' : '✗'} ${path.relative(root, outFile)} (${width}×${height})${
-            USE_FRAME ? ' · device contour' : ''
-          }`
-        );
+        console.log(`  ${ok ? '✓' : '✗'} ${path.relative(root, outFile)} (${width}×${height})`);
         if (!ok) {
           hadError = true;
-          console.error(`    Expected exactly ${device.outputWidth}×${device.outputHeight}`);
         }
       }
 
@@ -392,8 +347,7 @@ async function main() {
     }
 
     console.log('\n[assets:screenshots] Done.');
-    console.log(`Upload framed PNGs from ${path.relative(root, OUT_ROOT)}/{iphone-6.5|ipad-13}/`);
-    console.log(`Raw captures saved to ${path.relative(root, RAW_ROOT)}/`);
+    console.log(`Upload PNGs from ${path.relative(root, OUT_ROOT)}/{iphone-6.5|ipad-13}/`);
   } finally {
     preview.kill('SIGTERM');
   }

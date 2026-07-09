@@ -39,6 +39,7 @@ export default mergeConfig(
     plugins: [familyhubIndexHtmlPlugin()],
     define: {
       'import.meta.env.VITE_HUB_STANDALONE': JSON.stringify('true'),
+      'import.meta.env.VITE_STORE_SCREENSHOTS': JSON.stringify(process.env.VITE_STORE_SCREENSHOTS ?? 'false'),
     },
     build: {
       outDir: 'dist-familyhub',
