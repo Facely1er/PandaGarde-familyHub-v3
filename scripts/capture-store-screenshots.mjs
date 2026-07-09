@@ -30,9 +30,14 @@ import {
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const PORT = Number(process.env.HUB_SCREENSHOT_PORT ?? 4174);
 const BASE = `http://127.0.0.1:${PORT}`;
-const OUT_ROOT = path.join(root, 'store-assets', 'app-store');
+const playAndroidOnly = process.argv.includes('--play-android');
+const OUT_ROOT = playAndroidOnly
+  ? path.join(root, 'store-assets', 'play-store', 'phone-screenshots')
+  : path.join(root, 'store-assets', 'app-store');
 
-const DEVICES = [DEVICE_PROFILES['iphone-6.5'], DEVICE_PROFILES['ipad-13']];
+const DEVICES = playAndroidOnly
+  ? [DEVICE_PROFILES['pixel-7']]
+  : [DEVICE_PROFILES['iphone-6.5'], DEVICE_PROFILES['ipad-13']];
 
 const SCREENS = [
   {
@@ -289,7 +294,11 @@ async function main() {
   }
 
   console.log(`[assets:screenshots] Starting preview on ${BASE}`);
-  console.log('[assets:screenshots] Mode: full-bleed app UI (exact App Store dimensions)');
+  console.log(
+    playAndroidOnly
+      ? '[assets:screenshots] Mode: Play Store phone (1080×2400)'
+      : '[assets:screenshots] Mode: full-bleed app UI (exact App Store dimensions)'
+  );
   const preview = startPreview();
 
   try {
@@ -310,7 +319,7 @@ async function main() {
         deviceScaleFactor: device.deviceScaleFactor,
         colorScheme: 'light',
         locale: 'en-US',
-        isMobile: device.slug === 'iphone-6.5',
+        isMobile: device.slug === 'iphone-6.5' || device.slug === 'pixel-7',
         hasTouch: true,
       });
 
@@ -347,7 +356,11 @@ async function main() {
     }
 
     console.log('\n[assets:screenshots] Done.');
-    console.log(`Upload PNGs from ${path.relative(root, OUT_ROOT)}/{iphone-6.5|ipad-13}/`);
+    if (playAndroidOnly) {
+      console.log(`Upload PNGs from ${path.relative(root, OUT_ROOT)}/`);
+    } else {
+      console.log(`Upload PNGs from ${path.relative(root, OUT_ROOT)}/{iphone-6.5|ipad-13}/`);
+    }
   } finally {
     preview.kill('SIGTERM');
   }

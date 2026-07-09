@@ -138,6 +138,18 @@ export const DEVICE_PROFILES = {
     safeBottom: 20,
     platformClass: 'platform-ios platform-ipad',
   },
+  'pixel-7': {
+    slug: 'pixel-7',
+    label: 'Pixel 7 (Play phone)',
+    viewportWidth: 360,
+    viewportHeight: 800,
+    deviceScaleFactor: 3,
+    width: 1080,
+    height: 2400,
+    safeTop: 24,
+    safeBottom: 20,
+    platformClass: 'platform-android',
+  },
 };
 
 export async function assertExactDimensions(buffer, profile, sharp) {
