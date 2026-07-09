@@ -87,6 +87,7 @@ export function initStoreScreenshotEarly(): void {
     return;
   }
   window.__PG_STORE_CAPTURE__ = true;
+  document.documentElement.classList.add('store-capture');
   suppressHubOnboardingForCapture();
 }
 

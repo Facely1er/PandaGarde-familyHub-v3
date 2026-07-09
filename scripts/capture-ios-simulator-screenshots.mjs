@@ -34,10 +34,17 @@ const env = {
   LC_ALL: 'en_US.UTF-8',
 };
 
+const STORE_IPHONE_SIM = {
+  name: 'SC-Store-iPhone-6.5',
+  deviceType: 'com.apple.CoreSimulator.SimDeviceType.iPhone-14-Pro-Max',
+  rawWidth: 1284,
+  rawHeight: 2778,
+};
+
 const DEVICE_TARGETS = {
   'iphone-6.5': {
     profile: FRAMED_DEVICE_PROFILES['iphone-6.5'],
-    simName: 'SC-Store-iPhone-6.5',
+    simName: STORE_IPHONE_SIM.name,
     waitExtraMs: 0,
   },
   'ipad-13': {
@@ -117,6 +124,54 @@ function resolveSimulatorUdid(name) {
   throw new Error(`Simulator not found: "${name}". Create it in Xcode → Window → Devices and Simulators.`);
 }
 
+function resolveLatestIosRuntime() {
+  const list = run('xcrun', ['simctl', 'list', 'runtimes', 'available', '-j'], { quiet: true });
+  const runtimes = JSON.parse(list.stdout).runtimes.filter((rt) => rt.isAvailable && rt.platform === 'iOS');
+  if (runtimes.length === 0) {
+    throw new Error('No available iOS Simulator runtime found.');
+  }
+  return runtimes.sort((a, b) => b.version.localeCompare(a.version, undefined, { numeric: true }))[0]
+    .identifier;
+}
+
+function findSimulatorByName(name) {
+  const list = run('xcrun', ['simctl', 'list', 'devices', 'available', '-j'], { quiet: true });
+  const data = JSON.parse(list.stdout);
+  for (const runtime of Object.keys(data.devices).sort().reverse()) {
+    const match = data.devices[runtime]?.find((d) => d.isAvailable && d.name === name);
+    if (match) {
+      return { ...match, runtime };
+    }
+  }
+  return null;
+}
+
+function ensureStoreIphoneSimulator() {
+  const { name, deviceType } = STORE_IPHONE_SIM;
+  const existing = findSimulatorByName(name);
+  if (existing?.deviceTypeIdentifier === deviceType) {
+    return existing.udid;
+  }
+
+  if (existing) {
+    console.log(
+      `[ios-screenshots] Recreating ${name} (${existing.deviceTypeIdentifier ?? 'unknown'} → ${deviceType}) for 1284×2778 captures…`
+    );
+    run('xcrun', ['simctl', 'shutdown', existing.udid], { allowFail: true });
+    run('xcrun', ['simctl', 'delete', existing.udid]);
+  } else {
+    console.log(`[ios-screenshots] Creating ${name} (${deviceType})…`);
+  }
+
+  const runtime = existing?.runtime ?? resolveLatestIosRuntime();
+  const create = run('xcrun', ['simctl', 'create', name, deviceType, runtime], { quiet: true });
+  const udid = create.stdout?.trim();
+  if (!udid) {
+    throw new Error(`Failed to create simulator ${name}`);
+  }
+  return udid;
+}
+
 function bootSimulator(udid, name) {
   const state = run('xcrun', ['simctl', 'list', 'devices', '-j'], { quiet: true });
   const data = JSON.parse(state.stdout);
@@ -177,7 +232,8 @@ function launchApp(udid) {
 
 async function captureDevice(target, screenFilter) {
   const { profile, simName, waitExtraMs } = target;
-  const udid = resolveSimulatorUdid(simName);
+  const udid =
+    profile.slug === 'iphone-6.5' ? ensureStoreIphoneSimulator() : resolveSimulatorUdid(simName);
   bootSimulator(udid, simName);
 
   const outDir = path.join(outRoot, profile.slug);
@@ -211,9 +267,11 @@ async function captureDevice(target, screenFilter) {
     fs.writeFileSync(outPath, framed);
 
     const rawMeta = await sharp(raw).metadata();
+    const rawOk =
+      rawMeta.width === profile.rawWidth && rawMeta.height === profile.rawHeight;
     const { ok, width, height } = await assertFramedDimensions(framed, profile, sharp);
     console.log(
-      `  ✓ ${path.relative(root, outPath)} (${width}×${height}${ok ? '' : ' — dimension mismatch'}) [raw ${rawMeta.width}×${rawMeta.height}]`
+      `  ✓ ${path.relative(root, outPath)} (${width}×${height}${ok ? '' : ' — dimension mismatch'}) [raw ${rawMeta.width}×${rawMeta.height}${rawOk ? '' : ` — expected ${profile.rawWidth}×${profile.rawHeight}`}]`
     );
   }
 

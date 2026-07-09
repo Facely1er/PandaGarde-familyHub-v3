@@ -12,9 +12,11 @@ export const FRAMED_DEVICE_PROFILES = {
     label: 'iPhone 6.5"',
     outputWidth: 1284,
     outputHeight: 2778,
-    captureWidth: 1152,
-    captureHeight: 2496,
-    screen: { x: 66, y: 111, width: 1152, height: 2496, radius: 44 },
+    /** Native simctl capture size (iPhone 14 Pro Max / 12–14 Plus class). */
+    rawWidth: 1284,
+    rawHeight: 2778,
+    /** Screen inset ~2% so UI stays large inside the bezel. */
+    screen: { x: 16, y: 28, width: 1252, height: 2722, radius: 44 },
     safeArea: { top: 54, bottom: 32 },
     type: 'iphone',
   },
@@ -23,9 +25,9 @@ export const FRAMED_DEVICE_PROFILES = {
     label: 'iPad 13"',
     outputWidth: 2064,
     outputHeight: 2752,
-    captureWidth: 1840,
-    captureHeight: 2528,
-    screen: { x: 112, y: 112, width: 1840, height: 2528, radius: 28 },
+    rawWidth: 2064,
+    rawHeight: 2752,
+    screen: { x: 20, y: 24, width: 2024, height: 2704, radius: 28 },
     safeArea: { top: 24, bottom: 20 },
     type: 'ipad',
   },
@@ -65,15 +67,20 @@ function frameSvg(profile) {
 
 /** Composite a raw simulator capture into the device frame at exact App Store dimensions. */
 export async function compositeWithDeviceFrame(captureBuffer, profile, sharp) {
-  const { screen, outputWidth, outputHeight, captureWidth, captureHeight } = profile;
+  const { screen, outputWidth, outputHeight, rawWidth, rawHeight } = profile;
 
   const resizedCapture = await sharp(captureBuffer)
-    .resize(captureWidth, captureHeight, { fit: 'cover', position: 'top' })
+    .resize(rawWidth, rawHeight, { fit: 'cover', position: 'top' })
     .png()
     .toBuffer();
 
-  const mask = await roundedMask(captureWidth, captureHeight, screen.radius, sharp);
-  const clippedScreen = await sharp(resizedCapture)
+  const screenCapture = await sharp(resizedCapture)
+    .resize(screen.width, screen.height, { fit: 'cover', position: 'top' })
+    .png()
+    .toBuffer();
+
+  const mask = await roundedMask(screen.width, screen.height, screen.radius, sharp);
+  const clippedScreen = await sharp(screenCapture)
     .composite([{ input: mask, blend: 'dest-in' }])
     .png()
     .toBuffer();

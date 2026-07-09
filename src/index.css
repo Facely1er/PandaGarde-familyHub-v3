@@ -7356,6 +7356,41 @@ html.capacitor.platform-ios .family-hub-theme {
   --hub-content-pt: 0.625rem;
 }
 
+/* iPad — use full tablet width; avoid phone-width column centered on large screen */
+html.capacitor.platform-ipad .hub-page-inner {
+  max-width: 80rem;
+  padding-inline: max(1.25rem, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
+}
+
+html.capacitor.platform-ipad .hub-header-row {
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: max(1.25rem, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
+}
+
+html.capacitor.platform-ipad .hub-standalone-page .max-w-lg,
+html.capacitor.platform-ipad .hub-standalone-page .max-w-xl,
+html.capacitor.platform-ipad .hub-welcome-landing__inner {
+  max-width: 42rem;
+}
+
+html.store-capture.platform-ipad .hub-page-inner {
+  max-width: 80rem;
+  padding-inline: 2.5rem;
+}
+
+html.store-capture.platform-ipad .hub-header-row {
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 2.5rem;
+}
+
+html.store-capture.platform-ipad .hub-standalone-page .max-w-lg,
+html.store-capture.platform-ipad .hub-standalone-page .max-w-xl,
+html.store-capture.platform-ipad .hub-welcome-landing__inner {
+  max-width: 42rem;
+}
+
 /* Tour card clears bottom tab bar on phones */
 .hub-tour-overlay {
   padding-bottom: calc(var(--hub-nav-offset, 4.75rem) + 1rem);
