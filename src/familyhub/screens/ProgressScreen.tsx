@@ -26,6 +26,65 @@ const ACHIEVEMENT_META: Record<string, { label: string; icon: LucideIcon; descri
   dedicated_learner: { label: 'Dedicated Learner', icon: Timer, description: 'Spent 60+ minutes learning' },
 };
 
+type SummaryStatTone = 'teal' | 'indigo' | 'amber' | 'emerald';
+
+const SUMMARY_STAT_TONES: Record<
+  SummaryStatTone,
+  { card: string; iconWrap: string; icon: string; value: string; label: string }
+> = {
+  teal: {
+    card: 'border-teal-100 bg-teal-50 dark:border-teal-700/40 dark:bg-teal-900/20',
+    iconWrap: 'bg-teal-100 dark:bg-teal-900/50',
+    icon: 'text-teal-600 dark:text-teal-400',
+    value: 'text-teal-900 dark:text-teal-100',
+    label: 'text-teal-700 dark:text-teal-300',
+  },
+  indigo: {
+    card: 'border-indigo-100 bg-indigo-50 dark:border-indigo-700/40 dark:bg-indigo-900/20',
+    iconWrap: 'bg-indigo-100 dark:bg-indigo-900/50',
+    icon: 'text-indigo-600 dark:text-indigo-400',
+    value: 'text-indigo-900 dark:text-indigo-100',
+    label: 'text-indigo-700 dark:text-indigo-300',
+  },
+  amber: {
+    card: 'border-amber-100 bg-amber-50 dark:border-amber-700/40 dark:bg-amber-900/20',
+    iconWrap: 'bg-amber-100 dark:bg-amber-900/50',
+    icon: 'text-amber-600 dark:text-amber-400',
+    value: 'text-amber-900 dark:text-amber-100',
+    label: 'text-amber-700 dark:text-amber-300',
+  },
+  emerald: {
+    card: 'border-emerald-100 bg-emerald-50 dark:border-emerald-700/40 dark:bg-emerald-900/20',
+    iconWrap: 'bg-emerald-100 dark:bg-emerald-900/50',
+    icon: 'text-emerald-600 dark:text-emerald-400',
+    value: 'text-emerald-900 dark:text-emerald-100',
+    label: 'text-emerald-700 dark:text-emerald-300',
+  },
+};
+
+const SummaryStatCard: React.FC<{
+  icon: LucideIcon;
+  tone: SummaryStatTone;
+  value: React.ReactNode;
+  label: string;
+}> = ({ icon: Icon, tone, value, label }) => {
+  const styles = SUMMARY_STAT_TONES[tone];
+  return (
+    <div className={`flex items-center gap-2.5 rounded-lg border px-3 py-2.5 ${styles.card}`}>
+      <span
+        className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${styles.iconWrap}`}
+        aria-hidden="true"
+      >
+        <Icon className={styles.icon} size={16} />
+      </span>
+      <div className="min-w-0 flex-1">
+        <p className={`text-lg font-bold leading-none tabular-nums ${styles.value}`}>{value}</p>
+        <p className={`mt-0.5 text-[0.6875rem] leading-tight ${styles.label}`}>{label}</p>
+      </div>
+    </div>
+  );
+};
+
 interface ProgressScreenProps {
   /** When true, omits page hero — used inside Journey */
   embedded?: boolean;
@@ -96,29 +155,31 @@ const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => 
       )}
 
       {/* Summary stats */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <div className="rounded-xl border border-teal-100 bg-teal-50 p-4 dark:border-teal-700/40 dark:bg-teal-900/20">
-          <CheckCircle2 className="text-teal-600 dark:text-teal-400 mb-2" size={20} aria-hidden="true" />
-          <p className="text-2xl font-bold text-teal-900 dark:text-teal-100">{completedCount}</p>
-          <p className="text-xs text-teal-700 dark:text-teal-300 mt-1">{t('hub.progress.activitiesDone')}</p>
-        </div>
-        <div className="rounded-xl border border-indigo-100 bg-indigo-50 p-4 dark:border-indigo-700/40 dark:bg-indigo-900/20">
-          <TrendingUp className="text-indigo-600 dark:text-indigo-400 mb-2" size={20} aria-hidden="true" />
-          <p className="text-2xl font-bold text-indigo-900 dark:text-indigo-100">{pct}%</p>
-          <p className="text-xs text-indigo-700 dark:text-indigo-300 mt-1">{t('hub.progress.ofAvailable', { total: totalCount })}</p>
-        </div>
-        <div className="rounded-xl border border-amber-100 bg-amber-50 p-4 dark:border-amber-700/40 dark:bg-amber-900/20">
-          <Clock className="text-amber-600 dark:text-amber-400 mb-2" size={20} aria-hidden="true" />
-          <p className="text-2xl font-bold text-amber-900 dark:text-amber-100">{progress.totalTimeSpent}</p>
-          <p className="text-xs text-amber-700 dark:text-amber-300 mt-1">{t('hub.progress.minutesLearning')}</p>
-        </div>
-        <div className="rounded-xl border border-emerald-100 bg-emerald-50 p-4 dark:border-emerald-700/40 dark:bg-emerald-900/20">
-          <Star className="text-emerald-600 dark:text-emerald-400 mb-2" size={20} aria-hidden="true" />
-          <p className="text-2xl font-bold text-emerald-900 dark:text-emerald-100">
-            {avgScore !== null ? `${avgScore}%` : '—'}
-          </p>
-          <p className="text-xs text-emerald-700 dark:text-emerald-300 mt-1">{t('hub.progress.avgScore')}</p>
-        </div>
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-2.5">
+        <SummaryStatCard
+          icon={CheckCircle2}
+          tone="teal"
+          value={completedCount}
+          label={t('hub.progress.activitiesDone')}
+        />
+        <SummaryStatCard
+          icon={TrendingUp}
+          tone="indigo"
+          value={`${pct}%`}
+          label={t('hub.progress.ofAvailable', { total: totalCount })}
+        />
+        <SummaryStatCard
+          icon={Clock}
+          tone="amber"
+          value={progress.totalTimeSpent}
+          label={t('hub.progress.minutesLearning')}
+        />
+        <SummaryStatCard
+          icon={Star}
+          tone="emerald"
+          value={avgScore !== null ? `${avgScore}%` : '—'}
+          label={t('hub.progress.avgScore')}
+        />
       </div>
 
       {/* Progress bar */}
@@ -191,8 +252,8 @@ const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => 
 
       {/* Forest friends */}
       {forestFriends.length > 0 && (
-        <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-800">
-          <div className="mb-4 flex items-end justify-between gap-3">
+        <div className="rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800">
+          <div className="mb-3 flex items-end justify-between gap-3">
             <div>
               <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-200">Forest friends</h2>
               <p className="mt-0.5 text-xs text-gray-500 dark:text-gray-400">
@@ -203,28 +264,36 @@ const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => 
               {friendsMet} / {forestFriends.length} met
             </p>
           </div>
-          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <ul className="grid grid-cols-1 gap-2 min-[400px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
             {forestFriends.map(({ character, total, completed }) => (
               <li
                 key={character.id}
-                className={`flex flex-col items-center gap-2 rounded-xl border p-3 text-center ${
+                className={`flex items-center gap-2 rounded-lg border px-2.5 py-2 ${
                   completed > 0
                     ? 'border-green-200 bg-green-50 dark:border-green-700/40 dark:bg-green-900/20'
                     : 'border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-900/40'
                 }`}
               >
-                <StoryCharacterPortrait character={character} size="sm" highlight={completed > 0 && completed === total} />
-                <div>
-                  <p className="text-xs font-semibold text-gray-900 dark:text-gray-100">{character.name}</p>
-                  <p className="text-[11px] text-gray-500 dark:text-gray-400">{character.epithet}</p>
+                <StoryCharacterPortrait
+                  character={character}
+                  size="sm"
+                  highlight={completed > 0 && completed === total}
+                />
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-xs font-semibold leading-tight text-gray-900 dark:text-gray-100">
+                    {character.name}
+                  </p>
+                  <p className="truncate text-[0.625rem] leading-tight text-gray-500 dark:text-gray-400">
+                    {character.epithet}
+                  </p>
+                  <p
+                    className={`mt-0.5 text-[0.625rem] font-semibold leading-tight ${
+                      completed > 0 ? 'text-green-700 dark:text-green-300' : 'text-gray-400 dark:text-gray-500'
+                    }`}
+                  >
+                    {completed} / {total} missions
+                  </p>
                 </div>
-                <p
-                  className={`text-[11px] font-semibold ${
-                    completed > 0 ? 'text-green-700 dark:text-green-300' : 'text-gray-400 dark:text-gray-500'
-                  }`}
-                >
-                  {completed} / {total} missions
-                </p>
               </li>
             ))}
           </ul>
