@@ -201,9 +201,6 @@ const HomePage: React.FC = () => {
                 <Link to="/digital-footprint" className="button button-secondary inline-flex items-center gap-1.5">
                   {t('common.footprintReview')}
                 </Link>
-                <Link to="/stories" className="button button-secondary inline-flex items-center gap-1.5">
-                  {t('common.stories')}
-                </Link>
               </div>
               <p className="homepage-closing__followup page-section__lead text-center">
                 {t('home.stillQuestions')}{' '}

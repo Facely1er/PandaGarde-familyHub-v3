@@ -150,32 +150,32 @@ export const ShellLinkCard: React.FC<{
   className?: string;
 }> = ({ to, title, description, tag, cta = 'Open', icon, visual, className = '' }) => {
   const visualMode = visual?.imageSrc ? 'image' : visual?.icon ? 'icon' : null;
+  const isInlineIconVisual = visualMode === 'icon';
 
   return (
     <Link
       to={to}
-      className={`shell-card shell-card--nested shell-link-card ${icon ? 'shell-link-card--with-icon' : ''} ${visual ? `shell-link-card--with-visual shell-link-card--visual-${visual.tone ?? 'emerald'}` : ''} ${visualMode === 'icon' ? 'shell-link-card--visual-icon-led' : ''} ${className}`.trim()}
+      className={`shell-card shell-card--nested shell-link-card ${icon ? 'shell-link-card--with-icon' : ''} ${visual ? `shell-link-card--with-visual shell-link-card--visual-${visual.tone ?? 'emerald'}` : ''} ${isInlineIconVisual ? 'shell-link-card--visual-icon-led' : ''} ${className}`.trim()}
     >
-      {visual ? (
-        <div
-          className={`shell-link-card__visual ${visualMode === 'icon' ? 'shell-link-card__visual--icon-led' : ''}`.trim()}
-          aria-hidden="true"
-        >
-          {visual.imageSrc ? (
-            <img
-              src={visual.imageSrc}
-              alt={visual.imageAlt ?? ''}
-              className={`shell-link-card__visual-image ${visual.imageFit === 'contain' ? 'shell-link-card__visual-image--contain' : ''}`.trim()}
-              style={visual.imagePosition ? { objectPosition: visual.imagePosition } : undefined}
-              loading="lazy"
-            />
-          ) : null}
-          {visual.icon ? (
-            <div className="shell-link-card__visual-badge">{visual.icon}</div>
-          ) : null}
+      {visual && visualMode === 'image' ? (
+        <div className="shell-link-card__visual" aria-hidden="true">
+          <img
+            src={visual.imageSrc}
+            alt={visual.imageAlt ?? ''}
+            className={`shell-link-card__visual-image ${visual.imageFit === 'contain' ? 'shell-link-card__visual-image--contain' : ''}`.trim()}
+            style={visual.imagePosition ? { objectPosition: visual.imagePosition } : undefined}
+            loading="lazy"
+          />
         </div>
       ) : null}
-      <div className="shell-link-card__main">
+      <div
+        className={`shell-link-card__main ${isInlineIconVisual ? 'shell-link-card__main--inline-visual' : ''}`.trim()}
+      >
+        {isInlineIconVisual && visual?.icon ? (
+          <div className="shell-link-card__visual-badge shell-link-card__visual-badge--inline" aria-hidden="true">
+            {visual.icon}
+          </div>
+        ) : null}
         {icon && !visual ? (
           <div className="shell-link-card__icon" aria-hidden="true">
             {icon}
