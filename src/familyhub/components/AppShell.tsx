@@ -135,7 +135,7 @@ const AppShell: React.FC = () => {
         </a>
 
         <header className={hubTheme.chromeHeader}>
-          <div className="hub-header-row flex max-w-full items-center justify-between gap-1 pl-[max(0.5rem,var(--hub-safe-left,env(safe-area-inset-left,0px)))] pr-[max(0.5rem,var(--hub-safe-right,env(safe-area-inset-right,0px)))]">
+          <div className="hub-header-row flex max-w-full items-center justify-between gap-2 pl-[max(0.75rem,var(--hub-safe-left,env(safe-area-inset-left,0px)))] pr-[max(0.75rem,var(--hub-safe-right,env(safe-area-inset-right,0px)))]">
             <div className="hub-header-brand flex min-w-0 flex-1 items-center">
               <a
                 href={isHubStandalone ? pandagardeWebsiteUrl : '/'}
@@ -151,25 +151,25 @@ const AppShell: React.FC = () => {
                 <HubBrandLogo size="shell" variant="plain" alt="" />
               </a>
               <div className="hub-header-brand__text flex min-w-0 flex-col justify-center gap-px leading-none">
-                <h1 className="whitespace-nowrap font-bold text-teal-700 dark:text-teal-400 text-[length:clamp(13px,3.4vw,15px)]">
+                <h1 className="whitespace-nowrap font-bold text-teal-700 dark:text-teal-400 text-[length:clamp(12px,3.25vw,14px)]">
                   <span className="block">{HUB_BRAND_LINE_1}</span>
                   <span className="block">{HUB_BRAND_LINE_2}</span>
                 </h1>
               </div>
             </div>
-            <div className="flex shrink-0 items-center gap-0.5">
+            <div className="flex shrink-0 items-center gap-1">
               <button
                   type="button"
                   onClick={toggleTheme}
-                  className="flex h-9 w-9 items-center justify-center rounded-md text-gray-500 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
+                  className="flex h-8 w-8 items-center justify-center rounded-md text-gray-500 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
                   aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
                 >
-                  {theme === 'light' ? <Moon size={20} aria-hidden="true" /> : <Sun size={20} aria-hidden="true" />}
+                  {theme === 'light' ? <Moon size={18} aria-hidden="true" /> : <Sun size={18} aria-hidden="true" />}
                 </button>
                 <NavLink
                   to={hubPaths.settings}
                   className={[
-                    'flex h-9 w-9 items-center justify-center rounded-md transition-colors',
+                    'flex h-8 w-8 items-center justify-center rounded-md transition-colors',
                     onSettingsPage
                       ? 'bg-teal-100 text-teal-700 dark:bg-teal-900/40 dark:text-teal-300'
                       : 'text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700',
@@ -177,7 +177,7 @@ const AppShell: React.FC = () => {
                   aria-label={settingsTab.label}
                   aria-current={onSettingsPage ? 'page' : undefined}
                 >
-                  <Settings size={20} aria-hidden="true" />
+                  <Settings size={18} aria-hidden="true" />
                 </NavLink>
                 <a
                   href={isHubStandalone ? pandagardeWebsiteUrl : '/'}

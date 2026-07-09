@@ -19,7 +19,7 @@ const framedSizeClasses: Record<HubBrandLogoSize, string> = {
 const plainSizeClasses: Record<HubBrandLogoSize, string> = {
   xs: 'h-10 w-10',
   sm: 'h-11 w-11',
-  shell: 'h-[3.25rem] w-[3.25rem]',
+  shell: 'h-12 w-12',
   md: 'h-16 w-16',
   lg: 'h-24 w-24 sm:h-28 sm:w-28',
   hero: 'h-28 w-28 sm:h-32 sm:w-32',

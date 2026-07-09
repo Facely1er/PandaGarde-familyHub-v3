@@ -7228,17 +7228,17 @@ body {
 }
 
 .hub-header-brand {
-  gap: 0.0625rem;
+  gap: 0.125rem;
   min-width: 0;
 }
 
 .hub-header-brand__text {
   min-width: 0;
-  margin-left: -0.1875rem;
+  margin-left: -0.125rem;
 }
 
 .hub-header-row {
-  min-height: 2.875rem;
+  min-height: 2.75rem;
 }
 
 .hub-page-inner {
