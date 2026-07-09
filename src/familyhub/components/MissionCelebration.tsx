@@ -30,6 +30,7 @@ const MissionCelebration: React.FC<MissionCelebrationProps> = ({
     getMissionName,
     getMissionText,
     getCelebrationLine,
+    getDurationLabel,
   } = useHubI18n();
   const doneRef = useRef<HTMLButtonElement>(null);
   const guide = activity.guideCharacter ? getForestCharacter(activity.guideCharacter) : undefined;
