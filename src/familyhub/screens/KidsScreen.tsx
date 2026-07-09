@@ -49,6 +49,7 @@ const KidsScreen: React.FC = () => {
   const [editMember, setEditMember] = useState({ name: '', age: 0, role: 'Child' });
   const addMemberTriggerRef = useRef<HTMLButtonElement>(null);
   const editMemberTriggerRef = useRef<HTMLButtonElement>(null);
+  const removeMemberTriggerRef = useRef<HTMLButtonElement>(null);
 
   const closeAddMember = () => setShowAddMember(false);
   const addDialogRef = useDialogFocusTrap({
@@ -61,6 +62,7 @@ const KidsScreen: React.FC = () => {
   const removeDialogRef = useDialogFocusTrap({
     isOpen: memberToRemove !== null,
     onClose: closeRemoveConfirm,
+    returnFocusRef: removeMemberTriggerRef,
   });
 
   const openEditMember = (member: HubFamilyMember, trigger: HTMLButtonElement | null) => {
@@ -287,7 +289,10 @@ const KidsScreen: React.FC = () => {
                     </button>
                     <button
                       type="button"
-                      onClick={() => setMemberToRemove(member)}
+                      onClick={(e) => {
+                        removeMemberTriggerRef.current = e.currentTarget;
+                        setMemberToRemove(member);
+                      }}
                       className="p-2 text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all hover:scale-105 min-w-[44px] min-h-[44px] flex items-center justify-center"
                       title="Remove family member"
                       aria-label={`Remove ${member.name} from family`}

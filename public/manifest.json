@@ -9,16 +9,22 @@
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/LogoPandagarde.png",
+      "src": "/icons/pwa-icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/LogoPandagarde.png",
+      "src": "/icons/pwa-icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
+    },
+    {
+      "src": "/icons/pwa-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
   "categories": ["education", "kids", "privacy", "family"],
@@ -30,22 +36,22 @@
       "name": "Privacy Story",
       "short_name": "Story",
       "description": "Read the Privacy Panda interactive story",
-      "url": "/story",
-      "icons": [{ "src": "/LogoPandagarde.png", "sizes": "96x96" }]
+      "url": "/stories/privacy-panda-and-the-digital-bamboo-forest",
+      "icons": [{ "src": "/icons/pwa-icon-192.png", "sizes": "192x192" }]
     },
     {
       "name": "Family Hub",
       "short_name": "Hub",
       "description": "Your family privacy workspace",
       "url": "/family-hub",
-      "icons": [{ "src": "/LogoPandagarde.png", "sizes": "96x96" }]
+      "icons": [{ "src": "/icons/pwa-icon-192.png", "sizes": "192x192" }]
     },
     {
-      "name": "Get Started",
-      "short_name": "Start",
-      "description": "Begin the DFA privacy journey",
-      "url": "/get-started",
-      "icons": [{ "src": "/LogoPandagarde.png", "sizes": "96x96" }]
+      "name": "Footprint Review",
+      "short_name": "Review",
+      "description": "Start your family's digital footprint review",
+      "url": "/digital-footprint",
+      "icons": [{ "src": "/icons/pwa-icon-192.png", "sizes": "192x192" }]
     }
   ]
 }

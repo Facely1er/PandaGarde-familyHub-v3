@@ -13,7 +13,16 @@ const bundles = [
   {
     name: 'Main website (www)',
     dir: path.join(root, '..', 'dist'),
-    required: ['index.html', 'sw.js', 'manifest.json', 'offline.html', '_headers', 'LogoPandagarde.png'],
+    required: [
+      'index.html',
+      'sw.js',
+      'manifest.json',
+      'offline.html',
+      '_headers',
+      'LogoPandagarde.png',
+      'icons/pwa-icon-192.png',
+      'icons/pwa-icon-512.png',
+    ],
   },
   {
     name: 'Family Hub (hub.pandagarde.com / Capacitor webDir)',
@@ -21,13 +30,15 @@ const bundles = [
     required: [
       'index.html',
       'familyhub.html',
-      'sw.js',
       'familyhub-manifest.json',
       'offline.html',
       '_redirects',
       '_headers',
       'LogoPandagarde.png',
+      'icons/pwa-icon-192.png',
+      'icons/pwa-icon-512.png',
     ],
+    // sw.js is intentionally omitted from dist-familyhub (Capacitor); native boot unregisters legacy SW.
   },
 ];
 
