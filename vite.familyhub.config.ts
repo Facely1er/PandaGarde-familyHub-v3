@@ -24,6 +24,11 @@ const familyhubIndexHtmlPlugin = () => ({
     if (fs.existsSync(headersSrc)) {
       fs.copyFileSync(headersSrc, path.join(outDir, '_headers'));
     }
+    // Service workers break Capacitor — never ship sw.js in the hub bundle.
+    const swPath = path.join(outDir, 'sw.js');
+    if (fs.existsSync(swPath)) {
+      fs.unlinkSync(swPath);
+    }
   },
 });
 

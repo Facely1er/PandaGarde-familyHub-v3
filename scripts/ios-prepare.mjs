@@ -41,6 +41,12 @@ function removeStaleXcodeBuildDir() {
 console.log('[ios:prepare] Building Family Hub web bundle…');
 run('npm', ['run', 'build:familyhub']);
 
+const distSw = path.join(root, 'dist-familyhub', 'sw.js');
+if (fs.existsSync(distSw)) {
+  console.log('[ios:prepare] Removing sw.js from dist-familyhub (service workers break native WebView)…');
+  fs.unlinkSync(distSw);
+}
+
 console.log('[ios:prepare] Patching upstream Capacitor WKProcessPool deprecation…');
 run('node', ['scripts/patch-capacitor-wkprocesspool.mjs']);
 

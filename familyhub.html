@@ -2,6 +2,63 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      (function () {
+        var RELOAD_KEY = 'pandagarde_hub_native_sw_reload_v1';
+
+        function isNativeShell() {
+          try {
+            var protocol = window.location.protocol;
+            if (protocol === 'capacitor:' || protocol === 'ionic:') {
+              return true;
+            }
+            var cap = window.Capacitor;
+            return !!(cap && cap.isNativePlatform && cap.isNativePlatform());
+          } catch (e) {
+            return false;
+          }
+        }
+
+        function clearWebCaches() {
+          var tasks = [];
+          if ('serviceWorker' in navigator) {
+            tasks.push(
+              navigator.serviceWorker.getRegistrations().then(function (regs) {
+                return Promise.all(regs.map(function (reg) { return reg.unregister(); }));
+              })
+            );
+          }
+          if (window.caches && caches.keys) {
+            tasks.push(
+              caches.keys().then(function (keys) {
+                return Promise.all(keys.map(function (key) { return caches.delete(key); }));
+              })
+            );
+          }
+          return Promise.all(tasks);
+        }
+
+        if (!isNativeShell()) {
+          return;
+        }
+
+        // Stale SW may have served old index.html with missing JS chunks — reload once after purge.
+        if (
+          'serviceWorker' in navigator &&
+          navigator.serviceWorker.controller &&
+          !sessionStorage.getItem(RELOAD_KEY)
+        ) {
+          sessionStorage.setItem(RELOAD_KEY, '1');
+          clearWebCaches().finally(function () {
+            window.location.reload();
+          });
+          return;
+        }
+
+        sessionStorage.removeItem(RELOAD_KEY);
+        clearWebCaches();
+      })();
+    </script>
     <link rel="icon" type="image/png" href="/LogoPandagarde.png" />
     <link rel="manifest" href="/familyhub-manifest.json" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -26,28 +83,6 @@
           }
           document.documentElement.setAttribute('data-theme', t);
         } catch (e) {}
-      })();
-    </script>
-    <script>
-      (function () {
-        var c = window.Capacitor;
-        if (!c || !c.isNativePlatform || !c.isNativePlatform()) {
-          return;
-        }
-        if ('serviceWorker' in navigator) {
-          navigator.serviceWorker.getRegistrations().then(function (regs) {
-            regs.forEach(function (reg) {
-              reg.unregister();
-            });
-          });
-        }
-        if (window.caches && caches.keys) {
-          caches.keys().then(function (keys) {
-            keys.forEach(function (key) {
-              caches.delete(key);
-            });
-          });
-        }
       })();
     </script>
     <div id="root"></div>
