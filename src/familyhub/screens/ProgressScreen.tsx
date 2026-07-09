@@ -268,7 +268,7 @@ const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => 
             {forestFriends.map(({ character, total, completed }) => (
               <li
                 key={character.id}
-                className={`flex items-center gap-2 rounded-lg border px-2.5 py-2 ${
+                className={`flex items-center gap-2.5 rounded-lg border px-2.5 py-2 ${
                   completed > 0
                     ? 'border-green-200 bg-green-50 dark:border-green-700/40 dark:bg-green-900/20'
                     : 'border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-900/40'
@@ -276,7 +276,7 @@ const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => 
               >
                 <StoryCharacterPortrait
                   character={character}
-                  size="sm"
+                  size="md"
                   highlight={completed > 0 && completed === total}
                 />
                 <div className="min-w-0 flex-1">
