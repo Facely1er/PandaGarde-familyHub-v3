@@ -6,9 +6,9 @@
   "dashboardReadyStandalone": "Appuyez sur la mission du jour ci-dessous pour commencer. Consultez Parcours pour les badges ou certificats.",
   "nav": {
     "skipToMain": "Aller au contenu principal",
-    "primary": "Navigation principale Family Hub",
-    "openWebsite": "Ouvrir le site PandaGarde",
-    "backToWebsite": "Retour au site PandaGarde",
+    "primary": "Navigation principale {{productName}}",
+    "openWebsite": "Ouvrir le site {{brandName}}",
+    "backToWebsite": "Retour au site {{brandName}}",
     "site": "Site",
     "dashboard": {
       "label": "Tableau de bord — aujourd'hui et statistiques",
@@ -33,10 +33,9 @@
   },
   "welcome": {
     "title": "Bienvenue dans votre",
-    "titleHighlight": "Family Hub",
     "adventurePaths": "Trois parcours d'aventure",
     "whatsInside": "Ce qui vous attend",
-    "websiteNote": "Le bilan d'empreinte et les guides parentaux sont sur le site principal PandaGarde — ouvrez-les à tout moment en complément de ces missions.",
+    "websiteNote": "Le bilan d'empreinte et les guides parentaux sont sur le site principal {{brandName}} — ouvrez-les à tout moment en complément de ces missions.",
     "privacyStrong": "Rien ne quitte cet appareil.",
     "privacyNote": "Pas de compte, pas d'inscription — les profils et la progression de votre famille restent ici.",
     "sections": {
@@ -58,7 +57,7 @@
     "title": "Paramètres",
     "subtitle": "Gérez vos préférences et accédez aux ressources d'aide.",
     "language": "Langue",
-    "languageHint": "Choisissez l'anglais, le français ou l'espagnol pour les menus et libellés de Family Hub.",
+    "languageHint": "Choisissez l'anglais, le français ou l'espagnol pour les menus et libellés de {{productName}}.",
     "theme": "Thème",
     "darkMode": "Mode sombre",
     "lightMode": "Mode clair",
@@ -90,11 +89,11 @@
     "helpTitle": "Aide et support",
     "faq": "Foire aux questions",
     "contact": "Contacter le support",
-    "backToWebsite": "Retour au site PandaGarde"
+    "backToWebsite": "Retour au site {{brandName}}"
   },
   "dashboard": {
-    "welcomeRegion": "Bienvenue dans Family Hub",
-    "welcomeTitle": "Vous êtes dans Family Hub — là où vous pratiquez ensemble.",
+    "welcomeRegion": "Bienvenue dans {{productName}}",
+    "welcomeTitle": "Vous êtes dans {{productName}} — là où vous pratiquez ensemble.",
     "welcomeBody": "Faites une courte mission aujourd'hui. La progression et les badges sont enregistrés sur cet appareil.",
     "stories": "Histoires Privacy Panda",
     "footprint": "Bilan d'empreinte",
@@ -122,7 +121,7 @@
     "suggestedNext": "Prochaines étapes suggérées"
   },
   "tour": {
-    "dialogLabel": "Visite guidée Family Hub",
+    "dialogLabel": "Visite guidée {{productName}}",
     "skip": "Passer la visite",
     "stepOf": "Étape {{current}} sur {{total}}",
     "next": "Suivant",
@@ -304,7 +303,7 @@
     "agePlaceholder": "Entrez l'âge",
     "roleLabel": "Rôle",
     "ageMatched": "Activités adaptées à l'âge :",
-    "privacyFormNote": "Un prénom ou surnom suffit. Ces informations restent sur cet appareil et ne sont jamais envoyées à PandaGarde.",
+    "privacyFormNote": "Un prénom ou surnom suffit. Ces informations restent sur cet appareil et ne sont jamais envoyées à {{brandName}}.",
     "cancel": "Annuler",
     "saving": "Enregistrement…",
     "removing": "Suppression…",

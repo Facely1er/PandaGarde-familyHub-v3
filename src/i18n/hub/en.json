@@ -6,9 +6,9 @@
   "dashboardReadyStandalone": "Tap today's mission below to start. Check Journey when you want badges or certificates.",
   "nav": {
     "skipToMain": "Skip to main content",
-    "primary": "Primary Family Hub navigation",
-    "openWebsite": "Open PandaGarde website",
-    "backToWebsite": "Back to PandaGarde website",
+    "primary": "Primary {{productName}} navigation",
+    "openWebsite": "Open {{brandName}} website",
+    "backToWebsite": "Back to {{brandName}} website",
     "site": "Site",
     "dashboard": {
       "label": "Dashboard — today and quick stats",
@@ -33,10 +33,9 @@
   },
   "welcome": {
     "title": "Welcome to your",
-    "titleHighlight": "Family Hub",
     "adventurePaths": "Three adventure paths",
     "whatsInside": "What's inside",
-    "websiteNote": "The footprint review and parent guides live on the main PandaGarde site — open them any time alongside these missions.",
+    "websiteNote": "The footprint review and parent guides live on the main {{brandName}} site — open them any time alongside these missions.",
     "privacyStrong": "Nothing leaves this device.",
     "privacyNote": "No account, no signup—your family profiles and progress stay here.",
     "sections": {
@@ -58,7 +57,7 @@
     "title": "Settings",
     "subtitle": "Manage your app preferences and access help resources.",
     "language": "Language",
-    "languageHint": "Choose English, French, or Spanish for Family Hub menus and labels.",
+    "languageHint": "Choose English, French, or Spanish for {{productName}} menus and labels.",
     "theme": "Theme",
     "darkMode": "Dark mode",
     "lightMode": "Light mode",
@@ -90,11 +89,11 @@
     "helpTitle": "Help & Support",
     "faq": "Frequently Asked Questions",
     "contact": "Contact Support",
-    "backToWebsite": "Back to PandaGarde website"
+    "backToWebsite": "Back to {{brandName}} website"
   },
   "dashboard": {
-    "welcomeRegion": "Welcome to Family Hub",
-    "welcomeTitle": "You're in Family Hub — where you practice together.",
+    "welcomeRegion": "Welcome to {{productName}}",
+    "welcomeTitle": "You're in {{productName}} — where you practice together.",
     "welcomeBody": "Do one short mission today. Progress and badges save on this device.",
     "stories": "Privacy Panda stories",
     "footprint": "Footprint review",
@@ -122,7 +121,7 @@
     "suggestedNext": "Suggested next steps"
   },
   "tour": {
-    "dialogLabel": "Family Hub tour",
+    "dialogLabel": "{{productName}} tour",
     "skip": "Skip tour",
     "stepOf": "Step {{current}} of {{total}}",
     "next": "Next",
@@ -304,7 +303,7 @@
     "agePlaceholder": "Enter age",
     "roleLabel": "Role",
     "ageMatched": "Age-matched activities:",
-    "privacyFormNote": "A first name or nickname is enough. This information stays on this device and is never sent to PandaGarde.",
+    "privacyFormNote": "A first name or nickname is enough. This information stays on this device and is never sent to {{brandName}}.",
     "cancel": "Cancel",
     "saving": "Saving…",
     "removing": "Removing…",

@@ -26,7 +26,7 @@ const HubPageLayout: React.FC<HubPageLayoutProps> = ({
   <div className={`min-h-full min-w-0 ${className}`.trim()}>
     <div
       className={[
-        'hub-page-inner mx-auto flex w-full min-w-0 flex-col gap-4 px-4 pb-4 sm:gap-5 sm:px-6 sm:pb-6',
+        'hub-page-inner mx-auto flex w-full min-w-0 flex-col gap-3 px-4 pb-3 pt-1 sm:gap-3.5 sm:px-5 sm:pb-4',
         maxWidthClass[maxWidth],
       ].join(' ')}
     >

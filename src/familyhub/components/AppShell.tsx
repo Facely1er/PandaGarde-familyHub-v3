@@ -17,6 +17,7 @@ import { getHubOrigin } from '../../lib/hubMission';
 import { openExternalUrl } from '../../lib/openExternalUrl';
 import { hubPaths, pandagardeWebsiteUrl, isHubStandalone } from '../hubPaths';
 import HubBrandLogo from './HubBrandLogo';
+import LanguageSwitcher from '../../components/LanguageSwitcher';
 import { hubTheme } from '../hubTheme';
 import { HUB_BRAND_LINE_1, HUB_BRAND_LINE_2 } from '../constants';
 import { useHubI18n } from '../hubI18n';
@@ -172,6 +173,7 @@ const AppShell: React.FC = () => {
                 >
                   {theme === 'light' ? <Moon size={18} aria-hidden="true" /> : <Sun size={18} aria-hidden="true" />}
                 </button>
+                <LanguageSwitcher variant="hub" className="shrink-0" />
                 <NavLink
                   to={hubPaths.settings}
                   className={[

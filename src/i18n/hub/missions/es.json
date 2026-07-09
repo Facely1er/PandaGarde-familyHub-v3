@@ -1,58 +1,310 @@
 {
   "missions": {
     "pack-digital-backpack": {
-      "name": "Prepara tu mochila digital"
+      "name": "Prepara tu mochila digital",
+      "description": "Decide qué información va en tu mochila escolar — y qué se queda en casa. ¡Luego practica la misma idea para Internet!",
+      "realLifeScenario": "Quieres unirte a un juego en línea divertido. Pide tu nombre, escuela y dirección. ¿Qué deberías compartir?",
+      "learningObjective": "Ayudar a los más pequeños a distinguir datos amistosos de detalles privados.",
+      "familyPrompt": "Creen juntos una lista « compartir / preguntar primero / mantener privado » con ejemplos de las apps o juegos favoritos de su hijo.",
+      "nextStep": "Hagan una revisión de un minuto de una app favorita y detecten las preguntas antes del registro.",
+      "keyLearnings": [
+        "Tu dirección y nombre completo son privados — déjalos en casa",
+        "Un apodo o solo el nombre está bien para juegos",
+        "Pide a un adulto antes de llenar formularios en línea"
+      ],
+      "discussionPrompts": [
+        "¿Qué elementos de la mochila son seguros en línea y cuáles se quedan en casa?",
+        "¿Quién en nuestra familia puede ayudarte a decidir antes de compartir algo nuevo?"
+      ]
     },
     "traffic-light-safety": {
-      "name": "Semáforo: ¿seguro o no?"
+      "name": "Semáforo: ¿seguro o no?",
+      "description": "Usa luz roja, amarilla y verde para decidir si compartir algo en línea es seguro, arriesgado o definitivamente no permitido.",
+      "realLifeScenario": "Un juego dice: «¡Ganaste un premio! Danos tu dirección para recibirlo.» ¿Rojo, amarillo o verde?",
+      "learningObjective": "Construir un lenguaje familiar simple para detenerse, ir despacio y pedir ayuda en línea.",
+      "familyPrompt": "Elijan tres ejemplos reales de juegos, videos o mensajes y decidan juntos si son rojos, amarillos o verdes.",
+      "nextStep": "Coloquen un recordatorio de semáforo cerca del dispositivo familiar que más usan.",
+      "keyLearnings": [
+        "Verde = seguro compartir (color favorito, nombre de mascota)",
+        "Amarillo = preguntar a un adulto primero (tu foto, nombre de escuela)",
+        "Rojo = nunca compartir en línea (dirección, teléfono, contraseña)"
+      ],
+      "discussionPrompts": [
+        "¿Qué pistas indican que un mensaje debería ser rojo en lugar de verde?",
+        "¿Qué hace nuestra familia cuando algo se siente amarillo y confuso?"
+      ]
     },
     "secret-keeper-club": {
-      "name": "Club de secretos"
+      "name": "Club de secretos",
+      "description": "El cofre del tesoro de Privacy Panda necesita una contraseña especial que solo la familia conoce. ¡Aprende por qué las contraseñas protegen nuestros secretos!",
+      "realLifeScenario": "Tu mejor amigo te pide la contraseña de tu tableta para mostrarte algo genial. ¿Qué haces?",
+      "learningObjective": "Presentar las contraseñas como secretos familiares que protegen espacios y dispositivos de confianza.",
+      "familyPrompt": "Inventen juntos una frase secreta divertida y practiquen cómo mantenerla en secreto cuando alguien mira.",
+      "nextStep": "Revisen juntos una cuenta infantil y verifiquen si la contraseña sigue siendo fuerte y privada.",
+      "keyLearnings": [
+        "Las contraseñas son como las llaves de casa — solo para la familia",
+        "Una buena contraseña es larga y usa letras, números y un símbolo",
+        "Nunca escribas tu contraseña donde otros puedan ver"
+      ],
+      "discussionPrompts": [
+        "¿Por qué una contraseña debe mantenerse privada incluso ante amigos?",
+        "¿Qué te ayuda a recordar una contraseña fuerte sin decirla en voz alta?"
+      ]
     },
     "trusted-adults-online": {
-      "name": "¿Con quién puedo hablar en línea?"
+      "name": "¿Con quién puedo hablar en línea?",
+      "description": "Clasifica contactos en línea en familia de confianza, adultos conocidos y desconocidos — y aprende cuándo pedir ayuda a un adulto.",
+      "realLifeScenario": "Jugando, alguien que no conoces te envía un mensaje preguntando dónde vives. ¿Qué haces?",
+      "learningObjective": "Ayudar a los niños a reconocer cuándo un contacto en línea es un aliado de confianza o un desconocido.",
+      "familyPrompt": "Creen una lista corta de « adultos seguros » y practiquen a quién puede acudir su hijo si un mensaje le incomoda.",
+      "nextStep": "Guarden la lista de adultos de confianza de su hijo donde la encuentre rápido.",
+      "keyLearnings": [
+        "Los amigos en línea siguen siendo desconocidos hasta que un adulto de confianza verifique",
+        "Siempre está bien decir « necesito preguntarle a mi padre » y cerrar sesión",
+        "Cuéntale de inmediato a un adulto de confianza si un mensaje te incomoda"
+      ],
+      "discussionPrompts": [
+        "¿Cómo distinguir a alguien que conoces de alguien que solo conoces en línea?",
+        "¿Qué palabras usar cuando quieres pausar y pedir ayuda?"
+      ]
     },
     "my-info-collage": {
-      "name": "Mi collage público y privado"
+      "name": "Mi collage público y privado",
+      "description": "Crea un collage que separa la información « OK para compartir » de la « mantener privada » con los personajes de Privacy Panda.",
+      "realLifeScenario": "Tu clase hace un sitio web escolar. ¿Qué cosas sobre ti puedes poner para que todos las vean?",
+      "learningObjective": "Mostrar que cada publicación o perfil añade piezas a la huella digital de un niño.",
+      "familyPrompt": "Armen el collage con su hijo y dejen que explique por qué cada elemento es público o privado.",
+      "nextStep": "Miren juntos un perfil familiar y detecten un detalle que mantendrían privado en el futuro.",
+      "keyLearnings": [
+        "Público: pasatiempos, comida favorita, lo que te gusta dibujar",
+        "Privado: dirección, teléfono, contraseña o cumpleaños completo",
+        "Ni siquiera los amigos deben compartir tus detalles privados por ti"
+      ],
+      "discussionPrompts": [
+        "¿Qué elementos del collage seguirían siendo seguros de compartir con desconocidos?",
+        "¿Cómo podría propagarse un detalle privado si un amigo lo publica por ti?"
+      ]
     },
     "permission-please": {
-      "name": "¡Permiso, por favor!"
+      "name": "¡Permiso, por favor!",
+      "description": "Practica pedir y dar permiso antes de compartir una foto o video de ti o de un amigo en línea.",
+      "realLifeScenario": "Tu mamá toma una linda foto de ti y tu amigo en el parque. Quiere publicarla. ¿Debería preguntarle a tu amigo primero?",
+      "learningObjective": "Enseñar que la privacidad incluye pedir antes de publicar fotos, videos o mensajes.",
+      "familyPrompt": "Representen pedir permiso antes de publicar una foto de salida familiar, luego practiquen responder amablemente a un « no ».",
+      "nextStep": "Elijan una regla familiar para compartir fotos y colóquenla donde todos la vean.",
+      "keyLearnings": [
+        "Siempre pregunta antes de compartir la foto de otra persona",
+        "Está bien decir « no » y esa elección debe respetarse",
+        "Una vez en línea, las fotos son muy difíciles de eliminar por completo"
+      ],
+      "discussionPrompts": [
+        "¿Cómo te sientes cuando alguien pregunta antes de publicar tu foto?",
+        "¿Qué pasa si una persona dice sí y otra dice no?"
+      ]
     },
     "digital-footprint-trail": {
-      "name": "Rastro de huella digital"
+      "name": "Rastro de huella digital",
+      "description": "Rastrea exactamente qué datos recopilan Roblox, YouTube y juegos populares sobre ti — y decide si te sientes cómodo con ello.",
+      "realLifeScenario": "Has jugado Roblox todos los días durante dos años. ¿Qué probablemente sabe Roblox sobre ti ahora?",
+      "learningObjective": "Ayudar a los niños a entender que las apps construyen perfiles con la información que recopilan con el tiempo.",
+      "familyPrompt": "Elijan una app favorita y listen lo que probablemente sabe sobre cada miembro de la familia que la usa.",
+      "nextStep": "Abran los ajustes de privacidad de una app frecuente y revisen los controles de datos juntos.",
+      "keyLearnings": [
+        "Los juegos y apps rastrean tu ubicación, historial de búsqueda y patrones de juego",
+        "Estos datos pueden venderse a otras empresas",
+        "Revisar los ajustes de privacidad regularmente limita lo que se recopila"
+      ],
+      "discussionPrompts": [
+        "¿Qué datos te sorprenderían si una app los recopilara sobre nuestra familia?",
+        "¿Cuál es la diferencia entre datos de juego divertidos e información demasiado personal?"
+      ]
     },
     "phishing-patrol": {
-      "name": "Patrulla anti-phishing"
+      "name": "Patrulla anti-phishing",
+      "description": "Detecta mensajes falsos que fingen ser de juegos, escuelas o concursos. Ejemplos realistas en un espacio de práctica seguro.",
+      "realLifeScenario": "«¡Ganaste 10 000 Robux! Haz clic aquí e inicia sesión para reclamar tu premio.» ¿Es este mensaje real o una estafa?",
+      "learningObjective": "Enseñar a las familias a ir despacio, verificar el remitente y evitar mensajes urgentes fraudulentos.",
+      "familyPrompt": "Compartan dos ejemplos de mensajes falsos y pidan a su hijo que detecte las pistas de estafa antes de revelar la respuesta.",
+      "nextStep": "Practiquen abrir un sitio de confianza directamente en lugar de usar un enlace en un mensaje.",
+      "keyLearnings": [
+        "Los mensajes de phishing crean urgencia y prometen recompensas",
+        "Verifica la dirección del remitente — a menudo está ligeramente mal",
+        "Nunca hagas clic en enlaces en mensajes; ve directamente al sitio oficial"
+      ],
+      "discussionPrompts": [
+        "¿Qué palabras en un mensaje intentan apresurarte antes de pensar?",
+        "¿Cuál es nuestra regla familiar cuando un mensaje pide hacer clic en un enlace de inicio de sesión?"
+      ]
     },
     "app-permission-inspector": {
-      "name": "Inspector de permisos"
+      "name": "Inspector de permisos",
+      "description": "Investiga por qué las apps piden cámara, ubicación y contactos — y decide qué permisos son necesarios o sospechosos.",
+      "realLifeScenario": "Un juego nuevo pide acceso a tu ubicación, contactos y micrófono. ¿Deberías permitir todo?",
+      "learningObjective": "Ayudar a los niños a cuestionar si una app realmente necesita los datos o accesos que solicita.",
+      "familyPrompt": "Revisen una app instalada y voten qué permisos son esenciales, opcionales o innecesarios.",
+      "nextStep": "Auditen juntos una app segura para niños y desactiven al menos un permiso que no necesiten.",
+      "keyLearnings": [
+        "Una app de linterna nunca necesita tus contactos — eso es una señal de alerta",
+        "La ubicación solo debe activarse cuando la app realmente la necesita",
+        "Puedes cambiar los permisos de una app en cualquier momento en los ajustes del teléfono"
+      ],
+      "discussionPrompts": [
+        "¿Qué permiso cuestionarías primero y por qué?",
+        "¿Cómo decidir si una solicitud de app es útil o excesiva?"
+      ]
     },
     "privacy-settings-pro": {
-      "name": "Pro de ajustes de privacidad"
+      "name": "Pro de ajustes de privacidad",
+      "description": "Practica configurar ajustes de privacidad en cuentas simuladas de Instagram y Roblox para proteger tu perfil de desconocidos.",
+      "realLifeScenario": "Tu padre acaba de permitirte crear una cuenta de Instagram. Recorre paso a paso cómo hacerla privada y segura.",
+      "learningObjective": "Dar confianza para cambiar ajustes de privacidad antes de que un niño se una a una nueva plataforma social o de juegos.",
+      "familyPrompt": "Usen esta actividad como lista de verificación familiar antes de que su hijo se una a una nueva plataforma.",
+      "nextStep": "Programen una revisión mensual de diez minutos de los ajustes de privacidad de las apps que más usa su hijo.",
+      "keyLearnings": [
+        "Pon tu cuenta en Privado para que solo seguidores aprobados vean tus publicaciones",
+        "Desactiva « Mostrar estado de actividad » para no decir a desconocidos cuándo estás en línea",
+        "Nunca compartas tu número de teléfono en un perfil público"
+      ],
+      "discussionPrompts": [
+        "¿Qué ajustes parecen más importantes antes de publicar tu primera foto o video?",
+        "¿Con qué frecuencia deberíamos revisar los ajustes de privacidad después de una actualización de app?"
+      ]
     },
     "screenshot-safety": {
-      "name": "Reto de seguridad en capturas"
+      "name": "Reto de seguridad en capturas",
+      "description": "Aprende qué pasa cuando se comparten capturas de pantalla y practica decidir si enviar o detenerte antes de reenviar algo.",
+      "realLifeScenario": "Un compañero te envía una captura divertida de otro amigo. Quiere que la compartas en el chat del grupo de clase.",
+      "learningObjective": "Mostrar cómo las capturas convierten momentos privados en huellas digitales duraderas.",
+      "familyPrompt": "Hablen de una situación real de chat grupal y decidan juntos cuándo reenviar una captura cruzaría la línea.",
+      "nextStep": "Creen una frase familiar de pausa para chats: « ¿Compartiría esto si todos pudieran verlo? »",
+      "keyLearnings": [
+        "Las capturas pueden propagarse mucho más allá del público original",
+        "Compartir la imagen de alguien sin permiso puede ser una forma de ciberacoso",
+        "Pregúntate: « ¿Estaría bien si fuera una captura de mí? »"
+      ],
+      "discussionPrompts": [
+        "¿Qué cambia cuando un mensaje privado se convierte en captura?",
+        "¿Cómo salir de una cadena de capturas sin empeorar las cosas?"
+      ]
     },
     "password-strength-lab": {
-      "name": "Laboratorio de contraseñas"
+      "name": "Laboratorio de contraseñas",
+      "description": "Prueba contraseñas realistas y aprende qué las hace fuertes o débiles. Construye una frase secreta memorable que realmente usarás.",
+      "realLifeScenario": "La contraseña de tu cuenta escolar es « 123abc ». Tu profesor de informática dice que apareció en una filtración de datos. Crea una mejor ahora.",
+      "learningObjective": "Enseñar a las familias a crear contraseñas fuertes y memorables sin reutilizarlas en todas partes.",
+      "familyPrompt": "Desafíense mutuamente a convertir contraseñas débiles de ejemplo en frases secretas más fuertes y expliquen por qué la nueva versión gana.",
+      "nextStep": "Elijan una cuenta familiar importante y actualícenla con una contraseña o frase secreta más fuerte.",
+      "keyLearnings": [
+        "Frases secretas largas (3–4 palabras aleatorias) superan contraseñas cortas y complejas",
+        "Nunca reutilices la misma contraseña en diferentes cuentas",
+        "Una app gestora de contraseñas puede recordar contraseñas fuertes por ti"
+      ],
+      "discussionPrompts": [
+        "¿Por qué una frase larga es más fácil de recordar y más difícil de descifrar?",
+        "¿Qué cuentas familiares causarían el mayor problema si su contraseña se reutilizara?"
+      ]
     },
     "password-fortress-builder": {
-      "name": "Construye tu fortaleza de contraseñas"
+      "name": "Construye tu fortaleza de contraseñas",
+      "description": "Construye un sistema de seguridad personal completo: frases secretas, gestor de contraseñas y autenticación de dos factores en cuentas clave.",
+      "realLifeScenario": "Tienes 25 cuentas en línea. Una es hackeada y te das cuenta de que usaste la misma contraseña en todas partes. Arréglalo ahora.",
+      "learningObjective": "Ayudar a los adolescentes a construir un plan de seguridad que realmente mantengan.",
+      "familyPrompt": "Pidan a su adolescente que mapee sus tres cuentas principales y decida cuál debería recibir una contraseña más fuerte o 2FA primero.",
+      "nextStep": "Activen 2FA para una cuenta importante juntos y guarden los códigos de respaldo en un lugar seguro.",
+      "keyLearnings": [
+        "Un gestor de contraseñas almacena contraseñas únicas y fuertes para cada cuenta",
+        "Activa la autenticación de dos factores (2FA) en cuentas de correo y redes sociales",
+        "Tu cuenta de correo desbloquea todo lo demás — protégela con más cuidado"
+      ],
+      "discussionPrompts": [
+        "¿Qué cuenta causaría más daño si se comprometiera primero?",
+        "¿Qué hábitos de seguridad parecen realistas de mantener cada semana, no solo hoy?"
+      ]
     },
     "online-reputation-audit": {
-      "name": "Auditoría de reputación en línea"
+      "name": "Auditoría de reputación en línea",
+      "description": "Mira qué aparece cuando alguien busca tu nombre en línea — y decide qué quieres cambiar antes de una solicitud de empleo o universidad.",
+      "realLifeScenario": "Solicitas un trabajo de verano. El gerente busca tu nombre antes de la entrevista. ¿Qué encuentra?",
+      "learningObjective": "Ayudar a los adolescentes a entender que publicaciones antiguas pueden afectar oportunidades futuras.",
+      "familyPrompt": "Inviten a su adolescente a hacer una revisión privada « busca tu nombre » y hablen de lo que parece exacto, desactualizado o demasiado público.",
+      "nextStep": "Revisen un perfil público o resultado de búsqueda y decidan si editar, archivar o reforzarlo.",
+      "keyLearnings": [
+        "Busca tu nombre cada pocos meses para saber qué es público",
+        "Publicaciones y fotos etiquetadas antiguas pueden aparecer años después",
+        "Añadir contenido positivo (proyectos escolares, voluntariado) puede equilibrar lo que la gente ve"
+      ],
+      "discussionPrompts": [
+        "¿Qué partes de tu huella en línea actual te enorgullecerían ante un futuro empleador?",
+        "¿Qué querrías cambiar antes de una entrevista o solicitud universitaria?"
+      ]
     },
     "data-broker-discovery": {
-      "name": "Descubrimiento de brokers de datos"
+      "name": "Descubrimiento de brokers de datos",
+      "description": "Descubre qué pueden listar los sitios de brokers de datos sobre tu familia — y cómo solicitar la eliminación.",
+      "realLifeScenario": "Encuentras un sitio que lista tu dirección y miembros de tu familia — buscable por cualquiera. ¿Cómo llegó ahí?",
+      "learningObjective": "Mostrar cómo registros públicos y compras pueden crear perfiles en línea detallados.",
+      "familyPrompt": "Investiguen juntos un sitio de broker y decidan si su familia quiere enviar una solicitud de eliminación.",
+      "nextStep": "Elijan un broker o sitio de búsqueda de personas y documenten los pasos de exclusión para seguimiento posterior.",
+      "keyLearnings": [
+        "Los brokers de datos recopilan información de registros públicos, redes sociales y compras",
+        "La mayoría de sitios de brokers tienen una página de exclusión — toma tiempo pero funciona",
+        "Existen servicios pagados de eliminación si quieres ayuda con muchos sitios a la vez"
+      ],
+      "discussionPrompts": [
+        "¿Qué detalles personales te parecen más sorprendentes o invasivos cuando un broker los lista?",
+        "¿Cuánto esfuerzo invertiría nuestra familia para eliminar listados públicos y por dónde empezar?"
+      ]
     },
     "privacy-rights-challenge": {
-      "name": "Reto de derechos de privacidad"
+      "name": "Reto de derechos de privacidad",
+      "description": "Aprende qué significan las leyes de privacidad para adolescentes — cuándo escuelas y apps necesitan permiso antes de compartir datos de estudiantes.",
+      "realLifeScenario": "Tu escuela quiere compartir datos de evaluación de estudiantes con una app de tutoría. ¿Necesitan el permiso de tus padres primero?",
+      "learningObjective": "Conectar las leyes de privacidad con situaciones cotidianas en la escuela y las apps.",
+      "familyPrompt": "Lean juntos un derecho de privacidad y discutan dónde podría importar en la vida escolar, deportiva o digital de su adolescente.",
+      "nextStep": "Elijan un servicio que use su adolescente y verifiquen dónde explica derechos de eliminación, consentimiento o acceso a datos.",
+      "keyLearnings": [
+        "Las leyes de EE. UU. y la UE dan a las familias derechos sobre el uso de datos de niños",
+        "En muchos lugares puedes pedir a una empresa que elimine tus datos personales",
+        "Las escuelas de EE. UU. siguen la FERPA — los padres pueden revisar registros educativos a solicitud"
+      ],
+      "discussionPrompts": [
+        "¿Qué derecho de privacidad usarías primero si una empresa recopilara demasiado sobre ti?",
+        "¿Cómo deberían colaborar padres y adolescentes cuando escuelas o apps piden consentimiento?"
+      ]
     },
     "social-media-simulator": {
-      "name": "Simulador de privacidad en redes"
+      "name": "Simulador de privacidad en redes",
+      "description": "Toma decisiones reales de privacidad en un simulador de redes sociales realista — publicaciones, compartidos, mensajes directos y etiquetas de ubicación — y ve las consecuencias.",
+      "realLifeScenario": "Publicas una foto de una fiesta. Tres días después causa problemas en la escuela. Recorre eliminarla, gestionar republicaciones y las consecuencias.",
+      "learningObjective": "Dar a los adolescentes un espacio seguro para practicar decisiones de compartir bajo presión antes de que ocurran de verdad.",
+      "familyPrompt": "Usen el escenario para acordar un hábito familiar de « pausa antes de publicar » que respete la independencia de su adolescente.",
+      "nextStep": "Revisen los ajustes de compartir ubicación en una app social y decidan si el valor predeterminado sigue siendo correcto.",
+      "keyLearnings": [
+        "Las etiquetas de ubicación en fotos revelan exactamente dónde y cuándo estuviste",
+        "Incluso las publicaciones eliminadas pueden capturarse y guardarse por otros",
+        "Piensa antes de publicar: « ¿Estaría contento de que mi abuelo, mi profesor y mi futuro jefe lo vean? »"
+      ],
+      "discussionPrompts": [
+        "¿Qué parte de una publicación parece más arriesgada: el pie de foto, la foto, la ubicación o la audiencia?",
+        "¿Cómo te recuperarías si una publicación llegara a más personas de lo esperado?"
+      ]
     },
     "ai-and-your-privacy": {
-      "name": "IA y tu privacidad"
+      "name": "IA y tu privacidad",
+      "description": "Entiende qué hacen herramientas de IA como ChatGPT con tus consultas, y aprende prácticas seguras para usar IA sin exponer accidentalmente información personal.",
+      "realLifeScenario": "Pegas el ensayo personal de un amigo en ChatGPT para obtener comentarios. ¿Cuáles son las implicaciones de privacidad para tu amigo — y para ti?",
+      "learningObjective": "Ayudar a los adolescentes a tratar las consultas de IA como envíos públicos a menos que conozcan los ajustes y límites de privacidad.",
+      "familyPrompt": "Hablen de un caso real de uso de IA en la escuela y decidan qué información es segura incluir y qué debe mantenerse privada.",
+      "nextStep": "Elijan una herramienta de IA que usen y revisen juntos sus ajustes de privacidad, historial y controles de datos.",
+      "keyLearnings": [
+        "Las consultas de IA pueden usarse para entrenar modelos futuros — trátalas como mensajes públicos",
+        "Nunca pegues datos personales (pasaportes, direcciones, info médica) en herramientas de IA",
+        "Verifica los ajustes de privacidad de cualquier servicio de IA antes de compartir contenido sensible"
+      ],
+      "discussionPrompts": [
+        "¿Qué tipos de tareas o datos personales deben quedar completamente fuera de una consulta de IA?",
+        "¿Cómo obtener ayuda de IA sin compartir la información sensible de otra persona?"
+      ]
     }
   },
   "ageGroupDescriptions": {

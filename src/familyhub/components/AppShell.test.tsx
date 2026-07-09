@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from '../../contexts/ThemeContext';
 import { FamilyProvider } from '../../contexts/FamilyContext';
+import { HUB_DISPLAY_NAME } from '../constants';
 import AppShell from './AppShell';
 
 const renderShell = (initialEntry = '/family-hub/dashboard') =>
@@ -28,7 +29,7 @@ describe('AppShell navigation', () => {
   it('shows full branding and screen tagline in the header', () => {
     renderShell('/family-hub/dashboard');
 
-    expect(screen.getByRole('heading', { level: 1, name: 'PandaGarde Family Hub' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 1, name: HUB_DISPLAY_NAME })).toBeInTheDocument();
     expect(screen.getByText('Dashboard — today and quick stats')).toBeInTheDocument();
   });
 

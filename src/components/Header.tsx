@@ -294,7 +294,7 @@ function Header() {
               </button>
             </div>
 
-            <LanguageSwitcher />
+            <LanguageSwitcher variant="segmented" />
 
             <div className="mobile-nav-section">
               <p className="mobile-nav-section-label">{t('common.explore')}</p>

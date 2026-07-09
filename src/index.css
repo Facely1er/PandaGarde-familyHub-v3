@@ -7451,6 +7451,10 @@ header.header .nav-actions__toolbar .language-switcher__control {
   padding: 0 1rem 0.5rem;
 }
 
+.mobile-nav .language-switcher--segmented .language-switcher__segmented {
+  width: 100%;
+}
+
 .mobile-nav .language-switcher__control {
   width: 100%;
   justify-content: center;

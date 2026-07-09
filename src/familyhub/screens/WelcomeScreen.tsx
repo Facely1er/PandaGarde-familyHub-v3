@@ -5,7 +5,7 @@ import { setHubOrigin } from '../../lib/hubMission';
 import { openExternalUrl } from '../../lib/openExternalUrl';
 import AgeBandStrip from '../components/AgeBandStrip';
 import HubBrandLogo from '../components/HubBrandLogo';
-import { HUB_WELCOMED_KEY } from '../constants';
+import { HUB_BRAND_LINE_2, HUB_WELCOMED_KEY } from '../constants';
 import { hubPaths, pandagardeWebsiteUrl } from '../hubPaths';
 import { hubTheme } from '../hubTheme';
 import { useHubI18n } from '../hubI18n';
@@ -52,7 +52,7 @@ const WelcomeScreen: React.FC = () => {
             <div>
               <h1 className="text-2xl font-extrabold leading-tight tracking-tight text-gray-900 dark:text-white sm:text-3xl">
                 {t('hub.welcome.title')}{' '}
-                <span className="text-teal-600 dark:text-teal-400">{t('hub.welcome.titleHighlight')}</span>
+                <span className="text-teal-600 dark:text-teal-400">{HUB_BRAND_LINE_2}</span>
               </h1>
               <p className="mx-auto mt-1.5 max-w-sm text-sm leading-snug text-gray-600 dark:text-gray-300">
                 {t('hub.welcomeLead')}
