@@ -36,6 +36,8 @@
     "assets:generate": "capacitor-assets generate --android --ios",
     "assets:generate:all": "capacitor-assets generate",
     "assets:store": "node scripts/generate-store-assets.mjs",
+    "assets:screenshots": "node scripts/capture-store-screenshots.mjs",
+    "assets:screenshots:build": "node scripts/capture-store-screenshots.mjs --build",
     "store:check": "node scripts/verify-store-readiness.mjs",
     "assets:pwa": "node scripts/generate-pwa-icons.mjs",
     "deploy:check": "npm run test:launch-smoke && npm run build:familyhub && node scripts/verify-deploy-assets.mjs",

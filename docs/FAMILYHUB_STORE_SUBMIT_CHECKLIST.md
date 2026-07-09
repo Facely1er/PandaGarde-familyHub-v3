@@ -84,9 +84,17 @@ Use a **real device or emulator** with the **standalone** build (`npm run androi
 | 9 | Settings → Privacy section | Your data stays on your device | Phone | Optional |
 
 **Minimum:** 4 screenshots (Play) · 3+ per device size (Apple).  
-**Aspect:** Play phone 16:9 or 9:16 · Apple 6.7" 1290×2796 (portrait).
+**Aspect:** Play phone 16:9 or 9:16 · Apple **iPhone 6.5"** 1284×2778 · **iPad 13"** 2064×2752 (portrait).
 
-**How to capture:**
+**Generate App Store sets (recommended):**
+
+```bash
+npm run assets:screenshots:build
+# → store-assets/app-store/iphone-6.5/*.png
+# → store-assets/app-store/ipad-13/*.png
+```
+
+**How to capture manually** (alternative):
 
 ```bash
 npm run android:debug

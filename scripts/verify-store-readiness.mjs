@@ -22,8 +22,11 @@ const REQUIRED_FILES = [
   'docs/FAMILYHUB_STORE_SUBMIT_CHECKLIST.md',
 ];
 
-const SCREENSHOT_MIN = 5;
-const SCREENSHOT_DIR = 'store-assets/ios-screenshots';
+const SCREENSHOT_SETS = [
+  { dir: 'store-assets/app-store/iphone-6.5', label: 'iPhone 6.5" App Store set', min: 5 },
+  { dir: 'store-assets/app-store/ipad-13', label: 'iPad 13" App Store set', min: 5 },
+];
+const LEGACY_SCREENSHOT_DIR = 'store-assets/ios-screenshots';
 
 function read(file) {
   return fs.readFileSync(path.join(root, file), 'utf8');
@@ -50,15 +53,20 @@ for (const file of REQUIRED_FILES) {
   track(fs.existsSync(path.join(root, file)), file);
 }
 
-const screenshotDir = path.join(root, SCREENSHOT_DIR);
-if (fs.existsSync(screenshotDir)) {
-  const shots = fs.readdirSync(screenshotDir).filter((f) => /\.(png|jpg|jpeg|webp)$/i.test(f));
-  track(
-    shots.length >= SCREENSHOT_MIN,
-    `${SCREENSHOT_DIR} has ${shots.length} screenshots (need ≥ ${SCREENSHOT_MIN})`
-  );
-} else {
-  track(false, `${SCREENSHOT_DIR} missing`);
+for (const { dir, label, min } of SCREENSHOT_SETS) {
+  const screenshotDir = path.join(root, dir);
+  if (fs.existsSync(screenshotDir)) {
+    const shots = fs.readdirSync(screenshotDir).filter((f) => /\.(png|jpg|jpeg|webp)$/i.test(f));
+    track(shots.length >= min, `${label}: ${shots.length} screenshots (need ≥ ${min})`);
+  } else {
+    track(false, `${label} missing — run npm run assets:screenshots:build`);
+  }
+}
+
+const legacyDir = path.join(root, LEGACY_SCREENSHOT_DIR);
+if (fs.existsSync(legacyDir)) {
+  const legacyShots = fs.readdirSync(legacyDir).filter((f) => /\.(png|jpg|jpeg|webp)$/i.test(f));
+  console.log(`[store:check] INFO — ${LEGACY_SCREENSHOT_DIR} has ${legacyShots.length} legacy captures`);
 }
 
 const capConfig = read('capacitor.config.ts');
