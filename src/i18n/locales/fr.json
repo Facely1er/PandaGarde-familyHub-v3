@@ -96,12 +96,6 @@
     "stillQuestions": "Encore des questions ?",
     "howItWorksFaq": "Voir comment PandaGarde fonctionne et les réponses courantes"
   },
-  "hub": {
-    "welcomeLead": "De courtes missions de confidentialité à faire ensemble. Des situations réelles à l'école, dans les jeux et la vie sociale. Tout reste sur ce téléphone ou cet ordinateur.",
-    "enterCta": "Ajoutez votre famille pour commencer",
-    "dashboardEmpty": "Appuyez ci-dessous pour ajouter votre premier enfant — nom et âge seulement. Nous suggérerons les bonnes missions.",
-    "dashboardReady": "Commencez la mission du jour ci-dessous. Badges et certificats sont dans Parcours."
-  },
   "messaging": {
     "footprintCatalogNote": "Le bilan d'empreinte utilise les applications que vous listez dans le catalogue. Histoires, guides et Family Hub fonctionnent seuls — vous n'avez pas besoin de terminer un bilan d'abord.",
     "independentAreasLead": "Choisissez ce qui convient aujourd'hui : une histoire avec votre enfant, un guide parental, des missions dans Family Hub, ou un bilan d'empreinte quand vous voulez un aperçu du foyer.",

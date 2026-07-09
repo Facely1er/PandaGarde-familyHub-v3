@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import { ArrowRight, ExternalLink, Shield, Users, Gamepad2, Award } from 'lucide-react';
 import { setHubOrigin } from '../../lib/hubMission';
 import { openExternalUrl } from '../../lib/openExternalUrl';
@@ -9,33 +8,34 @@ import HubBrandLogo from '../components/HubBrandLogo';
 import { HUB_WELCOMED_KEY } from '../constants';
 import { hubPaths, pandagardeWebsiteUrl } from '../hubPaths';
 import { hubTheme } from '../hubTheme';
+import { useHubI18n } from '../hubI18n';
 
 export { HUB_WELCOMED_KEY };
 
-const sections = [
-  {
-    icon: Users,
-    title: 'Add your family',
-    description: 'Name and age for each child—that\'s all we need to pick the right missions.',
-    color: 'text-teal-600 dark:text-teal-400 bg-teal-50 dark:bg-teal-900/30',
-  },
-  {
-    icon: Gamepad2,
-    title: 'Do a mission together',
-    description: 'About 10 minutes each. A real situation, a family talk, and one thing to try at home.',
-    color: 'text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30',
-  },
-  {
-    icon: Award,
-    title: 'Track progress',
-    description: 'Badges and certificates for missions you finish—saved on this device only.',
-    color: 'text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/30',
-  },
-];
-
 const WelcomeScreen: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useHubI18n();
   const navigate = useNavigate();
+
+  const sections = [
+    {
+      icon: Users,
+      title: t('hub.welcome.sections.family.title'),
+      description: t('hub.welcome.sections.family.description'),
+      color: 'text-teal-600 dark:text-teal-400 bg-teal-50 dark:bg-teal-900/30',
+    },
+    {
+      icon: Gamepad2,
+      title: t('hub.welcome.sections.mission.title'),
+      description: t('hub.welcome.sections.mission.description'),
+      color: 'text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30',
+    },
+    {
+      icon: Award,
+      title: t('hub.welcome.sections.progress.title'),
+      description: t('hub.welcome.sections.progress.description'),
+      color: 'text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/30',
+    },
+  ];
 
   const handleGetStarted = () => {
     setHubOrigin('standalone');
@@ -47,14 +47,12 @@ const WelcomeScreen: React.FC = () => {
     <div className={`family-hub-theme hub-standalone-page ${hubTheme.page}`}>
       <div className="flex-1 overflow-y-auto px-4 pb-4 pt-[var(--hub-content-pt,1rem)] sm:pt-6">
         <div className="mx-auto max-w-xl space-y-4 sm:space-y-5">
-
-          {/* Hero — compact on phones so adventure cards stay above sticky CTA */}
           <div className="space-y-2 text-center">
             <HubBrandLogo size="md" variant="plain" className="mx-auto" alt="" />
             <div>
               <h1 className="text-2xl font-extrabold leading-tight tracking-tight text-gray-900 dark:text-white sm:text-3xl">
-                Welcome to your{' '}
-                <span className="text-teal-600 dark:text-teal-400">Family Hub</span>
+                {t('hub.welcome.title')}{' '}
+                <span className="text-teal-600 dark:text-teal-400">{t('hub.welcome.titleHighlight')}</span>
               </h1>
               <p className="mx-auto mt-1.5 max-w-sm text-sm leading-snug text-gray-600 dark:text-gray-300">
                 {t('hub.welcomeLead')}
@@ -62,12 +60,11 @@ const WelcomeScreen: React.FC = () => {
             </div>
           </div>
 
-          <AgeBandStrip title="Three adventure paths" density="compact" />
+          <AgeBandStrip title={t('hub.welcome.adventurePaths')} density="compact" />
 
-          {/* What's inside */}
           <div className="space-y-3">
             <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
-              What's inside
+              {t('hub.welcome.whatsInside')}
             </h2>
             <ul className="grid gap-3">
               {sections.map(({ icon: Icon, title, description, color }) => (
@@ -88,29 +85,18 @@ const WelcomeScreen: React.FC = () => {
           </div>
 
           <p className="text-center text-sm text-gray-600 dark:text-gray-400">
-            The{' '}
-            <button
-              type="button"
-              onClick={() => openExternalUrl(pandagardeWebsiteUrl)}
-              className="inline-flex items-center gap-1 font-medium text-teal-700 hover:underline dark:text-teal-400"
-            >
-              footprint review and parent guides
-              <ExternalLink size={14} aria-hidden="true" />
-            </button>{' '}
-            live on the main PandaGarde site — open them any time alongside these missions.
+            {t('hub.welcome.websiteNote')}
           </p>
 
-          {/* Privacy note */}
           <div className="flex items-start gap-3 rounded-xl bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 p-4 text-sm text-green-800 dark:text-green-200">
             <Shield size={18} className="mt-0.5 shrink-0 text-green-600 dark:text-green-400" aria-hidden="true" />
             <p>
-              <strong>Nothing leaves this device.</strong> No account, no signup—your family profiles and progress stay here.
+              <strong>{t('hub.welcome.privacyStrong')}</strong> {t('hub.welcome.privacyNote')}
             </p>
           </div>
         </div>
       </div>
 
-      {/* Sticky CTA */}
       <div className="sticky bottom-0 border-t border-gray-200 bg-white/90 px-4 py-3 backdrop-blur dark:border-gray-700 dark:bg-gray-800/90 pb-[max(0.5rem,var(--hub-nav-safe-bottom,env(safe-area-inset-bottom,0px)))]">
         <div className="mx-auto flex max-w-xl flex-col gap-2">
           <button

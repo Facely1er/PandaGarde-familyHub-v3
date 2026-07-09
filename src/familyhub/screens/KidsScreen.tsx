@@ -14,6 +14,7 @@ import HubScreenHero from '../components/HubScreenHero';
 import HubWebsiteLink from '../components/HubWebsiteLink';
 import { hubTheme } from '../hubTheme';
 import { hubAgeBandForAge, HUB_AGE_BANDS } from '../hubAgeBands';
+import { useHubI18n } from '../hubI18n';
 
 const ChildProgressDetail = lazy(() => import('../../components/ChildProgressDetail'));
 
@@ -24,20 +25,21 @@ type AgeGroupMeta = {
   badgeClass: string;
 };
 
-function getAgeGroup(age: number): AgeGroupMeta | null {
+function getAgeGroup(age: number, labelForRange: (range: '5-8' | '9-12' | '13-17') => string): AgeGroupMeta | null {
   const band = hubAgeBandForAge(age);
   if (!band) {
     return null;
   }
   return {
     range: band.range,
-    label: band.shortLabel,
+    label: labelForRange(band.range),
     icon: band.icon,
     badgeClass: `${band.chipClass} border`,
   };
 }
 
 const KidsScreen: React.FC = () => {
+  const { t, ageBandLabel } = useHubI18n();
   const { members: familyMembers, syncing, addMember, updateMember, removeMember } = useHubFamilyMembers();
   const { calculateMemberScore, removeMemberProgress } = useFamilyProgress();
   const { currentMemberId, setActiveMember } = useActiveMember();
@@ -149,9 +151,9 @@ const KidsScreen: React.FC = () => {
   return (
     <HubPageLayout>
       <HubScreenHero
-        badge="Your crew"
-        title="Family members"
-        subtitle="Add a first name and age for each child or teen — we match missions to their age band."
+        badge={t('hub.kids.badge')}
+        title={t('hub.kids.title')}
+        subtitle={t('hub.kids.subtitle')}
         compact
       />
 
@@ -172,10 +174,10 @@ const KidsScreen: React.FC = () => {
               })}
             </div>
             <h2 className="mb-2 text-lg font-bold text-gray-900 dark:text-white sm:text-xl">
-              Who is learning with you?
+              {t('hub.kids.emptyTitle')}
             </h2>
             <p className="mb-6 max-w-sm text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-              Add a name and age — we&apos;ll suggest the right privacy missions automatically.
+              {t('hub.kids.emptyBody')}
             </p>
             <button
               ref={addMemberTriggerRef}
@@ -184,16 +186,15 @@ const KidsScreen: React.FC = () => {
               className="inline-flex w-full max-w-xs items-center justify-center gap-2 rounded-xl bg-teal-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-teal-700 min-h-[44px] sm:w-auto"
             >
               <Plus size={18} aria-hidden="true" />
-              Add your first member
+              {t('hub.kids.addFirst')}
             </button>
           </div>
           <p className="flex items-start gap-2 text-left text-xs leading-relaxed text-gray-500 dark:text-gray-400">
             <Lock size={14} className="mt-0.5 shrink-0" aria-hidden="true" />
             <span>
-              Only a first name and age are needed — no email or account. Profiles and progress stay on
-              this device.{' '}
+              {t('hub.kids.privacyNote')}{' '}
               <HubWebsiteLink path="/privacy" className="underline hover:text-teal-700 dark:hover:text-teal-300">
-                Privacy policy
+                {t('hub.kids.privacyPolicy')}
               </HubWebsiteLink>
             </span>
           </p>
@@ -202,7 +203,7 @@ const KidsScreen: React.FC = () => {
         <>
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
-              {`${familyMembers.length} member${familyMembers.length === 1 ? '' : 's'} on this device`}
+              {t('hub.kids.memberCount', { count: familyMembers.length })}
             </p>
             <button
               ref={addMemberTriggerRef}
@@ -211,12 +212,12 @@ const KidsScreen: React.FC = () => {
               className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-teal-600 px-4 py-2.5 text-white transition-colors hover:bg-teal-700 min-h-[44px] sm:w-auto"
             >
               <Plus size={18} aria-hidden="true" />
-              <span>Add member</span>
+              <span>{t('hub.kids.addMember')}</span>
             </button>
           </div>
           <div className="space-y-4">
           {familyMembers.map((member) => {
-            const ageGroup = getAgeGroup(member.age);
+            const ageGroup = getAgeGroup(member.age, ageBandLabel);
             const band = hubAgeBandForAge(member.age);
             return (
               <div

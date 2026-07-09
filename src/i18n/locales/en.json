@@ -96,12 +96,6 @@
     "stillQuestions": "Still have questions?",
     "howItWorksFaq": "See how PandaGarde works and common answers"
   },
-  "hub": {
-    "welcomeLead": "Short privacy missions you do together. Real situations from school, games, and social life. Everything stays on this phone or computer.",
-    "enterCta": "Add your family to start",
-    "dashboardEmpty": "Tap below to add your first child — name and age only. We will suggest the right missions.",
-    "dashboardReady": "Start today's mission below. Badges and certificates are under Journey."
-  },
   "messaging": {
     "footprintCatalogNote": "Footprint review uses the apps you list in the service catalog. Stories, guides, and Family Hub work on their own—you do not need to finish a review first.",
     "independentAreasLead": "Pick what fits today: a story with your child, a parent guide, missions in Family Hub, or a footprint review when you want a household snapshot.",

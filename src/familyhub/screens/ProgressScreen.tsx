@@ -17,6 +17,7 @@ import HubPageLayout from '../components/HubPageLayout';
 import HubScreenHero from '../components/HubScreenHero';
 import HubWebsiteLink from '../components/HubWebsiteLink';
 import { hubPaths } from '../hubPaths';
+import { useHubI18n } from '../hubI18n';
 
 const ACHIEVEMENT_META: Record<string, { label: string; icon: LucideIcon; description: string }> = {
   first_activity: { label: 'First Step', icon: Sprout, description: 'Completed your first activity' },
@@ -31,6 +32,7 @@ interface ProgressScreenProps {
 }
 
 const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => {
+  const { t } = useHubI18n();
   const [showCertificates, setShowCertificates] = useState(false);
   const [showProgressExport, setShowProgressExport] = useState(false);
   const { progress, getActivityProgress } = useProgress();
@@ -82,12 +84,12 @@ const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => 
     <>
       {!embedded && (
         <HubScreenHero
-          badge="Family rewards"
-          title="Mission progress"
+          badge={t('hub.progress.badge')}
+          title={t('hub.progress.title')}
           subtitle={
             completedCount === 0
-              ? 'Finish your first mission to earn a badge. Tap Missions on the menu to pick one.'
-              : `You've finished ${completedCount} of ${totalCount} missions. Do another to keep going!`
+              ? t('hub.progress.subtitleEmpty')
+              : t('hub.progress.subtitleProgress', { completed: completedCount, total: totalCount })
           }
           compact
         />
@@ -98,34 +100,34 @@ const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => 
         <div className="rounded-xl border border-teal-100 bg-teal-50 p-4 dark:border-teal-700/40 dark:bg-teal-900/20">
           <CheckCircle2 className="text-teal-600 dark:text-teal-400 mb-2" size={20} aria-hidden="true" />
           <p className="text-2xl font-bold text-teal-900 dark:text-teal-100">{completedCount}</p>
-          <p className="text-xs text-teal-700 dark:text-teal-300 mt-1">Activities done</p>
+          <p className="text-xs text-teal-700 dark:text-teal-300 mt-1">{t('hub.progress.activitiesDone')}</p>
         </div>
         <div className="rounded-xl border border-indigo-100 bg-indigo-50 p-4 dark:border-indigo-700/40 dark:bg-indigo-900/20">
           <TrendingUp className="text-indigo-600 dark:text-indigo-400 mb-2" size={20} aria-hidden="true" />
           <p className="text-2xl font-bold text-indigo-900 dark:text-indigo-100">{pct}%</p>
-          <p className="text-xs text-indigo-700 dark:text-indigo-300 mt-1">of {totalCount} available</p>
+          <p className="text-xs text-indigo-700 dark:text-indigo-300 mt-1">{t('hub.progress.ofAvailable', { total: totalCount })}</p>
         </div>
         <div className="rounded-xl border border-amber-100 bg-amber-50 p-4 dark:border-amber-700/40 dark:bg-amber-900/20">
           <Clock className="text-amber-600 dark:text-amber-400 mb-2" size={20} aria-hidden="true" />
           <p className="text-2xl font-bold text-amber-900 dark:text-amber-100">{progress.totalTimeSpent}</p>
-          <p className="text-xs text-amber-700 dark:text-amber-300 mt-1">Minutes learning</p>
+          <p className="text-xs text-amber-700 dark:text-amber-300 mt-1">{t('hub.progress.minutesLearning')}</p>
         </div>
         <div className="rounded-xl border border-emerald-100 bg-emerald-50 p-4 dark:border-emerald-700/40 dark:bg-emerald-900/20">
           <Star className="text-emerald-600 dark:text-emerald-400 mb-2" size={20} aria-hidden="true" />
           <p className="text-2xl font-bold text-emerald-900 dark:text-emerald-100">
             {avgScore !== null ? `${avgScore}%` : '—'}
           </p>
-          <p className="text-xs text-emerald-700 dark:text-emerald-300 mt-1">Avg. score</p>
+          <p className="text-xs text-emerald-700 dark:text-emerald-300 mt-1">{t('hub.progress.avgScore')}</p>
         </div>
       </div>
 
       {/* Progress bar */}
       <div className="rounded-xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-800">
         <div className="flex items-end justify-between mb-2">
-          <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">Mission progress</p>
+          <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">{t('hub.progress.progressLabel')}</p>
           <p className="text-sm font-bold text-teal-700 dark:text-teal-300">{completedCount} / {totalCount}</p>
         </div>
-        <div className="h-3 w-full rounded-full bg-gray-100 dark:bg-gray-700 overflow-hidden" role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100} aria-label={`${pct}% of activities completed`}>
+        <div className="h-3 w-full rounded-full bg-gray-100 dark:bg-gray-700 overflow-hidden" role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100} aria-label={t('hub.progress.progressAria', { pct })}>
           <div
             className="h-full rounded-full bg-teal-600 transition-all duration-500 dark:bg-teal-500"
             style={{ width: `${pct}%` }}
@@ -133,7 +135,7 @@ const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => 
         </div>
         {completedCount === 0 && (
           <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
-            No activities completed yet — head to <strong>Activities</strong> to start your first mission.
+            {t('hub.progress.noneYet')}
           </p>
         )}
       </div>

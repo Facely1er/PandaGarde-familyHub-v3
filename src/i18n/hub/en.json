@@ -1,0 +1,265 @@
+{
+  "welcomeLead": "Short privacy missions you do together. Real situations from school, games, and social life. Everything stays on this phone or computer.",
+  "enterCta": "Add your family to start",
+  "dashboardEmpty": "Tap below to add your first child — name and age only. We will suggest the right missions.",
+  "dashboardReady": "Start today's mission below. Badges and certificates are under Journey.",
+  "dashboardReadyStandalone": "Tap today's mission below to start. Check Journey when you want badges or certificates.",
+  "nav": {
+    "skipToMain": "Skip to main content",
+    "primary": "Primary Family Hub navigation",
+    "openWebsite": "Open PandaGarde website",
+    "backToWebsite": "Back to PandaGarde website",
+    "site": "Site",
+    "dashboard": {
+      "label": "Dashboard — today and quick stats",
+      "short": "Dashboard"
+    },
+    "journey": {
+      "label": "Mission progress — badges and certificates",
+      "short": "Journey"
+    },
+    "activities": {
+      "label": "Privacy missions for your family",
+      "short": "Missions"
+    },
+    "kids": {
+      "label": "Family profiles — add children and guardians",
+      "short": "Family"
+    },
+    "settings": {
+      "label": "Settings and help",
+      "short": "Settings"
+    }
+  },
+  "welcome": {
+    "title": "Welcome to your",
+    "titleHighlight": "Family Hub",
+    "adventurePaths": "Three adventure paths",
+    "whatsInside": "What's inside",
+    "websiteNote": "The footprint review and parent guides live on the main PandaGarde site — open them any time alongside these missions.",
+    "privacyStrong": "Nothing leaves this device.",
+    "privacyNote": "No account, no signup—your family profiles and progress stay here.",
+    "sections": {
+      "family": {
+        "title": "Add your family",
+        "description": "Name and age for each child—that's all we need to pick the right missions."
+      },
+      "mission": {
+        "title": "Do a mission together",
+        "description": "About 10 minutes each. A real situation, a family talk, and one thing to try at home."
+      },
+      "progress": {
+        "title": "Track progress",
+        "description": "Badges and certificates for missions you finish—saved on this device only."
+      }
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Manage your app preferences and access help resources.",
+    "language": "Language",
+    "languageHint": "Choose English, French, or Spanish for Family Hub menus and labels.",
+    "theme": "Theme",
+    "darkMode": "Dark mode",
+    "lightMode": "Light mode",
+    "switchToLight": "Switch to light mode",
+    "switchToDark": "Switch to dark mode",
+    "switchTheme": "Switch to {{mode}}",
+    "premiumTitle": "Premium missions",
+    "premiumActive": "Active",
+    "premiumCustomize": "Open any mission → Customize to set apps, names, or your own scenario. Stored on this device only.",
+    "premiumUnlocked": "Unlocked {{date}}{{source}}",
+    "premiumSignOut": "Sign out of Premium (this device)",
+    "premiumPricing": "{{price}} · coming to app stores",
+    "premiumLearnMore": "Learn more",
+    "premiumBody": "Footprint review stays free. Premium personalizes mission scenarios with your family's apps and situations — optional, on this device.",
+    "premiumPilot": "Have a pilot code? Enter it below before subscriptions launch.",
+    "premiumUnlockCode": "Premium unlock code",
+    "premiumUnlockPlaceholder": "Enter unlock code",
+    "premiumUnlock": "Unlock",
+    "premiumUnlockedMessage": "Premium unlocked on this device.",
+    "premiumUnlockFailed": "Unlock failed.",
+    "privacyTitle": "Privacy",
+    "privacyBody": "Your privacy is important to us. All data is stored locally on your device and is never shared with third parties.",
+    "viewPrivacyPolicy": "View Privacy Policy",
+    "legalTitle": "Legal",
+    "terms": "Terms of Service",
+    "cookies": "Cookie Policy",
+    "accessibility": "Accessibility Statement",
+    "legalOverview": "Legal Overview",
+    "helpTitle": "Help & Support",
+    "faq": "Frequently Asked Questions",
+    "contact": "Contact Support",
+    "backToWebsite": "Back to PandaGarde website"
+  },
+  "dashboard": {
+    "welcomeRegion": "Welcome to Family Hub",
+    "welcomeTitle": "You're in Family Hub — where you practice together.",
+    "welcomeBody": "Do one short mission today. Progress and badges save on this device.",
+    "stories": "Privacy Panda stories",
+    "footprint": "Footprint review",
+    "dismissWelcome": "Dismiss welcome message",
+    "howMissionsTitle": "How missions work",
+    "dismissHowMissions": "Dismiss how missions work",
+    "howMissionsSteps": [
+      "Pick a mission from the Missions tab — each takes 5–15 minutes.",
+      "Do it together: read the scenario, then talk through or play the activity.",
+      "Finish to save progress and earn badges — check Journey to see them."
+    ],
+    "badgeWeb": "Welcome back",
+    "badgeToday": "Today",
+    "titleEmpty": "Add your family to get started",
+    "titleReady": "Ready for today's mission?",
+    "addFirstMember": "Add your first family member",
+    "profiles": "Profiles",
+    "goalsDone": "Goals done",
+    "openGoals": "Open goals",
+    "pickAgePath": "Pick an age path",
+    "browseMissions": "Browse missions",
+    "browseMissionsHint": "Age-matched activities and games",
+    "manageFamily": "Manage family",
+    "manageFamilyHint": "Update ages and active learner",
+    "suggestedNext": "Suggested next steps"
+  },
+  "tour": {
+    "dialogLabel": "Family Hub tour",
+    "skip": "Skip tour",
+    "stepOf": "Step {{current}} of {{total}}",
+    "next": "Next",
+    "getStarted": "Get started",
+    "steps": [
+      {
+        "title": "Dashboard — start here",
+        "body": "See today's mission and add family members. This is your home screen."
+      },
+      {
+        "title": "Journey — badges & certificates",
+        "body": "See missions you've finished and print certificates to celebrate."
+      },
+      {
+        "title": "Missions — pick one to do",
+        "body": "Short activities matched to your child's age. Tap one to start together."
+      },
+      {
+        "title": "Family — add your kids",
+        "body": "Enter each child's name and age. That's how we pick the right missions."
+      }
+    ]
+  },
+  "activities": {
+    "badge": "{{count}} missions",
+    "title": "Family privacy missions",
+    "subtitle": "Pick an age group below to find your next mission — each one starts with a real situation you talk through together.",
+    "filterAge": "Filter by age group",
+    "filterGoal": "Filter by learning goal",
+    "allAges": "All ages",
+    "allGoals": "All goals",
+    "missionsForAges": "Missions for ages {{range}}",
+    "focusMissions": "{{focus}} missions",
+    "allMissions": "All missions",
+    "focusedOn": " · focused on {{focus}}",
+    "acrossAgesFocused": "Across all age groups, focused on {{focus}}",
+    "browseAll": "Browse every mission, grouped by age",
+    "missionsCount": "missions",
+    "doneCount": "done",
+    "emptyTitle": "No activities match that combination yet.",
+    "emptyBody": "Try a different age band or switch back to All goals to uncover more family activities.",
+    "featured": "Featured",
+    "completed": "Completed",
+    "ages": "Ages {{range}}",
+    "forestGuide": "Your forest guide",
+    "realLifeSituation": "Real-life situation",
+    "personalized": "Personalized",
+    "startMission": "Start mission",
+    "startConversation": "Start conversation",
+    "startActivityAria": "Start activity: {{name}}"
+  },
+  "mission": {
+    "exit": "Exit mission",
+    "familyMission": "Family mission",
+    "learningGoal": "Learning goal:",
+    "forestGuide": "Forest guide",
+    "realLifeScenario": "Real-life scenario",
+    "personalizedFamily": "Personalized for your family",
+    "familyPrompt": "Family prompt",
+    "discussionStarters": "Discussion starters",
+    "keyLearnings": "Key learnings",
+    "afterMission": "After this mission",
+    "more": "More",
+    "progress": "Mission progress",
+    "stepReadTalk": "Read & talk",
+    "stepPractice": "Practice",
+    "stepDone": "Done",
+    "startInteractive": "Start interactive activity",
+    "hadConversation": "We had our family conversation"
+  },
+  "premium": {
+    "label": "Premium",
+    "hint": "— use your child's apps in scenarios.",
+    "unlockInSettings": "Unlock in Settings"
+  },
+  "progress": {
+    "badge": "Family rewards",
+    "title": "Mission progress",
+    "subtitleEmpty": "Finish your first mission to earn a badge. Tap Missions on the menu to pick one.",
+    "subtitleProgress": "You've finished {{completed}} of {{total}} missions. Do another to keep going!",
+    "activitiesDone": "Activities done",
+    "ofAvailable": "of {{total}} available",
+    "minutesLearning": "Minutes learning",
+    "avgScore": "Avg. score",
+    "progressLabel": "Mission progress",
+    "noneYet": "No activities completed yet — head to Missions to start your first mission.",
+    "progressAria": "{{pct}}% of activities completed"
+  },
+  "kids": {
+    "badge": "Your crew",
+    "title": "Family members",
+    "subtitle": "Add a first name and age for each child or teen — we match missions to their age band.",
+    "emptyTitle": "Who is learning with you?",
+    "emptyBody": "Add a name and age — we'll suggest the right privacy missions automatically.",
+    "addFirst": "Add your first member",
+    "privacyNote": "Only a first name and age are needed — no email or account. Profiles and progress stay on this device.",
+    "privacyPolicy": "Privacy policy",
+    "memberCount": "{{count}} member on this device",
+    "memberCount_plural": "{{count}} members on this device",
+    "addMember": "Add member",
+    "roleAge": "{{role}} · Age {{age}}",
+    "practiceScore": "Privacy practice score: {{score}}/100",
+    "activitiesFor": "{{label}} activities →",
+    "editMember": "Edit family member",
+    "editName": "Edit {{name}}",
+    "viewProgress": "View detailed progress for {{name}}",
+    "activeProgress": "Active for missions — view progress",
+    "setActiveProgress": "Set as active and view progress",
+    "removeMember": "Remove family member",
+    "removeName": "Remove {{name}} from family",
+    "avatar": "{{label}} avatar"
+  },
+  "ageBands": {
+    "pickAdventure": "Pick your adventure",
+    "missionCount": "{{count}} missions",
+    "5-8": {
+      "label": "Little Explorers",
+      "shortLabel": "Ages 5–8",
+      "tagline": "First steps in safe sharing"
+    },
+    "9-12": {
+      "label": "Privacy Detectives",
+      "shortLabel": "Ages 9–12",
+      "tagline": "Games, chats & scams"
+    },
+    "13-17": {
+      "label": "Digital Citizens",
+      "shortLabel": "Ages 13–17",
+      "tagline": "Social life & future you"
+    }
+  },
+  "focus": {
+    "safeSharing": "Safe sharing",
+    "accountSecurity": "Account security",
+    "spottingScams": "Spotting scams",
+    "privacySettings": "Privacy settings",
+    "digitalFootprint": "Digital footprint",
+    "digitalRights": "Digital rights"
+  }
+}

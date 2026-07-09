@@ -1,0 +1,265 @@
+{
+  "welcomeLead": "De courtes missions de confidentialité à faire ensemble. Des situations réelles à l'école, dans les jeux et la vie sociale. Tout reste sur ce téléphone ou cet ordinateur.",
+  "enterCta": "Ajoutez votre famille pour commencer",
+  "dashboardEmpty": "Appuyez ci-dessous pour ajouter votre premier enfant — nom et âge seulement. Nous suggérerons les bonnes missions.",
+  "dashboardReady": "Commencez la mission du jour ci-dessous. Badges et certificats sont dans Parcours.",
+  "dashboardReadyStandalone": "Appuyez sur la mission du jour ci-dessous pour commencer. Consultez Parcours pour les badges ou certificats.",
+  "nav": {
+    "skipToMain": "Aller au contenu principal",
+    "primary": "Navigation principale Family Hub",
+    "openWebsite": "Ouvrir le site PandaGarde",
+    "backToWebsite": "Retour au site PandaGarde",
+    "site": "Site",
+    "dashboard": {
+      "label": "Tableau de bord — aujourd'hui et statistiques",
+      "short": "Accueil"
+    },
+    "journey": {
+      "label": "Progression des missions — badges et certificats",
+      "short": "Parcours"
+    },
+    "activities": {
+      "label": "Missions de confidentialité pour votre famille",
+      "short": "Missions"
+    },
+    "kids": {
+      "label": "Profils familiaux — ajouter enfants et adultes",
+      "short": "Famille"
+    },
+    "settings": {
+      "label": "Paramètres et aide",
+      "short": "Réglages"
+    }
+  },
+  "welcome": {
+    "title": "Bienvenue dans votre",
+    "titleHighlight": "Family Hub",
+    "adventurePaths": "Trois parcours d'aventure",
+    "whatsInside": "Ce qui vous attend",
+    "websiteNote": "Le bilan d'empreinte et les guides parentaux sont sur le site principal PandaGarde — ouvrez-les à tout moment en complément de ces missions.",
+    "privacyStrong": "Rien ne quitte cet appareil.",
+    "privacyNote": "Pas de compte, pas d'inscription — les profils et la progression de votre famille restent ici.",
+    "sections": {
+      "family": {
+        "title": "Ajoutez votre famille",
+        "description": "Prénom et âge pour chaque enfant — c'est tout ce qu'il nous faut pour choisir les bonnes missions."
+      },
+      "mission": {
+        "title": "Faites une mission ensemble",
+        "description": "Environ 10 minutes chacune. Une situation réelle, une discussion en famille et une chose à essayer à la maison."
+      },
+      "progress": {
+        "title": "Suivez la progression",
+        "description": "Badges et certificats pour les missions terminées — enregistrés uniquement sur cet appareil."
+      }
+    }
+  },
+  "settings": {
+    "title": "Paramètres",
+    "subtitle": "Gérez vos préférences et accédez aux ressources d'aide.",
+    "language": "Langue",
+    "languageHint": "Choisissez l'anglais, le français ou l'espagnol pour les menus et libellés de Family Hub.",
+    "theme": "Thème",
+    "darkMode": "Mode sombre",
+    "lightMode": "Mode clair",
+    "switchToLight": "Passer en mode clair",
+    "switchToDark": "Passer en mode sombre",
+    "switchTheme": "Passer en {{mode}}",
+    "premiumTitle": "Missions Premium",
+    "premiumActive": "Actif",
+    "premiumCustomize": "Ouvrez une mission → Personnaliser pour définir les applications, noms ou votre propre scénario. Stocké sur cet appareil uniquement.",
+    "premiumUnlocked": "Débloqué le {{date}}{{source}}",
+    "premiumSignOut": "Se déconnecter de Premium (cet appareil)",
+    "premiumPricing": "{{price}} · bientôt dans les boutiques d'applications",
+    "premiumLearnMore": "En savoir plus",
+    "premiumBody": "Le bilan d'empreinte reste gratuit. Premium personnalise les scénarios de mission avec les applications et situations de votre famille — optionnel, sur cet appareil.",
+    "premiumPilot": "Vous avez un code pilote ? Saisissez-le ci-dessous avant le lancement des abonnements.",
+    "premiumUnlockCode": "Code de déverrouillage Premium",
+    "premiumUnlockPlaceholder": "Saisir le code",
+    "premiumUnlock": "Déverrouiller",
+    "premiumUnlockedMessage": "Premium déverrouillé sur cet appareil.",
+    "premiumUnlockFailed": "Échec du déverrouillage.",
+    "privacyTitle": "Confidentialité",
+    "privacyBody": "Votre vie privée compte pour nous. Toutes les données sont stockées localement sur votre appareil et ne sont jamais partagées avec des tiers.",
+    "viewPrivacyPolicy": "Voir la politique de confidentialité",
+    "legalTitle": "Mentions légales",
+    "terms": "Conditions d'utilisation",
+    "cookies": "Politique relative aux cookies",
+    "accessibility": "Déclaration d'accessibilité",
+    "legalOverview": "Aperçu juridique",
+    "helpTitle": "Aide et support",
+    "faq": "Foire aux questions",
+    "contact": "Contacter le support",
+    "backToWebsite": "Retour au site PandaGarde"
+  },
+  "dashboard": {
+    "welcomeRegion": "Bienvenue dans Family Hub",
+    "welcomeTitle": "Vous êtes dans Family Hub — là où vous pratiquez ensemble.",
+    "welcomeBody": "Faites une courte mission aujourd'hui. La progression et les badges sont enregistrés sur cet appareil.",
+    "stories": "Histoires Privacy Panda",
+    "footprint": "Bilan d'empreinte",
+    "dismissWelcome": "Fermer le message de bienvenue",
+    "howMissionsTitle": "Comment fonctionnent les missions",
+    "dismissHowMissions": "Fermer comment fonctionnent les missions",
+    "howMissionsSteps": [
+      "Choisissez une mission dans l'onglet Missions — chacune prend 5 à 15 minutes.",
+      "Faites-la ensemble : lisez le scénario, puis discutez ou jouez l'activité.",
+      "Terminez pour enregistrer la progression et gagner des badges — consultez Parcours pour les voir."
+    ],
+    "badgeWeb": "Bon retour",
+    "badgeToday": "Aujourd'hui",
+    "titleEmpty": "Ajoutez votre famille pour commencer",
+    "titleReady": "Prêt pour la mission du jour ?",
+    "addFirstMember": "Ajouter votre premier membre",
+    "profiles": "Profils",
+    "goalsDone": "Objectifs faits",
+    "openGoals": "Objectifs ouverts",
+    "pickAgePath": "Choisissez un parcours par âge",
+    "browseMissions": "Parcourir les missions",
+    "browseMissionsHint": "Activités et jeux adaptés à l'âge",
+    "manageFamily": "Gérer la famille",
+    "manageFamilyHint": "Mettre à jour les âges et l'apprenant actif",
+    "suggestedNext": "Prochaines étapes suggérées"
+  },
+  "tour": {
+    "dialogLabel": "Visite guidée Family Hub",
+    "skip": "Passer la visite",
+    "stepOf": "Étape {{current}} sur {{total}}",
+    "next": "Suivant",
+    "getStarted": "Commencer",
+    "steps": [
+      {
+        "title": "Tableau de bord — commencez ici",
+        "body": "Voir la mission du jour et ajouter des membres de la famille. C'est votre écran d'accueil."
+      },
+      {
+        "title": "Parcours — badges et certificats",
+        "body": "Voir les missions terminées et imprimer des certificats pour célébrer."
+      },
+      {
+        "title": "Missions — choisissez-en une",
+        "body": "Courtes activités adaptées à l'âge de votre enfant. Appuyez pour commencer ensemble."
+      },
+      {
+        "title": "Famille — ajoutez vos enfants",
+        "body": "Saisissez le prénom et l'âge de chaque enfant. C'est ainsi que nous choisissons les bonnes missions."
+      }
+    ]
+  },
+  "activities": {
+    "badge": "{{count}} missions",
+    "title": "Missions de confidentialité en famille",
+    "subtitle": "Choisissez un groupe d'âge ci-dessous pour trouver votre prochaine mission — chacune commence par une situation réelle à discuter ensemble.",
+    "filterAge": "Filtrer par groupe d'âge",
+    "filterGoal": "Filtrer par objectif d'apprentissage",
+    "allAges": "Tous les âges",
+    "allGoals": "Tous les objectifs",
+    "missionsForAges": "Missions pour les {{range}} ans",
+    "focusMissions": "Missions {{focus}}",
+    "allMissions": "Toutes les missions",
+    "focusedOn": " · axé sur {{focus}}",
+    "acrossAgesFocused": "Tous les groupes d'âge, axé sur {{focus}}",
+    "browseAll": "Parcourir toutes les missions, regroupées par âge",
+    "missionsCount": "missions",
+    "doneCount": "terminées",
+    "emptyTitle": "Aucune activité ne correspond à cette combinaison pour l'instant.",
+    "emptyBody": "Essayez une autre tranche d'âge ou revenez à Tous les objectifs pour découvrir plus d'activités familiales.",
+    "featured": "À la une",
+    "completed": "Terminée",
+    "ages": "Âges {{range}}",
+    "forestGuide": "Votre guide de la forêt",
+    "realLifeSituation": "Situation réelle",
+    "personalized": "Personnalisée",
+    "startMission": "Commencer la mission",
+    "startConversation": "Commencer la conversation",
+    "startActivityAria": "Commencer l'activité : {{name}}"
+  },
+  "mission": {
+    "exit": "Quitter la mission",
+    "familyMission": "Mission familiale",
+    "learningGoal": "Objectif d'apprentissage :",
+    "forestGuide": "Guide de la forêt",
+    "realLifeScenario": "Scénario réel",
+    "personalizedFamily": "Personnalisé pour votre famille",
+    "familyPrompt": "Invitation familiale",
+    "discussionStarters": "Amorces de discussion",
+    "keyLearnings": "Points clés",
+    "afterMission": "Après cette mission",
+    "more": "Plus",
+    "progress": "Progression de la mission",
+    "stepReadTalk": "Lire et discuter",
+    "stepPractice": "Pratiquer",
+    "stepDone": "Terminé",
+    "startInteractive": "Commencer l'activité interactive",
+    "hadConversation": "Nous avons eu notre conversation en famille"
+  },
+  "premium": {
+    "label": "Premium",
+    "hint": "— utilisez les applications de votre enfant dans les scénarios.",
+    "unlockInSettings": "Déverrouiller dans Réglages"
+  },
+  "progress": {
+    "badge": "Récompenses familiales",
+    "title": "Progression des missions",
+    "subtitleEmpty": "Terminez votre première mission pour gagner un badge. Appuyez sur Missions dans le menu pour en choisir une.",
+    "subtitleProgress": "Vous avez terminé {{completed}} missions sur {{total}}. Faites-en une autre pour continuer !",
+    "activitiesDone": "Activités terminées",
+    "ofAvailable": "sur {{total}} disponibles",
+    "minutesLearning": "Minutes d'apprentissage",
+    "avgScore": "Score moy.",
+    "progressLabel": "Progression des missions",
+    "noneYet": "Aucune activité terminée pour l'instant — allez dans Missions pour commencer votre première mission.",
+    "progressAria": "{{pct}} % des activités terminées"
+  },
+  "kids": {
+    "badge": "Votre équipe",
+    "title": "Membres de la famille",
+    "subtitle": "Ajoutez un prénom et un âge pour chaque enfant ou adolescent — nous adaptons les missions à leur tranche d'âge.",
+    "emptyTitle": "Qui apprend avec vous ?",
+    "emptyBody": "Ajoutez un prénom et un âge — nous suggérerons automatiquement les bonnes missions de confidentialité.",
+    "addFirst": "Ajouter votre premier membre",
+    "privacyNote": "Seuls un prénom et un âge sont nécessaires — pas d'e-mail ni de compte. Profils et progression restent sur cet appareil.",
+    "privacyPolicy": "Politique de confidentialité",
+    "memberCount": "{{count}} membre sur cet appareil",
+    "memberCount_plural": "{{count}} membres sur cet appareil",
+    "addMember": "Ajouter un membre",
+    "roleAge": "{{role}} · Âge {{age}}",
+    "practiceScore": "Score de pratique confidentialité : {{score}}/100",
+    "activitiesFor": "Activités {{label}} →",
+    "editMember": "Modifier le membre",
+    "editName": "Modifier {{name}}",
+    "viewProgress": "Voir la progression détaillée de {{name}}",
+    "activeProgress": "Actif pour les missions — voir la progression",
+    "setActiveProgress": "Définir comme actif et voir la progression",
+    "removeMember": "Supprimer le membre",
+    "removeName": "Retirer {{name}} de la famille",
+    "avatar": "Avatar {{label}}"
+  },
+  "ageBands": {
+    "pickAdventure": "Choisissez votre aventure",
+    "missionCount": "{{count}} missions",
+    "5-8": {
+      "label": "Petits explorateurs",
+      "shortLabel": "5–8 ans",
+      "tagline": "Premiers pas du partage sécurisé"
+    },
+    "9-12": {
+      "label": "Détectives de la vie privée",
+      "shortLabel": "9–12 ans",
+      "tagline": "Jeux, discussions et arnaques"
+    },
+    "13-17": {
+      "label": "Citoyens numériques",
+      "shortLabel": "13–17 ans",
+      "tagline": "Vie sociale et futur vous"
+    }
+  },
+  "focus": {
+    "safeSharing": "Partage sécurisé",
+    "accountSecurity": "Sécurité du compte",
+    "spottingScams": "Repérer les arnaques",
+    "privacySettings": "Paramètres de confidentialité",
+    "digitalFootprint": "Empreinte numérique",
+    "digitalRights": "Droits numériques"
+  }
+}

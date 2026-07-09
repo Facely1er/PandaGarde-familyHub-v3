@@ -245,7 +245,7 @@ function Header() {
                   <LayoutDashboard size={17} aria-hidden="true" />
                 </Link>
 
-                <LanguageSwitcher compact className="hidden sm:inline-flex" />
+                <LanguageSwitcher variant="toolbar" className="hidden sm:inline-flex" />
 
                 <button
                   type="button"

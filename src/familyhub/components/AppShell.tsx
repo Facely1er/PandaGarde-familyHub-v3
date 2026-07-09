@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard,
@@ -19,6 +19,7 @@ import { hubPaths, pandagardeWebsiteUrl, isHubStandalone } from '../hubPaths';
 import HubBrandLogo from './HubBrandLogo';
 import { hubTheme } from '../hubTheme';
 import { HUB_BRAND_LINE_1, HUB_BRAND_LINE_2 } from '../constants';
+import { useHubI18n } from '../hubI18n';
 
 interface TabItem {
   id: string;
@@ -29,51 +30,56 @@ interface TabItem {
 }
 
 /** Primary destinations for parents and kids — settings live in the header */
-const primaryTabs: TabItem[] = [
-  {
-    id: 'dashboard',
-    label: 'Dashboard — today and quick stats',
-    shortLabel: 'Dashboard',
-    icon: LayoutDashboard,
-    path: hubPaths.dashboard,
-  },
-  {
-    id: 'journey',
-    label: 'Mission progress — badges and certificates',
-    shortLabel: 'Journey',
-    icon: Map,
-    path: hubPaths.journey,
-  },
-  {
-    id: 'activities',
-    label: 'Privacy missions for your family',
-    shortLabel: 'Missions',
-    icon: Gamepad2,
-    path: hubPaths.activities,
-  },
-  {
-    id: 'kids',
-    label: 'Family profiles — add children and guardians',
-    shortLabel: 'Family',
-    icon: Users,
-    path: hubPaths.kids,
-  },
-];
-
-const settingsTab: TabItem = {
-  id: 'settings',
-  label: 'Settings and help',
-  shortLabel: 'Settings',
-  icon: Settings,
-  path: hubPaths.settings,
-};
-
-const allTabs = [...primaryTabs, settingsTab];
-
 const AppShell: React.FC = () => {
   const location = useLocation();
   const tabRefs = useRef<Array<HTMLAnchorElement | null>>([]);
   const { theme, toggleTheme } = useTheme();
+  const { t } = useHubI18n();
+
+  const primaryTabs: TabItem[] = useMemo(
+    () => [
+      {
+        id: 'dashboard',
+        label: t('hub.nav.dashboard.label'),
+        shortLabel: t('hub.nav.dashboard.short'),
+        icon: LayoutDashboard,
+        path: hubPaths.dashboard,
+      },
+      {
+        id: 'journey',
+        label: t('hub.nav.journey.label'),
+        shortLabel: t('hub.nav.journey.short'),
+        icon: Map,
+        path: hubPaths.journey,
+      },
+      {
+        id: 'activities',
+        label: t('hub.nav.activities.label'),
+        shortLabel: t('hub.nav.activities.short'),
+        icon: Gamepad2,
+        path: hubPaths.activities,
+      },
+      {
+        id: 'kids',
+        label: t('hub.nav.kids.label'),
+        shortLabel: t('hub.nav.kids.short'),
+        icon: Users,
+        path: hubPaths.kids,
+      },
+    ],
+    [t]
+  );
+
+  const settingsTab: TabItem = useMemo(
+    () => ({
+      id: 'settings',
+      label: t('hub.nav.settings.label'),
+      shortLabel: t('hub.nav.settings.short'),
+      icon: Settings,
+      path: hubPaths.settings,
+    }),
+    [t]
+  );
 
   const isTabActive = (path: string): boolean => {
     if (path === hubPaths.dashboard) {
@@ -131,7 +137,7 @@ const AppShell: React.FC = () => {
           href="#family-hub-main"
           className="sr-only focus:not-sr-only focus:absolute focus:left-3 focus:top-3 focus:z-[90] focus:rounded-lg focus:bg-teal-700 focus:px-3 focus:py-2 focus:text-sm focus:font-semibold focus:text-white focus:outline-none focus:ring-2 focus:ring-white"
         >
-          Skip to main content
+          {t('hub.nav.skipToMain')}
         </a>
 
         <header className={hubTheme.chromeHeader}>
@@ -143,10 +149,10 @@ const AppShell: React.FC = () => {
                 className="flex shrink-0 items-center transition-opacity hover:opacity-80"
                 aria-label={
                   hubOrigin === 'standalone' || isHubStandalone
-                    ? 'Open PandaGarde website (optional)'
-                    : 'Back to PandaGarde website'
+                    ? t('hub.nav.openWebsite')
+                    : t('hub.nav.backToWebsite')
                 }
-                title={hubOrigin === 'standalone' || isHubStandalone ? 'Website' : 'Back to PandaGarde'}
+                title={hubOrigin === 'standalone' || isHubStandalone ? t('hub.nav.site') : t('hub.nav.backToWebsite')}
               >
                 <HubBrandLogo size="shell" variant="plain" alt="" />
               </a>
@@ -162,7 +168,7 @@ const AppShell: React.FC = () => {
                   type="button"
                   onClick={toggleTheme}
                   className="flex h-8 w-8 items-center justify-center rounded-md text-gray-500 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
-                  aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+                  aria-label={theme === 'light' ? t('common.switchToDark') : t('common.switchToLight')}
                 >
                   {theme === 'light' ? <Moon size={18} aria-hidden="true" /> : <Sun size={18} aria-hidden="true" />}
                 </button>
@@ -183,10 +189,10 @@ const AppShell: React.FC = () => {
                   href={isHubStandalone ? pandagardeWebsiteUrl : '/'}
                   onClick={onOpenWebsite}
                   className="hidden h-8 items-center gap-1 rounded-full bg-teal-50 px-2.5 text-[11px] font-semibold uppercase tracking-wide text-teal-700 transition-colors hover:bg-teal-100 dark:bg-teal-900/40 dark:text-teal-200 dark:hover:bg-teal-900/60 sm:inline-flex"
-                  aria-label="Open PandaGarde website"
+                  aria-label={t('hub.nav.openWebsite')}
                 >
                   <ArrowLeft size={12} aria-hidden="true" />
-                  Site
+                  {t('hub.nav.site')}
                 </a>
             </div>
           </div>
@@ -200,7 +206,7 @@ const AppShell: React.FC = () => {
 
         <nav
           className={hubTheme.chromeNav}
-          aria-label="Primary Family Hub navigation"
+          aria-label={t('hub.nav.primary')}
           onKeyDown={onNavKeyDown}
         >
           <ul className="hub-bottom-nav-tabs grid max-w-full grid-cols-4">

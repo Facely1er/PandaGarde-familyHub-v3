@@ -4,16 +4,24 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import en from './locales/en.json';
 import fr from './locales/fr.json';
 import es from './locales/es.json';
+import hubEn from './hub/en.json';
+import hubFr from './hub/fr.json';
+import hubEs from './hub/es.json';
 
 export const SUPPORTED_LANGUAGES = ['en', 'fr', 'es'] as const;
 export type SupportedLanguage = (typeof SUPPORTED_LANGUAGES)[number];
 
 export const LANGUAGE_STORAGE_KEY = 'pandagarde-language';
 
+const mergeHub = <T extends { hub?: unknown }>(base: T, hub: typeof hubEn) => ({
+  ...base,
+  hub,
+});
+
 const resources = {
-  en: { translation: en },
-  fr: { translation: fr },
-  es: { translation: es },
+  en: { translation: mergeHub(en, hubEn) },
+  fr: { translation: mergeHub(fr, hubFr) },
+  es: { translation: mergeHub(es, hubEs) },
 };
 
 void i18n

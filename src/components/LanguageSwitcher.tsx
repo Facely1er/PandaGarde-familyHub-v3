@@ -1,7 +1,12 @@
 import React, { useId } from 'react';
-import { Globe } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { SUPPORTED_LANGUAGES, type SupportedLanguage } from '../i18n';
+
+const LANGUAGE_FLAGS: Record<SupportedLanguage, string> = {
+  en: '🇺🇸',
+  fr: '🇫🇷',
+  es: '🇪🇸',
+};
 
 const LANGUAGE_LABELS: Record<SupportedLanguage, string> = {
   en: 'English',
@@ -11,12 +16,12 @@ const LANGUAGE_LABELS: Record<SupportedLanguage, string> = {
 
 type LanguageSwitcherProps = {
   className?: string;
-  compact?: boolean;
+  variant?: 'toolbar' | 'default';
 };
 
 const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
   className = '',
-  compact = false,
+  variant = 'default',
 }) => {
   const { t, i18n } = useTranslation();
   const selectId = useId();
@@ -26,24 +31,34 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
     void i18n.changeLanguage(event.target.value);
   };
 
+  const isToolbar = variant === 'toolbar';
+
   return (
-    <div className={`language-switcher ${className}`.trim()}>
+    <div
+      className={`language-switcher ${isToolbar ? 'language-switcher--toolbar' : ''} ${className}`.trim()}
+    >
       <label htmlFor={selectId} className="sr-only">
         {t('common.selectLanguage')}
       </label>
-      <div className="language-switcher__control">
-        <Globe size={16} className="language-switcher__icon" aria-hidden />
+      <div
+        className={`language-switcher__control${isToolbar ? ' header-icon-btn' : ''}`.trim()}
+      >
+        {isToolbar ? (
+          <span className="language-switcher__flag" aria-hidden="true">
+            {LANGUAGE_FLAGS[currentLang]}
+          </span>
+        ) : null}
         <select
           id={selectId}
           className="language-switcher__select"
           value={currentLang}
           onChange={handleChange}
           aria-label={t('common.selectLanguage')}
-          title={t('common.language')}
+          title={LANGUAGE_LABELS[currentLang]}
         >
           {SUPPORTED_LANGUAGES.map((code) => (
-            <option key={code} value={code}>
-              {compact ? code.toUpperCase() : LANGUAGE_LABELS[code]}
+            <option key={code} value={code} aria-label={LANGUAGE_LABELS[code]}>
+              {LANGUAGE_FLAGS[code]}
             </option>
           ))}
         </select>

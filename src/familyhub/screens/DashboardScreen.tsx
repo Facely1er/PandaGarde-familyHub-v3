@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { useHubI18n } from '../hubI18n';
 import { Users, Gamepad2, Plus, X, BookOpen, Fingerprint, ListChecks } from 'lucide-react';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { useHubFamilyMembers } from '../../hooks/useHubFamilyMembers';
@@ -18,19 +18,21 @@ interface FamilyGoal {
 }
 
 /** Shown once on first visit — explains how Hub connects to the rest of PandaGarde. */
-const HubWelcomeBanner: React.FC<{ onDismiss: () => void }> = ({ onDismiss }) => (
+const HubWelcomeBanner: React.FC<{ onDismiss: () => void }> = ({ onDismiss }) => {
+  const { t } = useHubI18n();
+  return (
   <div
     role="region"
-    aria-label="Welcome to Family Hub"
+    aria-label={t('hub.dashboard.welcomeRegion')}
     className="rounded-xl border border-teal-200 bg-teal-50 p-4 dark:border-teal-700/50 dark:bg-teal-900/20"
   >
     <div className="flex items-start justify-between gap-3">
       <div className="flex-1">
         <p className="text-sm font-semibold text-teal-900 dark:text-teal-100">
-          You&apos;re in Family Hub — where you practice together.
+          {t('hub.dashboard.welcomeTitle')}
         </p>
         <p className="mt-1 text-xs leading-relaxed text-teal-800 dark:text-teal-200">
-          Do one short mission today. Progress and badges save on this device.
+          {t('hub.dashboard.welcomeBody')}
         </p>
         <div className="mt-3 flex flex-wrap gap-2">
           <HubWebsiteLink
@@ -39,7 +41,7 @@ const HubWelcomeBanner: React.FC<{ onDismiss: () => void }> = ({ onDismiss }) =>
             showExternalIcon
           >
             <BookOpen size={12} aria-hidden />
-            Privacy Panda stories
+            {t('hub.dashboard.stories')}
           </HubWebsiteLink>
           <HubWebsiteLink
             path="/digital-footprint"
@@ -47,62 +49,64 @@ const HubWelcomeBanner: React.FC<{ onDismiss: () => void }> = ({ onDismiss }) =>
             showExternalIcon
           >
             <Fingerprint size={12} aria-hidden />
-            Footprint review
+            {t('hub.dashboard.footprint')}
           </HubWebsiteLink>
         </div>
       </div>
       <button
         type="button"
         onClick={onDismiss}
-        aria-label="Dismiss welcome message"
+        aria-label={t('hub.dashboard.dismissWelcome')}
         className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-teal-600 transition-colors hover:bg-teal-100 dark:text-teal-300 dark:hover:bg-teal-800/40"
       >
         <X size={15} aria-hidden />
       </button>
     </div>
   </div>
-);
+  );
+};
 
 /** Quick recap of the mission loop for people who skipped the tour. Dismissible. */
-const HowMissionsWorkCard: React.FC<{ onDismiss: () => void }> = ({ onDismiss }) => (
+const HowMissionsWorkCard: React.FC<{ onDismiss: () => void }> = ({ onDismiss }) => {
+  const { t } = useHubI18n();
+  const steps = t('hub.dashboard.howMissionsSteps', { returnObjects: true }) as string[];
+
+  return (
   <div
     role="region"
-    aria-label="How missions work"
+    aria-label={t('hub.dashboard.howMissionsTitle')}
     className="rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800"
   >
     <div className="flex items-start justify-between gap-3">
       <div className="flex items-center gap-2">
         <ListChecks size={16} className="shrink-0 text-teal-600 dark:text-teal-300" aria-hidden />
-        <h2 className="text-sm font-semibold text-gray-900 dark:text-white">How missions work</h2>
+        <h2 className="text-sm font-semibold text-gray-900 dark:text-white">{t('hub.dashboard.howMissionsTitle')}</h2>
       </div>
       <button
         type="button"
         onClick={onDismiss}
-        aria-label="Dismiss how missions work"
+        aria-label={t('hub.dashboard.dismissHowMissions')}
         className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-gray-700 dark:hover:text-gray-200"
       >
         <X size={15} aria-hidden />
       </button>
     </div>
     <ol className="mt-3 grid gap-2 text-xs leading-relaxed text-gray-600 dark:text-gray-300 sm:grid-cols-3 sm:gap-3">
-      {[
-        'Pick a mission from the Missions tab — each takes 5–15 minutes.',
-        'Do it together: read the scenario, then talk through or play the activity.',
-        'Finish to save progress and earn badges — check Journey to see them.',
-      ].map((step, index) => (
-        <li key={step} className="flex gap-2">
+      {steps.map((stepText, index) => (
+        <li key={stepText} className="flex gap-2">
           <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-teal-100 text-[11px] font-bold text-teal-800 dark:bg-teal-900/50 dark:text-teal-200">
             {index + 1}
           </span>
-          {step}
+          {stepText}
         </li>
       ))}
     </ol>
   </div>
-);
+  );
+};
 
 const DashboardScreen: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useHubI18n();
   const { members: familyMembers } = useHubFamilyMembers();
   const [familyGoals] = useLocalStorage<FamilyGoal[]>('pandagarde_family_goals', []);
   const completedGoals = familyGoals.filter((goal) => goal?.completed).length;
@@ -129,18 +133,18 @@ const DashboardScreen: React.FC = () => {
         )}
 
         <HubScreenHero
-          badge={hubOrigin === 'web' ? 'Welcome back' : 'Today'}
+          badge={hubOrigin === 'web' ? t('hub.dashboard.badgeWeb') : t('hub.dashboard.badgeToday')}
           title={
             familyMembers.length === 0
-              ? 'Add your family to get started'
-              : "Ready for today's mission?"
+              ? t('hub.dashboard.titleEmpty')
+              : t('hub.dashboard.titleReady')
           }
           subtitle={
             familyMembers.length === 0
               ? t('hub.dashboardEmpty')
               : hubOrigin === 'web'
                 ? t('hub.dashboardReady')
-                : 'Tap today\'s mission below to start. Check Journey when you want badges or certificates.'
+                : t('hub.dashboardReadyStandalone')
           }
           compact
         />
@@ -151,7 +155,7 @@ const DashboardScreen: React.FC = () => {
             className="flex items-center justify-center gap-2 rounded-xl border-2 border-dashed border-teal-300 bg-teal-50 px-4 py-4 text-sm font-semibold text-teal-800 transition-colors hover:border-teal-400 hover:bg-teal-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 dark:border-teal-600 dark:bg-teal-900/20 dark:text-teal-200 dark:hover:bg-teal-900/30"
           >
             <Plus size={18} aria-hidden="true" />
-            Add your first family member
+            {t('hub.dashboard.addFirstMember')}
           </Link>
         )}
 
@@ -164,7 +168,7 @@ const DashboardScreen: React.FC = () => {
         <dl className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           <div className="flex min-h-[4.75rem] flex-col justify-between rounded-xl border border-teal-100 bg-teal-50/70 px-5 py-4 dark:border-teal-700/50 dark:bg-teal-900/20">
             <dt className="text-xs font-semibold uppercase tracking-wide text-teal-700 dark:text-teal-200">
-              Profiles
+              {t('hub.dashboard.profiles')}
             </dt>
             <dd className="text-right text-2xl font-bold tabular-nums text-teal-900 dark:text-teal-100">
               {familyMembers.length}
@@ -172,7 +176,7 @@ const DashboardScreen: React.FC = () => {
           </div>
           <div className="flex min-h-[4.75rem] flex-col justify-between rounded-xl border border-indigo-100 bg-indigo-50/70 px-5 py-4 dark:border-indigo-700/50 dark:bg-indigo-900/20">
             <dt className="text-xs font-semibold uppercase tracking-wide text-indigo-700 dark:text-indigo-200">
-              Goals done
+              {t('hub.dashboard.goalsDone')}
             </dt>
             <dd className="text-right text-2xl font-bold tabular-nums text-indigo-900 dark:text-indigo-100">
               {completedGoals}
@@ -180,7 +184,7 @@ const DashboardScreen: React.FC = () => {
           </div>
           <div className="col-span-2 flex min-h-[4.75rem] flex-col justify-between rounded-xl border border-amber-100 bg-amber-50/70 px-5 py-4 dark:col-span-1 dark:border-amber-700/50 dark:bg-amber-900/20">
             <dt className="text-xs font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-200">
-              Open goals
+              {t('hub.dashboard.openGoals')}
             </dt>
             <dd className="text-right text-2xl font-bold tabular-nums text-amber-900 dark:text-amber-100">
               {Math.max(familyGoals.length - completedGoals, 0)}
@@ -188,10 +192,10 @@ const DashboardScreen: React.FC = () => {
           </div>
         </dl>
 
-        <AgeBandStrip title="Pick an age path" />
+        <AgeBandStrip title={t('hub.dashboard.pickAgePath')} />
 
         {familyMembers.length > 0 && (
-          <nav aria-label="Suggested next steps" className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <nav aria-label={t('hub.dashboard.suggestedNext')} className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <Link
               to={hubPaths.activities}
               className="group flex items-center gap-3 rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-all hover:border-teal-300 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 dark:border-gray-700 dark:bg-gray-800 dark:hover:border-teal-500"
@@ -200,9 +204,9 @@ const DashboardScreen: React.FC = () => {
                 <Gamepad2 size={20} aria-hidden="true" />
               </span>
               <span className="min-w-0">
-                <span className="block text-sm font-semibold text-gray-900 dark:text-white">Browse missions</span>
+                <span className="block text-sm font-semibold text-gray-900 dark:text-white">{t('hub.dashboard.browseMissions')}</span>
                 <span className="block text-xs text-gray-600 dark:text-gray-300">
-                  Age-matched activities and games
+                  {t('hub.dashboard.browseMissionsHint')}
                 </span>
               </span>
             </Link>
@@ -214,9 +218,9 @@ const DashboardScreen: React.FC = () => {
                 <Users size={20} aria-hidden="true" />
               </span>
               <span className="min-w-0">
-                <span className="block text-sm font-semibold text-gray-900 dark:text-white">Manage family</span>
+                <span className="block text-sm font-semibold text-gray-900 dark:text-white">{t('hub.dashboard.manageFamily')}</span>
                 <span className="block text-xs text-gray-600 dark:text-gray-300">
-                  Update ages and active learner
+                  {t('hub.dashboard.manageFamilyHint')}
                 </span>
               </span>
             </Link>

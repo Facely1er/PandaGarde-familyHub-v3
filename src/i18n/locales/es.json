@@ -96,12 +96,6 @@
     "stillQuestions": "¿Aún tienes preguntas?",
     "howItWorksFaq": "Ver cómo funciona PandaGarde y respuestas comunes"
   },
-  "hub": {
-    "welcomeLead": "Misiones cortas de privacidad que hacen juntos. Situaciones reales de la escuela, los juegos y la vida social. Todo permanece en este teléfono u ordenador.",
-    "enterCta": "Agrega tu familia para empezar",
-    "dashboardEmpty": "Toca abajo para agregar tu primer hijo — solo nombre y edad. Sugeriremos las misiones adecuadas.",
-    "dashboardReady": "Empieza la misión de hoy abajo. Insignias y certificados están en Recorrido."
-  },
   "messaging": {
     "footprintCatalogNote": "La revisión de huella usa las aplicaciones que listas en el catálogo. Historias, guías y Family Hub funcionan por sí solos — no necesitas terminar una revisión primero.",
     "independentAreasLead": "Elige lo que encaje hoy: una historia con tu hijo, una guía para padres, misiones en Family Hub, o una revisión de huella cuando quieras una instantánea del hogar.",

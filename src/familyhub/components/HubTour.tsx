@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { X, ArrowRight, LayoutDashboard, Map, Users, Gamepad2 } from 'lucide-react';
 import { useDialogFocusTrap } from '../../hooks/useDialogFocusTrap';
 import { hubPaths } from '../hubPaths';
+import { useHubI18n } from '../hubI18n';
 
 export const HUB_TOUR_KEY = 'pandagarde_hub_tour_done';
 
@@ -12,47 +13,31 @@ interface TourStep {
   navTarget: string;
 }
 
-const steps: TourStep[] = [
-  {
-    title: 'Dashboard — start here',
-    body: 'See today\'s mission and add family members. This is your home screen.',
-    icon: LayoutDashboard,
-    navTarget: hubPaths.dashboard,
-  },
-  {
-    title: 'Journey — badges & certificates',
-    body: 'See missions you\'ve finished and print certificates to celebrate.',
-    icon: Map,
-    navTarget: hubPaths.journey,
-  },
-  {
-    title: 'Missions — pick one to do',
-    body: 'Short activities matched to your child\'s age. Tap one to start together.',
-    icon: Gamepad2,
-    navTarget: hubPaths.activities,
-  },
-  {
-    title: 'Family — add your kids',
-    body: 'Enter each child\'s name and age. That\'s how we pick the right missions.',
-    icon: Users,
-    navTarget: hubPaths.kids,
-  },
-];
-
 interface HubTourProps {
   onDone?: () => void;
 }
 
 const HubTour: React.FC<HubTourProps> = ({ onDone }) => {
+  const { t } = useHubI18n();
   const [step, setStep] = useState(0);
   const [visible, setVisible] = useState(false);
+
+  const steps: TourStep[] = useMemo(() => {
+    const raw = t('hub.tour.steps', { returnObjects: true }) as Array<{ title: string; body: string }>;
+    const icons = [LayoutDashboard, Map, Gamepad2, Users];
+    const targets = [hubPaths.dashboard, hubPaths.journey, hubPaths.activities, hubPaths.kids];
+    return raw.map((item, index) => ({
+      ...item,
+      icon: icons[index] ?? LayoutDashboard,
+      navTarget: targets[index] ?? hubPaths.dashboard,
+    }));
+  }, [t]);
 
   useEffect(() => {
     const done = localStorage.getItem(HUB_TOUR_KEY);
     if (done === 'true') {return;}
-    // Short delay so the dashboard has time to render
-    const t = setTimeout(() => setVisible(true), 600);
-    return () => clearTimeout(t);
+    const timer = setTimeout(() => setVisible(true), 600);
+    return () => clearTimeout(timer);
   }, []);
 
   const dismiss = () => {
@@ -94,10 +79,9 @@ const HubTour: React.FC<HubTourProps> = ({ onDone }) => {
         ref={dialogRef}
         role="dialog"
         aria-modal="true"
-        aria-label="Family Hub tour"
+        aria-label={t('hub.tour.dialogLabel')}
         className="relative w-full max-w-sm rounded-2xl bg-white dark:bg-gray-800 shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden"
       >
-        {/* Progress bar */}
         <div className="h-1 bg-gray-100 dark:bg-gray-700">
           <div
             className="h-1 bg-teal-500 transition-all duration-300"
@@ -106,22 +90,19 @@ const HubTour: React.FC<HubTourProps> = ({ onDone }) => {
         </div>
 
         <div className="p-5">
-          {/* Close */}
           <button
             type="button"
             onClick={dismiss}
             className="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-            aria-label="Skip tour"
+            aria-label={t('hub.tour.skip')}
           >
             <X size={16} aria-hidden="true" />
           </button>
 
-          {/* Step count */}
           <p className="text-xs font-medium text-gray-400 dark:text-gray-500 mb-3">
-            Step {step + 1} of {steps.length}
+            {t('hub.tour.stepOf', { current: step + 1, total: steps.length })}
           </p>
 
-          {/* Icon + heading */}
           <div className="flex items-start gap-3 mb-3">
             <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-300">
               <Icon size={22} aria-hidden="true" />
@@ -131,11 +112,8 @@ const HubTour: React.FC<HubTourProps> = ({ onDone }) => {
             </h2>
           </div>
 
-          <p className="text-sm text-gray-600 dark:text-gray-300 mb-5">
-            {current.body}
-          </p>
+          <p className="text-sm text-gray-600 dark:text-gray-300 mb-5">{current.body}</p>
 
-          {/* Step dots */}
           <div className="flex items-center gap-1.5 mb-5" aria-hidden="true">
             {steps.map((_, i) => (
               <span
@@ -152,21 +130,20 @@ const HubTour: React.FC<HubTourProps> = ({ onDone }) => {
             ))}
           </div>
 
-          {/* Actions */}
           <div className="flex items-center justify-between gap-3">
             <button
               type="button"
               onClick={dismiss}
               className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
             >
-              Skip tour
+              {t('hub.tour.skip')}
             </button>
             <button
               type="button"
               onClick={handleNext}
               className="inline-flex items-center gap-2 rounded-lg bg-teal-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-teal-700 active:scale-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
             >
-              {isLast ? 'Get started' : 'Next'}
+              {isLast ? t('hub.tour.getStarted') : t('hub.tour.next')}
               <ArrowRight size={16} aria-hidden="true" />
             </button>
           </div>

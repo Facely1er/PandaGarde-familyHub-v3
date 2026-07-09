@@ -19,7 +19,7 @@ import { getForestCharacter } from '../../data/forestCharacters';
 import { StoryCharacterPortrait } from '../../components/stories/StoryCharacterPortrait';
 import RelatedStoryLink from '../components/RelatedStoryLink';
 import { useResolvedMissionScenario } from '../../hooks/useResolvedMissionScenario';
-import type { ResolvedMissionScenario } from '../../lib/personalizeActivity';
+import { useHubI18n } from '../hubI18n';
 
 const FOCUS_ORDER: ActivityFocus[] = [
   'Safe sharing',
@@ -41,6 +41,7 @@ const ActivityCard: React.FC<{
   onStart: () => void;
   scenario: ResolvedMissionScenario;
 }> = ({ activity, isCompleted, score, onStart, scenario }) => {
+  const { t } = useHubI18n();
   const guide = activity.guideCharacter ? getForestCharacter(activity.guideCharacter) : undefined;
   return (
   <div
@@ -58,7 +59,7 @@ const ActivityCard: React.FC<{
         ? 'border-teal-200 bg-teal-50/50 hover:border-teal-400 hover:shadow-md dark:border-teal-700/40 dark:bg-teal-900/10 dark:hover:border-teal-500'
         : 'border-gray-200 bg-white hover:border-teal-300 hover:shadow-md dark:border-gray-400 dark:bg-gray-100 dark:hover:border-teal-500'
     }`}
-    aria-label={`Start activity: ${activity.name}`}
+    aria-label={t('hub.activities.startActivityAria', { name: activity.name })}
   >
     <div className="flex items-start justify-between gap-3">
       <div className="flex items-center gap-3">
@@ -72,12 +73,12 @@ const ActivityCard: React.FC<{
       <div className="flex flex-col items-end gap-2">
         {activity.featured && (
           <span className="rounded-full bg-teal-100 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-teal-700 dark:bg-teal-900/30 dark:text-teal-200">
-            Featured
+            {t('hub.activities.featured')}
           </span>
         )}
         {isCompleted && (
           <span className="rounded-full bg-emerald-100 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-200">
-            Completed{score !== undefined ? ` · ${score}%` : ''}
+            {t('hub.activities.completed')}{score !== undefined ? ` · ${score}%` : ''}
           </span>
         )}
       </div>
@@ -86,7 +87,7 @@ const ActivityCard: React.FC<{
     <div className="mt-3 flex flex-wrap gap-1.5 text-[11px] font-medium">
       <RelatedStoryLink missionId={activity.id} variant="chip" />
       <span className="rounded-full bg-white px-2.5 py-1 text-teal-700 ring-1 ring-teal-200 dark:bg-gray-800 dark:text-teal-300 dark:ring-teal-700/50">
-        Ages {activity.groupAgeRange}
+        {t('hub.activities.ages', { range: activity.groupAgeRange })}
       </span>
       <span className="rounded-full bg-gray-100 px-2.5 py-1 text-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:ring-1 dark:ring-gray-500">
         {activity.focus}
@@ -103,7 +104,7 @@ const ActivityCard: React.FC<{
         <StoryCharacterPortrait character={guide} size="sm" />
         <div className="min-w-0">
           <p className="text-[11px] font-semibold uppercase tracking-wide text-green-700 dark:text-green-300">
-            Your forest guide
+            {t('hub.activities.forestGuide')}
           </p>
           <p className="mt-0.5 text-sm font-semibold text-gray-900">
             {guide.name} <span className="font-normal text-gray-500">· {guide.epithet}</span>
@@ -114,14 +115,14 @@ const ActivityCard: React.FC<{
 
     <div className="mt-3 rounded-xl border border-amber-100 bg-amber-50/80 p-3 dark:border-amber-800/40 dark:bg-amber-900/15">
       <p className="text-[11px] font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-300">
-        Real-life situation
+        {t('hub.activities.realLifeSituation')}
       </p>
       <p className="mt-1 line-clamp-3 text-sm leading-relaxed text-amber-950 dark:text-amber-100">
         {scenario.text}
       </p>
       {scenario.isPersonalized && (
         <p className="mt-1 text-[11px] font-semibold uppercase tracking-wide text-violet-700 dark:text-violet-300">
-          Personalized
+          {t('hub.activities.personalized')}
         </p>
       )}
     </div>
@@ -136,7 +137,7 @@ const ActivityCard: React.FC<{
       </div>
       <div className="flex items-center gap-1 text-sm font-semibold text-teal-600 transition-transform group-hover:translate-x-0.5 dark:text-teal-300">
         <Play size={15} aria-hidden="true" />
-        {activity.activityManagerId ? 'Start mission' : 'Start conversation'}
+        {activity.activityManagerId ? t('hub.activities.startMission') : t('hub.activities.startConversation')}
       </div>
     </div>
   </div>
@@ -172,6 +173,7 @@ const GroupHeading: React.FC<{ group: AgeGroup }> = ({ group }) => {
 };
 
 const ActivitiesScreen: React.FC = () => {
+  const { t, focusLabel } = useHubI18n();
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const locationState = location.state as { initialAgeFilter?: AgeTabId; startMissionId?: string } | null;
@@ -201,13 +203,13 @@ const ActivitiesScreen: React.FC = () => {
   const allActivities = useMemo(() => flattenAgeBasedActivities(), []);
   const focusTabs = useMemo(
     () => [
-      { id: 'all' as const, label: 'All goals' },
+      { id: 'all' as const, label: t('hub.activities.allGoals') },
       ...FOCUS_ORDER.filter((focus) => allActivities.some((activity) => activity.focus === focus)).map((focus) => ({
         id: focus,
-        label: focus,
+        label: focusLabel(focus),
       })),
     ],
-    [allActivities]
+    [allActivities, focusLabel, t]
   );
 
   const filteredActivities = useMemo(
@@ -235,15 +237,15 @@ const ActivitiesScreen: React.FC = () => {
   const activeGroup =
     activeAge !== 'all' ? ageBasedActivities.find((candidate) => candidate.ageRange === activeAge) : undefined;
   const headingText = activeGroup
-    ? `Missions for ages ${activeGroup.ageRange}`
+    ? t('hub.activities.missionsForAges', { range: activeGroup.ageRange })
     : activeFocus !== 'all'
-      ? `${activeFocus} missions`
-      : 'All missions';
+      ? t('hub.activities.focusMissions', { focus: focusLabel(activeFocus) })
+      : t('hub.activities.allMissions');
   const subText = activeGroup
-    ? `${activeGroup.description}${activeFocus !== 'all' ? ` · focused on ${activeFocus.toLowerCase()}` : ''}`
+    ? `${activeGroup.description}${activeFocus !== 'all' ? t('hub.activities.focusedOn', { focus: focusLabel(activeFocus).toLowerCase() }) : ''}`
     : activeFocus !== 'all'
-      ? `Across all age groups, focused on ${activeFocus.toLowerCase()}`
-      : 'Browse every mission, grouped by age';
+      ? t('hub.activities.acrossAgesFocused', { focus: focusLabel(activeFocus).toLowerCase() })
+      : t('hub.activities.browseAll');
 
   const handleStart = (activity: FlattenedAgeBasedActivity) => {
     setActiveMission(activity);
@@ -265,14 +267,14 @@ const ActivitiesScreen: React.FC = () => {
   return (
     <HubPageLayout>
       <HubScreenHero
-        badge={`${allActivities.length} missions`}
-        title="Family privacy missions"
-        subtitle="Pick an age group below to find your next mission — each one starts with a real situation you talk through together."
+        badge={t('hub.activities.badge', { count: allActivities.length })}
+        title={t('hub.activities.title')}
+        subtitle={t('hub.activities.subtitle')}
         compact
       />
 
       <div className="sticky top-0 z-20 -mx-4 space-y-2 border-b border-gray-200 bg-gray-50/95 px-4 py-2 backdrop-blur-sm dark:border-gray-700 dark:bg-gray-950/95 sm:-mx-6 sm:px-6">
-        <div className="flex flex-wrap justify-center gap-1.5" role="tablist" aria-label="Filter by age group">
+        <div className="flex flex-wrap justify-center gap-1.5" role="tablist" aria-label={t('hub.activities.filterAge')}>
           <button
             role="tab"
             aria-selected={activeAge === 'all'}
@@ -283,7 +285,7 @@ const ActivitiesScreen: React.FC = () => {
                 : 'border-gray-200 bg-white text-gray-700 hover:border-teal-300 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200'
             }`}
           >
-            All ages
+            {t('hub.activities.allAges')}
           </button>
           {HUB_AGE_BANDS.map((band) => {
             const isActive = activeAge === band.range;
@@ -298,8 +300,10 @@ const ActivitiesScreen: React.FC = () => {
                 }`}
               >
                 <band.icon size={14} className="hidden sm:block" aria-hidden="true" />
-                <span>{band.shortLabel}</span>
-                <span className="hidden text-xs font-medium opacity-75 md:inline">{band.label}</span>
+                <span>{t(`hub.ageBands.${band.range}.shortLabel`)}</span>
+                <span className="hidden text-xs font-medium opacity-75 md:inline">
+                  {t(`hub.ageBands.${band.range}.label`)}
+                </span>
               </button>
             );
           })}
@@ -308,7 +312,7 @@ const ActivitiesScreen: React.FC = () => {
         <div
           className="flex gap-1.5 overflow-x-auto pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           role="toolbar"
-          aria-label="Filter by learning goal"
+          aria-label={t('hub.activities.filterGoal')}
         >
           {focusTabs.map((tab) => (
             <button
@@ -338,10 +342,10 @@ const ActivitiesScreen: React.FC = () => {
           <div className="flex shrink-0 flex-wrap items-center gap-1.5 text-[11px] font-medium sm:text-xs">
             <span className="inline-flex items-center gap-1 rounded-full bg-teal-50 px-2 py-0.5 text-teal-800 dark:bg-teal-900/30 dark:text-teal-200">
               <Sparkles size={11} aria-hidden="true" />
-              <strong className="font-bold tabular-nums">{filteredActivities.length}</strong> missions
+              <strong className="font-bold tabular-nums">{filteredActivities.length}</strong> {t('hub.activities.missionsCount')}
             </span>
             <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-200">
-              <strong className="font-bold tabular-nums">{completedCount}</strong> done
+              <strong className="font-bold tabular-nums">{completedCount}</strong> {t('hub.activities.doneCount')}
             </span>
             <span className="inline-flex items-center gap-1 rounded-full bg-indigo-50 px-2 py-0.5 text-indigo-800 dark:bg-indigo-900/30 dark:text-indigo-200">
               <strong className="font-bold tabular-nums">{totalMinutes}m</strong>
@@ -351,9 +355,9 @@ const ActivitiesScreen: React.FC = () => {
 
         {filteredActivities.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-gray-300 bg-white px-6 py-10 text-center dark:border-gray-700 dark:bg-gray-800">
-            <p className="text-base font-semibold text-gray-900 dark:text-white">No activities match that combination yet.</p>
+            <p className="text-base font-semibold text-gray-900 dark:text-white">{t('hub.activities.emptyTitle')}</p>
             <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
-              Try a different age band or switch back to All goals to uncover more family activities.
+              {t('hub.activities.emptyBody')}
             </p>
           </div>
         ) : showGroupedGrid ? (

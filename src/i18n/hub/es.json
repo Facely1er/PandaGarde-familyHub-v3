@@ -1,0 +1,265 @@
+{
+  "welcomeLead": "Misiones cortas de privacidad que hacen juntos. Situaciones reales de la escuela, los juegos y la vida social. Todo permanece en este teléfono u ordenador.",
+  "enterCta": "Agrega tu familia para empezar",
+  "dashboardEmpty": "Toca abajo para agregar tu primer hijo — solo nombre y edad. Sugeriremos las misiones adecuadas.",
+  "dashboardReady": "Empieza la misión de hoy abajo. Insignias y certificados están en Recorrido.",
+  "dashboardReadyStandalone": "Toca la misión de hoy abajo para empezar. Consulta Recorrido cuando quieras insignias o certificados.",
+  "nav": {
+    "skipToMain": "Ir al contenido principal",
+    "primary": "Navegación principal de Family Hub",
+    "openWebsite": "Abrir el sitio web de PandaGarde",
+    "backToWebsite": "Volver al sitio web de PandaGarde",
+    "site": "Sitio",
+    "dashboard": {
+      "label": "Panel — hoy y estadísticas rápidas",
+      "short": "Inicio"
+    },
+    "journey": {
+      "label": "Progreso de misiones — insignias y certificados",
+      "short": "Recorrido"
+    },
+    "activities": {
+      "label": "Misiones de privacidad para tu familia",
+      "short": "Misiones"
+    },
+    "kids": {
+      "label": "Perfiles familiares — agregar hijos y adultos",
+      "short": "Familia"
+    },
+    "settings": {
+      "label": "Ajustes y ayuda",
+      "short": "Ajustes"
+    }
+  },
+  "welcome": {
+    "title": "Bienvenido a tu",
+    "titleHighlight": "Family Hub",
+    "adventurePaths": "Tres caminos de aventura",
+    "whatsInside": "Qué incluye",
+    "websiteNote": "La revisión de huella y las guías para padres están en el sitio principal de PandaGarde — ábrelas cuando quieras junto con estas misiones.",
+    "privacyStrong": "Nada sale de este dispositivo.",
+    "privacyNote": "Sin cuenta ni registro — los perfiles y el progreso de tu familia permanecen aquí.",
+    "sections": {
+      "family": {
+        "title": "Agrega tu familia",
+        "description": "Nombre y edad de cada hijo — eso es todo lo que necesitamos para elegir las misiones adecuadas."
+      },
+      "mission": {
+        "title": "Hagan una misión juntos",
+        "description": "Unos 10 minutos cada una. Una situación real, una charla en familia y algo para probar en casa."
+      },
+      "progress": {
+        "title": "Sigue el progreso",
+        "description": "Insignias y certificados por las misiones que terminen — guardados solo en este dispositivo."
+      }
+    }
+  },
+  "settings": {
+    "title": "Ajustes",
+    "subtitle": "Administra tus preferencias y accede a recursos de ayuda.",
+    "language": "Idioma",
+    "languageHint": "Elige inglés, francés o español para los menús y etiquetas de Family Hub.",
+    "theme": "Tema",
+    "darkMode": "Modo oscuro",
+    "lightMode": "Modo claro",
+    "switchToLight": "Cambiar a modo claro",
+    "switchToDark": "Cambiar a modo oscuro",
+    "switchTheme": "Cambiar a {{mode}}",
+    "premiumTitle": "Misiones Premium",
+    "premiumActive": "Activo",
+    "premiumCustomize": "Abre cualquier misión → Personalizar para definir apps, nombres o tu propio escenario. Guardado solo en este dispositivo.",
+    "premiumUnlocked": "Desbloqueado el {{date}}{{source}}",
+    "premiumSignOut": "Cerrar sesión de Premium (este dispositivo)",
+    "premiumPricing": "{{price}} · próximamente en las tiendas de apps",
+    "premiumLearnMore": "Más información",
+    "premiumBody": "La revisión de huella sigue siendo gratuita. Premium personaliza los escenarios de misión con las apps y situaciones de tu familia — opcional, en este dispositivo.",
+    "premiumPilot": "¿Tienes un código piloto? Introdúcelo abajo antes del lanzamiento de suscripciones.",
+    "premiumUnlockCode": "Código de desbloqueo Premium",
+    "premiumUnlockPlaceholder": "Introducir código",
+    "premiumUnlock": "Desbloquear",
+    "premiumUnlockedMessage": "Premium desbloqueado en este dispositivo.",
+    "premiumUnlockFailed": "Error al desbloquear.",
+    "privacyTitle": "Privacidad",
+    "privacyBody": "Tu privacidad es importante para nosotros. Todos los datos se almacenan localmente en tu dispositivo y nunca se comparten con terceros.",
+    "viewPrivacyPolicy": "Ver política de privacidad",
+    "legalTitle": "Legal",
+    "terms": "Términos de servicio",
+    "cookies": "Política de cookies",
+    "accessibility": "Declaración de accesibilidad",
+    "legalOverview": "Resumen legal",
+    "helpTitle": "Ayuda y soporte",
+    "faq": "Preguntas frecuentes",
+    "contact": "Contactar soporte",
+    "backToWebsite": "Volver al sitio web de PandaGarde"
+  },
+  "dashboard": {
+    "welcomeRegion": "Bienvenido a Family Hub",
+    "welcomeTitle": "Estás en Family Hub — donde practican juntos.",
+    "welcomeBody": "Haz una misión corta hoy. El progreso y las insignias se guardan en este dispositivo.",
+    "stories": "Historias de Privacy Panda",
+    "footprint": "Revisión de huella",
+    "dismissWelcome": "Cerrar mensaje de bienvenida",
+    "howMissionsTitle": "Cómo funcionan las misiones",
+    "dismissHowMissions": "Cerrar cómo funcionan las misiones",
+    "howMissionsSteps": [
+      "Elige una misión en la pestaña Misiones — cada una toma de 5 a 15 minutos.",
+      "Háganla juntos: lean el escenario y luego conversen o jueguen la actividad.",
+      "Terminen para guardar el progreso y ganar insignias — consulta Recorrido para verlas."
+    ],
+    "badgeWeb": "Bienvenido de nuevo",
+    "badgeToday": "Hoy",
+    "titleEmpty": "Agrega tu familia para empezar",
+    "titleReady": "¿Listo para la misión de hoy?",
+    "addFirstMember": "Agregar tu primer miembro",
+    "profiles": "Perfiles",
+    "goalsDone": "Metas hechas",
+    "openGoals": "Metas abiertas",
+    "pickAgePath": "Elige un camino por edad",
+    "browseMissions": "Explorar misiones",
+    "browseMissionsHint": "Actividades y juegos según la edad",
+    "manageFamily": "Gestionar familia",
+    "manageFamilyHint": "Actualizar edades y aprendiz activo",
+    "suggestedNext": "Próximos pasos sugeridos"
+  },
+  "tour": {
+    "dialogLabel": "Recorrido de Family Hub",
+    "skip": "Saltar recorrido",
+    "stepOf": "Paso {{current}} de {{total}}",
+    "next": "Siguiente",
+    "getStarted": "Empezar",
+    "steps": [
+      {
+        "title": "Panel — empieza aquí",
+        "body": "Ve la misión de hoy y agrega miembros de la familia. Esta es tu pantalla de inicio."
+      },
+      {
+        "title": "Recorrido — insignias y certificados",
+        "body": "Ve las misiones que has terminado e imprime certificados para celebrar."
+      },
+      {
+        "title": "Misiones — elige una",
+        "body": "Actividades cortas adaptadas a la edad de tu hijo. Toca una para empezar juntos."
+      },
+      {
+        "title": "Familia — agrega a tus hijos",
+        "body": "Introduce el nombre y la edad de cada hijo. Así elegimos las misiones adecuadas."
+      }
+    ]
+  },
+  "activities": {
+    "badge": "{{count}} misiones",
+    "title": "Misiones de privacidad en familia",
+    "subtitle": "Elige un grupo de edad abajo para encontrar tu próxima misión — cada una empieza con una situación real para conversar juntos.",
+    "filterAge": "Filtrar por grupo de edad",
+    "filterGoal": "Filtrar por objetivo de aprendizaje",
+    "allAges": "Todas las edades",
+    "allGoals": "Todos los objetivos",
+    "missionsForAges": "Misiones para edades {{range}}",
+    "focusMissions": "Misiones de {{focus}}",
+    "allMissions": "Todas las misiones",
+    "focusedOn": " · enfocado en {{focus}}",
+    "acrossAgesFocused": "Todos los grupos de edad, enfocado en {{focus}}",
+    "browseAll": "Explorar todas las misiones, agrupadas por edad",
+    "missionsCount": "misiones",
+    "doneCount": "hechas",
+    "emptyTitle": "Ninguna actividad coincide con esa combinación por ahora.",
+    "emptyBody": "Prueba otra franja de edad o vuelve a Todos los objetivos para descubrir más actividades familiares.",
+    "featured": "Destacada",
+    "completed": "Completada",
+    "ages": "Edades {{range}}",
+    "forestGuide": "Tu guía del bosque",
+    "realLifeSituation": "Situación real",
+    "personalized": "Personalizada",
+    "startMission": "Empezar misión",
+    "startConversation": "Empezar conversación",
+    "startActivityAria": "Empezar actividad: {{name}}"
+  },
+  "mission": {
+    "exit": "Salir de la misión",
+    "familyMission": "Misión familiar",
+    "learningGoal": "Objetivo de aprendizaje:",
+    "forestGuide": "Guía del bosque",
+    "realLifeScenario": "Escenario real",
+    "personalizedFamily": "Personalizado para tu familia",
+    "familyPrompt": "Invitación familiar",
+    "discussionStarters": "Iniciadores de conversación",
+    "keyLearnings": "Aprendizajes clave",
+    "afterMission": "Después de esta misión",
+    "more": "Más",
+    "progress": "Progreso de la misión",
+    "stepReadTalk": "Leer y conversar",
+    "stepPractice": "Practicar",
+    "stepDone": "Listo",
+    "startInteractive": "Empezar actividad interactiva",
+    "hadConversation": "Tuvimos nuestra conversación en familia"
+  },
+  "premium": {
+    "label": "Premium",
+    "hint": "— usa las apps de tu hijo en los escenarios.",
+    "unlockInSettings": "Desbloquear en Ajustes"
+  },
+  "progress": {
+    "badge": "Recompensas familiares",
+    "title": "Progreso de misiones",
+    "subtitleEmpty": "Termina tu primera misión para ganar una insignia. Toca Misiones en el menú para elegir una.",
+    "subtitleProgress": "Has terminado {{completed}} de {{total}} misiones. ¡Haz otra para seguir!",
+    "activitiesDone": "Actividades hechas",
+    "ofAvailable": "de {{total}} disponibles",
+    "minutesLearning": "Minutos aprendiendo",
+    "avgScore": "Puntuación prom.",
+    "progressLabel": "Progreso de misiones",
+    "noneYet": "Aún no hay actividades completadas — ve a Misiones para empezar tu primera misión.",
+    "progressAria": "{{pct}}% de actividades completadas"
+  },
+  "kids": {
+    "badge": "Tu equipo",
+    "title": "Miembros de la familia",
+    "subtitle": "Agrega un nombre y edad para cada hijo o adolescente — adaptamos las misiones a su franja de edad.",
+    "emptyTitle": "¿Quién aprende contigo?",
+    "emptyBody": "Agrega un nombre y edad — sugeriremos automáticamente las misiones de privacidad adecuadas.",
+    "addFirst": "Agregar tu primer miembro",
+    "privacyNote": "Solo se necesitan un nombre y una edad — sin correo ni cuenta. Perfiles y progreso permanecen en este dispositivo.",
+    "privacyPolicy": "Política de privacidad",
+    "memberCount": "{{count}} miembro en este dispositivo",
+    "memberCount_plural": "{{count}} miembros en este dispositivo",
+    "addMember": "Agregar miembro",
+    "roleAge": "{{role}} · Edad {{age}}",
+    "practiceScore": "Puntuación de práctica de privacidad: {{score}}/100",
+    "activitiesFor": "Actividades {{label}} →",
+    "editMember": "Editar miembro",
+    "editName": "Editar {{name}}",
+    "viewProgress": "Ver progreso detallado de {{name}}",
+    "activeProgress": "Activo para misiones — ver progreso",
+    "setActiveProgress": "Establecer como activo y ver progreso",
+    "removeMember": "Eliminar miembro",
+    "removeName": "Quitar a {{name}} de la familia",
+    "avatar": "Avatar de {{label}}"
+  },
+  "ageBands": {
+    "pickAdventure": "Elige tu aventura",
+    "missionCount": "{{count}} misiones",
+    "5-8": {
+      "label": "Pequeños exploradores",
+      "shortLabel": "5–8 años",
+      "tagline": "Primeros pasos en el uso seguro"
+    },
+    "9-12": {
+      "label": "Detectives de privacidad",
+      "shortLabel": "9–12 años",
+      "tagline": "Juegos, chats y estafas"
+    },
+    "13-17": {
+      "label": "Ciudadanos digitales",
+      "shortLabel": "13–17 años",
+      "tagline": "Vida social y tu futuro yo"
+    }
+  },
+  "focus": {
+    "safeSharing": "Uso seguro al compartir",
+    "accountSecurity": "Seguridad de la cuenta",
+    "spottingScams": "Detectar estafas",
+    "privacySettings": "Ajustes de privacidad",
+    "digitalFootprint": "Huella digital",
+    "digitalRights": "Derechos digitales"
+  }
+}

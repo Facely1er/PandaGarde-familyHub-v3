@@ -20,6 +20,7 @@ import { StoryCharacterPortrait } from '../../components/stories/StoryCharacterP
 import RelatedStoryLink from './RelatedStoryLink';
 import MissionScenarioCustomize from './MissionScenarioCustomize';
 import { useFootprintAnalysis, useResolvedMissionScenario } from '../../hooks/useResolvedMissionScenario';
+import { useHubI18n } from '../hubI18n';
 
 export type MissionPhase = 'intro' | 'play' | 'complete';
 
@@ -35,16 +36,17 @@ const MissionStepProgress: React.FC<{ phase: MissionPhase; hasGame: boolean; com
   hasGame,
   compact = false,
 }) => {
+  const { t } = useHubI18n();
   const steps = hasGame
-    ? (['Read & talk', 'Practice', 'Done'] as const)
-    : (['Read & talk', 'Done'] as const);
+    ? ([t('hub.mission.stepReadTalk'), t('hub.mission.stepPractice'), t('hub.mission.stepDone')] as const)
+    : ([t('hub.mission.stepReadTalk'), t('hub.mission.stepDone')] as const);
   const phaseIndex: Record<MissionPhase, number> = hasGame
     ? { intro: 0, play: 1, complete: 2 }
     : { intro: 0, complete: 1 };
   const current = phaseIndex[phase];
 
   return (
-    <nav aria-label="Mission progress" className={compact ? 'w-full' : 'mx-auto w-full max-w-lg'}>
+    <nav aria-label={t('hub.mission.progress')} className={compact ? 'w-full' : 'mx-auto w-full max-w-lg'}>
       <ol className="flex items-center justify-between gap-1">
         {steps.map((label, index) => {
           const done = index < current;
@@ -85,7 +87,9 @@ const MissionIntroDetails: React.FC<{
   icon: React.ReactNode;
   children: React.ReactNode;
   defaultOpen?: boolean;
-}> = ({ title, icon, children, defaultOpen = false }) => (
+}> = ({ title, icon, children, defaultOpen = false }) => {
+  const { t } = useHubI18n();
+  return (
   <details
     open={defaultOpen}
     className="rounded-xl border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800"
@@ -95,13 +99,15 @@ const MissionIntroDetails: React.FC<{
         {icon}
         {title}
       </span>
-      <span className="shrink-0 text-xs font-medium text-gray-400 dark:text-gray-500">More</span>
+      <span className="shrink-0 text-xs font-medium text-gray-400 dark:text-gray-500">{t('hub.mission.more')}</span>
     </summary>
     <div className="border-t border-gray-100 px-3 pb-3 pt-2 dark:border-gray-700">{children}</div>
   </details>
-);
+  );
+};
 
 const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onExit, onStartNext }) => {
+  const { t } = useHubI18n();
   const hasGame = Boolean(activity.activityManagerId);
   const [phase, setPhase] = useState<MissionPhase>('intro');
   const [completionScore, setCompletionScore] = useState<number | undefined>();
@@ -149,13 +155,13 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
           type="button"
           onClick={onExit}
           className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg p-2 transition-colors hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 dark:hover:bg-gray-700"
-          aria-label="Exit mission"
+          aria-label={t('hub.mission.exit')}
         >
           <ArrowLeft size={20} />
         </button>
         <div className="min-w-0 flex-1">
           <p className="text-xs font-semibold uppercase tracking-wide text-teal-600 dark:text-teal-400">
-            Family mission
+            {t('hub.mission.familyMission')}
           </p>
           <h2 className="truncate text-lg font-semibold text-gray-900 dark:text-white">{activity.name}</h2>
         </div>
@@ -174,7 +180,7 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
               <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-300">{activity.description}</p>
               <div className="mt-2 flex flex-wrap gap-1.5 text-xs font-medium">
                 <span className="rounded-full bg-white px-2.5 py-0.5 text-teal-700 ring-1 ring-teal-200 dark:bg-gray-800 dark:text-teal-200 dark:ring-teal-700/50">
-                  Ages {activity.groupAgeRange}
+                  {t('hub.activities.ages', { range: activity.groupAgeRange })}
                 </span>
                 <span className="rounded-full bg-white px-2.5 py-0.5 text-gray-700 ring-1 ring-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:ring-gray-600">
                   {activity.duration}
@@ -187,7 +193,7 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
             </div>
 
             <p className="rounded-xl border border-gray-200 bg-white p-3 text-sm leading-relaxed text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200">
-              <span className="font-semibold text-gray-900 dark:text-white">Learning goal: </span>
+              <span className="font-semibold text-gray-900 dark:text-white">{t('hub.mission.learningGoal')} </span>
               {activity.learningObjective}
             </p>
 
@@ -196,7 +202,7 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
                 <StoryCharacterPortrait character={guide} size="sm" />
                 <div className="min-w-0">
                   <p className="text-[11px] font-semibold uppercase tracking-wide text-green-700 dark:text-green-300">
-                    Forest guide
+                    {t('hub.mission.forestGuide')}
                   </p>
                   <p className="text-sm font-semibold text-gray-900 dark:text-white">
                     {guide.name} · {guide.epithet}
@@ -207,12 +213,12 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
 
             <section className="rounded-xl border border-amber-200 bg-amber-50 p-3 dark:border-amber-700/40 dark:bg-amber-900/20">
               <p className="text-xs font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-300">
-                Real-life scenario
+                {t('hub.mission.realLifeScenario')}
               </p>
               <p className="mt-1.5 text-sm leading-relaxed text-amber-950 dark:text-amber-100">{scenario.text}</p>
               {scenario.isPersonalized && (
                 <p className="mt-1.5 text-xs font-medium text-amber-800 dark:text-amber-200">
-                  Personalized for your family
+                  {t('hub.mission.personalizedFamily')}
                 </p>
               )}
             </section>
@@ -230,14 +236,14 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
             <section className="rounded-xl border border-indigo-200 bg-indigo-50 p-3 dark:border-indigo-700/40 dark:bg-indigo-900/20">
               <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-indigo-700 dark:text-indigo-300">
                 <MessageCircleHeart size={14} aria-hidden="true" />
-                Family prompt
+                {t('hub.mission.familyPrompt')}
               </p>
               <p className="mt-1.5 text-sm leading-relaxed text-indigo-950 dark:text-indigo-100">{activity.familyPrompt}</p>
             </section>
 
             {activity.discussionPrompts.length > 0 && (
               <MissionIntroDetails
-                title="Discussion starters"
+                title={t('hub.mission.discussionStarters')}
                 icon={<MessageCircle size={14} className="text-violet-500" aria-hidden="true" />}
               >
                 <ul className="space-y-1.5">
@@ -252,7 +258,7 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
             )}
 
             <MissionIntroDetails
-              title="Key learnings"
+              title={t('hub.mission.keyLearnings')}
               icon={<BookOpen size={14} className="text-teal-600 dark:text-teal-400" aria-hidden="true" />}
             >
               <ul className="space-y-1.5">
@@ -268,7 +274,7 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
             </MissionIntroDetails>
 
             <MissionIntroDetails
-              title="After this mission"
+              title={t('hub.mission.afterMission')}
               icon={<Target size={14} className="text-emerald-600 dark:text-emerald-400" aria-hidden="true" />}
             >
               <p className="text-sm text-emerald-950 dark:text-emerald-100">{activity.nextStep}</p>
@@ -286,7 +292,7 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
                 className="inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-teal-600 px-4 py-3 text-base font-semibold text-white hover:bg-teal-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
               >
                 <Play size={18} aria-hidden="true" />
-                Start interactive activity
+                {t('hub.mission.startInteractive')}
               </button>
             ) : (
               <button
@@ -294,7 +300,7 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
                 onClick={() => finishMission(100)}
                 className="inline-flex min-h-[48px] w-full items-center justify-center rounded-xl bg-teal-600 px-4 py-3 text-base font-semibold text-white hover:bg-teal-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
               >
-                We had our family conversation
+                {t('hub.mission.hadConversation')}
               </button>
             )}
           </div>
