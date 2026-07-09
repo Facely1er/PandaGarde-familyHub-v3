@@ -118,9 +118,9 @@ const HomePage: React.FC = () => {
           </header>
 
           <div className="homepage-hero__actions">
-            <Link to={primaryCta.href} className="button button-primary inline-flex items-center justify-center gap-2">
+            <Link to={primaryCta.href} className="button button-primary inline-flex items-center justify-center gap-1.5">
               {primaryCta.label}
-              <ArrowRight size={18} aria-hidden />
+              <ArrowRight size={16} aria-hidden />
             </Link>
             <Link
               to="/digital-footprint"
@@ -129,7 +129,7 @@ const HomePage: React.FC = () => {
               {t('common.footprintReview')}
             </Link>
           </div>
-          <p className="mt-3 text-center text-sm text-gray-500 dark:text-gray-400">
+          <p className="homepage-hero__helper">
             {t('home.notSure')}{' '}
             <Link to="/how-it-works" className="font-medium text-green-700 hover:underline dark:text-green-400">
               {t('common.seeHowItWorks')}
