@@ -1,11 +1,8 @@
 /**
  * Dev-only store screenshot automation (VITE_STORE_SCREENSHOTS=true).
- * The iOS capture script drives navigation via a local HTTP server (no URL scheme dialogs).
+ * The iOS capture script writes public/capture-target.json before each install.
  */
 import type { NavigateFunction } from 'react-router-dom';
-
-export const STORE_CAPTURE_SERVER_PORT = 4177;
-export const STORE_CAPTURE_SERVER = `http://127.0.0.1:${STORE_CAPTURE_SERVER_PORT}`;
 
 export const STORE_SCREENSHOTS = [
   { id: '01-login', path: '/', auth: false },
@@ -73,7 +70,6 @@ export function isStoreScreenshotBuild(): boolean {
   return import.meta.env.VITE_STORE_SCREENSHOTS === 'true';
 }
 
-/** Hide first-run overlays so simulator captures stay clean. */
 export function suppressHubOnboardingForCapture(): void {
   localStorage.setItem('pandagarde_hub_tour_done', 'true');
   localStorage.setItem('pandagarde_hub_welcome_dismissed', 'true');
@@ -85,6 +81,10 @@ export function initStoreScreenshotEarly(): void {
     return;
   }
   suppressHubOnboardingForCapture();
+}
+
+function isStoreScreenshotId(value: string): value is StoreScreenshotId {
+  return STORE_SCREENSHOTS.some((screen) => screen.id === value);
 }
 
 export function applyStoreScreenshotSeed(auth: boolean): void {
@@ -106,55 +106,41 @@ export function applyStoreScreenshotSeed(auth: boolean): void {
   }
 }
 
-function navigateToScreen(navigate: NavigateFunction, screenId: StoreScreenshotId): void {
-  const screen = STORE_SCREENSHOTS.find((entry) => entry.id === screenId);
+/** Read capture-target.json bundled by scripts/capture-ios-simulator-screenshots.mjs */
+export async function bootstrapStoreScreenshotFromBundle(): Promise<(typeof STORE_SCREENSHOTS)[number] | null> {
+  if (!isStoreScreenshotBuild()) {
+    return null;
+  }
+  try {
+    const response = await fetch(`/capture-target.json?ts=${Date.now()}`, { cache: 'no-store' });
+    if (!response.ok) {
+      return null;
+    }
+    const payload = (await response.json()) as { screen?: string };
+    const screenId = payload.screen;
+    if (!screenId || !isStoreScreenshotId(screenId)) {
+      return null;
+    }
+    return STORE_SCREENSHOTS.find((screen) => screen.id === screenId) ?? null;
+  } catch {
+    return null;
+  }
+}
+
+/** Apply bundled target before React mounts (AuthProvider reads localStorage on init). */
+export async function prepareStoreScreenshotBoot(): Promise<string | null> {
+  if (!isStoreScreenshotBuild()) {
+    return null;
+  }
+  const screen = await bootstrapStoreScreenshotFromBundle();
   if (!screen) {
-    return;
+    return null;
   }
   applyStoreScreenshotSeed(screen.auth);
-  navigate(screen.path);
+  return screen.path;
 }
 
-function isStoreScreenshotId(value: string): value is StoreScreenshotId {
-  return STORE_SCREENSHOTS.some((screen) => screen.id === value);
-}
-
-/** Poll the local capture server so simctl never needs familyhub:// openurl (avoids iOS dialog). */
-export function initStoreScreenshotMode(navigate: NavigateFunction): () => void {
-  if (!isStoreScreenshotBuild()) {
-    return () => undefined;
-  }
-
-  let lastScreen: StoreScreenshotId | null = null;
-  let active = true;
-
-  const poll = async () => {
-    if (!active) {
-      return;
-    }
-    try {
-      const response = await fetch(`${STORE_CAPTURE_SERVER}/screen`);
-      if (!response.ok) {
-        return;
-      }
-      const payload = (await response.json()) as { screen?: string | null };
-      const next = payload.screen ?? null;
-      if (next && isStoreScreenshotId(next) && next !== lastScreen) {
-        lastScreen = next;
-        navigateToScreen(navigate, next);
-      }
-    } catch {
-      // Capture server not running yet.
-    }
-  };
-
-  const timer = window.setInterval(() => {
-    void poll();
-  }, 400);
-  void poll();
-
-  return () => {
-    active = false;
-    window.clearInterval(timer);
-  };
+/** No-op — bootstrapping happens in familyhub-main before render. */
+export function initStoreScreenshotMode(_navigate: NavigateFunction): () => void {
+  return () => undefined;
 }
