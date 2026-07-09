@@ -29,7 +29,7 @@ const HubScreenHero: React.FC<HubScreenHeroProps> = ({
     <div className="relative flex flex-row items-start gap-3 sm:gap-4">
       {mascot === 'panda' && (
         <HubBrandLogo
-          size={compact ? 'md' : 'lg'}
+          size={compact ? 'sm' : 'lg'}
           variant="plain"
           animated={!compact}
         />

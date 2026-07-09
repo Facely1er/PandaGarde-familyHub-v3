@@ -12,6 +12,7 @@ import { hubPaths } from '../hubPaths';
 import HubPageLayout from '../components/HubPageLayout';
 import HubScreenHero from '../components/HubScreenHero';
 import HubWebsiteLink from '../components/HubWebsiteLink';
+import { hubTheme } from '../hubTheme';
 import { hubAgeBandForAge, HUB_AGE_BANDS } from '../hubAgeBands';
 
 const ChildProgressDetail = lazy(() => import('../../components/ChildProgressDetail'));
@@ -148,65 +149,70 @@ const KidsScreen: React.FC = () => {
       <HubScreenHero
         badge="Your crew"
         title="Family members"
-        subtitle="Add each child's name and age—that's how we pick the right missions. Tap Add Member to start."
+        subtitle="Add a first name and age for each child or teen — we match missions to their age band."
         compact
       />
-      <div className="flex items-center justify-between">
-        <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
-          {familyMembers.length === 0
-            ? 'No one added yet — start with one child or teen.'
-            : `${familyMembers.length} member${familyMembers.length === 1 ? '' : 's'} on this device`}
-        </p>
-        <button
-          ref={addMemberTriggerRef}
-          type="button"
-          onClick={() => setShowAddMember(true)}
-          className="flex items-center gap-2 bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-teal-700 transition-colors min-h-[44px]"
-        >
-          <Plus size={18} aria-hidden="true" />
-          <span>Add Member</span>
-        </button>
-      </div>
 
       {familyMembers.length === 0 ? (
-        <div className="rounded-3xl border border-dashed border-teal-200 bg-teal-50/50 py-12 text-center dark:border-teal-700 dark:bg-teal-900/10">
-          <div className="mx-auto mb-4 flex justify-center gap-3" aria-hidden="true">
-            {HUB_AGE_BANDS.map((b) => {
-              const Icon = b.icon;
-              return (
-                <span
-                  key={b.range}
-                  className={`flex h-10 w-10 items-center justify-center rounded-xl ${b.iconBadgeClass}`}
-                >
-                  <Icon size={20} />
-                </span>
-              );
-            })}
+        <>
+          <div className={`${hubTheme.card} flex flex-col items-center px-4 py-8 text-center sm:px-6 sm:py-10`}>
+            <div className="mb-4 flex justify-center gap-2.5" aria-hidden="true">
+              {HUB_AGE_BANDS.map((b) => {
+                const Icon = b.icon;
+                return (
+                  <span
+                    key={b.range}
+                    className={`flex h-9 w-9 items-center justify-center rounded-xl ${b.iconBadgeClass}`}
+                  >
+                    <Icon size={18} />
+                  </span>
+                );
+              })}
+            </div>
+            <h2 className="mb-2 text-lg font-bold text-gray-900 dark:text-white sm:text-xl">
+              Who is learning with you?
+            </h2>
+            <p className="mb-6 max-w-sm text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+              Add a name and age — we&apos;ll suggest the right privacy missions automatically.
+            </p>
+            <button
+              ref={addMemberTriggerRef}
+              type="button"
+              onClick={() => setShowAddMember(true)}
+              className="inline-flex w-full max-w-xs items-center justify-center gap-2 rounded-xl bg-teal-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-teal-700 min-h-[44px] sm:w-auto"
+            >
+              <Plus size={18} aria-hidden="true" />
+              Add your first member
+            </button>
           </div>
-          <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-white">Who is learning with you?</h3>
-          <p className="mx-auto mb-6 max-w-sm text-gray-600 dark:text-gray-400">
-            Add a name and age — we&apos;ll suggest the right privacy missions automatically.
-          </p>
-          <button
-            type="button"
-            onClick={() => setShowAddMember(true)}
-            className="bg-teal-600 text-white px-6 py-3 rounded-lg hover:bg-teal-700 transition-colors font-semibold min-h-[44px]"
-          >
-            Add Your First Member
-          </button>
-          <p className="mx-auto mt-6 flex max-w-sm items-start justify-center gap-1.5 px-4 text-xs text-gray-500 dark:text-gray-400">
+          <p className="flex items-start gap-2 text-left text-xs leading-relaxed text-gray-500 dark:text-gray-400">
             <Lock size={14} className="mt-0.5 shrink-0" aria-hidden="true" />
             <span>
-              Privacy notice: only a first name and age are needed — no email, no account. Nothing is
-              sent to us; profiles and progress stay on this device.{' '}
+              Only a first name and age are needed — no email or account. Profiles and progress stay on
+              this device.{' '}
               <HubWebsiteLink path="/privacy" className="underline hover:text-teal-700 dark:hover:text-teal-300">
                 Privacy policy
               </HubWebsiteLink>
             </span>
           </p>
-        </div>
+        </>
       ) : (
-        <div className="space-y-4">
+        <>
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+              {`${familyMembers.length} member${familyMembers.length === 1 ? '' : 's'} on this device`}
+            </p>
+            <button
+              ref={addMemberTriggerRef}
+              type="button"
+              onClick={() => setShowAddMember(true)}
+              className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-teal-600 px-4 py-2.5 text-white transition-colors hover:bg-teal-700 min-h-[44px] sm:w-auto"
+            >
+              <Plus size={18} aria-hidden="true" />
+              <span>Add member</span>
+            </button>
+          </div>
+          <div className="space-y-4">
           {familyMembers.map((member) => {
             const ageGroup = getAgeGroup(member.age);
             const band = hubAgeBandForAge(member.age);
@@ -293,7 +299,8 @@ const KidsScreen: React.FC = () => {
               </div>
             );
           })}
-        </div>
+          </div>
+        </>
       )}
 
       {showAddMember && (

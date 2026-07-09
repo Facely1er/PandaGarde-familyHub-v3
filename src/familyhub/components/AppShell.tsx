@@ -158,8 +158,11 @@ const AppShell: React.FC = () => {
                 <h1 className="whitespace-nowrap font-bold text-teal-700 dark:text-teal-400 text-[length:clamp(10px,2.75vw,12px)]">
                   {HUB_DISPLAY_NAME}
                 </h1>
-                <p className="whitespace-nowrap font-medium text-gray-500 dark:text-gray-400 text-[length:clamp(8px,2.2vw,10px)]">
-                  {currentTab.label}
+                <p
+                  className="whitespace-nowrap font-medium text-gray-500 dark:text-gray-400 text-[length:clamp(8px,2.2vw,10px)]"
+                  title={currentTab.label}
+                >
+                  {currentTab.shortLabel}
                 </p>
               </div>
             </div>
