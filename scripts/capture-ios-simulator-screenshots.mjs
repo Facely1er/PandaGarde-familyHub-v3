@@ -100,12 +100,23 @@ function resolveSimulatorUdid(name) {
 }
 
 function bootSimulator(udid, name) {
-  run('xcrun', ['simctl', 'shutdown', udid], { allowFail: true });
-  sleep(1500);
-  console.log(`[ios-screenshots] Booting ${name}…`);
-  run('xcrun', ['simctl', 'boot', udid]);
+  const state = run('xcrun', ['simctl', 'list', 'devices', '-j'], { quiet: true });
+  const data = JSON.parse(state.stdout);
+  let booted = false;
+  for (const devs of Object.values(data.devices)) {
+    const match = devs.find((d) => d.udid === udid);
+    if (match?.state === 'Booted') {
+      booted = true;
+      break;
+    }
+  }
+  if (!booted) {
+    console.log(`[ios-screenshots] Booting ${name}…`);
+    run('xcrun', ['simctl', 'boot', udid]);
+    sleep(3000);
+  }
   run('open', ['-a', 'Simulator', '--args', '-CurrentDeviceUDID', udid], { allowFail: true });
-  sleep(3000);
+  sleep(2000);
 }
 
 function prepareWebBundle() {
