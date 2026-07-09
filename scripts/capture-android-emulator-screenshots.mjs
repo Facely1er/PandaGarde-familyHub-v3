@@ -26,7 +26,7 @@ import {
   compositeWithDeviceFrame,
   FRAMED_DEVICE_PROFILES,
 } from './lib/store-device-frames.mjs';
-import { CAPTURE_SCREENS, injectCaptureBootIntoHtml } from './lib/store-capture-boot.mjs';
+import { CAPTURE_SCREENS } from './lib/store-capture-boot.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const bundleId = 'com.pandagarde.familyhub';
@@ -138,11 +138,15 @@ async function ensureEmulator(avd = defaultAvd) {
   await waitForBoot();
 }
 
-function prepareWebBundle() {
-  console.log('[android-screenshots] Building Family Hub with VITE_STORE_SCREENSHOTS=true…');
+function buildWebBundleForScreen(screenId) {
+  console.log(`[android-screenshots] Building web bundle for ${screenId}…`);
   run('npm', ['run', 'build:familyhub'], {
-    env: { ...process.env, VITE_STORE_SCREENSHOTS: 'true' },
-    label: 'build:familyhub',
+    env: {
+      ...process.env,
+      VITE_STORE_SCREENSHOTS: 'true',
+      VITE_CAPTURE_SCREEN: screenId,
+    },
+    label: `build:familyhub (${screenId})`,
   });
 
   const distSw = path.join(distDir, 'sw.js');
@@ -165,22 +169,6 @@ function buildDebugApk() {
   if (!fs.existsSync(debugApk)) {
     throw new Error(`Debug APK not found at ${debugApk}`);
   }
-}
-
-function patchHtmlForScreen(screenId) {
-  const source = fs.existsSync(distIndex)
-    ? distIndex
-    : fs.existsSync(path.join(distDir, 'familyhub.html'))
-      ? path.join(distDir, 'familyhub.html')
-      : androidIndex;
-  const html = fs.readFileSync(source, 'utf8');
-  const patched = injectCaptureBootIntoHtml(html, screenId);
-  fs.writeFileSync(distIndex, patched);
-  if (fs.existsSync(path.join(distDir, 'familyhub.html'))) {
-    fs.writeFileSync(path.join(distDir, 'familyhub.html'), patched);
-  }
-  fs.mkdirSync(androidPublic, { recursive: true });
-  fs.writeFileSync(androidIndex, patched);
 }
 
 function screencapToFile(outPath) {
@@ -207,17 +195,38 @@ async function normalizeRaw(buffer) {
     .toBuffer();
 }
 
+function parseOnlyFilter() {
+  const onlyArg = process.argv.find((arg) => arg.startsWith('--only='));
+  if (!onlyArg) {
+    return null;
+  }
+  const ids = onlyArg
+    .slice('--only='.length)
+    .split(',')
+    .map((id) => id.trim())
+    .filter(Boolean);
+  return ids.length ? new Set(ids) : null;
+}
+
 async function captureAll() {
+  const only = parseOnlyFilter();
+  const screens = only
+    ? CAPTURE_SCREENS.filter((screen) => only.has(screen.id))
+    : CAPTURE_SCREENS;
+
+  if (!screens.length) {
+    throw new Error('No capture screens matched --only filter');
+  }
+
   fs.mkdirSync(outRaw, { recursive: true });
   fs.mkdirSync(outFramed, { recursive: true });
 
   adb(['shell', 'settings', 'put', 'system', 'show_navigation_bar', '1']);
   adb(['shell', 'settings', 'put', 'secure', 'navigation_mode', '2']);
 
-  for (const screen of CAPTURE_SCREENS) {
-    console.log(`[android-screenshots] ${screen.id} — patch, install, launch`);
-    patchHtmlForScreen(screen.id);
-    run('npx', ['cap', 'copy', 'android'], { allowFail: false });
+  for (const screen of screens) {
+    console.log(`[android-screenshots] ${screen.id} — build, install, launch`);
+    buildWebBundleForScreen(screen.id);
     buildDebugApk();
 
     adb(['uninstall', bundleId], { allowFail: true });
@@ -231,6 +240,7 @@ async function captureAll() {
       console.log(`[android-screenshots] Waiting for ${screen.id} content via WebView CDP…`);
       await waitForAndroidScreenContent(adbPath, screen.waitFor, {
         scrollLoginCta: screen.id === '01-login',
+        contentRoot: screen.contentRoot ?? '#family-hub-main',
       });
     } catch (error) {
       console.warn(
@@ -261,16 +271,7 @@ async function captureAll() {
 }
 
 async function main() {
-  const doBuild = process.argv.includes('--build') || !fs.existsSync(debugApk);
-
   await ensureEmulator();
-
-  if (doBuild || !fs.existsSync(distIndex)) {
-    prepareWebBundle();
-  } else {
-    console.log('[android-screenshots] Reusing web bundle (pass --build to rebuild)');
-  }
-
   await captureAll();
 
   console.log('\n[android-screenshots] Done.');

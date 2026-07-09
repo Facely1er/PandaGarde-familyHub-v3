@@ -8,10 +8,12 @@ import AgeBandStrip from '../../familyhub/components/AgeBandStrip';
 import HubBrandLogo from '../../familyhub/components/HubBrandLogo';
 import HubWebsiteLink from '../../familyhub/components/HubWebsiteLink';
 import { hubTheme } from '../../familyhub/hubTheme';
+import { useStoreCaptureReady } from '../../familyhub/storeScreenshotMode';
 
 const footerLinkClass = 'underline hover:text-teal-700 dark:hover:text-teal-300';
 
 const LoginPage: React.FC = () => {
+  useStoreCaptureReady();
   const navigate = useNavigate();
   const location = useLocation();
   const { signInLocally } = useAuth();

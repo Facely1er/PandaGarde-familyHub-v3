@@ -28,7 +28,7 @@ Family privacy missions
 ## Short description (Google Play, 80 chars)
 
 ```
-18 family privacy missions, ages 5–17. Practice, talk, fix—on your device only.
+18 family privacy missions, ages 5 to 17. Practice, talk, fix — device only.
 ```
 
 ---

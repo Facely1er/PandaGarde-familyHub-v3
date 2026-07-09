@@ -143,8 +143,35 @@ async function getWebViewPage(adbPath) {
   return page.webSocketDebuggerUrl;
 }
 
+function buildContentProbeExpression(contentRoot = '#family-hub-main') {
+  const selector = JSON.stringify(contentRoot);
+  return `(() => {
+    const root = document.querySelector(${selector}) || document.body;
+    const text = root.innerText || '';
+    const hasSpinner = !!root.querySelector('[class*="animate-spin"]');
+    const ready = window.__PG_CAPTURE_READY__ === true;
+    return { text, hasSpinner, ready };
+  })()`;
+}
+
+function isCaptureContentReady(probe, patterns) {
+  if (!probe || probe.hasSpinner || probe.ready !== true) {
+    return false;
+  }
+  if (!patterns.length) {
+    return true;
+  }
+  return matchesPatterns(probe.text, patterns);
+}
+
+function matchesPatterns(text, patterns) {
+  return patterns.some((pattern) => new RegExp(pattern, 'i').test(text));
+}
+
 export async function waitForAndroidScreenContent(adbPath, patterns, options = {}) {
   const timeoutMs = options.timeoutMs ?? 90_000;
+  const contentRoot = options.contentRoot ?? '#family-hub-main';
+  const probeExpression = buildContentProbeExpression(contentRoot);
   const wsUrl = await getWebViewPage(adbPath);
   const session = new CdpSession(wsUrl);
   await session.open();
@@ -153,21 +180,15 @@ export async function waitForAndroidScreenContent(adbPath, patterns, options = {
     const started = Date.now();
     const patternSource = patterns.map((pattern) => String(pattern));
     while (Date.now() - started < timeoutMs) {
-      const text = await session.evaluate('document.body ? document.body.innerText : ""');
-      if (
-        typeof text === 'string' &&
-        patternSource.some((pattern) => new RegExp(pattern, 'i').test(text))
-      ) {
+      const probe = await session.evaluate(probeExpression);
+      if (isCaptureContentReady(probe, patternSource)) {
         break;
       }
       await delay(500);
     }
 
-    const finalText = await session.evaluate('document.body ? document.body.innerText : ""');
-    if (
-      typeof finalText !== 'string' ||
-      !patternSource.some((pattern) => new RegExp(pattern, 'i').test(finalText))
-    ) {
+    const finalProbe = await session.evaluate(probeExpression);
+    if (!isCaptureContentReady(finalProbe, patternSource)) {
       throw new Error(`Timed out waiting for screen text: ${patternSource.join(' | ')}`);
     }
 
@@ -177,10 +198,15 @@ export async function waitForAndroidScreenContent(adbPath, patterns, options = {
           const buttons = Array.from(document.querySelectorAll('button'));
           const target = buttons.find((button) => /let's go!/i.test(button.textContent || ''));
           if (target) {
-            target.scrollIntoView({ block: 'center' });
+            target.scrollIntoView({ block: 'center', behavior: 'instant' });
+          }
+          const page = document.querySelector('.hub-standalone-page');
+          if (page) {
+            page.scrollTop = 0;
           }
         })()
       `);
+      await delay(600);
     } else {
       await session.evaluate(`
         (() => {

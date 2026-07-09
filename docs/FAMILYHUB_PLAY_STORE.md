@@ -128,7 +128,7 @@ Welcome to PandaGarde Family Hub! 18 privacy missions for ages 5–17, family di
 | Field | Value |
 |-------|--------|
 | App name | `PandaGarde Family Hub` |
-| Short description (80 chars) | `18 family privacy missions, ages 5–17. Practice, talk, fix—on your device only.` |
+| Short description (80 chars) | `18 family privacy missions, ages 5 to 17. Practice, talk, fix — device only.` |
 | Full description | [FAMILYHUB_APP_STORE_COPY.md](./FAMILYHUB_APP_STORE_COPY.md) § Full description |
 | App icon | `store-assets/play-store-icon-512.png` |
 | Feature graphic | `store-assets/play-feature-graphic-1024x500.png` |

@@ -5,49 +5,56 @@ export const CAPTURE_SCREENS = [
     path: '/',
     auth: false,
     waitMs: 9000,
-    waitFor: ["Let's go!"],
+    waitFor: ["Let's go!", 'Works offline'],
+    contentRoot: '.hub-standalone-page',
   },
   {
     id: '02-dashboard',
     path: '/dashboard',
     auth: true,
-    waitMs: 8000,
-    waitFor: ["Today's mission", 'Browse missions', 'Family Hub'],
+    waitMs: 10000,
+    waitFor: ["Ready for today's mission", "Tap today's mission", 'Start mission'],
+    contentRoot: '#family-hub-main',
   },
   {
     id: '03-activities',
     path: '/activities',
     auth: true,
     waitMs: 12000,
-    waitFor: ['All missions', 'Real-life situation'],
+    waitFor: ['Family privacy missions', 'Browse every mission', 'All missions'],
+    contentRoot: '#family-hub-main',
   },
   {
     id: '04-mission-intro',
     path: '/activities?mission=pack-digital-backpack',
     auth: true,
-    waitMs: 8000,
-    waitFor: ['Real-life scenario', 'Family prompt'],
+    waitMs: 10000,
+    waitFor: ['Pack Your Digital Backpack', 'Real-life scenario', 'Family prompt'],
+    contentRoot: '#family-hub-main',
   },
   {
     id: '05-journey',
     path: '/journey',
     auth: true,
-    waitMs: 8000,
-    waitFor: ['Mission progress', 'Family rewards'],
+    waitMs: 10000,
+    waitFor: ['Mission progress', 'Family rewards', 'Forest friends'],
+    contentRoot: '#family-hub-main',
   },
   {
     id: '06-kids',
     path: '/kids',
     auth: true,
-    waitMs: 8000,
+    waitMs: 10000,
     waitFor: ['Family members', 'Maya', 'Jordan'],
+    contentRoot: '#family-hub-main',
   },
   {
     id: '07-settings',
     path: '/settings',
     auth: true,
-    waitMs: 8000,
-    waitFor: ['Settings', 'Privacy Policy', 'Help & Support'],
+    waitMs: 10000,
+    waitFor: ['Manage your app preferences', 'View Privacy Policy', 'Light mode'],
+    contentRoot: '#family-hub-main',
   },
 ];
 
@@ -123,7 +130,7 @@ localStorage.removeItem('pandagarde_hub_welcomed');
 localStorage.removeItem('pandagarde_family');
 localStorage.removeItem('pandagarde_progress');`;
 
-  return `<script id="${CAPTURE_BOOT_TAG}">window.__PG_CAPTURE_SCREEN__=${JSON.stringify(screenId)};window.__PG_STORE_CAPTURE__=true;(function(){try{localStorage.setItem('pandagarde-theme','light');localStorage.setItem('pandagarde-language','en');localStorage.setItem('pandagarde_hub_origin','standalone');localStorage.setItem('pandagarde_hub_tour_done','true');localStorage.setItem('pandagarde_hub_welcome_dismissed','true');localStorage.setItem('pandagarde_hub_mission_hint_dismissed','true');${authSeed}history.replaceState(null,'',${pathJson});}catch(e){}})();</script>`;
+  return `<script id="${CAPTURE_BOOT_TAG}">window.__PG_CAPTURE_SCREEN__=${JSON.stringify(screenId)};window.__PG_STORE_CAPTURE__=true;window.__PG_CAPTURE_READY__=false;(function(){try{localStorage.setItem('pandagarde-theme','light');localStorage.setItem('pandagarde-language','en');localStorage.setItem('pandagarde_hub_origin','standalone');localStorage.setItem('pandagarde_hub_tour_done','true');localStorage.setItem('pandagarde_hub_welcome_dismissed','true');localStorage.setItem('pandagarde_hub_mission_hint_dismissed','true');${authSeed}history.replaceState(null,'',${pathJson});}catch(e){}})();</script>`;
 }
 
 export function injectCaptureBootIntoHtml(html, screenId) {

@@ -13,6 +13,7 @@ import {
   unlockPremiumWithCode,
 } from '../../lib/premiumEntitlement';
 import { HUB_SUPPORT_EMAIL } from '../constants';
+import { useStoreCaptureReady } from '../storeScreenshotMode';
 
 const externalLinkClass =
   'inline-flex items-center gap-1.5 text-sm font-medium text-teal-600 hover:underline dark:text-teal-400';
@@ -21,6 +22,7 @@ const settingsInlineRow =
   'flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3';
 
 const SettingsScreen: React.FC = () => {
+  useStoreCaptureReady();
   const { t } = useHubI18n();
   const unlockInputId = useId();
   const [premiumActive, setPremiumActive] = useState(() => isPremiumActive());

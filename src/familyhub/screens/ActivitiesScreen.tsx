@@ -20,6 +20,7 @@ import { StoryCharacterPortrait } from '../../components/stories/StoryCharacterP
 import RelatedStoryLink from '../components/RelatedStoryLink';
 import { useResolvedMissionScenario } from '../../hooks/useResolvedMissionScenario';
 import { useHubI18n } from '../hubI18n';
+import { useStoreCaptureReady } from '../storeScreenshotMode';
 
 const FOCUS_ORDER: ActivityFocus[] = [
   'Safe sharing',
@@ -180,6 +181,7 @@ const GroupHeading: React.FC<{ group: AgeGroup }> = ({ group }) => {
 };
 
 const ActivitiesScreen: React.FC = () => {
+  useStoreCaptureReady();
   const { t, focusLabel } = useHubI18n();
   const location = useLocation();
   const [searchParams] = useSearchParams();

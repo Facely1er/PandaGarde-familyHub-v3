@@ -15,6 +15,7 @@ import HubWebsiteLink from '../components/HubWebsiteLink';
 import { hubTheme } from '../hubTheme';
 import { hubAgeBandForAge, HUB_AGE_BANDS } from '../hubAgeBands';
 import { useHubI18n } from '../hubI18n';
+import { useStoreCaptureReady } from '../storeScreenshotMode';
 
 const ChildProgressDetail = lazy(() => import('../../components/ChildProgressDetail'));
 
@@ -39,6 +40,7 @@ function getAgeGroup(age: number, labelForRange: (range: '5-8' | '9-12' | '13-17
 }
 
 const KidsScreen: React.FC = () => {
+  useStoreCaptureReady();
   const { t, ageBandLabel, getRoleLabel } = useHubI18n();
   const { members: familyMembers, syncing, addMember, updateMember, removeMember } = useHubFamilyMembers();
   const { calculateMemberScore, removeMemberProgress } = useFamilyProgress();

@@ -117,7 +117,7 @@ Create app → package name **`com.pandagarde.familyhub`** → upload AAB to **I
 | Field | Paste |
 |-------|--------|
 | **App name** | `PandaGarde Family Hub` |
-| **Short description** (80 chars) | `18 family privacy missions, ages 5–17. Practice, talk, fix—on your device only.` |
+| **Short description** (80 chars) | `18 family privacy missions, ages 5 to 17. Practice, talk, fix — device only.` |
 | **Full description** | See [Full description](#full-description-both-stores) below |
 | **App icon** | 512×512 PNG → `store-assets/play-store-icon-512.png` (`npm run assets:store`) |
 | **Feature graphic** | 1024×500 → `store-assets/play-feature-graphic-1024x500.png` |

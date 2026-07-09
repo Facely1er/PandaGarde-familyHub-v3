@@ -12,7 +12,7 @@ import TodayMissionCard from '../components/TodayMissionCard';
 import { getHubOrigin, touchHubStreak } from '../../lib/hubMission';
 import { hubPaths } from '../hubPaths';
 import HubWebsiteLink from '../components/HubWebsiteLink';
-import { isStoreScreenshotBuild } from '../storeScreenshotMode';
+import { isStoreScreenshotBuild, useStoreCaptureReady } from '../storeScreenshotMode';
 
 interface FamilyGoal {
   completed?: boolean;
@@ -107,6 +107,7 @@ const HowMissionsWorkCard: React.FC<{ onDismiss: () => void }> = ({ onDismiss })
 };
 
 const DashboardScreen: React.FC = () => {
+  useStoreCaptureReady();
   const { t } = useHubI18n();
   const { members: familyMembers } = useHubFamilyMembers();
   const [familyGoals] = useLocalStorage<FamilyGoal[]>('pandagarde_family_goals', []);

@@ -18,6 +18,7 @@ import HubScreenHero from '../components/HubScreenHero';
 import HubWebsiteLink from '../components/HubWebsiteLink';
 import { hubPaths } from '../hubPaths';
 import { useHubI18n } from '../hubI18n';
+import { useStoreCaptureReady } from '../storeScreenshotMode';
 
 const ACHIEVEMENT_ICONS: Record<string, LucideIcon> = {
   first_activity: Sprout,
@@ -91,6 +92,7 @@ interface ProgressScreenProps {
 }
 
 const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => {
+  useStoreCaptureReady();
   const { t, i18n, focusLabel, characterEpithet, getMissionName } = useHubI18n();
   const [showCertificates, setShowCertificates] = useState(false);
   const [showProgressExport, setShowProgressExport] = useState(false);

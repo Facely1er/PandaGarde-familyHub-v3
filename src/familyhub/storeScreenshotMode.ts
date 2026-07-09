@@ -1,7 +1,8 @@
 /**
  * Dev-only store screenshot automation (VITE_STORE_SCREENSHOTS=true).
- * The iOS capture script sets VITE_CAPTURE_SCREEN per build (most reliable).
+ * Capture scripts set VITE_CAPTURE_SCREEN per build so each cold launch lands on the right route.
  */
+import { useEffect } from 'react';
 import type { NavigateFunction } from 'react-router-dom';
 
 export const STORE_SCREENSHOTS = [
@@ -19,6 +20,7 @@ export type StoreScreenshotId = (typeof STORE_SCREENSHOTS)[number]['id'];
 declare global {
   interface Window {
     __PG_STORE_CAPTURE__?: boolean;
+    __PG_CAPTURE_READY__?: boolean;
   }
 }
 
@@ -76,6 +78,16 @@ export function isStoreScreenshotBuild(): boolean {
   return import.meta.env.VITE_STORE_SCREENSHOTS === 'true';
 }
 
+/** Call when a capture target screen has mounted and rendered. */
+export function useStoreCaptureReady(): void {
+  useEffect(() => {
+    if (!isStoreScreenshotBuild()) {
+      return;
+    }
+    window.__PG_CAPTURE_READY__ = true;
+  }, []);
+}
+
 export function suppressHubOnboardingForCapture(): void {
   localStorage.setItem('pandagarde_hub_tour_done', 'true');
   localStorage.setItem('pandagarde_hub_welcome_dismissed', 'true');
@@ -87,6 +99,7 @@ export function initStoreScreenshotEarly(): void {
     return;
   }
   window.__PG_STORE_CAPTURE__ = true;
+  window.__PG_CAPTURE_READY__ = false;
   document.documentElement.classList.add('store-capture');
   suppressHubOnboardingForCapture();
 }
