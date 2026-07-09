@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 import CertificateGenerator from '../components/CertificateGenerator';
+import AuthWrapper from './family-hub/AuthWrapper';
 
 const CertificatePage: React.FC = () => {
   return (
@@ -19,7 +20,12 @@ const CertificatePage: React.FC = () => {
           <ArrowLeft size={16} aria-hidden />
           Back to Family Hub
         </Link>
-        <CertificateGenerator />
+        {/* CertificateGenerator reads the saved family profile via useAuth();
+            outside Family Hub's own routes that context isn't mounted, so wrap it
+            here to avoid silently falling back to a generic placeholder name. */}
+        <AuthWrapper>
+          <CertificateGenerator />
+        </AuthWrapper>
       </div>
     </PageLayout>
   );

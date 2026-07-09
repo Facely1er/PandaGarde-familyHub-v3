@@ -134,6 +134,23 @@ const CertificatesPage: React.FC = () => {
               </div>
             </div>
           </div>
+
+          <div className="rounded-xl border border-green-200 bg-green-50 p-6 text-left dark:border-green-800 dark:bg-green-900/20">
+            <h3 className="mb-2 text-lg font-semibold text-green-800 dark:text-green-200">
+              Want it auto-filled with your child's name and progress?
+            </h3>
+            <p className="mb-4 text-sm text-gray-600 dark:text-gray-400">
+              The Certificate Generator uses your saved Family Hub profile to fill in your child's name,
+              achievement, and date automatically — no typing required. (Also available from Family Hub's
+              Progress screen.)
+            </p>
+            <Link
+              to="/certificate"
+              className="button button-primary inline-flex items-center gap-2"
+            >
+              Open Certificate Generator
+            </Link>
+          </div>
         </div>
 
         {/* Certificates Grid */}

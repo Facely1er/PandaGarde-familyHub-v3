@@ -19,6 +19,7 @@ import {
 const APP_STATIC_PATHS = new Set([
   '/service-catalog',
   '/digital-footprint',
+  '/child-safety-alerts',
   '/scoring-methodology',
   '/digital-rights',
   '/for-families',
@@ -75,7 +76,7 @@ describe('footer navigation links', () => {
   });
 
   it('footer link counts match planned IA', () => {
-    expect(footerFootprintLinks).toHaveLength(4);
+    expect(footerFootprintLinks).toHaveLength(5);
     expect(footerFamilyLinks).toHaveLength(4);
     expect(footerHelpCenterLinks).toHaveLength(5);
     expect(footerLegalLinks).toHaveLength(5);

@@ -69,7 +69,7 @@ const faqItems: FAQItem[] = [
     id: '7',
     question: 'Where did Safety Alerts and the privacy assessment go?',
     answer:
-      'Safety alerts and the formal privacy assessment are still here on PandaGarde. Open Child Safety Alerts from the menu, or finish your footprint review and use the family privacy assessment page for a quick check-in.',
+      'Safety alerts and the formal privacy assessment are still here on PandaGarde. Open Child Safety Alerts from the footer under Review workflow, or finish your footprint review and use the family privacy assessment page for a quick check-in.',
     category: 'technical',
   },
   {

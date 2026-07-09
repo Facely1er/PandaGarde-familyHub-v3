@@ -1,6 +1,7 @@
 import {
   type LucideIcon,
   BookOpen,
+  Bell,
   Compass,
   Fingerprint,
   FileText,
@@ -96,6 +97,7 @@ export const dfaWorkflowNavItems: SiteNavItem[] = [
 export const footprintReviewLayerLinks: SiteNavItem[] = [
   { id: 'footprint-catalog', icon: ListChecks, label: 'Service catalog', href: '/service-catalog' },
   { id: 'footprint-review', icon: Fingerprint, label: FOOTPRINT_REVIEW_NAV_LABEL, href: '/digital-footprint' },
+  { id: 'footprint-alerts', icon: Bell, label: 'Safety alerts', href: '/child-safety-alerts' },
   { id: 'footprint-scoring', icon: ClipboardList, label: 'Scoring methodology', href: '/scoring-methodology' },
   { id: 'footprint-digital-rights', icon: Scale, label: 'Digital privacy rights', href: '/digital-rights' },
 ];

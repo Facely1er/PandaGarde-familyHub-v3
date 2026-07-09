@@ -86,7 +86,7 @@ Formal **privacy assessment** (`/privacy-assessment`) and **safety alerts** (`/c
 
 PandaGarde serves these **in-app**; SocialCaution is a separate, non-integrated project and no PandaGarde route may redirect to it.
 
-- `/child-safety-alerts` — catalog-based notifications and RSS safety headlines for apps the family listed (refresh happens on the page while online; nothing is pushed and no child device is monitored). Legacy `/safety-alerts` and `/alerts` redirect here.
+- `/child-safety-alerts` — catalog-based notifications and RSS safety headlines for apps the family listed (refresh happens on the page while online; nothing is pushed and no child device is monitored). Legacy `/safety-alerts` and `/alerts` redirect here. Linked from the footer's "Review workflow" column (`footprintReviewLayerLinks` in `siteNavigation.ts`) — not in primary nav, to keep it secondary to stories/guides/Hub.
 - `/privacy-assessment` — the family privacy assessment (progress saves on device). Legacy `/assessment` redirects here; `/quick-assessment` offers short themed check-ins that feed into it.
 
 ### Avoid on PandaGarde

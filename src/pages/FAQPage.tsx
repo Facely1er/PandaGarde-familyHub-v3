@@ -18,7 +18,7 @@ const FAQPage: React.FC = () => {
     {
       id: '1',
       question: 'What is PandaGarde and who is it for?',
-      answer: 'PandaGarde helps families with children ages 5–13 learn about online privacy together. It combines Privacy Panda stories, parent guides, a footprint review, and Family Hub missions — use any of them in any order.',
+      answer: 'PandaGarde helps families with children of all ages learn about online privacy together, from young kids through teens. It combines Privacy Panda stories, parent guides, a footprint review, and Family Hub missions — use any of them in any order.',
       category: 'general'
     },
     {
@@ -30,7 +30,7 @@ const FAQPage: React.FC = () => {
     {
       id: '3',
       question: 'What age groups does PandaGarde support?',
-      answer: 'PandaGarde is designed for children ages 5–13, with content matched to three bands: young children (5–7), middle childhood (8–10), and older kids (11–13). Stories, guides, and Family Hub missions are all age-aware.',
+      answer: 'PandaGarde is designed for all ages, with content matched to three bands: younger kids (5–8), tweens (9–12), and teens (13–17). Stories, guides, and Family Hub missions are all age-aware.',
       category: 'general'
     },
     {
