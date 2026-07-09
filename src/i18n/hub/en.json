@@ -69,10 +69,10 @@
     "premiumCustomize": "Open any mission → Customize to set apps, names, or your own scenario. Stored on this device only.",
     "premiumUnlocked": "Unlocked {{date}}{{source}}",
     "premiumSignOut": "Sign out of Premium (this device)",
-    "premiumPricing": "{{price}} · coming to app stores",
+    "premiumPilotBadge": "Pilot preview · free on this device",
     "premiumLearnMore": "Learn more",
     "premiumBody": "Footprint review stays free. Premium personalizes mission scenarios with your family's apps and situations — optional, on this device.",
-    "premiumPilot": "Have a pilot code? Enter it below before subscriptions launch.",
+    "premiumPilot": "Have a pilot code? Enter it below to unlock customization on this device.",
     "premiumUnlockCode": "Premium unlock code",
     "premiumUnlockPlaceholder": "Enter unlock code",
     "premiumUnlock": "Unlock",
@@ -89,6 +89,7 @@
     "helpTitle": "Help & Support",
     "faq": "Frequently Asked Questions",
     "contact": "Contact Support",
+    "supportEmail": "Email {{email}}",
     "backToWebsite": "Back to {{brandName}} website"
   },
   "dashboard": {

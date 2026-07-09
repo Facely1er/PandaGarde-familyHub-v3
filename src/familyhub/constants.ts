@@ -15,6 +15,9 @@ export const HUB_BRAND_I18N_DEFAULTS = {
   displayName: HUB_DISPLAY_NAME,
 } as const;
 
+/** Store listing support contact — must match docs/FAMILYHUB_STORE_SUBMIT_CHECKLIST.md */
+export const HUB_SUPPORT_EMAIL = 'support@pandagarde.com';
+
 export {
   HUB_ORIGIN_KEY,
   HUB_LAST_MISSION_KEY,

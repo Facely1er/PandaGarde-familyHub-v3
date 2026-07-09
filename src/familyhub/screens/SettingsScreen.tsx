@@ -10,9 +10,9 @@ import {
   clearPremiumEntitlement,
   isPremiumActive,
   loadPremiumEntitlement,
-  PREMIUM_PRICING_LABEL,
   unlockPremiumWithCode,
 } from '../../lib/premiumEntitlement';
+import { HUB_SUPPORT_EMAIL } from '../constants';
 
 const externalLinkClass =
   'inline-flex items-center gap-1.5 text-sm font-medium text-teal-600 hover:underline dark:text-teal-400';
@@ -133,7 +133,7 @@ const SettingsScreen: React.FC = () => {
                     {t('hub.settings.premiumTitle')}
                   </span>
                   <span className={`mt-0.5 block text-xs ${hubTheme.muted}`}>
-                    {t('hub.settings.premiumPricing', { price: PREMIUM_PRICING_LABEL })}
+                    {t('hub.settings.premiumPilotBadge')}
                   </span>
                 </span>
               </span>
@@ -224,6 +224,12 @@ const SettingsScreen: React.FC = () => {
             </h2>
           </div>
           <ul className="space-y-1">
+            <li>
+              <a href={`mailto:${HUB_SUPPORT_EMAIL}`} className={externalLinkClass}>
+                {t('hub.settings.supportEmail', { email: HUB_SUPPORT_EMAIL })}
+                <ExternalLink size={14} aria-hidden />
+              </a>
+            </li>
             {helpLinks.map(({ path, label, icon: Icon }) => (
               <li key={path}>
                 <HubWebsiteLink path={path} className={externalLinkClass}>

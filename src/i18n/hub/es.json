@@ -69,10 +69,10 @@
     "premiumCustomize": "Abre cualquier misión → Personalizar para definir apps, nombres o tu propio escenario. Guardado solo en este dispositivo.",
     "premiumUnlocked": "Desbloqueado el {{date}}{{source}}",
     "premiumSignOut": "Cerrar sesión de Premium (este dispositivo)",
-    "premiumPricing": "{{price}} · próximamente en las tiendas de apps",
+    "premiumPilotBadge": "Vista previa piloto · gratis en este dispositivo",
     "premiumLearnMore": "Más información",
     "premiumBody": "La revisión de huella sigue siendo gratuita. Premium personaliza los escenarios de misión con las apps y situaciones de tu familia — opcional, en este dispositivo.",
-    "premiumPilot": "¿Tienes un código piloto? Introdúcelo abajo antes del lanzamiento de suscripciones.",
+    "premiumPilot": "¿Tienes un código piloto? Introdúcelo abajo para desbloquear la personalización en este dispositivo.",
     "premiumUnlockCode": "Código de desbloqueo Premium",
     "premiumUnlockPlaceholder": "Introducir código",
     "premiumUnlock": "Desbloquear",
@@ -89,6 +89,7 @@
     "helpTitle": "Ayuda y soporte",
     "faq": "Preguntas frecuentes",
     "contact": "Contactar soporte",
+    "supportEmail": "Enviar correo a {{email}}",
     "backToWebsite": "Volver al sitio web de {{brandName}}"
   },
   "dashboard": {

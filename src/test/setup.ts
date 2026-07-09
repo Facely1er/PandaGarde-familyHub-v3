@@ -1,5 +1,34 @@
 import '@testing-library/jest-dom/vitest';
 
+/** jsdom sometimes exposes a broken localStorage without clear(); polyfill for tests. */
+if (typeof window !== 'undefined') {
+  const storage = window.localStorage;
+  if (!storage || typeof storage.clear !== 'function') {
+    const store = new Map<string, string>();
+    const shim: Storage = {
+      get length() {
+        return store.size;
+      },
+      clear() {
+        store.clear();
+      },
+      getItem(key: string) {
+        return store.has(key) ? store.get(key)! : null;
+      },
+      key(index: number) {
+        return Array.from(store.keys())[index] ?? null;
+      },
+      removeItem(key: string) {
+        store.delete(key);
+      },
+      setItem(key: string, value: string) {
+        store.set(key, String(value));
+      },
+    };
+    Object.defineProperty(window, 'localStorage', { value: shim, writable: true });
+  }
+}
+
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: vi.fn().mockImplementation((query: string) => ({

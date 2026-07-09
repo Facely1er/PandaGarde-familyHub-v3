@@ -67,5 +67,5 @@ export const clearPremiumEntitlement = (): void => {
   savePremiumEntitlement(DEFAULT_PREMIUM_ENTITLEMENT);
 };
 
-/** Display pricing — update when store SKU is live. */
+/** Display pricing for marketing site — not shown in Family Hub v1 store build (no IAP). */
 export const PREMIUM_PRICING_LABEL = '$4.99/month';

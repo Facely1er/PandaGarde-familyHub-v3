@@ -1,0 +1,104 @@
+#!/usr/bin/env node
+/**
+ * Pre-submit checks for Family Hub Google Play + App Store packages.
+ * Run: npm run store:check
+ */
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+
+const REQUIRED_FILES = [
+  'assets/icon.png',
+  'assets/splash.png',
+  'android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png',
+  'ios/App/App/Assets.xcassets/AppIcon.appiconset/AppIcon-512@2x.png',
+  'store-assets/play-store-icon-512.png',
+  'store-assets/apple-app-store-icon-1024.png',
+  'store-assets/play-feature-graphic-1024x500.png',
+  'public/familyhub-manifest.json',
+  'capacitor.config.ts',
+  'docs/FAMILYHUB_STORE_SUBMIT_CHECKLIST.md',
+];
+
+const SCREENSHOT_MIN = 5;
+const SCREENSHOT_DIR = 'store-assets/ios-screenshots';
+
+function read(file) {
+  return fs.readFileSync(path.join(root, file), 'utf8');
+}
+
+function fail(message) {
+  console.error(`[store:check] FAIL — ${message}`);
+  return false;
+}
+
+function ok(message) {
+  console.log(`[store:check] OK — ${message}`);
+  return true;
+}
+
+let passed = true;
+const track = (success, message) => {
+  passed = (success ? ok(message) : fail(message)) && passed;
+};
+
+console.log('[store:check] Family Hub store readiness\n');
+
+for (const file of REQUIRED_FILES) {
+  track(fs.existsSync(path.join(root, file)), file);
+}
+
+const screenshotDir = path.join(root, SCREENSHOT_DIR);
+if (fs.existsSync(screenshotDir)) {
+  const shots = fs.readdirSync(screenshotDir).filter((f) => /\.(png|jpg|jpeg|webp)$/i.test(f));
+  track(
+    shots.length >= SCREENSHOT_MIN,
+    `${SCREENSHOT_DIR} has ${shots.length} screenshots (need ≥ ${SCREENSHOT_MIN})`
+  );
+} else {
+  track(false, `${SCREENSHOT_DIR} missing`);
+}
+
+const capConfig = read('capacitor.config.ts');
+track(capConfig.includes("appId: 'com.pandagarde.familyhub'"), 'Capacitor appId com.pandagarde.familyhub');
+track(capConfig.includes("appName: 'PandaGarde Family Hub'"), 'Capacitor appName PandaGarde Family Hub');
+
+const gradle = read('android/app/build.gradle');
+const versionCodeMatch = gradle.match(/versionCode\s+(\d+)/);
+const versionNameMatch = gradle.match(/versionName\s+"([^"]+)"/);
+if (versionCodeMatch && versionNameMatch) {
+  track(versionNameMatch[1] === '1.0.0', `Android versionName ${versionNameMatch[1]}`);
+  console.log(`[store:check] INFO — Android versionCode ${versionCodeMatch[1]} (increment every Play upload)`);
+} else {
+  track(false, 'Android versionCode / versionName in build.gradle');
+}
+
+const settings = read('src/familyhub/screens/SettingsScreen.tsx');
+track(settings.includes('path="/privacy"'), 'Settings privacy policy link');
+track(settings.includes('mailto:support@pandagarde.com'), 'Settings support email link');
+track(!settings.includes('PREMIUM_PRICING_LABEL'), 'Settings hides store pricing (no IAP in v1)');
+
+const keystoreProps = path.join(root, 'android/keystore.properties');
+const keystoreJks = path.join(root, 'android/pandagarde-familyhub-upload.jks');
+if (fs.existsSync(keystoreProps) && fs.existsSync(keystoreJks)) {
+  ok('Android upload keystore present (local only — keep backed up offline)');
+} else {
+  console.log('[store:check] MANUAL — Generate upload keystore: npm run android:keystore');
+}
+
+const aab = path.join(root, 'android/app/build/outputs/bundle/release/app-release.aab');
+if (fs.existsSync(aab)) {
+  ok('Signed release AAB built locally');
+} else {
+  console.log('[store:check] MANUAL — Build signed AAB: npm run android:bundleRelease');
+}
+
+console.log('');
+if (passed) {
+  console.log('[store:check] Automated checks passed. Complete console steps in docs/FAMILYHUB_STORE_SUBMIT_CHECKLIST.md');
+} else {
+  console.error('[store:check] Fix failures above before store submission.');
+  process.exit(1);
+}

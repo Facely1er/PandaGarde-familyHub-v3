@@ -69,10 +69,10 @@
     "premiumCustomize": "Ouvrez une mission → Personnaliser pour définir les applications, noms ou votre propre scénario. Stocké sur cet appareil uniquement.",
     "premiumUnlocked": "Débloqué le {{date}}{{source}}",
     "premiumSignOut": "Se déconnecter de Premium (cet appareil)",
-    "premiumPricing": "{{price}} · bientôt dans les boutiques d'applications",
+    "premiumPilotBadge": "Aperçu pilote · gratuit sur cet appareil",
     "premiumLearnMore": "En savoir plus",
     "premiumBody": "Le bilan d'empreinte reste gratuit. Premium personnalise les scénarios de mission avec les applications et situations de votre famille — optionnel, sur cet appareil.",
-    "premiumPilot": "Vous avez un code pilote ? Saisissez-le ci-dessous avant le lancement des abonnements.",
+    "premiumPilot": "Vous avez un code pilote ? Saisissez-le ci-dessous pour débloquer la personnalisation sur cet appareil.",
     "premiumUnlockCode": "Code de déverrouillage Premium",
     "premiumUnlockPlaceholder": "Saisir le code",
     "premiumUnlock": "Déverrouiller",
@@ -89,6 +89,7 @@
     "helpTitle": "Aide et support",
     "faq": "Foire aux questions",
     "contact": "Contacter le support",
+    "supportEmail": "Écrire à {{email}}",
     "backToWebsite": "Retour au site {{brandName}}"
   },
   "dashboard": {
