@@ -6,15 +6,11 @@ Paste into **App Store Connect → App Review → Reply** and **App Review Infor
 
 Attach your screen recording (`.mov` / `.mp4`) when replying.
 
-**Generate recording (automated tour — same approach as Silent Hour):**
+**Recording file:** `store-assets/app-review/simulator-review-iphone.mp4` (Xcode Simulator — includes Dynamic Island framing).
 
 ```bash
-npm run app-review:record
-# → store-assets/app-review/app-review-recording.mp4
-# → store-assets/app-review/app-review-recording.mov
+npm run app-review:record:simulator   # regenerate iPhone simulator auto-tour
 ```
-
-The app auto-walks: login → welcome → dashboard → mission → add family member → journey → settings → clear data → login.
 
 **Bundle ID:** `com.pandagarde.familyhub`  
 **Support:** support@pandagarde.com  
@@ -24,7 +20,7 @@ The app auto-walks: login → welcome → dashboard → mission → add family m
 
 ## Resubmission: new build required?
 
-**Yes — upload a new iOS build (build 7), not the rejected build 6.**
+**Yes — upload a new iOS build (build 8), not the rejected build 6.**
 
 | Change since rejected build | In store binary? | Why it matters |
 |-----------------------------|----------------|----------------|
@@ -33,36 +29,36 @@ The app auto-walks: login → welcome → dashboard → mission → add family m
 | Premium copy (no IAP in v1.0.0) | Yes | Matches App Review notes |
 | App Review auto-tour (`VITE_APP_REVIEW_DEMO`) | No (dev/recording only) | Not enabled in App Store builds |
 
-**Rejected:** `1.0.0 (6)` · **Resubmit:** `1.0.0 (7)`
+**Rejected:** `1.0.0 (6)` · **Resubmit:** `1.0.0 (8)`
 
 On Mac before upload:
 
 ```bash
 npm run test:run
-npm run mobile:bump:build          # 6 → 7
+npm run mobile:bump:build
 npm run ios:appstore               # or ios:prepare + archive in Xcode
 ```
 
-Upload build **7** to App Store Connect, select it on the version, then reply with notes + recording.
+Upload build **8** to App Store Connect, select it on the version, then reply with notes + recording.
 
 **Do not** reply with only build 6 if the binary lacks **Clear all data** — Apple will not find what your notes describe.
 
 ---
 
-## Devices tested — complete this honestly
+## Devices tested (section 2)
 
-**Recommended for resubmission:** run the full reviewer path on **Xcode Simulator** (iPhone + iPad), record on the **iPhone simulator**, and attach that `.mov` to App Store Connect. Label devices as **Simulator** — do not call them physical hardware.
+**Recommended for resubmission:** run the full reviewer path on **Xcode Simulator** (iPhone + iPad), record on the **iPhone simulator**, and attach that `.mp4` to App Store Connect. Label devices as **Simulator** — do not call them physical hardware.
 
-**Do not attach** the Playwright web capture (`store-assets/app-review/app-review-recording.mp4`) and claim it is a device recording. Use simctl output from `npm run ios:simulator:review -- --record` instead.
+**Do not attach** the Playwright web capture (`store-assets/app-review/app-review-recording.mp4`) and claim it is a device recording. Use simctl output from `npm run app-review:record:simulator` instead.
 
 **Before you submit:**
 
-1. Run the 16-step checklist on **iPhone** simulator: `npm run ios:simulator:review -- --record`
-2. Run the same checklist on **iPad** simulator: `npm run ios:simulator:review:ipad -- --record`
-3. Bump, archive, and upload **build 7** (`npm run mobile:bump:build && npm run ios:appstore`).
+1. Run the 16-step checklist on **iPhone** simulator: `npm run ios:simulator:review`
+2. Run the same checklist on **iPad** simulator: `npm run ios:simulator:review:ipad`
+3. Bump, archive, and upload **build 8** (`npm run mobile:bump:build && npm run ios:appstore`).
 4. Fill sections 1–2 with **only simulators you actually tested** (iPhone + iPad if both completed).
 
-**Section 1 — simulator recording (attach iPhone `.mov`):**
+**Section 1 — simulator recording (attach iPhone `.mp4`):**
 
 ```
 1) SCREEN RECORDING
@@ -76,12 +72,12 @@ Flow: cold launch → Let's go! → welcome → dashboard → Journey → Missio
 2) DEVICES TESTED
 • iPhone Simulator (iPhone 14 Pro Max, 6.5") — iOS [X.Y] (full reviewer path + attached screen recording)
 • iPad Simulator (iPad Pro 13-inch) — iPadOS [X.Y] (same reviewer path)
-Build: 1.0.0 (7) — tested on Xcode Simulator before App Store upload.
+Build: 1.0.0 (8) — tested on Xcode Simulator before App Store upload.
 ```
 
 Replace `[X.Y]` with the runtime version from Simulator or `xcrun simctl list runtimes`.
 
-**Optional — physical device instead:** If you later test on a real iPhone via TestFlight, swap “Simulator” for the model from **Settings → General → About** and note TestFlight build 7. Do not list both simulator and physical unless you actually ran both.
+**Optional — physical device instead:** If you later test on a real iPhone via TestFlight, swap “Simulator” for the model from **Settings → General → About** and note TestFlight build 8. Do not list both simulator and physical unless you actually ran both.
 
 **Full checklist:** [FAMILYHUB_IOS_SIMULATOR_REVIEW_TEST.md](./FAMILYHUB_IOS_SIMULATOR_REVIEW_TEST.md) · `npm run ios:simulator:review` · `npm run ios:simulator:review:ipad`
 
@@ -89,19 +85,17 @@ Replace `[X.Y]` with the runtime version from Simulator or `xcrun simctl list ru
 
 ## Screen recording checklist (Xcode Simulator — iPhone + iPad)
 
-Record on **iPhone simulator** (`npm run ios:simulator:review -- --record`). Repeat the same steps on **iPad simulator** (`npm run ios:simulator:review:ipad`). Suggested flow (~4–6 min each):
+Record on **iPhone simulator** (`npm run app-review:record:simulator`). Repeat the same steps on **iPad simulator** (`npm run ios:simulator:review:ipad -- --record`). Suggested flow (~4–6 min each):
 
 1. Launch app → login screen → tap **Let's go!**
-2. Welcome (if shown) → **Start fresh**
-3. Dashboard → start today's mission
-4. Activities → browse age filters → open a mission → complete intro / learn / play / family talk / celebration
+2. Welcome (if shown) → **Add your family to start**
+3. Dashboard → Journey → Missions
+4. Open a mission → complete intro / celebration → **Back to activities**
 5. Family tab → add member (first name + age)
-6. Journey → show progress / badges
-7. Settings → Privacy → **View Privacy Policy** (opens Safari) → return to app
-8. Settings → **Clear all data on this device** → confirm (shows local deletion; returns to login)
-9. Tap **Let's go!** again to show fresh start
+6. Settings → **Clear all data on this device** → confirm (returns to login)
+7. Tap **Let's go!** again to show fresh start
 
-**Not in this build (state in reply):** no server accounts, no StoreKit purchases/subscriptions, no UGC/social feed, no sensitive permission prompts.
+**Not in v1.0.0:** no server accounts, IAP, UGC/social, or sensitive permission prompts.
 
 ---
 
@@ -121,7 +115,7 @@ Not in v1.0.0: no server accounts or cloud deletion; no IAP/subscriptions; no UG
 2) DEVICES TESTED
 • iPhone Simulator (iPhone 14 Pro Max, 6.5") — iOS [version] (full reviewer path + attached screen recording)
 • iPad Simulator (iPad Pro 13-inch) — iPadOS [version] (same reviewer path)
-Build: 1.0.0 (7) — tested on Xcode Simulator before App Store upload.
+Build: 1.0.0 (8) — tested on Xcode Simulator before App Store upload.
 
 3) PURPOSE & AUDIENCE
 Parent-guided educational app for families ages 5–17: 18 short privacy missions with real scenarios, optional practice activities, family discussion prompts, and one practical action per mission. Not a social network; does not monitor children's devices.

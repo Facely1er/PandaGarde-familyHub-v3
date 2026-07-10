@@ -1,6 +1,6 @@
 # Family Hub — iOS Simulator App Review smoke test (Mac)
 
-Use this on a **Mac with Xcode** to validate the **production** app (same build path as App Store, without demo auto-tour flags) before uploading build 7.
+Use this on a **Mac with Xcode** to validate the **production** app (same build path as App Store, without demo auto-tour flags) before uploading build 8.
 
 Run the full 16-step checklist on **both iPhone and iPad simulators**, record each pass, and attach the iPhone recording to App Store Connect. The simulator recording is acceptable for the Guideline 2.1 reply **as long as you label devices honestly** (simulator name + iOS version — not “physical iPhone”).
 
@@ -12,15 +12,15 @@ Run the full 16-step checklist on **both iPhone and iPad simulators**, record ea
 
 | Device | OS | Result | Artifact |
 |--------|-----|--------|----------|
-| iPhone Simulator (SC-Review-iPhone-6.5 · iPhone 14 Pro Max, 6.5") | **iOS 26.2** | Launch + App Review auto-tour recorded | `store-assets/app-review/simulator-review-iphone.mov` |
-| iPad Simulator (iPad Pro 13-inch M5) | **iPadOS 26.2** | Launch + welcome screen verified | `store-assets/app-review/simulator-review-ipad.mov` · `smoke-ipad-login.png` |
+| iPhone Simulator (SC-Review-iPhone-6.5 · iPhone 14 Pro Max, 6.5") | **iOS 26.2** | Launch + App Review auto-tour recorded | `store-assets/app-review/simulator-review-iphone.mp4` |
+| iPad Simulator (iPad Pro 13-inch M5) | **iPadOS 26.2** | Launch + welcome screen verified | `store-assets/app-review/simulator-review-ipad.mp4` · `smoke-ipad-login.png` |
 
 **Build tested:** `1.0.0 (8)` · Xcode Simulator · runtime `iOS 26.2` (`com.apple.CoreSimulator.SimRuntime.iOS-26-2`)
 
 Regenerate recordings:
 
 ```bash
-npm run app-review:record:simulator   # iPhone auto-tour → simulator-review-iphone.mov
+npm run app-review:record:simulator   # iPhone auto-tour → simulator-review-iphone.mp4
 npm run ios:simulator:review:ipad -- --record
 ```
 
@@ -44,10 +44,10 @@ npm run ios:simulator:review -- --skip-build
 
 # Record simulator screen while you run the manual steps below
 npm run ios:simulator:review -- --record
-# → store-assets/app-review/simulator-review-iphone.mov
+# → store-assets/app-review/simulator-review-iphone.mov (+ .mp4)
 
 npm run ios:simulator:review:ipad -- --record
-# → store-assets/app-review/simulator-review-ipad.mov
+# → store-assets/app-review/simulator-review-ipad.mov (+ .mp4)
 ```
 
 Or open in Xcode after prepare:
@@ -93,7 +93,7 @@ Record **while you run the manual steps** on each form factor:
 
 ```bash
 # iPhone — attach this file to App Store Connect
-npm run ios:simulator:review -- --record
+npm run app-review:record:simulator
 
 # iPad — same checklist; keep a separate recording for your records
 npm run ios:simulator:review:ipad -- --record
@@ -114,11 +114,11 @@ xcrun simctl io booted recordVideo ~/Desktop/familyhub-review-iphone.mov
 1. Bump and archive for App Store:
    ```bash
    npm run test:run
-   npm run mobile:bump:build    # → 1.0.0 (7)
+   npm run mobile:bump:build
    npm run ios:appstore
    ```
-2. Upload build **7** to App Store Connect.
-3. Attach **`simulator-review-iphone.mov`** (or your iPhone simctl recording) to the review reply.
+2. Upload build **8** to App Store Connect.
+3. Attach **`simulator-review-iphone.mp4`** to the review reply.
 4. Paste the short reply from `FAMILYHUB_APP_STORE_REVIEW_REPLY.md` with the **simulator** device lines below.
 
 **Section 1 — screen recording (simulator):**
@@ -135,7 +135,7 @@ Flow: cold launch → Let's go! → welcome → dashboard → Journey → Missio
 2) DEVICES TESTED
 • iPhone Simulator (iPhone 14 Pro Max, 6.5") — iOS [X.Y] (full reviewer path + attached screen recording)
 • iPad Simulator (iPad Pro 13-inch) — iPadOS [X.Y] (same reviewer path)
-Build: 1.0.0 (7) — tested on Xcode Simulator before App Store upload.
+Build: 1.0.0 (8) — tested on Xcode Simulator before App Store upload.
 ```
 
 Replace `[X.Y]` with the iOS version shown in **Simulator → Settings → General → About** (or `xcrun simctl list runtimes`). List **only** simulators you actually ran the checklist on.
