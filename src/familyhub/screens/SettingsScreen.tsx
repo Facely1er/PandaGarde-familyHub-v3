@@ -1,5 +1,6 @@
 import React, { useId, useState } from 'react';
-import { Shield, HelpCircle, ExternalLink, Home, Scale, Sparkles } from 'lucide-react';
+import { Shield, HelpCircle, ExternalLink, Home, Scale, Sparkles, Trash2 } from 'lucide-react';
+import { useAuth } from '../../pages/family-hub/AuthWrapper';
 import { hubTheme } from '../hubTheme';
 import HubPageLayout from '../components/HubPageLayout';
 import HubThemeToggle from '../components/HubThemeToggle';
@@ -13,6 +14,7 @@ import {
   unlockPremiumWithCode,
 } from '../../lib/premiumEntitlement';
 import { HUB_SUPPORT_EMAIL } from '../constants';
+import { clearAllHubLocalData } from '../hubLocalData';
 import { useStoreCaptureReady } from '../storeScreenshotMode';
 
 const externalLinkClass =
@@ -24,11 +26,13 @@ const settingsInlineRow =
 const SettingsScreen: React.FC = () => {
   useStoreCaptureReady();
   const { t } = useHubI18n();
+  const { signOutLocally } = useAuth();
   const unlockInputId = useId();
   const [premiumActive, setPremiumActive] = useState(() => isPremiumActive());
   const [unlockCode, setUnlockCode] = useState('');
   const [unlockMessage, setUnlockMessage] = useState<string | null>(null);
   const [unlockError, setUnlockError] = useState<string | null>(null);
+  const [showClearDataConfirm, setShowClearDataConfirm] = useState(false);
 
   const handleUnlock = () => {
     const result = unlockPremiumWithCode(unlockCode);
@@ -48,6 +52,12 @@ const SettingsScreen: React.FC = () => {
     setPremiumActive(false);
     setUnlockMessage(null);
     setUnlockError(null);
+  };
+
+  const handleClearAllData = () => {
+    clearAllHubLocalData();
+    signOutLocally();
+    setShowClearDataConfirm(false);
   };
 
   const entitlement = loadPremiumEntitlement();
@@ -200,6 +210,25 @@ const SettingsScreen: React.FC = () => {
           </HubWebsiteLink>
         </div>
 
+        <div className="border-t border-gray-100 pt-2.5 dark:border-gray-700">
+          <div className="mb-1 flex items-center gap-2">
+            <Trash2 className="shrink-0 text-red-600 dark:text-red-400" size={16} aria-hidden />
+            <h2 id="settings-clear-data-heading" className={`text-sm font-semibold ${hubTheme.heading}`}>
+              {t('hub.settings.clearDataTitle')}
+            </h2>
+          </div>
+          <p className={`mb-2 text-xs leading-snug sm:text-sm ${hubTheme.body}`}>
+            {t('hub.settings.clearDataBody')}
+          </p>
+          <button
+            type="button"
+            onClick={() => setShowClearDataConfirm(true)}
+            className="rounded-lg border border-red-300 px-3 py-2 text-sm font-medium text-red-700 hover:bg-red-50 min-h-[40px] dark:border-red-800 dark:text-red-300 dark:hover:bg-red-950/40"
+          >
+            {t('hub.settings.clearDataButton')}
+          </button>
+        </div>
+
         <div className="border-t border-gray-100 pt-2 dark:border-gray-700">
           <div className="mb-1 flex items-center gap-2">
             <Scale className="shrink-0 text-teal-600 dark:text-teal-400" size={16} aria-hidden />
@@ -243,6 +272,51 @@ const SettingsScreen: React.FC = () => {
           </ul>
         </div>
       </section>
+
+      {showClearDataConfirm && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+          role="presentation"
+          onClick={() => setShowClearDataConfirm(false)}
+          onKeyDown={(event) => {
+            if (event.key === 'Escape') {
+              setShowClearDataConfirm(false);
+            }
+          }}
+        >
+          <div
+            className="w-full max-w-md rounded-2xl border border-gray-200 bg-white p-6 shadow-xl dark:border-gray-700 dark:bg-gray-800"
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby="clear-data-title"
+            aria-describedby="clear-data-desc"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <h3 id="clear-data-title" className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+              {t('hub.settings.clearDataConfirmTitle')}
+            </h3>
+            <p id="clear-data-desc" className={`mb-4 text-sm ${hubTheme.body}`}>
+              {t('hub.settings.clearDataConfirmBody')}
+            </p>
+            <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+              <button
+                type="button"
+                onClick={() => setShowClearDataConfirm(false)}
+                className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 min-h-[40px] dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-700"
+              >
+                {t('hub.settings.clearDataCancel')}
+              </button>
+              <button
+                type="button"
+                onClick={handleClearAllData}
+                className="rounded-lg bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700 min-h-[40px]"
+              >
+                {t('hub.settings.clearDataConfirmButton')}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </HubPageLayout>
   );
 };

@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { lazy } from '../../lib/lazyWithRetry';
 import { ArrowLeft, BookOpen, HelpCircle, MessageCircle, MessageCircleHeart, Play, Target } from 'lucide-react';
 import { HubScreenFallback } from '../HubScreenFallback';
@@ -21,6 +21,7 @@ import RelatedStoryLink from './RelatedStoryLink';
 import MissionScenarioCustomize from './MissionScenarioCustomize';
 import { useFootprintAnalysis, useResolvedMissionScenario } from '../../hooks/useResolvedMissionScenario';
 import { useHubI18n } from '../hubI18n';
+import { isAppReviewDemo, setAppReviewView } from '../../lib/appReviewDemo';
 
 export type MissionPhase = 'intro' | 'play' | 'complete';
 
@@ -155,6 +156,29 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
     setStreak(newStreak);
     setPhase('complete');
   };
+
+  useEffect(() => {
+    if (!isAppReviewDemo()) {
+      return;
+    }
+    if (phase === 'intro') {
+      setAppReviewView('mission-intro');
+    } else if (phase === 'play') {
+      setAppReviewView('mission-play');
+    } else if (phase === 'complete') {
+      setAppReviewView('mission-complete');
+    }
+  }, [phase]);
+
+  useEffect(() => {
+    if (!isAppReviewDemo() || phase !== 'play') {
+      return;
+    }
+    const timer = window.setTimeout(() => finishMission(92), 2800);
+    return () => window.clearTimeout(timer);
+    // finishMission is stable enough for demo auto-complete
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phase, activity.id]);
 
   const header = (
     <div className="shrink-0 border-b border-gray-200 bg-white px-4 py-2 dark:border-gray-700 dark:bg-gray-800">

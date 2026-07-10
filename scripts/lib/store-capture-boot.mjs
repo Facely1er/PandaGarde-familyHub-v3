@@ -1,3 +1,4 @@
+
 /** Screen definitions shared with storeScreenshotMode.ts — keep in sync manually. */
 export const CAPTURE_SCREENS = [
   {
@@ -53,7 +54,7 @@ export const CAPTURE_SCREENS = [
     path: '/settings',
     auth: true,
     waitMs: 10000,
-    waitFor: ['Manage your app preferences', 'View Privacy Policy', 'Light mode'],
+    waitFor: ['Manage your app preferences', 'View Privacy Policy', 'Clear all data on this device'],
     contentRoot: '#family-hub-main',
   },
 ];

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, ExternalLink, Shield, Users, Gamepad2, Award } from 'lucide-react';
 import { setHubOrigin } from '../../lib/hubMission';
@@ -9,12 +9,19 @@ import { HUB_BRAND_LINE_2, HUB_WELCOMED_KEY } from '../constants';
 import { hubPaths, pandagardeWebsiteUrl } from '../hubPaths';
 import { hubTheme } from '../hubTheme';
 import { useHubI18n } from '../hubI18n';
+import { isAppReviewDemo, setAppReviewView } from '../../lib/appReviewDemo';
 
 export { HUB_WELCOMED_KEY };
 
 const WelcomeScreen: React.FC = () => {
   const { t } = useHubI18n();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAppReviewDemo()) {
+      setAppReviewView('welcome');
+    }
+  }, []);
 
   const sections = [
     {

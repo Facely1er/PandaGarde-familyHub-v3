@@ -68,6 +68,7 @@ export default mergeConfig(
       'import.meta.env.VITE_HUB_STANDALONE': JSON.stringify('true'),
       'import.meta.env.VITE_STORE_SCREENSHOTS': JSON.stringify(process.env.VITE_STORE_SCREENSHOTS ?? 'false'),
       'import.meta.env.VITE_CAPTURE_SCREEN': JSON.stringify(process.env.VITE_CAPTURE_SCREEN ?? ''),
+      'import.meta.env.VITE_APP_REVIEW_DEMO': JSON.stringify(process.env.VITE_APP_REVIEW_DEMO ?? 'false'),
     },
     build: {
       outDir: 'dist-familyhub',

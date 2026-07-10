@@ -42,6 +42,8 @@ SIGN-IN: No real account. Tap "Let's go!" on the login screen to open Family Hub
 
 DATA: Family members (first name + age) and mission progress are stored in on-device storage only. No backend sync in this build.
 
+DATA DELETION: Settings → "Clear all data on this device", or uninstall the app. PandaGarde does not receive user data.
+
 CHILDREN: Parent-guided educational missions (scenarios, games, family discussion). No user-generated social feed, no child-to-child messaging, no ads targeting children.
 
 OPTIONAL: Users may open pandagarde.com in the system browser for stories or Digital Footprint Analysis. That website is separate from the in-app flow.
@@ -126,9 +128,11 @@ Typical honest answers for Family Hub:
 
 ### App Review information
 
-Same reviewer notes as Google (above).
+Same reviewer notes as Google (above). **Apple Guideline 2.1** requires the full 7-point reply — see [FAMILYHUB_APP_STORE_REVIEW_REPLY.md](./FAMILYHUB_APP_STORE_REVIEW_REPLY.md) and attach a physical-device screen recording.
 
-**Demo account:** Not required — document local login.
+**Demo account:** Not required — document local login ("Let's go!").
+
+**Pilot premium (not StoreKit):** Settings → Premium → code `FAMILYHUB-PREMIUM` unlocks scenario personalization locally. v1.0.0 has **no in-app purchases**.
 
 ### Age rating (App Store)
 

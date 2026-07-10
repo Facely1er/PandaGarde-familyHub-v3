@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ArrowRight, ShieldCheck, CheckCircle2, Sparkles } from 'lucide-react';
 import { useAuth } from './AuthWrapper';
@@ -9,6 +9,7 @@ import HubBrandLogo from '../../familyhub/components/HubBrandLogo';
 import HubWebsiteLink from '../../familyhub/components/HubWebsiteLink';
 import { hubTheme } from '../../familyhub/hubTheme';
 import { useStoreCaptureReady } from '../../familyhub/storeScreenshotMode';
+import { isAppReviewDemo, setAppReviewView } from '../../lib/appReviewDemo';
 
 const footerLinkClass = 'underline hover:text-teal-700 dark:hover:text-teal-300';
 
@@ -17,6 +18,16 @@ const LoginPage: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { signInLocally } = useAuth();
+
+  useEffect(() => {
+    if (isAppReviewDemo()) {
+      setAppReviewView('login');
+      document.documentElement.dataset.appReviewOnLogin = '1';
+    }
+    return () => {
+      delete document.documentElement.dataset.appReviewOnLogin;
+    };
+  }, []);
 
   const handleContinue = () => {
     signInLocally();

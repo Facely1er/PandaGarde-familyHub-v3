@@ -21,6 +21,7 @@ import RelatedStoryLink from '../components/RelatedStoryLink';
 import { useResolvedMissionScenario } from '../../hooks/useResolvedMissionScenario';
 import { useHubI18n } from '../hubI18n';
 import { useStoreCaptureReady } from '../storeScreenshotMode';
+import { APP_REVIEW_START_MISSION, isAppReviewDemo } from '../../lib/appReviewDemo';
 
 const FOCUS_ORDER: ActivityFocus[] = [
   'Safe sharing',
@@ -259,6 +260,25 @@ const ActivitiesScreen: React.FC = () => {
   const handleStart = (activity: FlattenedAgeBasedActivity) => {
     setActiveMission(activity);
   };
+
+  useEffect(() => {
+    if (!isAppReviewDemo()) {
+      return;
+    }
+    const onStartMission = (event: Event) => {
+      const custom = event as CustomEvent<{ missionId: string }>;
+      const missionId = custom.detail?.missionId;
+      if (!missionId) {
+        return;
+      }
+      const activity = allActivities.find((entry) => entry.id === missionId);
+      if (activity) {
+        setActiveMission(activity);
+      }
+    };
+    window.addEventListener(APP_REVIEW_START_MISSION, onStartMission);
+    return () => window.removeEventListener(APP_REVIEW_START_MISSION, onStartMission);
+  }, [allActivities]);
 
   if (activeMission) {
     return (

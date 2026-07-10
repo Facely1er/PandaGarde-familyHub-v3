@@ -93,8 +93,10 @@ Welcome to PandaGarde Family Hub! 18 privacy missions for ages 5–17, family di
 
 ## Review notes (paste into App Review / Play Console)
 
+**Google Play** — short block:
+
 ```
-SIGN-IN: No real account. Tap through local demo login on the login screen to open Family Hub.
+SIGN-IN: No real account. Tap "Let's go!" on the login screen to open Family Hub.
 
 DATA: All family members and mission progress are stored in on-device storage only. No backend sync in this build.
 
@@ -102,8 +104,12 @@ CHILDREN: Content is parent-guided educational missions (scenarios, games, famil
 
 OPTIONAL: Users may open the full PandaGarde website in a browser for Digital Footprint Analysis; that is separate from the hub app flow.
 
+DATA DELETION: Settings → "Clear all data on this device", or uninstall the app.
+
 TEST PATH: Login → Welcome (optional) → Dashboard → Activities → start any mission → complete intro/learn/play → family step → celebration.
 ```
+
+**Apple App Store** — use the full 7-point reply in [FAMILYHUB_APP_STORE_REVIEW_REPLY.md](./FAMILYHUB_APP_STORE_REVIEW_REPLY.md) plus a **physical-device screen recording**.
 
 ---
 

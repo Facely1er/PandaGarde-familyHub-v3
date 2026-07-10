@@ -20,6 +20,7 @@ const REQUIRED_FILES = [
   'public/familyhub-manifest.json',
   'capacitor.config.ts',
   'docs/FAMILYHUB_STORE_SUBMIT_CHECKLIST.md',
+  'docs/FAMILYHUB_APP_STORE_REVIEW_REPLY.md',
 ];
 
 const SCREENSHOT_SETS = [
@@ -86,7 +87,26 @@ if (versionCodeMatch && versionNameMatch) {
 const settings = read('src/familyhub/screens/SettingsScreen.tsx');
 track(settings.includes('path="/privacy"'), 'Settings privacy policy link');
 track(settings.includes('HUB_SUPPORT_EMAIL'), 'Settings support email link');
+track(settings.includes('clearAllHubLocalData'), 'Settings clear-all-data control (App Review)');
 track(!settings.includes('PREMIUM_PRICING_LABEL'), 'Settings hides store pricing (no IAP in v1)');
+
+const reviewReply = read('docs/FAMILYHUB_APP_STORE_REVIEW_REPLY.md');
+track(reviewReply.includes('SCREEN RECORDING'), 'Apple 2.1 review reply doc present');
+track(reviewReply.includes('FAMILYHUB-PREMIUM'), 'Review reply includes pilot premium code');
+
+const reviewRecordScript = path.join(root, 'scripts/record-app-review-video.mjs');
+if (fs.existsSync(reviewRecordScript)) {
+  ok('App Review recording script present (npm run app-review:record)');
+} else {
+  track(false, 'scripts/record-app-review-video.mjs missing');
+}
+
+const reviewMp4 = path.join(root, 'store-assets/app-review/app-review-recording.mp4');
+if (fs.existsSync(reviewMp4)) {
+  ok(`App Review recording built (${Math.round(fs.statSync(reviewMp4).size / 1024)} KB)`);
+} else {
+  console.log('[store:check] MANUAL — Generate App Review video: npm run app-review:record');
+}
 
 const keystoreProps = path.join(root, 'android/keystore.properties');
 const keystoreJks = path.join(root, 'android/pandagarde-familyhub-upload.jks');

@@ -12667,3 +12667,35 @@ header.header .nav-actions button.header-icon-btn:not(.header-search-bar) {
 [data-theme='dark'] .coloring-sheets-page__modal-actions {
   border-top-color: var(--gray-700);
 }
+
+/* App Review recording — phone layout in Playwright / simulator capture */
+html[data-app-review-capture='1'],
+html[data-app-review-capture='1'] body,
+html[data-app-review-capture='1'] #root {
+  min-height: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+html[data-app-review-capture='1'] #root {
+  display: flex;
+  flex-direction: column;
+}
+
+html[data-app-review-capture='1'] .family-hub-theme {
+  min-height: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+html[data-app-review-capture='1'] .hub-bottom-nav {
+  position: relative;
+  flex-shrink: 0;
+}
+
+html[data-app-review-on-login='1'] .hub-standalone-page {
+  min-height: 100%;
+  justify-content: center;
+}
+

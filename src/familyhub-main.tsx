@@ -6,11 +6,13 @@ import './index.css';
 import { initServiceWorker } from './lib/serviceWorker.ts';
 import { initHubNativeShell } from './lib/hubNativeShell';
 import { initStoreScreenshotEarly, prepareStoreScreenshotBootSync } from './familyhub/storeScreenshotMode';
+import { initAppReviewCaptureEarly } from './lib/appReviewDemo';
 import { clearNativeWebCachesOnBoot, shouldEnableServiceWorker } from './lib/nativeWebCache';
 import { logger } from './lib/logger';
 
 async function bootFamilyHub() {
   initStoreScreenshotEarly();
+  initAppReviewCaptureEarly();
 
   const capturePath = prepareStoreScreenshotBootSync();
   if (capturePath) {

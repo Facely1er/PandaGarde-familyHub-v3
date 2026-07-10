@@ -13,7 +13,7 @@ One document to complete **Google Play** and **Apple App Store** listings for **
 | Support | `support@pandagarde.com` |
 | Website | `https://www.pandagarde.com` |
 
-**Related docs:** [FAMILYHUB_PLAY_STORE.md](./FAMILYHUB_PLAY_STORE.md) (Play walkthrough) · [FAMILYHUB_APP_STORE_COPY.md](./FAMILYHUB_APP_STORE_COPY.md) · [FAMILYHUB_STORE_PRIVACY_FORMS.md](./FAMILYHUB_STORE_PRIVACY_FORMS.md) · [FAMILYHUB_STORE_RELEASE.md](./FAMILYHUB_STORE_RELEASE.md)
+**Related docs:** [FAMILYHUB_PLAY_STORE.md](./FAMILYHUB_PLAY_STORE.md) (Play walkthrough) · [FAMILYHUB_APP_STORE_COPY.md](./FAMILYHUB_APP_STORE_COPY.md) · [FAMILYHUB_STORE_PRIVACY_FORMS.md](./FAMILYHUB_STORE_PRIVACY_FORMS.md) · [FAMILYHUB_STORE_RELEASE.md](./FAMILYHUB_STORE_RELEASE.md) · [FAMILYHUB_APP_STORE_REVIEW_REPLY.md](./FAMILYHUB_APP_STORE_REVIEW_REPLY.md)
 
 ---
 
@@ -147,6 +147,8 @@ SIGN-IN: No real account. Tap "Let's go!" on the login screen to open Family Hub
 
 DATA: Family members (first name + age) and mission progress are stored in on-device storage only. No backend sync in this build.
 
+DATA DELETION: Settings → "Clear all data on this device", or uninstall the app.
+
 CHILDREN: Parent-guided educational missions. No social feed, no child-to-child messaging, no ads targeting children.
 
 OPTIONAL: Users may open pandagarde.com in the system browser for stories or Digital Footprint Analysis.
@@ -227,9 +229,15 @@ Create app → bundle ID **`com.pandagarde.familyhub`** → platform iOS.
 
 | Field | Value |
 |-------|--------|
-| Sign-in required? | No |
-| Notes | Same block as Google review instructions (above) |
+| Sign-in required? | **No** |
+| Demo account | Leave blank — local “Let’s go!” only |
+| Notes | Full 7-point reply in [FAMILYHUB_APP_STORE_REVIEW_REPLY.md](./FAMILYHUB_APP_STORE_REVIEW_REPLY.md) |
+| Attachment | **Physical-device screen recording** (required for Apple 2.1) |
 | Contact | Your name, phone, email |
+
+**Apple Guideline 2.1 reply must include all seven items** (recording, devices tested, purpose, setup, external services, regions, regulated industry). Paste the block from `FAMILYHUB_APP_STORE_REVIEW_REPLY.md` — the short Google Play notes are not enough for Apple.
+
+**Screen recording must show:** cold launch → Let’s go! → mission flow → add family member → Settings → **Clear all data on this device** → back to login.
 
 ### TestFlight (recommended before public)
 

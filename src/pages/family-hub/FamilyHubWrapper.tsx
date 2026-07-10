@@ -6,6 +6,7 @@ import { HUB_WELCOMED_KEY } from '../../familyhub/constants';
 import { lazyScreen } from '../../familyhub/lazyScreen';
 import AuthWrapper, { useAuth } from './AuthWrapper';
 import LoginPage from './LoginPage';
+import AppReviewTourHost from '../../familyhub/components/AppReviewTourHost';
 
 const WelcomeScreen = lazyScreen(() => import('../../familyhub/screens/WelcomeScreen'));
 const DashboardScreen = lazyScreen(() => import('../../familyhub/screens/DashboardScreen'));
@@ -56,6 +57,7 @@ const FamilyHubWrapper: React.FC = () => {
     <div className="flex min-h-0 flex-1 flex-col">
       <HubExperienceProviders>
         <AuthWrapper>
+          <AppReviewTourHost />
           <FamilyHubRoutes />
         </AuthWrapper>
       </HubExperienceProviders>

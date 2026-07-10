@@ -78,12 +78,14 @@ Launcher background color: teal tint `#F0FDFA` (`android/app/src/main/res/values
 
 ## Reviewer notes (no real accounts)
 
-Family Hub uses **local-only** sign-in (`LoginPage` → “Open Family Hub”). Document for store review:
+Family Hub uses **local-only** sign-in (`LoginPage` → “Let's go!”). Document for store review:
 
 - No server account required
 - Progress stored in on-device storage only
+- **Data deletion:** Settings → Clear all data on this device, or uninstall
 - Optional link to full PandaGarde website for Digital Footprint Analysis
 - Child-facing content is parent-guided missions, not open social features
+- **Apple 2.1:** full reply + screen recording → [FAMILYHUB_APP_STORE_REVIEW_REPLY.md](./FAMILYHUB_APP_STORE_REVIEW_REPLY.md)
 
 See `src/pages/AppStoreReviewPage.tsx` on the marketing site for copy you can mirror in store listing notes.
 
