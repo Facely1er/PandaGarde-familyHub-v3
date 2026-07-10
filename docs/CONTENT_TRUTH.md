@@ -112,7 +112,21 @@ PandaGarde serves these **in-app**; SocialCaution is a separate, non-integrated 
 
 ---
 
-## 8. Stale phrases — grep before release
+## 8. Family Hub Premium (optional)
+
+| Claim | Truth |
+|-------|--------|
+| All missions free | **True** — 18 missions, games, family prompts stay free |
+| Premium adds | **True** — personalized real-life scenarios (parent Customize: app, child name, custom text) |
+| Premium pricing | **One-time purchase** (target ~$9.99 when IAP ships) — **not** a monthly subscription |
+| Premium requires account | **False** — pilot codes and future IAP unlock on device; no PandaGarde server login |
+| Premium = cloud sync | **False** — personalization stored locally; multi-device sync is a future tier |
+
+Approved phrasing: *“Optional one-time Premium unlock personalizes mission scenarios with your family’s apps — footprint review stays free.”*
+
+---
+
+## 9. Stale phrases — grep before release
 
 Search and fix if found in user-facing copy:
 
@@ -134,7 +148,7 @@ Start Digital Footprint Analysis
 
 ---
 
-## 9. Canonical feature bullets (copy-paste safe)
+## 10. Canonical feature bullets (copy-paste safe)
 
 **Family Hub**
 
@@ -144,6 +158,7 @@ Start Digital Footprint Analysis
 - Parent-guided — no child social network
 - Works standalone or after the website assessment
 - No server account required for core use
+- Optional **Premium** (one-time unlock when billed): tailor mission scenarios to your family’s apps — not a subscription
 
 **Service catalog → alerts**
 
@@ -153,19 +168,19 @@ Start Digital Footprint Analysis
 
 ---
 
-## 10. Automated check
+## 11. Automated check
 
 ```bash
 npm run check:content-truth
 ```
 
-Scans `src/pages`, `src/components`, `src/familyhub`, and `src/data/familyResources.ts` for §8 stale phrases. Survey copy (`familyPrivacyAssessment.ts`) and service catalog vendor text are excluded.
+Scans `src/pages`, `src/components`, `src/familyhub`, and `src/data/familyResources.ts` for §9 stale phrases. Survey copy (`familyPrivacyAssessment.ts`) and service catalog vendor text are excluded.
 
 Add new patterns to `scripts/check-content-truth.mjs` when product behavior changes.
 
 ---
 
-## 11. Related docs
+## 12. Related docs
 
 - [FAMILYHUB_APP_STORE_COPY.md](./FAMILYHUB_APP_STORE_COPY.md) — store listings (aligned with §2)
 - [FAMILYHUB_MISSIONS_PARENT_GUIDE.md](./FAMILYHUB_MISSIONS_PARENT_GUIDE.md) — parent one-pager

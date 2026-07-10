@@ -1,14 +1,14 @@
 /**
  * Premium entitlement — separate from DFA (footprint review stays free).
- * Stored locally until subscription / store billing is wired.
+ * Stored locally until one-time store IAP / receipt validation is wired.
  */
 
 export const PREMIUM_ENTITLEMENT_STORAGE_KEY = 'pandagarde_premium_entitlement';
 
-/** Pilot unlock codes — replace with server validation when billing ships. */
+/** Pilot unlock codes — replace with store receipt validation when billing ships. */
 const PILOT_UNLOCK_CODES = new Set(['PANDA-PILOT-2026', 'FAMILYHUB-PREMIUM']);
 
-export type PremiumSource = 'pilot-code' | 'subscription' | 'manual';
+export type PremiumSource = 'pilot-code' | 'purchase' | 'manual';
 
 export interface PremiumEntitlement {
   active: boolean;
@@ -67,5 +67,5 @@ export const clearPremiumEntitlement = (): void => {
   savePremiumEntitlement(DEFAULT_PREMIUM_ENTITLEMENT);
 };
 
-/** Display pricing for marketing site — not shown in Family Hub v1 store build (no IAP). */
-export const PREMIUM_PRICING_LABEL = '$4.99/month';
+/** Display pricing for marketing site — one-time unlock, not a subscription. */
+export const PREMIUM_PRICING_LABEL = '$9.99 one-time';

@@ -343,7 +343,7 @@ const ForFamiliesPage: React.FC = () => {
 
               <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
 
-                Missions are free. Optional Premium ({PREMIUM_PRICING_LABEL}, app stores soon) personalizes scenarios with your family&apos;s apps.
+                Missions are free. Optional Premium ({PREMIUM_PRICING_LABEL} unlock in app stores soon — no subscription) personalizes scenarios with your family&apos;s apps.
 
               </p>
 
