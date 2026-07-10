@@ -22,6 +22,66 @@ The app auto-walks: login → welcome → dashboard → mission → add family m
 
 ---
 
+## Resubmission: new build required?
+
+**Yes — upload a new iOS build (build 7), not the rejected build 6.**
+
+| Change since rejected build | In store binary? | Why it matters |
+|-----------------------------|----------------|----------------|
+| **Settings → Clear all data on this device** | Yes (after rebuild) | Shown in your recording and stated in the reply — reviewers must see it in the IPA |
+| **ChildProgressDetail** logger fix | Yes | Minor crash fix when viewing child progress |
+| Premium copy (no IAP in v1.0.0) | Yes | Matches App Review notes |
+| App Review auto-tour (`VITE_APP_REVIEW_DEMO`) | No (dev/recording only) | Not enabled in App Store builds |
+
+**Rejected:** `1.0.0 (6)` · **Resubmit:** `1.0.0 (7)`
+
+On Mac before upload:
+
+```bash
+npm run test:run
+npm run mobile:bump:build          # 6 → 7
+npm run ios:appstore               # or ios:prepare + archive in Xcode
+```
+
+Upload build **7** to App Store Connect, select it on the version, then reply with notes + recording.
+
+**Do not** reply with only build 6 if the binary lacks **Clear all data** — Apple will not find what your notes describe.
+
+---
+
+## Devices tested — complete this honestly
+
+Apple expects **physical device** testing. The Playwright file (`store-assets/app-review/app-review-recording.mp4`) is **not** a physical-device capture — **do not** claim “physical iPhone” if you attach only that file.
+
+**Before you submit:**
+
+1. Install **build 7** via TestFlight on your iPhone.
+2. Smoke-test: Let's go! → mission → Family → Settings → **Clear all data** → login.
+3. Record on the **same iPhone** (Control Center → Screen Recording), cold launch from home screen.
+4. Fill section 2 with **only devices you actually used** (one iPhone is fine — do not invent a second device or iPad).
+
+**Section 2 — single iPhone (honest template):**
+
+```
+2) DEVICES TESTED
+• iPhone [your model] — iOS [your version] (TestFlight build 7: full reviewer path + attached screen recording)
+Build: 1.0.0 (7) via TestFlight internal testing.
+```
+
+**Section 1 — after physical re-record:**
+
+```
+1) SCREEN RECORDING
+Attached: screen recording from iPhone [model], iOS [version].
+Flow: cold launch → Let's go! → …
+```
+
+Replace `[model]` / `[version]` with **Settings → General → About** on the phone you used.
+
+**Simulator smoke test (Mac):** [FAMILYHUB_IOS_SIMULATOR_REVIEW_TEST.md](./FAMILYHUB_IOS_SIMULATOR_REVIEW_TEST.md) · `npm run ios:simulator:review`
+
+---
+
 ## Screen recording checklist (physical iPhone, latest iOS)
 
 Record from the home screen (cold launch). Suggested flow (~4–6 min):
@@ -54,9 +114,8 @@ Attached: [DEVICE MODEL], iOS [VERSION]. Flow: cold launch → Let's go! → wel
 Not in v1.0.0: no server accounts or cloud deletion; no IAP/subscriptions; no UGC, social, or reporting; no location, contacts, camera, microphone, photos, or ATT prompts.
 
 2) DEVICES TESTED
-• iPhone [model] — iOS [version]
-• iPhone [model] — iOS [version]
-Build: 1.0.0 ([build])
+• iPhone [model] — iOS [version] (TestFlight build 7 — full reviewer path)
+Build: 1.0.0 (7) via TestFlight internal testing.
 
 3) PURPOSE & AUDIENCE
 Parent-guided educational app for families ages 5–17: 18 short privacy missions with real scenarios, optional practice activities, family discussion prompts, and one practical action per mission. Not a social network; does not monitor children's devices.
