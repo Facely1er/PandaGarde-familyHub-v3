@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import {
+  APP_REVIEW_BEAT_MS,
+  APP_REVIEW_QUICK_BEAT_MS,
   APP_REVIEW_SCREEN_DWELL_MS,
   APP_REVIEW_TRANSITION_MS,
   appReviewTourAlreadyStarted,
@@ -27,6 +29,14 @@ function delay(ms: number) {
 
 function dwell(ms = APP_REVIEW_SCREEN_DWELL_MS) {
   return delay(ms);
+}
+
+function beat() {
+  return dwell(APP_REVIEW_BEAT_MS);
+}
+
+function quickBeat() {
+  return dwell(APP_REVIEW_QUICK_BEAT_MS);
 }
 
 async function settleNavigation() {
@@ -162,7 +172,7 @@ export function useAppReviewAutoTour() {
         if (!(await waitForReviewView('login'))) {
           throw new Error('login screen not ready');
         }
-        await dwell();
+        await beat();
         clickButtonMatching(/let's go!/i);
         if (!(await waitForReviewView(['welcome', 'dashboard']))) {
           throw new Error('post-login navigation failed');
@@ -171,7 +181,7 @@ export function useAppReviewAutoTour() {
         // 2 — Welcome (first-time path)
         if (getAppReviewView() === 'welcome') {
           await settleNavigation();
-          await dwell();
+          await beat();
           clickButtonMatching(/add your family/i);
           if (!(await waitForReviewView('dashboard'))) {
             throw new Error('welcome → dashboard failed');
@@ -183,9 +193,9 @@ export function useAppReviewAutoTour() {
         if (!(await waitForMainText(/today's mission|ready for today|browse missions/i))) {
           throw new Error('dashboard content not visible');
         }
-        await dwell();
+        await beat();
 
-        // 4 — Journey (tab 2)
+        // 4 — Journey (tab 2) — quick skim
         if (!clickHubNav(hubPaths.journey)) {
           throw new Error('journey nav click failed');
         }
@@ -196,7 +206,7 @@ export function useAppReviewAutoTour() {
         if (!(await waitForMainText(/mission progress|family rewards|forest friends/i))) {
           throw new Error('journey content not visible');
         }
-        await dwell();
+        await quickBeat();
 
         // 5 — Missions (tab 3)
         if (!clickHubNav(hubPaths.activities)) {
@@ -209,17 +219,17 @@ export function useAppReviewAutoTour() {
         if (!(await waitForMainText(/family privacy missions|all missions|browse every mission/i))) {
           throw new Error('activities content not visible');
         }
-        await dwell();
+        await beat();
 
         // 6 — Mission intro auto-completes in demo (no lazy-loaded game)
         dispatchAppReviewStartMission(REVIEW_MISSION_ID);
         if (!(await waitForReviewView('mission-intro'))) {
           throw new Error('mission intro not shown');
         }
-        if (!(await waitForReviewView('mission-complete', 12_000))) {
+        if (!(await waitForReviewView('mission-complete', 10_000))) {
           throw new Error('mission did not complete');
         }
-        await dwell(2000);
+        await quickBeat();
         if (!clickButtonMatching(/back to activities|done for now/i)) {
           throw new Error('celebration dismiss button not found');
         }
@@ -227,10 +237,9 @@ export function useAppReviewAutoTour() {
           throw new Error('celebration modal did not close');
         }
         await settleNavigation();
-        if (!(await waitForReviewView('activities', 8000))) {
+        if (!(await waitForReviewView('activities', 6000))) {
           throw new Error('return to activities list failed');
         }
-        await delay(400);
 
         // 7 — Family (tab 4)
         if (!clickHubNav(hubPaths.kids)) {
@@ -243,13 +252,13 @@ export function useAppReviewAutoTour() {
         if (!(await waitForMainText(/family members|who is learning/i))) {
           throw new Error('kids content not visible');
         }
-        await dwell();
+        await beat();
         dispatchAppReviewAddMember('Alex', 9);
-        await delay(1500);
+        await delay(500);
         if (!(await waitForMainText(/Alex/i))) {
           throw new Error('add member failed');
         }
-        await dwell();
+        await quickBeat();
 
         // 8 — Settings (header)
         if (!clickSettingsNav()) {
@@ -262,20 +271,20 @@ export function useAppReviewAutoTour() {
         if (!(await waitForMainText(/manage your app preferences|privacy/i))) {
           throw new Error('settings content not visible');
         }
-        await dwell();
+        await beat();
         document.getElementById('settings-clear-data-heading')?.scrollIntoView({ block: 'center' });
-        await delay(800);
+        await delay(250);
 
         // 9 — Data deletion → fresh login
         clickButtonMatching(/clear all data on this device/i);
         setAppReviewView('settings-clear');
-        await delay(500);
+        await delay(250);
         clickButtonMatching(/^clear all data$/i);
-        if (!(await waitForMainText(/let's go!/i, 10_000))) {
+        if (!(await waitForMainText(/let's go!/i, 8000))) {
           throw new Error('login screen not shown after clear data');
         }
         setAppReviewView('login-end');
-        await dwell(2500);
+        await quickBeat();
         markAppReviewTourDone();
       } catch (error) {
         const message = error instanceof Error ? error.message : String(error);

@@ -232,18 +232,19 @@ Create app → bundle ID **`com.pandagarde.familyhub`** → platform iOS.
 | Sign-in required? | **No** |
 | Demo account | Leave blank — local “Let’s go!” only |
 | Notes | Full 7-point reply in [FAMILYHUB_APP_STORE_REVIEW_REPLY.md](./FAMILYHUB_APP_STORE_REVIEW_REPLY.md) |
-| Attachment | **Physical-device screen recording** (required for Apple 2.1) |
+| Attachment | **Simulator screen recording** (iPhone simctl `.mov` from `npm run ios:simulator:review -- --record`) |
 | Contact | Your name, phone, email |
 
 **Apple Guideline 2.1 reply must include all seven items** (recording, devices tested, purpose, setup, external services, regions, regulated industry). Paste the block from `FAMILYHUB_APP_STORE_REVIEW_REPLY.md` — the short Google Play notes are not enough for Apple.
 
-**Screen recording must show:** cold launch → Let’s go! → mission flow → add family member → Settings → **Clear all data on this device** → back to login.
+**Screen recording must show:** cold launch → Let’s go! → mission flow → add family member → Settings → **Clear all data on this device** → back to login. Record on **iPhone simulator**; repeat checklist on **iPad simulator** for section 2 devices tested. See [FAMILYHUB_IOS_SIMULATOR_REVIEW_TEST.md](./FAMILYHUB_IOS_SIMULATOR_REVIEW_TEST.md).
 
-### TestFlight (recommended before public)
+### TestFlight / Simulator smoke (before public)
 
-- [ ] Upload build → Internal testing group
-- [ ] Smoke test on physical iPhone
-- [ ] Submit for App Review
+- [ ] Upload build **7** → select on version
+- [ ] iPhone simulator smoke passed (`npm run ios:simulator:review -- --record`)
+- [ ] iPad simulator smoke passed (`npm run ios:simulator:review:ipad`)
+- [ ] Submit for App Review with simulator recording attached
 
 **Apple checklist**
 
@@ -252,7 +253,7 @@ Create app → bundle ID **`com.pandagarde.familyhub`** → platform iOS.
 - [ ] Age rating done
 - [ ] Build selected
 - [ ] Review notes pasted
-- [ ] TestFlight smoke passed
+- [ ] iPhone + iPad simulator smoke passed
 
 ---
 
@@ -348,7 +349,7 @@ APPLE
 [ ] App created · bundle com.pandagarde.familyhub
 [ ] Metadata · keywords · subtitle
 [ ] App Privacy: No data collected
-[ ] Screenshots · TestFlight smoke
+[ ] Screenshots · iPhone + iPad simulator smoke
 [ ] Submitted for review
 
 POST-LAUNCH

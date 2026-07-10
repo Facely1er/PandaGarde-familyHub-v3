@@ -51,40 +51,45 @@ Upload build **7** to App Store Connect, select it on the version, then reply wi
 
 ## Devices tested — complete this honestly
 
-Apple expects **physical device** testing. The Playwright file (`store-assets/app-review/app-review-recording.mp4`) is **not** a physical-device capture — **do not** claim “physical iPhone” if you attach only that file.
+**Recommended for resubmission:** run the full reviewer path on **Xcode Simulator** (iPhone + iPad), record on the **iPhone simulator**, and attach that `.mov` to App Store Connect. Label devices as **Simulator** — do not call them physical hardware.
+
+**Do not attach** the Playwright web capture (`store-assets/app-review/app-review-recording.mp4`) and claim it is a device recording. Use simctl output from `npm run ios:simulator:review -- --record` instead.
 
 **Before you submit:**
 
-1. Install **build 7** via TestFlight on your iPhone.
-2. Smoke-test: Let's go! → mission → Family → Settings → **Clear all data** → login.
-3. Record on the **same iPhone** (Control Center → Screen Recording), cold launch from home screen.
-4. Fill section 2 with **only devices you actually used** (one iPhone is fine — do not invent a second device or iPad).
+1. Run the 16-step checklist on **iPhone** simulator: `npm run ios:simulator:review -- --record`
+2. Run the same checklist on **iPad** simulator: `npm run ios:simulator:review:ipad -- --record`
+3. Bump, archive, and upload **build 7** (`npm run mobile:bump:build && npm run ios:appstore`).
+4. Fill sections 1–2 with **only simulators you actually tested** (iPhone + iPad if both completed).
 
-**Section 2 — single iPhone (honest template):**
-
-```
-2) DEVICES TESTED
-• iPhone [your model] — iOS [your version] (TestFlight build 7: full reviewer path + attached screen recording)
-Build: 1.0.0 (7) via TestFlight internal testing.
-```
-
-**Section 1 — after physical re-record:**
+**Section 1 — simulator recording (attach iPhone `.mov`):**
 
 ```
 1) SCREEN RECORDING
-Attached: screen recording from iPhone [model], iOS [version].
-Flow: cold launch → Let's go! → …
+Attached: Xcode Simulator screen recording — iPhone 14 Pro Max (6.5"), iOS [X.Y].
+Flow: cold launch → Let's go! → welcome → dashboard → Journey → Missions → complete one mission → Family (add member) → Settings (Clear all data) → login → Let's go! again.
 ```
 
-Replace `[model]` / `[version]` with **Settings → General → About** on the phone you used.
+**Section 2 — iPhone + iPad simulators:**
 
-**Simulator smoke test (Mac):** [FAMILYHUB_IOS_SIMULATOR_REVIEW_TEST.md](./FAMILYHUB_IOS_SIMULATOR_REVIEW_TEST.md) · `npm run ios:simulator:review`
+```
+2) DEVICES TESTED
+• iPhone Simulator (iPhone 14 Pro Max, 6.5") — iOS [X.Y] (full reviewer path + attached screen recording)
+• iPad Simulator (iPad Pro 13-inch) — iPadOS [X.Y] (same reviewer path)
+Build: 1.0.0 (7) — tested on Xcode Simulator before App Store upload.
+```
+
+Replace `[X.Y]` with the runtime version from Simulator or `xcrun simctl list runtimes`.
+
+**Optional — physical device instead:** If you later test on a real iPhone via TestFlight, swap “Simulator” for the model from **Settings → General → About** and note TestFlight build 7. Do not list both simulator and physical unless you actually ran both.
+
+**Full checklist:** [FAMILYHUB_IOS_SIMULATOR_REVIEW_TEST.md](./FAMILYHUB_IOS_SIMULATOR_REVIEW_TEST.md) · `npm run ios:simulator:review` · `npm run ios:simulator:review:ipad`
 
 ---
 
-## Screen recording checklist (physical iPhone, latest iOS)
+## Screen recording checklist (Xcode Simulator — iPhone + iPad)
 
-Record from the home screen (cold launch). Suggested flow (~4–6 min):
+Record on **iPhone simulator** (`npm run ios:simulator:review -- --record`). Repeat the same steps on **iPad simulator** (`npm run ios:simulator:review:ipad`). Suggested flow (~4–6 min each):
 
 1. Launch app → login screen → tap **Let's go!**
 2. Welcome (if shown) → **Start fresh**
@@ -109,13 +114,14 @@ APP REVIEW — PandaGarde Family Hub v1.0.0
 Bundle ID: com.pandagarde.familyhub
 
 1) SCREEN RECORDING
-Attached: [DEVICE MODEL], iOS [VERSION]. Flow: cold launch → Let's go! → welcome → dashboard → Journey → Missions → complete one mission → Family (add member) → Settings (privacy, Clear all data) → login → Let's go! again.
+Attached: Xcode Simulator screen recording — iPhone 14 Pro Max (6.5"), iOS [VERSION]. Flow: cold launch → Let's go! → welcome → dashboard → Journey → Missions → complete one mission → Family (add member) → Settings (privacy, Clear all data) → login → Let's go! again.
 
 Not in v1.0.0: no server accounts or cloud deletion; no IAP/subscriptions; no UGC, social, or reporting; no location, contacts, camera, microphone, photos, or ATT prompts.
 
 2) DEVICES TESTED
-• iPhone [model] — iOS [version] (TestFlight build 7 — full reviewer path)
-Build: 1.0.0 (7) via TestFlight internal testing.
+• iPhone Simulator (iPhone 14 Pro Max, 6.5") — iOS [version] (full reviewer path + attached screen recording)
+• iPad Simulator (iPad Pro 13-inch) — iPadOS [version] (same reviewer path)
+Build: 1.0.0 (7) — tested on Xcode Simulator before App Store upload.
 
 3) PURPOSE & AUDIENCE
 Parent-guided educational app for families ages 5–17: 18 short privacy missions with real scenarios, optional practice activities, family discussion prompts, and one practical action per mission. Not a social network; does not monitor children's devices.

@@ -36,9 +36,38 @@ export function phoneVideoExportFilter(exportW = IPHONE_67.exportW, exportH = IP
   return [
     'trim=start=0.3',
     'setpts=PTS-STARTPTS',
-    `scale=${exportW}:${exportH}`,
+    `scale=${exportW}:${exportH}:flags=lanczos`,
     'format=yuv420p',
   ].join(',');
+}
+
+/** High-quality simctl .mov → App Store MP4 (matches Playwright export polish). */
+export function simulatorMovToMp4FfmpegArgs(movPath, mp4Path, exportW = IPHONE_67.exportW, exportH = IPHONE_67.exportH) {
+  return [
+    '-y',
+    '-i',
+    movPath,
+    '-vf',
+    phoneVideoExportFilter(exportW, exportH),
+    '-c:v',
+    'libx264',
+    '-profile:v',
+    'high',
+    '-pix_fmt',
+    'yuv420p',
+    '-crf',
+    '18',
+    '-movflags',
+    '+faststart',
+    '-color_primaries',
+    'bt709',
+    '-color_trc',
+    'bt709',
+    '-colorspace',
+    'bt709',
+    '-an',
+    mp4Path,
+  ];
 }
 
 export function previewBase(port = PREVIEW_PORT) {

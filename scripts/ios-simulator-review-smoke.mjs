@@ -4,13 +4,16 @@
  *
  * Usage (Mac + Xcode):
  *   npm run ios:simulator:review
- *   npm run ios:simulator:review -- --record   # also starts simctl screen recording
+ *   npm run ios:simulator:review:ipad
+ *   npm run ios:simulator:review -- --record   # → store-assets/app-review/simulator-review-iphone.mov
+ *   npm run ios:simulator:review:ipad -- --record
  *   npm run ios:simulator:review -- --skip-build
  */
 import { spawn, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { simulatorMovToMp4FfmpegArgs } from './lib/app-review-capture-shared.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const iosAppDir = path.join(root, 'ios', 'App');
@@ -18,11 +21,21 @@ const iosPublicDir = path.join(iosAppDir, 'App', 'public');
 const derivedData = path.join(iosAppDir, '.derivedData');
 const appBundle = path.join(derivedData, 'Build', 'Products', 'Debug-iphonesimulator', 'App.app');
 const bundleId = 'com.pandagarde.familyhub';
-const recordOut = path.join(root, 'store-assets', 'app-review', 'simulator-review-recording.mov');
+const reviewOutDir = path.join(root, 'store-assets', 'app-review');
 
-const STORE_IPHONE_SIM = {
-  name: 'SC-Review-iPhone-6.5',
-  deviceType: 'com.apple.CoreSimulator.SimDeviceType.iPhone-14-Pro-Max',
+const DEVICE_PROFILES = {
+  iphone: {
+    name: 'SC-Review-iPhone-6.5',
+    deviceType: 'com.apple.CoreSimulator.SimDeviceType.iPhone-14-Pro-Max',
+    label: 'iPhone 14 Pro Max (6.5")',
+    recordFile: 'simulator-review-iphone.mov',
+  },
+  ipad: {
+    name: 'iPad Pro 13-inch (M5)',
+    deviceType: null,
+    label: 'iPad Pro 13-inch',
+    recordFile: 'simulator-review-ipad.mov',
+  },
 };
 
 const env = {
@@ -33,6 +46,17 @@ const env = {
 
 const skipBuild = process.argv.includes('--skip-build');
 const startRecord = process.argv.includes('--record');
+const deviceArg = process.argv.find((a) => a.startsWith('--device='));
+const deviceKey = deviceArg?.split('=')[1] ?? 'iphone';
+const deviceProfile = DEVICE_PROFILES[deviceKey];
+
+if (!deviceProfile) {
+  console.error(`Unknown --device=${deviceKey}. Use iphone or ipad.`);
+  process.exit(1);
+}
+
+const recordOut = path.join(reviewOutDir, deviceProfile.recordFile);
+const recordMp4 = path.join(reviewOutDir, deviceProfile.recordFile.replace(/\.mov$/i, '.mp4'));
 
 function run(command, args, options = {}) {
   const result = spawnSync(command, args, {
@@ -73,9 +97,17 @@ function findSimulatorByName(name) {
   return null;
 }
 
-function ensureSimulator() {
-  const { name, deviceType } = STORE_IPHONE_SIM;
+function ensureSimulator(profile) {
+  const { name, deviceType } = profile;
   const existing = findSimulatorByName(name);
+  if (!deviceType) {
+    if (existing) {
+      return existing.udid;
+    }
+    throw new Error(
+      `Simulator not found: "${name}". Create it in Xcode → Window → Devices and Simulators.`
+    );
+  }
   if (existing?.deviceTypeIdentifier === deviceType) {
     return existing.udid;
   }
@@ -159,11 +191,21 @@ function launchApp(udid) {
   run('osascript', ['-e', 'tell application "Simulator" to activate'], { allowFail: true });
 }
 
-function printManualScript(simName, iosRuntime) {
+function exportMovToMp4(movPath, mp4Path) {
+  const ffmpegBin = process.env.FFMPEG ?? 'ffmpeg';
+  console.log(`[ios:simulator:review] Exporting MP4 → ${mp4Path}`);
+  const result = spawnSync(ffmpegBin, simulatorMovToMp4FfmpegArgs(movPath, mp4Path), { encoding: 'utf8' });
+  if (result.status !== 0) {
+    throw new Error(result.stderr || 'ffmpeg MP4 export failed');
+  }
+  console.log(`[ios:simulator:review] ✓ Saved ${mp4Path} (${Math.round(fs.statSync(mp4Path).size / 1024)} KB)`);
+}
+
+function printManualScript(simName, simLabel, iosRuntime) {
   console.log(`
 ══════════════════════════════════════════════════════════════════
   PandaGarde Family Hub — App Review smoke test (Simulator)
-  Device: ${simName} · iOS ${iosRuntime}
+  Device: ${simName} (${simLabel}) · iOS ${iosRuntime}
   Bundle: ${bundleId}
 ══════════════════════════════════════════════════════════════════
 
@@ -206,9 +248,10 @@ Follow in order (~5 min). Check each step before continuing.
 
  PASS if all checked and no error screens.
 
- For App Store reply (section 2), you may note:
-   • iPhone Simulator — iOS ${iosRuntime} (smoke test before TestFlight)
-   • Plus a physical iPhone for the final screen recording Apple requested
+ For App Store reply (section 2), after iPhone + iPad sim tests:
+   • iPhone Simulator (iPhone 14 Pro Max, 6.5") — iOS ${iosRuntime}
+   • iPad Simulator (iPad Pro 13-inch) — iPadOS ${iosRuntime}
+   Attach the iPhone simctl recording to App Store Connect.
 
  Full checklist: docs/FAMILYHUB_IOS_SIMULATOR_REVIEW_TEST.md
 ══════════════════════════════════════════════════════════════════
@@ -228,8 +271,8 @@ async function main() {
     process.exit(1);
   }
 
-  const udid = ensureSimulator();
-  bootSimulator(udid, STORE_IPHONE_SIM.name);
+  const udid = ensureSimulator(deviceProfile);
+  bootSimulator(udid, deviceProfile.name);
 
   if (!skipBuild) {
     prepareWebBundle();
@@ -240,19 +283,27 @@ async function main() {
 
   installFresh(udid);
   launchApp(udid);
-  sleep(3000);
 
   const iosVersion = getIosRuntimeLabel();
-  printManualScript(STORE_IPHONE_SIM.name, iosVersion);
+  printManualScript(deviceProfile.name, deviceProfile.label, iosVersion);
 
   if (startRecord) {
+    // Wait for login screen before recording — avoid capturing install/home-screen UI.
+    console.log('[ios:simulator:review] Waiting for login screen before recording…');
+    sleep(6000);
     fs.mkdirSync(path.dirname(recordOut), { recursive: true });
     console.log(`[ios:simulator:review] Recording → ${recordOut}`);
-    console.log('[ios:simulator:review] Press Ctrl+C when the manual test is finished.\n');
+    console.log('[ios:simulator:review] Run the manual checklist now. Press Ctrl+C when finished.\n');
     const proc = spawn('xcrun', ['simctl', 'io', udid, 'recordVideo', recordOut], { stdio: 'inherit' });
     proc.on('exit', (code) => {
       if (code === 0 || code === null) {
         console.log(`\n[ios:simulator:review] ✓ Saved ${recordOut}`);
+        try {
+          exportMovToMp4(recordOut, recordMp4);
+        } catch (err) {
+          console.error('[ios:simulator:review] MP4 export failed:', err.message ?? err);
+          process.exit(1);
+        }
       }
       process.exit(code ?? 0);
     });
