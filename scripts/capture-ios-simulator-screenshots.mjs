@@ -15,6 +15,7 @@ import {
   assertFramedDimensions,
   compositeWithDeviceFrame,
   FRAMED_DEVICE_PROFILES,
+  reframeRawCaptures,
 } from './lib/store-device-frames.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -56,11 +57,12 @@ const DEVICE_TARGETS = {
 
 function parseArgs() {
   const doNativeBuild = process.argv.includes('--build');
+  const reframeOnly = process.argv.includes('--reframe-only');
   const deviceArg = process.argv.find((a) => a.startsWith('--device='));
   const screenArg = process.argv.find((a) => a.startsWith('--screen='));
   const deviceFilter = deviceArg?.split('=')[1] ?? 'all';
   const screenFilter = screenArg?.split('=')[1] ?? null;
-  return { doNativeBuild, deviceFilter, screenFilter };
+  return { doNativeBuild, reframeOnly, deviceFilter, screenFilter };
 }
 
 function run(command, args, options = {}) {
@@ -230,11 +232,23 @@ function launchApp(udid) {
   run('osascript', ['-e', 'tell application "Simulator" to activate'], { allowFail: true });
 }
 
+function warmUpSimulatorApp(udid) {
+  console.log('[ios-screenshots] Warm-up launch (WebView cold start)…');
+  buildWebBundleForScreen('02-dashboard');
+  run('xcrun', ['simctl', 'uninstall', udid, bundleId], { allowFail: true });
+  run('xcrun', ['simctl', 'install', udid, appBundle]);
+  launchApp(udid);
+  sleep(14000);
+  run('xcrun', ['simctl', 'terminate', udid, bundleId], { allowFail: true });
+  sleep(2000);
+}
+
 async function captureDevice(target, screenFilter) {
   const { profile, simName, waitExtraMs } = target;
   const udid =
     profile.slug === 'iphone-6.5' ? ensureStoreIphoneSimulator() : resolveSimulatorUdid(simName);
   bootSimulator(udid, simName);
+  warmUpSimulatorApp(udid);
 
   const outDir = path.join(outRoot, profile.slug);
   const rawDir = path.join(rawRoot, profile.slug);
@@ -279,14 +293,7 @@ async function captureDevice(target, screenFilter) {
 }
 
 async function main() {
-  const { doNativeBuild, deviceFilter, screenFilter } = parseArgs();
-
-  if (doNativeBuild || !fs.existsSync(appBundle)) {
-    prepareNativeApp();
-    buildNativeApp();
-  } else {
-    console.log('[ios-screenshots] Reusing native .app shell (pass --build to rebuild native)');
-  }
+  const { doNativeBuild, reframeOnly, deviceFilter, screenFilter } = parseArgs();
 
   const targets =
     deviceFilter === 'all'
@@ -296,6 +303,31 @@ async function main() {
   if (targets.length === 0) {
     console.error(`Unknown --device=${deviceFilter}. Use iphone-6.5, ipad-13, or all.`);
     process.exit(1);
+  }
+
+  if (reframeOnly) {
+    console.log('[ios-screenshots] Reframing raw captures into device bezels…');
+    const hadError = await reframeRawCaptures({
+      rawRoot,
+      outRoot,
+      profiles: targets.map((target) => target.profile),
+      screens: CAPTURE_SCREENS,
+      screenFilter,
+      sharp,
+      log: (line) => console.log(line),
+    });
+    if (hadError) {
+      process.exit(1);
+    }
+    console.log('\n[ios-screenshots] Reframe done.');
+    return;
+  }
+
+  if (doNativeBuild || !fs.existsSync(appBundle)) {
+    prepareNativeApp();
+    buildNativeApp();
+  } else {
+    console.log('[ios-screenshots] Reusing native .app shell (pass --build to rebuild native)');
   }
 
   for (const target of targets) {
