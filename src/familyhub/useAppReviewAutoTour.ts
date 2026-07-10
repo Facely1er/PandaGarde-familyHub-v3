@@ -78,6 +78,18 @@ function clickButtonMatching(matcher: RegExp): boolean {
   return true;
 }
 
+async function waitForCelebrationDismissed(timeoutMs = 8000): Promise<boolean> {
+  const deadline = Date.now() + timeoutMs;
+  while (Date.now() < deadline) {
+    const dialog = document.querySelector('[aria-labelledby="mission-celebration-title"]');
+    if (!dialog) {
+      return true;
+    }
+    await delay(POLL_MS);
+  }
+  return false;
+}
+
 /** Bottom nav order: Dashboard → Journey → Missions → Family */
 function clickHubNav(path: string): boolean {
   const normalized = path.replace(/\/$/, '') || '/';
@@ -207,13 +219,18 @@ export function useAppReviewAutoTour() {
         if (!(await waitForReviewView('mission-complete', 12_000))) {
           throw new Error('mission did not complete');
         }
-        await dwell();
-        clickButtonMatching(/done for now/i);
+        await dwell(2000);
+        if (!clickButtonMatching(/back to activities|done for now/i)) {
+          throw new Error('celebration dismiss button not found');
+        }
+        if (!(await waitForCelebrationDismissed())) {
+          throw new Error('celebration modal did not close');
+        }
         await settleNavigation();
         if (!(await waitForReviewView('activities', 8000))) {
           throw new Error('return to activities list failed');
         }
-        await delay(600);
+        await delay(400);
 
         // 7 — Family (tab 4)
         if (!clickHubNav(hubPaths.kids)) {
@@ -259,6 +276,7 @@ export function useAppReviewAutoTour() {
         }
         setAppReviewView('login-end');
         await dwell(2500);
+        markAppReviewTourDone();
       } catch (error) {
         const message = error instanceof Error ? error.message : String(error);
         const onErrorPage = pageShowsReviewError();
@@ -266,8 +284,7 @@ export function useAppReviewAutoTour() {
         if (onErrorPage) {
           document.documentElement.dataset.appReviewTourError = message;
         }
-      } finally {
-        markAppReviewTourDone();
+        document.documentElement.dataset.appReviewTourFailed = '1';
       }
     };
 

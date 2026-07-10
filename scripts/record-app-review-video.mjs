@@ -171,13 +171,20 @@ async function recordOnce(headless) {
     () => document.documentElement.dataset.appReviewTourDone === '1',
     { timeout: APP_REVIEW_TOUR_DONE_FALLBACK_MS }
   );
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(1500);
 
   const errorText = await page.evaluate(() => {
     const text = document.body?.innerText ?? '';
     const tourError = document.documentElement.dataset.appReviewTourError ?? '';
+    const tourFailed = document.documentElement.dataset.appReviewTourFailed === '1';
     if (/Navigation error|Something went wrong|Page update needed/i.test(text)) {
       return text.slice(0, 200);
+    }
+    if (tourFailed) {
+      return `Tour failed: ${tourError || 'unknown step'}`;
+    }
+    if (/mission complete/i.test(text) && /back to activities|continue to next mission/i.test(text)) {
+      return 'Recording ended on mission celebration modal (tour did not dismiss)';
     }
     return tourError ? `Tour error: ${tourError}` : '';
   });

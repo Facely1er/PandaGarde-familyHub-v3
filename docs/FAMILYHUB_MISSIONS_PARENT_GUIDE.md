@@ -114,4 +114,4 @@ Personalization priority: your custom text → your app/name → apps from footp
 
 ---
 
-*Catalog source: `src/data/ageBasedActivities.ts` · Machine-readable export: `docs/familyhub-missions-catalog.csv`*
+*Catalog source: `src/data/ageBasedActivities.ts` · Machine-readable export: `docs/familyhub-missions-catalog.csv` · IAP implementation: [FAMILYHUB_PREMIUM_IAP_CHECKLIST.md](./FAMILYHUB_PREMIUM_IAP_CHECKLIST.md)*

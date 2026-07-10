@@ -184,5 +184,6 @@ Add new patterns to `scripts/check-content-truth.mjs` when product behavior chan
 
 - [FAMILYHUB_APP_STORE_COPY.md](./FAMILYHUB_APP_STORE_COPY.md) — store listings (aligned with §2)
 - [FAMILYHUB_MISSIONS_PARENT_GUIDE.md](./FAMILYHUB_MISSIONS_PARENT_GUIDE.md) — parent one-pager
+- [FAMILYHUB_PREMIUM_IAP_CHECKLIST.md](./FAMILYHUB_PREMIUM_IAP_CHECKLIST.md) — v1.1 one-time IAP implementation checklist
 - [sdlc/PERSISTENCE_DESIGN.md](./sdlc/PERSISTENCE_DESIGN.md) — local vs cloud tiers
 - [sdlc/VISION.md](./sdlc/VISION.md) — product identity (authoritative)

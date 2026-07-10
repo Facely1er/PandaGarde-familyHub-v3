@@ -1,8 +1,10 @@
 # Apple App Store — Guideline 2.1 review reply (v1.0.0)
 
-Paste into **App Store Connect → App Review → Reply** and into **App Review Information → Notes** for future submissions.
+Paste into **App Store Connect → App Review → Reply** and **App Review Information → Notes**.
 
-Attach a **physical-device screen recording** (`.mov` / `.mp4`) when replying.
+**Limit:** App Store Connect notes are capped at **4000 characters** — use the **Short reply** below.
+
+Attach your screen recording (`.mov` / `.mp4`) when replying.
 
 **Generate recording (automated tour — same approach as Silent Hour):**
 
@@ -38,7 +40,52 @@ Record from the home screen (cold launch). Suggested flow (~4–6 min):
 
 ---
 
-## Reply text (copy below — fill bracketed fields)
+## Short reply (paste this — ~2060 chars, under 4000 limit)
+
+Fill bracketed fields, then copy everything inside the code block:
+
+```
+APP REVIEW — PandaGarde Family Hub v1.0.0
+Bundle ID: com.pandagarde.familyhub
+
+1) SCREEN RECORDING
+Attached: [DEVICE MODEL], iOS [VERSION]. Flow: cold launch → Let's go! → welcome → dashboard → Journey → Missions → complete one mission → Family (add member) → Settings (privacy, Clear all data) → login → Let's go! again.
+
+Not in v1.0.0: no server accounts or cloud deletion; no IAP/subscriptions; no UGC, social, or reporting; no location, contacts, camera, microphone, photos, or ATT prompts.
+
+2) DEVICES TESTED
+• iPhone [model] — iOS [version]
+• iPhone [model] — iOS [version]
+Build: 1.0.0 ([build])
+
+3) PURPOSE & AUDIENCE
+Parent-guided educational app for families ages 5–17: 18 short privacy missions with real scenarios, optional practice activities, family discussion prompts, and one practical action per mission. Not a social network; does not monitor children's devices.
+
+4) SETUP & ACCESS
+No demo account. Tap "Let's go!" — creates a local guardian profile on this device only.
+Reviewer path: Login → Dashboard → Journey → Missions → complete one mission → Family → Settings.
+Optional pilot (not StoreKit): Settings → Premium → code FAMILYHUB-PREMIUM — on-device scenario personalization only.
+Data deletion: Settings → Clear all data on this device → confirm, or delete the app. PandaGarde does not store this data on servers.
+
+5) EXTERNAL SERVICES
+Core features work offline after first load. No auth, payment, analytics, crash, or AI services in the app. Capacitor native shell; @capacitor/browser opens user-tapped links in Safari (privacy, terms on pandagarde.com). No third-party analytics loaded in Family Hub.
+
+6) REGIONS
+Consistent worldwide. UI: English, Spanish, French (Settings → Language). Free app; no IAP in v1.0.0.
+
+7) REGULATED / THIRD-PARTY
+Not applicable. Educational privacy content only. No medical, legal, or financial services. No licensed third-party media.
+
+Support: support@pandagarde.com
+Privacy: https://www.pandagarde.com/privacy
+```
+
+---
+
+## Extended reply (reference only — exceeds 4000 chars if pasted whole)
+
+<details>
+<summary>Full text for internal reference</summary>
 
 ```
 APP REVIEW INFORMATION — PandaGarde Family Hub v1.0.0
@@ -117,6 +164,8 @@ Support: support@pandagarde.com
 Privacy: https://www.pandagarde.com/privacy
 ```
 
+</details>
+
 ---
 
 ## App Review Information fields
@@ -125,8 +174,8 @@ Privacy: https://www.pandagarde.com/privacy
 |-------|--------|
 | Sign-in required? | **No** |
 | Demo account | Leave blank |
-| Notes | Full reply text above |
-| Attachment | Physical-device screen recording |
+| Notes | **Short reply** above (~2060 chars) |
+| Attachment | Your screen recording |
 
 ---
 
