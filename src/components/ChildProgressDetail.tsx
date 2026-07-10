@@ -3,6 +3,7 @@ import { useFamilyProgress } from '../contexts/FamilyProgressContext';
 import { Award, Clock, TrendingUp, Calendar, Gamepad2, BookOpen, GraduationCap, ArrowLeft } from 'lucide-react';
 import { ProgressBar } from './ui/ProgressBar';
 import { useHubI18n } from '../familyhub/hubI18n';
+import { logger } from '../lib/logger';
 
 interface ChildProgressDetailProps {
   memberId: number;

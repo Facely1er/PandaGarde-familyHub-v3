@@ -15,6 +15,7 @@ import HubWebsiteLink from '../components/HubWebsiteLink';
 import { hubTheme } from '../hubTheme';
 import { hubAgeBandForAge, HUB_AGE_BANDS } from '../hubAgeBands';
 import { useHubI18n } from '../hubI18n';
+import { APP_REVIEW_ADD_MEMBER, isAppReviewDemo } from '../../lib/appReviewDemo';
 import { useStoreCaptureReady } from '../storeScreenshotMode';
 
 const ChildProgressDetail = lazy(() => import('../../components/ChildProgressDetail'));
@@ -87,6 +88,26 @@ const KidsScreen: React.FC = () => {
       setActiveMember(familyMembers[0].id);
     }
   }, [familyMembers, currentMemberId, setActiveMember]);
+
+  useEffect(() => {
+    if (!isAppReviewDemo()) {
+      return;
+    }
+    const onAddMember = (event: Event) => {
+      const detail = (event as CustomEvent<{ name: string; age: number; role?: string }>).detail;
+      if (!detail?.name?.trim() || detail.age <= 0) {
+        return;
+      }
+      void (async () => {
+        const linked = await addMember(detail.name.trim(), detail.age, detail.role ?? 'Child');
+        if (linked && familyMembers.length === 0) {
+          setActiveMember(linked.id);
+        }
+      })();
+    };
+    window.addEventListener(APP_REVIEW_ADD_MEMBER, onAddMember);
+    return () => window.removeEventListener(APP_REVIEW_ADD_MEMBER, onAddMember);
+  }, [addMember, familyMembers.length, setActiveMember]);
 
   const selectMember = (memberId: number) => {
     setActiveMember(memberId);

@@ -23,7 +23,8 @@ import {
 } from './lib/app-review-capture-shared.mjs';
 
 /** Keep in sync with APP_REVIEW_RECORD_MS in src/lib/appReviewDemo.ts */
-const APP_REVIEW_RECORD_MS = 90_000;
+const APP_REVIEW_RECORD_MS = 75_000;
+const APP_REVIEW_TOUR_DONE_FALLBACK_MS = 75_000;
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const outDir = join(root, 'store-assets', 'app-review');
@@ -147,6 +148,7 @@ async function recordOnce(headless) {
   );
 
   const page = await context.newPage();
+  page.setDefaultTimeout(120_000);
   await page.addInitScript(() => {
     document.documentElement.dataset.appReviewCapture = '1';
     localStorage.setItem('pandagarde_local_auth_v1', 'false');
@@ -154,7 +156,7 @@ async function recordOnce(headless) {
   });
 
   console.log(
-    `[app-review:record] Recording ${durationMs / 1000}s @ ${IPHONE_67.viewportW}×${IPHONE_67.viewportH} (${headless ? 'headless' : 'headed'})\n${baseUrl}\n`
+    `[app-review:record] Recording until tour completes (max ${durationMs / 1000}s) @ ${IPHONE_67.viewportW}×${IPHONE_67.viewportH} (${headless ? 'headless' : 'headed'})\n${baseUrl}\n`
   );
   await page.goto(baseUrl, { waitUntil: 'networkidle', timeout: 90_000 });
   await page.waitForFunction(
@@ -165,7 +167,23 @@ async function recordOnce(headless) {
     { timeout: 90_000 }
   );
   console.log('[app-review:record] App visible — auto-tour recording…\n');
-  await page.waitForTimeout(durationMs);
+  await page.waitForFunction(
+    () => document.documentElement.dataset.appReviewTourDone === '1',
+    { timeout: APP_REVIEW_TOUR_DONE_FALLBACK_MS }
+  );
+  await page.waitForTimeout(2000);
+
+  const errorText = await page.evaluate(() => {
+    const text = document.body?.innerText ?? '';
+    const tourError = document.documentElement.dataset.appReviewTourError ?? '';
+    if (/Navigation error|Something went wrong|Page update needed/i.test(text)) {
+      return text.slice(0, 200);
+    }
+    return tourError ? `Tour error: ${tourError}` : '';
+  });
+  if (errorText) {
+    throw new Error(`Tour ended on error screen: ${errorText}`);
+  }
 
   const video = page.video();
   await context.close();

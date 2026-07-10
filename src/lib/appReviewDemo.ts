@@ -4,29 +4,27 @@
  */
 
 /** Dwell on each major screen during the auto-tour. */
-export const APP_REVIEW_SCREEN_DWELL_MS = 4000;
+export const APP_REVIEW_SCREEN_DWELL_MS = 3500;
 
 /** Pause after navigation so the next screen settles. */
-export const APP_REVIEW_TRANSITION_MS = 600;
+export const APP_REVIEW_TRANSITION_MS = 700;
 
-/** Auto-complete in-mission games after this delay. */
-export const APP_REVIEW_MISSION_PLAY_MS = 3000;
-
-/** Playwright recording length — tour finishes around ~70s. */
-export const APP_REVIEW_RECORD_MS = 90_000;
+/** Max Playwright wait — recording stops when tour signals done (~65s). */
+export const APP_REVIEW_RECORD_MS = 75_000;
 
 export const APP_REVIEW_START_MISSION = 'pg-app-review-start-mission' as const;
+export const APP_REVIEW_ADD_MEMBER = 'pg-app-review-add-member' as const;
+export const APP_REVIEW_TOUR_DONE = 'pg-app-review-tour-done' as const;
 
 export type AppReviewView =
   | 'login'
   | 'welcome'
   | 'dashboard'
+  | 'journey'
   | 'activities'
   | 'mission-intro'
-  | 'mission-play'
   | 'mission-complete'
   | 'kids'
-  | 'journey'
   | 'settings'
   | 'settings-clear'
   | 'login-end';
@@ -55,6 +53,14 @@ export function markAppReviewTourStarted(): void {
     return;
   }
   (window as unknown as Record<string, boolean>)[TOUR_GUARD] = true;
+}
+
+export function markAppReviewTourDone(): void {
+  if (typeof document === 'undefined') {
+    return;
+  }
+  document.documentElement.dataset.appReviewTourDone = '1';
+  window.dispatchEvent(new CustomEvent(APP_REVIEW_TOUR_DONE));
 }
 
 export function setAppReviewView(view: AppReviewView): void {
@@ -88,4 +94,19 @@ export function dispatchAppReviewStartMission(missionId: string): void {
     return;
   }
   window.dispatchEvent(new CustomEvent(APP_REVIEW_START_MISSION, { detail: { missionId } }));
+}
+
+export function dispatchAppReviewAddMember(name: string, age: number, role = 'Child'): void {
+  if (typeof window === 'undefined') {
+    return;
+  }
+  window.dispatchEvent(new CustomEvent(APP_REVIEW_ADD_MEMBER, { detail: { name, age, role } }));
+}
+
+export function pageShowsReviewError(): boolean {
+  if (typeof document === 'undefined') {
+    return false;
+  }
+  const text = document.body?.innerText ?? '';
+  return /Navigation error|Something went wrong|Page update needed/i.test(text);
 }

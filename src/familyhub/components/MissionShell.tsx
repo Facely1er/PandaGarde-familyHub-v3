@@ -163,15 +163,14 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
     }
     if (phase === 'intro') {
       setAppReviewView('mission-intro');
-    } else if (phase === 'play') {
-      setAppReviewView('mission-play');
     } else if (phase === 'complete') {
       setAppReviewView('mission-complete');
     }
   }, [phase]);
 
+  /** App Review: skip lazy-loaded games — auto-complete from intro to avoid NavigationErrorBoundary. */
   useEffect(() => {
-    if (!isAppReviewDemo() || phase !== 'play') {
+    if (!isAppReviewDemo() || phase !== 'intro') {
       return;
     }
     const timer = window.setTimeout(() => finishMission(92), 2800);

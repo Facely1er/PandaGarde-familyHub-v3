@@ -1,25 +1,24 @@
 import { useEffect, useRef } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useAuth } from '../pages/family-hub/AuthWrapper';
+import { useLocation } from 'react-router-dom';
 import {
-  APP_REVIEW_MISSION_PLAY_MS,
   APP_REVIEW_SCREEN_DWELL_MS,
-  APP_REVIEW_START_MISSION,
   APP_REVIEW_TRANSITION_MS,
   appReviewTourAlreadyStarted,
+  dispatchAppReviewAddMember,
   dispatchAppReviewStartMission,
   getAppReviewView,
   isAppReviewDemo,
+  markAppReviewTourDone,
   markAppReviewTourStarted,
+  pageShowsReviewError,
   setAppReviewView,
 } from '../lib/appReviewDemo';
-import { clearAllHubLocalData } from './hubLocalData';
+import { logger } from '../lib/logger';
 import { hubPaths } from './hubPaths';
-import { HUB_WELCOMED_KEY } from './constants';
 import { isStoreScreenshotBuild } from './storeScreenshotMode';
 
 const POLL_MS = 80;
-const VIEW_WAIT_MS = 12_000;
+const VIEW_WAIT_MS = 15_000;
 const REVIEW_MISSION_ID = 'pack-digital-backpack';
 
 function delay(ms: number) {
@@ -41,8 +40,27 @@ async function waitForReviewView(target: string | string[], timeoutMs = VIEW_WAI
   const targets = Array.isArray(target) ? target : [target];
   const deadline = Date.now() + timeoutMs;
   while (Date.now() < deadline) {
-    const view = getAppReviewView();
-    if (targets.includes(view)) {
+    if (pageShowsReviewError()) {
+      return false;
+    }
+    if (targets.includes(getAppReviewView())) {
+      return true;
+    }
+    await delay(POLL_MS);
+  }
+  return false;
+}
+
+async function waitForMainText(matcher: RegExp, timeoutMs = VIEW_WAIT_MS): Promise<boolean> {
+  const deadline = Date.now() + timeoutMs;
+  while (Date.now() < deadline) {
+    if (pageShowsReviewError()) {
+      return false;
+    }
+    const main = document.getElementById('family-hub-main');
+    const login = document.querySelector('.hub-standalone-page');
+    const text = `${main?.textContent ?? ''} ${login?.textContent ?? ''}`;
+    if (matcher.test(text)) {
       return true;
     }
     await delay(POLL_MS);
@@ -60,26 +78,36 @@ function clickButtonMatching(matcher: RegExp): boolean {
   return true;
 }
 
-function fillInput(id: string, value: string) {
-  const input = document.getElementById(id) as HTMLInputElement | null;
-  if (!input) {
+/** Bottom nav order: Dashboard → Journey → Missions → Family */
+function clickHubNav(path: string): boolean {
+  const normalized = path.replace(/\/$/, '') || '/';
+  const links = Array.from(document.querySelectorAll('nav[aria-label] a[href]')) as HTMLAnchorElement[];
+  const match = links.find((link) => {
+    const href = (link.getAttribute('href') ?? '').replace(/\/$/, '') || '/';
+    return href === normalized;
+  });
+  if (!match) {
     return false;
   }
-  const nativeSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value')?.set;
-  nativeSetter?.call(input, value);
-  input.dispatchEvent(new Event('input', { bubbles: true }));
-  input.dispatchEvent(new Event('change', { bubbles: true }));
+  match.click();
+  return true;
+}
+
+function clickSettingsNav(): boolean {
+  const link = document.querySelector('a[aria-label*="Settings"]') as HTMLAnchorElement | null;
+  if (!link) {
+    return false;
+  }
+  link.click();
   return true;
 }
 
 /**
- * App Review tour (~70s): Login → Welcome → Dashboard → Mission → Family → Journey →
- * Settings → Clear data → Login again.
+ * App Review tour — matches bottom-nav order and review description:
+ * Login → Welcome → Dashboard → Journey → Missions → Mission → Family → Settings → Clear data → Login
  */
 export function useAppReviewAutoTour() {
-  const navigate = useNavigate();
   const location = useLocation();
-  const { signInLocally, signOutLocally } = useAuth();
   const started = useRef(false);
 
   useEffect(() => {
@@ -87,18 +115,19 @@ export function useAppReviewAutoTour() {
       return;
     }
     const path = location.pathname.replace(/\/$/, '') || '/';
+    const current = getAppReviewView();
+    const onMission = current.startsWith('mission-');
+
     if (path.endsWith('/welcome') || path === '/welcome') {
       setAppReviewView('welcome');
-    } else if (path.endsWith('/dashboard') || path === '/dashboard') {
+    } else if ((path.endsWith('/dashboard') || path === '/dashboard') && !onMission) {
       setAppReviewView('dashboard');
-    } else if (path.endsWith('/activities') || path === '/activities') {
-      if (!getAppReviewView().startsWith('mission-')) {
-        setAppReviewView('activities');
-      }
-    } else if (path.endsWith('/kids') || path === '/kids') {
-      setAppReviewView('kids');
     } else if (path.endsWith('/journey') || path === '/journey') {
       setAppReviewView('journey');
+    } else if ((path.endsWith('/activities') || path === '/activities') && !onMission) {
+      setAppReviewView('activities');
+    } else if (path.endsWith('/kids') || path === '/kids') {
+      setAppReviewView('kids');
     } else if (path.endsWith('/settings') || path === '/settings') {
       setAppReviewView('settings');
     }
@@ -115,90 +144,133 @@ export function useAppReviewAutoTour() {
     markAppReviewTourStarted();
 
     const run = async () => {
-      setAppReviewView('login');
-      if (!(await waitForReviewView('login'))) {
-        return;
-      }
-      await dwell();
-
-      signInLocally();
-      localStorage.setItem(HUB_WELCOMED_KEY, 'false');
-      navigate(hubPaths.welcome, { replace: true });
-      if (!(await waitForReviewView('welcome'))) {
-        navigate(hubPaths.dashboard, { replace: true });
-      } else {
-        await settleNavigation();
+      try {
+        // 1 — Login (cold start)
+        setAppReviewView('login');
+        if (!(await waitForReviewView('login'))) {
+          throw new Error('login screen not ready');
+        }
         await dwell();
-        localStorage.setItem(HUB_WELCOMED_KEY, 'true');
-        navigate(hubPaths.dashboard, { replace: true });
-      }
+        clickButtonMatching(/let's go!/i);
+        if (!(await waitForReviewView(['welcome', 'dashboard']))) {
+          throw new Error('post-login navigation failed');
+        }
 
-      if (!(await waitForReviewView('dashboard'))) {
-        return;
-      }
-      await settleNavigation();
-      await dwell();
+        // 2 — Welcome (first-time path)
+        if (getAppReviewView() === 'welcome') {
+          await settleNavigation();
+          await dwell();
+          clickButtonMatching(/add your family/i);
+          if (!(await waitForReviewView('dashboard'))) {
+            throw new Error('welcome → dashboard failed');
+          }
+        }
 
-      navigate(hubPaths.activities);
-      if (!(await waitForReviewView('activities'))) {
-        return;
-      }
-      await settleNavigation();
-      await dwell();
+        // 3 — Dashboard (tab 1)
+        await settleNavigation();
+        if (!(await waitForMainText(/today's mission|ready for today|browse missions/i))) {
+          throw new Error('dashboard content not visible');
+        }
+        await dwell();
 
-      dispatchAppReviewStartMission(REVIEW_MISSION_ID);
-      if (!(await waitForReviewView('mission-intro'))) {
-        return;
-      }
-      await dwell();
-      clickButtonMatching(/start interactive activity/i);
-      if (!(await waitForReviewView('mission-play', APP_REVIEW_MISSION_PLAY_MS + VIEW_WAIT_MS))) {
-        return;
-      }
-      await delay(APP_REVIEW_MISSION_PLAY_MS + 800);
-      if (!(await waitForReviewView('mission-complete'))) {
-        return;
-      }
-      await dwell();
-      clickButtonMatching(/done for now/i);
-      await settleNavigation();
+        // 4 — Journey (tab 2)
+        if (!clickHubNav(hubPaths.journey)) {
+          throw new Error('journey nav click failed');
+        }
+        if (!(await waitForReviewView('journey'))) {
+          throw new Error('journey view not active');
+        }
+        await settleNavigation();
+        if (!(await waitForMainText(/mission progress|family rewards|forest friends/i))) {
+          throw new Error('journey content not visible');
+        }
+        await dwell();
 
-      navigate(hubPaths.kids);
-      if (!(await waitForReviewView('kids'))) {
-        return;
-      }
-      await dwell();
-      clickButtonMatching(/add (your first )?member/i);
-      await delay(500);
-      fillInput('member-name', 'Alex');
-      fillInput('member-age', '9');
-      await delay(400);
-      clickButtonMatching(/^add member$/i);
-      await delay(1200);
+        // 5 — Missions (tab 3)
+        if (!clickHubNav(hubPaths.activities)) {
+          throw new Error('missions nav click failed');
+        }
+        if (!(await waitForReviewView('activities'))) {
+          throw new Error('activities view not active');
+        }
+        await settleNavigation();
+        if (!(await waitForMainText(/family privacy missions|all missions|browse every mission/i))) {
+          throw new Error('activities content not visible');
+        }
+        await dwell();
 
-      navigate(hubPaths.journey);
-      if (!(await waitForReviewView('journey'))) {
-        return;
-      }
-      await settleNavigation();
-      await dwell();
+        // 6 — Mission intro auto-completes in demo (no lazy-loaded game)
+        dispatchAppReviewStartMission(REVIEW_MISSION_ID);
+        if (!(await waitForReviewView('mission-intro'))) {
+          throw new Error('mission intro not shown');
+        }
+        if (!(await waitForReviewView('mission-complete', 12_000))) {
+          throw new Error('mission did not complete');
+        }
+        await dwell();
+        clickButtonMatching(/done for now/i);
+        await settleNavigation();
+        if (!(await waitForReviewView('activities', 8000))) {
+          throw new Error('return to activities list failed');
+        }
+        await delay(600);
 
-      navigate(hubPaths.settings);
-      if (!(await waitForReviewView('settings'))) {
-        return;
+        // 7 — Family (tab 4)
+        if (!clickHubNav(hubPaths.kids)) {
+          throw new Error('family nav click failed');
+        }
+        if (!(await waitForReviewView('kids'))) {
+          throw new Error('kids view not active');
+        }
+        await settleNavigation();
+        if (!(await waitForMainText(/family members|who is learning/i))) {
+          throw new Error('kids content not visible');
+        }
+        await dwell();
+        dispatchAppReviewAddMember('Alex', 9);
+        await delay(1500);
+        if (!(await waitForMainText(/Alex/i))) {
+          throw new Error('add member failed');
+        }
+        await dwell();
+
+        // 8 — Settings (header)
+        if (!clickSettingsNav()) {
+          throw new Error('settings nav click failed');
+        }
+        if (!(await waitForReviewView('settings'))) {
+          throw new Error('settings view not active');
+        }
+        await settleNavigation();
+        if (!(await waitForMainText(/manage your app preferences|privacy/i))) {
+          throw new Error('settings content not visible');
+        }
+        await dwell();
+        document.getElementById('settings-clear-data-heading')?.scrollIntoView({ block: 'center' });
+        await delay(800);
+
+        // 9 — Data deletion → fresh login
+        clickButtonMatching(/clear all data on this device/i);
+        setAppReviewView('settings-clear');
+        await delay(500);
+        clickButtonMatching(/^clear all data$/i);
+        if (!(await waitForMainText(/let's go!/i, 10_000))) {
+          throw new Error('login screen not shown after clear data');
+        }
+        setAppReviewView('login-end');
+        await dwell(2500);
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        const onErrorPage = pageShowsReviewError();
+        logger.error('App Review auto-tour failed', { message, onErrorPage, view: getAppReviewView() });
+        if (onErrorPage) {
+          document.documentElement.dataset.appReviewTourError = message;
+        }
+      } finally {
+        markAppReviewTourDone();
       }
-      await settleNavigation();
-      await dwell();
-      clickButtonMatching(/clear all data on this device/i);
-      setAppReviewView('settings-clear');
-      await delay(600);
-      clickButtonMatching(/^clear all data$/i);
-      clearAllHubLocalData();
-      signOutLocally();
-      setAppReviewView('login-end');
-      await dwell();
     };
 
     void run();
-  }, [navigate, signInLocally, signOutLocally]);
+  }, []);
 }

@@ -21,7 +21,7 @@ import RelatedStoryLink from '../components/RelatedStoryLink';
 import { useResolvedMissionScenario } from '../../hooks/useResolvedMissionScenario';
 import { useHubI18n } from '../hubI18n';
 import { useStoreCaptureReady } from '../storeScreenshotMode';
-import { APP_REVIEW_START_MISSION, isAppReviewDemo } from '../../lib/appReviewDemo';
+import { APP_REVIEW_START_MISSION, isAppReviewDemo, setAppReviewView } from '../../lib/appReviewDemo';
 
 const FOCUS_ORDER: ActivityFocus[] = [
   'Safe sharing',
@@ -286,7 +286,12 @@ const ActivitiesScreen: React.FC = () => {
         <MissionShell
           activity={activeMission}
           completedIds={completedIds}
-          onExit={() => setActiveMission(null)}
+          onExit={() => {
+            setActiveMission(null);
+            if (isAppReviewDemo()) {
+              setAppReviewView('activities');
+            }
+          }}
           onStartNext={(next) => setActiveMission(next)}
         />
       </div>
