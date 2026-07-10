@@ -173,7 +173,7 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
     if (!isAppReviewDemo() || phase !== 'intro') {
       return;
     }
-    const timer = window.setTimeout(() => finishMission(92), 1600);
+    const timer = window.setTimeout(() => finishMission(92), 3500);
     return () => window.clearTimeout(timer);
     // finishMission is stable enough for demo auto-complete
     // eslint-disable-next-line react-hooks/exhaustive-deps

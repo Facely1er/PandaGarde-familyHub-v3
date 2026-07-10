@@ -3,20 +3,20 @@
  * Enable with ?appReviewDemo=1 or VITE_APP_REVIEW_DEMO=true (review builds).
  */
 
-/** Standard beat between major tour steps (~1.8s) — keeps rhythm consistent on recording. */
-export const APP_REVIEW_BEAT_MS = 1800;
+/** Standard beat per screen (4s) — enough time to read headings and key UI. */
+export const APP_REVIEW_BEAT_MS = 4000;
 
-/** Shorter beat for tab skim (Journey) or post-action confirmation. */
-export const APP_REVIEW_QUICK_BEAT_MS = 1100;
+/** Brief pause after an action (celebration dismiss, fresh login) — still ≥3s. */
+export const APP_REVIEW_QUICK_BEAT_MS = 3000;
 
 /** Dwell on each major screen during the auto-tour. */
 export const APP_REVIEW_SCREEN_DWELL_MS = APP_REVIEW_BEAT_MS;
 
-/** Pause after navigation so the next screen settles. */
-export const APP_REVIEW_TRANSITION_MS = 350;
+/** Pause after navigation so the next screen settles before the dwell starts. */
+export const APP_REVIEW_TRANSITION_MS = 500;
 
-/** Max capture length — tour finishes ~40s; recording stops shortly after. */
-export const APP_REVIEW_RECORD_MS = 45_000;
+/** Max capture length — tour ~65–70s with readable per-screen pacing. */
+export const APP_REVIEW_RECORD_MS = 75_000;
 
 export const APP_REVIEW_START_MISSION = 'pg-app-review-start-mission' as const;
 export const APP_REVIEW_ADD_MEMBER = 'pg-app-review-add-member' as const;

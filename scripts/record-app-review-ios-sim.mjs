@@ -191,7 +191,7 @@ async function recordTour(udid) {
   // Install and reach the login screen before recording — never capture simctl install UI.
   console.log('[ios-sim-record] Cold launch (install happens before recording)…');
   coldLaunch(udid);
-  const loginReadyMs = Number(process.env.APP_REVIEW_LOGIN_READY_MS ?? 3500);
+  const loginReadyMs = Number(process.env.APP_REVIEW_LOGIN_READY_MS ?? 4500);
   await new Promise((resolve) => setTimeout(resolve, loginReadyMs));
 
   console.log(`[ios-sim-record] Recording ${TOUR_MS / 1000}s → ${recordOut}`);

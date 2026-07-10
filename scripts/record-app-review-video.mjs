@@ -23,8 +23,8 @@ import {
 } from './lib/app-review-capture-shared.mjs';
 
 /** Keep in sync with APP_REVIEW_RECORD_MS in src/lib/appReviewDemo.ts */
-const APP_REVIEW_RECORD_MS = 45_000;
-const APP_REVIEW_TOUR_DONE_FALLBACK_MS = 45_000;
+const APP_REVIEW_RECORD_MS = 75_000;
+const APP_REVIEW_TOUR_DONE_FALLBACK_MS = 75_000;
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const outDir = join(root, 'store-assets', 'app-review');

@@ -195,7 +195,7 @@ export function useAppReviewAutoTour() {
         }
         await beat();
 
-        // 4 — Journey (tab 2) — quick skim
+        // 4 — Journey (tab 2)
         if (!clickHubNav(hubPaths.journey)) {
           throw new Error('journey nav click failed');
         }
@@ -206,7 +206,7 @@ export function useAppReviewAutoTour() {
         if (!(await waitForMainText(/mission progress|family rewards|forest friends/i))) {
           throw new Error('journey content not visible');
         }
-        await quickBeat();
+        await beat();
 
         // 5 — Missions (tab 3)
         if (!clickHubNav(hubPaths.activities)) {
@@ -229,7 +229,7 @@ export function useAppReviewAutoTour() {
         if (!(await waitForReviewView('mission-complete', 10_000))) {
           throw new Error('mission did not complete');
         }
-        await quickBeat();
+        await beat();
         if (!clickButtonMatching(/back to activities|done for now/i)) {
           throw new Error('celebration dismiss button not found');
         }
@@ -254,11 +254,11 @@ export function useAppReviewAutoTour() {
         }
         await beat();
         dispatchAppReviewAddMember('Alex', 9);
-        await delay(500);
+        await delay(650);
         if (!(await waitForMainText(/Alex/i))) {
           throw new Error('add member failed');
         }
-        await quickBeat();
+        await beat();
 
         // 8 — Settings (header)
         if (!clickSettingsNav()) {
@@ -273,12 +273,12 @@ export function useAppReviewAutoTour() {
         }
         await beat();
         document.getElementById('settings-clear-data-heading')?.scrollIntoView({ block: 'center' });
-        await delay(250);
+        await delay(400);
 
         // 9 — Data deletion → fresh login
         clickButtonMatching(/clear all data on this device/i);
         setAppReviewView('settings-clear');
-        await delay(250);
+        await delay(400);
         clickButtonMatching(/^clear all data$/i);
         if (!(await waitForMainText(/let's go!/i, 8000))) {
           throw new Error('login screen not shown after clear data');
