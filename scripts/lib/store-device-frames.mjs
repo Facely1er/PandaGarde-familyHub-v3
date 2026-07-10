@@ -4,6 +4,8 @@
  * - FRAMED_DEVICE_PROFILES: simulator captures composited inside a device bezel
  * - DEVICE_PROFILES: Playwright full-bleed capture (browser preview)
  */
+import fs from 'node:fs';
+import path from 'node:path';
 
 /** Device bezel + marketing background (exact App Store canvas size). */
 export const FRAMED_DEVICE_PROFILES = {
@@ -15,8 +17,8 @@ export const FRAMED_DEVICE_PROFILES = {
     /** Native simctl capture size (iPhone 14 Pro Max / 12–14 Plus class). */
     rawWidth: 1284,
     rawHeight: 2778,
-    /** Screen inset ~2% so UI stays large inside the bezel. */
-    screen: { x: 16, y: 28, width: 1252, height: 2722, radius: 44 },
+    /** Marketing bezel — screen inset ~10% so device + teal background read clearly. */
+    screen: { x: 66, y: 111, width: 1152, height: 2496, radius: 44 },
     safeArea: { top: 54, bottom: 32 },
     type: 'iphone',
   },
@@ -27,7 +29,7 @@ export const FRAMED_DEVICE_PROFILES = {
     outputHeight: 2752,
     rawWidth: 2064,
     rawHeight: 2752,
-    screen: { x: 20, y: 24, width: 2024, height: 2704, radius: 28 },
+    screen: { x: 112, y: 112, width: 1840, height: 2528, radius: 28 },
     safeArea: { top: 24, bottom: 20 },
     type: 'ipad',
   },
@@ -58,10 +60,6 @@ function frameSvg(profile) {
   const bodyW = screen.width + 28;
   const bodyH = screen.height + 28;
   const bodyRadius = screen.radius + 10;
-  const island =
-    type === 'iphone'
-      ? `<rect x="${screen.x + screen.width / 2 - 62}" y="${screen.y + 10}" width="124" height="36" rx="18" fill="#0a0a0a"/>`
-      : '';
   const camera =
     type === 'ipad'
       ? `<circle cx="${screen.x + screen.width / 2}" cy="${bodyY + 8}" r="5" fill="#2d2d2d"/>`
@@ -69,6 +67,16 @@ function frameSvg(profile) {
         ? `<circle cx="${screen.x + screen.width / 2}" cy="${screen.y + 28}" r="10" fill="#1f2937"/>
            <circle cx="${screen.x + screen.width / 2}" cy="${screen.y + 28}" r="6" fill="#111827"/>`
         : '';
+
+  const iphoneDetails =
+    type === 'iphone'
+      ? `<rect x="${screen.x + screen.width / 2 - 62}" y="${screen.y + 10}" width="124" height="34" rx="17" fill="#030712"/>`
+      : '';
+
+  const ipadDetails =
+    type === 'ipad'
+      ? `<rect x="${screen.x + screen.width / 2 - 36}" y="${screen.y + screen.height - 18}" width="72" height="5" rx="2.5" fill="rgba(255,255,255,0.35)"/>`
+      : '';
 
   return Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${outputWidth}" height="${outputHeight}">
   <defs>
@@ -85,7 +93,8 @@ function frameSvg(profile) {
   <rect x="${bodyX}" y="${bodyY}" width="${bodyW}" height="${bodyH}" rx="${bodyRadius}" fill="#111827" filter="url(#deviceShadow)"/>
   <rect x="${screen.x - 2}" y="${screen.y - 2}" width="${screen.width + 4}" height="${screen.height + 4}" rx="${screen.radius + 2}" fill="#030712"/>
   ${camera}
-  ${island}
+  ${iphoneDetails}
+  ${ipadDetails}
 </svg>`);
 }
 
@@ -125,6 +134,54 @@ export async function compositeWithDeviceFrame(captureBuffer, profile, sharp) {
   }
 
   return output;
+}
+
+/** Re-composite existing raw simulator PNGs into marketing device frames. */
+export async function reframeRawCaptures({
+  rawRoot,
+  outRoot,
+  profiles,
+  screens,
+  screenFilter = null,
+  sharp,
+  log = console.log,
+}) {
+  let hadError = false;
+
+  for (const profile of profiles) {
+    const rawDir = path.join(rawRoot, profile.slug);
+    const outDir = path.join(outRoot, profile.slug);
+    fs.mkdirSync(outDir, { recursive: true });
+
+    const selectedScreens = screenFilter
+      ? screens.filter((screen) => screen.id === screenFilter)
+      : screens;
+
+    for (const screen of selectedScreens) {
+      const rawPath = path.join(rawDir, `${screen.id}.png`);
+      if (!fs.existsSync(rawPath)) {
+        log(`  ✗ missing raw ${path.relative(process.cwd(), rawPath)}`);
+        hadError = true;
+        continue;
+      }
+
+      const raw = fs.readFileSync(rawPath);
+      const framed = await compositeWithDeviceFrame(raw, profile, sharp);
+      const outPath = path.join(outDir, `${screen.id}.png`);
+      fs.writeFileSync(outPath, framed);
+
+      const rawMeta = await sharp(raw).metadata();
+      const { ok, width, height } = await assertFramedDimensions(framed, profile, sharp);
+      log(
+        `  ${ok ? '✓' : '✗'} ${path.relative(process.cwd(), outPath)} (${width}×${height}) [raw ${rawMeta.width}×${rawMeta.height}]`
+      );
+      if (!ok) {
+        hadError = true;
+      }
+    }
+  }
+
+  return hadError;
 }
 
 export async function assertFramedDimensions(buffer, profile, sharp) {

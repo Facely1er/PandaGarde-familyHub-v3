@@ -31,6 +31,20 @@ function pruneMobileOnlyAssets(outDir: string) {
   }
 }
 
+function storeCaptureHtmlPlugin() {
+  const enabled = process.env.VITE_STORE_SCREENSHOTS === 'true';
+  return {
+    name: 'store-capture-html',
+    transformIndexHtml(html: string) {
+      if (!enabled) {
+        return html;
+      }
+      const bootFlag = '<script>window.__PG_STORE_CAPTURE__=true;</script>';
+      return html.replace('<head>', `<head>\n    ${bootFlag}`);
+    },
+  };
+}
+
 /** Capacitor and most hosts expect index.html at the web root */
 const familyhubIndexHtmlPlugin = () => ({
   name: 'familyhub-index-html',
@@ -63,7 +77,7 @@ const familyhubIndexHtmlPlugin = () => ({
 export default mergeConfig(
   baseConfig,
   defineConfig({
-    plugins: [familyhubIndexHtmlPlugin()],
+    plugins: [storeCaptureHtmlPlugin(), familyhubIndexHtmlPlugin()],
     define: {
       'import.meta.env.VITE_HUB_STANDALONE': JSON.stringify('true'),
       'import.meta.env.VITE_STORE_SCREENSHOTS': JSON.stringify(process.env.VITE_STORE_SCREENSHOTS ?? 'false'),
