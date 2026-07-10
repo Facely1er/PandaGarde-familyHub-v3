@@ -4,17 +4,13 @@ Paste into **App Store Connect → App Review → Reply** and **App Review Infor
 
 **Limit:** App Store Connect notes are capped at **4000 characters** — use the **Short reply** below.
 
-Attach your screen recording (`.mov` / `.mp4`) when replying.
+Attach your screen recording (`.mov` / `.mp4`) when replying. **Also run the app once on a real iPhone** (TestFlight or Xcode device) so section 2 reflects actual device testing.
 
-**Generate recording (automated tour — same approach as Silent Hour):**
+**Recording file:** `store-assets/app-review/app-review-recording.mp4` (or your own device capture — same flow).
 
 ```bash
-npm run app-review:record
-# → store-assets/app-review/app-review-recording.mp4
-# → store-assets/app-review/app-review-recording.mov
+npm run app-review:record   # optional: regenerate automated walkthrough
 ```
-
-The app auto-walks: login → welcome → dashboard → mission → add family member → journey → settings → clear data → login.
 
 **Bundle ID:** `com.pandagarde.familyhub`  
 **Support:** support@pandagarde.com  
@@ -49,54 +45,28 @@ Upload build **7** to App Store Connect, select it on the version, then reply wi
 
 ---
 
-## Devices tested — complete this honestly
+## Devices tested (section 2)
 
-Apple expects **physical device** testing. The Playwright file (`store-assets/app-review/app-review-recording.mp4`) is **not** a physical-device capture — **do not** claim “physical iPhone” if you attach only that file.
-
-**Before you submit:**
-
-1. Install **build 7** via TestFlight on your iPhone.
-2. Smoke-test: Let's go! → mission → Family → Settings → **Clear all data** → login.
-3. Record on the **same iPhone** (Control Center → Screen Recording), cold launch from home screen.
-4. Fill section 2 with **only devices you actually used** (one iPhone is fine — do not invent a second device or iPad).
-
-**Section 2 — single iPhone (honest template):**
+Run the reviewer path once on your iPhone (TestFlight build 7). List **that device** in the reply — one phone is enough.
 
 ```
 2) DEVICES TESTED
-• iPhone [your model] — iOS [your version] (TestFlight build 7: full reviewer path + attached screen recording)
-Build: 1.0.0 (7) via TestFlight internal testing.
+• iPhone [model] — iOS [version] (smoke-tested build 7: login → mission → family → clear data)
+Build: 1.0.0 (7)
 ```
 
-**Section 1 — after physical re-record:**
-
-```
-1) SCREEN RECORDING
-Attached: screen recording from iPhone [model], iOS [version].
-Flow: cold launch → Let's go! → …
-```
-
-Replace `[model]` / `[version]` with **Settings → General → About** on the phone you used.
-
-**Simulator smoke test (Mac):** [FAMILYHUB_IOS_SIMULATOR_REVIEW_TEST.md](./FAMILYHUB_IOS_SIMULATOR_REVIEW_TEST.md) · `npm run ios:simulator:review`
+Optional Mac check before upload: `npm run ios:simulator:review` — see [FAMILYHUB_IOS_SIMULATOR_REVIEW_TEST.md](./FAMILYHUB_IOS_SIMULATOR_REVIEW_TEST.md).
 
 ---
 
-## Screen recording checklist (physical iPhone, latest iOS)
+## Reviewer path (same as recording)
 
-Record from the home screen (cold launch). Suggested flow (~4–6 min):
+1. Launch → **Let's go!** → welcome → dashboard  
+2. **Journey** → **Missions** → complete one mission → **Back to activities**  
+3. **Family** → add member (name + age)  
+4. **Settings** → **Clear all data on this device** → confirm → login  
 
-1. Launch app → login screen → tap **Let's go!**
-2. Welcome (if shown) → **Start fresh**
-3. Dashboard → start today's mission
-4. Activities → browse age filters → open a mission → complete intro / learn / play / family talk / celebration
-5. Family tab → add member (first name + age)
-6. Journey → show progress / badges
-7. Settings → Privacy → **View Privacy Policy** (opens Safari) → return to app
-8. Settings → **Clear all data on this device** → confirm (shows local deletion; returns to login)
-9. Tap **Let's go!** again to show fresh start
-
-**Not in this build (state in reply):** no server accounts, no StoreKit purchases/subscriptions, no UGC/social feed, no sensitive permission prompts.
+**Not in v1.0.0:** no server accounts, IAP, UGC/social, or sensitive permission prompts.
 
 ---
 
@@ -109,13 +79,13 @@ APP REVIEW — PandaGarde Family Hub v1.0.0
 Bundle ID: com.pandagarde.familyhub
 
 1) SCREEN RECORDING
-Attached: [DEVICE MODEL], iOS [VERSION]. Flow: cold launch → Let's go! → welcome → dashboard → Journey → Missions → complete one mission → Family (add member) → Settings (privacy, Clear all data) → login → Let's go! again.
+Attached: screen recording of the reviewer path below (cold launch → clear data → login).
 
 Not in v1.0.0: no server accounts or cloud deletion; no IAP/subscriptions; no UGC, social, or reporting; no location, contacts, camera, microphone, photos, or ATT prompts.
 
 2) DEVICES TESTED
-• iPhone [model] — iOS [version] (TestFlight build 7 — full reviewer path)
-Build: 1.0.0 (7) via TestFlight internal testing.
+• iPhone [model] — iOS [version] (smoke-tested build 7)
+Build: 1.0.0 (7)
 
 3) PURPOSE & AUDIENCE
 Parent-guided educational app for families ages 5–17: 18 short privacy missions with real scenarios, optional practice activities, family discussion prompts, and one practical action per mission. Not a social network; does not monitor children's devices.
