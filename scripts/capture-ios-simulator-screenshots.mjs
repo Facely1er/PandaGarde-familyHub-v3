@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 /**
- * Capture App Store screenshots from Xcode Simulator.
+ * Capture App Store screenshots from Xcode Simulator (native Capacitor build).
+ *
+ * Uses simctl + installed App.app — NOT browser preview. For Playwright/web
+ * captures use scripts/capture-store-screenshots.mjs (Android or fallback only).
  *
  * Builds a fresh web bundle per screen (VITE_CAPTURE_SCREEN) so each cold launch
  * lands on the correct route with seeded data — no URL schemes or HTML patching.
@@ -10,7 +13,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
-import { CAPTURE_SCREENS } from './lib/store-capture-boot.mjs';
+import { CAPTURE_SCREENS, CAPTURE_SCREEN_CAPTIONS } from './lib/store-capture-boot.mjs';
 import {
   assertFramedDimensions,
   compositeWithDeviceFrame,
@@ -105,6 +108,8 @@ function buildWebBundleForScreen(screenId) {
       ...env,
       VITE_STORE_SCREENSHOTS: 'true',
       VITE_CAPTURE_SCREEN: screenId,
+      VITE_DISABLE_PREMIUM_COMMERCE: 'true',
+      VITE_HUB_STANDALONE: 'true',
     },
   });
   const distSw = path.join(distDir, 'sw.js');
@@ -226,6 +231,18 @@ function buildNativeApp() {
   }
 }
 
+function installOnSimulator(udid) {
+  run('xcrun', ['simctl', 'uninstall', udid, bundleId], { allowFail: true });
+  const install = spawnSync(
+    'perl',
+    ['-e', 'alarm 90; exec @ARGV', 'xcrun', 'simctl', 'install', udid, appBundle],
+    { cwd: root, env, stdio: 'inherit', encoding: 'utf8' }
+  );
+  if (install.status !== 0) {
+    throw new Error('simctl install timed out or failed');
+  }
+}
+
 function launchApp(udid) {
   run('xcrun', ['simctl', 'terminate', udid, bundleId], { allowFail: true });
   run('xcrun', ['simctl', 'launch', udid, bundleId]);
@@ -235,8 +252,7 @@ function launchApp(udid) {
 function warmUpSimulatorApp(udid) {
   console.log('[ios-screenshots] Warm-up launch (WebView cold start)…');
   buildWebBundleForScreen('02-dashboard');
-  run('xcrun', ['simctl', 'uninstall', udid, bundleId], { allowFail: true });
-  run('xcrun', ['simctl', 'install', udid, appBundle]);
+  installOnSimulator(udid);
   launchApp(udid);
   sleep(14000);
   run('xcrun', ['simctl', 'terminate', udid, bundleId], { allowFail: true });
@@ -248,7 +264,11 @@ async function captureDevice(target, screenFilter) {
   const udid =
     profile.slug === 'iphone-6.5' ? ensureStoreIphoneSimulator() : resolveSimulatorUdid(simName);
   bootSimulator(udid, simName);
-  warmUpSimulatorApp(udid);
+  if (process.env.IOS_SCREENSHOTS_SKIP_WARMUP !== '1') {
+    warmUpSimulatorApp(udid);
+  } else {
+    console.log('[ios-screenshots] Skipping warm-up (IOS_SCREENSHOTS_SKIP_WARMUP=1)');
+  }
 
   const outDir = path.join(outRoot, profile.slug);
   const rawDir = path.join(rawRoot, profile.slug);
@@ -267,8 +287,7 @@ async function captureDevice(target, screenFilter) {
     buildWebBundleForScreen(screen.id);
 
     console.log(`[ios-screenshots] ${profile.slug}/${screen.id} — install + launch`);
-    run('xcrun', ['simctl', 'uninstall', udid, bundleId], { allowFail: true });
-    run('xcrun', ['simctl', 'install', udid, appBundle]);
+    installOnSimulator(udid);
     launchApp(udid);
     sleep(screen.waitMs + waitExtraMs);
 
@@ -277,7 +296,8 @@ async function captureDevice(target, screenFilter) {
     run('xcrun', ['simctl', 'io', udid, 'screenshot', rawPath]);
 
     const raw = fs.readFileSync(rawPath);
-    const framed = await compositeWithDeviceFrame(raw, profile, sharp);
+    const caption = CAPTURE_SCREEN_CAPTIONS[screen.id] ?? null;
+    const framed = await compositeWithDeviceFrame(raw, profile, sharp, caption);
     fs.writeFileSync(outPath, framed);
 
     const rawMeta = await sharp(raw).metadata();

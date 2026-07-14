@@ -238,7 +238,7 @@ const KidsScreen: React.FC = () => {
               <span>{t('hub.kids.addMember')}</span>
             </button>
           </div>
-          <div className="space-y-4">
+          <div className="hub-kids-member-grid gap-4">
           {familyMembers.map((member) => {
             const ageGroup = getAgeGroup(member.age, ageBandLabel);
             const band = hubAgeBandForAge(member.age);

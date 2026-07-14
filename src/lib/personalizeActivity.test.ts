@@ -1,4 +1,4 @@
-import { describe, expect, it, beforeEach } from 'vitest';
+import { describe, expect, it, beforeEach, vi } from 'vitest';
 import { resolveMissionScenario } from './personalizeActivity';
 import type { FootprintAnalysis } from './footprintAnalyzer';
 import { getExposureLevel } from './privacyExposureIndex';
@@ -106,9 +106,13 @@ describe('resolveMissionScenario', () => {
 describe('premiumEntitlement', () => {
   beforeEach(() => {
     localStorage.clear();
+    vi.restoreAllMocks();
   });
 
-  it('unlock and clear premium', async () => {
+  it('unlock and clear premium on web', async () => {
+    const { Capacitor } = await import('@capacitor/core');
+    vi.spyOn(Capacitor, 'isNativePlatform').mockReturnValue(false);
+
     const { unlockPremiumWithCode, isPremiumActive, clearPremiumEntitlement } = await import(
       './premiumEntitlement'
     );
@@ -118,6 +122,29 @@ describe('premiumEntitlement', () => {
     expect(isPremiumActive()).toBe(true);
     clearPremiumEntitlement();
     expect(isPremiumActive()).toBe(false);
+  });
+
+  it('blocks pilot unlock on native store builds', async () => {
+    const { Capacitor } = await import('@capacitor/core');
+    vi.spyOn(Capacitor, 'isNativePlatform').mockReturnValue(true);
+
+    const { unlockPremiumWithCode, isPremiumActive } = await import('./premiumEntitlement');
+    const unlock = unlockPremiumWithCode('FAMILYHUB-PREMIUM');
+    expect(unlock.success).toBe(false);
+    expect(isPremiumActive()).toBe(false);
+  });
+
+  it('blocks pilot unlock when native store build flag is set', async () => {
+    vi.stubEnv('VITE_DISABLE_PREMIUM_COMMERCE', 'true');
+    vi.resetModules();
+
+    const { unlockPremiumWithCode, isPremiumActive } = await import('./premiumEntitlement');
+    const unlock = unlockPremiumWithCode('PANDA-PILOT-2026');
+    expect(unlock.success).toBe(false);
+    expect(isPremiumActive()).toBe(false);
+
+    vi.unstubAllEnvs();
+    vi.resetModules();
   });
 });
 

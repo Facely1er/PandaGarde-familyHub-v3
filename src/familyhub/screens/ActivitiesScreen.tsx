@@ -402,7 +402,7 @@ const ActivitiesScreen: React.FC = () => {
                 <div id={`group-${group.ageRange}`}>
                   <GroupHeading group={group} />
                 </div>
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+                <div className="hub-mission-grid grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
                   {group.activities.map((activity) => {
                     const fullActivity: FlattenedAgeBasedActivity = {
                       ...activity,
@@ -428,7 +428,7 @@ const ActivitiesScreen: React.FC = () => {
             })}
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          <div className="hub-mission-grid grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {filteredActivities.map((activity) => {
               const progressDetails = getActivityProgress(getCompletionId(activity));
               return (

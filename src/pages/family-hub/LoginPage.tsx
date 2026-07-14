@@ -10,8 +10,7 @@ import HubWebsiteLink from '../../familyhub/components/HubWebsiteLink';
 import { hubTheme } from '../../familyhub/hubTheme';
 import { useStoreCaptureReady } from '../../familyhub/storeScreenshotMode';
 import { isAppReviewDemo, setAppReviewView } from '../../lib/appReviewDemo';
-
-const footerLinkClass = 'underline hover:text-teal-700 dark:hover:text-teal-300';
+import { shouldHideHubWebsiteChrome } from '../../lib/hubWebsiteChrome';
 
 const LoginPage: React.FC = () => {
   useStoreCaptureReady();
@@ -45,7 +44,7 @@ const LoginPage: React.FC = () => {
   return (
     <div className={`family-hub-theme hub-standalone-page ${hubTheme.page}`}>
       <div className="flex flex-1 flex-col justify-center px-4 py-10">
-        <div className="mx-auto w-full max-w-lg space-y-6">
+        <div className="mx-auto w-full max-w-lg hub-login-shell space-y-6">
           <div className="text-center">
             <HubBrandLogo size="hero" variant="plain" animated className="mx-auto" />
             <p className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-teal-100 px-3 py-1 text-xs font-bold uppercase tracking-wide text-teal-800 dark:bg-teal-900/50 dark:text-teal-200">
@@ -88,24 +87,33 @@ const LoginPage: React.FC = () => {
         </div>
       </div>
 
-      <p className="pb-2 text-center text-xs text-gray-500 dark:text-gray-400">
-        <HubWebsiteLink path="/privacy" className={footerLinkClass}>
-          Privacy
-        </HubWebsiteLink>
-        <span className="mx-2" aria-hidden="true">·</span>
-        <HubWebsiteLink path="/terms" className={footerLinkClass}>
-          Terms
-        </HubWebsiteLink>
-        <span className="mx-2" aria-hidden="true">·</span>
-        <HubWebsiteLink path="/cookies" className={footerLinkClass}>
-          Cookies
-        </HubWebsiteLink>
-      </p>
-      <p className="pb-[max(1rem,var(--hub-nav-safe-bottom,env(safe-area-inset-bottom,0px)))] text-center text-xs text-gray-500 dark:text-gray-400">
-        <HubWebsiteLink path="/" className={footerLinkClass}>
-          Visit PandaGarde website
-        </HubWebsiteLink>
-      </p>
+      {!shouldHideHubWebsiteChrome() && (
+        <>
+          <p className="pb-2 text-center text-xs text-gray-500 dark:text-gray-400">
+            <HubWebsiteLink path="/privacy" className="underline hover:text-teal-700 dark:hover:text-teal-300">
+              Privacy
+            </HubWebsiteLink>
+            <span className="mx-2" aria-hidden="true">·</span>
+            <HubWebsiteLink path="/terms" className="underline hover:text-teal-700 dark:hover:text-teal-300">
+              Terms
+            </HubWebsiteLink>
+            <span className="mx-2" aria-hidden="true">·</span>
+            <HubWebsiteLink path="/cookies" className="underline hover:text-teal-700 dark:hover:text-teal-300">
+              Cookies
+            </HubWebsiteLink>
+          </p>
+          <p className="pb-[max(1rem,var(--hub-nav-safe-bottom,env(safe-area-inset-bottom,0px)))] text-center text-xs text-gray-500 dark:text-gray-400">
+            <HubWebsiteLink path="/" className="underline hover:text-teal-700 dark:hover:text-teal-300">
+              Visit PandaGarde website
+            </HubWebsiteLink>
+          </p>
+        </>
+      )}
+      {shouldHideHubWebsiteChrome() && (
+        <p className="pb-[max(1rem,var(--hub-nav-safe-bottom,env(safe-area-inset-bottom,0px)))] text-center text-xs text-gray-500 dark:text-gray-400">
+          Privacy policy and support links are in Settings.
+        </p>
+      )}
     </div>
   );
 };

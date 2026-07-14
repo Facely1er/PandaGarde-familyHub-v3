@@ -7356,31 +7356,93 @@ html.capacitor.platform-ios .family-hub-theme {
   --hub-content-pt: 0.625rem;
 }
 
-/* iPad — use full tablet width; avoid phone-width column centered on large screen */
-html.capacitor.platform-ipad .hub-page-inner {
-  max-width: 80rem;
-  padding-inline: max(1.25rem, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
+/* iPad — use full tablet width; multi-column content */
+html.capacitor.platform-ipad .hub-page-inner,
+html.store-capture.platform-ipad .hub-page-inner {
+  max-width: min(96rem, 100%);
+  padding-inline: max(2rem, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
 }
 
-html.capacitor.platform-ipad .hub-header-row {
-  max-width: 80rem;
+html.capacitor.platform-ipad .hub-header-row,
+html.store-capture.platform-ipad .hub-header-row {
+  max-width: min(96rem, 100%);
   margin-inline: auto;
-  padding-inline: max(1.25rem, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
+  padding-inline: max(2rem, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
 }
 
 html.capacitor.platform-ipad .hub-standalone-page .max-w-lg,
 html.capacitor.platform-ipad .hub-standalone-page .max-w-xl,
-html.capacitor.platform-ipad .hub-welcome-landing__inner {
-  max-width: 42rem;
+html.capacitor.platform-ipad .hub-welcome-landing__inner,
+html.store-capture.platform-ipad .hub-standalone-page .max-w-lg,
+html.store-capture.platform-ipad .hub-standalone-page .max-w-xl,
+html.store-capture.platform-ipad .hub-welcome-landing__inner {
+  max-width: 40rem;
+}
+
+html.capacitor.platform-ipad .hub-mission-grid,
+html.store-capture.platform-ipad .hub-mission-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+html.capacitor.platform-ipad .hub-dashboard-stats,
+html.store-capture.platform-ipad .hub-dashboard-stats {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+html.capacitor.platform-ipad .hub-dashboard-stats > :last-child,
+html.store-capture.platform-ipad .hub-dashboard-stats > :last-child {
+  grid-column: auto;
+}
+
+html.capacitor.platform-ipad .hub-bottom-nav-tabs,
+html.store-capture.platform-ipad .hub-bottom-nav-tabs {
+  max-width: 56rem;
+  margin-inline: auto;
+}
+
+html.capacitor.platform-ipad .hub-age-band-strip,
+html.store-capture.platform-ipad .hub-age-band-strip {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+html.capacitor.platform-ipad .hub-login-shell,
+html.store-capture.platform-ipad .hub-login-shell {
+  max-width: 52rem;
+}
+
+html.capacitor.platform-ipad .hub-kids-member-grid,
+html.store-capture.platform-ipad .hub-kids-member-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+html.capacitor.platform-ipad .hub-settings-layout,
+html.store-capture.platform-ipad .hub-settings-layout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+
+html.capacitor.platform-ipad .hub-settings-layout > section:last-child,
+html.store-capture.platform-ipad .hub-settings-layout > section:last-child {
+  grid-column: 1 / -1;
+}
+
+html.capacitor.platform-ipad .hub-journey-friends,
+html.store-capture.platform-ipad .hub-journey-friends {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 html.store-capture.platform-ipad .hub-page-inner {
-  max-width: 80rem;
+  max-width: min(96rem, 100%);
   padding-inline: 2.5rem;
 }
 
 html.store-capture.platform-ipad .hub-header-row {
-  max-width: 80rem;
+  max-width: min(96rem, 100%);
   margin-inline: auto;
   padding-inline: 2.5rem;
 }
@@ -7388,7 +7450,7 @@ html.store-capture.platform-ipad .hub-header-row {
 html.store-capture.platform-ipad .hub-standalone-page .max-w-lg,
 html.store-capture.platform-ipad .hub-standalone-page .max-w-xl,
 html.store-capture.platform-ipad .hub-welcome-landing__inner {
-  max-width: 42rem;
+  max-width: 40rem;
 }
 
 /* Tour card clears bottom tab bar on phones */

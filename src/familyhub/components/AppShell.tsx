@@ -21,6 +21,7 @@ import LanguageSwitcher from '../../components/LanguageSwitcher';
 import { hubTheme } from '../hubTheme';
 import { HUB_BRAND_LINE_1, HUB_BRAND_LINE_2 } from '../constants';
 import { useHubI18n } from '../hubI18n';
+import { shouldHideHubWebsiteChrome } from '../../lib/hubWebsiteChrome';
 
 interface TabItem {
   id: string;
@@ -98,6 +99,7 @@ const AppShell: React.FC = () => {
 
   const hubOrigin = getHubOrigin();
   const onSettingsPage = isTabActive(hubPaths.settings);
+  const hideWebsiteChrome = shouldHideHubWebsiteChrome();
 
   const onOpenWebsite: React.MouseEventHandler<HTMLAnchorElement> = (event) => {
     if (!isHubStandalone) {
@@ -144,19 +146,28 @@ const AppShell: React.FC = () => {
         <header className={hubTheme.chromeHeader}>
           <div className="hub-header-row flex max-w-full items-center justify-between gap-2 pl-[max(0.75rem,var(--hub-safe-left,env(safe-area-inset-left,0px)))] pr-[max(0.75rem,var(--hub-safe-right,env(safe-area-inset-right,0px)))]">
             <div className="hub-header-brand flex min-w-0 flex-1 items-center">
-              <a
-                href={isHubStandalone ? pandagardeWebsiteUrl : '/'}
-                onClick={onOpenWebsite}
-                className="flex shrink-0 items-center transition-opacity hover:opacity-80"
-                aria-label={
-                  hubOrigin === 'standalone' || isHubStandalone
-                    ? t('hub.nav.openWebsite')
-                    : t('hub.nav.backToWebsite')
-                }
-                title={hubOrigin === 'standalone' || isHubStandalone ? t('hub.nav.site') : t('hub.nav.backToWebsite')}
-              >
-                <HubBrandLogo size="shell" variant="plain" alt="" />
-              </a>
+              {hideWebsiteChrome ? (
+                <div
+                  className="flex shrink-0 items-center"
+                  aria-label={`${HUB_BRAND_LINE_1} ${HUB_BRAND_LINE_2}`}
+                >
+                  <HubBrandLogo size="shell" variant="plain" alt="" />
+                </div>
+              ) : (
+                <a
+                  href={isHubStandalone ? pandagardeWebsiteUrl : '/'}
+                  onClick={onOpenWebsite}
+                  className="flex shrink-0 items-center transition-opacity hover:opacity-80"
+                  aria-label={
+                    hubOrigin === 'standalone' || isHubStandalone
+                      ? t('hub.nav.openWebsite')
+                      : t('hub.nav.backToWebsite')
+                  }
+                  title={hubOrigin === 'standalone' || isHubStandalone ? t('hub.nav.site') : t('hub.nav.backToWebsite')}
+                >
+                  <HubBrandLogo size="shell" variant="plain" alt="" />
+                </a>
+              )}
               <div className="hub-header-brand__text flex min-w-0 flex-col justify-center gap-px leading-none">
                 <h1 className="whitespace-nowrap font-bold text-teal-700 dark:text-teal-400 text-[length:clamp(12px,3.25vw,14px)]">
                   <span className="block">{HUB_BRAND_LINE_1}</span>
@@ -187,6 +198,7 @@ const AppShell: React.FC = () => {
                 >
                   <Settings size={18} aria-hidden="true" />
                 </NavLink>
+                {!hideWebsiteChrome && (
                 <a
                   href={isHubStandalone ? pandagardeWebsiteUrl : '/'}
                   onClick={onOpenWebsite}
@@ -196,6 +208,7 @@ const AppShell: React.FC = () => {
                   <ArrowLeft size={12} aria-hidden="true" />
                   {t('hub.nav.site')}
                 </a>
+                )}
             </div>
           </div>
         </header>

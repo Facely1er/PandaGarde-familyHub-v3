@@ -1,4 +1,4 @@
-# Apple App Store — Guideline 2.1 review reply (v1.0.0)
+# Apple App Store — review replies (v1.0.0)
 
 Paste into **App Store Connect → App Review → Reply** and **App Review Information → Notes**.
 
@@ -18,30 +18,35 @@ npm run app-review:record:simulator   # regenerate iPhone simulator auto-tour
 
 ---
 
-## Resubmission: new build required?
+## Guideline 3.1.1 rejection (build 8) — resubmit build 11
 
-**Yes — upload a new iOS build (build 8), not the rejected build 6.**
+**Rejected:** `1.0.0 (8)` on 2026-07-13 — **Guideline 3.1.1 (In-App Purchase)**  
+Apple flagged pilot-code Premium unlock and any non-StoreKit path to paid functionality.
 
-| Change since rejected build | In store binary? | Why it matters |
-|-----------------------------|----------------|----------------|
-| **Settings → Clear all data on this device** | Yes (after rebuild) | Shown in your recording and stated in the reply — reviewers must see it in the IPA |
-| **ChildProgressDetail** logger fix | Yes | Minor crash fix when viewing child progress |
-| Premium copy (no IAP in v1.0.0) | Yes | Matches App Review notes |
-| App Review auto-tour (`VITE_APP_REVIEW_DEMO`) | No (dev/recording only) | Not enabled in App Store builds |
+| Root cause in build 8 | Fix in build 11 |
+|------------------------|----------------|
+| Settings → Premium → pilot unlock code unlocked paid-style features without IAP | Premium section **removed from native iOS/Android builds** until StoreKit ships (v1.1) |
+| Mission intro showed “Premium · unlock in Settings” upsell | Hidden on native — baseline scenarios only |
+| Review notes told Apple how to use the pilot code | Notes updated — **do not mention pilot codes** |
 
-**Rejected:** `1.0.0 (6)` · **Resubmit:** `1.0.0 (8)`
+**Resubmit:** `1.0.0 (11)` with a **new binary** (not build 8).
 
 On Mac before upload:
 
 ```bash
 npm run test:run
-npm run mobile:bump:build
-npm run ios:appstore               # or ios:prepare + archive in Xcode
+npm run store:check
+npm run ios:appstore               # bumps build + prepares + archives
 ```
 
-Upload build **8** to App Store Connect, select it on the version, then reply with notes + recording.
+Upload build **11** to App Store Connect, select it on the version, regenerate the simulator recording (Settings must **not** show a Premium section), then reply with the **3.1.1 short reply** below.
 
-**Do not** reply with only build 6 if the binary lacks **Clear all data** — Apple will not find what your notes describe.
+> **Note:** `npm run ios:appstore` runs `mobile:bump:build` internally. If you bump manually first, the shipped build number will be **one higher** than the first bump (e.g. 8 → manual bump → 9 → `ios:appstore` → **10**). That is expected.
+
+**Exported IPA:** `ios/App/build/export/App.ipa`  
+**Archive:** `ios/App/build/App.xcarchive`
+
+Upload via Xcode Organizer (`open ios/App/build/App.xcarchive`) or Transporter (drag `App.ipa`).
 
 ---
 
@@ -55,8 +60,9 @@ Upload build **8** to App Store Connect, select it on the version, then reply wi
 
 1. Run the 16-step checklist on **iPhone** simulator: `npm run ios:simulator:review`
 2. Run the same checklist on **iPad** simulator: `npm run ios:simulator:review:ipad`
-3. Bump, archive, and upload **build 8** (`npm run mobile:bump:build && npm run ios:appstore`).
-4. Fill sections 1–2 with **only simulators you actually tested** (iPhone + iPad if both completed).
+3. Archive and upload **build 11** (`npm run ios:appstore` — already done if you followed the pipeline above).
+4. Confirm Settings has **no Premium section** in the simulator recording.
+5. Fill sections 1–2 with **only simulators you actually tested** (iPhone + iPad if both completed).
 
 **Section 1 — simulator recording (attach iPhone `.mp4`):**
 
@@ -72,12 +78,12 @@ Flow: cold launch → Let's go! → welcome → dashboard → Journey → Missio
 2) DEVICES TESTED
 • iPhone Simulator (iPhone 14 Pro Max, 6.5") — iOS [X.Y] (full reviewer path + attached screen recording)
 • iPad Simulator (iPad Pro 13-inch) — iPadOS [X.Y] (same reviewer path)
-Build: 1.0.0 (8) — tested on Xcode Simulator before App Store upload.
+Build: 1.0.0 (11) — tested on Xcode Simulator before App Store upload.
 ```
 
 Replace `[X.Y]` with the runtime version from Simulator or `xcrun simctl list runtimes`.
 
-**Optional — physical device instead:** If you later test on a real iPhone via TestFlight, swap “Simulator” for the model from **Settings → General → About** and note TestFlight build 8. Do not list both simulator and physical unless you actually ran both.
+**Optional — physical device instead:** If you later test on a real iPhone via TestFlight, swap “Simulator” for the model from **Settings → General → About** and note TestFlight build 11. Do not list both simulator and physical unless you actually ran both.
 
 **Full checklist:** [FAMILYHUB_IOS_SIMULATOR_REVIEW_TEST.md](./FAMILYHUB_IOS_SIMULATOR_REVIEW_TEST.md) · `npm run ios:simulator:review` · `npm run ios:simulator:review:ipad`
 
@@ -95,13 +101,47 @@ Record on **iPhone simulator** (`npm run app-review:record:simulator`). Repeat t
 6. Settings → **Clear all data on this device** → confirm (returns to login)
 7. Tap **Let's go!** again to show fresh start
 
-**Not in v1.0.0:** no server accounts, IAP, UGC/social, or sensitive permission prompts.
+**Not in v1.0.0:** no server accounts, IAP, subscriptions, premium unlock, UGC/social, or sensitive permission prompts.
 
 ---
 
-## Short reply (paste this — ~2060 chars, under 4000 limit)
+## Short reply — Guideline 3.1.1 (paste this — under 4000 limit)
 
 Fill bracketed fields, then copy everything inside the code block:
+
+```
+APP REVIEW — PandaGarde Family Hub v1.0.0 (Guideline 3.1.1)
+Bundle ID: com.pandagarde.familyhub
+
+We removed all premium/unlock UI from this build. v1.0.0 is fully free.
+
+1) SCREEN RECORDING
+Attached: Xcode Simulator — iPhone 14 Pro Max (6.5"), iOS [VERSION]. Flow: cold launch → Let's go! → welcome → dashboard → Journey → Missions → complete one mission → Family (add member) → Settings (no Premium section; privacy + Clear all data) → login → Let's go! again.
+
+2) GUIDELINE 3.1.1 — NO PAID CONTENT IN v1.0.0
+• All 18 missions, games, and family prompts are free with no paywall.
+• No in-app purchases, subscriptions, or StoreKit products in this version.
+• No unlock codes, promo codes, or alternate payment paths in the app.
+• Settings no longer shows a Premium section (removed in build 11).
+• Mission intros do not mention Premium or external purchase.
+• Optional website links (privacy, terms, FAQ) open in Safari only when the user taps them; the app does not sell digital content through those links.
+
+3) DEVICES TESTED
+• iPhone Simulator (iPhone 14 Pro Max, 6.5") — iOS [version] (attached recording)
+• iPad Simulator (iPad Pro 13-inch) — iPadOS [version] (same path)
+Build: 1.0.0 (11).
+
+4) SETUP
+No demo account. Tap "Let's go!" — local guardian profile on this device only.
+Data deletion: Settings → Clear all data on this device → confirm, or delete the app.
+
+Support: support@pandagarde.com
+Privacy: https://www.pandagarde.com/privacy
+```
+
+---
+
+## Short reply — Guideline 2.1 (reference only)
 
 ```
 APP REVIEW — PandaGarde Family Hub v1.0.0
@@ -110,12 +150,12 @@ Bundle ID: com.pandagarde.familyhub
 1) SCREEN RECORDING
 Attached: Xcode Simulator screen recording — iPhone 14 Pro Max (6.5"), iOS [VERSION]. Flow: cold launch → Let's go! → welcome → dashboard → Journey → Missions → complete one mission → Family (add member) → Settings (privacy, Clear all data) → login → Let's go! again.
 
-Not in v1.0.0: no server accounts or cloud deletion; no IAP/subscriptions; no UGC, social, or reporting; no location, contacts, camera, microphone, photos, or ATT prompts.
+Not in v1.0.0: no server accounts or cloud deletion; no IAP/subscriptions; no premium unlock; no UGC, social, or reporting; no location, contacts, camera, microphone, photos, or ATT prompts.
 
 2) DEVICES TESTED
 • iPhone Simulator (iPhone 14 Pro Max, 6.5") — iOS [version] (full reviewer path + attached screen recording)
 • iPad Simulator (iPad Pro 13-inch) — iPadOS [version] (same reviewer path)
-Build: 1.0.0 (8) — tested on Xcode Simulator before App Store upload.
+Build: 1.0.0 (11) — tested on Xcode Simulator before App Store upload.
 
 3) PURPOSE & AUDIENCE
 Parent-guided educational app for families ages 5–17: 18 short privacy missions with real scenarios, optional practice activities, family discussion prompts, and one practical action per mission. Not a social network; does not monitor children's devices.
@@ -123,7 +163,6 @@ Parent-guided educational app for families ages 5–17: 18 short privacy mission
 4) SETUP & ACCESS
 No demo account. Tap "Let's go!" — creates a local guardian profile on this device only.
 Reviewer path: Login → Dashboard → Journey → Missions → complete one mission → Family → Settings.
-Optional pilot (not StoreKit): Settings → Premium → code FAMILYHUB-PREMIUM — on-device scenario personalization only.
 Data deletion: Settings → Clear all data on this device → confirm, or delete the app. PandaGarde does not store this data on servers.
 
 5) EXTERNAL SERVICES
@@ -189,8 +228,7 @@ Sign-in: Tap “Let’s go!” on the first screen. This creates a local guardia
 Reviewer path:
 Login → Dashboard → Activities → complete one mission → Family → add child (name + age) → Journey → Settings.
 
-Optional pilot premium (NOT App Store billing): Settings → Premium → expand → code: FAMILYHUB-PREMIUM
-Unlocks personalized mission scenarios on-device only. v1.0.0 has no in-app purchases.
+v1.0.0 has no paid features, no Premium section in Settings, and no in-app purchases.
 
 Data deletion (no cloud account):
 • Settings → “Clear all data on this device” → confirm, or
@@ -233,7 +271,7 @@ Privacy: https://www.pandagarde.com/privacy
 |-------|--------|
 | Sign-in required? | **No** |
 | Demo account | Leave blank |
-| Notes | **Short reply** above (~2060 chars) |
+| Notes | **3.1.1 short reply** above |
 | Attachment | Your screen recording |
 
 ---

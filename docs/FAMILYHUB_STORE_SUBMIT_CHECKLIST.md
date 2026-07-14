@@ -231,13 +231,13 @@ Create app → bundle ID **`com.pandagarde.familyhub`** → platform iOS.
 |-------|--------|
 | Sign-in required? | **No** |
 | Demo account | Leave blank — local “Let’s go!” only |
-| Notes | Full 7-point reply in [FAMILYHUB_APP_STORE_REVIEW_REPLY.md](./FAMILYHUB_APP_STORE_REVIEW_REPLY.md) |
+| Notes | **Guideline 3.1.1 short reply** in [FAMILYHUB_APP_STORE_REVIEW_REPLY.md](./FAMILYHUB_APP_STORE_REVIEW_REPLY.md) — no pilot codes |
 | Attachment | **Simulator screen recording** (iPhone simctl `.mov` from `npm run ios:simulator:review -- --record`) |
 | Contact | Your name, phone, email |
 
 **Apple Guideline 2.1 reply must include all seven items** (recording, devices tested, purpose, setup, external services, regions, regulated industry). Paste the block from `FAMILYHUB_APP_STORE_REVIEW_REPLY.md` — the short Google Play notes are not enough for Apple.
 
-**Screen recording must show:** cold launch → Let’s go! → mission flow → add family member → Settings → **Clear all data on this device** → back to login. Record on **iPhone simulator**; repeat checklist on **iPad simulator** for section 2 devices tested. See [FAMILYHUB_IOS_SIMULATOR_REVIEW_TEST.md](./FAMILYHUB_IOS_SIMULATOR_REVIEW_TEST.md).
+**Screen recording must show:** cold launch → Let’s go! → mission flow → add family member → Settings (**no Premium section**) → **Clear all data on this device** → back to login. Record on **iPhone simulator**; repeat checklist on **iPad simulator** for section 2 devices tested. See [FAMILYHUB_IOS_SIMULATOR_REVIEW_TEST.md](./FAMILYHUB_IOS_SIMULATOR_REVIEW_TEST.md).
 
 ### TestFlight / Simulator smoke (before public)
 

@@ -1,4 +1,36 @@
 
+/** Marketing headlines for iPhone App Store frames (same 7-screen flow). */
+export const CAPTURE_SCREEN_CAPTIONS = {
+  '01-login': {
+    headline: 'Family privacy missions',
+    subline: 'Ages 5–17 · Tap Let\u2019s go!',
+  },
+  '02-dashboard': {
+    headline: 'Daily privacy missions',
+    subline: 'One real situation at a time',
+  },
+  '03-activities': {
+    headline: '18 missions · Ages 5–17',
+    subline: 'Browse every family mission',
+  },
+  '04-mission-intro': {
+    headline: 'Real situations',
+    subline: 'Not abstract rules — talk together',
+  },
+  '05-journey': {
+    headline: 'Track progress',
+    subline: 'Streaks, badges & forest friends',
+  },
+  '06-kids': {
+    headline: 'Your family roster',
+    subline: 'Name and age only — on this device',
+  },
+  '07-settings': {
+    headline: 'Your data stays here',
+    subline: 'Clear all data anytime · No Premium paywall',
+  },
+};
+
 /** Screen definitions shared with storeScreenshotMode.ts — keep in sync manually. */
 export const CAPTURE_SCREENS = [
   {
@@ -65,48 +97,66 @@ const SAMPLE_FAMILY = [
     name: 'Maya',
     age: 9,
     role: 'child',
-    privacyScore: 72,
-    completedActivities: 3,
-    badges: ['first_mission'],
-    lastActive: '2026-07-01T12:00:00.000Z',
+    privacyScore: 78,
+    completedActivities: 5,
+    badges: ['first_mission', 'privacy_detective'],
+    lastActive: '2026-07-12T12:00:00.000Z',
   },
   {
     id: 2,
     name: 'Jordan',
     age: 14,
     role: 'teen',
-    privacyScore: 68,
-    completedActivities: 2,
-    badges: [],
-    lastActive: '2026-07-02T12:00:00.000Z',
+    privacyScore: 71,
+    completedActivities: 4,
+    badges: ['first_mission'],
+    lastActive: '2026-07-13T12:00:00.000Z',
   },
 ];
 
 const SAMPLE_PROGRESS = {
-  completedActivities: ['pack-digital-backpack', 'password-treasure-hunt', 'traffic-light-safety'],
+  completedActivities: [
+    'pack-digital-backpack',
+    'password-treasure-hunt',
+    'traffic-light-safety',
+    'phishing-detective',
+    'social-media-audit',
+  ],
   activityDetails: {
     'pack-digital-backpack': {
       activityId: 'pack-digital-backpack',
       completed: true,
       score: 92,
-      completedAt: '2026-07-01T10:00:00.000Z',
+      completedAt: '2026-07-08T10:00:00.000Z',
     },
     'password-treasure-hunt': {
       activityId: 'password-treasure-hunt',
       completed: true,
       score: 88,
-      completedAt: '2026-07-02T10:00:00.000Z',
+      completedAt: '2026-07-09T10:00:00.000Z',
     },
     'traffic-light-safety': {
       activityId: 'traffic-light-safety',
       completed: true,
       score: 95,
-      completedAt: '2026-07-03T10:00:00.000Z',
+      completedAt: '2026-07-10T10:00:00.000Z',
+    },
+    'phishing-detective': {
+      activityId: 'phishing-detective',
+      completed: true,
+      score: 90,
+      completedAt: '2026-07-11T10:00:00.000Z',
+    },
+    'social-media-audit': {
+      activityId: 'social-media-audit',
+      completed: true,
+      score: 86,
+      completedAt: '2026-07-12T10:00:00.000Z',
     },
   },
-  totalTimeSpent: 36,
-  achievements: ['first_activity'],
-  lastUpdated: '2026-07-08T10:00:00.000Z',
+  totalTimeSpent: 52,
+  achievements: ['first_activity', 'mission_streak_3'],
+  lastUpdated: '2026-07-13T10:00:00.000Z',
 };
 
 const CAPTURE_BOOT_TAG = 'pg-capture-boot';
@@ -125,7 +175,9 @@ export function buildCaptureBootScript(screenId) {
     ? `localStorage.setItem('pandagarde_local_auth_v1','true');
 localStorage.setItem('pandagarde_hub_welcomed','true');
 localStorage.setItem('pandagarde_family',${familyJson});
-localStorage.setItem('pandagarde_progress',${progressJson});`
+localStorage.setItem('pandagarde_progress',${progressJson});
+localStorage.setItem('pandagarde_hub_streak','4');
+localStorage.setItem('pandagarde_hub_last_active_date',new Date().toISOString().slice(0,10));`
     : `localStorage.setItem('pandagarde_local_auth_v1','false');
 localStorage.removeItem('pandagarde_hub_welcomed');
 localStorage.removeItem('pandagarde_family');

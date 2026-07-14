@@ -1,7 +1,10 @@
 #!/usr/bin/env node
 /**
- * Record App Review auto-tour on Xcode Simulator (iPhone 6.5").
- * Builds with VITE_APP_REVIEW_DEMO=true so the tour runs in the native shell.
+ * Record App Review flow on Xcode Simulator (iPhone 6.5").
+ * Uses the same simulator workflow as ios-simulator-review-smoke.mjs:
+ * production derivedData path, single install + launch, simctl recordVideo.
+ *
+ * Builds with VITE_APP_REVIEW_DEMO=true so the in-app auto-tour runs during capture.
  *
  * Output: store-assets/app-review/simulator-review-iphone.mov (+ .mp4)
  */
@@ -14,12 +17,18 @@ import { simulatorMovToMp4FfmpegArgs } from './lib/app-review-capture-shared.mjs
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const iosAppDir = path.join(root, 'ios', 'App');
 const iosPublicDir = path.join(iosAppDir, 'App', 'public');
-const derivedData = path.join(iosAppDir, '.derivedData-review');
+/** Match ios-simulator-review-smoke — avoids .derivedData-review install hangs */
+const derivedData = path.join(iosAppDir, '.derivedData');
 const appBundle = path.join(derivedData, 'Build', 'Products', 'Debug-iphonesimulator', 'App.app');
 const bundleId = 'com.pandagarde.familyhub';
 const outDir = path.join(root, 'store-assets', 'app-review');
 const recordOut = path.join(outDir, 'simulator-review-iphone.mov');
 const recordMp4 = path.join(outDir, 'simulator-review-iphone.mp4');
+
+const SIM = {
+  name: 'SC-Review-iPhone-6.5',
+  deviceType: 'com.apple.CoreSimulator.SimDeviceType.iPhone-14-Pro-Max',
+};
 
 function readAppReviewRecordMs() {
   const src = fs.readFileSync(path.join(root, 'src/lib/appReviewDemo.ts'), 'utf8');
@@ -29,11 +38,6 @@ function readAppReviewRecordMs() {
 
 const TOUR_MS = Number(process.env.APP_REVIEW_RECORD_MS ?? readAppReviewRecordMs());
 const skipBuild = process.argv.includes('--skip-build');
-
-const SIM = {
-  name: 'SC-Review-iPhone-6.5',
-  deviceType: 'com.apple.CoreSimulator.SimDeviceType.iPhone-14-Pro-Max',
-};
 
 const env = {
   ...process.env,
@@ -61,6 +65,9 @@ function sleep(ms) {
 function resolveLatestIosRuntime() {
   const list = run('xcrun', ['simctl', 'list', 'runtimes', 'available', '-j'], { quiet: true });
   const runtimes = JSON.parse(list.stdout).runtimes.filter((rt) => rt.isAvailable && rt.platform === 'iOS');
+  if (runtimes.length === 0) {
+    throw new Error('No iOS Simulator runtime found.');
+  }
   return runtimes.sort((a, b) => b.version.localeCompare(a.version, undefined, { numeric: true }))[0]
     .identifier;
 }
@@ -96,22 +103,29 @@ function ensureSimulator() {
   return udid;
 }
 
+/** Same boot path as ios-simulator-review-smoke — do not shutdown a running sim. */
 function bootSimulator(udid) {
   const state = run('xcrun', ['simctl', 'list', 'devices', '-j'], { quiet: true });
   const data = JSON.parse(state.stdout);
   const match = Object.values(data.devices).flat().find((d) => d.udid === udid);
   if (match?.state !== 'Booted') {
+    console.log('[ios-sim-record] Booting simulator…');
     run('xcrun', ['simctl', 'boot', udid]);
-    run('xcrun', ['simctl', 'bootstatus', udid, '-b']);
+    sleep(3000);
   }
   run('open', ['-a', 'Simulator', '--args', '-CurrentDeviceUDID', udid], { allowFail: true });
   sleep(2000);
 }
 
-function prepareDemoBundle() {
-  console.log('[ios-sim-record] Building Family Hub with App Review auto-tour…');
+function prepareWebBundle() {
+  console.log('[ios-sim-record] Building Family Hub (App Review auto-tour, no premium commerce)…');
   run('npm', ['run', 'build:familyhub'], {
-    env: { ...env, VITE_APP_REVIEW_DEMO: 'true', VITE_HUB_STANDALONE: 'true' },
+    env: {
+      ...env,
+      VITE_APP_REVIEW_DEMO: 'true',
+      VITE_HUB_STANDALONE: 'true',
+      VITE_DISABLE_PREMIUM_COMMERCE: 'true',
+    },
   });
   const distSw = path.join(root, 'dist-familyhub', 'sw.js');
   if (fs.existsSync(distSw)) {
@@ -124,6 +138,7 @@ function prepareDemoBundle() {
   if (fs.existsSync(iosPublicSw)) {
     fs.unlinkSync(iosPublicSw);
   }
+  console.log('[ios-sim-record] Installing CocoaPods…');
   run('pod', ['install'], { cwd: iosAppDir });
 }
 
@@ -152,18 +167,21 @@ function buildSimulatorApp() {
   }
 }
 
-function warmUp(udid) {
+function installFresh(udid) {
   run('xcrun', ['simctl', 'uninstall', udid, bundleId], { allowFail: true });
-  run('xcrun', ['simctl', 'install', udid, appBundle]);
-  run('xcrun', ['simctl', 'launch', udid, bundleId], { allowFail: true });
-  sleep(3500);
-  run('xcrun', ['simctl', 'terminate', udid, bundleId], { allowFail: true });
-  sleep(800);
+  console.log('[ios-sim-record] Installing app on simulator…');
+  const install = spawnSync('perl', ['-e', 'alarm 90; exec @ARGV', 'xcrun', 'simctl', 'install', udid, appBundle], {
+    cwd: root,
+    env,
+    stdio: 'inherit',
+    encoding: 'utf8',
+  });
+  if (install.status !== 0) {
+    throw new Error('simctl install timed out or failed — restart Simulator and retry');
+  }
 }
 
-function coldLaunch(udid) {
-  run('xcrun', ['simctl', 'uninstall', udid, bundleId], { allowFail: true });
-  run('xcrun', ['simctl', 'install', udid, appBundle]);
+function launchApp(udid) {
   run('xcrun', ['simctl', 'terminate', udid, bundleId], { allowFail: true });
   run('xcrun', ['simctl', 'launch', udid, bundleId]);
   run('osascript', ['-e', 'tell application "Simulator" to activate'], { allowFail: true });
@@ -188,13 +206,14 @@ async function recordTour(udid) {
     fs.unlinkSync(recordOut);
   }
 
-  // Install and reach the login screen before recording — never capture simctl install UI.
-  console.log('[ios-sim-record] Cold launch (install happens before recording)…');
-  coldLaunch(udid);
-  const loginReadyMs = Number(process.env.APP_REVIEW_LOGIN_READY_MS ?? 4500);
+  installFresh(udid);
+  launchApp(udid);
+
+  console.log('[ios-sim-record] Waiting for login screen before recording…');
+  const loginReadyMs = Number(process.env.APP_REVIEW_LOGIN_READY_MS ?? 5000);
   await new Promise((resolve) => setTimeout(resolve, loginReadyMs));
 
-  console.log(`[ios-sim-record] Recording ${TOUR_MS / 1000}s → ${recordOut}`);
+  console.log(`[ios-sim-record] Recording ${TOUR_MS / 1000}s (auto-tour) → ${recordOut}`);
   const recorder = spawn('xcrun', ['simctl', 'io', udid, 'recordVideo', recordOut], { stdio: 'inherit' });
 
   await new Promise((resolve) => setTimeout(resolve, TOUR_MS));
@@ -205,20 +224,10 @@ async function recordTour(udid) {
   });
 
   if (!fs.existsSync(recordOut) || fs.statSync(recordOut).size < 10_000) {
-    throw new Error('Recording missing or too small — re-run npm run app-review:record:simulator');
+    throw new Error('Recording missing or too small — try: npm run ios:simulator:review -- --record');
   }
   console.log(`[ios-sim-record] ✓ Saved ${recordOut} (${Math.round(fs.statSync(recordOut).size / 1024)} KB)`);
   exportMovToMp4(recordOut, recordMp4);
-}
-
-function syncPublicIntoAppBundle() {
-  const publicSrc = path.join(iosAppDir, 'App', 'public');
-  const publicDest = path.join(appBundle, 'public');
-  if (!fs.existsSync(publicSrc)) {
-    throw new Error('Missing ios/App/App/public — run prepareDemoBundle first.');
-  }
-  fs.rmSync(publicDest, { recursive: true, force: true });
-  fs.cpSync(publicSrc, publicDest, { recursive: true });
 }
 
 async function main() {
@@ -231,22 +240,17 @@ async function main() {
   bootSimulator(udid);
 
   if (!skipBuild) {
-    prepareDemoBundle();
+    prepareWebBundle();
     buildSimulatorApp();
-  } else {
-    if (!fs.existsSync(appBundle)) {
-      throw new Error('No simulator app bundle — run without --skip-build first.');
-    }
-    console.log('[ios-sim-record] --skip-build: refreshing demo web bundle only…');
-    prepareDemoBundle();
-    syncPublicIntoAppBundle();
+  } else if (!fs.existsSync(appBundle)) {
+    throw new Error('No simulator app bundle — run without --skip-build first.');
   }
 
-  warmUp(udid);
   await recordTour(udid);
 }
 
 main().catch((err) => {
   console.error('[ios-sim-record] Failed:', err.message ?? err);
+  console.error('[ios-sim-record] Manual fallback: npm run ios:simulator:review -- --record');
   process.exit(1);
 });

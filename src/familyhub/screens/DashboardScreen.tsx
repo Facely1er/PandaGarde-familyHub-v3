@@ -169,7 +169,7 @@ const DashboardScreen: React.FC = () => {
           <HowMissionsWorkCard onDismiss={() => setMissionHintDismissed(true)} />
         )}
 
-        <dl className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+        <dl className="hub-dashboard-stats grid grid-cols-2 gap-3 sm:grid-cols-3">
           <div className="flex min-h-[4.75rem] flex-col justify-between rounded-xl border border-teal-100 bg-teal-50/70 px-5 py-4 dark:border-teal-700/50 dark:bg-teal-900/20">
             <dt className="text-xs font-semibold uppercase tracking-wide text-teal-700 dark:text-teal-200">
               {t('hub.dashboard.profiles')}

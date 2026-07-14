@@ -89,10 +89,36 @@ track(settings.includes('path="/privacy"'), 'Settings privacy policy link');
 track(settings.includes('HUB_SUPPORT_EMAIL'), 'Settings support email link');
 track(settings.includes('clearAllHubLocalData'), 'Settings clear-all-data control (App Review)');
 track(!settings.includes('PREMIUM_PRICING_LABEL'), 'Settings hides store pricing (no IAP in v1)');
+track(settings.includes('isPremiumCommerceAvailable'), 'Settings gates premium on native store builds');
+
+const premiumEntitlement = read('src/lib/premiumEntitlement.ts');
+track(premiumEntitlement.includes('isPremiumCommerceAvailable'), 'Premium commerce gated on native');
+track(premiumEntitlement.includes('VITE_DISABLE_PREMIUM_COMMERCE'), 'Native build strips premium commerce at compile time');
+
+const iosPrepare = read('scripts/ios-prepare.mjs');
+track(iosPrepare.includes('VITE_DISABLE_PREMIUM_COMMERCE'), 'ios:prepare builds with premium commerce disabled');
+
+const privacyForms = read('docs/FAMILYHUB_STORE_PRIVACY_FORMS.md');
+track(!privacyForms.includes('FAMILYHUB-PREMIUM'), 'Store privacy forms omit pilot premium code');
+
+const iosPublicJs = path.join(root, 'ios/App/App/public/js');
+if (fs.existsSync(iosPublicJs)) {
+  const jsFiles = fs.readdirSync(iosPublicJs).filter((f) => f.endsWith('.js'));
+  const pilotHits = jsFiles.filter((f) => read(`ios/App/App/public/js/${f}`).includes('FAMILYHUB-PREMIUM'));
+  track(
+    pilotHits.length === 0,
+    pilotHits.length === 0
+      ? 'iOS bundle omits pilot premium codes (rebuild with ios:prepare if this fails)'
+      : `iOS bundle still contains FAMILYHUB-PREMIUM in: ${pilotHits.join(', ')} — run npm run ios:prepare`
+  );
+} else {
+  console.log('[store:check] MANUAL — Run npm run ios:prepare to verify pilot codes stripped from iOS bundle');
+}
 
 const reviewReply = read('docs/FAMILYHUB_APP_STORE_REVIEW_REPLY.md');
 track(reviewReply.includes('SCREEN RECORDING'), 'Apple 2.1 review reply doc present');
-track(reviewReply.includes('FAMILYHUB-PREMIUM'), 'Review reply includes pilot premium code');
+track(!reviewReply.includes('FAMILYHUB-PREMIUM'), 'Review reply omits pilot premium code (Guideline 3.1.1)');
+track(reviewReply.includes('Guideline 3.1.1'), 'Review reply addresses Guideline 3.1.1');
 
 const reviewRecordScript = path.join(root, 'scripts/record-app-review-video.mjs');
 if (fs.existsSync(reviewRecordScript)) {

@@ -1,6 +1,7 @@
 import React, { useEffect, useId, useState } from 'react';
 import { ChevronDown, ChevronUp, Pencil, RotateCcw, Sparkles } from 'lucide-react';
 import PremiumMissionHint from './PremiumMissionHint';
+import { isPremiumCommerceAvailable } from '../../lib/premiumEntitlement';
 import type { ParentScenarioInput } from '../../lib/missionScenarioConfig';
 import type { ResolvedMissionScenario } from '../../lib/personalizeActivity';
 import type { FlattenedAgeBasedActivity } from '../../data/ageBasedActivities';
@@ -51,7 +52,7 @@ const MissionScenarioCustomize: React.FC<MissionScenarioCustomizeProps> = ({
   }, [parentInput, activity.id]);
 
   if (!isPremium) {
-    return <PremiumMissionHint />;
+    return isPremiumCommerceAvailable() ? <PremiumMissionHint /> : null;
   }
 
   const handleSave = () => {

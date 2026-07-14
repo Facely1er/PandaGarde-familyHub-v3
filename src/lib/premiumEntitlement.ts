@@ -3,10 +3,18 @@
  * Stored locally until one-time store IAP / receipt validation is wired.
  */
 
+import { Capacitor } from '@capacitor/core';
+
 export const PREMIUM_ENTITLEMENT_STORAGE_KEY = 'pandagarde_premium_entitlement';
 
-/** Pilot unlock codes — replace with store receipt validation when billing ships. */
-const PILOT_UNLOCK_CODES = new Set(['PANDA-PILOT-2026', 'FAMILYHUB-PREMIUM']);
+/** Set at build time for Capacitor store binaries — strips pilot codes from the bundle. */
+const PREMIUM_COMMERCE_DISABLED_AT_BUILD =
+  import.meta.env.VITE_DISABLE_PREMIUM_COMMERCE === 'true';
+
+/** Pilot unlock codes — web Hub only; empty in native store builds (Guideline 3.1.1). */
+const PILOT_UNLOCK_CODES = PREMIUM_COMMERCE_DISABLED_AT_BUILD
+  ? new Set<string>()
+  : new Set(['PANDA-PILOT-2026', 'FAMILYHUB-PREMIUM']);
 
 export type PremiumSource = 'pilot-code' | 'purchase' | 'manual';
 
@@ -45,9 +53,35 @@ export const savePremiumEntitlement = (entitlement: PremiumEntitlement): void =>
   }
 };
 
-export const isPremiumActive = (): boolean => loadPremiumEntitlement().active;
+/**
+ * Pilot codes and premium upsell are web-only until StoreKit / Play Billing ships.
+ * Native store builds must not expose alternate unlock paths (App Store Guideline 3.1.1).
+ */
+export const isPremiumCommerceAvailable = (): boolean => {
+  if (PREMIUM_COMMERCE_DISABLED_AT_BUILD) {
+    return false;
+  }
+  return !Capacitor.isNativePlatform();
+};
+
+/** Drop stale premium flags on native — e.g. after upgrading from a rejected build. */
+export const purgeStalePremiumCommerceState = (): void => {
+  if (!isPremiumCommerceAvailable()) {
+    clearPremiumEntitlement();
+  }
+};
+
+export const isPremiumActive = (): boolean => {
+  if (!isPremiumCommerceAvailable()) {
+    return false;
+  }
+  return loadPremiumEntitlement().active;
+};
 
 export const unlockPremiumWithCode = (code: string): { success: boolean; error?: string } => {
+  if (!isPremiumCommerceAvailable()) {
+    return { success: false, error: 'Premium unlock is not available in the app.' };
+  }
   const normalized = code.trim().toUpperCase();
   if (!normalized) {
     return { success: false, error: 'Enter an unlock code.' };

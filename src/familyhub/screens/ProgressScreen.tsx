@@ -266,7 +266,7 @@ const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => 
               {t('hub.progress.forestFriends.metCount', { met: friendsMet, total: forestFriends.length })}
             </p>
           </div>
-          <ul className="grid grid-cols-1 gap-2 min-[400px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
+          <ul className="hub-journey-friends grid grid-cols-1 gap-2 min-[400px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
             {forestFriends.map(({ character, total, completed }) => (
               <li
                 key={character.id}

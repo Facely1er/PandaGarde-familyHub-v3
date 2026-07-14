@@ -31,10 +31,27 @@ export function phonePlaywrightContextOptions(overrides = {}) {
   };
 }
 
+/** Skip simulator boot / login settle before the auto-tour in exported MP4. */
+export const SIMULATOR_RECORDING_TRIM_START_SEC = 4;
+
 /** ffmpeg scale to phone store size. */
 export function phoneVideoExportFilter(exportW = IPHONE_67.exportW, exportH = IPHONE_67.exportH) {
   return [
     'trim=start=0.3',
+    'setpts=PTS-STARTPTS',
+    `scale=${exportW}:${exportH}:flags=lanczos`,
+    'format=yuv420p',
+  ].join(',');
+}
+
+/** Simulator simctl export — trim longer lead-in (home screen / splash before tour). */
+export function simulatorVideoExportFilter(
+  exportW = IPHONE_67.exportW,
+  exportH = IPHONE_67.exportH,
+  trimStartSec = SIMULATOR_RECORDING_TRIM_START_SEC
+) {
+  return [
+    `trim=start=${trimStartSec}`,
     'setpts=PTS-STARTPTS',
     `scale=${exportW}:${exportH}:flags=lanczos`,
     'format=yuv420p',
@@ -48,7 +65,7 @@ export function simulatorMovToMp4FfmpegArgs(movPath, mp4Path, exportW = IPHONE_6
     '-i',
     movPath,
     '-vf',
-    phoneVideoExportFilter(exportW, exportH),
+    simulatorVideoExportFilter(exportW, exportH),
     '-c:v',
     'libx264',
     '-profile:v',

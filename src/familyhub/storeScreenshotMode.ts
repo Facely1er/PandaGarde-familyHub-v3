@@ -4,6 +4,7 @@
  */
 import { useEffect } from 'react';
 import type { NavigateFunction } from 'react-router-dom';
+import { isIpadDevice } from '../lib/isIpadDevice';
 
 export const STORE_SCREENSHOTS = [
   { id: '01-login', path: '/', auth: false },
@@ -30,48 +31,66 @@ const SAMPLE_FAMILY = [
     name: 'Maya',
     age: 9,
     role: 'child',
-    privacyScore: 72,
-    completedActivities: 3,
-    badges: ['first_mission'],
-    lastActive: '2026-07-01T12:00:00.000Z',
+    privacyScore: 78,
+    completedActivities: 5,
+    badges: ['first_mission', 'privacy_detective'],
+    lastActive: '2026-07-12T12:00:00.000Z',
   },
   {
     id: 2,
     name: 'Jordan',
     age: 14,
     role: 'teen',
-    privacyScore: 68,
-    completedActivities: 2,
-    badges: [],
-    lastActive: '2026-07-02T12:00:00.000Z',
+    privacyScore: 71,
+    completedActivities: 4,
+    badges: ['first_mission'],
+    lastActive: '2026-07-13T12:00:00.000Z',
   },
 ];
 
 const SAMPLE_PROGRESS = {
-  completedActivities: ['pack-digital-backpack', 'password-treasure-hunt', 'traffic-light-safety'],
+  completedActivities: [
+    'pack-digital-backpack',
+    'password-treasure-hunt',
+    'traffic-light-safety',
+    'phishing-detective',
+    'social-media-audit',
+  ],
   activityDetails: {
     'pack-digital-backpack': {
       activityId: 'pack-digital-backpack',
       completed: true,
       score: 92,
-      completedAt: '2026-07-01T10:00:00.000Z',
+      completedAt: '2026-07-08T10:00:00.000Z',
     },
     'password-treasure-hunt': {
       activityId: 'password-treasure-hunt',
       completed: true,
       score: 88,
-      completedAt: '2026-07-02T10:00:00.000Z',
+      completedAt: '2026-07-09T10:00:00.000Z',
     },
     'traffic-light-safety': {
       activityId: 'traffic-light-safety',
       completed: true,
       score: 95,
-      completedAt: '2026-07-03T10:00:00.000Z',
+      completedAt: '2026-07-10T10:00:00.000Z',
+    },
+    'phishing-detective': {
+      activityId: 'phishing-detective',
+      completed: true,
+      score: 90,
+      completedAt: '2026-07-11T10:00:00.000Z',
+    },
+    'social-media-audit': {
+      activityId: 'social-media-audit',
+      completed: true,
+      score: 86,
+      completedAt: '2026-07-12T10:00:00.000Z',
     },
   },
-  totalTimeSpent: 36,
-  achievements: ['first_activity'],
-  lastUpdated: '2026-07-08T10:00:00.000Z',
+  totalTimeSpent: 52,
+  achievements: ['first_activity', 'mission_streak_3'],
+  lastUpdated: '2026-07-13T10:00:00.000Z',
 };
 
 export function isStoreScreenshotBuild(): boolean {
@@ -100,7 +119,10 @@ export function initStoreScreenshotEarly(): void {
   }
   window.__PG_STORE_CAPTURE__ = true;
   window.__PG_CAPTURE_READY__ = false;
-  document.documentElement.classList.add('store-capture');
+  document.documentElement.classList.add('store-capture', 'capacitor', 'platform-ios');
+  if (isIpadDevice()) {
+    document.documentElement.classList.add('platform-ipad');
+  }
   suppressHubOnboardingForCapture();
 }
 
@@ -119,6 +141,8 @@ export function applyStoreScreenshotSeed(auth: boolean): void {
     localStorage.setItem('pandagarde_hub_welcomed', 'true');
     localStorage.setItem('pandagarde_family', JSON.stringify(SAMPLE_FAMILY));
     localStorage.setItem('pandagarde_progress', JSON.stringify(SAMPLE_PROGRESS));
+    localStorage.setItem('pandagarde_hub_streak', '4');
+    localStorage.setItem('pandagarde_hub_last_active_date', new Date().toISOString().slice(0, 10));
   } else {
     localStorage.setItem('pandagarde_local_auth_v1', 'false');
     localStorage.removeItem('pandagarde_hub_welcomed');

@@ -31,15 +31,23 @@ function pruneMobileOnlyAssets(outDir: string) {
   }
 }
 
-function storeCaptureHtmlPlugin() {
-  const enabled = process.env.VITE_STORE_SCREENSHOTS === 'true';
+function captureBootHtmlPlugin() {
+  const storeCapture = process.env.VITE_STORE_SCREENSHOTS === 'true';
+  const appReviewCapture = process.env.VITE_APP_REVIEW_DEMO === 'true';
   return {
-    name: 'store-capture-html',
+    name: 'capture-boot-html',
     transformIndexHtml(html: string) {
-      if (!enabled) {
+      const flags: string[] = [];
+      if (storeCapture) {
+        flags.push('window.__PG_STORE_CAPTURE__=true');
+      }
+      if (appReviewCapture) {
+        flags.push('window.__PG_APP_REVIEW_CAPTURE__=true');
+      }
+      if (flags.length === 0) {
         return html;
       }
-      const bootFlag = '<script>window.__PG_STORE_CAPTURE__=true;</script>';
+      const bootFlag = `<script>${flags.join(';')};</script>`;
       return html.replace('<head>', `<head>\n    ${bootFlag}`);
     },
   };
@@ -77,12 +85,15 @@ const familyhubIndexHtmlPlugin = () => ({
 export default mergeConfig(
   baseConfig,
   defineConfig({
-    plugins: [storeCaptureHtmlPlugin(), familyhubIndexHtmlPlugin()],
+    plugins: [captureBootHtmlPlugin(), familyhubIndexHtmlPlugin()],
     define: {
       'import.meta.env.VITE_HUB_STANDALONE': JSON.stringify('true'),
       'import.meta.env.VITE_STORE_SCREENSHOTS': JSON.stringify(process.env.VITE_STORE_SCREENSHOTS ?? 'false'),
       'import.meta.env.VITE_CAPTURE_SCREEN': JSON.stringify(process.env.VITE_CAPTURE_SCREEN ?? ''),
       'import.meta.env.VITE_APP_REVIEW_DEMO': JSON.stringify(process.env.VITE_APP_REVIEW_DEMO ?? 'false'),
+      'import.meta.env.VITE_DISABLE_PREMIUM_COMMERCE': JSON.stringify(
+        process.env.VITE_DISABLE_PREMIUM_COMMERCE ?? 'false'
+      ),
     },
     build: {
       outDir: 'dist-familyhub',

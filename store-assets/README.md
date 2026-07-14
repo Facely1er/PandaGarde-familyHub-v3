@@ -14,15 +14,17 @@ npm run assets:store
 
 ## App Store screenshots (generated)
 
-**Recommended — Xcode Simulator (native resolution, device frame, real status bar):**
+**Recommended for App Store (Apple) — Xcode Simulator native Capacitor app only:**
 
 ```bash
 npm run assets:screenshots:ios
 ```
 
-Rebuilds the Family Hub web bundle and Simulator app before every capture. Use `npm run assets:screenshots:ios:fast` only when re-shooting with an already-fresh build (`--skip-build`).
+Rebuilds the native Simulator `.app` and captures from **installed Capacitor shell** (not browser preview). Use `npm run assets:screenshots:ios:fast` only when re-shooting with an already-fresh native build.
 
-Uses simulators **SC-Store-iPhone-6.5** and **iPad Pro 13-inch (M5)**. Output PNGs are composited **inside a device bezel** on a soft teal gradient at exact App Store dimensions. Raw simulator captures are kept in `_raw/`.
+**Do not use `npm run assets:screenshots:build` for Apple listings** — that path uses Playwright browser preview (website bundle), not the native iOS shell.
+
+Uses simulators **SC-Store-iPhone-6.5** and **iPad Pro 13-inch (M5)**. Output PNGs are composited **inside a device bezel** with marketing headlines on a soft teal gradient at exact App Store dimensions. Raw simulator captures are kept in `_raw/`.
 
 Re-frame existing raw captures without re-running the simulator:
 

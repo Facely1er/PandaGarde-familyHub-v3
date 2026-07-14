@@ -42,8 +42,8 @@
           return;
         }
 
-        // Store screenshot automation — never reload or purge caches (causes blank captures).
-        if (window.__PG_STORE_CAPTURE__) {
+        // Store / App Review capture — never reload or purge caches (causes blank screens).
+        if (window.__PG_STORE_CAPTURE__ || window.__PG_APP_REVIEW_CAPTURE__) {
           sessionStorage.removeItem(RELOAD_KEY);
           return;
         }

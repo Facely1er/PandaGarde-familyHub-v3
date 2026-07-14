@@ -46,7 +46,9 @@ DATA DELETION: Settings → "Clear all data on this device", or uninstall the ap
 
 CHILDREN: Parent-guided educational missions (scenarios, games, family discussion). No user-generated social feed, no child-to-child messaging, no ads targeting children.
 
-OPTIONAL: Users may open pandagarde.com in the system browser for stories or Digital Footprint Analysis. That website is separate from the in-app flow.
+OPTIONAL: Users may open pandagarde.com in the system browser for FAQ, contact, or privacy policy. That website is separate from the in-app flow.
+
+PAID CONTENT: None in v1.0.0 — all missions free; no Premium section, unlock codes, in-app purchases, or subscriptions in the app.
 
 TEST PATH: Login → Welcome (optional) → Dashboard → Activities → start any mission → complete intro/learn/play → family step → celebration.
 ```
@@ -132,7 +134,7 @@ Same reviewer notes as Google (above). **Apple Guideline 2.1** requires the full
 
 **Demo account:** Not required — document local login ("Let's go!").
 
-**Pilot premium (not StoreKit):** Settings → Premium → code `FAMILYHUB-PREMIUM` unlocks scenario personalization locally. v1.0.0 has **no in-app purchases**.
+**v1.0.0 — no paid features:** All missions are free. No Premium section, unlock codes, in-app purchases, or subscriptions in the app. Optional user-initiated links open pandagarde.com in Safari (privacy policy, FAQ, contact).
 
 ### Age rating (App Store)
 

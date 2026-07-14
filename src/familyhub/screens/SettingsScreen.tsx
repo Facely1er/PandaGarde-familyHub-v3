@@ -10,6 +10,7 @@ import { useHubI18n } from '../hubI18n';
 import {
   clearPremiumEntitlement,
   isPremiumActive,
+  isPremiumCommerceAvailable,
   loadPremiumEntitlement,
   unlockPremiumWithCode,
 } from '../../lib/premiumEntitlement';
@@ -61,6 +62,7 @@ const SettingsScreen: React.FC = () => {
   };
 
   const entitlement = loadPremiumEntitlement();
+  const showPremiumSection = isPremiumCommerceAvailable();
 
   const legalLinks = [
     { path: '/terms', label: t('hub.settings.terms') },
@@ -72,7 +74,9 @@ const SettingsScreen: React.FC = () => {
   const helpLinks = [
     { path: '/faq', label: t('hub.settings.faq') },
     { path: '/contact', label: t('hub.settings.contact') },
-    { path: '/', label: t('hub.settings.backToWebsite'), icon: Home },
+    ...(showPremiumSection
+      ? [{ path: '/', label: t('hub.settings.backToWebsite'), icon: Home }]
+      : []),
   ] as const;
 
   return (
@@ -82,6 +86,7 @@ const SettingsScreen: React.FC = () => {
         <p className={`text-sm ${hubTheme.body}`}>{t('hub.settings.subtitle')}</p>
       </header>
 
+      <div className="hub-settings-layout space-y-4">
       <section
         className={`${hubTheme.cardCompact} divide-y divide-gray-100 dark:divide-gray-700`}
         aria-label={t('hub.settings.language')}
@@ -106,6 +111,7 @@ const SettingsScreen: React.FC = () => {
         </div>
       </section>
 
+      {showPremiumSection && (
       <section className={hubTheme.cardCompact} aria-labelledby="settings-premium-heading">
         {premiumActive ? (
           <>
@@ -192,6 +198,7 @@ const SettingsScreen: React.FC = () => {
           </details>
         )}
       </section>
+      )}
 
       <section className={`${hubTheme.cardCompact} space-y-2.5`} aria-labelledby="settings-privacy-heading">
         <div>
@@ -272,6 +279,7 @@ const SettingsScreen: React.FC = () => {
           </ul>
         </div>
       </section>
+      </div>
 
       {showClearDataConfirm && (
         <div

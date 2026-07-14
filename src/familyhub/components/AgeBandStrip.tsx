@@ -38,7 +38,7 @@ const AgeBandStrip: React.FC<AgeBandStripProps> = ({
       >
         {heading}
       </h2>
-      <ul className={['grid min-w-0 grid-cols-1', compact ? 'gap-2' : 'gap-3 sm:grid-cols-3'].join(' ')}>
+      <ul className={['hub-age-band-strip grid min-w-0 grid-cols-1', compact ? 'gap-2' : 'gap-3 sm:grid-cols-3'].join(' ')}>
         {HUB_AGE_BANDS.map((band) => {
           const isActive = activeRange === band.range;
           const isFilter = Boolean(onSelectRange);

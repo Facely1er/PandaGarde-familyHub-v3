@@ -102,14 +102,16 @@ DATA: All family members and mission progress are stored in on-device storage on
 
 CHILDREN: Content is parent-guided educational missions (scenarios, games, family discussion). No user-generated social feed, no child-to-child messaging, no ads targeting children.
 
-OPTIONAL: Users may open the full PandaGarde website in a browser for Digital Footprint Analysis; that is separate from the hub app flow.
+OPTIONAL: Users may open pandagarde.com in the system browser for FAQ, contact, or privacy policy; that is separate from the hub app flow.
+
+PAID CONTENT: None in v1.0.0 — all missions free; no Premium section, unlock codes, in-app purchases, or subscriptions in the app.
 
 DATA DELETION: Settings → "Clear all data on this device", or uninstall the app.
 
 TEST PATH: Login → Welcome (optional) → Dashboard → Activities → start any mission → complete intro/learn/play → family step → celebration.
 ```
 
-**Apple App Store** — use the full 7-point reply in [FAMILYHUB_APP_STORE_REVIEW_REPLY.md](./FAMILYHUB_APP_STORE_REVIEW_REPLY.md) plus a **physical-device screen recording**.
+**Apple App Store** — use the **Guideline 3.1.1 short reply** in [FAMILYHUB_APP_STORE_REVIEW_REPLY.md](./FAMILYHUB_APP_STORE_REVIEW_REPLY.md) plus a **simulator screen recording** (Settings must show no Premium section).
 
 ---
 

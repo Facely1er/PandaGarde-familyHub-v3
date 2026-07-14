@@ -139,7 +139,9 @@ function bootSimulator(udid, name) {
 
 function prepareWebBundle() {
   console.log('[ios:simulator:review] Building production Family Hub bundle (no demo flags)…');
-  run('npm', ['run', 'build:familyhub']);
+  run('npm', ['run', 'build:familyhub'], {
+    env: { ...process.env, VITE_DISABLE_PREMIUM_COMMERCE: 'true' },
+  });
   const distSw = path.join(root, 'dist-familyhub', 'sw.js');
   if (fs.existsSync(distSw)) {
     fs.unlinkSync(distSw);
@@ -239,6 +241,7 @@ Follow in order (~5 min). Check each step before continuing.
 
  7. SETTINGS (gear icon, top right)
     [ ] Settings opens
+    [ ] **No "Premium missions" section** (Guideline 3.1.1)
     [ ] Scroll to "Your data on this device"
     [ ] Tap "Clear all data on this device" → confirm "Clear all data"
     [ ] Returns to login screen

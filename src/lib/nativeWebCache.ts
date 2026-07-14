@@ -60,7 +60,10 @@ export async function recoverFromLegacyServiceWorker(): Promise<void> {
 
 /** Fire-and-forget on boot — must not block React render. */
 export function clearNativeWebCachesOnBoot(): void {
-  if (import.meta.env.VITE_STORE_SCREENSHOTS === 'true') {
+  if (
+    import.meta.env.VITE_STORE_SCREENSHOTS === 'true' ||
+    import.meta.env.VITE_APP_REVIEW_DEMO === 'true'
+  ) {
     return;
   }
   void recoverFromLegacyServiceWorker()

@@ -19,6 +19,7 @@ import { getForestCharacter } from '../../data/forestCharacters';
 import { StoryCharacterPortrait } from '../../components/stories/StoryCharacterPortrait';
 import RelatedStoryLink from './RelatedStoryLink';
 import MissionScenarioCustomize from './MissionScenarioCustomize';
+import { isPremiumCommerceAvailable } from '../../lib/premiumEntitlement';
 import { useFootprintAnalysis, useResolvedMissionScenario } from '../../hooks/useResolvedMissionScenario';
 import { useHubI18n } from '../hubI18n';
 import { isAppReviewDemo, setAppReviewView } from '../../lib/appReviewDemo';
@@ -173,7 +174,7 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
     if (!isAppReviewDemo() || phase !== 'intro') {
       return;
     }
-    const timer = window.setTimeout(() => finishMission(92), 3500);
+    const timer = window.setTimeout(() => finishMission(92), 2800);
     return () => window.clearTimeout(timer);
     // finishMission is stable enough for demo auto-complete
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -256,15 +257,17 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
               )}
             </section>
 
-            <MissionScenarioCustomize
-              activity={activity}
-              scenario={scenario}
-              isPremium={isPremium}
-              parentInput={parentInput}
-              onSave={saveParentInput}
-              onClear={clearParentInput}
-              hasFootprintData={footprintAnalysis !== null}
-            />
+            {isPremiumCommerceAvailable() && (
+              <MissionScenarioCustomize
+                activity={activity}
+                scenario={scenario}
+                isPremium={isPremium}
+                parentInput={parentInput}
+                onSave={saveParentInput}
+                onClear={clearParentInput}
+                hasFootprintData={footprintAnalysis !== null}
+              />
+            )}
 
             <section className="rounded-xl border border-indigo-200 bg-indigo-50 p-3 dark:border-indigo-700/40 dark:bg-indigo-900/20">
               <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-indigo-700 dark:text-indigo-300">

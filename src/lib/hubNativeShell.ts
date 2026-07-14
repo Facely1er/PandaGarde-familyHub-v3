@@ -1,5 +1,6 @@
 import { Capacitor } from '@capacitor/core';
 import { isIpadDevice } from './isIpadDevice';
+import { purgeStalePremiumCommerceState } from './premiumEntitlement';
 
 /** Typical home-indicator inset when WKWebView reports env(safe-area-inset-bottom) as 0 */
 const IOS_HOME_INDICATOR_FALLBACK_PX = 28;
@@ -115,6 +116,7 @@ function dismissStaleInAppBrowser(): void {
  */
 export function initHubNativeShell(): void {
   applyCapacitorPlatformClasses();
+  purgeStalePremiumCommerceState();
   dismissStaleInAppBrowser();
   applySafeAreaCssVars();
 

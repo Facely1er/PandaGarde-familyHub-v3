@@ -22,9 +22,15 @@ const env = {
   LANG: 'en_US.UTF-8',
   LC_ALL: 'en_US.UTF-8',
 };
+const nativeBuildEnv = { ...env, VITE_DISABLE_PREMIUM_COMMERCE: 'true' };
 
-function run(command, args, cwd = root) {
-  const result = spawnSync(command, args, { cwd, env, stdio: 'inherit', shell: process.platform === 'win32' });
+function run(command, args, cwd = root, runEnv = env) {
+  const result = spawnSync(command, args, {
+    cwd,
+    env: runEnv,
+    stdio: 'inherit',
+    shell: process.platform === 'win32',
+  });
   if (result.status !== 0) {
     process.exit(result.status ?? 1);
   }
@@ -38,8 +44,8 @@ function removeStaleXcodeBuildDir() {
   fs.rmSync(staleBuildDir, { recursive: true, force: true });
 }
 
-console.log('[ios:prepare] Building Family Hub web bundle…');
-run('npm', ['run', 'build:familyhub']);
+console.log('[ios:prepare] Building Family Hub web bundle (native store — no premium commerce)…');
+run('npm', ['run', 'build:familyhub'], root, nativeBuildEnv);
 
 const distSw = path.join(root, 'dist-familyhub', 'sw.js');
 if (fs.existsSync(distSw)) {

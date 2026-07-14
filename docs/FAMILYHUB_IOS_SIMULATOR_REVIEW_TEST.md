@@ -1,6 +1,6 @@
 # Family Hub — iOS Simulator App Review smoke test (Mac)
 
-Use this on a **Mac with Xcode** to validate the **production** app (same build path as App Store, without demo auto-tour flags) before uploading build 8.
+Use this on a **Mac with Xcode** to validate the **production** app (same build path as App Store, without demo auto-tour flags) before uploading build 11.
 
 Run the full 16-step checklist on **both iPhone and iPad simulators**, record each pass, and attach the iPhone recording to App Store Connect. The simulator recording is acceptable for the Guideline 2.1 reply **as long as you label devices honestly** (simulator name + iOS version — not “physical iPhone”).
 
@@ -78,6 +78,7 @@ Reset state: delete the app on the simulator (long-press icon → Delete App), t
 | **10** | **Family** tab → **Add member** → Name `Alex`, Age `9`, Child → save | ☑ |
 | **11** | Alex appears in family list | ☑ |
 | **12** | **Settings** (gear, top right) opens | ☑ |
+| **12b** | Settings has **no Premium section** (Guideline 3.1.1) | ☐ |
 | **13** | Scroll to **Your data on this device** | ☑ |
 | **14** | **Clear all data on this device** → confirm **Clear all data** | ☑ |
 | **15** | Returns to **login** screen | ☑ |
@@ -117,7 +118,7 @@ xcrun simctl io booted recordVideo ~/Desktop/familyhub-review-iphone.mov
    npm run mobile:bump:build
    npm run ios:appstore
    ```
-2. Upload build **8** to App Store Connect.
+2. Upload build **11** to App Store Connect.
 3. Attach **`simulator-review-iphone.mp4`** to the review reply.
 4. Paste the short reply from `FAMILYHUB_APP_STORE_REVIEW_REPLY.md` with the **simulator** device lines below.
 
@@ -135,7 +136,7 @@ Flow: cold launch → Let's go! → welcome → dashboard → Journey → Missio
 2) DEVICES TESTED
 • iPhone Simulator (iPhone 14 Pro Max, 6.5") — iOS [X.Y] (full reviewer path + attached screen recording)
 • iPad Simulator (iPad Pro 13-inch) — iPadOS [X.Y] (same reviewer path)
-Build: 1.0.0 (8) — tested on Xcode Simulator before App Store upload.
+Build: 1.0.0 (10) — tested on Xcode Simulator before App Store upload.
 ```
 
 Replace `[X.Y]` with the iOS version shown in **Simulator → Settings → General → About** (or `xcrun simctl list runtimes`). List **only** simulators you actually ran the checklist on.
@@ -157,3 +158,5 @@ Replace `[X.Y]` with the iOS version shown in **Simulator → Settings → Gener
 
 - [FAMILYHUB_APP_STORE_REVIEW_REPLY.md](./FAMILYHUB_APP_STORE_REVIEW_REPLY.md) — paste-ready Apple reply
 - [FAMILYHUB_STORE_RELEASE.md](./FAMILYHUB_STORE_RELEASE.md) — archive & upload
+
+

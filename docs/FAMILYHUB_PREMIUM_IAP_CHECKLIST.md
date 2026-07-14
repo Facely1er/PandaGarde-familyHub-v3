@@ -2,7 +2,7 @@
 
 Track **Premium mission personalization** billing for the **next** store release after v1.0.0 review.
 
-**v1.0.0 (in review):** no IAP — pilot unlock codes only. Do not add billing to the binary under review.
+**v1.0.0 (in review):** no IAP — **pilot unlock codes must not ship in native iOS/Android builds** (Guideline 3.1.1). Web Hub may keep pilot codes until billing ships.
 
 **Related docs:** [CONTENT_TRUTH.md](./CONTENT_TRUTH.md) §8 · [FAMILYHUB_MISSIONS_PARENT_GUIDE.md](./FAMILYHUB_MISSIONS_PARENT_GUIDE.md) · [FAMILYHUB_STORE_PRIVACY_FORMS.md](./FAMILYHUB_STORE_PRIVACY_FORMS.md) · [FAMILYHUB_STORE_SUBMIT_CHECKLIST.md](./FAMILYHUB_STORE_SUBMIT_CHECKLIST.md)
 
@@ -36,7 +36,7 @@ Track **Premium mission personalization** billing for the **next** store release
 
 | Surface | v1.0.0 | v1.1+ |
 |---------|--------|-------|
-| iOS / Android app | Pilot codes | Pilot codes **+** store purchase + restore |
+| iOS / Android app | No premium UI (v1.0) | Pilot codes **+** store purchase + restore |
 | Web / PWA Hub (`hub.pandagarde.com`) | Pilot codes | Pilot codes only (unless Stripe added later) |
 
 ---
