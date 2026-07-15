@@ -316,7 +316,8 @@
     "saving": "Guardando…",
     "removing": "Eliminando…",
     "saveChanges": "Guardar cambios",
-    "remove": "Quitar"
+    "remove": "Quitar",
+    "saveFailed": "No se pudo guardar este miembro. Inténtalo de nuevo."
   },
   "common": {
     "minutesShort": "{{count}} min",

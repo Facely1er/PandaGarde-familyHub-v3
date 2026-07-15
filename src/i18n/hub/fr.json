@@ -316,7 +316,8 @@
     "saving": "Enregistrement…",
     "removing": "Suppression…",
     "saveChanges": "Enregistrer",
-    "remove": "Retirer"
+    "remove": "Retirer",
+    "saveFailed": "Impossible d'enregistrer ce membre. Réessayez."
   },
   "common": {
     "minutesShort": "{{count}} min",

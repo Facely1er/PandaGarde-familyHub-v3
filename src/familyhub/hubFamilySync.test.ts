@@ -121,6 +121,18 @@ describe('hubFamilySync', () => {
     expect(loadHubMembers().some((m) => m.id === linked.id)).toBe(true);
   });
 
+  it('addHubMemberToStores supports multiple members without data loss', async () => {
+    await addHubMemberToStores('Alex Kim', 9, 'Child');
+    await addHubMemberToStores('Jordan Lee', 14, 'Teen');
+    await addHubMemberToStores('Sam Park', 7, 'Child');
+
+    const hubMembers = loadHubMembers();
+    expect(hubMembers).toHaveLength(3);
+    expect(hubMembers.map((m) => m.name)).toEqual(
+      expect.arrayContaining(['Alex Kim', 'Jordan Lee', 'Sam Park'])
+    );
+  });
+
   it('updateHubMemberInStores updates Hub list and context profile age', async () => {
     const linked = await addHubMemberToStores('Sam Park', 8, 'Child');
     const updated = await updateHubMemberInStores(linked, { name: 'Sam Park', age: 9, role: 'Child' });

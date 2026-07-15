@@ -42,6 +42,16 @@ function generateIV(): Uint8Array {
   return crypto.getRandomValues(new Uint8Array(12));
 }
 
+/** Chunked base64 encode — avoids call-stack overflow from `String.fromCharCode(...largeArray)`. */
+function uint8ArrayToBase64(bytes: Uint8Array): string {
+  const chunkSize = 0x8000;
+  let binary = '';
+  for (let i = 0; i < bytes.length; i += chunkSize) {
+    binary += String.fromCharCode(...bytes.subarray(i, i + chunkSize));
+  }
+  return btoa(binary);
+}
+
 /**
  * Encrypt sensitive data
  * @param data - The data to encrypt (will be JSON stringified)
@@ -73,8 +83,7 @@ export async function encryptData(data: unknown, password: string): Promise<stri
     combined.set(iv, salt.length);
     combined.set(new Uint8Array(encryptedData), salt.length + iv.length);
 
-    // Convert to base64 for storage
-    return btoa(String.fromCharCode(...combined));
+    return uint8ArrayToBase64(combined);
   } catch (error) {
     logger.error('Encryption error:', error);
     throw new Error('Failed to encrypt data');
