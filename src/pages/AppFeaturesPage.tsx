@@ -13,6 +13,7 @@ import {
   Star
 } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
+import { APP_STORE_URL, GOOGLE_PLAY_URL } from '../data/appStoreLinks';
 
 const AppFeaturesPage: React.FC = () => {
   const features = [
@@ -142,7 +143,7 @@ const AppFeaturesPage: React.FC = () => {
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <a
-                  href="https://play.google.com/store/apps"
+                  href={GOOGLE_PLAY_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center px-6 py-3 bg-white text-teal-600 rounded-lg font-semibold hover:bg-teal-50 transition-colors"
@@ -152,7 +153,7 @@ const AppFeaturesPage: React.FC = () => {
                   <ExternalLink className="w-4 h-4 ml-2" />
                 </a>
                 <a
-                  href="https://apps.apple.com"
+                  href={APP_STORE_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center px-6 py-3 bg-white text-teal-600 rounded-lg font-semibold hover:bg-teal-50 transition-colors"

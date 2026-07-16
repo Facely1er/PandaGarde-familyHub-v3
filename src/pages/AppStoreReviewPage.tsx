@@ -12,6 +12,7 @@ import {
   Download
 } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
+import { APP_STORE_URL, GOOGLE_PLAY_URL } from '../data/appStoreLinks';
 
 const AppStoreReviewPage: React.FC = () => {
   const reviewSteps = [
@@ -330,7 +331,7 @@ const AppStoreReviewPage: React.FC = () => {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a
-                href="https://play.google.com/store/apps"
+                href={GOOGLE_PLAY_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition-colors"
@@ -340,7 +341,7 @@ const AppStoreReviewPage: React.FC = () => {
                 <ExternalLink className="w-4 h-4 ml-2" />
               </a>
               <a
-                href="https://apps.apple.com"
+                href={APP_STORE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center rounded-lg bg-green-700 px-6 py-3 font-semibold text-white transition-colors hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500"

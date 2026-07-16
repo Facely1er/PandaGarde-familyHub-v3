@@ -5,6 +5,7 @@ import { ArrowRight, BookMarked, BookOpen, CheckCircle, ChevronRight, LayoutDash
 import { loadDfaJourneyState } from '../lib/dfaJourney';
 import { getFoundationStory, getHomepageLatestStory, ORIGIN_STORY_SLUG } from '../data/stories';
 import { PageSection, ShellLinkCard, type ShellLinkCardVisual } from '../components/layout/PageContent';
+import AppStoreBadges from '../components/AppStoreBadges';
 
 const SPOTLIGHT_ICON_SIZE = 26;
 
@@ -198,12 +199,6 @@ const HomePage: React.FC = () => {
                   {t('home.addFamilyApps')}
                   <ArrowRight size={14} aria-hidden />
                 </Link>
-                <Link to="/digital-footprint" className="button button-secondary inline-flex items-center gap-1.5">
-                  {t('common.footprintReview')}
-                </Link>
-                <Link to="/stories" className="button button-secondary inline-flex items-center gap-1.5">
-                  {t('common.stories')}
-                </Link>
               </div>
               <p className="homepage-closing__followup page-section__lead text-center">
                 {t('home.stillQuestions')}{' '}
@@ -211,6 +206,17 @@ const HomePage: React.FC = () => {
                   {t('home.howItWorksFaq')}
                 </Link>
               </p>
+            </PageSection>
+
+            <PageSection
+              className="homepage-getapp"
+              header={{
+                eyebrow: t('home.getAppEyebrow'),
+                title: t('home.getAppTitle'),
+                lead: t('home.getAppLead'),
+              }}
+            >
+              <AppStoreBadges size="lg" />
             </PageSection>
           </div>
         </div>

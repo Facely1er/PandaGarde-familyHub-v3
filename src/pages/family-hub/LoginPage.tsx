@@ -7,6 +7,7 @@ import { hubPaths } from '../../familyhub/hubPaths';
 import AgeBandStrip from '../../familyhub/components/AgeBandStrip';
 import HubBrandLogo from '../../familyhub/components/HubBrandLogo';
 import HubWebsiteLink from '../../familyhub/components/HubWebsiteLink';
+import AppStoreBadges from '../../components/AppStoreBadges';
 import { hubTheme } from '../../familyhub/hubTheme';
 import { useStoreCaptureReady } from '../../familyhub/storeScreenshotMode';
 import { isAppReviewDemo, setAppReviewView } from '../../lib/appReviewDemo';
@@ -84,6 +85,15 @@ const LoginPage: React.FC = () => {
             Let&apos;s go!
             <ArrowRight size={22} aria-hidden="true" />
           </button>
+
+          {!shouldHideHubWebsiteChrome() && (
+            <div className="text-center">
+              <p className="mb-3 text-sm font-medium text-gray-600 dark:text-gray-300">
+                Prefer the mobile app? Get it here:
+              </p>
+              <AppStoreBadges size="md" />
+            </div>
+          )}
         </div>
       </div>
 

@@ -10,6 +10,8 @@ import { hubPaths, pandagardeWebsiteUrl } from '../hubPaths';
 import { hubTheme } from '../hubTheme';
 import { useHubI18n } from '../hubI18n';
 import { isAppReviewDemo, setAppReviewView } from '../../lib/appReviewDemo';
+import { shouldHideHubWebsiteChrome } from '../../lib/hubWebsiteChrome';
+import AppStoreBadges from '../../components/AppStoreBadges';
 
 export { HUB_WELCOMED_KEY };
 
@@ -106,6 +108,15 @@ const WelcomeScreen: React.FC = () => {
               <strong>{t('hub.welcome.privacyStrong')}</strong> {t('hub.welcome.privacyNote')}
             </p>
           </div>
+
+          {!shouldHideHubWebsiteChrome() && (
+            <div className="text-center">
+              <p className="mb-2.5 text-xs font-medium text-gray-500 dark:text-gray-400">
+                Get PandaGarde Family Hub on your phone
+              </p>
+              <AppStoreBadges size="sm" />
+            </div>
+          )}
         </div>
       </div>
 

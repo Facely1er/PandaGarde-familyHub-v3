@@ -159,7 +159,7 @@ export const ShellLinkCard: React.FC<{
       {visual ? (
         <div
           className={`shell-link-card__visual ${visualMode === 'icon' ? 'shell-link-card__visual--icon-led' : ''}`.trim()}
-          aria-hidden="true"
+          aria-hidden={visualMode === 'icon' && tag ? undefined : true}
         >
           {visual.imageSrc ? (
             <img
@@ -171,7 +171,12 @@ export const ShellLinkCard: React.FC<{
             />
           ) : null}
           {visual.icon ? (
-            <div className="shell-link-card__visual-badge">{visual.icon}</div>
+            <div className="shell-link-card__visual-badge" aria-hidden="true">
+              {visual.icon}
+            </div>
+          ) : null}
+          {visualMode === 'icon' && tag ? (
+            <span className="shell-link-card__tag shell-link-card__visual-tag">{tag}</span>
           ) : null}
         </div>
       ) : null}
@@ -182,7 +187,7 @@ export const ShellLinkCard: React.FC<{
           </div>
         ) : null}
         <div className="shell-link-card__copy">
-          {tag ? <span className="shell-link-card__tag">{tag}</span> : null}
+          {tag && visualMode !== 'icon' ? <span className="shell-link-card__tag">{tag}</span> : null}
           <h3 className="shell-card__title">{title}</h3>
           {description ? <p className="shell-card__body">{description}</p> : null}
         </div>

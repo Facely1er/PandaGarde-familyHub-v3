@@ -24,6 +24,7 @@ import {
   ShellRowCard,
   ShellTextCard,
 } from '../components/layout/PageContent';
+import AppStoreBadges from '../components/AppStoreBadges';
 
 const FLOW_ICONS: LucideIcon[] = [BookOpen, ShieldCheck, LayoutDashboard];
 const FLOW_HREFS = ['/stories', '/service-catalog', '/family-hub'];
@@ -213,14 +214,21 @@ const FeaturesPage: React.FC = () => {
         </div>
       </PageSection>
 
-      <div className="shell-card shell-card--panel shell-cta-panel flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div className="shell-cta-panel__copy">
+      <PageSection header={{ eyebrow: t('howItWorks.getAppEyebrow'), title: t('howItWorks.getAppTitle') }}>
+        <div className="shell-card shell-card--panel shell-card--panel-inner flex flex-col items-center gap-5 text-center">
+          <p className="shell-card__body max-w-2xl">{t('howItWorks.getAppLead')}</p>
+          <AppStoreBadges size="lg" />
+        </div>
+      </PageSection>
+
+      <div className="shell-card shell-card--panel flex flex-col gap-4">
+        <div>
           <h2 className="page-section__title">{t('howItWorks.readyTitle')}</h2>
-          <p className="shell-card__body">
+          <p className="shell-card__body mt-1.5">
             {t('howItWorks.readyBody')}
           </p>
         </div>
-        <div className="shell-cta-panel__actions flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+        <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
           <Link to="/digital-footprint" className="button button-primary inline-flex items-center gap-1.5">
             {t('howItWorks.startReview')} <ArrowRight size={14} aria-hidden />
           </Link>
