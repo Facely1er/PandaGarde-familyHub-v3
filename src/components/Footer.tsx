@@ -6,6 +6,7 @@ import {
   type SiteNavItem,
 } from '../data/siteNavigation';
 import { useLocalizedFooterColumns } from '../hooks/useLocalizedNav';
+import StoreBadges from './StoreBadges';
 
 const FOOTER_ICON_SIZE = 16;
 
@@ -87,6 +88,8 @@ const Footer: React.FC = () => {
             <p className="footer-trust-note">
               {t('footer.trustNote')}
             </p>
+
+            <StoreBadges className="mt-4" size="sm" />
           </div>
 
           <div className="footer-grid footer-grid--privacy">

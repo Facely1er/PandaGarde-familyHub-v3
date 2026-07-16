@@ -2,6 +2,7 @@ import React, { useId, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MessageCircle, HelpCircle, Search, Clock, Users, BookOpen, Shield } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
+import StoreBadges from '../components/StoreBadges';
 
 interface FAQItem {
   id: string;
@@ -41,7 +42,7 @@ const faqItems: FAQItem[] = [
     id: '3',
     question: 'Can I use PandaGarde on my tablet or phone?',
     answer:
-      'Yes. The website is responsive, and Family Hub can be installed as a mobile app (iOS/Android) or added to your home screen as a PWA.',
+      'Yes. The website is responsive. Family Hub is also available on the App Store and Google Play, or you can open it in your browser and add it to your home screen.',
     category: 'technical',
   },
   {
@@ -343,21 +344,24 @@ const SupportPage: React.FC = () => {
           <p className="mx-auto mb-8 max-w-2xl text-lg opacity-90">
             Explore privacy missions in Family Hub or browse activities on the website.
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link
-              to="/for-families"
-              className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-white px-6 py-3 font-semibold text-green-700 transition-colors hover:bg-gray-100"
-            >
-              <BookOpen size={20} aria-hidden />
-              Try Activities
-            </Link>
-            <Link
-              to="/family-hub"
-              className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-green-900 px-6 py-3 font-semibold text-white transition-colors hover:bg-green-950"
-            >
-              <Users size={20} aria-hidden />
-              Open Family Hub
-            </Link>
+          <div className="flex flex-col items-center gap-4">
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link
+                to="/for-families"
+                className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-white px-6 py-3 font-semibold text-green-700 transition-colors hover:bg-gray-100"
+              >
+                <BookOpen size={20} aria-hidden />
+                Try Activities
+              </Link>
+              <Link
+                to="/family-hub"
+                className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-green-900 px-6 py-3 font-semibold text-white transition-colors hover:bg-green-950"
+              >
+                <Users size={20} aria-hidden />
+                Open Family Hub
+              </Link>
+            </div>
+            <StoreBadges className="justify-center" size="sm" />
           </div>
         </div>
       </section>

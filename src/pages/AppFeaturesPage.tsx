@@ -7,12 +7,11 @@ import {
   Award, 
   BarChart3, 
   Shield,
-  Download,
-  ExternalLink,
   CheckCircle2,
   Star
 } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
+import StoreBadges from '../components/StoreBadges';
 
 const AppFeaturesPage: React.FC = () => {
   const features = [
@@ -140,28 +139,7 @@ const AppFeaturesPage: React.FC = () => {
               <p className="text-xl md:text-2xl text-teal-100 mb-8">
                 Mobile app features for app store reviewers
               </p>
-              <div className="flex flex-wrap justify-center gap-4">
-                <a
-                  href="https://play.google.com/store/apps"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center px-6 py-3 bg-white text-teal-600 rounded-lg font-semibold hover:bg-teal-50 transition-colors"
-                >
-                  <Download className="w-5 h-5 mr-2" />
-                  Google Play Store
-                  <ExternalLink className="w-4 h-4 ml-2" />
-                </a>
-                <a
-                  href="https://apps.apple.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center px-6 py-3 bg-white text-teal-600 rounded-lg font-semibold hover:bg-teal-50 transition-colors"
-                >
-                  <Download className="w-5 h-5 mr-2" />
-                  Apple App Store
-                  <ExternalLink className="w-4 h-4 ml-2" />
-                </a>
-              </div>
+              <StoreBadges className="justify-center" />
             </div>
           </div>
         </div>

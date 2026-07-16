@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ChevronDown, ChevronUp, HelpCircle, Book, Users, Shield, Download, Gamepad2, type LucideIcon } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
+import StoreBadges from '../components/StoreBadges';
 
 interface FAQItem {
   id: string;
@@ -118,19 +119,22 @@ const FAQPage: React.FC = () => {
             <p className="text-base sm:text-lg mb-5 sm:mb-6 opacity-90">
               {t('faq.stillQuestionsBody')}
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-              <Link
-                to="/contact"
-                className="bg-white/95 text-green-700 px-6 py-3 rounded-lg font-semibold shadow-md hover:bg-white hover:shadow-lg transition-all text-center dark:bg-emerald-950/60 dark:text-green-300 dark:border dark:border-green-400/30 dark:hover:bg-emerald-900/50"
-              >
-                {t('faq.contactUs')}
-              </Link>
-              <Link
-                to="/family-hub"
-                className="bg-green-700 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-800 transition-colors text-center"
-              >
-                {t('faq.tryFamilyHub')}
-              </Link>
+            <div className="flex flex-col items-center gap-4">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center w-full">
+                <Link
+                  to="/contact"
+                  className="bg-white/95 text-green-700 px-6 py-3 rounded-lg font-semibold shadow-md hover:bg-white hover:shadow-lg transition-all text-center dark:bg-emerald-950/60 dark:text-green-300 dark:border dark:border-green-400/30 dark:hover:bg-emerald-900/50"
+                >
+                  {t('faq.contactUs')}
+                </Link>
+                <Link
+                  to="/family-hub"
+                  className="bg-green-700 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-800 transition-colors text-center"
+                >
+                  {t('faq.tryFamilyHub')}
+                </Link>
+              </div>
+              <StoreBadges className="justify-center" size="sm" />
             </div>
           </div>
         </div>

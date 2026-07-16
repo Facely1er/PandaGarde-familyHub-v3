@@ -16,6 +16,7 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
+import StoreBadges from '../components/StoreBadges';
 import {
   PageLead,
   PageSection,
@@ -220,13 +221,16 @@ const FeaturesPage: React.FC = () => {
             {t('howItWorks.readyBody')}
           </p>
         </div>
-        <div className="shell-cta-panel__actions flex flex-col gap-2 sm:flex-row sm:flex-wrap">
-          <Link to="/digital-footprint" className="button button-primary inline-flex items-center gap-1.5">
-            {t('howItWorks.startReview')} <ArrowRight size={14} aria-hidden />
-          </Link>
-          <Link to="/family-hub" className="button button-secondary inline-flex items-center gap-1.5">
-            {t('common.familyHub')}
-          </Link>
+        <div className="shell-cta-panel__actions flex flex-col gap-4 sm:items-end">
+          <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+            <Link to="/digital-footprint" className="button button-primary inline-flex items-center gap-1.5">
+              {t('howItWorks.startReview')} <ArrowRight size={14} aria-hidden />
+            </Link>
+            <Link to="/family-hub" className="button button-secondary inline-flex items-center gap-1.5">
+              {t('common.familyHub')}
+            </Link>
+          </div>
+          <StoreBadges size="sm" />
         </div>
       </div>
     </PageLayout>
