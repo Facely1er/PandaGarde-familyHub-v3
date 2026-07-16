@@ -185,7 +185,8 @@ export class LocalStorageManager {
         const password = generateUserPassword(userId);
         
         try {
-          return await decryptData<unknown>(encryptedData, password);
+          const decrypted = await decryptData<unknown>(encryptedData, password);
+          return await this.decryptPIIFields(decrypted);
         } catch (decryptError) {
           logger.error('Error decrypting family data:', decryptError);
           // Try to parse as plain JSON as fallback (for migration)
@@ -233,7 +234,13 @@ export class LocalStorageManager {
       );
     } catch (error) {
       logger.error('Error saving family data:', error);
-      throw new Error('Failed to save family data');
+      try {
+        logger.warn('Saving family data unencrypted after encryption failure');
+        localStorage.setItem(LocalStorageManager.FAMILY_KEY, JSON.stringify(familyData));
+      } catch (fallbackError) {
+        logger.error('Error saving family data (unencrypted fallback):', fallbackError);
+        throw new Error('Failed to save family data');
+      }
     }
   }
 
@@ -318,12 +325,15 @@ export class LocalStorageManager {
    * Get current user ID (for encryption key generation)
    */
   private getCurrentUserId(): string {
-    // Try to get from localStorage or generate a device-specific ID
-    let userId = localStorage.getItem('pandagarde_user_id');
+    // Keep in sync with FamilyContext / hubFamilySync (`pandagarde_current_user_id`).
+    let userId =
+      localStorage.getItem('pandagarde_current_user_id') ||
+      localStorage.getItem('pandagarde_user_id');
     if (!userId) {
       userId = `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-      localStorage.setItem('pandagarde_user_id', userId);
     }
+    localStorage.setItem('pandagarde_current_user_id', userId);
+    localStorage.setItem('pandagarde_user_id', userId);
     return userId;
   }
 

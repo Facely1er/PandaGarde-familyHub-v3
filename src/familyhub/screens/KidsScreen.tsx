@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect, useRef, useState } from 'react';
 import { lazy } from '../../lib/lazyWithRetry';
 import { Link } from 'react-router-dom';
-import { Plus, Eye, Trash2, Pencil, Lock, type LucideIcon } from 'lucide-react';
+import { Plus, Eye, Trash2, Pencil, Lock } from 'lucide-react';
 import { useHubFamilyMembers } from '../../hooks/useHubFamilyMembers';
 import { useFamilyProgress } from '../../contexts/FamilyProgressContext';
 import { useActiveMember } from '../../utils/familyProgressIntegration';
@@ -12,33 +12,26 @@ import { hubPaths } from '../hubPaths';
 import HubPageLayout from '../components/HubPageLayout';
 import HubScreenHero from '../components/HubScreenHero';
 import HubWebsiteLink from '../components/HubWebsiteLink';
+import AgeMatchedPreview from '../components/AgeMatchedPreview';
+import MemberFormErrors from '../components/MemberFormErrors';
 import { hubTheme } from '../hubTheme';
-import { hubAgeBandForAge, HUB_AGE_BANDS } from '../hubAgeBands';
+import { getHubAgeGroupMeta, hubAgeBandForAge, HUB_AGE_BANDS } from '../hubAgeBands';
 import { useHubI18n } from '../hubI18n';
+import { validateFamilyMember } from '../../lib/familyHubSecurity';
 import { APP_REVIEW_ADD_MEMBER, isAppReviewDemo } from '../../lib/appReviewDemo';
 import { useStoreCaptureReady } from '../storeScreenshotMode';
 
 const ChildProgressDetail = lazy(() => import('../../components/ChildProgressDetail'));
 
-type AgeGroupMeta = {
-  range: '5-8' | '9-12' | '13-17';
-  label: string;
-  icon: LucideIcon;
-  badgeClass: string;
+const parseMemberAge = (raw: string): number => {
+  const parsed = Number.parseInt(raw, 10);
+  return Number.isFinite(parsed) ? parsed : 0;
 };
 
-function getAgeGroup(age: number, labelForRange: (range: '5-8' | '9-12' | '13-17') => string): AgeGroupMeta | null {
-  const band = hubAgeBandForAge(age);
-  if (!band) {
-    return null;
-  }
-  return {
-    range: band.range,
-    label: labelForRange(band.range),
-    icon: band.icon,
-    badgeClass: `${band.chipClass} border`,
-  };
-}
+const memberInitials = (name: string): string => {
+  const trimmed = name.trim();
+  return trimmed ? trimmed.charAt(0).toUpperCase() : '?';
+};
 
 const KidsScreen: React.FC = () => {
   useStoreCaptureReady();
@@ -52,11 +45,16 @@ const KidsScreen: React.FC = () => {
   const [selectedChildId, setSelectedChildId] = useState<number | null>(null);
   const [newMember, setNewMember] = useState({ name: '', age: 0, role: 'Child' });
   const [editMember, setEditMember] = useState({ name: '', age: 0, role: 'Child' });
+  const [addFormErrors, setAddFormErrors] = useState<string[]>([]);
+  const [editFormErrors, setEditFormErrors] = useState<string[]>([]);
   const addMemberTriggerRef = useRef<HTMLButtonElement>(null);
   const editMemberTriggerRef = useRef<HTMLButtonElement>(null);
   const removeMemberTriggerRef = useRef<HTMLButtonElement>(null);
 
-  const closeAddMember = () => setShowAddMember(false);
+  const closeAddMember = () => {
+    setShowAddMember(false);
+    setAddFormErrors([]);
+  };
   const addDialogRef = useDialogFocusTrap({
     isOpen: showAddMember,
     onClose: closeAddMember,
@@ -73,10 +71,14 @@ const KidsScreen: React.FC = () => {
   const openEditMember = (member: HubFamilyMember, trigger: HTMLButtonElement | null) => {
     editMemberTriggerRef.current = trigger;
     setEditMember({ name: member.name, age: member.age, role: member.role });
+    setEditFormErrors([]);
     setMemberToEdit(member);
   };
 
-  const closeEditMember = () => setMemberToEdit(null);
+  const closeEditMember = () => {
+    setMemberToEdit(null);
+    setEditFormErrors([]);
+  };
   const editDialogRef = useDialogFocusTrap({
     isOpen: memberToEdit !== null,
     onClose: closeEditMember,
@@ -114,12 +116,16 @@ const KidsScreen: React.FC = () => {
   };
 
   const addFamilyMember = async () => {
-    if (!newMember.name.trim() || newMember.age <= 0) {
+    const validation = validateFamilyMember(newMember);
+    if (!validation.isValid) {
+      setAddFormErrors(validation.errors);
       return;
     }
 
+    setAddFormErrors([]);
     const linked = await addMember(newMember.name, newMember.age, newMember.role);
     if (!linked) {
+      setAddFormErrors([t('hub.kids.saveFailed')]);
       return;
     }
 
@@ -131,12 +137,24 @@ const KidsScreen: React.FC = () => {
   };
 
   const saveEditedMember = async () => {
-    if (!memberToEdit || !editMember.name.trim() || editMember.age <= 0) {
+    if (!memberToEdit) {
       return;
     }
 
+    const validation = validateFamilyMember(editMember);
+    if (!validation.isValid) {
+      setEditFormErrors(validation.errors);
+      return;
+    }
+
+    setEditFormErrors([]);
     const updated = await updateMember(memberToEdit, editMember);
-    if (updated && currentMemberId === memberToEdit.id) {
+    if (!updated) {
+      setEditFormErrors([t('hub.kids.saveFailed')]);
+      return;
+    }
+
+    if (currentMemberId === memberToEdit.id) {
       setActiveMember(updated.id);
     }
     setMemberToEdit(null);
@@ -240,7 +258,7 @@ const KidsScreen: React.FC = () => {
           </div>
           <div className="hub-kids-member-grid gap-4">
           {familyMembers.map((member) => {
-            const ageGroup = getAgeGroup(member.age, ageBandLabel);
+            const ageGroup = getHubAgeGroupMeta(member.age, ageBandLabel);
             const band = hubAgeBandForAge(member.age);
             return (
               <div
@@ -259,7 +277,7 @@ const KidsScreen: React.FC = () => {
                       {band ? (
                         <band.icon size={22} aria-hidden="true" />
                       ) : (
-                        <span className="text-lg font-bold">{member.name.charAt(0).toUpperCase()}</span>
+                        <span className="text-lg font-bold">{memberInitials(member.name)}</span>
                       )}
                     </div>
                     <div className="min-w-0">
@@ -364,6 +382,8 @@ const KidsScreen: React.FC = () => {
             </div>
 
             <div className="space-y-4">
+              <MemberFormErrors errors={addFormErrors} />
+
               <div>
                 <label htmlFor="member-name" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                   {t('hub.kids.nameLabel')}
@@ -372,7 +392,10 @@ const KidsScreen: React.FC = () => {
                   id="member-name"
                   type="text"
                   value={newMember.name}
-                  onChange={(e) => setNewMember({ ...newMember, name: e.target.value })}
+                  onChange={(e) => {
+                    setAddFormErrors([]);
+                    setNewMember({ ...newMember, name: e.target.value });
+                  }}
                   className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-600 dark:bg-gray-700 dark:text-white"
                   placeholder={t('hub.kids.namePlaceholder')}
                   maxLength={50}
@@ -389,25 +412,21 @@ const KidsScreen: React.FC = () => {
                   id="member-age"
                   type="number"
                   value={newMember.age || ''}
-                  onChange={(e) => setNewMember({ ...newMember, age: parseInt(e.target.value, 10) || 0 })}
+                  onChange={(e) => {
+                    setAddFormErrors([]);
+                    setNewMember({ ...newMember, age: parseMemberAge(e.target.value) });
+                  }}
                   className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-600 dark:bg-gray-700 dark:text-white"
                   placeholder={t('hub.kids.agePlaceholder')}
                   min="1"
                   max="100"
                   aria-required="true"
                 />
-                {newMember.age >= 5 && newMember.age <= 17 && (() => {
-                  const g = getAgeGroup(newMember.age);
-                  return g ? (
-                    <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-                      {t('hub.kids.ageMatched')}{' '}
-                      <span className="inline-flex items-center gap-1 font-medium">
-                        <g.icon size={14} aria-hidden="true" />
-                        {g.label}
-                      </span>
-                    </p>
-                  ) : null;
-                })()}
+                <AgeMatchedPreview
+                  age={newMember.age}
+                  ageBandLabel={ageBandLabel}
+                  matchedLabel={t('hub.kids.ageMatched')}
+                />
               </div>
 
               <div>
@@ -488,6 +507,8 @@ const KidsScreen: React.FC = () => {
             </div>
 
             <div className="space-y-4">
+              <MemberFormErrors errors={editFormErrors} />
+
               <div>
                 <label htmlFor="edit-member-name" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                   {t('hub.kids.nameLabel')}
@@ -496,7 +517,10 @@ const KidsScreen: React.FC = () => {
                   id="edit-member-name"
                   type="text"
                   value={editMember.name}
-                  onChange={(e) => setEditMember({ ...editMember, name: e.target.value })}
+                  onChange={(e) => {
+                    setEditFormErrors([]);
+                    setEditMember({ ...editMember, name: e.target.value });
+                  }}
                   className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-600 dark:bg-gray-700 dark:text-white"
                   maxLength={50}
                   autoFocus
@@ -512,11 +536,19 @@ const KidsScreen: React.FC = () => {
                   id="edit-member-age"
                   type="number"
                   value={editMember.age || ''}
-                  onChange={(e) => setEditMember({ ...editMember, age: parseInt(e.target.value, 10) || 0 })}
+                  onChange={(e) => {
+                    setEditFormErrors([]);
+                    setEditMember({ ...editMember, age: parseMemberAge(e.target.value) });
+                  }}
                   className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-600 dark:bg-gray-700 dark:text-white"
                   min="1"
                   max="100"
                   aria-required="true"
+                />
+                <AgeMatchedPreview
+                  age={editMember.age}
+                  ageBandLabel={ageBandLabel}
+                  matchedLabel={t('hub.kids.ageMatched')}
                 />
               </div>
 

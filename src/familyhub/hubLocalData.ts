@@ -38,6 +38,7 @@ export const HUB_LOCAL_DATA_KEYS = [
   'pandagarde_hub_tour_done',
   'pandagarde_family_goals',
   'pandagarde_current_user_id',
+  'pandagarde_user_id',
   'pandagarde_privacy_goals',
 ] as const;
 

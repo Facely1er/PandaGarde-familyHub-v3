@@ -73,3 +73,27 @@ export function hubAgeBandForAge(age: number): HubAgeBand | undefined {
 export function hubAgeBandByRange(range: HubAgeRange): HubAgeBand {
   return HUB_AGE_BANDS.find((b) => b.range === range) ?? HUB_AGE_BANDS[0];
 }
+
+export interface HubAgeGroupMeta {
+  range: HubAgeRange;
+  label: string;
+  icon: LucideIcon;
+  badgeClass: string;
+}
+
+/** Mission age-band chip metadata for a member age (5–17 only). */
+export function getHubAgeGroupMeta(
+  age: number,
+  labelForRange: (range: HubAgeRange) => string
+): HubAgeGroupMeta | null {
+  const band = hubAgeBandForAge(age);
+  if (!band) {
+    return null;
+  }
+  return {
+    range: band.range,
+    label: labelForRange(band.range),
+    icon: band.icon,
+    badgeClass: `${band.chipClass} border`,
+  };
+}

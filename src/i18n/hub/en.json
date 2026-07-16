@@ -316,7 +316,8 @@
     "saving": "Saving…",
     "removing": "Removing…",
     "saveChanges": "Save changes",
-    "remove": "Remove"
+    "remove": "Remove",
+    "saveFailed": "Could not save this family member. Please try again."
   },
   "common": {
     "minutesShort": "{{count}} min",
