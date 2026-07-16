@@ -23,6 +23,7 @@ import {
   type ResourceHubLink,
 } from '../data/resourcesHubLinks';
 import { PREMIUM_PRICING_LABEL } from '../lib/premiumEntitlement';
+import StoreBadges from '../components/StoreBadges';
 
 
 
@@ -343,9 +344,11 @@ const ForFamiliesPage: React.FC = () => {
 
               <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
 
-                Missions are free. Optional Premium ({PREMIUM_PRICING_LABEL} unlock in app stores soon — no subscription) personalizes scenarios with your family&apos;s apps.
+                Missions are free. Optional Premium ({PREMIUM_PRICING_LABEL} in-app purchase on iOS and Android — no subscription) personalizes scenarios with your family&apos;s apps.
 
               </p>
+
+              <StoreBadges className="mt-4" size="sm" />
 
             </div>
 
