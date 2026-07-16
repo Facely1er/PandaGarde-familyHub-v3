@@ -9676,6 +9676,10 @@ header.header .nav-actions button.header-icon-btn:not(.header-search-bar) {
   font-size: 0.625rem;
 }
 
+.site-page .homepage-spotlight__grid .shell-link-card--with-visual .shell-link-card__main {
+  padding-bottom: 0.85rem;
+}
+
 .site-page .homepage-spotlight__grid .shell-link-card__cta {
   display: inline-flex;
   align-items: center;
