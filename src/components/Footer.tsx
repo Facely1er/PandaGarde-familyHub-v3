@@ -45,8 +45,13 @@ const Footer: React.FC = () => {
     );
   };
 
-  const renderNavColumn = (title: string, items: SiteNavItem[], extra?: FooterExternalNavItem[]) => (
-    <div className="footer-column">
+  const renderNavColumn = (
+    key: string,
+    title: string,
+    items: SiteNavItem[],
+    extra?: FooterExternalNavItem[]
+  ) => (
+    <div className="footer-column" key={key}>
       <h4>{title}</h4>
       <ul className="footer-menu-list">
         {items.map((item) => (
@@ -91,7 +96,7 @@ const Footer: React.FC = () => {
 
           <div className="footer-grid footer-grid--privacy">
             {footerColumns.map((column) =>
-              renderNavColumn(column.title, column.items, column.externalItems)
+              renderNavColumn(column.id, column.title, column.items, column.externalItems)
             )}
           </div>
         </div>

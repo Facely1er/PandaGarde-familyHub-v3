@@ -223,6 +223,39 @@
       "early": "Ages 5–7",
       "middle": "Ages 8–10",
       "older": "Ages 11–13"
+    },
+    "readerSubtitle": "Read aloud with sound effects, or switch to quiet chapter mode—same story, two ways.",
+    "card": {
+      "episode": "Episode {{number}}",
+      "season": "Season {{number}}",
+      "artComingSoon": "Art coming soon",
+      "interactiveChapters": "Interactive + chapters",
+      "chaptersActivities": "{{chapters}} chapters · {{activities}} activities",
+      "begin": "Begin",
+      "read": "Read"
+    },
+    "reader": {
+      "notFoundTitle": "Story not found",
+      "notFoundSubtitle": "This story may not exist yet or the link may be wrong.",
+      "backToStories": "Back to all stories",
+      "comingSoonTitle": "Coming soon",
+      "scheduledFor": "{{title}} is scheduled for {{date}}.",
+      "notAvailableYet": "{{title}} is not available yet.",
+      "comingSoonBody": "Browse published episodes on the stories page while you wait.",
+      "nextStepsHeading": "What's next?",
+      "nextStepsIntro": "Stories are a starting point — here are three ways to keep the conversation going with your family.",
+      "footprintTitle": "See your family's footprint",
+      "footprintDesc": "List the apps your family uses and see where your data goes.",
+      "footprintCta": "Footprint review",
+      "missionTitle": "Try a privacy mission",
+      "missionDesc": "Age-matched activities your family does together, saved on this device.",
+      "missionCta": "Family Hub",
+      "anotherTitle": "Read another episode",
+      "anotherDesc": "Browse all Privacy Panda stories, filtered by age.",
+      "anotherCta": "All stories",
+      "castTitle": "Meet the cast",
+      "castDesc": "See who lives in the forest and which episode they debut in.",
+      "castCta": "Story cast"
     }
   }
 }

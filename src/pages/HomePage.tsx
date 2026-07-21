@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { ArrowRight, BookMarked, BookOpen, CheckCircle, ChevronRight, LayoutDashboard, ListChecks, ShieldCheck } from 'lucide-react';
 import { loadDfaJourneyState } from '../lib/dfaJourney';
 import { getFoundationStory, getHomepageLatestStory, ORIGIN_STORY_SLUG } from '../data/stories';
+import { localizeStoryMeta } from '../data/storyI18n';
 import { PageSection, ShellLinkCard, type ShellLinkCardVisual } from '../components/layout/PageContent';
 import AppStoreBadges from '../components/AppStoreBadges';
 
@@ -29,7 +30,7 @@ const spotlightVisuals = {
 } as const satisfies Record<string, ShellLinkCardVisual>;
 
 const HomePage: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const journey = useMemo(() => loadDfaJourneyState(), []);
   const foundationStory = useMemo(() => getFoundationStory(), []);
   const latestStory = useMemo(() => getHomepageLatestStory(), []);
@@ -78,20 +79,21 @@ const HomePage: React.FC = () => {
 
     if (foundationStory) {
       const storyLink = links[0];
-      storyLink.title = foundationStory.title;
+      storyLink.title = localizeStoryMeta(foundationStory, i18n.language).title;
       storyLink.description = t('home.readTogether');
       storyLink.href = `/stories/${ORIGIN_STORY_SLUG}`;
       storyLink.cta = t('home.openStory');
     } else if (latestStory) {
+      const latestMeta = localizeStoryMeta(latestStory, i18n.language);
       const storyLink = links[0];
-      storyLink.title = latestStory.title;
-      storyLink.description = latestStory.privacyTopic;
+      storyLink.title = latestMeta.title;
+      storyLink.description = latestMeta.privacyTopic;
       storyLink.href = `/stories/${latestStory.slug}`;
       storyLink.cta = t('home.readEpisode', { number: latestStory.episodeNumber });
     }
 
     return links;
-  }, [foundationStory, latestStory, t]);
+  }, [foundationStory, latestStory, t, i18n.language]);
 
   const primaryCta =
     journey.progressPercent > 0 && journey.resumePath.includes('footprint')

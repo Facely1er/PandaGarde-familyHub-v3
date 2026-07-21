@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "engines": {
-    "node": ">=20.19.0 <21",
+    "node": ">=22",
     "npm": ">=10"
   },
   "scripts": {
@@ -90,11 +90,11 @@
     "test:watch-dfa": "vitest src/lib/dfaJourney.test.ts src/lib/dfaScoreEngine.test.ts src/components/journey/DfaJourneyStepper.test.tsx src/components/dfa/DfaScoreOverview.test.tsx"
   },
   "dependencies": {
-    "@capacitor/android": "^7.4.2",
-    "@capacitor/app": "^7.1.2",
-    "@capacitor/browser": "^7.0.5",
-    "@capacitor/core": "^7.4.2",
-    "@capacitor/ios": "^7.4.2",
+    "@capacitor/android": "^8.0.0",
+    "@capacitor/app": "^8.0.0",
+    "@capacitor/browser": "^8.0.0",
+    "@capacitor/core": "^8.0.0",
+    "@capacitor/ios": "^8.0.0",
     "framer-motion": "^11.0.0",
     "html2canvas": "^1.4.1",
     "i18next": "^26.3.4",
@@ -109,7 +109,7 @@
   },
   "devDependencies": {
     "@capacitor/assets": "^3.0.5",
-    "@capacitor/cli": "^7.4.2",
+    "@capacitor/cli": "^8.0.0",
     "@eslint/js": "^9.9.1",
     "@playwright/test": "^1.49.1",
     "@tailwindcss/typography": "^0.5.19",

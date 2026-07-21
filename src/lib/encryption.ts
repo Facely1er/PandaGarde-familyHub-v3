@@ -121,7 +121,10 @@ export async function decryptData<T>(encryptedData: string, password: string): P
     const decryptedString = decoder.decode(decryptedData);
     return JSON.parse(decryptedString) as T;
   } catch (error) {
-    logger.error('Decryption error:', error);
+    // A failed decrypt is a recoverable condition (wrong/rotated key or
+    // corrupted blob), not a genuine application error — the caller decides
+    // how to handle it. Log at warn level to avoid noisy console.error spam.
+    logger.warn('Decryption failed (invalid key or corrupted data):', error);
     throw new Error('Failed to decrypt data. Invalid password or corrupted data.');
   }
 }

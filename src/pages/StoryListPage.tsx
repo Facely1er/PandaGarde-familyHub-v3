@@ -11,6 +11,7 @@ import {
   AgeGroup,
   Story,
 } from '../data/stories';
+import { localizeStoryMeta } from '../data/storyI18n';
 import { StoryCard } from '../components/stories/StoryCard';
 import { StoryCastGallery } from '../components/stories/StoryCastGallery';
 import { StoryCoverArt } from '../components/stories/StoryCoverArt';
@@ -31,9 +32,10 @@ function groupBySeason(stories: Story[]): { season: 1 | 2; stories: Story[] }[] 
 }
 
 export function StoryListPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [filter, setFilter] = useState<Filter>('all');
   const foundationStory = getFoundationStory();
+  const foundationMeta = foundationStory ? localizeStoryMeta(foundationStory, i18n.language) : null;
 
   const filters = FILTER_VALUES.map((value) => ({
     value,
@@ -66,10 +68,10 @@ export function StoryListPage() {
                     {t('stories.foundationBadge')}
                   </p>
                   <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 sm:text-2xl">
-                    {foundationStory.title}
+                    {foundationMeta?.title ?? foundationStory.title}
                   </h2>
                   <p className="mt-2 text-sm text-gray-600 dark:text-gray-300 leading-relaxed max-w-xl">
-                    {foundationStory.summary}
+                    {foundationMeta?.summary ?? foundationStory.summary}
                   </p>
                   <ul className="mt-3 flex flex-wrap gap-3 text-xs text-gray-500 dark:text-gray-400">
                     <li className="inline-flex items-center gap-1">

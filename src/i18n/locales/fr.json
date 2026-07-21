@@ -223,6 +223,39 @@
       "early": "5–7 ans",
       "middle": "8–10 ans",
       "older": "11–13 ans"
+    },
+    "readerSubtitle": "Écoutez la lecture avec effets sonores, ou passez au mode chapitre tranquille — la même histoire, de deux façons.",
+    "card": {
+      "episode": "Épisode {{number}}",
+      "season": "Saison {{number}}",
+      "artComingSoon": "Illustration à venir",
+      "interactiveChapters": "Interactif + chapitres",
+      "chaptersActivities": "{{chapters}} chapitres · {{activities}} activités",
+      "begin": "Commencer",
+      "read": "Lire"
+    },
+    "reader": {
+      "notFoundTitle": "Histoire introuvable",
+      "notFoundSubtitle": "Cette histoire n'existe peut-être pas encore ou le lien est peut-être erroné.",
+      "backToStories": "Retour à toutes les histoires",
+      "comingSoonTitle": "Bientôt disponible",
+      "scheduledFor": "{{title}} est prévue pour le {{date}}.",
+      "notAvailableYet": "{{title}} n'est pas encore disponible.",
+      "comingSoonBody": "Parcourez les épisodes publiés sur la page des histoires en attendant.",
+      "nextStepsHeading": "Et ensuite ?",
+      "nextStepsIntro": "Les histoires sont un point de départ — voici trois façons de poursuivre la conversation en famille.",
+      "footprintTitle": "Découvrez l'empreinte de votre famille",
+      "footprintDesc": "Répertoriez les applications que votre famille utilise et voyez où vont vos données.",
+      "footprintCta": "Analyse de l'empreinte",
+      "missionTitle": "Essayez une mission de confidentialité",
+      "missionDesc": "Des activités adaptées à l'âge que votre famille réalise ensemble, enregistrées sur cet appareil.",
+      "missionCta": "Family Hub",
+      "anotherTitle": "Lire un autre épisode",
+      "anotherDesc": "Parcourez toutes les histoires de Privacy Panda, filtrées par âge.",
+      "anotherCta": "Toutes les histoires",
+      "castTitle": "Rencontrez les personnages",
+      "castDesc": "Découvrez qui vit dans la forêt et dans quel épisode ils apparaissent.",
+      "castCta": "Personnages"
     }
   }
 }

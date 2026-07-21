@@ -187,12 +187,21 @@ export class LocalStorageManager {
         try {
           const decrypted = await decryptData<unknown>(encryptedData, password);
           return await this.decryptPIIFields(decrypted);
-        } catch (decryptError) {
-          logger.error('Error decrypting family data:', decryptError);
-          // Try to parse as plain JSON as fallback (for migration)
+        } catch {
+          // Fall back to plain JSON for pre-encryption migration data.
           try {
             return JSON.parse(encryptedData);
           } catch {
+            // The blob was encrypted with a key we can no longer reproduce
+            // (e.g. the per-device secret was rotated or cleared), so it is
+            // permanently unreadable. Drop it to stop repeated decrypt
+            // failures on every load rather than leaving stale corrupt data.
+            logger.warn('Stored family data is unreadable (key mismatch); clearing it.');
+            try {
+              localStorage.removeItem(LocalStorageManager.FAMILY_KEY);
+            } catch {
+              /* ignore removal failure */
+            }
             return null;
           }
         }

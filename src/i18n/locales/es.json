@@ -223,6 +223,39 @@
       "early": "5–7 años",
       "middle": "8–10 años",
       "older": "11–13 años"
+    },
+    "readerSubtitle": "Escucha la narración con efectos de sonido, o cambia al modo capítulo tranquilo — la misma historia, de dos maneras.",
+    "card": {
+      "episode": "Episodio {{number}}",
+      "season": "Temporada {{number}}",
+      "artComingSoon": "Ilustración próximamente",
+      "interactiveChapters": "Interactivo + capítulos",
+      "chaptersActivities": "{{chapters}} capítulos · {{activities}} actividades",
+      "begin": "Comenzar",
+      "read": "Leer"
+    },
+    "reader": {
+      "notFoundTitle": "Historia no encontrada",
+      "notFoundSubtitle": "Puede que esta historia aún no exista o que el enlace sea incorrecto.",
+      "backToStories": "Volver a todas las historias",
+      "comingSoonTitle": "Próximamente",
+      "scheduledFor": "{{title}} está programada para el {{date}}.",
+      "notAvailableYet": "{{title}} aún no está disponible.",
+      "comingSoonBody": "Explora los episodios publicados en la página de historias mientras esperas.",
+      "nextStepsHeading": "¿Qué sigue?",
+      "nextStepsIntro": "Las historias son un punto de partida — aquí tienes tres maneras de mantener viva la conversación en familia.",
+      "footprintTitle": "Descubre la huella de tu familia",
+      "footprintDesc": "Enumera las apps que usa tu familia y descubre a dónde van tus datos.",
+      "footprintCta": "Análisis de huella",
+      "missionTitle": "Prueba una misión de privacidad",
+      "missionDesc": "Actividades adaptadas a la edad que tu familia realiza junta, guardadas en este dispositivo.",
+      "missionCta": "Family Hub",
+      "anotherTitle": "Lee otro episodio",
+      "anotherDesc": "Explora todas las historias de Privacy Panda, filtradas por edad.",
+      "anotherCta": "Todas las historias",
+      "castTitle": "Conoce a los personajes",
+      "castDesc": "Descubre quién vive en el bosque y en qué episodio aparece.",
+      "castCta": "Personajes"
     }
   }
 }

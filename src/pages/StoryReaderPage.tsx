@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { ArrowLeft, ArrowRight, Fingerprint, LayoutDashboard, Library, Users } from 'lucide-react';
 import { getStoryBySlug, isFoundationStory, isStoryPublished } from '../data/stories';
+import { localizeStoryMeta } from '../data/storyI18n';
 import { STORY_CAST_PATH } from '../data/forestCharacters';
 import { BambooForestStoryExperience } from '../components/stories/BambooForestStoryExperience';
 import { ChapterStoryExperience } from '../components/stories/ChapterStoryExperience';
@@ -9,6 +11,7 @@ import PageLayout from '../components/layout/PageLayout';
 
 /** Shown at the bottom of every published story — guides readers to the next logical step. */
 function StoryNextSteps() {
+  const { t } = useTranslation();
   return (
     <section
       className="mt-10 rounded-2xl border border-gray-200 bg-gray-50 p-6 dark:border-gray-700 dark:bg-gray-800"
@@ -18,10 +21,10 @@ function StoryNextSteps() {
         id="story-next-steps-heading"
         className="mb-1 text-lg font-bold text-gray-900 dark:text-gray-100"
       >
-        What's next?
+        {t('stories.reader.nextStepsHeading')}
       </h2>
       <p className="mb-5 text-sm text-gray-600 dark:text-gray-300">
-        Stories are a starting point — here are three ways to keep the conversation going with your family.
+        {t('stories.reader.nextStepsIntro')}
       </p>
       <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <li>
@@ -34,14 +37,14 @@ function StoryNextSteps() {
                 <Fingerprint size={18} aria-hidden />
               </span>
               <span className="block text-sm font-semibold text-gray-900 dark:text-white">
-                See your family's footprint
+                {t('stories.reader.footprintTitle')}
               </span>
             </span>
             <span className="block text-xs leading-relaxed text-gray-500 dark:text-gray-400">
-              List the apps your family uses and see where your data goes.
+              {t('stories.reader.footprintDesc')}
             </span>
             <span className="mt-auto inline-flex items-center gap-1 text-xs font-semibold text-green-700 dark:text-green-400">
-              Footprint review <ArrowRight size={13} aria-hidden />
+              {t('stories.reader.footprintCta')} <ArrowRight size={13} aria-hidden />
             </span>
           </Link>
         </li>
@@ -55,14 +58,14 @@ function StoryNextSteps() {
                 <LayoutDashboard size={18} aria-hidden />
               </span>
               <span className="block text-sm font-semibold text-gray-900 dark:text-white">
-                Try a privacy mission
+                {t('stories.reader.missionTitle')}
               </span>
             </span>
             <span className="block text-xs leading-relaxed text-gray-500 dark:text-gray-400">
-              Age-matched activities your family does together, saved on this device.
+              {t('stories.reader.missionDesc')}
             </span>
             <span className="mt-auto inline-flex items-center gap-1 text-xs font-semibold text-teal-700 dark:text-teal-400">
-              Family Hub <ArrowRight size={13} aria-hidden />
+              {t('stories.reader.missionCta')} <ArrowRight size={13} aria-hidden />
             </span>
           </Link>
         </li>
@@ -76,14 +79,14 @@ function StoryNextSteps() {
                 <Library size={18} aria-hidden />
               </span>
               <span className="block text-sm font-semibold text-gray-900 dark:text-white">
-                Read another episode
+                {t('stories.reader.anotherTitle')}
               </span>
             </span>
             <span className="block text-xs leading-relaxed text-gray-500 dark:text-gray-400">
-              Browse all Privacy Panda stories, filtered by age.
+              {t('stories.reader.anotherDesc')}
             </span>
             <span className="mt-auto inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 dark:text-emerald-400">
-              All stories <ArrowRight size={13} aria-hidden />
+              {t('stories.reader.anotherCta')} <ArrowRight size={13} aria-hidden />
             </span>
           </Link>
         </li>
@@ -97,14 +100,14 @@ function StoryNextSteps() {
                 <Users size={18} aria-hidden />
               </span>
               <span className="block text-sm font-semibold text-gray-900 dark:text-white">
-                Meet the cast
+                {t('stories.reader.castTitle')}
               </span>
             </span>
             <span className="block text-xs leading-relaxed text-gray-500 dark:text-gray-400">
-              See who lives in the forest and which episode they debut in.
+              {t('stories.reader.castDesc')}
             </span>
             <span className="mt-auto inline-flex items-center gap-1 text-xs font-semibold text-amber-700 dark:text-amber-400">
-              Story cast <ArrowRight size={13} aria-hidden />
+              {t('stories.reader.castCta')} <ArrowRight size={13} aria-hidden />
             </span>
           </Link>
         </li>
@@ -113,10 +116,20 @@ function StoryNextSteps() {
   );
 }
 
+/** Maps the active i18n language to a BCP-47 locale for date formatting. */
+function dateLocaleFor(language: string | undefined): string {
+  const lang = (language || 'en').split('-')[0];
+  if (lang === 'fr') {return 'fr-FR';}
+  if (lang === 'es') {return 'es-ES';}
+  return 'en-US';
+}
+
 export function StoryReaderPage() {
+  const { t, i18n } = useTranslation();
   const { slug } = useParams<{ slug: string }>();
   const story = slug ? getStoryBySlug(slug) : undefined;
   const published = story ? isStoryPublished(story) : false;
+  const localizedTitle = story ? localizeStoryMeta(story, i18n.language).title : '';
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -124,7 +137,7 @@ export function StoryReaderPage() {
 
   if (!story) {
     return (
-      <PageLayout title="Story not found" subtitle="This story may not exist yet or the link may be wrong." breadcrumbs>
+      <PageLayout title={t('stories.reader.notFoundTitle')} subtitle={t('stories.reader.notFoundSubtitle')} breadcrumbs>
         <div className="mx-auto max-w-lg px-4 py-12 text-center">
           <p className="text-4xl mb-4" aria-hidden>
             🐼
@@ -134,7 +147,7 @@ export function StoryReaderPage() {
             className="inline-flex items-center gap-2 text-sm font-medium text-green-700 hover:underline dark:text-green-400"
           >
             <ArrowLeft size={16} aria-hidden />
-            Back to all stories
+            {t('stories.reader.backToStories')}
           </Link>
         </div>
       </PageLayout>
@@ -143,13 +156,21 @@ export function StoryReaderPage() {
 
   if (!published) {
     const releaseLabel = story.scheduledAt
-      ? new Date(story.scheduledAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+      ? new Date(story.scheduledAt).toLocaleDateString(dateLocaleFor(i18n.language), {
+          month: 'long',
+          day: 'numeric',
+          year: 'numeric',
+        })
       : null;
 
     return (
       <PageLayout
-        title="Coming soon"
-        subtitle={releaseLabel ? `${story.title} is scheduled for ${releaseLabel}.` : `${story.title} is not available yet.`}
+        title={t('stories.reader.comingSoonTitle')}
+        subtitle={
+          releaseLabel
+            ? t('stories.reader.scheduledFor', { title: localizedTitle, date: releaseLabel })
+            : t('stories.reader.notAvailableYet', { title: localizedTitle })
+        }
         breadcrumbs
       >
         <div className="mx-auto max-w-lg px-4 py-12 text-center space-y-4">
@@ -157,14 +178,14 @@ export function StoryReaderPage() {
             {story.coverEmoji}
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-300">
-            Browse published episodes on the stories page while you wait.
+            {t('stories.reader.comingSoonBody')}
           </p>
           <Link
             to="/stories"
             className="inline-flex items-center gap-2 text-sm font-medium text-green-700 hover:underline dark:text-green-400"
           >
             <ArrowLeft size={16} aria-hidden />
-            Back to all stories
+            {t('stories.reader.backToStories')}
           </Link>
         </div>
       </PageLayout>
@@ -174,8 +195,8 @@ export function StoryReaderPage() {
   if (isFoundationStory(story)) {
     return (
       <PageLayout
-        title={story.title}
-        subtitle="Read aloud with sound effects, or switch to quiet chapter mode—same story, two ways."
+        title={localizedTitle}
+        subtitle={t('stories.readerSubtitle')}
         breadcrumbs
       >
         <div className="story-page-shell">
@@ -188,8 +209,8 @@ export function StoryReaderPage() {
 
   return (
     <PageLayout
-      title={story.title}
-      subtitle="Read aloud with sound effects, or switch to quiet chapter mode—same story, two ways."
+      title={localizedTitle}
+      subtitle={t('stories.readerSubtitle')}
       breadcrumbs
     >
       <div className="story-page-shell">
