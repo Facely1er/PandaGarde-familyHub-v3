@@ -1,8 +1,8 @@
-# Family Hub — Google Play completion guide (v1.0.0)
+# Family Hub — Google Play completion guide (v1.1.0)
 
 Everything you can do **from Windows** before opening Play Console. iOS steps are in [FAMILYHUB_STORE_RELEASE.md](./FAMILYHUB_STORE_RELEASE.md).
 
-**Package:** `com.pandagarde.familyhub` · **Version:** 1.0.0 (`versionCode` in `android/app/build.gradle`)
+**Package:** `com.pandagarde.familyhub` · **Version:** 1.1.0 (`versionCode` 13)
 
 ### Play Console warnings (expected)
 
@@ -124,11 +124,11 @@ On first upload, enroll in **Google Play App Signing**. Google will manage the a
 
 1. **Create new release**
 2. Upload `app-release.aab`
-3. Release name: `1.0.0 (1)`
+3. Release name: `1.1.0 (13)`
 4. Release notes (paste):
 
 ```
-Welcome to PandaGarde Family Hub! 18 privacy missions for ages 5–17, family discussion prompts, progress tracking, and certificates—all stored on your device. Works standalone or after the PandaGarde website assessment.
+PandaGarde Family Hub 1.1.0 — Capacitor 8 / Android 7+ (API 24+), smaller release build with R8, and ongoing privacy-mission improvements. Your data stays on this device.
 ```
 
 5. Save → **Review release** → **Start rollout to Internal testing**
@@ -192,7 +192,7 @@ TEST PATH: Login → Welcome (optional) → Dashboard → Activities → start a
 | Step | Command / action |
 |------|------------------|
 | Deploy web hub (same commit) | `npm run deploy:netlify:familyhub` |
-| Tag release | `git tag familyhub-v1.0.0 && git push origin familyhub-v1.0.0` |
+| Tag release | `git tag familyhub-v1.1.0 && git push origin familyhub-v1.1.0` |
 | Next Play upload | `npm run mobile:bump:build` → rebuild AAB → increment `versionCode` only |
 
 ---
@@ -224,4 +224,4 @@ PLAY CONSOLE
 
 ---
 
-*Last updated for v1.0.0 Play Store readiness — July 2026*
+*Last updated for v1.1.0 Play Store readiness — July 2026*
