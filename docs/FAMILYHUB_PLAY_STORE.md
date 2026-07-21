@@ -2,7 +2,14 @@
 
 Everything you can do **from Windows** before opening Play Console. iOS steps are in [FAMILYHUB_STORE_RELEASE.md](./FAMILYHUB_STORE_RELEASE.md).
 
-**Package:** `com.pandagarde.familyhub` · **Version:** 1.0.0 (`versionCode` 1)
+**Package:** `com.pandagarde.familyhub` · **Version:** 1.0.0 (`versionCode` in `android/app/build.gradle`)
+
+### Play Console warnings (expected)
+
+| Warning | Cause | Action |
+|---------|--------|--------|
+| Fewer supported devices (~1k) | Capacitor 8 requires `minSdkVersion` **24** (was 23). Drops Android **6.0** catalog devices only. | Safe to proceed. Cannot lower minSdk without leaving Capacitor 8. In Console: **Release → Device catalog → Supported devices** to confirm API 23-only drop. |
+| No deobfuscation file | Release uses R8 (`minifyEnabled true`). | After `android:bundleRelease`, upload `android/app/build/outputs/mapping/release/mapping.txt` with the AAB (App bundle explorer → **Uploads** / release **Deobfuscation file**). |
 
 ---
 
