@@ -19,7 +19,8 @@ Everything you can do **from Windows** before opening Play Console. iOS steps ar
 |------|--------|
 | Capacitor Android project | ✅ `android/` |
 | App ID / display name | ✅ `com.pandagarde.familyhub` · PandaGarde Family Hub |
-| `targetSdkVersion` / `compileSdkVersion` | ✅ 35 |
+| `minSdkVersion` / `targetSdk` / `compileSdk` | ✅ 24 / 36 / 36 (Capacitor 8) |
+| R8 + ProGuard mapping | ✅ `minifyEnabled true` → upload `mapping.txt` with each AAB |
 | Launcher icons + splash (all densities) | ✅ `android/app/src/main/res/` |
 | Web bundle synced | ✅ `npm run cap:sync:android` |
 | Store marketing assets | ✅ `store-assets/play-store-icon-512.png` · `play-feature-graphic-1024x500.png` |
@@ -55,11 +56,14 @@ npm run assets:store
 npm run android:bundleRelease
 ```
 
-**Upload this file to Play Console:**
+**Upload these to Play Console:**
 
 ```
 android/app/build/outputs/bundle/release/app-release.aab
+android/app/build/outputs/mapping/release/mapping.txt
 ```
+
+Attach `mapping.txt` on the same release as the deobfuscation / native debug symbols file so crashes and ANRs stay readable.
 
 ### Debug APK (screenshots / smoke test)
 
