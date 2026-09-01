@@ -179,7 +179,7 @@ const StoryProgress: React.FC<StoryProgressProps> = ({
         </div>
       )}
 
-      <style jsx>{`
+      <style>{`
         .story-progress-container {
           background: ${theme === 'dark' ? 'var(--gray-800)' : 'white'};
           border-radius: 12px;

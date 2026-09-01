@@ -126,7 +126,7 @@ const StoryScene: React.FC<StorySceneProps> = ({
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .story-scene-container {
           position: relative;
           width: 100%;

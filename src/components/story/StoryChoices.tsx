@@ -190,7 +190,7 @@ const StoryChoices: React.FC<StoryChoicesProps> = ({
         </div>
       )}
 
-      <style jsx>{`
+      <style>{`
         .story-choices-container {
           margin: 2rem 0;
           padding: 1.5rem;

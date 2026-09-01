@@ -302,109 +302,109 @@ const ActivityManager: React.FC<ActivityManagerProps> = ({ activityId, onClose, 
     switch (activityId) {
       case 'coloring':
         return (
-          <Suspense fallback={<div className="loading-spinner">Loading coloring activity...</div>}>
+          <Suspense fallback={<div className="flex h-48 items-center justify-center text-base text-gray-600 dark:text-gray-300">Loading coloring activity...</div>}>
             <ColoringActivity {...activityProps} context={activityContext.coloring} />
           </Suspense>
         );
       case 'sorting':
         return (
-          <Suspense fallback={<div className="loading-spinner">Loading sorting activity...</div>}>
+          <Suspense fallback={<div className="flex h-48 items-center justify-center text-base text-gray-600 dark:text-gray-300">Loading sorting activity...</div>}>
             <DragDropActivity {...activityProps} context={activityContext.sorting} />
           </Suspense>
         );
       case 'maze':
         return (
-          <Suspense fallback={<div className="loading-spinner">Loading maze activity...</div>}>
+          <Suspense fallback={<div className="flex h-48 items-center justify-center text-base text-gray-600 dark:text-gray-300">Loading maze activity...</div>}>
             <MazeActivity {...activityProps} context={activityContext.maze} />
           </Suspense>
         );
       case 'wordsearch':
         return (
-          <Suspense fallback={<div className="loading-spinner">Loading word search activity...</div>}>
+          <Suspense fallback={<div className="flex h-48 items-center justify-center text-base text-gray-600 dark:text-gray-300">Loading word search activity...</div>}>
             <WordSearchActivity {...activityProps} context={activityContext.wordsearch} />
           </Suspense>
         );
       case 'connectdots':
         return (
-          <Suspense fallback={<div className="loading-spinner">Loading connect dots activity...</div>}>
+          <Suspense fallback={<div className="flex h-48 items-center justify-center text-base text-gray-600 dark:text-gray-300">Loading connect dots activity...</div>}>
             <ConnectDotsActivity {...activityProps} context={activityContext.connectdots} />
           </Suspense>
         );
       case 'matching':
         return (
-          <Suspense fallback={<div className="loading-spinner">Loading matching activity...</div>}>
+          <Suspense fallback={<div className="flex h-48 items-center justify-center text-base text-gray-600 dark:text-gray-300">Loading matching activity...</div>}>
             <MatchingActivity {...activityProps} context={activityContext.matching} />
           </Suspense>
         );
       case 'memory':
         return (
-          <Suspense fallback={<div className="loading-spinner">Loading memory game...</div>}>
+          <Suspense fallback={<div className="flex h-48 items-center justify-center text-base text-gray-600 dark:text-gray-300">Loading memory game...</div>}>
             <MemoryGameActivity {...activityProps} context={activityContext.memory} />
           </Suspense>
         );
       case 'quiz':
         return (
-          <Suspense fallback={<div className="loading-spinner">Loading quiz...</div>}>
+          <Suspense fallback={<div className="flex h-48 items-center justify-center text-base text-gray-600 dark:text-gray-300">Loading quiz...</div>}>
             <QuizActivity {...activityProps} context={activityContext.quiz} />
           </Suspense>
         );
       case 'password-strength':
         return (
-          <Suspense fallback={<div className="loading-spinner">Loading password lab...</div>}>
+          <Suspense fallback={<div className="flex h-48 items-center justify-center text-base text-gray-600 dark:text-gray-300">Loading password lab...</div>}>
             <FamilyHubGame Game={PasswordStrengthLab} onClose={onClose} onComplete={activityProps.onComplete} />
           </Suspense>
         );
       case 'password-fortress':
         return (
-          <Suspense fallback={<div className="loading-spinner">Loading fortress builder...</div>}>
+          <Suspense fallback={<div className="flex h-48 items-center justify-center text-base text-gray-600 dark:text-gray-300">Loading fortress builder...</div>}>
             <FamilyHubGame Game={PasswordFortressBuilder} onClose={onClose} onComplete={activityProps.onComplete} />
           </Suspense>
         );
       case 'phishing-detective':
         return (
-          <Suspense fallback={<div className="loading-spinner">Loading phishing detective...</div>}>
+          <Suspense fallback={<div className="flex h-48 items-center justify-center text-base text-gray-600 dark:text-gray-300">Loading phishing detective...</div>}>
             <FamilyHubGame Game={PhishingDetective} onClose={onClose} onComplete={activityProps.onComplete} />
           </Suspense>
         );
       case 'privacy-settings':
         return (
-          <Suspense fallback={<div className="loading-spinner">Loading privacy settings trainer...</div>}>
+          <Suspense fallback={<div className="flex h-48 items-center justify-center text-base text-gray-600 dark:text-gray-300">Loading privacy settings trainer...</div>}>
             <FamilyHubGame Game={PrivacySettingsTrainer} onClose={onClose} onComplete={activityProps.onComplete} />
           </Suspense>
         );
       case 'social-media-audit':
         return (
-          <Suspense fallback={<div className="loading-spinner">Loading social media audit...</div>}>
+          <Suspense fallback={<div className="flex h-48 items-center justify-center text-base text-gray-600 dark:text-gray-300">Loading social media audit...</div>}>
             <FamilyHubGame Game={SocialMediaAudit} onClose={onClose} onComplete={activityProps.onComplete} />
           </Suspense>
         );
       case 'social-simulator':
         return (
-          <Suspense fallback={<div className="loading-spinner">Loading simulator...</div>}>
+          <Suspense fallback={<div className="flex h-48 items-center justify-center text-base text-gray-600 dark:text-gray-300">Loading simulator...</div>}>
             <FamilyHubGame Game={SocialMediaSimulator} onClose={onClose} onComplete={activityProps.onComplete} />
           </Suspense>
         );
       case 'digital-rights':
         return (
-          <Suspense fallback={<div className="loading-spinner">Loading digital rights quiz...</div>}>
+          <Suspense fallback={<div className="flex h-48 items-center justify-center text-base text-gray-600 dark:text-gray-300">Loading digital rights quiz...</div>}>
             <FamilyHubGame Game={DigitalRightsQuiz} onClose={onClose} onComplete={activityProps.onComplete} />
           </Suspense>
         );
       case 'digital-footprint':
         return (
-          <Suspense fallback={<div className="loading-spinner">Loading footprint visualizer...</div>}>
+          <Suspense fallback={<div className="flex h-48 items-center justify-center text-base text-gray-600 dark:text-gray-300">Loading footprint visualizer...</div>}>
             <FamilyHubGame Game={DigitalFootprintVisualizer} onClose={onClose} onComplete={activityProps.onComplete} />
           </Suspense>
         );
       case 'safe-unsafe':
         return (
-          <Suspense fallback={<div className="loading-spinner">Loading sorting game...</div>}>
+          <Suspense fallback={<div className="flex h-48 items-center justify-center text-base text-gray-600 dark:text-gray-300">Loading sorting game...</div>}>
             <FamilyHubGame Game={SafeUnsafeSorting} onClose={onClose} onComplete={activityProps.onComplete} />
           </Suspense>
         );
       case 'privacy-decoder':
         return (
-          <Suspense fallback={<div className="loading-spinner">Loading policy decoder...</div>}>
+          <Suspense fallback={<div className="flex h-48 items-center justify-center text-base text-gray-600 dark:text-gray-300">Loading policy decoder...</div>}>
             <FamilyHubGame Game={PrivacyPolicyDecoder} onClose={onClose} onComplete={activityProps.onComplete} />
           </Suspense>
         );
@@ -414,292 +414,95 @@ const ActivityManager: React.FC<ActivityManagerProps> = ({ activityId, onClose, 
   };
 
   return (
-    <div className="activity-manager">
+    <div className="fixed inset-0 z-[1000] flex flex-col bg-black/80">
       {showInstructions && currentActivity ? (
-        <div className="activity-instructions">
-          <div className="instructions-header">
-            <h2 className="instructions-title">{currentActivity.title}</h2>
-            <button onClick={onClose} className="close-button">×</button>
+        <div
+          className="m-4 mx-auto max-h-[90vh] w-full max-w-xl overflow-y-auto rounded-2xl border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800 sm:m-6"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="activity-instructions-title"
+        >
+          <div className="flex items-center justify-between border-b border-gray-200 bg-gray-50 px-5 py-4 dark:border-gray-700 dark:bg-gray-900">
+            <h2 id="activity-instructions-title" className="text-xl font-bold text-gray-900 dark:text-gray-100 sm:text-2xl">
+              {currentActivity.title}
+            </h2>
+            <button
+              type="button"
+              onClick={onClose}
+              className="flex h-10 w-10 items-center justify-center rounded-lg text-2xl text-gray-500 hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-700"
+              aria-label="Close activity"
+            >
+              ×
+            </button>
           </div>
 
-          <div className="instructions-content">
-            <div className="instructions-description">
-              <p>{currentActivity.description}</p>
-            </div>
+          <div className="p-5">
+            <p className="mb-5 text-base leading-relaxed text-gray-600 dark:text-gray-300">
+              {currentActivity.description}
+            </p>
 
-            <div className="instructions-steps">
-              <h3>How to Play:</h3>
-              <ol>
-                {currentActivity.instructions.map((instruction, index) => (
-                  <li key={index}>{instruction}</li>
+            <div className="mb-5">
+              <h3 className="mb-2 font-semibold text-gray-900 dark:text-gray-100">How to play</h3>
+              <ol className="list-decimal space-y-2 pl-5 text-sm text-gray-600 dark:text-gray-300">
+                {currentActivity.instructions.map((instruction) => (
+                  <li key={instruction}>{instruction}</li>
                 ))}
               </ol>
             </div>
 
-            <div className="instructions-tips">
-              <h3>💡 Tip:</h3>
-              <p>{currentActivity.tips}</p>
+            <div className="mb-5 rounded-xl border border-amber-200 bg-amber-50 p-4 dark:border-amber-800 dark:bg-amber-950/30">
+              <h3 className="mb-1 text-sm font-semibold text-amber-900 dark:text-amber-100">Tip</h3>
+              <p className="text-sm italic text-amber-800 dark:text-amber-200">{currentActivity.tips}</p>
             </div>
 
-            <div className="instructions-actions">
-            <button onClick={handleStart} className="start-button" aria-label="Start the activity">
-              <Play size={20} />
-              Start Activity
-            </button>
-            <button onClick={onClose} className="cancel-button" aria-label="Cancel and close activity">
-              Cancel
-            </button>
+            <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
+              <button
+                type="button"
+                onClick={handleStart}
+                className="button button-primary inline-flex items-center justify-center gap-2"
+                aria-label="Start the activity"
+              >
+                <Play size={20} aria-hidden />
+                Start activity
+              </button>
+              <button
+                type="button"
+                onClick={onClose}
+                className="button button-secondary"
+                aria-label="Cancel and close activity"
+              >
+                Cancel
+              </button>
             </div>
           </div>
         </div>
       ) : (
-        <div className="activity-container">
-          <div className="activity-header">
-            <h2 className="activity-title">{currentActivity?.title}</h2>
-            <div className="activity-controls">
-              <button onClick={handleRestart} className="restart-button" title="Restart Activity" aria-label="Restart the activity">
-                <RotateCcw size={20} />
+        <div className="flex h-full flex-col bg-white dark:bg-gray-900">
+          <div className="flex items-center justify-between border-b border-gray-200 bg-gray-50 px-4 py-3 dark:border-gray-700 dark:bg-gray-800">
+            <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100">{currentActivity?.title}</h2>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={handleRestart}
+                title="Restart activity"
+                aria-label="Restart the activity"
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-200 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700"
+              >
+                <RotateCcw size={20} aria-hidden />
               </button>
-              <button onClick={onClose} className="close-button" aria-label="Close activity">×</button>
+              <button
+                type="button"
+                onClick={onClose}
+                className="flex h-10 w-10 items-center justify-center rounded-lg text-2xl text-gray-500 hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-700"
+                aria-label="Close activity"
+              >
+                ×
+              </button>
             </div>
           </div>
           {renderActivity()}
         </div>
       )}
-
-      <style jsx>{`
-        .activity-manager {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: rgba(0, 0, 0, 0.8);
-          display: flex;
-          flex-direction: column;
-          z-index: 1000;
-        }
-
-        .activity-instructions {
-          background: white;
-          margin: 20px;
-          border-radius: 12px;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-          max-width: 600px;
-          max-height: 80vh;
-          overflow-y: auto;
-          margin: 20px auto;
-        }
-
-        .instructions-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 20px;
-          border-bottom: 1px solid #e0e0e0;
-          background: #f8f9fa;
-          border-radius: 12px 12px 0 0;
-        }
-
-        .instructions-title {
-          margin: 0;
-          color: #2C3E50;
-          font-size: 24px;
-        }
-
-        .instructions-content {
-          padding: 20px;
-        }
-
-        .instructions-description {
-          margin-bottom: 20px;
-        }
-
-        .instructions-description p {
-          font-size: 16px;
-          color: #666;
-          line-height: 1.6;
-        }
-
-        .instructions-steps {
-          margin-bottom: 20px;
-        }
-
-        .instructions-steps h3 {
-          color: #2C3E50;
-          margin-bottom: 10px;
-        }
-
-        .instructions-steps ol {
-          padding-left: 20px;
-        }
-
-        .instructions-steps li {
-          margin-bottom: 8px;
-          color: #666;
-          line-height: 1.5;
-        }
-
-        .instructions-tips {
-          background: #fff3cd;
-          border: 1px solid #ffeaa7;
-          border-radius: 8px;
-          padding: 15px;
-          margin-bottom: 20px;
-        }
-
-        .instructions-tips h3 {
-          margin: 0 0 8px 0;
-          color: #856404;
-          font-size: 16px;
-        }
-
-        .instructions-tips p {
-          margin: 0;
-          color: #856404;
-          font-style: italic;
-        }
-
-        .instructions-actions {
-          display: flex;
-          gap: 12px;
-          justify-content: center;
-        }
-
-        .start-button {
-          background: #4CAF50;
-          color: white;
-          border: none;
-          padding: 12px 24px;
-          border-radius: 8px;
-          font-size: 16px;
-          font-weight: 600;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          transition: background 0.2s;
-        }
-
-        .start-button:hover {
-          background: #45a049;
-        }
-
-        .cancel-button {
-          background: #f5f5f5;
-          color: #666;
-          border: 1px solid #ddd;
-          padding: 12px 24px;
-          border-radius: 8px;
-          font-size: 16px;
-          cursor: pointer;
-          transition: background 0.2s;
-        }
-
-        .cancel-button:hover {
-          background: #e0e0e0;
-        }
-
-        .activity-container {
-          background: white;
-          height: 100%;
-          display: flex;
-          flex-direction: column;
-        }
-
-        .activity-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 15px 20px;
-          background: #f8f9fa;
-          border-bottom: 1px solid #e0e0e0;
-        }
-
-        .activity-title {
-          margin: 0;
-          color: #2C3E50;
-          font-size: 20px;
-        }
-
-        .activity-controls {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-        }
-
-        .restart-button {
-          background: #f5f5f5;
-          border: 1px solid #ddd;
-          padding: 8px;
-          border-radius: 6px;
-          cursor: pointer;
-          color: #666;
-          transition: background 0.2s;
-        }
-
-        .restart-button:hover {
-          background: #e0e0e0;
-        }
-
-        .close-button {
-          background: none;
-          border: none;
-          font-size: 24px;
-          cursor: pointer;
-          color: #666;
-          padding: 4px;
-        }
-
-        .loading-spinner {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          height: 200px;
-          font-size: 16px;
-          color: #666;
-        }
-
-        .loading-spinner::before {
-          content: '';
-          width: 20px;
-          height: 20px;
-          border: 2px solid #f3f3f3;
-          border-top: 2px solid #4CAF50;
-          border-radius: 50%;
-          animation: spin 1s linear infinite;
-          margin-right: 10px;
-        }
-
-        @media (max-width: 768px) {
-          .activity-instructions {
-            margin: 10px;
-            max-height: 90vh;
-          }
-
-          .instructions-header {
-            padding: 15px;
-          }
-
-          .instructions-title {
-            font-size: 20px;
-          }
-
-          .instructions-content {
-            padding: 15px;
-          }
-
-          .instructions-actions {
-            flex-direction: column;
-          }
-
-          .start-button,
-          .cancel-button {
-            width: 100%;
-            justify-content: center;
-          }
-        }
-      `}</style>
     </div>
   );
 };

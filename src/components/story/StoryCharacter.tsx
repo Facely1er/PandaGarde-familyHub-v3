@@ -133,7 +133,7 @@ const StoryCharacter: React.FC<StoryCharacterProps> = ({
         </div>
       )}
 
-      <style jsx>{`
+      <style>{`
         .story-character-container {
           display: flex;
           flex-direction: column;

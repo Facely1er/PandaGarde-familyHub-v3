@@ -181,55 +181,37 @@ const PrivacyHandbookPage: React.FC = () => {
       subtitle="Hands-on guides for tweens who want to protect their personal info online. Pick a project below to get started."
       breadcrumbs={true}
     >
-      <div style={{ maxWidth: '75rem', margin: '0 auto' }}>
-        {/* Progress Section */}
-        <section style={{ padding: 'clamp(2rem, 4vw, 3rem) 0' }}>
-          <div style={{
-            backgroundColor: '#ffffff',
-            borderRadius: '16px',
-            boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)',
-            padding: '2rem',
-            marginBottom: '3rem'
-          }}>
-            <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
-              <h2 style={{ 
-                fontSize: 'clamp(1.5rem, 3vw, 1.875rem)', 
-                fontWeight: 700, 
-                marginBottom: '1rem',
-                color: '#1B5E20'
-              }}>
-                Your Learning Progress
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-10">
+        <section>
+          <div className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800 sm:p-8">
+            <div className="mb-6 text-center">
+              <h2 className="mb-4 text-2xl font-bold text-gray-900 sm:text-3xl dark:text-gray-100">
+                Your learning progress
               </h2>
             <div className="flex items-center justify-center gap-8 mb-6">
               <div className="text-center">
                 <div className="text-3xl font-bold text-green-600">{completedGuides.length}</div>
-                <div className="text-sm text-gray-600">Guides Completed</div>
+                <div className="text-sm text-gray-600 dark:text-gray-300">Guides completed</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-blue-600">{guides.length}</div>
-                <div className="text-sm text-gray-600">Total Guides</div>
+                <div className="text-sm text-gray-600 dark:text-gray-300">Total guides</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-purple-600">
                   {Math.round((completedGuides.length / guides.length) * 100)}%
                 </div>
-                <div className="text-sm text-gray-600">Overall Progress</div>
+                <div className="text-sm text-gray-600 dark:text-gray-300">Overall progress</div>
               </div>
             </div>
             </div>
           </div>
         </section>
 
-        {/* Category Filter */}
-        <section style={{ padding: 'clamp(2rem, 4vw, 3rem) 0' }}>
-          <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-            <h2 style={{ 
-              fontSize: 'clamp(1.5rem, 3vw, 1.875rem)', 
-              fontWeight: 700, 
-              marginBottom: '1.5rem',
-              color: '#1B5E20'
-            }}>
-              Browse by Category
+        <section>
+          <div className="mb-6 text-center">
+            <h2 className="mb-6 text-2xl font-bold text-gray-900 sm:text-3xl dark:text-gray-100">
+              Browse by category
             </h2>
           <div className="flex flex-wrap gap-3 justify-center">
             {categories.map((category) => {
@@ -237,16 +219,14 @@ const PrivacyHandbookPage: React.FC = () => {
               return (
                 <button
                   key={category.id}
+                  type="button"
                   onClick={() => setActiveCategory(category.id)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-full font-medium transition-all ${
+                  aria-pressed={activeCategory === category.id}
+                  className={`flex min-h-[44px] items-center gap-2 rounded-full px-4 py-2 font-medium transition-colors ${
                     activeCategory === category.id
-                      ? 'bg-green-500 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      ? 'bg-green-700 text-white dark:bg-green-600'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700'
                   }`}
-                  style={{
-                    backgroundColor: activeCategory === category.id ? 'var(--primary-light)' : undefined,
-                    color: activeCategory === category.id ? 'white' : undefined
-                  }}
                 >
                   <Icon size={16} />
                   {category.label}
@@ -257,9 +237,8 @@ const PrivacyHandbookPage: React.FC = () => {
         </div>
         </section>
 
-        {/* Guides Grid */}
-        <section style={{ padding: 'clamp(2rem, 4vw, 3rem) 0' }}>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <section>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filteredGuides.map((guide) => {
             const Icon = guide.icon;
             const CategoryIcon = getCategoryIcon(guide.category);
@@ -268,14 +247,20 @@ const PrivacyHandbookPage: React.FC = () => {
             return (
               <div
                 key={guide.id}
-                className={`bg-white rounded-xl shadow-md hover:shadow-lg transition-all transform hover:scale-105 cursor-pointer border-2 ${
-                  isCompleted ? 'border-green-500' : 'border-transparent'
+                role="button"
+                tabIndex={0}
+                className={`cursor-pointer rounded-2xl border bg-white p-0 transition-colors dark:bg-gray-800 ${
+                  isCompleted
+                    ? 'border-green-600 dark:border-green-500'
+                    : 'border-gray-200 hover:border-green-400 dark:border-gray-700 dark:hover:border-green-500'
                 }`}
-                style={{
-                  backgroundColor: 'var(--card-color)',
-                  boxShadow: 'var(--shadow-md)'
-                }}
                 onClick={() => handleGuideStart(guide)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    handleGuideStart(guide);
+                  }
+                }}
               >
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
@@ -292,20 +277,11 @@ const PrivacyHandbookPage: React.FC = () => {
                     <span className="text-sm text-gray-500 capitalize">{guide.category}</span>
                   </div>
 
-                  <h3 style={{ 
-                    fontSize: '1.25rem', 
-                    fontWeight: 700, 
-                    marginBottom: '0.75rem',
-                    color: '#1B5E20'
-                  }}>
+                  <h3 className="mb-3 text-xl font-bold text-gray-900 dark:text-gray-100">
                     {guide.title}
                   </h3>
 
-                  <p style={{ 
-                    marginBottom: '1rem', 
-                    lineHeight: 1.6,
-                    color: '#64748b'
-                  }}>
+                  <p className="mb-4 leading-relaxed text-gray-600 dark:text-gray-300">
                     {guide.description}
                   </p>
 
@@ -313,7 +289,7 @@ const PrivacyHandbookPage: React.FC = () => {
                     <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getDifficultyColor(guide.difficulty)}`}>
                       {guide.difficulty}
                     </span>
-                    <span className="text-sm font-medium" style={{ color: 'var(--gray-500)' }}>
+                    <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
                       {guide.duration}
                     </span>
                   </div>
@@ -336,11 +312,11 @@ const PrivacyHandbookPage: React.FC = () => {
 
         {/* Guide Modal */}
       {showGuide && selectedGuide && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" role="dialog" aria-modal="true">
+          <div className="max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-2xl border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800">
             <div className="p-6">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-2xl font-bold text-primary">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                   {selectedGuide.title}
                 </h3>
                 <button
@@ -352,12 +328,12 @@ const PrivacyHandbookPage: React.FC = () => {
               </div>
 
               <div className="mb-6">
-                <p className="text-lg mb-6 text-gray-600">
+                <p className="mb-6 text-lg text-gray-600 dark:text-gray-300">
                   {selectedGuide.description}
                 </p>
 
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
-                  <h4 className="font-semibold mb-4 text-primary">
+                  <h4 className="mb-4 font-semibold text-gray-900 dark:text-gray-100">
                     What You'll Learn:
                   </h4>
                   <ul className="list-disc pl-6 space-y-2 text-gray-600">
@@ -391,88 +367,26 @@ const PrivacyHandbookPage: React.FC = () => {
         </div>
       )}
 
-        {/* Call to Action */}
-        <section style={{
-          background: 'linear-gradient(135deg, #1B5E20 0%, #2563eb 100%)',
-          color: 'white',
-          padding: 'clamp(3rem, 6vw, 4rem) 0',
-          marginTop: 'clamp(2rem, 4vw, 3rem)',
-          textAlign: 'center'
-        }}>
-          <h2 style={{ 
-            fontSize: 'clamp(1.875rem, 3vw, 2.25rem)', 
-            fontWeight: 700, 
-            marginBottom: '1rem'
-          }}>
-            Ready to Become a Privacy Protector?
+        <section className="rounded-2xl bg-green-700 p-6 text-center text-white sm:p-8 dark:bg-green-800">
+          <h2 className="mb-3 text-2xl font-bold sm:text-3xl">
+            Ready for a privacy conversation?
           </h2>
-          <p style={{ 
-            fontSize: '1.125rem', 
-            marginBottom: '2rem', 
-            opacity: 0.9,
-            maxWidth: '42rem',
-            margin: '0 auto 2rem',
-            lineHeight: 1.6
-          }}>
-            Start your journey to becoming a digital privacy expert. Learn practical skills that will protect you and your family online.
+          <p className="mx-auto mb-6 max-w-2xl text-base leading-relaxed text-green-50">
+            Use these guides, then try a Family Hub mission when you want hands-on practice on this device.
           </p>
-          <div style={{ 
-            display: 'flex', 
-            flexWrap: 'wrap', 
-            gap: '1rem', 
-            justifyContent: 'center' 
-          }}>
+          <div className="flex flex-wrap justify-center gap-3">
             <Link
               to="/family-hub/activities"
-              style={{
-                background: 'white',
-                color: '#1B5E20',
-                padding: '0.875rem 1.5rem',
-                borderRadius: '12px',
-                fontWeight: 600,
-                textDecoration: 'none',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                transition: 'all 0.3s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#f3f4f6';
-                e.currentTarget.style.transform = 'translateY(-2px)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'white';
-                e.currentTarget.style.transform = 'translateY(0)';
-              }}
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-white px-5 py-2.5 font-semibold text-green-800 hover:bg-green-50"
             >
-              <Shield size={20} />
-              Try Privacy Explorers
+              <Shield size={20} aria-hidden />
+              Privacy missions
             </Link>
-            <Link 
+            <Link
               to="/family-hub"
-              style={{
-                background: 'rgba(255, 255, 255, 0.2)',
-                color: 'white',
-                padding: '0.875rem 1.5rem',
-                borderRadius: '12px',
-                fontWeight: 600,
-                textDecoration: 'none',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                border: '2px solid white',
-                transition: 'all 0.3s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.3)';
-                e.currentTarget.style.transform = 'translateY(-2px)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
-                e.currentTarget.style.transform = 'translateY(0)';
-              }}
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-xl border-2 border-white px-5 py-2.5 font-semibold text-white hover:bg-white/10"
             >
-              <Users size={20} />
+              <Users size={20} aria-hidden />
               Family Hub
             </Link>
           </div>
