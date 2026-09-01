@@ -83,6 +83,7 @@ export const BREADCRUMB_PAGE_LABELS: Record<string, string> = {
   '/service-catalog': 'Service catalog',
   '/safety-alerts': 'Safety alerts',
   '/alerts': 'Safety alerts',
+  '/child-safety-alerts': 'Safety alerts',
   '/digital-footprint': FOOTPRINT_REVIEW_NAV_LABEL,
   '/footprint': FOOTPRINT_REVIEW_NAV_LABEL,
   '/privacy-assessment': 'Privacy assessment',

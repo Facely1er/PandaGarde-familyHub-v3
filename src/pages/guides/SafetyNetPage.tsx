@@ -9,7 +9,7 @@ const SafetyNetPage: React.FC = () => {
       subtitle="Set up who your family can call for help with online problems. Work through each step below together."
       breadcrumbs={true}
     >
-      <div style={{ maxWidth: '56rem', margin: '0 auto' }}>
+      <div className="mx-auto w-full max-w-4xl">
         <SafetyNetBuilder />
       </div>
     </PageLayout>

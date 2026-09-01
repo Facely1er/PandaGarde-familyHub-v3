@@ -9,7 +9,7 @@ const AgeSpecificPrivacyPage: React.FC = () => {
       subtitle="Pick your child's age group for example questions and simple privacy tips you can use tonight."
       breadcrumbs={true}
     >
-      <div style={{ maxWidth: '56rem', margin: '0 auto' }}>
+      <div className="mx-auto w-full max-w-4xl">
         <AgeSpecificConversations />
       </div>
     </PageLayout>

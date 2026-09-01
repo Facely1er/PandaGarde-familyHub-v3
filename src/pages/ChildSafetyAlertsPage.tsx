@@ -5,43 +5,37 @@ import ChildSafetyAlerts from '../components/alerts/ChildSafetyAlerts';
 import ServiceNotificationCenter from '../components/ServiceNotificationCenter';
 import EmailCaptureInline from '../components/EmailCaptureInline';
 import { PRIVACY_PORTAL_URL, PRIVACY_PORTAL_OPT_OUT_URL } from '../config/portal';
+import PageLayout from '../components/layout/PageLayout';
 
 const ChildSafetyAlertsPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'alerts' | 'notifications'>('notifications');
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 sm:py-12 dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-8">
-          <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-            <div className="min-w-0">
-              <h1 className="mb-2 text-2xl font-bold text-gray-900 sm:text-3xl dark:text-white">
-                Safety Alerts & Notifications
-              </h1>
-              <p className="text-gray-600 dark:text-gray-400">
-                Headlines about apps you listed—not live monitoring of your child&apos;s phone. Add apps in the catalog first, then check back here for updates.
-              </p>
-            </div>
-            <div className="flex flex-wrap items-center gap-2 lg:flex-shrink-0">
-              <Link
-                to="/service-catalog"
-                className="flex items-center gap-2 rounded-lg bg-green-700 px-4 py-2 text-white transition-colors hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500"
-              >
-                <ShoppingBag className="h-5 w-5" />
-                <span>Add Services</span>
-              </Link>
-              <Link
-                to="/digital-footprint"
-                className="flex items-center gap-2 rounded-lg border border-green-700 px-4 py-2 text-green-700 transition-colors hover:bg-green-50 dark:border-green-400 dark:text-green-400 dark:hover:bg-green-900/20"
-              >
-                <BarChart3 className="h-5 w-5" />
-                <span>Footprint</span>
-              </Link>
-            </div>
-          </div>
+    <PageLayout
+      title="Safety Alerts & Notifications"
+      subtitle="Headlines about apps you listed—not live monitoring of your child's phone. Add apps in the catalog first, then check back here."
+      breadcrumbs
+    >
+      <div className="flex flex-col gap-6">
+        <div className="flex flex-wrap items-center gap-2">
+          <Link
+            to="/service-catalog"
+            className="button button-primary inline-flex items-center gap-2"
+          >
+            <ShoppingBag className="h-5 w-5" aria-hidden />
+            <span>Add Services</span>
+          </Link>
+          <Link
+            to="/digital-footprint"
+            className="button button-secondary inline-flex items-center gap-2"
+          >
+            <BarChart3 className="h-5 w-5" aria-hidden />
+            <span>Footprint</span>
+          </Link>
+        </div>
 
           {/* Service Catalog Requirement Banner */}
-          <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4 mb-4">
+          <div className="rounded-2xl border border-yellow-200 bg-yellow-50 p-4 dark:border-yellow-800 dark:bg-yellow-900/20">
             <div className="flex items-start space-x-3">
               <Shield className="h-5 w-5 text-yellow-600 dark:text-yellow-400 mt-0.5 flex-shrink-0" />
               <div className="flex-1">
@@ -63,7 +57,7 @@ const ChildSafetyAlertsPage: React.FC = () => {
           </div>
 
           {/* Info Banner */}
-          <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-4 mb-6">
+          <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 dark:border-amber-800 dark:bg-amber-900/20">
             <div className="flex items-start space-x-3">
               <AlertTriangle className="h-5 w-5 text-amber-600 dark:text-amber-400 mt-0.5" />
               <div>
@@ -76,51 +70,49 @@ const ChildSafetyAlertsPage: React.FC = () => {
               </div>
             </div>
           </div>
-        </div>
 
-          {/* MODPA Policy Alert */}
-          <div className="rounded-xl border-2 border-teal-300 dark:border-teal-700 bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-teal-900/40 dark:to-cyan-900/40 p-4 mb-6">
+          <div className="rounded-2xl border border-green-200 bg-green-50 p-4 dark:border-green-800 dark:bg-green-900/20">
             <div className="flex items-start gap-3">
-              <div className="flex-shrink-0 w-9 h-9 rounded-full bg-teal-600 flex items-center justify-center">
-                <Scale className="h-4 w-4 text-white" />
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-green-700">
+                <Scale className="h-4 w-4 text-white" aria-hidden />
               </div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-xs font-bold uppercase tracking-wide bg-teal-100 dark:bg-teal-800 text-teal-800 dark:text-teal-200 px-2 py-0.5 rounded">
+              <div className="min-w-0 flex-1">
+                <div className="mb-1 flex flex-wrap items-center gap-2">
+                  <span className="rounded bg-green-100 px-2 py-0.5 text-xs font-bold uppercase tracking-wide text-green-800 dark:bg-green-800 dark:text-green-200">
                     Policy Alert
                   </span>
-                  <span className="text-xs text-teal-600 dark:text-teal-400 font-medium">Maryland MODPA — In Effect</span>
+                  <span className="text-xs font-medium text-green-700 dark:text-green-400">Maryland MODPA — In Effect</span>
                 </div>
-                <p className="font-bold text-teal-900 dark:text-teal-100 mb-1 text-sm">
+                <p className="mb-1 text-sm font-bold text-green-900 dark:text-green-100">
                   Maryland families can now formally request deletion of their child's app data
                 </p>
-                <p className="text-xs text-teal-800 dark:text-teal-200 mb-3 leading-relaxed">
+                <p className="mb-3 text-xs leading-relaxed text-green-800 dark:text-green-200">
                   Under the Maryland Online Data Privacy Act (MODPA), you can submit access, correction, deletion, and opt-out requests to any qualifying data controller — including games, EdTech tools, and social platforms your children use. Requests must be honored within 45 days (15 days for opt-outs).
                 </p>
                 <div className="flex flex-wrap gap-2">
                   <Link
                     to="/digital-rights"
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold rounded-lg transition-colors"
+                    className="inline-flex items-center gap-1.5 rounded-lg bg-green-700 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-green-800"
                   >
-                    <Scale size={12} />
+                    <Scale size={12} aria-hidden />
                     Learn MODPA rights
                   </Link>
                   <a
                     href={PRIVACY_PORTAL_OPT_OUT_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-teal-900/50 text-teal-800 dark:text-teal-200 border border-teal-400 dark:border-teal-600 text-xs font-semibold rounded-lg hover:bg-teal-50 dark:hover:bg-teal-800/50 transition-colors"
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-green-300 bg-white px-3 py-1.5 text-xs font-semibold text-green-800 transition-colors hover:bg-green-50 dark:border-green-700 dark:bg-green-900/50 dark:text-green-200 dark:hover:bg-green-800/50"
                   >
-                    <ExternalLink size={12} />
+                    <ExternalLink size={12} aria-hidden />
                     Opt-out of data sale
                   </a>
                   <a
                     href={PRIVACY_PORTAL_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-teal-900/50 text-teal-800 dark:text-teal-200 border border-teal-400 dark:border-teal-600 text-xs font-semibold rounded-lg hover:bg-teal-50 dark:hover:bg-teal-800/50 transition-colors"
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-green-300 bg-white px-3 py-1.5 text-xs font-semibold text-green-800 transition-colors hover:bg-green-50 dark:border-green-700 dark:bg-green-900/50 dark:text-green-200 dark:hover:bg-green-800/50"
                   >
-                    <ExternalLink size={12} />
+                    <ExternalLink size={12} aria-hidden />
                     Privacy Portal
                   </a>
                 </div>
@@ -129,9 +121,10 @@ const ChildSafetyAlertsPage: React.FC = () => {
           </div>
 
           {/* Tabs */}
-        <div className="mb-6 border-b border-gray-200 dark:border-gray-700">
+        <div className="border-b border-gray-200 dark:border-gray-700">
           <nav className="flex space-x-8">
             <button
+              type="button"
               onClick={() => setActiveTab('notifications')}
               className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
                 activeTab === 'notifications'
@@ -145,6 +138,7 @@ const ChildSafetyAlertsPage: React.FC = () => {
               </div>
             </button>
             <button
+              type="button"
               onClick={() => setActiveTab('alerts')}
               className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
                 activeTab === 'alerts'
@@ -168,7 +162,7 @@ const ChildSafetyAlertsPage: React.FC = () => {
         )}
 
         {/* Email Capture for Safety Alerts */}
-        <div className="mt-8">
+        <div>
           <EmailCaptureInline
             title="Stay Updated on Child Safety Alerts"
             description="Optional email list for PandaGarde privacy and safety updates (when EmailJS is configured). This is not live monitoring of your child's apps or device."
@@ -178,7 +172,7 @@ const ChildSafetyAlertsPage: React.FC = () => {
         </div>
 
         {/* Related Resources */}
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           <Link
             to="/service-catalog"
             className="p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-green-500 dark:hover:border-green-600 transition-colors group"
@@ -228,7 +222,7 @@ const ChildSafetyAlertsPage: React.FC = () => {
           </Link>
         </div>
       </div>
-    </div>
+    </PageLayout>
   );
 };
 

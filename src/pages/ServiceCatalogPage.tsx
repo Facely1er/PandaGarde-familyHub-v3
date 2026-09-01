@@ -10,6 +10,7 @@ import { childServiceCatalog, getHealthServices, getSchoolAssignedServices, getS
 import { getServiceLogoUrlWithBrandColor, hasServiceLogo } from '../utils/serviceLogos';
 import { updateDfaJourneyPhase } from '../lib/dfaJourney';
 import { dfaTheme } from '../styles/dfaTheme';
+import PageLayout from '../components/layout/PageLayout';
 
 const SUGGESTED_SERVICE_IDS = ['youtube', 'instagram', 'whatsapp', 'roblox', 'khan-academy', 'duolingo'] as const;
 const SCHOOL_SERVICE_IDS = ['google-classroom', 'microsoft-teams-edu', 'canvas-lms', 'schoology', 'seesaw', 'zoom', 'classdojo', 'kahoot', 'quizlet', 'ixl', 'remind', 'nearpod', 'prodigy', 'code-org'] as const;
@@ -18,7 +19,7 @@ const TELECOM_SERVICE_IDS = ['verizon', 'att', 'tmobile', 'cricket-wireless', 'b
 const HIGH_LE_CONCERN_IDS = ['att', 'verizon', 'tmobile', 'tiktok', 'google-classroom', 'chatgpt', 'discord', 'snapchat', 'instagram', 'youtube', 'microsoft-teams-edu'] as const;
 
 const headerActionLinkClass =
-  'inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-lg bg-green-800 px-4 py-2 text-white transition-colors hover:bg-green-900';
+  'inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-lg bg-green-700 px-4 py-2 text-white transition-colors hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500';
 
 const ServiceCatalogPage: React.FC = () => {
   const { getFamilyServices, addServiceToFamily, removeServiceFromFamily } = useFamily();
@@ -68,9 +69,13 @@ const ServiceCatalogPage: React.FC = () => {
   };
 
   return (
-    <div className={dfaTheme.pageTight}>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className={`mb-6 rounded-xl p-4 ${dfaTheme.cardLg}`}>
+    <PageLayout
+      title="Service Catalog"
+      subtitle="Add the apps your family actually uses so footprint review can score something real. Stories, guides, and Family Hub work without finishing this list."
+      breadcrumbs
+    >
+      <div className="flex flex-col gap-6">
+        <div className={`rounded-xl p-4 ${dfaTheme.cardLg}`}>
           <p className={`flex items-start gap-2 ${dfaTheme.bodySm}`}>
             <Info className="mt-0.5 h-4 w-4 shrink-0 text-green-700 dark:text-green-400" aria-hidden />
             <span>
@@ -82,7 +87,7 @@ const ServiceCatalogPage: React.FC = () => {
           </p>
         </div>
 
-        <div className="mb-8">
+        <div>
           <DfaJourneyStepper
             currentKey="profile"
             compact
@@ -92,7 +97,7 @@ const ServiceCatalogPage: React.FC = () => {
         </div>
 
         {servicesCount > 0 && (
-          <div className={`mb-6 rounded-xl border-2 p-4 transition-all ${isReadyForAnalysis ? 'border-green-300 bg-gradient-to-r from-green-50 to-emerald-50 dark:border-green-700 dark:from-green-900/20 dark:to-emerald-900/20' : 'border-amber-300 bg-gradient-to-r from-amber-50 to-orange-50 dark:border-amber-700 dark:from-amber-900/20 dark:to-orange-900/20'}`}>
+          <div className={`rounded-xl border-2 p-4 transition-all ${isReadyForAnalysis} ? 'border-green-300 bg-gradient-to-r from-green-50 to-emerald-50 dark:border-green-700 dark:from-green-900/20 dark:to-emerald-900/20' : 'border-amber-300 bg-gradient-to-r from-amber-50 to-orange-50 dark:border-amber-700 dark:from-amber-900/20 dark:to-orange-900/20'}`}>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <div className={`flex h-12 w-12 items-center justify-center rounded-full ${isReadyForAnalysis ? 'bg-green-600' : 'bg-amber-500'}`}>
@@ -118,7 +123,7 @@ const ServiceCatalogPage: React.FC = () => {
                 </div>
               </div>
               {isReadyForAnalysis && (
-                <Link to="/digital-footprint" className="flex items-center gap-2 rounded-lg bg-green-600 px-5 py-2.5 font-semibold text-white shadow-md transition-all hover:bg-green-700 hover:shadow-lg">
+                <Link to="/digital-footprint" className="flex items-center gap-2 rounded-lg bg-green-700 px-5 py-2.5 font-semibold text-white transition-colors hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500">
                   <BarChart3 className="h-5 w-5" />
                   <span>See footprint</span>
                   <ArrowRight className="h-4 w-4" />
@@ -128,26 +133,20 @@ const ServiceCatalogPage: React.FC = () => {
           </div>
         )}
 
-        <div className="mb-8">
+        <div>
           <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">
             <span className="font-medium text-gray-700 dark:text-gray-300">Footprint review:</span>{' '}
-            <span className="font-medium text-green-600 dark:text-green-400">Step 1 — add your family's apps</span>
+            <span className="font-medium text-green-700 dark:text-green-400">Step 1 — add your family's apps</span>
             {' → '}
             <Link to="/digital-footprint" className="font-medium text-green-700 hover:text-green-800 hover:underline dark:text-green-400 dark:hover:text-green-300">Step 2 — see your footprint</Link>
           </p>
-          <div className="mb-4 flex items-center justify-between">
+          <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <div className="mb-2 flex items-center gap-3">
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Service Catalog</h1>
-                {servicesCount === 0 && (
-                  <span className="flex items-center gap-1 rounded-full bg-green-700 px-3 py-1 text-xs font-semibold text-white">
-                    <Unlock size={12} /> Step 1 of 2
-                  </span>
-                )}
-              </div>
-              <p className="text-gray-600 dark:text-gray-400">
-                Add the apps your family actually uses so PandaGarde can analyze something real. This phase should feel fast, not like a questionnaire marathon.
-              </p>
+              {servicesCount === 0 && (
+                <span className="inline-flex items-center gap-1 rounded-full bg-green-700 px-3 py-1 text-xs font-semibold text-white">
+                  <Unlock size={12} aria-hidden /> Step 1 of 2
+                </span>
+              )}
             </div>
             <div className="flex shrink-0 items-center gap-2">
               <Link to="/digital-footprint" className={headerActionLinkClass}>
@@ -235,7 +234,7 @@ const ServiceCatalogPage: React.FC = () => {
             <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">Continue when ready</h3>
             <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">Once you reach at least three services, head straight to the footprint review. Your list is saved locally on this device.</p>
             {isReadyForAnalysis ? (
-              <Link to="/digital-footprint" className="mt-4 inline-flex items-center gap-2 font-semibold text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300">
+              <Link to="/digital-footprint" className="mt-4 inline-flex items-center gap-2 font-semibold text-green-700 hover:text-green-800 dark:text-green-400 dark:hover:text-green-300">
                 Go to Footprint Review <ArrowRight size={16} />
               </Link>
             ) : (
@@ -246,7 +245,7 @@ const ServiceCatalogPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="mt-12 grid gap-8 lg:grid-cols-2">
+        <div className="grid gap-8 lg:grid-cols-2">
           {[{ title: 'School services frequently in scope', icon: School, items: schoolServices.slice(0, 6) }, { title: 'Health & medical apps families report', icon: Heart, items: healthServices.slice(0, 6) }, { title: 'AI tools families are increasingly using', icon: Bot, items: aiServices.slice(0, 6) }, { title: 'Telecom services that shape the household data trail', icon: Signal, items: telecomServices.slice(0, 6) }, { title: 'High-data-sharing services worth knowing about', icon: AlertTriangle, items: leConcernServices.slice(0, 6) }].map(({ title, icon: Icon, items }) => (
             <div key={title} className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-100">
               <div className="mb-3 flex items-center gap-2 text-gray-900 dark:text-gray-100"><Icon size={18} /><h3 className="text-lg font-bold">{title}</h3></div>
@@ -259,11 +258,11 @@ const ServiceCatalogPage: React.FC = () => {
           ))}
         </div>
 
-        <div className="mt-12">
+        <div>
           <EmailCaptureInline />
         </div>
       </div>
-    </div>
+    </PageLayout>
   );
 };
 

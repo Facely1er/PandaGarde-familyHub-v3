@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Clock, Target, Shield, Users, AlertTriangle, type LucideIcon } from 'lucide-react';
+import PageLayout from '../components/layout/PageLayout';
 
 type AssessmentType = 'child-safety' | 'privacy-settings' | 'device-security' | 'data-sharing';
 
@@ -60,27 +61,13 @@ const QuickAssessmentPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="mb-8">
-          <Link
-            to="/privacy-assessment"
-            className="inline-flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 mb-4"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            <span>Back to Full Assessment</span>
-          </Link>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
-            Quick Privacy Assessments
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400">
-            Focus on specific privacy concerns with these quick assessments
-          </p>
-        </div>
-
-        {/* Assessment Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+    <PageLayout
+      title="Quick Privacy Assessments"
+      subtitle="Focus on one privacy topic at a time, or take the full family check-in."
+      breadcrumbs
+    >
+      <div className="mx-auto flex w-full max-w-4xl flex-col gap-8">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {quickAssessments.map((assessment) => {
             const Icon = assessment.icon;
             const colorClasses = {
@@ -106,8 +93,16 @@ const QuickAssessmentPage: React.FC = () => {
             return (
               <div
                 key={assessment.id}
-                className={`p-6 rounded-lg border-2 ${colorClasses[color]} hover:shadow-lg transition-shadow cursor-pointer`}
+                role="button"
+                tabIndex={0}
+                className={`cursor-pointer rounded-2xl border-2 p-6 transition-colors ${colorClasses[color]} hover:border-green-400`}
                 onClick={() => handleStartAssessment(assessment.id)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    handleStartAssessment(assessment.id);
+                  }
+                }}
               >
                 <div className="flex items-start space-x-4">
                   <div className={`p-3 rounded-lg ${iconBgClasses[color]}`}>
@@ -138,28 +133,28 @@ const QuickAssessmentPage: React.FC = () => {
         </div>
 
         {/* Full Assessment Option */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-600">
+        <div className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800">
           <div className="flex items-start space-x-4">
-            <AlertTriangle className="h-6 w-6 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-1" />
+            <AlertTriangle className="mt-1 h-6 w-6 shrink-0 text-amber-600 dark:text-amber-400" />
             <div className="flex-1">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
+              <h3 className="mb-2 text-lg font-semibold text-gray-900 dark:text-gray-100">
                 Need a Comprehensive Assessment?
               </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+              <p className="mb-4 text-sm text-gray-600 dark:text-gray-300">
                 For a complete evaluation of your family's privacy practices, take the full assessment covering all categories.
               </p>
               <Link
                 to="/privacy-assessment"
-                className="inline-flex items-center space-x-2 rounded-lg bg-green-700 px-4 py-2 text-white transition-colors hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500"
+                className="button button-primary inline-flex items-center gap-2"
               >
                 <span>Start Full Assessment</span>
-                <ArrowLeft className="h-4 w-4 rotate-180" />
+                <ArrowLeft className="h-4 w-4 rotate-180" aria-hidden />
               </Link>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </PageLayout>
   );
 };
 

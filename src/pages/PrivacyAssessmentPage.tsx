@@ -19,6 +19,7 @@ import {
 import { JOURNAL_PUBLISHED } from '../data/siteNavigation';
 import { updateDfaJourneyPhase } from '../lib/dfaJourney';
 import { dfaTheme } from '../styles/dfaTheme';
+import PageLayout from '../components/layout/PageLayout';
 
 const resourceLinkClass =
   'block rounded-lg border border-gray-200 p-3 text-sm transition-colors hover:border-green-300 hover:bg-green-50/50 dark:border-dark-border dark:bg-dark-surface dark:hover:border-green-700/60 dark:hover:bg-gray-300';
@@ -37,9 +38,13 @@ const PrivacyAssessmentPage: React.FC = () => {
   };
 
   return (
-    <div className={dfaTheme.page}>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <header className={`mb-6 overflow-hidden ${dfaTheme.cardLg}`}>
+    <PageLayout
+      title="How is your family doing on privacy?"
+      subtitle="Answer a few questions from your app list and footprint scores. We will point you to stories and guides that fit."
+      breadcrumbs
+    >
+      <div className="flex flex-col gap-6">
+        <header className={`overflow-hidden ${dfaTheme.cardLg}`}>
           <div className={`${dfaTheme.band} px-5 py-3 sm:px-6`}>
             <p className={`text-sm leading-relaxed ${dfaTheme.bodySm}`}>
               <span className={`font-medium ${dfaTheme.title}`}>Where you are:</span>{' '}
@@ -48,16 +53,10 @@ const PrivacyAssessmentPage: React.FC = () => {
           </div>
 
           <div className="px-5 py-5 sm:px-6">
-            <div className="inline-flex items-center gap-2 rounded-full bg-emerald-100 px-3 py-1 text-sm font-semibold text-emerald-900 dark:bg-emerald-900/50 dark:text-emerald-100">
+            <div className="inline-flex items-center gap-2 rounded-full bg-green-100 px-3 py-1 text-sm font-semibold text-green-900 dark:bg-green-900/50 dark:text-green-100">
               <ShieldCheck size={16} aria-hidden />
               Quick family check-in
             </div>
-            <h1 className={`mt-3 text-2xl tracking-tight sm:text-3xl ${dfaTheme.titleBold}`}>
-              How is your family doing on privacy?
-            </h1>
-            <p className={`mt-2 max-w-3xl sm:text-base ${dfaTheme.bodySm}`}>
-              Answer the questions below based on your app list and footprint scores. When you finish, we will point you to stories and guides that fit.
-            </p>
             <nav className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm" aria-label="Related pages">
               <Link to="/digital-footprint" className={`inline-flex items-center gap-1.5 ${dfaTheme.link}`}>
                 <BarChart3 size={15} aria-hidden />
@@ -201,7 +200,7 @@ const PrivacyAssessmentPage: React.FC = () => {
           </div>
         </details>
 
-        <div className={`mt-6 p-5 sm:p-6 ${dfaTheme.cardMuted}`}>
+        <div className={`p-5 sm:p-6 ${dfaTheme.cardMuted}`}>
           <h2 className={`text-base ${dfaTheme.titleBold}`}>Optional: Family Hub</h2>
           <p className={`mt-1 ${dfaTheme.bodySm}`}>
             Device-local privacy missions for kids—separate from the website assessment above.
@@ -218,7 +217,7 @@ const PrivacyAssessmentPage: React.FC = () => {
           </div>
         </div>
       </div>
-    </div>
+    </PageLayout>
   );
 };
 

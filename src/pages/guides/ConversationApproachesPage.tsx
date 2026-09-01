@@ -9,7 +9,7 @@ const ConversationApproachesPage: React.FC = () => {
       subtitle="Pick one approach below that fits your child's age and mood. Each includes ready-to-use words you can say tonight."
       breadcrumbs={true}
     >
-      <div style={{ maxWidth: '56rem', margin: '0 auto' }}>
+      <div className="mx-auto w-full max-w-4xl">
         <ConversationApproaches />
       </div>
     </PageLayout>
