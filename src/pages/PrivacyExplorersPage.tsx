@@ -139,55 +139,42 @@ const PrivacyExplorersPage: React.FC = () => {
       subtitle="Fun quizzes and games for ages 9–12. Pick one activity below—each takes about 10 minutes."
       breadcrumbs={true}
     >
-      {/* Progress Section */}
-      <section style={{ padding: 'clamp(2rem, 4vw, 3rem) 0' }}>
-        <div className="bg-white rounded-xl shadow-lg p-8 mb-12" style={{
-          backgroundColor: '#ffffff',
-          boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)',
-          borderRadius: '16px'
-        }}>
-          <div className="text-center mb-6">
-            <h2 style={{ 
-              fontSize: 'clamp(1.5rem, 3vw, 2rem)', 
-              fontWeight: 700, 
-              marginBottom: '1rem',
-              color: '#1B5E20'
-            }}>
-              Your Explorer Progress
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-10">
+      <section>
+        <div className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800 sm:p-8">
+          <div className="mb-6 text-center">
+            <h2 className="mb-4 text-2xl font-bold text-gray-900 sm:text-3xl dark:text-gray-100">
+              Your explorer progress
             </h2>
             <div className="flex items-center justify-center gap-8 mb-6">
               <div className="text-center">
                 <div className="text-3xl font-bold text-blue-600">{userPoints}</div>
-                <div className="text-sm text-gray-600">Points Earned</div>
+                <div className="text-sm text-gray-600 dark:text-gray-300">Points earned</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-green-600">{completedChallenges.length}</div>
-                <div className="text-sm text-gray-600">Challenges Completed</div>
+                <div className="text-sm text-gray-600 dark:text-gray-300">Challenges completed</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-purple-600">{getCompletionPercentage()}%</div>
-                <div className="text-sm text-gray-600">Overall Progress</div>
+                <div className="text-sm text-gray-600 dark:text-gray-300">Overall progress</div>
               </div>
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-4">
+            <div className="h-4 w-full rounded-full bg-gray-200 dark:bg-gray-700">
               <div
-                className="h-4 rounded-full transition-all duration-500 bg-gradient-to-r from-blue-500 to-purple-600"
+                className="h-4 rounded-full bg-green-700 transition-all duration-500 dark:bg-green-500"
                 style={{ width: `${getCompletionPercentage()}%` }}
               />
             </div>
           </div>
 
           {getCompletionPercentage() === 100 && (
-            <div className="text-center bg-yellow-50 border border-yellow-200 rounded-lg p-6"
-                 style={{
-                   backgroundColor: 'var(--light)',
-                   borderColor: 'var(--warning)'
-                 }}>
-              <Trophy className="w-16 h-16 mx-auto mb-4 text-yellow-600" />
-              <h3 className="text-xl font-bold mb-2 text-primary">
-                Congratulations! 🎉
+            <div className="rounded-xl border border-yellow-200 bg-yellow-50 p-6 text-center dark:border-yellow-800 dark:bg-yellow-950/30">
+              <Trophy className="mx-auto mb-4 h-16 w-16 text-yellow-600 dark:text-yellow-400" aria-hidden />
+              <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-gray-100">
+                Congratulations
               </h3>
-              <p className="text-gray-700">
+              <p className="text-gray-700 dark:text-gray-200">
                 You've completed all Privacy Explorer challenges and earned your Digital Privacy Champion badge!
               </p>
             </div>
@@ -195,24 +182,12 @@ const PrivacyExplorersPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Challenges Grid */}
-      <section style={{ padding: 'clamp(2rem, 4vw, 3rem) 0' }}>
-        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <h2 style={{ 
-            fontSize: 'clamp(1.875rem, 3vw, 2.25rem)', 
-            fontWeight: 700, 
-            marginBottom: '0.75rem',
-            color: '#1B5E20'
-          }}>
-            Privacy Challenges
+      <section>
+        <div className="mb-8 text-center">
+          <h2 className="mb-3 text-2xl font-bold text-gray-900 sm:text-3xl dark:text-gray-100">
+            Privacy challenges
           </h2>
-          <p style={{ 
-            fontSize: '1.125rem', 
-            maxWidth: '42rem', 
-            margin: '0 auto',
-            color: '#64748b',
-            lineHeight: 1.6
-          }}>
+          <p className="mx-auto max-w-2xl text-lg leading-relaxed text-gray-600 dark:text-gray-300">
             Complete these interactive challenges to become a Privacy Explorer. Each challenge teaches important digital safety skills.
           </p>
         </div>
@@ -225,18 +200,24 @@ const PrivacyExplorersPage: React.FC = () => {
             return (
               <div
                 key={challenge.id}
-                className={`bg-white rounded-xl shadow-md hover:shadow-lg transition-all transform hover:scale-105 cursor-pointer border-2 ${
-                  isCompleted ? 'border-green-500' : 'border-transparent'
+                role="button"
+                tabIndex={0}
+                className={`cursor-pointer rounded-2xl border bg-white dark:bg-gray-800 ${
+                  isCompleted
+                    ? 'border-green-600 dark:border-green-500'
+                    : 'border-gray-200 hover:border-green-400 dark:border-gray-700 dark:hover:border-green-500'
                 }`}
-                style={{
-                  backgroundColor: 'var(--card-color)',
-                  boxShadow: 'var(--shadow-md)'
-                }}
                 onClick={() => handleChallengeStart(challenge)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    handleChallengeStart(challenge);
+                  }
+                }}
               >
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-700 text-white">
                       <Icon size={24} />
                     </div>
                     {isCompleted && (
@@ -244,20 +225,11 @@ const PrivacyExplorersPage: React.FC = () => {
                     )}
                   </div>
 
-                  <h3 style={{ 
-                    fontSize: '1.25rem', 
-                    fontWeight: 700, 
-                    marginBottom: '0.75rem',
-                    color: '#1B5E20'
-                  }}>
+                  <h3 className="mb-3 text-xl font-bold text-gray-900 dark:text-gray-100">
                     {challenge.title}
                   </h3>
 
-                  <p style={{ 
-                    marginBottom: '1rem', 
-                    lineHeight: 1.6,
-                    color: '#64748b'
-                  }}>
+                  <p className="mb-4 leading-relaxed text-gray-600 dark:text-gray-300">
                     {challenge.description}
                   </p>
 
@@ -265,11 +237,7 @@ const PrivacyExplorersPage: React.FC = () => {
                     <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getDifficultyColor(challenge.difficulty)}`}>
                       {challenge.difficulty}
                     </span>
-                    <span style={{ 
-                      fontSize: '0.875rem', 
-                      fontWeight: 500,
-                      color: '#6b7280'
-                    }}>
+                    <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
                       {challenge.duration}
                     </span>
                   </div>
@@ -297,15 +265,11 @@ const PrivacyExplorersPage: React.FC = () => {
 
       {/* Challenge Modal */}
       {showChallenge && selectedChallenge && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" role="dialog" aria-modal="true">
+          <div className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800">
             <div className="p-6">
-              <div className="flex items-center justify-between mb-6">
-                <h3 style={{ 
-                  fontSize: 'clamp(1.5rem, 3vw, 1.875rem)', 
-                  fontWeight: 700,
-                  color: '#1B5E20'
-                }}>
+              <div className="mb-6 flex items-center justify-between">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                   {selectedChallenge.title}
                 </h3>
                 <button
@@ -317,35 +281,15 @@ const PrivacyExplorersPage: React.FC = () => {
               </div>
 
               <div className="mb-6">
-                <p style={{ 
-                  fontSize: '1.125rem', 
-                  marginBottom: '1rem',
-                  color: '#64748b',
-                  lineHeight: 1.6
-                }}>
+                <p className="mb-4 text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                   {selectedChallenge.description}
                 </p>
 
-                <div style={{
-                  backgroundColor: '#eff6ff',
-                  border: '1px solid #bfdbfe',
-                  borderRadius: '12px',
-                  padding: '1rem',
-                  marginBottom: '1.5rem'
-                }}>
-                  <h4 style={{ 
-                    fontWeight: 600, 
-                    marginBottom: '0.5rem',
-                    color: '#1B5E20'
-                  }}>
-                    Challenge Instructions:
+                <div className="mb-6 rounded-xl border border-green-200 bg-green-50 p-4 dark:border-green-800 dark:bg-green-900/20">
+                  <h4 className="mb-2 font-semibold text-gray-900 dark:text-gray-100">
+                    Challenge instructions
                   </h4>
-                  <ul style={{ 
-                    listStyle: 'disc',
-                    paddingLeft: '1.5rem',
-                    color: '#64748b',
-                    lineHeight: 1.6
-                  }}>
+                  <ul className="list-disc space-y-1 pl-6 text-gray-600 dark:text-gray-300">
                     <li>Read all instructions carefully before starting</li>
                     <li>Take your time to understand each concept</li>
                     <li>Ask for help if you need clarification</li>
@@ -367,93 +311,29 @@ const PrivacyExplorersPage: React.FC = () => {
         </div>
       )}
 
-      {/* Call to Action */}
-      <section style={{
-        background: 'linear-gradient(135deg, #3b82f6 0%, #9333ea 100%)',
-        color: 'white',
-        padding: 'clamp(3rem, 6vw, 4rem) 0',
-        marginTop: 'clamp(2rem, 4vw, 3rem)'
-      }}>
-        <div className="text-center">
-          <h2 style={{ 
-            fontSize: 'clamp(1.875rem, 3vw, 2.25rem)', 
-            fontWeight: 700, 
-            marginBottom: '1rem'
-          }}>
-            Ready to Become a Privacy Explorer?
-          </h2>
-          <p style={{ 
-            fontSize: '1.125rem', 
-            marginBottom: '2rem', 
-            opacity: 0.9, 
-            maxWidth: '42rem', 
-            margin: '0 auto 2rem',
-            lineHeight: 1.6
-          }}>
-            Start your journey to becoming a digital privacy champion. Complete challenges, earn points, and unlock new skills!
-          </p>
-          <div style={{ 
-            display: 'flex', 
-            flexWrap: 'wrap', 
-            gap: '1rem', 
-            justifyContent: 'center' 
-          }}>
-            <Link
-              to="/family-hub/activities"
-              style={{
-                background: 'white',
-                color: '#3b82f6',
-                padding: '0.875rem 1.5rem',
-                borderRadius: '12px',
-                fontWeight: 600,
-                textDecoration: 'none',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                transition: 'all 0.3s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#f3f4f6';
-                e.currentTarget.style.transform = 'translateY(-2px)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'white';
-                e.currentTarget.style.transform = 'translateY(0)';
-              }}
-            >
-              <BookOpen size={20} />
-              Try Activity Book
-            </Link>
-            <Link 
-              to="/family-hub"
-              style={{
-                background: 'rgba(255, 255, 255, 0.2)',
-                color: 'white',
-                padding: '0.875rem 1.5rem',
-                borderRadius: '12px',
-                fontWeight: 600,
-                textDecoration: 'none',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                border: '2px solid white',
-                transition: 'all 0.3s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.3)';
-                e.currentTarget.style.transform = 'translateY(-2px)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
-                e.currentTarget.style.transform = 'translateY(0)';
-              }}
-            >
-              <Users size={20} />
-              Family Hub
-            </Link>
-          </div>
+      <section className="rounded-2xl bg-green-700 p-6 text-center text-white sm:p-8 dark:bg-green-800">
+        <h2 className="mb-3 text-2xl font-bold sm:text-3xl">Ready to try a privacy mission?</h2>
+        <p className="mx-auto mb-6 max-w-2xl text-base leading-relaxed text-green-50">
+          These challenges are website quizzes. For age-matched missions with progress on this device, open Family Hub.
+        </p>
+        <div className="flex flex-wrap justify-center gap-3">
+          <Link
+            to="/family-hub/activities"
+            className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-white px-5 py-2.5 font-semibold text-green-800 hover:bg-green-50"
+          >
+            <BookOpen size={20} aria-hidden />
+            Privacy missions
+          </Link>
+          <Link
+            to="/family-hub"
+            className="inline-flex min-h-[44px] items-center gap-2 rounded-xl border-2 border-white px-5 py-2.5 font-semibold text-white hover:bg-white/10"
+          >
+            <Users size={20} aria-hidden />
+            Family Hub
+          </Link>
         </div>
       </section>
+      </div>
     </PageLayout>
   );
 };

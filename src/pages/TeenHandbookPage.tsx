@@ -232,36 +232,32 @@ const TeenHandbookPage: React.FC = () => {
       subtitle="Practical privacy tips for teens—social media settings, passwords, and online reputation. Open the section that matches what you want to fix today."
       breadcrumbs={true}
     >
-      <div style={{ maxWidth: '75rem', margin: '0 auto' }}>
-        {/* Progress Section */}
-        <section style={{ padding: 'clamp(2rem, 4vw, 3rem) 0' }}>
-        <div className="bg-white rounded-xl shadow-lg p-8 mb-12" style={{
-          backgroundColor: 'var(--card-color)',
-          boxShadow: 'var(--shadow-lg)'
-        }}>
-          <div className="text-center mb-6">
-            <h2 className="text-2xl font-bold mb-4 text-primary">
-              Your Learning Journey
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-10">
+        <section>
+        <div className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800 sm:p-8">
+          <div className="mb-6 text-center">
+            <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-gray-100">
+              Your learning journey
             </h2>
-            <div className="flex items-center justify-center gap-8 mb-6">
+            <div className="mb-6 flex items-center justify-center gap-8">
               <div className="text-center">
-                <div className="text-3xl font-bold text-indigo-600">{completedChapters.length}</div>
-                <div className="text-sm text-gray-600">Chapters Completed</div>
+                <div className="text-3xl font-bold text-green-700 dark:text-green-400">{completedChapters.length}</div>
+                <div className="text-sm text-gray-600 dark:text-gray-300">Chapters completed</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-purple-600">{chapters.length}</div>
-                <div className="text-sm text-gray-600">Total Chapters</div>
+                <div className="text-3xl font-bold text-gray-900 dark:text-gray-100">{chapters.length}</div>
+                <div className="text-sm text-gray-600 dark:text-gray-300">Total chapters</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-green-600">
+                <div className="text-3xl font-bold text-green-700 dark:text-green-400">
                   {Math.round((completedChapters.length / chapters.length) * 100)}%
                 </div>
-                <div className="text-sm text-gray-600">Overall Progress</div>
+                <div className="text-sm text-gray-600 dark:text-gray-300">Overall progress</div>
               </div>
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-4">
+            <div className="h-4 w-full rounded-full bg-gray-200 dark:bg-gray-700">
               <div
-                className="h-4 rounded-full transition-all duration-500 bg-gradient-to-r from-indigo-500 to-purple-600"
+                className="h-4 rounded-full bg-green-700 transition-all duration-500 dark:bg-green-500"
                 style={{ width: `${Math.round((completedChapters.length / chapters.length) * 100)}%` }}
               />
             </div>
@@ -269,28 +265,25 @@ const TeenHandbookPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Category Filter */}
-      <section className="container mx-auto px-6 mb-8">
-        <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold mb-6 text-primary">
-            Browse by Category
+      <section>
+        <div className="mb-6 text-center">
+          <h2 className="mb-6 text-2xl font-bold text-gray-900 dark:text-gray-100">
+            Browse by category
           </h2>
-          <div className="flex flex-wrap gap-3 justify-center">
+          <div className="flex flex-wrap justify-center gap-3">
             {categories.map((category) => {
               const Icon = category.icon;
               return (
                 <button
                   key={category.id}
+                  type="button"
                   onClick={() => setActiveCategory(category.id)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-full font-medium transition-all ${
+                  aria-pressed={activeCategory === category.id}
+                  className={`flex min-h-[44px] items-center gap-2 rounded-full px-4 py-2 font-medium transition-colors ${
                     activeCategory === category.id
-                      ? 'bg-indigo-500 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      ? 'bg-green-700 text-white dark:bg-green-600'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700'
                   }`}
-                  style={{
-                    backgroundColor: activeCategory === category.id ? 'var(--primary-light)' : undefined,
-                    color: activeCategory === category.id ? 'white' : undefined
-                  }}
                 >
                   <Icon size={16} />
                   {category.label}
@@ -301,9 +294,8 @@ const TeenHandbookPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Chapters Grid */}
-      <section className="container mx-auto px-6 pb-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <section>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filteredChapters.map((chapter) => {
             const Icon = chapter.icon;
             const CategoryIcon = getCategoryIcon(chapter.category);
@@ -312,18 +304,24 @@ const TeenHandbookPage: React.FC = () => {
             return (
               <div
                 key={chapter.id}
-                className={`bg-white rounded-xl shadow-md hover:shadow-lg transition-all transform hover:scale-105 cursor-pointer border-2 ${
-                  isCompleted ? 'border-green-500' : 'border-transparent'
+                role="button"
+                tabIndex={0}
+                className={`cursor-pointer rounded-2xl border bg-white dark:bg-gray-800 ${
+                  isCompleted
+                    ? 'border-green-600 dark:border-green-500'
+                    : 'border-gray-200 hover:border-green-400 dark:border-gray-700 dark:hover:border-green-500'
                 }`}
-                style={{
-                  backgroundColor: 'var(--card-color)',
-                  boxShadow: 'var(--shadow-md)'
-                }}
                 onClick={() => handleChapterStart(chapter)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    handleChapterStart(chapter);
+                  }
+                }}
               >
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 flex items-center justify-center text-white">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-700 text-white">
                       <Icon size={24} />
                     </div>
                     {isCompleted && (
@@ -336,11 +334,11 @@ const TeenHandbookPage: React.FC = () => {
                     <span className="text-sm text-gray-500 capitalize">{chapter.category.replace('-', ' ')}</span>
                   </div>
 
-                  <h3 className="text-xl font-bold mb-3 text-primary">
+                  <h3 className="mb-3 text-xl font-bold text-gray-900 dark:text-gray-100">
                     {chapter.title}
                   </h3>
 
-                  <p className="mb-4 leading-relaxed text-gray-600">
+                  <p className="mb-4 leading-relaxed text-gray-600 dark:text-gray-300">
                     {chapter.description}
                   </p>
 
@@ -348,13 +346,13 @@ const TeenHandbookPage: React.FC = () => {
                     <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getDifficultyColor(chapter.difficulty)}`}>
                       {chapter.difficulty}
                     </span>
-                    <span className="text-sm font-medium" style={{ color: 'var(--gray-500)' }}>
+                    <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
                       {chapter.duration}
                     </span>
                   </div>
 
                   <button
-                    className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-indigo-600 hover:to-purple-700 transition-all"
+                    className="w-full rounded-lg bg-green-700 px-4 py-2 font-semibold text-white transition-colors hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500"
                     onClick={(e) => {
                       e.stopPropagation();
                       handleChapterStart(chapter);
@@ -371,11 +369,11 @@ const TeenHandbookPage: React.FC = () => {
 
       {/* Chapter Modal */}
       {showChapter && selectedChapter && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" role="dialog" aria-modal="true">
+          <div className="max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-2xl border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800">
             <div className="p-6">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-2xl font-bold text-primary">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                   {selectedChapter.title}
                 </h3>
                 <button
@@ -428,7 +426,7 @@ const TeenHandbookPage: React.FC = () => {
 
                   <button
                     onClick={() => handleChapterComplete(selectedChapter.id)}
-                    className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-6 py-2 rounded-lg font-semibold hover:from-indigo-600 hover:to-purple-700 transition-all"
+                    className="rounded-lg bg-green-700 px-6 py-2 font-semibold text-white transition-colors hover:bg-green-800 dark:bg-green-600"
                   >
                     Mark as Complete
                   </button>
@@ -439,88 +437,26 @@ const TeenHandbookPage: React.FC = () => {
         </div>
       )}
 
-        {/* Call to Action */}
-        <section style={{
-          background: 'linear-gradient(135deg, #4f46e5 0%, #9333ea 100%)',
-          color: 'white',
-          padding: 'clamp(3rem, 6vw, 4rem) 0',
-          marginTop: 'clamp(2rem, 4vw, 3rem)',
-          textAlign: 'center'
-        }}>
-          <h2 style={{ 
-            fontSize: 'clamp(1.875rem, 3vw, 2.25rem)', 
-            fontWeight: 700, 
-            marginBottom: '1rem'
-          }}>
-            Ready to Take Control of Your Privacy?
+        <section className="rounded-2xl bg-green-700 p-6 text-center text-white sm:p-8 dark:bg-green-800">
+          <h2 className="mb-3 text-2xl font-bold sm:text-3xl">
+            Ready to take one privacy action this week?
           </h2>
-          <p style={{ 
-            fontSize: '1.125rem', 
-            marginBottom: '2rem', 
-            opacity: 0.9,
-            maxWidth: '42rem',
-            margin: '0 auto 2rem',
-            lineHeight: 1.6
-          }}>
-            Pick a chapter below and read the tips that apply to you. Then try one action this week—passwords, posts, or app settings.
+          <p className="mx-auto mb-6 max-w-2xl text-base leading-relaxed text-green-50">
+            Pick a chapter, then try one action—passwords, posts, or app settings. Family Hub missions are optional practice on this device.
           </p>
-          <div style={{ 
-            display: 'flex', 
-            flexWrap: 'wrap', 
-            gap: '1rem', 
-            justifyContent: 'center' 
-          }}>
+          <div className="flex flex-wrap justify-center gap-3">
             <Link
               to="/for-families"
-              style={{
-                background: 'white',
-                color: '#4f46e5',
-                padding: '0.875rem 1.5rem',
-                borderRadius: '12px',
-                fontWeight: 600,
-                textDecoration: 'none',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                transition: 'all 0.3s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#f3f4f6';
-                e.currentTarget.style.transform = 'translateY(-2px)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'white';
-                e.currentTarget.style.transform = 'translateY(0)';
-              }}
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-white px-5 py-2.5 font-semibold text-green-800 hover:bg-green-50"
             >
-              <Settings size={20} />
-              Privacy Tools
+              <Settings size={20} aria-hidden />
+              Guides &amp; stories
             </Link>
-            <Link 
+            <Link
               to="/family-hub"
-              style={{
-                background: 'rgba(255, 255, 255, 0.2)',
-                color: 'white',
-                padding: '0.875rem 1.5rem',
-                borderRadius: '12px',
-                fontWeight: 600,
-                textDecoration: 'none',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                border: '2px solid white',
-                transition: 'all 0.3s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.3)';
-                e.currentTarget.style.transform = 'translateY(-2px)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
-                e.currentTarget.style.transform = 'translateY(0)';
-              }}
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-xl border-2 border-white px-5 py-2.5 font-semibold text-white hover:bg-white/10"
             >
-              <Users size={20} />
+              <Users size={20} aria-hidden />
               Family Hub
             </Link>
           </div>

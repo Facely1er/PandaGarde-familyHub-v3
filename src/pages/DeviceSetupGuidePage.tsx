@@ -157,8 +157,7 @@ const DeviceSetupGuidePage: React.FC = () => {
               return (
                 <div
                   key={device.id}
-                  className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
-                  style={{ backgroundColor: 'var(--card-color)' }}
+                  className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-lg transition-shadow hover:shadow-xl dark:border-gray-700 dark:bg-gray-800"
                 >
                   <div className="aspect-w-4 aspect-h-3 bg-gray-100">
                     <div className="w-full h-48 bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
@@ -216,8 +215,7 @@ const DeviceSetupGuidePage: React.FC = () => {
               return (
                 <div
                   key={index}
-                  className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow"
-                  style={{ backgroundColor: 'var(--card-color)' }}
+                  className="rounded-2xl border border-gray-200 bg-white p-6 shadow-md transition-shadow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
                 >
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -305,8 +303,7 @@ const DeviceSetupGuidePage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Link
               to="/guides/app-selection"
-              className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow text-center"
-              style={{ backgroundColor: 'var(--card-color)' }}
+              className="rounded-2xl border border-gray-200 bg-white p-6 text-center shadow-md transition-shadow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
             >
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Smartphone size={24} className="text-green-600" />
@@ -321,8 +318,7 @@ const DeviceSetupGuidePage: React.FC = () => {
 
             <Link
               to="/downloads/family-agreement"
-              className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow text-center"
-              style={{ backgroundColor: 'var(--card-color)' }}
+              className="rounded-2xl border border-gray-200 bg-white p-6 text-center shadow-md transition-shadow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
             >
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Shield size={24} className="text-blue-600" />
@@ -337,8 +333,7 @@ const DeviceSetupGuidePage: React.FC = () => {
 
             <Link
               to="/for-families"
-              className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow text-center"
-              style={{ backgroundColor: 'var(--card-color)' }}
+              className="rounded-2xl border border-gray-200 bg-white p-6 text-center shadow-md transition-shadow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
             >
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Settings size={24} className="text-purple-600" />

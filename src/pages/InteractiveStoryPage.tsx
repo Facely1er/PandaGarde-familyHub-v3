@@ -442,10 +442,10 @@ const InteractiveStoryPage: React.FC = () => {
       subtitle="Join Po the Panda on an interactive adventure through the Digital Bamboo Forest as he learns about privacy, sharing, and staying safe online. Make choices, unlock achievements, and become a privacy expert!"
       breadcrumbs={true}
     >
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem', position: 'relative' }}>
+      <div className="relative mx-auto w-full max-w-6xl">
         
         {/* Interactive Story Player - Primary Content (First Section After Hero) */}
-        <div id="story-player" style={{ marginBottom: '2rem', marginTop: '1rem' }}>
+        <div id="story-player" className="mb-8 mt-4">
           <InteractiveStoryPlayer
             scenes={storyScenes}
             currentSceneIndex={currentSceneIndex}
@@ -458,7 +458,7 @@ const InteractiveStoryPage: React.FC = () => {
         </div>
 
         {/* Enhanced Progress Component */}
-        <div style={{ marginBottom: '2rem' }} className="relative z-10">
+        <div className="relative z-10 mb-8">
           <StoryProgress
             currentScene={currentSceneIndex + 1}
             totalScenes={storyScenes.length}
@@ -469,7 +469,7 @@ const InteractiveStoryPage: React.FC = () => {
         </div>
 
         {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 0 }}>
+        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
           <div className={`absolute top-20 left-10 w-32 h-32 rounded-full opacity-20 animate-pulse ${isDark ? 'bg-green-700' : 'bg-green-200'}`} style={{ animationDuration: '3s' }}></div>
           <div className={`absolute top-40 right-20 w-24 h-24 rounded-full opacity-20 animate-pulse ${isDark ? 'bg-blue-700' : 'bg-blue-200'}`} style={{ animationDuration: '4s', animationDelay: '1s' }}></div>
           <div className={`absolute bottom-20 left-1/4 w-40 h-40 rounded-full opacity-15 animate-pulse ${isDark ? 'bg-purple-700' : 'bg-purple-200'}`} style={{ animationDuration: '5s', animationDelay: '2s' }}></div>
@@ -477,7 +477,7 @@ const InteractiveStoryPage: React.FC = () => {
         </div>
 
         {/* Feature Section with Info Grid */}
-        <div className="grid md:grid-cols-2 gap-6 items-center mb-8 relative z-10" style={{ marginTop: '2rem' }}>
+        <div className="relative z-10 mb-8 mt-8 grid items-center gap-6 md:grid-cols-2">
           {/* Left Column - Feature Grid and CTA */}
           <div className="text-left">
             {/* Enhanced Feature Grid with Icons */}
@@ -640,13 +640,12 @@ const InteractiveStoryPage: React.FC = () => {
       {/* Keyboard Help Panel */}
       {showKeyboardHelp && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" role="dialog" aria-labelledby="keyboard-help-title">
-          <div className={`rounded-lg p-6 max-w-md mx-4 ${isDark ? 'bg-gray-800' : 'bg-white'}`} style={{ backgroundColor: 'var(--card-color)' }}>
+          <div className="mx-4 max-w-md rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800">
             <div className="flex justify-between items-center mb-4">
               <h2 id="keyboard-help-title" className="text-xl font-bold text-gray-800">Keyboard Shortcuts</h2>
               <button
                 onClick={() => setShowKeyboardHelp(false)}
-                className="text-2xl"
-                style={{ color: 'var(--gray-500)' }}
+                className="text-2xl text-gray-500"
                 aria-label="Close keyboard help"
               >
                 ×
@@ -693,13 +692,12 @@ const InteractiveStoryPage: React.FC = () => {
       {/* Bookmarks Panel */}
       {showBookmarks && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" role="dialog" aria-labelledby="bookmarks-title">
-          <div className={`rounded-lg p-6 max-w-2xl mx-4 max-h-96 overflow-y-auto ${isDark ? 'bg-gray-800' : 'bg-white'}`} style={{ backgroundColor: 'var(--card-color)' }}>
+          <div className="mx-4 max-h-96 max-w-2xl overflow-y-auto rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800">
             <div className="flex justify-between items-center mb-4">
               <h2 id="bookmarks-title" className="text-xl font-bold text-gray-800">Story Bookmarks</h2>
               <button
                 onClick={() => setShowBookmarks(false)}
-                className="text-2xl"
-                style={{ color: 'var(--gray-500)' }}
+                className="text-2xl text-gray-500"
                 aria-label="Close bookmarks"
               >
                 ×
@@ -707,7 +705,7 @@ const InteractiveStoryPage: React.FC = () => {
             </div>
             <div className="space-y-2">
               {bookmarks.size === 0 ? (
-                <p className="text-center py-4" style={{ color: 'var(--gray-500)' }}>No bookmarks yet. Click the bookmark icon on any scene to save it!</p>
+                <p className="py-4 text-center text-gray-500">No bookmarks yet. Click the bookmark icon on any scene to save it!</p>
               ) : (
                 Array.from(bookmarks).map(sceneId => {
                   const scene = storyScenes.find(s => s.id === sceneId);
@@ -765,7 +763,7 @@ const InteractiveStoryPage: React.FC = () => {
                 >
                   <div className="text-center">
                     <div className="text-4xl mb-2">{achievement.icon}</div>
-                    <div className="font-bold text-sm" style={{ color: achievement.unlocked ? 'var(--gray-800)' : 'var(--gray-500)' }}>
+                    <div className={`text-sm font-bold ${achievement.unlocked ? 'text-gray-800 dark:text-gray-100' : 'text-gray-500'}`}>
                       {achievement.name}
                     </div>
                     {achievement.unlocked && (
@@ -782,116 +780,33 @@ const InteractiveStoryPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Enhanced Call to Action with Visuals */}
-        <div style={{ marginTop: '3rem', textAlign: 'center' }} className="relative z-10">
-          <div style={{
-            background: 'linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%)',
-            color: 'white',
-            padding: '3rem',
-            borderRadius: '16px',
-            boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
-            position: 'relative',
-            overflow: 'hidden',
-            border: '3px solid rgba(255, 255, 255, 0.2)'
-          }}>
-            {/* Animated Background Pattern */}
-            <div style={{ 
-              position: 'absolute', 
-              inset: 0, 
-              opacity: 0.15,
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23 11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 4c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm32-24c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E")`,
-              backgroundSize: '100px 100px'
-            }}></div>
-            
-            {/* Floating Icons */}
-            <div style={{ position: 'absolute', inset: 0, opacity: 0.2 }}>
-              <div className="animate-float" style={{ position: 'absolute', top: '1rem', left: '1rem', fontSize: '2.5rem', animationDuration: '3s' }}>🐼</div>
-              <div className="animate-float" style={{ position: 'absolute', top: '1rem', right: '1rem', fontSize: '2rem', animationDuration: '4s', animationDelay: '0.5s' }}>🛡️</div>
-              <div className="animate-float" style={{ position: 'absolute', bottom: '1rem', left: '2rem', fontSize: '2rem', animationDuration: '3.5s', animationDelay: '1s' }}>⭐</div>
-              <div className="animate-float" style={{ position: 'absolute', bottom: '1rem', right: '2rem', fontSize: '2.5rem', animationDuration: '4.5s', animationDelay: '1.5s' }}>🌿</div>
-              <div className="animate-float" style={{ position: 'absolute', top: '50%', left: '10%', fontSize: '1.5rem', animationDuration: '3s', animationDelay: '0.3s' }}>🔒</div>
-              <div className="animate-float" style={{ position: 'absolute', top: '50%', right: '10%', fontSize: '1.5rem', animationDuration: '3.5s', animationDelay: '0.7s' }}>📚</div>
-            </div>
-            
-            <div style={{ position: 'relative', zIndex: 10 }}>
-              <div className="flex items-center justify-center gap-2 mb-3">
-                <Sparkles className="text-yellow-300" size={24} />
-                <h2 style={{ fontSize: '2rem', fontWeight: 700, margin: 0, textShadow: '0 2px 4px rgba(0,0,0,0.2)' }}>
-                  Continue Learning with Privacy Panda!
-                </h2>
-                <Sparkles className="text-yellow-300" size={24} />
-              </div>
-              <p style={{ fontSize: '1.125rem', opacity: 0.95, maxWidth: '42rem', margin: '0 auto 2rem', lineHeight: 1.6, textShadow: '0 1px 2px rgba(0,0,0,0.1)' }}>
-                Explore more activities, games, and resources to help children learn about digital privacy and online safety.
-              </p>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center' }}>
-                <Link
-                  to="/family-hub/activities"
-                  className="group"
-                  style={{
-                    background: 'white',
-                    color: '#16a34a',
-                    padding: '0.875rem 2.25rem',
-                    borderRadius: '12px',
-                    fontWeight: 700,
-                    textDecoration: 'none',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '0.75rem',
-                    transition: 'all 0.3s',
-                    boxShadow: '0 6px 16px rgba(0,0,0,0.15)',
-                    border: '2px solid rgba(255, 255, 255, 0.3)'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = '#f0fdf4';
-                    e.currentTarget.style.transform = 'translateY(-2px) scale(1.05)';
-                    e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.2)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'white';
-                    e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                    e.currentTarget.style.boxShadow = '0 6px 16px rgba(0,0,0,0.15)';
-                  }}
-                >
-                  <Book size={22} className="group-hover:rotate-12 transition-transform" />
-                  Activity Book
-                </Link>
-                <button
-                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                  className="group"
-                  style={{
-                    background: 'rgba(255, 255, 255, 0.2)',
-                    color: 'white',
-                    padding: '0.875rem 2.25rem',
-                    borderRadius: '12px',
-                    fontWeight: 700,
-                    border: '2px solid rgba(255, 255, 255, 0.3)',
-                    cursor: 'pointer',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '0.75rem',
-                    transition: 'all 0.3s',
-                    boxShadow: '0 6px 16px rgba(0,0,0,0.15)',
-                    backdropFilter: 'blur(10px)'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.3)';
-                    e.currentTarget.style.transform = 'translateY(-2px) scale(1.05)';
-                    e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.2)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
-                    e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                    e.currentTarget.style.boxShadow = '0 6px 16px rgba(0,0,0,0.15)';
-                  }}
-                >
-                  <ArrowLeft size={22} className="group-hover:-translate-x-1 transition-transform" />
-                  Back to Top
-                </button>
-              </div>
-            </div>
+        <section className="relative z-10 mt-12 rounded-2xl bg-green-700 p-6 text-center text-white sm:p-8 dark:bg-green-800">
+          <div className="mb-3 flex items-center justify-center gap-2">
+            <Sparkles className="text-yellow-300" size={24} aria-hidden />
+            <h2 className="text-2xl font-bold sm:text-3xl">Continue learning with Privacy Panda</h2>
+            <Sparkles className="text-yellow-300" size={24} aria-hidden />
           </div>
-        </div>
+          <p className="mx-auto mb-6 max-w-2xl text-base leading-relaxed text-green-50">
+            Explore more activities, games, and resources to help children learn about digital privacy and online safety.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link
+              to="/family-hub/activities"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-white px-6 py-2.5 font-semibold text-green-800 hover:bg-green-50"
+            >
+              <Book size={22} aria-hidden />
+              Privacy missions
+            </Link>
+            <button
+              type="button"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-xl border-2 border-white px-6 py-2.5 font-semibold text-white hover:bg-white/10"
+            >
+              <ArrowLeft size={22} aria-hidden />
+              Back to top
+            </button>
+          </div>
+        </section>
       </div>
       
       {/* Custom Animations */}

@@ -357,7 +357,7 @@ const ImplementationGuidePage: React.FC = () => {
       subtitle="Four steps to bring privacy lessons into your school. Tap a phase below to see what to do that week."
       breadcrumbs={true}
     >
-      <div className="min-h-screen" style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}>
+      <div className="flex flex-col gap-10">
       {/* Phase Navigation */}
       <section className="container mx-auto px-6 py-12">
         <div className="text-center mb-12">
@@ -374,12 +374,11 @@ const ImplementationGuidePage: React.FC = () => {
             <button
               key={phase.id}
               onClick={() => setActivePhase(phase.id)}
-              className={`text-left p-6 rounded-xl border-2 transition-all ${
+              className={`rounded-xl border-2 p-6 text-left transition-all dark:bg-gray-800 ${
                 activePhase === phase.id
-                  ? `${getPhaseBorderColor(phase.color)} shadow-lg`
-                  : 'border-gray-200 hover:border-gray-300'
+                  ? `${getPhaseBorderColor(phase.color)} bg-white shadow-lg`
+                  : 'border-gray-200 bg-white hover:border-gray-300'
               }`}
-              style={{ backgroundColor: 'var(--card-color)' }}
             >
               <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${getPhaseColor(phase.color)} flex items-center justify-center text-white mb-4`}>
                 <Calendar size={24} />
@@ -402,7 +401,7 @@ const ImplementationGuidePage: React.FC = () => {
       {/* Active Phase Details */}
       {activePhaseData && (
         <section className="container mx-auto px-6 pb-16">
-          <div className="bg-white rounded-xl shadow-lg p-8" style={{ backgroundColor: 'var(--card-color)' }}>
+          <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-lg dark:border-gray-700 dark:bg-gray-800">
             <div className="text-center mb-8">
               <h2 className="text-2xl font-bold mb-4 text-primary">
                 {activePhaseData.title}
@@ -424,13 +423,10 @@ const ImplementationGuidePage: React.FC = () => {
                 return (
                   <div
                     key={step.id}
-                    className={`border rounded-lg p-6 transition-all ${
-                      isCompleted ? 'border-green-500 bg-green-50' : 'border-gray-200'
-                    }`}
-                    style={{
-                      backgroundColor: isCompleted ? 'var(--green-50)' : 'var(--card-color)',
-                      borderColor: isCompleted ? 'var(--green-500)' : 'var(--gray-200)'
-                    }}
+                    className={isCompleted
+                      ? 'rounded-lg border border-green-500 bg-green-50 p-6 dark:border-green-700 dark:bg-green-900/20'
+                      : 'rounded-lg border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800'
+                    }
                   >
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-start gap-4">
@@ -515,7 +511,7 @@ const ImplementationGuidePage: React.FC = () => {
           </div>
 
           <div className="max-w-4xl mx-auto">
-            <div className="bg-white rounded-xl p-8 shadow-lg" style={{ backgroundColor: 'var(--card-color)' }}>
+            <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-lg dark:border-gray-700 dark:bg-gray-800">
               <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                 {phases.map((phase) => {
                   const phaseSteps = phase.steps.length;

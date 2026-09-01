@@ -209,7 +209,7 @@ const PrivacyConcernsGuidePage: React.FC = () => {
       subtitle="Something feel off online? Tap the issue below for what to do first and who to call if it is urgent."
       breadcrumbs={true}
     >
-      <div style={{ maxWidth: '56rem', margin: '0 auto' }}>
+      <div className="mx-auto w-full max-w-4xl">
         {/* Introduction */}
         <div className="max-w-4xl mx-auto text-center mb-16">
           <h2 className="text-3xl font-bold mb-6 text-primary">
@@ -268,8 +268,7 @@ const PrivacyConcernsGuidePage: React.FC = () => {
               return (
                 <div
                   key={concern.id}
-                  className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
-                  style={{ backgroundColor: 'var(--card-color)' }}
+                  className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-lg transition-shadow hover:shadow-xl dark:border-gray-700 dark:bg-gray-800"
                 >
                   <div className="p-6">
                     <div className="flex items-center gap-4 mb-4">
@@ -349,8 +348,7 @@ const PrivacyConcernsGuidePage: React.FC = () => {
               return (
                 <div
                   key={step.step}
-                  className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow"
-                  style={{ backgroundColor: 'var(--card-color)' }}
+                  className="rounded-2xl border border-gray-200 bg-white p-6 shadow-md transition-shadow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
                 >
                   <div className="flex items-center gap-4 mb-4">
                     <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
@@ -383,8 +381,7 @@ const PrivacyConcernsGuidePage: React.FC = () => {
             {preventionTips.map((category, index) => (
               <div
                 key={index}
-                className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow"
-                style={{ backgroundColor: 'var(--card-color)' }}
+                className="rounded-2xl border border-gray-200 bg-white p-6 shadow-md transition-shadow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
               >
                 <h3 className="text-lg font-bold mb-4 text-primary">
                   {category.category}
@@ -464,8 +461,7 @@ const PrivacyConcernsGuidePage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Link
               to="/guides/device-setup"
-              className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow text-center"
-              style={{ backgroundColor: 'var(--card-color)' }}
+              className="rounded-2xl border border-gray-200 bg-white p-6 text-center shadow-md transition-shadow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
             >
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Shield size={24} className="text-green-600" />
@@ -480,8 +476,7 @@ const PrivacyConcernsGuidePage: React.FC = () => {
 
             <Link
               to="/guides/modeling-behavior"
-              className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow text-center"
-              style={{ backgroundColor: 'var(--card-color)' }}
+              className="rounded-2xl border border-gray-200 bg-white p-6 text-center shadow-md transition-shadow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
             >
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Users size={24} className="text-blue-600" />
@@ -496,8 +491,7 @@ const PrivacyConcernsGuidePage: React.FC = () => {
 
             <Link
               to="/support"
-              className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow text-center"
-              style={{ backgroundColor: 'var(--card-color)' }}
+              className="rounded-2xl border border-gray-200 bg-white p-6 text-center shadow-md transition-shadow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
             >
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Phone size={24} className="text-purple-600" />

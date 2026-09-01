@@ -14,7 +14,6 @@ import {
   CheckCircle,
   Filter,
 } from 'lucide-react';
-import { useTheme } from '../contexts/ThemeContext';
 import PageLayout from '../components/layout/PageLayout';
 import { resolveLegacyActivitiesPath } from '../lib/legacyActivitiesRedirect';
 import { setHubOrigin } from '../lib/hubMission';
@@ -37,7 +36,6 @@ interface Activity {
 
 const ActivityBookPage: React.FC = () => {
   const navigate = useNavigate();
-  const { theme } = useTheme();
   const [filter, setFilter] = useState<'all' | 'easy' | 'medium' | 'hard'>('all');
   const [sortBy, setSortBy] = useState<'name' | 'difficulty' | 'duration'>('name');
   const [searchTerm, setSearchTerm] = useState('');
@@ -164,36 +162,33 @@ const ActivityBookPage: React.FC = () => {
       subtitle="Printable coloring sheets and offline activities from the Privacy Panda story. For interactive missions with saved progress, open Family Hub."
       breadcrumbs={true}
     >
-      <div className="min-h-screen" style={{ backgroundColor: 'var(--white)', color: 'var(--gray-800)' }}>
+      <div className="flex flex-col gap-10">
 
       {/* Story Connection Section */}
-      <section style={{ padding: '3rem 0' }}>
-        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
-          <div className="bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-xl p-6 md:p-8 mb-8 md:mb-12 max-w-5xl mx-auto" style={{
-            backgroundColor: theme === 'dark' ? 'rgba(16, 185, 129, 0.1)' : '#F0FDF4',
-            borderColor: theme === 'dark' ? 'rgba(16, 185, 129, 0.3)' : '#BBF7D0'
-          }}>
+      <section>
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-8 rounded-2xl border border-green-200 bg-green-50 p-6 dark:border-green-800 dark:bg-green-900/20 md:mb-10 md:p-8">
             <div className="text-center mb-6">
               <div className="w-16 h-16 md:w-20 md:h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-3xl md:text-4xl">🐼</span>
               </div>
-              <h2 className="font-bold mb-3" style={{ fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', color: theme === 'dark' ? '#4ADE80' : '#059669' }}>
+              <h2 className="mb-3 text-2xl font-bold text-green-800 sm:text-3xl dark:text-green-200">
                 Continue Po's Journey
               </h2>
-              <p className="text-base md:text-lg lg:text-xl max-w-2xl mx-auto px-4" style={{ color: theme === 'dark' ? '#4ADE80' : '#059669' }}>
+              <p className="mx-auto max-w-2xl px-4 text-base text-green-800 md:text-lg dark:text-green-200">
                 These activities extend the story of Privacy Panda. Practice the privacy concepts Po learned in the Digital Bamboo Forest through hands-on games and exercises.
               </p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6">
               <div className="bg-white rounded-lg p-4 md:p-6 shadow-sm">
-                <h3 className="font-semibold mb-2 text-base md:text-lg text-primary">📖 Story Connection</h3>
+                <h3 className="mb-2 text-base font-semibold text-primary md:text-lg">Story connection</h3>
                 <p className="text-sm md:text-base text-gray-600">
                   Each activity relates to a part of Po's adventure, reinforcing the privacy lessons he learned.
                 </p>
               </div>
               <div className="bg-white rounded-lg p-4 md:p-6 shadow-sm">
-                <h3 className="font-semibold mb-2 text-base md:text-lg text-primary">🎯 Learning Goals</h3>
+                <h3 className="mb-2 text-base font-semibold text-primary md:text-lg">Learning goals</h3>
                 <p className="text-sm md:text-base text-gray-600">
                   Develop practical skills for protecting personal information and staying safe online.
                 </p>
@@ -211,12 +206,12 @@ const ActivityBookPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="rounded-xl border border-teal-200 bg-teal-50/80 p-6 max-w-3xl mx-auto mt-8 dark:border-teal-800 dark:bg-teal-900/20">
-            <p className="text-sm leading-relaxed text-teal-900 dark:text-teal-100 mb-4">{WEBSITE_HUB_BOUNDARY_LEAD}</p>
+          <div className="mx-auto mt-8 max-w-3xl rounded-2xl border border-green-200 bg-green-50 p-6 dark:border-green-800 dark:bg-green-900/20">
+            <p className="mb-4 text-sm leading-relaxed text-green-900 dark:text-green-100">{WEBSITE_HUB_BOUNDARY_LEAD}</p>
             <Link
               to={HUB_MISSIONS_PATH}
               onClick={() => setHubOrigin('web')}
-              className="inline-flex items-center gap-2 rounded-lg bg-teal-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-teal-700 min-h-[44px]"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-green-700 px-5 py-2.5 text-sm font-semibold text-white hover:bg-green-800"
             >
               {HUB_MISSIONS_CTA}
             </Link>
@@ -224,19 +219,17 @@ const ActivityBookPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Activities Grid */}
-      <section style={{ padding: '0 0 4rem 0' }}>
-        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
-          <div className="text-center mb-6 md:mb-8 max-w-4xl mx-auto">
-            <h2 className="font-bold mb-3 md:mb-4" style={{ fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', color: 'var(--primary)' }}>
+      <section>
+        <div className="mx-auto max-w-6xl">
+          <div className="mx-auto mb-6 max-w-4xl text-center md:mb-8">
+            <h2 className="mb-3 text-2xl font-bold text-primary sm:text-3xl md:mb-4">
               Choose Your Activity
             </h2>
-            <p className="text-base md:text-lg lg:text-xl max-w-2xl mx-auto mb-6 md:mb-8 px-4 text-gray-600">
+            <p className="mx-auto mb-6 max-w-2xl px-4 text-base text-gray-600 md:mb-8 md:text-lg dark:text-gray-300">
               Each topic below opens the matching mission in Family Hub. Progress and certificates stay in the Hub on this device.
             </p>
 
-            {/* Interactive Controls */}
-            <div className="bg-white rounded-xl shadow-lg p-4 md:p-6 mb-6 md:mb-8 max-w-5xl mx-auto" style={{ backgroundColor: 'var(--card-color)' }}>
+            <div className="mx-auto mb-6 max-w-5xl rounded-2xl border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800 md:mb-8 md:p-6">
               <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
                 {/* Search */}
                 <div className="flex-1 min-w-0">
@@ -244,10 +237,12 @@ const ActivityBookPage: React.FC = () => {
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
                     <input
                       type="text"
+                      id="activity-search"
+                      aria-label="Search activities"
                       placeholder="Search activities..."
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm md:text-base bg-surface"
+                      className="w-full rounded-lg border border-gray-300 bg-white py-2.5 pl-10 pr-4 text-sm focus:border-transparent focus:ring-2 focus:ring-green-500 md:text-base dark:border-gray-600 dark:bg-gray-900"
                     />
                   </div>
                 </div>
@@ -263,9 +258,10 @@ const ActivityBookPage: React.FC = () => {
                   </button>
 
                   <select
+                    aria-label="Sort activities"
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value as 'name' | 'difficulty' | 'duration')}
-                    className="px-3 md:px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm md:text-base bg-surface"
+                    className="rounded-lg border border-gray-300 bg-white px-3 py-2.5 text-sm focus:border-transparent focus:ring-2 focus:ring-green-500 md:px-4 md:text-base dark:border-gray-600 dark:bg-gray-900"
                   >
                     <option value="name">Sort by Name</option>
                     <option value="difficulty">Sort by Difficulty</option>
@@ -334,14 +330,16 @@ const ActivityBookPage: React.FC = () => {
             return (
               <div
                 key={activity.id}
-                className={`bg-white rounded-xl shadow-md hover:shadow-lg transition-all transform hover:scale-105 cursor-pointer border-2 ${
-                  'border-transparent'
-                }`}
-                style={{
-                  backgroundColor: 'var(--card-color)',
-                  boxShadow: 'var(--shadow-md)'
-                }}
+                role="button"
+                tabIndex={0}
+                className="cursor-pointer rounded-2xl border border-gray-200 bg-white shadow-md transition-all hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
                 onClick={() => openMissionInHub(activity)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openMissionInHub(activity);
+                  }
+                }}
               >
                 <div className="p-4 md:p-6 text-center">
                   <div className="flex items-center justify-center mb-4 relative">
@@ -362,13 +360,13 @@ const ActivityBookPage: React.FC = () => {
                     <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getDifficultyColor(activity.difficulty)}`}>
                       {activity.difficulty}
                     </span>
-                    <span className="text-sm font-medium" style={{ color: 'var(--gray-500)' }}>
+                    <span className="text-sm font-medium text-gray-500">
                       {activity.duration}
                     </span>
                   </div>
 
                   <div className="flex flex-col items-center gap-3">
-                    <span className="text-sm" style={{ color: 'var(--gray-500)' }}>
+                    <span className="text-sm text-gray-500">
                       Ages {activity.ageGroup}
                     </span>
                     <button
@@ -390,11 +388,10 @@ const ActivityBookPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Parent Resources Section */}
-      <section style={{ padding: '4rem 0', backgroundColor: 'var(--light)' }}>
-        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
-          <div className="text-center mb-8 md:mb-12">
-            <h2 className="font-bold mb-3 md:mb-4" style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', color: 'var(--primary)' }}>
+      <section className="rounded-2xl bg-gray-50 py-8 dark:bg-gray-900/40">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-8 text-center md:mb-12">
+            <h2 className="mb-3 text-2xl font-bold text-primary sm:text-3xl md:mb-4">
               For Parents & Educators
             </h2>
             <p className="text-base md:text-lg max-w-2xl mx-auto px-4 text-gray-600">
@@ -403,8 +400,8 @@ const ActivityBookPage: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
-            <div className="bg-white rounded-xl p-4 md:p-6 shadow-md text-center" style={{ backgroundColor: 'var(--card-color)' }}>
-              <div className="w-12 h-12 md:w-14 md:h-14 bg-blue-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+            <div className="rounded-2xl border border-gray-200 bg-white p-4 text-center shadow-md dark:border-gray-700 dark:bg-gray-800 md:p-6">
+              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 md:h-14 md:w-14">
                 <Download size={20} className="text-blue-600 md:w-6 md:h-6" />
               </div>
               <h3 className="text-lg md:text-xl font-bold mb-3 text-primary">
@@ -421,8 +418,8 @@ const ActivityBookPage: React.FC = () => {
               </button>
             </div>
 
-            <div className="bg-white rounded-xl p-4 md:p-6 shadow-md text-center" style={{ backgroundColor: 'var(--card-color)' }}>
-              <div className="w-12 h-12 md:w-14 md:h-14 bg-purple-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+            <div className="rounded-2xl border border-gray-200 bg-white p-4 text-center shadow-md dark:border-gray-700 dark:bg-gray-800 md:p-6">
+              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-purple-100 md:h-14 md:w-14">
                 <Users size={20} className="text-purple-600 md:w-6 md:h-6" />
               </div>
               <h3 className="text-lg md:text-xl font-bold mb-3 text-primary">
@@ -436,8 +433,8 @@ const ActivityBookPage: React.FC = () => {
               </Link>
             </div>
 
-            <div className="bg-white rounded-xl p-4 md:p-6 shadow-md text-center" style={{ backgroundColor: 'var(--card-color)' }}>
-              <div className="w-12 h-12 md:w-14 md:h-14 bg-yellow-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+            <div className="rounded-2xl border border-gray-200 bg-white p-4 text-center shadow-md dark:border-gray-700 dark:bg-gray-800 md:p-6">
+              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-yellow-100 md:h-14 md:w-14">
                 <Book size={20} className="text-yellow-600 md:w-6 md:h-6" />
               </div>
               <h3 className="text-lg md:text-xl font-bold mb-3 text-primary">
@@ -454,31 +451,29 @@ const ActivityBookPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Call to Action */}
-      <section style={{ padding: '4rem 0', background: 'linear-gradient(to right, #16a34a, #22c55e)', color: 'white' }}>
-        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem', textAlign: 'center' }}>
-          <h2 className="font-bold mb-3 md:mb-4" style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)' }}>
+      <section className="rounded-2xl bg-green-700 p-6 text-center text-white sm:p-8 dark:bg-green-800">
+          <h2 className="mb-3 text-2xl font-bold sm:text-3xl">
             Continue Your Privacy Learning Journey
           </h2>
-          <p className="text-lg md:text-xl mb-6 md:mb-8 opacity-90 max-w-2xl mx-auto px-4">
+          <p className="mx-auto mb-6 max-w-2xl px-4 text-base text-green-50 md:mb-8 md:text-lg">
             Explore more age-appropriate resources and activities designed to build strong privacy habits for life.
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
+          <div className="flex flex-col justify-center gap-3 sm:flex-row md:gap-4">
             <Link
               to="/story"
-              className="bg-white text-green-600 px-4 md:px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center justify-center gap-2 text-sm md:text-base"
+              className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-lg bg-white px-4 py-3 text-sm font-semibold text-green-800 hover:bg-green-50 md:px-6 md:text-base"
             >
-              <Book size={18} className="md:w-5 md:h-5" />
+              <Book size={18} className="md:h-5 md:w-5" />
               Read Privacy Panda's Story
             </Link>
-            <Link to="/family-hub"
-              className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-4 py-3 text-sm font-semibold text-green-700 transition-colors hover:bg-gray-100 sm:px-6 sm:text-base"
+            <Link
+              to="/family-hub"
+              className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-lg border-2 border-white px-4 py-3 text-sm font-semibold text-white hover:bg-white/10 sm:px-6 sm:text-base"
             >
-              <Users size={18} className="md:w-5 md:h-5" />
+              <Users size={18} className="md:h-5 md:w-5" />
               Open Family Hub
             </Link>
           </div>
-        </div>
       </section>
       </div>
     </PageLayout>
