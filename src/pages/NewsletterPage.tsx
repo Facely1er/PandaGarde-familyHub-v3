@@ -116,7 +116,7 @@ const NewsletterPage: React.FC = () => {
                 <button
                   type="submit"
                   disabled={isSubscribing}
-                  className="bg-gradient-to-r from-green-700 to-green-800 text-white px-6 py-3 rounded-lg font-semibold hover:from-green-800 hover:to-green-900 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="rounded-lg bg-green-700 px-6 py-3 font-semibold text-white hover:bg-green-800 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-green-600"
                 >
                   {isSubscribing ? 'Subscribing...' : 'Subscribe'}
                 </button>
@@ -146,7 +146,7 @@ const NewsletterPage: React.FC = () => {
             const Icon = feature.icon;
             return (
               <div key={index} className="text-center">
-                <div className="w-16 h-16 rounded-full flex items-center justify-center text-white mx-auto mb-4" style={{ background: 'var(--gradient-primary)' }}>
+                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-700 text-white dark:bg-green-600">
                   <Icon size={32} />
                 </div>
                 <h3 className="text-lg font-bold mb-2 text-primary">
@@ -271,30 +271,29 @@ const NewsletterPage: React.FC = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="rounded-xl py-12" style={{ background: 'linear-gradient(135deg, var(--accent) 0%, #c62828 100%)', color: 'white' }}>
-        <div className="text-center">
-          <h2 className="text-3xl font-bold mb-4">
-            Ready to Stay Informed?
+      <section className="rounded-2xl bg-green-700 p-6 text-center text-white sm:p-8 dark:bg-green-800">
+          <h2 className="mb-4 text-2xl font-bold sm:text-3xl">
+            Ready to stay informed?
           </h2>
-          <p className="text-xl mb-6 opacity-90 max-w-2xl mx-auto">
-            Join thousands of families who are already learning about digital privacy with our monthly newsletter.
+          <p className="mx-auto mb-6 max-w-2xl text-lg text-green-50">
+            Join families who use this newsletter for monthly privacy tips. Unsubscribe anytime.
           </p>
-          <div className="flex flex-wrap gap-4 justify-center">
+          <div className="flex flex-wrap justify-center gap-3">
             <Link
               to="/for-families"
-              className="bg-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center gap-2 text-primary"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-white px-6 py-3 font-semibold text-green-800 hover:bg-green-50"
             >
               <BookOpen size={20} />
-              Try Activities
+              Family resources
             </Link>
-            <Link to="/family-hub"
-              className="bg-white/10 text-white border border-white px-6 py-3 rounded-lg font-semibold hover:bg-white/20 transition-colors inline-flex items-center gap-2"
+            <Link
+              to="/family-hub"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border-2 border-white px-6 py-3 font-semibold text-white hover:bg-white/10"
             >
               <Users size={20} />
               Family Hub
             </Link>
           </div>
-        </div>
       </section>
     </PageLayout>
   );

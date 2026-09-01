@@ -66,10 +66,9 @@ const UnsubscribePage: React.FC = () => {
       subtitle="We're sorry to see you go. You can unsubscribe from our privacy education newsletter at any time."
       breadcrumbs={true}
     >
-      <div className="container mx-auto px-6 py-16">
-        <div className="max-w-2xl mx-auto">
+      <div className="mx-auto w-full max-w-2xl">
           {isUnsubscribed ? (
-            <div className="bg-green-50 border border-green-200 rounded-lg p-8 text-center">
+            <div className="rounded-2xl border border-green-200 bg-green-50 p-8 text-center dark:border-green-800 dark:bg-green-900/20">
               <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
               <h2 className="text-2xl font-bold text-green-800 mb-2">
                 Successfully Unsubscribed
@@ -80,7 +79,7 @@ const UnsubscribePage: React.FC = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   to="/newsletter"
-                  className="bg-gradient-to-r from-pink-500 to-rose-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-pink-600 hover:to-rose-700 transition-all inline-flex items-center gap-2"
+                  className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-green-700 px-6 py-3 font-semibold text-white hover:bg-green-800"
                 >
                   <ArrowLeft size={20} />
                   Back to Newsletter
@@ -94,7 +93,7 @@ const UnsubscribePage: React.FC = () => {
               </div>
             </div>
           ) : (
-            <div className="bg-white rounded-xl p-8 shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
+            <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-md dark:border-gray-700 dark:bg-gray-800">
               <div className="mb-6">
                 <h2 className="text-2xl font-bold mb-4 text-primary">
                   Unsubscribe from Newsletter
@@ -126,7 +125,7 @@ const UnsubscribePage: React.FC = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email address"
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                    className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-green-600 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100"
                     disabled={isUnsubscribing || !!emailFromUrl}
                   />
                 </div>
@@ -163,14 +162,13 @@ const UnsubscribePage: React.FC = () => {
               <div className="mt-8 pt-8 border-t border-gray-200">
                 <p className="text-sm text-gray-600 text-center">
                   Changed your mind?{' '}
-                  <Link to="/newsletter" className="text-pink-600 hover:text-pink-700 font-semibold">
+                  <Link to="/newsletter" className="font-semibold text-green-700 hover:text-green-800">
                     Stay subscribed
                   </Link>
                 </p>
               </div>
             </div>
           )}
-        </div>
       </div>
     </PageLayout>
   );

@@ -23,8 +23,8 @@ const SafetyPostersPage: React.FC = () => {
       size: '11" × 17"',
       icon: Lock,
       downloadUrl: '/downloads/safety-posters-print.html#password-safety',
-      previewBackground: 'linear-gradient(145deg, #ecfdf5 0%, #6ee7b7 55%, #34d399 100%)',
-      iconColor: '#047857'
+      previewClass: 'bg-gradient-to-br from-emerald-50 via-emerald-300 to-emerald-400',
+      iconClass: 'text-emerald-800'
     },
     {
       id: 'personal-information',
@@ -34,8 +34,8 @@ const SafetyPostersPage: React.FC = () => {
       size: '11" × 17"',
       icon: Shield,
       downloadUrl: '/downloads/safety-posters-print.html#personal-information',
-      previewBackground: 'linear-gradient(145deg, #eff6ff 0%, #93c5fd 50%, #3b82f6 100%)',
-      iconColor: '#1e40af'
+      previewClass: 'bg-gradient-to-br from-blue-50 via-blue-300 to-blue-500',
+      iconClass: 'text-blue-800'
     },
     {
       id: 'stranger-danger',
@@ -45,8 +45,8 @@ const SafetyPostersPage: React.FC = () => {
       size: '11" × 17"',
       icon: AlertTriangle,
       downloadUrl: '/downloads/safety-posters-print.html#stranger-danger',
-      previewBackground: 'linear-gradient(145deg, #fff7ed 0%, #fdba74 45%, #f97316 100%)',
-      iconColor: '#9a3412'
+      previewClass: 'bg-gradient-to-br from-orange-50 via-orange-300 to-orange-500',
+      iconClass: 'text-orange-800'
     },
     {
       id: 'app-safety',
@@ -56,8 +56,8 @@ const SafetyPostersPage: React.FC = () => {
       size: '11" × 17"',
       icon: Smartphone,
       downloadUrl: '/downloads/safety-posters-print.html#app-safety',
-      previewBackground: 'linear-gradient(145deg, #faf5ff 0%, #d8b4fe 40%, #a855f7 100%)',
-      iconColor: '#6b21a8'
+      previewClass: 'bg-gradient-to-br from-purple-50 via-purple-300 to-purple-500',
+      iconClass: 'text-purple-800'
     },
     {
       id: 'ask-for-help',
@@ -67,8 +67,8 @@ const SafetyPostersPage: React.FC = () => {
       size: '11" × 17"',
       icon: LifeBuoy,
       downloadUrl: '/downloads/safety-posters-print.html#ask-for-help',
-      previewBackground: 'linear-gradient(145deg, #fef2f2 0%, #fca5a5 40%, #ef4444 100%)',
-      iconColor: '#991b1b'
+      previewClass: 'bg-gradient-to-br from-red-50 via-red-300 to-red-500',
+      iconClass: 'text-red-800'
     },
     {
       id: 'family-agreement',
@@ -78,8 +78,8 @@ const SafetyPostersPage: React.FC = () => {
       size: '8.5" × 11"',
       icon: Users,
       downloadUrl: '/downloads/family-agreement-print.html',
-      previewBackground: 'linear-gradient(145deg, #f5f3ff 0%, #c4b5fd 45%, #7c3aed 100%)',
-      iconColor: '#5b21b6'
+      previewClass: 'bg-gradient-to-br from-violet-50 via-violet-300 to-violet-600',
+      iconClass: 'text-violet-800'
     }
   ];
 
@@ -124,8 +124,7 @@ const SafetyPostersPage: React.FC = () => {
       subtitle="Print a poster and hang it in the classroom or at home—one rule per sheet."
       breadcrumbs={true}
     >
-      <div className="bg-white dark:bg-gray-900">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-10">
         {/* Introduction */}
         <div className="max-w-4xl mx-auto text-center mb-16">
           <h2 className="text-3xl font-bold mb-6 text-primary">
@@ -137,7 +136,7 @@ const SafetyPostersPage: React.FC = () => {
           
           <div className="mb-8 rounded-xl border border-green-200 bg-green-50 p-4 sm:p-6 dark:border-green-800 dark:bg-green-950/30">
             <h3 className="mb-4 text-lg font-semibold text-primary sm:text-xl">
-              📋 Printing & Display Guidelines
+              Printing and display guidelines
             </h3>
             <div className="grid grid-cols-1 gap-4 text-left md:grid-cols-2">
               <div className="flex items-start gap-3">
@@ -179,15 +178,13 @@ const SafetyPostersPage: React.FC = () => {
             return (
               <div
                 key={poster.id}
-                className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
-                style={{ backgroundColor: 'var(--card-color)' }}
+                className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-lg transition-shadow hover:shadow-xl dark:border-gray-700 dark:bg-gray-800"
               >
-                <div className="aspect-w-4 aspect-h-3 overflow-hidden rounded-t-xl">
+                <div className="overflow-hidden rounded-t-2xl">
                   <div
-                    className="w-full h-48 flex items-center justify-center"
-                    style={{ background: poster.previewBackground }}
+                    className={`flex h-48 w-full items-center justify-center ${poster.previewClass}`}
                   >
-                    <IconComponent size={48} style={{ color: poster.iconColor }} aria-hidden />
+                    <IconComponent size={48} className={poster.iconClass} aria-hidden />
                   </div>
                 </div>
                 
@@ -206,7 +203,7 @@ const SafetyPostersPage: React.FC = () => {
                   </p>
                   
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-sm font-medium" style={{ color: 'var(--gray-500)' }}>
+                    <span className="text-sm font-medium text-gray-500">
                       {poster.ageGroup}
                     </span>
                   </div>
@@ -225,7 +222,7 @@ const SafetyPostersPage: React.FC = () => {
         </div>
 
         {/* Bulk Download Section */}
-        <div className="mb-12 rounded-xl bg-gradient-to-r from-green-600 to-green-700 p-6 text-center text-white sm:p-8">
+        <div className="rounded-2xl bg-green-700 p-6 text-center text-white sm:p-8 dark:bg-green-800">
           <h2 className="mb-4 text-xl font-bold sm:text-2xl">
             Complete Poster Collection
           </h2>
@@ -251,8 +248,7 @@ const SafetyPostersPage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Link
               to="/downloads/coloring-sheets"
-              className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow text-center"
-              style={{ backgroundColor: 'var(--card-color)' }}
+              className="rounded-2xl border border-gray-200 bg-white p-6 text-center shadow-md transition-shadow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
             >
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Shield size={24} className="text-green-600" />
@@ -267,8 +263,7 @@ const SafetyPostersPage: React.FC = () => {
 
             <Link
               to="/downloads/family-agreement"
-              className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow text-center"
-              style={{ backgroundColor: 'var(--card-color)' }}
+              className="rounded-2xl border border-gray-200 bg-white p-6 text-center shadow-md transition-shadow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
             >
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Users size={24} className="text-purple-600" />
@@ -283,8 +278,7 @@ const SafetyPostersPage: React.FC = () => {
 
             <Link
               to="/how-it-works"
-              className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow text-center"
-              style={{ backgroundColor: 'var(--card-color)' }}
+              className="rounded-2xl border border-gray-200 bg-white p-6 text-center shadow-md transition-shadow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
             >
               <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <AlertTriangle size={24} className="text-yellow-600" />
@@ -299,7 +293,6 @@ const SafetyPostersPage: React.FC = () => {
           </div>
         </div>
       </div>
-    </div>
     </PageLayout>
   );
 };

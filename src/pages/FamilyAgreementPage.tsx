@@ -78,8 +78,7 @@ const FamilyAgreementPage: React.FC = () => {
       subtitle="Fill in the agreement together, print it, and post it where everyone can see it. Tap Start below to begin."
       breadcrumbs={true}
     >
-      <div className="bg-white dark:bg-gray-900">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-10">
         {/* Introduction */}
         <div className="max-w-4xl mx-auto text-center mb-16">
           <h2 className="text-3xl font-bold mb-6 text-primary">
@@ -89,34 +88,34 @@ const FamilyAgreementPage: React.FC = () => {
             Print the agreement, sit down as a family, and fill in the blanks. Post it on the fridge when everyone signs. You can update it as kids get older.
           </p>
           
-          <div className="bg-purple-50 border border-purple-200 rounded-xl p-6 mb-8 bg-light">
-            <h3 className="text-xl font-semibold mb-4 text-primary">
-              💡 How to Use This Agreement
+          <div className="mb-8 rounded-xl border border-green-200 bg-green-50 p-6 dark:border-green-800 dark:bg-green-950/30">
+            <h3 className="mb-4 text-xl font-semibold text-primary">
+              How to use this agreement
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
               <div className="flex items-start gap-3">
-                <CheckCircle size={20} className="text-purple-600 mt-1 flex-shrink-0" />
+                <CheckCircle size={20} className="mt-1 flex-shrink-0 text-green-600" />
                 <div>
                   <h4 className="font-semibold mb-1 text-primary">Print & Discuss</h4>
                   <p className="text-sm text-gray-600">Print the agreement and fill it out together as a family</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <CheckCircle size={20} className="text-purple-600 mt-1 flex-shrink-0" />
+                <CheckCircle size={20} className="mt-1 flex-shrink-0 text-green-600" />
                 <div>
                   <h4 className="font-semibold mb-1 text-primary">Customize Rules</h4>
                   <p className="text-sm text-gray-600">Adapt the rules to fit your family's specific needs and values</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <CheckCircle size={20} className="text-purple-600 mt-1 flex-shrink-0" />
+                <CheckCircle size={20} className="mt-1 flex-shrink-0 text-green-600" />
                 <div>
                   <h4 className="font-semibold mb-1 text-primary">Sign Together</h4>
                   <p className="text-sm text-gray-600">Have everyone sign to show commitment to the agreement</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <CheckCircle size={20} className="text-purple-600 mt-1 flex-shrink-0" />
+                <CheckCircle size={20} className="mt-1 flex-shrink-0 text-green-600" />
                 <div>
                   <h4 className="font-semibold mb-1 text-primary">Review Regularly</h4>
                   <p className="text-sm text-gray-600">Update the agreement as your children grow and technology changes</p>
@@ -136,8 +135,7 @@ const FamilyAgreementPage: React.FC = () => {
             {agreementSections.map((section, index) => (
               <div
                 key={index}
-                className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow"
-                style={{ backgroundColor: 'var(--card-color)' }}
+                className="rounded-2xl border border-gray-200 bg-white p-6 shadow-md transition-shadow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
               >
                 <div className="text-4xl mb-4">{section.icon}</div>
                 <h3 className="text-lg font-semibold mb-3 text-primary">
@@ -205,8 +203,7 @@ const FamilyAgreementPage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Link
               to="/downloads/safety-posters"
-              className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow text-center"
-              style={{ backgroundColor: 'var(--card-color)' }}
+              className="rounded-2xl border border-gray-200 bg-white p-6 text-center shadow-md transition-shadow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
             >
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Shield size={24} className="text-blue-600" />
@@ -221,8 +218,7 @@ const FamilyAgreementPage: React.FC = () => {
 
             <Link
               to="/for-families"
-              className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow text-center"
-              style={{ backgroundColor: 'var(--card-color)' }}
+              className="rounded-2xl border border-gray-200 bg-white p-6 text-center shadow-md transition-shadow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
             >
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Users size={24} className="text-purple-600" />
@@ -236,8 +232,7 @@ const FamilyAgreementPage: React.FC = () => {
             </Link>
 
             <Link to="/family-hub"
-              className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow text-center"
-              style={{ backgroundColor: 'var(--card-color)' }}
+              className="rounded-2xl border border-gray-200 bg-white p-6 text-center shadow-md transition-shadow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
             >
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <CheckCircle size={24} className="text-green-600" />
@@ -246,13 +241,12 @@ const FamilyAgreementPage: React.FC = () => {
                 Family Hub
               </h3>
               <p className="text-sm text-gray-600">
-                Track your family's privacy learning progress
+                Optional kids&apos; missions on this device
               </p>
             </Link>
           </div>
         </div>
       </div>
-    </div>
     </PageLayout>
   );
 };

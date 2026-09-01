@@ -87,9 +87,7 @@ const CertificatesPage: React.FC = () => {
       subtitle="Print a certificate when your child finishes a story or mission. Pick one below and print it at home."
       breadcrumbs={true}
     >
-      <div className="bg-white dark:bg-gray-900">
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-10">
         {/* Introduction */}
         <div className="max-w-4xl mx-auto text-center mb-16">
           <h2 className="mb-6 text-2xl font-bold text-green-700 sm:text-3xl dark:text-green-400">
@@ -100,8 +98,8 @@ const CertificatesPage: React.FC = () => {
           </p>
           
           <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-6 mb-8 bg-light">
-            <h3 className="text-xl font-semibold mb-4 text-primary">
-              🏆 Certificate Usage Tips
+            <h3 className="mb-4 text-xl font-semibold text-primary">
+              Certificate usage tips
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
               <div className="flex items-start gap-3">
@@ -143,8 +141,7 @@ const CertificatesPage: React.FC = () => {
             return (
               <div
                 key={cert.id}
-                className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
-                style={{ backgroundColor: 'var(--card-color)' }}
+                className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-lg transition-shadow hover:shadow-xl dark:border-gray-700 dark:bg-gray-800"
               >
                 <div className="aspect-w-4 aspect-h-3 bg-gray-100">
                   <div className="w-full h-48 bg-gradient-to-br from-yellow-100 to-yellow-200 flex items-center justify-center">
@@ -177,7 +174,7 @@ const CertificatesPage: React.FC = () => {
                   
                   <button
                     onClick={() => handleDownload(cert.id)}
-                    className="w-full bg-yellow-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-yellow-700 transition-colors flex items-center justify-center gap-2"
+                    className="flex w-full items-center justify-center gap-2 rounded-lg bg-green-700 px-4 py-2 font-semibold text-white hover:bg-green-800 dark:bg-green-600"
                   >
                     <Download size={16} />
                     View & Print
@@ -189,7 +186,7 @@ const CertificatesPage: React.FC = () => {
         </div>
 
         {/* Custom Certificate Generator */}
-        <div className="mb-12 rounded-xl bg-gradient-to-r from-yellow-500 to-yellow-600 p-6 text-center text-white sm:p-8">
+        <div className="rounded-2xl bg-green-700 p-6 text-center text-white sm:p-8 dark:bg-green-800">
           <h2 className="mb-4 text-xl font-bold sm:text-2xl">
             Generate Custom Certificate
           </h2>
@@ -198,7 +195,7 @@ const CertificatesPage: React.FC = () => {
           </p>
           <Link
             to="/downloads/certificates"
-            className="bg-white text-yellow-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center gap-2"
+            className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-white px-8 py-3 font-semibold text-green-800 hover:bg-green-50"
           >
             <Award size={20} />
             Generate Custom Certificate
@@ -206,7 +203,7 @@ const CertificatesPage: React.FC = () => {
         </div>
 
         {/* Bulk Download Section */}
-        <div className="mb-12 rounded-xl bg-gradient-to-r from-green-500 to-green-600 p-6 text-center text-white sm:p-8">
+        <div className="rounded-2xl bg-green-700 p-6 text-center text-white sm:p-8 dark:bg-green-800">
           <h2 className="mb-4 text-xl font-bold sm:text-2xl">
             Complete Certificate Collection
           </h2>
@@ -216,7 +213,7 @@ const CertificatesPage: React.FC = () => {
           <button
             onClick={() => handleDownload('all-certificates')}
             disabled={isDownloading}
-            className="bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-white px-8 py-3 font-semibold text-green-800 hover:bg-green-50 disabled:cursor-not-allowed disabled:opacity-50"
           >
             <Download size={20} />
             {isDownloading ? 'Generating PDF...' : 'Download Complete Set'}
@@ -232,8 +229,7 @@ const CertificatesPage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Link
               to="/for-families"
-              className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow text-center"
-              style={{ backgroundColor: 'var(--card-color)' }}
+              className="rounded-2xl border border-gray-200 bg-white p-6 text-center shadow-md transition-shadow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
             >
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Award size={24} className="text-green-600" />
@@ -248,8 +244,7 @@ const CertificatesPage: React.FC = () => {
 
             <Link
               to="/downloads/coloring-sheets"
-              className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow text-center"
-              style={{ backgroundColor: 'var(--card-color)' }}
+              className="rounded-2xl border border-gray-200 bg-white p-6 text-center shadow-md transition-shadow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
             >
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Star size={24} className="text-blue-600" />
@@ -263,8 +258,7 @@ const CertificatesPage: React.FC = () => {
             </Link>
 
             <Link to="/family-hub"
-              className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow text-center"
-              style={{ backgroundColor: 'var(--card-color)' }}
+              className="rounded-2xl border border-gray-200 bg-white p-6 text-center shadow-md transition-shadow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
             >
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Trophy size={24} className="text-purple-600" />
@@ -273,12 +267,11 @@ const CertificatesPage: React.FC = () => {
                 Family Hub
               </h3>
               <p className="text-sm text-gray-600">
-                Track family achievements and progress together
+                Optional kids&apos; missions on this device
               </p>
             </Link>
           </div>
         </div>
-      </div>
       </div>
     </PageLayout>
   );

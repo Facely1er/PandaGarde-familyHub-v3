@@ -275,7 +275,7 @@ export const ConversationStarter: React.FC<ConversationStarterProps> = ({
   }
 
   return (
-    <div className="conversation-starter bg-white rounded-xl p-6 shadow-md" style={{ backgroundColor: 'var(--card-color)' }}>
+    <div className="conversation-starter rounded-2xl border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800">
       <div className="flex items-center gap-3 mb-6">
         <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-lg flex items-center justify-center text-white">
           <MessageCircle size={24} />

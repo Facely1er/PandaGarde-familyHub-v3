@@ -44,17 +44,19 @@ const ResourceModal: React.FC<ResourceModalProps> = ({
 
   return (
     <div 
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
       onClick={onClose}
     >
       <div 
-        className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="resource-modal-title"
+        className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800"
         onClick={(e) => e.stopPropagation()}
-        style={{ backgroundColor: 'var(--card-color)' }}
       >
         <div className="p-6">
           <div className="flex items-center justify-between mb-6">
-            <h3 className="text-2xl font-bold text-primary">
+            <h3 id="resource-modal-title" className="text-2xl font-bold text-primary">
               {title}
             </h3>
             <button

@@ -345,13 +345,7 @@ const PilotPage: React.FC = () => {
           </section>
 
           {/* CTA Section */}
-          <section
-            className="rounded-2xl p-8 sm:p-12 text-center text-white"
-            style={{
-              background: 'linear-gradient(135deg, #1B5E20 0%, #2E7D32 50%, #388E3C 100%)',
-              border: '1px solid rgba(255,255,255,0.1)'
-            }}
-          >
+          <section className="rounded-2xl bg-green-700 p-8 text-center text-white sm:p-12 dark:bg-green-800">
             <Sparkles className="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-6 text-white/90" />
             <h2 className="text-2xl sm:text-3xl font-bold mb-4">Ready to Join the 2026 Pilot?</h2>
             <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">

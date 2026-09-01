@@ -262,7 +262,7 @@ const EducatorToolsPage: React.FC = () => {
       breadcrumbs={true}
     >
 
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-8">
         <div
           className="rounded-xl border border-amber-200 bg-amber-50 dark:bg-amber-950/30 dark:border-amber-800 px-4 py-3 mb-6 text-sm text-gray-800"
           role="status"
@@ -278,10 +278,7 @@ const EducatorToolsPage: React.FC = () => {
 
         {/* Progress Section */}
         <div className="py-8">
-          <div className="bg-white rounded-xl shadow-lg p-8 mb-8" style={{
-            backgroundColor: 'var(--card-color)',
-            boxShadow: 'var(--shadow-lg)'
-          }}>
+          <div className="mb-8 rounded-2xl border border-gray-200 bg-white p-8 shadow-lg dark:border-gray-700 dark:bg-gray-800">
             <div className="text-center mb-6">
               <h2 className="text-2xl font-bold mb-4 text-primary">
                 What you&apos;ve used so far
@@ -292,7 +289,7 @@ const EducatorToolsPage: React.FC = () => {
                   <div className="text-sm text-gray-600">Pages opened</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold" style={{ color: 'var(--primary-light)' }}>{resources.length}</div>
+                  <div className="text-3xl font-bold text-green-600 dark:text-green-400">{resources.length}</div>
                   <div className="text-sm text-gray-600">Available</div>
                 </div>
                 <div className="text-center">
@@ -319,15 +316,12 @@ const EducatorToolsPage: React.FC = () => {
                   <button
                     key={category.id}
                     onClick={() => setActiveCategory(category.id)}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-full font-medium transition-all ${
+                    aria-pressed={activeCategory === category.id}
+                    className={`flex min-h-[44px] items-center gap-2 rounded-full px-4 py-2 font-medium transition-all ${
                       activeCategory === category.id
-                        ? 'bg-green-600 text-white'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        ? 'bg-green-700 text-white dark:bg-green-600'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600'
                     }`}
-                    style={{
-                      backgroundColor: activeCategory === category.id ? 'var(--primary-light)' : undefined,
-                      color: activeCategory === category.id ? 'white' : undefined
-                    }}
                   >
                     <Icon size={16} />
                     {category.label}
@@ -349,14 +343,18 @@ const EducatorToolsPage: React.FC = () => {
             return (
               <div
                 key={resource.id}
-                className={`bg-white rounded-xl shadow-md hover:shadow-lg transition-all transform hover:scale-105 cursor-pointer border-2 ${
-                  isCompleted ? 'border-green-500' : 'border-transparent'
+                role="button"
+                tabIndex={0}
+                className={`cursor-pointer rounded-2xl border-2 bg-white shadow-md transition-all hover:shadow-lg dark:bg-gray-800 ${
+                  isCompleted ? 'border-green-500' : 'border-gray-200 dark:border-gray-700'
                 }`}
-                style={{
-                  backgroundColor: 'var(--card-color)',
-                  boxShadow: 'var(--shadow-md)'
-                }}
                 onClick={() => handleResourceStart(resource)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleResourceStart(resource);
+                  }
+                }}
               >
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
@@ -385,14 +383,14 @@ const EducatorToolsPage: React.FC = () => {
                     <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getGradeLevelColor(resource.gradeLevel)}`}>
                       {resource.gradeLevel}
                     </span>
-                    <span className="text-sm font-medium" style={{ color: 'var(--gray-500)' }}>
+                    <span className="text-sm font-medium text-gray-500">
                       {resource.duration}
                     </span>
                   </div>
 
                   <div className="flex gap-2">
                     <button
-                      className="flex-1 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-green-600 hover:to-emerald-700 transition-all"
+                      className="flex-1 rounded-lg bg-green-700 px-4 py-2 font-semibold text-white hover:bg-green-800 dark:bg-green-600"
                       onClick={(e) => {
                         e.stopPropagation();
                         handleResourceStart(resource);
@@ -454,7 +452,7 @@ const EducatorToolsPage: React.FC = () => {
         />
 
         {/* Call to Action */}
-        <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl p-8 text-center mt-8 mb-8">
+        <div className="mt-8 rounded-2xl bg-green-700 p-8 text-center text-white dark:bg-green-800">
           <h2 className="text-2xl font-bold mb-4">
             Ready to Teach Digital Privacy?
           </h2>
@@ -464,21 +462,21 @@ const EducatorToolsPage: React.FC = () => {
           <div className="flex flex-wrap gap-4 justify-center">
             <Link
               to="/family-hub"
-              className="bg-white text-green-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center gap-2"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-white px-6 py-3 font-semibold text-green-800 hover:bg-green-50"
             >
               <Users size={20} />
               Family Hub
             </Link>
             <Link
               to="/contact"
-              className="bg-green-700 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-800 transition-colors inline-flex items-center gap-2"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border-2 border-white px-6 py-3 font-semibold text-white hover:bg-white/10"
             >
               <Presentation size={20} />
               Educator pilot
             </Link>
             <Link
               to="/contact"
-              className="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors inline-flex items-center gap-2"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border-2 border-white px-6 py-3 font-semibold text-white hover:bg-white/10"
             >
               <Award size={20} />
               Contact
