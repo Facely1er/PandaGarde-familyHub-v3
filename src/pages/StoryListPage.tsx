@@ -146,14 +146,14 @@ export function StoryListPage() {
                     aria-labelledby={`season-${season}-heading`}
                     className={
                       isSeason2
-                        ? 'rounded-2xl border border-teal-200 bg-teal-50/40 p-4 dark:border-teal-800/50 dark:bg-teal-950/20 sm:p-5'
+                        ? 'rounded-2xl border border-green-300 bg-green-50/60 p-4 dark:border-green-700/50 dark:bg-green-950/25 sm:p-5'
                         : 'rounded-2xl border border-green-200 bg-green-50/30 p-4 dark:border-green-800/40 dark:bg-green-950/15 sm:p-5'
                     }
                   >
                     <header className="mb-5 border-b border-gray-200/80 pb-4 dark:border-gray-700/80">
                       <p
                         className={`text-xs font-semibold uppercase tracking-wider ${
-                          isSeason2 ? 'text-teal-700 dark:text-teal-300' : 'text-green-700 dark:text-green-400'
+                          isSeason2 ? 'text-green-800 dark:text-green-200' : 'text-green-700 dark:text-green-400'
                         }`}
                       >
                         {t('stories.seasonLabel', { number: season })}

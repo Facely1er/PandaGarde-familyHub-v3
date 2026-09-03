@@ -31,14 +31,14 @@ const segmentedButtonClass = (selected: boolean, compact: boolean) =>
     compact
       ? 'inline-flex min-h-[32px] min-w-0 flex-1 items-center justify-center gap-1 rounded px-2 py-0.5 text-xs font-medium transition-colors sm:gap-1.5 sm:px-2.5 sm:text-sm'
       : 'inline-flex min-h-[44px] min-w-0 flex-1 items-center justify-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-800',
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-800',
     selected
-      ? 'bg-white text-teal-700 shadow-sm ring-1 ring-teal-600/30 dark:bg-gray-800 dark:text-teal-300 dark:ring-teal-500/40'
+      ? 'bg-white text-green-700 shadow-sm ring-1 ring-green-600/30 dark:bg-gray-800 dark:text-green-300 dark:ring-green-500/40'
       : 'text-gray-600 hover:bg-white/70 dark:text-gray-300 dark:hover:bg-gray-800/70',
   ].join(' ');
 
 const hubButtonClass =
-  'relative flex h-8 w-8 items-center justify-center rounded-md text-base leading-none text-gray-500 transition-colors hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 dark:text-gray-400 dark:hover:bg-gray-700';
+  'relative flex h-8 w-8 items-center justify-center rounded-md text-base leading-none text-gray-500 transition-colors hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 dark:text-gray-400 dark:hover:bg-gray-700';
 
 function nextLanguage(current: SupportedLanguage): SupportedLanguage {
   const index = SUPPORTED_LANGUAGES.indexOf(current);

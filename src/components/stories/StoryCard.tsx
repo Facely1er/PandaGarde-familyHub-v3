@@ -25,7 +25,7 @@ export function StoryCard({ story }: { story: Story }) {
             {t('stories.card.episode', { number: story.episodeNumber })}
           </span>
           {story.season > 1 ? (
-            <span className="text-xs font-medium text-teal-800 dark:text-teal-200 bg-teal-100 dark:bg-teal-950 px-2 py-0.5 rounded-full">
+            <span className="rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800 dark:bg-green-950 dark:text-green-200">
               {t('stories.card.season', { number: story.season })}
             </span>
           ) : null}

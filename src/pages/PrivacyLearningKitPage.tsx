@@ -50,9 +50,9 @@ const PrivacyLearningKitPage: React.FC = () => {
                 <li key={item.href}>
                   <Link
                     to={item.href}
-                    className="block rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-5 hover:border-teal-500 transition-colors min-h-[100px]"
+                    className="block rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-5 hover:border-green-500 transition-colors min-h-[100px]"
                   >
-                    <span className="text-xs font-semibold uppercase tracking-wide text-teal-600 dark:text-teal-400">
+                    <span className="text-xs font-semibold uppercase tracking-wide text-green-600 dark:text-green-400">
                       {item.badge}
                     </span>
                     <h3 className="font-semibold text-gray-900 dark:text-white mt-1">{item.title}</h3>

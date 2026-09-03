@@ -16,22 +16,22 @@ const SuccessStoriesPage: React.FC = () => {
       >
         {/* MODPA awareness callout for Maryland families */}
         <div className="pt-6">
-          <div className="rounded-xl border-2 border-teal-200 dark:border-teal-800 bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-teal-900/30 dark:to-cyan-900/30 p-5 mb-6">
+          <div className="rounded-xl border-2 border-green-200 dark:border-green-800 bg-gradient-to-r from-green-50 to-cyan-50 dark:from-green-900/30 dark:to-cyan-900/30 p-5 mb-6">
             <div className="flex flex-col sm:flex-row sm:items-start gap-3">
-              <div className="flex-shrink-0 w-9 h-9 rounded-full bg-teal-600 flex items-center justify-center">
+              <div className="flex-shrink-0 w-9 h-9 rounded-full bg-green-600 flex items-center justify-center">
                 <Scale size={16} color="white" />
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="font-bold text-teal-900 dark:text-teal-100 mb-1 text-sm">
+                <h3 className="font-bold text-green-900 dark:text-green-100 mb-1 text-sm">
                   Maryland families: MODPA gives you real tools — not just tips
                 </h3>
-                <p className="text-xs text-teal-800 dark:text-teal-200 mb-3 leading-relaxed">
+                <p className="text-xs text-green-800 dark:text-green-200 mb-3 leading-relaxed">
                   Under the Maryland Online Data Privacy Act, you can formally request that any qualifying app access, correct, delete, or stop selling your family's personal data. Many families in our community are already using these rights. Share your story or learn the steps below.
                 </p>
                 <div className="flex flex-wrap gap-2">
                   <Link
                     to="/digital-rights"
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold rounded-lg transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-600 hover:bg-green-700 text-white text-xs font-semibold rounded-lg transition-colors"
                   >
                     <Scale size={12} />
                     Understand your MODPA rights
@@ -40,7 +40,7 @@ const SuccessStoriesPage: React.FC = () => {
                     href={PRIVACY_PORTAL_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-teal-900/50 text-teal-800 dark:text-teal-200 border border-teal-400 dark:border-teal-600 text-xs font-semibold rounded-lg hover:bg-teal-50 transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-green-900/50 text-green-800 dark:text-green-200 border border-green-400 dark:border-green-600 text-xs font-semibold rounded-lg hover:bg-green-50 transition-colors"
                   >
                     <ExternalLink size={12} />
                     Privacy Portal

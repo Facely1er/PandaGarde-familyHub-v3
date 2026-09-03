@@ -49,7 +49,7 @@ class CommunityErrorBoundary extends Component<Props, State> {
 
       return (
         <div className="min-h-screen flex items-center justify-center p-4 bg-surface">
-          <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-6 text-center" style={{ backgroundColor: 'var(--card-color)' }}>
+          <div className="w-full max-w-md rounded-2xl border border-gray-200 bg-white p-6 text-center shadow-lg dark:border-gray-700 dark:bg-gray-800">
             <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <AlertTriangle size={32} className="text-red-600" />
             </div>
@@ -62,7 +62,7 @@ class CommunityErrorBoundary extends Component<Props, State> {
             <div className="space-y-3">
               <button
                 onClick={this.handleReset}
-                className="w-full px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition-colors flex items-center justify-center gap-2"
+                className="flex w-full items-center justify-center gap-2 rounded-lg bg-green-700 px-6 py-3 font-semibold text-white hover:bg-green-800"
               >
                 <RefreshCw size={18} />
                 Try Again
@@ -90,7 +90,7 @@ class CommunityErrorBoundary extends Component<Props, State> {
             {this.state.error && import.meta.env.DEV && (
               <details className="mt-4 text-left">
                 <summary className="cursor-pointer text-sm text-gray-500">Error Details (Development Only)</summary>
-                <pre className="mt-2 text-xs bg-gray-100 p-2 rounded overflow-auto" style={{ maxHeight: '200px' }}>
+                <pre className="mt-2 max-h-52 overflow-auto rounded bg-gray-100 p-2 text-xs dark:bg-gray-900">
                   {this.state.error.toString()}
                 </pre>
               </details>

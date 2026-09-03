@@ -278,14 +278,14 @@ const FamilyPrivacyGuidePage: React.FC = () => {
 
           {/* MODPA Rights for Maryland Families */}
           <section className="mb-16">
-            <div className="rounded-2xl border-2 border-teal-200 bg-gradient-to-br from-teal-50 to-cyan-50 p-8 family-guide-card">
+            <div className="rounded-2xl border-2 border-green-200 bg-gradient-to-br from-green-50 to-cyan-50 p-8 family-guide-card">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-teal-600 rounded-xl flex items-center justify-center">
+                <div className="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center">
                   <Scale size={24} className="text-white" />
                 </div>
                 <div>
                   <h2 className="text-2xl font-bold family-guide-primary">Maryland Families: Your MODPA Rights</h2>
-                  <p className="text-sm text-teal-700">Maryland Online Data Privacy Act — now in effect</p>
+                  <p className="text-sm text-green-700">Maryland Online Data Privacy Act — now in effect</p>
                 </div>
               </div>
 
@@ -295,21 +295,21 @@ const FamilyPrivacyGuidePage: React.FC = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                 <div className="bg-white rounded-xl p-5 shadow-sm">
-                  <div className="w-8 h-8 bg-teal-100 rounded-full flex items-center justify-center mb-3 text-teal-700 font-bold text-sm">1</div>
+                  <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mb-3 text-green-700 font-bold text-sm">1</div>
                   <h3 className="font-bold mb-2 family-guide-primary text-base">Know what's collected</h3>
                   <p className="text-xs family-guide-muted leading-relaxed">
                     Send an <strong>access request</strong> to any app or service your child uses. They must tell you what personal data they hold and how it's used. You can also ask for a portable copy.
                   </p>
                 </div>
                 <div className="bg-white rounded-xl p-5 shadow-sm">
-                  <div className="w-8 h-8 bg-teal-100 rounded-full flex items-center justify-center mb-3 text-teal-700 font-bold text-sm">2</div>
+                  <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mb-3 text-green-700 font-bold text-sm">2</div>
                   <h3 className="font-bold mb-2 family-guide-primary text-base">Delete or correct it</h3>
                   <p className="text-xs family-guide-muted leading-relaxed">
                     Submit a <strong>deletion request</strong> to remove your child's data from any qualifying service. If data is inaccurate (wrong age, location, etc.) a <strong>correction request</strong> applies instead.
                   </p>
                 </div>
                 <div className="bg-white rounded-xl p-5 shadow-sm">
-                  <div className="w-8 h-8 bg-teal-100 rounded-full flex items-center justify-center mb-3 text-teal-700 font-bold text-sm">3</div>
+                  <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mb-3 text-green-700 font-bold text-sm">3</div>
                   <h3 className="font-bold mb-2 family-guide-primary text-base">Opt out of sale and ads</h3>
                   <p className="text-xs family-guide-muted leading-relaxed">
                     Many free apps generate revenue by selling user data or showing targeted ads. Use MODPA's <strong>opt-out right</strong> — services must comply within 15 days. If your school uses EduSoluce, submit via their privacy portal.
@@ -317,9 +317,9 @@ const FamilyPrivacyGuidePage: React.FC = () => {
                 </div>
               </div>
 
-              <div className="bg-teal-100 rounded-xl p-4 mb-4">
-                <h4 className="font-bold text-teal-900 mb-1 text-sm">Conversation starter for teens</h4>
-                <p className="text-xs text-teal-800 leading-relaxed">
+              <div className="bg-green-100 rounded-xl p-4 mb-4">
+                <h4 className="font-bold text-green-900 mb-1 text-sm">Conversation starter for teens</h4>
+                <p className="text-xs text-green-800 leading-relaxed">
                   "Did you know you have a legal right to ask TikTok, Roblox, or any app: 'What do you know about me?' — and they have to answer? That's what MODPA means for us as a Maryland family."
                 </p>
               </div>
@@ -327,7 +327,7 @@ const FamilyPrivacyGuidePage: React.FC = () => {
               <div className="flex flex-wrap gap-3">
                 <Link
                   to="/digital-rights"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white text-sm font-semibold rounded-lg transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold rounded-lg transition-colors"
                 >
                   <Scale size={16} />
                   Full MODPA guide and module
@@ -336,7 +336,7 @@ const FamilyPrivacyGuidePage: React.FC = () => {
                   href={PRIVACY_PORTAL_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-white text-teal-800 border-2 border-teal-300 hover:bg-teal-50 text-sm font-semibold rounded-lg transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-white text-green-800 border-2 border-green-300 hover:bg-green-50 text-sm font-semibold rounded-lg transition-colors"
                 >
                   <ExternalLink size={16} />
                   Submit a request via Privacy Portal

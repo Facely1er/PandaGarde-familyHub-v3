@@ -130,15 +130,15 @@ const AppFeaturesPage: React.FC = () => {
 
   return (
     <PageLayout>
-      <div className="min-h-screen bg-gradient-to-br from-teal-50 via-white to-green-50">
+      <div className="bg-white dark:bg-gray-900">
         {/* Hero Section */}
-        <div className="bg-gradient-to-r from-teal-600 to-green-600 text-white py-16">
+        <div className="bg-green-700 py-16 text-white dark:bg-green-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <h1 className="text-4xl md:text-5xl font-bold mb-4">
                 PandaGarde Family Hub App
               </h1>
-              <p className="text-xl md:text-2xl text-teal-100 mb-8">
+              <p className="mb-8 text-xl text-green-100 md:text-2xl">
                 Mobile app features for app store reviewers
               </p>
               <div className="flex flex-wrap justify-center gap-4">
@@ -146,7 +146,7 @@ const AppFeaturesPage: React.FC = () => {
                   href={GOOGLE_PLAY_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center px-6 py-3 bg-white text-teal-600 rounded-lg font-semibold hover:bg-teal-50 transition-colors"
+                  className="inline-flex items-center rounded-lg bg-white px-6 py-3 font-semibold text-green-800 hover:bg-green-50"
                 >
                   <Download className="w-5 h-5 mr-2" />
                   Google Play Store
@@ -156,7 +156,7 @@ const AppFeaturesPage: React.FC = () => {
                   href={APP_STORE_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center px-6 py-3 bg-white text-teal-600 rounded-lg font-semibold hover:bg-teal-50 transition-colors"
+                  className="inline-flex items-center rounded-lg bg-white px-6 py-3 font-semibold text-green-800 hover:bg-green-50"
                 >
                   <Download className="w-5 h-5 mr-2" />
                   Apple App Store
@@ -183,9 +183,9 @@ const AppFeaturesPage: React.FC = () => {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow"
+                className="rounded-2xl border border-gray-200 bg-white p-6 shadow-lg transition-shadow hover:shadow-xl dark:border-gray-700 dark:bg-gray-800"
               >
-                <div className="text-teal-600 mb-4">{feature.icon}</div>
+                <div className="mb-4 text-green-700 dark:text-green-400">{feature.icon}</div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">
                   {feature.title}
                 </h3>
@@ -193,7 +193,7 @@ const AppFeaturesPage: React.FC = () => {
                 <ul className="space-y-2">
                   {feature.highlights.map((highlight, i) => (
                     <li key={i} className="flex items-start text-sm text-gray-700">
-                      <CheckCircle2 className="w-4 h-4 text-teal-600 mr-2 mt-0.5 flex-shrink-0" />
+                      <CheckCircle2 className="mr-2 mt-0.5 h-4 w-4 flex-shrink-0 text-green-700" />
                       {highlight}
                     </li>
                   ))}
@@ -223,7 +223,7 @@ const AppFeaturesPage: React.FC = () => {
                 >
                   <div className="flex items-center justify-between mb-3">
                     <Star className="w-5 h-5 text-yellow-400" />
-                    <span className="text-xs font-semibold text-teal-600 bg-teal-50 px-2 py-1 rounded">
+                    <span className="rounded bg-green-50 px-2 py-1 text-xs font-semibold text-green-800 dark:bg-green-900/40 dark:text-green-200">
                       {activity.ageRange}
                     </span>
                   </div>
@@ -277,23 +277,23 @@ const AppFeaturesPage: React.FC = () => {
                 </h3>
                 <ul className="space-y-2">
                   <li className="flex items-start">
-                    <CheckCircle2 className="w-5 h-5 text-teal-600 mr-2 mt-0.5 flex-shrink-0" />
+                    <CheckCircle2 className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0 text-green-700" />
                     <span className="text-gray-700">COPPA compliant - safe for children</span>
                   </li>
                   <li className="flex items-start">
-                    <CheckCircle2 className="w-5 h-5 text-teal-600 mr-2 mt-0.5 flex-shrink-0" />
+                    <CheckCircle2 className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0 text-green-700" />
                     <span className="text-gray-700">No in-app purchases or ads</span>
                   </li>
                   <li className="flex items-start">
-                    <CheckCircle2 className="w-5 h-5 text-teal-600 mr-2 mt-0.5 flex-shrink-0" />
+                    <CheckCircle2 className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0 text-green-700" />
                     <span className="text-gray-700">Works offline - no internet required</span>
                   </li>
                   <li className="flex items-start">
-                    <CheckCircle2 className="w-5 h-5 text-teal-600 mr-2 mt-0.5 flex-shrink-0" />
+                    <CheckCircle2 className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0 text-green-700" />
                     <span className="text-gray-700">Privacy-first - all data stored locally</span>
                   </li>
                   <li className="flex items-start">
-                    <CheckCircle2 className="w-5 h-5 text-teal-600 mr-2 mt-0.5 flex-shrink-0" />
+                    <CheckCircle2 className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0 text-green-700" />
                     <span className="text-gray-700">Content supports what schools teach about being safe online</span>
                   </li>
                 </ul>
@@ -303,13 +303,13 @@ const AppFeaturesPage: React.FC = () => {
         </div>
 
         {/* Reviewer Guide Section */}
-        <div className="bg-teal-600 text-white py-16">
+        <div className="bg-green-700 py-16 text-white dark:bg-green-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-8">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 For App Store Reviewers
               </h2>
-              <p className="text-xl text-teal-100">
+              <p className="text-xl text-green-100">
                 Quick guide to verify app features and functionality
               </p>
             </div>
@@ -334,10 +334,10 @@ const AppFeaturesPage: React.FC = () => {
                 ))}
               </div>
               
-              <div className="mt-8 pt-8 border-t border-teal-500">
+              <div className="mt-8 border-t border-white/30 pt-8">
                 <Link
                   to="/how-it-works"
-                  className="inline-flex items-center px-6 py-3 bg-white text-teal-600 rounded-lg font-semibold hover:bg-teal-50 transition-colors"
+                  className="inline-flex items-center rounded-lg bg-white px-6 py-3 font-semibold text-green-800 hover:bg-green-50"
                 >
                   View Detailed Reviewer Guide
                   <ExternalLink className="w-4 h-4 ml-2" />
@@ -352,7 +352,7 @@ const AppFeaturesPage: React.FC = () => {
           <div className="text-center">
             <Link
               to="/"
-              className="inline-flex items-center text-teal-600 hover:text-teal-700 font-semibold"
+              className="inline-flex items-center font-semibold text-green-700 hover:text-green-800"
             >
               ← Back to PandaGarde Website
             </Link>

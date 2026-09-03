@@ -59,16 +59,16 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
             <p className="text-gray-600 dark:text-gray-300 mb-6">
               You explored {activities.length} online activities and learned how they contribute to your digital footprint.
             </p>
-            <div className="bg-teal-50 dark:bg-teal-900/20 rounded-lg p-6 mb-6 text-left">
-              <h3 className="font-semibold text-teal-800 dark:text-teal-200 mb-3">Key Takeaways:</h3>
-              <ul className="space-y-2 text-teal-700 dark:text-teal-300 text-sm">
+            <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-6 mb-6 text-left">
+              <h3 className="font-semibold text-green-800 dark:text-green-200 mb-3">Key Takeaways:</h3>
+              <ul className="space-y-2 text-green-700 dark:text-green-300 text-sm">
                 <li>• Every online action leaves a trace</li>
                 <li>• Companies collect data to personalize experiences</li>
                 <li>• You can control some of your footprint with privacy settings</li>
                 <li>• Think before you post - your digital footprint can last forever</li>
               </ul>
             </div>
-            <button onClick={onBack} className="bg-teal-600 text-white px-6 py-3 rounded-lg">Back to Learning Hub</button>
+            <button onClick={onBack} className="bg-green-600 text-white px-6 py-3 rounded-lg">Back to Learning Hub</button>
           </div>
         </div>
       </div>
@@ -84,8 +84,8 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
         
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
           <div className="text-center mb-8">
-            <div className="w-16 h-16 bg-teal-100 dark:bg-teal-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Footprints className="text-teal-600 dark:text-teal-400" size={32} />
+            <div className="w-16 h-16 bg-green-100 dark:bg-green-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Footprints className="text-green-600 dark:text-green-400" size={32} />
             </div>
             <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-2">Digital Footprint Visualizer 👣</h1>
             <p className="text-gray-600 dark:text-gray-300">See how your online activities create a digital footprint</p>
@@ -131,8 +131,8 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
                   onClick={() => toggleActivity(activity.id)}
                   className={`p-4 rounded-lg border-2 transition-all ${
                     activities.includes(activity.id)
-                      ? 'border-teal-500 bg-teal-50 dark:bg-teal-900/20'
-                      : 'border-gray-200 dark:border-gray-600 hover:border-teal-300'
+                      ? 'border-green-500 bg-green-50 dark:bg-green-900/20'
+                      : 'border-gray-200 dark:border-gray-600 hover:border-green-300'
                   }`}
                 >
                   <div className="text-3xl mb-2">{activity.icon}</div>
@@ -168,7 +168,7 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
               disabled={activities.length < 3}
               className={`px-6 py-3 rounded-lg transition-colors ${
                 activities.length >= 3
-                  ? 'bg-teal-600 text-white hover:bg-teal-700'
+                  ? 'bg-green-600 text-white hover:bg-green-700'
                   : 'bg-gray-300 text-gray-500 cursor-not-allowed'
               }`}
             >

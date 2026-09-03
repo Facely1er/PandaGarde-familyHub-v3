@@ -331,7 +331,7 @@ const ImplementationGuidePage: React.FC = () => {
 
   const getPhaseColor = (color: string) => {
     const colors = {
-      teal: 'from-teal-500 to-teal-600',
+      teal: 'from-green-600 to-green-700',
       green: 'from-green-500 to-green-600',
       purple: 'from-purple-500 to-purple-600',
       orange: 'from-orange-500 to-orange-600'
@@ -341,7 +341,7 @@ const ImplementationGuidePage: React.FC = () => {
 
   const getPhaseBorderColor = (color: string) => {
     const colors = {
-      teal: 'border-teal-200',
+      teal: 'border-green-600',
       green: 'border-green-200',
       purple: 'border-purple-200',
       orange: 'border-orange-200'

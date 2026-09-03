@@ -179,11 +179,11 @@ const DigitalRightsPage: React.FC = () => {
           </Link>
         </nav>
 
-        <section className="mb-6 rounded-xl border-2 border-teal-200 dark:border-teal-800 bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-teal-900/30 dark:to-cyan-900/30 p-5">
-          <h3 className="font-bold text-teal-900 dark:text-teal-100 mb-2">
+        <section className="mb-6 rounded-xl border-2 border-green-200 dark:border-green-800 bg-gradient-to-r from-green-50 to-cyan-50 dark:from-green-900/30 dark:to-cyan-900/30 p-5">
+          <h3 className="font-bold text-green-900 dark:text-green-100 mb-2">
             Maryland residents: exercise your privacy rights
           </h3>
-          <p className="text-sm text-teal-800 dark:text-teal-200 mb-3">
+          <p className="text-sm text-green-800 dark:text-green-200 mb-3">
             Under the Maryland Online Data Privacy Act (MODPA), you can submit requests for access,
             correction, deletion, portability, and opt-out of sale or targeted advertising. If your
             school or organization uses the EduSoluce Privacy Portal, you can submit requests there.
@@ -193,7 +193,7 @@ const DigitalRightsPage: React.FC = () => {
               href={PRIVACY_PORTAL_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white font-medium rounded-lg transition-colors text-sm"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors text-sm"
             >
               <ExternalLink size={16} aria-hidden />
               Privacy Portal – Data rights
@@ -202,7 +202,7 @@ const DigitalRightsPage: React.FC = () => {
               href={PRIVACY_PORTAL_OPT_OUT_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-teal-900/50 text-teal-700 dark:text-teal-200 border-2 border-teal-600 dark:border-teal-500 hover:bg-teal-50 dark:hover:bg-teal-800/50 font-medium rounded-lg transition-colors text-sm"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-green-900/50 text-green-700 dark:text-green-200 border-2 border-green-600 dark:border-green-500 hover:bg-green-50 dark:hover:bg-green-800/50 font-medium rounded-lg transition-colors text-sm"
             >
               <ExternalLink size={16} aria-hidden />
               Opt-out of sale / targeted ads

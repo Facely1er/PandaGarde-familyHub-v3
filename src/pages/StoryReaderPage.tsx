@@ -51,10 +51,10 @@ function StoryNextSteps() {
         <li>
           <Link
             to="/family-hub"
-            className="group flex h-full flex-col gap-2 rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-all hover:border-teal-400 hover:shadow-md dark:border-gray-700 dark:bg-gray-700 dark:hover:border-teal-500"
+            className="group flex h-full flex-col gap-2 rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-all hover:border-green-600 hover:shadow-md dark:border-gray-700 dark:bg-gray-700 dark:hover:border-green-500"
           >
             <span className="flex items-center gap-2">
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-teal-100 text-teal-700 dark:bg-teal-900/40 dark:text-teal-300">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300">
                 <LayoutDashboard size={18} aria-hidden />
               </span>
               <span className="block text-sm font-semibold text-gray-900 dark:text-white">
@@ -64,7 +64,7 @@ function StoryNextSteps() {
             <span className="block text-xs leading-relaxed text-gray-500 dark:text-gray-400">
               {t('stories.reader.missionDesc')}
             </span>
-            <span className="mt-auto inline-flex items-center gap-1 text-xs font-semibold text-teal-700 dark:text-teal-400">
+            <span className="mt-auto inline-flex items-center gap-1 text-xs font-semibold text-green-700 dark:text-green-400">
               {t('stories.reader.missionCta')} <ArrowRight size={13} aria-hidden />
             </span>
           </Link>

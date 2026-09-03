@@ -274,11 +274,11 @@ const PrivacyPolicyPage: React.FC = () => {
                   <li>Opt out of any data collection (though this may limit functionality)</li>
                 </ul>
               </div>
-              <div className="rounded-lg border-2 border-teal-200 bg-teal-50 p-4 sm:p-6 dark:border-teal-800 dark:bg-teal-900/20">
-                <h3 className="mb-3 text-lg font-semibold text-teal-900 dark:text-teal-100 sm:text-xl">
+              <div className="rounded-lg border-2 border-green-200 bg-green-50 p-4 sm:p-6 dark:border-green-800 dark:bg-green-900/20">
+                <h3 className="mb-3 text-lg font-semibold text-green-900 dark:text-green-100 sm:text-xl">
                   Maryland Residents (MODPA)
                 </h3>
-                <p className="mb-3 text-sm text-teal-800 dark:text-teal-200">
+                <p className="mb-3 text-sm text-green-800 dark:text-green-200">
                   Under the Maryland Online Data Privacy Act (MODPA), Maryland residents have additional rights,
                   including the right to opt out of the sale of personal data and targeted advertising, and to request
                   access, correction, deletion, and portability of personal data. If your school or organization uses
@@ -288,7 +288,7 @@ const PrivacyPolicyPage: React.FC = () => {
                   href={PRIVACY_PORTAL_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 font-medium text-teal-700 hover:underline dark:text-teal-300"
+                  className="inline-flex items-center gap-2 font-medium text-green-700 hover:underline dark:text-green-300"
                 >
                   EduSoluce Privacy Portal – exercise your rights
                   <span aria-hidden="true">→</span>

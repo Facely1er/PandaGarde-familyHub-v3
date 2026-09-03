@@ -122,13 +122,13 @@ const AppStoreReviewPage: React.FC = () => {
 
   return (
     <PageLayout>
-      <div className="min-h-screen bg-gradient-to-br from-teal-50 via-white to-green-50">
+      <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-50">
         {/* Header */}
-        <div className="bg-gradient-to-r from-teal-600 to-green-600 text-white py-12">
+        <div className="bg-gradient-to-r from-green-600 to-green-600 text-white py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <Link
               to="/how-it-works"
-              className="inline-flex items-center text-teal-100 hover:text-white mb-4"
+              className="inline-flex items-center text-green-100 hover:text-white mb-4"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to App Features
@@ -136,7 +136,7 @@ const AppStoreReviewPage: React.FC = () => {
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               App Store Reviewer Guide
             </h1>
-            <p className="text-xl text-teal-100">
+            <p className="text-xl text-green-100">
               Step-by-step guide for verifying PandaGarde Family Hub app features
             </p>
           </div>
@@ -169,7 +169,7 @@ const AppStoreReviewPage: React.FC = () => {
             {reviewSteps.map((step) => (
               <div key={step.step} className="bg-white rounded-xl shadow-lg p-8">
                 <div className="flex items-start mb-6">
-                  <div className="flex-shrink-0 w-12 h-12 bg-teal-600 text-white rounded-full flex items-center justify-center font-bold text-xl mr-4">
+                  <div className="flex-shrink-0 w-12 h-12 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-xl mr-4">
                     {step.step}
                   </div>
                   <div className="flex-1">
@@ -184,7 +184,7 @@ const AppStoreReviewPage: React.FC = () => {
                       <ul className="space-y-2">
                         {step.checks.map((check, index) => (
                           <li key={index} className="flex items-start">
-                            <CheckCircle2 className="w-5 h-5 text-teal-600 mr-2 mt-0.5 flex-shrink-0" />
+                            <CheckCircle2 className="w-5 h-5 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
                             <span className="text-gray-700">{check}</span>
                           </li>
                         ))}
@@ -251,7 +251,7 @@ const AppStoreReviewPage: React.FC = () => {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {technicalDetails.compliance.map((item, index) => (
                   <div key={index} className="flex items-center">
-                    <Shield className="w-5 h-5 text-teal-600 mr-2" />
+                    <Shield className="w-5 h-5 text-green-600 mr-2" />
                     <span className="text-gray-700">{item}</span>
                   </div>
                 ))}
@@ -271,10 +271,10 @@ const AppStoreReviewPage: React.FC = () => {
               {activities.map((activity, index) => (
                 <div
                   key={index}
-                  className="bg-teal-50 rounded-lg p-4 border border-teal-200"
+                  className="bg-green-50 rounded-lg p-4 border border-green-200"
                 >
                   <div className="flex items-center">
-                    <Gamepad2 className="w-5 h-5 text-teal-600 mr-2" />
+                    <Gamepad2 className="w-5 h-5 text-green-600 mr-2" />
                     <span className="font-semibold text-gray-900">{activity}</span>
                   </div>
                 </div>
@@ -284,35 +284,35 @@ const AppStoreReviewPage: React.FC = () => {
         </div>
 
         {/* Feature Summary */}
-        <div className="bg-teal-600 text-white py-16">
+        <div className="bg-green-600 text-white py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-bold mb-8">Key Features Summary</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
                 <Users className="w-8 h-8 mb-4" />
                 <h3 className="font-bold text-lg mb-2">Family Management</h3>
-                <p className="text-teal-100 text-sm">
+                <p className="text-green-100 text-sm">
                   Manage multiple family members and track individual progress
                 </p>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
                 <Gamepad2 className="w-8 h-8 mb-4" />
                 <h3 className="font-bold text-lg mb-2">8 Activities</h3>
-                <p className="text-teal-100 text-sm">
+                <p className="text-green-100 text-sm">
                   Interactive privacy education games and activities
                 </p>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
                 <Award className="w-8 h-8 mb-4" />
                 <h3 className="font-bold text-lg mb-2">Achievements</h3>
-                <p className="text-teal-100 text-sm">
+                <p className="text-green-100 text-sm">
                   Certificates, badges, and progress milestones
                 </p>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
                 <BarChart3 className="w-8 h-8 mb-4" />
                 <h3 className="font-bold text-lg mb-2">Progress Tracking</h3>
-                <p className="text-teal-100 text-sm">
+                <p className="text-green-100 text-sm">
                   Mission completion, streaks, and certificates on device
                 </p>
               </div>
@@ -359,11 +359,11 @@ const AppStoreReviewPage: React.FC = () => {
           <div className="text-center text-gray-600">
             <p className="mb-2">
               Questions about the app? Contact us at{' '}
-              <a href="mailto:support@pandagarde.com" className="text-teal-600 hover:underline">
+              <a href="mailto:support@pandagarde.com" className="text-green-600 hover:underline">
                 support@pandagarde.com
               </a>
             </p>
-            <Link to="/" className="text-teal-600 hover:text-teal-700 font-semibold">
+            <Link to="/" className="text-green-600 hover:text-green-700 font-semibold">
               ← Back to PandaGarde Website
             </Link>
           </div>

@@ -42,7 +42,7 @@ const ActivitiesPage: React.FC = () => {
           <button
             type="button"
             onClick={clearSelection}
-            className="mb-4 inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-teal-700 hover:bg-teal-50 dark:text-teal-300 dark:hover:bg-teal-900/30 min-h-[44px]"
+            className="mb-4 inline-flex min-h-[44px] items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-green-700 hover:bg-green-50 dark:text-green-300 dark:hover:bg-green-900/30"
           >
             <ArrowLeft size={18} aria-hidden />
             Back to all activities
@@ -94,7 +94,7 @@ const ActivitiesPage: React.FC = () => {
               key={activity.id}
               type="button"
               onClick={() => navigate(`/activities/${activity.slug}`)}
-              className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-6 text-left shadow-sm hover:border-teal-500 hover:shadow-md transition-all min-h-[140px] flex flex-col justify-between"
+              className="flex min-h-[140px] flex-col justify-between rounded-xl border border-gray-200 bg-white p-6 text-left shadow-sm transition-all hover:border-green-600 hover:shadow-md dark:border-gray-700 dark:bg-gray-800"
             >
               <div>
                 <div className="flex items-start gap-3 mb-2">
@@ -103,7 +103,7 @@ const ActivitiesPage: React.FC = () => {
                   </span>
                   <div>
                     <h2 className="font-semibold text-gray-900 dark:text-white">{activity.name}</h2>
-                    <p className="text-xs text-teal-600 dark:text-teal-400 font-medium mt-0.5">
+                    <p className="mt-0.5 text-xs font-medium text-green-700 dark:text-green-400">
                       {activity.category} · {activity.difficulty}
                     </p>
                   </div>
@@ -113,7 +113,7 @@ const ActivitiesPage: React.FC = () => {
                   Ages {activity.ageGroup} · ~{activity.durationMinutes} min
                 </p>
               </div>
-              <span className="inline-flex items-center gap-2 text-sm font-medium text-teal-600 dark:text-teal-400 mt-4">
+              <span className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-green-700 dark:text-green-400">
                 <Play size={16} aria-hidden />
                 Start mission
               </span>
