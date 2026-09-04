@@ -125,8 +125,8 @@ const FamilyHubPage: React.FC = () => {
       url: '/family-hub/certificates'
     },
     {
-      title: 'PrivacyPanda App',
-      description: 'Access the full PrivacyPanda mobile application',
+      title: 'PandaGarde Family Hub',
+      description: 'Open the native Family Hub app (iOS / Android)',
       icon: Star,
       action: 'app-link',
       color: 'from-orange-500 to-orange-600',
@@ -1019,10 +1019,10 @@ const FamilyHubPage: React.FC = () => {
                   <Star size={24} className="text-orange-600" />
                 </div>
                 <h3 className="text-xl font-bold mb-3 text-primary">
-                  PrivacyPanda Mobile App
+                  PandaGarde Family Hub
                 </h3>
                 <p className="mb-4 text-gray-600">
-                  Access the full PrivacyPanda mobile application with advanced features and offline capabilities.
+                  Open the native Family Hub app for iPhone, iPad, and Android. Missions stay on this device.
                 </p>
                 <div className="text-orange-600 font-semibold hover:text-orange-700 transition-colors">
                   Launch App →

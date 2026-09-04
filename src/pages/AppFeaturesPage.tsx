@@ -254,11 +254,19 @@ const AppFeaturesPage: React.FC = () => {
                 <dl className="space-y-3">
                   <div>
                     <dt className="font-semibold text-gray-700">App Name</dt>
-                    <dd className="text-gray-600">Privacy Panda Family Hub</dd>
+                    <dd className="text-gray-600">PandaGarde Family Hub</dd>
                   </div>
                   <div>
                     <dt className="font-semibold text-gray-700">Category</dt>
                     <dd className="text-gray-600">Education / Family</dd>
+                  </div>
+                  <div>
+                    <dt className="font-semibold text-gray-700">Bundle ID</dt>
+                    <dd className="text-gray-600">com.pandagarde.familyhub</dd>
+                  </div>
+                  <div>
+                    <dt className="font-semibold text-gray-700">Version</dt>
+                    <dd className="text-gray-600">1.1.0 (build 13)</dd>
                   </div>
                   <div>
                     <dt className="font-semibold text-gray-700">Age Rating</dt>

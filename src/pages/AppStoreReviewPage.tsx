@@ -146,14 +146,18 @@ const AppStoreReviewPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Quick Information</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
               <div>
                 <h3 className="font-semibold text-gray-700 mb-2">App Name</h3>
-                <p className="text-gray-900">Privacy Panda Family Hub</p>
+                <p className="text-gray-900">PandaGarde Family Hub</p>
               </div>
               <div>
-                <h3 className="font-semibold text-gray-700 mb-2">Category</h3>
-                <p className="text-gray-900">Education / Family</p>
+                <h3 className="font-semibold text-gray-700 mb-2">Bundle ID</h3>
+                <p className="text-gray-900">com.pandagarde.familyhub</p>
+              </div>
+              <div>
+                <h3 className="font-semibold text-gray-700 mb-2">Version</h3>
+                <p className="text-gray-900">1.1.0 (build 13)</p>
               </div>
               <div>
                 <h3 className="font-semibold text-gray-700 mb-2">Age Rating</h3>
