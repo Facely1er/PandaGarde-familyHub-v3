@@ -35,10 +35,8 @@ const FamilyHubPage: React.FC = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<'dashboard' | 'activities' | 'progress' | 'resources' | 'family'>('dashboard');
   const [showCreateFamily, setShowCreateFamily] = useState(false);
-  const [showJoinFamily, setShowJoinFamily] = useState(false);
   const [showAddMember, setShowAddMember] = useState(false);
   const [newFamilyName, setNewFamilyName] = useState('');
-  const [joinFamilyId, setJoinFamilyId] = useState('');
   const [newMemberEmail, setNewMemberEmail] = useState('');
   const [newMemberFirstName, setNewMemberFirstName] = useState('');
   const [newMemberLastName, setNewMemberLastName] = useState('');
@@ -50,7 +48,6 @@ const FamilyHubPage: React.FC = () => {
     familyMembers, 
     loading, 
     createFamily, 
-    joinFamily, 
     leaveFamily, 
     addFamilyMember,
     refreshFamily,
@@ -117,7 +114,7 @@ const FamilyHubPage: React.FC = () => {
       description: 'See detailed progress for all family members',
       icon: TrendingUp,
       action: 'view-progress',
-      color: 'from-teal-500 to-teal-600'
+      color: 'from-green-600 to-green-700'
     },
     {
       title: 'Generate Certificates',
@@ -148,7 +145,7 @@ const FamilyHubPage: React.FC = () => {
       description: 'See household exposure from the apps you listed on the website',
       icon: Shield,
       action: 'footprint',
-      color: 'from-teal-500 to-teal-600',
+      color: 'from-green-600 to-green-700',
       url: '/digital-footprint'
     },
     {
@@ -188,25 +185,12 @@ const FamilyHubPage: React.FC = () => {
     }
   };
 
-  const handleJoinFamily = async () => {
-    if (!joinFamilyId.trim()) {return;}
-    
-    const { error } = await joinFamily(joinFamilyId);
-    if (error) {
-      alert(`Error joining family: ${error}`);
-    } else {
-      await refreshFamily();
-      await reconcileHubAndContext();
-      setShowJoinFamily(false);
-      setJoinFamilyId('');
-    }
-  };
-
   const handleAddMember = async () => {
-    if (!newMemberEmail.trim() || !newMemberFirstName.trim() || !newMemberLastName.trim()) {return;}
-    
+    if (!newMemberFirstName.trim() || !newMemberLastName.trim()) {return;}
+    const localEmail = newMemberEmail.trim() || `${newMemberFirstName.trim().toLowerCase()}@this-device.local`;
+
     const { error } = await addFamilyMember(
-      newMemberEmail,
+      localEmail,
       newMemberRole,
       newMemberFirstName,
       newMemberLastName
@@ -240,14 +224,8 @@ const FamilyHubPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: 'var(--light)', color: 'var(--gray-800)' }}>
-      {/* Header */}
-      <header className="bg-gradient-to-r from-green-600 via-green-500 to-green-600 text-white py-12 sm:py-20 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><pattern id='grain' width='100' height='100' patternUnits='userSpaceOnUse'><circle cx='20' cy='20' r='1' fill='rgba(255,255,255,0.1)'/><circle cx='80' cy='40' r='1' fill='rgba(255,255,255,0.05)'/><circle cx='40' cy='80' r='1' fill='rgba(255,255,255,0.1)'/></pattern></defs><rect width='100%' height='100%' fill='url(%23grain)'/></svg>")`
-          }} />
-        </div>
+    <div className="min-h-screen bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100">
+      <header className="relative overflow-hidden bg-green-700 py-12 text-white sm:py-20 dark:bg-green-800">
         
         <div className="container mx-auto px-4 sm:px-6 relative z-10">
           <div className="flex items-center justify-center mb-6 sm:mb-8">
@@ -257,13 +235,13 @@ const FamilyHubPage: React.FC = () => {
           </div>
           
           <div className="text-center">
-            <h1 className="font-bold mb-4 sm:mb-6 leading-tight" style={{ fontSize: 'clamp(1.875rem, 5vw, 3rem)' }}>
+            <h1 className="mb-4 text-3xl font-bold leading-tight sm:mb-6 sm:text-5xl">
               PandaGarde
               <span className="block text-yellow-300 mt-1">Family Hub</span>
             </h1>
             
             <p className="text-base sm:text-lg lg:text-xl opacity-90 max-w-2xl mx-auto mb-6 sm:mb-8 px-4">
-              Your central dashboard for family privacy education, progress tracking, and personalized learning paths.
+              Local household missions and guides on this device—not a social network or child-monitoring app.
             </p>
             
             <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs sm:text-sm px-4">
@@ -291,8 +269,7 @@ const FamilyHubPage: React.FC = () => {
             <div className="flex items-center gap-2 sm:gap-4 w-full md:w-auto justify-between md:justify-start">
               <Link 
                 to="/"
-                className="inline-flex items-center gap-2 text-green-600 hover:text-green-700 font-medium transition-colors text-sm sm:text-base"
-                style={{ color: 'var(--primary-light)' }}
+                className="inline-flex items-center gap-2 text-sm font-medium text-green-700 transition-colors hover:text-green-800 sm:text-base"
               >
                 <ArrowLeft size={16} />
                 <span className="hidden sm:inline">Back to Main Site</span>
@@ -323,13 +300,9 @@ const FamilyHubPage: React.FC = () => {
                   onClick={() => setActiveTab(key as 'dashboard' | 'activities' | 'progress' | 'family' | 'resources')}
                   className={`flex items-center gap-1.5 lg:gap-2 px-3 lg:px-4 py-2 rounded-lg font-medium transition-all text-sm lg:text-base min-h-[44px] ${
                     activeTab === key
-                      ? 'bg-green-100 text-green-700'
-                      : 'text-gray-600 hover:text-green-600 hover:bg-gray-50'
+                      ? 'bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-200'
+                      : 'text-gray-600 hover:bg-gray-50 hover:text-green-700'
                   }`}
-                  style={{
-                    backgroundColor: activeTab === key ? 'var(--secondary)' : undefined,
-                    color: activeTab === key ? 'var(--primary)' : undefined
-                  }}
                   aria-label={`${label} tab`}
                   aria-current={activeTab === key ? 'page' : undefined}
                 >
@@ -355,15 +328,8 @@ const FamilyHubPage: React.FC = () => {
                     className={`flex flex-col items-center justify-center gap-1 px-2 py-3 rounded-lg font-medium transition-all touch-manipulation ${
                       activeTab === key 
                         ? 'bg-green-100 text-green-700 shadow-sm' 
-                        : 'text-gray-600 bg-gray-50 active:bg-gray-100'
+                        : 'bg-gray-50 text-gray-600 active:bg-gray-100'
                     }`}
-                    style={{
-                      backgroundColor: activeTab === key ? 'var(--secondary)' : undefined,
-                      color: activeTab === key ? 'var(--primary)' : undefined,
-                      minHeight: '64px',
-                      minWidth: '64px',
-                      WebkitTapHighlightColor: 'transparent'
-                    }}
                   >
                     <Icon size={20} />
                     <span className="text-xs font-semibold leading-tight text-center">{shortLabel}</span>
@@ -385,7 +351,7 @@ const FamilyHubPage: React.FC = () => {
             {/* Family Members Overview */}
             <section>
               <div className="flex items-center justify-between mb-6 sm:mb-8">
-                <h2 className="font-bold" style={{ fontSize: 'clamp(1.5rem, 4vw, 1.875rem)', color: 'var(--primary)' }}>
+                <h2 className="text-2xl font-bold text-primary sm:text-3xl">
                   Family Progress Overview
                 </h2>
                 {currentFamily && (
@@ -400,29 +366,29 @@ const FamilyHubPage: React.FC = () => {
               </div>
               
               {!currentFamily ? (
-                <div className="text-center py-12 sm:py-16 bg-white rounded-xl border-2 border-dashed border-gray-300" style={{ backgroundColor: 'var(--card-color)' }}>
+                <div className="rounded-2xl border-2 border-dashed border-gray-300 bg-white py-12 text-center sm:py-16 dark:border-gray-600 dark:bg-gray-800">
                   <div className="w-20 h-20 sm:w-24 sm:h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
                     <Users size={32} className="sm:w-10 sm:h-10 text-gray-400" />
                   </div>
-                  <h3 className="font-bold mb-3" style={{ fontSize: 'clamp(1.25rem, 3vw, 1.5rem)', color: 'var(--primary)' }}>
-                    No Family Yet
+                  <h3 className="mb-3 text-xl font-bold text-primary sm:text-2xl">
+                    No household on this device yet
                   </h3>
-                  <p className="text-gray-600 mb-8 max-w-md mx-auto px-4">
-                    Create a family or join an existing one to start tracking progress together.
+                  <p className="mx-auto mb-8 max-w-md px-4 text-gray-600 dark:text-gray-300">
+                    Start a household here, or open the Family Hub for optional kids&apos; missions. Nothing is shared across devices.
                   </p>
-                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
+                  <div className="flex flex-col justify-center gap-3 px-4 sm:flex-row sm:gap-4">
                     <button
                       onClick={() => setShowCreateFamily(true)}
-                      className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors shadow-sm hover:shadow-md active:scale-[0.98]"
+                      className="rounded-lg bg-green-700 px-6 py-3 font-semibold text-white shadow-sm hover:bg-green-800"
                     >
-                      Create Family
+                      Start household
                     </button>
-                    <button
-                      onClick={() => setShowJoinFamily(true)}
-                      className="bg-green-700 hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500 text-white px-6 py-3 rounded-lg font-semibold transition-colors shadow-sm hover:shadow-md active:scale-[0.98]"
+                    <Link
+                      to="/family-hub"
+                      className="rounded-lg border-2 border-green-700 px-6 py-3 text-center font-semibold text-green-800 hover:bg-green-50 dark:border-green-400 dark:text-green-200"
                     >
-                      Join Family
-                    </button>
+                      Open Family Hub
+                    </Link>
                   </div>
                 </div>
               ) : (
@@ -434,11 +400,7 @@ const FamilyHubPage: React.FC = () => {
                     return (
                       <div 
                         key={member.id}
-                        className="bg-white rounded-xl p-5 sm:p-6 shadow-md hover:shadow-xl transition-all border-2 border-transparent hover:border-green-200"
-                        style={{ 
-                          backgroundColor: 'var(--card-color)',
-                          boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)'
-                        }}
+                        className="bg-white rounded-xl p-5 sm:p-6 shadow-md hover:shadow-xl transition-all border-2 border-transparent hover:border-green-200 rounded-xl border border-gray-200 bg-white p-5 shadow-md transition-all hover:border-green-200 hover:shadow-xl sm:p-6 dark:border-gray-700 dark:bg-gray-800"
                       >
                         <div className="flex items-center gap-4 mb-4">
                           <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-r from-green-500 to-green-600 flex items-center justify-center text-white text-lg sm:text-xl font-bold shadow-sm">
@@ -448,14 +410,14 @@ const FamilyHubPage: React.FC = () => {
                             <h3 className="font-bold text-base sm:text-lg sm:truncate break-words text-primary">
                               {member.first_name} {member.last_name}
                             </h3>
-                            <div className="flex items-center gap-1.5 text-xs sm:text-sm" style={{ color: 'var(--gray-500)' }}>
+                            <div className="flex items-center gap-1.5 text-xs text-gray-500 sm:text-sm">
                               <AgeIcon size={14} />
                               <span className="font-medium">{member.role === 'parent' ? 'Parent' : 'Child'}</span>
                             </div>
                           </div>
                         </div>
                         
-                        <div className="space-y-2 text-xs sm:text-sm pt-4 border-t border-gray-100" style={{ borderColor: 'var(--light)' }}>
+                        <div className="space-y-2 border-t border-gray-100 pt-4 text-xs sm:text-sm dark:border-gray-700">
                           <div className="flex items-center justify-between">
                             <span className="text-gray-500">Email</span>
                             <span className="font-medium sm:truncate break-words ml-2 text-gray-700">{member.email}</span>
@@ -474,8 +436,7 @@ const FamilyHubPage: React.FC = () => {
                   {/* Add Member Card */}
                   <button
                     onClick={() => setShowAddMember(true)}
-                    className="bg-white rounded-xl p-5 sm:p-6 border-2 border-dashed border-gray-300 hover:border-green-400 hover:bg-green-50 transition-all flex flex-col items-center justify-center min-h-[160px] text-center group sm:hidden"
-                    style={{ backgroundColor: 'var(--card-color)' }}
+                    className="bg-white rounded-xl p-5 sm:p-6 border-2 border-dashed border-gray-300 hover:border-green-400 hover:bg-green-50 transition-all flex flex-col items-center justify-center min-h-[160px] text-center group sm:hidden rounded-2xl border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800"
                   >
                     <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mb-3 group-hover:bg-green-200 transition-colors">
                       <Plus size={24} className="text-green-600" />
@@ -488,21 +449,21 @@ const FamilyHubPage: React.FC = () => {
 
             {/* Digital Footprint Widget */}
             <section>
-              <div className="bg-white rounded-xl p-6 border-2 border-indigo-200 dark:border-indigo-800" style={{ backgroundColor: 'var(--card-color)' }}>
+              <div className="bg-white rounded-xl p-6 border-2 border-indigo-200 dark:border-indigo-800 rounded-2xl border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800">
                 <DigitalFootprintVisualizer compact={true} />
               </div>
             </section>
 
             {/* Privacy Assessment Widget */}
             <section>
-              <div className="bg-white rounded-xl p-6 border-2 border-blue-200 dark:border-blue-800" style={{ backgroundColor: 'var(--card-color)' }}>
+              <div className="bg-white rounded-xl p-6 border-2 border-blue-200 dark:border-blue-800 rounded-2xl border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800">
                 <FamilyPrivacyAssessment compact={true} />
               </div>
             </section>
 
             {/* Privacy Goals Widget */}
             <section>
-              <div className="bg-white rounded-xl p-6 border-2 border-purple-200 dark:border-purple-800" style={{ backgroundColor: 'var(--card-color)' }}>
+              <div className="bg-white rounded-xl p-6 border-2 border-purple-200 dark:border-purple-800 rounded-2xl border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800">
                 <PrivacyGoals compact={true} />
               </div>
             </section>
@@ -510,7 +471,7 @@ const FamilyHubPage: React.FC = () => {
             {/* Recommended Resources (Compact) */}
             {familyPersona && (
               <section>
-                <div className="bg-white rounded-xl p-6 border-2 border-green-200 dark:border-green-800" style={{ backgroundColor: 'var(--card-color)' }}>
+                <div className="bg-white rounded-xl p-6 border-2 border-green-200 dark:border-green-800 rounded-2xl border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800">
                   <h3 className="text-xl font-bold mb-4 text-primary">
                     Recommended for You
                   </h3>
@@ -528,7 +489,7 @@ const FamilyHubPage: React.FC = () => {
             {/* Quick Actions */}
             <section>
               <div className="flex items-center justify-between mb-6 sm:mb-8">
-                <h2 className="font-bold" style={{ fontSize: 'clamp(1.5rem, 4vw, 1.875rem)', color: 'var(--primary)' }}>
+                <h2 className="text-2xl font-bold text-primary sm:text-3xl">
                   Quick Actions
                 </h2>
                 <span className="text-sm text-gray-500 hidden sm:inline">Tap any card to get started</span>
@@ -545,12 +506,7 @@ const FamilyHubPage: React.FC = () => {
                         <Link
                           key={index}
                           to={action.url}
-                          className="group bg-white rounded-xl p-5 sm:p-6 text-left hover:shadow-xl transition-all block touch-manipulation border-2 border-transparent hover:border-green-200 active:scale-[0.98]"
-                          style={{ 
-                            backgroundColor: 'var(--card-color)', 
-                            minHeight: '140px',
-                            boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)'
-                          }}
+                          className="group block min-h-[140px] touch-manipulation rounded-xl border-2 border-transparent bg-white p-5 text-left shadow-md transition-all hover:border-green-200 hover:shadow-xl active:scale-[0.98] sm:p-6 dark:bg-gray-800"
                         >
                           <div className={`w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r ${action.color} rounded-xl flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform`}>
                             <IconComponent size={24} className="sm:w-7 sm:h-7" />
@@ -573,12 +529,7 @@ const FamilyHubPage: React.FC = () => {
                         href={action.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group bg-white rounded-xl p-5 sm:p-6 text-left hover:shadow-xl transition-all block touch-manipulation border-2 border-transparent hover:border-green-200 active:scale-[0.98]"
-                        style={{ 
-                          backgroundColor: 'var(--card-color)', 
-                          minHeight: '140px',
-                          boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)'
-                        }}
+                        className="group block min-h-[140px] touch-manipulation rounded-xl border-2 border-transparent bg-white p-5 text-left shadow-md transition-all hover:border-green-200 hover:shadow-xl active:scale-[0.98] sm:p-6 dark:bg-gray-800"
                       >
                         <div className={`w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r ${action.color} rounded-xl flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform`}>
                           <IconComponent size={24} className="sm:w-7 sm:h-7" />
@@ -599,12 +550,7 @@ const FamilyHubPage: React.FC = () => {
                   return (
                     <button
                       key={index}
-                      className="group bg-white rounded-xl p-5 sm:p-6 text-left hover:shadow-xl transition-all touch-manipulation w-full border-2 border-transparent hover:border-green-200 active:scale-[0.98]"
-                      style={{ 
-                        backgroundColor: 'var(--card-color)', 
-                        minHeight: '140px',
-                        boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)'
-                      }}
+                      className="group w-full min-h-[140px] touch-manipulation rounded-xl border-2 border-transparent bg-white p-5 text-left shadow-md transition-all hover:border-green-200 hover:shadow-xl active:scale-[0.98] sm:p-6 dark:bg-gray-800"
                     >
                       <div className={`w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r ${action.color} rounded-xl flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform`}>
                         <IconComponent size={24} className="sm:w-7 sm:h-7" />
@@ -862,7 +808,7 @@ const FamilyHubPage: React.FC = () => {
         {activeTab === 'progress' && (
           <div className="space-y-8">
             <div className="text-center">
-              <h2 className="font-bold mb-4" style={{ fontSize: 'clamp(1.875rem, 3vw, 2.25rem)', color: 'var(--primary)' }}>
+              <h2 className="mb-4 text-2xl font-bold text-primary sm:text-3xl">
                 Family Progress Tracking
               </h2>
               <p className="text-lg max-w-2xl mx-auto text-gray-600">
@@ -870,15 +816,15 @@ const FamilyHubPage: React.FC = () => {
               </p>
             </div>
 
-            <div className="bg-white rounded-xl p-8" style={{ backgroundColor: 'var(--card-color)' }}>
+            <div className="bg-white rounded-xl p-8 rounded-2xl border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800">
               <div className="text-center mb-8">
-                <h3 className="font-bold mb-4" style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', color: 'var(--primary)' }}>
+                <h3 className="mb-4 text-xl font-bold text-primary sm:text-2xl">
                   Overall Family Progress
                 </h3>
                 <div className="w-32 h-32 mx-auto relative">
                   <div className="w-32 h-32 rounded-full bg-gray-200 flex items-center justify-center">
                     <div className="text-center">
-                      <div className="font-bold" style={{ fontSize: 'clamp(1.875rem, 3vw, 2.25rem)', color: 'var(--primary)' }}>
+                      <div className="text-3xl font-bold text-primary">
                         {getOverallProgressPercentage()}%
                       </div>
                       <div className="text-sm text-gray-600">
@@ -929,7 +875,7 @@ const FamilyHubPage: React.FC = () => {
         {activeTab === 'family' && (
           <div className="space-y-8">
             <div className="text-center">
-              <h2 className="font-bold mb-4" style={{ fontSize: 'clamp(1.875rem, 3vw, 2.25rem)', color: 'var(--primary)' }}>
+              <h2 className="mb-4 text-2xl font-bold text-primary sm:text-3xl">
                 Family Management
               </h2>
               <p className="text-lg max-w-2xl mx-auto text-gray-600">
@@ -945,28 +891,28 @@ const FamilyHubPage: React.FC = () => {
                 <h3 className="text-xl font-bold mb-4 text-primary">
                   No Family Yet
                 </h3>
-                <p className="text-gray-600 mb-8 max-w-md mx-auto">
-                  Create a family or join an existing one to start managing family members.
+                <p className="mx-auto mb-8 max-w-md text-gray-600">
+                  Start a household on this device, or open Family Hub for missions. Households are not shared online.
                 </p>
-                <div className="flex gap-4 justify-center">
+                <div className="flex justify-center gap-4">
                   <button
                     onClick={() => setShowCreateFamily(true)}
-                    className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+                    className="rounded-lg bg-green-700 px-6 py-3 font-medium text-white hover:bg-green-800"
                   >
-                    Create Family
+                    Start household
                   </button>
-                  <button
-                    onClick={() => setShowJoinFamily(true)}
-                    className="bg-green-700 hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+                  <Link
+                    to="/family-hub"
+                    className="rounded-lg border-2 border-green-700 px-6 py-3 font-medium text-green-800 hover:bg-green-50 dark:border-green-400 dark:text-green-200"
                   >
-                    Join Family
-                  </button>
+                    Open Family Hub
+                  </Link>
                 </div>
               </div>
             ) : (
               <div className="space-y-8">
                 {/* Family Info */}
-                <div className="bg-white rounded-xl p-6" style={{ backgroundColor: 'var(--card-color)' }}>
+                <div className="bg-white rounded-xl p-6 rounded-2xl border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800">
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-xl font-bold text-primary">
                       {currentFamily.name}
@@ -976,7 +922,7 @@ const FamilyHubPage: React.FC = () => {
                       className="text-red-600 hover:text-red-700 flex items-center gap-2"
                     >
                       <LogOut size={16} />
-                      Leave Family
+                      Remove household
                     </button>
                   </div>
                   <p className="text-gray-600 mb-4">
@@ -988,7 +934,7 @@ const FamilyHubPage: React.FC = () => {
                 </div>
 
                 {/* Family Members */}
-                <div className="bg-white rounded-xl p-6" style={{ backgroundColor: 'var(--card-color)' }}>
+                <div className="bg-white rounded-xl p-6 rounded-2xl border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800">
                   <div className="flex items-center justify-between mb-6">
                     <h3 className="text-xl font-bold text-primary">
                       Family Members ({familyMembers.length})
@@ -1067,8 +1013,7 @@ const FamilyHubPage: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <Link 
                 to="/family-hub"
-                className="bg-white rounded-xl p-6 hover:shadow-lg transition-all block"
-                style={{ backgroundColor: 'var(--card-color)' }}
+                className="bg-white rounded-xl p-6 hover:shadow-lg transition-all block rounded-2xl border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800"
               >
                 <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
                   <Star size={24} className="text-orange-600" />
@@ -1084,7 +1029,7 @@ const FamilyHubPage: React.FC = () => {
                 </div>
               </Link>
 
-              <div className="bg-white rounded-xl p-6" style={{ backgroundColor: 'var(--card-color)' }}>
+              <div className="bg-white rounded-xl p-6 rounded-2xl border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800">
                 <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
                   <Download size={24} className="text-green-600" />
                 </div>
@@ -1099,7 +1044,7 @@ const FamilyHubPage: React.FC = () => {
                 </Link>
               </div>
 
-              <div className="bg-white rounded-xl p-6" style={{ backgroundColor: 'var(--card-color)' }}>
+              <div className="bg-white rounded-xl p-6 rounded-2xl border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800">
                 <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
                   <Users size={24} className="text-purple-600" />
                 </div>
@@ -1114,7 +1059,7 @@ const FamilyHubPage: React.FC = () => {
                 </Link>
               </div>
 
-              <div className="bg-white rounded-xl p-6" style={{ backgroundColor: 'var(--card-color)' }}>
+              <div className="bg-white rounded-xl p-6 rounded-2xl border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800">
                 <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
                   <Settings size={24} className="text-green-600" />
                 </div>
@@ -1154,8 +1099,8 @@ const FamilyHubPage: React.FC = () => {
                 transition={{ duration: 0.2, ease: 'easeOut' }}
                 className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full p-6 sm:p-6 mx-auto"
               >
-                <h3 id="create-family-title" className="text-xl font-bold mb-4 text-primary">
-                  Create New Family
+                <h3 id="create-family-title" className="mb-4 text-xl font-bold text-primary">
+                  Start household on this device
                 </h3>
                 <div className="space-y-4">
                   <div>
@@ -1181,75 +1126,10 @@ const FamilyHubPage: React.FC = () => {
                     className="flex-1 bg-green-600 hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white px-4 py-3 rounded-md font-medium transition-colors min-h-[44px]"
                     aria-label="Create family"
                   >
-                    {loading ? 'Creating...' : 'Create Family'}
+                    {loading ? 'Saving...' : 'Start household'}
                   </button>
                   <button
                     onClick={() => setShowCreateFamily(false)}
-                    className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 px-4 py-3 rounded-md font-medium transition-colors min-h-[44px]"
-                    aria-label="Cancel and close dialog"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-        )}
-      </AnimatePresence>
-
-      {/* Join Family Modal */}
-      <AnimatePresence>
-        {showJoinFamily && (
-          <div className="fixed inset-0 z-50 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="join-family-title">
-            <div className="flex min-h-screen items-center justify-center p-4">
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.2 }}
-                className="fixed inset-0 bg-black bg-opacity-50"
-                onClick={() => setShowJoinFamily(false)}
-                aria-hidden="true"
-              />
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                transition={{ duration: 0.2, ease: 'easeOut' }}
-                className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full p-6"
-              >
-              <h3 id="join-family-title" className="text-xl font-bold mb-4 text-primary">
-                Join Existing Family
-              </h3>
-              <div className="space-y-4">
-                <div>
-                  <label htmlFor="family-id" className="block text-sm font-medium mb-2">
-                    Family ID <span className="text-red-500" aria-label="required">*</span>
-                  </label>
-                  <input
-                    id="family-id"
-                    type="text"
-                    value={joinFamilyId}
-                    onChange={(e) => setJoinFamilyId(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                    placeholder="Enter family ID"
-                    autoFocus
-                    required
-                    aria-required="true"
-                  />
-                </div>
-                <div className="flex gap-3">
-                  <button
-                    onClick={handleJoinFamily}
-                    disabled={!joinFamilyId.trim() || loading}
-                    className="flex-1 bg-green-700 hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500 disabled:bg-gray-400 disabled:cursor-not-allowed text-white px-4 py-3 rounded-md font-medium transition-colors min-h-[44px]"
-                    aria-label="Join family"
-                  >
-                    {loading ? 'Joining...' : 'Join Family'}
-                  </button>
-                  <button
-                    onClick={() => setShowJoinFamily(false)}
                     className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 px-4 py-3 rounded-md font-medium transition-colors min-h-[44px]"
                     aria-label="Cancel and close dialog"
                   >
@@ -1321,18 +1201,16 @@ const FamilyHubPage: React.FC = () => {
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="member-email" className="block text-sm font-medium mb-2">
-                    Email <span className="text-red-500" aria-label="required">*</span>
+                  <label htmlFor="member-email" className="mb-2 block text-sm font-medium">
+                    Email (optional)
                   </label>
                   <input
                     id="member-email"
                     type="email"
                     value={newMemberEmail}
                     onChange={(e) => setNewMemberEmail(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                    placeholder="Email address"
-                    required
-                    aria-required="true"
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                    placeholder="Leave blank to keep this member on this device only"
                   />
                 </div>
                 <div>
@@ -1351,7 +1229,7 @@ const FamilyHubPage: React.FC = () => {
                 <div className="flex gap-3">
                   <button
                     onClick={handleAddMember}
-                    disabled={!newMemberEmail.trim() || !newMemberFirstName.trim() || !newMemberLastName.trim() || loading}
+                    disabled={!newMemberFirstName.trim() || !newMemberLastName.trim() || loading}
                     className="flex-1 bg-green-600 hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white px-4 py-3 rounded-md font-medium transition-colors min-h-[44px]"
                     aria-label="Add family member"
                   >
