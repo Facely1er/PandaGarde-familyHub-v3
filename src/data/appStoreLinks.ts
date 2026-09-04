@@ -14,7 +14,7 @@ export const FAMILY_HUB_BUNDLE_ID = 'com.pandagarde.familyhub';
 export const FAMILY_HUB_VERSION = '1.1.0';
 
 /** Android versionCode and iOS CURRENT_PROJECT_VERSION */
-export const FAMILY_HUB_BUILD = 13;
+export const FAMILY_HUB_BUILD = 14;
 
 export const FAMILY_HUB_VERSION_LABEL = `${FAMILY_HUB_VERSION} (build ${FAMILY_HUB_BUILD})`;
 
