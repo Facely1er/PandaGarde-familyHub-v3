@@ -12,7 +12,7 @@ import {
   Download
 } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
-import { APP_STORE_URL, GOOGLE_PLAY_URL } from '../data/appStoreLinks';
+import { APP_STORE_URL, FAMILY_HUB_APP_NAME, FAMILY_HUB_BUNDLE_ID, FAMILY_HUB_VERSION_LABEL, GOOGLE_PLAY_URL } from '../data/appStoreLinks';
 
 const AppStoreReviewPage: React.FC = () => {
   const reviewSteps = [
@@ -149,15 +149,15 @@ const AppStoreReviewPage: React.FC = () => {
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
               <div>
                 <h3 className="font-semibold text-gray-700 mb-2">App Name</h3>
-                <p className="text-gray-900">PandaGarde Family Hub</p>
+                <p className="text-gray-900">{FAMILY_HUB_APP_NAME}</p>
               </div>
               <div>
                 <h3 className="font-semibold text-gray-700 mb-2">Bundle ID</h3>
-                <p className="text-gray-900">com.pandagarde.familyhub</p>
+                <p className="text-gray-900">{FAMILY_HUB_BUNDLE_ID}</p>
               </div>
               <div>
                 <h3 className="font-semibold text-gray-700 mb-2">Version</h3>
-                <p className="text-gray-900">1.1.0 (build 13)</p>
+                <p className="text-gray-900">{FAMILY_HUB_VERSION_LABEL}</p>
               </div>
               <div>
                 <h3 className="font-semibold text-gray-700 mb-2">Age Rating</h3>

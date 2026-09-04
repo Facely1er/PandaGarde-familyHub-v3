@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Bump Family Hub version across package.json, Android, and iOS.
+ * Bump Family Hub version across package.json, Android, iOS, and website store copy.
  *
  * Usage:
  *   node scripts/bump-familyhub-version.mjs 1.0.1
@@ -14,6 +14,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const pkgPath = path.join(root, 'package.json');
 const androidGradle = path.join(root, 'android', 'app', 'build.gradle');
 const iosPbx = path.join(root, 'ios', 'App', 'App.xcodeproj', 'project.pbxproj');
+const storeLinks = path.join(root, 'src', 'data', 'appStoreLinks.ts');
 
 function readJson(p) {
   return JSON.parse(fs.readFileSync(p, 'utf8'));
@@ -43,6 +44,18 @@ function setAndroid(gradleText, versionName, versionCode) {
 function setIosPbx(pbxText, marketingVersion, buildNumber) {
   let next = pbxText.replace(/MARKETING_VERSION = [^;]+;/g, `MARKETING_VERSION = ${marketingVersion};`);
   next = next.replace(/CURRENT_PROJECT_VERSION = [^;]+;/g, `CURRENT_PROJECT_VERSION = ${buildNumber};`);
+  return next;
+}
+
+function setStoreLinks(tsText, marketingVersion, buildNumber) {
+  let next = tsText.replace(
+    /export const FAMILY_HUB_VERSION = '[^']+'/,
+    `export const FAMILY_HUB_VERSION = '${marketingVersion}'`
+  );
+  next = next.replace(
+    /export const FAMILY_HUB_BUILD = \d+/,
+    `export const FAMILY_HUB_BUILD = ${buildNumber}`
+  );
   return next;
 }
 
@@ -98,6 +111,11 @@ if (fs.existsSync(androidGradle)) {
 if (fs.existsSync(iosPbx)) {
   const pbx = fs.readFileSync(iosPbx, 'utf8');
   fs.writeFileSync(iosPbx, setIosPbx(pbx, marketingVersion, String(iosBuild)));
+}
+
+if (fs.existsSync(storeLinks)) {
+  const ts = fs.readFileSync(storeLinks, 'utf8');
+  fs.writeFileSync(storeLinks, setStoreLinks(ts, marketingVersion, versionCode));
 }
 
 console.log(`Family Hub version: ${marketingVersion}`);

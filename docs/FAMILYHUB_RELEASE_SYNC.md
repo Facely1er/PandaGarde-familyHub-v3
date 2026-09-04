@@ -16,7 +16,7 @@ One codebase, three channels. Keep them on the **same git commit** for each rele
 - **Hub bundle:** `npm run build:familyhub` → `dist-familyhub/` (gitignored)
 - **Native shells:** `android/`, `ios/` (committed; synced web assets are **gitignored** inside each platform)
 - **Capacitor:** `capacitor.config.ts` → `webDir: 'dist-familyhub'`
-- **Version:** `package.json` `version` + `scripts/bump-familyhub-version.mjs`
+- **Version:** `package.json` `version` + Android/iOS + `src/data/appStoreLinks.ts` via `scripts/bump-familyhub-version.mjs`
 
 ## Every release (checklist)
 

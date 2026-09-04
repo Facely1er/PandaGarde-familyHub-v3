@@ -13,7 +13,7 @@ import {
   Star
 } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
-import { APP_STORE_URL, GOOGLE_PLAY_URL } from '../data/appStoreLinks';
+import { APP_STORE_URL, FAMILY_HUB_APP_NAME, FAMILY_HUB_BUNDLE_ID, FAMILY_HUB_VERSION_LABEL, GOOGLE_PLAY_URL } from '../data/appStoreLinks';
 
 const AppFeaturesPage: React.FC = () => {
   const features = [
@@ -135,8 +135,8 @@ const AppFeaturesPage: React.FC = () => {
         <div className="bg-green-700 py-16 text-white dark:bg-green-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                PandaGarde Family Hub App
+              <h1 className="mb-4 text-4xl font-bold md:text-5xl">
+                {FAMILY_HUB_APP_NAME}
               </h1>
               <p className="mb-8 text-xl text-green-100 md:text-2xl">
                 Mobile app features for app store reviewers
@@ -254,7 +254,7 @@ const AppFeaturesPage: React.FC = () => {
                 <dl className="space-y-3">
                   <div>
                     <dt className="font-semibold text-gray-700">App Name</dt>
-                    <dd className="text-gray-600">PandaGarde Family Hub</dd>
+                    <dd className="text-gray-600">{FAMILY_HUB_APP_NAME}</dd>
                   </div>
                   <div>
                     <dt className="font-semibold text-gray-700">Category</dt>
@@ -262,11 +262,11 @@ const AppFeaturesPage: React.FC = () => {
                   </div>
                   <div>
                     <dt className="font-semibold text-gray-700">Bundle ID</dt>
-                    <dd className="text-gray-600">com.pandagarde.familyhub</dd>
+                    <dd className="text-gray-600">{FAMILY_HUB_BUNDLE_ID}</dd>
                   </div>
                   <div>
                     <dt className="font-semibold text-gray-700">Version</dt>
-                    <dd className="text-gray-600">1.1.0 (build 13)</dd>
+                    <dd className="text-gray-600">{FAMILY_HUB_VERSION_LABEL}</dd>
                   </div>
                   <div>
                     <dt className="font-semibold text-gray-700">Age Rating</dt>

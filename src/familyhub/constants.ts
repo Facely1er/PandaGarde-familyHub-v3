@@ -1,8 +1,10 @@
+import { FAMILY_HUB_APP_NAME } from '../data/appStoreLinks';
+
 /** localStorage key: user has completed the Family Hub welcome screen */
 export const HUB_WELCOMED_KEY = 'pandagarde_hub_welcomed';
 
-/** App Store / shell display name — keep in sync with capacitor.config.ts appName */
-export const HUB_DISPLAY_NAME = 'PandaGarde Family Hub';
+/** App Store / shell display name — same as capacitor.config.ts appName */
+export const HUB_DISPLAY_NAME = FAMILY_HUB_APP_NAME;
 
 /** Header lockup — two lines beside the logo */
 export const HUB_BRAND_LINE_1 = 'PandaGarde';
