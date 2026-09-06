@@ -14,7 +14,7 @@ const BrandSplash: React.FC<BrandSplashProps> = ({
 }) => {
   return (
     <div
-      className={`min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-100 px-4 ${className}`}
+      className={`min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4 ${className}`}
       aria-label={message}
       aria-live="polite"
     >

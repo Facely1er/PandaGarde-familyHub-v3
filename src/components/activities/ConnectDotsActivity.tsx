@@ -234,7 +234,7 @@ const ConnectDotsActivity: React.FC<ConnectDotsActivityProps> = ({ onComplete, o
         </div>
 
         {/* Progress */}
-        <div className="border-b border-gray-200 bg-gray-50 px-5 py-3 dark:border-gray-800 dark:bg-gray-800/50">
+        <div className="border-b border-gray-200 bg-gray-50 px-5 py-3 dark:border-gray-800 dark:bg-gray-800">
           <div className="mb-1 flex items-center justify-between text-xs font-medium text-gray-600 dark:text-gray-300">
             <span>
               {connectedDots.length} of {total} connected
@@ -270,7 +270,7 @@ const ConnectDotsActivity: React.FC<ConnectDotsActivityProps> = ({ onComplete, o
         </div>
 
         {/* Controls */}
-        <div className="flex items-center justify-center border-t border-gray-200 bg-gray-50 px-5 py-4 dark:border-gray-800 dark:bg-gray-800/50">
+        <div className="flex items-center justify-center border-t border-gray-200 bg-gray-50 px-5 py-4 dark:border-gray-800 dark:bg-gray-800">
           <button
             type="button"
             onClick={reset}

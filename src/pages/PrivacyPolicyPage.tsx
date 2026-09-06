@@ -8,7 +8,7 @@ import { ORIGIN_STORY_SLUG } from '../data/stories';
 const policyCard =
   'rounded-lg border border-gray-200 bg-white p-4 shadow-sm sm:p-6 dark:border-gray-700 dark:bg-gray-800';
 const sectionHeading =
-  'mb-4 flex flex-wrap items-center gap-2 text-xl font-bold text-primary sm:mb-6 sm:gap-3 sm:text-2xl lg:text-3xl';
+  'mb-4 flex flex-wrap items-center gap-2 text-xl font-bold text-gray-900 dark:text-gray-100 sm:mb-6 sm:gap-3 sm:text-2xl lg:text-3xl';
 const bodyText = 'text-sm leading-relaxed text-gray-600 sm:text-base dark:text-gray-300';
 
 const PrivacyPolicyPage: React.FC = () => {
@@ -21,7 +21,7 @@ const PrivacyPolicyPage: React.FC = () => {
       <div className="mx-auto max-w-4xl">
         <div className="prose prose-lg max-w-none dark:prose-invert">
           <div className="mb-8 rounded-r-lg border-l-4 border-green-500 bg-green-50 p-4 sm:p-6 dark:border-green-600 dark:bg-green-950/30">
-            <h2 className="mb-3 text-xl font-bold text-primary sm:text-2xl">Our Commitment to Privacy</h2>
+            <h2 className="mb-3 text-xl font-bold text-gray-900 dark:text-gray-100 sm:text-2xl">Our Commitment to Privacy</h2>
             <p className={`m-0 ${bodyText}`}>
               At PandaGarde, we believe that privacy education should be taught through example. We are committed to
               protecting your privacy and the privacy of your children while providing valuable educational content
@@ -36,7 +36,7 @@ const PrivacyPolicyPage: React.FC = () => {
             </h2>
 
             <div className={`mb-6 ${policyCard}`}>
-              <h3 className="mb-4 text-lg font-semibold text-primary sm:text-xl">Minimal Data Collection</h3>
+              <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-gray-100 sm:text-xl">Minimal Data Collection</h3>
               <p className={`mb-4 ${bodyText}`}>
                 We collect the absolute minimum information necessary to provide our educational services:
               </p>
@@ -77,7 +77,7 @@ const PrivacyPolicyPage: React.FC = () => {
 
             <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2">
               <div className={policyCard}>
-                <h3 className="mb-4 text-lg font-semibold text-primary sm:text-xl">Educational Purposes</h3>
+                <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-gray-100 sm:text-xl">Educational Purposes</h3>
                 <ul className={`list-disc space-y-2 pl-6 ${bodyText}`}>
                   <li>Track learning progress and achievements</li>
                   <li>Provide personalized educational content</li>
@@ -87,7 +87,7 @@ const PrivacyPolicyPage: React.FC = () => {
               </div>
 
               <div className={policyCard}>
-                <h3 className="mb-4 text-lg font-semibold text-primary sm:text-xl">Service Improvement</h3>
+                <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-gray-100 sm:text-xl">Service Improvement</h3>
                 <ul className={`list-disc space-y-2 pl-6 ${bodyText}`}>
                   <li>Analyze usage patterns (anonymized)</li>
                   <li>Fix bugs and technical issues</li>
@@ -105,7 +105,7 @@ const PrivacyPolicyPage: React.FC = () => {
             </h2>
 
             <div className="mb-6 rounded-lg border border-green-300 bg-green-100 p-4 sm:p-6 dark:border-green-800 dark:bg-green-950/40">
-              <h3 className="mb-4 text-lg font-semibold text-primary sm:text-xl">Local Storage First</h3>
+              <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-gray-100 sm:text-xl">Local Storage First</h3>
               <p className={`m-0 ${bodyText} text-gray-800 dark:text-gray-200`}>
                 All progress data is stored locally on your device using secure browser storage. This means your
                 child&apos;s learning progress never leaves your device unless you choose to export it.
@@ -139,7 +139,7 @@ const PrivacyPolicyPage: React.FC = () => {
                   >
                     <item.icon size={28} aria-hidden="true" />
                   </div>
-                  <h3 className="mb-2 font-semibold text-primary">{item.title}</h3>
+                  <h3 className="mb-2 font-semibold text-gray-900 dark:text-gray-100">{item.title}</h3>
                   <p className="text-sm text-gray-600 dark:text-gray-300">{item.body}</p>
                 </div>
               ))}
@@ -147,7 +147,7 @@ const PrivacyPolicyPage: React.FC = () => {
           </section>
 
           <section className="mb-8">
-            <h2 className="mb-4 text-xl font-bold text-primary sm:mb-6 sm:text-2xl lg:text-3xl">
+            <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-gray-100 sm:mb-6 sm:text-2xl lg:text-3xl">
               Children&apos;s Privacy (COPPA Compliance)
             </h2>
 
@@ -171,7 +171,7 @@ const PrivacyPolicyPage: React.FC = () => {
             </div>
 
             <div className={`mb-6 ${policyCard}`}>
-              <h3 className="mb-4 text-lg font-semibold text-primary sm:text-xl">Parental Consent Process</h3>
+              <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-gray-100 sm:text-xl">Parental Consent Process</h3>
               <p className={`mb-4 ${bodyText}`}>
                 For children under 13, we require verifiable parental consent before collecting any personal information:
               </p>
@@ -213,7 +213,7 @@ const PrivacyPolicyPage: React.FC = () => {
             </div>
 
             <div className={`mb-6 ${policyCard}`}>
-              <h3 className="mb-4 text-lg font-semibold text-primary sm:text-xl">Parental Rights</h3>
+              <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-gray-100 sm:text-xl">Parental Rights</h3>
               <p className={`mb-4 ${bodyText}`}>Parents have the following rights regarding their child&apos;s information:</p>
               <ul className={`list-disc space-y-2 pl-6 ${bodyText}`}>
                 <li>
@@ -260,13 +260,13 @@ const PrivacyPolicyPage: React.FC = () => {
           </section>
 
           <section className="mb-8">
-            <h2 className="mb-4 text-xl font-bold text-primary sm:mb-6 sm:text-2xl lg:text-3xl">
+            <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-gray-100 sm:mb-6 sm:text-2xl lg:text-3xl">
               Your Rights and Choices
             </h2>
 
             <div className="space-y-4">
               <div className={policyCard}>
-                <h3 className="mb-3 text-lg font-semibold text-primary sm:text-xl">Access and Control</h3>
+                <h3 className="mb-3 text-lg font-semibold text-gray-900 dark:text-gray-100 sm:text-xl">Access and Control</h3>
                 <ul className={`list-disc space-y-2 pl-6 ${bodyText}`}>
                   <li>View all data we have about you or your child</li>
                   <li>Export your progress data for backup or transfer</li>
@@ -323,7 +323,7 @@ const PrivacyPolicyPage: React.FC = () => {
           </section>
 
           <section className="mb-8">
-            <h2 className="mb-4 text-xl font-bold text-primary sm:mb-6 sm:text-2xl lg:text-3xl">Policy Updates</h2>
+            <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-gray-100 sm:mb-6 sm:text-2xl lg:text-3xl">Policy Updates</h2>
             <p className={`mb-4 ${bodyText}`}>We may update this Privacy Policy from time to time. When we do, we will:</p>
             <ul className={`list-disc space-y-2 pl-6 ${bodyText}`}>
               <li>Post the updated policy on this page</li>

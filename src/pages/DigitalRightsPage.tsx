@@ -152,7 +152,7 @@ const DigitalRightsPage: React.FC = () => {
       subtitle="Privacy laws and your rights—especially helpful for Maryland families. Skip this page if you are just getting started with stories or your app list."
       breadcrumbs={true}
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="flex flex-col gap-6">
         <nav
           className="mb-6 flex flex-wrap gap-x-4 gap-y-2 text-sm"
           aria-label="Related privacy pages"
@@ -368,7 +368,7 @@ const DigitalRightsPage: React.FC = () => {
               role="dialog"
               aria-modal="true"
               aria-labelledby="digital-rights-module-title"
-              className="bg-white dark:bg-gray-100 rounded-t-2xl sm:rounded-2xl w-full sm:max-w-5xl max-h-[92vh] sm:max-h-[90vh] overflow-hidden flex flex-col shadow-xl"
+              className="bg-white dark:bg-gray-800 rounded-t-2xl sm:rounded-2xl w-full sm:max-w-5xl max-h-[92vh] sm:max-h-[90vh] overflow-hidden flex flex-col shadow-xl"
               onClick={(event) => event.stopPropagation()}
             >
               <div className="flex items-start justify-between gap-4 p-4 sm:p-6 border-b border-gray-200 dark:border-gray-700 shrink-0">
@@ -453,7 +453,7 @@ const DigitalRightsPage: React.FC = () => {
                 </div>
 
                 <section
-                  className="rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/60 p-4 sm:p-5"
+                  className="rounded-xl border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800 sm:p-5"
                   aria-labelledby="module-actions-heading"
                 >
                   <h4
@@ -471,7 +471,7 @@ const DigitalRightsPage: React.FC = () => {
                 </section>
               </div>
 
-              <div className="shrink-0 flex flex-col-reverse sm:flex-row sm:items-center sm:justify-end gap-2 sm:gap-3 p-4 sm:p-6 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-100/80">
+              <div className="shrink-0 flex flex-col-reverse sm:flex-row sm:items-center sm:justify-end gap-2 sm:gap-3 p-4 sm:p-6 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
                 <Button variant="secondary" size="sm" onClick={closeModule} className="w-full sm:w-auto">
                   Close
                 </Button>

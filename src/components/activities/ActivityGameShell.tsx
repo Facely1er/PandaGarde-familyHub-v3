@@ -94,7 +94,7 @@ const ActivityGameShell: React.FC<ActivityGameShellProps> = ({
         </div>
 
         {progressPercent !== undefined && (
-          <div className="border-b border-gray-200 bg-gray-50 px-5 py-3 dark:border-gray-800 dark:bg-gray-800/50">
+          <div className="border-b border-gray-200 bg-gray-50 px-5 py-3 dark:border-gray-800 dark:bg-gray-800">
             {(progressLeft || progressRight) && (
               <div className="mb-1 flex items-center justify-between text-xs font-medium text-gray-600 dark:text-gray-300">
                 <span>{progressLeft}</span>
@@ -113,7 +113,7 @@ const ActivityGameShell: React.FC<ActivityGameShellProps> = ({
         <div className="flex-1 overflow-y-auto px-5 py-4">{children}</div>
 
         {footer && (
-          <div className="flex flex-wrap items-center justify-center gap-2 border-t border-gray-200 bg-gray-50 px-5 py-4 dark:border-gray-800 dark:bg-gray-800/50">
+          <div className="flex flex-wrap items-center justify-center gap-2 border-t border-gray-200 bg-gray-50 px-5 py-4 dark:border-gray-800 dark:bg-gray-800">
             {footer}
           </div>
         )}

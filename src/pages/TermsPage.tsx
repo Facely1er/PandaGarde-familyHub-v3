@@ -14,7 +14,7 @@ const TermsPage: React.FC = () => {
 
             {/* Introduction */}
             <section className="mb-12">
-              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-primary">
+              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-900 dark:text-gray-100">
                 Introduction
               </h2>
               <p className="text-base sm:text-lg mb-4 text-gray-600 dark:text-gray-300">
@@ -30,14 +30,14 @@ const TermsPage: React.FC = () => {
 
             {/* Acceptance of Terms */}
             <section className="mb-12">
-              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-primary">
+              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-900 dark:text-gray-100">
                 Acceptance of Terms
               </h2>
               <div className="bg-green-50 dark:bg-green-950/30 p-6 rounded-lg mb-6 border border-green-200 dark:border-green-800">
                 <div className="flex items-start gap-3">
-                  <CheckCircle size={24} className="text-green-700 dark:text-green-400 mt-1 text-primary" />
+                  <CheckCircle size={24} className="mt-1 text-green-700 dark:text-green-400" aria-hidden />
                   <div>
-                    <h3 className="font-semibold mb-2 text-primary">
+                    <h3 className="font-semibold mb-2 text-gray-900 dark:text-gray-100">
                       Agreement to Terms
                     </h3>
                     <p className="text-gray-600 dark:text-gray-300">
@@ -51,7 +51,7 @@ const TermsPage: React.FC = () => {
 
             {/* Description of Service */}
             <section className="mb-12">
-              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-primary">
+              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-900 dark:text-gray-100">
                 Description of Service
               </h2>
               <p className="text-base sm:text-lg mb-4 text-gray-600 dark:text-gray-300">
@@ -69,12 +69,12 @@ const TermsPage: React.FC = () => {
 
             {/* User Accounts */}
             <section className="mb-12">
-              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-primary">
+              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-900 dark:text-gray-100">
                 User Accounts
               </h2>
               <div className="space-y-4">
                 <div className="bg-gray-50 p-6 rounded-lg bg-light">
-                  <h3 className="font-semibold mb-2 text-primary">
+                  <h3 className="font-semibold mb-2 text-gray-900 dark:text-gray-100">
                     Account Creation
                   </h3>
                   <p className="text-gray-600 dark:text-gray-300">
@@ -85,7 +85,7 @@ const TermsPage: React.FC = () => {
                 </div>
 
                 <div className="bg-gray-50 p-6 rounded-lg bg-light">
-                  <h3 className="font-semibold mb-2 text-primary">
+                  <h3 className="font-semibold mb-2 text-gray-900 dark:text-gray-100">
                     Age Requirements
                   </h3>
                   <p className="text-gray-600">
@@ -99,7 +99,7 @@ const TermsPage: React.FC = () => {
 
             {/* Acceptable Use */}
             <section className="mb-12">
-              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-primary">
+              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-900 dark:text-gray-100">
                 Acceptable Use
               </h2>
               <div className="callout-red mb-6">
@@ -133,7 +133,7 @@ const TermsPage: React.FC = () => {
 
             {/* Privacy and Data Protection */}
             <section className="mb-12">
-              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-primary">
+              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-900 dark:text-gray-100">
                 Privacy and Data Protection
               </h2>
               <div className="callout-green mb-6">
@@ -160,7 +160,7 @@ const TermsPage: React.FC = () => {
 
             {/* Intellectual Property */}
             <section className="mb-12">
-              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-primary">
+              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-900 dark:text-gray-100">
                 Intellectual Property
               </h2>
               <p className="text-base sm:text-lg mb-4 text-gray-600 dark:text-gray-300">
@@ -176,7 +176,7 @@ const TermsPage: React.FC = () => {
 
             {/* Disclaimers */}
             <section className="mb-12">
-              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-primary">
+              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-900 dark:text-gray-100">
                 Disclaimers
               </h2>
               <div className="callout-yellow mb-6">
@@ -203,7 +203,7 @@ const TermsPage: React.FC = () => {
 
             {/* Limitation of Liability */}
             <section className="mb-12">
-              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-primary">
+              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-900 dark:text-gray-100">
                 Limitation of Liability
               </h2>
               <p className="text-base sm:text-lg mb-4 text-gray-600 dark:text-gray-300">
@@ -216,7 +216,7 @@ const TermsPage: React.FC = () => {
 
             {/* Termination */}
             <section className="mb-12">
-              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-primary">
+              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-900 dark:text-gray-100">
                 Termination
               </h2>
               <p className="text-base sm:text-lg mb-4 text-gray-600 dark:text-gray-300">
@@ -231,7 +231,7 @@ const TermsPage: React.FC = () => {
 
             {/* Changes to Terms */}
             <section className="mb-12">
-              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-primary">
+              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-900 dark:text-gray-100">
                 Changes to Terms
               </h2>
               <p className="text-base sm:text-lg mb-4 text-gray-600 dark:text-gray-300">
@@ -247,7 +247,7 @@ const TermsPage: React.FC = () => {
 
             {/* Contact Information */}
             <section className="mb-12">
-              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-primary">
+              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-900 dark:text-gray-100">
                 Contact Information
               </h2>
               <p className="text-base sm:text-lg mb-4 text-gray-600 dark:text-gray-300">
@@ -272,7 +272,7 @@ const TermsPage: React.FC = () => {
             {/* Effective Date */}
             <section className="mb-12">
               <div className="bg-green-50 dark:bg-green-950/30 p-6 rounded-lg text-center border border-green-200 dark:border-green-800">
-                <p className="text-lg font-semibold text-primary">
+                <p className="text-lg font-semibold text-gray-900 dark:text-gray-100">
                   These Terms of Service are effective as of December 2024
                 </p>
                 <p className="text-sm mt-2 text-gray-600">

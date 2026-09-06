@@ -51,7 +51,7 @@ const DfaScoreOverview: React.FC<Props> = ({ analysis }) => {
                 key={option}
                 type="button"
                 onClick={() => handleTierChange(option)}
-                className={`rounded-lg px-4 py-2 text-sm font-semibold transition ${tier === option ? 'bg-green-700 text-white dark:bg-green-600' : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-300'}`}
+                className={`rounded-lg px-4 py-2 text-sm font-semibold transition ${tier === option ? 'bg-green-700 text-white dark:bg-green-600' : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'}`}
               >
                 {option === 'basic' ? 'Basic scoring' : 'Advanced scoring'}
               </button>
@@ -76,7 +76,7 @@ const DfaScoreOverview: React.FC<Props> = ({ analysis }) => {
               <h3 className="text-lg font-bold">Executive summary</h3>
             </div>
             <p className="mt-3 text-sm leading-6 text-gray-600 dark:text-gray-300">{score.executiveSummary}</p>
-            <div className="mt-4 rounded-xl border border-gray-200 bg-gray-50 p-4 text-sm text-gray-800 dark:border-gray-500 dark:bg-gray-100 dark:text-gray-200">
+            <div className="mt-4 rounded-xl border border-gray-200 bg-gray-50 p-4 text-sm text-gray-800 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200">
               <div><strong className="text-gray-900 ">Privacy posture:</strong> {score.privacyScore}/100</div>
               <div className="mt-1"><strong className="text-gray-900 ">Tier:</strong> {tier === 'basic' ? 'Fast household view' : 'Expanded risk analysis'}</div>
             </div>

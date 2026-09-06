@@ -114,9 +114,7 @@ const DownloadGuidePage: React.FC<DownloadGuidePageProps> = ({
       subtitle={description}
       breadcrumbs={true}
     >
-      <div className="bg-white dark:bg-gray-900">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
-        <div className="max-w-4xl mx-auto">
+      <div className="mx-auto flex w-full max-w-4xl flex-col gap-10">
           {resourceInfo ? (
             <>
               {/* Resource Information */}
@@ -246,9 +244,7 @@ const DownloadGuidePage: React.FC<DownloadGuidePageProps> = ({
               </Link>
             </div>
           </div>
-        </div>
       </div>
-    </div>
     </PageLayout>
   );
 };

@@ -49,10 +49,9 @@ const FAQPage: React.FC = () => {
       title={t('faq.title')}
       subtitle={t('faq.subtitle')}
     >
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 pb-8">
-          {/* Category Filter */}
-          <div className="mb-8 sm:mb-12">
-            <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-primary">
+      <div className="mx-auto flex w-full max-w-4xl flex-col gap-8">
+          <div>
+            <h2 className="mb-4 text-xl font-bold text-gray-900 sm:mb-6 sm:text-2xl dark:text-gray-100">
               {t('faq.browseByCategory')}
             </h2>
             <div className="flex flex-wrap gap-2 sm:gap-3">
@@ -61,12 +60,13 @@ const FAQPage: React.FC = () => {
                 return (
                   <button
                     key={category.id}
+                    type="button"
                     onClick={() => setSelectedCategory(category.id)}
                     aria-pressed={selectedCategory === category.id}
-                    className={`flex items-center gap-2 px-4 py-2.5 min-h-[44px] rounded-full text-sm font-medium transition-all ${
+                    className={`flex min-h-[44px] items-center gap-2 rounded-full px-4 py-2.5 text-sm font-medium transition-all ${
                       selectedCategory === category.id
-                        ? 'bg-green-600 text-white shadow-md shadow-green-900/30 ring-2 ring-green-400/40'
-                        : 'bg-gray-100 dark:bg-gray-800/80 text-gray-700 dark:text-gray-200 hover:bg-green-100/80 dark:hover:bg-green-900/30 dark:hover:text-green-200 dark:border dark:border-green-500/20'
+                        ? 'bg-green-700 text-white shadow-md shadow-green-900/30 ring-2 ring-green-400/40 dark:bg-green-600'
+                        : 'bg-gray-100 text-gray-700 hover:bg-green-100/80 dark:border dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-green-900/30 dark:hover:text-green-200'
                     }`}
                   >
                     <Icon size={15} aria-hidden />
@@ -77,19 +77,19 @@ const FAQPage: React.FC = () => {
             </div>
           </div>
 
-          {/* FAQ Items */}
           <div className="space-y-4">
             {filteredItems.map((item) => (
               <div
                 key={item.id}
-                className="theme-card overflow-hidden"
+                className="overflow-hidden rounded-2xl border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800"
               >
                 <button
+                  type="button"
                   onClick={() => toggleItem(item.id)}
                   aria-expanded={openItems.includes(item.id)}
-                  className="w-full px-4 sm:px-6 py-4 min-h-[56px] text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors bg-gray-50/50 dark:bg-gray-800"
+                  className="flex min-h-[56px] w-full items-center justify-between px-4 py-4 text-left transition-colors hover:bg-gray-50 sm:px-6 dark:hover:bg-gray-700/50"
                 >
-                  <h3 className="text-base sm:text-lg font-semibold pr-4 text-primary">
+                  <h3 className="pr-4 text-base font-semibold text-gray-900 sm:text-lg dark:text-gray-100">
                     {item.question}
                   </h3>
                   {openItems.includes(item.id) ? (

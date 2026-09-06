@@ -23,12 +23,11 @@ const NewsletterArchivePage: React.FC = () => {
       subtitle="Past newsletter issues with privacy tips and family activities. Tap an issue to read it."
       breadcrumbs={true}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
-        <div className="mx-auto max-w-4xl">
-          <div className="mb-8">
+      <div className="mx-auto flex w-full max-w-4xl flex-col gap-8">
+          <div>
             <Link
               to="/newsletter"
-              className="mb-4 inline-flex items-center gap-2 font-semibold text-pink-600 hover:text-pink-700 dark:text-pink-400 dark:hover:text-pink-300"
+              className="mb-4 inline-flex items-center gap-2 font-semibold text-green-700 hover:text-green-800 dark:text-green-400 dark:hover:text-green-300"
             >
               <ArrowLeft size={20} aria-hidden />
               Back to Newsletter
@@ -65,7 +64,7 @@ const NewsletterArchivePage: React.FC = () => {
                                 {newsletter.month} {newsletter.year}
                               </span>
                               {newsletter.featured && (
-                                <span className="flex items-center gap-1 rounded-full bg-pink-100 px-2 py-1 text-xs font-semibold text-pink-800 dark:bg-pink-900/40 dark:text-pink-200">
+                                <span className="flex items-center gap-1 rounded-full bg-green-100 px-2 py-1 text-xs font-semibold text-green-800 dark:bg-green-900/40 dark:text-green-200">
                                   <Star size={12} aria-hidden />
                                   Featured
                                 </span>
@@ -93,7 +92,7 @@ const NewsletterArchivePage: React.FC = () => {
                               )}
                             </div>
                           </div>
-                          <div className="ml-4 text-pink-600 dark:text-pink-400">
+                          <div className="ml-4 text-green-700 dark:text-green-400">
                             <ArrowLeft size={20} className="rotate-180" />
                           </div>
                         </div>
@@ -108,14 +107,13 @@ const NewsletterArchivePage: React.FC = () => {
           <div className="mt-12 text-center">
             <Link
               to="/newsletter"
-              className="bg-gradient-to-r from-pink-500 to-rose-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-pink-600 hover:to-rose-700 transition-all inline-flex items-center gap-2"
+              className="button button-primary inline-flex items-center gap-2"
             >
               <Mail size={20} />
               Subscribe to Newsletter
             </Link>
           </div>
         </div>
-      </div>
     </PageLayout>
   );
 };

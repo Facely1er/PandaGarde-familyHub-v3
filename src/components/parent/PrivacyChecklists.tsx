@@ -167,7 +167,7 @@ const PrivacyChecklists: React.FC = () => {
         })}
       </div>
 
-      <div className="mb-6 rounded-xl bg-gray-50 p-4 dark:bg-gray-800/60 sm:mb-8 sm:p-6">
+      <div className="mb-6 rounded-xl bg-gray-50 p-4 dark:bg-gray-800 sm:mb-8 sm:p-6">
         <div className="mb-2 flex items-center justify-between gap-4">
           <h3 className="text-lg font-semibold text-gray-900 sm:text-xl dark:text-gray-100">
             {currentChecklist.title}

@@ -202,7 +202,7 @@ const ServiceCatalogPage: React.FC = () => {
                   const isAdded = familyServiceIds.includes(service.id);
                   const isAdding = addingId === service.id;
                   return (
-                    <div key={service.id} className={`flex items-center gap-3 rounded-xl border-2 px-4 py-3 transition-all sm:w-auto ${isAdded ? 'border-green-300 bg-green-50 dark:border-green-700 dark:bg-green-950/40' : 'border-gray-200 bg-white hover:border-green-400 dark:border-gray-700 dark:bg-gray-100 dark:hover:border-green-500'}`}>
+                    <div key={service.id} className={`flex items-center gap-3 rounded-xl border-2 px-4 py-3 transition-all sm:w-auto ${isAdded ? 'border-green-300 bg-green-50 dark:border-green-700 dark:bg-green-950/40' : 'border-gray-200 bg-white hover:border-green-400 dark:border-gray-700 dark:bg-gray-800 dark:hover:border-green-500'}`}>
                       {hasServiceLogo(service.id) ? (
                         <img src={getServiceLogoUrlWithBrandColor(service.id, 32)} alt={`${service.name} logo`} className="h-8 w-8 rounded" />
                       ) : (
@@ -226,11 +226,11 @@ const ServiceCatalogPage: React.FC = () => {
         <ServiceCatalog guidedMode />
 
         <div className="mt-10 grid gap-6 lg:grid-cols-2">
-          <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-100">
+          <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-800">
             <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">Why this phase matters</h3>
             <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">Your footprint review is only meaningful if it reflects the real school, home, health, AI, and telecom services your family uses. This step defines the scope without a heavy signup flow.</p>
           </div>
-          <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-100">
+          <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-800">
             <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">Continue when ready</h3>
             <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">Once you reach at least three services, head straight to the footprint review. Your list is saved locally on this device.</p>
             {isReadyForAnalysis ? (
@@ -247,7 +247,7 @@ const ServiceCatalogPage: React.FC = () => {
 
         <div className="grid gap-8 lg:grid-cols-2">
           {[{ title: 'School services frequently in scope', icon: School, items: schoolServices.slice(0, 6) }, { title: 'Health & medical apps families report', icon: Heart, items: healthServices.slice(0, 6) }, { title: 'AI tools families are increasingly using', icon: Bot, items: aiServices.slice(0, 6) }, { title: 'Telecom services that shape the household data trail', icon: Signal, items: telecomServices.slice(0, 6) }, { title: 'High-data-sharing services worth knowing about', icon: AlertTriangle, items: leConcernServices.slice(0, 6) }].map(({ title, icon: Icon, items }) => (
-            <div key={title} className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-100">
+            <div key={title} className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-800">
               <div className="mb-3 flex items-center gap-2 text-gray-900 dark:text-gray-100"><Icon size={18} /><h3 className="text-lg font-bold">{title}</h3></div>
               <div className="flex flex-wrap gap-2">
                 {items.map((service) => (

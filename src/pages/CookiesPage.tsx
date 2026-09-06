@@ -14,7 +14,7 @@ const CookiesPage: React.FC = () => {
 
             {/* Introduction */}
             <section className="mb-12">
-              <h2 className="text-3xl font-bold mb-6 text-primary">
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">
                 What Are Cookies?
               </h2>
               <p className="text-lg mb-4 text-gray-600">
@@ -24,9 +24,9 @@ const CookiesPage: React.FC = () => {
               </p>
               <div className="bg-green-50 dark:bg-green-950/30 p-6 rounded-lg mb-6 border border-green-200 dark:border-green-800">
                 <div className="flex items-start gap-3">
-                  <Info size={24} className="text-green-700 dark:text-green-400 mt-1 text-primary" />
+                  <Info size={24} className="mt-1 text-green-700 dark:text-green-400" aria-hidden />
                   <div>
-                    <h3 className="font-semibold mb-2 text-primary">
+                    <h3 className="font-semibold mb-2 text-gray-900 dark:text-gray-100">
                       Our Privacy-First Approach
                     </h3>
                     <p className="text-gray-600">
@@ -40,7 +40,7 @@ const CookiesPage: React.FC = () => {
 
             {/* Types of Cookies */}
             <section className="mb-12">
-              <h2 className="text-3xl font-bold mb-6 text-primary">
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">
                 Types of Cookies We Use
               </h2>
 
@@ -115,7 +115,7 @@ const CookiesPage: React.FC = () => {
 
             {/* Third-Party Cookies */}
             <section className="mb-12">
-              <h2 className="text-3xl font-bold mb-6 text-primary">
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">
                 Third-Party Services
               </h2>
               <p className="text-lg mb-4 text-gray-600">
@@ -124,7 +124,7 @@ const CookiesPage: React.FC = () => {
               </p>
 
               <div className="bg-gray-50 p-6 rounded-lg bg-light">
-                <h3 className="font-semibold mb-3 text-primary">
+                <h3 className="font-semibold mb-3 text-gray-900 dark:text-gray-100">
                   Services We May Use:
                 </h3>
                 <ul className="list-disc pl-6 text-gray-600">
@@ -138,7 +138,7 @@ const CookiesPage: React.FC = () => {
 
             {/* Cookie Management */}
             <section className="mb-12">
-              <h2 className="text-3xl font-bold mb-6 text-primary">
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">
                 Managing Your Cookie Preferences
               </h2>
               <p className="text-lg mb-4 text-gray-600">
@@ -147,7 +147,7 @@ const CookiesPage: React.FC = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="theme-card p-6">
-                  <h3 className="font-semibold mb-3 text-primary">
+                  <h3 className="font-semibold mb-3 text-gray-900 dark:text-gray-100">
                     Browser Settings
                   </h3>
                   <p className="mb-3 text-gray-600">
@@ -162,7 +162,7 @@ const CookiesPage: React.FC = () => {
                 </div>
 
                 <div className="theme-card p-6">
-                  <h3 className="font-semibold mb-3 text-primary">
+                  <h3 className="font-semibold mb-3 text-gray-900 dark:text-gray-100">
                     Our Cookie Banner
                   </h3>
                   <p className="mb-3 text-gray-600">
@@ -180,7 +180,7 @@ const CookiesPage: React.FC = () => {
 
             {/* Children's Privacy */}
             <section className="mb-12">
-              <h2 className="text-3xl font-bold mb-6 text-primary">
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">
                 Special Considerations for Children
               </h2>
               <div className="callout-pink mb-6">
@@ -212,7 +212,7 @@ const CookiesPage: React.FC = () => {
 
             {/* Data Retention */}
             <section className="mb-12">
-              <h2 className="text-3xl font-bold mb-6 text-primary">
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">
                 Data Retention
               </h2>
               <p className="text-lg mb-4 text-gray-600">
@@ -228,7 +228,7 @@ const CookiesPage: React.FC = () => {
 
             {/* Updates to Policy */}
             <section className="mb-12">
-              <h2 className="text-3xl font-bold mb-6 text-primary">
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">
                 Updates to This Policy
               </h2>
               <p className="text-lg mb-4 text-gray-600">
@@ -243,7 +243,7 @@ const CookiesPage: React.FC = () => {
 
             {/* Contact Information */}
             <section className="mb-12">
-              <h2 className="text-3xl font-bold mb-6 text-primary">
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">
                 Questions About Cookies?
               </h2>
               <p className="text-lg mb-4 text-gray-600">
@@ -268,7 +268,7 @@ const CookiesPage: React.FC = () => {
             {/* Effective Date */}
             <section className="mb-12">
               <div className="bg-green-50 dark:bg-green-950/30 p-6 rounded-lg text-center border border-green-200 dark:border-green-800">
-                <p className="text-lg font-semibold text-primary">
+                <p className="text-lg font-semibold text-gray-900 dark:text-gray-100">
                   This Cookie Policy is effective as of December 2024
                 </p>
                 <p className="text-sm mt-2 text-gray-600">

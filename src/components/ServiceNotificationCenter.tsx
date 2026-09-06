@@ -349,7 +349,7 @@ const ServiceNotificationCenter: React.FC<ServiceNotificationCenterProps> = ({
                       const exposureLevel = getExposureLevel(exposureIndex);
                       if (exposureIndex !== null) {
                         return (
-                          <div className="mb-2 p-2 rounded-lg bg-gray-50 dark:bg-gray-800/50">
+                          <div className="mb-2 rounded-lg bg-gray-50 p-2 dark:bg-gray-800">
                             <div className="flex items-center justify-between mb-1">
                               <span className="text-xs font-medium text-gray-600 dark:text-gray-400">
                                 Privacy Exposure Index:

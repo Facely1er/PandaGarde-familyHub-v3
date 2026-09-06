@@ -563,7 +563,7 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
                   key={rec.id}
                   className={`rounded-lg border-2 transition-all ${
                     isDone
-                      ? 'bg-gray-50 dark:bg-gray-100/40 border-gray-200 dark:border-dark-border opacity-70'
+                      ? 'bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-dark-border opacity-70'
                       : rec.priority === 'high'   ? 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800' :
                         rec.priority === 'medium' ? 'bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800' :
                         'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800'
@@ -777,7 +777,7 @@ const DigitalFootprintVisualizer: React.FC<DigitalFootprintVisualizerProps> = ({
 
                   {/* Expanded: visual 3-column flow */}
                   {isOpen && (
-                    <div className="bg-slate-50 dark:bg-gray-100/40 border-t border-slate-200 dark:border-gray-600 p-4">
+                    <div className="bg-slate-50 dark:bg-gray-800 border-t border-slate-200 dark:border-gray-600 p-4">
                       {/* Summary sentence */}
                       <p className="text-xs text-slate-600 dark:text-slate-400 mb-4 leading-relaxed">
                         {chain.chainSummary}

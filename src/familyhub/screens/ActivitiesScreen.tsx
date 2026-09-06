@@ -59,7 +59,7 @@ const ActivityCard: React.FC<{
     className={`group flex cursor-pointer flex-col rounded-2xl border p-4 text-left shadow-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 ${
       activity.featured
         ? 'border-teal-200 bg-teal-50/50 hover:border-teal-400 hover:shadow-md dark:border-teal-700/40 dark:bg-teal-900/10 dark:hover:border-teal-500'
-        : 'border-gray-200 bg-white hover:border-teal-300 hover:shadow-md dark:border-gray-400 dark:bg-gray-100 dark:hover:border-teal-500'
+        : 'border-gray-200 bg-white hover:border-teal-300 hover:shadow-md dark:border-gray-700 dark:bg-gray-800 dark:hover:border-teal-500'
     }`}
     aria-label={t('hub.activities.startActivityAria', { name: getMissionName(activity) })}
   >
@@ -67,8 +67,8 @@ const ActivityCard: React.FC<{
       <div className="flex items-center gap-3">
         <HubIconBadge glyph={activity.icon} className="bg-teal-100 text-teal-700 dark:bg-teal-900/40 dark:text-teal-300" />
         <div>
-          <h3 className="text-base font-semibold leading-snug text-gray-900">{getMissionName(activity)}</h3>
-          <p className="mt-1 text-xs text-gray-500">{ageBandLabel(activity.groupAgeRange as '5-8' | '9-12' | '13-17')}</p>
+          <h3 className="text-base font-semibold leading-snug text-gray-900 dark:text-gray-100">{getMissionName(activity)}</h3>
+          <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">{ageBandLabel(activity.groupAgeRange as '5-8' | '9-12' | '13-17')}</p>
         </div>
       </div>
 

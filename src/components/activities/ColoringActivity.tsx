@@ -369,7 +369,7 @@ const ColoringActivity: React.FC<ColoringActivityProps> = ({ onComplete, onClose
       {context && <ActivityPurposeBanner context={context} />}
 
       <div className="flex flex-col gap-4 lg:flex-row">
-        <aside className="shrink-0 rounded-2xl border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800/50 lg:w-48">
+        <aside className="shrink-0 rounded-2xl border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800 lg:w-48">
           <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">Colors</p>
           <div className="mb-4 grid grid-cols-5 gap-2">
             {colors.map((color) => (

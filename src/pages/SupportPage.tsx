@@ -321,7 +321,7 @@ const SupportPage: React.FC = () => {
         </div>
       </section>
 
-      <section className="border-t border-gray-200 bg-gray-50 py-12 dark:border-gray-700 dark:bg-gray-100/50">
+      <section className="border-t border-gray-200 bg-gray-50 py-12 dark:border-gray-700 dark:bg-gray-800">
         <div className="mx-auto max-w-4xl px-4 text-center sm:px-6">
           <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-gray-100">Still need help?</h2>
           <p className="mb-8 text-lg text-gray-600 dark:text-gray-300">

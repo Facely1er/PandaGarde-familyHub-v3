@@ -256,7 +256,7 @@ const MazeActivity: React.FC<MazeActivityProps> = ({ onComplete, onClose, contex
         </div>
 
         {/* Stats */}
-        <div className="flex items-center justify-center gap-3 border-b border-gray-200 bg-gray-50 px-5 py-3 dark:border-gray-800 dark:bg-gray-800/50">
+        <div className="flex items-center justify-center gap-3 border-b border-gray-200 bg-gray-50 px-5 py-3 dark:border-gray-800 dark:bg-gray-800">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-sm font-medium text-gray-700 shadow-sm dark:bg-gray-800 dark:text-gray-200">
             <Footprints className="h-4 w-4 text-emerald-600 dark:text-emerald-400" aria-hidden="true" />
             {moves} moves
@@ -312,7 +312,7 @@ const MazeActivity: React.FC<MazeActivityProps> = ({ onComplete, onClose, contex
         </div>
 
         {/* Controls */}
-        <div className="flex flex-col items-center gap-4 border-t border-gray-200 bg-gray-50 px-5 py-4 sm:flex-row sm:justify-between dark:border-gray-800 dark:bg-gray-800/50">
+        <div className="flex flex-col items-center gap-4 border-t border-gray-200 bg-gray-50 px-5 py-4 sm:flex-row sm:justify-between dark:border-gray-800 dark:bg-gray-800">
           {/* D-pad */}
           <div className="flex flex-col items-center gap-1.5">
             <button type="button" onClick={() => movePlayer('up')} disabled={isCompleted} aria-label="Move up" className={dPadBtn}>

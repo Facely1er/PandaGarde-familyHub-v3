@@ -39,8 +39,8 @@ const ContactPage: React.FC = () => {
         <ContactForm />
       </section>
 
-      <section className="rounded-2xl border border-gray-200 bg-gray-50 py-12 dark:border-gray-700 dark:bg-gray-100/50">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6">
+      <section className="rounded-2xl border border-gray-200 bg-gray-50 py-12 dark:border-gray-700 dark:bg-gray-800">
+        <div className="mx-auto max-w-4xl">
           <div className="mb-10 text-center">
             <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-gray-100 sm:text-3xl">
               Frequently Asked Questions
@@ -80,7 +80,7 @@ const ContactPage: React.FC = () => {
       </section>
 
       <section className="bg-gradient-to-r from-green-700 to-green-600 py-12 text-white sm:py-16">
-        <div className="container mx-auto px-4 text-center sm:px-6">
+        <div className="text-center">
           <h2 className="mb-4 text-2xl font-bold sm:text-3xl">Ready to get started?</h2>
           <p className="mx-auto mb-8 max-w-2xl text-lg opacity-90">
             Start learning about online privacy with your family today—it&apos;s free.

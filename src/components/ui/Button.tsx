@@ -24,10 +24,10 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 
 const variantStyles: Record<NonNullable<ButtonProps['variant']>, string> = {
   primary: `
-    bg-gradient-to-r from-[#1B5E20] to-[#2E7D32] 
-    text-white 
-    hover:from-[#0D4A0F] hover:to-[#1B5E20] 
-    focus:ring-[#1B5E20]
+    bg-green-700 dark:bg-green-600
+    text-white
+    hover:bg-green-800 dark:hover:bg-green-500
+    focus:ring-green-700 dark:focus:ring-green-400
     shadow-sm hover:shadow-md
   `,
   secondary: `
@@ -39,10 +39,10 @@ const variantStyles: Record<NonNullable<ButtonProps['variant']>, string> = {
   `,
   outline: `
     bg-transparent
-    text-[#1B5E20] dark:text-[#66BB6A]
-    border-2 border-[#1B5E20] dark:border-[#66BB6A]
-    hover:bg-[#1B5E20]/10 dark:hover:bg-[#66BB6A]/10
-    focus:ring-[#1B5E20]
+    text-green-700 dark:text-green-400
+    border-2 border-green-700 dark:border-green-400
+    hover:bg-green-50 dark:hover:bg-green-900/20
+    focus:ring-green-700
   `,
   ghost: `
     bg-transparent
@@ -52,16 +52,16 @@ const variantStyles: Record<NonNullable<ButtonProps['variant']>, string> = {
     focus:ring-gray-400
   `,
   danger: `
-    bg-red-600 
-    text-white 
-    hover:bg-red-700 
+    bg-red-600
+    text-white
+    hover:bg-red-700
     focus:ring-red-500
     shadow-sm hover:shadow-md
   `,
   success: `
-    bg-green-600 
-    text-white 
-    hover:bg-green-700 
+    bg-green-700
+    text-white
+    hover:bg-green-800
     focus:ring-green-500
     shadow-sm hover:shadow-md
   `,

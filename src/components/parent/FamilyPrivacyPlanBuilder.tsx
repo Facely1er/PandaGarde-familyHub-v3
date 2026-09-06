@@ -300,7 +300,7 @@ export const FamilyPrivacyPlanBuilder: React.FC<FamilyPrivacyPlanBuilderProps> =
         </div>
 
         {showAddRule && (
-          <div className="mb-4 p-4 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-100/50">
+          <div className="mb-4 p-4 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-800">
             <label htmlFor="new-sharing-rule" className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
               New sharing rule
             </label>

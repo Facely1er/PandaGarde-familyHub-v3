@@ -15,7 +15,7 @@ export const hubTheme = {
   pageContent:
     'mx-auto flex w-full min-w-0 max-w-5xl flex-col gap-3 p-4 sm:gap-4 sm:p-5',
   surface: 'bg-white dark:bg-gray-800',
-  surfaceMuted: 'bg-gray-50 dark:bg-gray-800/80',
+  surfaceMuted: 'bg-gray-50 dark:bg-gray-800',
   hero:
     'relative overflow-hidden rounded-3xl border border-teal-200 bg-teal-700 shadow-sm dark:border-teal-700 dark:bg-teal-900',
   card: 'rounded-2xl border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800',

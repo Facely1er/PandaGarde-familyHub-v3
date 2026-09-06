@@ -22,7 +22,7 @@ import { dfaTheme } from '../styles/dfaTheme';
 import PageLayout from '../components/layout/PageLayout';
 
 const resourceLinkClass =
-  'block rounded-lg border border-gray-200 p-3 text-sm transition-colors hover:border-green-300 hover:bg-green-50/50 dark:border-dark-border dark:bg-dark-surface dark:hover:border-green-700/60 dark:hover:bg-gray-300';
+  'block rounded-lg border border-gray-200 p-3 text-sm transition-colors hover:border-green-300 hover:bg-green-50/50 dark:border-dark-border dark:bg-dark-surface dark:hover:border-green-700/60 dark:hover:bg-gray-700';
 
 const PrivacyAssessmentPage: React.FC = () => {
   useEffect(() => {

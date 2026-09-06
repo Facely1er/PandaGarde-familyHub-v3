@@ -160,7 +160,7 @@ const QuizActivity: React.FC<QuizActivityProps> = ({ onComplete, onClose, contex
         }
       >
         {context && <ActivityPurposeBanner context={context} />}
-        <div className="space-y-4 rounded-2xl border border-gray-200 bg-gray-50 p-5 dark:border-gray-700 dark:bg-gray-800/50">
+        <div className="space-y-4 rounded-2xl border border-gray-200 bg-gray-50 p-5 dark:border-gray-700 dark:bg-gray-800">
           <p className="text-sm text-gray-700 dark:text-gray-300">
             {questions.length} questions about passwords, sharing, and staying safe online.
           </p>

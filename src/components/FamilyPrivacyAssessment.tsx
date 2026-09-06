@@ -129,7 +129,7 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
       case 'parental-controls':
         return 'bg-pink-100 text-pink-800 dark:bg-pink-900/30 dark:text-pink-300';
       default:
-        return 'bg-gray-100 text-gray-800 dark:bg-gray-100/30 dark:text-dark-text-secondary';
+        return 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300';
     }
   };
 
@@ -148,7 +148,7 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
       case 'high':
         return 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300';
       default:
-        return 'bg-gray-100 text-gray-800 dark:bg-gray-100/30 dark:text-dark-text-secondary';
+        return 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300';
     }
   };
 
@@ -359,13 +359,13 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
             </button>
             <button
               onClick={handleRestart}
-              className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-dark-text-secondary rounded-lg hover:bg-gray-50 dark:hover:bg-gray-300 transition-colors"
+              className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-dark-text-secondary rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             >
               Retake Assessment
             </button>
             <Link
               to="/assessment-history"
-              className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-dark-text-secondary rounded-lg hover:bg-gray-50 dark:hover:bg-gray-300 transition-colors"
+              className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-dark-text-secondary rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             >
               View History
             </Link>
@@ -539,7 +539,7 @@ const FamilyPrivacyAssessment: React.FC<FamilyPrivacyAssessmentProps> = ({
         <button
           onClick={handlePrevious}
           disabled={currentStep === 0}
-          className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-dark-text-secondary rounded-lg hover:bg-gray-50 dark:hover:bg-gray-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
+          className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-dark-text-secondary rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
         >
           <ArrowLeft className="h-4 w-4" />
           <span>Previous</span>
