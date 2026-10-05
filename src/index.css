@@ -952,8 +952,9 @@ canvas:focus {
   outline-offset: 2px;
 }
 
-/* High contrast mode support - Enhanced */
-@media (prefers-contrast: high) {
+/* High contrast mode support - Enhanced
+   `more` is the standard; `high` is kept for older WebKit. */
+@media (prefers-contrast: more), (prefers-contrast: high) {
   :root {
     --primary: #000000;
     --primary-light: #000000;
@@ -971,15 +972,17 @@ canvas:focus {
     --gray-100: #FFFFFF;
     --gray-200: #EEEEEE;
     --gray-300: #DDDDDD;
-    --gray-800: #000000;
     --gray-600: #CCCCCC;
-    --gray-700: #000000;
+    /* Hover / raised-from-card — not black, so dark:hover:bg-gray-700 stays a lift */
+    --gray-700: #3F3F3F;
+    /* Cards stay near-black but above the page so they do not merge with overlays */
+    --gray-800: #1C1C1C;
     --gray-900: #000000;
     --fg-heading: #FFFFFF;
     --fg-default: #FFFFFF;
     --fg-muted: #CCCCCC;
-    --surface-raised: #000000;
-    --surface-sunken: #000000;
+    --surface-raised: var(--gray-800);
+    --surface-sunken: var(--gray-900);
     --line: #FFFFFF;
   }
 }

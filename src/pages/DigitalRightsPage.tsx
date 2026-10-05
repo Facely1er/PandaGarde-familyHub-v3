@@ -453,7 +453,7 @@ const DigitalRightsPage: React.FC = () => {
                 </div>
 
                 <section
-                  className="rounded-xl border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800 sm:p-5"
+                  className="rounded-xl border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-950/60 sm:p-5"
                   aria-labelledby="module-actions-heading"
                 >
                   <h4
@@ -471,7 +471,7 @@ const DigitalRightsPage: React.FC = () => {
                 </section>
               </div>
 
-              <div className="shrink-0 flex flex-col-reverse sm:flex-row sm:items-center sm:justify-end gap-2 sm:gap-3 p-4 sm:p-6 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+              <div className="shrink-0 flex flex-col-reverse sm:flex-row sm:items-center sm:justify-end gap-2 sm:gap-3 p-4 sm:p-6 border-t border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-800">
                 <Button variant="secondary" size="sm" onClick={closeModule} className="w-full sm:w-auto">
                   Close
                 </Button>
