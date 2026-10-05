@@ -154,7 +154,7 @@ const ModelingBehaviorGuidePage: React.FC = () => {
       <div className="mx-auto w-full max-w-4xl">
         {/* Introduction */}
         <div className="max-w-4xl mx-auto text-center mb-16">
-          <h2 className="text-3xl font-bold mb-6 text-primary">
+          <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">
             Leading by Example
           </h2>
           <p className="text-lg leading-relaxed mb-8 text-gray-600">
@@ -162,35 +162,35 @@ const ModelingBehaviorGuidePage: React.FC = () => {
           </p>
           
           <div className="bg-purple-50 border border-purple-200 rounded-xl p-6 mb-8 bg-light">
-            <h3 className="text-xl font-semibold mb-4 text-primary">
+            <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">
               👨‍👩‍👧‍👦 Why Modeling Matters
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
               <div className="flex items-start gap-3">
                 <Eye size={20} className="text-purple-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1 text-primary">Children Learn by Watching</h4>
+                  <h4 className="font-semibold mb-1 text-gray-900 dark:text-gray-100">Children Learn by Watching</h4>
                   <p className="text-sm text-gray-600">They observe and imitate adult behavior patterns</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Eye size={20} className="text-purple-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1 text-primary">Consistency Builds Trust</h4>
+                  <h4 className="font-semibold mb-1 text-gray-900 dark:text-gray-100">Consistency Builds Trust</h4>
                   <p className="text-sm text-gray-600">When your actions match your words, children trust your guidance</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Eye size={20} className="text-purple-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1 text-primary">Creates Family Culture</h4>
+                  <h4 className="font-semibold mb-1 text-gray-900 dark:text-gray-100">Creates Family Culture</h4>
                   <p className="text-sm text-gray-600">Establishes shared values and expectations</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Eye size={20} className="text-purple-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1 text-primary">Prevents Hypocrisy</h4>
+                  <h4 className="font-semibold mb-1 text-gray-900 dark:text-gray-100">Prevents Hypocrisy</h4>
                   <p className="text-sm text-gray-600">Avoids "do as I say, not as I do" situations</p>
                 </div>
               </div>
@@ -200,7 +200,7 @@ const ModelingBehaviorGuidePage: React.FC = () => {
 
         {/* Modeling Areas */}
         <div className="max-w-6xl mx-auto mb-16">
-          <h2 className="text-2xl font-bold mb-8 text-center text-primary">
+          <h2 className="text-2xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">
             Key Areas to Model
           </h2>
           
@@ -218,7 +218,7 @@ const ModelingBehaviorGuidePage: React.FC = () => {
                         <IconComponent size={24} className="text-purple-600" />
                       </div>
                       <div>
-                        <h3 className="text-lg font-bold text-primary">
+                        <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">
                           {area.title}
                         </h3>
                         <p className="text-sm text-gray-600">
@@ -228,7 +228,7 @@ const ModelingBehaviorGuidePage: React.FC = () => {
                     </div>
                     
                     <div className="mb-4">
-                      <h4 className="text-sm font-semibold mb-2 text-primary">
+                      <h4 className="text-sm font-semibold mb-2 text-gray-900 dark:text-gray-100">
                         Examples to Demonstrate:
                       </h4>
                       <ul className="text-sm space-y-1 text-gray-600">
@@ -242,7 +242,7 @@ const ModelingBehaviorGuidePage: React.FC = () => {
                     </div>
                     
                     <div className="mb-4">
-                      <h4 className="text-sm font-semibold mb-2 text-primary">
+                      <h4 className="text-sm font-semibold mb-2 text-gray-900 dark:text-gray-100">
                         Teaching Tips:
                       </h4>
                       <ul className="text-sm space-y-1 text-gray-600">
@@ -263,7 +263,7 @@ const ModelingBehaviorGuidePage: React.FC = () => {
 
         {/* Daily Practices */}
         <div className="max-w-6xl mx-auto mb-16">
-          <h2 className="text-2xl font-bold mb-8 text-center text-primary">
+          <h2 className="text-2xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">
             Daily Modeling Practices
           </h2>
           
@@ -273,7 +273,7 @@ const ModelingBehaviorGuidePage: React.FC = () => {
                 key={index}
                 className="rounded-2xl border border-gray-200 bg-white p-6 shadow-md transition-shadow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
               >
-                <h3 className="text-lg font-bold mb-4 text-center text-primary">
+                <h3 className="text-lg font-bold mb-4 text-center text-gray-900 dark:text-gray-100">
                   {practice.time}
                 </h3>
                 <ul className="space-y-2">
@@ -291,7 +291,7 @@ const ModelingBehaviorGuidePage: React.FC = () => {
 
         {/* Conversation Starters */}
         <div className="max-w-6xl mx-auto mb-16">
-          <h2 className="text-2xl font-bold mb-8 text-center text-primary">
+          <h2 className="text-2xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">
             Conversation Starters
           </h2>
           
@@ -301,11 +301,11 @@ const ModelingBehaviorGuidePage: React.FC = () => {
                 key={index}
                 className="rounded-2xl border border-gray-200 bg-white p-6 shadow-md transition-shadow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
               >
-                <h3 className="text-lg font-bold mb-3 text-primary">
+                <h3 className="text-lg font-bold mb-3 text-gray-900 dark:text-gray-100">
                   {starter.topic}
                 </h3>
                 <div className="mb-4">
-                  <h4 className="text-sm font-semibold mb-2 text-primary">
+                  <h4 className="text-sm font-semibold mb-2 text-gray-900 dark:text-gray-100">
                     Ask:
                   </h4>
                   <p className="text-sm italic text-gray-600">
@@ -313,7 +313,7 @@ const ModelingBehaviorGuidePage: React.FC = () => {
                   </p>
                 </div>
                 <div>
-                  <h4 className="text-sm font-semibold mb-2 text-primary">
+                  <h4 className="text-sm font-semibold mb-2 text-gray-900 dark:text-gray-100">
                     Discuss:
                   </h4>
                   <p className="text-sm text-gray-600">
@@ -380,7 +380,7 @@ const ModelingBehaviorGuidePage: React.FC = () => {
 
         {/* Additional Resources */}
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold mb-8 text-center text-primary">
+          <h2 className="text-2xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">
             Related Resources
           </h2>
           
@@ -392,7 +392,7 @@ const ModelingBehaviorGuidePage: React.FC = () => {
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Shield size={24} className="text-green-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2 text-primary">
+              <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
                 Privacy Concerns Guide
               </h3>
               <p className="text-sm text-gray-600">
@@ -407,7 +407,7 @@ const ModelingBehaviorGuidePage: React.FC = () => {
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Users size={24} className="text-blue-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2 text-primary">
+              <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
                 Device Setup Guide
               </h3>
               <p className="text-sm text-gray-600">
@@ -421,7 +421,7 @@ const ModelingBehaviorGuidePage: React.FC = () => {
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Heart size={24} className="text-purple-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2 text-primary">
+              <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
                 Family Hub
               </h3>
               <p className="text-sm text-gray-600">

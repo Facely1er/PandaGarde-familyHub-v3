@@ -77,7 +77,7 @@ const FamilyPrivacyGuidePage: React.FC = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Ages 5-8 */}
-              <div className="bg-white rounded-xl p-6 shadow-md family-guide-card">
+              <div className="family-guide-card rounded-xl border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
                     <Users size={24} className="text-green-600" />
@@ -100,7 +100,7 @@ const FamilyPrivacyGuidePage: React.FC = () => {
               </div>
 
               {/* Ages 9-12 */}
-              <div className="bg-white rounded-xl p-6 shadow-md family-guide-card">
+              <div className="family-guide-card rounded-xl border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
                     <Shield size={24} className="text-blue-600" />
@@ -123,7 +123,7 @@ const FamilyPrivacyGuidePage: React.FC = () => {
               </div>
 
               {/* Ages 13-17 */}
-              <div className="bg-white rounded-xl p-6 shadow-md family-guide-card">
+              <div className="family-guide-card rounded-xl border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
                     <BookOpen size={24} className="text-purple-600" />
@@ -146,7 +146,7 @@ const FamilyPrivacyGuidePage: React.FC = () => {
               </div>
 
               {/* All Ages */}
-              <div className="bg-white rounded-xl p-6 shadow-md family-guide-card">
+              <div className="family-guide-card rounded-xl border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
                     <Heart size={24} className="text-yellow-600" />
@@ -178,7 +178,7 @@ const FamilyPrivacyGuidePage: React.FC = () => {
             <p className="family-guide-p mb-8 text-sm">Copy these questions into a conversation—no lecture required.</p>
             
             <div className="space-y-8">
-              <div className="bg-white rounded-xl p-6 shadow-md family-guide-card">
+              <div className="family-guide-card rounded-xl border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800">
                 <h3 className="text-xl font-bold mb-4 family-guide-primary">Personal Information</h3>
                 <div className="space-y-4">
                   <div>
@@ -198,7 +198,7 @@ const FamilyPrivacyGuidePage: React.FC = () => {
                 </div>
               </div>
 
-              <div className="bg-white rounded-xl p-6 shadow-md family-guide-card">
+              <div className="family-guide-card rounded-xl border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800">
                 <h3 className="text-xl font-bold mb-4 family-guide-primary">Password Security</h3>
                 <div className="space-y-4">
                   <div>
@@ -211,7 +211,7 @@ const FamilyPrivacyGuidePage: React.FC = () => {
                 </div>
               </div>
 
-              <div className="bg-white rounded-xl p-6 shadow-md family-guide-card">
+              <div className="family-guide-card rounded-xl border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800">
                 <h3 className="text-xl font-bold mb-4 family-guide-primary">Digital Footprint</h3>
                 <div className="space-y-4">
                   <div>
@@ -234,7 +234,7 @@ const FamilyPrivacyGuidePage: React.FC = () => {
             <p className="family-guide-p mb-8 text-sm">You do not need a perfect plan—pick one card and try it this week.</p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="bg-white rounded-xl p-6 shadow-md family-guide-card">
+              <div className="family-guide-card rounded-xl border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800">
                 <h3 className="text-xl font-bold mb-4 family-guide-primary">Start early, keep it short</h3>
                 <ul className="space-y-2 text-sm family-guide-muted">
                   <li>• Five minutes beats a long talk—stories and missions count</li>
@@ -244,7 +244,7 @@ const FamilyPrivacyGuidePage: React.FC = () => {
                 </ul>
               </div>
 
-              <div className="bg-white rounded-xl p-6 shadow-md family-guide-card">
+              <div className="family-guide-card rounded-xl border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800">
                 <h3 className="text-xl font-bold mb-4 family-guide-primary">Make it safe to ask questions</h3>
                 <ul className="space-y-2 text-sm family-guide-muted">
                   <li>• Keep devices in shared spaces when you can</li>
@@ -254,7 +254,7 @@ const FamilyPrivacyGuidePage: React.FC = () => {
                 </ul>
               </div>
 
-              <div className="bg-white rounded-xl p-6 shadow-md family-guide-card">
+              <div className="family-guide-card rounded-xl border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800">
                 <h3 className="text-xl font-bold mb-4 family-guide-primary">Use real examples</h3>
                 <ul className="space-y-2 text-sm family-guide-muted">
                   <li>• Talk about an app your family actually uses</li>
@@ -264,7 +264,7 @@ const FamilyPrivacyGuidePage: React.FC = () => {
                 </ul>
               </div>
 
-              <div className="bg-white rounded-xl p-6 shadow-md family-guide-card">
+              <div className="family-guide-card rounded-xl border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800">
                 <h3 className="text-xl font-bold mb-4 family-guide-primary">Make it fun</h3>
                 <ul className="space-y-2 text-sm family-guide-muted">
                   <li>• Read Privacy Panda together</li>
@@ -294,21 +294,21 @@ const FamilyPrivacyGuidePage: React.FC = () => {
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                <div className="bg-white rounded-xl p-5 shadow-sm">
+                <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-800">
                   <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mb-3 text-green-700 font-bold text-sm">1</div>
                   <h3 className="font-bold mb-2 family-guide-primary text-base">Know what's collected</h3>
                   <p className="text-xs family-guide-muted leading-relaxed">
                     Send an <strong>access request</strong> to any app or service your child uses. They must tell you what personal data they hold and how it's used. You can also ask for a portable copy.
                   </p>
                 </div>
-                <div className="bg-white rounded-xl p-5 shadow-sm">
+                <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-800">
                   <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mb-3 text-green-700 font-bold text-sm">2</div>
                   <h3 className="font-bold mb-2 family-guide-primary text-base">Delete or correct it</h3>
                   <p className="text-xs family-guide-muted leading-relaxed">
                     Submit a <strong>deletion request</strong> to remove your child's data from any qualifying service. If data is inaccurate (wrong age, location, etc.) a <strong>correction request</strong> applies instead.
                   </p>
                 </div>
-                <div className="bg-white rounded-xl p-5 shadow-sm">
+                <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-800">
                   <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mb-3 text-green-700 font-bold text-sm">3</div>
                   <h3 className="font-bold mb-2 family-guide-primary text-base">Opt out of sale and ads</h3>
                   <p className="text-xs family-guide-muted leading-relaxed">
@@ -336,7 +336,7 @@ const FamilyPrivacyGuidePage: React.FC = () => {
                   href={PRIVACY_PORTAL_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-white text-green-800 border-2 border-green-300 hover:bg-green-50 text-sm font-semibold rounded-lg transition-colors"
+                  className="inline-flex items-center gap-2 rounded-lg border-2 border-green-300 bg-white px-4 py-2 text-sm font-semibold text-green-800 transition-colors hover:bg-green-50 dark:border-green-700 dark:bg-gray-800 dark:text-green-200 dark:hover:bg-green-950/40"
                 >
                   <ExternalLink size={16} />
                   Submit a request via Privacy Portal
@@ -354,7 +354,7 @@ const FamilyPrivacyGuidePage: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <Link
                 to="/downloads/family-agreement"
-                className="family-guide-card bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow text-center"
+                className="family-guide-card rounded-xl border border-gray-200 bg-white p-6 text-center shadow-md transition-shadow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
               >
                 <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                   <Download size={24} className="text-green-600" />
@@ -369,7 +369,7 @@ const FamilyPrivacyGuidePage: React.FC = () => {
 
               <Link
                 to="/how-it-works"
-                className="family-guide-card bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow text-center"
+                className="family-guide-card rounded-xl border border-gray-200 bg-white p-6 text-center shadow-md transition-shadow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
               >
                 <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                   <BookOpen size={24} className="text-blue-600" />
@@ -384,7 +384,7 @@ const FamilyPrivacyGuidePage: React.FC = () => {
 
               <Link
                 to="/guides/age-specific"
-                className="family-guide-card bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow text-center"
+                className="family-guide-card rounded-xl border border-gray-200 bg-white p-6 text-center shadow-md transition-shadow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
               >
                 <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                   <Users size={24} className="text-purple-600" />

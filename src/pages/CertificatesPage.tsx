@@ -98,35 +98,35 @@ const CertificatesPage: React.FC = () => {
           </p>
           
           <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-6 mb-8 bg-light">
-            <h3 className="mb-4 text-xl font-semibold text-primary">
+            <h3 className="mb-4 text-xl font-semibold text-gray-900 dark:text-gray-100">
               Certificate usage tips
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
               <div className="flex items-start gap-3">
                 <Star size={20} className="text-yellow-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1 text-primary">Personalize</h4>
+                  <h4 className="font-semibold mb-1 text-gray-900 dark:text-gray-100">Personalize</h4>
                   <p className="text-sm text-gray-600">Add the child's name and achievement date</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Star size={20} className="text-yellow-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1 text-primary">Display Proudly</h4>
+                  <h4 className="font-semibold mb-1 text-gray-900 dark:text-gray-100">Display Proudly</h4>
                   <p className="text-sm text-gray-600">Frame and display certificates in learning areas</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Star size={20} className="text-yellow-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1 text-primary">Celebrate Together</h4>
+                  <h4 className="font-semibold mb-1 text-gray-900 dark:text-gray-100">Celebrate Together</h4>
                   <p className="text-sm text-gray-600">Present certificates during family celebrations</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Star size={20} className="text-yellow-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1 text-primary">Create Portfolio</h4>
+                  <h4 className="font-semibold mb-1 text-gray-900 dark:text-gray-100">Create Portfolio</h4>
                   <p className="text-sm text-gray-600">Keep certificates as part of learning portfolio</p>
                 </div>
               </div>
@@ -151,7 +151,7 @@ const CertificatesPage: React.FC = () => {
                 
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-lg font-bold text-primary">
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">
                       {cert.title}
                     </h3>
                     <span className="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-semibold">
@@ -164,7 +164,7 @@ const CertificatesPage: React.FC = () => {
                   </p>
                   
                   <div className="bg-gray-50 rounded-lg p-3 mb-4 bg-light">
-                    <h4 className="text-sm font-semibold mb-1 text-primary">
+                    <h4 className="text-sm font-semibold mb-1 text-gray-900 dark:text-gray-100">
                       Requirements:
                     </h4>
                     <p className="text-sm text-gray-600">
@@ -234,7 +234,7 @@ const CertificatesPage: React.FC = () => {
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Award size={24} className="text-green-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2 text-primary">
+              <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
                 Activity Book
               </h3>
               <p className="text-sm text-gray-600">
@@ -249,7 +249,7 @@ const CertificatesPage: React.FC = () => {
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Star size={24} className="text-blue-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2 text-primary">
+              <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
                 Coloring Sheets
               </h3>
               <p className="text-sm text-gray-600">
@@ -263,7 +263,7 @@ const CertificatesPage: React.FC = () => {
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Trophy size={24} className="text-purple-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2 text-primary">
+              <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
                 Family Hub
               </h3>
               <p className="text-sm text-gray-600">

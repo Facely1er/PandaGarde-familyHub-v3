@@ -127,7 +127,7 @@ const SafetyPostersPage: React.FC = () => {
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-10">
         {/* Introduction */}
         <div className="max-w-4xl mx-auto text-center mb-16">
-          <h2 className="text-3xl font-bold mb-6 text-primary">
+          <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">
             Hang a reminder kids will see every day
           </h2>
           <p className="text-lg leading-relaxed mb-8 text-gray-600">
@@ -135,35 +135,35 @@ const SafetyPostersPage: React.FC = () => {
           </p>
           
           <div className="mb-8 rounded-xl border border-green-200 bg-green-50 p-4 sm:p-6 dark:border-green-800 dark:bg-green-950/30">
-            <h3 className="mb-4 text-lg font-semibold text-primary sm:text-xl">
+            <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-gray-100 sm:text-xl">
               Printing and display guidelines
             </h3>
             <div className="grid grid-cols-1 gap-4 text-left md:grid-cols-2">
               <div className="flex items-start gap-3">
                 <Shield size={20} className="mt-1 flex-shrink-0 text-green-600 dark:text-green-400" />
                 <div>
-                  <h4 className="font-semibold mb-1 text-primary">Print Quality</h4>
+                  <h4 className="font-semibold mb-1 text-gray-900 dark:text-gray-100">Print Quality</h4>
                   <p className="text-sm text-gray-600">Use high-quality paper and color printing for best results</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Shield size={20} className="mt-1 flex-shrink-0 text-green-600 dark:text-green-400" />
                 <div>
-                  <h4 className="font-semibold mb-1 text-primary">Placement</h4>
+                  <h4 className="font-semibold mb-1 text-gray-900 dark:text-gray-100">Placement</h4>
                   <p className="text-sm text-gray-600">Display at eye level for children in learning areas</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Shield size={20} className="mt-1 flex-shrink-0 text-green-600 dark:text-green-400" />
                 <div>
-                  <h4 className="font-semibold mb-1 text-primary">Lamination</h4>
+                  <h4 className="font-semibold mb-1 text-gray-900 dark:text-gray-100">Lamination</h4>
                   <p className="text-sm text-gray-600">Consider laminating for durability and easy cleaning</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Shield size={20} className="mt-1 flex-shrink-0 text-green-600 dark:text-green-400" />
                 <div>
-                  <h4 className="font-semibold mb-1 text-primary">Discussion</h4>
+                  <h4 className="font-semibold mb-1 text-gray-900 dark:text-gray-100">Discussion</h4>
                   <p className="text-sm text-gray-600">Use posters as conversation starters about privacy</p>
                 </div>
               </div>
@@ -190,7 +190,7 @@ const SafetyPostersPage: React.FC = () => {
                 
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-lg font-bold text-primary">
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">
                       {poster.title}
                     </h3>
                     <span className="rounded-full bg-green-100 px-2 py-1 text-xs font-semibold text-green-800 dark:bg-green-900/40 dark:text-green-200">
@@ -241,7 +241,7 @@ const SafetyPostersPage: React.FC = () => {
 
         {/* Additional Resources */}
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold mb-8 text-center text-primary">
+          <h2 className="text-2xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">
             Related Resources
           </h2>
           
@@ -253,7 +253,7 @@ const SafetyPostersPage: React.FC = () => {
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Shield size={24} className="text-green-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2 text-primary">
+              <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
                 Coloring Sheets
               </h3>
               <p className="text-sm text-gray-600">
@@ -268,7 +268,7 @@ const SafetyPostersPage: React.FC = () => {
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Users size={24} className="text-purple-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2 text-primary">
+              <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
                 Family Agreement
               </h3>
               <p className="text-sm text-gray-600">
@@ -283,7 +283,7 @@ const SafetyPostersPage: React.FC = () => {
               <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <AlertTriangle size={24} className="text-yellow-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2 text-primary">
+              <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
                 Educator Tools
               </h3>
               <p className="text-sm text-gray-600">

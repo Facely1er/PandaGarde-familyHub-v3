@@ -101,7 +101,7 @@ const DeviceSetupGuidePage: React.FC = () => {
       <div className="max-w-4xl mx-auto">
         {/* Introduction */}
         <div className="max-w-4xl mx-auto text-center mb-16">
-          <h2 className="text-3xl font-bold mb-6 text-primary">
+          <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">
             Pick your device to get started
           </h2>
           <p className="text-lg leading-relaxed mb-8 text-gray-600 dark:text-gray-300">
@@ -109,35 +109,35 @@ const DeviceSetupGuidePage: React.FC = () => {
           </p>
           
           <div className="bg-green-50 border border-green-200 rounded-xl p-6 mb-8 bg-light">
-            <h3 className="text-xl font-semibold mb-4 text-primary">
+            <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">
               🛡️ Why Device Setup Matters
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
               <div className="flex items-start gap-3">
                 <CheckCircle size={20} className="text-green-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1 text-primary">Prevents Accidents</h4>
+                  <h4 className="font-semibold mb-1 text-gray-900 dark:text-gray-100">Prevents Accidents</h4>
                   <p className="text-sm text-gray-600">Blocks inappropriate content before children encounter it</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <CheckCircle size={20} className="text-green-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1 text-primary">Teaches Boundaries</h4>
+                  <h4 className="font-semibold mb-1 text-gray-900 dark:text-gray-100">Teaches Boundaries</h4>
                   <p className="text-sm text-gray-600">Helps children understand digital limits and rules</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <CheckCircle size={20} className="text-green-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1 text-primary">Builds Trust</h4>
+                  <h4 className="font-semibold mb-1 text-gray-900 dark:text-gray-100">Builds Trust</h4>
                   <p className="text-sm text-gray-600">Shows children you care about their safety</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <CheckCircle size={20} className="text-green-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1 text-primary">Peace of Mind</h4>
+                  <h4 className="font-semibold mb-1 text-gray-900 dark:text-gray-100">Peace of Mind</h4>
                   <p className="text-sm text-gray-600">Gives parents confidence in their children's online safety</p>
                 </div>
               </div>
@@ -147,7 +147,7 @@ const DeviceSetupGuidePage: React.FC = () => {
 
         {/* Device Setup Guides */}
         <div className="max-w-6xl mx-auto mb-16">
-          <h2 className="text-2xl font-bold mb-8 text-center text-primary">
+          <h2 className="text-2xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">
             Device-Specific Setup Guides
           </h2>
           
@@ -167,7 +167,7 @@ const DeviceSetupGuidePage: React.FC = () => {
                   
                   <div className="p-6">
                     <div className="flex items-center justify-between mb-3">
-                      <h3 className="text-lg font-bold text-primary">
+                      <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">
                         {device.title}
                       </h3>
                       <span className="rounded-full bg-green-100 px-2 py-1 text-xs font-semibold text-green-800 dark:bg-green-900/40 dark:text-green-200">
@@ -180,7 +180,7 @@ const DeviceSetupGuidePage: React.FC = () => {
                     </p>
                     
                     <div className="mb-4">
-                      <h4 className="text-sm font-semibold mb-2 text-primary">
+                      <h4 className="text-sm font-semibold mb-2 text-gray-900 dark:text-gray-100">
                         Setup Steps:
                       </h4>
                       <ul className="text-sm space-y-1 text-gray-600">
@@ -205,7 +205,7 @@ const DeviceSetupGuidePage: React.FC = () => {
 
         {/* Safety Features */}
         <div className="max-w-6xl mx-auto mb-16">
-          <h2 className="text-2xl font-bold mb-8 text-center text-primary">
+          <h2 className="text-2xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">
             Essential Safety Features
           </h2>
           
@@ -223,7 +223,7 @@ const DeviceSetupGuidePage: React.FC = () => {
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-2">
-                        <h3 className="font-semibold text-primary">
+                        <h3 className="font-semibold text-gray-900 dark:text-gray-100">
                           {feature.title}
                         </h3>
                         <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
@@ -296,7 +296,7 @@ const DeviceSetupGuidePage: React.FC = () => {
 
         {/* Additional Resources */}
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold mb-8 text-center text-primary">
+          <h2 className="text-2xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">
             Related Resources
           </h2>
           
@@ -308,7 +308,7 @@ const DeviceSetupGuidePage: React.FC = () => {
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Smartphone size={24} className="text-green-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2 text-primary">
+              <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
                 App Selection Guide
               </h3>
               <p className="text-sm text-gray-600">
@@ -323,7 +323,7 @@ const DeviceSetupGuidePage: React.FC = () => {
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Shield size={24} className="text-blue-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2 text-primary">
+              <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
                 Family Agreement
               </h3>
               <p className="text-sm text-gray-600">
@@ -338,7 +338,7 @@ const DeviceSetupGuidePage: React.FC = () => {
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Settings size={24} className="text-purple-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2 text-primary">
+              <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
                 Parent Resources
               </h3>
               <p className="text-sm text-gray-600">

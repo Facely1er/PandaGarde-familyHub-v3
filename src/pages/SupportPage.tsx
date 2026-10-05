@@ -199,7 +199,7 @@ const SupportPage: React.FC = () => {
       breadcrumbs
     >
       <section className="py-8 sm:py-12">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="mx-auto max-w-6xl">
           <div className="mb-10 text-center">
             <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-gray-100 sm:text-3xl">
               How can we help you?
@@ -218,7 +218,7 @@ const SupportPage: React.FC = () => {
       </section>
 
       <section id="support-faq" className="border-t border-gray-200 py-12 dark:border-gray-700">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6">
+        <div className="mx-auto max-w-4xl">
           <div className="mb-8 text-center">
             <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-gray-100">
               Frequently Asked Questions

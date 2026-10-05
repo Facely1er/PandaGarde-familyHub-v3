@@ -262,6 +262,7 @@ const ServiceNotificationCenter: React.FC<ServiceNotificationCenterProps> = ({
           <select
             value={filter}
             onChange={(e) => setFilter(e.target.value as typeof filter)}
+            aria-label="Filter by priority"
             className="px-3 py-1.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-sm"
           >
             <option value="all">All Priorities</option>
@@ -272,6 +273,7 @@ const ServiceNotificationCenter: React.FC<ServiceNotificationCenterProps> = ({
           <select
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
+            aria-label="Filter by category"
             className="px-3 py-1.5 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-sm"
           >
             <option value="all">All Categories</option>

@@ -45,7 +45,7 @@ export default function NewsletterIssuePage() {
         subtitle="This issue may not exist yet or the link may be wrong."
         breadcrumbs
       >
-        <div className="mx-auto max-w-lg px-4 py-12 text-center">
+        <div className="mx-auto max-w-lg py-12 text-center">
           <Mail className="mx-auto mb-4 h-16 w-16 text-gray-400 dark:text-gray-500" aria-hidden />
           <p className="mb-6 text-gray-600 dark:text-gray-300">
             Browse the archive for published privacy education newsletters.
@@ -74,7 +74,7 @@ export default function NewsletterIssuePage() {
       subtitle="Privacy education newsletter issue"
       breadcrumbs
     >
-      <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6">
+      <div className="mx-auto max-w-4xl py-8">
         <Link
           to="/newsletter/archive"
           className="mb-6 inline-flex items-center gap-2 font-semibold text-green-700 hover:text-green-800 dark:text-green-400 dark:hover:text-green-300"
@@ -206,7 +206,7 @@ export default function NewsletterIssuePage() {
         <div className="mt-12 text-center">
           <Link
             to="/newsletter"
-            className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-pink-500 to-rose-600 px-6 py-3 font-semibold text-white transition-all hover:from-pink-600 hover:to-rose-700"
+            className="inline-flex items-center gap-2 rounded-lg bg-green-700 px-6 py-3 font-semibold text-white transition-colors hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500"
           >
             <Mail size={20} aria-hidden />
             Subscribe to newsletter

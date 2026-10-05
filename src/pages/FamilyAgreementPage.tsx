@@ -81,7 +81,7 @@ const FamilyAgreementPage: React.FC = () => {
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-10">
         {/* Introduction */}
         <div className="max-w-4xl mx-auto text-center mb-16">
-          <h2 className="text-3xl font-bold mb-6 text-primary">
+          <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">
             Write your family&apos;s screen rules together
           </h2>
           <p className="text-lg leading-relaxed mb-8 text-gray-600">
@@ -89,35 +89,35 @@ const FamilyAgreementPage: React.FC = () => {
           </p>
           
           <div className="mb-8 rounded-xl border border-green-200 bg-green-50 p-6 dark:border-green-800 dark:bg-green-950/30">
-            <h3 className="mb-4 text-xl font-semibold text-primary">
+            <h3 className="mb-4 text-xl font-semibold text-gray-900 dark:text-gray-100">
               How to use this agreement
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
               <div className="flex items-start gap-3">
                 <CheckCircle size={20} className="mt-1 flex-shrink-0 text-green-600" />
                 <div>
-                  <h4 className="font-semibold mb-1 text-primary">Print & Discuss</h4>
+                  <h4 className="font-semibold mb-1 text-gray-900 dark:text-gray-100">Print & Discuss</h4>
                   <p className="text-sm text-gray-600">Print the agreement and fill it out together as a family</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <CheckCircle size={20} className="mt-1 flex-shrink-0 text-green-600" />
                 <div>
-                  <h4 className="font-semibold mb-1 text-primary">Customize Rules</h4>
+                  <h4 className="font-semibold mb-1 text-gray-900 dark:text-gray-100">Customize Rules</h4>
                   <p className="text-sm text-gray-600">Adapt the rules to fit your family's specific needs and values</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <CheckCircle size={20} className="mt-1 flex-shrink-0 text-green-600" />
                 <div>
-                  <h4 className="font-semibold mb-1 text-primary">Sign Together</h4>
+                  <h4 className="font-semibold mb-1 text-gray-900 dark:text-gray-100">Sign Together</h4>
                   <p className="text-sm text-gray-600">Have everyone sign to show commitment to the agreement</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <CheckCircle size={20} className="mt-1 flex-shrink-0 text-green-600" />
                 <div>
-                  <h4 className="font-semibold mb-1 text-primary">Review Regularly</h4>
+                  <h4 className="font-semibold mb-1 text-gray-900 dark:text-gray-100">Review Regularly</h4>
                   <p className="text-sm text-gray-600">Update the agreement as your children grow and technology changes</p>
                 </div>
               </div>
@@ -127,7 +127,7 @@ const FamilyAgreementPage: React.FC = () => {
 
         {/* Agreement Sections Preview */}
         <div className="max-w-6xl mx-auto mb-16">
-          <h2 className="text-2xl font-bold mb-8 text-center text-primary">
+          <h2 className="text-2xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">
             What's Included in Your Family Agreement
           </h2>
           
@@ -138,7 +138,7 @@ const FamilyAgreementPage: React.FC = () => {
                 className="rounded-2xl border border-gray-200 bg-white p-6 shadow-md transition-shadow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
               >
                 <div className="text-4xl mb-4">{section.icon}</div>
-                <h3 className="text-lg font-semibold mb-3 text-primary">
+                <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-gray-100">
                   {section.title}
                 </h3>
                 <p className="text-sm mb-4 text-gray-600">
@@ -159,7 +159,7 @@ const FamilyAgreementPage: React.FC = () => {
 
         {/* Action Buttons */}
         <div className="max-w-4xl mx-auto text-center mb-16">
-          <h2 className="text-2xl font-bold mb-6 text-primary">
+          <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-gray-100">
             Get Your Family Internet Agreement
           </h2>
           <p className="text-lg mb-8 text-gray-600">
@@ -196,7 +196,7 @@ const FamilyAgreementPage: React.FC = () => {
 
         {/* Additional Resources */}
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold mb-8 text-center text-primary">
+          <h2 className="text-2xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">
             Related Resources
           </h2>
           
@@ -208,7 +208,7 @@ const FamilyAgreementPage: React.FC = () => {
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Shield size={24} className="text-blue-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2 text-primary">
+              <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
                 Safety Posters
               </h3>
               <p className="text-sm text-gray-600">
@@ -223,7 +223,7 @@ const FamilyAgreementPage: React.FC = () => {
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Users size={24} className="text-purple-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2 text-primary">
+              <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
                 Parent Resources
               </h3>
               <p className="text-sm text-gray-600">
@@ -237,7 +237,7 @@ const FamilyAgreementPage: React.FC = () => {
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <CheckCircle size={24} className="text-green-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2 text-primary">
+              <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
                 Family Hub
               </h3>
               <p className="text-sm text-gray-600">

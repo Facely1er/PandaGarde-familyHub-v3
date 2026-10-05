@@ -1,6 +1,8 @@
 /**
  * Family Hub semantic Tailwind tokens.
  * Solid surfaces only — no gradients in the hub shell.
+ * Neutrals match CLAUDE.md / website (gray-50…950). Teal is Hub-only accent
+ * for chrome/CTAs — marketing site stays green.
  */
 export const hubTheme = {
   shell:

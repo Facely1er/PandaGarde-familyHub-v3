@@ -212,7 +212,7 @@ const PrivacyConcernsGuidePage: React.FC = () => {
       <div className="mx-auto w-full max-w-4xl">
         {/* Introduction */}
         <div className="max-w-4xl mx-auto text-center mb-16">
-          <h2 className="text-3xl font-bold mb-6 text-primary">
+          <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">
             Quick Response is Key
           </h2>
           <p className="text-lg leading-relaxed mb-8 text-gray-600">
@@ -220,35 +220,35 @@ const PrivacyConcernsGuidePage: React.FC = () => {
           </p>
           
           <div className="bg-red-50 border border-red-200 rounded-xl p-6 mb-8 bg-light">
-            <h3 className="text-xl font-semibold mb-4 text-primary">
+            <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">
               🚨 Emergency Contacts
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
               <div className="flex items-start gap-3">
                 <Phone size={20} className="text-red-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1 text-primary">Law Enforcement</h4>
+                  <h4 className="font-semibold mb-1 text-gray-900 dark:text-gray-100">Law Enforcement</h4>
                   <p className="text-sm text-gray-600">Contact local police for serious privacy violations</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Phone size={20} className="text-red-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1 text-primary">FBI Internet Crime</h4>
+                  <h4 className="font-semibold mb-1 text-gray-900 dark:text-gray-100">FBI Internet Crime</h4>
                   <p className="text-sm text-gray-600">Report online crimes at ic3.gov</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Phone size={20} className="text-red-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1 text-primary">National Center for Missing & Exploited Children</h4>
+                  <h4 className="font-semibold mb-1 text-gray-900 dark:text-gray-100">National Center for Missing & Exploited Children</h4>
                   <p className="text-sm text-gray-600">1-800-THE-LOST for child safety concerns</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Phone size={20} className="text-red-600 mt-1 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold mb-1 text-primary">Crisis Text Line</h4>
+                  <h4 className="font-semibold mb-1 text-gray-900 dark:text-gray-100">Crisis Text Line</h4>
                   <p className="text-sm text-gray-600">Text HOME to 741741 for immediate support</p>
                 </div>
               </div>
@@ -258,7 +258,7 @@ const PrivacyConcernsGuidePage: React.FC = () => {
 
         {/* Common Concerns */}
         <div className="max-w-6xl mx-auto mb-16">
-          <h2 className="text-2xl font-bold mb-8 text-center text-primary">
+          <h2 className="text-2xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">
             Common Privacy Concerns
           </h2>
           
@@ -285,7 +285,7 @@ const PrivacyConcernsGuidePage: React.FC = () => {
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center justify-between">
-                          <h3 className="text-lg font-bold text-primary">
+                          <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">
                             {concern.title}
                           </h3>
                           <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
@@ -303,7 +303,7 @@ const PrivacyConcernsGuidePage: React.FC = () => {
                     </div>
                     
                     <div className="mb-4">
-                      <h4 className="text-sm font-semibold mb-2 text-primary">
+                      <h4 className="text-sm font-semibold mb-2 text-gray-900 dark:text-gray-100">
                         Warning Signs:
                       </h4>
                       <ul className="text-sm space-y-1 text-gray-600">
@@ -317,7 +317,7 @@ const PrivacyConcernsGuidePage: React.FC = () => {
                     </div>
                     
                     <div className="mb-4">
-                      <h4 className="text-sm font-semibold mb-2 text-primary">
+                      <h4 className="text-sm font-semibold mb-2 text-gray-900 dark:text-gray-100">
                         Immediate Actions:
                       </h4>
                       <ul className="text-sm space-y-1 text-gray-600">
@@ -338,7 +338,7 @@ const PrivacyConcernsGuidePage: React.FC = () => {
 
         {/* Response Steps */}
         <div className="max-w-6xl mx-auto mb-16">
-          <h2 className="text-2xl font-bold mb-8 text-center text-primary">
+          <h2 className="text-2xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">
             General Response Steps
           </h2>
           
@@ -359,7 +359,7 @@ const PrivacyConcernsGuidePage: React.FC = () => {
                     </div>
                   </div>
                   
-                  <h3 className="text-lg font-bold mb-2 text-primary">
+                  <h3 className="text-lg font-bold mb-2 text-gray-900 dark:text-gray-100">
                     {step.title}
                   </h3>
                   <p className="text-sm text-gray-600">
@@ -373,7 +373,7 @@ const PrivacyConcernsGuidePage: React.FC = () => {
 
         {/* Prevention Tips */}
         <div className="max-w-6xl mx-auto mb-16">
-          <h2 className="text-2xl font-bold mb-8 text-center text-primary">
+          <h2 className="text-2xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">
             Prevention Strategies
           </h2>
           
@@ -383,7 +383,7 @@ const PrivacyConcernsGuidePage: React.FC = () => {
                 key={index}
                 className="rounded-2xl border border-gray-200 bg-white p-6 shadow-md transition-shadow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
               >
-                <h3 className="text-lg font-bold mb-4 text-primary">
+                <h3 className="text-lg font-bold mb-4 text-gray-900 dark:text-gray-100">
                   {category.category}
                 </h3>
                 <ul className="space-y-2">
@@ -454,7 +454,7 @@ const PrivacyConcernsGuidePage: React.FC = () => {
 
         {/* Additional Resources */}
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold mb-8 text-center text-primary">
+          <h2 className="text-2xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">
             Related Resources
           </h2>
           
@@ -466,7 +466,7 @@ const PrivacyConcernsGuidePage: React.FC = () => {
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Shield size={24} className="text-green-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2 text-primary">
+              <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
                 Device Setup Guide
               </h3>
               <p className="text-sm text-gray-600">
@@ -481,7 +481,7 @@ const PrivacyConcernsGuidePage: React.FC = () => {
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Users size={24} className="text-blue-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2 text-primary">
+              <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
                 Modeling Behavior
               </h3>
               <p className="text-sm text-gray-600">
@@ -496,7 +496,7 @@ const PrivacyConcernsGuidePage: React.FC = () => {
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
                 <Phone size={24} className="text-purple-600" />
               </div>
-              <h3 className="text-lg font-semibold mb-2 text-primary">
+              <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
                 Support Center
               </h3>
               <p className="text-sm text-gray-600">

@@ -138,7 +138,7 @@ export function StoryReaderPage() {
   if (!story) {
     return (
       <PageLayout title={t('stories.reader.notFoundTitle')} subtitle={t('stories.reader.notFoundSubtitle')} breadcrumbs>
-        <div className="mx-auto max-w-lg px-4 py-12 text-center">
+        <div className="mx-auto max-w-lg py-12 text-center">
           <p className="text-4xl mb-4" aria-hidden>
             🐼
           </p>
@@ -173,7 +173,7 @@ export function StoryReaderPage() {
         }
         breadcrumbs
       >
-        <div className="mx-auto max-w-lg px-4 py-12 text-center space-y-4">
+        <div className="mx-auto max-w-lg space-y-4 py-12 text-center">
           <p className="text-5xl" aria-hidden>
             {story.coverEmoji}
           </p>

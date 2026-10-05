@@ -193,7 +193,7 @@ const DigitalRightsPage: React.FC = () => {
               href={PRIVACY_PORTAL_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors text-sm"
+              className="inline-flex items-center gap-2 rounded-lg bg-green-700 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500"
             >
               <ExternalLink size={16} aria-hidden />
               Privacy Portal – Data rights

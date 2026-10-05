@@ -183,14 +183,14 @@ const CookiesPage: React.FC = () => {
               <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">
                 Special Considerations for Children
               </h2>
-              <div className="callout-pink mb-6">
+              <div className="mb-6 rounded-xl border border-green-200 bg-green-50 p-4 dark:border-green-800 dark:bg-green-950/40">
                 <div className="flex items-start gap-3">
-                  <Shield size={24} className="text-pink-600 mt-1" />
+                  <Shield size={24} className="mt-1 text-green-700 dark:text-green-400" aria-hidden />
                   <div>
-                    <h3 className="font-semibold mb-2 text-pink-800">
+                    <h3 className="mb-2 font-semibold text-green-900 dark:text-green-100">
                       COPPA Compliance
                     </h3>
-                    <p className="text-pink-700">
+                    <p className="text-green-800 dark:text-green-200">
                       We are committed to protecting children's privacy and comply with the Children's Online
                       Privacy Protection Act (COPPA). We do not knowingly collect personal information from
                       children under 13 without parental consent.

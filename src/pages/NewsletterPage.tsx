@@ -88,7 +88,7 @@ const NewsletterPage: React.FC = () => {
       {/* Subscription Section */}
       <section className="py-12">
         <div className="max-w-2xl mx-auto text-center mb-12">
-          <h2 className="text-3xl font-bold mb-6 text-primary">
+          <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">
             Join Our Privacy Education Community
           </h2>
           <p className="text-lg mb-8 text-gray-600">
@@ -149,7 +149,7 @@ const NewsletterPage: React.FC = () => {
                 <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-700 text-white dark:bg-green-600">
                   <Icon size={32} />
                 </div>
-                <h3 className="text-lg font-bold mb-2 text-primary">
+                <h3 className="text-lg font-bold mb-2 text-gray-900 dark:text-gray-100">
                   {feature.title}
                 </h3>
                 <p className="text-sm text-gray-600">
@@ -165,7 +165,7 @@ const NewsletterPage: React.FC = () => {
       <section className="py-12 rounded-xl bg-light">
         <div>
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold mb-4 text-primary">
+            <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-gray-100">
               Recent Newsletters
             </h2>
             <p className="text-lg mb-4 text-gray-600">
@@ -227,7 +227,7 @@ const NewsletterPage: React.FC = () => {
       {/* Privacy Promise */}
       <section className="py-12">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-8 text-primary">
+          <h2 className="text-3xl font-bold mb-8 text-gray-900 dark:text-gray-100">
             Our Privacy Promise
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -235,7 +235,7 @@ const NewsletterPage: React.FC = () => {
               <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Shield size={24} className="text-green-600" />
               </div>
-              <h3 className="font-bold mb-2 text-primary">
+              <h3 className="font-bold mb-2 text-gray-900 dark:text-gray-100">
                 No Spam
               </h3>
               <p className="text-sm text-gray-600">
@@ -246,7 +246,7 @@ const NewsletterPage: React.FC = () => {
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Mail size={24} className="text-blue-600" />
               </div>
-              <h3 className="font-bold mb-2 text-primary">
+              <h3 className="font-bold mb-2 text-gray-900 dark:text-gray-100">
                 Easy Unsubscribe
               </h3>
               <p className="text-sm text-gray-600">
@@ -259,7 +259,7 @@ const NewsletterPage: React.FC = () => {
               <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Users size={24} className="text-purple-600" />
               </div>
-              <h3 className="font-bold mb-2 text-primary">
+              <h3 className="font-bold mb-2 text-gray-900 dark:text-gray-100">
                 Data Protection
               </h3>
               <p className="text-sm text-gray-600">
