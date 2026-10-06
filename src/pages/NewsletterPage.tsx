@@ -4,7 +4,7 @@ import { Mail, CheckCircle, Users, Calendar, BookOpen, Shield } from 'lucide-rea
 import PageLayout from '../components/layout/PageLayout';
 import { useToast } from '../contexts/ToastContext';
 import { newsletterArchive, newsletterIssuePath } from '../data/newsletters';
-import { requestNewsletterListChange } from '../lib/newsletterClient';
+import { submitNewsletterNetlifyForm } from '../lib/netlifyForms';
 import { logger } from '../lib/logger';
 
 const NewsletterPage: React.FC = () => {
@@ -29,9 +29,9 @@ const NewsletterPage: React.FC = () => {
     setIsSubscribing(true);
 
     try {
-      await requestNewsletterListChange('subscribe', email);
+      await submitNewsletterNetlifyForm({ email, purpose: 'newsletter' });
       setIsSubscribed(true);
-      showSuccess('You are on the list', 'We will email you when the next issue is published.');
+      showSuccess('Address saved', 'Issues are on this page. Email delivery is not turned on yet.');
       setEmail('');
     } catch (error) {
       logger.error('Newsletter subscription error:', error);
@@ -45,12 +45,12 @@ const NewsletterPage: React.FC = () => {
     {
       icon: Calendar,
       title: 'Monthly Privacy Tips',
-      description: 'Get the latest privacy tips and best practices delivered to your inbox.'
+      description: 'Read the latest privacy tips in each issue on this page.'
     },
     {
       icon: BookOpen,
       title: 'New Activity Releases',
-      description: 'Be the first to know about new educational activities and resources.'
+      description: 'Each issue lists new activities you can open on the site.'
     },
     {
       icon: Shield,
@@ -81,7 +81,7 @@ const NewsletterPage: React.FC = () => {
   return (
     <PageLayout
       title="Newsletter"
-      subtitle="Privacy tips and new activities by email. Enter your address below to subscribe—unsubscribe anytime."
+      subtitle="Privacy tips and activities you can read here. Email delivery is not turned on yet. You can still save your address for when it is."
       breadcrumbs={true}
     >
 
@@ -92,8 +92,8 @@ const NewsletterPage: React.FC = () => {
             Join Our Privacy Education Community
           </h2>
           <p className="text-lg mb-8 text-gray-600">
-            Get monthly updates with the latest privacy education resources, activities, and expert tips
-            delivered directly to your inbox. No spam, just valuable content for your family.
+            Read each issue on this page. Saving your address stores it with our site form submissions.
+            We do not email issues yet, because there is no mail service connected.
           </p>
 
           {!isSubscribed ? (
@@ -118,7 +118,7 @@ const NewsletterPage: React.FC = () => {
                   disabled={isSubscribing}
                   className="rounded-lg bg-green-700 px-6 py-3 font-semibold text-white hover:bg-green-800 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-green-600"
                 >
-                  {isSubscribing ? 'Subscribing...' : 'Subscribe'}
+                  {isSubscribing ? 'Saving...' : 'Save my address'}
                 </button>
               </div>
               <p className="text-sm text-gray-500 mt-4">
@@ -132,9 +132,9 @@ const NewsletterPage: React.FC = () => {
           ) : (
             <div className="bg-green-50 border border-green-200 rounded-lg p-6">
               <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-green-800 mb-2">Successfully Subscribed!</h3>
+              <h3 className="text-xl font-bold text-green-800 mb-2">Address saved</h3>
               <p className="text-green-700">
-                You are on the list. We email a new issue when it is published. Past issues stay on this page.
+                We stored your address. Issues are not emailed yet. Read them below.
               </p>
             </div>
           )}
@@ -239,7 +239,7 @@ const NewsletterPage: React.FC = () => {
                 No Spam
               </h3>
               <p className="text-sm text-gray-600">
-                We only send valuable content about privacy education. No promotional spam.
+                Issues are published on this site. We are not sending them by email yet.
               </p>
             </div>
             <div className="text-center">
@@ -251,8 +251,9 @@ const NewsletterPage: React.FC = () => {
               </h3>
               <p className="text-sm text-gray-600">
                 <Link to="/newsletter/unsubscribe" className="text-green-700 hover:text-green-800 underline">
-                  Unsubscribe anytime
-                </Link> with one click. We respect your inbox.
+                  Ask us not to email you
+                </Link>{' '}
+                if you saved an address. We are not sending mail yet.
               </p>
             </div>
             <div className="text-center">
@@ -263,7 +264,7 @@ const NewsletterPage: React.FC = () => {
                 Data Protection
               </h3>
               <p className="text-sm text-gray-600">
-                Your address is stored with our email service so we can send this newsletter. We do not sell it.
+                Your address is stored as a site form submission. We do not sell it, and we do not email it yet.
               </p>
             </div>
           </div>

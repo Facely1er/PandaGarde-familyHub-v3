@@ -3,7 +3,7 @@ import { useSearchParams, Link } from 'react-router-dom';
 import { CheckCircle, AlertCircle, ArrowLeft } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 import { useToast } from '../contexts/ToastContext';
-import { requestNewsletterListChange } from '../lib/newsletterClient';
+import { submitNewsletterNetlifyForm } from '../lib/netlifyForms';
 import { logger } from '../lib/logger';
 
 const UnsubscribePage: React.FC = () => {
@@ -39,9 +39,9 @@ const UnsubscribePage: React.FC = () => {
     setIsUnsubscribing(true);
 
     try {
-      await requestNewsletterListChange('unsubscribe', email);
+      await submitNewsletterNetlifyForm({ email, purpose: 'unsubscribe' });
       setIsUnsubscribed(true);
-      showSuccess('Unsubscribed', 'You will no longer receive newsletter emails.');
+      showSuccess('Request saved', 'We are not emailing issues. Your opt-out is stored with our form submissions.');
     } catch (error) {
       logger.error('Newsletter unsubscribe error:', error);
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
@@ -58,7 +58,7 @@ const UnsubscribePage: React.FC = () => {
   return (
     <PageLayout
       title="Unsubscribe from Newsletter"
-      subtitle="We're sorry to see you go. You can unsubscribe from our privacy education newsletter at any time."
+      subtitle="We are not emailing newsletter issues yet. You can still ask us not to use your address when email starts."
       breadcrumbs={true}
     >
       <div className="mx-auto w-full max-w-2xl">
@@ -66,10 +66,10 @@ const UnsubscribePage: React.FC = () => {
             <div className="rounded-2xl border border-green-200 bg-green-50 p-8 text-center dark:border-green-800 dark:bg-green-900/20">
               <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
               <h2 className="text-2xl font-bold text-green-800 mb-2">
-                Successfully Unsubscribed
+                Opt-out saved
               </h2>
               <p className="text-green-700 mb-6">
-                You have been removed from our newsletter mailing list. You will no longer receive our monthly privacy education updates.
+                We are not sending newsletter email. Your request is stored so we do not use this address if email starts later.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
@@ -130,9 +130,9 @@ const UnsubscribePage: React.FC = () => {
                     <strong>What happens when you unsubscribe?</strong>
                   </p>
                   <ul className="text-sm text-gray-600 space-y-1 list-disc list-inside">
-                    <li>You will stop receiving our monthly privacy education newsletter</li>
-                    <li>You can resubscribe at any time by visiting our newsletter page</li>
-                    <li>That address is marked so we stop emailing it</li>
+                    <li>We are not emailing issues today</li>
+                    <li>Your opt-out is stored with our form submissions</li>
+                    <li>You can save the address again later from the newsletter page</li>
                     <li>You can still access all our resources and guides on the website</li>
                   </ul>
                 </div>

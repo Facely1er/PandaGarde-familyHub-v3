@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Send, User, Mail, MessageSquare, Phone, CheckCircle, AlertCircle } from 'lucide-react';
-import { requestNewsletterListChange } from '../../lib/newsletterClient';
 import { submitContactNetlifyForm } from '../../lib/netlifyForms';
 import { useToast } from '../../hooks/useToast';
 import { logger } from '../../lib/logger';
@@ -149,14 +148,6 @@ const ContactForm: React.FC = () => {
         newsletter: formData.newsletter,
         botField,
       });
-
-      if (formData.newsletter) {
-        try {
-          await requestNewsletterListChange('subscribe', formData.email);
-        } catch (newsletterError) {
-          logger.warn('Newsletter subscription failed:', newsletterError);
-        }
-      }
 
       setFormData({
         name: '',
@@ -421,7 +412,7 @@ const ContactForm: React.FC = () => {
               onChange={handleInputChange}
               className="mt-1 h-4 w-4 shrink-0 rounded border-gray-300 text-green-700 focus:ring-green-600"
             />
-            <span>Subscribe to our newsletter for privacy education tips and updates</span>
+            <span>Save my email for the newsletter. Issues are on the site; email is not sent yet.</span>
           </label>
         </div>
 
