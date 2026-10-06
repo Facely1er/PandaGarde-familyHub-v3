@@ -211,7 +211,7 @@ const PrivacyConcernsGuidePage: React.FC = () => {
     >
       <div className="mx-auto w-full max-w-4xl">
         {/* Introduction */}
-        <div className="max-w-4xl mx-auto text-center mb-16">
+        <div className="mb-16 text-center">
           <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">
             Quick Response is Key
           </h2>
@@ -257,7 +257,7 @@ const PrivacyConcernsGuidePage: React.FC = () => {
         </div>
 
         {/* Common Concerns */}
-        <div className="max-w-6xl mx-auto mb-16">
+        <div className="mb-16">
           <h2 className="text-2xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">
             Common Privacy Concerns
           </h2>
@@ -337,7 +337,7 @@ const PrivacyConcernsGuidePage: React.FC = () => {
         </div>
 
         {/* Response Steps */}
-        <div className="max-w-6xl mx-auto mb-16">
+        <div className="mb-16">
           <h2 className="text-2xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">
             General Response Steps
           </h2>
@@ -372,7 +372,7 @@ const PrivacyConcernsGuidePage: React.FC = () => {
         </div>
 
         {/* Prevention Tips */}
-        <div className="max-w-6xl mx-auto mb-16">
+        <div className="mb-16">
           <h2 className="text-2xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">
             Prevention Strategies
           </h2>
@@ -400,7 +400,7 @@ const PrivacyConcernsGuidePage: React.FC = () => {
         </div>
 
         {/* Recovery Resources */}
-        <div className="max-w-4xl mx-auto mb-16">
+        <div className="mb-16">
           <div className="bg-gradient-to-r from-green-600 to-green-700 rounded-xl p-8 text-white">
             <h2 className="text-2xl font-bold mb-6">
               Recovery and Support Resources
@@ -453,7 +453,7 @@ const PrivacyConcernsGuidePage: React.FC = () => {
         </div>
 
         {/* Additional Resources */}
-        <div className="max-w-4xl mx-auto">
+        <div>
           <h2 className="text-2xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">
             Related Resources
           </h2>

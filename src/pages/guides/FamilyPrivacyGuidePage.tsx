@@ -278,14 +278,14 @@ const FamilyPrivacyGuidePage: React.FC = () => {
 
           {/* MODPA Rights for Maryland Families */}
           <section className="mb-16">
-            <div className="rounded-2xl border-2 border-green-200 bg-gradient-to-br from-green-50 to-cyan-50 p-8 family-guide-card">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center">
-                  <Scale size={24} className="text-white" />
+            <div className="rounded-2xl border border-green-200 bg-green-50 p-8 dark:border-green-800 dark:bg-gray-800">
+              <div className="mb-6 flex items-center gap-3">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-green-700 dark:bg-green-600">
+                  <Scale size={24} className="text-white" aria-hidden />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold family-guide-primary">Maryland Families: Your MODPA Rights</h2>
-                  <p className="text-sm text-green-700">Maryland Online Data Privacy Act — now in effect</p>
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Maryland Families: Your MODPA Rights</h2>
+                  <p className="text-sm text-green-700 dark:text-green-300">Maryland Online Data Privacy Act — now in effect</p>
                 </div>
               </div>
 
@@ -317,9 +317,9 @@ const FamilyPrivacyGuidePage: React.FC = () => {
                 </div>
               </div>
 
-              <div className="bg-green-100 rounded-xl p-4 mb-4">
-                <h4 className="font-bold text-green-900 mb-1 text-sm">Conversation starter for teens</h4>
-                <p className="text-xs text-green-800 leading-relaxed">
+              <div className="mb-4 rounded-xl bg-green-100 p-4 dark:bg-green-950/40">
+                <h4 className="mb-1 text-sm font-bold text-green-900 dark:text-green-100">Conversation starter for teens</h4>
+                <p className="text-xs leading-relaxed text-green-800 dark:text-green-200">
                   "Did you know you have a legal right to ask TikTok, Roblox, or any app: 'What do you know about me?' — and they have to answer? That's what MODPA means for us as a Maryland family."
                 </p>
               </div>
@@ -327,7 +327,7 @@ const FamilyPrivacyGuidePage: React.FC = () => {
               <div className="flex flex-wrap gap-3">
                 <Link
                   to="/digital-rights"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold rounded-lg transition-colors"
+                  className="inline-flex items-center gap-2 rounded-lg bg-green-700 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500"
                 >
                   <Scale size={16} />
                   Full MODPA guide and module

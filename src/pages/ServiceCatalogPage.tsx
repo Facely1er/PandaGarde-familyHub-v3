@@ -212,7 +212,7 @@ const ServiceCatalogPage: React.FC = () => {
                         <div className="text-sm font-semibold text-gray-900 dark:text-white truncate">{service.name}</div>
                         <div className="text-xs text-gray-500 dark:text-gray-400">{service.category}</div>
                       </div>
-                      <button onClick={() => handleSuggestedAddRemove(service.id)} disabled={isAdding} className={`shrink-0 rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${isAdded ? 'bg-green-100 text-green-700 hover:bg-green-200 dark:bg-green-800 dark:text-green-200' : 'bg-green-600 text-white hover:bg-green-700'} disabled:cursor-not-allowed disabled:opacity-60`}>
+                      <button onClick={() => handleSuggestedAddRemove(service.id)} disabled={isAdding} className={`shrink-0 rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${isAdded ? 'bg-green-100 text-green-700 hover:bg-green-200 dark:bg-green-800 dark:text-green-200' : 'bg-green-700 text-white hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500'} disabled:cursor-not-allowed disabled:opacity-60`}>
                         {isAdding ? 'Updating…' : isAdded ? 'Remove' : 'Add'}
                       </button>
                     </div>

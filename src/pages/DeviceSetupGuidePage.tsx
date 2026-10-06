@@ -98,9 +98,9 @@ const DeviceSetupGuidePage: React.FC = () => {
       subtitle="Set up parental controls and privacy settings on phones, tablets, and computers. Pick your device type below to see step-by-step instructions."
       breadcrumbs={true}
     >
-      <div className="max-w-4xl mx-auto">
+      <div className="mx-auto w-full max-w-4xl">
         {/* Introduction */}
-        <div className="max-w-4xl mx-auto text-center mb-16">
+        <div className="mb-16 text-center">
           <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">
             Pick your device to get started
           </h2>
@@ -146,7 +146,7 @@ const DeviceSetupGuidePage: React.FC = () => {
         </div>
 
         {/* Device Setup Guides */}
-        <div className="max-w-6xl mx-auto mb-16">
+        <div className="mb-16">
           <h2 className="text-2xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">
             Device-Specific Setup Guides
           </h2>
@@ -204,7 +204,7 @@ const DeviceSetupGuidePage: React.FC = () => {
         </div>
 
         {/* Safety Features */}
-        <div className="max-w-6xl mx-auto mb-16">
+        <div className="mb-16">
           <h2 className="text-2xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">
             Essential Safety Features
           </h2>
@@ -246,7 +246,7 @@ const DeviceSetupGuidePage: React.FC = () => {
         </div>
 
         {/* Quick Setup Checklist */}
-        <div className="max-w-4xl mx-auto mb-16">
+        <div className="mb-16">
           <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-8 text-white">
             <h2 className="text-2xl font-bold mb-6">
               Quick Setup Checklist
@@ -295,7 +295,7 @@ const DeviceSetupGuidePage: React.FC = () => {
         </div>
 
         {/* Additional Resources */}
-        <div className="max-w-4xl mx-auto">
+        <div>
           <h2 className="text-2xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">
             Related Resources
           </h2>

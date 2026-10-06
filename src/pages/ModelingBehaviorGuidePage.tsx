@@ -153,7 +153,7 @@ const ModelingBehaviorGuidePage: React.FC = () => {
     >
       <div className="mx-auto w-full max-w-4xl">
         {/* Introduction */}
-        <div className="max-w-4xl mx-auto text-center mb-16">
+        <div className="mb-16 text-center">
           <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">
             Leading by Example
           </h2>
@@ -199,7 +199,7 @@ const ModelingBehaviorGuidePage: React.FC = () => {
         </div>
 
         {/* Modeling Areas */}
-        <div className="max-w-6xl mx-auto mb-16">
+        <div className="mb-16">
           <h2 className="text-2xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">
             Key Areas to Model
           </h2>
@@ -262,7 +262,7 @@ const ModelingBehaviorGuidePage: React.FC = () => {
         </div>
 
         {/* Daily Practices */}
-        <div className="max-w-6xl mx-auto mb-16">
+        <div className="mb-16">
           <h2 className="text-2xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">
             Daily Modeling Practices
           </h2>
@@ -290,7 +290,7 @@ const ModelingBehaviorGuidePage: React.FC = () => {
         </div>
 
         {/* Conversation Starters */}
-        <div className="max-w-6xl mx-auto mb-16">
+        <div className="mb-16">
           <h2 className="text-2xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">
             Conversation Starters
           </h2>
@@ -326,7 +326,7 @@ const ModelingBehaviorGuidePage: React.FC = () => {
         </div>
 
         {/* Common Mistakes */}
-        <div className="max-w-4xl mx-auto mb-16">
+        <div className="mb-16">
           <div className="bg-gradient-to-r from-red-500 to-red-600 rounded-xl p-8 text-white">
             <h2 className="text-2xl font-bold mb-6">
               Common Modeling Mistakes to Avoid
@@ -379,7 +379,7 @@ const ModelingBehaviorGuidePage: React.FC = () => {
         </div>
 
         {/* Additional Resources */}
-        <div className="max-w-4xl mx-auto">
+        <div>
           <h2 className="text-2xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">
             Related Resources
           </h2>

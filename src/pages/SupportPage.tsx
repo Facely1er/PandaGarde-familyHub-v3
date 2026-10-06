@@ -131,7 +131,7 @@ function SupportOptionCard({
 
   const inner = (
     <>
-      <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-green-600 text-white">
+      <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-green-700 text-white dark:bg-green-600">
         <Icon size={24} aria-hidden />
       </div>
       <h3 className="mb-2 text-lg font-bold text-gray-900 dark:text-gray-100">{option.title}</h3>

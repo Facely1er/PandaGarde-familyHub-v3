@@ -153,7 +153,7 @@ const AppSelectionGuidePage: React.FC = () => {
     >
       <div className="mx-auto w-full max-w-4xl">
         {/* Introduction */}
-        <div className="max-w-4xl mx-auto text-center mb-16">
+        <div className="mb-16 text-center">
           <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">
             Making Smart App Choices
           </h2>
@@ -199,7 +199,7 @@ const AppSelectionGuidePage: React.FC = () => {
         </div>
 
         {/* App Categories */}
-        <div className="max-w-6xl mx-auto mb-16">
+        <div className="mb-16">
           <h2 className="text-2xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">
             App Categories & Recommendations
           </h2>
@@ -263,7 +263,7 @@ const AppSelectionGuidePage: React.FC = () => {
         </div>
 
         {/* Red Flags */}
-        <div className="max-w-6xl mx-auto mb-16">
+        <div className="mb-16">
           <h2 className="text-2xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">
             Red Flags to Avoid
           </h2>
@@ -313,7 +313,7 @@ const AppSelectionGuidePage: React.FC = () => {
         </div>
 
         {/* Age Recommendations */}
-        <div className="max-w-6xl mx-auto mb-16">
+        <div className="mb-16">
           <h2 className="text-2xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">
             Age-Specific Recommendations
           </h2>
@@ -341,7 +341,7 @@ const AppSelectionGuidePage: React.FC = () => {
         </div>
 
         {/* App Review Process */}
-        <div className="max-w-4xl mx-auto mb-16">
+        <div className="mb-16">
           <div className="bg-gradient-to-r from-green-600 to-green-700 rounded-xl p-8 text-white">
             <h2 className="text-2xl font-bold mb-6">
               How to Review Apps Before Downloading
@@ -394,7 +394,7 @@ const AppSelectionGuidePage: React.FC = () => {
         </div>
 
         {/* Additional Resources */}
-        <div className="max-w-4xl mx-auto">
+        <div>
           <h2 className="text-2xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">
             Related Resources
           </h2>
