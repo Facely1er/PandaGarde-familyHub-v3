@@ -1004,7 +1004,7 @@ const FamilyHubPage: React.FC = () => {
             <div className="mt-8">
               <EmailCaptureInline
                 title="Stay Updated on Child Safety"
-                description="Optional email updates about privacy news and safety headlines—not live monitoring of your child's device."
+                description="Optional: store your address with our site form submissions. We are not sending email yet. This is not live monitoring of your child's device."
                 purpose="updates"
                 compact={false}
               />

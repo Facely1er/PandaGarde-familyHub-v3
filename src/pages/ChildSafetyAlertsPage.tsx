@@ -165,7 +165,7 @@ const ChildSafetyAlertsPage: React.FC = () => {
         <div>
           <EmailCaptureInline
             title="Stay Updated on Child Safety Alerts"
-            description="Optional email list for PandaGarde privacy and safety updates (when EmailJS is configured). This is not live monitoring of your child's apps or device."
+            description="Optional: store your address with our site form submissions for privacy and safety updates later. We are not sending email yet. This is not live monitoring of your child's apps or device."
             purpose="safety-alerts"
             compact={false}
           />

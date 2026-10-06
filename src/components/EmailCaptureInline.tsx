@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Mail, CheckCircle } from 'lucide-react';
-import { useToast } from '../hooks/useToast';
+import { useToast } from '../contexts/ToastContext';
 import { logger } from '../lib/logger';
 import { submitNewsletterNetlifyForm } from '../lib/netlifyForms';
 import type { EmailSubscription } from '../types/emailSubscription';
@@ -14,8 +14,8 @@ interface EmailCaptureInlineProps {
 }
 
 const EmailCaptureInline: React.FC<EmailCaptureInlineProps> = ({
-  title = 'Stay Updated on Child Safety',
-  description = 'Optional email updates about privacy news and safety headlines (not live monitoring of your child\'s device).',
+  title = 'Save your email for safety updates',
+  description = 'Optional: store your address with our site form submissions. We are not sending email yet. This is not live monitoring of your child\'s device.',
   onSubmit,
   purpose = 'safety-alerts',
   compact = false
@@ -25,31 +25,15 @@ const EmailCaptureInline: React.FC<EmailCaptureInlineProps> = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      showError('Please enter a valid email address');
-      return;
-    }
-
-    setIsSubmitting(true);
-
+  const rememberLocally = (address: string) => {
     try {
-      let subscriptions: EmailSubscription[] = [];
-      try {
-        const subscriptionsStr = localStorage.getItem('pandagarde_email_subscriptions') || '[]';
-        const parsed = JSON.parse(subscriptionsStr);
-        subscriptions = Array.isArray(parsed) ? parsed : [];
-      } catch (error) {
-        logger.error('Error parsing email subscriptions:', error);
-        subscriptions = [];
-      }
-      
-      if (!subscriptions.find((s) => s?.email === email)) {
+      const subscriptionsStr = localStorage.getItem('pandagarde_email_subscriptions') || '[]';
+      const parsed = JSON.parse(subscriptionsStr);
+      const subscriptions: EmailSubscription[] = Array.isArray(parsed) ? parsed : [];
+
+      if (!subscriptions.find((s) => s?.email === address)) {
         subscriptions.push({
-          email,
+          email: address,
           purpose,
           subscribedAt: new Date().toISOString(),
           preferences: {
@@ -60,29 +44,43 @@ const EmailCaptureInline: React.FC<EmailCaptureInlineProps> = ({
         });
         localStorage.setItem('pandagarde_email_subscriptions', JSON.stringify(subscriptions));
       }
+    } catch (error) {
+      logger.error('Error saving email subscription locally:', error);
+    }
+  };
 
-      // Submit to Netlify Forms so signups are captured server-side
-      try {
-        await submitNewsletterNetlifyForm({ email, purpose });
-      } catch (netlifyError) {
-        logger.error('Netlify newsletter form error:', netlifyError);
-        // Don't block UX — localStorage save already succeeded
-      }
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      showError('Invalid Email', 'Please enter a valid email address.');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      await submitNewsletterNetlifyForm({ email, purpose });
+      rememberLocally(email);
 
       if (onSubmit) {
         await onSubmit(email);
       }
 
       setIsSubmitted(true);
-      showSuccess('Successfully subscribed!');
-      
+      showSuccess(
+        'Address saved',
+        'We stored your address with our form submissions. Email delivery is not turned on yet.'
+      );
+
       setTimeout(() => {
         setEmail('');
         setIsSubmitted(false);
       }, 3000);
     } catch (error) {
-      logger.error('Error subscribing email:', error);
-      showError('Failed to subscribe. Please try again.');
+      logger.error('Error saving email address:', error);
+      showError('Save Failed', 'We could not save your address. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -92,9 +90,9 @@ const EmailCaptureInline: React.FC<EmailCaptureInlineProps> = ({
     return (
       <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
         {isSubmitted ? (
-          <div className="flex items-center space-x-2 text-green-600 dark:text-green-400">
+          <div className="flex items-center space-x-2 text-green-700 dark:text-green-400">
             <CheckCircle className="h-5 w-5" />
-            <span className="text-sm font-medium">Subscribed! Check your email.</span>
+            <span className="text-sm font-medium">Address saved. Email is not sent yet.</span>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="flex flex-col gap-2 sm:flex-row">
@@ -110,17 +108,17 @@ const EmailCaptureInline: React.FC<EmailCaptureInlineProps> = ({
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 disabled:opacity-50 text-sm font-medium transition-colors"
+              className="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 disabled:opacity-50 text-sm font-medium transition-colors dark:bg-green-600 dark:hover:bg-green-500"
             >
-              {isSubmitting ? '...' : 'Subscribe'}
+              {isSubmitting ? 'Saving...' : 'Save my address'}
             </button>
           </form>
         )}
         {!isSubmitted && (
           <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-            We respect your privacy.{' '}
+            Stored as a site form submission. We are not emailing yet.{' '}
             <a href="/newsletter/unsubscribe" className="underline hover:text-green-700 dark:hover:text-green-300">
-              Unsubscribe anytime
+              Ask us not to email you
             </a>
             .
           </p>
@@ -134,13 +132,13 @@ const EmailCaptureInline: React.FC<EmailCaptureInlineProps> = ({
       {isSubmitted ? (
         <div className="text-center">
           <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 dark:bg-green-900/30 mb-3">
-            <CheckCircle className="h-6 w-6 text-green-600 dark:text-green-400" />
+            <CheckCircle className="h-6 w-6 text-green-700 dark:text-green-400" />
           </div>
           <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1">
-            Thank You!
+            Address saved
           </h3>
           <p className="text-sm text-gray-600 dark:text-gray-400">
-            You're all set. We'll keep you updated.
+            We stored your address. Email delivery is not turned on yet.
           </p>
         </div>
       ) : (
@@ -174,15 +172,15 @@ const EmailCaptureInline: React.FC<EmailCaptureInlineProps> = ({
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="px-6 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors"
+                className="px-6 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors dark:bg-green-600 dark:hover:bg-green-500"
               >
-                {isSubmitting ? 'Subscribing...' : 'Subscribe'}
+                {isSubmitting ? 'Saving...' : 'Save my address'}
               </button>
             </div>
             <p className="text-xs text-gray-500 dark:text-gray-400">
-              We respect your privacy.{' '}
+              Stored as a site form submission. We are not emailing yet.{' '}
               <a href="/newsletter/unsubscribe" className="underline hover:text-green-700 dark:hover:text-green-300">
-                Unsubscribe anytime
+                Ask us not to email you
               </a>
               .
             </p>
@@ -194,4 +192,3 @@ const EmailCaptureInline: React.FC<EmailCaptureInlineProps> = ({
 };
 
 export default EmailCaptureInline;
-
