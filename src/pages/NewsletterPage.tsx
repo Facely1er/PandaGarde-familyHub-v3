@@ -4,7 +4,7 @@ import { Mail, CheckCircle, Users, Calendar, BookOpen, Shield } from 'lucide-rea
 import PageLayout from '../components/layout/PageLayout';
 import { useToast } from '../contexts/ToastContext';
 import { newsletterArchive, newsletterIssuePath } from '../data/newsletters';
-import { submitNewsletterNetlifyForm } from '../lib/netlifyForms';
+import { requestNewsletterListChange } from '../lib/newsletterClient';
 import { logger } from '../lib/logger';
 
 const NewsletterPage: React.FC = () => {
@@ -29,9 +29,9 @@ const NewsletterPage: React.FC = () => {
     setIsSubscribing(true);
 
     try {
-      await submitNewsletterNetlifyForm({ email, purpose: 'newsletter' });
+      await requestNewsletterListChange('subscribe', email);
       setIsSubscribed(true);
-      showSuccess('Successfully Subscribed!', 'Thank you for joining our privacy education newsletter.');
+      showSuccess('You are on the list', 'We will email you when the next issue is published.');
       setEmail('');
     } catch (error) {
       logger.error('Newsletter subscription error:', error);
@@ -134,7 +134,7 @@ const NewsletterPage: React.FC = () => {
               <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
               <h3 className="text-xl font-bold text-green-800 mb-2">Successfully Subscribed!</h3>
               <p className="text-green-700">
-                Thank you for joining our privacy education community. You'll receive your first newsletter soon!
+                You are on the list. We email a new issue when it is published. Past issues stay on this page.
               </p>
             </div>
           )}
@@ -263,7 +263,7 @@ const NewsletterPage: React.FC = () => {
                 Data Protection
               </h3>
               <p className="text-sm text-gray-600">
-                We never share your email with third parties. Your privacy is protected.
+                Your address is stored with our email service so we can send this newsletter. We do not sell it.
               </p>
             </div>
           </div>

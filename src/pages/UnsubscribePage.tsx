@@ -3,7 +3,7 @@ import { useSearchParams, Link } from 'react-router-dom';
 import { CheckCircle, AlertCircle, ArrowLeft } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 import { useToast } from '../contexts/ToastContext';
-import { newsletterService } from '../lib/database';
+import { requestNewsletterListChange } from '../lib/newsletterClient';
 import { logger } from '../lib/logger';
 
 const UnsubscribePage: React.FC = () => {
@@ -39,14 +39,9 @@ const UnsubscribePage: React.FC = () => {
     setIsUnsubscribing(true);
 
     try {
-      const success = await newsletterService.unsubscribe(email);
-      
-      if (success) {
-        setIsUnsubscribed(true);
-        showSuccess('Successfully Unsubscribed', 'You have been removed from our newsletter mailing list.');
-      } else {
-        showError('Unsubscribe Failed', 'There was an error unsubscribing. Please try again or contact support.');
-      }
+      await requestNewsletterListChange('unsubscribe', email);
+      setIsUnsubscribed(true);
+      showSuccess('Unsubscribed', 'You will no longer receive newsletter emails.');
     } catch (error) {
       logger.error('Newsletter unsubscribe error:', error);
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
@@ -137,7 +132,7 @@ const UnsubscribePage: React.FC = () => {
                   <ul className="text-sm text-gray-600 space-y-1 list-disc list-inside">
                     <li>You will stop receiving our monthly privacy education newsletter</li>
                     <li>You can resubscribe at any time by visiting our newsletter page</li>
-                    <li>Your email address will be removed from our mailing list</li>
+                    <li>That address is marked so we stop emailing it</li>
                     <li>You can still access all our resources and guides on the website</li>
                   </ul>
                 </div>
