@@ -210,19 +210,20 @@ const ColoringSheetsPage: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => openPrintView(sheet)}
-                    className="button button-primary inline-flex flex-1 items-center justify-center gap-2"
+                    className="button button-primary coloring-sheets-page__action-btn"
                   >
-                    <Printer size={16} aria-hidden />
+                    <Printer size={15} aria-hidden />
                     View &amp; print
                   </button>
                   <button
                     type="button"
                     onClick={() => downloadSvg(sheet)}
-                    className="button button-secondary inline-flex items-center justify-center gap-2 px-4"
-                    title="Download SVG"
+                    className="button button-secondary coloring-sheets-page__action-btn coloring-sheets-page__action-btn--icon"
+                    title={`Download SVG for ${sheet.title}`}
+                    aria-label={`Download SVG for ${sheet.title}`}
                   >
-                    <Download size={16} aria-hidden />
-                    <span className="sr-only">Download SVG for {sheet.title}</span>
+                    <Download size={15} aria-hidden />
+                    SVG
                   </button>
                 </div>
               </div>

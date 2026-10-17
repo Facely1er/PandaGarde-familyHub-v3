@@ -6,6 +6,8 @@ export default defineConfig({
   retries: 0,
   use: {
     baseURL: process.env.BASE_URL ?? 'http://127.0.0.1:4173',
+    // Prefer system Chrome when Playwright's headless-shell download is unavailable.
+    ...(process.env.PW_CHANNEL ? { channel: process.env.PW_CHANNEL } : {}),
     trace: 'off',
     screenshot: 'only-on-failure',
   },

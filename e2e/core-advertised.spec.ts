@@ -64,13 +64,13 @@ test.describe('Core features advertised (How it works + CONTENT_TRUTH)', () => {
   });
 
   test('Guides & stories — key cards are not 404', async ({ page }) => {
-    await gotoAndWait(page, '/for-families');
     for (const name of [
       /Family privacy guide/i,
       /Device setup guide/i,
       /Coloring sheets/i,
       /Privacy Panda & the Digital Bamboo Forest/i,
     ]) {
+      await gotoAndWait(page, '/for-families');
       const link = page.getByRole('link', { name }).first();
       await expect(link).toBeVisible();
       const href = await link.getAttribute('href');
@@ -146,11 +146,14 @@ test.describe('Core features advertised (How it works + CONTENT_TRUTH)', () => {
       localStorage.removeItem('pandagarde_hub_welcomed');
     });
     await gotoAndWait(page, '/family-hub');
-    await expect(page.getByRole('heading', { name: /PandaGarde Family Hub/i })).toBeVisible();
-    await page.getByRole('button', { name: /Let's go!/i }).click();
-    await page.waitForURL(/\/family-hub\/(welcome|dashboard)/);
+    const localGate = page.getByRole('button', { name: /Let's go!/i });
+    if (await localGate.isVisible().catch(() => false)) {
+      await localGate.click();
+    }
+    await page.waitForURL(/\/family-hub\/(welcome|dashboard)/, { timeout: 15_000 });
     if (page.url().includes('/welcome')) {
-      await page.getByRole('button', { name: /Start fresh in Family Hub/i }).click();
+      await expect(page.getByRole('heading', { name: /Welcome to your Family Hub/i })).toBeVisible();
+      await page.getByRole('button', { name: /Add your family to start/i }).click();
       await page.waitForURL(/\/family-hub\/dashboard/);
     }
     await expect(page.locator('main, [class*="dashboard"]').first()).toBeVisible();

@@ -12752,8 +12752,24 @@ header.header .nav-actions button.header-icon-btn:not(.header-search-bar) {
 
 .coloring-sheets-page__actions {
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   gap: 0.5rem;
-  margin-top: 0.35rem;
+  margin-top: 0.25rem;
+}
+
+.coloring-sheets-page__actions .coloring-sheets-page__action-btn {
+  margin-top: 0;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.8125rem;
+  line-height: 1.25;
+  gap: 0.35rem;
+  min-height: 2.25rem;
+}
+
+.coloring-sheets-page__actions .coloring-sheets-page__action-btn--icon {
+  flex-shrink: 0;
+  padding-inline: 0.7rem;
 }
 
 .coloring-sheets-page__bulk {
