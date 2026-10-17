@@ -12,11 +12,17 @@ import {
   Fingerprint,
   LayoutDashboard,
   Library,
+  MessageCircle,
+  Search,
+  Settings,
   Sparkles,
+  Trees,
 } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 import { PageSection, ShellLinkCard, type SectionIconTone } from '../components/layout/PageContent';
+import AppStoreBadges from '../components/AppStoreBadges';
 import {
+  resourceFamilyToolsLinks,
   resourceGuideLinks,
   resourcePrintableLinks,
   resourceStoryLinks,
@@ -24,50 +30,35 @@ import {
 } from '../data/resourcesHubLinks';
 import { PREMIUM_PRICING_LABEL } from '../lib/premiumEntitlement';
 
-
-
 const HUB_JUMP_LINKS = [
-
   { href: '#hub-stories', label: 'Stories' },
-
   { href: '#hub-guides', label: 'Guides' },
-
+  { href: '#hub-family-tools', label: 'Family tools' },
   { href: '#hub-printables', label: 'Printables' },
-
+  { href: '#hub-kids', label: 'Kids forest' },
   { href: '#hub-footprint', label: 'Footprint' },
-
   { href: '#hub-missions', label: 'Family Hub' },
-
 ] as const;
 
-
-
 const LINK_ICONS: Record<string, LucideIcon> = {
-
   '/stories/privacy-panda-and-the-digital-bamboo-forest': Sparkles,
-
   '/stories': Library,
   '/stories/cast': Library,
-
   '/guides/family-privacy': BookOpen,
-
   '/family-privacy-plan': FileText,
-
   '/guides/emergency-safety': AlertTriangle,
-
+  '/guides/device-setup': Settings,
+  '/guides/conversation-approaches': MessageCircle,
+  '/guides/app-selection': Search,
+  '/downloads/family-agreement': FileText,
   '/downloads/coloring-sheets': Download,
-
+  '/downloads/safety-posters': Download,
+  '/downloads/certificates': Download,
 };
 
-
-
 function linkIcon(href: string, fallback: LucideIcon): LucideIcon {
-
   return LINK_ICONS[href] ?? fallback;
-
 }
-
-
 
 function HubLinkGrid({
   links,
@@ -86,8 +77,7 @@ function HubLinkGrid({
   getTag?: (link: ResourceHubLink) => string | undefined;
   getCardClass?: (link: ResourceHubLink) => string | undefined;
 }) {
-  const gridClass =
-    columns === 3 ? 'shell-grid shell-grid--3' : 'shell-grid shell-grid--2';
+  const gridClass = columns === 3 ? 'shell-grid shell-grid--3' : 'shell-grid shell-grid--2';
 
   return (
     <div className={`${gridClass} ${gridClassName}`.trim()}>
@@ -104,34 +94,19 @@ function HubLinkGrid({
             icon={<Icon size={20} strokeWidth={2} />}
             className={getCardClass?.(link)}
             cta={
-
               getCta?.(link) ?? (
-
                 <>
-
                   Open
-
                   <ChevronRight size={16} aria-hidden />
-
                 </>
-
               )
-
             }
-
           />
-
         );
-
       })}
-
     </div>
-
   );
-
 }
-
-
 
 const ForFamiliesPage: React.FC = () => {
   const { t } = useTranslation();
@@ -139,62 +114,35 @@ const ForFamiliesPage: React.FC = () => {
   const sectionTone = {
     stories: 'emerald' as SectionIconTone,
     guides: 'sky' as SectionIconTone,
+    tools: 'amber' as SectionIconTone,
   };
 
-
-
   return (
-
     <PageLayout title={t('nav.guidesStories')} subtitle={t('messaging.guidesStoriesLead')} breadcrumbs={true}>
-
       <div className="guides-stories-hub">
-
         <nav className="guides-stories-hub__jump" aria-label="On this page">
-
           <ul className="guides-stories-hub__jump-list">
-
             {HUB_JUMP_LINKS.map((item) => (
-
               <li key={item.href}>
-
                 <a href={item.href} className="guides-stories-hub__jump-link">
-
                   {item.label}
-
                 </a>
-
               </li>
-
             ))}
-
           </ul>
-
         </nav>
 
-
-
         <PageSection
-
           id="hub-stories"
-
           className="guides-stories-hub__section guides-stories-hub__section--stories"
-
           header={{
-
             eyebrow: 'Read together',
-
             title: 'Stories',
-
             lead: 'Read Privacy Panda adventures with your child—at home or school, one chapter at a time.',
-
             icon: <Library size={26} strokeWidth={2} />,
-
             iconTone: sectionTone.stories,
-
           }}
-
         >
-
           <HubLinkGrid
             links={resourceStoryLinks}
             fallbackIcon={BookOpen}
@@ -207,89 +155,96 @@ const ForFamiliesPage: React.FC = () => {
               link.href.includes('digital-bamboo-forest') ? 'shell-link-card--highlight' : undefined
             }
             getCta={(link) =>
-
               link.href === '/stories' ? (
-
                 <>
-
                   Browse
-
                   <ChevronRight size={16} aria-hidden />
-
                 </>
-
               ) : (
-
                 <>
-
                   Read story
-
                   <ChevronRight size={16} aria-hidden />
-
                 </>
-
               )
-
             }
-
           />
-
         </PageSection>
-
-
 
         <PageSection
-
           id="hub-guides"
-
           className="guides-stories-hub__section guides-stories-hub__section--guides"
-
           header={{
-
             eyebrow: 'Open anytime',
-
             title: 'Guides for parents',
-
             lead: 'Conversation starters, a household privacy plan, and steps when something goes wrong online.',
-
             icon: <BookOpen size={26} strokeWidth={2} />,
-
             iconTone: sectionTone.guides,
-
           }}
-
         >
-
           <HubLinkGrid links={resourceGuideLinks} fallbackIcon={BookOpen} columns={3} />
-
         </PageSection>
 
-
+        <PageSection
+          id="hub-family-tools"
+          className="guides-stories-hub__section guides-stories-hub__section--family-tools"
+          header={{
+            eyebrow: 'Household helpers',
+            title: 'Family tools',
+            lead: 'Practical pages for devices, apps, and calm family talks you can use anytime.',
+            icon: <Settings size={26} strokeWidth={2} />,
+            iconTone: sectionTone.tools,
+          }}
+        >
+          <HubLinkGrid links={resourceFamilyToolsLinks} fallbackIcon={Settings} columns={2} />
+        </PageSection>
 
         <PageSection
           id="hub-printables"
-          className="guides-stories-hub__section guides-stories-hub__section--printables guides-stories-hub__section--compact"
+          className="guides-stories-hub__section guides-stories-hub__section--printables"
+          header={{
+            eyebrow: 'Print at home',
+            title: 'Printables',
+            lead: 'Coloring sheets, posters, certificates, and a family agreement—no account required.',
+            icon: <Download size={26} strokeWidth={2} />,
+            iconTone: 'violet',
+          }}
         >
-          {resourcePrintableLinks.map((link) => (
-            <ShellLinkCard
-              key={link.href}
-              to={link.href}
-              tag="Printables"
-              title={link.label}
-              description={link.description}
-              icon={<Download size={20} strokeWidth={2} />}
-              className="shell-link-card--compact-row"
-              cta={
-                <>
-                  Open
-                  <ChevronRight size={16} aria-hidden />
-                </>
-              }
-            />
-          ))}
+          <HubLinkGrid links={resourcePrintableLinks} fallbackIcon={Download} columns={2} />
         </PageSection>
 
-
+        <PageSection id="hub-kids" className="guides-stories-hub__section guides-stories-hub__section--kids">
+          <article className="shell-card guides-stories-hub__cta guides-stories-hub__cta--kids shell-cta-panel">
+            <div className="guides-stories-hub__cta-icon shell-icon shell-icon--lg" aria-hidden="true">
+              <Trees size={24} />
+            </div>
+            <div className="shell-cta-panel__copy">
+              <p className="shell-pill mb-2 self-start">Kids forest</p>
+              <h2 className="shell-card__title m-0 text-lg">Adventures for children</h2>
+              <p className="shell-card__body mt-2 mb-0">
+                Start with a Privacy Panda story on the website anytime. For age-matched missions and
+                progress on this device, open Family Hub—or get the Family Hub app for phones and
+                tablets.
+              </p>
+            </div>
+            <div className="shell-cta-panel__actions guides-stories-hub__cta-actions guides-stories-hub__kids-actions">
+              <Link
+                to="/stories/privacy-panda-and-the-digital-bamboo-forest"
+                className="button button-primary inline-flex shrink-0 items-center gap-2"
+              >
+                Read a story
+                <ArrowRight size={16} aria-hidden />
+              </Link>
+              <Link
+                to="/family-hub"
+                className="button button-secondary inline-flex shrink-0 items-center gap-2"
+              >
+                Open Family Hub
+                <ArrowRight size={16} aria-hidden />
+              </Link>
+              <AppStoreBadges size="sm" align="start" className="w-full sm:w-auto" />
+            </div>
+          </article>
+        </PageSection>
 
         <PageSection
           id="hub-footprint"
@@ -319,62 +274,32 @@ const ForFamiliesPage: React.FC = () => {
           </article>
         </PageSection>
 
-
-
         <PageSection id="hub-missions" className="guides-stories-hub__section guides-stories-hub__section--hub pb-8">
-
           <article className="shell-card guides-stories-hub__cta shell-cta-panel">
-
             <div className="guides-stories-hub__cta-icon shell-icon shell-icon--lg" aria-hidden="true">
-
               <LayoutDashboard size={24} />
-
             </div>
-
             <div className="shell-cta-panel__copy">
-
               <h2 className="shell-card__title m-0 text-lg">Family Hub</h2>
-
               <p className="shell-card__body mt-2 mb-0">
-
                 The only place for age-matched privacy missions and saved progress on this device.
-
               </p>
-
               <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-
-                Missions are free. Optional Premium ({PREMIUM_PRICING_LABEL} unlock in app stores soon — no subscription) personalizes scenarios with your family&apos;s apps.
-
+                Missions are free. Optional Premium ({PREMIUM_PRICING_LABEL} unlock in app stores soon —
+                no subscription) personalizes scenarios with your family&apos;s apps.
               </p>
-
             </div>
-
             <div className="shell-cta-panel__actions">
-
               <Link to="/family-hub" className="button button-primary inline-flex shrink-0 items-center gap-2">
-
                 Open Family Hub
-
                 <ArrowRight size={16} aria-hidden />
-
               </Link>
-
             </div>
-
           </article>
-
         </PageSection>
-
       </div>
-
     </PageLayout>
-
   );
-
 };
 
-
-
 export default ForFamiliesPage;
-
-

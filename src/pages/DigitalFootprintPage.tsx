@@ -146,7 +146,7 @@ const DigitalFootprintPage: React.FC = () => {
               disabled={isExportingPdf}
               aria-busy={isExportingPdf}
               aria-label="Download digital footprint report as PDF"
-              className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold disabled:cursor-not-allowed disabled:opacity-70 ${dfaTheme.btnOutline}`}
+              className={`inline-flex min-h-11 items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-70 ${dfaTheme.btnOutline}`}
             >
               <Download className="h-3.5 w-3.5" aria-hidden />
               {isExportingPdf ? 'Generating…' : 'Download PDF'}
@@ -154,7 +154,7 @@ const DigitalFootprintPage: React.FC = () => {
           )}
           <Link
             to="/service-catalog"
-            className="inline-flex items-center gap-1.5 rounded-lg border border-green-300 px-3 py-1.5 text-xs font-semibold text-green-700 hover:bg-green-50 dark:border-green-700 dark:text-green-300 dark:hover:bg-green-900/30"
+            className="inline-flex min-h-11 items-center gap-1.5 rounded-lg border border-green-300 px-3 py-2 text-sm font-semibold text-green-700 hover:bg-green-50 dark:border-green-700 dark:text-green-300 dark:hover:bg-green-900/30"
           >
             Update app list
           </Link>
@@ -163,7 +163,7 @@ const DigitalFootprintPage: React.FC = () => {
             onClick={() => { void handleStartOver(); }}
             disabled={isResetting}
             aria-busy={isResetting}
-            className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold text-gray-500 hover:text-gray-700 disabled:cursor-not-allowed disabled:opacity-70 dark:text-gray-400 dark:hover:text-gray-200"
+            className="inline-flex min-h-11 items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-semibold text-gray-500 hover:text-gray-700 disabled:cursor-not-allowed disabled:opacity-70 dark:text-gray-400 dark:hover:text-gray-200"
           >
             <RotateCcw className="h-3.5 w-3.5" aria-hidden />
             {isResetting ? 'Clearing…' : 'Start over'}
@@ -223,25 +223,25 @@ const DigitalFootprintPage: React.FC = () => {
           <div className="flex flex-wrap gap-2">
             <Link
               to="/service-catalog"
-              className="inline-flex items-center gap-1.5 rounded-lg bg-green-700 px-3 py-2 text-xs font-semibold text-white hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500 sm:text-sm"
+              className="inline-flex min-h-11 items-center gap-1.5 rounded-lg bg-green-700 px-3 py-2 text-sm font-semibold text-white hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500"
             >
               Update app list <ArrowRight size={14} aria-hidden />
             </Link>
             <Link
               to="/family-hub"
-              className="inline-flex items-center gap-1.5 rounded-lg border border-gray-300 px-3 py-2 text-xs font-semibold text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-700 sm:text-sm"
+              className="inline-flex min-h-11 items-center gap-1.5 rounded-lg border border-gray-300 px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-700"
             >
               Family Hub missions
             </Link>
             <Link
               to="/for-families"
-              className="inline-flex items-center gap-1.5 rounded-lg border border-gray-300 px-3 py-2 text-xs font-semibold text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-700 sm:text-sm"
+              className="inline-flex min-h-11 items-center gap-1.5 rounded-lg border border-gray-300 px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-700"
             >
               Parent guides
             </Link>
             <Link
               to={storyHref}
-              className="inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-semibold text-green-700 hover:underline dark:text-green-400 sm:text-sm"
+              className="touch-link rounded-lg px-3 text-sm font-semibold text-green-700 hover:underline dark:text-green-400"
             >
               Privacy Panda stories
             </Link>

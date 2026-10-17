@@ -74,7 +74,10 @@ export const PARENT_CORE_PATH = [
   '/stories',
   '/guides/family-privacy',
   '/guides/device-setup',
+  '/guides/conversation-approaches',
+  '/guides/app-selection',
   '/family-privacy-plan',
+  '/downloads/family-agreement',
   '/scoring-methodology',
   '/faq',
   '/contact',
@@ -82,8 +85,7 @@ export const PARENT_CORE_PATH = [
 
 export const DEPRIORITIZED_FOR_GENERAL_PARENTS = [
   'Safety alerts and privacy assessment (on PandaGarde, but not in main parent nav)',
-  'Privacy tools (link index only — redirects to Guides & stories hub)',
-  'Toolkit (shortcut cards — redirects to Guides & stories hub)',
+  'Legacy /privacy-tools and /parent-toolkit URLs redirect to Guides & stories (Family tools section)',
   'Quick Start, Educator Tools, Classroom Activities',
   'All /community/* (device-local demos)',
   'Privacy Goals, Quick Assessment, Assessment History',

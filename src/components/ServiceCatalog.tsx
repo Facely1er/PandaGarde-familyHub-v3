@@ -309,7 +309,7 @@ const ServiceCatalog: React.FC<ServiceCatalogProps> = ({
         )}
 
         {guidedMode && (
-          <div className="flex flex-wrap gap-2 mb-3" role="group" aria-label="Filter by category">
+          <div className="catalog-category-pills" role="group" aria-label="Filter by category">
             {(['all', 'edtech', 'health', 'ai', 'telecom', 'social-media', 'messaging', 'gaming', 'streaming', 'education', 'creative'] as const).map((cat) => {
               const CategoryIcon = getCategoryIcon(cat);
               return (
@@ -339,88 +339,159 @@ const ServiceCatalog: React.FC<ServiceCatalogProps> = ({
           </div>
         )}
 
-        <div className="filter-group">
-          <Filter size={16} />
-          {!guidedMode && (
-          <select
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value as ServiceCategory | 'all')}
-            className="filter-select"
-            aria-label="Filter by category"
-          >
-            <option value="all">All Categories</option>
-            <option value="edtech">School Tools (EdTech)</option>
-            <option value="ai">AI Apps</option>
-            <option value="telecom">Mobile Carriers</option>
-            <option value="health">Health & medical</option>
-            <option value="social-media">Social Media</option>
-            <option value="messaging">Messaging</option>
-            <option value="gaming">Gaming</option>
-            <option value="streaming">Streaming</option>
-            <option value="education">Education</option>
-            <option value="creative">Creative</option>
-          </select>
-          )}
+        {guidedMode ? (
+          <details className="catalog-advanced-filters">
+            <summary>
+              <Filter size={16} className="mr-2 shrink-0" aria-hidden />
+              More filters (risk, sort, concerns)
+            </summary>
+            <div className="filter-group">
+              <select
+                value={selectedRisk}
+                onChange={(e) => setSelectedRisk(e.target.value)}
+                className="filter-select"
+                aria-label="Filter by risk level"
+              >
+                <option value="all">All Risk Levels</option>
+                <option value="low">Low Risk</option>
+                <option value="medium">Medium Risk</option>
+                <option value="high">High Risk</option>
+                <option value="very-high">Very High Risk</option>
+              </select>
 
-          <select
-            value={selectedRisk}
-            onChange={(e) => setSelectedRisk(e.target.value)}
-            className="filter-select"
-            aria-label="Filter by risk level"
-          >
-            <option value="all">All Risk Levels</option>
-            <option value="low">Low Risk</option>
-            <option value="medium">Medium Risk</option>
-            <option value="high">High Risk</option>
-            <option value="very-high">Very High Risk</option>
-          </select>
+              <select
+                value={selectedExposureLevel}
+                onChange={(e) => setSelectedExposureLevel(e.target.value)}
+                className="filter-select"
+                aria-label="Filter by exposure level"
+              >
+                <option value="all">All Exposure Levels</option>
+                <option value="very-high">Very High (70-100)</option>
+                <option value="high">High (50-69)</option>
+                <option value="medium">Medium (30-49)</option>
+                <option value="low">Low (0-29)</option>
+              </select>
 
-          <select
-            value={selectedExposureLevel}
-            onChange={(e) => setSelectedExposureLevel(e.target.value)}
-            className="filter-select"
-            aria-label="Filter by exposure level"
-          >
-            <option value="all">All Exposure Levels</option>
-            <option value="very-high">Very High (70-100)</option>
-            <option value="high">High (50-69)</option>
-            <option value="medium">Medium (30-49)</option>
-            <option value="low">Low (0-29)</option>
-          </select>
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value as 'name' | 'exposure' | 'age')}
+                className="filter-select"
+                aria-label="Sort by"
+              >
+                <option value="name">Sort by Name</option>
+                <option value="exposure">Sort by Exposure Index</option>
+                <option value="age">Sort by Age</option>
+              </select>
 
-          <select
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value as 'name' | 'exposure' | 'age')}
-            className="filter-select"
-            aria-label="Sort by"
-          >
-            <option value="name">Sort by Name</option>
-            <option value="exposure">Sort by Exposure Index</option>
-            <option value="age">Sort by Age</option>
-          </select>
+              <button
+                type="button"
+                onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
+                className="inline-flex items-center justify-center rounded bg-gray-200 px-3 py-1.5 text-sm font-medium transition-colors hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600"
+                title={`Sort ${sortOrder === 'asc' ? 'Descending' : 'Ascending'}`}
+                aria-label={`Sort ${sortOrder === 'asc' ? 'descending' : 'ascending'}`}
+              >
+                {sortOrder === 'asc' ? '↑' : '↓'}
+              </button>
 
-          <button
-            onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
-            className="px-3 py-1.5 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 rounded text-sm font-medium transition-colors"
-            title={`Sort ${sortOrder === 'asc' ? 'Descending' : 'Ascending'}`}
-          >
-            {sortOrder === 'asc' ? '↑' : '↓'}
-          </button>
+              <button
+                type="button"
+                onClick={() => setFilterLawEnforcement(!filterLawEnforcement)}
+                className={`inline-flex items-center justify-center gap-1.5 rounded border px-3 py-1.5 text-sm font-medium transition-colors ${
+                  filterLawEnforcement
+                    ? 'border-red-400 bg-red-100 text-red-700 dark:border-red-600 dark:bg-red-900/40 dark:text-red-300'
+                    : 'border-transparent bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
+                }`}
+                title="Show only services with law enforcement data-sharing concerns"
+              >
+                <Scale size={14} aria-hidden />
+                LE Concerns
+              </button>
+            </div>
+          </details>
+        ) : (
+          <div className="filter-group">
+            <Filter size={16} aria-hidden />
+            <select
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value as ServiceCategory | 'all')}
+              className="filter-select"
+              aria-label="Filter by category"
+            >
+              <option value="all">All Categories</option>
+              <option value="edtech">School Tools (EdTech)</option>
+              <option value="ai">AI Apps</option>
+              <option value="telecom">Mobile Carriers</option>
+              <option value="health">Health & medical</option>
+              <option value="social-media">Social Media</option>
+              <option value="messaging">Messaging</option>
+              <option value="gaming">Gaming</option>
+              <option value="streaming">Streaming</option>
+              <option value="education">Education</option>
+              <option value="creative">Creative</option>
+            </select>
 
-          {/* Law Enforcement filter toggle */}
-          <button
-            onClick={() => setFilterLawEnforcement(!filterLawEnforcement)}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded text-sm font-medium transition-colors border ${
-              filterLawEnforcement
-                ? 'bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300 border-red-400 dark:border-red-600'
-                : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-transparent hover:bg-gray-300 dark:hover:bg-gray-600'
-            }`}
-            title="Show only services with law enforcement data-sharing concerns"
-          >
-            <Scale size={14} />
-            LE Concerns
-          </button>
-        </div>
+            <select
+              value={selectedRisk}
+              onChange={(e) => setSelectedRisk(e.target.value)}
+              className="filter-select"
+              aria-label="Filter by risk level"
+            >
+              <option value="all">All Risk Levels</option>
+              <option value="low">Low Risk</option>
+              <option value="medium">Medium Risk</option>
+              <option value="high">High Risk</option>
+              <option value="very-high">Very High Risk</option>
+            </select>
+
+            <select
+              value={selectedExposureLevel}
+              onChange={(e) => setSelectedExposureLevel(e.target.value)}
+              className="filter-select"
+              aria-label="Filter by exposure level"
+            >
+              <option value="all">All Exposure Levels</option>
+              <option value="very-high">Very High (70-100)</option>
+              <option value="high">High (50-69)</option>
+              <option value="medium">Medium (30-49)</option>
+              <option value="low">Low (0-29)</option>
+            </select>
+
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value as 'name' | 'exposure' | 'age')}
+              className="filter-select"
+              aria-label="Sort by"
+            >
+              <option value="name">Sort by Name</option>
+              <option value="exposure">Sort by Exposure Index</option>
+              <option value="age">Sort by Age</option>
+            </select>
+
+            <button
+              type="button"
+              onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
+              className="inline-flex items-center justify-center rounded bg-gray-200 px-3 py-1.5 text-sm font-medium transition-colors hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600"
+              title={`Sort ${sortOrder === 'asc' ? 'Descending' : 'Ascending'}`}
+              aria-label={`Sort ${sortOrder === 'asc' ? 'descending' : 'ascending'}`}
+            >
+              {sortOrder === 'asc' ? '↑' : '↓'}
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setFilterLawEnforcement(!filterLawEnforcement)}
+              className={`inline-flex items-center justify-center gap-1.5 rounded border px-3 py-1.5 text-sm font-medium transition-colors ${
+                filterLawEnforcement
+                  ? 'border-red-400 bg-red-100 text-red-700 dark:border-red-600 dark:bg-red-900/40 dark:text-red-300'
+                  : 'border-transparent bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
+              }`}
+              title="Show only services with law enforcement data-sharing concerns"
+            >
+              <Scale size={14} aria-hidden />
+              LE Concerns
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Service Grid */}

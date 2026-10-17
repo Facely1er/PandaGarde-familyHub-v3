@@ -11,17 +11,22 @@ async function gotoAndWait(page: Page, path: string) {
 test.describe('Core features advertised (How it works + CONTENT_TRUTH)', () => {
   test('Home — hero and primary journey CTA', async ({ page }) => {
     await gotoAndWait(page, '/');
-    await expect(page.getByRole('heading', { level: 1 })).toContainText(/digital life/i);
-    const primary = page.getByRole('link', { name: /Continue footprint review|Explore stories|Footprint review/i });
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(/kids are online|calm way to talk/i);
+    const primary = page.getByRole('link', {
+      name: /Continue footprint review|Continue adding apps|Explore stories|Footprint Review/i,
+    });
     await expect(primary.first()).toBeVisible();
-    await expect(page.locator('.premium-hero').getByRole('link', { name: /How it works/i })).toBeVisible();
+    await expect(
+      page.locator('.homepage-hero').getByRole('link', { name: /See how it works|How it works/i }),
+    ).toBeVisible();
   });
 
   test('How it works — three-step flow', async ({ page }) => {
     await gotoAndWait(page, '/how-it-works');
-    await expect(page.getByRole('heading', { name: /Discover your privacy exposure/i })).toBeVisible();
-    await expect(page.getByRole('heading', { name: /Learn what matters/i })).toBeVisible();
-    await expect(page.getByRole('heading', { name: /Take action in Family Hub/i })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: /How PandaGarde Works/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /Stories & guides/i }).first()).toBeVisible();
+    await expect(page.getByRole('heading', { name: /Footprint from (your )?catalog/i }).first()).toBeVisible();
+    await expect(page.getByRole('heading', { name: /Family Hub/i }).first()).toBeVisible();
     await expect(page.getByText(/Does PandaGarde monitor what my child does online/i)).toBeVisible();
   });
 
@@ -60,7 +65,12 @@ test.describe('Core features advertised (How it works + CONTENT_TRUTH)', () => {
 
   test('Guides & stories — key cards are not 404', async ({ page }) => {
     await gotoAndWait(page, '/for-families');
-    for (const name of [/Family privacy guide/i, /Printables/i, /Privacy Panda/i]) {
+    for (const name of [
+      /Family privacy guide/i,
+      /Device setup guide/i,
+      /Coloring sheets/i,
+      /Privacy Panda & the Digital Bamboo Forest/i,
+    ]) {
       const link = page.getByRole('link', { name }).first();
       await expect(link).toBeVisible();
       const href = await link.getAttribute('href');
@@ -113,10 +123,12 @@ test.describe('Core features advertised (How it works + CONTENT_TRUTH)', () => {
       page.getByRole('heading', { name: /Launch-grade scoring|Executive summary/i }).first()
     ).toBeVisible({ timeout: 15_000 });
     await expect(page.getByText(/Services analyzed/i)).toBeVisible();
-    const toStory = page.getByRole('link', { name: /Read Privacy Panda story/i }).first();
+    const toStory = page
+      .getByRole('link', { name: /Privacy Panda stories|Read a story|Read Privacy Panda/i })
+      .first();
     await expect(toStory).toBeVisible();
     await toStory.click();
-    await page.waitForURL(/\/stories\//);
+    await page.waitForURL(/\/(stories|family-hub)/);
     await expect(page.locator('main, #main-content').first()).toBeVisible();
   });
 

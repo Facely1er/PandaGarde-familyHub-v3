@@ -6,16 +6,17 @@ import baseConfig from './vite.config';
 
 const rootDir = path.dirname(fileURLToPath(import.meta.url));
 
-/** Website-only public assets — not used in the standalone Family Hub app (saves ~8 MB in AAB). */
+/**
+ * Website-only public assets — not used in the standalone Family Hub app (saves ~8 MB in AAB).
+ * Keep offline.html, _redirects, and _headers: hub.pandagarde.com (Netlify) and deploy:check need them.
+ * Capacitor ignores those files; sw.js is still stripped below.
+ */
 const MOBILE_PRUNE_PATHS = [
   'images/story',
   'images/coloring',
   'downloads',
-  'offline.html',
   'favicon.ico',
   'manifest.json',
-  '_redirects',
-  '_headers',
 ];
 
 function rmPath(target: string) {
@@ -81,11 +82,56 @@ const familyhubIndexHtmlPlugin = () => ({
   },
 });
 
+/**
+ * Dev/preview: serve familyhub.html at `/` and for hub SPA routes.
+ * Without this, Vite still serves the website index.html — and opening
+ * `/familyhub.html` leaves React Router on that pathname (infinite Navigate).
+ */
+const familyhubDevSpaPlugin = () => ({
+  name: 'familyhub-dev-spa',
+  configureServer(server: { middlewares: { use: (fn: (req: { url?: string }, _res: unknown, next: () => void) => void) => void } }) {
+    server.middlewares.use((req, _res, next) => {
+      const raw = req.url ?? '';
+      const pathname = raw.split('?')[0] ?? '';
+      const qs = raw.includes('?') ? raw.slice(raw.indexOf('?')) : '';
+
+      const isViteInternal =
+        pathname.startsWith('/@') ||
+        pathname.startsWith('/node_modules') ||
+        pathname.startsWith('/src/') ||
+        pathname.startsWith('/__');
+      const isStaticAsset =
+        /\.\w+$/.test(pathname) &&
+        pathname !== '/index.html' &&
+        pathname !== '/familyhub.html';
+
+      if (isViteInternal || isStaticAsset) {
+        next();
+        return;
+      }
+
+      req.url = `/familyhub.html${qs}`;
+      next();
+    });
+  },
+  configurePreviewServer(server: { middlewares: { use: (fn: (req: { url?: string }, _res: unknown, next: () => void) => void) => void } }) {
+    server.middlewares.use((req, _res, next) => {
+      const raw = req.url ?? '';
+      const pathname = raw.split('?')[0] ?? '';
+      const qs = raw.includes('?') ? raw.slice(raw.indexOf('?')) : '';
+      if (pathname === '/' || pathname === '/index.html' || !/\.\w+$/.test(pathname)) {
+        req.url = `/familyhub.html${qs}`;
+      }
+      next();
+    });
+  },
+});
+
 /** Hub-only production bundle → dist-familyhub/ (Capacitor webDir) */
 export default mergeConfig(
   baseConfig,
   defineConfig({
-    plugins: [captureBootHtmlPlugin(), familyhubIndexHtmlPlugin()],
+    plugins: [familyhubDevSpaPlugin(), captureBootHtmlPlugin(), familyhubIndexHtmlPlugin()],
     define: {
       'import.meta.env.VITE_HUB_STANDALONE': JSON.stringify('true'),
       'import.meta.env.VITE_STORE_SCREENSHOTS': JSON.stringify(process.env.VITE_STORE_SCREENSHOTS ?? 'false'),
@@ -106,7 +152,7 @@ export default mergeConfig(
     },
     server: {
       port: 5174,
-      open: '/familyhub.html',
+      open: '/',
     },
   })
 );

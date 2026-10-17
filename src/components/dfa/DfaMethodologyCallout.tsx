@@ -12,7 +12,7 @@ const DfaMethodologyCallout: React.FC = () => (
         list, not device monitoring.{' '}
         <Link
           to="/scoring-methodology#dfa-methodology"
-          className="font-semibold text-emerald-800 underline hover:text-emerald-900 dark:text-emerald-300 dark:hover:text-emerald-200"
+          className="touch-link font-semibold text-emerald-800 underline hover:text-emerald-900 dark:text-emerald-300 dark:hover:text-emerald-200"
         >
           Read the full footprint review methodology
         </Link>

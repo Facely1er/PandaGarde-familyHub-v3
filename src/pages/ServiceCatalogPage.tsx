@@ -19,7 +19,7 @@ const TELECOM_SERVICE_IDS = ['verizon', 'att', 'tmobile', 'cricket-wireless', 'b
 const HIGH_LE_CONCERN_IDS = ['att', 'verizon', 'tmobile', 'tiktok', 'google-classroom', 'chatgpt', 'discord', 'snapchat', 'instagram', 'youtube', 'microsoft-teams-edu'] as const;
 
 const headerActionLinkClass =
-  'inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-lg bg-green-700 px-4 py-2 text-white transition-colors hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500';
+  'inline-flex min-h-11 shrink-0 items-center gap-2 whitespace-nowrap rounded-lg bg-green-700 px-4 py-2.5 text-white transition-colors hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500';
 
 const ServiceCatalogPage: React.FC = () => {
   const { getFamilyServices, addServiceToFamily, removeServiceFromFamily } = useFamily();
@@ -80,7 +80,7 @@ const ServiceCatalogPage: React.FC = () => {
             <Info className="mt-0.5 h-4 w-4 shrink-0 text-green-700 dark:text-green-400" aria-hidden />
             <span>
               <strong>Just tap the apps your kids use.</strong> Most families are done in under 3 minutes. Scores are educational guides—not live monitoring, and nothing is uploaded.{' '}
-              <Link to="/scoring-methodology" className="font-semibold text-green-700 hover:underline dark:text-green-400">
+              <Link to="/scoring-methodology" className="touch-link font-semibold text-green-700 hover:underline dark:text-green-400">
                 How scoring works
               </Link>
             </span>
@@ -97,25 +97,31 @@ const ServiceCatalogPage: React.FC = () => {
         </div>
 
         {servicesCount > 0 && (
-          <div className={`rounded-xl border-2 p-4 transition-all ${isReadyForAnalysis} ? 'border-green-300 bg-gradient-to-r from-green-50 to-emerald-50 dark:border-green-700 dark:from-green-900/20 dark:to-emerald-900/20' : 'border-amber-300 bg-gradient-to-r from-amber-50 to-orange-50 dark:border-amber-700 dark:from-amber-900/20 dark:to-orange-900/20'}`}>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <div className={`flex h-12 w-12 items-center justify-center rounded-full ${isReadyForAnalysis ? 'bg-green-600' : 'bg-amber-500'}`}>
+          <div
+            className={`rounded-xl border-2 p-4 transition-all ${
+              isReadyForAnalysis
+                ? 'border-green-300 bg-gradient-to-r from-green-50 to-emerald-50 dark:border-green-700 dark:from-green-900/20 dark:to-emerald-900/20'
+                : 'border-amber-300 bg-gradient-to-r from-amber-50 to-orange-50 dark:border-amber-700 dark:from-amber-900/20 dark:to-orange-900/20'
+            }`}
+          >
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex min-w-0 items-start gap-3 sm:items-center sm:gap-4">
+                <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full ${isReadyForAnalysis ? 'bg-green-600' : 'bg-amber-500'}`}>
                   {isReadyForAnalysis ? <CheckCircle className="h-6 w-6 text-white" /> : <Target className="h-6 w-6 text-white" />}
                 </div>
-                <div>
-                  <div className="flex items-center gap-2">
+                <div className="min-w-0">
+                  <div className="flex flex-wrap items-center gap-2">
                     <span className={`text-lg font-bold ${isReadyForAnalysis ? 'text-green-900 dark:text-green-100' : 'text-amber-900 dark:text-amber-100'}`}>
                       {servicesCount} app{servicesCount !== 1 ? 's' : ''} added
                     </span>
                     {isReadyForAnalysis && (
-                      <span className="flex items-center gap-1 rounded-full bg-green-100 px-2 py-0.5 text-xs font-bold text-green-700 dark:bg-green-800 dark:text-green-200">
-                        <Sparkles size={12} /> Ready for footprint review
+                      <span className="inline-flex items-center gap-1 rounded-full bg-green-100 px-2 py-0.5 text-xs font-bold text-green-700 dark:bg-green-800 dark:text-green-200">
+                        <Sparkles size={12} aria-hidden /> Ready for footprint review
                       </span>
                     )}
                   </div>
-                  <div className="mt-1 flex items-center gap-3">
-                    <ProgressBar value={progressPercent} size="sm" variant={isReadyForAnalysis ? 'low' : 'primary'} aria-label="Services added progress" className="h-2 w-32" />
+                  <div className="mt-1 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
+                    <ProgressBar value={progressPercent} size="sm" variant={isReadyForAnalysis ? 'low' : 'primary'} aria-label="Services added progress" className="h-2 w-full max-w-[8rem]" />
                     <span className={`text-sm ${isReadyForAnalysis ? 'text-green-700 dark:text-green-300' : 'text-amber-700 dark:text-amber-300'}`}>
                       {isReadyForAnalysis ? 'Ready for footprint review.' : servicesCount === 1 ? 'Great start — add 2 more for footprint scores.' : servicesCount === 2 ? 'Almost there — add 1 more for footprint scores.' : 'Add 3 services to run footprint review.'}
                     </span>
@@ -123,10 +129,13 @@ const ServiceCatalogPage: React.FC = () => {
                 </div>
               </div>
               {isReadyForAnalysis && (
-                <Link to="/digital-footprint" className="flex items-center gap-2 rounded-lg bg-green-700 px-5 py-2.5 font-semibold text-white transition-colors hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500">
-                  <BarChart3 className="h-5 w-5" />
+                <Link
+                  to="/digital-footprint"
+                  className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg bg-green-700 px-5 py-2.5 font-semibold text-white transition-colors hover:bg-green-800 sm:w-auto dark:bg-green-600 dark:hover:bg-green-500"
+                >
+                  <BarChart3 className="h-5 w-5" aria-hidden />
                   <span>See footprint</span>
-                  <ArrowRight className="h-4 w-4" />
+                  <ArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
               )}
             </div>
@@ -136,9 +145,14 @@ const ServiceCatalogPage: React.FC = () => {
         <div>
           <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">
             <span className="font-medium text-gray-700 dark:text-gray-300">Footprint review:</span>{' '}
-            <span className="font-medium text-green-700 dark:text-green-400">Step 1 — add your family's apps</span>
+            <span className="font-medium text-green-700 dark:text-green-400">Step 1 — add your family&apos;s apps</span>
             {' → '}
-            <Link to="/digital-footprint" className="font-medium text-green-700 hover:text-green-800 hover:underline dark:text-green-400 dark:hover:text-green-300">Step 2 — see your footprint</Link>
+            <Link
+              to="/digital-footprint"
+              className="touch-link font-medium text-green-700 hover:text-green-800 hover:underline dark:text-green-400 dark:hover:text-green-300"
+            >
+              Step 2 — see your footprint
+            </Link>
           </p>
           <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
@@ -212,7 +226,12 @@ const ServiceCatalogPage: React.FC = () => {
                         <div className="text-sm font-semibold text-gray-900 dark:text-white truncate">{service.name}</div>
                         <div className="text-xs text-gray-500 dark:text-gray-400">{service.category}</div>
                       </div>
-                      <button onClick={() => handleSuggestedAddRemove(service.id)} disabled={isAdding} className={`shrink-0 rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${isAdded ? 'bg-green-100 text-green-700 hover:bg-green-200 dark:bg-green-800 dark:text-green-200' : 'bg-green-700 text-white hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500'} disabled:cursor-not-allowed disabled:opacity-60`}>
+                      <button
+                        type="button"
+                        onClick={() => handleSuggestedAddRemove(service.id)}
+                        disabled={isAdding}
+                        className={`min-h-11 shrink-0 rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${isAdded ? 'bg-green-100 text-green-700 hover:bg-green-200 dark:bg-green-800 dark:text-green-200' : 'bg-green-700 text-white hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500'} disabled:cursor-not-allowed disabled:opacity-60`}
+                      >
                         {isAdding ? 'Updating…' : isAdded ? 'Remove' : 'Add'}
                       </button>
                     </div>
@@ -234,8 +253,11 @@ const ServiceCatalogPage: React.FC = () => {
             <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">Continue when ready</h3>
             <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">Once you reach at least three services, head straight to the footprint review. Your list is saved locally on this device.</p>
             {isReadyForAnalysis ? (
-              <Link to="/digital-footprint" className="mt-4 inline-flex items-center gap-2 font-semibold text-green-700 hover:text-green-800 dark:text-green-400 dark:hover:text-green-300">
-                Go to Footprint Review <ArrowRight size={16} />
+              <Link
+                to="/digital-footprint"
+                className="touch-link mt-4 font-semibold text-green-700 hover:text-green-800 dark:text-green-400 dark:hover:text-green-300"
+              >
+                Go to Footprint Review <ArrowRight size={16} className="ml-1 inline" aria-hidden />
               </Link>
             ) : (
               <p className="mt-4 text-sm font-medium text-gray-600 dark:text-gray-300">

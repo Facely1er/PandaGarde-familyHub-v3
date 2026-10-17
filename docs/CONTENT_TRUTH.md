@@ -73,7 +73,7 @@
 
 | Surface | Interactive missions / games | Progress |
 |---------|------------------------------|----------|
-| **Website** | **No** public `/activities` catalog (legacy URLs redirect to Hub). **Guides & stories** hub (`/for-families`) lists printables only—no duplicate mission catalog. | Not for missions |
+| **Website** | **No** public `/activities` catalog (legacy URLs redirect to Hub). **Guides & stories** hub (`/for-families`) lists stories, parent guides, **Family tools** (device setup, conversations, app selection, family agreement), printables, Kids forest CTAs, and optional footprint/Hub links—no duplicate mission catalog. Do **not** brand this as a SocialCaution-style “Toolkit”. | Not for missions |
 | **Family Hub** | **Yes** — `ageBasedActivities` missions; optional `ActivityManager` games **inside** a mission only | Per member, device-local |
 
 Do **not** describe website “Learning activities” and Hub “missions” as the same catalog. Approved website CTAs: **Privacy missions** → `/family-hub/activities`. Legacy `/activities` and `/activities/:slug` redirect to Hub (slug mapped when a mission shares the same game id).

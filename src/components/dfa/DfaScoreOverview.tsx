@@ -38,7 +38,7 @@ const DfaScoreOverview: React.FC<Props> = ({ analysis }) => {
           <h2 className="mt-3 text-2xl font-bold text-gray-900">Launch-grade scoring, not just a footprint list</h2>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-600 dark:text-gray-700">
             Use the Basic score for a fast household reading. Switch to Advanced to include data-sharing networks, broker reach, and AI-specific sensitivity.{' '}
-            <Link to="/scoring-methodology#dfa-methodology" className="font-semibold text-green-700 hover:underline dark:text-green-400">
+            <Link to="/scoring-methodology#dfa-methodology" className="touch-link font-semibold text-green-700 hover:underline dark:text-green-400">
               Read the footprint review methodology
             </Link>
           </p>
@@ -51,7 +51,7 @@ const DfaScoreOverview: React.FC<Props> = ({ analysis }) => {
                 key={option}
                 type="button"
                 onClick={() => handleTierChange(option)}
-                className={`rounded-lg px-4 py-2 text-sm font-semibold transition ${tier === option ? 'bg-green-700 text-white dark:bg-green-600' : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'}`}
+                className={`min-h-11 rounded-lg px-4 py-2 text-sm font-semibold transition ${tier === option ? 'bg-green-700 text-white dark:bg-green-600' : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'}`}
               >
                 {option === 'basic' ? 'Basic scoring' : 'Advanced scoring'}
               </button>

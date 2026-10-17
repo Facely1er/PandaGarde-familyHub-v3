@@ -99,7 +99,7 @@ const DfaJourneyStepper: React.FC<Props> = ({
             <Link
               to={phase.path}
               aria-current={isCurrent ? 'step' : undefined}
-              className={`inline-flex max-w-full items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors ${
+              className={`inline-flex min-h-11 max-w-full items-center gap-2 rounded-full border px-3 py-2 text-xs font-semibold transition-colors sm:text-sm ${
                 isCurrent
                   ? 'border-green-600 bg-green-700 text-white dark:border-green-500 dark:bg-green-600'
                   : isComplete
@@ -146,7 +146,7 @@ const DfaJourneyStepper: React.FC<Props> = ({
           {!hideStripCta ? (
             <Link
               to={activePath}
-              className="inline-flex shrink-0 items-center gap-1.5 text-xs font-semibold text-green-700 hover:text-green-800 dark:text-green-300 dark:hover:text-green-200 sm:text-sm"
+              className="touch-link shrink-0 gap-1.5 text-sm font-semibold text-green-700 hover:text-green-800 dark:text-green-300 dark:hover:text-green-200"
             >
               {activeLabel} <ArrowRight size={14} aria-hidden />
             </Link>
@@ -156,7 +156,7 @@ const DfaJourneyStepper: React.FC<Props> = ({
         {optionalPhases.length > 0 && (
           <p className="mt-2 text-xs text-gray-500 dark:text-gray-300">
             Optional:{' '}
-            <Link to={optionalPhases[0].path} className="font-medium text-green-700 hover:underline dark:text-green-400">
+            <Link to={optionalPhases[0].path} className="touch-link font-medium text-green-700 hover:underline dark:text-green-400">
               {optionalPhases[0].title}
             </Link>
             {' — '}privacy missions for kids, available any time.

@@ -767,11 +767,11 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
           <div className="full-story-text">
             <div className="full-story-header">
               <h2 className="full-story-title">Privacy Panda and the Digital Bamboo Forest</h2>
-              <p className="full-story-intro" style={{ color: theme === 'dark' ? 'var(--gray-600)' : 'var(--gray-600)' }}>
+              <p className="full-story-intro" style={{ color: theme === 'dark' ? 'var(--fg-muted)' : 'var(--gray-600)' }}>
                 Join Po the Panda on an adventure through the Digital Bamboo Forest as he learns about privacy, sharing, and staying safe online.
               </p>
             </div>
-            <div className="full-story-body" style={{ color: theme === 'dark' ? 'var(--gray-800)' : 'var(--gray-800)' }}>
+            <div className="full-story-body" style={{ color: theme === 'dark' ? 'var(--fg-default)' : 'var(--gray-800)' }}>
               {scenes.map((scene, index) => (
                 <div key={scene.id} className="full-story-scene">
                   {index > 0 && <div className="scene-divider"></div>}
@@ -880,7 +880,7 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
           max-width: 900px;
           margin: 0 auto;
           background: ${theme === 'dark' 
-            ? 'linear-gradient(145deg, var(--gray-100) 0%, var(--gray-200) 55%, var(--gray-300) 100%)' 
+            ? 'linear-gradient(145deg, var(--surface-raised) 0%, var(--surface-sunken) 55%, var(--gray-900) 100%)' 
             : 'white'};
           border-radius: 20px;
           box-shadow: ${theme === 'dark' 
@@ -1103,7 +1103,7 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
 
         .setting-group label {
           font-weight: 500;
-          color: ${theme === 'dark' ? 'var(--gray-700)' : 'var(--gray-700)'};
+          color: ${theme === 'dark' ? 'var(--fg-default)' : 'var(--gray-700)'};
         }
 
         .setting-group input[type="range"] {
@@ -1119,7 +1119,7 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
           background: ${theme === 'dark' 
             ? 'rgba(22, 27, 34, 0.8)' 
             : 'white'};
-          color: ${theme === 'dark' ? 'var(--gray-800)' : 'var(--gray-800)'};
+          color: ${theme === 'dark' ? 'var(--fg-default)' : 'var(--gray-800)'};
           font-size: 0.9rem;
           transition: all 0.2s ease;
         }
@@ -1349,6 +1349,7 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
           border-radius: 14px;
           text-align: left;
           animation: fadeInUp 0.8s ease-out;
+          color: ${theme === 'dark' ? 'var(--fg-default)' : 'var(--gray-800)'};
           background: ${theme === 'dark'
             ? 'linear-gradient(145deg, rgba(13, 31, 26, 0.65) 0%, rgba(20, 43, 36, 0.75) 100%)'
             : 'rgba(255, 255, 255, 0.92)'};
@@ -1365,13 +1366,16 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
           font-size: clamp(1.02rem, 2.2vw, 1.125rem);
           line-height: 1.75;
           letter-spacing: 0.01em;
-          color: ${theme === 'dark' ? 'var(--gray-800)' : 'var(--gray-800)'};
+          color: ${theme === 'dark' ? 'var(--fg-default)' : 'var(--gray-800)'};
+          -webkit-text-fill-color: ${theme === 'dark' ? 'var(--fg-default)' : 'var(--gray-800)'};
           text-wrap: pretty;
         }
 
         .story-text__paragraph {
           margin: 0;
           max-width: 65ch;
+          color: inherit;
+          -webkit-text-fill-color: inherit;
         }
 
         .story-text__paragraph + .story-text__paragraph {
@@ -1417,7 +1421,7 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
           border: 2px solid ${theme === 'dark' 
             ? 'rgba(110, 231, 183, 0.3)' 
             : 'var(--primary-light)'};
-          color: ${theme === 'dark' ? 'var(--gray-700)' : 'var(--gray-800)'};
+          color: ${theme === 'dark' ? 'var(--fg-default)' : 'var(--gray-800)'};
           padding: clamp(1rem, 3vw, 1.5rem);
           border-radius: 16px;
           cursor: pointer;
@@ -1457,7 +1461,7 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
           background: ${theme === 'dark' 
             ? 'linear-gradient(135deg, rgba(110, 231, 183, 0.25) 0%, rgba(134, 239, 172, 0.25) 100%)' 
             : 'var(--primary-light)'};
-          color: ${theme === 'dark' ? 'var(--gray-800)' : 'white'};
+          color: ${theme === 'dark' ? 'var(--fg-heading)' : 'white'};
           transform: translateY(-4px) scale(1.02);
           box-shadow: ${theme === 'dark' 
             ? '0 12px 40px rgba(110, 231, 183, 0.5), 0 4px 20px rgba(110, 231, 183, 0.3), inset 0 1px 0 rgba(110, 231, 183, 0.3), 0 0 24px rgba(110, 231, 183, 0.2)' 
@@ -1549,7 +1553,7 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
           border: ${theme === 'dark' 
             ? '1px solid rgba(102, 187, 106, 0.2)' 
             : 'none'};
-          color: ${theme === 'dark' ? 'var(--gray-700)' : 'inherit'};
+          color: ${theme === 'dark' ? 'var(--fg-default)' : 'inherit'};
         }
 
         .spinner {
@@ -1615,7 +1619,7 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
           background: ${theme === 'dark' 
             ? 'linear-gradient(135deg, rgba(22, 27, 34, 0.95) 0%, rgba(28, 33, 40, 0.95) 100%)' 
             : 'rgba(0, 0, 0, 0.85)'};
-          color: ${theme === 'dark' ? 'var(--gray-800)' : 'white'};
+          color: ${theme === 'dark' ? 'var(--fg-default)' : 'white'};
           padding: clamp(0.5rem, 2vw, 0.75rem) clamp(0.75rem, 3vw, 1rem);
           border-radius: 20px;
           display: flex;

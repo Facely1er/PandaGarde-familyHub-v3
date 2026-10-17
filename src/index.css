@@ -3053,7 +3053,7 @@ body {
 
 .resource-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
   gap: 25px;
   margin-top: 30px;
 }
@@ -5185,7 +5185,7 @@ body {
 
 .learn-more-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
   gap: 32px;
   margin-top: 48px;
 }
@@ -5260,7 +5260,7 @@ body {
 .curriculum-grid,
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
   gap: 32px;
   margin-top: 48px;
 }
@@ -5399,7 +5399,7 @@ body {
 
 .resource-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
   gap: 32px;
   margin-top: 32px;
 }
@@ -6424,7 +6424,7 @@ body {
 
 .age-paths-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
   gap: 32px;
   margin-top: 48px;
 }
@@ -10101,9 +10101,33 @@ header.header .nav-actions button.header-icon-btn:not(.header-search-bar) {
   background: linear-gradient(165deg, rgba(14, 165, 233, 0.06) 0%, rgba(255, 255, 255, 0.92) 42%);
 }
 
+.guides-stories-hub__section--family-tools {
+  border-color: rgba(245, 158, 11, 0.18);
+  background: linear-gradient(165deg, rgba(245, 158, 11, 0.07) 0%, rgba(255, 255, 255, 0.92) 42%);
+}
+
 .guides-stories-hub__section--printables {
   border-color: rgba(139, 92, 246, 0.16);
   background: linear-gradient(165deg, rgba(139, 92, 246, 0.06) 0%, rgba(255, 255, 255, 0.92) 42%);
+}
+
+.guides-stories-hub__section--kids {
+  border-color: rgba(34, 197, 94, 0.22);
+  background: linear-gradient(165deg, rgba(34, 197, 94, 0.08) 0%, rgba(255, 255, 255, 0.92) 42%);
+}
+
+.guides-stories-hub__kids-actions {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .guides-stories-hub__kids-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+  }
 }
 
 .guides-stories-hub__section--compact {
@@ -10733,11 +10757,24 @@ header.header .nav-actions button.header-icon-btn:not(.header-search-bar) {
     justify-content: flex-end;
   }
 
+  /* Keep supporting copy readable on tablet — do not ellipsis mid-sentence */
   .shell-cta-panel__copy .shell-card__body {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
   }
+}
+
+/**
+ * Inline text CTAs that must stay tappable on phones (WCAG 2.5.5 / 44px target).
+ * Prefer on “How scoring works”, journey links, mid-copy secondary CTAs.
+ */
+.touch-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-block: 0.5rem;
+  box-sizing: border-box;
 }
 
 [data-theme='dark'] .page-lead,
@@ -10764,8 +10801,16 @@ header.header .nav-actions button.header-icon-btn:not(.header-search-bar) {
   background: linear-gradient(165deg, rgba(14, 165, 233, 0.12) 0%, rgba(30, 41, 59, 0.7) 48%);
 }
 
+[data-theme='dark'] .guides-stories-hub__section--family-tools {
+  background: linear-gradient(165deg, rgba(245, 158, 11, 0.12) 0%, rgba(30, 41, 59, 0.7) 48%);
+}
+
 [data-theme='dark'] .guides-stories-hub__section--printables {
   background: linear-gradient(165deg, rgba(139, 92, 246, 0.12) 0%, rgba(30, 41, 59, 0.7) 48%);
+}
+
+[data-theme='dark'] .guides-stories-hub__section--kids {
+  background: linear-gradient(165deg, rgba(34, 197, 94, 0.12) 0%, rgba(30, 41, 59, 0.7) 48%);
 }
 
 [data-theme='dark'] .guides-stories-hub__section--footprint {
@@ -12134,6 +12179,33 @@ header.header .nav-actions button.header-icon-btn:not(.header-search-bar) {
   box-shadow: var(--shadow-md), 0 0 24px rgba(74, 222, 128, 0.08);
 }
 
+/*
+ * Story player copy sits on dark green panels. Gray scale stays Tailwind-semantic
+ * (800 = near-black), so body text must use foreground tokens — not --gray-800.
+ */
+[data-theme='dark'] .interactive-story-player .story-text-panel,
+[data-theme='dark'] .interactive-story-player .story-text,
+[data-theme='dark'] .interactive-story-player .story-text__paragraph,
+[data-theme='dark'] .interactive-story-player .full-story-body,
+[data-theme='dark'] .interactive-story-player .full-story-intro,
+[data-theme='dark'] .interactive-story-player .choice-btn,
+[data-theme='dark'] .interactive-story-player .setting-group label,
+[data-theme='dark'] .interactive-story-player .setting-group select {
+  color: var(--fg-default) !important;
+  -webkit-text-fill-color: var(--fg-default);
+}
+
+[data-theme='dark'] .interactive-story-player .story-text__paragraph:first-child::first-letter {
+  color: var(--primary-light) !important;
+  -webkit-text-fill-color: var(--primary-light);
+}
+
+[data-theme='dark'] .interactive-story-player .choice-btn:hover:not(:disabled),
+[data-theme='dark'] .interactive-story-player .choice-btn.selected {
+  color: var(--fg-heading) !important;
+  -webkit-text-fill-color: var(--fg-heading);
+}
+
 .page-header {
   position: relative;
   overflow: hidden;
@@ -12237,7 +12309,7 @@ header.header .nav-actions button.header-icon-btn:not(.header-search-bar) {
   display: grid;
   gap: 2rem;
   margin-top: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
 }
 
 .marketing-heading {

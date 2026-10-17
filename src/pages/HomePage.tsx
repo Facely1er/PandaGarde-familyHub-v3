@@ -134,7 +134,7 @@ const HomePage: React.FC = () => {
           </div>
           <p className="mt-3 text-center text-sm text-gray-500 dark:text-gray-400">
             {t('home.notSure')}{' '}
-            <Link to="/how-it-works" className="font-medium text-green-700 hover:underline dark:text-green-400">
+            <Link to="/how-it-works" className="touch-link font-medium text-green-700 hover:underline dark:text-green-400">
               {t('common.seeHowItWorks')}
             </Link>
           </p>
@@ -181,7 +181,7 @@ const HomePage: React.FC = () => {
               </div>
               {(foundationStory || latestStory) && (
                 <p className="homepage-spotlight__see-all">
-                  <Link to="/stories" className="font-medium text-green-700 hover:underline dark:text-green-400">
+                  <Link to="/stories" className="touch-link font-medium text-green-700 hover:underline dark:text-green-400">
                     {t('common.seeAllStories')}
                   </Link>
                 </p>
@@ -204,7 +204,7 @@ const HomePage: React.FC = () => {
               </div>
               <p className="homepage-closing__followup page-section__lead text-center">
                 {t('home.stillQuestions')}{' '}
-                <Link to="/how-it-works#faq" className="font-semibold text-green-700 hover:underline dark:text-green-400">
+                <Link to="/how-it-works#faq" className="touch-link font-semibold text-green-700 hover:underline dark:text-green-400">
                   {t('home.howItWorksFaq')}
                 </Link>
               </p>
