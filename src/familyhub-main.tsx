@@ -14,6 +14,11 @@ async function bootFamilyHub() {
   initStoreScreenshotEarly();
   initAppReviewCaptureEarly();
 
+  // Dev entry is familyhub.html; normalize so React Router paths are `/`, `/dashboard`, …
+  if (/\/familyhub\.html$/i.test(window.location.pathname)) {
+    window.history.replaceState(null, '', `/${window.location.search}${window.location.hash}`);
+  }
+
   const capturePath = prepareStoreScreenshotBootSync();
   if (capturePath) {
     const current = `${window.location.pathname}${window.location.search}`;
