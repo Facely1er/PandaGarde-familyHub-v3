@@ -13,6 +13,13 @@ export type ActivityFocus =
 
 export type FamilyMode = 'Play together' | 'Talk together' | 'Teen-led reflection';
 
+/** Optional parent follow-up links (settings help, guides, crisis) — educate only, not monitoring. */
+export interface ParentResourceLink {
+  label: string;
+  href: string;
+  kind?: 'settings' | 'guide' | 'crisis';
+}
+
 export interface AgeBasedActivity {
   id: string;
   name: string;
@@ -43,6 +50,8 @@ export interface AgeBasedActivity {
   scenarioTemplate?: string;
   /** Premium: DFA catalog category used to pick {app} when parent has not set one. */
   personalizationCategory?: PersonalizationCategory;
+  /** Official help / guide / crisis links shown under “After this mission”. */
+  parentResources?: ParentResourceLink[];
 }
 
 export interface AgeGroup {
@@ -356,6 +365,23 @@ export const ageBasedActivities: AgeGroup[] = [
         scenarioTemplate:
           'A new app called {app} asks for access to your location, contacts, and microphone. Should you allow all of these?',
         personalizationCategory: 'gaming',
+        parentResources: [
+          {
+            label: 'Apple — Change app permissions (iPhone/iPad)',
+            href: 'https://support.apple.com/guide/iphone/control-access-to-information-in-apps-iph251e92810/ios',
+            kind: 'settings',
+          },
+          {
+            label: 'Google — Change app permissions (Android)',
+            href: 'https://support.google.com/android/answer/9431959',
+            kind: 'settings',
+          },
+          {
+            label: 'PandaGarde device setup guide',
+            href: '/guides/device-setup',
+            kind: 'guide',
+          },
+        ],
       },
       {
         id: 'privacy-settings-pro',
@@ -387,6 +413,23 @@ export const ageBasedActivities: AgeGroup[] = [
         scenarioTemplate:
           'Your parent just allowed you to create a {app} account. Walk through making it private and safe, step by step.',
         personalizationCategory: 'social-media',
+        parentResources: [
+          {
+            label: 'Instagram — Privacy and safety tools',
+            href: 'https://help.instagram.com/196883789407160',
+            kind: 'settings',
+          },
+          {
+            label: 'YouTube — Privacy settings',
+            href: 'https://support.google.com/youtube/answer/157177',
+            kind: 'settings',
+          },
+          {
+            label: 'PandaGarde device setup guide',
+            href: '/guides/device-setup',
+            kind: 'guide',
+          },
+        ],
       },
       {
         id: 'screenshot-safety',
@@ -645,6 +688,28 @@ export const ageBasedActivities: AgeGroup[] = [
         scenarioTemplate:
           'You paste a friend\'s personal essay into {app} to get feedback. What are the privacy implications for your friend — and for you?',
         personalizationCategory: 'ai',
+        parentResources: [
+          {
+            label: 'AWARE AI family one-pager (PandaGarde)',
+            href: '/guides/aware-ai',
+            kind: 'guide',
+          },
+          {
+            label: 'OpenAI — Privacy policy & controls overview',
+            href: 'https://openai.com/policies/privacy-policy',
+            kind: 'settings',
+          },
+          {
+            label: '988 Suicide & Crisis Lifeline',
+            href: 'https://988lifeline.org/',
+            kind: 'crisis',
+          },
+          {
+            label: 'Crisis Text Line — text HOME to 741741',
+            href: 'https://www.crisistextline.org/',
+            kind: 'crisis',
+          },
+        ],
       },
     ],
   },

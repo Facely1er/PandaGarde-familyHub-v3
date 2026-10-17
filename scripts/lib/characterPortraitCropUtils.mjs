@@ -39,7 +39,8 @@ export const CASTING_ROW0_ART_TOP_FRAC = [
   119 / 682,
   118 / 682,
   99 / 682,
-  56 / 682,
+  // Billy (R0C5): card chrome starts ~y117 — below sheet bamboo banner
+  122 / 682,
 ];
 
 /** Name plate starts ~y310 on row 0, ~y565 on row 1. */
@@ -65,7 +66,7 @@ export const CASTING_ROLE_CROP = {
   miki: { insetLeft: 0.09, insetRight: 0.03, insetTop: 0.02, focusTop: 0.26, focusLeft: 0.58 },
   mika: { insetLeft: 0.03, insetRight: 0.03, insetTop: 0, focusTop: 0.32, focusLeft: 0.5 },
   tao: { insetLeft: 0.07, insetRight: 0.03, insetTop: 0.02, focusTop: 0.28, focusLeft: 0.5 },
-  billy: { insetLeft: 0.1, insetRight: 0.04, insetTop: 0.05, focusTop: 0.32, focusLeft: 0.52 },
+  billy: { insetLeft: 0.1, insetRight: 0.04, insetTop: 0.04, focusTop: 0.28, focusLeft: 0.52 },
   vex: { insetLeft: 0.06, insetRight: 0.03, insetTop: 0.02, focusTop: 0.3, focusLeft: 0.46 },
   kai: { insetLeft: 0.03, insetRight: 0.03, insetTop: 0, focusTop: 0.36, focusLeft: 0.5 },
   lumi: { insetLeft: 0.03, insetRight: 0.03, insetTop: 0, focusTop: 0.28, focusLeft: 0.5 },

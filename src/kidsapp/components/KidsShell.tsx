@@ -5,7 +5,7 @@ import { getAvatar } from '../kidsContent';
 
 const NAV_ITEMS = [
   { to: '/', label: 'Forest Map', emoji: '🗺️' },
-  { to: '/badges', label: 'My Badges', emoji: '🏅' },
+  { to: '/badges', label: 'My Camp', emoji: '⛺' },
   { to: '/grown-ups', label: 'Grown-Ups', emoji: '🔒' },
 ];
 

@@ -1,37 +1,52 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { StoryCoverArt } from '../../components/stories/StoryCoverArt';
+import type { Story } from '../../data/stories';
 import { useKidsProgress } from '../KidsProgressContext';
-import { getKidsEpisodes, EPISODE_GAME_OVERRIDES, PILLAR_META } from '../kidsContent';
+import {
+  EPISODE_GAME_OVERRIDES,
+  getKidsEpisodesBySeason,
+  isKidsEpisodeUnlocked,
+  KIDS_SEASON_META,
+  KIDS_SEASONS,
+  PILLAR_META,
+  type KidsSeason,
+} from '../kidsContent';
 
-/**
- * The Bamboo Forest journey: Season 1 episodes as stops along a winding path.
- * Episode N+1 unlocks when episode N is complete.
- */
-const WorldMapScreen: React.FC = () => {
-  const { isEpisodeComplete } = useKidsProgress();
-  const episodes = getKidsEpisodes();
-
-  let previousComplete = true;
+function SeasonPath({
+  season,
+  episodes,
+  isEpisodeComplete,
+}: {
+  season: KidsSeason;
+  episodes: Story[];
+  isEpisodeComplete: (slug: string) => boolean;
+}) {
+  const meta = KIDS_SEASON_META[season];
 
   return (
-    <div className="py-2">
-      <h1 className="text-2xl font-extrabold text-emerald-800 dark:text-emerald-300 sm:text-3xl">
-        The Privacy Grove
-      </h1>
-      <p className="mt-1 text-gray-600 dark:text-gray-300">
-        Follow the bamboo path! Finish a story and its game to unlock the next stop.
-      </p>
+    <section className={season === 2 ? 'mt-10' : undefined} aria-labelledby={`season-${season}-heading`}>
+      <div className="mb-4">
+        <p className="text-xs font-bold uppercase tracking-wide text-emerald-700 dark:text-emerald-400">
+          Season {season}
+        </p>
+        <h2
+          id={`season-${season}-heading`}
+          className="text-xl font-extrabold text-emerald-800 dark:text-emerald-300 sm:text-2xl"
+        >
+          {meta.title}
+        </h2>
+        <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">{meta.subtitle}</p>
+      </div>
 
-      <ol className="relative mt-6 space-y-4">
+      <ol className="relative space-y-4">
         <div
           className="absolute bottom-4 left-8 top-4 w-1 rounded bg-emerald-200 dark:bg-emerald-800"
           aria-hidden
         />
         {episodes.map((story) => {
           const complete = isEpisodeComplete(story.slug);
-          const unlocked = previousComplete;
-          previousComplete = complete;
+          const unlocked = isKidsEpisodeUnlocked(story.slug, isEpisodeComplete);
           const pillar = PILLAR_META[story.questPillar];
           const specialGame = EPISODE_GAME_OVERRIDES[story.slug];
 
@@ -60,9 +75,7 @@ const WorldMapScreen: React.FC = () => {
             >
               <StoryCoverArt story={story} variant="inline" />
               <div className="min-w-0 flex-1">
-                <p className="truncate font-bold text-gray-900 dark:text-gray-100">
-                  {story.title}
-                </p>
+                <p className="truncate font-bold text-gray-900 dark:text-gray-100">{story.title}</p>
                 <p className="mt-0.5 line-clamp-2 text-sm text-gray-600 dark:text-gray-300">
                   {story.privacyTopic}
                 </p>
@@ -107,6 +120,34 @@ const WorldMapScreen: React.FC = () => {
           );
         })}
       </ol>
+    </section>
+  );
+}
+
+/**
+ * Bamboo Forest journey: Season 1 then Season 2 as stops along the path.
+ * Episode N+1 unlocks when episode N is complete (S2 after S1).
+ */
+const WorldMapScreen: React.FC = () => {
+  const { isEpisodeComplete } = useKidsProgress();
+
+  return (
+    <div className="py-2">
+      <h1 className="text-2xl font-extrabold text-emerald-800 dark:text-emerald-300 sm:text-3xl">
+        The Digital Bamboo Forest
+      </h1>
+      <p className="mt-1 text-gray-600 dark:text-gray-300">
+        Explore the Privacy Grove, then unlock the Kindness Clearing.
+      </p>
+
+      {KIDS_SEASONS.map((season) => (
+        <SeasonPath
+          key={season}
+          season={season}
+          episodes={getKidsEpisodesBySeason(season)}
+          isEpisodeComplete={isEpisodeComplete}
+        />
+      ))}
     </div>
   );
 };

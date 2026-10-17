@@ -12,6 +12,11 @@ interface HubWebsiteLinkProps {
   showExternalIcon?: boolean;
 }
 
+/** Static co-hosted files (e.g. kids.html) must not use the SPA router. */
+function isStaticWebsiteFile(path: string): boolean {
+  return /\.\w+(\?|#|$)/.test(path);
+}
+
 /**
  * In-app route on pandagarde.com; opens system browser from standalone Hub / Capacitor.
  */
@@ -21,7 +26,7 @@ const HubWebsiteLink: React.FC<HubWebsiteLinkProps> = ({
   className = '',
   showExternalIcon = false,
 }) => {
-  if (isHubStandalone) {
+  if (isHubStandalone || isStaticWebsiteFile(path)) {
     return (
       <button
         type="button"

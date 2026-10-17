@@ -3,6 +3,9 @@ import { FOOTPRINT_REVIEW_NAV_LABEL } from './siteNavigation';
 /**
  * Curated links for /for-families — grouped by site navigation layer.
  * Every href must resolve (route or PARENT_SURFACE_REDIRECTS).
+ *
+ * Naming: use “Family tools” / guides — never a generic “Toolkit” brand
+ * that competes with SocialCaution’s adult /toolkit.
  */
 
 export type ResourceHubLink = {
@@ -46,14 +49,61 @@ export const resourceGuideLinks: ResourceHubLink[] = [
     href: '/guides/emergency-safety',
     description: 'If something went wrong online—start here.',
   },
+  {
+    label: 'AWARE AI family one-pager',
+    href: '/guides/aware-ai',
+    description: 'Chatbot habits, privacy prompts, and crisis pointers for families.',
+  },
+];
+
+/**
+ * Practical household helpers formerly buried behind /parent-toolkit.
+ * Live on-site pages only — not SocialCaution-style remediation tools.
+ */
+export const resourceFamilyToolsLinks: ResourceHubLink[] = [
+  {
+    label: 'Device setup guide',
+    href: '/guides/device-setup',
+    description: 'Privacy and security settings when a child gets a phone or tablet.',
+  },
+  {
+    label: 'Conversation approaches',
+    href: '/guides/conversation-approaches',
+    description: 'Age-appropriate prompts for calm family talks about privacy.',
+  },
+  {
+    label: 'App selection guide',
+    href: '/guides/app-selection',
+    description: 'Evaluate an app for privacy and fit before your child installs it.',
+  },
+  {
+    label: 'Family internet agreement',
+    href: '/downloads/family-agreement',
+    description: 'Printable household agreement you can fill out together.',
+  },
 ];
 
 /** Website printables only — no duplicate mission catalog. */
 export const resourcePrintableLinks: ResourceHubLink[] = [
   {
-    label: 'Printables & downloads',
+    label: 'Coloring sheets',
     href: '/downloads/coloring-sheets',
-    description: 'Coloring sheets, posters, and certificates to print at home.',
+    description: 'Privacy Panda pages to color at home or school.',
+  },
+  {
+    label: 'Safety posters',
+    href: '/downloads/safety-posters',
+    description: 'Visual reminders for shared devices and common spaces.',
+  },
+  {
+    label: 'Certificates',
+    href: '/downloads/certificates',
+    description: 'Printable certificates to celebrate privacy learning.',
+  },
+  {
+    label: 'Family internet agreement',
+    href: '/downloads/family-agreement',
+    description: 'Household rules you can print and sign together.',
   },
 ];
 
@@ -85,8 +135,19 @@ export const resourceFootprintLinks: ResourceHubLink[] = [
 ];
 
 /** Curated hub index only — footprint workflow lives on /digital-footprint and footer Review workflow. */
-export const allResourceHubLinks: ResourceHubLink[] = [
-  ...resourceStoryLinks,
-  ...resourceGuideLinks,
-  ...resourcePrintableLinks,
-];
+export const allResourceHubLinks: ResourceHubLink[] = (() => {
+  const seen = new Set<string>();
+  const links = [
+    ...resourceStoryLinks,
+    ...resourceGuideLinks,
+    ...resourceFamilyToolsLinks,
+    ...resourcePrintableLinks,
+  ];
+  return links.filter((link) => {
+    if (seen.has(link.href)) {
+      return false;
+    }
+    seen.add(link.href);
+    return true;
+  });
+})();

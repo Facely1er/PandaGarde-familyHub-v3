@@ -42,6 +42,7 @@ const AppSelectionGuidePage = lazy(() => import('./pages/AppSelectionGuidePage')
 const ModelingBehaviorGuidePage = lazy(() => import('./pages/ModelingBehaviorGuidePage'));
 const PrivacyConcernsGuidePage = lazy(() => import('./pages/PrivacyConcernsGuidePage'));
 const FamilyPrivacyGuidePage = lazy(() => import('./pages/guides/FamilyPrivacyGuidePage'));
+const AwareAiGuidePage = lazy(() => import('./pages/guides/AwareAiGuidePage'));
 const EmergencySafetyGuidePage = lazy(() => import('./pages/guides/EmergencySafetyGuidePage'));
 const AgeSpecificGuidePage = lazy(() => import('./pages/guides/AgeSpecificGuidePage'));
 const ConversationApproachesPage = lazy(() => import('./pages/guides/ConversationApproachesPage'));
@@ -266,6 +267,7 @@ function App() {
             <Route path="/guides/modeling-behavior" element={<ModelingBehaviorGuidePage />} />
             <Route path="/guides/privacy-concerns" element={<PrivacyConcernsGuidePage />} />
             <Route path="/guides/family-privacy" element={<FamilyPrivacyGuidePage />} />
+            <Route path="/guides/aware-ai" element={<AwareAiGuidePage />} />
             <Route path="/guides/emergency-safety" element={<EmergencySafetyGuidePage />} />
             <Route path="/guides/age-specific" element={<AgeSpecificGuidePage />} />
             <Route path="/guides/conversation-approaches" element={<ConversationApproachesPage />} />

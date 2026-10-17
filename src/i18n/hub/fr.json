@@ -192,6 +192,8 @@
     "discussionStarters": "Amorces de discussion",
     "keyLearnings": "Points clés",
     "afterMission": "Après cette mission",
+    "parentResources": "Ressources parents",
+    "crisisDisclaimer": "PandaGarde est éducatif — ce n'est pas un service de crise ni un chatbot. En cas de besoin immédiat, utilisez le 988 ou Crisis Text Line.",
     "more": "Plus",
     "progress": "Progression de la mission",
     "stepReadTalk": "Lire et discuter",
@@ -217,6 +219,15 @@
     "progressLabel": "Progression des missions",
     "noneYet": "Aucune activité terminée pour l'instant — allez dans Missions pour commencer votre première mission.",
     "progressAria": "{{pct}} % des activités terminées",
+    "familyJourney": {
+      "title": "Carte du parcours familial",
+      "body": "Les missions du Hub restent sur cet appareil. Les histoires, le bilan d'empreinte et l'appli Forêt Kids sont des espaces séparés — sans surveillance d'appareil ni synchronisation automatique.",
+      "missions": "Continuer les missions Hub",
+      "stories": "Histoires Privacy Panda",
+      "footprint": "Bilan d'empreinte",
+      "kidsForest": "Appli Forêt Kids",
+      "aware": "Fiche AWARE IA"
+    },
     "allComplete": {
       "title": "Vous avez terminé toutes les missions — bravo !",
       "body": "Célébrez avec un certificat ci-dessous, puis poursuivez la conversation : revisitez les missions au fil de la croissance de vos enfants, lisez une histoire Privacy Panda ensemble ou actualisez le bilan d'empreinte de votre famille avec les nouvelles applications.",

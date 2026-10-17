@@ -203,6 +203,54 @@ const ProgressScreen: React.FC<ProgressScreenProps> = ({ embedded = false }) => 
         )}
       </div>
 
+      {/* Family journey bridge — honest local-first map across surfaces */}
+      <div className="rounded-xl border border-teal-200 bg-teal-50 p-5 dark:border-teal-700/50 dark:bg-teal-900/20">
+        <h2 className="text-sm font-semibold text-teal-900 dark:text-teal-100">
+          {t('hub.progress.familyJourney.title')}
+        </h2>
+        <p className="mt-2 text-sm leading-relaxed text-teal-800 dark:text-teal-200">
+          {t('hub.progress.familyJourney.body')}
+        </p>
+        <div className="mt-3 flex flex-wrap gap-2">
+          <Link
+            to={hubPaths.activities}
+            className="inline-flex items-center gap-1.5 rounded-lg bg-teal-600 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-teal-700 dark:bg-teal-500 dark:text-teal-950 dark:hover:bg-teal-400"
+          >
+            {t('hub.progress.familyJourney.missions')}
+          </Link>
+          <HubWebsiteLink
+            path="/stories"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-teal-300 bg-white px-3 py-1.5 text-xs font-semibold text-teal-800 transition-colors hover:bg-teal-100 dark:border-teal-600 dark:bg-teal-900/40 dark:text-teal-200 dark:hover:bg-teal-900/60"
+            showExternalIcon
+          >
+            <BookOpen size={13} aria-hidden />
+            {t('hub.progress.familyJourney.stories')}
+          </HubWebsiteLink>
+          <HubWebsiteLink
+            path="/digital-footprint"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-teal-300 bg-white px-3 py-1.5 text-xs font-semibold text-teal-800 transition-colors hover:bg-teal-100 dark:border-teal-600 dark:bg-teal-900/40 dark:text-teal-200 dark:hover:bg-teal-900/60"
+            showExternalIcon
+          >
+            <Fingerprint size={13} aria-hidden />
+            {t('hub.progress.familyJourney.footprint')}
+          </HubWebsiteLink>
+          <HubWebsiteLink
+            path="/kids.html"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-teal-300 bg-white px-3 py-1.5 text-xs font-semibold text-teal-800 transition-colors hover:bg-teal-100 dark:border-teal-600 dark:bg-teal-900/40 dark:text-teal-200 dark:hover:bg-teal-900/60"
+            showExternalIcon
+          >
+            {t('hub.progress.familyJourney.kidsForest')}
+          </HubWebsiteLink>
+          <HubWebsiteLink
+            path="/guides/aware-ai"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-teal-300 bg-white px-3 py-1.5 text-xs font-semibold text-teal-800 transition-colors hover:bg-teal-100 dark:border-teal-600 dark:bg-teal-900/40 dark:text-teal-200 dark:hover:bg-teal-900/60"
+            showExternalIcon
+          >
+            {t('hub.progress.familyJourney.aware')}
+          </HubWebsiteLink>
+        </div>
+      </div>
+
       {/* All missions complete — where to go next */}
       {totalCount > 0 && completedCount >= totalCount && (
         <div className="rounded-xl border border-amber-200 bg-amber-50 p-5 dark:border-amber-700/50 dark:bg-amber-900/20">

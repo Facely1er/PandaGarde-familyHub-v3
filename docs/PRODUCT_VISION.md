@@ -99,7 +99,7 @@ the forest becomes meaningful. That inversion is the product.
 | **Inhabited** | Characters react, remember, guide. | Story narration, character portraits, guide-linked Hub missions |
 | **Personal** | Every child has a camp — badges, artifacts, choices. | Badge Shelf + trusted-team scaffold (Camp v0.5); full My Camp v1 planned |
 | **Safe** | Calm, not exciting. Studio Ghibli, not gamified loops. | Shame-free games, no streak anxiety, parental gate on grown-ups view |
-| **Expandable** | Privacy is the first grove. The forest grows with the child. | Season 1 in Kids App; Season 2 content in `stories.ts` |
+| **Expandable** | Privacy is the first grove. The forest grows with the child. | Seasons 1–2 in Kids App forest map; more seasons planned |
 
 ### The Internet Architecture Layer
 
@@ -333,7 +333,7 @@ See `STORYLINE_BIBLE.md` §5 and `kidsContent.ts` `PILLAR_META`.
 | Family Hub: 18 missions, progress, certificates | ✅ Shipped |
 | Storyline Bible + forest characters | ✅ Shipped |
 | Forest map v1 — clickable 9 zones | 🔲 Path-only map today |
-| My Camp v1 — tent, backpack, journal, companion corner | 🔲 Badge Shelf + trusted team only |
+| My Camp v1 — tent, backpack, journal, companion corner | ✅ Camp shell (tent theme, journal, companion) + Tao Circle |
 | Parent unified progress across Kids + Hub + DFA | 🔲 Split across surfaces |
 | Ambient audio foundation | 🔲 Planned |
 | Institutional evidence base (docs) | ✅ Partial |
@@ -351,9 +351,9 @@ See `STORYLINE_BIBLE.md` §5 and `kidsContent.ts` `PILLAR_META`.
 
 | Item | Status |
 |---|---|
-| Stories 9–14 (Season 2) in `stories.ts` | ✅ Content started |
+| Stories 9–16 (Season 2) in `stories.ts` | ✅ Published |
 | `KindnessGuardians` game (Episode 7 override) | ✅ Shipped |
-| Season 2 in Kids App Forest Map | 🔲 Season 1 only today |
+| Season 2 in Kids App Forest Map | ✅ Season 1 + 2 path (S2 unlocks after S1) |
 | Echo Cavern zone, Kai/Lumi primary cast in app | 🔲 Planned |
 | Character animation, ambient audio, branching v1 | 🔲 Planned |
 | School district pilot | 🔲 Pilot page live; contract TBD |
@@ -413,11 +413,12 @@ and multilingual scalability — together, a category that does not exist yet.
 ### Product enhancement (next quality gates)
 
 - Clickable 9-zone forest map (upgrade from linear path)
-- My Camp v1 persistence (tent, backpack, journal, companion corner)
+- My Camp v1 persistence (tent theme, journal, companion corner) ✅
 - Ambient audio per zone (toggleable, no autoplay)
 - Character greeting on episode entry with progress memory
-- Parent progress bridge (single view: Kids episodes + Hub missions + DFA status)
-- Season 2 episodes in Kids App
+- Parent progress bridge (Hub Progress family journey map) ✅
+- Season 2 episodes in Kids App ✅
+- Policy parent cards (settings deep-links, AWARE one-pager, crisis links) ✅
 
 ### Camp / pilot layer (additive, removable)
 

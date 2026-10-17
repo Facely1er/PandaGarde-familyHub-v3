@@ -4,7 +4,12 @@ import { getStoryBySlug } from '../../data/stories';
 import { StoryCoverArt } from '../../components/stories/StoryCoverArt';
 import { useKidsProgress } from '../KidsProgressContext';
 import SessionRest from '../components/SessionRest';
-import { getEpisodeGame, getFamilyActivity, PILLAR_META } from '../kidsContent';
+import {
+  getEpisodeGame,
+  getFamilyActivity,
+  isKidsEpisodeUnlocked,
+  PILLAR_META,
+} from '../kidsContent';
 
 type Phase = 'story' | 'game' | 'ceremony' | 'family' | 'rest';
 
@@ -29,21 +34,24 @@ const GameFallback: React.FC = () => (
 const EpisodeScreen: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
-  const { profile, markStoryRead, markEpisodeComplete } = useKidsProgress();
+  const { profile, markStoryRead, markEpisodeComplete, isEpisodeComplete } = useKidsProgress();
   const [phase, setPhase] = useState<Phase>('story');
   const [chapterIndex, setChapterIndex] = useState(0);
   const [gameScore, setGameScore] = useState<number | null>(null);
 
   const story = slug ? getStoryBySlug(slug) : undefined;
+  const unlocked = story ? isKidsEpisodeUnlocked(story.slug, isEpisodeComplete) : false;
 
-  if (!story) {
+  if (!story || !unlocked) {
     return (
       <div className="mx-auto max-w-2xl px-4 py-12 text-center">
         <span className="text-5xl" aria-hidden>
           🙈
         </span>
         <p className="mt-3 text-lg font-bold text-gray-900 dark:text-gray-100">
-          This part of the forest is hidden!
+          {story && !unlocked
+            ? 'This stop is still locked — finish the earlier path first!'
+            : 'This part of the forest is hidden!'}
         </p>
         <Link
           to="/"

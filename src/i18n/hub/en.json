@@ -192,6 +192,8 @@
     "discussionStarters": "Discussion starters",
     "keyLearnings": "Key learnings",
     "afterMission": "After this mission",
+    "parentResources": "Parent resources",
+    "crisisDisclaimer": "PandaGarde is educational — not a crisis service or chatbot. If you or your child need immediate help, use 988 or Crisis Text Line.",
     "more": "More",
     "progress": "Mission progress",
     "stepReadTalk": "Read & talk",
@@ -217,6 +219,15 @@
     "progressLabel": "Mission progress",
     "noneYet": "No activities completed yet — head to Missions to start your first mission.",
     "progressAria": "{{pct}}% of activities completed",
+    "familyJourney": {
+      "title": "Family journey map",
+      "body": "Hub missions stay on this device. Stories, footprint review, and the Kids Forest App are separate calm spaces — they do not monitor devices or sync automatically.",
+      "missions": "Continue Hub missions",
+      "stories": "Privacy Panda stories",
+      "footprint": "Footprint review",
+      "kidsForest": "Kids Forest App",
+      "aware": "AWARE AI one-pager"
+    },
     "allComplete": {
       "title": "You finished every mission — amazing work!",
       "body": "Celebrate with a certificate below, then keep the conversation going: revisit missions as your kids grow, read a Privacy Panda story together, or refresh your family's footprint review with any new apps.",

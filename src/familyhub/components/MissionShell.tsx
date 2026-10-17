@@ -1,7 +1,8 @@
 import React, { Suspense, useEffect, useState } from 'react';
 import { lazy } from '../../lib/lazyWithRetry';
-import { ArrowLeft, BookOpen, HelpCircle, MessageCircle, MessageCircleHeart, Play, Target } from 'lucide-react';
+import { ArrowLeft, BookOpen, ExternalLink, HelpCircle, MessageCircle, MessageCircleHeart, Play, Target } from 'lucide-react';
 import { HubScreenFallback } from '../HubScreenFallback';
+import HubWebsiteLink from './HubWebsiteLink';
 
 const ActivityManager = lazy(() => import('../../components/activities/ActivityManager'));
 import MissionCelebration from './MissionCelebration';
@@ -318,6 +319,47 @@ const MissionShell: React.FC<MissionShellProps> = ({ activity, completedIds, onE
               <p className="text-sm text-emerald-950 dark:text-emerald-100">
                 {getMissionText(activity.id, 'nextStep', activity.nextStep)}
               </p>
+              {activity.parentResources && activity.parentResources.length > 0 && (
+                <div className="mt-3 space-y-2">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-emerald-800 dark:text-emerald-300">
+                    {t('hub.mission.parentResources')}
+                  </p>
+                  <ul className="space-y-1.5">
+                    {activity.parentResources.map((resource) => {
+                      const isExternal = /^https?:\/\//i.test(resource.href);
+                      const tone =
+                        resource.kind === 'crisis'
+                          ? 'border-rose-200 bg-rose-50 text-rose-900 dark:border-rose-800 dark:bg-rose-950/40 dark:text-rose-100'
+                          : 'border-emerald-200 bg-white text-emerald-900 dark:border-emerald-800 dark:bg-gray-900/40 dark:text-emerald-100';
+                      const linkClass = `inline-flex w-full items-start gap-2 rounded-lg border px-2.5 py-2 text-left text-sm font-medium hover:opacity-90 ${tone}`;
+                      return (
+                        <li key={`${resource.href}-${resource.label}`}>
+                          {isExternal ? (
+                            <a
+                              href={resource.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={linkClass}
+                            >
+                              <ExternalLink size={14} className="mt-0.5 shrink-0 opacity-70" aria-hidden />
+                              <span>{resource.label}</span>
+                            </a>
+                          ) : (
+                            <HubWebsiteLink path={resource.href} className={linkClass} showExternalIcon>
+                              {resource.label}
+                            </HubWebsiteLink>
+                          )}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                  {activity.parentResources.some((resource) => resource.kind === 'crisis') && (
+                    <p className="text-xs leading-relaxed text-rose-800 dark:text-rose-200">
+                      {t('hub.mission.crisisDisclaimer')}
+                    </p>
+                  )}
+                </div>
+              )}
             </MissionIntroDetails>
           </div>
         </div>

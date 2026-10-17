@@ -1,7 +1,11 @@
 import { describe, expect, it } from 'vitest';
 
 import { PARENT_SURFACE_REDIRECTS } from './parentSiteSurface';
-import { allResourceHubLinks, resourceFootprintLinks } from './resourcesHubLinks';
+import {
+  allResourceHubLinks,
+  resourceFamilyToolsLinks,
+  resourceFootprintLinks,
+} from './resourcesHubLinks';
 
 const APP_STATIC_PATHS = new Set([
   '/',
@@ -18,8 +22,15 @@ const APP_STATIC_PATHS = new Set([
   '/guides/family-privacy',
   '/family-privacy-plan',
   '/guides/emergency-safety',
+  '/guides/aware-ai',
+  '/guides/device-setup',
+  '/guides/conversation-approaches',
+  '/guides/app-selection',
   '/family-hub/activities',
   '/downloads/coloring-sheets',
+  '/downloads/safety-posters',
+  '/downloads/certificates',
+  '/downloads/family-agreement',
 ]);
 
 function pathResolves(href: string): boolean {
@@ -50,5 +61,16 @@ describe('resourcesHubLinks', () => {
       '/scoring-methodology',
       '/digital-rights',
     ]);
+  });
+
+  it('family tools surface household helpers (not adult remediation toolkit)', () => {
+    const hrefs = resourceFamilyToolsLinks.map((l) => l.href);
+    expect(hrefs).toEqual([
+      '/guides/device-setup',
+      '/guides/conversation-approaches',
+      '/guides/app-selection',
+      '/downloads/family-agreement',
+    ]);
+    expect(hrefs.some((h) => h.startsWith('/toolkit'))).toBe(false);
   });
 });

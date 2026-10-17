@@ -6,11 +6,52 @@ import {
   type Story,
 } from '../data/stories';
 
-/** Season 1 — The Privacy Grove — is the kids app v1 campaign. */
+/** Seasons available in the Kids App forest map (Privacy Grove + Kindness Clearing). */
+export const KIDS_SEASONS = [1, 2] as const;
+export type KidsSeason = (typeof KIDS_SEASONS)[number];
+
+/** @deprecated Prefer KIDS_SEASONS — kept for older tests. */
 export const KIDS_SEASON = 1 as const;
 
+export const KIDS_SEASON_META: Record<
+  KidsSeason,
+  { title: string; subtitle: string; certificate: string }
+> = {
+  1: {
+    title: 'The Privacy Grove',
+    subtitle: 'Follow the bamboo path! Finish a story and its game to unlock the next stop.',
+    certificate: 'Privacy Grove Explorer — Season 1 Complete',
+  },
+  2: {
+    title: 'The Kindness Clearing',
+    subtitle: 'Season 1 unlocks this path. Practice kindness, footprints, and forest agreements.',
+    certificate: 'Kindness Clearing Explorer — Season 2 Complete',
+  },
+};
+
+export function getKidsEpisodesBySeason(season: KidsSeason): Story[] {
+  return getStoriesBySeason(season);
+}
+
+/** All Kids App episodes in unlock order (Season 1, then Season 2). */
 export function getKidsEpisodes(): Story[] {
-  return getStoriesBySeason(KIDS_SEASON);
+  return KIDS_SEASONS.flatMap((season) => getKidsEpisodesBySeason(season));
+}
+
+/** Episode N unlocks when episode N−1 is complete (Season 2 starts after Season 1). */
+export function isKidsEpisodeUnlocked(
+  slug: string,
+  isComplete: (episodeSlug: string) => boolean,
+): boolean {
+  const episodes = getKidsEpisodes();
+  const index = episodes.findIndex((story) => story.slug === slug);
+  if (index < 0) {
+    return false;
+  }
+  if (index === 0) {
+    return true;
+  }
+  return isComplete(episodes[index - 1].slug);
 }
 
 export type KidAgeBand = 'early' | 'middle' | 'older';
@@ -174,14 +215,55 @@ export const EPISODE_GAME_OVERRIDES: Record<string, KidsGame> = {
     description: 'Choose your trusted grown-ups and a family code word!',
     Component: lazy(() => import('./games/TrustedTeamBuilder')),
   },
-  // Season 2 episode 9 — "The Echo Chamber" (bystander's choice) reuses the
-  // kindness game if/when Season 2 ships in the kids app.
+  // Season 2 — Kindness Clearing theme games
   'the-echo-chamber': {
     id: 'kindness-guardians',
     name: 'Kindness Guardians',
     emoji: '💚',
     description: 'Spot unkindness and choose the guardian move!',
     Component: lazy(() => import('./games/KindnessGuardians')),
+  },
+  'vex-and-the-borrowed-face': {
+    id: 'phishing-detective',
+    name: 'Phishing Detective',
+    emoji: '🔍',
+    description: 'Spot borrowed faces and tricky messages!',
+    Component: lazy(() => import('../components/games/PhishingDetective')),
+  },
+  'what-mika-forgot-to-forget': {
+    id: 'digital-footprint',
+    name: 'Digital Footprint Visualizer',
+    emoji: '👣',
+    description: 'See what stays in the archive!',
+    Component: lazy(() => import('../components/games/DigitalFootprintVisualizer')),
+  },
+  'kais-accidental-machine': {
+    id: 'privacy-settings',
+    name: 'Privacy Settings Trainer',
+    emoji: '⚙️',
+    description: 'Tune a machine so it stays kind and careful!',
+    Component: lazy(() => import('../components/games/PrivacySettingsTrainer')),
+  },
+  'the-night-the-stream-went-dark': {
+    id: 'password-fortress',
+    name: 'Password Fortress Builder',
+    emoji: '🏰',
+    description: 'Rebuild the stream’s protective gates!',
+    Component: lazy(() => import('../components/games/PasswordFortressBuilder')),
+  },
+  'the-weight-of-a-screenshot': {
+    id: 'kindness-guardians',
+    name: 'Kindness Guardians',
+    emoji: '💚',
+    description: 'Choose the guardian move before a screenshot spreads!',
+    Component: lazy(() => import('./games/KindnessGuardians')),
+  },
+  'the-forest-agreement': {
+    id: 'trusted-team-builder',
+    name: 'Build Your Tao Circle',
+    emoji: '🛡️',
+    description: 'Agree who helps when a forest rule feels unclear!',
+    Component: lazy(() => import('./games/TrustedTeamBuilder')),
   },
 };
 

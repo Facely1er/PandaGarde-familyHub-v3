@@ -37,8 +37,12 @@ export const STORY_MISSION_LINKS: Record<string, string[]> = {
   'the-day-the-password-was-too-short': ['secret-keeper-club', 'password-strength-lab', 'password-fortress-builder'],
   'when-miki-said-something-unkind': ['screenshot-safety'],
   'pos-toughest-question': ['trusted-adults-online'],
-  'the-echo-chamber': ['ai-and-your-privacy'],
+  'the-echo-chamber': ['ai-and-your-privacy', 'screenshot-safety'],
+  'vex-and-the-borrowed-face': ['phishing-patrol', 'trusted-adults-online'],
   'what-mika-forgot-to-forget': ['data-broker-discovery'],
+  'kais-accidental-machine': ['app-permission-inspector', 'ai-and-your-privacy'],
+  'the-night-the-stream-went-dark': ['password-strength-lab', 'password-fortress-builder'],
+  'lumis-light': ['online-reputation-audit', 'social-media-simulator'],
   'the-weight-of-a-screenshot': ['screenshot-safety', 'social-media-simulator', 'online-reputation-audit'],
   'the-forest-agreement': ['privacy-rights-challenge'],
 };

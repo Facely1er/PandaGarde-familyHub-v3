@@ -192,6 +192,8 @@
     "discussionStarters": "Iniciadores de conversación",
     "keyLearnings": "Aprendizajes clave",
     "afterMission": "Después de esta misión",
+    "parentResources": "Recursos para padres",
+    "crisisDisclaimer": "PandaGarde es educativo — no es un servicio de crisis ni un chatbot. Si necesitan ayuda inmediata, usen 988 o Crisis Text Line.",
     "more": "Más",
     "progress": "Progreso de la misión",
     "stepReadTalk": "Leer y conversar",
@@ -217,6 +219,15 @@
     "progressLabel": "Progreso de misiones",
     "noneYet": "Aún no hay actividades completadas — ve a Misiones para empezar tu primera misión.",
     "progressAria": "{{pct}}% de actividades completadas",
+    "familyJourney": {
+      "title": "Mapa del recorrido familiar",
+      "body": "Las misiones del Hub se quedan en este dispositivo. Las historias, la revisión de huella y la App del Bosque Kids son espacios aparte — sin monitoreo de dispositivos ni sincronización automática.",
+      "missions": "Seguir misiones del Hub",
+      "stories": "Historias Privacy Panda",
+      "footprint": "Revisión de huella",
+      "kidsForest": "App del Bosque Kids",
+      "aware": "Ficha AWARE IA"
+    },
     "allComplete": {
       "title": "¡Terminaste todas las misiones — increíble!",
       "body": "Celebra con un certificado abajo y sigue la conversación: revisa misiones a medida que tus hijos crecen, lee una historia de Privacy Panda juntos o actualiza la revisión de huella digital de tu familia con las apps nuevas.",

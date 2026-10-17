@@ -21,10 +21,13 @@ describe('characterPortraitCropUtils', () => {
     const po = getCastingArtRect(SOURCE_W, SOURCE_H, 0, 0);
     const ruby = getCastingArtRect(SOURCE_W, SOURCE_H, 1, 0);
     const mika = getCastingArtRect(SOURCE_W, SOURCE_H, 3, 0);
+    const billy = getCastingArtRect(SOURCE_W, SOURCE_H, 5, 0, CASTING_ROLE_CROP.billy);
 
     expect(po.top).toBeLessThanOrEqual(60);
     expect(ruby.top).toBeGreaterThanOrEqual(115);
     expect(mika.top).toBeGreaterThanOrEqual(115);
+    // Billy's card sits under the bamboo banner — art must start below chrome (~y117)
+    expect(billy.top).toBeGreaterThanOrEqual(120);
     expect(mika.top + mika.height).toBeLessThanOrEqual(
       Math.round(SOURCE_H * CASTING_ROW0_ART_BOTTOM_FRAC) + 2,
     );

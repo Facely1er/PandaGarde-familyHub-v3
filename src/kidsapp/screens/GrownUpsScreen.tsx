@@ -9,7 +9,7 @@ const GrownUpsScreen: React.FC = () => {
   const [unlocked, setUnlocked] = useState(false);
   const [gateVisible, setGateVisible] = useState(false);
   const [confirmReset, setConfirmReset] = useState(false);
-  const { earnedBadges, trustedTeam, resetAll } = useKidsProgress();
+  const { earnedBadges, trustedTeam, resetAll, season1Complete, season2Complete } = useKidsProgress();
   const totalEpisodes = getKidsEpisodes().length;
 
   if (!unlocked) {
@@ -60,8 +60,16 @@ const GrownUpsScreen: React.FC = () => {
       <section className="mt-4 rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-800">
         <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100">Progress summary</h2>
         <p className="mt-2 text-gray-600 dark:text-gray-300">
-          {earnedBadges.length} of {totalEpisodes} Season 1 episodes completed. Each episode pairs a
-          story with a hands-on mini-game and an optional family activity you can do together offline.
+          {earnedBadges.length} of {totalEpisodes} forest episodes completed (Season 1 Privacy Grove
+          {season1Complete ? ' ✓' : ''}
+          {', '}Season 2 Kindness Clearing
+          {season2Complete ? ' ✓' : ''}
+          ). Each episode pairs a story with a hands-on mini-game and an optional family activity you
+          can do together offline.
+        </p>
+        <p className="mt-2 text-gray-600 dark:text-gray-300">
+          Progress stays on this device only — it does not sync with Family Hub missions or the
+          website footprint review. Those are separate, calm practice spaces for grown-ups.
         </p>
         <p className="mt-2 text-gray-600 dark:text-gray-300">
           PandaGarde is designed for finite sessions — not endless scrolling. After each episode,
