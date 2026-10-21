@@ -107,7 +107,7 @@ const ServiceCatalogPage: React.FC = () => {
                         disabled={busyId === service.id}
                         aria-pressed={added}
                         aria-label={`${added ? 'Remove' : 'Add'} ${service.name}`}
-                        className={`flex min-h-[56px] w-full items-center gap-3 rounded-xl border-2 px-3 py-2 text-left transition-colors disabled:opacity-60 ${
+                        className={`compact-action-btn flex min-h-[56px] w-full items-center gap-3 rounded-xl border-2 px-3 py-2 text-left transition-colors disabled:opacity-60 ${
                           added
                             ? 'border-green-700 bg-green-50 dark:border-green-400 dark:bg-green-950'
                             : 'border-gray-200 bg-white hover:border-green-400 dark:border-gray-700 dark:bg-gray-800 dark:hover:border-green-500'

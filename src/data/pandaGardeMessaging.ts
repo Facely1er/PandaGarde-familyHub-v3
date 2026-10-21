@@ -4,7 +4,7 @@ export const FOOTPRINT_CATALOG_NOTE =
   'Footprint review uses the apps you list in the service catalog. Stories, guides, and Family Hub work on their own—you do not need to finish a review first.';
 
 export const INDEPENDENT_AREAS_LEAD =
-  'Pick what fits today: a story with your child, a parent guide, missions in Family Hub, or a footprint review when you want a household snapshot.';
+  'Pick what fits today: the Family Snapshot for a quick overview, a story with your child, a parent guide, Family Hub missions, or Footprint Review after you list apps in the catalog.';
 
 /** Page hero for /for-families — family-facing, no workflow disclaimers. */
 export const GUIDES_STORIES_PAGE_LEAD =
@@ -18,24 +18,24 @@ export const QUICK_START_LEAD =
 export const PARENT_PATH_STEPS = [
   {
     step: 1,
-    title: 'Read a story together',
-    description: 'Open Privacy Panda and read one scene with your child. No setup or account needed.',
-    link: '/stories',
-    cta: 'Browse stories',
+    title: 'See the big picture',
+    description: 'Tick the kinds of apps your child uses. Two minutes, no app names — then you’ll know where to start.',
+    link: '/big-picture',
+    cta: 'Start',
   },
   {
     step: 2,
-    title: 'List the apps your family uses',
-    description: 'Tap the apps and websites your kids use. This powers your footprint review scores.',
+    title: 'Name your family’s apps',
+    description: 'Tap the apps your child uses. Your action plan is built from this list.',
     link: '/service-catalog',
     cta: 'Add your apps',
   },
   {
     step: 3,
-    title: 'See your footprint review',
-    description: 'Find out which apps collect the most data from your list. Green scores are lower risk; red scores are worth a family talk.',
+    title: 'Get your action plan',
+    description: 'For each app: what to know and what to change, most important first. Tick steps as you go.',
     link: '/digital-footprint',
-    cta: 'See your scores',
+    cta: 'See my plan',
     requiresApps: true,
   },
   {

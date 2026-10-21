@@ -10,10 +10,10 @@
 
 | Surface | Role | Route |
 |--------|------|--------|
-| **PandaGarde (website)** | Service catalog + footprint review, stories, parent guides, printables/downloads; emotional path to Family Hub | `/`, `/service-catalog`, `/digital-footprint`, `/stories`, `/for-families`, etc. |
+| **PandaGarde (website)** | Big picture → your apps (catalog) → action plan (footprint review); stories, parent guides, printables/downloads; emotional path to Family Hub | `/`, `/big-picture`, `/service-catalog`, `/digital-footprint`, `/stories`, `/for-families`, etc. |
 | **Family Hub** | Practice and follow through — **18 age-matched missions** (family talk + optional embedded games), members, progress on device | `/family-hub/*` |
 
-**Approved one-liner:** Stories and guides are open anytime; the service catalog feeds footprint review when families want a snapshot; Family Hub is optional practice on device.
+**Approved one-liner:** Stories and guides are open anytime; Big picture is the two-minute overview; the apps you pick feed the action plan; Family Hub is optional practice on device.
 
 **Independence rule:** Do **not** imply stories, resources, or Family Hub require completing footprint review or the catalog (except the footprint **page** itself, which needs catalog entries to score).
 
