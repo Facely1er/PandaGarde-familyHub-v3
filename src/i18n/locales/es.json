@@ -64,7 +64,7 @@
   "home": {
     "eyebrow": "Orientación de privacidad familiar",
     "title": "Tus hijos están en línea.",
-    "titleAccent": " Aquí tienes una forma tranquila de hablar de ello.",
+    "titleAccent": " Aquí te mostramos cómo mantenerlos a salvo.",
     "lead": "Descubre adónde van los datos de tu hijo — en la escuela, en los juegos y en las redes sociales — y sigue un camino sencillo, de la visión general a los hábitos que tu familia mantiene.",
     "continueFootprint": "Continuar revisión de huella",
     "continueApps": "Continuar agregando tus aplicaciones",
@@ -103,8 +103,8 @@
     "pathSnapshotDesc": "Marca los tipos de servicios que usa tu hijo. Mira dónde se acumula la exposición y por dónde empezar.",
     "pathSnapshotCta": "Empezar la instantánea",
     "pathFootprintTag": "Paso 2 · 10 min",
-    "pathFootprintTitle": "Nombra tus apps, obtén tu huella",
-    "pathFootprintDesc": "Elige las apps reales de tu familia en el catálogo: notas de privacidad, puntuaciones y qué corregir primero en cada app.",
+    "pathFootprintTitle": "Nombra las apps de tu familia",
+    "pathFootprintDesc": "Elige las apps reales en el catálogo. La revisión de huella puntúa cada una y muestra qué corregir primero.",
     "pathTalkTag": "Paso 3 · leer juntos",
     "pathTalkTitle": "Hablarlo con una historia",
     "pathTalkDesc": "Una historia de Privacy Panda les da a ti y a tu hijo palabras compartidas para lo que descubrieron — sin sermones.",
@@ -115,7 +115,7 @@
   },
   "messaging": {
     "footprintCatalogNote": "La revisión de huella usa las aplicaciones que listas en el catálogo. Historias, guías y Family Hub funcionan por sí solos — no necesitas terminar una revisión primero.",
-    "independentAreasLead": "Elige lo que encaje hoy: una historia con tu hijo, una guía para padres, misiones en Family Hub, o una revisión de huella cuando quieras una instantánea del hogar.",
+    "independentAreasLead": "Elige lo que encaje hoy: la instantánea familiar para una visión rápida, una historia con tu hijo, una guía para padres, misiones de Family Hub, o la revisión de huella después de listar apps en el catálogo.",
     "guidesStoriesLead": "Lee con tus hijos, usa guías para padres e imprimibles, o abre Family Hub para practicar — a tu propio ritmo.",
     "quickStartLead": "¿5 minutos? Lee una historia con tu hijo. ¿15? Lista las aplicaciones de tu familia. Todo lo demás puede esperar."
   },
@@ -153,8 +153,8 @@
   },
   "howItWorks": {
     "title": "Cómo funciona PandaGarde",
-    "subtitle": "Historias, guías y Family Hub funcionan por sí solos. El catálogo alimenta la revisión de huella cuando quieres una instantánea.",
-    "lead": "PandaGarde no es una larga lista de tareas. Las familias leen historias, usan guías, abren Family Hub o hacen una revisión de huella cuando ayuda — solo la revisión necesita aplicaciones listadas en el catálogo.",
+    "subtitle": "Historias, guías y Family Hub funcionan por sí solos. La instantánea familiar es la visión rápida; el catálogo alimenta la revisión de huella para apps con nombre.",
+    "lead": "PandaGarde no es una larga lista de tareas. Empieza con la instantánea familiar, lee historias, usa guías, abre Family Hub o haz la revisión de huella cuando tengas apps listadas en el catálogo.",
     "yourPath": "Tu camino",
     "fourAreas": "Cuatro áreas — elige la que encaje",
     "whatYouGet": "Lo que obtienes",
@@ -174,8 +174,8 @@
     "getAppTitle": "Obtén la app Family Hub",
     "getAppLead": "Descarga PandaGarde Family Hub para iPhone, iPad y Android. Gratis, sin necesidad de cuenta, y tus datos se quedan en tu dispositivo.",
     "readyTitle": "¿Listo para empezar?",
-    "readyBody": "Empieza con la revisión de huella, o abre Family Hub cuando estés listo.",
-    "startReview": "Empezar revisión",
+    "readyBody": "Empieza con la instantánea familiar, o abre Family Hub cuando estés listo.",
+    "startReview": "Ver la visión general",
     "flow": [
       { "title": "Historias y guías", "description": "Aventuras de Privacy Panda y materiales para padres — disponibles en cualquier momento. No requiere catálogo ni revisión de huella." },
       { "title": "Huella desde tu catálogo", "description": "Lista aplicaciones en el catálogo de servicios cuando quieras puntuaciones. La revisión de huella lee esa lista — no desbloquea el resto del sitio." },
@@ -189,11 +189,11 @@
     ],
     "transformationColumns": [
       { "eyebrow": "Sin un plan compartido", "title": "El trabajo de privacidad se dispersa y reinicia", "points": ["Notas, pestañas y conversaciones puntuales nunca se convierten en una rutina del hogar.", "Es difícil saber qué ajuste o aplicación arreglar primero.", "Los niños escuchan reglas diferentes en momentos diferentes, sin una historia común."] },
-      { "eyebrow": "Con PandaGarde", "title": "Revisen, aprendan y actúen juntos", "points": ["La revisión de huella da una instantánea cuando listas aplicaciones en el catálogo.", "Historias y recursos funcionan por sí solos cuando necesitas un momento tranquilo.", "Family Hub mantiene misiones y progreso en un solo lugar en tu dispositivo."] }
+      { "eyebrow": "Con PandaGarde", "title": "Revisen, aprendan y actúen juntos", "points": ["La instantánea familiar muestra la visión general en dos minutos; la revisión de huella puntúa apps con nombre de tu catálogo.", "Historias y recursos funcionan por sí solos cuando necesitas un momento tranquilo.", "Family Hub mantiene misiones y progreso en un solo lugar en tu dispositivo."] }
     ],
     "journeyLayers": [
       { "title": "Historias y guías", "description": "Privacy Panda y materiales para padres — disponibles en cualquier momento, sin catálogo.", "points": ["Leer juntos", "Independiente de la huella", "Tono adaptado a la edad"] },
-      { "title": "Huella desde el catálogo", "description": "Lista aplicaciones una vez; revisa la exposición cuando quieras una instantánea del hogar.", "points": ["El catálogo crea la lista", "La revisión usa esa lista", "Momento opcional"] },
+      { "title": "Huella desde el catálogo", "description": "Lista aplicaciones una vez en el catálogo, luego abre la revisión de huella para puntuaciones por app.", "points": ["El catálogo crea la lista", "La revisión usa esa lista", "Momento opcional"] },
       { "title": "Family Hub", "description": "Misiones y progreso en tu dispositivo — antes, después o sin una revisión.", "points": ["Progreso local", "Misiones guiadas por padres", "No requiere revisión de huella"] }
     ],
     "audienceCards": [
@@ -203,7 +203,7 @@
     ],
     "faqCards": [
       { "question": "¿Tenemos que terminar la revisión de huella antes de las historias o Family Hub?", "answer": "No. Historias, guías y Family Hub son independientes. Solo la página de revisión de huella necesita aplicaciones en tu catálogo de servicios para que las puntuaciones tengan algo que analizar." },
-      { "question": "¿Tenemos que abrir Family Hub el primer día?", "answer": "No. Muchas familias empiezan con una historia o una guía, usan la revisión de huella cuando quieren una instantánea, y abren Family Hub cuando las misiones encajan en la semana." },
+      { "question": "¿Tenemos que abrir Family Hub el primer día?", "answer": "No. Muchas familias empiezan con la instantánea familiar o una historia, nombran apps para la revisión de huella cuando están listas, y abren Family Hub cuando las misiones encajan en la semana." },
       { "question": "¿PandaGarde supervisa lo que hace mi hijo en línea?", "answer": "No. Tú listas los servicios que usa tu familia; PandaGarde no observa la actividad en vivo en el dispositivo de un niño." },
       { "question": "¿Para qué sirve el catálogo de servicios?", "answer": "Es la lista de aplicaciones y servicios que usa tu familia. La revisión de huella lee esa lista para mostrar la exposición. El catálogo no bloquea historias, recursos ni Family Hub." }
     ],

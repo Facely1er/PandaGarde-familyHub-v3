@@ -64,7 +64,7 @@
   "home": {
     "eyebrow": "Conseils en confidentialité familiale",
     "title": "Vos enfants sont en ligne.",
-    "titleAccent": " Voici une façon calme d'en parler.",
+    "titleAccent": " Voici comment les garder en sécurité.",
     "lead": "Voyez où vont les données de votre enfant — à l'école, dans les jeux et sur les réseaux sociaux — puis suivez un parcours simple, de la vue d'ensemble aux habitudes que votre famille garde.",
     "continueFootprint": "Continuer le bilan d'empreinte",
     "continueApps": "Continuer à ajouter vos applications",
@@ -103,8 +103,8 @@
     "pathSnapshotDesc": "Cochez les types de services que votre enfant utilise. Voyez où l'exposition s'accumule et par où commencer.",
     "pathSnapshotCta": "Commencer l'aperçu",
     "pathFootprintTag": "Étape 2 · 10 min",
-    "pathFootprintTitle": "Nommez vos applis, obtenez votre empreinte",
-    "pathFootprintDesc": "Choisissez les applis réelles de votre famille dans le catalogue : notes de confidentialité, scores et priorités par appli.",
+    "pathFootprintTitle": "Nommez les applis de votre famille",
+    "pathFootprintDesc": "Choisissez les applis réelles dans le catalogue. Le bilan d'empreinte note ensuite chacune et indique quoi corriger en premier.",
     "pathTalkTag": "Étape 3 · à lire ensemble",
     "pathTalkTitle": "En parler avec une histoire",
     "pathTalkDesc": "Une histoire de Privacy Panda vous donne, à vous et à votre enfant, des mots communs pour ce que vous avez découvert — sans sermon.",
@@ -115,7 +115,7 @@
   },
   "messaging": {
     "footprintCatalogNote": "Le bilan d'empreinte utilise les applications que vous listez dans le catalogue. Histoires, guides et Family Hub fonctionnent seuls — vous n'avez pas besoin de terminer un bilan d'abord.",
-    "independentAreasLead": "Choisissez ce qui convient aujourd'hui : une histoire avec votre enfant, un guide parental, des missions dans Family Hub, ou un bilan d'empreinte quand vous voulez un aperçu du foyer.",
+    "independentAreasLead": "Choisissez ce qui convient aujourd'hui : l'aperçu familial pour une vue rapide, une histoire avec votre enfant, un guide parental, des missions Family Hub, ou le bilan d'empreinte après avoir listé vos applis.",
     "guidesStoriesLead": "Lisez avec vos enfants, utilisez les guides parentaux et les imprimables, ou ouvrez Family Hub pour pratiquer — à votre rythme.",
     "quickStartLead": "5 minutes ? Lisez une histoire avec votre enfant. 15 minutes ? Listez les applications de votre famille. Le reste peut attendre."
   },
@@ -153,8 +153,8 @@
   },
   "howItWorks": {
     "title": "Comment fonctionne PandaGarde",
-    "subtitle": "Histoires, guides et Family Hub se suffisent à eux-mêmes. Le catalogue alimente le bilan d'empreinte quand vous voulez un aperçu.",
-    "lead": "PandaGarde n'est pas une longue liste de contrôle. Les familles lisent des histoires, utilisent des guides, ouvrent Family Hub ou lancent un bilan d'empreinte quand cela aide — seul le bilan nécessite des applications listées dans le catalogue.",
+    "subtitle": "Histoires, guides et Family Hub se suffisent à eux-mêmes. L'aperçu familial est la vue rapide ; le catalogue alimente le bilan d'empreinte pour les applis nommées.",
+    "lead": "PandaGarde n'est pas une longue liste de contrôle. Commencez par l'aperçu familial, lisez des histoires, utilisez des guides, ouvrez Family Hub ou lancez le bilan d'empreinte quand vos applis sont listées dans le catalogue.",
     "yourPath": "Votre parcours",
     "fourAreas": "Quatre espaces — choisissez ce qui convient",
     "whatYouGet": "Ce que vous obtenez",
@@ -174,8 +174,8 @@
     "getAppTitle": "Obtenez l'application Family Hub",
     "getAppLead": "Téléchargez PandaGarde Family Hub pour iPhone, iPad et Android. Gratuit, sans compte requis, et vos données restent sur votre appareil.",
     "readyTitle": "Prêt à commencer ?",
-    "readyBody": "Commencez par le bilan d'empreinte, ou ouvrez Family Hub quand vous êtes prêt.",
-    "startReview": "Commencer le bilan",
+    "readyBody": "Commencez par l'aperçu familial, ou ouvrez Family Hub quand vous êtes prêt.",
+    "startReview": "Voir la vue d'ensemble",
     "flow": [
       { "title": "Histoires et guides", "description": "Aventures de Privacy Panda et ressources parentales — accessibles à tout moment. Aucun catalogue ni bilan d'empreinte requis." },
       { "title": "Empreinte depuis votre catalogue", "description": "Listez les applications dans le catalogue quand vous voulez des scores. Le bilan lit cette liste — il ne déverrouille pas le reste du site." },
@@ -189,11 +189,11 @@
     ],
     "transformationColumns": [
       { "eyebrow": "Sans plan partagé", "title": "Le travail sur la vie privée se disperse et recommence", "points": ["Les notes, onglets et conversations ponctuelles ne deviennent jamais une routine familiale.", "Difficile de savoir quel réglage ou quelle application corriger en premier.", "Les enfants entendent des règles différentes à différents moments, sans histoire commune."] },
-      { "eyebrow": "Avec PandaGarde", "title": "Évaluez, apprenez et agissez ensemble", "points": ["Le bilan d'empreinte donne un aperçu quand vous listez les applications dans le catalogue.", "Histoires et ressources fonctionnent seules quand vous avez besoin d'un moment calme.", "Family Hub réunit missions et progression au même endroit sur votre appareil."] }
+      { "eyebrow": "Avec PandaGarde", "title": "Évaluez, apprenez et agissez ensemble", "points": ["L'aperçu familial donne la vue d'ensemble en deux minutes ; le bilan d'empreinte note les applis nommées de votre catalogue.", "Histoires et ressources fonctionnent seules quand vous avez besoin d'un moment calme.", "Family Hub réunit missions et progression au même endroit sur votre appareil."] }
     ],
     "journeyLayers": [
       { "title": "Histoires et guides", "description": "Privacy Panda et ressources parentales — accessibles à tout moment, sans catalogue.", "points": ["Lire ensemble", "Indépendant de l'empreinte", "Ton adapté à l'âge"] },
-      { "title": "Empreinte depuis le catalogue", "description": "Listez les applications une fois ; évaluez l'exposition quand vous voulez un aperçu du foyer.", "points": ["Le catalogue construit la liste", "Le bilan utilise cette liste", "Moment au choix"] },
+      { "title": "Empreinte depuis le catalogue", "description": "Listez les applications une fois dans le catalogue, puis ouvrez le bilan d'empreinte pour les scores par appli.", "points": ["Le catalogue construit la liste", "Le bilan utilise cette liste", "Moment au choix"] },
       { "title": "Family Hub", "description": "Missions et progression sur votre appareil — avant, après ou sans bilan.", "points": ["Progression locale", "Missions guidées par les parents", "Aucun bilan d'empreinte requis"] }
     ],
     "audienceCards": [
@@ -203,7 +203,7 @@
     ],
     "faqCards": [
       { "question": "Devons-nous terminer le bilan d'empreinte avant les histoires ou Family Hub ?", "answer": "Non. Histoires, guides et Family Hub sont indépendants. Seule la page du bilan d'empreinte nécessite des applications dans votre catalogue pour que les scores aient de quoi analyser." },
-      { "question": "Devons-nous ouvrir Family Hub dès le premier jour ?", "answer": "Non. Beaucoup de familles commencent par une histoire ou un guide, utilisent le bilan d'empreinte quand elles veulent un aperçu, et ouvrent Family Hub quand les missions conviennent à la semaine." },
+      { "question": "Devons-nous ouvrir Family Hub dès le premier jour ?", "answer": "Non. Beaucoup de familles commencent par l'aperçu familial ou une histoire, nomment leurs applis pour le bilan d'empreinte quand elles sont prêtes, et ouvrent Family Hub quand les missions conviennent à la semaine." },
       { "question": "PandaGarde surveille-t-il ce que fait mon enfant en ligne ?", "answer": "Non. Vous listez les services que votre famille utilise ; PandaGarde ne surveille pas l'activité en direct sur l'appareil d'un enfant." },
       { "question": "À quoi sert le catalogue de services ?", "answer": "C'est la liste des applications et services que votre famille utilise. Le bilan d'empreinte lit cette liste pour montrer l'exposition. Le catalogue ne verrouille ni les histoires, ni les ressources, ni Family Hub." }
     ],

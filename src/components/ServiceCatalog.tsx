@@ -571,25 +571,22 @@ const ServiceCatalog: React.FC<ServiceCatalogProps> = ({
                   const exposureLevel = getExposureLevel(exposureIndex);
                   if (exposureIndex !== null) {
                     return (
-                      <div className="mt-3 p-2 rounded-lg bg-gray-50 dark:bg-gray-800">
-                        <div className="flex items-center justify-between mb-1">
+                      <div className="rounded-lg bg-gray-50 p-2 dark:bg-gray-800">
+                        <div className="mb-1 flex items-center justify-between gap-2">
                           <span className="text-xs font-medium text-gray-600 dark:text-gray-400">
                             Privacy Exposure
                           </span>
-                          <span className={`text-xs font-semibold ${exposureLevel.textColor}`}>
-                            {exposureIndex}/100
+                          <span className={`shrink-0 text-xs font-semibold ${exposureLevel.textColor}`}>
+                            {exposureLevel.level} · {exposureIndex}/100
                           </span>
                         </div>
-                        <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                        <div className="h-2 w-full rounded-full bg-gray-200 dark:bg-gray-700">
                           {/* width from CSS var --exposure-pct (dynamic 0-100%) */}
                           <div
                             className={`h-2 rounded-full exposure-bar-width ${exposureLevel.barColor}`}
                             style={{ ['--exposure-pct' as string]: `${exposureIndex}%` } as React.CSSProperties}
                           />
                         </div>
-                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                          {exposureLevel.level} - {exposureLevel.description}
-                        </p>
                       </div>
                     );
                   }

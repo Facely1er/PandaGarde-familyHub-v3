@@ -64,7 +64,7 @@
   "home": {
     "eyebrow": "Family privacy guidance",
     "title": "Your kids are online.",
-    "titleAccent": " Here's a calm way to talk about it.",
+    "titleAccent": " Here's how to keep them safe.",
     "lead": "See where your child's data goes — at school, in games and on social apps — then follow a simple path from the big picture to habits your family keeps.",
     "continueFootprint": "Continue footprint review",
     "continueApps": "Continue adding your apps",
@@ -103,8 +103,8 @@
     "pathSnapshotDesc": "Tick the kinds of services your child uses. See where exposure builds up and where to start.",
     "pathSnapshotCta": "Start the snapshot",
     "pathFootprintTag": "Step 2 · 10 min",
-    "pathFootprintTitle": "Name your apps, get your footprint",
-    "pathFootprintDesc": "Pick your family's actual apps from the catalog for per-app privacy notes, scores and what to fix first.",
+    "pathFootprintTitle": "Name your family's apps",
+    "pathFootprintDesc": "Pick the actual apps from the catalog. Footprint Review then scores each one and shows what to fix first.",
     "pathTalkTag": "Step 3 · read together",
     "pathTalkTitle": "Talk it through with a story",
     "pathTalkDesc": "A Privacy Panda story gives you and your child shared words for what you found — no lecture needed.",
@@ -115,7 +115,7 @@
   },
   "messaging": {
     "footprintCatalogNote": "Footprint review uses the apps you list in the service catalog. Stories, guides, and Family Hub work on their own—you do not need to finish a review first.",
-    "independentAreasLead": "Pick what fits today: a story with your child, a parent guide, missions in Family Hub, or a footprint review when you want a household snapshot.",
+    "independentAreasLead": "Pick what fits today: the Family Snapshot for a quick overview, a story with your child, a parent guide, Family Hub missions, or Footprint Review after you list apps in the catalog.",
     "guidesStoriesLead": "Read with your kids, use parent guides and printables, or open Family Hub for practice—all at your own pace.",
     "quickStartLead": "Got 5 minutes? Read a story with your child. Got 15? List the apps your family uses. Everything else can wait until you are ready."
   },
@@ -153,8 +153,8 @@
   },
   "howItWorks": {
     "title": "How PandaGarde Works",
-    "subtitle": "Stories, guides, and Family Hub stand on their own. The catalog feeds footprint review when you want a snapshot.",
-    "lead": "PandaGarde is not one long checklist. Families read stories, use guides, open Family Hub, or run a footprint review when it helps—only the review needs apps listed in the catalog.",
+    "subtitle": "Stories, guides, and Family Hub stand on their own. Family Snapshot is the quick overview; the catalog feeds Footprint Review for named apps.",
+    "lead": "PandaGarde is not one long checklist. Start with the Family Snapshot, read stories, use guides, open Family Hub, or run Footprint Review when you have apps listed in the catalog.",
     "yourPath": "Your path",
     "fourAreas": "Four areas—pick what fits",
     "whatYouGet": "What you get",
@@ -174,8 +174,8 @@
     "getAppTitle": "Get the Family Hub app",
     "getAppLead": "Download PandaGarde Family Hub for iPhone, iPad, and Android. Free, no account required, and your data stays on your device.",
     "readyTitle": "Ready to begin?",
-    "readyBody": "Start with footprint review, or open Family Hub when you are ready.",
-    "startReview": "Start review",
+    "readyBody": "Start with the Family Snapshot, or open Family Hub when you are ready.",
+    "startReview": "See the big picture",
     "flow": [
       { "title": "Stories & guides", "description": "Privacy Panda adventures and parent materials—open anytime. No catalog or footprint review required." },
       { "title": "Footprint from your catalog", "description": "List apps in the service catalog when you want scores. Footprint review reads that list—it does not unlock the rest of the site." },
@@ -189,11 +189,11 @@
     ],
     "transformationColumns": [
       { "eyebrow": "Without a shared plan", "title": "Privacy work scatters and restarts", "points": ["Notes, tabs, and one-off conversations never become a household routine.", "It is hard to know which setting or app to fix first.", "Kids hear different rules in different moments, without a shared story."] },
-      { "eyebrow": "With PandaGarde", "title": "Review, learn, and follow through together", "points": ["Footprint review gives a snapshot when you list apps in the catalog.", "Stories and resources work on their own when you need a calm moment.", "Family Hub keeps missions and progress in one place on your device."] }
+      { "eyebrow": "With PandaGarde", "title": "Review, learn, and follow through together", "points": ["Family Snapshot shows the big picture in two minutes; Footprint Review scores named apps from your catalog.", "Stories and resources work on their own when you need a calm moment.", "Family Hub keeps missions and progress in one place on your device."] }
     ],
     "journeyLayers": [
       { "title": "Stories & guides", "description": "Privacy Panda and parent materials—open anytime, no catalog required.", "points": ["Read together", "Independent of footprint", "Age-matched tone"] },
-      { "title": "Footprint from catalog", "description": "List apps once; review exposure when you want a household snapshot.", "points": ["Catalog builds the list", "Review uses that list", "Optional timing"] },
+      { "title": "Footprint from catalog", "description": "List apps once in the catalog, then open Footprint Review for per-app scores.", "points": ["Catalog builds the list", "Review uses that list", "Optional timing"] },
       { "title": "Family Hub", "description": "Missions and progress on your device—before, after, or without a review.", "points": ["Local progress", "Parent-guided missions", "No footprint review required"] }
     ],
     "audienceCards": [
@@ -203,7 +203,7 @@
     ],
     "faqCards": [
       { "question": "Do we have to finish footprint review before stories or Family Hub?", "answer": "No. Stories, guides, and Family Hub are independent. Only the footprint review page needs apps in your service catalog so scores have something to analyze." },
-      { "question": "Do we have to open Family Hub on day one?", "answer": "No. Many families start with a story or a guide, use footprint review when they want a snapshot, and open Family Hub whenever missions fit the week." },
+      { "question": "Do we have to open Family Hub on day one?", "answer": "No. Many families start with the Family Snapshot or a story, name apps for Footprint Review when ready, and open Family Hub whenever missions fit the week." },
       { "question": "Does PandaGarde monitor what my child does online?", "answer": "No. You list services your family uses; PandaGarde does not watch live activity on a child's device." },
       { "question": "What is the service catalog for?", "answer": "It is the list of apps and services your family uses. Footprint review reads that list to show exposure. The catalog does not gate stories, resources, or Family Hub." }
     ],

@@ -127,8 +127,8 @@ const HomePage: React.FC = () => {
               {primaryCta.label}
               <ArrowRight size={18} aria-hidden />
             </Link>
-            <Link to="/digital-footprint" className="button button-secondary inline-flex items-center justify-center">
-              {t('common.footprintReview')}
+            <Link to="/service-catalog" className="button button-secondary inline-flex items-center justify-center">
+              {t('home.addFamilyApps')}
             </Link>
           </div>
           <p className="mt-3 text-center text-sm text-gray-500 dark:text-gray-400">

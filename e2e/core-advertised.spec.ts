@@ -11,7 +11,7 @@ async function gotoAndWait(page: Page, path: string) {
 test.describe('Core features advertised (How it works + CONTENT_TRUTH)', () => {
   test('Home — hero and primary journey CTA', async ({ page }) => {
     await gotoAndWait(page, '/');
-    await expect(page.getByRole('heading', { level: 1 })).toContainText(/kids are online|calm way to talk/i);
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(/kids are online|keep them safe/i);
     const primary = page.getByRole('link', {
       name: /Continue footprint review|Continue adding apps|big picture|Footprint Review/i,
     });

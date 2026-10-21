@@ -255,11 +255,11 @@ const ForFamiliesPage: React.FC = () => {
               <Fingerprint size={24} />
             </div>
             <div className="shell-cta-panel__copy">
-              <p className="shell-pill mb-2 self-start">When you want a snapshot</p>
+              <p className="shell-pill mb-2 self-start">After the Family Snapshot</p>
               <h2 className="shell-card__title m-0 text-lg">{t('nav.footprintReview')}</h2>
               <p className="shell-card__body mt-2 mb-0">
-                List the apps your family uses, then see exposure scores and what to do next—all on the
-                Footprint Review page.
+                Name your family’s apps in the catalog, then open Footprint Review for per-app scores and
+                what to fix first.
               </p>
             </div>
             <div className="shell-cta-panel__actions guides-stories-hub__cta-actions">
