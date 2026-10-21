@@ -17,6 +17,7 @@ import {
 } from './siteNavigation';
 
 const APP_STATIC_PATHS = new Set([
+  '/family-snapshot',
   '/service-catalog',
   '/digital-footprint',
   '/scoring-methodology',
@@ -76,7 +77,7 @@ describe('footer navigation links', () => {
   });
 
   it('footer link counts match planned IA', () => {
-    expect(footerFootprintLinks).toHaveLength(4);
+    expect(footerFootprintLinks).toHaveLength(5);
     expect(footerFamilyLinks).toHaveLength(5);
     expect(footerHelpCenterLinks).toHaveLength(5);
     expect(footerLegalLinks).toHaveLength(5);
