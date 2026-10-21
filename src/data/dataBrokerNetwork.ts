@@ -1,5 +1,5 @@
 /**
- * Data Broker Network â€” 3rd/4th Party Data Chain Mapping
+ * Data Broker Network — 3rd/4th Party Data Chain Mapping
  *
  * Documents the downstream data flow for each service:
  *  - 3rd-party trackers: SDKs, analytics, ad-network libraries embedded in the app
@@ -19,7 +19,7 @@ export type TrackerRole =
   | 'advertising'      // ad-delivery or ad-attribution
   | 'attribution'      // mobile install/conversion attribution
   | 'customer-data'    // CRM / customer data platform
-  | 'cloud-infra'      // backend hosting â€” less direct, but still holds data
+  | 'cloud-infra'      // backend hosting — less direct, but still holds data
   | 'payment'          // billing (limited personal data, but still 3rd party)
   | 'ai-training';     // conversation/content data used to train AI models
 
@@ -60,9 +60,9 @@ export interface ServiceDataChain {
   chainRiskLevel: 'low' | 'medium' | 'high' | 'very-high';
 }
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─────────────────────────────────────────────────────────────────────────────
 // Common reusable trackers (referenced by multiple services)
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─────────────────────────────────────────────────────────────────────────────
 
 const FIREBASE_ANALYTICS: ThirdPartyTracker = {
   name: 'Google Firebase / Analytics',
@@ -120,9 +120,9 @@ const _OPENAI_API: ThirdPartyTracker = {
   documented: true
 };
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─────────────────────────────────────────────────────────────────────────────
 // Common broker links
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─────────────────────────────────────────────────────────────────────────────
 
 const LIVERAMP: DataBrokerLink = {
   name: 'LiveRamp',
@@ -169,13 +169,13 @@ const UNITY_ADS: DataBrokerLink = {
   documented: true
 };
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─────────────────────────────────────────────────────────────────────────────
 // Service data chains
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─────────────────────────────────────────────────────────────────────────────
 
 export const serviceDataChains: ServiceDataChain[] = [
 
-  // â”€â”€ Social Media â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Social Media ──────────────────────────────────────────────────────────
 
   {
     serviceId: 'instagram',
@@ -237,7 +237,7 @@ export const serviceDataChains: ServiceDataChain[] = [
     fourthPartyBrokers: [LIVERAMP, ORACLE_BLUEKAI]
   },
 
-  // â”€â”€ Messaging â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Messaging ────────────────────────────────────────────────────────────
 
   {
     serviceId: 'whatsapp',
@@ -274,7 +274,7 @@ export const serviceDataChains: ServiceDataChain[] = [
     fourthPartyBrokers: [ORACLE_BLUEKAI, EPSILON]
   },
 
-  // â”€â”€ Gaming â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Gaming ───────────────────────────────────────────────────────────────
 
   {
     serviceId: 'roblox',
@@ -335,7 +335,7 @@ export const serviceDataChains: ServiceDataChain[] = [
     ]
   },
 
-  // â”€â”€ Streaming â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Streaming ────────────────────────────────────────────────────────────
 
   {
     serviceId: 'youtube',
@@ -378,12 +378,12 @@ export const serviceDataChains: ServiceDataChain[] = [
     ]
   },
 
-  // â”€â”€ EdTech / School â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── EdTech / School ──────────────────────────────────────────────────────
 
   {
     serviceId: 'google-classroom',
     chainRiskLevel: 'medium',
-    chainSummary: 'Google for Education restricts ad use of student data, but the same Google infrastructure that hosts Classroom is deeply connected to Google\'s broader data ecosystem â€” and third-party tools added by teachers bypass those protections.',
+    chainSummary: 'Google for Education restricts ad use of student data, but the same Google infrastructure that hosts Classroom is deeply connected to Google\'s broader data ecosystem — and third-party tools added by teachers bypass those protections.',
     thirdPartyTrackers: [
       {
         name: 'Google Analytics for Education',
@@ -405,7 +405,7 @@ export const serviceDataChains: ServiceDataChain[] = [
       {
         name: 'EdTech Third-Party Vendors (via Marketplace)',
         type: 'data-marketplace',
-        reachNote: 'Any EdTech app installed via Google Workspace Marketplace creates its own data flow â€” some of these vendors have weak or no FERPA compliance and may share data downstream.',
+        reachNote: 'Any EdTech app installed via Google Workspace Marketplace creates its own data flow — some of these vendors have weak or no FERPA compliance and may share data downstream.',
         documented: false
       }
     ]
@@ -414,7 +414,7 @@ export const serviceDataChains: ServiceDataChain[] = [
   {
     serviceId: 'classdojo',
     chainRiskLevel: 'high',
-    chainSummary: 'ClassDojo stores detailed child behavioural profiles and uses Salesforce and Google Analytics â€” this connects children\'s school behaviour records to commercial data infrastructure.',
+    chainSummary: 'ClassDojo stores detailed child behavioural profiles and uses Salesforce and Google Analytics — this connects children\'s school behaviour records to commercial data infrastructure.',
     thirdPartyTrackers: [
       SALESFORCE_MKT,
       FIREBASE_ANALYTICS,
@@ -430,7 +430,7 @@ export const serviceDataChains: ServiceDataChain[] = [
       {
         name: 'Salesforce Datorama / Marketing Cloud Intelligence',
         type: 'customer-data',
-        reachNote: 'Salesforce\'s Marketing Cloud can connect to Oracle Data Cloud and other data brokers for enrichment â€” data processed through Salesforce may be enriched with broader consumer profiles.',
+        reachNote: 'Salesforce\'s Marketing Cloud can connect to Oracle Data Cloud and other data brokers for enrichment — data processed through Salesforce may be enriched with broader consumer profiles.',
         documented: false
       },
       ORACLE_BLUEKAI
@@ -461,12 +461,12 @@ export const serviceDataChains: ServiceDataChain[] = [
     ]
   },
 
-  // â”€â”€ AI Apps â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── AI Apps ───────────────────────────────────────────────────────────────
 
   {
     serviceId: 'chatgpt',
     chainRiskLevel: 'very-high',
-    chainSummary: 'Every conversation with ChatGPT is stored by OpenAI; unless you disable training, that content â€” including personal disclosures â€” may be used to train future AI models. There is no FERPA compliance for consumer accounts.',
+    chainSummary: 'Every conversation with ChatGPT is stored by OpenAI; unless you disable training, that content — including personal disclosures — may be used to train future AI models. There is no FERPA compliance for consumer accounts.',
     thirdPartyTrackers: [
       {
         name: 'Microsoft Azure (infrastructure)',
@@ -528,7 +528,7 @@ export const serviceDataChains: ServiceDataChain[] = [
   {
     serviceId: 'snapchat-my-ai',
     chainRiskLevel: 'very-high',
-    chainSummary: 'My AI is built into Snapchat and shares Snap\'s full ad infrastructure; conversations are stored and factored into ad targeting â€” the same data flows that reach LiveRamp and Oracle BlueKai apply.',
+    chainSummary: 'My AI is built into Snapchat and shares Snap\'s full ad infrastructure; conversations are stored and factored into ad targeting — the same data flows that reach LiveRamp and Oracle BlueKai apply.',
     thirdPartyTrackers: [
       {
         name: 'Snap Advertising SDK',
@@ -545,12 +545,12 @@ export const serviceDataChains: ServiceDataChain[] = [
   {
     serviceId: 'meta-ai',
     chainRiskLevel: 'very-high',
-    chainSummary: 'Meta AI is embedded in WhatsApp, Instagram, and Messenger â€” every AI interaction feeds Meta\'s advertising system, which connects to the largest identity-resolution and data broker network in the world.',
+    chainSummary: 'Meta AI is embedded in WhatsApp, Instagram, and Messenger — every AI interaction feeds Meta\'s advertising system, which connects to the largest identity-resolution and data broker network in the world.',
     thirdPartyTrackers: [
       {
         name: 'Meta AI Training & Ad Pipeline',
         role: 'ai-training',
-        notes: 'Meta uses AI conversations to improve its models and, for some interactions, to inform ad targeting â€” same data infrastructure as Facebook/Instagram',
+        notes: 'Meta uses AI conversations to improve its models and, for some interactions, to inform ad targeting — same data infrastructure as Facebook/Instagram',
         canProfileMinors: true,
         documented: true
       }
@@ -561,7 +561,7 @@ export const serviceDataChains: ServiceDataChain[] = [
   {
     serviceId: 'grammarly',
     chainRiskLevel: 'high',
-    chainSummary: 'Every piece of writing â€” homework, essays, emails â€” passes through Grammarly\'s servers. This gives Grammarly an unusually deep view into children\'s ideas, personal writing, and academic work.',
+    chainSummary: 'Every piece of writing — homework, essays, emails — passes through Grammarly\'s servers. This gives Grammarly an unusually deep view into children\'s ideas, personal writing, and academic work.',
     thirdPartyTrackers: [
       AWS_INFRA,
       FIREBASE_ANALYTICS,
@@ -586,7 +586,7 @@ export const serviceDataChains: ServiceDataChain[] = [
   {
     serviceId: 'microsoft-copilot',
     chainRiskLevel: 'medium',
-    chainSummary: 'Microsoft Copilot in school accounts is governed by the Microsoft EDU data terms, giving it more protection than the consumer version â€” but all interactions are stored by Microsoft and flow through Azure.',
+    chainSummary: 'Microsoft Copilot in school accounts is governed by the Microsoft EDU data terms, giving it more protection than the consumer version — but all interactions are stored by Microsoft and flow through Azure.',
     thirdPartyTrackers: [
       {
         name: 'Microsoft Azure AI Infrastructure',
@@ -613,7 +613,7 @@ export const serviceDataChains: ServiceDataChain[] = [
     ]
   },
 
-  // â”€â”€ Telecom â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Telecom ────────────────────────────────────────────────────────────────
 
   {
     serviceId: 'verizon',
@@ -664,12 +664,12 @@ export const serviceDataChains: ServiceDataChain[] = [
   {
     serviceId: 'att',
     chainRiskLevel: 'very-high',
-    chainSummary: 'AT&T combines carrier-level location, call metadata, and broadband browsing data. It ran "Project Hemisphere" â€” a mass surveillance program selling call records at scale â€” and its Xandr ad platform (now Microsoft) used carrier identity data for ad targeting. AT&T was the carrier most cited in congressional hearings on location-data sales.',
+    chainSummary: 'AT&T combines carrier-level location, call metadata, and broadband browsing data. It ran "Project Hemisphere" — a mass surveillance program selling call records at scale — and its Xandr ad platform (now Microsoft) used carrier identity data for ad targeting. AT&T was the carrier most cited in congressional hearings on location-data sales.',
     thirdPartyTrackers: [
       {
         name: 'AT&T AdWorks / Xandr (now Microsoft Advertising)',
         role: 'advertising',
-        notes: 'AT&T\'s ad platform used carrier identity and location data to build targeting segments; acquired by Microsoft in 2022 â€” data agreements carried over',
+        notes: 'AT&T\'s ad platform used carrier identity and location data to build targeting segments; acquired by Microsoft in 2022 — data agreements carried over',
         canProfileMinors: true,
         documented: true
       },
@@ -714,7 +714,7 @@ export const serviceDataChains: ServiceDataChain[] = [
       {
         name: 'T-Mobile Advertising Solutions',
         role: 'advertising',
-        notes: 'T-Mobile uses network data (location, app category, web category) to build advertising segments; enabled by default â€” opt-out in T-Mobile app',
+        notes: 'T-Mobile uses network data (location, app category, web category) to build advertising segments; enabled by default — opt-out in T-Mobile app',
         canProfileMinors: true,
         documented: true
       },
@@ -736,7 +736,7 @@ export const serviceDataChains: ServiceDataChain[] = [
       {
         name: 'Securus Technologies (historical)',
         type: 'aggregator',
-        reachNote: 'Securus was purchasing real-time location data from T-Mobile (and other carriers) and selling it to law enforcement and bail bondsmen â€” exposed by NYT in 2018; FCC enforcement followed.',
+        reachNote: 'Securus was purchasing real-time location data from T-Mobile (and other carriers) and selling it to law enforcement and bail bondsmen — exposed by NYT in 2018; FCC enforcement followed.',
         documented: true
       },
       ACXIOM
@@ -746,12 +746,12 @@ export const serviceDataChains: ServiceDataChain[] = [
   {
     serviceId: 'cricket-wireless',
     chainRiskLevel: 'high',
-    chainSummary: 'Cricket is fully owned by AT&T and runs on the same network infrastructure â€” all AT&T data practices, including the Xandr/Microsoft ad platform and Project Hemisphere, apply to Cricket subscribers.',
+    chainSummary: 'Cricket is fully owned by AT&T and runs on the same network infrastructure — all AT&T data practices, including the Xandr/Microsoft ad platform and Project Hemisphere, apply to Cricket subscribers.',
     thirdPartyTrackers: [
       {
         name: 'AT&T Network Infrastructure (shared)',
         role: 'analytics',
-        notes: 'Cricket operates as an MVNO on AT&T\'s network â€” all AT&T tower-level location and traffic data applies',
+        notes: 'Cricket operates as an MVNO on AT&T\'s network — all AT&T tower-level location and traffic data applies',
         canProfileMinors: true,
         documented: true
       }
@@ -768,9 +768,9 @@ export const serviceDataChains: ServiceDataChain[] = [
   }
 ];
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─────────────────────────────────────────────────────────────────────────────
 // Look-up helpers
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─────────────────────────────────────────────────────────────────────────────
 
 /**
  * Get the data chain for a specific service, or null if not mapped.

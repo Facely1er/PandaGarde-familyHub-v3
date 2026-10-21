@@ -30,8 +30,8 @@ The cast — Po, Ruby, Tao, Mika, Billy, Lumi, and the extended tier — is the 
 and structural backbone. Canon content in `src/data/stories.ts` and
 `docs/STORYLINE_BIBLE.md` feeds all surfaces.
 
-**Approved one-liner (shipped):** Stories and guides are open anytime; Family Snapshot is
-the two-minute overview; the catalog feeds Footprint Review for named apps; Family Hub is
+**Approved one-liner (shipped):** Stories and guides are open anytime; Big picture is
+the two-minute overview; the apps you pick feed the action plan; Family Hub is
 optional practice on device; the Kids App is where the forest feels most real for children.
 
 ### What It Is Not

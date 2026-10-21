@@ -17,7 +17,6 @@ const PRINTABLES_HUB_PATH = '/downloads/coloring-sheets';
 const PRINTABLES_HUB_LABEL = 'Printables & downloads';
 
 const FOOTPRINT_WORKFLOW_PATHS = new Set([
-  '/family-snapshot',
   '/service-catalog',
   '/digital-footprint',
   '/footprint',
@@ -81,8 +80,8 @@ export const BREADCRUMB_PAGE_LABELS: Record<string, string> = {
   '/age-groups': 'Age groups',
   '/educator-tools': 'Educator tools',
   '/classroom-activities': 'Classroom activities',
-  '/family-snapshot': 'Family snapshot',
-  '/service-catalog': 'Service catalog',
+  '/big-picture': 'Big picture',
+  '/service-catalog': 'Your apps',
   '/safety-alerts': 'Safety alerts',
   '/alerts': 'Safety alerts',
   '/child-safety-alerts': 'Safety alerts',

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Download, ArrowRight, BarChart3, TrendingUp, BookOpen, ChevronDown, ChevronUp, RotateCcw } from 'lucide-react';
+import { Download, ArrowRight, BookOpen, ChevronDown, ChevronUp, RotateCcw } from 'lucide-react';
 import PageLayout from '../components/layout/PageLayout';
 import DigitalFootprintVisualizer from '../components/DigitalFootprintVisualizer';
-import EmptyStateWithServicePrompt from '../components/EmptyStateWithServicePrompt';
-import DfaJourneyStepper from '../components/journey/DfaJourneyStepper';
+import FamilyActionPlan from '../components/FamilyActionPlan';
+import FamilyPlanSteps from '../components/journey/FamilyPlanSteps';
 import DfaScoreOverview from '../components/dfa/DfaScoreOverview';
 import DfaMethodologyCallout from '../components/dfa/DfaMethodologyCallout';
 import { useFamily } from '../contexts/FamilyContext';
@@ -12,8 +12,8 @@ import { footprintAnalyzer } from '../lib/footprintAnalyzer';
 import { resetDfaJourney, updateDfaJourneyPhase } from '../lib/dfaJourney';
 import { buildDfaScore, loadDfaScoreTier } from '../lib/dfaScoreEngine';
 import { downloadDfaExecutiveSummary } from '../lib/dfaReport';
+import { loadFamilyPictureSelection } from '../lib/familyBigPicture';
 import { logger } from '../lib/logger';
-import { FOOTPRINT_REVIEW_NAV_LABEL } from '../data/siteNavigation';
 import { dfaTheme } from '../styles/dfaTheme';
 
 const DigitalFootprintEducator: React.FC = () => {
@@ -68,19 +68,29 @@ const DigitalFootprintPage: React.FC = () => {
     });
   }, [totalServicesCount]);
 
+  const pictureDone = loadFamilyPictureSelection().kinds.length > 0;
+
   if (totalServicesCount === 0) {
     return (
       <PageLayout
-        title={FOOTPRINT_REVIEW_NAV_LABEL}
-        subtitle="Scores come from apps you listed in the service catalog. Add at least three there to see your family's exposure—stories and guides work without that step."
+        title="Your action plan"
+        subtitle="Step 3 of 3 — built from the apps your family uses."
         breadcrumbs={true}
       >
-        <EmptyStateWithServicePrompt
-          feature="Your family's digital footprint"
-          description="Tap at least 3 apps your family uses in the app list. Then come back here to see your scores."
-          minimumServices={3}
-          icon={<BarChart3 size={24} className="text-white" />}
-        />
+        <div className="mx-auto flex w-full max-w-4xl flex-col gap-6">
+          <FamilyPlanSteps current="plan" done={{ picture: pictureDone }} />
+          <div className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-700 dark:bg-gray-800">
+            <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100">Pick your apps first</h2>
+            <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
+              Your plan is built from the apps your child actually uses. Pick them in the app list — it takes about three
+              minutes — and your step-by-step plan appears here.
+            </p>
+            <Link to="/service-catalog" className="button button-primary mt-4 inline-flex min-h-[44px] items-center gap-2">
+              Pick your apps
+              <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+          </div>
+        </div>
       </PageLayout>
     );
   }
@@ -120,133 +130,87 @@ const DigitalFootprintPage: React.FC = () => {
     }
   };
 
-  const storyHref = '/stories/privacy-panda-and-the-digital-bamboo-forest';
+
+  const hasScores = totalServicesCount >= 3;
 
   return (
     <PageLayout
-      title={FOOTPRINT_REVIEW_NAV_LABEL}
-      subtitle="Household scores from the apps you listed. Review exposure by service, download a summary, or update your app list for a fresher picture."
+      title="Your action plan"
+      subtitle="Step 3 of 3 — what to do about the apps your family uses, most important first."
       breadcrumbs={true}
     >
-      <section className="mb-6 overflow-hidden rounded-2xl border border-green-200 bg-green-50 shadow-sm dark:border-green-800/50 dark:bg-gray-800">
-        <div className="px-4 pt-4 pb-3">
-          <DfaJourneyStepper
-            variant="strip"
-            currentKey="dfa"
-            catalogServicesCount={totalServicesCount}
-            embedded
-            hideStripCta
-          />
-        </div>
-        <div className="flex flex-wrap items-center gap-2 border-t border-green-200/80 bg-white/70 px-4 py-2.5 dark:border-green-800/50 dark:bg-gray-900/60">
-          {analysis && (
-            <button
-              type="button"
-              onClick={() => { void handleExportPdf(); }}
-              disabled={isExportingPdf}
-              aria-busy={isExportingPdf}
-              aria-label="Download digital footprint report as PDF"
-              className={`inline-flex min-h-11 items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-70 ${dfaTheme.btnOutline}`}
-            >
-              <Download className="h-3.5 w-3.5" aria-hidden />
-              {isExportingPdf ? 'Generating…' : 'Download PDF'}
-            </button>
-          )}
-          <Link
-            to="/service-catalog"
-            className="inline-flex min-h-11 items-center gap-1.5 rounded-lg border border-green-300 px-3 py-2 text-sm font-semibold text-green-700 hover:bg-green-50 dark:border-green-700 dark:text-green-300 dark:hover:bg-green-900/30"
-          >
-            Update app list
+      <div className="mx-auto flex w-full max-w-5xl flex-col gap-8">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <FamilyPlanSteps current="plan" done={{ picture: pictureDone, apps: true }} />
+          <Link to="/service-catalog" className="touch-link text-sm font-semibold text-green-700 hover:underline dark:text-green-400">
+            Add or remove apps
           </Link>
-          <button
-            type="button"
-            onClick={() => { void handleStartOver(); }}
-            disabled={isResetting}
-            aria-busy={isResetting}
-            className="inline-flex min-h-11 items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-semibold text-gray-500 hover:text-gray-700 disabled:cursor-not-allowed disabled:opacity-70 dark:text-gray-400 dark:hover:text-gray-200"
-          >
-            <RotateCcw className="h-3.5 w-3.5" aria-hidden />
-            {isResetting ? 'Clearing…' : 'Start over'}
-          </button>
         </div>
-      </section>
 
-      {analysis && (
-        <div className="mb-8 space-y-6">
-          <DfaScoreOverview analysis={analysis} />
-          <div className="grid gap-4 md:grid-cols-3">
-            {[['Family score', `${analysis.familyScore}/100`], ['Privacy score', `${analysis.privacyScore}/100`], ['Services analyzed', `${analysis.totalServices}`]].map(([label, value]) => (
-              <div key={label} className={`p-5 ${dfaTheme.cardLg}`}>
-                <div className="text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-dark-text-tertiary">{label}</div>
-                <div className={`mt-2 text-3xl ${dfaTheme.titleBold}`}>{value}</div>
-              </div>
-            ))}
+        <FamilyActionPlan serviceIds={catalogServices.length ? catalogServices : Object.values(memberServices).flat()} />
+
+        <details className="group rounded-2xl border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800">
+          <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-3 p-5 font-semibold text-gray-900 dark:text-gray-100">
+            <span>
+              Detailed footprint review
+              <span className="block text-sm font-normal text-gray-500 dark:text-gray-400">
+                Scores, data sharing and a PDF summary — optional, for parents who want the detail.
+              </span>
+            </span>
+            <ArrowRight className="h-4 w-4 shrink-0 transition-transform group-open:rotate-90" aria-hidden />
+          </summary>
+          <div className="border-t border-gray-200 p-5 dark:border-gray-700">
+            {hasScores ? (
+              <>
+                <div className="mb-6 flex flex-wrap items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => { void handleExportPdf(); }}
+                    disabled={isExportingPdf}
+                    aria-busy={isExportingPdf}
+                    aria-label="Download digital footprint report as PDF"
+                    className={`inline-flex min-h-11 items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-70 ${dfaTheme.btnOutline}`}
+                  >
+                    <Download className="h-3.5 w-3.5" aria-hidden />
+                    {isExportingPdf ? 'Generating…' : 'Download PDF'}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => { void handleStartOver(); }}
+                    disabled={isResetting}
+                    aria-busy={isResetting}
+                    className="inline-flex min-h-11 items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-semibold text-gray-500 hover:text-gray-700 disabled:cursor-not-allowed disabled:opacity-70 dark:text-gray-400 dark:hover:text-gray-200"
+                  >
+                    <RotateCcw className="h-3.5 w-3.5" aria-hidden />
+                    {isResetting ? 'Clearing…' : 'Start over'}
+                  </button>
+                </div>
+                <div className="mb-8 space-y-6">
+                  <DfaScoreOverview analysis={analysis} />
+                  <div className="grid gap-4 md:grid-cols-3">
+                    {[['Family score', `${analysis.familyScore}/100`], ['Privacy score', `${analysis.privacyScore}/100`], ['Services analyzed', `${analysis.totalServices}`]].map(([label, value]) => (
+                      <div key={label} className={`p-5 ${dfaTheme.cardLg}`}>
+                        <div className="text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-dark-text-tertiary">{label}</div>
+                        <div className={`mt-2 text-3xl ${dfaTheme.titleBold}`}>{value}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="mb-8">
+                  <DigitalFootprintVisualizer />
+                </div>
+                <div className="space-y-6">
+                  <DigitalFootprintEducator />
+                  <DfaMethodologyCallout />
+                </div>
+              </>
+            ) : (
+              <p className="text-sm text-gray-600 dark:text-gray-300">
+                Add at least three apps to see the detailed review. Your action plan above already works with any number of apps.
+              </p>
+            )}
           </div>
-        </div>
-      )}
-
-      <div className="mb-8">
-        <DigitalFootprintVisualizer />
-      </div>
-
-      <div className="mb-8 space-y-6">
-        <DigitalFootprintEducator />
-        <DfaMethodologyCallout />
-      </div>
-
-      {totalServicesCount < 5 && (
-        <div className="mb-8 rounded-xl border-2 border-green-200 bg-gradient-to-r from-green-50 to-emerald-50 p-4 sm:p-5 dark:border-green-800 dark:from-green-900/20 dark:to-emerald-900/20">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
-            <div className="flex-shrink-0">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-700 dark:bg-green-600"><TrendingUp className="h-6 w-6 text-white" /></div>
-            </div>
-            <div className="min-w-0 flex-1">
-              <div className="mb-2 flex flex-wrap items-center gap-2">
-                <h3 className="text-lg font-bold text-green-900 dark:text-green-100">Improve your analysis</h3>
-                <span className="rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700 dark:bg-green-800 dark:text-green-200">{totalServicesCount} of 5+ services</span>
-              </div>
-              <p className="mb-3 text-sm text-green-800 dark:text-green-200">You already have a usable footprint review. Add more services anytime for a fuller picture—or explore stories and Family Hub when you are ready.</p>
-              <Link to="/service-catalog" className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-green-300 px-4 py-2 font-semibold text-green-700 hover:bg-green-100/60 dark:border-green-700 dark:text-green-200 sm:w-auto">Add more services</Link>
-            </div>
-          </div>
-        </div>
-      )}
-
-      <div className={`p-5 sm:p-6 ${dfaTheme.cardLg} border-green-200 dark:border-green-800/50`}>
-        <div className="flex flex-col gap-4">
-          <div>
-            <h2 className={`text-lg sm:text-xl ${dfaTheme.titleBold}`}>What to do with these scores</h2>
-            <p className={`mt-2 text-sm leading-6 ${dfaTheme.bodySm}`}>
-              Use the breakdown above to spot which listed apps collect the most data. Update your app list anytime, download a PDF for your records, or explore optional stories and Family Hub missions when you are ready to talk it through with kids.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            <Link
-              to="/service-catalog"
-              className="inline-flex min-h-11 items-center gap-1.5 rounded-lg bg-green-700 px-3 py-2 text-sm font-semibold text-white hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500"
-            >
-              Update app list <ArrowRight size={14} aria-hidden />
-            </Link>
-            <Link
-              to="/family-hub"
-              className="inline-flex min-h-11 items-center gap-1.5 rounded-lg border border-gray-300 px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-700"
-            >
-              Family Hub missions
-            </Link>
-            <Link
-              to="/for-families"
-              className="inline-flex min-h-11 items-center gap-1.5 rounded-lg border border-gray-300 px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-700"
-            >
-              Parent guides
-            </Link>
-            <Link
-              to={storyHref}
-              className="touch-link rounded-lg px-3 text-sm font-semibold text-green-700 hover:underline dark:text-green-400"
-            >
-              Privacy Panda stories
-            </Link>
-          </div>
-        </div>
+        </details>
       </div>
     </PageLayout>
   );

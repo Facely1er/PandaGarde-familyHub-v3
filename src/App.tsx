@@ -26,7 +26,7 @@ const GetStartedRedirect = lazy(() => import('./pages/GetStartedRedirect'));
 const ChildSafetyAlertsPage = lazy(() => import('./pages/ChildSafetyAlertsPage'));
 const PrivacyAssessmentPage = lazy(() => import('./pages/PrivacyAssessmentPage'));
 const QuickAssessmentPage = lazy(() => import('./pages/QuickAssessmentPage'));
-const FamilySnapshotPage = lazy(() => import('./pages/FamilySnapshotPage'));
+const FamilyBigPicturePage = lazy(() => import('./pages/FamilyBigPicturePage'));
 const TermsPage = lazy(() => import('./pages/TermsPage'));
 const CookiesPage = lazy(() => import('./pages/CookiesPage'));
 const AccessibilityPage = lazy(() => import('./pages/AccessibilityPage'));
@@ -210,8 +210,9 @@ function App() {
             <Route path="/newsletter/:id" element={<NewsletterIssuePage />} />
             <Route path="/support" element={<SupportPage />} />
             <Route path="/get-started" element={<GetStartedRedirect />} />
-            <Route path="/family-snapshot" element={<FamilySnapshotPage />} />
-            <Route path="/snapshot" element={<Navigate to="/family-snapshot" replace />} />
+            <Route path="/big-picture" element={<FamilyBigPicturePage />} />
+            <Route path="/family-snapshot" element={<Navigate to="/big-picture" replace />} />
+            <Route path="/snapshot" element={<Navigate to="/big-picture" replace />} />
             <Route path="/service-catalog" element={<ServiceCatalogPage />} />
             <Route path="/safety-alerts" element={<Navigate to="/child-safety-alerts" replace />} />
             <Route path="/alerts" element={<Navigate to="/child-safety-alerts" replace />} />

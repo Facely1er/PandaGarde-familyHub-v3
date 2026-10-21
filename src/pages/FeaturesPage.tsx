@@ -229,7 +229,7 @@ const FeaturesPage: React.FC = () => {
           </p>
         </div>
         <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
-          <Link to="/family-snapshot" className="button button-primary inline-flex items-center gap-1.5">
+          <Link to="/big-picture" className="button button-primary inline-flex items-center gap-1.5">
             {t('howItWorks.startReview')} <ArrowRight size={14} aria-hidden />
           </Link>
           <Link to="/family-hub" className="button button-secondary inline-flex items-center gap-1.5">
