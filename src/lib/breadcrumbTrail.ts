@@ -81,7 +81,7 @@ export const BREADCRUMB_PAGE_LABELS: Record<string, string> = {
   '/educator-tools': 'Educator tools',
   '/classroom-activities': 'Classroom activities',
   '/big-picture': 'Big picture',
-  '/service-catalog': 'Service catalog',
+  '/service-catalog': 'Your apps',
   '/safety-alerts': 'Safety alerts',
   '/alerts': 'Safety alerts',
   '/child-safety-alerts': 'Safety alerts',

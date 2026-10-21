@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ArrowRight, BookOpen, CheckCircle, ChevronRight, LayoutDashboard, ShieldCheck, Telescope } from 'lucide-react';
+import { ArrowRight, CheckCircle, ChevronRight, LayoutGrid, ListChecks, ShieldCheck, Telescope } from 'lucide-react';
 import { loadDfaJourneyState } from '../lib/dfaJourney';
 import { getFoundationStory, getHomepageLatestStory, ORIGIN_STORY_SLUG } from '../data/stories';
 import { PageSection, ShellLinkCard, type ShellLinkCardVisual } from '../components/layout/PageContent';
@@ -14,13 +14,13 @@ const pathVisuals = {
     icon: <Telescope size={STEP_ICON_SIZE} strokeWidth={1.75} aria-hidden />,
     tone: 'sky',
   },
-  stories: {
-    icon: <BookOpen size={STEP_ICON_SIZE} strokeWidth={1.75} aria-hidden />,
-    tone: 'emerald',
+  apps: {
+    icon: <LayoutGrid size={STEP_ICON_SIZE} strokeWidth={1.75} aria-hidden />,
+    tone: 'violet',
   },
-  hub: {
-    icon: <LayoutDashboard size={STEP_ICON_SIZE} strokeWidth={1.75} aria-hidden />,
-    tone: 'amber',
+  plan: {
+    icon: <ListChecks size={STEP_ICON_SIZE} strokeWidth={1.75} aria-hidden />,
+    tone: 'emerald',
   },
 } as const satisfies Record<string, ShellLinkCardVisual>;
 
@@ -52,20 +52,20 @@ const HomePage: React.FC = () => {
       visual: pathVisuals.snapshot,
     },
     {
-      title: t('home.pathTalkTitle'),
-      description: t('home.pathTalkDesc'),
-      href: storyHref,
-      tag: t('home.pathTalkTag'),
-      cta: t('home.openStory'),
-      visual: pathVisuals.stories,
+      title: t('home.pathAppsTitle'),
+      description: t('home.pathAppsDesc'),
+      href: '/service-catalog',
+      tag: t('home.pathAppsTag'),
+      cta: t('home.pathAppsCta'),
+      visual: pathVisuals.apps,
     },
     {
-      title: t('home.pathPracticeTitle'),
-      description: t('home.pathPracticeDesc'),
-      href: '/family-hub/activities',
-      tag: t('home.pathPracticeTag'),
-      cta: t('home.pathPracticeCta'),
-      visual: pathVisuals.hub,
+      title: t('home.pathPlanTitle'),
+      description: t('home.pathPlanDesc'),
+      href: '/digital-footprint',
+      tag: t('home.pathPlanTag'),
+      cta: t('home.pathPlanCta'),
+      visual: pathVisuals.plan,
     },
   ];
 
@@ -147,6 +147,12 @@ const HomePage: React.FC = () => {
                   </li>
                 ))}
               </ol>
+              <p className="homepage-spotlight__see-all">
+                {t('home.storyFirst')}{' '}
+                <Link to={storyHref} className="touch-link font-semibold text-green-700 hover:underline dark:text-green-400">
+                  {t('home.storyFirstCta')}
+                </Link>
+              </p>
               <p className="homepage-spotlight__see-all">
                 {t('home.stillQuestions')}{' '}
                 <Link to="/how-it-works#faq" className="touch-link font-semibold text-green-700 hover:underline dark:text-green-400">

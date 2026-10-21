@@ -1,52 +1,41 @@
-# Family big picture — plain words first
+# Guided parent path — big picture → your apps → action plan
 
-Route: `/big-picture` (legacy `/family-snapshot`, `/snapshot` redirect). Header nav: **Big picture**.
+A fully guided, plain-language journey for non-technical parents that ends in an action plan for
+the apps their child actually uses. Every page shows the same 3-step guide
+(`components/journey/FamilyPlanSteps.tsx`) and one primary next step.
 
-## Principles
+| Step | Route | What the parent does | What they get |
+|---|---|---|---|
+| 1. Big picture | `/big-picture` | Tick everyday kinds of apps (4 areas × 3) + optional ages | Where to start (Start here / Worth a look / Lighter for now), what those apps usually know, 3 things for this week, a question for their child, school questions + EduSoluce |
+| 2. Your apps | `/service-catalog` | Tap **Add** on apps suggested from step 1 (or search all) | Their app list (`pandagarde_family_services`) |
+| 3. Action plan | `/digital-footprint` | Tick steps as they do them | Per-app cards ordered *Do these first → Next → When you have time*: "Good to know" + "What to do" checklist, school/age notes, steps for areas with no app, a conversation prompt + story |
 
-1. **Doesn't compete with SocialCaution.** SocialCaution measures (scores, indices, per-app
-   inventories). PandaGarde helps a family understand and *talk*. No numbers on parent-entry pages.
-2. **Written for non-technical parents.** Everyday app kinds with familiar examples; results say
-   "Start here / Worth a look / Lighter for now" and "These apps usually know: …".
-3. **One next step on every screen.** Home → big picture → read a story together. Family Hub and
-   the app-by-app footprint review are quiet secondary links.
+Legacy `/family-snapshot` and `/snapshot` redirect to `/big-picture`.
 
-## The parent path (homepage)
+## Positioning
 
-1. **See the big picture** — `/big-picture`, 2 minutes
-2. **Talk about it with a story** — Privacy Panda story
-3. **Practice together** — Family Hub missions
+SocialCaution measures (scores, indices). PandaGarde guides a family to act and talk. No numbers on
+steps 1–3; the scored footprint review is a collapsed **Detailed footprint review** under the plan
+(needs 3+ apps). The plan itself works from one app.
 
-The footprint review (catalog → scores) stays available from the footer "Review workflow" column
-and a single "Want app-by-app detail?" link on the result.
+## Where things live
 
-## Picker
+- Content: `src/data/familyBigPicture.ts` (areas, kinds, `catalogIds` suggestions, school questions)
+- Step 1 logic: `src/lib/familyBigPicture.ts` (ranks areas; never exposes a number)
+- Step 3 logic: `src/lib/familyActionPlan.ts` (catalog risk → priority, ≤4 steps and ≤2 notes per app, progress storage)
+- UI: `pages/FamilyBigPicturePage.tsx`, `pages/ServiceCatalogPage.tsx`, `components/FamilyActionPlan.tsx`, `pages/DigitalFootprintPage.tsx`
 
-Four areas × three everyday kinds (`src/data/familyBigPicture.ts`), plus optional ages:
+Storage (device only): `pandagarde_family_snapshot_v1` (step 1), `pandagarde_family_services` (step 2),
+`pandagarde_action_plan_v1` (ticked steps).
 
-| Area | Kinds | Who picks the apps |
-|---|---|---|
-| School | classwork & homework apps · class messages & behavior points · school laptop or tablet | The school |
-| Games | online games & consoles · free phone games · game chat & streaming | You and your child |
-| Social apps & AI chat | video & photo apps · messaging apps · AI chatbots | Often your child |
-| At home | streaming · smart speakers & connected toys · kid phone, watch or location sharing | You |
+## EduSoluce funnel
 
-## Result
-
-- Four area cards: plain label, "These apps usually know: …" tags, who picks the apps
-- **This week**: up to three concrete actions, starting with the "Start here" area
-- **Ask your child**: one conversation opener for the "Start here" area
-- **Good to know for their age** (only when relevant)
-- **Questions to ask your child's school** (collapsed; only when school is ticked) + "Share
-  EduSoluce with your school" (`VITE_EDUSOLUCE_URL`) — the EduSoluce funnel
-- **Next: talk about it together** → story; secondary: Family Hub missions, app list
-
-Areas are ranked internally by the sensitivity of what their apps usually hold
-(`src/lib/familyBigPicture.ts`); the weights are never shown. A unit test keeps "score", "exposure",
-"index" and "/100" out of parent-facing copy.
+Step 1 shows school questions and "Share EduSoluce with your school" (`VITE_EDUSOLUCE_URL`) when
+school apps are ticked; step 3 marks school-chosen apps ("Chosen by the school — ask the teacher…").
 
 ## Follow-ups
 
-- Translate the big picture page (home is EN/FR/ES)
-- Decide the footprint review's future: plain-language rewrite or keep as an "advanced" area
-- Pick the story that matches the "Start here" area instead of the origin story
+- Rewrite catalog `parentTips` that still use jargon (e.g. "FERPA-compliant", "CPNI") in plain words
+- Translate steps 1–3 (homepage is EN/FR/ES)
+- Add consoles, smart speakers and location apps to the catalog so every big-picture kind has suggestions
+- Printable plan; story matched to the "Start here" area

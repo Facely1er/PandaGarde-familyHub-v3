@@ -6,6 +6,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Check, ExternalLink, Gamepad2, GraduationCap, Home, MessageCircle, type LucideIcon } from 'lucide-react';
+import FamilyPlanSteps from '../components/journey/FamilyPlanSteps';
 import PageLayout from '../components/layout/PageLayout';
 import { EDUSOLUCE_SCHOOLS_URL } from '../config/portal';
 import {
@@ -29,6 +30,7 @@ import {
   type FamilyPictureSelection,
 } from '../lib/familyBigPicture';
 import { trackEvent } from '../lib/analytics';
+import { useFamily } from '../contexts/FamilyContext';
 
 const AREA_ICON: Record<PictureAreaId, LucideIcon> = {
   school: GraduationCap,
@@ -61,6 +63,7 @@ const FamilyBigPicturePage: React.FC = () => {
   }, [showResult]);
 
   const picture = useMemo(() => buildFamilyPicture(selection), [selection]);
+  const hasApps = useFamily().getFamilyServices().length > 0;
   const startArea = picture.startArea ? PICTURE_AREAS[picture.startArea] : null;
 
   const toggleKind = (id: PictureKindId) =>
@@ -84,9 +87,10 @@ const FamilyBigPicturePage: React.FC = () => {
   return (
     <PageLayout
       title="Your family’s big picture"
-      subtitle="Two minutes, no account. See where your child’s information goes and what to do first."
+      subtitle="Step 1 of 3 — two minutes, no account. See where your child’s information goes and what to do first."
     >
       <div className="mx-auto flex w-full max-w-4xl flex-col gap-6">
+        <FamilyPlanSteps current="picture" done={{ apps: hasApps }} />
         {!showResult ? (
           <>
             <p className="text-gray-600 dark:text-gray-300">
@@ -279,27 +283,22 @@ const FamilyBigPicturePage: React.FC = () => {
               </details>
             ) : null}
 
-            <section className="rounded-2xl bg-gray-50 p-5 dark:bg-gray-800/60 sm:p-6" aria-labelledby="bp-next">
-              <h2 id="bp-next" className={H2}>Next: talk about it together</h2>
-              <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
-                A short Privacy Panda story gives you and your child the same words for all of this.
+            <section className="rounded-2xl border border-green-200 bg-green-50 p-5 dark:border-green-800 dark:bg-green-950 sm:p-6" aria-labelledby="bp-next">
+              <p className="text-xs font-semibold uppercase tracking-wide text-green-800 dark:text-green-300">Step 2 of 3</p>
+              <h2 id="bp-next" className={`${H2} mt-1`}>Next: pick your apps and get your action plan</h2>
+              <p className="mt-1 text-sm text-gray-700 dark:text-gray-200">
+                We’ll suggest apps from what you ticked. Pick the ones your child uses and you’ll get a step-by-step plan
+                for each — what to know and what to change.
               </p>
               <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <Link to={`/stories/${ORIGIN_STORY_SLUG}`} className="button button-primary inline-flex min-h-[44px] items-center justify-center gap-2">
-                  Read a story together
+                <Link to="/service-catalog" className="button button-primary inline-flex min-h-[44px] items-center justify-center gap-2">
+                  Pick your apps
                   <ArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
-                <Link to="/family-hub/activities" className="touch-link text-sm font-semibold text-green-700 hover:underline dark:text-green-400">
-                  Or practice with Family Hub missions
+                <Link to={`/stories/${ORIGIN_STORY_SLUG}`} className="touch-link text-sm font-semibold text-green-700 hover:underline dark:text-green-400">
+                  Or read a story together first
                 </Link>
               </div>
-              <p className="mt-4 border-t border-gray-200 pt-3 text-xs text-gray-500 dark:border-gray-700 dark:text-gray-400">
-                Want app-by-app detail? List your apps in the{' '}
-                <Link to="/service-catalog" className="font-medium text-green-700 underline underline-offset-2 dark:text-green-400">
-                  app list
-                </Link>
-                .
-              </p>
             </section>
 
             <p className="text-xs text-gray-500 dark:text-gray-400">

@@ -68,7 +68,7 @@
 | **Family Hub** | No | Missions on device; open anytime |
 | **Big picture** (`/big-picture`) | No | Kinds of apps, not named apps; plain words, no scores; never writes to the catalog |
 | **Service catalog** | — | Builds the list footprint review uses |
-| **Footprint review** | Yes (for scores) | Empty without catalog entries; does not block other areas |
+| **Footprint review** (`/digital-footprint`) | Yes | Leads with the **action plan** (any number of apps); detailed scores collapsed, need 3+ apps |
 
 ### Website vs Family Hub — activities boundary
 
@@ -193,6 +193,14 @@ Add new patterns to `scripts/check-content-truth.mjs` when product behavior chan
 | "Nothing leaves your device" | **True** — answers in `pandagarde_family_snapshot_v1`; never writes to `pandagarde_family_services` |
 | School consent note | US COPPA school-authorization guidance — keep "can", not "always" |
 | EduSoluce link | Something parents can **share with their school** — PandaGarde sends nothing to EduSoluce |
+
+### Action plan (step 3 of the guided path)
+
+| Claim | Truth |
+|-------|--------|
+| "Your family action plan" | Built **only** from apps the parent added; per-app notes and steps come from the catalog's `privacyConcerns` / `parentTips` |
+| "Do these first / Next / When you have time" | Catalog `riskLevel` (very-high/high · medium · low) in plain words |
+| Ticked steps | Saved on this device (`pandagarde_action_plan_v1`); nothing is checked on the child's device |
 
 On parent-entry pages avoid: scores, "/100", "exposure", "index", "risk level", "scan", "detect". The
 app-by-app footprint review (footer, "Review workflow") keeps its scores for parents who want detail.

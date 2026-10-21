@@ -36,8 +36,32 @@ test.describe('Core features advertised (How it works + CONTENT_TRUTH)', () => {
     await expect(page.locator('main, #main-content').first()).not.toContainText(/\/100|score/i);
     await page.getByText(/Questions to ask your child.s school/i).click();
     await expect(page.getByRole('link', { name: /Share EduSoluce with your school/i })).toHaveAttribute('target', '_blank');
-    await page.getByRole('link', { name: /Read a story together/i }).click();
-    await page.waitForURL(/\/stories\//);
+    await page.getByRole('link', { name: /^Pick your apps/i }).click();
+    await page.waitForURL(/\/service-catalog/);
+  });
+
+  test('Guided path — big picture suggestions → action plan with tickable steps', async ({ page }) => {
+    await page.addInitScript(() => {
+      if (sessionStorage.getItem('e2e-seeded')) {return;}
+      sessionStorage.setItem('e2e-seeded', '1');
+      localStorage.removeItem('pandagarde_family_services');
+      localStorage.removeItem('pandagarde_action_plan_v1');
+      localStorage.setItem('pandagarde_family_snapshot_v1', JSON.stringify({ ages: ['9-12'], kinds: ['play-worlds', 'home-smart'] }));
+    });
+    await gotoAndWait(page, '/service-catalog');
+    await expect(page.getByRole('heading', { name: /Suggested from your big picture/i })).toBeVisible();
+    await page.getByRole('button', { name: 'Add Roblox' }).click();
+    await expect(page.getByRole('button', { name: 'Remove Roblox' })).toBeVisible();
+    await page.getByRole('link', { name: /See your action plan/i }).click();
+    await page.waitForURL(/\/digital-footprint/);
+    await expect(page.getByRole('heading', { level: 1, name: /action plan/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Roblox' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /From your big picture/i })).toBeVisible();
+    await expect(page.getByText(/^0 of \d+ steps done$/)).toBeVisible();
+    await page.getByRole('listitem').filter({ has: page.getByRole('heading', { name: 'Roblox' }) }).getByRole('checkbox').first().check();
+    await expect(page.getByText(/^1 of \d+ steps done$/)).toBeVisible();
+    await page.reload({ waitUntil: 'networkidle' });
+    await expect(page.getByText(/^1 of \d+ steps done$/)).toBeVisible();
   });
 
   test('How it works — three-step flow', async ({ page }) => {
@@ -49,10 +73,10 @@ test.describe('Core features advertised (How it works + CONTENT_TRUTH)', () => {
     await expect(page.getByText(/Does PandaGarde monitor what my child does online/i)).toBeVisible();
   });
 
-  test('Get started — resumes footprint review path', async ({ page }) => {
+  test('Get started — resumes the guided apps / plan path', async ({ page }) => {
     await gotoAndWait(page, '/get-started');
     await expect(page).toHaveURL(/\/(service-catalog|digital-footprint)/);
-    await expect(page.getByText(/Footprint review|service catalog/i).first()).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: /Your apps|action plan/i })).toBeVisible();
   });
 
   test('Service catalog — add services UI', async ({ page }) => {
@@ -67,7 +91,7 @@ test.describe('Core features advertised (How it works + CONTENT_TRUTH)', () => {
       localStorage.removeItem('pandagarde_family_services');
     });
     await gotoAndWait(page, '/digital-footprint');
-    const empty = page.getByText(/Add at least 3 services|digital footprint/i);
+    const empty = page.getByRole('heading', { name: /Pick your apps first/i });
     await expect(empty.first()).toBeVisible();
   });
 
@@ -137,7 +161,9 @@ test.describe('Core features advertised (How it works + CONTENT_TRUTH)', () => {
       localStorage.setItem('pandagarde_family_services', JSON.stringify(ids));
     }, [...E2E_SERVICE_IDS]);
     await gotoAndWait(page, '/digital-footprint');
-    await expect(page.getByRole('heading', { level: 1, name: /Footprint Review/i })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: /action plan/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /Your family action plan/i })).toBeVisible();
+    await page.locator('summary', { hasText: 'Detailed footprint review' }).click();
     await expect(
       page.getByRole('heading', { name: /Launch-grade scoring|Executive summary/i }).first()
     ).toBeVisible({ timeout: 15_000 });

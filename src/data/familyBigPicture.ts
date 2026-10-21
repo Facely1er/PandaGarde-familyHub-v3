@@ -112,6 +112,8 @@ export interface PictureKind {
   minAge13?: boolean;
   /** Commonly includes chat or voice with people your child may not know. */
   openChat?: boolean;
+  /** Service catalog ids suggested on the "Your apps" step when this kind is ticked. */
+  catalogIds: string[];
 }
 
 export const PICTURE_KINDS: Record<PictureKindId, PictureKind> = {
@@ -120,18 +122,21 @@ export const PICTURE_KINDS: Record<PictureKindId, PictureKind> = {
     name: 'Classwork & homework apps',
     examples: 'Google Classroom, Seesaw, IXL, Khan Academy',
     data: ['identity', 'learning', 'messages', 'media', 'habits'],
+    catalogIds: ['google-classroom', 'seesaw', 'ixl', 'khan-academy', 'canvas-lms', 'schoology', 'microsoft-teams-edu', 'prodigy', 'lexia', 'dreambox', 'kahoot', 'quizlet', 'nearpod', 'zoom'],
   },
   'school-messaging': {
     area: 'school',
     name: 'Class messages & behavior points',
     examples: 'ClassDojo, Remind, ParentSquare',
     data: ['identity', 'conduct', 'media', 'messages'],
+    catalogIds: ['classdojo', 'remind', 'flip', 'padlet'],
   },
   'school-device': {
     area: 'school',
     name: 'A school laptop or tablet',
     examples: 'School Chromebook or iPad, often with web filtering',
     data: ['habits', 'messages', 'conduct', 'feelings'],
+    catalogIds: ['school-student-health-portal'],
   },
   'play-worlds': {
     area: 'play',
@@ -139,12 +144,14 @@ export const PICTURE_KINDS: Record<PictureKindId, PictureKind> = {
     examples: 'Roblox, Minecraft, Fortnite, Switch, PlayStation, Xbox',
     data: ['identity', 'messages', 'friends', 'faceVoice', 'purchases', 'habits'],
     openChat: true,
+    catalogIds: ['roblox', 'minecraft', 'fortnite', 'among-us', 'steam'],
   },
   'play-mobile': {
     area: 'play',
     name: 'Free games on a phone or tablet',
     examples: 'Puzzle, racing and casual games with ads',
     data: ['location', 'habits', 'purchases'],
+    catalogIds: ['among-us'],
   },
   'play-chat': {
     area: 'play',
@@ -153,6 +160,7 @@ export const PICTURE_KINDS: Record<PictureKindId, PictureKind> = {
     data: ['identity', 'messages', 'friends', 'faceVoice', 'media'],
     minAge13: true,
     openChat: true,
+    catalogIds: ['discord', 'twitch'],
   },
   'social-video': {
     area: 'social',
@@ -161,6 +169,7 @@ export const PICTURE_KINDS: Record<PictureKindId, PictureKind> = {
     data: ['identity', 'media', 'faceVoice', 'habits', 'location', 'friends', 'messages'],
     minAge13: true,
     openChat: true,
+    catalogIds: ['youtube', 'tiktok', 'instagram', 'pinterest'],
   },
   'social-messaging': {
     area: 'social',
@@ -168,6 +177,7 @@ export const PICTURE_KINDS: Record<PictureKindId, PictureKind> = {
     examples: 'Snapchat, WhatsApp, group chats',
     data: ['identity', 'messages', 'media', 'friends', 'location'],
     minAge13: true,
+    catalogIds: ['snapchat', 'whatsapp', 'telegram'],
   },
   'social-ai': {
     area: 'social',
@@ -175,24 +185,28 @@ export const PICTURE_KINDS: Record<PictureKindId, PictureKind> = {
     examples: 'ChatGPT, Gemini, Snapchat My AI',
     data: ['messages', 'feelings', 'habits'],
     minAge13: true,
+    catalogIds: ['chatgpt', 'google-gemini', 'snapchat-my-ai', 'character-ai', 'meta-ai', 'microsoft-copilot', 'socratic', 'khanmigo'],
   },
   'home-streaming': {
     area: 'home',
     name: 'TV and video streaming',
     examples: 'YouTube Kids, Netflix, Disney+',
     data: ['identity', 'habits'],
+    catalogIds: ['youtube-kids', 'netflix', 'disney-plus', 'pbs-kids', 'amazon-prime-video', 'spotify', 'hulu', 'max'],
   },
   'home-smart': {
     area: 'home',
     name: 'Smart speakers and connected toys',
     examples: 'Alexa, Google Home, toys that talk or listen',
     data: ['faceVoice', 'home', 'media', 'habits'],
+    catalogIds: [],
   },
   'home-location': {
     area: 'home',
     name: 'A kid phone, watch or location sharing',
     examples: 'Family Link, Find My, Life360, kids’ smartwatches',
     data: ['location', 'home', 'friends'],
+    catalogIds: ['verizon', 'att', 'tmobile', 'cricket-wireless', 'mint-mobile', 'boost-mobile'],
   },
 };
 

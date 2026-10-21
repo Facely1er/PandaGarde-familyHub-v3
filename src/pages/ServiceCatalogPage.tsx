@@ -1,288 +1,176 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import { ArrowRight, Check, Plus } from 'lucide-react';
 import ServiceCatalog from '../components/ServiceCatalog';
-import EmailCaptureInline from '../components/EmailCaptureInline';
-import { ProgressBar } from '../components/ui/ProgressBar';
-import DfaJourneyStepper from '../components/journey/DfaJourneyStepper';
-import { BarChart3, ArrowRight, Unlock, CheckCircle, Sparkles, Target, Plus, Heart, School, AlertTriangle, Bot, Signal, Info } from 'lucide-react';
-import { useFamily } from '../contexts/FamilyContext';
-import { childServiceCatalog, getHealthServices, getSchoolAssignedServices, getServicesWithLawEnforcementConcerns } from '../data/childServiceCatalog';
-import { getServiceLogoUrlWithBrandColor, hasServiceLogo } from '../utils/serviceLogos';
-import { updateDfaJourneyPhase } from '../lib/dfaJourney';
-import { dfaTheme } from '../styles/dfaTheme';
+import FamilyPlanSteps from '../components/journey/FamilyPlanSteps';
 import PageLayout from '../components/layout/PageLayout';
+import { useFamily } from '../contexts/FamilyContext';
+import { childServiceCatalog, type ChildService } from '../data/childServiceCatalog';
+import { PICTURE_AREAS, PICTURE_AREA_ORDER, PICTURE_KINDS } from '../data/familyBigPicture';
+import { loadFamilyPictureSelection } from '../lib/familyBigPicture';
+import { updateDfaJourneyPhase } from '../lib/dfaJourney';
+import { getServiceLogoUrlWithBrandColor, hasServiceLogo } from '../utils/serviceLogos';
 
-const SUGGESTED_SERVICE_IDS = ['youtube', 'instagram', 'whatsapp', 'roblox', 'khan-academy', 'duolingo'] as const;
-const SCHOOL_SERVICE_IDS = ['google-classroom', 'microsoft-teams-edu', 'canvas-lms', 'schoology', 'seesaw', 'zoom', 'classdojo', 'kahoot', 'quizlet', 'ixl', 'remind', 'nearpod', 'prodigy', 'code-org'] as const;
-const AI_SERVICE_IDS = ['chatgpt', 'google-gemini', 'microsoft-copilot', 'character-ai', 'snapchat-my-ai', 'meta-ai', 'grammarly', 'perplexity-ai', 'khanmigo'] as const;
-const TELECOM_SERVICE_IDS = ['verizon', 'att', 'tmobile', 'cricket-wireless', 'boost-mobile', 'mint-mobile'] as const;
-const HIGH_LE_CONCERN_IDS = ['att', 'verizon', 'tmobile', 'tiktok', 'google-classroom', 'chatgpt', 'discord', 'snapchat', 'instagram', 'youtube', 'microsoft-teams-edu'] as const;
+/** Shown when the family skipped the big picture. */
+const POPULAR_SERVICE_IDS = ['youtube', 'roblox', 'minecraft', 'tiktok', 'snapchat', 'google-classroom', 'netflix', 'chatgpt'];
 
-const headerActionLinkClass =
-  'inline-flex min-h-11 shrink-0 items-center gap-2 whitespace-nowrap rounded-lg bg-green-700 px-4 py-2.5 text-white transition-colors hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500';
+/** Suggestions per big-picture area, limited so the first screen stays short. */
+const SUGGESTIONS_PER_AREA = 8;
+const SUGGESTIONS_PER_KIND = 4;
+
+interface SuggestionGroup {
+  title: string;
+  services: ChildService[];
+}
 
 const ServiceCatalogPage: React.FC = () => {
   const { getFamilyServices, addServiceToFamily, removeServiceFromFamily } = useFamily();
-  const [servicesCount, setServicesCount] = useState(0);
-  const [addingId, setAddingId] = useState<string | null>(null);
-  const updateCount = useCallback(() => {
-    setServicesCount(getFamilyServices().length);
-  }, [getFamilyServices]);
+  const [familyServiceIds, setFamilyServiceIds] = useState<string[]>(() => getFamilyServices());
+  const [busyId, setBusyId] = useState<string | null>(null);
+  const picture = useMemo(() => loadFamilyPictureSelection(), []);
 
+  const refresh = useCallback(() => setFamilyServiceIds(getFamilyServices()), [getFamilyServices]);
+
+  // The full catalog below adds apps through the same store; poll so the count stays in sync.
   useEffect(() => {
-    updateCount();
-    const interval = setInterval(updateCount, 1000);
+    refresh();
+    const interval = setInterval(refresh, 1000);
     return () => clearInterval(interval);
-  }, [updateCount]);
+  }, [refresh]);
+
+  const servicesCount = familyServiceIds.length;
 
   useEffect(() => {
     updateDfaJourneyPhase('profile', {
       visited: true,
       completed: servicesCount >= 3,
-      resumePath: servicesCount >= 3 ? '/digital-footprint' : '/service-catalog',
+      resumePath: servicesCount > 0 ? '/digital-footprint' : '/service-catalog',
     });
   }, [servicesCount]);
 
-  const progressPercent = Math.min((servicesCount / 5) * 100, 100);
-  const isReadyForAnalysis = servicesCount >= 3;
-  const familyServiceIds = getFamilyServices();
-  const suggestedServices = childServiceCatalog.filter(s => SUGGESTED_SERVICE_IDS.includes(s.id as typeof SUGGESTED_SERVICE_IDS[number]));
-  const schoolServices = getSchoolAssignedServices().filter(s => SCHOOL_SERVICE_IDS.includes(s.id as typeof SCHOOL_SERVICE_IDS[number]));
-  const aiServices = childServiceCatalog.filter(s => AI_SERVICE_IDS.includes(s.id as typeof AI_SERVICE_IDS[number]));
-  const telecomServices = childServiceCatalog.filter(s => TELECOM_SERVICE_IDS.includes(s.id as typeof TELECOM_SERVICE_IDS[number]));
-  const healthServices = getHealthServices();
-  const leConcernServices = getServicesWithLawEnforcementConcerns().filter(s => HIGH_LE_CONCERN_IDS.includes(s.id as typeof HIGH_LE_CONCERN_IDS[number]));
+  const groups = useMemo<SuggestionGroup[]>(() => {
+    const byId = new Map(childServiceCatalog.map((s) => [s.id, s]));
+    const pick = (ids: string[]) => ids.map((id) => byId.get(id)).filter((s): s is ChildService => Boolean(s));
+    if (!picture.kinds.length) {
+      return [{ title: 'Popular with families', services: pick(POPULAR_SERVICE_IDS) }];
+    }
+    return PICTURE_AREA_ORDER.map((area) => {
+      // Top few from each ticked kind, so every kind is represented before the area cap.
+      const ids = picture.kinds
+        .filter((k) => PICTURE_KINDS[k].area === area)
+        .flatMap((k) => PICTURE_KINDS[k].catalogIds.slice(0, SUGGESTIONS_PER_KIND));
+      return { title: PICTURE_AREAS[area].name, services: pick([...new Set(ids)].slice(0, SUGGESTIONS_PER_AREA)) };
+    }).filter((g) => g.services.length);
+  }, [picture]);
 
-  const handleSuggestedAddRemove = async (serviceId: string) => {
-    if (addingId) {return;}
-    setAddingId(serviceId);
+  const toggle = async (serviceId: string) => {
+    if (busyId) {return;}
+    setBusyId(serviceId);
     try {
-      if (familyServiceIds.includes(serviceId)) {
-        await removeServiceFromFamily(serviceId);
-      } else {
-        await addServiceToFamily(serviceId);
-      }
-      updateCount();
+      if (familyServiceIds.includes(serviceId)) {await removeServiceFromFamily(serviceId);}
+      else {await addServiceToFamily(serviceId);}
+      refresh();
     } finally {
-      setAddingId(null);
+      setBusyId(null);
     }
   };
 
   return (
     <PageLayout
-      title="Service Catalog"
-      subtitle="Add the apps your family actually uses so footprint review can score something real. Stories, guides, and Family Hub work without finishing this list."
+      title="Your apps"
+      subtitle="Step 2 of 3 — tap the apps your child uses. Your action plan is built from this list."
       breadcrumbs
     >
-      <div className="flex flex-col gap-6">
-        <div className={`rounded-xl p-4 ${dfaTheme.cardLg}`}>
-          <p className={`flex items-start gap-2 ${dfaTheme.bodySm}`}>
-            <Info className="mt-0.5 h-4 w-4 shrink-0 text-green-700 dark:text-green-400" aria-hidden />
-            <span>
-              <strong>Just tap the apps your kids use.</strong> Most families are done in under 3 minutes. Scores are educational guides—not live monitoring, and nothing is uploaded.{' '}
-              <Link to="/scoring-methodology" className="touch-link font-semibold text-green-700 hover:underline dark:text-green-400">
-                How scoring works
-              </Link>
-            </span>
-          </p>
-        </div>
+      <div className="mx-auto flex w-full max-w-5xl flex-col gap-8">
+        <FamilyPlanSteps current="apps" done={{ picture: picture.kinds.length > 0, apps: servicesCount > 0 }} />
 
-        <div>
-          <DfaJourneyStepper
-            currentKey="profile"
-            compact
-            catalogServicesCount={servicesCount}
-            subtitle="List the apps your family uses—this list is what footprint review analyzes. Stories, guides, and Family Hub do not require finishing the catalog."
-          />
-        </div>
-
-        {servicesCount > 0 && (
-          <div
-            className={`rounded-xl border-2 p-4 transition-all ${
-              isReadyForAnalysis
-                ? 'border-green-300 bg-gradient-to-r from-green-50 to-emerald-50 dark:border-green-700 dark:from-green-900/20 dark:to-emerald-900/20'
-                : 'border-amber-300 bg-gradient-to-r from-amber-50 to-orange-50 dark:border-amber-700 dark:from-amber-900/20 dark:to-orange-900/20'
-            }`}
-          >
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <div className="flex min-w-0 items-start gap-3 sm:items-center sm:gap-4">
-                <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full ${isReadyForAnalysis ? 'bg-green-600' : 'bg-amber-500'}`}>
-                  {isReadyForAnalysis ? <CheckCircle className="h-6 w-6 text-white" /> : <Target className="h-6 w-6 text-white" />}
-                </div>
-                <div className="min-w-0">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className={`text-lg font-bold ${isReadyForAnalysis ? 'text-green-900 dark:text-green-100' : 'text-amber-900 dark:text-amber-100'}`}>
-                      {servicesCount} app{servicesCount !== 1 ? 's' : ''} added
-                    </span>
-                    {isReadyForAnalysis && (
-                      <span className="inline-flex items-center gap-1 rounded-full bg-green-100 px-2 py-0.5 text-xs font-bold text-green-700 dark:bg-green-800 dark:text-green-200">
-                        <Sparkles size={12} aria-hidden /> Ready for footprint review
-                      </span>
-                    )}
-                  </div>
-                  <div className="mt-1 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
-                    <ProgressBar value={progressPercent} size="sm" variant={isReadyForAnalysis ? 'low' : 'primary'} aria-label="Services added progress" className="h-2 w-full max-w-[8rem]" />
-                    <span className={`text-sm ${isReadyForAnalysis ? 'text-green-700 dark:text-green-300' : 'text-amber-700 dark:text-amber-300'}`}>
-                      {isReadyForAnalysis ? 'Ready for footprint review.' : servicesCount === 1 ? 'Great start — add 2 more for footprint scores.' : servicesCount === 2 ? 'Almost there — add 1 more for footprint scores.' : 'Add 3 services to run footprint review.'}
-                    </span>
-                  </div>
-                </div>
-              </div>
-              {isReadyForAnalysis && (
-                <Link
-                  to="/digital-footprint"
-                  className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg bg-green-700 px-5 py-2.5 font-semibold text-white transition-colors hover:bg-green-800 sm:w-auto dark:bg-green-600 dark:hover:bg-green-500"
-                >
-                  <BarChart3 className="h-5 w-5" aria-hidden />
-                  <span>See footprint</span>
-                  <ArrowRight className="h-4 w-4" aria-hidden />
-                </Link>
-              )}
-            </div>
+        <section aria-labelledby="apps-suggested" className="flex flex-col gap-5">
+          <div>
+            <h2 id="apps-suggested" className="text-lg font-bold text-gray-900 dark:text-gray-100">
+              {picture.kinds.length ? 'Suggested from your big picture' : 'Start with the apps you know'}
+            </h2>
+            <p className="text-sm text-gray-600 dark:text-gray-300">
+              Tap <strong>Add</strong> on each app your child uses. Nothing is installed or checked on their device.
+            </p>
           </div>
-        )}
-
-        <div>
-          <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">
-            <span className="font-medium text-gray-700 dark:text-gray-300">Footprint review:</span>{' '}
-            <span className="font-medium text-green-700 dark:text-green-400">Step 1 — add your family&apos;s apps</span>
-            {' → '}
-            <Link
-              to="/digital-footprint"
-              className="touch-link font-medium text-green-700 hover:text-green-800 hover:underline dark:text-green-400 dark:hover:text-green-300"
-            >
-              Step 2 — see your footprint
-            </Link>
-          </p>
-          <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              {servicesCount === 0 && (
-                <span className="inline-flex items-center gap-1 rounded-full bg-green-700 px-3 py-1 text-xs font-semibold text-white">
-                  <Unlock size={12} aria-hidden /> Step 1 of 2
-                </span>
-              )}
-            </div>
-            <div className="flex shrink-0 items-center gap-2">
-              <Link to="/digital-footprint" className={headerActionLinkClass}>
-                <BarChart3 className="h-5 w-5 shrink-0" aria-hidden />
-                <span>Footprint</span>
-              </Link>
-            </div>
-          </div>
-
-          {servicesCount < 3 && (
-            <div className="mb-6 rounded-xl border-2 border-green-200 bg-gradient-to-r from-green-50 to-emerald-50 p-6 dark:border-green-800 dark:from-green-900/20 dark:to-emerald-900/20">
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-700">
-                    <Unlock className="h-6 w-6 text-white" />
-                  </div>
-                </div>
-                <div className="flex-1">
-                  <h3 className="mb-2 text-lg font-bold text-gray-900 dark:text-white">How this phase works</h3>
-                  <ol className="mb-4 list-inside list-decimal space-y-2 text-sm text-gray-700 dark:text-gray-300">
-                    <li><strong>Choose services</strong> your family actually uses.</li>
-                    <li><strong>Tap Add</strong> on each one — no account or backend required.</li>
-                    <li><strong>Reach 3 services</strong> to open footprint review (other areas work without this).</li>
-                  </ol>
-                  <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
-                    {[
-                      ['Privacy snapshot', 'See your family’s exposure at a glance'],
-                      ['Risk per app', 'Understand which apps need more care'],
-                      ['Stories & Hub', 'Explore with kids when you have a calm moment'],
-                    ].map(([title, desc]) => (
-                      <div key={title} className="flex items-start gap-2">
-                        <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-green-600 dark:text-green-400" />
-                        <div>
-                          <div className="text-sm font-semibold text-gray-900 dark:text-white">{title}</div>
-                          <div className="text-xs text-gray-600 dark:text-gray-400">{desc}</div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {suggestedServices.length > 0 && (
-            <div className="mb-6">
-              <h3 className="mb-2 flex items-center gap-2 text-lg font-semibold text-gray-900 dark:text-white">
-                <Heart className="h-5 w-5 text-green-600 dark:text-green-400" /> Start with these — popular with families
-              </h3>
-              <p className="mb-3 text-sm text-gray-600 dark:text-gray-400">Tap <strong>Add</strong> on any app your family uses. You can add more from the full list below.</p>
-              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                {suggestedServices.map((service) => {
-                  const isAdded = familyServiceIds.includes(service.id);
-                  const isAdding = addingId === service.id;
+          {groups.map((group) => (
+            <div key={group.title}>
+              <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">{group.title}</h3>
+              <ul className="m-0 grid list-none grid-cols-1 gap-2 p-0 sm:grid-cols-2 lg:grid-cols-4">
+                {group.services.map((service) => {
+                  const added = familyServiceIds.includes(service.id);
                   return (
-                    <div key={service.id} className={`flex items-center gap-3 rounded-xl border-2 px-4 py-3 transition-all sm:w-auto ${isAdded ? 'border-green-300 bg-green-50 dark:border-green-700 dark:bg-green-950/40' : 'border-gray-200 bg-white hover:border-green-400 dark:border-gray-700 dark:bg-gray-800 dark:hover:border-green-500'}`}>
-                      {hasServiceLogo(service.id) ? (
-                        <img src={getServiceLogoUrlWithBrandColor(service.id, 32)} alt={`${service.name} logo`} className="h-8 w-8 rounded" />
-                      ) : (
-                        <div className="flex h-8 w-8 items-center justify-center rounded bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-200"><Plus size={16} /></div>
-                      )}
-                      <div className="min-w-0 flex-1">
-                        <div className="text-sm font-semibold text-gray-900 dark:text-white truncate">{service.name}</div>
-                        <div className="text-xs text-gray-500 dark:text-gray-400">{service.category}</div>
-                      </div>
+                    <li key={service.id}>
                       <button
                         type="button"
-                        onClick={() => handleSuggestedAddRemove(service.id)}
-                        disabled={isAdding}
-                        className={`min-h-11 shrink-0 rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${isAdded ? 'bg-green-100 text-green-700 hover:bg-green-200 dark:bg-green-800 dark:text-green-200' : 'bg-green-700 text-white hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-500'} disabled:cursor-not-allowed disabled:opacity-60`}
+                        onClick={() => { void toggle(service.id); }}
+                        disabled={busyId === service.id}
+                        aria-pressed={added}
+                        aria-label={`${added ? 'Remove' : 'Add'} ${service.name}`}
+                        className={`flex min-h-[56px] w-full items-center gap-3 rounded-xl border-2 px-3 py-2 text-left transition-colors disabled:opacity-60 ${
+                          added
+                            ? 'border-green-700 bg-green-50 dark:border-green-400 dark:bg-green-950'
+                            : 'border-gray-200 bg-white hover:border-green-400 dark:border-gray-700 dark:bg-gray-800 dark:hover:border-green-500'
+                        }`}
                       >
-                        {isAdding ? 'Updating…' : isAdded ? 'Remove' : 'Add'}
+                        {hasServiceLogo(service.id) ? (
+                          <img src={getServiceLogoUrlWithBrandColor(service.id) ?? undefined} alt="" className="h-8 w-8 shrink-0 rounded" loading="lazy" onError={(e) => { e.currentTarget.style.visibility = 'hidden'; }} />
+                        ) : (
+                          <span className="h-8 w-8 shrink-0 rounded bg-gray-100 dark:bg-gray-700" aria-hidden />
+                        )}
+                        <span className="min-w-0 flex-1 truncate text-sm font-semibold text-gray-900 dark:text-gray-100">{service.name}</span>
+                        <span
+                          className={`inline-flex shrink-0 items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold ${
+                            added ? 'bg-green-700 text-white dark:bg-green-400 dark:text-gray-900' : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-200'
+                          }`}
+                          aria-hidden
+                        >
+                          {added ? <Check className="h-3 w-3" /> : <Plus className="h-3 w-3" />}
+                          {added ? 'Added' : 'Add'}
+                        </span>
                       </button>
-                    </div>
+                    </li>
                   );
                 })}
-              </div>
-            </div>
-          )}
-        </div>
-
-        <ServiceCatalog guidedMode />
-
-        <div className="mt-10 grid gap-6 lg:grid-cols-2">
-          <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-            <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">Why this phase matters</h3>
-            <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">Your footprint review is only meaningful if it reflects the real school, home, health, AI, and telecom services your family uses. This step defines the scope without a heavy signup flow.</p>
-          </div>
-          <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-            <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">Continue when ready</h3>
-            <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">Once you reach at least three services, head straight to the footprint review. Your list is saved locally on this device.</p>
-            {isReadyForAnalysis ? (
-              <Link
-                to="/digital-footprint"
-                className="touch-link mt-4 font-semibold text-green-700 hover:text-green-800 dark:text-green-400 dark:hover:text-green-300"
-              >
-                Go to Footprint Review <ArrowRight size={16} className="ml-1 inline" aria-hidden />
-              </Link>
-            ) : (
-              <p className="mt-4 text-sm font-medium text-gray-600 dark:text-gray-300">
-                Add at least three services above to continue to Footprint Review.
-              </p>
-            )}
-          </div>
-        </div>
-
-        <div className="grid gap-8 lg:grid-cols-2">
-          {[{ title: 'School services frequently in scope', icon: School, items: schoolServices.slice(0, 6) }, { title: 'Health & medical apps families report', icon: Heart, items: healthServices.slice(0, 6) }, { title: 'AI tools families are increasingly using', icon: Bot, items: aiServices.slice(0, 6) }, { title: 'Telecom services that shape the household data trail', icon: Signal, items: telecomServices.slice(0, 6) }, { title: 'High-data-sharing services worth knowing about', icon: AlertTriangle, items: leConcernServices.slice(0, 6) }].map(({ title, icon: Icon, items }) => (
-            <div key={title} className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-              <div className="mb-3 flex items-center gap-2 text-gray-900 dark:text-gray-100"><Icon size={18} /><h3 className="text-lg font-bold">{title}</h3></div>
-              <div className="flex flex-wrap gap-2">
-                {items.map((service) => (
-                  <span key={service.id} className="rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-700 dark:bg-gray-700 dark:text-gray-300">{service.name}</span>
-                ))}
-              </div>
+              </ul>
             </div>
           ))}
+        </section>
+
+        <div className="sticky bottom-2 z-10 flex flex-col gap-3 rounded-2xl border border-gray-200 bg-white/95 p-4 shadow-sm backdrop-blur dark:border-gray-700 dark:bg-gray-900/95 sm:flex-row sm:items-center">
+          {servicesCount > 0 ? (
+            <Link to="/digital-footprint" className="button button-primary inline-flex min-h-[44px] items-center justify-center gap-2">
+              See your action plan
+              <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+          ) : (
+            <span className="button button-primary inline-flex min-h-[44px] cursor-not-allowed items-center justify-center gap-2 opacity-50" aria-disabled="true">
+              See your action plan
+              <ArrowRight className="h-4 w-4" aria-hidden />
+            </span>
+          )}
+          <p className="text-sm text-gray-600 dark:text-gray-300" aria-live="polite">
+            {servicesCount === 0
+              ? 'Add at least one app to build your plan.'
+              : `${servicesCount} app${servicesCount === 1 ? '' : 's'} in your list.`}
+            {!picture.kinds.length ? (
+              <>
+                {' '}
+                <Link to="/big-picture" className="font-medium text-green-700 underline underline-offset-2 dark:text-green-400">
+                  Not sure? Start with the big picture
+                </Link>
+              </>
+            ) : null}
+          </p>
         </div>
 
-        <div>
-          <EmailCaptureInline />
-        </div>
+        <section aria-labelledby="apps-all" className="flex flex-col gap-3">
+          <div>
+            <h2 id="apps-all" className="text-lg font-bold text-gray-900 dark:text-gray-100">Can’t see an app? Search them all</h2>
+            <p className="text-sm text-gray-600 dark:text-gray-300">School, games, social, streaming, AI, health and phone carriers.</p>
+          </div>
+          <ServiceCatalog guidedMode />
+        </section>
       </div>
     </PageLayout>
   );
