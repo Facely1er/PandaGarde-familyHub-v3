@@ -20,6 +20,19 @@ describe('big picture → catalog mapping', () => {
   });
 });
 
+describe('catalog copy shown in the action plan', () => {
+  // Parents read these notes and tips directly; keep them in everyday words.
+  const JARGON =
+    /\b(FERPA|COPPA|HIPAA|CPNI|IMEI|IMSI|UIDH|LTI|SIS|API|SDK|metadata|aggregators?|ecosystem|analytics|infrastructure|retention|biometric|enterprise|HealthKit|proxy access|identity-resolution|de-identified|data processing|two-factor|authentication)\b/i;
+
+  it('uses no technical or legal jargon', () => {
+    const offenders = childServiceCatalog.flatMap((s) =>
+      [...s.privacyConcerns, ...s.parentTips].filter((t) => JARGON.test(t)).map((t) => `${s.id}: ${t}`)
+    );
+    expect(offenders).toEqual([]);
+  });
+});
+
 describe('buildFamilyActionPlan', () => {
   it('is empty without apps or kinds', () => {
     const plan = buildFamilyActionPlan({ serviceIds: [] });

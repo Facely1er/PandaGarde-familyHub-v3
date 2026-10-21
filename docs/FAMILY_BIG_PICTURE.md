@@ -25,6 +25,9 @@ steps 1–3; the scored footprint review is a collapsed **Detailed footprint rev
 - Step 3 logic: `src/lib/familyActionPlan.ts` (catalog risk → priority, ≤4 steps and ≤2 notes per app, progress storage)
 - UI: `pages/FamilyBigPicturePage.tsx`, `pages/ServiceCatalogPage.tsx`, `components/FamilyActionPlan.tsx`, `pages/DigitalFootprintPage.tsx`
 
+Catalog notes and tips are written in everyday words; `familyActionPlan.test.ts` fails on technical or
+legal jargon (FERPA, metadata, retention, …) so it can't creep back into the plan.
+
 Storage (device only): `pandagarde_family_snapshot_v1` (step 1), `pandagarde_family_services` (step 2),
 `pandagarde_action_plan_v1` (ticked steps).
 
@@ -35,7 +38,6 @@ school apps are ticked; step 3 marks school-chosen apps ("Chosen by the school �
 
 ## Follow-ups
 
-- Rewrite catalog `parentTips` that still use jargon (e.g. "FERPA-compliant", "CPNI") in plain words
 - Translate steps 1–3 (homepage is EN/FR/ES)
 - Add consoles, smart speakers and location apps to the catalog so every big-picture kind has suggestions
 - Printable plan; story matched to the "Start here" area

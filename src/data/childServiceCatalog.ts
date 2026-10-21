@@ -142,13 +142,13 @@ export const childServiceCatalog: ChildService[] = [
     privacyConcerns: [
       'Public boards can reveal interests and location',
       'Comments and messages from other users',
-      'Algorithm may surface mature content',
-      'Shopping links track browsing behavior'
+      'Suggested pins may show grown-up content',
+      'Shopping links keep track of what your child looks at'
     ],
     parentTips: [
       'Set account to private',
       'Review boards and followers regularly',
-      'Disable personalized ads where possible',
+      'Turn off personalized ads in settings, where offered',
       'Discuss what not to pin publicly'
     ],
     website: 'https://www.pinterest.com'
@@ -207,13 +207,13 @@ export const childServiceCatalog: ChildService[] = [
       'Public channels and large groups with strangers',
       'Secret chats are not visible to parents',
       'Bots and links can expose scams or mature content',
-      'Phone number discovery settings'
+      'Others may find your teen by their phone number'
     ],
     parentTips: [
       'Restrict who can add your teen to groups',
       'Disable nearby people and username search if needed',
       'Discuss never joining unknown channels',
-      'Review active sessions and linked devices'
+      'Check which devices are signed in to the account'
     ],
     website: 'https://telegram.org'
   },
@@ -393,7 +393,7 @@ export const childServiceCatalog: ChildService[] = [
     riskLevel: 'low',
     privacyConcerns: [
       'Viewing history and profiles tracked',
-      'Targeted recommendations and ads on some plans',
+      'Suggestions, and ads on some plans, are based on what your child watches',
       'Child profiles still linked to a household account'
     ],
     parentTips: [
@@ -413,7 +413,7 @@ export const childServiceCatalog: ChildService[] = [
     minAge: 7,
     riskLevel: 'medium',
     privacyConcerns: [
-      'Viewing tied to Amazon purchase and ad profiles',
+      'What your child watches is linked to your Amazon shopping and ads',
       'Rentals and channels can expose mature content',
       'Household sharing blurs who watched what'
     ],
@@ -439,14 +439,14 @@ export const childServiceCatalog: ChildService[] = [
     riskLevel: 'medium',
     privacyConcerns: [
       'Mature content available on the same account',
-      'Viewing and ad profiles tracked',
+      'What your child watches is used to choose ads',
       'Live TV may include unfiltered channels'
     ],
     parentTips: [
       'Create a teen-appropriate profile with restrictions',
       'Block mature titles with profile PINs',
       'Review Hulu Kids content only for younger children',
-      'Discuss ad-supported plan data use'
+      'If your plan has ads, know that viewing is used to choose them'
     ],
     website: 'https://www.hulu.com',
     vendor: 'Disney (Hulu)'
@@ -481,7 +481,7 @@ export const childServiceCatalog: ChildService[] = [
     riskLevel: 'low',
     privacyConcerns: [
       'Viewing tied to Apple ID and Family Sharing',
-      'Third-party channels may have separate privacy policies',
+      'Channels from other companies have their own privacy rules',
       'Purchase history visible on shared devices'
     ],
     parentTips: [
@@ -543,14 +543,14 @@ export const childServiceCatalog: ChildService[] = [
     minAge: 13,
     riskLevel: 'medium',
     privacyConcerns: [
-      'Listening history builds detailed interest profiles',
+      'What your child listens to builds a detailed picture of their interests',
       'Podcasts may include explicit content',
       'Social features can expose activity to others',
       'Wrapped and recommendations reveal habits'
     ],
     parentTips: [
       'Use Spotify Kids for children under 13',
-      'Disable public listening activity',
+      'Turn off sharing of what your child listens to',
       'Review explicit content filters',
       'Discuss podcast sources before subscribing'
     ],
@@ -566,11 +566,11 @@ export const childServiceCatalog: ChildService[] = [
     privacyConcerns: [
       'Unfiltered live chat with strangers',
       'Mature language and content on many streams',
-      'Donations and DMs from viewers',
+      'Donations and private messages from viewers',
       'Recommendations can surface inappropriate streams'
     ],
     parentTips: [
-      'Disable whispers and restrict chat',
+      'Turn off whispers (private messages) and limit who can chat',
       'Follow only approved channels',
       'Use supervised viewing for younger teens',
       'Turn off notifications from unknown creators'
@@ -691,8 +691,8 @@ export const childServiceCatalog: ChildService[] = [
     riskLevel: 'medium',
     privacyConcerns: [
       'Projects can be shared publicly via link',
-      'Templates may include brand and stock content tracking',
-      'Education vs. personal accounts collect different data',
+      'Some templates and stock images track how they are used',
+      'School accounts and personal accounts collect different information',
       'AI image tools may store prompts'
     ],
     parentTips: [
@@ -718,16 +718,16 @@ export const childServiceCatalog: ChildService[] = [
     minAge: 6,
     riskLevel: 'medium',
     privacyConcerns: [
-      'Google collects student behavioral and usage data',
-      'Student account linked to broader Google ecosystem',
-      'Third-party apps integrated via Google Marketplace can access student data',
-      'Usage analytics shared with school administrators'
+      'Google keeps a record of how your child uses Classroom',
+      'The school account also works with other Google apps',
+      'Add-on apps that teachers connect can see your child’s schoolwork',
+      'The school can see how and when your child uses it'
     ],
     parentTips: [
-      'Ask your school for a copy of their Google for Education data agreement',
-      'Review which Marketplace apps have been added by teachers',
-      'Check that the account is "supervised" (school-managed)',
-      'Understand that school admins can see all account activity'
+      'Ask the school for its written privacy agreement with Google',
+      'Ask which add-on apps teachers have connected to Classroom',
+      'Make sure your child uses the school account, not a personal Google account',
+      'Know that the school can see everything done in the school account'
     ],
     website: 'https://classroom.google.com',
     lawEnforcementConcerns: [
@@ -746,14 +746,14 @@ export const childServiceCatalog: ChildService[] = [
     minAge: 6,
     riskLevel: 'medium',
     privacyConcerns: [
-      'Chat messages and meeting history stored by Microsoft',
+      'Microsoft keeps class chats and meeting history',
       'Class recordings can be kept by school or Microsoft',
-      'Usage and behavioral analytics collected',
-      'Integrated with other Microsoft 365 school apps (OneDrive, OneNote)'
+      'Records how your child uses Teams',
+      'Connected to other school Microsoft apps like OneDrive and OneNote'
     ],
     parentTips: [
-      'Ask school about their Microsoft 365 Education data agreement',
-      'Understand meeting recording and retention policies',
+      'Ask the school for its written privacy agreement with Microsoft',
+      'Ask whether class meetings are recorded and how long recordings are kept',
       'Review what assignments and files are stored in OneDrive',
       'Check that the account is school-managed, not a personal Microsoft account'
     ],
@@ -774,16 +774,16 @@ export const childServiceCatalog: ChildService[] = [
     minAge: 6,
     riskLevel: 'medium',
     privacyConcerns: [
-      'Student grades, submissions, and activity logs stored on Instructure servers',
-      'Learning analytics shared with school and district',
-      'Third-party LTI tools within Canvas can access student data',
-      'Student communication through Canvas messages is stored'
+      'Grades, homework and a log of activity are kept by Instructure, the company behind Canvas',
+      'Reports on your child’s learning are shared with the school and district',
+      'Add-on tools that teachers connect can see your child’s work',
+      'Messages sent in Canvas are kept'
     ],
     parentTips: [
-      'Ask school about their Instructure/Canvas data processing agreement',
-      'Check which external LTI tools teachers have enabled',
-      'Understand how long student submission data is retained',
-      'Review the parent observer account features to monitor activity'
+      'Ask the school for its written privacy agreement with Canvas',
+      'Ask which add-on tools teachers have connected to Canvas',
+      'Ask how long homework and grades are kept',
+      'Ask for a parent (observer) account so you can see what your child sees'
     ],
     website: 'https://www.instructure.com/canvas'
   },
@@ -797,16 +797,16 @@ export const childServiceCatalog: ChildService[] = [
     minAge: 6,
     riskLevel: 'medium',
     privacyConcerns: [
-      'Student academic records synced with PowerSchool SIS',
-      'Usage patterns and learning analytics collected',
-      'Parent and student messaging logged',
-      'Data sharing between Schoology and other PowerSchool products'
+      'Grades and records are shared with PowerSchool, the school’s student records system',
+      'Records how your child uses it and how they are learning',
+      'Messages between parents, students and teachers are kept',
+      'Information can be shared with other PowerSchool products the school uses'
     ],
     parentTips: [
-      'Review school\'s PowerSchool/Schoology privacy policy',
+      'Ask the school for the Schoology privacy policy',
       'Check parent portal access to see what data is visible',
-      'Understand cross-product data sharing within the PowerSchool suite',
-      'Ask school about data retention after graduation'
+      'Ask which other PowerSchool products receive your child’s information',
+      'Ask how long records are kept after your child leaves the school'
     ],
     website: 'https://www.schoology.com'
   },
@@ -823,13 +823,13 @@ export const childServiceCatalog: ChildService[] = [
       'Student photos, videos, and audio stored on platform',
       'Portfolio content may be visible to school community',
       'Parent and teacher messaging stored',
-      'Student biometric data (voice, image) captured in portfolio items'
+      'Recordings of your child’s face and voice are saved in their portfolio'
     ],
     parentTips: [
       'Review sharing settings — check whether portfolio is private or visible to class',
-      'Understand data retention for student content after the school year',
+      'Ask how long your child’s work is kept after the school year',
       'Monitor what your child is posting to their portfolio',
-      'Ask school about their Seesaw student data agreement'
+      'Ask the school for its written privacy agreement with Seesaw'
     ],
     website: 'https://web.seesaw.me'
   },
@@ -844,14 +844,14 @@ export const childServiceCatalog: ChildService[] = [
     riskLevel: 'medium',
     privacyConcerns: [
       'Video sessions can be recorded by the host (teacher or school)',
-      'Meeting metadata, chat, and usage data collected by Zoom',
-      'Attention-tracking features may be enabled by the host',
-      'Student likeness and voice captured on video'
+      'Zoom records who joined, when, and what was said in chat',
+      'The school can see attendance and how long your child stayed in each session',
+      'Your child’s face and voice are captured on video'
     ],
     parentTips: [
-      'Ask school about their meeting recording and retention policies',
+      'Ask whether classes are recorded and how long recordings are kept',
       'Ensure your child joins from a private, appropriate space',
-      'Check if attention tracking is enabled on school sessions',
+      'Use a plain or blurred background so your home stays private',
       'Confirm the school account is the managed education version (not a personal free account)'
     ],
     website: 'https://zoom.us/education',
@@ -871,18 +871,18 @@ export const childServiceCatalog: ChildService[] = [
     minAge: 6,
     riskLevel: 'high',
     privacyConcerns: [
-      'Detailed behavioral profiles (points, demerits) stored indefinitely by default',
+      'Behavior points (good and bad) can be kept for years unless deleted',
       'Student photos and videos in class portfolios',
-      'Behavioral data visible to parents but controlled entirely by teachers',
+      'You can see behavior points, but only teachers can change them',
       'Student content (portfolio, messages) hosted by ClassDojo',
-      'No clear data deletion timeline for behavioral history'
+      'There is no set date when old behavior points are deleted'
     ],
     parentTips: [
-      'Request deletion of behavioral history at the end of each school year',
+      'Ask for old behavior points to be deleted at the end of each school year',
       'Check privacy settings on your child\'s student account and portfolio',
-      'Ask the school whether ClassDojo is used in a FERPA-compliant manner',
-      'Opt out of community features if available',
-      'Ask ClassDojo to delete old behavioral data via their privacy request process'
+      'Ask the school who can see your child’s behavior points and how long they are kept',
+      'Turn off sharing beyond the class, if offered',
+      'You can also ask ClassDojo directly to delete old behavior records'
     ],
     website: 'https://www.classdojo.com'
   },
@@ -898,12 +898,12 @@ export const childServiceCatalog: ChildService[] = [
     privacyConcerns: [
       'Messages between teachers and students or parents stored on platform',
       'Phone number required to join',
-      'Communication patterns and metadata collected'
+      'Records who messages whom, and when'
     ],
     parentTips: [
       'Use the parent account — do not share the student join code with others',
       'Review message history and notification settings',
-      'Check Remind\'s data retention policy for message archives'
+      'Ask how long old messages are kept'
     ],
     website: 'https://www.remind.com'
   },
@@ -924,7 +924,7 @@ export const childServiceCatalog: ChildService[] = [
     parentTips: [
       'Ensure your child uses a school-managed account, not a personal free account',
       'Check whether the nickname includes any personal information',
-      'Review Kahoot\'s school data agreement with your school'
+      'Ask the school whether it has a privacy agreement with Kahoot'
     ],
     website: 'https://kahoot.com'
   },
@@ -941,13 +941,13 @@ export const childServiceCatalog: ChildService[] = [
       'Study sets and all learning activity tracked',
       'Free tier shows advertising to students',
       'Publicly shared study sets may contain student names or personal notes',
-      'Student performance data shared with teachers'
+      'Teachers can see your child’s results'
     ],
     parentTips: [
       'Check whether your child uses the school-licensed version (no ads) or a free personal account',
       'Review account privacy settings to limit public profile visibility',
       'Monitor which study sets are shared publicly',
-      'Ask school about their Quizlet data agreement'
+      'Ask the school whether it has a privacy agreement with Quizlet'
     ],
     website: 'https://quizlet.com'
   },
@@ -962,15 +962,15 @@ export const childServiceCatalog: ChildService[] = [
     riskLevel: 'medium',
     privacyConcerns: [
       'Every answer and problem attempt is tracked and stored',
-      'Detailed learning analytics and performance profiles built over time',
-      'Progress data shared with teachers and school administrators',
-      'Data used to improve IXL platform algorithms'
+      'Builds a detailed record of strengths and weak spots over the years',
+      'Progress is shared with teachers and the school',
+      'Answers are used to improve IXL’s product'
     ],
     parentTips: [
       'Review the parent dashboard to understand what data IXL holds on your child',
-      'Ask school about their IXL data processing agreement',
-      'Understand how long performance history is retained after school year',
-      'Request data export or deletion via IXL privacy settings'
+      'Ask the school for its written privacy agreement with IXL',
+      'Ask how long results are kept after the school year',
+      'You can ask IXL for a copy of your child’s data, or to delete it'
     ],
     website: 'https://www.ixl.com'
   },
@@ -986,12 +986,12 @@ export const childServiceCatalog: ChildService[] = [
     privacyConcerns: [
       'Reading history and quiz responses tracked per article',
       'Student reading level and progress shared with teachers',
-      'Article engagement used for platform recommendations'
+      'What your child reads is used to suggest more articles'
     ],
     parentTips: [
-      'Review reading analytics and progress reports with your child',
-      'Ask school about Newsela\'s student data retention policy',
-      'Check Newsela\'s COPPA compliance statement for under-13 students'
+      'Look at reading progress reports together with your child',
+      'Ask how long Newsela keeps your child’s reading history',
+      'If your child is under 13, ask how the school gave consent for Newsela'
     ],
     website: 'https://newsela.com'
   },
@@ -1006,15 +1006,15 @@ export const childServiceCatalog: ChildService[] = [
     riskLevel: 'low',
     privacyConcerns: [
       'All student responses (polls, quizzes, open-ended) stored per session',
-      'Teacher and school admins can see full student response history',
-      'Session data stored by Nearpod and Renaissance Learning',
-      'Cross-product data sharing potential with other Renaissance products'
+      'Teachers and the school can see every answer your child has given',
+      'Answers are kept by Nearpod and its owner, Renaissance',
+      'Information may be shared with other Renaissance products the school uses'
     ],
     parentTips: [
-      'Ask teacher about session recording and data retention',
+      'Ask the teacher how long class answers are kept',
       'Understand that all in-class responses are saved',
-      'Review Nearpod\'s FERPA compliance documentation',
-      'Ask school about Renaissance Learning\'s broader data practices'
+      'Ask the school who can see your child’s answers outside class',
+      'Ask which other Renaissance products the school uses'
     ],
     website: 'https://nearpod.com'
   },
@@ -1028,13 +1028,13 @@ export const childServiceCatalog: ChildService[] = [
     minAge: 6,
     riskLevel: 'low',
     privacyConcerns: [
-      'Video-watching behavior and all quiz responses tracked',
+      'Tracks how your child watches each video and every quiz answer',
       'Completion rates and scores stored per student',
-      'Teacher has full visibility into individual student engagement'
+      'Teachers can see exactly how each student watched and answered'
     ],
     parentTips: [
       'Review what data is visible to teachers in Edpuzzle',
-      'Ask school about their Edpuzzle data agreement',
+      'Ask the school whether it has a privacy agreement with Edpuzzle',
       'Understand what happens to student data after the school year ends'
     ],
     website: 'https://edpuzzle.com'
@@ -1050,13 +1050,13 @@ export const childServiceCatalog: ChildService[] = [
     riskLevel: 'low',
     privacyConcerns: [
       'Detailed reading performance data collected per session',
-      'Progress and assessment data shared with teachers and administrators',
-      'Learning behavior patterns stored by Cambium Learning Group'
+      'Progress and test results are shared with teachers and the school',
+      'Kept by Cambium Learning Group, the company behind Lexia'
     ],
     parentTips: [
       'Review progress reports available to parents',
-      'Ask school about their Cambium Learning Group / Lexia data agreement',
-      'Understand assessment data retention after the school year'
+      'Ask the school for its written privacy agreement with Lexia',
+      'Ask how long test results are kept after the school year'
     ],
     website: 'https://www.lexialearning.com'
   },
@@ -1070,15 +1070,15 @@ export const childServiceCatalog: ChildService[] = [
     minAge: 5,
     riskLevel: 'low',
     privacyConcerns: [
-      'Every decision and interaction tracked to build an adaptive learning model',
+      'Every click and answer is recorded to adjust lessons to your child',
       'Detailed math learning profiles built over time',
-      'Progress data shared with teachers, school, and district administrators',
-      'Data shared with Discovery Education parent company'
+      'Progress is shared with teachers, the school and the district',
+      'Information is shared with Discovery Education, the company that owns DreamBox'
     ],
     parentTips: [
       'Review parent progress reports in the DreamBox parent portal',
-      'Ask school about Discovery Education\'s data practices',
-      'Understand how long detailed learning data is retained',
+      'Ask the school how Discovery Education uses your child’s information',
+      'Ask how long detailed learning records are kept',
       'Request data deletion at the end of the school year if desired'
     ],
     website: 'https://www.dreambox.com'
@@ -1093,16 +1093,16 @@ export const childServiceCatalog: ChildService[] = [
     minAge: 5,
     riskLevel: 'medium',
     privacyConcerns: [
-      'Comprehensive reading and math assessment data built over years',
-      'Renaissance also owns Nearpod — cross-product data sharing is possible',
-      'Assessment and testing history shared with school and district',
-      'Student data used for product development and benchmarking'
+      'Builds a record of reading and math test results over many years',
+      'Renaissance also owns Nearpod, so information can be shared between them',
+      'Test history is shared with the school and district',
+      'Student results are used to build products and compare schools'
     ],
     parentTips: [
-      'Ask school about Renaissance Learning\'s full data practices across all products',
-      'Request access to your child\'s AR and STAR assessment history',
-      'Understand that Renaissance also owns Nearpod (same data ecosystem)',
-      'Ask whether student data is shared with third-party research partners'
+      'Ask the school which Renaissance products it uses and what each keeps',
+      'Ask to see your child’s reading and math test history (AR and STAR)',
+      'Remember Renaissance also owns Nearpod — one company may hold both records',
+      'Ask whether results are shared with outside researchers'
     ],
     website: 'https://www.renaissance.com'
   },
@@ -1116,16 +1116,16 @@ export const childServiceCatalog: ChildService[] = [
     minAge: 6,
     riskLevel: 'medium',
     privacyConcerns: [
-      'Free tier includes paid membership upsell messages targeting children',
-      'Game engagement and learning analytics collected',
-      'Marketing communications may target parents based on child activity',
+      'The free version shows children ads for a paid membership',
+      'Records how your child plays and learns',
+      'Parents may get sales emails based on how their child plays',
       'In-app purchase prompts for premium membership'
     ],
     parentTips: [
       'Ensure the school-assigned account is used (not a personal account)',
-      'Disable or ignore in-app membership purchase prompts',
-      'Opt out of Prodigy marketing emails in parent account settings',
-      'Be aware of the distinction between game play and actual learning progress'
+      'Teach your child to ignore offers to buy a membership',
+      'Turn off Prodigy sales emails in your parent account',
+      'Time in the game is not the same as learning — check the progress report'
     ],
     website: 'https://www.prodigygame.com'
   },
@@ -1144,7 +1144,7 @@ export const childServiceCatalog: ChildService[] = [
       'Non-profit with a strong stated privacy policy'
     ],
     parentTips: [
-      'Code.org is a non-profit with COPPA and FERPA compliance',
+      'Good news: Code.org is a non-profit that follows US student privacy laws',
       'Review the parent guide on Code.org for data practices',
       'Check student account settings to limit data collection where possible'
     ],
@@ -1160,16 +1160,16 @@ export const childServiceCatalog: ChildService[] = [
     minAge: 6,
     riskLevel: 'medium',
     privacyConcerns: [
-      'Student video recordings (voice and likeness) stored by Microsoft',
+      'Videos of your child’s face and voice are kept by Microsoft',
       'Videos may be viewable by the entire class or wider audience depending on settings',
-      'Microsoft data practices and retention policies apply',
-      'Student biometric data (face, voice) captured in every video'
+      'Microsoft’s rules decide how long videos are kept',
+      'Every video shows your child’s face and voice'
     ],
     parentTips: [
-      'Ask teacher about topic visibility settings (class-only vs. open)',
-      'Confirm the school uses the Microsoft-managed education version',
-      'Understand Microsoft\'s retention policy for student videos',
-      'Ask school about their data agreement for Flip with Microsoft'
+      'Ask the teacher whether videos are seen by the class only or by anyone',
+      'Make sure your child uses the school account, not a personal one',
+      'Ask how long your child’s videos are kept',
+      'Ask the school for its written privacy agreement with Microsoft'
     ],
     website: 'https://flip.com'
   },
@@ -1185,13 +1185,13 @@ export const childServiceCatalog: ChildService[] = [
     privacyConcerns: [
       'Board visibility depends entirely on teacher settings — can be public by default',
       'Student posts, images, and comments stored on platform',
-      'Public boards are indexable by search engines',
-      'No strict FERPA compliance for free-tier accounts'
+      'Public boards can show up in Google searches',
+      'The free version doesn’t include school-level privacy protections'
     ],
     parentTips: [
       'Ask teacher whether class boards are set to private or public',
       'Review what your child is posting on shared boards',
-      'Ask school whether they use the Padlet for Schools (FERPA-compliant) version',
+      'Ask whether the school uses Padlet for Schools, the version with student privacy protections',
       'Understand that posts on public boards can be seen by anyone on the internet'
     ],
     website: 'https://padlet.com'
@@ -1211,16 +1211,16 @@ export const childServiceCatalog: ChildService[] = [
     riskLevel: 'high',
     privacyConcerns: [
       'All conversations stored by OpenAI — including sensitive personal disclosures',
-      'Free and Plus accounts: content may be used to train future AI models',
-      'No FERPA or COPPA compliance for consumer accounts — schools using it informally have no protection',
-      'Age verification is not enforced — children under 13 can and do access it',
+      'On personal accounts, chats may be used to train future versions',
+      'Personal accounts don’t have school privacy protections, even if a teacher suggests using it',
+      'Age is not checked — children under 13 can sign up anyway',
       'Sensitive information shared (mental health, personal problems) is recorded'
     ],
     parentTips: [
-      'Go to Settings → Data Controls and disable "Improve the model for everyone" to stop training data use',
+      'In Settings → Data Controls, turn off “Improve the model for everyone” so chats aren’t used for training',
       'Talk with your child about not sharing personal details, passwords, or school credentials',
       'Delete conversation history regularly from the account sidebar',
-      'If used for school, ask the school whether they have an enterprise agreement (which blocks training)',
+      'If it’s used for school, ask whether the school has its own agreement that keeps chats out of training',
       'ChatGPT has a minimum age of 13 — ensure younger children do not have access'
     ],
     website: 'https://chat.openai.com',
@@ -1239,15 +1239,15 @@ export const childServiceCatalog: ChildService[] = [
     minAge: 13,
     riskLevel: 'high',
     privacyConcerns: [
-      'Conversations linked to child\'s Google account and full Google data ecosystem',
-      'Queries and responses stored and reviewed by Google to improve AI',
+      'Chats are linked to your child’s Google account and other Google services',
+      'Chats are saved, and people at Google may read some to improve it',
       'Accessible through school Google accounts — possible even on accounts set up for younger students',
-      'Part of Google\'s broader ad and identity-resolution infrastructure'
+      'Part of Google, whose business is built on advertising'
     ],
     parentTips: [
       'Check Google Account → Gemini Apps Activity and turn off history or delete it regularly',
-      'In Family Link (under-13 accounts), Gemini should be blocked by default — verify this',
-      'Ask your child\'s school whether Gemini is enabled in the school Google Workspace',
+      'For children under 13, check in Family Link whether Gemini is allowed, and turn it off if you prefer',
+      'Ask the school whether Gemini is turned on for school Google accounts',
       'Discuss with your child that Google stores and may review AI conversations'
     ],
     website: 'https://gemini.google.com',
@@ -1266,16 +1266,16 @@ export const childServiceCatalog: ChildService[] = [
     minAge: 13,
     riskLevel: 'medium',
     privacyConcerns: [
-      'Conversations stored by Microsoft; retention varies by account type',
-      'School accounts governed by Microsoft EDU terms (more protective)',
-      'Consumer Copilot shows ads powered by Microsoft Advertising',
-      'Integrated with Microsoft 365 — AI can access files, emails, and calendar if enabled'
+      'Microsoft saves chats; how long depends on the type of account',
+      'School accounts come with stronger privacy rules',
+      'The free personal version shows ads',
+      'If turned on, it can read files, emails and the calendar in the account'
     ],
     parentTips: [
-      'If your child has a school Microsoft 365 account, verify that the Copilot settings are managed by the school',
-      'For personal accounts, check Microsoft Privacy Dashboard → Activity History and delete AI history',
-      'Ensure Copilot is not connected to sensitive OneDrive files',
-      'Consumer Copilot on Bing uses Microsoft\'s ad targeting — use the school account version for safer access'
+      'If your child has a school Microsoft account, use Copilot there — the school controls the settings',
+      'On personal accounts, open the Microsoft privacy dashboard and delete Copilot history',
+      'Make sure Copilot can’t open private files in OneDrive',
+      'The free version on Bing uses chats for ads — the school version is safer'
     ],
     website: 'https://copilot.microsoft.com',
     lawEnforcementConcerns: [
@@ -1293,19 +1293,19 @@ export const childServiceCatalog: ChildService[] = [
     minAge: 16,
     riskLevel: 'very-high',
     privacyConcerns: [
-      'AI characters are designed to form emotional bonds — significant risk of dependency for vulnerable teens',
-      'Full conversation history stored; includes highly personal disclosures about mental health, relationships',
-      'Linked to multiple legal complaints and lawsuits alleging harm to minors',
-      'Minimal robust content filtering — inappropriate conversations have been widely reported',
-      'No parental controls or family-link features',
-      'All conversations used to train Character.AI\'s models with no clear opt-out'
+      'AI characters are built to feel like friends — some teens come to depend on them',
+      'Every chat is saved, including very personal things about feelings and relationships',
+      'Families have filed lawsuits saying the app harmed their children',
+      'Filters are weak — many inappropriate chats have been reported',
+      'Few tools for parents to see or limit use',
+      'Chats are used to train the app, with no clear way to say no'
     ],
     parentTips: [
-      'This app is not recommended for children under 16 — consider blocking it at the router or device level',
-      'Character.AI now has a Teen Mode (under-18) with some content restrictions — ensure it is active',
+      'Not recommended under 16 — consider blocking it in your phone or home Wi-Fi settings',
+      'If your teen uses it, check the account has their real age so teen limits apply',
       'Have an open conversation: AI personas are not real friends and cannot replace real support',
-      'If your child is struggling emotionally, direct them to real mental health resources (Crisis Text Line, therapist)',
-      'Review your child\'s account history at least monthly if they use this app'
+      'If your child is struggling, point them to real people: you, a counselor, or Crisis Text Line (text HOME to 741741 in the US)',
+      'If they use it, look at the chats together at least once a month'
     ],
     website: 'https://character.ai'
   },
@@ -1318,16 +1318,16 @@ export const childServiceCatalog: ChildService[] = [
     minAge: 13,
     riskLevel: 'very-high',
     privacyConcerns: [
-      'Enabled by default for all Snapchat users — children cannot easily disable it',
-      'My AI conversations are stored and factor into Snap\'s ad targeting',
-      'My AI previously shared a user\'s location with the AI without explicit consent (patched but noted)',
+      'Turned on for every Snapchat user — it can’t easily be turned off',
+      'Chats with My AI are saved and used to choose ads',
+      'My AI can use your child’s location if Snapchat has it',
       'Children may share personal or sensitive information thinking it is private',
-      'My AI may recommend products, links, and sponsored content — advertising without clear labelling for younger users'
+      'My AI can suggest products and paid links that aren’t clearly marked as ads'
     ],
     parentTips: [
-      'Go to Snapchat → Profile → Privacy Controls → Clear My AI Data and delete conversation history',
-      'Snapchat+ subscribers can remove My AI from the chat list; free users cannot',
-      'Discuss with your teen that My AI is not a confidential companion — Snap staff can review conversations',
+      'Delete My AI chats: Snapchat → Profile → Settings → Privacy Controls → Clear Data',
+      'Only paying Snapchat+ users can remove My AI from the chat list',
+      'Tell your teen My AI is not a private friend — Snapchat staff can read the chats',
       'If your child is under 13, they should not have Snapchat at all',
       'Check for My AI in the Friends list — it appears as a contact called "My AI"'
     ],
@@ -1347,17 +1347,17 @@ export const childServiceCatalog: ChildService[] = [
     minAge: 13,
     riskLevel: 'very-high',
     privacyConcerns: [
-      'Meta AI conversations feed the same advertising system as Instagram and Facebook',
-      'Accessible via WhatsApp blue circle — often activated unintentionally',
-      'Content your child shares in AI chats may inform Meta\'s ad targeting',
-      'Meta\'s data broker relationships (LiveRamp, Acxiom, etc.) apply to AI conversation data',
-      'No separate parental controls for Meta AI within WhatsApp or Instagram'
+      'Chats with Meta AI feed the same ad system as Instagram and Facebook',
+      'The blue circle in WhatsApp opens Meta AI — easy to tap by accident',
+      'What your child says to it may be used to choose ads',
+      'Chats may be kept and reviewed to improve Meta’s AI',
+      'Few parent controls for Meta AI inside WhatsApp or Instagram'
     ],
     parentTips: [
-      'Meta AI is embedded — you cannot fully remove it, but you can avoid actively using it',
-      'Review Meta account Privacy Settings → AI → Interaction History and delete it',
+      'You can’t remove Meta AI, but your child can choose not to use it',
+      'Delete past Meta AI chats in your Meta account privacy settings',
       'Discuss with your teen that the blue circle in WhatsApp is Meta AI, not a private chat',
-      'Check Instagram Accounts Center → Privacy → Your Activity on Meta AI'
+      'In Instagram, open Accounts Center to see and delete Meta AI activity'
     ],
     website: 'https://ai.meta.com'
   },
@@ -1370,16 +1370,16 @@ export const childServiceCatalog: ChildService[] = [
     minAge: 13,
     riskLevel: 'medium',
     privacyConcerns: [
-      'Every piece of writing (essays, personal statements, messages) passes through Grammarly\'s servers',
-      'Writing content may be used to train Grammarly\'s AI models on standard consumer accounts',
-      'Browser extension has broad access to all text typed in web pages',
-      'De-identified writing data may be shared with third-party analytics partners'
+      'Everything your child writes with it (essays, messages) goes through Grammarly’s computers',
+      'On personal accounts, writing may be used to train Grammarly’s AI',
+      'The browser add-on can see almost everything typed on websites',
+      'Writing, with names removed, may be shared with outside companies'
     ],
     parentTips: [
-      'Check Grammarly\'s Account Settings → Privacy and opt out of "human review" and data-sharing options',
-      'Grammarly for Education provides stronger privacy protections — ask your school if they have a licence',
-      'The browser extension can see everything typed on websites — review what sites your child uses it on',
-      'Remind your child not to paste personal information (SSN, passwords, home address) into Grammarly'
+      'In Grammarly’s privacy settings, turn off human review and data sharing',
+      'Ask whether the school has Grammarly for Education, which has stronger privacy protections',
+      'Turn the browser add-on off on sites where your child types private things',
+      'Remind your child not to paste private details (passwords, home address, ID numbers) into it'
     ],
     website: 'https://www.grammarly.com'
   },
@@ -1392,17 +1392,17 @@ export const childServiceCatalog: ChildService[] = [
     minAge: 13,
     riskLevel: 'high',
     privacyConcerns: [
-      'All search queries and follow-up questions stored by Perplexity',
-      'No age verification — children of any age can access it',
-      'Queries used to improve the AI model (opt-out available in paid plans)',
-      'Search patterns reveal personal interests, location, health questions, and academic topics',
-      'Perplexity collects IP address, device info, and search patterns linked to an account or device fingerprint'
+      'Every question your child asks is saved',
+      'Age is not checked — children of any age can use it',
+      'Questions are used to improve the AI',
+      'Questions can reveal interests, location, health worries and schoolwork',
+      'It records the device and internet connection used, even without an account'
     ],
     parentTips: [
-      'Perplexity allows disabling personalised AI on free accounts — check Settings → Privacy',
-      'Remind your child not to search for highly personal topics (health conditions, home address, etc.)',
-      'Consider whether Perplexity is being used to bypass school search filters',
-      'Use a school-controlled account if the school has an agreement with Perplexity'
+      'Open Settings → Privacy and turn off what you can',
+      'Remind your child not to ask about very personal things (health, home address)',
+      'Check whether it’s being used to get around school web filters',
+      'If the school offers its own account, use that instead'
     ],
     website: 'https://www.perplexity.ai'
   },
@@ -1415,14 +1415,14 @@ export const childServiceCatalog: ChildService[] = [
     minAge: 10,
     riskLevel: 'medium',
     privacyConcerns: [
-      'Photos of homework and written work uploaded to Google\'s AI infrastructure',
-      'Usage linked to Google account and feeds Google\'s data ecosystem',
-      'Google may use query data to improve its AI products'
+      'Photos of homework are sent to Google’s computers',
+      'Use is linked to your child’s Google account',
+      'Google may use the questions to improve its AI'
     ],
     parentTips: [
       'Check Google Account → Data & Privacy → My Activity to see Socratic history',
       'Disable Socratic activity history in Google Account if desired',
-      'Discuss with your child that homework photos are processed by Google'
+      'Tell your child that homework photos are sent to Google'
     ],
     website: 'https://socratic.org'
   },
@@ -1436,16 +1436,16 @@ export const childServiceCatalog: ChildService[] = [
     minAge: 13,
     riskLevel: 'medium',
     privacyConcerns: [
-      'Conversations processed via OpenAI\'s API (subject to OpenAI\'s enterprise data terms)',
+      'Chats are handled by OpenAI, the company behind ChatGPT, under a business agreement',
       'Khan Academy stores conversation history to track learning progress',
-      'OpenAI enterprise API should prevent training on these conversations, but verify with the school',
-      'Student academic struggles and misconceptions are logged in detail'
+      'That agreement should keep chats out of AI training — confirm with the school',
+      'What your child finds hard is recorded in detail'
     ],
     parentTips: [
       'Khan Academy is a non-profit with strong stated privacy commitments',
-      'Verify that your school\'s Khanmigo agreement includes OpenAI Enterprise API protections',
+      'Ask the school whether chats are kept out of AI training',
       'Review the Khan Academy parent dashboard for conversation and progress history',
-      'Khanmigo is one of the more responsibly designed AI tutors — confirm version used is the school version'
+      'Make sure your child uses the school version of Khanmigo'
     ],
     website: 'https://www.khanacademy.org/khanmigo'
   },
@@ -1465,19 +1465,19 @@ export const childServiceCatalog: ChildService[] = [
     minAge: 6,
     riskLevel: 'very-high',
     privacyConcerns: [
-      'Knows your child\'s precise location 24/7 via cell towers and GPS',
-      'Sells "Custom Experience" advertising program uses app usage and web browsing data — opt-out required',
-      'Verizon was fined $1.35M for inserting hidden "supercookies" (UIDH) into all mobile traffic to track users without consent',
-      'Call and SMS metadata (who, when, how long) logged and retained',
-      'Device identifier (IMEI/IMSI) linked to real-world identity and can be shared with data brokers',
-      'Participated in the 2018 carrier location-data scandal (sold real-time location to aggregators)'
+      'Knows where your child’s phone is at all times',
+      'Its “Custom Experience” program uses app and web activity for ads unless you opt out',
+      'Verizon was fined $1.35M in 2016 for secretly tagging customers’ web traffic to track them',
+      'Keeps a record of who your child calls and texts, when, and for how long',
+      'The phone’s ID number is linked to your child’s real name and may be shared with marketing companies',
+      'In 2018, US carriers including Verizon were found selling customers’ live location to other companies'
     ],
     parentTips: [
       'Opt out of Verizon\'s Custom Experience program: My Verizon app → Account → Privacy Settings',
-      'Enable the Verizon Smart Family parental controls for location monitoring and content filters',
-      'Review the Verizon Privacy Policy to understand data retention for call records',
-      'Request deletion of advertising data via the Verizon Privacy Dashboard',
-      'Ask Verizon to opt you out of sharing data with Oath/Yahoo and other advertising partners'
+      'Use Verizon Smart Family for content filters and location sharing',
+      'Check how long Verizon keeps call and text records',
+      'Ask Verizon to delete advertising data in its Privacy Dashboard',
+      'Ask Verizon not to share your data with advertising partners'
     ],
     website: 'https://www.verizon.com/about/privacy'
   },
@@ -1490,18 +1490,18 @@ export const childServiceCatalog: ChildService[] = [
     minAge: 6,
     riskLevel: 'very-high',
     privacyConcerns: [
-      'Real-time location data accessible to AT&T and historically sold to third-party aggregators',
-      'AT&T operated "Project Hemisphere" — a surveillance program sharing call records with government and law enforcement at industrial scale',
-      'AT&T\'s Xandr ad platform (now Microsoft) used carrier-level identity data for ad targeting',
-      'CPNI (Customer Proprietary Network Information) — detailed calling patterns are protected by law but exceptions are broad',
-      'AT&T broadband customers\' browsing history used for ad targeting ("Internet Preferences" program)',
-      'Participated in the 2018 carrier location-data scandal'
+      'AT&T knows where your child’s phone is, and in the past sold live location to other companies',
+      'AT&T has shared large amounts of call records with US law enforcement through a program called Hemisphere',
+      'AT&T has used customer information to target ads',
+      'Call records are protected by law, but with broad exceptions',
+      'AT&T home internet browsing history has been used for ads',
+      'In 2018, AT&T was among the carriers found selling customers’ live location'
     ],
     parentTips: [
-      'Opt out of AT&T\'s advertising programs: att.com/privacy → Advertising & Analytics',
+      'Opt out of AT&T’s advertising programs at att.com/privacy (look for the advertising settings)',
       'Use AT&T Secure Family for parental controls, location sharing, and content filters',
-      'Review and opt out of the "Internet Preferences" browsing data program in your AT&T account',
-      'Request a copy of your child\'s data under CPNI rules via AT&T\'s Privacy Center',
+      'If you have AT&T home internet, opt out of “Internet Preferences” in your account',
+      'Ask AT&T for a copy of the call records it keeps, in its Privacy Center',
       'Disable "Relevant Advertising" in your myAT&T account settings'
     ],
     website: 'https://www.att.com/privacy'
@@ -1515,19 +1515,19 @@ export const childServiceCatalog: ChildService[] = [
     minAge: 6,
     riskLevel: 'very-high',
     privacyConcerns: [
-      '2021 data breach exposed personal data of 76.6 million current and former customers — including names, SSNs, and driver\'s licenses',
-      'T-Mobile Advertising Solutions uses network data (location, app usage, web traffic) for ad targeting — opt-out required',
-      'Location data sold to aggregators; T-Mobile was cited in the 2018 carrier location-data scandal',
-      'App and web usage data collected via "T-Mobile Insights" network analytics program',
-      'Device identifiers and call metadata retained and may be shared with partners',
-      'Sprint (now merged into T-Mobile) also had documented location-data sharing practices'
+      'A 2021 breach exposed names, Social Security numbers and driver’s licenses of 76.6 million people',
+      'Uses location, app and web activity for ads unless you opt out',
+      'In 2018, T-Mobile was among the carriers found selling customers’ live location',
+      'Collects app and web activity for its “Insights” marketing program',
+      'Keeps call records and phone ID numbers, which may be shared with partners',
+      'Sprint, now part of T-Mobile, also shared customers’ location'
     ],
     parentTips: [
       'Opt out of T-Mobile\'s advertising programs: Account → Privacy & Notifications → Advertising in the T-Mobile app',
       'Enable T-Life / FamilyMode for parental controls and location tracking',
-      'If you were a customer before 2021, check haveibeenpwned.com for breach exposure',
-      'Request T-Mobile to delete advertising profile data via their Privacy Center',
-      'Review what T-Mobile Insights data collection applies to your plan'
+      'If you were a customer before 2021, check haveibeenpwned.com to see if your email was exposed',
+      'Ask T-Mobile to delete your advertising data in its Privacy Center',
+      'Opt out of “Insights” in the privacy settings, if it applies to your plan'
     ],
     website: 'https://www.t-mobile.com/privacy-center',
     lawEnforcementConcerns: [
@@ -1546,14 +1546,14 @@ export const childServiceCatalog: ChildService[] = [
     riskLevel: 'high',
     privacyConcerns: [
       'Fully owned and operated by AT&T — all AT&T data practices apply',
-      'Location data accessible on AT&T network infrastructure',
-      'Call and SMS metadata retained under AT&T policies',
-      'Advertising data sharing follows AT&T\'s advertising programs'
+      'Runs on AT&T’s network, so AT&T can see location',
+      'Call and text records are kept under AT&T’s rules',
+      'AT&T’s advertising programs apply'
     ],
     parentTips: [
       'Treat Cricket\'s privacy practices as equivalent to AT&T\'s — same opt-outs apply',
       'Log into my.cricketwireless.com to review account privacy settings',
-      'Opt out of AT&T advertising programs (Cricket shares the AT&T infrastructure)',
+      'Opt out of AT&T’s advertising programs — they cover Cricket too',
       'Use device-level parental controls since Cricket does not offer a dedicated family safety app'
     ],
     website: 'https://www.cricketwireless.com/legal-information/privacy-policy.html'
@@ -1567,16 +1567,16 @@ export const childServiceCatalog: ChildService[] = [
     minAge: 6,
     riskLevel: 'high',
     privacyConcerns: [
-      'Location and network data collected by DISH Wireless and EchoStar parent company',
-      'DISH also operates satellite TV — combined data profile possible across products',
-      'Call metadata and device identifiers retained per DISH privacy policy',
-      'Advertising programs use network and device data for targeting'
+      'Location and phone activity are collected by EchoStar, the company behind Boost',
+      'The same company runs DISH TV, so information can be combined',
+      'Keeps records of calls and the phone’s ID number',
+      'Phone activity is used for ads'
     ],
     parentTips: [
       'Review DISH/Boost privacy settings at boostmobile.com/legal/privacy',
       'Opt out of advertising data use in your Boost account settings',
       'Use device-level parental controls (Android Family Link or iOS Screen Time)',
-      'Be aware that DISH\'s merger with EchoStar creates a combined data profile'
+      'Remember the same company may hold your phone and TV information'
     ],
     website: 'https://www.boostmobile.com/legal/privacy',
     lawEnforcementConcerns: [
@@ -1593,15 +1593,15 @@ export const childServiceCatalog: ChildService[] = [
     minAge: 6,
     riskLevel: 'high',
     privacyConcerns: [
-      'Operates on T-Mobile\'s network — T-Mobile\'s data practices and 2021 breach history apply',
-      'Location, call metadata, and device identifiers accessible via T-Mobile infrastructure',
-      'Advertising data may be shared under T-Mobile\'s advertising programs post-acquisition'
+      'Runs on T-Mobile’s network, so T-Mobile’s privacy rules apply',
+      'T-Mobile can see location, call records and the phone’s ID number',
+      'Since T-Mobile bought Mint, T-Mobile’s ad programs may apply'
     ],
     parentTips: [
       'Since Mint runs on T-Mobile\'s network, opt out of T-Mobile Advertising in the T-Mobile Privacy Center',
       'Use device-level parental controls (Android Family Link or iOS Screen Time)',
-      'Review Mint\'s privacy policy at mintmobile.com/legal/privacy for Mint-specific data practices',
-      'Be aware that T-Mobile\'s 2021 data breach affects the network your device is on'
+      'Read Mint’s own privacy policy at mintmobile.com/legal/privacy',
+      'Check haveibeenpwned.com to see if your email was exposed in past breaches'
     ],
     website: 'https://www.mintmobile.com/legal/privacy',
     lawEnforcementConcerns: [
@@ -1621,8 +1621,8 @@ export const childServiceCatalog: ChildService[] = [
     riskLevel: 'high',
     vendor: 'Apple',
     privacyConcerns: [
-      'Can store heart rate, sleep, cycle tracking, and connected provider records',
-      'Third-party apps may request HealthKit access on the device',
+      'Can store heart rate, sleep, cycle tracking and records from doctors',
+      'Other apps can ask to read health data on the phone',
       'May sync to iCloud — not the same as a school health record, but still very personal',
     ],
     parentTips: [
@@ -1642,12 +1642,12 @@ export const childServiceCatalog: ChildService[] = [
     riskLevel: 'high',
     vendor: 'Google',
     privacyConcerns: [
-      'Activity and wellness data may combine with other Google account signals',
-      'Third-party fitness apps can connect and share data into Fit',
-      'Not a HIPAA-covered medical record by default for consumer accounts',
+      'Activity and health data can be combined with other Google account information',
+      'Other fitness apps can connect and share data with Fit',
+      'Not protected like a medical record from your doctor',
     ],
     parentTips: [
-      'Review Google account privacy settings and Fit data sources',
+      'Check which apps and devices send data to Google Fit',
       'Disconnect unused apps from Google Fit',
       'Remind teens not to log highly personal health notes in connected apps',
     ],
@@ -1670,7 +1670,7 @@ export const childServiceCatalog: ChildService[] = [
     parentTips: [
       'Set the account to private and limit social features for teens',
       'Review which data types sync from the watch or phone',
-      'Use a strong password and enable two-factor authentication',
+      'Use a strong password and turn on two-step sign-in (a code sent to your phone)',
     ],
     website: 'https://www.fitbit.com',
   },
@@ -1685,7 +1685,7 @@ export const childServiceCatalog: ChildService[] = [
     vendor: 'Calm.com',
     privacyConcerns: [
       'Account and usage data show meditation and sleep habits',
-      'Subscription and device identifiers linked to the account',
+      'Subscription and device details are linked to the account',
       'Not a clinical therapy service — still personal wellbeing data',
     ],
     parentTips: [
@@ -1707,7 +1707,7 @@ export const childServiceCatalog: ChildService[] = [
     privacyConcerns: [
       'Usage patterns reveal stress-management and sleep routines',
       'Kids mode still collects account and progress data',
-      'Employer or school plans may add separate data controllers',
+      'If it comes through a school or employer, they may also see some information',
     ],
     parentTips: [
       'Choose age-appropriate content and supervise younger kids',
@@ -1726,13 +1726,13 @@ export const childServiceCatalog: ChildService[] = [
     riskLevel: 'very-high',
     vendor: 'Teladoc Health',
     privacyConcerns: [
-      'Video visits and messages can include symptoms, medications, and identifiers',
-      'Health information handled under healthcare privacy rules when used as a covered service',
+      'Video visits and messages can include symptoms, medicines and personal details',
+      'Health information is protected by medical privacy law when used through your health plan',
       'Account data may include insurance, pharmacy, and family contact details',
     ],
     parentTips: [
       'Use only for legitimate care — guardian should manage accounts for minors',
-      'Review the notice of privacy practices before a first visit',
+      'Read the privacy notice before the first visit',
       'Do not share visit links or photos of records in group chats',
     ],
     website: 'https://www.teladoc.com',
@@ -1748,12 +1748,12 @@ export const childServiceCatalog: ChildService[] = [
     vendor: 'Epic Systems',
     privacyConcerns: [
       'Can expose lab results, diagnoses, appointments, and provider messages',
-      'Proxy access for minors is controlled by the healthcare organization',
+      'The clinic decides which parents can see a child’s records',
       'Highly sensitive — treat portal login like banking credentials',
     ],
     parentTips: [
-      'Enable strong authentication; never share portal passwords with children casually',
-      'Review who has proxy access to a minor\'s chart at the clinic',
+      'Turn on two-step sign-in and keep the password to yourself',
+      'Ask the clinic who can see your child’s records',
       'Log out on shared family devices after viewing records',
     ],
     website: 'https://www.mychart.org',
@@ -1771,11 +1771,11 @@ export const childServiceCatalog: ChildService[] = [
     privacyConcerns: [
       'May store immunizations, medications, allergies, and nurse visit notes',
       'Often required for enrollment — families may have limited opt-out',
-      'Governed by school policies and student privacy laws, not consumer app terms alone',
+      'Covered by school rules and student privacy laws',
     ],
     parentTips: [
       'Ask the school which vendor runs the health portal and request their privacy notice',
-      'Confirm who can see health entries (nurse, teachers, administrators)',
+      'Ask who can see health entries: the nurse, teachers, office staff',
       'Keep copies of forms you submit — do not paste portal passwords into email',
     ],
   },
@@ -1795,7 +1795,7 @@ export const childServiceCatalog: ChildService[] = [
     ],
     parentTips: [
       'Guardian should manage pharmacy accounts for minors',
-      'Turn off marketing profiles where possible and use Rx privacy settings',
+      'Turn off marketing in the app and check the prescription privacy settings',
       'Never photograph prescription labels for social sharing',
     ],
     website: 'https://www.cvs.com',
