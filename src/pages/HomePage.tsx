@@ -1,19 +1,7 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import {
-  ArrowRight,
-  BookOpen,
-  CheckCircle,
-  ChevronRight,
-  Gamepad2,
-  GraduationCap,
-  LayoutDashboard,
-  ListChecks,
-  MessageCircle,
-  ShieldCheck,
-  Telescope,
-} from 'lucide-react';
+import { ArrowRight, BookOpen, CheckCircle, ChevronRight, LayoutDashboard, ShieldCheck, Telescope } from 'lucide-react';
 import { loadDfaJourneyState } from '../lib/dfaJourney';
 import { getFoundationStory, getHomepageLatestStory, ORIGIN_STORY_SLUG } from '../data/stories';
 import { PageSection, ShellLinkCard, type ShellLinkCardVisual } from '../components/layout/PageContent';
@@ -26,10 +14,6 @@ const pathVisuals = {
     icon: <Telescope size={STEP_ICON_SIZE} strokeWidth={1.75} aria-hidden />,
     tone: 'sky',
   },
-  footprint: {
-    icon: <ListChecks size={STEP_ICON_SIZE} strokeWidth={1.75} aria-hidden />,
-    tone: 'violet',
-  },
   stories: {
     icon: <BookOpen size={STEP_ICON_SIZE} strokeWidth={1.75} aria-hidden />,
     tone: 'emerald',
@@ -39,12 +23,6 @@ const pathVisuals = {
     tone: 'amber',
   },
 } as const satisfies Record<string, ShellLinkCardVisual>;
-
-const contextFacts = [
-  { key: 'School', icon: GraduationCap },
-  { key: 'Play', icon: Gamepad2 },
-  { key: 'Social', icon: MessageCircle },
-] as const;
 
 const HomePage: React.FC = () => {
   const { t } = useTranslation();
@@ -68,18 +46,10 @@ const HomePage: React.FC = () => {
     {
       title: t('home.pathSnapshotTitle'),
       description: t('home.pathSnapshotDesc'),
-      href: '/family-snapshot',
+      href: '/big-picture',
       tag: t('home.pathSnapshotTag'),
       cta: t('home.pathSnapshotCta'),
       visual: pathVisuals.snapshot,
-    },
-    {
-      title: t('home.pathFootprintTitle'),
-      description: t('home.pathFootprintDesc'),
-      href: '/service-catalog',
-      tag: t('home.pathFootprintTag'),
-      cta: t('home.addFamilyApps'),
-      visual: pathVisuals.footprint,
     },
     {
       title: t('home.pathTalkTitle'),
@@ -104,7 +74,7 @@ const HomePage: React.FC = () => {
       ? { href: journey.resumePath, label: t('home.continueFootprint') }
       : journey.progressPercent > 0 && journey.resumePath.includes('catalog')
         ? { href: journey.resumePath, label: t('home.continueApps') }
-        : { href: '/family-snapshot', label: t('home.seeBigPicture') };
+        : { href: '/big-picture', label: t('home.seeBigPicture') };
 
   return (
     <div className="site-page">
@@ -126,9 +96,6 @@ const HomePage: React.FC = () => {
             <Link to={primaryCta.href} className="button button-primary inline-flex items-center justify-center gap-2">
               {primaryCta.label}
               <ArrowRight size={18} aria-hidden />
-            </Link>
-            <Link to="/digital-footprint" className="button button-secondary inline-flex items-center justify-center">
-              {t('common.footprintReview')}
             </Link>
           </div>
           <p className="mt-3 text-center text-sm text-gray-500 dark:text-gray-400">
@@ -152,38 +119,6 @@ const HomePage: React.FC = () => {
       <div className="page-layout__main">
         <div className="container px-4 sm:px-6 lg:px-8">
           <div className="page-content">
-            <PageSection
-              header={{
-                eyebrow: t('home.contextsEyebrow'),
-                title: t('home.contextsTitle'),
-                lead: t('home.contextsLead'),
-              }}
-            >
-              <ul className="m-0 grid list-none grid-cols-1 gap-4 p-0 md:grid-cols-3">
-                {contextFacts.map(({ key, icon: Icon }) => (
-                  <li
-                    key={key}
-                    className="flex flex-col gap-2 rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-800"
-                  >
-                    <span className="inline-flex items-center gap-2 text-sm font-semibold text-green-700 dark:text-green-400">
-                      <Icon size={18} aria-hidden />
-                      {t(`home.context${key}Title`)}
-                    </span>
-                    <p className="text-sm text-gray-900 dark:text-gray-100">{t(`home.context${key}Fact`)}</p>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">
-                      <strong className="font-semibold">{t('home.contextLeverLabel')}</strong> {t(`home.context${key}Lever`)}
-                    </p>
-                  </li>
-                ))}
-              </ul>
-              <p className="text-center text-sm text-gray-600 dark:text-gray-300">
-                {t('home.contextsFollowup')}{' '}
-                <Link to="/family-snapshot" className="touch-link font-semibold text-green-700 hover:underline dark:text-green-400">
-                  {t('home.seeBigPicture')}
-                </Link>
-              </p>
-            </PageSection>
-
             <PageSection
               className="homepage-spotlight"
               header={{

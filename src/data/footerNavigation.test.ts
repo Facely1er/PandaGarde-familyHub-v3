@@ -2,6 +2,8 @@ import { describe, expect, it } from 'vitest';
 
 import { PARENT_SURFACE_REDIRECTS } from './parentSiteSurface';
 import {
+  BIG_PICTURE_NAV_LABEL,
+  BIG_PICTURE_PATH,
   FOOTER_COLUMN_FAMILY_CONTENT,
   FOOTER_COLUMN_HELP_CENTER,
   FOOTER_COLUMN_REVIEW_WORKFLOW,
@@ -17,7 +19,7 @@ import {
 } from './siteNavigation';
 
 const APP_STATIC_PATHS = new Set([
-  '/family-snapshot',
+  '/big-picture',
   '/service-catalog',
   '/digital-footprint',
   '/scoring-methodology',
@@ -77,7 +79,7 @@ describe('footer navigation links', () => {
   });
 
   it('footer link counts match planned IA', () => {
-    expect(footerFootprintLinks).toHaveLength(5);
+    expect(footerFootprintLinks).toHaveLength(4);
     expect(footerFamilyLinks).toHaveLength(5);
     expect(footerHelpCenterLinks).toHaveLength(5);
     expect(footerLegalLinks).toHaveLength(5);
@@ -110,9 +112,10 @@ describe('footer navigation links', () => {
     expect(
       footprintCol?.items.some((item) => item.label === FOOTER_COLUMN_REVIEW_WORKFLOW)
     ).toBe(false);
-    const headerFootprint = primaryNavItems.find((item) => item.href === '/digital-footprint');
+    // Header leads parents to the plain-language big picture; app-by-app review stays in the footer.
+    expect(primaryNavItems.some((item) => item.href === '/digital-footprint')).toBe(false);
+    expect(primaryNavItems.find((item) => item.href === BIG_PICTURE_PATH)?.label).toBe(BIG_PICTURE_NAV_LABEL);
     const footerFootprint = footprintCol?.items.find((item) => item.href === '/digital-footprint');
-    expect(headerFootprint?.label).toBe(FOOTPRINT_REVIEW_NAV_LABEL);
     expect(footerFootprint?.label).toBe(FOOTPRINT_REVIEW_NAV_LABEL);
     expect(footprintCol?.items.some((item) => item.label === 'Exposure review')).toBe(false);
 

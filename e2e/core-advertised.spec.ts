@@ -21,20 +21,23 @@ test.describe('Core features advertised (How it works + CONTENT_TRUTH)', () => {
     ).toBeVisible();
   });
 
-  test('Family Snapshot — big picture with school questions and next step', async ({ page }) => {
+  test('Big picture — plain-language result, no scores, story as next step', async ({ page }) => {
     await page.addInitScript(() => localStorage.removeItem('pandagarde_family_snapshot_v1'));
     await gotoAndWait(page, '/family-snapshot');
-    await expect(page.getByRole('heading', { level: 1, name: /Family Snapshot/i })).toBeVisible();
-    const see = page.getByRole('button', { name: /See our big picture/i });
-    await expect(see).toBeDisabled();
-    await page.getByText('Classroom & homework platforms', { exact: true }).click();
-    await page.getByText('Online game worlds', { exact: true }).click();
-    await see.click();
-    await expect(page.getByRole('heading', { name: /Where exposure builds up/i })).toBeVisible();
-    await expect(page.getByRole('heading', { name: /Questions to ask your child.s school/i })).toBeVisible();
-    await expect(page.getByRole('link', { name: /EduSoluce for schools/i })).toHaveAttribute('target', '_blank');
-    await page.getByRole('link', { name: /Next: name your family.s apps/i }).click();
-    await page.waitForURL(/\/service-catalog/);
+    await page.waitForURL(/\/big-picture/);
+    await expect(page.getByRole('heading', { level: 1, name: /big picture/i })).toBeVisible();
+    const show = page.getByRole('button', { name: /Show our big picture/i });
+    await expect(show).toBeDisabled();
+    await page.getByText('Classwork & homework apps', { exact: true }).click();
+    await page.getByText('Online games and consoles', { exact: true }).click();
+    await show.click();
+    await expect(page.getByText('Start here', { exact: true })).toBeVisible();
+    await expect(page.getByText('Ask your child', { exact: true })).toBeVisible();
+    await expect(page.locator('main, #main-content').first()).not.toContainText(/\/100|score/i);
+    await page.getByText(/Questions to ask your child.s school/i).click();
+    await expect(page.getByRole('link', { name: /Share EduSoluce with your school/i })).toHaveAttribute('target', '_blank');
+    await page.getByRole('link', { name: /Read a story together/i }).click();
+    await page.waitForURL(/\/stories\//);
   });
 
   test('How it works — three-step flow', async ({ page }) => {

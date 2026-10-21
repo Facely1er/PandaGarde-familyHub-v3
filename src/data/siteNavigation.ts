@@ -44,6 +44,10 @@ export const GUIDES_STORIES_NAV_LABEL = 'Guides & stories';
 /** @deprecated Use GUIDES_STORIES_NAV_LABEL */
 export const FOR_FAMILIES_NAV_LABEL = GUIDES_STORIES_NAV_LABEL;
 
+/** Parent entry point: plain-language overview before any app-by-app review. */
+export const BIG_PICTURE_PATH = '/big-picture';
+export const BIG_PICTURE_NAV_LABEL = 'Big picture';
+
 /** Header / page titles — primary entry points. */
 export const FOOTPRINT_REVIEW_NAV_LABEL = 'Footprint Review';
 
@@ -58,12 +62,7 @@ export const FOOTER_COLUMN_LEGAL = 'Legal';
 export const primaryNavItems: SiteNavItem[] = [
   { id: 'nav-home', icon: Home, label: 'Home', href: '/' },
   { id: 'nav-how-it-works', icon: Compass, label: 'How It Works', href: '/how-it-works' },
-  {
-    id: 'nav-footprint',
-    icon: Fingerprint,
-    label: FOOTPRINT_REVIEW_NAV_LABEL,
-    href: '/digital-footprint',
-  },
+  { id: 'nav-big-picture', icon: Telescope, label: BIG_PICTURE_NAV_LABEL, href: BIG_PICTURE_PATH },
   { id: 'nav-guides-stories', icon: BookOpen, label: GUIDES_STORIES_NAV_LABEL, href: FOR_FAMILIES_PATH },
   { id: 'nav-family-hub', icon: LayoutDashboard, label: 'Family Hub', href: '/family-hub' },
 ];
@@ -83,7 +82,7 @@ export function buildMobileQuickNavItems(items: SiteNavItem[] = primaryNavItems)
  * How It Works is omitted (reachable via hamburger menu).
  */
 export const mobileQuickNavItems: SiteNavItem[] = [
-  { id: 'mobile-quick-footprint', icon: Fingerprint, label: FOOTPRINT_REVIEW_NAV_LABEL, href: '/digital-footprint' },
+  { id: 'mobile-quick-big-picture', icon: Telescope, label: BIG_PICTURE_NAV_LABEL, href: BIG_PICTURE_PATH },
   { id: 'mobile-quick-guides-stories', icon: BookOpen, label: GUIDES_STORIES_NAV_LABEL, href: FOR_FAMILIES_PATH },
   { id: 'mobile-quick-family-hub', icon: LayoutDashboard, label: 'Family Hub', href: '/family-hub' },
 ];
@@ -95,7 +94,6 @@ export const dfaWorkflowNavItems: SiteNavItem[] = [
 ];
 
 export const footprintReviewLayerLinks: SiteNavItem[] = [
-  { id: 'footprint-snapshot', icon: Telescope, label: 'Family snapshot', href: '/family-snapshot' },
   { id: 'footprint-catalog', icon: ListChecks, label: 'Service catalog', href: '/service-catalog' },
   { id: 'footprint-review', icon: Fingerprint, label: FOOTPRINT_REVIEW_NAV_LABEL, href: '/digital-footprint' },
   { id: 'footprint-scoring', icon: ClipboardList, label: 'Scoring methodology', href: '/scoring-methodology' },

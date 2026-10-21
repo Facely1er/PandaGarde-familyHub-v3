@@ -11,7 +11,7 @@ describe('buildMobileQuickNavItems', () => {
     expect(quick.map((item) => item.id)).toEqual([
       'mobile-quick-home',
       'mobile-quick-how-it-works',
-      'mobile-quick-footprint',
+      'mobile-quick-big-picture',
       'mobile-quick-guides-stories',
       'mobile-quick-family-hub',
     ]);
@@ -21,7 +21,7 @@ describe('buildMobileQuickNavItems', () => {
 describe('mobileQuickNavItems', () => {
   it('exposes a trimmed tablet quick-nav set without Home or How It Works', () => {
     expect(mobileQuickNavItems.map((item) => item.id)).toEqual([
-      'mobile-quick-footprint',
+      'mobile-quick-big-picture',
       'mobile-quick-guides-stories',
       'mobile-quick-family-hub',
     ]);

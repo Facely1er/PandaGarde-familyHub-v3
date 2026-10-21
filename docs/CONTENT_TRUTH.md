@@ -66,7 +66,7 @@
 | **Stories** | No | Emotional, kid-facing; open anytime |
 | **Resources / guides** | No | Supporting parent copy; open anytime |
 | **Family Hub** | No | Missions on device; open anytime |
-| **Family Snapshot** (`/family-snapshot`) | No | Kinds of services, not named apps; educational overview; never writes to the catalog |
+| **Big picture** (`/big-picture`) | No | Kinds of apps, not named apps; plain words, no scores; never writes to the catalog |
 | **Service catalog** | — | Builds the list footprint review uses |
 | **Footprint review** | Yes (for scores) | Empty without catalog entries; does not block other areas |
 
@@ -181,23 +181,26 @@ Add new patterns to `scripts/check-content-truth.mjs` when product behavior chan
 
 ---
 
-## 12. Family Snapshot (`/family-snapshot`)
+## 12. Big picture (`/big-picture`) — and how PandaGarde differs from SocialCaution
 
-The two-minute "big picture" entry point (homepage primary CTA for new visitors). Details: [FAMILY_SNAPSHOT.md](./FAMILY_SNAPSHOT.md).
+**Positioning:** SocialCaution *measures* (exposure scores, per-app inventories). PandaGarde helps a family
+*understand and talk* about it. Parent-entry surfaces (home, big picture) use plain words — no numbers.
 
 | Claim | Truth |
 |-------|--------|
-| "See your child's exposure" | **Typical** collection by *kind* of service (school, play, social, home) — not their actual apps or settings |
-| Score | Educational exposure overview; same curve as SocialCaution Category Snapshot; not a compliance or safety rating |
-| "Stays on your device" | **True** — selection in `pandagarde_family_snapshot_v1`; nothing sent; never writes to `pandagarde_family_services` |
-| School consent note | US COPPA school-authorization guidance (schools may consent for educational-only use, under 13) — keep "can", not "always" |
-| EduSoluce link | A pointer parents can **share with their school** — PandaGarde does not send school or child data to EduSoluce |
+| "See where your child's information goes" | What these **kinds** of apps **usually** collect — not their actual apps, device or settings |
+| "Start here / Worth a look / Lighter for now" | Ranking of the ticked areas by how sensitive their usual information is — not a safety rating |
+| "Nothing leaves your device" | **True** — answers in `pandagarde_family_snapshot_v1`; never writes to `pandagarde_family_services` |
+| School consent note | US COPPA school-authorization guidance — keep "can", not "always" |
+| EduSoluce link | Something parents can **share with their school** — PandaGarde sends nothing to EduSoluce |
 
-Avoid: "scan", "detect", "see what your child uses", or implying the snapshot replaces the named-app footprint review.
+On parent-entry pages avoid: scores, "/100", "exposure", "index", "risk level", "scan", "detect". The
+app-by-app footprint review (footer, "Review workflow") keeps its scores for parents who want detail.
+Details: [FAMILY_BIG_PICTURE.md](./FAMILY_BIG_PICTURE.md). Legacy `/family-snapshot` and `/snapshot` redirect here.
 
 ## 13. Related docs
 
-- [FAMILY_SNAPSHOT.md](./FAMILY_SNAPSHOT.md) — big-picture entry, value path, EduSoluce bridge
+- [FAMILY_BIG_PICTURE.md](./FAMILY_BIG_PICTURE.md) — parent entry, three-step path, EduSoluce bridge
 
 - [FAMILYHUB_APP_STORE_COPY.md](./FAMILYHUB_APP_STORE_COPY.md) — store listings (aligned with §2)
 - [FAMILYHUB_MISSIONS_PARENT_GUIDE.md](./FAMILYHUB_MISSIONS_PARENT_GUIDE.md) — parent one-pager
