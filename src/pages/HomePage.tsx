@@ -1,36 +1,53 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ArrowRight, BookMarked, BookOpen, CheckCircle, ChevronRight, LayoutDashboard, ListChecks, ShieldCheck } from 'lucide-react';
+import {
+  ArrowRight,
+  BookOpen,
+  CheckCircle,
+  ChevronRight,
+  Gamepad2,
+  GraduationCap,
+  LayoutDashboard,
+  ListChecks,
+  MessageCircle,
+  ShieldCheck,
+  Telescope,
+} from 'lucide-react';
 import { loadDfaJourneyState } from '../lib/dfaJourney';
 import { getFoundationStory, getHomepageLatestStory, ORIGIN_STORY_SLUG } from '../data/stories';
-import { localizeStoryMeta } from '../data/storyI18n';
 import { PageSection, ShellLinkCard, type ShellLinkCardVisual } from '../components/layout/PageContent';
 import AppStoreBadges from '../components/AppStoreBadges';
 
-const SPOTLIGHT_ICON_SIZE = 26;
+const STEP_ICON_SIZE = 26;
 
-const spotlightVisuals = {
-  stories: {
-    icon: <BookOpen size={SPOTLIGHT_ICON_SIZE} strokeWidth={1.75} aria-hidden />,
-    tone: 'emerald',
-  },
-  guides: {
-    icon: <BookMarked size={SPOTLIGHT_ICON_SIZE} strokeWidth={1.75} aria-hidden />,
+const pathVisuals = {
+  snapshot: {
+    icon: <Telescope size={STEP_ICON_SIZE} strokeWidth={1.75} aria-hidden />,
     tone: 'sky',
   },
   footprint: {
-    icon: <ListChecks size={SPOTLIGHT_ICON_SIZE} strokeWidth={1.75} aria-hidden />,
+    icon: <ListChecks size={STEP_ICON_SIZE} strokeWidth={1.75} aria-hidden />,
     tone: 'violet',
   },
+  stories: {
+    icon: <BookOpen size={STEP_ICON_SIZE} strokeWidth={1.75} aria-hidden />,
+    tone: 'emerald',
+  },
   hub: {
-    icon: <LayoutDashboard size={SPOTLIGHT_ICON_SIZE} strokeWidth={1.75} aria-hidden />,
+    icon: <LayoutDashboard size={STEP_ICON_SIZE} strokeWidth={1.75} aria-hidden />,
     tone: 'amber',
   },
 } as const satisfies Record<string, ShellLinkCardVisual>;
 
+const contextFacts = [
+  { key: 'School', icon: GraduationCap },
+  { key: 'Play', icon: Gamepad2 },
+  { key: 'Social', icon: MessageCircle },
+] as const;
+
 const HomePage: React.FC = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const journey = useMemo(() => loadDfaJourneyState(), []);
   const foundationStory = useMemo(() => getFoundationStory(), []);
   const latestStory = useMemo(() => getHomepageLatestStory(), []);
@@ -41,66 +58,53 @@ const HomePage: React.FC = () => {
     t('home.trustListApps'),
   ];
 
-  const spotlightLinks = useMemo(() => {
-    const links = [
-      {
-        title: t('home.spotlightStoriesTitle'),
-        description: t('home.spotlightStoriesDesc'),
-        href: '/stories',
-        tag: t('home.spotlightStoriesTag'),
-        cta: t('home.spotlightStoriesCta'),
-        visual: spotlightVisuals.stories,
-      },
-      {
-        title: t('nav.guidesStories'),
-        description: t('home.spotlightGuidesDesc'),
-        href: '/for-families',
-        tag: t('home.spotlightGuidesTag'),
-        cta: t('common.browse'),
-        visual: spotlightVisuals.guides,
-      },
-      {
-        title: t('common.footprintReview'),
-        description: t('home.spotlightFootprintDesc'),
-        href: '/digital-footprint',
-        tag: t('home.spotlightFootprintTag'),
-        cta: t('common.open'),
-        visual: spotlightVisuals.footprint,
-      },
-      {
-        title: t('common.familyHub'),
-        description: t('home.spotlightHubDesc'),
-        href: '/family-hub',
-        tag: t('home.spotlightHubTag'),
-        cta: t('common.open'),
-        visual: spotlightVisuals.hub,
-      },
-    ];
+  const storyHref = foundationStory
+    ? `/stories/${ORIGIN_STORY_SLUG}`
+    : latestStory
+      ? `/stories/${latestStory.slug}`
+      : '/stories';
 
-    if (foundationStory) {
-      const storyLink = links[0];
-      storyLink.title = localizeStoryMeta(foundationStory, i18n.language).title;
-      storyLink.description = t('home.readTogether');
-      storyLink.href = `/stories/${ORIGIN_STORY_SLUG}`;
-      storyLink.cta = t('home.openStory');
-    } else if (latestStory) {
-      const latestMeta = localizeStoryMeta(latestStory, i18n.language);
-      const storyLink = links[0];
-      storyLink.title = latestMeta.title;
-      storyLink.description = latestMeta.privacyTopic;
-      storyLink.href = `/stories/${latestStory.slug}`;
-      storyLink.cta = t('home.readEpisode', { number: latestStory.episodeNumber });
-    }
-
-    return links;
-  }, [foundationStory, latestStory, t, i18n.language]);
+  const pathSteps = [
+    {
+      title: t('home.pathSnapshotTitle'),
+      description: t('home.pathSnapshotDesc'),
+      href: '/family-snapshot',
+      tag: t('home.pathSnapshotTag'),
+      cta: t('home.pathSnapshotCta'),
+      visual: pathVisuals.snapshot,
+    },
+    {
+      title: t('home.pathFootprintTitle'),
+      description: t('home.pathFootprintDesc'),
+      href: '/service-catalog',
+      tag: t('home.pathFootprintTag'),
+      cta: t('home.addFamilyApps'),
+      visual: pathVisuals.footprint,
+    },
+    {
+      title: t('home.pathTalkTitle'),
+      description: t('home.pathTalkDesc'),
+      href: storyHref,
+      tag: t('home.pathTalkTag'),
+      cta: t('home.openStory'),
+      visual: pathVisuals.stories,
+    },
+    {
+      title: t('home.pathPracticeTitle'),
+      description: t('home.pathPracticeDesc'),
+      href: '/family-hub/activities',
+      tag: t('home.pathPracticeTag'),
+      cta: t('home.pathPracticeCta'),
+      visual: pathVisuals.hub,
+    },
+  ];
 
   const primaryCta =
     journey.progressPercent > 0 && journey.resumePath.includes('footprint')
       ? { href: journey.resumePath, label: t('home.continueFootprint') }
       : journey.progressPercent > 0 && journey.resumePath.includes('catalog')
         ? { href: journey.resumePath, label: t('home.continueApps') }
-        : { href: '/stories', label: t('home.exploreStories') };
+        : { href: '/family-snapshot', label: t('home.seeBigPicture') };
 
   return (
     <div className="site-page">
@@ -115,9 +119,7 @@ const HomePage: React.FC = () => {
               {t('home.title')}
               <span>{t('home.titleAccent')}</span>
             </h1>
-            <p className="page-section__lead">
-              {t('home.lead')}
-            </p>
+            <p className="page-section__lead">{t('home.lead')}</p>
           </header>
 
           <div className="homepage-hero__actions">
@@ -125,15 +127,12 @@ const HomePage: React.FC = () => {
               {primaryCta.label}
               <ArrowRight size={18} aria-hidden />
             </Link>
-            <Link
-              to="/digital-footprint"
-              className="button button-secondary inline-flex items-center justify-center"
-            >
+            <Link to="/digital-footprint" className="button button-secondary inline-flex items-center justify-center">
               {t('common.footprintReview')}
             </Link>
           </div>
           <p className="mt-3 text-center text-sm text-gray-500 dark:text-gray-400">
-            {t('home.notSure')}{' '}
+            {t('home.snapshotMeta')} ·{' '}
             <Link to="/how-it-works" className="touch-link font-medium text-green-700 hover:underline dark:text-green-400">
               {t('common.seeHowItWorks')}
             </Link>
@@ -154,55 +153,66 @@ const HomePage: React.FC = () => {
         <div className="container px-4 sm:px-6 lg:px-8">
           <div className="page-content">
             <PageSection
-              className="homepage-spotlight"
               header={{
-                eyebrow: t('home.spotlightEyebrow'),
-                title: t('home.spotlightTitle'),
-                lead: t('home.spotlightLead'),
+                eyebrow: t('home.contextsEyebrow'),
+                title: t('home.contextsTitle'),
+                lead: t('home.contextsLead'),
               }}
             >
-              <div className="homepage-spotlight__grid">
-                {spotlightLinks.map((item) => (
-                  <ShellLinkCard
-                    key={item.href}
-                    to={item.href}
-                    tag={item.tag}
-                    title={item.title}
-                    description={item.description}
-                    visual={item.visual}
-                    cta={
-                      <>
-                        {item.cta}
-                        <ChevronRight size={16} aria-hidden />
-                      </>
-                    }
-                  />
+              <ul className="m-0 grid list-none grid-cols-1 gap-4 p-0 md:grid-cols-3">
+                {contextFacts.map(({ key, icon: Icon }) => (
+                  <li
+                    key={key}
+                    className="flex flex-col gap-2 rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-800"
+                  >
+                    <span className="inline-flex items-center gap-2 text-sm font-semibold text-green-700 dark:text-green-400">
+                      <Icon size={18} aria-hidden />
+                      {t(`home.context${key}Title`)}
+                    </span>
+                    <p className="text-sm text-gray-900 dark:text-gray-100">{t(`home.context${key}Fact`)}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">
+                      <strong className="font-semibold">{t('home.contextLeverLabel')}</strong> {t(`home.context${key}Lever`)}
+                    </p>
+                  </li>
                 ))}
-              </div>
-              {(foundationStory || latestStory) && (
-                <p className="homepage-spotlight__see-all">
-                  <Link to="/stories" className="touch-link font-medium text-green-700 hover:underline dark:text-green-400">
-                    {t('common.seeAllStories')}
-                  </Link>
-                </p>
-              )}
+              </ul>
+              <p className="text-center text-sm text-gray-600 dark:text-gray-300">
+                {t('home.contextsFollowup')}{' '}
+                <Link to="/family-snapshot" className="touch-link font-semibold text-green-700 hover:underline dark:text-green-400">
+                  {t('home.seeBigPicture')}
+                </Link>
+              </p>
             </PageSection>
 
             <PageSection
-              className="homepage-closing"
+              className="homepage-spotlight"
               header={{
-                eyebrow: t('home.closingEyebrow'),
-                title: t('home.closingTitle'),
-                lead: t('home.closingLead'),
+                eyebrow: t('home.pathEyebrow'),
+                title: t('home.pathTitle'),
+                lead: t('home.pathLead'),
               }}
             >
-              <div className="homepage-closing__actions">
-                <Link to="/service-catalog" className="button button-primary inline-flex items-center gap-1.5">
-                  {t('home.addFamilyApps')}
-                  <ArrowRight size={14} aria-hidden />
-                </Link>
-              </div>
-              <p className="homepage-closing__followup page-section__lead text-center">
+              <ol className="homepage-spotlight__grid m-0 list-none p-0">
+                {pathSteps.map((item) => (
+                  <li key={item.href} className="flex">
+                    <ShellLinkCard
+                      to={item.href}
+                      tag={item.tag}
+                      title={item.title}
+                      description={item.description}
+                      visual={item.visual}
+                      className="w-full"
+                      cta={
+                        <>
+                          {item.cta}
+                          <ChevronRight size={16} aria-hidden />
+                        </>
+                      }
+                    />
+                  </li>
+                ))}
+              </ol>
+              <p className="homepage-spotlight__see-all">
                 {t('home.stillQuestions')}{' '}
                 <Link to="/how-it-works#faq" className="touch-link font-semibold text-green-700 hover:underline dark:text-green-400">
                   {t('home.howItWorksFaq')}
