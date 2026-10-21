@@ -1,15 +1,15 @@
 /**
  * Data Broker Ecosystem
  *
- * Maps parent companies â†’ their known 3rd-party data recipients (ad networks,
- * analytics, measurement) â†’ the 4th-party data brokers that aggregate and
+ * Maps parent companies → their known 3rd-party data recipients (ad networks,
+ * analytics, measurement) → the 4th-party data brokers that aggregate and
  * resell consumer/student data downstream.
  *
  * Sources: company privacy policies, academic research, FOIA-obtained school
  * vendor lists, and privacy-advocacy datasets (Common Sense Privacy, EFF, etc.)
  */
 
-// â”€â”€â”€ Types â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Types ───────────────────────────────────────────────────────────────────
 
 export type ThirdPartyType =
   | 'ad-network'
@@ -50,7 +50,7 @@ export interface CompanyEcosystem {
   dataBrokers: DataBroker[];
 }
 
-// â”€â”€â”€ Known data brokers registry â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Known data brokers registry ─────────────────────────────────────────────
 
 export const DATA_BROKER_REGISTRY: Record<string, DataBroker> = {
   acxiom: {
@@ -197,7 +197,7 @@ export const DATA_BROKER_REGISTRY: Record<string, DataBroker> = {
     id: 'ai-training-brokers',
     name: 'AI Training Data Marketplaces',
     description:
-      'Brokers and marketplaces (e.g., Scale AI, Surge AI, Appen) that purchase user-generated content â€” including conversations, images, and prompts â€” and sell it as AI training datasets. Conversations with AI assistants may enter this chain.',
+      'Brokers and marketplaces (e.g., Scale AI, Surge AI, Appen) that purchase user-generated content — including conversations, images, and prompts — and sell it as AI training datasets. Conversations with AI assistants may enter this chain.',
     dataCategories: [
       'Conversation transcripts',
       'User prompts and queries',
@@ -210,7 +210,7 @@ export const DATA_BROKER_REGISTRY: Record<string, DataBroker> = {
   },
 };
 
-// â”€â”€â”€ Company ecosystems â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Company ecosystems ───────────────────────────────────────────────────────
 
 export const COMPANY_ECOSYSTEMS: CompanyEcosystem[] = [
   {
@@ -235,7 +235,7 @@ export const COMPANY_ECOSYSTEMS: CompanyEcosystem[] = [
         name: 'Meta Pixel / Conversions API',
         type: 'analytics',
         dataReceived: ['Website actions', 'Purchase events', 'Form fills'],
-        notes: 'Embedded on millions of third-party sites â€” data flows back to Meta.',
+        notes: 'Embedded on millions of third-party sites — data flows back to Meta.',
       },
     ],
     dataBrokers: [
@@ -255,7 +255,7 @@ export const COMPANY_ECOSYSTEMS: CompanyEcosystem[] = [
         name: 'Google Ads / Display & Video 360',
         type: 'ad-network',
         dataReceived: ['Search queries', 'YouTube watch history', 'Location data', 'Purchase intent'],
-        notes: 'Largest digital ad platform globally. School users on Workspace EDU are exempt from ad targeting â€” but personal Google accounts are not.',
+        notes: 'Largest digital ad platform globally. School users on Workspace EDU are exempt from ad targeting — but personal Google accounts are not.',
       },
       {
         id: 'google-analytics-4',
@@ -489,7 +489,7 @@ export const COMPANY_ECOSYSTEMS: CompanyEcosystem[] = [
         name: 'Character.AI Training Pipeline',
         type: 'analytics',
         dataReceived: ['Full conversation content', 'User persona details', 'Emotional expression data'],
-        notes: 'All conversations stored and used for model training. No true deletion â€” conversations may persist in model weights.',
+        notes: 'All conversations stored and used for model training. No true deletion — conversations may persist in model weights.',
       },
     ],
     dataBrokers: [
@@ -506,7 +506,7 @@ export const COMPANY_ECOSYSTEMS: CompanyEcosystem[] = [
         name: 'Product Analytics (internal)',
         type: 'analytics',
         dataReceived: ['All text being typed', 'Document content', 'Writing patterns', 'Error frequencies'],
-        notes: 'The Grammarly browser extension has access to virtually everything a user types in any text field â€” including passwords if not excluded.',
+        notes: 'The Grammarly browser extension has access to virtually everything a user types in any text field — including passwords if not excluded.',
       },
     ],
     dataBrokers: [
@@ -515,7 +515,7 @@ export const COMPANY_ECOSYSTEMS: CompanyEcosystem[] = [
   },
 ];
 
-// â”€â”€â”€ Lookup helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── Lookup helpers ───────────────────────────────────────────────────────────
 
 /**
  * Get the company ecosystem for a given parent company ID.

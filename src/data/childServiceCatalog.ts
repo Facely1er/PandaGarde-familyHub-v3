@@ -43,7 +43,7 @@ export interface ChildService {
   icon?: string; // Icon name or URL
   logoUrl?: string; // Service logo URL (will be generated from service ID)
   website?: string; // Official website
-  /** True when the app is typically assigned by a school/district â€” exposure is involuntary */
+  /** True when the app is typically assigned by a school/district — exposure is involuntary */
   schoolAssigned?: boolean;
   /** Vendor or company behind the service */
   vendor?: string;
@@ -80,7 +80,7 @@ export const childServiceCatalog: ChildService[] = [
     website: 'https://www.instagram.com',
     lawEnforcementConcerns: [
       'Meta (Instagram\'s parent) receives tens of thousands of government data requests annually and complies with a high percentage of them',
-      'Account content, DMs, and metadata can be handed to law enforcement with a valid legal order â€” messages are not end-to-end encrypted',
+      'Account content, DMs, and metadata can be handed to law enforcement with a valid legal order — messages are not end-to-end encrypted',
       'Emergency disclosure requests allow Meta to share data without a warrant in certain circumstances'
     ]
   },
@@ -704,7 +704,7 @@ export const childServiceCatalog: ChildService[] = [
     website: 'https://www.canva.com'
   },
 
-  // â”€â”€ EdTech / School-Assigned â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── EdTech / School-Assigned ──────────────────────────────────────────────
   // These are commonly assigned by schools or districts. Students are exposed
   // to them as part of their school context, independently of family choice.
 
@@ -793,7 +793,7 @@ export const childServiceCatalog: ChildService[] = [
     category: 'edtech',
     schoolAssigned: true,
     vendor: 'PowerSchool',
-    description: 'Learning management system with SIS integration for Kâ€“12',
+    description: 'Learning management system with SIS integration for K–12',
     minAge: 6,
     riskLevel: 'medium',
     privacyConcerns: [
@@ -816,7 +816,7 @@ export const childServiceCatalog: ChildService[] = [
     category: 'edtech',
     schoolAssigned: true,
     vendor: 'Seesaw Learning',
-    description: 'Digital portfolio and family communication app for Kâ€“5',
+    description: 'Digital portfolio and family communication app for K–5',
     minAge: 5,
     riskLevel: 'medium',
     privacyConcerns: [
@@ -826,7 +826,7 @@ export const childServiceCatalog: ChildService[] = [
       'Student biometric data (voice, image) captured in portfolio items'
     ],
     parentTips: [
-      'Review sharing settings â€” check whether portfolio is private or visible to class',
+      'Review sharing settings — check whether portfolio is private or visible to class',
       'Understand data retention for student content after the school year',
       'Monitor what your child is posting to their portfolio',
       'Ask school about their Seesaw student data agreement'
@@ -901,7 +901,7 @@ export const childServiceCatalog: ChildService[] = [
       'Communication patterns and metadata collected'
     ],
     parentTips: [
-      'Use the parent account â€” do not share the student join code with others',
+      'Use the parent account — do not share the student join code with others',
       'Review message history and notification settings',
       'Check Remind\'s data retention policy for message archives'
     ],
@@ -957,7 +957,7 @@ export const childServiceCatalog: ChildService[] = [
     category: 'edtech',
     schoolAssigned: true,
     vendor: 'IXL Learning',
-    description: 'Adaptive practice platform for math and ELA, Kâ€“12',
+    description: 'Adaptive practice platform for math and ELA, K–12',
     minAge: 5,
     riskLevel: 'medium',
     privacyConcerns: [
@@ -1066,7 +1066,7 @@ export const childServiceCatalog: ChildService[] = [
     category: 'edtech',
     schoolAssigned: true,
     vendor: 'Discovery Education',
-    description: 'Adaptive Kâ€“8 math program that adjusts to each student in real time',
+    description: 'Adaptive K–8 math program that adjusts to each student in real time',
     minAge: 5,
     riskLevel: 'low',
     privacyConcerns: [
@@ -1094,7 +1094,7 @@ export const childServiceCatalog: ChildService[] = [
     riskLevel: 'medium',
     privacyConcerns: [
       'Comprehensive reading and math assessment data built over years',
-      'Renaissance also owns Nearpod â€” cross-product data sharing is possible',
+      'Renaissance also owns Nearpod — cross-product data sharing is possible',
       'Assessment and testing history shared with school and district',
       'Student data used for product development and benchmarking'
     ],
@@ -1112,7 +1112,7 @@ export const childServiceCatalog: ChildService[] = [
     category: 'edtech',
     schoolAssigned: true,
     vendor: 'Prodigy Education',
-    description: 'Gamified adaptive math platform for grades 1â€“8',
+    description: 'Gamified adaptive math platform for grades 1–8',
     minAge: 6,
     riskLevel: 'medium',
     privacyConcerns: [
@@ -1135,7 +1135,7 @@ export const childServiceCatalog: ChildService[] = [
     category: 'edtech',
     schoolAssigned: true,
     vendor: 'Code.org (Non-profit)',
-    description: 'Computer science and coding curriculum for Kâ€“12 classrooms',
+    description: 'Computer science and coding curriculum for K–12 classrooms',
     minAge: 6,
     riskLevel: 'low',
     privacyConcerns: [
@@ -1183,7 +1183,7 @@ export const childServiceCatalog: ChildService[] = [
     minAge: 13,
     riskLevel: 'medium',
     privacyConcerns: [
-      'Board visibility depends entirely on teacher settings â€” can be public by default',
+      'Board visibility depends entirely on teacher settings — can be public by default',
       'Student posts, images, and comments stored on platform',
       'Public boards are indexable by search engines',
       'No strict FERPA compliance for free-tier accounts'
@@ -1197,8 +1197,8 @@ export const childServiceCatalog: ChildService[] = [
     website: 'https://padlet.com'
   },
 
-  // â”€â”€ AI Apps â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-  // AI-powered tools used by children and teens â€” many have no COPPA/FERPA
+  // ── AI Apps ──────────────────────────────────────────────────────────────
+  // AI-powered tools used by children and teens — many have no COPPA/FERPA
   // compliance for consumer accounts. Conversation data is often used for training.
 
   {
@@ -1210,18 +1210,18 @@ export const childServiceCatalog: ChildService[] = [
     minAge: 13,
     riskLevel: 'high',
     privacyConcerns: [
-      'All conversations stored by OpenAI â€” including sensitive personal disclosures',
+      'All conversations stored by OpenAI — including sensitive personal disclosures',
       'Free and Plus accounts: content may be used to train future AI models',
-      'No FERPA or COPPA compliance for consumer accounts â€” schools using it informally have no protection',
-      'Age verification is not enforced â€” children under 13 can and do access it',
+      'No FERPA or COPPA compliance for consumer accounts — schools using it informally have no protection',
+      'Age verification is not enforced — children under 13 can and do access it',
       'Sensitive information shared (mental health, personal problems) is recorded'
     ],
     parentTips: [
-      'Go to Settings â†’ Data Controls and disable "Improve the model for everyone" to stop training data use',
+      'Go to Settings → Data Controls and disable "Improve the model for everyone" to stop training data use',
       'Talk with your child about not sharing personal details, passwords, or school credentials',
       'Delete conversation history regularly from the account sidebar',
       'If used for school, ask the school whether they have an enterprise agreement (which blocks training)',
-      'ChatGPT has a minimum age of 13 â€” ensure younger children do not have access'
+      'ChatGPT has a minimum age of 13 — ensure younger children do not have access'
     ],
     website: 'https://chat.openai.com',
     lawEnforcementConcerns: [
@@ -1235,18 +1235,18 @@ export const childServiceCatalog: ChildService[] = [
     name: 'Google Gemini',
     category: 'ai',
     vendor: 'Google (Alphabet)',
-    description: 'Google\'s AI assistant â€” available through Google account on web, Android, and as a school add-on',
+    description: 'Google\'s AI assistant — available through Google account on web, Android, and as a school add-on',
     minAge: 13,
     riskLevel: 'high',
     privacyConcerns: [
       'Conversations linked to child\'s Google account and full Google data ecosystem',
       'Queries and responses stored and reviewed by Google to improve AI',
-      'Accessible through school Google accounts â€” possible even on accounts set up for younger students',
+      'Accessible through school Google accounts — possible even on accounts set up for younger students',
       'Part of Google\'s broader ad and identity-resolution infrastructure'
     ],
     parentTips: [
-      'Check Google Account â†’ Gemini Apps Activity and turn off history or delete it regularly',
-      'In Family Link (under-13 accounts), Gemini should be blocked by default â€” verify this',
+      'Check Google Account → Gemini Apps Activity and turn off history or delete it regularly',
+      'In Family Link (under-13 accounts), Gemini should be blocked by default — verify this',
       'Ask your child\'s school whether Gemini is enabled in the school Google Workspace',
       'Discuss with your child that Google stores and may review AI conversations'
     ],
@@ -1269,13 +1269,13 @@ export const childServiceCatalog: ChildService[] = [
       'Conversations stored by Microsoft; retention varies by account type',
       'School accounts governed by Microsoft EDU terms (more protective)',
       'Consumer Copilot shows ads powered by Microsoft Advertising',
-      'Integrated with Microsoft 365 â€” AI can access files, emails, and calendar if enabled'
+      'Integrated with Microsoft 365 — AI can access files, emails, and calendar if enabled'
     ],
     parentTips: [
       'If your child has a school Microsoft 365 account, verify that the Copilot settings are managed by the school',
-      'For personal accounts, check Microsoft Privacy Dashboard â†’ Activity History and delete AI history',
+      'For personal accounts, check Microsoft Privacy Dashboard → Activity History and delete AI history',
       'Ensure Copilot is not connected to sensitive OneDrive files',
-      'Consumer Copilot on Bing uses Microsoft\'s ad targeting â€” use the school account version for safer access'
+      'Consumer Copilot on Bing uses Microsoft\'s ad targeting — use the school account version for safer access'
     ],
     website: 'https://copilot.microsoft.com',
     lawEnforcementConcerns: [
@@ -1289,20 +1289,20 @@ export const childServiceCatalog: ChildService[] = [
     name: 'Character.AI',
     category: 'ai',
     vendor: 'Character Technologies',
-    description: 'Platform where users chat with AI personas and "characters" â€” very popular with teens',
+    description: 'Platform where users chat with AI personas and "characters" — very popular with teens',
     minAge: 16,
     riskLevel: 'very-high',
     privacyConcerns: [
-      'AI characters are designed to form emotional bonds â€” significant risk of dependency for vulnerable teens',
+      'AI characters are designed to form emotional bonds — significant risk of dependency for vulnerable teens',
       'Full conversation history stored; includes highly personal disclosures about mental health, relationships',
       'Linked to multiple legal complaints and lawsuits alleging harm to minors',
-      'Minimal robust content filtering â€” inappropriate conversations have been widely reported',
+      'Minimal robust content filtering — inappropriate conversations have been widely reported',
       'No parental controls or family-link features',
       'All conversations used to train Character.AI\'s models with no clear opt-out'
     ],
     parentTips: [
-      'This app is not recommended for children under 16 â€” consider blocking it at the router or device level',
-      'Character.AI now has a Teen Mode (under-18) with some content restrictions â€” ensure it is active',
+      'This app is not recommended for children under 16 — consider blocking it at the router or device level',
+      'Character.AI now has a Teen Mode (under-18) with some content restrictions — ensure it is active',
       'Have an open conversation: AI personas are not real friends and cannot replace real support',
       'If your child is struggling emotionally, direct them to real mental health resources (Crisis Text Line, therapist)',
       'Review your child\'s account history at least monthly if they use this app'
@@ -1314,22 +1314,22 @@ export const childServiceCatalog: ChildService[] = [
     name: 'Snapchat My AI',
     category: 'ai',
     vendor: 'Snap Inc.',
-    description: 'AI chatbot built directly into Snapchat â€” enabled by default for all users including teens',
+    description: 'AI chatbot built directly into Snapchat — enabled by default for all users including teens',
     minAge: 13,
     riskLevel: 'very-high',
     privacyConcerns: [
-      'Enabled by default for all Snapchat users â€” children cannot easily disable it',
+      'Enabled by default for all Snapchat users — children cannot easily disable it',
       'My AI conversations are stored and factor into Snap\'s ad targeting',
       'My AI previously shared a user\'s location with the AI without explicit consent (patched but noted)',
       'Children may share personal or sensitive information thinking it is private',
-      'My AI may recommend products, links, and sponsored content â€” advertising without clear labelling for younger users'
+      'My AI may recommend products, links, and sponsored content — advertising without clear labelling for younger users'
     ],
     parentTips: [
-      'Go to Snapchat â†’ Profile â†’ Privacy Controls â†’ Clear My AI Data and delete conversation history',
+      'Go to Snapchat → Profile → Privacy Controls → Clear My AI Data and delete conversation history',
       'Snapchat+ subscribers can remove My AI from the chat list; free users cannot',
-      'Discuss with your teen that My AI is not a confidential companion â€” Snap staff can review conversations',
+      'Discuss with your teen that My AI is not a confidential companion — Snap staff can review conversations',
       'If your child is under 13, they should not have Snapchat at all',
-      'Check for My AI in the Friends list â€” it appears as a contact called "My AI"'
+      'Check for My AI in the Friends list — it appears as a contact called "My AI"'
     ],
     website: 'https://www.snapchat.com',
     lawEnforcementConcerns: [
@@ -1348,16 +1348,16 @@ export const childServiceCatalog: ChildService[] = [
     riskLevel: 'very-high',
     privacyConcerns: [
       'Meta AI conversations feed the same advertising system as Instagram and Facebook',
-      'Accessible via WhatsApp blue circle â€” often activated unintentionally',
+      'Accessible via WhatsApp blue circle — often activated unintentionally',
       'Content your child shares in AI chats may inform Meta\'s ad targeting',
       'Meta\'s data broker relationships (LiveRamp, Acxiom, etc.) apply to AI conversation data',
       'No separate parental controls for Meta AI within WhatsApp or Instagram'
     ],
     parentTips: [
-      'Meta AI is embedded â€” you cannot fully remove it, but you can avoid actively using it',
-      'Review Meta account Privacy Settings â†’ AI â†’ Interaction History and delete it',
+      'Meta AI is embedded — you cannot fully remove it, but you can avoid actively using it',
+      'Review Meta account Privacy Settings → AI → Interaction History and delete it',
       'Discuss with your teen that the blue circle in WhatsApp is Meta AI, not a private chat',
-      'Check Instagram Accounts Center â†’ Privacy â†’ Your Activity on Meta AI'
+      'Check Instagram Accounts Center → Privacy → Your Activity on Meta AI'
     ],
     website: 'https://ai.meta.com'
   },
@@ -1366,7 +1366,7 @@ export const childServiceCatalog: ChildService[] = [
     name: 'Grammarly',
     category: 'ai',
     vendor: 'Grammarly Inc.',
-    description: 'AI writing assistant used across browsers, Word, and Google Docs â€” widely used by students for essays and homework',
+    description: 'AI writing assistant used across browsers, Word, and Google Docs — widely used by students for essays and homework',
     minAge: 13,
     riskLevel: 'medium',
     privacyConcerns: [
@@ -1376,9 +1376,9 @@ export const childServiceCatalog: ChildService[] = [
       'De-identified writing data may be shared with third-party analytics partners'
     ],
     parentTips: [
-      'Check Grammarly\'s Account Settings â†’ Privacy and opt out of "human review" and data-sharing options',
-      'Grammarly for Education provides stronger privacy protections â€” ask your school if they have a licence',
-      'The browser extension can see everything typed on websites â€” review what sites your child uses it on',
+      'Check Grammarly\'s Account Settings → Privacy and opt out of "human review" and data-sharing options',
+      'Grammarly for Education provides stronger privacy protections — ask your school if they have a licence',
+      'The browser extension can see everything typed on websites — review what sites your child uses it on',
       'Remind your child not to paste personal information (SSN, passwords, home address) into Grammarly'
     ],
     website: 'https://www.grammarly.com'
@@ -1388,18 +1388,18 @@ export const childServiceCatalog: ChildService[] = [
     name: 'Perplexity AI',
     category: 'ai',
     vendor: 'Perplexity AI',
-    description: 'AI-powered search engine that answers questions with cited sources â€” used as a search replacement by students',
+    description: 'AI-powered search engine that answers questions with cited sources — used as a search replacement by students',
     minAge: 13,
     riskLevel: 'high',
     privacyConcerns: [
       'All search queries and follow-up questions stored by Perplexity',
-      'No age verification â€” children of any age can access it',
+      'No age verification — children of any age can access it',
       'Queries used to improve the AI model (opt-out available in paid plans)',
       'Search patterns reveal personal interests, location, health questions, and academic topics',
       'Perplexity collects IP address, device info, and search patterns linked to an account or device fingerprint'
     ],
     parentTips: [
-      'Perplexity allows disabling personalised AI on free accounts â€” check Settings â†’ Privacy',
+      'Perplexity allows disabling personalised AI on free accounts — check Settings → Privacy',
       'Remind your child not to search for highly personal topics (health conditions, home address, etc.)',
       'Consider whether Perplexity is being used to bypass school search filters',
       'Use a school-controlled account if the school has an agreement with Perplexity'
@@ -1411,7 +1411,7 @@ export const childServiceCatalog: ChildService[] = [
     name: 'Socratic by Google',
     category: 'ai',
     vendor: 'Google (Alphabet)',
-    description: 'AI homework help app for secondary students â€” photo-based problem solving for math, science, and more',
+    description: 'AI homework help app for secondary students — photo-based problem solving for math, science, and more',
     minAge: 10,
     riskLevel: 'medium',
     privacyConcerns: [
@@ -1420,7 +1420,7 @@ export const childServiceCatalog: ChildService[] = [
       'Google may use query data to improve its AI products'
     ],
     parentTips: [
-      'Check Google Account â†’ Data & Privacy â†’ My Activity to see Socratic history',
+      'Check Google Account → Data & Privacy → My Activity to see Socratic history',
       'Disable Socratic activity history in Google Account if desired',
       'Discuss with your child that homework photos are processed by Google'
     ],
@@ -1432,7 +1432,7 @@ export const childServiceCatalog: ChildService[] = [
     category: 'ai',
     schoolAssigned: true,
     vendor: 'Khan Academy / OpenAI',
-    description: 'AI tutor built by Khan Academy on top of OpenAI\'s GPT â€” designed specifically for students',
+    description: 'AI tutor built by Khan Academy on top of OpenAI\'s GPT — designed specifically for students',
     minAge: 13,
     riskLevel: 'medium',
     privacyConcerns: [
@@ -1445,12 +1445,12 @@ export const childServiceCatalog: ChildService[] = [
       'Khan Academy is a non-profit with strong stated privacy commitments',
       'Verify that your school\'s Khanmigo agreement includes OpenAI Enterprise API protections',
       'Review the Khan Academy parent dashboard for conversation and progress history',
-      'Khanmigo is one of the more responsibly designed AI tutors â€” confirm version used is the school version'
+      'Khanmigo is one of the more responsibly designed AI tutors — confirm version used is the school version'
     ],
     website: 'https://www.khanacademy.org/khanmigo'
   },
 
-  // â”€â”€ Mobile Operators (Telecom) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Mobile Operators (Telecom) ────────────────────────────────────────────
   // Mobile carriers have uniquely deep access: real-time location 24/7,
   // call/SMS metadata, device identifiers, and app-traffic patterns.
   // All four major US carriers have a documented history of selling
@@ -1466,14 +1466,14 @@ export const childServiceCatalog: ChildService[] = [
     riskLevel: 'very-high',
     privacyConcerns: [
       'Knows your child\'s precise location 24/7 via cell towers and GPS',
-      'Sells "Custom Experience" advertising program uses app usage and web browsing data â€” opt-out required',
+      'Sells "Custom Experience" advertising program uses app usage and web browsing data — opt-out required',
       'Verizon was fined $1.35M for inserting hidden "supercookies" (UIDH) into all mobile traffic to track users without consent',
       'Call and SMS metadata (who, when, how long) logged and retained',
       'Device identifier (IMEI/IMSI) linked to real-world identity and can be shared with data brokers',
       'Participated in the 2018 carrier location-data scandal (sold real-time location to aggregators)'
     ],
     parentTips: [
-      'Opt out of Verizon\'s Custom Experience program: My Verizon app â†’ Account â†’ Privacy Settings',
+      'Opt out of Verizon\'s Custom Experience program: My Verizon app → Account → Privacy Settings',
       'Enable the Verizon Smart Family parental controls for location monitoring and content filters',
       'Review the Verizon Privacy Policy to understand data retention for call records',
       'Request deletion of advertising data via the Verizon Privacy Dashboard',
@@ -1491,14 +1491,14 @@ export const childServiceCatalog: ChildService[] = [
     riskLevel: 'very-high',
     privacyConcerns: [
       'Real-time location data accessible to AT&T and historically sold to third-party aggregators',
-      'AT&T operated "Project Hemisphere" â€” a surveillance program sharing call records with government and law enforcement at industrial scale',
+      'AT&T operated "Project Hemisphere" — a surveillance program sharing call records with government and law enforcement at industrial scale',
       'AT&T\'s Xandr ad platform (now Microsoft) used carrier-level identity data for ad targeting',
-      'CPNI (Customer Proprietary Network Information) â€” detailed calling patterns are protected by law but exceptions are broad',
+      'CPNI (Customer Proprietary Network Information) — detailed calling patterns are protected by law but exceptions are broad',
       'AT&T broadband customers\' browsing history used for ad targeting ("Internet Preferences" program)',
       'Participated in the 2018 carrier location-data scandal'
     ],
     parentTips: [
-      'Opt out of AT&T\'s advertising programs: att.com/privacy â†’ Advertising & Analytics',
+      'Opt out of AT&T\'s advertising programs: att.com/privacy → Advertising & Analytics',
       'Use AT&T Secure Family for parental controls, location sharing, and content filters',
       'Review and opt out of the "Internet Preferences" browsing data program in your AT&T account',
       'Request a copy of your child\'s data under CPNI rules via AT&T\'s Privacy Center',
@@ -1515,15 +1515,15 @@ export const childServiceCatalog: ChildService[] = [
     minAge: 6,
     riskLevel: 'very-high',
     privacyConcerns: [
-      '2021 data breach exposed personal data of 76.6 million current and former customers â€” including names, SSNs, and driver\'s licenses',
-      'T-Mobile Advertising Solutions uses network data (location, app usage, web traffic) for ad targeting â€” opt-out required',
+      '2021 data breach exposed personal data of 76.6 million current and former customers — including names, SSNs, and driver\'s licenses',
+      'T-Mobile Advertising Solutions uses network data (location, app usage, web traffic) for ad targeting — opt-out required',
       'Location data sold to aggregators; T-Mobile was cited in the 2018 carrier location-data scandal',
       'App and web usage data collected via "T-Mobile Insights" network analytics program',
       'Device identifiers and call metadata retained and may be shared with partners',
       'Sprint (now merged into T-Mobile) also had documented location-data sharing practices'
     ],
     parentTips: [
-      'Opt out of T-Mobile\'s advertising programs: Account â†’ Privacy & Notifications â†’ Advertising in the T-Mobile app',
+      'Opt out of T-Mobile\'s advertising programs: Account → Privacy & Notifications → Advertising in the T-Mobile app',
       'Enable T-Life / FamilyMode for parental controls and location tracking',
       'If you were a customer before 2021, check haveibeenpwned.com for breach exposure',
       'Request T-Mobile to delete advertising profile data via their Privacy Center',
@@ -1541,17 +1541,17 @@ export const childServiceCatalog: ChildService[] = [
     name: 'Cricket Wireless',
     category: 'telecom',
     vendor: 'AT&T (subsidiary)',
-    description: 'Prepaid carrier fully owned by AT&T â€” shares AT&T\'s network infrastructure and data practices',
+    description: 'Prepaid carrier fully owned by AT&T — shares AT&T\'s network infrastructure and data practices',
     minAge: 6,
     riskLevel: 'high',
     privacyConcerns: [
-      'Fully owned and operated by AT&T â€” all AT&T data practices apply',
+      'Fully owned and operated by AT&T — all AT&T data practices apply',
       'Location data accessible on AT&T network infrastructure',
       'Call and SMS metadata retained under AT&T policies',
       'Advertising data sharing follows AT&T\'s advertising programs'
     ],
     parentTips: [
-      'Treat Cricket\'s privacy practices as equivalent to AT&T\'s â€” same opt-outs apply',
+      'Treat Cricket\'s privacy practices as equivalent to AT&T\'s — same opt-outs apply',
       'Log into my.cricketwireless.com to review account privacy settings',
       'Opt out of AT&T advertising programs (Cricket shares the AT&T infrastructure)',
       'Use device-level parental controls since Cricket does not offer a dedicated family safety app'
@@ -1568,7 +1568,7 @@ export const childServiceCatalog: ChildService[] = [
     riskLevel: 'high',
     privacyConcerns: [
       'Location and network data collected by DISH Wireless and EchoStar parent company',
-      'DISH also operates satellite TV â€” combined data profile possible across products',
+      'DISH also operates satellite TV — combined data profile possible across products',
       'Call metadata and device identifiers retained per DISH privacy policy',
       'Advertising programs use network and device data for targeting'
     ],
@@ -1589,11 +1589,11 @@ export const childServiceCatalog: ChildService[] = [
     name: 'Mint Mobile',
     category: 'telecom',
     vendor: 'T-Mobile US (subsidiary)',
-    description: 'Prepaid carrier acquired by T-Mobile in 2023 â€” runs on T-Mobile\'s network',
+    description: 'Prepaid carrier acquired by T-Mobile in 2023 — runs on T-Mobile\'s network',
     minAge: 6,
     riskLevel: 'high',
     privacyConcerns: [
-      'Operates on T-Mobile\'s network â€” T-Mobile\'s data practices and 2021 breach history apply',
+      'Operates on T-Mobile\'s network — T-Mobile\'s data practices and 2021 breach history apply',
       'Location, call metadata, and device identifiers accessible via T-Mobile infrastructure',
       'Advertising data may be shared under T-Mobile\'s advertising programs post-acquisition'
     ],

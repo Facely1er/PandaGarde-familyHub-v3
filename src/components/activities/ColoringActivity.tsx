@@ -151,7 +151,7 @@ const ColoringActivity: React.FC<ColoringActivityProps> = ({ onComplete, onClose
     ctx.fillStyle = '#4CAF50';
     ctx.font = 'bold 16px Arial';
     ctx.textAlign = 'center';
-    ctx.fillText('ðŸ”’', 300, 320);
+    ctx.fillText('🔒', 300, 320);
 
     // Text with better styling
     ctx.fillStyle = '#2C3E50';
@@ -325,7 +325,7 @@ const ColoringActivity: React.FC<ColoringActivityProps> = ({ onComplete, onClose
       setFeedback(null);
       onComplete(finalScore);
     } else {
-      setFeedback(`Keep coloring! About ${Math.round(completionPercentage)}% filled â€” add more color to the panda and shield.`);
+      setFeedback(`Keep coloring! About ${Math.round(completionPercentage)}% filled — add more color to the panda and shield.`);
     }
   };
 
@@ -333,7 +333,7 @@ const ColoringActivity: React.FC<ColoringActivityProps> = ({ onComplete, onClose
     <ActivityGameShell
       titleId="coloring-title"
       title="Color Privacy Panda"
-      subtitle="Color the panda and shield â€” then check when you're proud of it."
+      subtitle="Color the panda and shield — then check when you're proud of it."
       titleIcon={<Palette className="h-5 w-5" aria-hidden="true" />}
       onClose={onClose}
       progressPercent={isCompleted ? 100 : score}
