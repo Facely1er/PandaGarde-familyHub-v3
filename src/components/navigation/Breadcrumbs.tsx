@@ -18,33 +18,34 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className = '' }) => {
   }
 
   return (
-    <nav
-      aria-label="Breadcrumb"
-      className={`inline-block rounded-lg bg-white/10 px-4 py-2 backdrop-blur-md dark:border dark:border-green-300/25 ${className}`}
-    >
-      <ol className="m-0 flex list-none flex-wrap items-center gap-x-2 gap-y-1 p-0 text-sm">
+    <nav aria-label="Breadcrumb" className={`inline-block ${className}`}>
+      <ol className="m-0 flex list-none flex-wrap items-center gap-x-1.5 gap-y-0.5 p-0 text-xs leading-snug">
         {breadcrumbs.map((item, index) => {
           const isLast = index === breadcrumbs.length - 1;
 
           return (
-            <li key={`${item.path}-${index}`} className="flex items-center gap-2">
+            <li key={`${item.path}-${index}`} className="flex min-w-0 items-center gap-1.5">
               {index > 0 && (
-                <ChevronRight size={14} aria-hidden="true" className="flex-shrink-0 text-white/60" />
+                <ChevronRight
+                  size={12}
+                  aria-hidden="true"
+                  className="flex-shrink-0 text-white/35"
+                />
               )}
               {isLast ? (
                 <span
                   aria-current="page"
-                  className="whitespace-normal break-words font-semibold text-white"
+                  className="whitespace-normal break-words font-medium text-white/70"
                 >
                   {item.label}
                 </span>
               ) : (
                 <Link
                   to={item.path}
-                  className="inline-flex max-w-[10rem] items-center gap-1 text-white/80 no-underline transition-colors hover:text-white sm:max-w-[14rem]"
+                  className="inline-flex max-w-[9rem] items-center gap-1 text-white/50 no-underline transition-colors hover:text-white/80 sm:max-w-[12rem]"
                 >
                   {index === 0 && (
-                    <Home size={14} aria-hidden="true" className="flex-shrink-0" />
+                    <Home size={12} aria-hidden="true" className="flex-shrink-0 opacity-80" />
                   )}
                   <span className="truncate">{item.label}</span>
                 </Link>
