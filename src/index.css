@@ -12576,16 +12576,84 @@ header.header .nav-actions button.header-icon-btn:not(.header-search-bar) {
   }
 
   .story-feature-panel__layout {
-    @apply grid grid-cols-[auto_1fr] items-start gap-x-4 gap-y-4 lg:grid-cols-[auto_1fr_auto] lg:items-center lg:gap-5;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      'cover heading'
+      'body body'
+      'cta cta';
+    column-gap: 1rem;
+    row-gap: 0.875rem;
+    align-items: start;
   }
 
-  .story-feature-panel__copy {
-    @apply min-w-0;
+  .story-feature-panel__cover {
+    grid-area: cover;
+  }
+
+  .story-feature-panel__cover .story-cover-art--hero {
+    width: 5.5rem;
+  }
+
+  .story-feature-panel__heading {
+    grid-area: heading;
+    min-width: 0;
+    align-self: center;
+  }
+
+  .story-feature-panel__body {
+    grid-area: body;
+    min-width: 0;
   }
 
   .story-feature-panel__cta {
-    @apply col-span-2 w-full justify-self-stretch sm:w-auto sm:justify-self-start;
-    @apply lg:col-span-1 lg:col-start-3 lg:row-start-1 lg:w-auto lg:justify-self-end;
+    grid-area: cta;
+    width: 100%;
+    justify-self: stretch;
+  }
+
+  @media (min-width: 640px) {
+    .story-feature-panel__cover .story-cover-art--hero {
+      width: 8rem;
+    }
+
+    .story-feature-panel__cta {
+      width: auto;
+      justify-self: start;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .story-feature-panel__layout {
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      grid-template-areas:
+        'cover heading cta'
+        'cover body cta';
+      column-gap: 1.25rem;
+      row-gap: 0.5rem;
+      align-items: center;
+    }
+
+    .story-feature-panel__cover {
+      align-self: center;
+    }
+
+    .story-feature-panel__heading {
+      align-self: end;
+    }
+
+    .story-feature-panel__body {
+      align-self: start;
+    }
+
+    .story-feature-panel__cover .story-cover-art--hero {
+      width: 10rem;
+    }
+
+    .story-feature-panel__cta {
+      justify-self: end;
+      align-self: center;
+    }
   }
 
   .story-cover-art--thumb {

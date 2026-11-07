@@ -62,15 +62,19 @@ export function StoryListPage() {
           {foundationStory && (
             <div className="story-feature-panel rounded-3xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-white p-6 dark:border-emerald-800 dark:from-emerald-950/50 dark:to-gray-900 sm:p-8">
               <div className="story-feature-panel__layout">
-                <StoryCoverArt story={foundationStory} variant="hero" />
-                <div className="story-feature-panel__copy">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 mb-1">
+                <div className="story-feature-panel__cover">
+                  <StoryCoverArt story={foundationStory} variant="hero" />
+                </div>
+                <div className="story-feature-panel__heading">
+                  <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
                     {t('stories.foundationBadge')}
                   </p>
                   <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 sm:text-2xl">
                     {foundationMeta?.title ?? foundationStory.title}
                   </h2>
-                  <p className="mt-2 text-sm text-gray-600 dark:text-gray-300 leading-relaxed max-w-xl">
+                </div>
+                <div className="story-feature-panel__body">
+                  <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-300">
                     {foundationMeta?.summary ?? foundationStory.summary}
                   </p>
                   <ul className="mt-3 flex flex-wrap gap-3 text-xs text-gray-500 dark:text-gray-400">
