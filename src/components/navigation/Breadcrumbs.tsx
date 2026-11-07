@@ -34,7 +34,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className = '' }) => {
               {isLast ? (
                 <span
                   aria-current="page"
-                  className="max-w-[16rem] truncate font-semibold text-white sm:max-w-xs"
+                  className="whitespace-normal break-words font-semibold text-white"
                 >
                   {item.label}
                 </span>

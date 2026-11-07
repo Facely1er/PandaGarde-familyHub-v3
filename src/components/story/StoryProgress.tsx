@@ -51,29 +51,35 @@ const StoryProgress: React.FC<StoryProgressProps> = ({
       {/* Main Progress Bar */}
       <div className="progress-main">
         <div className="progress-header">
-          <div className="progress-info">
-            <span className="progress-label">Story Progress</span>
+          <span className="progress-label">Story Progress</span>
+          <div className="progress-meta">
             <span className="progress-text">
               Scene {currentScene} of {totalScenes}
             </span>
-          </div>
-          <div className="progress-stats">
-            {points > 0 && (
-              <div className="points-display">
-                <span className="points-icon">🏆</span>
-                <span className="points-value">{points}</span>
-              </div>
-            )}
-            {achievements.length > 0 && (
-              <button
-                className="achievements-toggle"
-                onClick={() => setShowAchievements(!showAchievements)}
-                title="View Achievements"
-              >
-                <span className="achievement-icon">🏅</span>
-                <span className="achievement-count">{unlockedAchievements.length}/{achievements.length}</span>
-              </button>
-            )}
+            <div className="progress-stats">
+              {points > 0 && (
+                <div className="points-display">
+                  <span className="points-icon">🏆</span>
+                  <span className="points-value">{points}</span>
+                </div>
+              )}
+              {achievements.length > 0 && (
+                <button
+                  type="button"
+                  className="achievements-toggle"
+                  onClick={() => setShowAchievements(!showAchievements)}
+                  title="View Achievements"
+                  aria-expanded={showAchievements}
+                >
+                  <span className="achievement-icon" aria-hidden>
+                    🏅
+                  </span>
+                  <span className="achievement-count">
+                    {unlockedAchievements.length}/{achievements.length}
+                  </span>
+                </button>
+              )}
+            </div>
           </div>
         </div>
 
@@ -183,71 +189,79 @@ const StoryProgress: React.FC<StoryProgressProps> = ({
         .story-progress-container {
           background: ${theme === 'dark' ? 'var(--gray-800)' : 'white'};
           border-radius: 12px;
-          padding: 1.5rem;
+          padding: 1rem 1.125rem;
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
           border: 1px solid ${theme === 'dark' ? 'var(--gray-600)' : 'var(--gray-200)'};
           position: relative;
         }
 
         .progress-main {
-          margin-bottom: 1rem;
+          margin-bottom: 0.75rem;
         }
 
         .progress-header {
           display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 1rem;
+          flex-direction: column;
+          gap: 0.375rem;
+          margin-bottom: 0.75rem;
         }
 
-        .progress-info {
+        .progress-meta {
           display: flex;
-          flex-direction: column;
-          gap: 0.25rem;
+          align-items: center;
+          justify-content: space-between;
+          gap: 0.75rem;
+          min-width: 0;
         }
 
         .progress-label {
           font-weight: 600;
           color: ${theme === 'dark' ? 'var(--gray-200)' : 'var(--gray-700)'};
-          font-size: 0.9rem;
+          font-size: 0.8125rem;
+          line-height: 1.2;
         }
 
         .progress-text {
           color: var(--primary);
-          font-weight: 500;
-          font-size: 1.1rem;
+          font-weight: 600;
+          font-size: 0.9375rem;
+          line-height: 1.25;
+          min-width: 0;
         }
 
         .progress-stats {
           display: flex;
-          gap: 1rem;
+          gap: 0.5rem;
           align-items: center;
+          flex-shrink: 0;
         }
 
         .points-display {
           display: flex;
           align-items: center;
-          gap: 0.5rem;
+          gap: 0.375rem;
           background: var(--warning);
           color: white;
-          padding: 0.5rem 1rem;
-          border-radius: 20px;
+          padding: 0.25rem 0.625rem;
+          border-radius: 999px;
           font-weight: 600;
+          font-size: 0.8125rem;
         }
 
         .points-icon {
-          font-size: 1.2rem;
+          font-size: 1rem;
         }
 
         .achievements-toggle {
-          display: flex;
+          display: inline-flex;
           align-items: center;
-          gap: 0.5rem;
+          gap: 0.375rem;
           background: ${theme === 'dark' ? 'var(--gray-700)' : 'var(--light)'};
           border: 1px solid ${theme === 'dark' ? 'var(--gray-600)' : 'var(--gray-300)'};
           color: ${theme === 'dark' ? 'var(--gray-200)' : 'var(--gray-700)'};
-          padding: 0.5rem 1rem;
-          border-radius: 20px;
+          padding: 0.25rem 0.625rem;
+          min-height: 2rem;
+          border-radius: 999px;
           cursor: pointer;
           transition: all 0.2s ease;
           font-weight: 500;
@@ -269,7 +283,7 @@ const StoryProgress: React.FC<StoryProgressProps> = ({
 
         .progress-bar-container {
           position: relative;
-          margin-bottom: 1rem;
+          margin-bottom: 0.5rem;
         }
 
         .progress-bar {
@@ -356,29 +370,31 @@ const StoryProgress: React.FC<StoryProgressProps> = ({
 
         .progress-details {
           border-top: 1px solid ${theme === 'dark' ? 'var(--gray-600)' : 'var(--gray-200)'};
-          padding-top: 1rem;
+          padding-top: 0.625rem;
         }
 
         .progress-metrics {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-          gap: 1rem;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem 1rem;
+          justify-content: space-between;
         }
 
         .metric {
-          text-align: center;
+          display: inline-flex;
+          align-items: baseline;
+          gap: 0.375rem;
+          text-align: left;
         }
 
         .metric-label {
-          display: block;
-          font-size: 0.8rem;
+          font-size: 0.75rem;
           color: ${theme === 'dark' ? 'var(--gray-400)' : 'var(--gray-600)'};
-          margin-bottom: 0.25rem;
+          margin-bottom: 0;
         }
 
         .metric-value {
-          display: block;
-          font-size: 1.2rem;
+          font-size: 0.875rem;
           font-weight: 600;
           color: var(--primary);
         }
@@ -538,15 +554,12 @@ const StoryProgress: React.FC<StoryProgressProps> = ({
         }
 
         @media (max-width: 768px) {
-          .progress-header {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 1rem;
+          .story-progress-container {
+            padding: 0.875rem 1rem;
           }
 
-          .progress-stats {
-            align-self: stretch;
-            justify-content: space-between;
+          .progress-meta {
+            gap: 0.5rem;
           }
 
           .achievements-panel {
