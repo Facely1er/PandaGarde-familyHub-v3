@@ -1,3 +1,5 @@
+import { ORIGIN_STORY_SLUG } from './originStory';
+
 // src/data/stories.ts
 // PandaGarde — Story Registry
 // Product file — exists year-round, independent of any go-to-market program.
@@ -2221,7 +2223,7 @@ export const STORIES: Story[] = [
 
 // ─── HELPERS ──────────────────────────────────────────────────────────────────
 
-export const ORIGIN_STORY_SLUG = 'privacy-panda-and-the-digital-bamboo-forest';
+export { ORIGIN_STORY_SLUG };
 
 export const isStoryPublished = (story: Story): boolean => {
   const now = new Date();

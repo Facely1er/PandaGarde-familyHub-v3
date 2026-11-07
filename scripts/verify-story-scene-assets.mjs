@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Ensures every imageUrl in storyScenes.ts exists under public/images/story with non-zero size.
+ * Ensures every imageUrl and videoUrl in storyScenes.ts exists under public/images/story with non-zero size.
  */
 import fs from 'fs';
 import path from 'path';
@@ -11,7 +11,7 @@ const storyScenesPath = path.join(root, 'src/data/storyScenes.ts');
 const storyDir = path.join(root, 'public/images/story');
 
 const source = fs.readFileSync(storyScenesPath, 'utf8');
-const urls = [...source.matchAll(/imageUrl:\s*'([^']+)'/g)].map((m) => m[1]);
+const urls = [...source.matchAll(/(?:imageUrl|videoUrl):\s*'([^']+)'/g)].map((m) => m[1]);
 
 if (!fs.existsSync(storyDir)) {
   console.error('verify-story-scene-assets: missing directory public/images/story');

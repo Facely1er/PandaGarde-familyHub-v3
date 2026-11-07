@@ -1,4 +1,4 @@
-import { ORIGIN_STORY_SLUG } from '../data/stories';
+import { ORIGIN_STORY_SLUG } from '../data/originStory';
 
 const PREFIX = 'pandagarde';
 

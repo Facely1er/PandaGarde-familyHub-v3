@@ -3,6 +3,8 @@ export interface StorySceneData {
   title: string;
   content: string;
   imageUrl?: string;
+  /** Optional silent mini clip. The still in imageUrl stays the poster until play. */
+  videoUrl?: string;
   character?: 'panda' | 'turtle' | 'monkey' | 'beaver' | 'rabbit' | 'owl' | 'fox';
   animation?: 'bounce' | 'wave' | 'nod' | 'shake' | 'dance' | 'hide' | 'appear';
   background?: 'forest' | 'cave' | 'meadow' | 'river' | 'mountain' | 'village' | 'digital';

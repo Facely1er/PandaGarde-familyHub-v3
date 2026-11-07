@@ -80,8 +80,25 @@ const normalizeStorySceneAssetsPlugin = () => ({
   },
 });
 
+const productionRouterAlias =
+  process.env.NODE_ENV === 'production'
+    ? [
+        {
+          find: 'react-router/dom',
+          replacement: path.resolve(__dirname, 'node_modules/react-router/dist/production/dom-export.mjs'),
+        },
+        {
+          find: 'react-router',
+          replacement: path.resolve(__dirname, 'node_modules/react-router/dist/production/index.mjs'),
+        },
+      ]
+    : [];
+
 export default defineConfig({
   plugins: [react(), spaDownloadRoutesPlugin(), optionalDependenciesPlugin(), normalizeStorySceneAssetsPlugin()],
+  resolve: {
+    alias: productionRouterAlias,
+  },
   server: {
     port: 5173,
   },

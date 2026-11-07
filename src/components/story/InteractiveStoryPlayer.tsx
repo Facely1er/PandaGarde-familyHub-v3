@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Play, Pause, Volume2, VolumeX, RotateCcw, ChevronLeft, ChevronRight, Settings, BookOpen, Grid } from 'lucide-react';
 import { useTheme } from '../../contexts/ThemeContext';
+import { StorySceneMedia } from './StorySceneMedia';
 
 interface StoryScene {
   id: string;
@@ -9,6 +10,7 @@ interface StoryScene {
   character?: string;
   animation?: string;
   imageUrl?: string;
+  videoUrl?: string;
   choices?: Array<{
     text: string;
     nextScene: string;
@@ -792,22 +794,20 @@ const InteractiveStoryPlayer: React.FC<InteractiveStoryPlayerProps> = ({
 
               <div
                 className={`story-scene__layout${
-                  currentScene.imageUrl ? ' story-scene__layout--with-image' : ''
+                  currentScene.imageUrl || currentScene.videoUrl ? ' story-scene__layout--with-image' : ''
                 }`}
               >
-                {currentScene.imageUrl && (
+                {(currentScene.imageUrl || currentScene.videoUrl) && (
                   <div className="story-image-container">
-                    <img
-                      src={currentScene.imageUrl}
-                      alt={currentScene.title}
-                      className="story-image"
-                      loading="lazy"
-                      decoding="async"
+                    <StorySceneMedia
+                      imageUrl={currentScene.imageUrl}
+                      videoUrl={currentScene.videoUrl}
+                      label={currentScene.title}
                     />
                   </div>
                 )}
 
-                {currentScene.character && !currentScene.imageUrl && (
+                {currentScene.character && !currentScene.imageUrl && !currentScene.videoUrl && (
                   <div
                     ref={animationRef}
                     className={`character-display ${isAnimating ? 'animating' : ''} ${isSpeaking ? 'speaking' : ''}`}

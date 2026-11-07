@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect } from 'react';
 import { lazy } from './lib/lazyWithRetry';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { ORIGIN_STORY_SLUG } from './data/stories';
+import { ORIGIN_STORY_SLUG } from './data/originStory';
 import { PARENT_SURFACE_REDIRECTS } from './data/parentSiteSurface';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { ToastProvider } from './contexts/ToastContext';
@@ -288,7 +288,7 @@ function App() {
             <Route path="/activities/privacy-learning-kit" element={<PrivacyLearningKitPage />} />
             <Route
               path="/activities/story"
-              element={<Navigate to="/stories/privacy-panda-and-the-digital-bamboo-forest" replace />}
+              element={<Navigate to={`/stories/${ORIGIN_STORY_SLUG}`} replace />}
             />
             <Route path="/activities/:activityId" element={<ActivitiesRedirectPage />} />
             

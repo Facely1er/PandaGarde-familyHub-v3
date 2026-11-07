@@ -2,6 +2,8 @@
 
 PNG files here are referenced by `src/data/storyScenes.ts` (`imageUrl: '/images/story/…'`).
 
+An optional silent clip uses `videoUrl` beside that still (`.mp4` or `.webm`, hyphenated name, same folder). The still stays on screen until play, and a missing clip file fails `npm run check:story-assets`.
+
 Use **hyphenated filenames only** (no spaces or apostrophes). Vite renames legacy names at build time; CI runs `npm run check:story-assets` to ensure every scene file exists and is non-empty.
 
 Restore missing art from git history if needed:
