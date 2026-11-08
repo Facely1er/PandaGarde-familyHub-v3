@@ -29,12 +29,12 @@ export function StoryCharacterPortrait({
   return (
     <figure
       className={`flex shrink-0 flex-col items-center text-center ${
-        isStrip ? 'w-[4.75rem] gap-2' : 'gap-1.5'
+        isStrip ? 'w-[4.25rem] gap-1' : 'gap-1.5'
       }`}
     >
       <div
         className={`${SIZE_CLASS[size]} overflow-hidden rounded-2xl border border-gray-200 bg-gray-100 dark:border-gray-600 dark:bg-gray-800 ${
-          highlight ? 'ring-2 ring-green-500/70 ring-offset-2 ring-offset-white dark:ring-offset-gray-900' : ''
+          highlight ? 'outline outline-2 outline-offset-[-2px] outline-green-500/80' : ''
         }`}
       >
         {!failed && character.portraitUrl ? (
@@ -59,13 +59,11 @@ export function StoryCharacterPortrait({
           <p className="text-xs font-semibold leading-tight text-gray-900 dark:text-gray-100">
             {character.name}
           </p>
-          <p
-            className={`text-[0.65rem] leading-tight text-gray-500 dark:text-gray-400 ${
-              isStrip ? 'whitespace-nowrap' : ''
-            }`}
-          >
-            {character.epithet}
-          </p>
+          {!isStrip ? (
+            <p className="text-[0.65rem] leading-tight text-gray-500 dark:text-gray-400">
+              {character.epithet}
+            </p>
+          ) : null}
         </figcaption>
       ) : null}
     </figure>

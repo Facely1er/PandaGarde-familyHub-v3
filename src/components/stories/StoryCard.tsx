@@ -20,30 +20,25 @@ export function StoryCard({ story }: { story: Story }) {
       <StoryCoverArt story={story} variant="card" />
 
       <div className="flex min-h-0 flex-1 flex-col p-4">
-        <div className="flex items-center gap-2 mb-2 flex-wrap">
-          <span className="text-xs font-medium text-green-700 dark:text-green-400 bg-green-50 dark:bg-green-950 px-2 py-0.5 rounded-full">
+        <div className="mb-2 flex flex-wrap items-center gap-1.5">
+          <span className="rounded-full bg-green-50 px-2 py-0.5 text-xs font-medium text-green-700 dark:bg-green-950 dark:text-green-400">
             {t('stories.card.episode', { number: story.episodeNumber })}
           </span>
-          {story.season > 1 ? (
-            <span className="rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800 dark:bg-green-950 dark:text-green-200">
-              {t('stories.card.season', { number: story.season })}
-            </span>
-          ) : null}
           {!hasCoverArt && story.season > 1 ? (
-            <span className="text-xs font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded-full">
+            <span className="rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-700 dark:text-gray-300">
               {t('stories.card.artComingSoon')}
             </span>
           ) : null}
-          {story.ageGroups.map((ag) => (
+          {story.ageGroups.slice(0, 1).map((ag) => (
             <span
               key={ag}
-              className="text-xs font-medium text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded-full"
+              className="rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-500 dark:bg-gray-700 dark:text-gray-400"
             >
               {t(`stories.filters.${ag}`)}
             </span>
           ))}
           {isFoundation && (
-            <span className="inline-flex items-center gap-1 text-xs font-medium text-emerald-800 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-950 px-2 py-0.5 rounded-full">
+            <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-medium text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
               <Play size={12} aria-hidden />
               {t('stories.card.interactiveChapters')}
             </span>

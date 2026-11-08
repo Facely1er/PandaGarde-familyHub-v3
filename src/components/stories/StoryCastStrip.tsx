@@ -21,9 +21,9 @@ export function StoryCastStrip({ story }: StoryCastStripProps) {
       >
         Friends in this episode
       </h3>
-      <ul className="flex flex-wrap items-start justify-center gap-x-5 gap-y-3 sm:gap-x-6">
+      <ul className="flex flex-wrap items-start justify-start gap-x-3 gap-y-2 sm:justify-center sm:gap-x-5">
         {cast.map((character) => (
-          <li key={character.id} className="flex min-w-[4.75rem] justify-center">
+          <li key={character.id} className="flex min-w-[3.75rem] justify-center">
             <StoryCharacterPortrait
               character={character}
               size="sm"
