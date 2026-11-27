@@ -11,6 +11,19 @@
   to = "/LogoPandagarde.png"
   status = 200
 
+# Bare /sitemap must not return SPA HTML (GSC: "Sitemap appears to be an HTML page")
+[[redirects]]
+  from = "/sitemap"
+  to = "/sitemap.xml"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sitemap/"
+  to = "/sitemap.xml"
+  status = 301
+  force = true
+
 # React printable hub pages (shadowed by public/downloads/*.html pretty URLs without force)
 [[redirects]]
   from = "/downloads/coloring-sheets"
