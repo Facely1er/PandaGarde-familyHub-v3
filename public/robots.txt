@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.pandagarde.com/sitemap.xml
+# App / auth internals (hub host + transactional)
+Disallow: /family-hub/auth
+Disallow: /family-hub/settings
+Disallow: /api/
+Disallow: /admin/
+Disallow: /dev/
