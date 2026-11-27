@@ -70,3 +70,4 @@ ios/App/.derivedData/
 
 # Local Netlify folder
 .netlify
+upload_certificate.pem
